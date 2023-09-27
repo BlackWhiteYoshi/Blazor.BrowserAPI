@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Blazor.BrowserAPI.JSBundlerAndMinifier": {
+      "commandName": "Project",
+      "commandLineArgs": "../../../../../Blazor.BrowserAPI"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    
+    <Title>Blazor.BrowserAPI</Title>
+    <Description>A Blazor Library that provides easy access to browser APIs without the need to use any JavaScript. It supports asynchronous communication as well as synchronous (JSRuntime and JSInProcessRuntime).</Description>
+    <Authors>BlackWhiteYoshi</Authors>
+    <PackageTags>C#;Blazor;Browser;Web;API;Interop;JavaScript</PackageTags>
+
+    <PackageReadmeFile>PACKAGE.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/BlackWhiteYoshi/Blazor.BrowserAPI</PackageProjectUrl>
+
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/BlackWhiteYoshi/Blazor.BrowserAPI.git</RepositoryUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+    <PackageIconUrl>https://raw.githubusercontent.com/BlackWhiteYoshi/Blazor.BrowserAPI/master/ICON.png</PackageIconUrl>
+    <PackageIcon>ICON.png</PackageIcon>
+
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+
+    <Version>0.1.0</Version>
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <DocumentationFile>$(ProjectDir)Blazor.BrowserAPI.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <NoWarn>$(NoWarn);CS1066</NoWarn> <!-- Explicitly Implementing an Interface with Optional Parameters -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\PACKAGE.md" Pack="True" PackagePath="/" />
+    <None Include="..\ICON.png" Pack="True" PackagePath="/" />
+    <None Include="..\LICENSE" Pack="True" PackagePath="/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.11" />
+    <PackageReference Include="AutoInterface" Version="1.2.3" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>

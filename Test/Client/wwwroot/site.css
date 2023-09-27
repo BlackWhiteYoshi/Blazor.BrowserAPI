@@ -1,0 +1,126 @@
+﻿*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  margin: 0;
+  color: #DDD;
+  background-color: #222;
+}
+
+#app {
+  position: relative;
+  margin: 2em;
+}
+
+.loading-progress {
+  position: relative;
+  display: block;
+  width: 8rem;
+  height: 8rem;
+  margin: 20vh auto 1rem auto;
+}
+.loading-progress circle {
+  fill: none;
+  stroke: #e0e0e0;
+  stroke-width: 0.6rem;
+  transform-origin: 50% 50%;
+  transform: rotate(-90deg);
+}
+.loading-progress circle:last-child {
+  stroke: #1b6ec2;
+  stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
+  transition: stroke-dasharray 0.05s ease-in-out;
+}
+
+.loading-progress-text {
+  position: absolute;
+  text-align: center;
+  font-weight: bold;
+  inset: calc(20vh + 3.25rem) 0 auto 0.2rem;
+}
+.loading-progress-text:after {
+  content: var(--blazor-load-percentage-text, "Loading");
+}
+
+#blazor-error-ui {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 1000;
+  display: none;
+  color: #222;
+  background-image: linear-gradient(90deg, #FF7, #FF4, #FF7);
+}
+#blazor-error-ui > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8em;
+  padding: 0.6em 1.2em;
+}
+#blazor-error-ui > div > p {
+  margin: 0 0 0 auto;
+}
+#blazor-error-ui > div > p > span {
+  display: inline-block;
+}
+#blazor-error-ui > div > p > span:first-child {
+  margin-right: 0.4em;
+}
+#blazor-error-ui > div > .dismiss {
+  cursor: pointer;
+  margin-left: auto;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: stroke 0.1s;
+}
+#blazor-error-ui > div > .dismiss > line {
+  stroke: #000;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+#blazor-error-ui > div > .dismiss:hover > line {
+  stroke: #04b;
+  transition: stroke 0.3s;
+}
+
+#test-page > h1 {
+  font-size: 3em;
+  text-align: center;
+}
+
+#test-page .group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  margin: 2em;
+  padding: 2em;
+  background-color: #333;
+}
+#test-page .group > h2 {
+  margin: 0;
+}
+#test-page .group > div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+#test-page .group > div > button {
+  padding: 0.4em 0.6em;
+  color: #DDD;
+  background-color: #000;
+  border-radius: 0.2em;
+}
+#test-page .group > label {
+  min-height: calc(1.5rem + 0.8em);
+  padding: 0.4em;
+  background-color: #2C2C2C;
+}

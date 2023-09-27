@@ -1,0 +1,35 @@
+#test-page {
+    .group {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5em;
+
+        margin: 2em;
+        padding: 2em;
+        background-color: #333;
+
+        & > h2 {
+            margin: 0;
+        }
+
+        & > div {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 1em;
+
+            & > button {
+                padding: 0.4em 0.6em;
+                color: #DDD;
+                background-color: #000;
+                border-radius: 0.2em;
+            }
+        }
+
+        & > label {
+            min-height: calc(1.5rem + 0.8em);
+            padding: 0.4em;
+            background-color: #2C2C2C;
+        }
+    }
+}
