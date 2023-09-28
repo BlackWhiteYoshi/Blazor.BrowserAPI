@@ -14,7 +14,7 @@ public sealed partial class BrowserAPICore : IClipboard {
     /// <param name="text"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Write(string text, CancellationToken cancellationToken = default) => InvokeAsync("clipboardWriteText", cancellationToken, text);
+    ValueTask IClipboard.Write(string text, CancellationToken cancellationToken = default) => InvokeAsync("clipboardWriteText", cancellationToken, text);
 
     /// <summary>
     /// <para>navigator.clipboard.readText();</para>
@@ -22,5 +22,5 @@ public sealed partial class BrowserAPICore : IClipboard {
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> Read(CancellationToken cancellationToken = default) => InvokeAsync<string>("clipboardReadText", cancellationToken);
+    ValueTask<string> IClipboard.Read(CancellationToken cancellationToken = default) => InvokeAsync<string>("clipboardReadText", cancellationToken);
 }

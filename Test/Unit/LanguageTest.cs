@@ -52,32 +52,4 @@ public sealed class LanguageTest : PlayWrightTest {
         string? htmlLanguage = await htmlElement!.GetAttributeAsync("lang");
         Assert.Equal(LanguageGroup.SET_HTML_TEST, htmlLanguage);
     }
-
-
-    [Fact]
-    public async Task GetBrowserLanguage_InProcess() {
-        string expected = await Page.EvaluateAsync<string>("navigator.language");
-
-        await Page.GetByTestId(LanguageGroup.DATA_TESTID_GET_BROWSER_LANGUAGE_INPROCESS).ClickAsync();
-
-        string? result = await Page.GetByTestId(LanguageGroup.DATA_TESTID_OUTPUT).TextContentAsync();
-        Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public async Task GetHtmlLanguage_InProcess() {
-        await Page.GetByTestId(LanguageGroup.DATA_TESTID_GET_HTML_LANGUAGE_INPROCESS).ClickAsync();
-
-        string? result = await Page.GetByTestId(LanguageGroup.DATA_TESTID_OUTPUT).TextContentAsync();
-        Assert.Equal("en", result);
-    }
-
-    [Fact]
-    public async Task SetHtmlLanguage_InProcess() {
-        await Page.GetByTestId(LanguageGroup.DATA_TESTID_SET_HTML_LANGUAGE_INPROCESS).ClickAsync();
-
-        IElementHandle? htmlElement = await Page.QuerySelectorAsync("html");
-        string? htmlLanguage = await htmlElement!.GetAttributeAsync("lang");
-        Assert.Equal(LanguageGroup.SET_HTML_TEST, htmlLanguage);
-    }
 }

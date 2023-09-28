@@ -4,8 +4,8 @@ using Xunit;
 namespace Blazor.BrowserAPI.UnitTest;
 
 [Collection("PlayWright")]
-public sealed class SessionStorageTest : PlayWrightTest {
-    public SessionStorageTest(PlayWrightFixture playWrightFixture) : base(playWrightFixture) { }
+public sealed class SessionStorageInProcessTest : PlayWrightTest {
+    public SessionStorageInProcessTest(PlayWrightFixture playWrightFixture) : base(playWrightFixture) { }
 
 
     [Theory]
@@ -13,27 +13,12 @@ public sealed class SessionStorageTest : PlayWrightTest {
     [InlineData(1)]
     [InlineData(3)]
     [InlineData(10)]
-    public async Task GetLength_Property(int number) {
+    public async Task GetLength(int number) {
+
         for (int i = 0; i < number; i++)
             await Page.EvaluateAsync($"sessionStorage.setItem('test-key-{i}', 'test-value-{i}');");
 
-        await Page.GetByTestId(SessionStorageGroup.DATA_TESTID_GET_LENGTH_PROPERTY).ClickAsync();
-
-        string? result = await Page.GetByTestId(SessionStorageGroup.DATA_TESTID_OUTPUT).TextContentAsync();
-        Assert.Equal(number.ToString(), result);
-
-    }
-
-    [Theory]
-    [InlineData(0)]
-    [InlineData(1)]
-    [InlineData(3)]
-    [InlineData(10)]
-    public async Task GetLength_Method(int number) {
-        for (int i = 0; i < number; i++)
-            await Page.EvaluateAsync($"sessionStorage.setItem('test-key-{i}', 'test-value-{i}');");
-
-        await Page.GetByTestId(SessionStorageGroup.DATA_TESTID_GET_LENGTH_METHOD).ClickAsync();
+        await Page.GetByTestId(SessionStorageGroup.DATA_TESTID_GET_LENGTH_INPROCESS).ClickAsync();
 
         string? result = await Page.GetByTestId(SessionStorageGroup.DATA_TESTID_OUTPUT).TextContentAsync();
         Assert.Equal(number.ToString(), result);
@@ -44,7 +29,7 @@ public sealed class SessionStorageTest : PlayWrightTest {
         const string KEY = "test-key-0";
         await Page.EvaluateAsync($"sessionStorage.setItem('{KEY}', 'test-value-0');");
 
-        await Page.GetByTestId(SessionStorageGroup.DATA_TESTID_KEY).ClickAsync();
+        await Page.GetByTestId(SessionStorageGroup.DATA_TESTID_KEY_INPROCESS).ClickAsync();
 
         string? result = await Page.GetByTestId(SessionStorageGroup.DATA_TESTID_OUTPUT).TextContentAsync();
         Assert.Equal(KEY, result);
@@ -55,7 +40,7 @@ public sealed class SessionStorageTest : PlayWrightTest {
         const string VALUE = "test-getItem-value";
         await Page.EvaluateAsync($"sessionStorage.setItem('{SessionStorageGroup.GET_ITEM_TEST}', '{VALUE}');");
 
-        await Page.GetByTestId(SessionStorageGroup.DATA_TESTID_GET_ITEM).ClickAsync();
+        await Page.GetByTestId(SessionStorageGroup.DATA_TESTID_GET_ITEM_INPROCESS).ClickAsync();
 
         string? result = await Page.GetByTestId(SessionStorageGroup.DATA_TESTID_OUTPUT).TextContentAsync();
         Assert.Equal(VALUE, result);
@@ -63,7 +48,7 @@ public sealed class SessionStorageTest : PlayWrightTest {
 
     [Fact]
     public async Task SetItem() {
-        await Page.GetByTestId(SessionStorageGroup.DATA_TESTID_SET_ITEM).ClickAsync();
+        await Page.GetByTestId(SessionStorageGroup.DATA_TESTID_SET_ITEM_INPROCESS).ClickAsync();
 
         string result = await Page.EvaluateAsync<string>($"sessionStorage.getItem('{SessionStorageGroup.SET_ITEM_KEY_TEST}');");
         Assert.Equal(SessionStorageGroup.SET_ITEM_VALUE_TEST, result);
@@ -73,10 +58,12 @@ public sealed class SessionStorageTest : PlayWrightTest {
     public async Task RemoveItem() {
         await Page.EvaluateAsync($"sessionStorage.setItem('{SessionStorageGroup.REMOVE_ITEM_TEST}', 'test-value');");
 
-        await Page.GetByTestId(SessionStorageGroup.DATA_TESTID_REMOVE_ITEM).ClickAsync();
+        await Page.GetByTestId(SessionStorageGroup.DATA_TESTID_REMOVE_ITEM_INPROCESS).ClickAsync();
 
         string? result = await Page.EvaluateAsync<string?>($"sessionStorage.getItem('{SessionStorageGroup.REMOVE_ITEM_TEST}');");
         Assert.Null(result);
+
+
     }
 
     [Theory]
@@ -88,7 +75,7 @@ public sealed class SessionStorageTest : PlayWrightTest {
         for (int i = 0; i < number; i++)
             await Page.EvaluateAsync($"sessionStorage.setItem('test-key-{i}', 'test-value-{i}');");
 
-        await Page.GetByTestId(SessionStorageGroup.DATA_TESTID_CLEAR).ClickAsync();
+        await Page.GetByTestId(SessionStorageGroup.DATA_TESTID_CLEAR_INPROCESS).ClickAsync();
 
         int length = await Page.EvaluateAsync<int>("sessionStorage.length");
         Assert.Equal(0, length);

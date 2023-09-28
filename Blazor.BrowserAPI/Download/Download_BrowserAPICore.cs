@@ -17,8 +17,8 @@ public sealed partial class BrowserAPICore : IDownload {
     /// <param name="fileContent">UTF8 encoded content of the file.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask DownloadAsFile(string fileName, string fileContent, CancellationToken cancellationToken = default)
-        => DownloadAsFile(fileName, Encoding.UTF8.GetBytes(fileContent), cancellationToken);
+    ValueTask IDownload.DownloadAsFile(string fileName, string fileContent, CancellationToken cancellationToken = default)
+        => ((IDownload)this).DownloadAsFile(fileName, Encoding.UTF8.GetBytes(fileContent), cancellationToken);
 
     /// <summary>
     /// Triggers a download by adding an &lt;a&gt;-element to the document and simulate a click on it.
@@ -27,10 +27,10 @@ public sealed partial class BrowserAPICore : IDownload {
     /// <param name="fileContent">Raw data that gets downloaded and saved in a file.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask DownloadAsFile(string fileName, byte[] fileContent, CancellationToken cancellationToken = default) {
+    async ValueTask IDownload.DownloadAsFile(string fileName, byte[] fileContent, CancellationToken cancellationToken = default) {
         using MemoryStream memoryStream = new(fileContent);
         using DotNetStreamReference streamReference = new(memoryStream);
-        await DownloadAsFile(fileName, streamReference, cancellationToken);
+        await ((IDownload)this).DownloadAsFile(fileName, streamReference, cancellationToken);
     }
 
     /// <summary>
@@ -40,6 +40,6 @@ public sealed partial class BrowserAPICore : IDownload {
     /// <param name="fileContent">Data stream that gets downloaded and saved in a file.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask DownloadAsFile(string fileName, DotNetStreamReference fileContent, CancellationToken cancellationToken = default)
+    ValueTask IDownload.DownloadAsFile(string fileName, DotNetStreamReference fileContent, CancellationToken cancellationToken = default)
         => InvokeAsync("downloadAsFile", cancellationToken, fileName, fileContent);
 }
