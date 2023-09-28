@@ -6,7 +6,7 @@ namespace BrowserAPI;
 /// The Clipboard interface implements the Clipboard API, providing—if the user grants permission—both read and write access to the contents of the system clipboard.
 /// </summary>
 [AutoInterface(Name = "IClipboard")]
-public partial class BrowserAPICore : IClipboard {
+public sealed partial class BrowserAPICore : IClipboard {
     /// <summary>
     /// <para>navigator.clipboard.writeText(text);</para>
     /// <para>The Clipboard interface's writeText() property writes the specified text string to the system clipboard. Text may be read back using either read() or readText().</para>

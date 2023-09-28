@@ -9,7 +9,7 @@ namespace BrowserAPI;
 /// <para>For file upload use the <see cref="Microsoft.AspNetCore.Components.Forms.InputFile">InputFile</see> component.</para>
 /// </summary>
 [AutoInterface(Name = "IDownload")]
-public partial class BrowserAPICore : IDownload {
+public sealed partial class BrowserAPICore : IDownload {
     /// <summary>
     /// Triggers a download by adding an &lt;a&gt;-element to the document and simulate a click on it.
     /// </summary>

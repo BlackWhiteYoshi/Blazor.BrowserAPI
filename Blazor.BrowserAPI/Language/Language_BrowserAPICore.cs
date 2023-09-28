@@ -8,7 +8,7 @@ namespace BrowserAPI;
 /// </summary>
 [AutoInterface(Name = "ILanguage")]
 [AutoInterface(Name = "ILanguageInProcess")]
-public partial class BrowserAPICore : ILanguage, ILanguageInProcess {
+public sealed partial class BrowserAPICore : ILanguage, ILanguageInProcess {
     /// <summary>
     /// <para>navigator.language</para>
     /// <para>The Navigator.language read-only property returns a string representing the preferred language of the user, usually the language of the browser UI. Examples of valid language codes include "en", "en-US", "fr", "fr-FR", "es-ES", etc.</para>

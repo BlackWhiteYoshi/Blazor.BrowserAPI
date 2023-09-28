@@ -8,7 +8,7 @@ namespace BrowserAPI;
 /// </summary>
 [AutoInterface(Name = "ILocalStorage")]
 [AutoInterface(Name = "ILocalStorageInProcess")]
-public partial class BrowserAPICore : ILocalStorage, ILocalStorageInProcess {
+public sealed partial class BrowserAPICore : ILocalStorage, ILocalStorageInProcess {
     /// <summary>
     /// Returns an integer representing the number of data items stored in localStorage.
     /// </summary>

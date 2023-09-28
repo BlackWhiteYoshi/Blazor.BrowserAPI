@@ -7,7 +7,7 @@ namespace BrowserAPI;
 /// </summary>
 [AutoInterface(Name = "ICookieStorage")]
 [AutoInterface(Name = "ICookieStorageInProcess")]
-public partial class BrowserAPICore : ICookieStorage, ICookieStorageInProcess {
+public sealed partial class BrowserAPICore : ICookieStorage, ICookieStorageInProcess {
     /// <summary>
     /// <para>document.cookie</para>
     /// <para>

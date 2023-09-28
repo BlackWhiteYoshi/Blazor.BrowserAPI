@@ -9,7 +9,7 @@ namespace BrowserAPI;
 /// </summary>
 [AutoInterface(Name = "ISessionStorage")]
 [AutoInterface(Name = "ISessionStorageInProcess")]
-public partial class BrowserAPICore : ISessionStorage, ISessionStorageInProcess {
+public sealed partial class BrowserAPICore : ISessionStorage, ISessionStorageInProcess {
     /// <summary>
     /// Returns an integer representing the number of data items stored in sessionStorage.
     /// </summary>
