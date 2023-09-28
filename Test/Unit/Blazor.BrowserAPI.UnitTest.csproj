@@ -8,10 +8,6 @@
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <NoWarn>$(NoWarn);xUnit1033</NoWarn>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.11" />
     <PackageReference Include="Microsoft.Playwright" Version="1.38.0" />
