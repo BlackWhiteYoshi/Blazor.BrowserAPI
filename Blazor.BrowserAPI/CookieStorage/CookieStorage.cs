@@ -5,8 +5,15 @@ namespace BrowserAPI;
 /// <summary>
 /// The Document property cookie lets you read and write cookies associated with the document.
 /// </summary>
-[AutoInterface(Name = "ICookieStorage")]
-public sealed partial class BrowserAPICore : ICookieStorage {
+[AutoInterface]
+public sealed class CookieStorage : ICookieStorage {
+    private readonly IModuleManager _moduleManager;
+
+    public CookieStorage(IModuleManager moduleManager) {
+        _moduleManager = moduleManager;
+    }
+
+
     /// <summary>
     /// <para>document.cookie</para>
     /// <para>
@@ -14,7 +21,7 @@ public sealed partial class BrowserAPICore : ICookieStorage {
     /// Note that each key and value may be surrounded by whitespace (space and tab characters).
     /// </para>
     /// </summary>
-    ValueTask<string> ICookieStorage.AllCookies => ((ICookieStorage)this).GetAllCookies(default);
+    public ValueTask<string> AllCookies => GetAllCookies(default);
 
     /// <summary>
     /// <para>document.cookie</para>
@@ -25,19 +32,19 @@ public sealed partial class BrowserAPICore : ICookieStorage {
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    ValueTask<string> ICookieStorage.GetAllCookies(CancellationToken cancellationToken) => InvokeTrySync<string>("getAllCookies", cancellationToken);
+    public ValueTask<string> GetAllCookies(CancellationToken cancellationToken) => _moduleManager.InvokeTrySync<string>("getAllCookies", cancellationToken);
 
     /// <summary>
     /// Returns an integer representing the number of cookies stored in cookieStorage.
     /// </summary>
-    ValueTask<int> ICookieStorage.Length => ((ICookieStorage)this).GetLength(default);
+    public ValueTask<int> Length => GetLength(default);
 
     /// <summary>
     /// Returns an integer representing the number of cookies stored in cookieStorage.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    ValueTask<int> ICookieStorage.GetLength(CancellationToken cancellationToken) => InvokeTrySync<int>("cookieStorageLength", cancellationToken);
+    public ValueTask<int> GetLength(CancellationToken cancellationToken) => _moduleManager.InvokeTrySync<int>("cookieStorageLength", cancellationToken);
 
     /// <summary>
     /// When passed a number <i>n</i>, this method will return the name of the nth key in cookieStorage.
@@ -45,7 +52,7 @@ public sealed partial class BrowserAPICore : ICookieStorage {
     /// <param name="index"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    ValueTask<string?> ICookieStorage.Key(int index, CancellationToken cancellationToken = default) => InvokeTrySync<string?>("cookieStorageKey", cancellationToken, index);
+    public ValueTask<string?> Key(int index, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync<string?>("cookieStorageKey", cancellationToken, index);
 
     /// <summary>
     /// When passed a key name, will return that key's value.
@@ -53,7 +60,7 @@ public sealed partial class BrowserAPICore : ICookieStorage {
     /// <param name="key"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    ValueTask<string?> ICookieStorage.GetCookie(string key, CancellationToken cancellationToken = default) => InvokeTrySync<string?>("cookieStorageGetCookie", cancellationToken, key);
+    public ValueTask<string?> GetCookie(string key, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync<string?>("cookieStorageGetCookie", cancellationToken, key);
 
     /// <summary>
     /// When passed a key name and value, will add that key to cookieStorage, or update that key's value if it already exists.
@@ -66,21 +73,21 @@ public sealed partial class BrowserAPICore : ICookieStorage {
     /// <param name="secure"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    ValueTask ICookieStorage.SetCookie(string key, string value, int? expires = null, string path = "/", CookieSameSite sameSite = CookieSameSite.None, bool secure = false, CancellationToken cancellationToken = default)
-        => InvokeTrySync("cookieStorageSetCookie", cancellationToken, key, value, expires, path, sameSite.ToString(), secure);
-    
+    public ValueTask SetCookie(string key, string value, int? expires = null, string path = "/", CookieSameSite sameSite = CookieSameSite.None, bool secure = false, CancellationToken cancellationToken = default)
+        => _moduleManager.InvokeTrySync("cookieStorageSetCookie", cancellationToken, key, value, expires, path, sameSite.ToString(), secure);
+
     /// <summary>
     /// When passed a key name, will remove that key from cookieStorage.
     /// </summary>
     /// <param name="key"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    ValueTask ICookieStorage.RemoveCookie(string key, CancellationToken cancellationToken = default) => InvokeTrySync("cookieStorageRemoveCookie", cancellationToken, key);
+    public ValueTask RemoveCookie(string key, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("cookieStorageRemoveCookie", cancellationToken, key);
 
     /// <summary>
     /// When invoked, will empty all keys out of cookieStorage.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    ValueTask ICookieStorage.Clear(CancellationToken cancellationToken = default) => InvokeTrySync("cookieStorageClear", cancellationToken);
+    public ValueTask Clear(CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("cookieStorageClear", cancellationToken);
 }

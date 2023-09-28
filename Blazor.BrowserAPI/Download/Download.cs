@@ -8,8 +8,15 @@ namespace BrowserAPI;
 /// Save data as a file download on the filesystem.
 /// <para>For file upload use the <see cref="Microsoft.AspNetCore.Components.Forms.InputFile">InputFile</see> component.</para>
 /// </summary>
-[AutoInterface(Name = "IDownload")]
-public sealed partial class BrowserAPICore : IDownload {
+[AutoInterface]
+public sealed class Download : IDownload {
+    private readonly IModuleManager _moduleManager;
+
+    public Download(IModuleManager moduleManager) {
+        _moduleManager = moduleManager;
+    }
+
+
     /// <summary>
     /// Triggers a download by adding an &lt;a&gt;-element to the document and simulate a click on it.
     /// </summary>
@@ -17,8 +24,8 @@ public sealed partial class BrowserAPICore : IDownload {
     /// <param name="fileContent">UTF8 encoded content of the file.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    ValueTask IDownload.DownloadAsFile(string fileName, string fileContent, CancellationToken cancellationToken = default)
-        => ((IDownload)this).DownloadAsFile(fileName, Encoding.UTF8.GetBytes(fileContent), cancellationToken);
+    public ValueTask DownloadAsFile(string fileName, string fileContent, CancellationToken cancellationToken = default)
+        => DownloadAsFile(fileName, Encoding.UTF8.GetBytes(fileContent), cancellationToken);
 
     /// <summary>
     /// Triggers a download by adding an &lt;a&gt;-element to the document and simulate a click on it.
@@ -27,10 +34,10 @@ public sealed partial class BrowserAPICore : IDownload {
     /// <param name="fileContent">Raw data that gets downloaded and saved in a file.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    async ValueTask IDownload.DownloadAsFile(string fileName, byte[] fileContent, CancellationToken cancellationToken = default) {
+    public async ValueTask DownloadAsFile(string fileName, byte[] fileContent, CancellationToken cancellationToken = default) {
         using MemoryStream memoryStream = new(fileContent);
         using DotNetStreamReference streamReference = new(memoryStream);
-        await ((IDownload)this).DownloadAsFile(fileName, streamReference, cancellationToken);
+        await DownloadAsFile(fileName, streamReference, cancellationToken);
     }
 
     /// <summary>
@@ -40,6 +47,6 @@ public sealed partial class BrowserAPICore : IDownload {
     /// <param name="fileContent">Data stream that gets downloaded and saved in a file.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    ValueTask IDownload.DownloadAsFile(string fileName, DotNetStreamReference fileContent, CancellationToken cancellationToken = default)
-        => InvokeAsync("downloadAsFile", cancellationToken, fileName, fileContent);
+    public ValueTask DownloadAsFile(string fileName, DotNetStreamReference fileContent, CancellationToken cancellationToken = default)
+        => _moduleManager.InvokeAsync("downloadAsFile", cancellationToken, fileName, fileContent);
 }
