@@ -1,7 +1,7 @@
 /**
  * 
  * @param {string} fileName
- * @param {{ arrayBuffer(): ArrayBuffer; stream(): ReadableStream; }} fileContent
+ * @param {import("../blazor").DotNet.DotNetStreamReference} fileContent
  */
 export async function downloadAsFile(fileName, fileContent) {
     const arrayBuffer = await fileContent.arrayBuffer();
