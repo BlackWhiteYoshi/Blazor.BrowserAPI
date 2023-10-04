@@ -7,7 +7,7 @@ namespace BrowserAPI;
 /// <para>The document.documentElement.lang attribute sets the language of the content in the HTML page.</para>
 /// </summary>
 [AutoInterface]
-public sealed class Language : ILanguage {
+internal sealed class Language : ILanguage {
     private readonly IModuleManager _moduleManager;
 
     public Language(IModuleManager moduleManager) {

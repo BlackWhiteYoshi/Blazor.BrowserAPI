@@ -8,7 +8,7 @@ namespace BrowserAPI;
 /// the difference is that while data in localStorage doesn't expire, data in sessionStorage is cleared when the page session ends.
 /// </summary>
 [AutoInterface]
-public sealed class SessionStorage : ISessionStorage {
+internal sealed class SessionStorage : ISessionStorage {
     private readonly IModuleManager _moduleManager;
 
     public SessionStorage(IModuleManager moduleManager) {

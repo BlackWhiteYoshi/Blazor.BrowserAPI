@@ -7,7 +7,7 @@ namespace BrowserAPI;
 /// the stored data is saved across browser sessions.
 /// </summary>
 [AutoInterface]
-public sealed class LocalStorage : ILocalStorage {
+internal sealed class LocalStorage : ILocalStorage {
     private readonly IModuleManager _moduleManager;
 
     public LocalStorage(IModuleManager moduleManager) {

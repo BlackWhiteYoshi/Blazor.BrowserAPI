@@ -5,7 +5,7 @@ namespace BrowserAPI;
 /// <summary>
 /// Contains a get-property to retrieve and observe the state of the module download.
 /// </summary>
-public sealed class ModuleManager : IModuleManager, IDisposable, IAsyncDisposable {
+internal sealed class ModuleManager : IModuleManager, IDisposable, IAsyncDisposable {
     /// <summary>
     /// A Task that represents the download of the module. If this tasks finishes, the download finishes.
     /// </summary>

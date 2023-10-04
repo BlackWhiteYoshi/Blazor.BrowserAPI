@@ -9,7 +9,7 @@ namespace BrowserAPI;
 /// <para>For file upload use the <see cref="Microsoft.AspNetCore.Components.Forms.InputFile">InputFile</see> component.</para>
 /// </summary>
 [AutoInterface]
-public sealed class Download : IDownload {
+internal sealed class Download : IDownload {
     private readonly IModuleManager _moduleManager;
 
     public Download(IModuleManager moduleManager) {

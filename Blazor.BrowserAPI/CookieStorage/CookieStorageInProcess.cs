@@ -6,7 +6,7 @@ namespace BrowserAPI;
 /// The Document property cookie lets you read and write cookies associated with the document.
 /// </summary>
 [AutoInterface]
-public sealed class CookieStorageInProcess : ICookieStorageInProcess {
+internal sealed class CookieStorageInProcess : ICookieStorageInProcess {
     private readonly IModuleManager _moduleManager;
 
     public CookieStorageInProcess(IModuleManager moduleManager) {

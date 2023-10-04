@@ -6,7 +6,7 @@ namespace BrowserAPI;
 /// The Clipboard interface implements the Clipboard API, providing—if the user grants permission—both read and write access to the contents of the system clipboard.
 /// </summary>
 [AutoInterface]
-public sealed class Clipboard : IClipboard {
+internal sealed class Clipboard : IClipboard {
     private readonly IModuleManager _moduleManager;
 
     public Clipboard(IModuleManager moduleManager) {
