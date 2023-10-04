@@ -36,7 +36,7 @@ services.AddBrowserAPI();
 <br></br>
 ## JS module
 
-The necessary js file is fetched automatically the first time .
+The necessary js file is fetched automatically the first time.
 However, if you use a functionality of BrowserAPI synchronous (JSInProcessRuntime) before the download has finished, you get an error like:
 
 *JS-module is not loaded yet. To make sure the module is downloaded, you can await IModuleLoader.ModuleDownload.*
@@ -62,6 +62,14 @@ public static class Program {
         await host.RunAsync();
     }
 }
+```
+
+Furthermore you can prefetch the module into JavaScript, so the ModuleLoader will only get a reference to the module.
+```html
+<head>
+  ...
+  <link rel="modulepreload" href="_content/Blazor.BrowserAPI/BrowserAPI.js" />
+</head>
 ```
 
 **Note**:  
