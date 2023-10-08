@@ -75,14 +75,14 @@ export declare module DotNet {
      */
     interface DotNetStreamReference {
         /**
-         * Acess underlying data as ArrayBuffer.
+         * Access underlying data as ArrayBuffer.
          * 
          * @returns stream as ArrayBuffer
          */
         arrayBuffer(): ArrayBuffer;
 
         /**
-         * Acess underlying data as ReadableStream.
+         * Access underlying data as ReadableStream.
          * 
          * @returns stream as ReadableStream
          */
