@@ -302,6 +302,18 @@ The document.documentElement.lang attribute sets the language of the content in 
 | HtmlLanguage    | string   | get/set | document.documentElement.lang; The content of the "lang" attribute on the html tag.; language abbreviation: e.g. "en", "fr", "es", "de"
 
 
+<br></br>
+### IServiceWorker
+
+TODO (also not tested yet)
+
+
+<br></br>
+### IServiceWorkerInProcess
+
+TODO (also not tested yet)
+
+
 
 <br></br>
 ## Preview

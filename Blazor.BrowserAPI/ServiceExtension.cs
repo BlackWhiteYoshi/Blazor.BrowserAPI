@@ -14,7 +14,9 @@ public static class ServiceExtension {
             .AddScoped<IDownload, Download>()
             .AddScoped<IClipboard, Clipboard>()
             .AddScoped<ILanguage, Language>()
-            .AddScoped<ILanguageInProcess, LanguageInProcess>();
+            .AddScoped<ILanguageInProcess, LanguageInProcess>()
+            .AddScoped<IServiceWorker, ServiceWorker>()
+            .AddScoped<IServiceWorkerInProcess, ServiceWorkerInProcess>();
 
         return services;
     }
