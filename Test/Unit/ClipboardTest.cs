@@ -1,7 +1,7 @@
 ﻿using BrowserAPI.Test.Client;
 using Xunit;
 
-namespace Blazor.BrowserAPI.UnitTest;
+namespace BrowserAPI.UnitTest;
 
 public sealed class ClipboardTest : PlayWrightTest {
     public ClipboardTest(PlayWrightFixture playWrightFixture) : base(playWrightFixture) { }
@@ -12,7 +12,7 @@ public sealed class ClipboardTest : PlayWrightTest {
         const string TEST_STR = "clipboard read test";
 
         await Context.GrantPermissionsAsync(new string[] { "clipboard-read", "clipboard-write" });
-        await Page.EvaluateAsync($"navigator.clipboard.writeText('{TEST_STR}')");
+        await Page.EvaluateAsync($"navigator.clipboard.writeText('{TEST_STR}');");
 
         await Page.GetByTestId(ClipboardGroup.DATA_TESTID_READ).ClickAsync();
 
@@ -26,7 +26,7 @@ public sealed class ClipboardTest : PlayWrightTest {
         
         await Page.GetByTestId(ClipboardGroup.DATA_TESTID_WRITE).ClickAsync();
 
-        string clipboardContent = await Page.EvaluateAsync<string>($"navigator.clipboard.readText()");
+        string clipboardContent = await Page.EvaluateAsync<string>($"navigator.clipboard.readText();");
         Assert.Equal(ClipboardGroup.WRITE_TEST, clipboardContent);
     }
 }

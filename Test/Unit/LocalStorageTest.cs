@@ -1,7 +1,7 @@
 using BrowserAPI.Test.Client;
 using Xunit;
 
-namespace Blazor.BrowserAPI.UnitTest;
+namespace BrowserAPI.UnitTest;
 
 [Collection("PlayWright")]
 public sealed class LocalStorageTest : PlayWrightTest {
@@ -90,7 +90,7 @@ public sealed class LocalStorageTest : PlayWrightTest {
 
         await Page.GetByTestId(LocalStorageGroup.DATA_TESTID_CLEAR).ClickAsync();
 
-        int length = await Page.EvaluateAsync<int>("localStorage.length");
+        int length = await Page.EvaluateAsync<int>("localStorage.length;");
         Assert.Equal(0, length);
     }
 }

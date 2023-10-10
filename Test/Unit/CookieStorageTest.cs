@@ -2,7 +2,7 @@
 using System.Text;
 using Xunit;
 
-namespace Blazor.BrowserAPI.UnitTest;
+namespace BrowserAPI.UnitTest;
 
 public sealed class CookieStorageTest : PlayWrightTest {
     public CookieStorageTest(PlayWrightFixture playWrightFixture) : base(playWrightFixture) { }
@@ -25,7 +25,7 @@ public sealed class CookieStorageTest : PlayWrightTest {
             expected = builder.ToString();
         }
         for (int i = 0; i < number; i++)
-            await Page.EvaluateAsync($$"""document.cookie = `test-key-{{i}}=test-value-{{i}};expires=${new Date(Date.now() + 3600000).toUTCString()}`""");
+            await Page.EvaluateAsync($$"""document.cookie = `test-key-{{i}}=test-value-{{i}};expires=${new Date(Date.now() + 3600000).toUTCString()}`;""");
 
         await Page.GetByTestId(CookieStorageGroup.DATA_TESTID_GET_ALL_COOKIES_PROPERTY).ClickAsync();
 
@@ -50,7 +50,7 @@ public sealed class CookieStorageTest : PlayWrightTest {
             expected = builder.ToString();
         }
         for (int i = 0; i < number; i++)
-            await Page.EvaluateAsync($$"""document.cookie = `test-key-{{i}}=test-value-{{i}};expires=${new Date(Date.now() + 3600000).toUTCString()}`""");
+            await Page.EvaluateAsync($$"""document.cookie = `test-key-{{i}}=test-value-{{i}};expires=${new Date(Date.now() + 3600000).toUTCString()}`;""");
 
         await Page.GetByTestId(CookieStorageGroup.DATA_TESTID_GET_ALL_COOKIES_METHOD).ClickAsync();
 
@@ -65,7 +65,7 @@ public sealed class CookieStorageTest : PlayWrightTest {
     [InlineData(10)]
     public async Task GetLength_Property(int number) {
         for (int i = 0; i < number; i++)
-            await Page.EvaluateAsync($"document.cookie = 'test-key-{i}=test-value-{i}'");
+            await Page.EvaluateAsync($"document.cookie = 'test-key-{i}=test-value-{i}';");
 
         await Page.GetByTestId(CookieStorageGroup.DATA_TESTID_GET_LENGTH_PROPERTY).ClickAsync();
 
@@ -81,7 +81,7 @@ public sealed class CookieStorageTest : PlayWrightTest {
     [InlineData(10)]
     public async Task GetLength_Method(int number) {
         for (int i = 0; i < number; i++)
-            await Page.EvaluateAsync($"document.cookie = 'test-key-{i}=test-value-{i}'");
+            await Page.EvaluateAsync($"document.cookie = 'test-key-{i}=test-value-{i}';");
 
         await Page.GetByTestId(CookieStorageGroup.DATA_TESTID_GET_LENGTH_METHOD).ClickAsync();
 
@@ -92,7 +92,7 @@ public sealed class CookieStorageTest : PlayWrightTest {
     [Fact]
     public async Task Key() {
         const string KEY = "test-key-0";
-        await Page.EvaluateAsync($"document.cookie = '{KEY}=test-value-0'");
+        await Page.EvaluateAsync($"document.cookie = '{KEY}=test-value-0';");
 
         await Page.GetByTestId(CookieStorageGroup.DATA_TESTID_KEY).ClickAsync();
 
@@ -103,7 +103,7 @@ public sealed class CookieStorageTest : PlayWrightTest {
     [Fact]
     public async Task GetCookie() {
         const string VALUE = "test-getCOOKIE-value";
-        await Page.EvaluateAsync($"document.cookie = '{CookieStorageGroup.GET_COOKIE_TEST}={VALUE}'");
+        await Page.EvaluateAsync($"document.cookie = '{CookieStorageGroup.GET_COOKIE_TEST}={VALUE}';");
 
         await Page.GetByTestId(CookieStorageGroup.DATA_TESTID_GET_COOKIE).ClickAsync();
 
@@ -115,17 +115,17 @@ public sealed class CookieStorageTest : PlayWrightTest {
     public async Task SetCookie() {
         await Page.GetByTestId(CookieStorageGroup.DATA_TESTID_SET_COOKIE).ClickAsync();
 
-        string result = await Page.EvaluateAsync<string>("document.cookie");
+        string result = await Page.EvaluateAsync<string>("document.cookie;");
         Assert.Equal($"{CookieStorageGroup.SET_COOKIE_KEY_TEST}={CookieStorageGroup.SET_COOKIE_VALUE_TEST}", result);
     }
 
     [Fact]
     public async Task RemoveCookie() {
-        await Page.EvaluateAsync($"document.cookie = '{CookieStorageGroup.REMOVE_COOKIE_TEST}=test-value'");
+        await Page.EvaluateAsync($"document.cookie = '{CookieStorageGroup.REMOVE_COOKIE_TEST}=test-value';");
 
         await Page.GetByTestId(CookieStorageGroup.DATA_TESTID_REMOVE_COOKIE).ClickAsync();
 
-        string result = await Page.EvaluateAsync<string>("document.cookie");
+        string result = await Page.EvaluateAsync<string>("document.cookie;");
         Assert.Empty(result);
     }
 
@@ -136,11 +136,11 @@ public sealed class CookieStorageTest : PlayWrightTest {
     [InlineData(10)]
     public async Task Clear(int number) {
         for (int i = 0; i < number; i++)
-            await Page.EvaluateAsync($"document.cookie = 'test-key-{i}=test-value-{i}'");
+            await Page.EvaluateAsync($"document.cookie = 'test-key-{i}=test-value-{i}';");
 
         await Page.GetByTestId(CookieStorageGroup.DATA_TESTID_CLEAR).ClickAsync();
 
-        string result = await Page.EvaluateAsync<string>("document.cookie");
+        string result = await Page.EvaluateAsync<string>("document.cookie;");
         Assert.Empty(result);
     }
 }

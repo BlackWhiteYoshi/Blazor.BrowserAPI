@@ -1,7 +1,7 @@
 ﻿using Microsoft.Playwright;
 using Xunit;
 
-namespace Blazor.BrowserAPI.UnitTest;
+namespace BrowserAPI.UnitTest;
 
 [Collection("PlayWright")]
 public abstract class PlayWrightTest : IAsyncLifetime {

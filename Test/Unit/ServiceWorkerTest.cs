@@ -1,7 +1,7 @@
 ﻿using BrowserAPI.Test.Client;
 using Xunit;
 
-namespace Blazor.BrowserAPI.UnitTest;
+namespace BrowserAPI.UnitTest;
 
 [Collection("PlayWright")]
 public sealed class ServiceWorkerTest : PlayWrightTest {

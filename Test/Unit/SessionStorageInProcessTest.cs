@@ -1,7 +1,7 @@
 ﻿using BrowserAPI.Test.Client;
 using Xunit;
 
-namespace Blazor.BrowserAPI.UnitTest;
+namespace BrowserAPI.UnitTest;
 
 [Collection("PlayWright")]
 public sealed class SessionStorageInProcessTest : PlayWrightTest {
@@ -77,7 +77,7 @@ public sealed class SessionStorageInProcessTest : PlayWrightTest {
 
         await Page.GetByTestId(SessionStorageGroup.DATA_TESTID_CLEAR_INPROCESS).ClickAsync();
 
-        int length = await Page.EvaluateAsync<int>("sessionStorage.length");
+        int length = await Page.EvaluateAsync<int>("sessionStorage.length;");
         Assert.Equal(0, length);
     }
 }

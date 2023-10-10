@@ -1,4 +1,4 @@
-namespace Blazor.BrowserAPI.Test.Server;
+namespace BrowserAPI.Test.Server;
 
 public static class Program {
     public interface IAssemblyMarker { }

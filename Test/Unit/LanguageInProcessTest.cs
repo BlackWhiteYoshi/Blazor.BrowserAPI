@@ -2,7 +2,7 @@
 using Microsoft.Playwright;
 using Xunit;
 
-namespace Blazor.BrowserAPI.UnitTest;
+namespace BrowserAPI.UnitTest;
 
 public sealed class LanguageInProcessTest : PlayWrightTest {
     public LanguageInProcessTest(PlayWrightFixture playWrightFixture) : base(playWrightFixture) { }
@@ -10,7 +10,7 @@ public sealed class LanguageInProcessTest : PlayWrightTest {
 
     [Fact]
     public async Task GetBrowserLanguage() {
-        string expected = await Page.EvaluateAsync<string>("navigator.language");
+        string expected = await Page.EvaluateAsync<string>("navigator.language;");
 
         await Page.GetByTestId(LanguageGroup.DATA_TESTID_GET_BROWSER_LANGUAGE_INPROCESS).ClickAsync();
 

@@ -1,8 +1,8 @@
 ﻿using BrowserAPI.Test.Client;
-using Microsoft.Playwright;
 using Xunit;
+using IDownloadData = Microsoft.Playwright.IDownload;
 
-namespace Blazor.BrowserAPI.UnitTest;
+namespace BrowserAPI.UnitTest;
 
 public sealed class DownloadTest : PlayWrightTest {
     public DownloadTest(PlayWrightFixture playWrightFixture) : base(playWrightFixture) { }
@@ -10,12 +10,12 @@ public sealed class DownloadTest : PlayWrightTest {
 
     [Fact]
     public async Task Download() {
-        Task<IDownload> downloadTask = Page.WaitForDownloadAsync();
+        Task<IDownloadData> downloadTask = Page.WaitForDownloadAsync();
         await Page.GetByTestId(DownloadGroup.DATA_TESTID).ClickAsync();
-        IDownload download = await downloadTask;
+        IDownloadData download = await downloadTask;
         
         Stream downloadData = await download.CreateReadStreamAsync() ?? throw new Exception("download data is null");
-        using StreamReader streamReader = new StreamReader(downloadData);
+        using StreamReader streamReader = new(downloadData);
         string downloadContent = await streamReader.ReadToEndAsync();
 
         Assert.Equal(DownloadGroup.FILENAME, download.SuggestedFilename);
