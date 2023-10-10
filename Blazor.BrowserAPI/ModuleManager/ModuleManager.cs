@@ -52,10 +52,7 @@ internal sealed class ModuleManager : IModuleManager, IDisposable, IAsyncDisposa
 
     async ValueTask<TResult> IModuleManager.InvokeTrySync<TResult>(string identifier, CancellationToken cancellationToken, params object?[]? args) {
         IJSObjectReference module = await ModuleDownload;
-        if (module is IJSInProcessObjectReference moduleInProcess)
-            return moduleInProcess.Invoke<TResult>(identifier, args);
-        else
-            return await module.InvokeAsync<TResult>(identifier, cancellationToken, args);
+        return await module.InvokeTrySync<TResult>(identifier, cancellationToken, args);
     }
 
     async ValueTask<TResult> IModuleManager.InvokeAsync<TResult>(string identifier, CancellationToken cancellationToken, params object?[]? args) {
