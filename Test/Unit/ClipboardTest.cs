@@ -14,9 +14,9 @@ public sealed class ClipboardTest : PlayWrightTest {
         await Context.GrantPermissionsAsync(new string[] { "clipboard-read", "clipboard-write" });
         await Page.EvaluateAsync($"navigator.clipboard.writeText('{TEST_STR}');");
 
-        await Page.GetByTestId(ClipboardGroup.DATA_TESTID_READ).ClickAsync();
+        await Page.GetByTestId(ClipboardGroup.BUTTON_READ).ClickAsync();
 
-        string? result = await Page.GetByTestId(ClipboardGroup.DATA_TESTID_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ClipboardGroup.LABEL_OUTPUT).TextContentAsync();
         Assert.Equal(TEST_STR, result);
     }
 
@@ -24,9 +24,9 @@ public sealed class ClipboardTest : PlayWrightTest {
     public async Task ClipboardWrite() {
         await Context.GrantPermissionsAsync(new string[] { "clipboard-read", "clipboard-write" });
         
-        await Page.GetByTestId(ClipboardGroup.DATA_TESTID_WRITE).ClickAsync();
+        await Page.GetByTestId(ClipboardGroup.BUTTON_WRITE).ClickAsync();
 
         string clipboardContent = await Page.EvaluateAsync<string>($"navigator.clipboard.readText();");
-        Assert.Equal(ClipboardGroup.WRITE_TEST, clipboardContent);
+        Assert.Equal(ClipboardGroup.TEST_WRITE, clipboardContent);
     }
 }

@@ -3,28 +3,11 @@
 namespace BrowserAPI.Test.Client;
 
 public partial class SessionStorageGroup : ComponentBase {
-    public const string DATA_TESTID_GET_LENGTH_PROPERTY = "session-storage-get-length-property";
-    public const string DATA_TESTID_GET_LENGTH_METHOD = "session-storage-get-length-method";
-    public const string DATA_TESTID_KEY = "session-storage-key";
-    public const string DATA_TESTID_GET_ITEM = "session-storage-get-item";
-    public const string DATA_TESTID_SET_ITEM = "session-storage-set-item";
-    public const string DATA_TESTID_REMOVE_ITEM = "session-storage-remove-item";
-    public const string DATA_TESTID_CLEAR = "session-storage-clear";
-
-    public const string DATA_TESTID_GET_LENGTH_INPROCESS = "session-storage-get-length-inprocess";
-    public const string DATA_TESTID_KEY_INPROCESS = "session-storage-key-inprocess";
-    public const string DATA_TESTID_GET_ITEM_INPROCESS = "session-storage-get-item-inprocess";
-    public const string DATA_TESTID_SET_ITEM_INPROCESS = "session-storage-set-item-inprocess";
-    public const string DATA_TESTID_REMOVE_ITEM_INPROCESS = "session-storage-remove-item-inprocess";
-    public const string DATA_TESTID_CLEAR_INPROCESS = "session-storage-clear-inprocess";
-
-    public const string DATA_TESTID_OUTPUT = "session-storage-output";
-
-    private const int KEY_INDEX_TEST = 0;
-    public const string GET_ITEM_TEST = "get-item-test";
-    public const string SET_ITEM_KEY_TEST = "set-item-key-test";
-    public const string SET_ITEM_VALUE_TEST = "set-item-value-test";
-    public const string REMOVE_ITEM_TEST = "remove-item-test";
+    private const int TEST_KEY_INDEX = 0;
+    public const string TEST_GET_ITEM = "get-item-test";
+    public const string TEST_SET_ITEM_KEY = "set-item-key-test";
+    public const string TEST_SET_ITEM_VALUE = "set-item-value-test";
+    public const string TEST_REMOVE_ITEM = "remove-item-test";
 
 
     [Inject]
@@ -33,61 +16,76 @@ public partial class SessionStorageGroup : ComponentBase {
     [Inject]
     public required ISessionStorageInProcess SessionStorageInProcess { private get; init; }
 
+
+    public const string LABEL_OUTPUT = "session-storage-output";
     private string labelOutput = string.Empty;
 
 
+    public const string BUTTON_GET_LENGTH_PROPERTY = "session-storage-get-length-property";
     private async Task GetLength_Property() {
         int length = await SessionStorage.Length;
         labelOutput = length.ToString();
     }
 
+    public const string BUTTON_GET_LENGTH_METHOD = "session-storage-get-length-method";
     private async Task GetLength_Method() {
         int length = await SessionStorage.GetLength(default);
         labelOutput = length.ToString();
     }
 
+    public const string BUTTON_KEY = "session-storage-key";
     private async Task Key() {
-        labelOutput = await SessionStorage.Key(KEY_INDEX_TEST) ?? throw new Exception($"key {KEY_INDEX_TEST} is not present");
+        labelOutput = await SessionStorage.Key(TEST_KEY_INDEX) ?? throw new Exception($"key {TEST_KEY_INDEX} is not present");
     }
 
+    public const string BUTTON_GET_ITEM = "session-storage-get-item";
     private async Task GetItem() {
-        labelOutput = await SessionStorage.GetItem(GET_ITEM_TEST) ?? throw new Exception($"key '{GET_ITEM_TEST}' is not present");
+        labelOutput = await SessionStorage.GetItem(TEST_GET_ITEM) ?? throw new Exception($"key '{TEST_GET_ITEM}' is not present");
     }
 
+    public const string BUTTON_SET_ITEM = "session-storage-set-item";
     private async Task SetItem() {
-        await SessionStorage.SetItem(SET_ITEM_KEY_TEST, SET_ITEM_VALUE_TEST);
+        await SessionStorage.SetItem(TEST_SET_ITEM_KEY, TEST_SET_ITEM_VALUE);
     }
 
+    public const string BUTTON_REMOVE_ITEM = "session-storage-remove-item";
     private async Task RemoveItem() {
-        await SessionStorage.RemoveItem(REMOVE_ITEM_TEST);
+        await SessionStorage.RemoveItem(TEST_REMOVE_ITEM);
     }
 
+    public const string BUTTON_CLEAR = "session-storage-clear";
     private async Task Clear() {
         await SessionStorage.Clear();
     }
 
 
+    public const string BUTTON_GET_LENGTH_INPROCESS = "session-storage-get-length-inprocess";
     private void GetLength_InProcess() {
         int length = SessionStorageInProcess.Length;
         labelOutput = length.ToString();
     }
 
+    public const string BUTTON_KEY_INPROCESS = "session-storage-key-inprocess";
     private void Key_InProcess() {
-        labelOutput = SessionStorageInProcess.Key(KEY_INDEX_TEST) ?? throw new Exception($"key ({KEY_INDEX_TEST}) is not present");
+        labelOutput = SessionStorageInProcess.Key(TEST_KEY_INDEX) ?? throw new Exception($"key ({TEST_KEY_INDEX}) is not present");
     }
 
+    public const string BUTTON_GET_ITEM_INPROCESS = "session-storage-get-item-inprocess";
     private void GetItem_InProcess() {
-        labelOutput = SessionStorageInProcess.GetItem(GET_ITEM_TEST) ?? throw new Exception($"key '{GET_ITEM_TEST}' is not present");
+        labelOutput = SessionStorageInProcess.GetItem(TEST_GET_ITEM) ?? throw new Exception($"key '{TEST_GET_ITEM}' is not present");
     }
 
+    public const string BUTTON_SET_ITEM_INPROCESS = "session-storage-set-item-inprocess";
     private void SetItem_InProcess() {
-        SessionStorageInProcess.SetItem(SET_ITEM_KEY_TEST, SET_ITEM_VALUE_TEST);
+        SessionStorageInProcess.SetItem(TEST_SET_ITEM_KEY, TEST_SET_ITEM_VALUE);
     }
 
+    public const string BUTTON_REMOVE_ITEM_INPROCESS = "session-storage-remove-item-inprocess";
     private void RemoveItem_InProcess() {
-        SessionStorageInProcess.RemoveItem(REMOVE_ITEM_TEST);
+        SessionStorageInProcess.RemoveItem(TEST_REMOVE_ITEM);
     }
 
+    public const string BUTTON_CLEAR_INPROCESS = "session-storage-clear-inprocess";
     private void Clear_InProcess() {
         SessionStorageInProcess.Clear();
     }

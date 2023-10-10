@@ -3,19 +3,7 @@
 namespace BrowserAPI.Test.Client;
 
 public sealed partial class LanguageGroup : ComponentBase {
-    public const string DATA_TESTID_GET_BROWSER_LANGUAGE_PROPERTY = "get-browser-language-property";
-    public const string DATA_TESTID_GET_BROWSER_LANGUAGE_METHOD = "get-browser-language-method";
-    public const string DATA_TESTID_GET_HTML_LANGUAGE_PROPERTY = "get-html-language-property";
-    public const string DATA_TESTID_GET_HTML_LANGUAGE_METHOD = "get-html-language-method";
-    public const string DATA_TESTID_SET_HTML_LANGUAGE = "set-html-language";
-
-    public const string DATA_TESTID_GET_BROWSER_LANGUAGE_INPROCESS = "get-browser-language-inprocess";
-    public const string DATA_TESTID_GET_HTML_LANGUAGE_INPROCESS = "get-html-language-inprocess";
-    public const string DATA_TESTID_SET_HTML_LANGUAGE_INPROCESS = "set-html-language-inprocess";
-
-    public const string DATA_TESTID_OUTPUT = "language-output";
-
-    public const string SET_HTML_TEST = "html language test";
+    public const string TEST_SET_HTML = "html language test";
 
 
     [Inject]
@@ -24,39 +12,49 @@ public sealed partial class LanguageGroup : ComponentBase {
     [Inject]
     public required ILanguageInProcess LanguageInProcess { private get; init; }
 
+
+    public const string LABEL_OUTPUT = "language-output";
     private string labelOutput = string.Empty;
-    
-    
+
+
+    public const string BUTTON_GET_BROWSER_LANGUAGE_PROPERTY = "get-browser-language-property";
     private async Task GetBrowserLanguage_Property() {
         labelOutput = await Language.BrowserLanguage;
     }
 
+    public const string BUTTON_GET_BROWSER_LANGUAGE_METHOD = "get-browser-language-method";
     private async Task GetBrowserLanguage_Method() {
         labelOutput = await Language.GetBrowserLanguage(default);
     }
 
+    public const string BUTTON_GET_HTML_LANGUAGE_PROPERTY = "get-html-language-property";
     private async Task GetHtmlLanguage_Property() {
         labelOutput = await Language.HtmlLanguage;
     }
 
+    public const string BUTTON_GET_HTML_LANGUAGE_METHOD = "get-html-language-method";
     private async Task GetHtmlLanguage_Method() {
         labelOutput = await Language.GetHtmlLanguage(default);
     }
 
+    public const string BUTTON_SET_HTML_LANGUAGE = "set-html-language";
     private async Task SetHtmlLanguage() {
-        await Language.SetHtmlLanguage(SET_HTML_TEST);
+        await Language.SetHtmlLanguage(TEST_SET_HTML);
     }
 
 
+    public const string BUTTON_GET_BROWSER_LANGUAGE_INPROCESS = "get-browser-language-inprocess";
     private void GetBrowserLanguage_InProcess() {
         labelOutput = LanguageInProcess.BrowserLanguage;
     }
 
+    public const string BUTTON_GET_HTML_LANGUAGE_INPROCESS = "get-html-language-inprocess";
     private void GetHtmlLanguage_InProcess() {
         labelOutput = LanguageInProcess.HtmlLanguage;
     }
 
+    public const string BUTTON_SET_HTML_LANGUAGE_INPROCESS = "set-html-language-inprocess";
     private void SetHtmlLanguage_InProcess() {
-        LanguageInProcess.HtmlLanguage = SET_HTML_TEST;
+        LanguageInProcess.HtmlLanguage = TEST_SET_HTML;
     }
 }

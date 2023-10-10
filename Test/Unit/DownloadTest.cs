@@ -11,14 +11,14 @@ public sealed class DownloadTest : PlayWrightTest {
     [Fact]
     public async Task Download() {
         Task<IDownloadData> downloadTask = Page.WaitForDownloadAsync();
-        await Page.GetByTestId(DownloadGroup.DATA_TESTID).ClickAsync();
+        await Page.GetByTestId(DownloadGroup.BUTTON_DOWNLOAD_AS_FILE).ClickAsync();
         IDownloadData download = await downloadTask;
         
         Stream downloadData = await download.CreateReadStreamAsync() ?? throw new Exception("download data is null");
         using StreamReader streamReader = new(downloadData);
         string downloadContent = await streamReader.ReadToEndAsync();
 
-        Assert.Equal(DownloadGroup.FILENAME, download.SuggestedFilename);
-        Assert.Equal(DownloadGroup.FILECONTENT, downloadContent);
+        Assert.Equal(DownloadGroup.TEST_FILENAME, download.SuggestedFilename);
+        Assert.Equal(DownloadGroup.TEST_FILECONTENT, downloadContent);
     }
 }
