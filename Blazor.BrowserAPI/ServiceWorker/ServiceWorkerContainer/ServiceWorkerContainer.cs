@@ -3,13 +3,9 @@ using Microsoft.JSInterop;
 
 namespace BrowserAPI;
 
-/// <summary>
-/// The <i>ServiceWorkerContainer</i> interface of the <i>Service Worker API</i> provides an object representing the service worker as an overall unit in the network ecosystem, including facilities to register, unregister and update service workers, and access the state of service workers and their registrations.<br />
-/// Most importantly, it exposes the <i>ServiceWorkerContainer.register()</i> method used to register service workers, and the <i>ServiceWorkerContainer.controller</i> property used to determine whether or not the current page is actively controlled.
-/// </summary>
-[AutoInterface]
-internal sealed class ServiceWorker : ServiceWorkerBase, IServiceWorker {
-    public ServiceWorker(IModuleManager moduleManager) : base(moduleManager) { }
+[AutoInterface(Modifier = "public partial")]
+internal sealed class ServiceWorkerContainer : ServiceWorkerContainerBase, IServiceWorkerContainer {
+    public ServiceWorkerContainer(IModuleManager moduleManager) : base(moduleManager) { }
 
 
     /// <summary>
@@ -71,17 +67,17 @@ internal sealed class ServiceWorker : ServiceWorkerBase, IServiceWorker {
     /// <summary>
     /// Returns a <i>ServiceWorker</i> object if its state is activating or activated (the same object returned by ServiceWorkerRegistration.active). This property returns null during a force-refresh request (Shift + refresh) or if there is no active worker.
     /// </summary>
-    public ValueTask<IServiceWorkerInstance?> Controller => GetController(default);
+    public ValueTask<IServiceWorker?> Controller => GetController(default);
 
     /// <summary>
     /// Returns a <i>ServiceWorker</i> object if its state is activating or activated (the same object returned by ServiceWorkerRegistration.active). This property returns null during a force-refresh request (Shift + refresh) or if there is no active worker.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<IServiceWorkerInstance?> GetController(CancellationToken cancellationToken) {
+    public async ValueTask<IServiceWorker?> GetController(CancellationToken cancellationToken) {
         try {
-            IJSObjectReference serviceWorker = await _moduleManager.InvokeTrySync<IJSObjectReference>("serviceWorkerController", default);
-            return new ServiceWorkerInstance(_moduleManager, serviceWorker);
+            IJSObjectReference serviceWorker = await _moduleManager.InvokeTrySync<IJSObjectReference>("serviceWorkerContainerController", cancellationToken);
+            return new ServiceWorker(_moduleManager, serviceWorker);
         }
         catch (JSException) {
             return null;
@@ -95,5 +91,5 @@ internal sealed class ServiceWorker : ServiceWorkerBase, IServiceWorker {
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask StartMessages(CancellationToken cancellationToken = default)
-        => _moduleManager.InvokeTrySync("serviceWorkeStartMessages", cancellationToken);
+        => _moduleManager.InvokeTrySync("serviceWorkerContainerStartMessages", cancellationToken);
 }

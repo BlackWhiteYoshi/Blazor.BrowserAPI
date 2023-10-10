@@ -3,13 +3,9 @@ using Microsoft.JSInterop;
 
 namespace BrowserAPI;
 
-/// <summary>
-/// The <i>ServiceWorkerContainer</i> interface of the <i>Service Worker API</i> provides an object representing the service worker as an overall unit in the network ecosystem, including facilities to register, unregister and update service workers, and access the state of service workers and their registrations.<br />
-/// Most importantly, it exposes the <i>ServiceWorkerContainer.register()</i> method used to register service workers, and the <i>ServiceWorkerContainer.controller</i> property used to determine whether or not the current page is actively controlled.
-/// </summary>
-[AutoInterface]
-internal sealed class ServiceWorkerInProcess : ServiceWorkerBase, IServiceWorkerInProcess {
-    public ServiceWorkerInProcess(IModuleManager moduleManager) : base(moduleManager) { }
+[AutoInterface(Modifier = "public partial")]
+internal sealed class ServiceWorkerContainerInProcess : ServiceWorkerContainerBase, IServiceWorkerContainerInProcess {
+    public ServiceWorkerContainerInProcess(IModuleManager moduleManager) : base(moduleManager) { }
 
 
     /// <summary>
@@ -70,11 +66,11 @@ internal sealed class ServiceWorkerInProcess : ServiceWorkerBase, IServiceWorker
     /// <summary>
     /// Returns a <i>ServiceWorker</i> object if its state is activating or activated (the same object returned by ServiceWorkerRegistration.active). This property returns null during a force-refresh request (Shift + refresh) or if there is no active worker.
     /// </summary>
-    public IServiceWorkerInstanceInProcess? Controller {
+    public IServiceWorkerInProcess? Controller {
         get {
             try {
-                IJSInProcessObjectReference serviceWorker = _moduleManager.InvokeSync<IJSInProcessObjectReference>("serviceWorkerController");
-                return new ServiceWorkerInstanceInProcess(_moduleManager, serviceWorker);
+                IJSInProcessObjectReference serviceWorker = _moduleManager.InvokeSync<IJSInProcessObjectReference>("serviceWorkerContainerController");
+                return new ServiceWorkerInProcess(_moduleManager, serviceWorker);
             }
             catch (JSException) {
                 return null;
@@ -86,5 +82,5 @@ internal sealed class ServiceWorkerInProcess : ServiceWorkerBase, IServiceWorker
     /// <summary>
     /// The <i>startMessages()</i> method of the ServiceWorkerContainer interface explicitly starts the flow of messages being dispatched from a service worker to pages under its control (e.g. sent via Client.postMessage()). This can be used to react to sent messages earlier, even before that page's content has finished loading. 
     /// </summary>
-    public void StartMessages() => _moduleManager.InvokeSync("serviceWorkeStartMessages");
+    public void StartMessages() => _moduleManager.InvokeSync("serviceWorkerContainerStartMessages");
 }

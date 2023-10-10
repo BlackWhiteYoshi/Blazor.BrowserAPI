@@ -3,14 +3,15 @@ using Microsoft.JSInterop;
 
 namespace BrowserAPI;
 
-/// <summary>
-/// The <i>ServiceWorker</i> interface of the Service Worker API provides a reference to a service worker. Multiple browsing contexts (e.g. pages, workers, etc.) can be associated with the same service worker, each through a unique ServiceWorker object.
-/// </summary>
-[AutoInterface(Inheritance = new[] { typeof(IAsyncDisposable) })]
-internal sealed class ServiceWorkerInstance : ServiceWorkerInstanceBase, IServiceWorkerInstance {
-    public ServiceWorkerInstance(IModuleManager moduleManager, IJSObjectReference serviceWorker) : base(moduleManager, serviceWorker) { }
+[AutoInterface(Modifier = "public partial", Inheritance = new[] { typeof(IAsyncDisposable) })]
+internal sealed class ServiceWorker : ServiceWorkerBase, IServiceWorker {
+    protected override IJSObjectReference ServiceWorkerJS { get; }
 
-    ValueTask IAsyncDisposable.DisposeAsync() => _serviceWorker.DisposeAsync();
+    public ServiceWorker(IModuleManager moduleManager, IJSObjectReference serviceWorker) : base(moduleManager) {
+        ServiceWorkerJS = serviceWorker;
+    }
+
+    ValueTask IAsyncDisposable.DisposeAsync() => ServiceWorkerJS.DisposeAsync();
 
 
     /// <summary>
@@ -23,7 +24,7 @@ internal sealed class ServiceWorkerInstance : ServiceWorkerInstanceBase, IServic
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetScriptUrl(CancellationToken cancellationToken) => _moduleManager.InvokeTrySync<string>("serviceWorkerInstanceScriptURL", cancellationToken, _serviceWorker);
+    public ValueTask<string> GetScriptUrl(CancellationToken cancellationToken) => _moduleManager.InvokeTrySync<string>("serviceWorkerScriptURL", cancellationToken, ServiceWorkerJS);
 
 
     /// <summary>
@@ -36,7 +37,7 @@ internal sealed class ServiceWorkerInstance : ServiceWorkerInstanceBase, IServic
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetState(CancellationToken cancellationToken) => _moduleManager.InvokeTrySync<string>("serviceWorkerInstanceState", cancellationToken, _serviceWorker);
+    public ValueTask<string> GetState(CancellationToken cancellationToken) => _moduleManager.InvokeTrySync<string>("serviceWorkerState", cancellationToken, ServiceWorkerJS);
 
 
     /// <summary>
@@ -45,5 +46,5 @@ internal sealed class ServiceWorkerInstance : ServiceWorkerInstanceBase, IServic
     /// <param name="message"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask PostMessage(object message, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("serviceWorkerInstancePostMessage", cancellationToken, _serviceWorker, message);
+    public ValueTask PostMessage(object message, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("serviceWorkerPostMessage", cancellationToken, ServiceWorkerJS, message);
 }

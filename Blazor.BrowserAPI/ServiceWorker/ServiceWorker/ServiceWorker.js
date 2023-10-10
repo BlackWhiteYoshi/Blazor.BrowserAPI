@@ -3,7 +3,7 @@
  * @param {ServiceWorker} serviceWorker
  * @returns {string}
  */
-export function serviceWorkerInstanceScriptURL(serviceWorker) {
+export function serviceWorkerScriptURL(serviceWorker) {
     return serviceWorker.scriptURL;
 }
 
@@ -12,7 +12,7 @@ export function serviceWorkerInstanceScriptURL(serviceWorker) {
  * @param {ServiceWorker} serviceWorker
  * @returns {string}
  */
-export function serviceWorkerInstanceState(serviceWorker) {
+export function serviceWorkerState(serviceWorker) {
     return serviceWorker.state;
 }
 
@@ -21,7 +21,7 @@ export function serviceWorkerInstanceState(serviceWorker) {
  * @param {ServiceWorker} serviceWorker
  * @param {any} message
  */
-export function serviceWorkerInstancePostMessage(serviceWorker, message) {
+export function serviceWorkerPostMessage(serviceWorker, message) {
     return serviceWorker.postMessage(message);
 }
 
@@ -31,7 +31,7 @@ export function serviceWorkerInstancePostMessage(serviceWorker, message) {
  * @param {ServiceWorker} serviceWorker
  * @param {import("../blazor").DotNet.DotNetObject} stateChangeTrigger
  */
-export function serviceWorkerInstanceActivateOnstatechange(serviceWorker, stateChangeTrigger) {
+export function serviceWorkerActivateOnstatechange(serviceWorker, stateChangeTrigger) {
     serviceWorker.onstatechange = (event) => stateChangeTrigger.invokeMethodAsync("Trigger", event.target.state);
 }
 
@@ -39,7 +39,7 @@ export function serviceWorkerInstanceActivateOnstatechange(serviceWorker, stateC
  * 
  * @param {ServiceWorker} serviceWorker
  */
-export function serviceWorkerInstanceDeactivateOnstatechange(serviceWorker) {
+export function serviceWorkerDeactivateOnstatechange(serviceWorker) {
     serviceWorker.onstatechange = null;
 }
 
@@ -49,7 +49,7 @@ export function serviceWorkerInstanceDeactivateOnstatechange(serviceWorker) {
  * @param {ServiceWorker} serviceWorker
  * @param {import("../blazor").DotNet.DotNetObject} errorTrigger
  */
-export function serviceWorkerInstanceActivateOnerror(serviceWorker, errorTrigger) {
+export function serviceWorkerActivateOnerror(serviceWorker, errorTrigger) {
     serviceWorker.onerror = (event) => errorTrigger.invokeMethodAsync("Trigger", event);
 }
 
@@ -57,6 +57,6 @@ export function serviceWorkerInstanceActivateOnerror(serviceWorker, errorTrigger
  * 
  * @param {ServiceWorker} serviceWorker
  */
-export function serviceWorkerInstanceDeactivateOnerror(serviceWorker) {
+export function serviceWorkerDeactivateOnerror(serviceWorker) {
     serviceWorker.onerror = null;
 }

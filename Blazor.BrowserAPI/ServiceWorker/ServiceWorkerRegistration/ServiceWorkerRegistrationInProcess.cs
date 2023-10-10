@@ -3,14 +3,12 @@ using Microsoft.JSInterop;
 
 namespace BrowserAPI;
 
-/// <summary>
-/// The <i>ServiceWorkerRegistration</i> interface of the Service Worker API represents the service worker registration. You register a service worker to control one or more pages that share the same origin.
-/// </summary>
-[AutoInterface(Inheritance = new[] { typeof(IDisposable) })]
+[AutoInterface(Modifier = "public partial", Inheritance = new[] { typeof(IDisposable) })]
 internal sealed class ServiceWorkerRegistrationInProcess : ServiceWorkerRegistrationBase, IServiceWorkerRegistrationInProcess {
-    private new readonly IJSInProcessObjectReference _serviceWorkerRegistration;
+    private readonly IJSInProcessObjectReference _serviceWorkerRegistration;
+    protected override IJSObjectReference ServiceWorkerRegistrationJS => _serviceWorkerRegistration;
 
-    public ServiceWorkerRegistrationInProcess(IModuleManager moduleManager, IJSInProcessObjectReference serviceWorkerRegistration) : base(moduleManager, serviceWorkerRegistration) {
+    public ServiceWorkerRegistrationInProcess(IModuleManager moduleManager, IJSInProcessObjectReference serviceWorkerRegistration) : base(moduleManager) {
         _serviceWorkerRegistration = serviceWorkerRegistration;
     }
 
@@ -21,11 +19,11 @@ internal sealed class ServiceWorkerRegistrationInProcess : ServiceWorkerRegistra
     /// <summary>
     /// The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated. This property is initially set to null. 
     /// </summary>
-    public IServiceWorkerInstanceInProcess? Active {
+    public IServiceWorkerInProcess? Active {
         get {
             try {
                 IJSInProcessObjectReference serviceWorker = _moduleManager.InvokeSync<IJSInProcessObjectReference>("serviceWorkerRegistrationActive", _serviceWorkerRegistration);
-                return new ServiceWorkerInstanceInProcess(_moduleManager, serviceWorker);
+                return new ServiceWorkerInProcess(_moduleManager, serviceWorker);
             }
             catch (JSException) {
                 return null;
@@ -36,11 +34,11 @@ internal sealed class ServiceWorkerRegistrationInProcess : ServiceWorkerRegistra
     /// <summary>
     /// The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing. This property is initially set to null. 
     /// </summary>
-    public IServiceWorkerInstanceInProcess? Installing {
+    public IServiceWorkerInProcess? Installing {
         get {
             try {
                 IJSInProcessObjectReference serviceWorker = _moduleManager.InvokeSync<IJSInProcessObjectReference>("serviceWorkerRegistrationInstalling", _serviceWorkerRegistration);
-                return new ServiceWorkerInstanceInProcess(_moduleManager, serviceWorker);
+                return new ServiceWorkerInProcess(_moduleManager, serviceWorker);
             }
             catch (JSException) {
                 return null;
@@ -51,11 +49,11 @@ internal sealed class ServiceWorkerRegistrationInProcess : ServiceWorkerRegistra
     /// <summary>
     /// The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed. This property is initially set to null. 
     /// </summary>
-    public IServiceWorkerInstanceInProcess? Waiting {
+    public IServiceWorkerInProcess? Waiting {
         get {
             try {
                 IJSInProcessObjectReference serviceWorker = _moduleManager.InvokeSync<IJSInProcessObjectReference>("serviceWorkerRegistrationWaiting", _serviceWorkerRegistration);
-                return new ServiceWorkerInstanceInProcess(_moduleManager, serviceWorker);
+                return new ServiceWorkerInProcess(_moduleManager, serviceWorker);
             }
             catch (JSException) {
                 return null;

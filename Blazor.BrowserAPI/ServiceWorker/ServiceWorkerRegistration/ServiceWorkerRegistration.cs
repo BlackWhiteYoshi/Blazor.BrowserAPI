@@ -3,30 +3,31 @@ using Microsoft.JSInterop;
 
 namespace BrowserAPI;
 
-/// <summary>
-/// The <i>ServiceWorkerRegistration</i> interface of the Service Worker API represents the service worker registration. You register a service worker to control one or more pages that share the same origin.
-/// </summary>
-[AutoInterface(Inheritance = new[] { typeof(IAsyncDisposable) })]
+[AutoInterface(Modifier = "public partial", Inheritance = new[] { typeof(IAsyncDisposable) })]
 internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase, IServiceWorkerRegistration {
-    public ServiceWorkerRegistration(IModuleManager moduleManager, IJSObjectReference serviceWorkerRegistration) : base(moduleManager, serviceWorkerRegistration) { }
+    protected override IJSObjectReference ServiceWorkerRegistrationJS { get; }
 
-    ValueTask IAsyncDisposable.DisposeAsync() => _serviceWorkerRegistration.DisposeAsync();
+    public ServiceWorkerRegistration(IModuleManager moduleManager, IJSObjectReference serviceWorkerRegistration) : base(moduleManager) {
+        ServiceWorkerRegistrationJS = serviceWorkerRegistration;
+    }
+
+    ValueTask IAsyncDisposable.DisposeAsync() => ServiceWorkerRegistrationJS.DisposeAsync();
 
 
     /// <summary>
     /// The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated. This property is initially set to null. 
     /// </summary>
-    public ValueTask<IServiceWorkerInstance?> Active => GetActive(default);
+    public ValueTask<IServiceWorker?> Active => GetActive(default);
 
     /// <summary>
     /// The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated. This property is initially set to null. 
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<IServiceWorkerInstance?> GetActive(CancellationToken cancellationToken) {
+    public async ValueTask<IServiceWorker?> GetActive(CancellationToken cancellationToken) {
         try {
-            IJSObjectReference serviceWorker = await _moduleManager.InvokeTrySync<IJSObjectReference>("serviceWorkerRegistrationActive", cancellationToken, _serviceWorkerRegistration);
-            return new ServiceWorkerInstance(_moduleManager, serviceWorker);
+            IJSObjectReference serviceWorker = await _moduleManager.InvokeTrySync<IJSObjectReference>("serviceWorkerRegistrationActive", cancellationToken, ServiceWorkerRegistrationJS);
+            return new ServiceWorker(_moduleManager, serviceWorker);
         }
         catch (JSException) {
             return null;
@@ -37,17 +38,17 @@ internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase,
     /// <summary>
     /// The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing. This property is initially set to null. 
     /// </summary>
-    public ValueTask<IServiceWorkerInstance?> Installing => GetInstalling(default);
+    public ValueTask<IServiceWorker?> Installing => GetInstalling(default);
 
     /// <summary>
     /// The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing. This property is initially set to null. 
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<IServiceWorkerInstance?> GetInstalling(CancellationToken cancellationToken) {
+    public async ValueTask<IServiceWorker?> GetInstalling(CancellationToken cancellationToken) {
         try {
-            IJSObjectReference serviceWorker = await _moduleManager.InvokeTrySync<IJSObjectReference>("serviceWorkerRegistrationInstalling", cancellationToken, _serviceWorkerRegistration);
-            return new ServiceWorkerInstance(_moduleManager, serviceWorker);
+            IJSObjectReference serviceWorker = await _moduleManager.InvokeTrySync<IJSObjectReference>("serviceWorkerRegistrationInstalling", cancellationToken, ServiceWorkerRegistrationJS);
+            return new ServiceWorker(_moduleManager, serviceWorker);
         }
         catch (JSException) {
             return null;
@@ -58,17 +59,17 @@ internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase,
     /// <summary>
     /// The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed. This property is initially set to null. 
     /// </summary>
-    public ValueTask<IServiceWorkerInstance?> Waiting => GetWaiting(default);
+    public ValueTask<IServiceWorker?> Waiting => GetWaiting(default);
 
     /// <summary>
     /// The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed. This property is initially set to null. 
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<IServiceWorkerInstance?> GetWaiting(CancellationToken cancellationToken) {
+    public async ValueTask<IServiceWorker?> GetWaiting(CancellationToken cancellationToken) {
         try {
-            IJSObjectReference serviceWorker = await _moduleManager.InvokeTrySync<IJSObjectReference>("serviceWorkerRegistrationWaiting", cancellationToken, _serviceWorkerRegistration);
-            return new ServiceWorkerInstance(_moduleManager, serviceWorker);
+            IJSObjectReference serviceWorker = await _moduleManager.InvokeTrySync<IJSObjectReference>("serviceWorkerRegistrationWaiting", cancellationToken, ServiceWorkerRegistrationJS);
+            return new ServiceWorker(_moduleManager, serviceWorker);
         }
         catch (JSException) {
             return null;
@@ -87,7 +88,7 @@ internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase,
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetScope(CancellationToken cancellationToken) => _moduleManager.InvokeTrySync<string>("serviceWorkerRegistrationScope", default, _serviceWorkerRegistration);
+    public ValueTask<string> GetScope(CancellationToken cancellationToken) => _moduleManager.InvokeTrySync<string>("serviceWorkerRegistrationScope", default, ServiceWorkerRegistrationJS);
 
 
     /// <summary>
@@ -100,7 +101,7 @@ internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase,
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetUpdateViaCache(CancellationToken cancellationToken) => _moduleManager.InvokeTrySync<string>("serviceWorkerRegistrationUpdateViaCache", default, _serviceWorkerRegistration);
+    public ValueTask<string> GetUpdateViaCache(CancellationToken cancellationToken) => _moduleManager.InvokeTrySync<string>("serviceWorkerRegistrationUpdateViaCache", default, ServiceWorkerRegistrationJS);
 
 
 
