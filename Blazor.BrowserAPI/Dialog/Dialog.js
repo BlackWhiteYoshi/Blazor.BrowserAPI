@@ -1,7 +1,6 @@
 /**
- * 
  * @param {HTMLDialogElement} dialog
- * @returns
+ * @returns {Dialog}
  */
 export function createDialog(dialog) {
     return new Dialog(dialog);
@@ -10,100 +9,93 @@ export function createDialog(dialog) {
 
 class Dialog {
     /**
-     * 
+     * @type {HTMLDialogElemnt}
+     */
+    #dialog;
+
+    /**
      * @param {HTMLDialogElement} dialog
      */
     constructor(dialog) {
-        this.dialog = dialog;
+        this.#dialog = dialog;
     }
 
 
     /**
-     * 
      * @returns {boolean}
      */
     getOpen() {
-        return this.dialog.open;
+        return this.#dialog.open;
     }
 
     /**
-     * 
      * @param {boolean} value
      */
     setOpen(value) {
-        this.dialog.open = value;
+        this.#dialog.open = value;
     }
 
 
     /**
-     * 
      * @returns {string}
      */
     getReturnValue() {
-        return this.dialog.returnValue;
+        return this.#dialog.returnValue;
     }
 
     /**
-     * 
      * @param {string} returnValue
      */
     setReturnValue(returnValue) {
-        this.dialog.returnValue = returnValue;
+        this.#dialog.returnValue = returnValue;
     }
 
 
     /**
-     * 
      * @param {string | undefined} returnValue
      */
     close(returnValue) {
-        this.dialog.close(returnValue);
+        this.#dialog.close(returnValue);
     }
 
 
     /**
-     * 
      */
     show() {
-        this.dialog.show();
+        this.#dialog.show();
     }
 
     /**
-     * 
      */
     showModal() {
-        this.dialog.showModal();
+        this.#dialog.showModal();
     }
 
 
     /**
-     * 
      * @param {import("../blazor").DotNet.DotNetObject} cancelTrigger
      */
     activateOncancel(cancelTrigger) {
-        this.dialog.oncancel = () => cancelTrigger.invokeMethodAsync("Trigger");
+        this.#dialog.oncancel = () => cancelTrigger.invokeMethodAsync("Trigger");
     }
 
     /**
-     * 
      */
     deactivateOncancel() {
-        this.dialog.oncancel = null;
+        this.#dialog.oncancel = null;
     }
 
 
     /**
-     * 
      * @param {import("../blazor").DotNet.DotNetObject} closeTrigger
      */
     activateOnclose(closeTrigger) {
-        this.dialog.onclose = () => closeTrigger.invokeMethodAsync("Trigger");
+        this.#dialog.onclose = () => closeTrigger.invokeMethodAsync("Trigger");
     }
 
     /**
-     * 
      */
     deactivateOnclose() {
-        this.dialog.onclose = null;
+        this.#dialog.onclose = null;
     }
 }

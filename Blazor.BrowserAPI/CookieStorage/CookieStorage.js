@@ -1,5 +1,4 @@
 /**
- * 
  * @returns {string}
  */
 export function getAllCookies() {
@@ -7,7 +6,6 @@ export function getAllCookies() {
 }
 
 /**
- * 
  * @returns {number}
  */
 export function cookieStorageLength() {
@@ -19,7 +17,6 @@ export function cookieStorageLength() {
 }
 
 /**
- * 
  * @param {number} index
  * @returns {string | null}
  */
@@ -37,7 +34,6 @@ export function cookieStorageKey(index) {
 }
 
 /**
- * 
  * @param {string} key
  * @returns {string | null}
  */
@@ -55,7 +51,6 @@ export function cookieStorageGetCookie(key) {
 }
 
 /**
- * 
  * @param {string} key
  * @param {string} value
  * @param {number | null} expires
@@ -77,7 +72,6 @@ export function cookieStorageSetCookie(key, value, expires, path, sameSite, secu
 }
 
 /**
- * 
  * @param {string} key
  */
 export function cookieStorageRemoveCookie(key) {
@@ -85,7 +79,6 @@ export function cookieStorageRemoveCookie(key) {
 }
 
 /**
- * 
  */
 export function cookieStorageClear() {
     let cookies = document.cookie.split(';');

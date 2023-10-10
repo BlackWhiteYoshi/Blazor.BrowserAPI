@@ -1,5 +1,4 @@
 /**
- * 
  * @returns {number}
  */
 export function localStorageLength() {
@@ -7,7 +6,6 @@ export function localStorageLength() {
 }
 
 /**
- * 
  * @param {number} index
  * @returns {string | null}
  */
@@ -16,7 +14,6 @@ export function localStorageKey(index) {
 }
 
 /**
- * 
  * @param {string} key
  * @returns {string | null}
  */
@@ -25,7 +22,6 @@ export function localStorageGetItem(key) {
 }
 
 /**
- * 
  * @param {string} key
  * @param {string} value
  */
@@ -34,7 +30,6 @@ export function localStorageSetItem(key, value) {
 }
 
 /**
- * 
  * @param {string} key
  */
 export function localStorageRemoveItem(key) {
@@ -42,7 +37,6 @@ export function localStorageRemoveItem(key) {
 }
 
 /**
- * 
  */
 export function localStorageClear() {
     localStorage.clear();

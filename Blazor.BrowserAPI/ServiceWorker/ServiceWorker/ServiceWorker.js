@@ -1,5 +1,4 @@
 /**
- * 
  * @param {ServiceWorker} serviceWorker
  * @returns {string}
  */
@@ -8,7 +7,6 @@ export function serviceWorkerScriptURL(serviceWorker) {
 }
 
 /**
- * 
  * @param {ServiceWorker} serviceWorker
  * @returns {string}
  */
@@ -17,7 +15,6 @@ export function serviceWorkerState(serviceWorker) {
 }
 
 /**
- * 
  * @param {ServiceWorker} serviceWorker
  * @param {any} message
  */
@@ -27,7 +24,6 @@ export function serviceWorkerPostMessage(serviceWorker, message) {
 
 
 /**
- * 
  * @param {ServiceWorker} serviceWorker
  * @param {import("../blazor").DotNet.DotNetObject} stateChangeTrigger
  */
@@ -36,7 +32,6 @@ export function serviceWorkerActivateOnstatechange(serviceWorker, stateChangeTri
 }
 
 /**
- * 
  * @param {ServiceWorker} serviceWorker
  */
 export function serviceWorkerDeactivateOnstatechange(serviceWorker) {
@@ -45,7 +40,6 @@ export function serviceWorkerDeactivateOnstatechange(serviceWorker) {
 
 
 /**
- * 
  * @param {ServiceWorker} serviceWorker
  * @param {import("../blazor").DotNet.DotNetObject} errorTrigger
  */
@@ -54,7 +48,6 @@ export function serviceWorkerActivateOnerror(serviceWorker, errorTrigger) {
 }
 
 /**
- * 
  * @param {ServiceWorker} serviceWorker
  */
 export function serviceWorkerDeactivateOnerror(serviceWorker) {

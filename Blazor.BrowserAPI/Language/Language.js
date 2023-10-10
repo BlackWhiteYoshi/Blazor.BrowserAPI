@@ -1,5 +1,4 @@
 /**
- * 
  * @returns {string}
  */
 export function LanguageBrowser() {
@@ -7,7 +6,6 @@ export function LanguageBrowser() {
 }
 
 /**
- * 
  * @returns string
  */
 export function LanguageHtmlRead() {
@@ -15,7 +13,6 @@ export function LanguageHtmlRead() {
 }
 
 /**
- * 
  * @param {string} language
  * @returns string
  */

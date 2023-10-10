@@ -1,5 +1,4 @@
 /**
- * 
  * @param {ServiceWorkerRegistration} serviceWorkerRegistration
  * @returns {ServiceWorker | null}
  */
@@ -8,7 +7,6 @@ export function serviceWorkerRegistrationActive(serviceWorkerRegistration) {
 }
 
 /**
- * 
  * @param {ServiceWorkerRegistration} serviceWorkerRegistration
  * @returns {ServiceWorker | null}
  */
@@ -17,7 +15,6 @@ export function serviceWorkerRegistrationInstalling(serviceWorkerRegistration) {
 }
 
 /**
- * 
  * @param {ServiceWorkerRegistration} serviceWorkerRegistration
  * @returns {ServiceWorker | null}
  */
@@ -27,7 +24,6 @@ export function serviceWorkerRegistrationWaiting(serviceWorkerRegistration) {
 
 
 /**
- * 
  * @param {ServiceWorkerRegistration} serviceWorkerRegistration
  * @returns {string}
  */
@@ -36,7 +32,6 @@ export function serviceWorkerRegistrationScope(serviceWorkerRegistration) {
 }
 
 /**
- * 
  * @param {ServiceWorkerRegistration} serviceWorkerRegistration
  * @returns {string}
  */
@@ -46,7 +41,6 @@ export function serviceWorkerRegistrationUpdateViaCache(serviceWorkerRegistratio
 
 
 /**
- * 
  * @param {ServiceWorkerRegistration} serviceWorkerRegistration
  * @returns {Promise<boolean>}
  */
@@ -55,7 +49,6 @@ export function serviceWorkerRegistrationUnregister(serviceWorkerRegistration) {
 }
 
 /**
- * 
  * @param {ServiceWorkerRegistration} serviceWorkerRegistration
  * @returns {ServiceWorkerRegistration}
  */
@@ -65,7 +58,6 @@ export function serviceWorkerRegistrationUpdate(serviceWorkerRegistration) {
 
 
 /**
- * 
  * @param {ServiceWorkerRegistration} serviceWorkerRegistration
  * @param {import("../blazor").DotNet.DotNetObject} updateFoundTrigger
  */
@@ -74,7 +66,6 @@ export function serviceWorkerRegistrationActivateOnupdatefound(serviceWorkerRegi
 }
 
 /**
- * 
  * @param {ServiceWorkerRegistration} serviceWorkerRegistration
  */
 export function serviceWorkerRegistrationDeactivateOnupdatefound(serviceWorkerRegistration) {

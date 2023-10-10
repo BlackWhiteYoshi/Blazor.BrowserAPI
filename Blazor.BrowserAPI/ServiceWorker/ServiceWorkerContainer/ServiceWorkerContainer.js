@@ -1,5 +1,4 @@
 /**
- * 
  * @param {string} filePath
  * @returns {boolean}
  */
@@ -12,7 +11,6 @@ export async function serviceWorkerContainerRegister(filePath) {
 }
 
 /**
- * 
  * @param {string} filePath
  * @returns {Promise<ServiceWorkerRegistration>}
  */
@@ -25,7 +23,6 @@ export function serviceWorkerContainerRegisterWithWorkerRegistration(filePath) {
 
 
 /**
- * 
  * @returns {ServiceWorker | null}
  */
 export function serviceWorkerContainerController() {
@@ -33,7 +30,6 @@ export function serviceWorkerContainerController() {
 }
 
 /**
- * 
  * @returns {Promise<ServiceWorkerRegistration>}
  */
 export function serviceWorkerContainerReady() {
@@ -42,7 +38,6 @@ export function serviceWorkerContainerReady() {
 
 
 /**
- * 
  * @param {string | URL} clientUrl
  * @returns {Promise<ServiceWorkerRegistration | undefined>}
  */
@@ -51,7 +46,6 @@ export function serviceWorkerContainerGetRegistration(clientUrl) {
 }
 
 /**
- * 
  * @returns {Promise<readonly ServiceWorkerRegistration[]>}
  */
 export function serviceWorkerContainerGetRegistrations() {
@@ -59,7 +53,6 @@ export function serviceWorkerContainerGetRegistrations() {
 }
 
 /**
- * 
  */
 export function serviceWorkerContainerStartMessages() {
     navigator.serviceWorker.startMessages();
@@ -67,7 +60,6 @@ export function serviceWorkerContainerStartMessages() {
 
 
 /**
- * 
  * @param {import("../blazor").DotNet.DotNetObject} controllerChangeTrigger
  */
 export function serviceWorkerContainerActivateOncontrollerchange(controllerChangeTrigger) {
@@ -75,7 +67,6 @@ export function serviceWorkerContainerActivateOncontrollerchange(controllerChang
 }
 
 /**
- * 
  */
 export function serviceWorkerContainerDeactivateOncontrollerchange() {
     navigator.serviceWorker.oncontrollerchange = null;
@@ -83,7 +74,6 @@ export function serviceWorkerContainerDeactivateOncontrollerchange() {
 
 
 /**
- * 
  * @param {import("../blazor").DotNet.DotNetObject} messageTrigger
  */
 export function serviceWorkerContainerActivateOnMessage(messageTrigger) {
@@ -91,7 +81,6 @@ export function serviceWorkerContainerActivateOnMessage(messageTrigger) {
 }
 
 /**
- * 
  */
 export function serviceWorkerContainerDeactivateOnMessage() {
     navigator.serviceWorker.onmessage = null;

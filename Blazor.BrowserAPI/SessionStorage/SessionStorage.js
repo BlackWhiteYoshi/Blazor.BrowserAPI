@@ -1,5 +1,4 @@
 /**
- * 
  * @returns {number}
  */
 export function sessionStorageLength() {
@@ -7,7 +6,6 @@ export function sessionStorageLength() {
 }
 
 /**
- * 
  * @param {number} index
  * @returns {string | null}
  */
@@ -16,7 +14,6 @@ export function sessionStorageKey(index) {
 }
 
 /**
- * 
  * @param {string} key
  * @returns {string | null}
  */
@@ -25,7 +22,6 @@ export function sessionStorageGetItem(key) {
 }
 
 /**
- * 
  * @param {string} key
  * @param {string} value
  */
@@ -34,7 +30,6 @@ export function sessionStorageSetItem(key, value) {
 }
 
 /**
- * 
  * @param {string} key
  */
 export function sessionStorageRemoveItem(key) {
@@ -42,7 +37,6 @@ export function sessionStorageRemoveItem(key) {
 }
 
 /**
- * 
  */
 export function sessionStorageClear() {
     sessionStorage.clear();
