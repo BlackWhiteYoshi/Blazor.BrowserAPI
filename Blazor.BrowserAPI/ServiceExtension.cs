@@ -15,8 +15,10 @@ public static class ServiceExtension {
             .AddScoped<IClipboard, Clipboard>()
             .AddScoped<ILanguage, Language>()
             .AddScoped<ILanguageInProcess, LanguageInProcess>()
-            .AddScoped<IServiceWorker, ServiceWorker>()
-            .AddScoped<IServiceWorkerInProcess, ServiceWorkerInProcess>();
+            .AddScoped<IServiceWorkerContainer, ServiceWorkerContainer>()
+            .AddScoped<IServiceWorkerContainerInProcess, ServiceWorkerContainerInProcess>()
+            .AddScoped<IDialogFactory, DialogFactory>()
+            .AddScoped<IDialogInProcessFactory, DialogInProcessFactory>();
 
         return services;
     }
