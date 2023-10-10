@@ -2,7 +2,7 @@
 
 namespace BrowserAPI.Test.Client;
 
-public sealed partial class LanguageGroup {
+public sealed partial class LanguageGroup : ComponentBase {
     public const string DATA_TESTID_GET_BROWSER_LANGUAGE_PROPERTY = "get-browser-language-property";
     public const string DATA_TESTID_GET_BROWSER_LANGUAGE_METHOD = "get-browser-language-method";
     public const string DATA_TESTID_GET_HTML_LANGUAGE_PROPERTY = "get-html-language-property";

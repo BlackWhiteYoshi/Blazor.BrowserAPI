@@ -2,7 +2,7 @@
 
 namespace BrowserAPI.Test.Client;
 
-public sealed partial class DownloadGroup {
+public sealed partial class DownloadGroup : ComponentBase {
     public const string DATA_TESTID = "download";
 
     public const string FILENAME = "Test.txt";

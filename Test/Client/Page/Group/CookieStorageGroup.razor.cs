@@ -2,7 +2,7 @@
 
 namespace BrowserAPI.Test.Client;
 
-public sealed partial class CookieStorageGroup {
+public sealed partial class CookieStorageGroup : ComponentBase {
     public const string DATA_TESTID_GET_ALL_COOKIES_PROPERTY = "cookie-storage-get-all-cookies-property";
     public const string DATA_TESTID_GET_ALL_COOKIES_METHOD = "cookie-storage-get-all-cookies-method";
     public const string DATA_TESTID_GET_LENGTH_PROPERTY = "cookie-storage-get-length-property";

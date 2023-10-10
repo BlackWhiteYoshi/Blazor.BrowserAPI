@@ -2,7 +2,7 @@
 
 namespace BrowserAPI.Test.Client;
 
-public sealed partial class ClipboardGroup {
+public sealed partial class ClipboardGroup : ComponentBase {
     public const string DATA_TESTID_READ = "clipboard-read";
     public const string DATA_TESTID_WRITE = "clipboard-write";
 
