@@ -5,15 +5,14 @@ using System.Text;
 namespace Blazor.BrowserAPI.JSBundlerAndMinifier;
 
 public static class Program {
-    private const string OUTPUT_Path = "wwwroot/BrowserAPI.js";
-
-    public static async Task Main(string[] args) {
+    public static void Main(string[] args) {
         string inputPath = args.Length switch {
             >= 1 => args[0],
             _ => "."
         };
+        const string outputPath = "wwwroot/BrowserAPI.js";
 
-        List<string> jsFiles = new();
+        List<string> jsFilePaths = new();
         {
             string[] directories = Directory.GetDirectories(inputPath);
             foreach (string path in directories) {
@@ -21,18 +20,20 @@ public static class Program {
                 if (directory.EndsWith($"/bin") || directory.EndsWith($"/obj") || directory.EndsWith($"/wwwroot"))
                     continue;
 
-                string[] files = Directory.GetFiles(directory, "*.js", SearchOption.AllDirectories);
-                foreach (string file in files)
-                    jsFiles.Add(file);
+                string[] filePaths = Directory.GetFiles(directory, "*.js", SearchOption.AllDirectories);
+                foreach (string filePath in filePaths)
+                    jsFilePaths.Add(filePath);
             }
         }
 
         string bundleJS;
         {
-            StringBuilder builder = new(1024 * jsFiles.Count);
+            StringBuilder builder = new(1024 * jsFilePaths.Count);
 
-            foreach (string file in jsFiles)
-                builder.Append(File.ReadAllText(file));
+            foreach (string filePath in jsFilePaths)
+                foreach (string line in File.ReadLines(filePath))
+                    if (!line.StartsWith("import"))
+                        builder.Append(line);
 
             bundleJS = builder.ToString();
         }
@@ -46,7 +47,7 @@ public static class Program {
             minifiedJS = minifyResult.Code;
         }
 
-        string outputPath = Path.Combine(inputPath, OUTPUT_Path);
-        await File.WriteAllTextAsync(outputPath, minifiedJS);
+        string absoluteOutputPath = Path.Combine(inputPath, outputPath);
+        File.WriteAllText(absoluteOutputPath, minifiedJS);
     }
 }
