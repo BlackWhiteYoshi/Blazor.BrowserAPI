@@ -12,26 +12,20 @@ namespace BrowserAPI;
 internal abstract class ServiceWorkerRegistrationBase {
     protected abstract IJSObjectReference ServiceWorkerRegistrationJS { get; }
 
-    protected readonly IModuleManager _moduleManager;
-
-    public ServiceWorkerRegistrationBase(IModuleManager moduleManager) {
-        _moduleManager = moduleManager;
-    }
-
 
     /// <summary>
     /// The <i>unregister()</i> method of the ServiceWorkerRegistration interface unregisters the service worker registration and returns a Promise. The promise will resolve to false if no registration was found, otherwise it resolves to true irrespective of whether unregistration happened or not (it may not unregister if someone else just called ServiceWorkerContainer.register() with the same scope.) The service worker will finish any ongoing operations before it is unregistered. 
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<bool> Unregister(CancellationToken cancellationToken = default) => _moduleManager.InvokeAsync<bool>("serviceWorkerRegistrationUnregister", cancellationToken, ServiceWorkerRegistrationJS);
+    public ValueTask<bool> Unregister(CancellationToken cancellationToken = default) => ServiceWorkerRegistrationJS.InvokeAsync<bool>("unregister", cancellationToken);
 
     /// <summary>
     /// The <i>update()</i> method of the ServiceWorkerRegistration interface attempts to update the service worker. It fetches the worker's script URL, and if the new worker is not byte-by-byte identical to the current worker, it installs the new worker. The fetch of the worker bypasses any browser caches if the previous fetch occurred over 24 hours ago. 
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    protected ValueTask<IJSObjectReference> UpdateBase(CancellationToken cancellationToken = default) => _moduleManager.InvokeAsync<IJSObjectReference>("serviceWorkerRegistrationUpdate", cancellationToken, ServiceWorkerRegistrationJS);
+    protected ValueTask<IJSObjectReference> UpdateBase(CancellationToken cancellationToken = default) => ServiceWorkerRegistrationJS.InvokeAsync<IJSObjectReference>("update", cancellationToken);
 
 
     #region UpdateFound event
@@ -43,7 +37,7 @@ internal abstract class ServiceWorkerRegistrationBase {
     public event Action OnUpdateFound {
         add {
             if (_onUpdateFound == null)
-                _ = _moduleManager.InvokeTrySync("serviceWorkerRegistrationActivateOnupdatefound", default, ServiceWorkerRegistrationJS, DotNetObjectReference.Create(new UpdateFoundTrigger(this))).Preserve();
+                _ = ServiceWorkerRegistrationJS.InvokeVoidTrySync("activateOnupdatefound", default, DotNetObjectReference.Create(new UpdateFoundTrigger(this))).Preserve();
 
             _onUpdateFound += value;
         }
@@ -51,7 +45,7 @@ internal abstract class ServiceWorkerRegistrationBase {
             _onUpdateFound -= value;
 
             if (_onUpdateFound == null)
-                _ = _moduleManager.InvokeTrySync("serviceWorkerRegistrationDeactivateOnupdatefound", default, ServiceWorkerRegistrationJS).Preserve();
+                _ = ServiceWorkerRegistrationJS.InvokeVoidTrySync("deactivateOnupdatefound", default).Preserve();
         }
     }
 

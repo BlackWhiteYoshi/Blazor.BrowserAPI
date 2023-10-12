@@ -7,7 +7,7 @@ namespace BrowserAPI;
 internal sealed class ServiceWorker : ServiceWorkerBase, IServiceWorker {
     protected override IJSObjectReference ServiceWorkerJS { get; }
 
-    public ServiceWorker(IModuleManager moduleManager, IJSObjectReference serviceWorker) : base(moduleManager) {
+    public ServiceWorker(IJSObjectReference serviceWorker) {
         ServiceWorkerJS = serviceWorker;
     }
 
@@ -24,7 +24,7 @@ internal sealed class ServiceWorker : ServiceWorkerBase, IServiceWorker {
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetScriptUrl(CancellationToken cancellationToken) => _moduleManager.InvokeTrySync<string>("serviceWorkerScriptURL", cancellationToken, ServiceWorkerJS);
+    public ValueTask<string> GetScriptUrl(CancellationToken cancellationToken) => ServiceWorkerJS.InvokeTrySync<string>("scriptURL", cancellationToken);
 
 
     /// <summary>
@@ -37,7 +37,7 @@ internal sealed class ServiceWorker : ServiceWorkerBase, IServiceWorker {
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetState(CancellationToken cancellationToken) => _moduleManager.InvokeTrySync<string>("serviceWorkerState", cancellationToken, ServiceWorkerJS);
+    public ValueTask<string> GetState(CancellationToken cancellationToken) => ServiceWorkerJS.InvokeTrySync<string>("state", cancellationToken);
 
 
     /// <summary>
@@ -46,5 +46,5 @@ internal sealed class ServiceWorker : ServiceWorkerBase, IServiceWorker {
     /// <param name="message"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask PostMessage(object message, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("serviceWorkerPostMessage", cancellationToken, ServiceWorkerJS, message);
+    public ValueTask PostMessage(object message, CancellationToken cancellationToken = default) => ServiceWorkerJS.InvokeVoidTrySync("postMessage", cancellationToken, message);
 }

@@ -8,7 +8,7 @@ internal sealed class ServiceWorkerRegistrationInProcess : ServiceWorkerRegistra
     private readonly IJSInProcessObjectReference _serviceWorkerRegistration;
     protected override IJSObjectReference ServiceWorkerRegistrationJS => _serviceWorkerRegistration;
 
-    public ServiceWorkerRegistrationInProcess(IModuleManager moduleManager, IJSInProcessObjectReference serviceWorkerRegistration) : base(moduleManager) {
+    public ServiceWorkerRegistrationInProcess(IJSInProcessObjectReference serviceWorkerRegistration) {
         _serviceWorkerRegistration = serviceWorkerRegistration;
     }
 
@@ -22,8 +22,8 @@ internal sealed class ServiceWorkerRegistrationInProcess : ServiceWorkerRegistra
     public IServiceWorkerInProcess? Active {
         get {
             try {
-                IJSInProcessObjectReference serviceWorker = _moduleManager.InvokeSync<IJSInProcessObjectReference>("serviceWorkerRegistrationActive", _serviceWorkerRegistration);
-                return new ServiceWorkerInProcess(_moduleManager, serviceWorker);
+                IJSInProcessObjectReference serviceWorker = _serviceWorkerRegistration.Invoke<IJSInProcessObjectReference>("active");
+                return new ServiceWorkerInProcess(serviceWorker);
             }
             catch (JSException) {
                 return null;
@@ -37,8 +37,8 @@ internal sealed class ServiceWorkerRegistrationInProcess : ServiceWorkerRegistra
     public IServiceWorkerInProcess? Installing {
         get {
             try {
-                IJSInProcessObjectReference serviceWorker = _moduleManager.InvokeSync<IJSInProcessObjectReference>("serviceWorkerRegistrationInstalling", _serviceWorkerRegistration);
-                return new ServiceWorkerInProcess(_moduleManager, serviceWorker);
+                IJSInProcessObjectReference serviceWorker = _serviceWorkerRegistration.Invoke<IJSInProcessObjectReference>("installing");
+                return new ServiceWorkerInProcess(serviceWorker);
             }
             catch (JSException) {
                 return null;
@@ -52,8 +52,8 @@ internal sealed class ServiceWorkerRegistrationInProcess : ServiceWorkerRegistra
     public IServiceWorkerInProcess? Waiting {
         get {
             try {
-                IJSInProcessObjectReference serviceWorker = _moduleManager.InvokeSync<IJSInProcessObjectReference>("serviceWorkerRegistrationWaiting", _serviceWorkerRegistration);
-                return new ServiceWorkerInProcess(_moduleManager, serviceWorker);
+                IJSInProcessObjectReference serviceWorker = _serviceWorkerRegistration.Invoke<IJSInProcessObjectReference>("waiting");
+                return new ServiceWorkerInProcess(serviceWorker);
             }
             catch (JSException) {
                 return null;
@@ -65,12 +65,12 @@ internal sealed class ServiceWorkerRegistrationInProcess : ServiceWorkerRegistra
     /// <summary>
     /// The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration. The service worker must be on the same origin as the document that registers the ServiceWorker. 
     /// </summary>
-    public string Scope => _moduleManager.InvokeSync<string>("serviceWorkerRegistrationScope", _serviceWorkerRegistration);
+    public string Scope => _serviceWorkerRegistration.Invoke<string>("scope");
 
     /// <summary>
     /// The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register. Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior. 
     /// </summary>
-    public string UpdateViaCache => _moduleManager.InvokeSync<string>("serviceWorkerRegistrationUpdateViaCache", _serviceWorkerRegistration);
+    public string UpdateViaCache => _serviceWorkerRegistration.Invoke<string>("updateViaCache");
 
 
     /// <summary>
@@ -80,6 +80,6 @@ internal sealed class ServiceWorkerRegistrationInProcess : ServiceWorkerRegistra
     /// <returns></returns>
     public async ValueTask<IServiceWorkerRegistrationInProcess> Update(CancellationToken cancellationToken) {
         IJSObjectReference serviceWorkerRegistration = await UpdateBase(cancellationToken);
-        return new ServiceWorkerRegistrationInProcess(_moduleManager, (IJSInProcessObjectReference)serviceWorkerRegistration);
+        return new ServiceWorkerRegistrationInProcess((IJSInProcessObjectReference)serviceWorkerRegistration);
     }
 }

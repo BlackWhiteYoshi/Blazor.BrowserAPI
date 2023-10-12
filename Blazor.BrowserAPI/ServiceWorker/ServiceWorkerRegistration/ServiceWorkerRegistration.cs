@@ -7,7 +7,7 @@ namespace BrowserAPI;
 internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase, IServiceWorkerRegistration {
     protected override IJSObjectReference ServiceWorkerRegistrationJS { get; }
 
-    public ServiceWorkerRegistration(IModuleManager moduleManager, IJSObjectReference serviceWorkerRegistration) : base(moduleManager) {
+    public ServiceWorkerRegistration(IJSObjectReference serviceWorkerRegistration) {
         ServiceWorkerRegistrationJS = serviceWorkerRegistration;
     }
 
@@ -26,8 +26,8 @@ internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase,
     /// <returns></returns>
     public async ValueTask<IServiceWorker?> GetActive(CancellationToken cancellationToken) {
         try {
-            IJSObjectReference serviceWorker = await _moduleManager.InvokeTrySync<IJSObjectReference>("serviceWorkerRegistrationActive", cancellationToken, ServiceWorkerRegistrationJS);
-            return new ServiceWorker(_moduleManager, serviceWorker);
+            IJSObjectReference serviceWorker = await ServiceWorkerRegistrationJS.InvokeTrySync<IJSObjectReference>("active", cancellationToken);
+            return new ServiceWorker(serviceWorker);
         }
         catch (JSException) {
             return null;
@@ -47,8 +47,8 @@ internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase,
     /// <returns></returns>
     public async ValueTask<IServiceWorker?> GetInstalling(CancellationToken cancellationToken) {
         try {
-            IJSObjectReference serviceWorker = await _moduleManager.InvokeTrySync<IJSObjectReference>("serviceWorkerRegistrationInstalling", cancellationToken, ServiceWorkerRegistrationJS);
-            return new ServiceWorker(_moduleManager, serviceWorker);
+            IJSObjectReference serviceWorker = await ServiceWorkerRegistrationJS.InvokeTrySync<IJSObjectReference>("installing", cancellationToken);
+            return new ServiceWorker(serviceWorker);
         }
         catch (JSException) {
             return null;
@@ -68,8 +68,8 @@ internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase,
     /// <returns></returns>
     public async ValueTask<IServiceWorker?> GetWaiting(CancellationToken cancellationToken) {
         try {
-            IJSObjectReference serviceWorker = await _moduleManager.InvokeTrySync<IJSObjectReference>("serviceWorkerRegistrationWaiting", cancellationToken, ServiceWorkerRegistrationJS);
-            return new ServiceWorker(_moduleManager, serviceWorker);
+            IJSObjectReference serviceWorker = await ServiceWorkerRegistrationJS.InvokeTrySync<IJSObjectReference>("waiting", cancellationToken);
+            return new ServiceWorker(serviceWorker);
         }
         catch (JSException) {
             return null;
@@ -88,7 +88,7 @@ internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase,
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetScope(CancellationToken cancellationToken) => _moduleManager.InvokeTrySync<string>("serviceWorkerRegistrationScope", default, ServiceWorkerRegistrationJS);
+    public ValueTask<string> GetScope(CancellationToken cancellationToken) => ServiceWorkerRegistrationJS.InvokeTrySync<string>("scope", default);
 
 
     /// <summary>
@@ -101,7 +101,7 @@ internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase,
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetUpdateViaCache(CancellationToken cancellationToken) => _moduleManager.InvokeTrySync<string>("serviceWorkerRegistrationUpdateViaCache", default, ServiceWorkerRegistrationJS);
+    public ValueTask<string> GetUpdateViaCache(CancellationToken cancellationToken) => ServiceWorkerRegistrationJS.InvokeTrySync<string>("updateViaCache", default);
 
 
 
@@ -112,6 +112,6 @@ internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase,
     /// <returns></returns>
     public async ValueTask<IServiceWorkerRegistration> Update(CancellationToken cancellationToken) {
         IJSObjectReference serviceWorkerRegistration = await UpdateBase(cancellationToken);
-        return new ServiceWorkerRegistration(_moduleManager, serviceWorkerRegistration);
+        return new ServiceWorkerRegistration(serviceWorkerRegistration);
     }
 }

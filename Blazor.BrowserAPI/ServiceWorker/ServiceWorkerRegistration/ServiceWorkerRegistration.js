@@ -1,73 +1,97 @@
-/**
- * @param {ServiceWorkerRegistration} serviceWorkerRegistration
- * @returns {ServiceWorker | null}
- */
-export function serviceWorkerRegistrationActive(serviceWorkerRegistration) {
-    return serviceWorkerRegistration.active;
-}
+import { ServiceWorkerWrapper } from "../ServiceWorker/ServiceWorker.js";
+import { createServiceWorker } from "../ServiceWorker/ServiceWorker.js";
+
+
 
 /**
  * @param {ServiceWorkerRegistration} serviceWorkerRegistration
- * @returns {ServiceWorker | null}
+ * @returns {ServiceWorkerRegistrationWrapper}
  */
-export function serviceWorkerRegistrationInstalling(serviceWorkerRegistration) {
-    return serviceWorkerRegistration.installing;
-}
-
-/**
- * @param {ServiceWorkerRegistration} serviceWorkerRegistration
- * @returns {ServiceWorker | null}
- */
-export function serviceWorkerRegistrationWaiting(serviceWorkerRegistration) {
-    return serviceWorkerRegistration.waiting;
+export function createServiceWorkerRegistration(serviceWorkerRegistration) {
+    return new ServiceWorkerRegistrationWrapper(serviceWorkerRegistration);
 }
 
 
-/**
- * @param {ServiceWorkerRegistration} serviceWorkerRegistration
- * @returns {string}
- */
-export function serviceWorkerRegistrationScope(serviceWorkerRegistration) {
-    return serviceWorkerRegistration.scope;
-}
+export class ServiceWorkerRegistrationWrapper {
+    /**
+     * @type {ServiceWorkerRegistration}
+     */
+    #serviceWorkerRegistration;
 
-/**
- * @param {ServiceWorkerRegistration} serviceWorkerRegistration
- * @returns {string}
- */
-export function serviceWorkerRegistrationUpdateViaCache(serviceWorkerRegistration) {
-    return serviceWorkerRegistration.updateViaCache;
-}
+    /**
+     * @param {ServiceWorkerRegistration} serviceWorkerRegistration
+     */
+    constructor(serviceWorkerRegistration) {
+        this.#serviceWorkerRegistration = serviceWorkerRegistration;
+    }
 
 
-/**
- * @param {ServiceWorkerRegistration} serviceWorkerRegistration
- * @returns {Promise<boolean>}
- */
-export function serviceWorkerRegistrationUnregister(serviceWorkerRegistration) {
-    return serviceWorkerRegistration.unregister();
-}
+    /**
+     * @returns {ServiceWorkerWrapper | null}
+     */
+    active() {
+        return createServiceWorker(this.#serviceWorkerRegistration.active);
+    }
 
-/**
- * @param {ServiceWorkerRegistration} serviceWorkerRegistration
- * @returns {ServiceWorkerRegistration}
- */
-export function serviceWorkerRegistrationUpdate(serviceWorkerRegistration) {
-    return serviceWorkerRegistration.update();
-}
+    /**
+     * @returns {ServiceWorker | null}
+     */
+    installing() {
+        return createServiceWorker(this.#serviceWorkerRegistration.installing);
+    }
+
+    /**
+     * @returns {ServiceWorker | null}
+     */
+    waiting() {
+        return createServiceWorker(this.#serviceWorkerRegistration.waiting);
+    }
 
 
-/**
- * @param {ServiceWorkerRegistration} serviceWorkerRegistration
- * @param {import("../blazor").DotNet.DotNetObject} updateFoundTrigger
- */
-export function serviceWorkerRegistrationActivateOnupdatefound(serviceWorkerRegistration, updateFoundTrigger) {
-    serviceWorkerRegistration.onupdatefound = () => updateFoundTrigger.invokeMethodAsync("Trigger");
-}
+    /**
+     * @returns {string}
+     */
+    scope() {
+        return this.#serviceWorkerRegistration.scope;
+    }
 
-/**
- * @param {ServiceWorkerRegistration} serviceWorkerRegistration
- */
-export function serviceWorkerRegistrationDeactivateOnupdatefound(serviceWorkerRegistration) {
-    serviceWorkerRegistration.onupdatefound = null;
+    /**
+     * @returns {string}
+     */
+    updateViaCache() {
+        return this.#serviceWorkerRegistration.updateViaCache;
+    }
+
+
+    /**
+     * @returns {Promise<boolean>}
+     */
+    unregister() {
+        return this.#serviceWorkerRegistration.unregister();
+    }
+
+    /**
+     * @returns {ServiceWorkerRegistrationWrapper}
+     */
+    async update() {
+        /**
+         * @type {ServiceWorkerRegistration}
+         */
+        const updatedServiceWorkerRegistration = await this.#serviceWorkerRegistration.update();
+        return createServiceWorkerRegistration(updatedServiceWorkerRegistration);
+    }
+
+
+    /**
+     * @param {import("../blazor").DotNet.DotNetObject} updateFoundTrigger
+     */
+    activateOnupdatefound(updateFoundTrigger) {
+        this.#serviceWorkerRegistration.onupdatefound = () => updateFoundTrigger.invokeMethodAsync("Trigger");
+    }
+
+    /**
+     */
+    deactivateOnupdatefound() {
+        this.#serviceWorkerRegistration.onupdatefound = null;
+    }
 }

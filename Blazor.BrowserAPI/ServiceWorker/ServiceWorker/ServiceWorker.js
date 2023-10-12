@@ -1,55 +1,75 @@
 /**
- * @param {ServiceWorker} serviceWorker
- * @returns {string}
+ * @param {ServiceWorker | null} serviceWorker
+ * @returns {ServiceWorkerWrapper | null}
  */
-export function serviceWorkerScriptURL(serviceWorker) {
-    return serviceWorker.scriptURL;
-}
+export function createServiceWorker(serviceWorker) {
+    if (serviceWorker === null)
+        return null;
 
-/**
- * @param {ServiceWorker} serviceWorker
- * @returns {string}
- */
-export function serviceWorkerState(serviceWorker) {
-    return serviceWorker.state;
-}
-
-/**
- * @param {ServiceWorker} serviceWorker
- * @param {any} message
- */
-export function serviceWorkerPostMessage(serviceWorker, message) {
-    return serviceWorker.postMessage(message);
+    return new ServiceWorkerWrapper(serviceWorker);
 }
 
 
-/**
- * @param {ServiceWorker} serviceWorker
- * @param {import("../blazor").DotNet.DotNetObject} stateChangeTrigger
- */
-export function serviceWorkerActivateOnstatechange(serviceWorker, stateChangeTrigger) {
-    serviceWorker.onstatechange = (event) => stateChangeTrigger.invokeMethodAsync("Trigger", event.target.state);
-}
+export class ServiceWorkerWrapper {
+    /**
+     * @type {ServiceWorker}
+     */
+    #serviceWorker;
 
-/**
- * @param {ServiceWorker} serviceWorker
- */
-export function serviceWorkerDeactivateOnstatechange(serviceWorker) {
-    serviceWorker.onstatechange = null;
-}
+    /**
+     * @param {ServiceWorker} serviceWorker
+     */
+    constructor(serviceWorker) {
+        this.#serviceWorker = serviceWorker;
+    }
 
 
-/**
- * @param {ServiceWorker} serviceWorker
- * @param {import("../blazor").DotNet.DotNetObject} errorTrigger
- */
-export function serviceWorkerActivateOnerror(serviceWorker, errorTrigger) {
-    serviceWorker.onerror = (event) => errorTrigger.invokeMethodAsync("Trigger", event);
-}
+    /**
+     * @returns {string}
+     */
+    scriptURL() {
+        return this.#serviceWorker.scriptURL;
+    }
 
-/**
- * @param {ServiceWorker} serviceWorker
- */
-export function serviceWorkerDeactivateOnerror(serviceWorker) {
-    serviceWorker.onerror = null;
+    /**
+     * @returns {string}
+     */
+    state() {
+        return this.#serviceWorker.state;
+    }
+
+    /**
+     * @param {any} message
+     */
+    postMessage(message) {
+        return this.#serviceWorker.postMessage(message);
+    }
+
+
+    /**
+     * @param {import("../blazor").DotNet.DotNetObject} stateChangeTrigger
+     */
+    activateOnstatechange(stateChangeTrigger) {
+        this.#serviceWorker.onstatechange = (event) => stateChangeTrigger.invokeMethodAsync("Trigger", event.target.state);
+    }
+
+    /**
+     */
+    deactivateOnstatechange() {
+        this.#serviceWorker.onstatechange = null;
+    }
+
+
+    /**
+     * @param {import("../blazor").DotNet.DotNetObject} errorTrigger
+     */
+    activateOnerror(errorTrigger) {
+        this.#serviceWorker.onerror = (event) => errorTrigger.invokeMethodAsync("Trigger", event);
+    }
+
+    /**
+     */
+    deactivateOnerror() {
+        this.#serviceWorker.onerror = null;
+    }
 }

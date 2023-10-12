@@ -1,13 +1,13 @@
 /**
  * @param {HTMLDialogElement} dialog
- * @returns {Dialog}
+ * @returns {DialogWrapper}
  */
 export function createDialog(dialog) {
-    return new Dialog(dialog);
+    return new DialogWrapper(dialog);
 }
 
 
-class Dialog {
+export class DialogWrapper {
     /**
      * @type {HTMLDialogElemnt}
      */

@@ -20,7 +20,7 @@ internal sealed class ServiceWorkerContainerInProcess : ServiceWorkerContainerBa
         if (serviceWorkerRegistration == null)
             return null;
 
-        return new ServiceWorkerRegistrationInProcess(_moduleManager, (IJSInProcessObjectReference)serviceWorkerRegistration);
+        return new ServiceWorkerRegistrationInProcess((IJSInProcessObjectReference)serviceWorkerRegistration);
     }
 
 
@@ -31,7 +31,7 @@ internal sealed class ServiceWorkerContainerInProcess : ServiceWorkerContainerBa
     /// <returns></returns>
     public async ValueTask<IServiceWorkerRegistrationInProcess> DelayUntilReady(CancellationToken cancellationToken = default) {
         IJSObjectReference serviceWorkerRegistration = await DelayUntilReadyBase(cancellationToken);
-        return new ServiceWorkerRegistrationInProcess(_moduleManager, (IJSInProcessObjectReference)serviceWorkerRegistration);
+        return new ServiceWorkerRegistrationInProcess((IJSInProcessObjectReference)serviceWorkerRegistration);
     }
 
 
@@ -45,7 +45,7 @@ internal sealed class ServiceWorkerContainerInProcess : ServiceWorkerContainerBa
         if (serviceWorkerRegistration == null)
             return null;
 
-        return new ServiceWorkerRegistrationInProcess(_moduleManager, (IJSInProcessObjectReference)serviceWorkerRegistration);
+        return new ServiceWorkerRegistrationInProcess((IJSInProcessObjectReference)serviceWorkerRegistration);
     }
 
     /// <summary>
@@ -58,7 +58,7 @@ internal sealed class ServiceWorkerContainerInProcess : ServiceWorkerContainerBa
 
         ServiceWorkerRegistrationInProcess[] result = new ServiceWorkerRegistrationInProcess[serviceWorkerRegistrations.Length];
         for (int i = 0; i < serviceWorkerRegistrations.Length; i++)
-            result[i] = new ServiceWorkerRegistrationInProcess(_moduleManager, (IJSInProcessObjectReference)serviceWorkerRegistrations[i]);
+            result[i] = new ServiceWorkerRegistrationInProcess((IJSInProcessObjectReference)serviceWorkerRegistrations[i]);
         return result;
     }
 
@@ -70,7 +70,7 @@ internal sealed class ServiceWorkerContainerInProcess : ServiceWorkerContainerBa
         get {
             try {
                 IJSInProcessObjectReference serviceWorker = _moduleManager.InvokeSync<IJSInProcessObjectReference>("serviceWorkerContainerController");
-                return new ServiceWorkerInProcess(_moduleManager, serviceWorker);
+                return new ServiceWorkerInProcess(serviceWorker);
             }
             catch (JSException) {
                 return null;

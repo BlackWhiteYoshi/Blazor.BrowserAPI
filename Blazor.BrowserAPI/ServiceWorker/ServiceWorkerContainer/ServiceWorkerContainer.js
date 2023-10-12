@@ -1,3 +1,8 @@
+import { ServiceWorkerRegistrationWrapper } from "../ServiceWorkerRegistration/ServiceWorkerRegistration.js";
+import { createServiceWorkerRegistration } from "../ServiceWorkerRegistration/ServiceWorkerRegistration.js";
+import { ServiceWorkerWrapper } from "../ServiceWorker/ServiceWorker.js";
+import { createServiceWorker } from "../ServiceWorker/ServiceWorker.js";
+
 /**
  * @param {string} filePath
  * @returns {boolean}
@@ -12,44 +17,51 @@ export async function serviceWorkerContainerRegister(filePath) {
 
 /**
  * @param {string} filePath
- * @returns {Promise<ServiceWorkerRegistration>}
+ * @returns {Promise<ServiceWorkerRegistrationWrapper>}
  */
-export function serviceWorkerContainerRegisterWithWorkerRegistration(filePath) {
+export async function serviceWorkerContainerRegisterWithWorkerRegistration(filePath) {
     if (!("serviceWorker" in navigator))
         return Promise.reject("Service workers are not supported.");
 
-    return navigator.serviceWorker.register(filePath);
+    const serviceWorkerRegistration = await navigator.serviceWorker.register(filePath);
+    return createServiceWorkerRegistration(serviceWorkerRegistration);
 }
 
 
 /**
- * @returns {ServiceWorker | null}
+ * @returns {ServiceWorkerWrapper | null}
  */
 export function serviceWorkerContainerController() {
-    return navigator.serviceWorker.controller;
+    return createServiceWorker(navigator.serviceWorker.controller);
 }
 
 /**
- * @returns {Promise<ServiceWorkerRegistration>}
+ * @returns {Promise<ServiceWorkerRegistrationWrapper>}
  */
-export function serviceWorkerContainerReady() {
-    return navigator.serviceWorker.ready;
+export async function serviceWorkerContainerReady() {
+    const serviceWorkerRegistration = await navigator.serviceWorker.ready;
+    return createServiceWorkerRegistration(serviceWorkerRegistration);
 }
 
 
 /**
  * @param {string | URL} clientUrl
- * @returns {Promise<ServiceWorkerRegistration | undefined>}
+ * @returns {Promise<ServiceWorkerRegistrationWrapper | undefined>}
  */
-export function serviceWorkerContainerGetRegistration(clientUrl) {
-    navigator.serviceWorker.getRegistration(clientUrl);
+export async function serviceWorkerContainerGetRegistration(clientUrl) {
+    const serviceWorkerRegistration = await navigator.serviceWorker.getRegistration(clientUrl);
+    if (serviceWorkerRegistration === undefined)
+        return undefined;
+
+    return createServiceWorkerRegistration(serviceWorkerRegistration);
 }
 
 /**
- * @returns {Promise<readonly ServiceWorkerRegistration[]>}
+ * @returns {Promise<ServiceWorkerRegistrationWrapper[]>}
  */
-export function serviceWorkerContainerGetRegistrations() {
-    navigator.serviceWorker.getRegistrations();
+export async function serviceWorkerContainerGetRegistrations() {
+    const serviceWorkerRegistrations = await navigator.serviceWorker.getRegistrations();
+    return serviceWorkerRegistrations.map((serviceWorkerRegistration) => createServiceWorkerRegistration(serviceWorkerRegistration));
 }
 
 /**

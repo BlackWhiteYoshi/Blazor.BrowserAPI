@@ -12,12 +12,6 @@ namespace BrowserAPI;
 internal abstract class ServiceWorkerBase {
     protected abstract IJSObjectReference ServiceWorkerJS { get; }
 
-    protected readonly IModuleManager _moduleManager;
-
-    public ServiceWorkerBase(IModuleManager moduleManager) {
-        _moduleManager = moduleManager;
-    }
-
 
     #region StateChange event
 
@@ -28,7 +22,7 @@ internal abstract class ServiceWorkerBase {
     public event Action<string>? OnStateChange {
         add {
             if (_onStateChange == null)
-                _ = _moduleManager.InvokeTrySync("serviceWorkerActivateOnstatechange", default, ServiceWorkerJS, DotNetObjectReference.Create(new StateChangeTrigger(this))).Preserve();
+                _ = ServiceWorkerJS.InvokeVoidTrySync("activateOnstatechange", default, DotNetObjectReference.Create(new StateChangeTrigger(this))).Preserve();
 
             _onStateChange += value;
         }
@@ -36,7 +30,7 @@ internal abstract class ServiceWorkerBase {
             _onStateChange -= value;
 
             if (_onStateChange == null)
-                _ = _moduleManager.InvokeTrySync("serviceWorkerDeactivateOnstatechange", default, ServiceWorkerJS).Preserve();
+                _ = ServiceWorkerJS.InvokeVoidTrySync("deactivateOnstatechange", default).Preserve();
         }
     }
 
@@ -64,7 +58,7 @@ internal abstract class ServiceWorkerBase {
     public event Action<string> OnError {
         add {
             if (_onError == null)
-                _ = _moduleManager.InvokeTrySync("serviceWorkerActivateOnerror", default, ServiceWorkerJS, DotNetObjectReference.Create(new ErrorTrigger(this))).Preserve();
+                _ = ServiceWorkerJS.InvokeVoidTrySync("activateOnerror", default, DotNetObjectReference.Create(new ErrorTrigger(this))).Preserve();
 
             _onError += value;
         }
@@ -72,7 +66,7 @@ internal abstract class ServiceWorkerBase {
             _onError -= value;
 
             if (_onError == null)
-                _ = _moduleManager.InvokeTrySync("serviceWorkerDeactivateOnerror", default, ServiceWorkerJS).Preserve();
+                _ = ServiceWorkerJS.InvokeVoidTrySync("deactivateOnerror", default).Preserve();
         }
     }
 

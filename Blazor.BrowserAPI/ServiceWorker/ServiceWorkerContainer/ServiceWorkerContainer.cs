@@ -20,7 +20,7 @@ internal sealed class ServiceWorkerContainer : ServiceWorkerContainerBase, IServ
         if (serviceWorkerRegistration == null)
             return null;
 
-        return new ServiceWorkerRegistration(_moduleManager, serviceWorkerRegistration);
+        return new ServiceWorkerRegistration(serviceWorkerRegistration);
     }
 
 
@@ -31,7 +31,7 @@ internal sealed class ServiceWorkerContainer : ServiceWorkerContainerBase, IServ
     /// <returns></returns>
     public async ValueTask<IServiceWorkerRegistration> DelayUntilReady(CancellationToken cancellationToken = default) {
         IJSObjectReference serviceWorkerRegistration = await DelayUntilReadyBase(cancellationToken);
-        return new ServiceWorkerRegistration(_moduleManager, serviceWorkerRegistration);
+        return new ServiceWorkerRegistration(serviceWorkerRegistration);
     }
 
 
@@ -46,7 +46,7 @@ internal sealed class ServiceWorkerContainer : ServiceWorkerContainerBase, IServ
         if (serviceWorkerRegistration == null)
             return null;
 
-        return new ServiceWorkerRegistration(_moduleManager, serviceWorkerRegistration);
+        return new ServiceWorkerRegistration(serviceWorkerRegistration);
     }
 
     /// <summary>
@@ -59,7 +59,7 @@ internal sealed class ServiceWorkerContainer : ServiceWorkerContainerBase, IServ
 
         ServiceWorkerRegistration[] result = new ServiceWorkerRegistration[serviceWorkerRegistrations.Length];
         for (int i = 0; i < serviceWorkerRegistrations.Length; i++)
-            result[i] = new ServiceWorkerRegistration(_moduleManager, serviceWorkerRegistrations[i]);
+            result[i] = new ServiceWorkerRegistration(serviceWorkerRegistrations[i]);
         return result;
     }
 
@@ -77,7 +77,7 @@ internal sealed class ServiceWorkerContainer : ServiceWorkerContainerBase, IServ
     public async ValueTask<IServiceWorker?> GetController(CancellationToken cancellationToken) {
         try {
             IJSObjectReference serviceWorker = await _moduleManager.InvokeTrySync<IJSObjectReference>("serviceWorkerContainerController", cancellationToken);
-            return new ServiceWorker(_moduleManager, serviceWorker);
+            return new ServiceWorker(serviceWorker);
         }
         catch (JSException) {
             return null;
