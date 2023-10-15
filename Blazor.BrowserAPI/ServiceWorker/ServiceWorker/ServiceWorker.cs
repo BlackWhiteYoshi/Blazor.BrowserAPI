@@ -28,12 +28,12 @@ internal sealed class ServiceWorker : ServiceWorkerBase, IServiceWorker {
 
 
     /// <summary>
-    /// The state read-only property of the <i>ServiceWorker</i> interface returns a string representing the current state of the service worker. It can be one of the following values: parsed, installing, installed, activating, activated, or redundant. 
+    /// The state read-only property of the <i>ServiceWorker</i> interface returns a string representing the current state of the service worker. It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.
     /// </summary>
     public ValueTask<string> State => GetState(default);
 
     /// <summary>
-    /// The state read-only property of the <i>ServiceWorker</i> interface returns a string representing the current state of the service worker. It can be one of the following values: parsed, installing, installed, activating, activated, or redundant. 
+    /// The state read-only property of the <i>ServiceWorker</i> interface returns a string representing the current state of the service worker. It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>

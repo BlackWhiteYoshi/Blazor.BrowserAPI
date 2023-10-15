@@ -4,8 +4,7 @@ namespace BrowserAPI;
 
 /// <summary>
 /// The read-only sessionStorage property accesses a session Storage object for the current origin.<br />
-/// sessionStorage is similar to localStorage;<br />
-/// the difference is that while data in localStorage doesn't expire, data in sessionStorage is cleared when the page session ends.
+/// sessionStorage is similar to localStorage; the difference is that while data in localStorage doesn't expire, data in sessionStorage is cleared when the page session ends.
 /// </summary>
 [AutoInterface]
 internal sealed class SessionStorage : ISessionStorage {

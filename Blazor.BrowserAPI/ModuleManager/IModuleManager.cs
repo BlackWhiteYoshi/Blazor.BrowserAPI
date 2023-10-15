@@ -3,6 +3,13 @@ using Microsoft.JSInterop.Infrastructure;
 
 namespace BrowserAPI;
 
+/// <summary>
+/// <para>
+/// The ModuleManager is responsible for the access of the JS-module at "_content/Blazor.BrowserAPI/BrowserAPI.js".<br />
+/// It starts fetching the js file with the constructor.
+/// </para>
+/// <para>It contains a get-property to retrieve and observe the state of the module download.</para>
+/// </summary>
 public interface IModuleManager {
     public Task<IJSObjectReference> ModuleDownload { get; }
 

@@ -36,7 +36,7 @@ internal sealed class ServiceWorkerContainer : ServiceWorkerContainerBase, IServ
 
 
     /// <summary>
-    /// The <i>getRegistration()</i> method of the ServiceWorkerContainer interface gets a ServiceWorkerRegistration object whose scope URL matches the provided client URL. The method returns a Promise that resolves to a ServiceWorkerRegistration or undefined. 
+    /// The <i>getRegistration()</i> method of the ServiceWorkerContainer interface gets a ServiceWorkerRegistration object whose scope URL matches the provided client URL. The method returns a Promise that resolves to a ServiceWorkerRegistration or undefined.
     /// </summary>
     /// <param name="clientUrl"></param>
     /// <param name="cancellationToken"></param>
@@ -50,7 +50,7 @@ internal sealed class ServiceWorkerContainer : ServiceWorkerContainerBase, IServ
     }
 
     /// <summary>
-    /// The <i>getRegistrations()</i> method of the ServiceWorkerContainer interface gets all ServiceWorkerRegistrations associated with a ServiceWorkerContainer, in an array. The method returns a Promise that resolves to an array of ServiceWorkerRegistration. 
+    /// The <i>getRegistrations()</i> method of the ServiceWorkerContainer interface gets all ServiceWorkerRegistrations associated with a ServiceWorkerContainer, in an array. The method returns a Promise that resolves to an array of ServiceWorkerRegistration.
     /// </summary>
     /// <param name="clientUrl"></param>
     /// <returns></returns>
@@ -86,7 +86,7 @@ internal sealed class ServiceWorkerContainer : ServiceWorkerContainerBase, IServ
 
 
     /// <summary>
-    /// The <i>startMessages()</i> method of the ServiceWorkerContainer interface explicitly starts the flow of messages being dispatched from a service worker to pages under its control (e.g. sent via Client.postMessage()). This can be used to react to sent messages earlier, even before that page's content has finished loading. 
+    /// The <i>startMessages()</i> method of the ServiceWorkerContainer interface explicitly starts the flow of messages being dispatched from a service worker to pages under its control (e.g. sent via Client.postMessage()). This can be used to react to sent messages earlier, even before that page's content has finished loading.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>

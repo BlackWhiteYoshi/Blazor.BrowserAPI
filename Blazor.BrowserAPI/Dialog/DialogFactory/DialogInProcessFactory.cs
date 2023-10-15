@@ -5,8 +5,7 @@ using Microsoft.JSInterop;
 namespace BrowserAPI;
 
 /// <summary>
-/// <para>This class can take a <see cref="ElementReference"/> of &lt;dialog&gt; and creates a <see cref="IDialogInProcess"/> object with it.</para>
-/// <para>The <i>HTMLDialogElement</i> interface provides methods to manipulate &lt;dialog&gt; elements. It inherits properties and methods from the HTMLElement interface.</para>
+/// This class can take a <see cref="ElementReference"/> of &lt;dialog&gt; and creates a <see cref="IDialogInProcess"/> object with it.
 /// </summary>
 [AutoInterface]
 internal sealed class DialogInProcessFactory : IDialogInProcessFactory {

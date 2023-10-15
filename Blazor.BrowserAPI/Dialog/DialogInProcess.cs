@@ -3,9 +3,6 @@ using Microsoft.JSInterop;
 
 namespace BrowserAPI;
 
-/// <summary>
-/// The <i>HTMLDialogElement</i> interface provides methods to manipulate &lt;dialog&gt; elements. It inherits properties and methods from the HTMLElement interface.
-/// </summary>
 [AutoInterface(Modifier = "public partial", Inheritance = new[] { typeof(IDisposable) })]
 internal sealed class DialogInProcess : DialogBase, IDialogInProcess {
     private readonly IJSInProcessObjectReference _dialogJS;
@@ -19,7 +16,7 @@ internal sealed class DialogInProcess : DialogBase, IDialogInProcess {
 
 
     /// <summary>
-    /// The <i>open</i> property of the HTMLDialogElement interface is a boolean value reflecting the open HTML attribute, indicating whether the &lt;dialog&gt; is available for interaction. 
+    /// The <i>open</i> property of the HTMLDialogElement interface is a boolean value reflecting the open HTML attribute, indicating whether the &lt;dialog&gt; is available for interaction.
     /// </summary>
     public bool Open {
         get => _dialogJS.Invoke<bool>("getOpen");
@@ -36,23 +33,23 @@ internal sealed class DialogInProcess : DialogBase, IDialogInProcess {
 
 
     /// <summary>
-    /// The <i>show()</i> method of the HTMLDialogElement interface displays the dialog modelessly, i.e. still allowing interaction with content outside of the dialog. 
+    /// The <i>show()</i> method of the HTMLDialogElement interface displays the dialog modelessly, i.e. still allowing interaction with content outside of the dialog.
     /// </summary>
     public void Show() => _dialogJS.InvokeVoid("show");
     
     /// <summary>
-    /// The <i>showModal()</i> method of the HTMLDialogElement interface displays the dialog as a modal, over the top of any other dialogs that might be present. It displays in the top layer, along with a ::backdrop pseudo-element. Interaction outside the dialog is blocked and the content outside it is rendered inert. 
+    /// The <i>showModal()</i> method of the HTMLDialogElement interface displays the dialog as a modal, over the top of any other dialogs that might be present. It displays in the top layer, along with a ::backdrop pseudo-element. Interaction outside the dialog is blocked and the content outside it is rendered inert.
     /// </summary>
     public void ShowModal() => _dialogJS.InvokeVoid("showModal");
 
 
     /// <summary>
-    /// The <i>close()</i> method of the HTMLDialogElement interface closes the &lt;dialog&gt;. An optional string may be passed as an argument, updating the returnValue of the dialog. 
+    /// The <i>close()</i> method of the HTMLDialogElement interface closes the &lt;dialog&gt;.
     /// </summary>
     public void Close() => _dialogJS.InvokeVoid("close");
-    
+
     /// <summary>
-    /// The <i>close()</i> method of the HTMLDialogElement interface closes the &lt;dialog&gt;. An optional string may be passed as an argument, updating the returnValue of the dialog. 
+    /// The <i>close()</i> method of the HTMLDialogElement interface closes the &lt;dialog&gt; and updates the returnValue of the dialog.
     /// </summary>
     public void Close(string returnValue) => _dialogJS.InvokeVoid("close", returnValue);
 }
