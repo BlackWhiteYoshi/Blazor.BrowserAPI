@@ -18,7 +18,7 @@ internal sealed class Clipboard : IClipboard {
     /// <para>navigator.clipboard.writeText(text);</para>
     /// <para>The Clipboard interface's writeText() property writes the specified text string to the system clipboard. Text may be read back using either read() or readText().</para>
     /// </summary>
-    /// <param name="text"></param>
+    /// <param name="text">The string to be written to the clipboard.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask Write(string text, CancellationToken cancellationToken = default) => _moduleManager.InvokeAsync("clipboardWriteText", cancellationToken, text);

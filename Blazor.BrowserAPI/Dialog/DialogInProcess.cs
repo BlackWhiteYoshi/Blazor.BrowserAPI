@@ -51,5 +51,6 @@ internal sealed class DialogInProcess : DialogBase, IDialogInProcess {
     /// <summary>
     /// The <i>close()</i> method of the HTMLDialogElement interface closes the &lt;dialog&gt; and updates the returnValue of the dialog.
     /// </summary>
+    /// <param name="returnValue">A string representing an updated value for the <see cref="ReturnValue"/> of the dialog.</param>
     public void Close(string returnValue) => _dialogJS.InvokeVoid("close", returnValue);
 }

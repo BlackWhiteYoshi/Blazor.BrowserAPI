@@ -18,9 +18,9 @@ internal sealed class DialogFactory : IDialogFactory {
     /// <summary>
     /// Takes a <see cref="ElementReference"/> of &lt;dialog&gt; and returns a <see cref="IDialog"/> interface to interact with the given &lt;dialog&gt;.
     /// </summary>
-    /// <param name="dialog"></param>
+    /// <param name="dialog">An <see cref="ElementReference"/> referencing a &lt;dialog&gt; html tag.</param>
     /// <param name="cancellationToken"></param>
-    /// <returns></returns>
+    /// <returns>An object that can be used to interact with the given &lt;dialog&gt; element.</returns>
     public async ValueTask<IDialog> Create(ElementReference dialog, CancellationToken cancellationToken = default) {
         IJSObjectReference dialogJS = await _moduleManager.InvokeTrySync<IJSObjectReference>("createDialog", cancellationToken, dialog);
         return new Dialog(dialogJS);

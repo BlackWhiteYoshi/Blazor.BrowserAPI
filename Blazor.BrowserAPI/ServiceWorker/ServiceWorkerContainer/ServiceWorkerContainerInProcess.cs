@@ -38,7 +38,8 @@ internal sealed class ServiceWorkerContainerInProcess : ServiceWorkerContainerBa
     /// <summary>
     /// The <i>getRegistration()</i> method of the ServiceWorkerContainer interface gets a ServiceWorkerRegistration object whose scope URL matches the provided client URL. The method returns a Promise that resolves to a ServiceWorkerRegistration or undefined.
     /// </summary>
-    /// <param name="clientUrl"></param>
+    /// <param name="clientUrl">The registration whose scope matches this URL will be returned. Relative URLs are resolved with the current client as the base.</param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IServiceWorkerRegistrationInProcess?> GetRegistration(string clientUrl, CancellationToken cancellationToken = default) {
         IJSObjectReference? serviceWorkerRegistration = await GetRegistrationBase(clientUrl, cancellationToken);
@@ -51,7 +52,7 @@ internal sealed class ServiceWorkerContainerInProcess : ServiceWorkerContainerBa
     /// <summary>
     /// The <i>getRegistrations()</i> method of the ServiceWorkerContainer interface gets all ServiceWorkerRegistrations associated with a ServiceWorkerContainer, in an array. The method returns a Promise that resolves to an array of ServiceWorkerRegistration.
     /// </summary>
-    /// <param name="clientUrl"></param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IServiceWorkerRegistrationInProcess[]> GetRegistrations(CancellationToken cancellationToken = default) {
         IJSObjectReference[] serviceWorkerRegistrations = await GetRegistrationsBase(cancellationToken);

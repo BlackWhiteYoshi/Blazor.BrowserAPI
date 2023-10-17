@@ -18,8 +18,8 @@ internal sealed class DialogInProcessFactory : IDialogInProcessFactory {
     /// <summary>
     /// Takes a <see cref="ElementReference"/> of &lt;dialog&gt; and returns a <see cref="IDialogInProcess"/> interface to interact with the given &lt;dialog&gt;.
     /// </summary>
-    /// <param name="dialog"></param>
-    /// <returns></returns>
+    /// <param name="dialog">An <see cref="ElementReference"/> referencing a &lt;dialog&gt; html tag.</param>
+    /// <returns>An object that can be used to interact with the given &lt;dialog&gt; element.</returns>
     public IDialogInProcess Create(ElementReference dialog) {
         IJSInProcessObjectReference dialogJS = _moduleManager.InvokeSync<IJSInProcessObjectReference>("createDialog", dialog);
         return new DialogInProcess(dialogJS);

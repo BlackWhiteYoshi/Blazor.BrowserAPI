@@ -49,7 +49,7 @@ internal sealed class CookieStorage : ICookieStorage {
     /// <summary>
     /// When passed a number <i>n</i>, this method will return the name of the nth key in cookieStorage.
     /// </summary>
-    /// <param name="index"></param>
+    /// <param name="index">An integer representing the number of the key you want to get the name of. This is a zero-based index.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<string?> Key(int index, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync<string?>("cookieStorageKey", cancellationToken, index);
@@ -57,7 +57,7 @@ internal sealed class CookieStorage : ICookieStorage {
     /// <summary>
     /// When passed a key name, will return that key's value.
     /// </summary>
-    /// <param name="key"></param>
+    /// <param name="key">A string containing the name of the key you want to retrieve the value of.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<string?> GetCookie(string key, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync<string?>("cookieStorageGetCookie", cancellationToken, key);
@@ -65,12 +65,12 @@ internal sealed class CookieStorage : ICookieStorage {
     /// <summary>
     /// When passed a key name and value, will add that key to cookieStorage, or update that key's value if it already exists.
     /// </summary>
-    /// <param name="key"></param>
-    /// <param name="value"></param>
-    /// <param name="expires">Time in ms until the cookie gets removed.<br />Default is not setting this attribute, so it will be a session cookie and gets discarded when the client shuts down.</param>
-    /// <param name="path"></param>
-    /// <param name="sameSite"></param>
-    /// <param name="secure"></param>
+    /// <param name="key">A string containing the name of the key you want to create/update.</param>
+    /// <param name="value">A string containing the value you want to give the key you are creating/updating.</param>
+    /// <param name="expires">The expiry date of the cookie. If neither expires nor max-age is specified, it will expire at the end of session.</param>
+    /// <param name="path">Indicates the path that must exist in the requested URL for the browser to send the Cookie header (e.g., '/', '/mydir').<br/>Default is "/"</param>
+    /// <param name="sameSite">SameSite prevents the browser from sending this cookie along with cross-site requests. Possible values are lax, strict or none.<br/>Defailt is None</param>
+    /// <param name="secure">Specifies that the cookie should only be transmitted over a secure protocol.<br/>Default is false</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask SetCookie(string key, string value, int? expires = null, string path = "/", CookieSameSite sameSite = CookieSameSite.None, bool secure = false, CancellationToken cancellationToken = default)
@@ -79,7 +79,7 @@ internal sealed class CookieStorage : ICookieStorage {
     /// <summary>
     /// When passed a key name, will remove that key from cookieStorage.
     /// </summary>
-    /// <param name="key"></param>
+    /// <param name="key">A string containing the name of the key you want to remove.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask RemoveCookie(string key, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("cookieStorageRemoveCookie", cancellationToken, key);
