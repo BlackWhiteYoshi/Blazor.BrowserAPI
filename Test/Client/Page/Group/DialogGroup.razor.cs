@@ -11,15 +11,15 @@ public sealed partial class DialogGroup : ComponentBase {
     [Inject]
     public required IDialogFactory DialogFactory { private get; init; }
 
-    private Task<IDialog>? dialog;
-    private Task<IDialog> Dialog => dialog ??= DialogFactory.Create(dialogElement).AsTask();
+    private Task<IDialog>? _dialog;
+    private Task<IDialog> Dialog => _dialog ??= DialogFactory.Create(dialogElement).AsTask();
 
 
     [Inject]
     public required IDialogInProcessFactory DialogInProcessFactory { private get; init; }
 
-    private IDialogInProcess? dialogInProcess;
-    private IDialogInProcess DialogInProcess => dialogInProcess ??= DialogInProcessFactory.Create(dialogElement);
+    private IDialogInProcess? _dialogInProcess;
+    private IDialogInProcess DialogInProcess => _dialogInProcess ??= DialogInProcessFactory.Create(dialogElement);
 
 
     public const string LABEL_OUTPUT = "dialog-output";

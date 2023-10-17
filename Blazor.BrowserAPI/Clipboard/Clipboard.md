@@ -6,7 +6,17 @@ The Clipboard interface implements the Clipboard API, providing—if the user gran
 <br><br />
 ## Example
 
-TODO
+```csharp
+public sealed  partial class ExampleComponent : ComponentBase {
+    [Inject]
+    public required IClipboard Clipboard { private get; init; }
+    
+    private async Task Example() {
+        await Clipboard.Write("example content");
+        string clipboardContent = await Clipboard.Read(); // returns "example content"
+    }
+}
+```
 
 
 <br><br />

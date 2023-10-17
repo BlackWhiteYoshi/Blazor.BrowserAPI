@@ -7,7 +7,17 @@ sessionStorage is similar to localStorage; the difference is that while data in 
 <br><br />
 ## Example
 
-TODO
+```csharp
+public sealed  partial class ExampleComponent : ComponentBase {
+    [Inject]
+    public required ISessionStorage SessionStorage { private get; init; }
+    
+    private async Task Example() {
+        await SessionStorage.SetItem("example key", "example content");
+        string? content = await SessionStorage.GetItem("example key"); // returns "example content"
+    }
+}
+```
 
 
 <br><br />

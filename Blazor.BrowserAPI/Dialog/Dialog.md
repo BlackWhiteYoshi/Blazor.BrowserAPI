@@ -6,7 +6,29 @@ The *HTMLDialogElement* interface provides methods to manipulate &lt;dialog&gt; 
 <br><br />
 ## Example
 
-TODO
+```razor
+<dialog @ref="dialogElement">
+    <p>Content of dialog</p>
+</dialog>
+```
+
+```csharp
+public sealed partial class ExampleComponent : ComponentBase {
+    [Inject]
+    public required IDialogFactory DialogFactory { private get; init; }
+
+    private Task<IDialog>? _dialog;
+    private Task<IDialog> Dialog => _dialog ??= DialogFactory.Create(dialogElement).AsTask();
+
+    private ElementReference dialogElement;
+
+
+    private async Task Example() {
+        IDialog dialog = await Dialog;
+        await dialog.Show();
+    }
+}
+```
 
 
 <br><br />

@@ -7,7 +7,17 @@ the stored data is saved across browser sessions.
 <br><br />
 ## Example
 
-TODO
+```csharp
+public sealed  partial class ExampleComponent : ComponentBase {
+    [Inject]
+    public required ILocalStorage LocalStorage { private get; init; }
+    
+    private async Task Example() {
+        await LocalStorage.SetItem("example key", "example content");
+        string? content = await LocalStorage.GetItem("example key"); // returns "example content"
+    }
+}
+```
 
 
 <br><br />

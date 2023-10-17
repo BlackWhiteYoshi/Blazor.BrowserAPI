@@ -6,7 +6,17 @@ The Document property cookie lets you read and write cookies associated with the
 <br><br />
 ## Example
 
-TODO
+```csharp
+public sealed  partial class ExampleComponent : ComponentBase {
+    [Inject]
+    public required ICookieStorage CookieStorage { private get; init; }
+    
+    private async Task Example() {
+        await CookieStorage.SetCookie("example key", "example content");
+        string? content = await CookieStorage.GetCookie("example key"); // returns "example content"
+    }
+}
+```
 
 
 <br><br />
