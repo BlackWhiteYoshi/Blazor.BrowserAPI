@@ -2,7 +2,7 @@
 
 namespace BrowserAPI.Test.Client;
 
-public sealed partial class DialogGroup : ComponentBase {
+public sealed partial class DialogGroup : ComponentBase, IAsyncDisposable {
     public const string TEST_RETURN_VALUE = "return-value-test";
     public const string TEST_CANCEL_EVENT = "cancel-event-test";
     public const string TEST_CLOSE_EVENT = "close-event-test";
@@ -11,15 +11,11 @@ public sealed partial class DialogGroup : ComponentBase {
     [Inject]
     public required IDialogFactory DialogFactory { private get; init; }
 
-    private Task<IDialog>? _dialog;
-    private Task<IDialog> Dialog => _dialog ??= DialogFactory.Create(dialogElement).AsTask();
-
-
-    [Inject]
-    public required IDialogInProcessFactory DialogInProcessFactory { private get; init; }
+    private IDialog? _dialog;
+    private IDialog Dialog => _dialog ??= DialogFactory.Create(dialogElement);
 
     private IDialogInProcess? _dialogInProcess;
-    private IDialogInProcess DialogInProcess => _dialogInProcess ??= DialogInProcessFactory.Create(dialogElement);
+    private IDialogInProcess DialogInProcess => _dialogInProcess ??= DialogFactory.CreateInProcess(dialogElement);
 
 
     public const string LABEL_OUTPUT = "dialog-output";
@@ -28,85 +24,81 @@ public sealed partial class DialogGroup : ComponentBase {
     public const string DIALOG_ELEMENT = "dialog-dialog-element";
     private ElementReference dialogElement;
 
+    public ValueTask DisposeAsync() {
+        _dialogInProcess?.Dispose();
+        return _dialog switch {
+            IDialog => _dialog.DisposeAsync(),
+            null => ValueTask.CompletedTask
+        };
+    }
+
 
     public const string BUTTON_GET_OPEN_PROPERTY = "dialog-get-open-property";
     private async Task GetOpen_Property() {
-        IDialog dialog = await Dialog;
-        bool state = await dialog.Open;
+        bool state = await Dialog.Open;
         labelOutput = state.ToString();
     }
 
     public const string BUTTON_GET_OPEN_METHOD = "dialog-get-open-method";
     private async Task GetOpen_Method() {
-        IDialog dialog = await Dialog;
-        bool state = await dialog.GetOpen(default);
+        bool state = await Dialog.GetOpen(default);
         labelOutput = state.ToString();
     }
 
     public const string BUTTON_SET_OPEN = "dialog-set-open";
     private async Task SetOpen() {
-        IDialog dialog = await Dialog;
-        await dialog.SetOpen(true);
+        await Dialog.SetOpen(true);
     }
 
 
     public const string BUTTON_GET_RETURN_VALUE_PROPERTY = "dialog-get-return-value-property";
     private async Task GetReturnValue_Property() {
-        IDialog dialog = await Dialog;
-        labelOutput = await dialog.ReturnValue;
+        labelOutput = await Dialog.ReturnValue;
     }
 
     public const string BUTTON_GET_RETURN_VALUE_METHOD = "dialog-get-return-value-method";
     private async Task GetReturnValue_Method() {
-        IDialog dialog = await Dialog;
-        labelOutput = await dialog.GetReturnValue(default);
+        labelOutput = await Dialog.GetReturnValue(default);
     }
 
     public const string BUTTON_SET_RETURN_VALUE = "dialog-set-return-value";
     private async Task SetReturnValue() {
-        IDialog dialog = await Dialog;
-        await dialog.SetReturnValue(TEST_RETURN_VALUE);
+        await Dialog.SetReturnValue(TEST_RETURN_VALUE);
     }
 
 
     public const string BUTTON_SHOW = "dialog-show";
     private async Task Show() {
-        IDialog dialog = await Dialog;
-        await dialog.Show();
+        await Dialog.Show();
     }
 
     public const string BUTTON_SHOW_MODAL = "dialog-show-modal";
     private async Task ShowModal() {
-        IDialog dialog = await Dialog;
-        await dialog.ShowModal();
+        await Dialog.ShowModal();
     }
 
     public const string BUTTON_CLOSE = "dialog-close";
     private async Task Close() {
-        IDialog dialog = await Dialog;
-        await dialog.Close();
+        await Dialog.Close();
     }
 
     public const string BUTTON_CLOSE_RETURN_VALUE = "dialog-close-return-value";
     private async Task CloseReturnValue() {
-        IDialog dialog = await Dialog;
-        await dialog.Close(TEST_RETURN_VALUE);
+        await Dialog.Close(TEST_RETURN_VALUE);
     }
 
 
     public const string BUTTON_REGISTER_ON_CANCEL = "dialog-cancel-event";
-    private async Task RegisterOnCancel() {
-        IDialog dialog = await Dialog;
-        dialog.OnCancel += () => {
+    private void RegisterOnCancel() {
+        Dialog.OnCancel += () => {
             labelOutput = TEST_CANCEL_EVENT;
             StateHasChanged();
         };
     }
 
     public const string BUTTON_REGISTER_ON_CLOSE = "dialog-close-event";
-    private async Task RegisterOnClose() {
-        IDialog dialog = await Dialog;
-        dialog.OnClose += () => {
+    private void RegisterOnClose() {
+        Dialog.OnClose += () => {
             labelOutput = TEST_CLOSE_EVENT;
             StateHasChanged();
         };

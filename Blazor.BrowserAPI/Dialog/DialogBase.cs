@@ -10,7 +10,7 @@ namespace BrowserAPI;
 [AutoInterface(Name = "IDialog", Modifier = "public partial")]
 [AutoInterface(Name = "IDialogInProcess", Modifier = "public partial")]
 internal abstract class DialogBase {
-    protected abstract IJSObjectReference DialogJS { get; }
+    protected abstract Task<IJSObjectReference> DialogJS { get; }
 
 
     #region Cancel event
@@ -21,16 +21,26 @@ internal abstract class DialogBase {
     /// </summary>
     public event Action OnCancel {
         add {
-            if (_onCancel == null)
-                _ = DialogJS.InvokeVoidTrySync("activateOncancel", default, DotNetObjectReference.Create(new CancelTrigger(this))).Preserve();
+            if (_onCancel == null) {
+                _ = DoAsync();
+                async Task DoAsync() {
+                    IJSObjectReference dialog = await DialogJS;
+                    await dialog.InvokeVoidTrySync("activateOncancel", default, DotNetObjectReference.Create(new CancelTrigger(this)));
+                }
+            }
 
             _onCancel += value;
         }
         remove {
             _onCancel -= value;
 
-            if (_onCancel == null)
-                _ = DialogJS.InvokeVoidTrySync("deactivateOncancel", default).Preserve();
+            if (_onCancel == null) {
+                _ = DoAsync();
+                async Task DoAsync() {
+                    IJSObjectReference dialog = await DialogJS;
+                    await dialog.InvokeVoidTrySync("deactivateOncancel", default);
+                }
+            }
         }
     }
 
@@ -57,16 +67,26 @@ internal abstract class DialogBase {
     /// </summary>
     public event Action OnClose {
         add {
-            if (_onClose == null)
-                _ = DialogJS.InvokeVoidTrySync("activateOnclose", default, DotNetObjectReference.Create(new CloseTrigger(this))).Preserve();
+            if (_onClose == null) {
+                _ = DoAsync();
+                async Task DoAsync() {
+                    IJSObjectReference dialog = await DialogJS;
+                    await dialog.InvokeVoidTrySync("activateOnclose", default, DotNetObjectReference.Create(new CloseTrigger(this)));
+                }
+            }
 
             _onClose += value;
         }
         remove {
             _onClose -= value;
 
-            if (_onClose == null)
-                _ = DialogJS.InvokeVoidTrySync("deactivateOnclose", default).Preserve();
+            if (_onClose == null) {
+                _ = DoAsync();
+                async Task DoAsync() {
+                    IJSObjectReference dialog = await DialogJS;
+                    await dialog.InvokeVoidTrySync("deactivateOnclose", default);
+                }
+            }
         }
     }
 

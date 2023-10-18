@@ -17,8 +17,7 @@ public static class ServiceExtension {
             .AddScoped<ILanguageInProcess, LanguageInProcess>()
             .AddScoped<IServiceWorkerContainer, ServiceWorkerContainer>()
             .AddScoped<IServiceWorkerContainerInProcess, ServiceWorkerContainerInProcess>()
-            .AddScoped<IDialogFactory, DialogFactory>()
-            .AddScoped<IDialogInProcessFactory, DialogInProcessFactory>();
+            .AddScoped<IDialogFactory, DialogFactory>();
 
         return services;
     }

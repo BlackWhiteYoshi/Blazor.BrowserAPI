@@ -6,10 +6,13 @@ namespace BrowserAPI;
 [AutoInterface(Modifier = "public partial", Inheritance = new[] { typeof(IDisposable) })]
 internal sealed class DialogInProcess : DialogBase, IDialogInProcess {
     private readonly IJSInProcessObjectReference _dialogJS;
-    protected override IJSObjectReference DialogJS => _dialogJS;
+
+    private readonly Task<IJSObjectReference> dialogJSTask;
+    protected override Task<IJSObjectReference> DialogJS => dialogJSTask;
 
     public DialogInProcess(IJSInProcessObjectReference dialogJS) {
         _dialogJS = dialogJS;
+        dialogJSTask = Task.FromResult<IJSObjectReference>(dialogJS);
     }
 
     public void Dispose() => _dialogJS.Dispose();
