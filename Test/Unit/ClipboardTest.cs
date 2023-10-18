@@ -6,12 +6,16 @@ namespace BrowserAPI.UnitTest;
 public sealed class ClipboardTest : PlayWrightTest {
     public ClipboardTest(PlayWrightFixture playWrightFixture) : base(playWrightFixture) { }
 
+    public override async Task InitializeAsync() {
+        await base.InitializeAsync();
+        await Context.GrantPermissionsAsync(new string[] { "clipboard-read", "clipboard-write" });
+    }
+
 
     [Fact]
     public async Task ClipboardRead() {
         const string TEST_STR = "clipboard read test";
 
-        await Context.GrantPermissionsAsync(new string[] { "clipboard-read", "clipboard-write" });
         await Page.EvaluateAsync($"navigator.clipboard.writeText('{TEST_STR}');");
 
         await Page.GetByTestId(ClipboardGroup.BUTTON_READ).ClickAsync();
@@ -22,8 +26,6 @@ public sealed class ClipboardTest : PlayWrightTest {
 
     [Fact]
     public async Task ClipboardWrite() {
-        await Context.GrantPermissionsAsync(new string[] { "clipboard-read", "clipboard-write" });
-        
         await Page.GetByTestId(ClipboardGroup.BUTTON_WRITE).ClickAsync();
 
         string clipboardContent = await Page.EvaluateAsync<string>($"navigator.clipboard.readText();");

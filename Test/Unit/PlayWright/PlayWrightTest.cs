@@ -21,13 +21,13 @@ public abstract class PlayWrightTest : IAsyncLifetime {
     public PlayWrightTest(PlayWrightFixture playWrightFixture) => _playWrightFixture = playWrightFixture;
 
 
-    public async Task InitializeAsync() {
+    public virtual async Task InitializeAsync() {
         Context = await _playWrightFixture.NewBrowserContext();
         Page = await Context.NewPageAsync();
         await Page.GotoAsync("/");
     }
 
-    public async Task DisposeAsync() {
+    public virtual async Task DisposeAsync() {
         try {
             // Asserts that no exception has been occured.
             await Assertions.Expect(Page.Locator("#blazor-error-ui")).ToBeVisibleAsync(new LocatorAssertionsToBeVisibleOptions() { Visible = false });
