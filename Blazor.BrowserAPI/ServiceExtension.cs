@@ -5,20 +5,22 @@ namespace BrowserAPI;
 public static class ServiceExtension {
     public static IServiceCollection AddBrowserAPI(this IServiceCollection services) {
         services.AddScoped<IModuleManager, ModuleManager>()
-            .AddScoped<ILocalStorage, LocalStorage>()
-            .AddScoped<ILocalStorageInProcess, LocalStorageInProcess>()
-            .AddScoped<ISessionStorage, SessionStorage>()
-            .AddScoped<ISessionStorageInProcess, SessionStorageInProcess>()
+            .AddScoped<IClipboard, Clipboard>()
+            .AddScoped<IConsole, Console>()
+            .AddScoped<IConsoleInProcess, ConsoleInProcess>()
             .AddScoped<ICookieStorage, CookieStorage>()
             .AddScoped<ICookieStorageInProcess, CookieStorageInProcess>()
+            .AddScoped<IDialogFactory, DialogFactory>()
             .AddScoped<IDownload, Download>()
-            .AddScoped<IClipboard, Clipboard>()
             .AddScoped<ILanguage, Language>()
             .AddScoped<ILanguageInProcess, LanguageInProcess>()
+            .AddScoped<ILocalStorage, LocalStorage>()
+            .AddScoped<ILocalStorageInProcess, LocalStorageInProcess>()
             .AddScoped<IServiceWorkerContainer, ServiceWorkerContainer>()
             .AddScoped<IServiceWorkerContainerInProcess, ServiceWorkerContainerInProcess>()
-            .AddScoped<IDialogFactory, DialogFactory>();
-
+            .AddScoped<ISessionStorage, SessionStorage>()
+            .AddScoped<ISessionStorageInProcess, SessionStorageInProcess>();
+            
         return services;
     }
 }

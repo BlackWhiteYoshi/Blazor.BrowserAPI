@@ -7,6 +7,7 @@ It supports asynchronous communication as well as synchronous (JSRuntime and JSI
 ## Available Browser APIs
 
 - [Clipboard](Blazor.BrowserAPI/Clipboard/Clipboard.md)
+- [Console](Blazor.BrowserAPI/Console/Console.md)
 - [CookieStorage](Blazor.BrowserAPI/CookieStorage/CookieStorage.md)
 - [Dialog](Blazor.BrowserAPI/Dialog/Dialog.md)
 - [Download](Blazor.BrowserAPI/Download/Download.md)

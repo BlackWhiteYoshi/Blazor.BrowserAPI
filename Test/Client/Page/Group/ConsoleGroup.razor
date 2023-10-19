@@ -1,0 +1,91 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Console</h2>
+    <div>
+        <button data-testid="@BUTTON_ASSERT_STRING" @onclick="Assert_String">Assert_String</button>
+        <button data-testid="@BUTTON_ASSERT" @onclick="Assert">Assert</button>
+        <button data-testid="@BUTTON_CLEAR" @onclick="Clear">Clear</button>
+        
+        <button data-testid="@BUTTON_COUNT" @onclick="Count">Count</button>
+        <button data-testid="@BUTTON_COUNT_LABEL" @onclick="Count_Label">Count_Label</button>
+        <button data-testid="@BUTTON_COUNT_RESET" @onclick="CountReset">CountReset</button>
+        <button data-testid="@BUTTON_COUNT_RESET_LABEL" @onclick="CountReset_Label">CountReset_Label</button>
+
+        <button data-testid="@BUTTON_DEBUG_STRING" @onclick="Debug_String">Debug_String</button>
+        <button data-testid="@BUTTON_DEBUG" @onclick="Debug">Debug</button>
+        <button data-testid="@BUTTON_DIR" @onclick="Dir">Dir</button>
+        <button data-testid="@BUTTON_DIRXML" @onclick="Dirxml">Dirxml</button>
+        <button data-testid="@BUTTON_ERROR_STRING" @onclick="Error_String">Error_String</button>
+        <button data-testid="@BUTTON_ERROR" @onclick="Error">Error</button>
+        
+        <button data-testid="@BUTTON_GROUP" @onclick="Group">Group</button>
+        <button data-testid="@BUTTON_GROUP_LABEL" @onclick="Group_Label">Group_Label</button>
+        <button data-testid="@BUTTON_GROUP_COLLAPSED" @onclick="GroupCollapsed">GroupCollapsed</button>
+        <button data-testid="@BUTTON_GROUP_COLLAPSED_LABEL" @onclick="GroupCollapsed_Label">GroupCollapsed_Label</button>
+        <button data-testid="@BUTTON_GROUP_END" @onclick="GroupEnd">GroupEnd</button>
+
+        <button data-testid="@BUTTON_INFO_STRING" @onclick="Info_String">Info_String</button>
+        <button data-testid="@BUTTON_INFO" @onclick="Info">Info</button>
+        <button data-testid="@BUTTON_LOG_STRING" @onclick="Log_String">Log_String</button>
+        <button data-testid="@BUTTON_LOG" @onclick="Log">Log</button>
+        <button data-testid="@BUTTON_TABLE" @onclick="Table">Table</button>
+        <button data-testid="@BUTTON_TABLE_COLUMNS" @onclick="Table_Columns">Table_Columns</button>
+
+        <button data-testid="@BUTTON_TIME" @onclick="Time">Time</button>
+        <button data-testid="@BUTTON_TIME_LABEL" @onclick="Time_Label">Time_Label</button>
+        <button data-testid="@BUTTON_TIME_END" @onclick="TimeEnd">TimeEnd</button>
+        <button data-testid="@BUTTON_TIME_END_LABEL" @onclick="TimeEnd_Label">TimeEnd_Label</button>
+        <button data-testid="@BUTTON_TIME_LOG" @onclick="TimeLog">TimeLog</button>
+        <button data-testid="@BUTTON_TIME_LOG_LABEL" @onclick="TimeLog_Label">TimeLog_Label</button>
+        <button data-testid="@BUTTON_TIME_LOG_LABEL_DATA" @onclick="TimeLog_LabelData">TimeLog_LabelData</button>
+        
+        <button data-testid="@BUTTON_TRACE_STRING" @onclick="Trace_String">Trace_String</button>
+        <button data-testid="@BUTTON_TRACE" @onclick="Trace">Trace</button>
+        <button data-testid="@BUTTON_WARN_STRING" @onclick="Warn_String">Warn_String</button>
+        <button data-testid="@BUTTON_WARN" @onclick="Warn">Warn</button>
+
+
+        <button data-testid="@BUTTON_ASSERT_STRING_INPROCESS" @onclick="Assert_String_InProcess">Assert_String_InProcess</button>
+        <button data-testid="@BUTTON_ASSERT_INPROCESS" @onclick="Assert_InProcess">Assert_InProcess</button>
+        <button data-testid="@BUTTON_CLEAR_INPROCESS" @onclick="Clear_InProcess">Clear_InProcess</button>
+
+        <button data-testid="@BUTTON_COUNT_INPROCESS" @onclick="Count_InProcess">Count_InProcess</button>
+        <button data-testid="@BUTTON_COUNT_LABEL_INPROCESS" @onclick="Count_Label_InProcess">Count_Label_InProcess</button>
+        <button data-testid="@BUTTON_COUNT_RESET_INPROCESS" @onclick="CountReset_InProcess">CountReset_InProcess</button>
+        <button data-testid="@BUTTON_COUNT_RESET_LABEL_INPROCESS" @onclick="CountReset_Label_InProcess">CountReset_Label_InProcess</button>
+
+        <button data-testid="@BUTTON_DEBUG_STRING_INPROCESS" @onclick="Debug_String_InProcess">Debug_String_InProcess</button>
+        <button data-testid="@BUTTON_DEBUG_INPROCESS" @onclick="Debug_InProcess">Debug_InProcess</button>
+        <button data-testid="@BUTTON_DIR_INPROCESS" @onclick="Dir_InProcess">Dir_InProcess</button>
+        <button data-testid="@BUTTON_DIRXML_INPROCESS" @onclick="Dirxml_InProcess">Dirxml_InProcess</button>
+        <button data-testid="@BUTTON_ERROR_STRING_INPROCESS" @onclick="Error_String_InProcess">Error_String_InProcess</button>
+        <button data-testid="@BUTTON_ERROR_INPROCESS" @onclick="Error_InProcess">Error_InProcess</button>
+
+        <button data-testid="@BUTTON_GROUP_INPROCESS" @onclick="Group_InProcess">Group_InProcess</button>
+        <button data-testid="@BUTTON_GROUP_LABEL_INPROCESS" @onclick="Group_Label_InProcess">Group_Label_InProcess</button>
+        <button data-testid="@BUTTON_GROUP_COLLAPSED_INPROCESS" @onclick="GroupCollapsed_InProcess">GroupCollapsed_InProcess</button>
+        <button data-testid="@BUTTON_GROUP_COLLAPSED_LABEL_INPROCESS" @onclick="GroupCollapsed_Label_InProcess">GroupCollapsed_Label_InProcess</button>
+        <button data-testid="@BUTTON_GROUP_END_INPROCESS" @onclick="GroupEnd_InProcess">GroupEnd_InProcess</button>
+
+        <button data-testid="@BUTTON_INFO_STRING_INPROCESS" @onclick="Info_String_InProcess">Info_String_InProcess</button>
+        <button data-testid="@BUTTON_INFO_INPROCESS" @onclick="Info_InProcess">Info_InProcess</button>
+        <button data-testid="@BUTTON_LOG_STRING_INPROCESS" @onclick="Log_String_InProcess">Log_String_InProcess</button>
+        <button data-testid="@BUTTON_LOG_INPROCESS" @onclick="Log_InProcess">Log_InProcess</button>
+        <button data-testid="@BUTTON_TABLE_INPROCESS" @onclick="Table_InProcess">Table_InProcess</button>
+        <button data-testid="@BUTTON_TABLE_COLUMNS_INPROCESS" @onclick="Table_Columns_InProcess">Table_Columns_InProcess</button>
+
+        <button data-testid="@BUTTON_TIME_INPROCESS" @onclick="Time_InProcess">Time_InProcess</button>
+        <button data-testid="@BUTTON_TIME_LABEL_INPROCESS" @onclick="Time_Label_InProcess">Time_Label_InProcess</button>
+        <button data-testid="@BUTTON_TIME_END_INPROCESS" @onclick="TimeEnd_InProcess">TimeEnd_InProcess</button>
+        <button data-testid="@BUTTON_TIME_END_LABEL_INPROCESS" @onclick="TimeEnd_Label_InProcess">TimeEnd_Label_InProcess</button>
+        <button data-testid="@BUTTON_TIME_LOG_INPROCESS" @onclick="TimeLog_InProcess">TimeLog_InProcess</button>
+        <button data-testid="@BUTTON_TIME_LOG_LABEL_INPROCESS" @onclick="TimeLog_Label_InProcess">TimeLog_Label_InProcess</button>
+        <button data-testid="@BUTTON_TIME_LOG_LABEL_DATA_INPROCESS" @onclick="TimeLog_LabelData_InProcess">TimeLog_LabelData_InProcess</button>
+
+        <button data-testid="@BUTTON_TRACE_STRING_INPROCESS" @onclick="Trace_String_InProcess">Trace_String_InProcess</button>
+        <button data-testid="@BUTTON_TRACE_INPROCESS" @onclick="Trace_InProcess">Trace_InProcess</button>
+        <button data-testid="@BUTTON_WARN_STRING_INPROCESS" @onclick="Warn_String_InProcess">Warn_String_InProcess</button>
+        <button data-testid="@BUTTON_WARN_INPROCESS" @onclick="Warn_InProcess">Warn_InProcess</button>
+    </div>
+</div>
