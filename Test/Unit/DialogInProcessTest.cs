@@ -4,8 +4,8 @@ using Xunit;
 
 namespace BrowserAPI.UnitTest;
 
-public sealed class DialogTestInProcess : PlayWrightTest {
-    public DialogTestInProcess(PlayWrightFixture playWrightFixture) : base(playWrightFixture) { }
+public sealed class DialogInProcessTest : PlayWrightTest {
+    public DialogInProcessTest(PlayWrightFixture playWrightFixture) : base(playWrightFixture) { }
 
 
     [Fact]
