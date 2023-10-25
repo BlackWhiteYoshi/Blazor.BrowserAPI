@@ -12,8 +12,8 @@ internal sealed class ServiceWorkerRegistrationInProcess : ServiceWorkerRegistra
         _serviceWorkerRegistration = serviceWorkerRegistration;
     }
 
-
-    void IDisposable.Dispose() => _serviceWorkerRegistration.Dispose();
+    [IgnoreAutoInterface]
+    public void Dispose() => _serviceWorkerRegistration.Dispose();
 
 
     /// <summary>

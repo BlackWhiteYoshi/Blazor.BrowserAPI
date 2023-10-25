@@ -10,7 +10,8 @@ internal sealed class ServiceWorker : ServiceWorkerBase, IServiceWorker {
         ServiceWorkerJS = serviceWorker;
     }
 
-    ValueTask IAsyncDisposable.DisposeAsync() => ServiceWorkerJS.DisposeAsync();
+    [IgnoreAutoInterface]
+    public ValueTask DisposeAsync() => ServiceWorkerJS.DisposeAsync();
 
 
     /// <summary>

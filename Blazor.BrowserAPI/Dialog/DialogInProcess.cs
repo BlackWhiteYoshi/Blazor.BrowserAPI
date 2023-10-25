@@ -15,6 +15,7 @@ internal sealed class DialogInProcess : DialogBase, IDialogInProcess {
         dialogJSTask = Task.FromResult<IJSObjectReference>(dialogJS);
     }
 
+    [IgnoreAutoInterface]
     public void Dispose() => _dialogJS.Dispose();
 
 

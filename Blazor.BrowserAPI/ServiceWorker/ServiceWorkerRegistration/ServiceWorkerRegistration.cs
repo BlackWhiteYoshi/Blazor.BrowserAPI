@@ -11,7 +11,8 @@ internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase,
         ServiceWorkerRegistrationJS = serviceWorkerRegistration;
     }
 
-    ValueTask IAsyncDisposable.DisposeAsync() => ServiceWorkerRegistrationJS.DisposeAsync();
+    [IgnoreAutoInterface]
+    public ValueTask DisposeAsync() => ServiceWorkerRegistrationJS.DisposeAsync();
 
 
     /// <summary>

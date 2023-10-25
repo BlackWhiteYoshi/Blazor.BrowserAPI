@@ -12,7 +12,8 @@ internal sealed class ServiceWorkerInProcess : ServiceWorkerBase, IServiceWorker
         _serviceWorker = serviceWorker;
     }
 
-    void IDisposable.Dispose() => _serviceWorker.Dispose();
+    [IgnoreAutoInterface]
+    public void Dispose() => _serviceWorker.Dispose();
 
 
     /// <summary>

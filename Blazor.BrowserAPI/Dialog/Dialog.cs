@@ -11,6 +11,7 @@ internal sealed class Dialog : DialogBase, IDialog {
         DialogJS = dialogJS;
     }
 
+    [IgnoreAutoInterface]
     public async ValueTask DisposeAsync() => await (await DialogJS).DisposeAsync();
 
 
