@@ -15,12 +15,12 @@ public sealed partial class ClipboardGroup : ComponentBase {
 
 
     public const string BUTTON_READ = "clipboard-read";
-    private async Task ClipboardRead() {
+    private async Task Read() {
         labelOutput = await Clipboard.Read();
     }
 
     public const string BUTTON_WRITE = "clipboard-write";
-    private async Task ClipboardWrite() {
+    private async Task Write() {
         await Clipboard.Write(TEST_WRITE);
     }
 }

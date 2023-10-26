@@ -13,7 +13,7 @@ public sealed class ClipboardTest : PlayWrightTest {
 
 
     [Fact]
-    public async Task ClipboardRead() {
+    public async Task Read() {
         const string TEST_STR = "clipboard read test";
 
         await Page.EvaluateAsync($"navigator.clipboard.writeText('{TEST_STR}');");
@@ -25,7 +25,7 @@ public sealed class ClipboardTest : PlayWrightTest {
     }
 
     [Fact]
-    public async Task ClipboardWrite() {
+    public async Task Write() {
         await Page.GetByTestId(ClipboardGroup.BUTTON_WRITE).ClickAsync();
 
         string clipboardContent = await Page.EvaluateAsync<string>($"navigator.clipboard.readText();");
