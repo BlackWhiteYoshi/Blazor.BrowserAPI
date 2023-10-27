@@ -40,10 +40,10 @@ public sealed class PlayWrightFixture : ICollectionFixture<PlayWrightFixture>, I
         IBrowserContext browserContext = await browser.NewContextAsync(new BrowserNewContextOptions() { BaseURL = BASE_URL });
 
         await browserContext.RouteAsync($"{BASE_URL}/**", async (IRoute route) => {
-            HttpRequestMessage requestMessage;
-            {
+            using HttpRequestMessage requestMessage = CreateRequestMessage(route);
+            static HttpRequestMessage CreateRequestMessage(IRoute route) {
                 IRequest request = route.Request;
-                requestMessage = new(new HttpMethod(request.Method), request.Url) {
+                HttpRequestMessage requestMessage = new(new HttpMethod(request.Method), request.Url) {
                     Content = request.PostDataBuffer switch {
                         byte[] postDataBuffer => new ByteArrayContent(postDataBuffer),
                         null => null
@@ -51,14 +51,18 @@ public sealed class PlayWrightFixture : ICollectionFixture<PlayWrightFixture>, I
                 };
                 foreach (var header in request.Headers)
                     requestMessage.Headers.Add(header.Key, header.Value);
+
+                return requestMessage;
             }
 
-            HttpResponseMessage response = await httpClient.SendAsync(requestMessage);
-            await route.FulfillAsync(new RouteFulfillOptions() {
+            using HttpResponseMessage response = await httpClient.SendAsync(requestMessage);
+
+            RouteFulfillOptions routeFulfillOptions = new() {
                 BodyBytes = await response.Content.ReadAsByteArrayAsync(),
                 Headers = response.Content.Headers.Select(header => new KeyValuePair<string, string>(header.Key, string.Join(',', header.Value))),
                 Status = (int)response.StatusCode
-            });
+            };
+            await route.FulfillAsync(routeFulfillOptions);
         });
 
         return browserContext;
