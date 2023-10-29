@@ -1,3 +1,6 @@
+// @ts-check
+
+
 /**
  * @returns {string}
  */

@@ -1,3 +1,6 @@
+// @ts-check
+
+
 /**
  * @param {string} text
  * @returns {Promise<void>}

@@ -1,3 +1,6 @@
+// @ts-check
+
+
 /**
  * @param {boolean} condition
  * @param {any[]} data

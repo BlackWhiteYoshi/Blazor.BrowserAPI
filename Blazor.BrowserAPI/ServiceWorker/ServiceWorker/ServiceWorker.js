@@ -1,3 +1,6 @@
+// @ts-check
+
+
 /**
  * @param {ServiceWorker | null} serviceWorker
  * @returns {ServiceWorkerWrapper | null}
@@ -11,9 +14,7 @@ export function createServiceWorker(serviceWorker) {
 
 
 export class ServiceWorkerWrapper {
-    /**
-     * @type {ServiceWorker}
-     */
+    /** @type {ServiceWorker} */
     #serviceWorker;
 
     /**
@@ -47,10 +48,10 @@ export class ServiceWorkerWrapper {
 
 
     /**
-     * @param {import("../blazor").DotNet.DotNetObject} stateChangeTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} stateChangeTrigger
      */
     activateOnstatechange(stateChangeTrigger) {
-        this.#serviceWorker.onstatechange = (event) => stateChangeTrigger.invokeMethodAsync("Trigger", event.target.state);
+        this.#serviceWorker.onstatechange = (event) => stateChangeTrigger.invokeMethodAsync("Trigger", /** @type {ServiceWorker} */(event.target).state);
     }
 
     /**
@@ -61,7 +62,7 @@ export class ServiceWorkerWrapper {
 
 
     /**
-     * @param {import("../blazor").DotNet.DotNetObject} errorTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} errorTrigger
      */
     activateOnerror(errorTrigger) {
         this.#serviceWorker.onerror = (event) => errorTrigger.invokeMethodAsync("Trigger", event);

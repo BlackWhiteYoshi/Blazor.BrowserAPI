@@ -1,6 +1,7 @@
+// @ts-check
+
 import { ServiceWorkerWrapper } from "../ServiceWorker/ServiceWorker.js";
 import { createServiceWorker } from "../ServiceWorker/ServiceWorker.js";
-
 
 
 /**
@@ -13,9 +14,7 @@ export function createServiceWorkerRegistration(serviceWorkerRegistration) {
 
 
 export class ServiceWorkerRegistrationWrapper {
-    /**
-     * @type {ServiceWorkerRegistration}
-     */
+    /** @type {ServiceWorkerRegistration} */
     #serviceWorkerRegistration;
 
     /**
@@ -34,14 +33,14 @@ export class ServiceWorkerRegistrationWrapper {
     }
 
     /**
-     * @returns {ServiceWorker | null}
+     * @returns {ServiceWorkerWrapper | null}
      */
     installing() {
         return createServiceWorker(this.#serviceWorkerRegistration.installing);
     }
 
     /**
-     * @returns {ServiceWorker | null}
+     * @returns {ServiceWorkerWrapper | null}
      */
     waiting() {
         return createServiceWorker(this.#serviceWorkerRegistration.waiting);
@@ -71,19 +70,18 @@ export class ServiceWorkerRegistrationWrapper {
     }
 
     /**
-     * @returns {ServiceWorkerRegistrationWrapper}
+     * @returns {Promise<ServiceWorkerRegistrationWrapper>}
      */
     async update() {
-        /**
-         * @type {ServiceWorkerRegistration}
-         */
-        const updatedServiceWorkerRegistration = await this.#serviceWorkerRegistration.update();
+        /** @type {ServiceWorkerRegistration} */
+        // @ts-ignore -> wrong return type definition for update(): expected ServiceWorkerRegistration, actually void
+        const updatedServiceWorkerRegistration = (await this.#serviceWorkerRegistration.update());
         return createServiceWorkerRegistration(updatedServiceWorkerRegistration);
     }
 
 
     /**
-     * @param {import("../blazor").DotNet.DotNetObject} updateFoundTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} updateFoundTrigger
      */
     activateOnupdatefound(updateFoundTrigger) {
         this.#serviceWorkerRegistration.onupdatefound = () => updateFoundTrigger.invokeMethodAsync("Trigger");

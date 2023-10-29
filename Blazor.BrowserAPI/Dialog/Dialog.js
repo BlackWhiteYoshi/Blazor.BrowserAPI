@@ -1,3 +1,6 @@
+// @ts-check
+
+
 /**
  * @param {HTMLDialogElement} dialog
  * @returns {DialogWrapper}
@@ -8,9 +11,7 @@ export function createDialog(dialog) {
 
 
 export class DialogWrapper {
-    /**
-     * @type {HTMLDialogElemnt}
-     */
+    /** @type {HTMLDialogElement} */
     #dialog;
 
     /**
