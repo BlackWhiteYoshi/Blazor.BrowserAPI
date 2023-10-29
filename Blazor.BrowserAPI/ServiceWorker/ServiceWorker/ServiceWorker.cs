@@ -1,5 +1,6 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
+
 namespace BrowserAPI;
 
 [AutoInterface(Modifier = "public partial", Inheritance = new[] { typeof(IAsyncDisposable) })]

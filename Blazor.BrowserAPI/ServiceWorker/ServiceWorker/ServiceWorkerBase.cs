@@ -17,9 +17,10 @@ internal abstract class ServiceWorkerBase {
 
     private Action<string>? _onStateChange;
     /// <summary>
-    /// The <i>statechange</i> event fires anytime the ServiceWorker.state changes.
+    /// <para>The <i>statechange</i> event fires anytime the ServiceWorker.state changes.</para>
+    /// <para>Parameter is the new state of the service worker. It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.</para>
     /// </summary>
-    public event Action<string>? OnStateChange {
+    public event Action<string> OnStateChange {
         add {
             if (_onStateChange == null)
                 _ = ServiceWorkerJS.InvokeVoidTrySync("activateOnstatechange", default, DotNetObjectReference.Create(new StateChangeTrigger(this))).Preserve();
@@ -53,7 +54,8 @@ internal abstract class ServiceWorkerBase {
 
     private Action<string>? _onError;
     /// <summary>
-    /// The <i>error</i> event fires whenever an error occurs in the service worker.
+    /// <para>The <i>error</i> event fires whenever an error occurs in the service worker.</para>
+    /// <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</see> as JSON.</para>
     /// </summary>
     public event Action<string> OnError {
         add {

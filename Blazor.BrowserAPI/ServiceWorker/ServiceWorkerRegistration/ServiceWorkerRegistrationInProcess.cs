@@ -68,7 +68,13 @@ internal sealed class ServiceWorkerRegistrationInProcess : ServiceWorkerRegistra
     public string Scope => _serviceWorkerRegistration.Invoke<string>("scope");
 
     /// <summary>
-    /// The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register. Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.
+    /// <para>The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register. Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.</para>
+    /// <para>
+    /// Returns one of the following values:<br />
+    /// - <b>imports</b>: meaning the HTTP cache is not consulted for update of the service worker, but is consulted for importScripts.<br />
+    /// - <b>all</b>: meaning the HTTP cache is consulted in both cases<br />
+    /// - <b>none</b>: meaning the HTTP cache is never consulted.
+    /// </para>
     /// </summary>
     public string UpdateViaCache => _serviceWorkerRegistration.Invoke<string>("updateViaCache");
 
@@ -78,7 +84,7 @@ internal sealed class ServiceWorkerRegistrationInProcess : ServiceWorkerRegistra
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<IServiceWorkerRegistrationInProcess> Update(CancellationToken cancellationToken) {
+    public async ValueTask<IServiceWorkerRegistrationInProcess> Update(CancellationToken cancellationToken = default) {
         IJSObjectReference serviceWorkerRegistration = await UpdateBase(cancellationToken);
         return new ServiceWorkerRegistrationInProcess((IJSInProcessObjectReference)serviceWorkerRegistration);
     }
