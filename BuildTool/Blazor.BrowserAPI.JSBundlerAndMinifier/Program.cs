@@ -33,7 +33,7 @@ public static class Program {
             foreach (string filePath in jsFilePaths)
                 foreach (string line in File.ReadLines(filePath))
                     if (!line.StartsWith("import"))
-                        builder.Append(line);
+                        builder.Append(line).Append('\n');
 
             bundleJS = builder.ToString();
         }
