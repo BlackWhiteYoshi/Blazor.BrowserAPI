@@ -98,7 +98,7 @@ internal abstract class ServiceWorkerContainerBase {
     private Action<string>? _onMessage;
     /// <summary>
     /// <para>The message event is used in a page controlled by a service worker to receive messages from the service worker.</para>
-    /// <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/message_event">MessageEvent.</see> as json.</para>
+    /// <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/message_event">MessageEvent</see> as json.</para>
     /// </summary>
     public event Action<string> OnMessage {
         add {

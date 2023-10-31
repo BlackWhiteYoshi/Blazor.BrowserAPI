@@ -119,7 +119,9 @@ internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase,
 
 
     /// <summary>
-    /// The <i>update()</i> method of the ServiceWorkerRegistration interface attempts to update the service worker. It fetches the worker's script URL, and if the new worker is not byte-by-byte identical to the current worker, it installs the new worker. The fetch of the worker bypasses any browser caches if the previous fetch occurred over 24 hours ago.
+    /// The <i>update()</i> method of the ServiceWorkerRegistration interface attempts to update the service worker.
+    /// It fetches the worker's script URL, and if the new worker is not byte-by-byte identical to the current worker, it installs the new worker.
+    /// The fetch of the worker bypasses any browser caches if the previous fetch occurred over 24 hours ago.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>

@@ -5,7 +5,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace BrowserAPI;
 
 /// <summary>
-/// The <i>ServiceWorkerRegistration</i> interface of the Service Worker API represents the service worker registration. You register a service worker to control one or more pages that share the same origin.
+/// The <i>ServiceWorkerRegistration</i> interface of the Service Worker API represents the service worker registration.
+/// You register a service worker to control one or more pages that share the same origin.
 /// </summary>
 [AutoInterface(Name = "IServiceWorkerRegistration", Modifier = "public partial")]
 [AutoInterface(Name = "IServiceWorkerRegistrationInProcess", Modifier = "public partial")]
