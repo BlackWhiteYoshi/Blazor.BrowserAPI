@@ -5,18 +5,12 @@ public static class Program {
 
 
     public static void Main(string[] args) {
-        WebApplication app = CreateWebApplication(args);
-        app.Run();
-    }
-
-
-    public static WebApplication CreateWebApplication(params string[] args) {
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
         WebApplication app = builder.Build();
 
         ConfigurePipeline(app);
-        return app;
+        app.Run();
     }
 
     private static void ConfigurePipeline(WebApplication app) {
