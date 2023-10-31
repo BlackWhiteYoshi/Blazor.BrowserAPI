@@ -8,7 +8,7 @@ The specifics of how it works varies from browser to browser, but there is a de 
 ## Example
 
 ```csharp
-public sealed  partial class ExampleComponent : ComponentBase {
+public sealed partial class ExampleComponent : ComponentBase {
     [Inject]
     public required IConsole Console { private get; init; }
     

@@ -7,7 +7,7 @@ The Clipboard interface implements the Clipboard API, providing—if the user gran
 ## Example
 
 ```csharp
-public sealed  partial class ExampleComponent : ComponentBase {
+public sealed partial class ExampleComponent : ComponentBase {
     [Inject]
     public required IClipboard Clipboard { private get; init; }
     

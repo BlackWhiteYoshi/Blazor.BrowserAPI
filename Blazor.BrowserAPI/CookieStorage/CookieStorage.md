@@ -7,7 +7,7 @@ The Document property cookie lets you read and write cookies associated with the
 ## Example
 
 ```csharp
-public sealed  partial class ExampleComponent : ComponentBase {
+public sealed partial class ExampleComponent : ComponentBase {
     [Inject]
     public required ICookieStorage CookieStorage { private get; init; }
     

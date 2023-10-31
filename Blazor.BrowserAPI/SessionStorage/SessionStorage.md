@@ -8,7 +8,7 @@ sessionStorage is similar to localStorage; the difference is that while data in 
 ## Example
 
 ```csharp
-public sealed  partial class ExampleComponent : ComponentBase {
+public sealed partial class ExampleComponent : ComponentBase {
     [Inject]
     public required ISessionStorage SessionStorage { private get; init; }
     

@@ -8,7 +8,7 @@ the stored data is saved across browser sessions.
 ## Example
 
 ```csharp
-public sealed  partial class ExampleComponent : ComponentBase {
+public sealed partial class ExampleComponent : ComponentBase {
     [Inject]
     public required ILocalStorage LocalStorage { private get; init; }
     
