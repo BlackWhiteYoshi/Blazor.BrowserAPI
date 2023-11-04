@@ -4,6 +4,7 @@ import { ServiceWorkerRegistrationWrapper } from "../ServiceWorkerRegistration/S
 import { createServiceWorkerRegistration } from "../ServiceWorkerRegistration/ServiceWorkerRegistration.js";
 import { ServiceWorkerWrapper } from "../ServiceWorker/ServiceWorker.js";
 import { createServiceWorker } from "../ServiceWorker/ServiceWorker.js";
+import { DotNet } from "../../blazor";
 
 
 /**
@@ -60,11 +61,12 @@ export async function serviceWorkerContainerGetRegistration(clientUrl) {
 }
 
 /**
- * @returns {Promise<ServiceWorkerRegistrationWrapper[]>}
+ * returns something like Promise<JSObjectReference<ServiceWorkerRegistrationWrapper[]>>
+ * @returns {Promise<any[]>}
  */
 export async function serviceWorkerContainerGetRegistrations() {
     const serviceWorkerRegistrations = await navigator.serviceWorker.getRegistrations();
-    return serviceWorkerRegistrations.map((serviceWorkerRegistration) => createServiceWorkerRegistration(serviceWorkerRegistration));
+    return serviceWorkerRegistrations.map((serviceWorkerRegistration) => DotNet.createJSObjectReference(createServiceWorkerRegistration(serviceWorkerRegistration)));
 }
 
 /**
