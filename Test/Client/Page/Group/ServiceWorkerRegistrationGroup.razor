@@ -1,0 +1,30 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Service Worker Registration</h2>
+    <div>
+        <button data-testid="@BUTTON_UNREGISTER" @onclick="Unregister">Unregister</button>
+        <button data-testid="@BUTTON_ACTIVE_PROPERTY" @onclick="Active_Property">Active_Property</button>
+        <button data-testid="@BUTTON_ACTIVE_METHOD" @onclick="Active_Method">Active_Method</button>
+        <button data-testid="@BUTTON_INSTALLING_PROPERTY" @onclick="Installing_Property">Installing_Property</button>
+        <button data-testid="@BUTTON_INSTALLING_METHOD" @onclick="Installing_Method">Installing_Method</button>
+        <button data-testid="@BUTTON_WAITING_PROPERTY" @onclick="Waiting_Property">Waiting_Property</button>
+        <button data-testid="@BUTTON_WAITING_METHOD" @onclick="Waiting_Method">Waiting_Method</button>
+        <button data-testid="@BUTTON_SCOPE_PROPERTY" @onclick="Scope_Property">Scope_Property</button>
+        <button data-testid="@BUTTON_SCOPE_METHOD" @onclick="Scope_Method">Scope_Method</button>
+        <button data-testid="@BUTTON_UPDATE_VIA_CACHE_PROPERTY" @onclick="UpdateViaCache_Property">UpdateViaCache_Property</button>
+        <button data-testid="@BUTTON_UPDATE_VIA_CACHE_METHOD" @onclick="UpdateViaCache_Method">UpdateViaCache_Method</button>
+        <button data-testid="@BUTTON_UPDATE" @onclick="Update">Update</button>
+        <button data-testid="@BUTTON_REGISTER_ON_UPDATE_FOUND" @onclick="RegisterOnUpdateFound">RegisterOnUpdateFound</button>
+
+        <button data-testid="@BUTTON_UNREGISTER_INPROCESS" @onclick="Unregister_InProcess">Unregister_InProcess</button>
+        <button data-testid="@BUTTON_ACTIVE_INPROCESS" @onclick="Active_InProcess">Active_InProcess</button>
+        <button data-testid="@BUTTON_INSTALLING_INPROCESS" @onclick="Installing_InProcess">Installing_InProcess</button>
+        <button data-testid="@BUTTON_WAITING_INPROCESS" @onclick="Waiting_InProcess">Waiting_InProcess</button>
+        <button data-testid="@BUTTON_SCOPE_INPROCESS" @onclick="Scope_InProcess">Scope_InProcess</button>
+        <button data-testid="@BUTTON_UPDATE_VIA_CACHE_INPROCESS" @onclick="UpdateViaCache_InProcess">UpdateViaCache_InProcess</button>
+        <button data-testid="@BUTTON_UPDATE_INPROCESS" @onclick="Update_InProcess">Update_InProcess</button>
+        <button data-testid="@BUTTON_REGISTER_ON_UPDATE_FOUND_INPROCESS" @onclick="RegisterOnUpdateFound_InProcess">RegisterOnUpdateFound_InProcess</button>
+    </div>
+    <label data-testId="@LABEL_OUTPUT">@labelOutput</label>
+</div>

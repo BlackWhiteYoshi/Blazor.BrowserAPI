@@ -1,0 +1,21 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Service Worker</h2>
+    <div>
+        <button data-testid="@BUTTON_SCRIPT_URL_PROPERTY" @onclick="ScriptUrl_Property">ScriptUrl_Property</button>
+        <button data-testid="@BUTTON_SCRIPT_URL_METHOD" @onclick="ScriptUrl_Method">ScriptUrl_Method</button>
+        <button data-testid="@BUTTON_STATE_PROPERTY" @onclick="State_Property">State_Property</button>
+        <button data-testid="@BUTTON_STATE_METHOD" @onclick="State_Method">State_Method</button>
+        <button data-testid="@BUTTON_POST_MESSAGE" @onclick="PostMessage">PostMessage</button>
+        <button data-testid="@BUTTON_REGISTER_ON_STATE_CHANGE" @onclick="RegisterOnStateChange">RegisterOnStateChange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ERROR" @onclick="RegisterOnError">RegisterOnError</button>
+
+        <button data-testid="@BUTTON_SCRIPT_URL_INPROCESS" @onclick="ScriptUrl_InProcess">ScriptUrl_InProcess</button>
+        <button data-testid="@BUTTON_STATE_INPROCESS" @onclick="State_InProcess">State_InProcess</button>
+        <button data-testid="@BUTTON_POST_MESSAGE_INPROCESS" @onclick="PostMessage_InProcess">PostMessage_InProcess</button>
+        <button data-testid="@BUTTON_REGISTER_ON_STATE_CHANGE_INPROCESS" @onclick="RegisterOnStateChange_InProcess">RegisterOnStateChange_InProcess</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ERROR_INPROCESS" @onclick="RegisterOnError_InProcess">RegisterOnError_InProcess</button>
+    </div>
+    <label data-testId="@LABEL_OUTPUT">@labelOutput</label>
+</div>
