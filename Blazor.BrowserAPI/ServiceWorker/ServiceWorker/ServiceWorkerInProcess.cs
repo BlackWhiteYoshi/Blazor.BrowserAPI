@@ -38,5 +38,5 @@ internal sealed class ServiceWorkerInProcess(IJSInProcessObjectReference service
     /// <para>The object to deliver to the worker; this will be in the data field in the event delivered to the message event. This may be any JavaScript object handled by the structured clone algorithm.</para>
     /// <para>The message parameter is mandatory.If the data to be passed to the worker is unimportant, null or undefined must be passed explicitly.</para>
     /// </param>
-    public void PostMessage(object message) => serviceWorker.InvokeVoid("postMessage", message);
+    public void PostMessage(object message) => serviceWorker.InvokeVoid("postMessage", [message]);
 }

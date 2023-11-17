@@ -41,5 +41,5 @@ internal sealed class Download(IModuleManager moduleManager) : IDownload {
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask DownloadAsFile(string fileName, DotNetStreamReference fileContent, CancellationToken cancellationToken = default)
-        => moduleManager.InvokeAsync("downloadAsFile", cancellationToken, fileName, fileContent);
+        => moduleManager.InvokeAsync("downloadAsFile", cancellationToken, [fileName, fileContent]);
 }

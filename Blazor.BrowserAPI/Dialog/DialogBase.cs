@@ -26,7 +26,7 @@ internal abstract class DialogBase {
                 _ = DoAsync();
                 async Task DoAsync() {
                     IJSObjectReference dialog = await DialogJS;
-                    await dialog.InvokeVoidTrySync("activateOncancel", default, DotNetObjectReference.Create(new CancelTrigger(this)));
+                    await dialog.InvokeVoidTrySync("activateOncancel", default, [DotNetObjectReference.Create(new CancelTrigger(this))]);
                 }
             }
 
@@ -66,7 +66,7 @@ internal abstract class DialogBase {
                 _ = DoAsync();
                 async Task DoAsync() {
                     IJSObjectReference dialog = await DialogJS;
-                    await dialog.InvokeVoidTrySync("activateOnclose", default, DotNetObjectReference.Create(new CloseTrigger(this)));
+                    await dialog.InvokeVoidTrySync("activateOnclose", default, [DotNetObjectReference.Create(new CloseTrigger(this))]);
                 }
             }
 

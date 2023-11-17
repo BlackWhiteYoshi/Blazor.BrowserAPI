@@ -14,7 +14,7 @@ internal sealed class Clipboard(IModuleManager moduleManager) : IClipboard {
     /// <param name="text">The string to be written to the clipboard.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Write(string text, CancellationToken cancellationToken = default) => moduleManager.InvokeAsync("clipboardWriteText", cancellationToken, text);
+    public ValueTask Write(string text, CancellationToken cancellationToken = default) => moduleManager.InvokeAsync("clipboardWriteText", cancellationToken, [text]);
 
     /// <summary>
     /// <para>navigator.clipboard.readText();</para>

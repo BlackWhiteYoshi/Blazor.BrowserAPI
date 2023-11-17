@@ -43,5 +43,5 @@ internal sealed class Language(IModuleManager moduleManager) : ILanguage {
     /// <param name="language">language abbreviation: e.g. "en", "fr", "es", "de"</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask SetHtmlLanguage(string language, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("LanguageHtmlWrite", cancellationToken, language);
+    public ValueTask SetHtmlLanguage(string language, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("LanguageHtmlWrite", cancellationToken, [language]);
 }

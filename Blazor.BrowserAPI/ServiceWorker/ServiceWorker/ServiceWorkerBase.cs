@@ -25,7 +25,7 @@ internal abstract class ServiceWorkerBase {
     public event Action<string> OnStateChange {
         add {
             if (_onStateChange == null)
-                _ = ServiceWorkerJS.InvokeVoidTrySync("activateOnstatechange", default, DotNetObjectReference.Create(new StateChangeTrigger(this))).Preserve();
+                _ = ServiceWorkerJS.InvokeVoidTrySync("activateOnstatechange", default, [DotNetObjectReference.Create(new StateChangeTrigger(this))]).Preserve();
 
             _onStateChange += value;
         }
@@ -56,7 +56,7 @@ internal abstract class ServiceWorkerBase {
     public event Action<string> OnError {
         add {
             if (_onError == null)
-                _ = ServiceWorkerJS.InvokeVoidTrySync("activateOnerror", default, DotNetObjectReference.Create(new ErrorTrigger(this))).Preserve();
+                _ = ServiceWorkerJS.InvokeVoidTrySync("activateOnerror", default, [DotNetObjectReference.Create(new ErrorTrigger(this))]).Preserve();
 
             _onError += value;
         }

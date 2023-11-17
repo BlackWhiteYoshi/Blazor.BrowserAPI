@@ -21,6 +21,6 @@ internal sealed class LanguageInProcess(IModuleManager moduleManager) : ILanguag
     /// </summary>
     public string HtmlLanguage {
         get => moduleManager.InvokeSync<string>("LanguageHtmlRead");
-        set => moduleManager.InvokeSync("LanguageHtmlWrite", value);
+        set => moduleManager.InvokeSync("LanguageHtmlWrite", [value]);
     }
 }

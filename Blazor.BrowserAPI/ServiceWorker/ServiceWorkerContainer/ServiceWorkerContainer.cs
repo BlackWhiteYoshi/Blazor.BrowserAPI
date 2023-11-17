@@ -99,6 +99,5 @@ internal sealed class ServiceWorkerContainer(IModuleManager moduleManager) : Ser
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask StartMessages(CancellationToken cancellationToken = default)
-        => moduleManager.InvokeTrySync("serviceWorkerContainerStartMessages", cancellationToken);
+    public ValueTask StartMessages(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("serviceWorkerContainerStartMessages", cancellationToken);
 }

@@ -36,7 +36,7 @@ internal abstract class ServiceWorkerRegistrationBase {
     public event Action OnUpdateFound {
         add {
             if (_onUpdateFound == null)
-                _ = ServiceWorkerRegistrationJS.InvokeVoidTrySync("activateOnupdatefound", default, DotNetObjectReference.Create(new UpdateFoundTrigger(this))).Preserve();
+                _ = ServiceWorkerRegistrationJS.InvokeVoidTrySync("activateOnupdatefound", default, [DotNetObjectReference.Create(new UpdateFoundTrigger(this))]).Preserve();
 
             _onUpdateFound += value;
         }

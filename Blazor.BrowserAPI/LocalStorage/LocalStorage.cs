@@ -26,7 +26,7 @@ internal sealed class LocalStorage(IModuleManager moduleManager) : ILocalStorage
     /// <param name="index">An integer representing the number of the key you want to get the name of. This is a zero-based index.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string?> Key(int index, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync<string?>("localStorageKey", cancellationToken, index);
+    public ValueTask<string?> Key(int index, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync<string?>("localStorageKey", cancellationToken, [index]);
 
     /// <summary>
     /// When passed a key name, will return that key's value.
@@ -34,7 +34,7 @@ internal sealed class LocalStorage(IModuleManager moduleManager) : ILocalStorage
     /// <param name="key">A string containing the name of the key you want to retrieve the value of.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string?> GetItem(string key, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync<string?>("localStorageGetItem", cancellationToken, key);
+    public ValueTask<string?> GetItem(string key, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync<string?>("localStorageGetItem", cancellationToken, [key]);
 
     /// <summary>
     /// When passed a key name and value, will add that key to localStorage, or update that key's value if it already exists.
@@ -43,7 +43,7 @@ internal sealed class LocalStorage(IModuleManager moduleManager) : ILocalStorage
     /// <param name="value">A string containing the value you want to give the key you are creating/updating.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask SetItem(string key, string value, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("localStorageSetItem", cancellationToken, key, value);
+    public ValueTask SetItem(string key, string value, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("localStorageSetItem", cancellationToken, [key, value]);
 
     /// <summary>
     /// When passed a key name, will remove that key from localStorage.
@@ -51,7 +51,7 @@ internal sealed class LocalStorage(IModuleManager moduleManager) : ILocalStorage
     /// <param name="key">A string containing the name of the key you want to remove.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask RemoveItem(string key, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("localStorageRemoveItem", cancellationToken, key);
+    public ValueTask RemoveItem(string key, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("localStorageRemoveItem", cancellationToken, [key]);
 
     /// <summary>
     /// When invoked, will empty all keys out of localStorage.

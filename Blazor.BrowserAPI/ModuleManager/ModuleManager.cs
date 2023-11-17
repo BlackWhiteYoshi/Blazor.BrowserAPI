@@ -48,7 +48,7 @@ internal sealed class ModuleManager : IModuleManager, IDisposable, IAsyncDisposa
     }
 
 
-    TResult IModuleManager.InvokeSync<TResult>(string identifier, params object?[]? args) {
+    TResult IModuleManager.InvokeSync<TResult>(string identifier, object?[]? args = null) {
         if (!ModuleDownload.IsCompletedSuccessfully)
             throw new JSException("JS-module is not loaded yet. To make sure the module is downloaded, you can await IModuleLoader.ModuleDownload.");
 
@@ -56,12 +56,12 @@ internal sealed class ModuleManager : IModuleManager, IDisposable, IAsyncDisposa
         return module.Invoke<TResult>(identifier, args);
     }
 
-    async ValueTask<TResult> IModuleManager.InvokeTrySync<TResult>(string identifier, CancellationToken cancellationToken, params object?[]? args) {
+    async ValueTask<TResult> IModuleManager.InvokeTrySync<TResult>(string identifier, CancellationToken cancellationToken, object?[]? args = null) {
         IJSObjectReference module = await ModuleDownload;
         return await module.InvokeTrySync<TResult>(identifier, cancellationToken, args);
     }
 
-    async ValueTask<TResult> IModuleManager.InvokeAsync<TResult>(string identifier, CancellationToken cancellationToken, params object?[]? args) {
+    async ValueTask<TResult> IModuleManager.InvokeAsync<TResult>(string identifier, CancellationToken cancellationToken, object?[]? args = null) {
         IJSObjectReference module = await ModuleDownload;
         return await module.InvokeAsync<TResult>(identifier, cancellationToken, args);
     }

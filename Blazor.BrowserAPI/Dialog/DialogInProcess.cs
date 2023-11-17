@@ -21,7 +21,7 @@ internal sealed class DialogInProcess(IJSInProcessObjectReference dialogJS) : Di
     /// </summary>
     public bool Open {
         get => _dialogJS.Invoke<bool>("getOpen");
-        set => _dialogJS.InvokeVoid("setOpen", value);
+        set => _dialogJS.InvokeVoid("setOpen", [value]);
     }
 
     /// <summary>
@@ -29,7 +29,7 @@ internal sealed class DialogInProcess(IJSInProcessObjectReference dialogJS) : Di
     /// </summary>
     public string ReturnValue {
         get => _dialogJS.Invoke<string>("getReturnValue");
-        set => _dialogJS.InvokeVoid("setReturnValue", value);
+        set => _dialogJS.InvokeVoid("setReturnValue", [value]);
     }
 
 
@@ -53,5 +53,5 @@ internal sealed class DialogInProcess(IJSInProcessObjectReference dialogJS) : Di
     /// The <i>close()</i> method of the HTMLDialogElement interface closes the &lt;dialog&gt; and updates the returnValue of the dialog.
     /// </summary>
     /// <param name="returnValue">A string representing an updated value for the <see cref="ReturnValue"/> of the dialog.</param>
-    public void Close(string returnValue) => _dialogJS.InvokeVoid("close", returnValue);
+    public void Close(string returnValue) => _dialogJS.InvokeVoid("close", [returnValue]);
 }

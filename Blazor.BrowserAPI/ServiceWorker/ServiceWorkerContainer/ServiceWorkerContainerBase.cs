@@ -23,12 +23,11 @@ internal abstract class ServiceWorkerContainerBase {
     /// <param name="scriptURL">relative file path to the service worker script (e.g. "/sw.js")</param>
     /// <param name="cancellationToken"></param>
     /// <returns>true, if service worker is supported, otherwise false</returns>
-    public ValueTask<bool> Register(string scriptURL, CancellationToken cancellationToken = default)
-        => ModuleManager.InvokeAsync<bool>("serviceWorkerContainerRegister", cancellationToken, scriptURL);
+    public ValueTask<bool> Register(string scriptURL, CancellationToken cancellationToken = default) => ModuleManager.InvokeAsync<bool>("serviceWorkerContainerRegister", cancellationToken, [scriptURL]);
 
     protected async ValueTask<IJSObjectReference?> RegisterWithWorkerRegistrationBase(string scriptURL, CancellationToken cancellationToken) {
         try {
-            return await ModuleManager.InvokeAsync<IJSObjectReference>("serviceWorkerContainerRegisterWithWorkerRegistration", cancellationToken, scriptURL);
+            return await ModuleManager.InvokeAsync<IJSObjectReference>("serviceWorkerContainerRegisterWithWorkerRegistration", cancellationToken, [scriptURL]);
         }
         catch (JSException) {
             return null;
@@ -36,21 +35,19 @@ internal abstract class ServiceWorkerContainerBase {
     }
 
 
-    protected ValueTask<IJSObjectReference> DelayUntilReadyBase(CancellationToken cancellationToken)
-        => ModuleManager.InvokeAsync<IJSObjectReference>("serviceWorkerContainerReady", cancellationToken);
+    protected ValueTask<IJSObjectReference> DelayUntilReadyBase(CancellationToken cancellationToken) => ModuleManager.InvokeAsync<IJSObjectReference>("serviceWorkerContainerReady", cancellationToken);
 
 
     protected async ValueTask<IJSObjectReference?> GetRegistrationBase(string clientUrl, CancellationToken cancellationToken) {
         try {
-            return await ModuleManager.InvokeAsync<IJSObjectReference>("serviceWorkerContainerGetRegistration", cancellationToken, clientUrl);
+            return await ModuleManager.InvokeAsync<IJSObjectReference>("serviceWorkerContainerGetRegistration", cancellationToken, [clientUrl]);
         }
         catch (JSException) {
             return null;
         }
     }
 
-    protected ValueTask<IJSObjectReference[]> GetRegistrationsBase(CancellationToken cancellationToken)
-        => ModuleManager.InvokeAsync<IJSObjectReference[]>("serviceWorkerContainerGetRegistrations", cancellationToken);
+    protected ValueTask<IJSObjectReference[]> GetRegistrationsBase(CancellationToken cancellationToken) => ModuleManager.InvokeAsync<IJSObjectReference[]>("serviceWorkerContainerGetRegistrations", cancellationToken);
 
 
     #region ControllerChange event
@@ -62,7 +59,7 @@ internal abstract class ServiceWorkerContainerBase {
     public event Action OnControllerChange {
         add {
             if (_onControllerChange == null)
-                _ = ModuleManager.InvokeTrySync("serviceWorkerContainerActivateOncontrollerchange", default, DotNetObjectReference.Create(new ControllerChangeTrigger(this))).Preserve();
+                _ = ModuleManager.InvokeTrySync("serviceWorkerContainerActivateOncontrollerchange", default, [DotNetObjectReference.Create(new ControllerChangeTrigger(this))]).Preserve();
 
             _onControllerChange += value;
         }
@@ -93,7 +90,7 @@ internal abstract class ServiceWorkerContainerBase {
     public event Action<string> OnMessage {
         add {
             if (_onMessage == null)
-                _ = ModuleManager.InvokeTrySync("serviceWorkerContainerActivateOnMessage", default, DotNetObjectReference.Create(new ControllerChangeTrigger(this))).Preserve();
+                _ = ModuleManager.InvokeTrySync("serviceWorkerContainerActivateOnMessage", default, [DotNetObjectReference.Create(new ControllerChangeTrigger(this))]).Preserve();
 
             _onMessage += value;
         }

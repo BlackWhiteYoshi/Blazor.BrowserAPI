@@ -31,7 +31,7 @@ internal sealed class Dialog(Task<IJSObjectReference> dialogJS) : DialogBase, ID
     /// <param name="value">Sets the dialog state:<br/>true = open<br/>false = close</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetOpen(bool value, CancellationToken cancellationToken = default) => await (await DialogJS).InvokeVoidTrySync("setOpen", cancellationToken, value);
+    public async ValueTask SetOpen(bool value, CancellationToken cancellationToken = default) => await (await DialogJS).InvokeVoidTrySync("setOpen", cancellationToken, [value]);
 
 
     /// <summary>
@@ -52,7 +52,7 @@ internal sealed class Dialog(Task<IJSObjectReference> dialogJS) : DialogBase, ID
     /// <param name="returnValue">A string representing the updated value of the dialog.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetReturnValue(string returnValue, CancellationToken cancellationToken = default) => await (await DialogJS).InvokeVoidTrySync("setReturnValue", cancellationToken, returnValue);
+    public async ValueTask SetReturnValue(string returnValue, CancellationToken cancellationToken = default) => await (await DialogJS).InvokeVoidTrySync("setReturnValue", cancellationToken, [returnValue]);
 
 
     /// <summary>
@@ -83,5 +83,5 @@ internal sealed class Dialog(Task<IJSObjectReference> dialogJS) : DialogBase, ID
     /// <param name="returnValue">A string representing an updated value for the <see cref="ReturnValue"/> of the dialog.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask Close(string returnValue, CancellationToken cancellationToken = default) => await (await DialogJS).InvokeVoidTrySync("close", cancellationToken, returnValue);
+    public async ValueTask Close(string returnValue, CancellationToken cancellationToken = default) => await (await DialogJS).InvokeVoidTrySync("close", cancellationToken, [returnValue]);
 }

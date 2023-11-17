@@ -57,5 +57,5 @@ internal sealed class ServiceWorker(IJSObjectReference serviceWorker) : ServiceW
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask PostMessage(object message, CancellationToken cancellationToken = default) => serviceWorker.InvokeVoidTrySync("postMessage", cancellationToken, message);
+    public ValueTask PostMessage(object message, CancellationToken cancellationToken = default) => serviceWorker.InvokeVoidTrySync("postMessage", cancellationToken, [message]);
 }
