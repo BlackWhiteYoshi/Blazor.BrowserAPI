@@ -6,20 +6,13 @@ namespace BrowserAPI;
 /// The <i>console</i> object provides access to the browser's debugging console (e.g. the Web console in Firefox). The specifics of how it works varies from browser to browser, but there is a de facto set of features that are typically provided.
 /// </summary>
 [AutoInterface]
-internal sealed class ConsoleInProcess : IConsoleInProcess {
-    private readonly IModuleManager _moduleManager;
-
-    public ConsoleInProcess(IModuleManager moduleManager) {
-        _moduleManager = moduleManager;
-    }
-
-
+internal sealed class ConsoleInProcess(IModuleManager moduleManager) : IConsoleInProcess {
     /// <summary>
     /// The <i>console.assert()</i> method writes an error message to the console if the assertion is false. If the assertion is true, nothing happens.
     /// </summary>
     /// <param name="condition">Any boolean expression. If the assertion is false, the message is written to the console.</param>
     /// <param name="message">The text that will be displayed in the console.</param>
-    public void Assert(bool condition, string? message) => _moduleManager.InvokeSync("consoleAssert", condition, message);
+    public void Assert(bool condition, string? message) => moduleManager.InvokeSync("consoleAssert", condition, message);
 
     /// <summary>
     /// The <i>console.assert()</i> method writes an error message to the console if the assertion is false. If the assertion is true, nothing happens.
@@ -30,36 +23,36 @@ internal sealed class ConsoleInProcess : IConsoleInProcess {
     /// <para>or</para>
     /// <para>A JavaScript string containing zero or more substitution strings: JavaScript objects with which to replace substitution strings within msg. This parameter gives you additional control over the format of the output.</para>
     /// </param>
-    public void Assert(bool condition, object?[]? data) => _moduleManager.InvokeSync("consoleAssert", condition, data);
+    public void Assert(bool condition, object?[]? data) => moduleManager.InvokeSync("consoleAssert", condition, data);
 
     /// <summary>
     /// The <i>console.clear()</i> method clears the console if the console allows it.
     /// A graphical console, like those running on browsers, will allow it; a console displaying on the terminal, like the one running on Node, will not support it, and will have no effect (and no error).
     /// </summary>
-    public void Clear() => _moduleManager.InvokeSync("consoleClear");
+    public void Clear() => moduleManager.InvokeSync("consoleClear");
 
 
     /// <summary>
     /// The <i>console.count()</i> method logs the number of times that this particular call to count() has been called.
     /// </summary>
-    public void Count() => _moduleManager.InvokeSync("consoleCount");
+    public void Count() => moduleManager.InvokeSync("consoleCount");
 
     /// <summary>
     /// The <i>console.count()</i> method logs the number of times that this particular call to count() has been called.
     /// </summary>
     /// <param name="label">A string. If supplied, <i>count()</i> outputs the number of times it has been called with that label. If omitted, <i>count()</i> behaves as though it was called with the "default" label.</param>
-    public void Count(string label) => _moduleManager.InvokeSync("consoleCount", label);
+    public void Count(string label) => moduleManager.InvokeSync("consoleCount", label);
 
     /// <summary>
     /// The <i>console.countReset()</i> method resets counter used with <see cref="Count"/>.
     /// </summary>
-    public void CountReset() => _moduleManager.InvokeSync("consoleCountReset");
+    public void CountReset() => moduleManager.InvokeSync("consoleCountReset");
 
     /// <summary>
     /// The <i>console.countReset()</i> method resets counter used with <see cref="Count(string)"/>.
     /// </summary>
     /// <param name="label">A string. If supplied, <i>countReset()</i> resets the count for that label to 0. If omitted, <i>countReset()</i> resets the default counter to 0.</param>
-    public void CountReset(string label) => _moduleManager.InvokeSync("consoleCountReset", label);
+    public void CountReset(string label) => moduleManager.InvokeSync("consoleCountReset", label);
 
 
     /// <summary>
@@ -68,7 +61,7 @@ internal sealed class ConsoleInProcess : IConsoleInProcess {
     /// In most cases, the log level is configured within the console UI. This log level might correspond to the Debug or Verbose log level.
     /// </summary>
     /// <param name="message">The text that will be displayed in the console.</param>
-    public void Debug(string? message) => _moduleManager.InvokeSync("consoleDebug", message);
+    public void Debug(string? message) => moduleManager.InvokeSync("consoleDebug", message);
 
     /// <summary>
     /// The <i>console.debug()</i> method outputs a message to the web console at the "debug" log level.
@@ -80,14 +73,14 @@ internal sealed class ConsoleInProcess : IConsoleInProcess {
     /// <para>or</para>
     /// <para>A JavaScript string containing zero or more substitution strings: JavaScript objects with which to replace substitution strings within msg. This parameter gives you additional control over the format of the output.</para>
     /// </param>
-    public void Debug(object?[]? data) => _moduleManager.InvokeSync("consoleDebug", new object?[1] { data });
+    public void Debug(object?[]? data) => moduleManager.InvokeSync("consoleDebug", [data]);
 
     /// <summary>
     /// <para>The method <i>console.dir()</i> displays an interactive list of the properties of the specified JavaScript object. The output is presented as a hierarchical listing with disclosure triangles that let you see the contents of child objects.</para>
     /// <para>In other words, <i>console.dir()</i> is the way to see all the properties of a specified JavaScript object in console by which the developer can easily get the properties of the object.</para>
     /// </summary>
     /// <param name="item">A JavaScript object whose properties should be output.</param>
-    public void Dir(object? item) => _moduleManager.InvokeSync("consoleDir", item);
+    public void Dir(object? item) => moduleManager.InvokeSync("consoleDir", item);
 
     /// <summary>
     /// The <i>console.dirxml()</i> method displays an interactive tree of the descendant elements of the specified XML/HTML element.
@@ -95,13 +88,13 @@ internal sealed class ConsoleInProcess : IConsoleInProcess {
     /// The output is presented as a hierarchical listing of expandable nodes that let you see the contents of child nodes.
     /// </summary>
     /// <param name="item">A JavaScript object whose properties should be output.</param>
-    public void Dirxml(object? item) => _moduleManager.InvokeSync("consoleDirxml", item);
+    public void Dirxml(object? item) => moduleManager.InvokeSync("consoleDirxml", item);
 
     /// <summary>
     /// The <i>console.error()</i> method outputs an error message to the Web console.
     /// </summary>
     /// <param name="message">The text that will be displayed in the console.</param>
-    public void Error(string? message) => _moduleManager.InvokeSync("consoleError", message);
+    public void Error(string? message) => moduleManager.InvokeSync("consoleError", message);
 
     /// <summary>
     /// The <i>console.error()</i> method outputs an error message to the Web console.
@@ -111,19 +104,19 @@ internal sealed class ConsoleInProcess : IConsoleInProcess {
     /// <para>or</para>
     /// <para>A JavaScript string containing zero or more substitution strings: JavaScript objects with which to replace substitution strings within msg. This parameter gives you additional control over the format of the output.</para>
     /// </param>
-    public void Error(object?[]? data) => _moduleManager.InvokeSync("consoleError", new object?[1] { data });
+    public void Error(object?[]? data) => moduleManager.InvokeSync("consoleError", [data]);
 
 
     /// <summary>
     /// The <i>console.group()</i> method creates a new inline group in the Web console log, causing any subsequent console messages to be indented by an additional level, until <see cref="GroupEnd"/> is called.
     /// </summary>
-    public void Group() => _moduleManager.InvokeSync("consoleGroup");
+    public void Group() => moduleManager.InvokeSync("consoleGroup");
 
     /// <summary>
     /// The <i>console.group()</i> method creates a new inline group in the Web console log, causing any subsequent console messages to be indented by an additional level, until <see cref="GroupEnd"/> is called.
     /// </summary>
     /// <param name="label">Label for the group.</param>
-    public void Group(string label) => _moduleManager.InvokeSync("consoleGroup", label);
+    public void Group(string label) => moduleManager.InvokeSync("consoleGroup", label);
 
     /// <summary>
     /// <para>
@@ -132,7 +125,7 @@ internal sealed class ConsoleInProcess : IConsoleInProcess {
     /// </para>
     /// <para>Call <see cref="GroupEnd"/> to back out to the parent group.</para>
     /// </summary>
-    public void GroupCollapsed() => _moduleManager.InvokeSync("consoleGroupCollapsed");
+    public void GroupCollapsed() => moduleManager.InvokeSync("consoleGroupCollapsed");
 
     /// <summary>
     /// <para>
@@ -142,12 +135,12 @@ internal sealed class ConsoleInProcess : IConsoleInProcess {
     /// <para>Call <see cref="GroupEnd"/> to back out to the parent group.</para>
     /// </summary>
     /// <param name="label">Label for the group.</param>
-    public void GroupCollapsed(string label) => _moduleManager.InvokeSync("consoleGroupCollapsed", label);
+    public void GroupCollapsed(string label) => moduleManager.InvokeSync("consoleGroupCollapsed", label);
 
     /// <summary>
     /// The <i>console.groupEnd()</i> method exits the current inline group in the Web console.
     /// </summary>
-    public void GroupEnd() => _moduleManager.InvokeSync("consoleGroupEnd");
+    public void GroupEnd() => moduleManager.InvokeSync("consoleGroupEnd");
 
 
     /// <summary>
@@ -155,7 +148,7 @@ internal sealed class ConsoleInProcess : IConsoleInProcess {
     /// In Firefox, a small "i" icon is displayed next to these items in the Web console's log.
     /// </summary>
     /// <param name="message">The text that will be displayed in the console.</param>
-    public void Info(string? message) => _moduleManager.InvokeSync("consoleInfo", message);
+    public void Info(string? message) => moduleManager.InvokeSync("consoleInfo", message);
 
     /// <summary>
     /// The <i>console.info()</i> method outputs an informational message to the Web console.
@@ -166,14 +159,14 @@ internal sealed class ConsoleInProcess : IConsoleInProcess {
     /// <para>or</para>
     /// <para>A JavaScript string containing zero or more substitution strings: JavaScript objects with which to replace substitution strings within msg. This parameter gives you additional control over the format of the output.</para>
     /// </param>
-    public void Info(object?[]? data) => _moduleManager.InvokeSync("consoleInfo", new object?[1] { data });
+    public void Info(object?[]? data) => moduleManager.InvokeSync("consoleInfo", [data]);
 
     /// <summary>
     /// The <i>console.log()</i> method outputs a message to the web console.
     /// The message may be a single string (with optional substitution values), or it may be any one or more JavaScript objects.
     /// </summary>
     /// <param name="message">The text that will be displayed in the console.</param>
-    public void Log(string? message) => _moduleManager.InvokeSync("consoleLog", message);
+    public void Log(string? message) => moduleManager.InvokeSync("consoleLog", message);
 
     /// <summary>
     /// The <i>console.log()</i> method outputs a message to the web console.
@@ -184,7 +177,7 @@ internal sealed class ConsoleInProcess : IConsoleInProcess {
     /// <para>or</para>
     /// <para>A JavaScript string containing zero or more substitution strings: JavaScript objects with which to replace substitution strings within msg. This parameter gives you additional control over the format of the output.</para>
     /// </param>
-    public void Log(object?[]? data) => _moduleManager.InvokeSync("consoleLog", new object?[1] { data });
+    public void Log(object?[]? data) => moduleManager.InvokeSync("consoleLog", [data]);
 
     /// <summary>
     /// <para>The <i>console.table()</i> method displays tabular data as a table.</para>
@@ -197,7 +190,7 @@ internal sealed class ConsoleInProcess : IConsoleInProcess {
     /// </para>
     /// </summary>
     /// <param name="data">The data to display. This must be either an array or an object.</param>
-    public void Table(object data) => _moduleManager.InvokeSync("consoleTable", data);
+    public void Table(object data) => moduleManager.InvokeSync("consoleTable", data);
 
     /// <summary>
     /// <para>The <i>console.table()</i> method displays tabular data as a table.</para>
@@ -211,7 +204,7 @@ internal sealed class ConsoleInProcess : IConsoleInProcess {
     /// </summary>
     /// <param name="data">The data to display. This must be either an array or an object.</param>
     /// <param name="columns">An array containing the names of columns to include in the output.</param>
-    public void Table(object data, string[] columns) => _moduleManager.InvokeSync("consoleTable", data, columns);
+    public void Table(object data, string[] columns) => moduleManager.InvokeSync("consoleTable", data, columns);
 
 
     /// <summary>
@@ -219,7 +212,7 @@ internal sealed class ConsoleInProcess : IConsoleInProcess {
     /// You give each timer a unique name, and may have up to 10,000 timers running on a given page.
     /// When you call <see cref="TimeEnd"/>, the browser will output the time, in milliseconds, that elapsed since the timer was started.
     /// </summary>
-    public void Time() => _moduleManager.InvokeSync("consoleTime");
+    public void Time() => moduleManager.InvokeSync("consoleTime");
 
     /// <summary>
     /// The <i>console.time()</i> method starts a timer you can use to track how long an operation takes.
@@ -227,55 +220,55 @@ internal sealed class ConsoleInProcess : IConsoleInProcess {
     /// When you call <see cref="TimeEnd(string)"/> with the same name, the browser will output the time, in milliseconds, that elapsed since the timer was started.
     /// </summary>
     /// <param name="label">A string representing the name to give the new timer. This will identify the timer; use the same name when calling console.timeEnd() to stop the timer and get the time output to the console. If omitted, the label "default" is used.</param>
-    public void Time(string label) => _moduleManager.InvokeSync("consoleTime", label);
+    public void Time(string label) => moduleManager.InvokeSync("consoleTime", label);
 
     /// <summary>
     /// The <i>console.timeEnd()</i> stops a timer that was previously started by calling <see cref="Time"/>.
     /// </summary>
-    public void TimeEnd() => _moduleManager.InvokeSync("consoleTimeEnd");
+    public void TimeEnd() => moduleManager.InvokeSync("consoleTimeEnd");
 
     /// <summary>
     /// The <i>console.timeEnd()</i> stops a timer that was previously started by calling <see cref="Time(string)"/>.
     /// </summary>
     /// <param name="label">A string representing the name of the timer to stop. Once stopped, the elapsed time is automatically displayed in the Web console along with an indicator that the time has ended. If omitted, the label "default" is used.</param>
-    public void TimeEnd(string label) => _moduleManager.InvokeSync("consoleTimeEnd", label);
+    public void TimeEnd(string label) => moduleManager.InvokeSync("consoleTimeEnd", label);
 
     /// <summary>
     /// The <i>console.timeLog()</i> method logs the current value of a timer that was previously started by calling <see cref="Time"/>.
     /// </summary>
-    public void TimeLog() => _moduleManager.InvokeSync("consoleTimeLog");
+    public void TimeLog() => moduleManager.InvokeSync("consoleTimeLog");
 
     /// <summary>
     /// The <i>console.timeLog()</i> method logs the current value of a timer that was previously started by calling <see cref="Time(string)"/>.
     /// </summary>
     /// <param name="label">The name of the timer to log to the console. If this is omitted the label "default" is used.</param>
-    public void TimeLog(string label) => _moduleManager.InvokeSync("consoleTimeLog", label);
+    public void TimeLog(string label) => moduleManager.InvokeSync("consoleTimeLog", label);
 
     /// <summary>
     /// The <i>console.timeLog()</i> method logs the current value of a timer that was previously started by calling <see cref="Time(string)"/>.
     /// </summary>
     /// <param name="label">The name of the timer to log to the console. If this is omitted the label "default" is used.</param>
     /// <param name="data">Additional values to be logged to the console after the timer output.</param>
-    public void TimeLog(string label, object?[]? data) => _moduleManager.InvokeSync("consoleTimeLog", label, data);
+    public void TimeLog(string label, object?[]? data) => moduleManager.InvokeSync("consoleTimeLog", label, data);
 
 
     /// <summary>
     /// The <i>console.trace()</i> method outputs a stack trace to the Web console.
     /// </summary>
     /// <param name="message">The text that will be displayed in the console.</param>
-    public void Trace(string? message) => _moduleManager.InvokeSync("consoleTrace", message);
+    public void Trace(string? message) => moduleManager.InvokeSync("consoleTrace", message);
 
     /// <summary>
     /// The <i>console.trace()</i> method outputs a stack trace to the Web console.
     /// </summary>
     /// <param name="objects">Zero or more objects to be output to console along with the trace. These are assembled and formatted the same way they would be if passed to the <see cref="Log(object?[]?)"/> method.</param>
-    public void Trace(object?[]? objects) => _moduleManager.InvokeSync("consoleTrace", new object?[1] { objects });
+    public void Trace(object?[]? objects) => moduleManager.InvokeSync("consoleTrace", [objects]);
 
     /// <summary>
     /// The <i>console.warn()</i> method outputs a warning message to the Web console.
     /// </summary>
     /// <param name="message">The text that will be displayed in the console.</param>
-    public void Warn(string? message) => _moduleManager.InvokeSync("consoleWarn", message);
+    public void Warn(string? message) => moduleManager.InvokeSync("consoleWarn", message);
 
     /// <summary>
     /// The <i>console.warn()</i> method outputs a warning message to the Web console.
@@ -285,5 +278,5 @@ internal sealed class ConsoleInProcess : IConsoleInProcess {
     /// <para>or</para>
     /// <para>A JavaScript string containing zero or more substitution strings: JavaScript objects with which to replace substitution strings within msg. This parameter gives you additional control over the format of the output.</para>
     /// </param>
-    public void Warn(object?[]? data) => _moduleManager.InvokeSync("consoleWarn", new object?[1] { data });
+    public void Warn(object?[]? data) => moduleManager.InvokeSync("consoleWarn", [data]);
 }

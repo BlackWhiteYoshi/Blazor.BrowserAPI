@@ -1,30 +1,27 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI;
 
-[AutoInterface(Modifier = "public partial", Inheritance = new[] { typeof(IDisposable) })]
-internal sealed class ServiceWorkerInProcess : ServiceWorkerBase, IServiceWorkerInProcess {
-    private readonly IJSInProcessObjectReference _serviceWorker;
-    protected override IJSObjectReference ServiceWorkerJS => _serviceWorker;
-
-    public ServiceWorkerInProcess(IJSInProcessObjectReference serviceWorker) {
-        _serviceWorker = serviceWorker;
-    }
+[AutoInterface(Modifier = "public partial", Inheritance = [typeof(IDisposable)])]
+[RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
+internal sealed class ServiceWorkerInProcess(IJSInProcessObjectReference serviceWorker) : ServiceWorkerBase, IServiceWorkerInProcess {
+    protected override IJSObjectReference ServiceWorkerJS => serviceWorker;
 
     [IgnoreAutoInterface]
-    public void Dispose() => _serviceWorker.Dispose();
+    public void Dispose() => serviceWorker.Dispose();
 
 
     /// <summary>
     /// Returns the <i>ServiceWorker</i> serialized script URL defined as part of ServiceWorkerRegistration. The URL must be on the same origin as the document that registers the ServiceWorker.
     /// </summary>
-    public string ScriptUrl => _serviceWorker.Invoke<string>("scriptURL");
+    public string ScriptUrl => serviceWorker.Invoke<string>("scriptURL");
 
     /// <summary>
     /// The state read-only property of the <i>ServiceWorker</i> interface returns a string representing the current state of the service worker. It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.
     /// </summary>
-    public string State => _serviceWorker.Invoke<string>("state");
+    public string State => serviceWorker.Invoke<string>("state");
 
     /// <summary>
     /// <para>
@@ -41,5 +38,5 @@ internal sealed class ServiceWorkerInProcess : ServiceWorkerBase, IServiceWorker
     /// <para>The object to deliver to the worker; this will be in the data field in the event delivered to the message event. This may be any JavaScript object handled by the structured clone algorithm.</para>
     /// <para>The message parameter is mandatory.If the data to be passed to the worker is unimportant, null or undefined must be passed explicitly.</para>
     /// </param>
-    public void PostMessage(object message) => _serviceWorker.InvokeVoid("postMessage", message);
+    public void PostMessage(object message) => serviceWorker.InvokeVoid("postMessage", message);
 }

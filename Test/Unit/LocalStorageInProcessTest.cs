@@ -4,10 +4,7 @@ using Xunit;
 namespace BrowserAPI.UnitTest;
 
 [Collection("PlayWright")]
-public sealed class LocalStorageInProcessTest : PlayWrightTest {
-    public LocalStorageInProcessTest(PlayWrightFixture playWrightFixture) : base(playWrightFixture) { }
-
-
+public sealed class LocalStorageInProcessTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     [Theory]
     [InlineData(0)]
     [InlineData(1)]

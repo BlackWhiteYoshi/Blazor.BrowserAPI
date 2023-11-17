@@ -1,18 +1,16 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI;
 
-[AutoInterface(Modifier = "public partial", Inheritance = new[] { typeof(IAsyncDisposable) })]
-internal sealed class ServiceWorker : ServiceWorkerBase, IServiceWorker {
-    protected override IJSObjectReference ServiceWorkerJS { get; }
-
-    public ServiceWorker(IJSObjectReference serviceWorker) {
-        ServiceWorkerJS = serviceWorker;
-    }
+[AutoInterface(Modifier = "public partial", Inheritance = [typeof(IAsyncDisposable)])]
+[RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
+internal sealed class ServiceWorker(IJSObjectReference serviceWorker) : ServiceWorkerBase, IServiceWorker {
+    protected override IJSObjectReference ServiceWorkerJS => serviceWorker;
 
     [IgnoreAutoInterface]
-    public ValueTask DisposeAsync() => ServiceWorkerJS.DisposeAsync();
+    public ValueTask DisposeAsync() => serviceWorker.DisposeAsync();
 
 
     /// <summary>
@@ -25,7 +23,7 @@ internal sealed class ServiceWorker : ServiceWorkerBase, IServiceWorker {
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetScriptUrl(CancellationToken cancellationToken) => ServiceWorkerJS.InvokeTrySync<string>("scriptURL", cancellationToken);
+    public ValueTask<string> GetScriptUrl(CancellationToken cancellationToken) => serviceWorker.InvokeTrySync<string>("scriptURL", cancellationToken);
 
 
     /// <summary>
@@ -39,7 +37,7 @@ internal sealed class ServiceWorker : ServiceWorkerBase, IServiceWorker {
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetState(CancellationToken cancellationToken) => ServiceWorkerJS.InvokeTrySync<string>("state", cancellationToken);
+    public ValueTask<string> GetState(CancellationToken cancellationToken) => serviceWorker.InvokeTrySync<string>("state", cancellationToken);
 
 
     /// <summary>
@@ -59,5 +57,5 @@ internal sealed class ServiceWorker : ServiceWorkerBase, IServiceWorker {
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask PostMessage(object message, CancellationToken cancellationToken = default) => ServiceWorkerJS.InvokeVoidTrySync("postMessage", cancellationToken, message);
+    public ValueTask PostMessage(object message, CancellationToken cancellationToken = default) => serviceWorker.InvokeVoidTrySync("postMessage", cancellationToken, message);
 }

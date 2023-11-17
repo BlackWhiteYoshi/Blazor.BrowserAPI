@@ -10,6 +10,7 @@ namespace BrowserAPI;
 /// </summary>
 [AutoInterface(Name = "IServiceWorker", Modifier = "public partial")]
 [AutoInterface(Name = "IServiceWorkerInProcess", Modifier = "public partial")]
+[RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 internal abstract class ServiceWorkerBase {
     protected abstract IJSObjectReference ServiceWorkerJS { get; }
 
@@ -36,16 +37,10 @@ internal abstract class ServiceWorkerBase {
         }
     }
 
-    private sealed class StateChangeTrigger {
-        private readonly ServiceWorkerBase _serviceWorker;
-
-        [DynamicDependency(nameof(Trigger))]
-        public StateChangeTrigger(ServiceWorkerBase serviceWorker) {
-            _serviceWorker = serviceWorker;
-        }
-
+    [method: DynamicDependency(nameof(Trigger))]
+    private sealed class StateChangeTrigger(ServiceWorkerBase serviceWorker) {
         [JSInvokable]
-        public void Trigger(string state) => _serviceWorker._onStateChange?.Invoke(state);
+        public void Trigger(string state) => serviceWorker._onStateChange?.Invoke(state);
     }
 
     #endregion
@@ -73,16 +68,10 @@ internal abstract class ServiceWorkerBase {
         }
     }
 
-    private sealed class ErrorTrigger {
-        private readonly ServiceWorkerBase _serviceWorker;
-
-        [DynamicDependency(nameof(Trigger))]
-        public ErrorTrigger(ServiceWorkerBase serviceWorker) {
-            _serviceWorker = serviceWorker;
-        }
-
+    [method: DynamicDependency(nameof(Trigger))]
+    private sealed class ErrorTrigger(ServiceWorkerBase serviceWorker) {
         [JSInvokable]
-        public void Trigger(object message) => _serviceWorker._onError?.Invoke(message.ToString()!);
+        public void Trigger(object message) => serviceWorker._onError?.Invoke(message.ToString()!);
     }
 
     #endregion

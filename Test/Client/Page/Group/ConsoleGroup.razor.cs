@@ -151,7 +151,7 @@ public sealed partial class ConsoleGroup : ComponentBase {
 
     public const string BUTTON_TABLE_COLUMNS = "console-table-columns";
     private async Task Table_Columns() {
-        await Console.Table(new object[] { TEST_TABLE_COLUMNS, TEST_TABLE_COLUMNS }, Array.Empty<string>());
+        await Console.Table((string[])[TEST_TABLE_COLUMNS, TEST_TABLE_COLUMNS], []);
     }
 
 
@@ -339,7 +339,7 @@ public sealed partial class ConsoleGroup : ComponentBase {
 
     public const string BUTTON_TABLE_COLUMNS_INPROCESS = "console-table-columns-inprocess";
     private void Table_Columns_InProcess() {
-        ConsoleInProcess.Table(new object[] { TEST_TABLE_COLUMNS, TEST_TABLE_COLUMNS }, Array.Empty<string>());
+        ConsoleInProcess.Table((string[])[TEST_TABLE_COLUMNS, TEST_TABLE_COLUMNS], []);
     }
 
 

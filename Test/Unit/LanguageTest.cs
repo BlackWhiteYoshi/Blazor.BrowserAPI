@@ -4,10 +4,7 @@ using Xunit;
 
 namespace BrowserAPI.UnitTest;
 
-public sealed class LanguageTest : PlayWrightTest {
-    public LanguageTest(PlayWrightFixture playWrightFixture) : base(playWrightFixture) { }
-
-
+public sealed class LanguageTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     [Fact]
     public async Task GetBrowserLanguage_Property() {
         string expected = await Page.EvaluateAsync<string>("navigator.language;");

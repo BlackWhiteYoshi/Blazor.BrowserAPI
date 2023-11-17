@@ -11,6 +11,6 @@
 //namespace BrowserAPI.UnitTest;
 
 //[Collection("PlayWright")]
-//public sealed class ServiceWorkerInProcessTest : PlayWrightTest {
-//    public ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixture) : base(playWrightFixture) { }
+//public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
+
 //}

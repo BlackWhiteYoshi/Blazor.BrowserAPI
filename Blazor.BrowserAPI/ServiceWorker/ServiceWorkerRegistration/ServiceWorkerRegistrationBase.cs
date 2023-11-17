@@ -10,6 +10,7 @@ namespace BrowserAPI;
 /// </summary>
 [AutoInterface(Name = "IServiceWorkerRegistration", Modifier = "public partial")]
 [AutoInterface(Name = "IServiceWorkerRegistrationInProcess", Modifier = "public partial")]
+[RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 internal abstract class ServiceWorkerRegistrationBase {
     protected abstract IJSObjectReference ServiceWorkerRegistrationJS { get; }
 
@@ -47,16 +48,10 @@ internal abstract class ServiceWorkerRegistrationBase {
         }
     }
 
-    private sealed class UpdateFoundTrigger {
-        private readonly ServiceWorkerRegistrationBase _serviceWorkerRegistration;
-
-        [DynamicDependency(nameof(Trigger))]
-        public UpdateFoundTrigger(ServiceWorkerRegistrationBase serviceWorkerRegistration) {
-            _serviceWorkerRegistration = serviceWorkerRegistration;
-        }
-
+    [method: DynamicDependency(nameof(Trigger))]
+    private sealed class UpdateFoundTrigger(ServiceWorkerRegistrationBase serviceWorkerRegistration) {
         [JSInvokable]
-        public void Trigger() => _serviceWorkerRegistration._onUpdateFound?.Invoke();
+        public void Trigger() => serviceWorkerRegistration._onUpdateFound?.Invoke();
     }
 
     #endregion

@@ -4,10 +4,7 @@ using Xunit;
 
 namespace BrowserAPI.UnitTest;
 
-public sealed class DialogInProcessTest : PlayWrightTest {
-    public DialogInProcessTest(PlayWrightFixture playWrightFixture) : base(playWrightFixture) { }
-
-
+public sealed class DialogInProcessTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     [Fact]
     public async Task GetOpen_InProcess() {
         await Page.GetByTestId(DialogGroup.BUTTON_GET_OPEN_INPROCESS).ClickAsync();

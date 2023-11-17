@@ -14,11 +14,7 @@ namespace BrowserAPI;
 [AutoInterface(Name = "IServiceWorkerContainer", Modifier = "public partial")]
 [AutoInterface(Name = "IServiceWorkerContainerInProcess", Modifier = "public partial")]
 internal abstract class ServiceWorkerContainerBase {
-    protected readonly IModuleManager _moduleManager;
-
-    public ServiceWorkerContainerBase(IModuleManager moduleManager) {
-        _moduleManager = moduleManager;
-    }
+    protected abstract IModuleManager ModuleManager { get; }
 
 
     /// <summary>
@@ -28,11 +24,11 @@ internal abstract class ServiceWorkerContainerBase {
     /// <param name="cancellationToken"></param>
     /// <returns>true, if service worker is supported, otherwise false</returns>
     public ValueTask<bool> Register(string scriptURL, CancellationToken cancellationToken = default)
-        => _moduleManager.InvokeAsync<bool>("serviceWorkerContainerRegister", cancellationToken, scriptURL);
+        => ModuleManager.InvokeAsync<bool>("serviceWorkerContainerRegister", cancellationToken, scriptURL);
 
     protected async ValueTask<IJSObjectReference?> RegisterWithWorkerRegistrationBase(string scriptURL, CancellationToken cancellationToken) {
         try {
-            return await _moduleManager.InvokeAsync<IJSObjectReference>("serviceWorkerContainerRegisterWithWorkerRegistration", cancellationToken, scriptURL);
+            return await ModuleManager.InvokeAsync<IJSObjectReference>("serviceWorkerContainerRegisterWithWorkerRegistration", cancellationToken, scriptURL);
         }
         catch (JSException) {
             return null;
@@ -41,12 +37,12 @@ internal abstract class ServiceWorkerContainerBase {
 
 
     protected ValueTask<IJSObjectReference> DelayUntilReadyBase(CancellationToken cancellationToken)
-        => _moduleManager.InvokeAsync<IJSObjectReference>("serviceWorkerContainerReady", cancellationToken);
+        => ModuleManager.InvokeAsync<IJSObjectReference>("serviceWorkerContainerReady", cancellationToken);
 
 
     protected async ValueTask<IJSObjectReference?> GetRegistrationBase(string clientUrl, CancellationToken cancellationToken) {
         try {
-            return await _moduleManager.InvokeAsync<IJSObjectReference>("serviceWorkerContainerGetRegistration", cancellationToken, clientUrl);
+            return await ModuleManager.InvokeAsync<IJSObjectReference>("serviceWorkerContainerGetRegistration", cancellationToken, clientUrl);
         }
         catch (JSException) {
             return null;
@@ -54,7 +50,7 @@ internal abstract class ServiceWorkerContainerBase {
     }
 
     protected ValueTask<IJSObjectReference[]> GetRegistrationsBase(CancellationToken cancellationToken)
-        => _moduleManager.InvokeAsync<IJSObjectReference[]>("serviceWorkerContainerGetRegistrations", cancellationToken);
+        => ModuleManager.InvokeAsync<IJSObjectReference[]>("serviceWorkerContainerGetRegistrations", cancellationToken);
 
 
     #region ControllerChange event
@@ -66,7 +62,7 @@ internal abstract class ServiceWorkerContainerBase {
     public event Action OnControllerChange {
         add {
             if (_onControllerChange == null)
-                _ = _moduleManager.InvokeTrySync("serviceWorkerContainerActivateOncontrollerchange", default, DotNetObjectReference.Create(new ControllerChangeTrigger(this))).Preserve();
+                _ = ModuleManager.InvokeTrySync("serviceWorkerContainerActivateOncontrollerchange", default, DotNetObjectReference.Create(new ControllerChangeTrigger(this))).Preserve();
 
             _onControllerChange += value;
         }
@@ -74,20 +70,14 @@ internal abstract class ServiceWorkerContainerBase {
             _onControllerChange -= value;
 
             if (_onControllerChange == null)
-                _ = _moduleManager.InvokeTrySync("serviceWorkerContainerDeactivateOncontrollerchange", default).Preserve();
+                _ = ModuleManager.InvokeTrySync("serviceWorkerContainerDeactivateOncontrollerchange", default).Preserve();
         }
     }
 
-    private sealed class ControllerChangeTrigger {
-        private readonly ServiceWorkerContainerBase _serviceWorkerContainer;
-
-        [DynamicDependency(nameof(Trigger))]
-        public ControllerChangeTrigger(ServiceWorkerContainerBase serviceWorkerContainer) {
-            _serviceWorkerContainer = serviceWorkerContainer;
-        }
-
+    [method: DynamicDependency(nameof(Trigger))]
+    private sealed class ControllerChangeTrigger(ServiceWorkerContainerBase serviceWorkerContainer) {
         [JSInvokable]
-        public void Trigger() => _serviceWorkerContainer._onControllerChange?.Invoke();
+        public void Trigger() => serviceWorkerContainer._onControllerChange?.Invoke();
     }
 
     #endregion
@@ -103,7 +93,7 @@ internal abstract class ServiceWorkerContainerBase {
     public event Action<string> OnMessage {
         add {
             if (_onMessage == null)
-                _ = _moduleManager.InvokeTrySync("serviceWorkerContainerActivateOnMessage", default, DotNetObjectReference.Create(new ControllerChangeTrigger(this))).Preserve();
+                _ = ModuleManager.InvokeTrySync("serviceWorkerContainerActivateOnMessage", default, DotNetObjectReference.Create(new ControllerChangeTrigger(this))).Preserve();
 
             _onMessage += value;
         }
@@ -111,20 +101,14 @@ internal abstract class ServiceWorkerContainerBase {
             _onMessage -= value;
 
             if (_onMessage == null)
-                _ = _moduleManager.InvokeTrySync("serviceWorkerContainerDeactivateOnMessage", default).Preserve();
+                _ = ModuleManager.InvokeTrySync("serviceWorkerContainerDeactivateOnMessage", default).Preserve();
         }
     }
 
-    private sealed class MessageTrigger {
-        private readonly ServiceWorkerContainerBase _serviceWorkerContainer;
-
-        [DynamicDependency(nameof(Trigger))]
-        public MessageTrigger(ServiceWorkerContainerBase serviceWorkerContainer) {
-            _serviceWorkerContainer = serviceWorkerContainer;
-        }
-
+    [method: DynamicDependency(nameof(Trigger))]
+    private sealed class MessageTrigger(ServiceWorkerContainerBase serviceWorkerContainer) {
         [JSInvokable]
-        public void Trigger(object message) => _serviceWorkerContainer._onMessage?.Invoke(message.ToString()!);
+        public void Trigger(object message) => serviceWorkerContainer._onMessage?.Invoke(message.ToString()!);
     }
 
     #endregion

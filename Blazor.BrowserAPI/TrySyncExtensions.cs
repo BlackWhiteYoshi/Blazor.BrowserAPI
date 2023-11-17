@@ -1,4 +1,5 @@
 ﻿using Microsoft.JSInterop;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI;
 
@@ -6,6 +7,7 @@ namespace BrowserAPI;
 /// <para>Extensions for <see cref="IJSRuntime"/> and <see cref="IJSObjectReference"/>.</para>
 /// <para>This class contains <i>TrySync</i>-methods, which will use <see cref="IJSInProcessRuntime.Invoke{TResult}(string, object?[]?)"/> if possible, otherwise <see cref="IJSRuntime.InvokeAsync{TResult}(string, object?[]?)"/>.</para>
 /// </summary>
+[RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public static class TrySyncExtensions {
     /// <summary>
     /// <para>Invokes the specified JavaScript function synchronously if possible, otherwise asynchronously.</para>

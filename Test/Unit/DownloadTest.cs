@@ -4,10 +4,7 @@ using IDownloadData = Microsoft.Playwright.IDownload;
 
 namespace BrowserAPI.UnitTest;
 
-public sealed class DownloadTest : PlayWrightTest {
-    public DownloadTest(PlayWrightFixture playWrightFixture) : base(playWrightFixture) { }
-
-
+public sealed class DownloadTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     [Fact]
     public async Task Download() {
         Task<IDownloadData> downloadTask = Page.WaitForDownloadAsync();

@@ -5,12 +5,10 @@ using Xunit;
 
 namespace BrowserAPI.UnitTest;
 
-public sealed class ConsoleTest : PlayWrightTest {
+public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     private string? assertValue = null;
     private bool assertRegex = false;
     private bool assertSuccess = false;
-
-    public ConsoleTest(PlayWrightFixture playWrightFixture) : base(playWrightFixture) { }
 
     public override async Task InitializeAsync() {
         await base.InitializeAsync();

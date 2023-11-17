@@ -6,14 +6,7 @@ namespace BrowserAPI;
 /// The <i>console</i> object provides access to the browser's debugging console (e.g. the Web console in Firefox). The specifics of how it works varies from browser to browser, but there is a de facto set of features that are typically provided.
 /// </summary>
 [AutoInterface]
-internal sealed class Console : IConsole {
-    private readonly IModuleManager _moduleManager;
-
-    public Console(IModuleManager moduleManager) {
-        _moduleManager = moduleManager;
-    }
-
-
+internal sealed class Console(IModuleManager moduleManager) : IConsole {
     /// <summary>
     /// The <i>console.assert()</i> method writes an error message to the console if the assertion is false. If the assertion is true, nothing happens.
     /// </summary>
@@ -21,7 +14,7 @@ internal sealed class Console : IConsole {
     /// <param name="message">The text that will be displayed in the console.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Assert(bool condition, string? message, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleAssert", cancellationToken, condition, message);
+    public ValueTask Assert(bool condition, string? message, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleAssert", cancellationToken, condition, message);
 
     /// <summary>
     /// The <i>console.assert()</i> method writes an error message to the console if the assertion is false. If the assertion is true, nothing happens.
@@ -34,7 +27,7 @@ internal sealed class Console : IConsole {
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Assert(bool condition, object?[]? data, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleAssert", cancellationToken, condition, data);
+    public ValueTask Assert(bool condition, object?[]? data, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleAssert", cancellationToken, condition, data);
 
     /// <summary>
     /// The <i>console.clear()</i> method clears the console if the console allows it.
@@ -42,7 +35,7 @@ internal sealed class Console : IConsole {
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Clear(CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleClear", cancellationToken);
+    public ValueTask Clear(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleClear", cancellationToken);
 
 
     /// <summary>
@@ -50,7 +43,7 @@ internal sealed class Console : IConsole {
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Count(CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleCount", cancellationToken);
+    public ValueTask Count(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleCount", cancellationToken);
 
     /// <summary>
     /// The <i>console.count()</i> method logs the number of times that this particular call to count() has been called.
@@ -59,14 +52,14 @@ internal sealed class Console : IConsole {
     /// If omitted, <i>count()</i> behaves as though it was called with the "default" label.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Count(string label, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleCount", cancellationToken, label);
+    public ValueTask Count(string label, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleCount", cancellationToken, label);
 
     /// <summary>
     /// The <i>console.countReset()</i> method resets counter used with <see cref="Count"/>.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask CountReset(CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleCountReset", cancellationToken);
+    public ValueTask CountReset(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleCountReset", cancellationToken);
 
     /// <summary>
     /// The <i>console.countReset()</i> method resets counter used with <see cref="Count(string)"/>.
@@ -75,7 +68,7 @@ internal sealed class Console : IConsole {
     /// If omitted, <i>countReset()</i> resets the default counter to 0.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask CountReset(string label, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleCountReset", cancellationToken, label);
+    public ValueTask CountReset(string label, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleCountReset", cancellationToken, label);
 
 
     /// <summary>
@@ -86,7 +79,7 @@ internal sealed class Console : IConsole {
     /// <param name="message">The text that will be displayed in the console.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Debug(string? message, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleDebug", cancellationToken, message);
+    public ValueTask Debug(string? message, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleDebug", cancellationToken, message);
 
     /// <summary>
     /// The <i>console.debug()</i> method outputs a message to the web console at the "debug" log level.
@@ -100,7 +93,7 @@ internal sealed class Console : IConsole {
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Debug(object?[]? data, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleDebug", cancellationToken, new object?[1] { data });
+    public ValueTask Debug(object?[]? data, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleDebug", cancellationToken, [data]);
 
     /// <summary>
     /// <para>The method <i>console.dir()</i> displays an interactive list of the properties of the specified JavaScript object. The output is presented as a hierarchical listing with disclosure triangles that let you see the contents of child objects.</para>
@@ -109,7 +102,7 @@ internal sealed class Console : IConsole {
     /// <param name="item">A JavaScript object whose properties should be output.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Dir(object? item, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleDir", cancellationToken, item);
+    public ValueTask Dir(object? item, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleDir", cancellationToken, item);
 
     /// <summary>
     /// The <i>console.dirxml()</i> method displays an interactive tree of the descendant elements of the specified XML/HTML element.
@@ -119,7 +112,7 @@ internal sealed class Console : IConsole {
     /// <param name="item">A JavaScript object whose properties should be output.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Dirxml(object? item, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleDirxml", cancellationToken, item);
+    public ValueTask Dirxml(object? item, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleDirxml", cancellationToken, item);
 
     /// <summary>
     /// The <i>console.error()</i> method outputs an error message to the Web console.
@@ -127,7 +120,7 @@ internal sealed class Console : IConsole {
     /// <param name="message">The text that will be displayed in the console.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Error(string? message, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleError", cancellationToken, message);
+    public ValueTask Error(string? message, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleError", cancellationToken, message);
 
     /// <summary>
     /// The <i>console.error()</i> method outputs an error message to the Web console.
@@ -139,7 +132,7 @@ internal sealed class Console : IConsole {
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Error(object?[]? data, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleError", cancellationToken, new object?[1] { data });
+    public ValueTask Error(object?[]? data, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleError", cancellationToken, [data]);
 
 
     /// <summary>
@@ -147,7 +140,7 @@ internal sealed class Console : IConsole {
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Group(CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleGroup", cancellationToken);
+    public ValueTask Group(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleGroup", cancellationToken);
 
     /// <summary>
     /// The <i>console.group()</i> method creates a new inline group in the Web console log, causing any subsequent console messages to be indented by an additional level, until <see cref="GroupEnd"/> is called.
@@ -155,7 +148,7 @@ internal sealed class Console : IConsole {
     /// <param name="label">Label for the group.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Group(string label, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleGroup", cancellationToken, label);
+    public ValueTask Group(string label, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleGroup", cancellationToken, label);
 
     /// <summary>
     /// <para>
@@ -166,7 +159,7 @@ internal sealed class Console : IConsole {
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask GroupCollapsed(CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleGroupCollapsed", cancellationToken);
+    public ValueTask GroupCollapsed(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleGroupCollapsed", cancellationToken);
 
     /// <summary>
     /// <para>
@@ -178,14 +171,14 @@ internal sealed class Console : IConsole {
     /// <param name="label">Label for the group.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask GroupCollapsed(string label, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleGroupCollapsed", cancellationToken, label);
+    public ValueTask GroupCollapsed(string label, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleGroupCollapsed", cancellationToken, label);
 
     /// <summary>
     /// The <i>console.groupEnd()</i> method exits the current inline group in the Web console.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask GroupEnd(CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleGroupEnd", cancellationToken);
+    public ValueTask GroupEnd(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleGroupEnd", cancellationToken);
 
 
     /// <summary>
@@ -195,7 +188,7 @@ internal sealed class Console : IConsole {
     /// <param name="message">The text that will be displayed in the console.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Info(string? message, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleInfo", cancellationToken, message);
+    public ValueTask Info(string? message, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleInfo", cancellationToken, message);
 
     /// <summary>
     /// The <i>console.info()</i> method outputs an informational message to the Web console.
@@ -208,7 +201,7 @@ internal sealed class Console : IConsole {
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Info(object?[]? data, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleInfo", cancellationToken, new object?[1] { data });
+    public ValueTask Info(object?[]? data, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleInfo", cancellationToken, [data]);
 
     /// <summary>
     /// The <i>console.log()</i> method outputs a message to the web console.
@@ -217,7 +210,7 @@ internal sealed class Console : IConsole {
     /// <param name="message">The text that will be displayed in the console.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Log(string? message, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleLog", cancellationToken, message);
+    public ValueTask Log(string? message, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleLog", cancellationToken, message);
 
     /// <summary>
     /// The <i>console.log()</i> method outputs a message to the web console.
@@ -230,7 +223,7 @@ internal sealed class Console : IConsole {
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Log(object?[]? data, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleLog", cancellationToken, new object?[1] { data });
+    public ValueTask Log(object?[]? data, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleLog", cancellationToken, [data]);
 
     /// <summary>
     /// <para>The <i>console.table()</i> method displays tabular data as a table.</para>
@@ -245,7 +238,7 @@ internal sealed class Console : IConsole {
     /// <param name="data">The data to display. This must be either an array or an object.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Table(object data, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleTable", cancellationToken, data);
+    public ValueTask Table(object data, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleTable", cancellationToken, data);
 
     /// <summary>
     /// <para>The <i>console.table()</i> method displays tabular data as a table.</para>
@@ -261,7 +254,7 @@ internal sealed class Console : IConsole {
     /// <param name="columns">An array containing the names of columns to include in the output.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Table(object data, string[] columns, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleTable", cancellationToken, data, columns);
+    public ValueTask Table(object data, string[] columns, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleTable", cancellationToken, data, columns);
 
 
     /// <summary>
@@ -271,7 +264,7 @@ internal sealed class Console : IConsole {
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Time(CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleTime", cancellationToken);
+    public ValueTask Time(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleTime", cancellationToken);
 
     /// <summary>
     /// The <i>console.time()</i> method starts a timer you can use to track how long an operation takes.
@@ -285,14 +278,14 @@ internal sealed class Console : IConsole {
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Time(string label, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleTime", cancellationToken, label);
+    public ValueTask Time(string label, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleTime", cancellationToken, label);
 
     /// <summary>
     /// The <i>console.timeEnd()</i> stops a timer that was previously started by calling <see cref="Time"/>.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask TimeEnd(CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleTimeEnd", cancellationToken);
+    public ValueTask TimeEnd(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleTimeEnd", cancellationToken);
 
     /// <summary>
     /// The <i>console.timeEnd()</i> stops a timer that was previously started by calling <see cref="Time(string)"/>.
@@ -304,14 +297,14 @@ internal sealed class Console : IConsole {
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask TimeEnd(string label, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleTimeEnd", cancellationToken, label);
+    public ValueTask TimeEnd(string label, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleTimeEnd", cancellationToken, label);
 
     /// <summary>
     /// The <i>console.timeLog()</i> method logs the current value of a timer that was previously started by calling <see cref="Time"/>.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask TimeLog(CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleTimeLog", cancellationToken);
+    public ValueTask TimeLog(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleTimeLog", cancellationToken);
 
     /// <summary>
     /// The <i>console.timeLog()</i> method logs the current value of a timer that was previously started by calling <see cref="Time(string)"/>.
@@ -319,7 +312,7 @@ internal sealed class Console : IConsole {
     /// <param name="label">The name of the timer to log to the console. If this is omitted the label "default" is used.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask TimeLog(string label, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleTimeLog", cancellationToken, label);
+    public ValueTask TimeLog(string label, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleTimeLog", cancellationToken, label);
 
     /// <summary>
     /// The <i>console.timeLog()</i> method logs the current value of a timer that was previously started by calling <see cref="Time(string)"/>.
@@ -328,7 +321,7 @@ internal sealed class Console : IConsole {
     /// <param name="data">Additional values to be logged to the console after the timer output.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask TimeLog(string label, object?[]? data, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleTimeLog", cancellationToken, label, data);
+    public ValueTask TimeLog(string label, object?[]? data, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleTimeLog", cancellationToken, label, data);
 
 
     /// <summary>
@@ -337,7 +330,7 @@ internal sealed class Console : IConsole {
     /// <param name="message">The text that will be displayed in the console.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Trace(string? message, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleTrace", cancellationToken, message);
+    public ValueTask Trace(string? message, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleTrace", cancellationToken, message);
 
     /// <summary>
     /// The <i>console.trace()</i> method outputs a stack trace to the Web console.
@@ -348,7 +341,7 @@ internal sealed class Console : IConsole {
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Trace(object?[]? objects, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleTrace", cancellationToken, new object?[1] { objects });
+    public ValueTask Trace(object?[]? objects, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleTrace", cancellationToken, [objects]);
 
     /// <summary>
     /// The <i>console.warn()</i> method outputs a warning message to the Web console.
@@ -356,7 +349,7 @@ internal sealed class Console : IConsole {
     /// <param name="message">The text that will be displayed in the console.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Warn(string? message, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleWarn", cancellationToken, message);
+    public ValueTask Warn(string? message, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleWarn", cancellationToken, message);
 
     /// <summary>
     /// The <i>console.warn()</i> method outputs a warning message to the Web console.
@@ -368,5 +361,5 @@ internal sealed class Console : IConsole {
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Warn(object?[]? data, CancellationToken cancellationToken = default) => _moduleManager.InvokeTrySync("consoleWarn", cancellationToken, new object?[1] { data });
+    public ValueTask Warn(object?[]? data, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleWarn", cancellationToken, [data]);
 }

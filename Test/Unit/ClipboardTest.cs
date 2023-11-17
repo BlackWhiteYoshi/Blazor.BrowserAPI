@@ -3,12 +3,10 @@ using Xunit;
 
 namespace BrowserAPI.UnitTest;
 
-public sealed class ClipboardTest : PlayWrightTest {
-    public ClipboardTest(PlayWrightFixture playWrightFixture) : base(playWrightFixture) { }
-
+public sealed class ClipboardTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     public override async Task InitializeAsync() {
         await base.InitializeAsync();
-        await Context.GrantPermissionsAsync(new string[] { "clipboard-read", "clipboard-write" });
+        await Context.GrantPermissionsAsync(["clipboard-read", "clipboard-write"]);
     }
 
 

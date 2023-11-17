@@ -1,11 +1,13 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI;
 
 [AutoInterface(Modifier = "public partial")]
-internal sealed class ServiceWorkerContainerInProcess : ServiceWorkerContainerBase, IServiceWorkerContainerInProcess {
-    public ServiceWorkerContainerInProcess(IModuleManager moduleManager) : base(moduleManager) { }
+[RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
+internal sealed class ServiceWorkerContainerInProcess(IModuleManager moduleManager) : ServiceWorkerContainerBase, IServiceWorkerContainerInProcess {
+    protected override IModuleManager ModuleManager => moduleManager;
 
 
     /// <summary>
@@ -70,7 +72,7 @@ internal sealed class ServiceWorkerContainerInProcess : ServiceWorkerContainerBa
     public IServiceWorkerInProcess? Controller {
         get {
             try {
-                IJSInProcessObjectReference serviceWorker = _moduleManager.InvokeSync<IJSInProcessObjectReference>("serviceWorkerContainerController");
+                IJSInProcessObjectReference serviceWorker = moduleManager.InvokeSync<IJSInProcessObjectReference>("serviceWorkerContainerController");
                 return new ServiceWorkerInProcess(serviceWorker);
             }
             catch (JSException) {
@@ -83,5 +85,5 @@ internal sealed class ServiceWorkerContainerInProcess : ServiceWorkerContainerBa
     /// <summary>
     /// The <i>startMessages()</i> method of the ServiceWorkerContainer interface explicitly starts the flow of messages being dispatched from a service worker to pages under its control (e.g. sent via Client.postMessage()). This can be used to react to sent messages earlier, even before that page's content has finished loading.
     /// </summary>
-    public void StartMessages() => _moduleManager.InvokeSync("serviceWorkerContainerStartMessages");
+    public void StartMessages() => moduleManager.InvokeSync("serviceWorkerContainerStartMessages");
 }

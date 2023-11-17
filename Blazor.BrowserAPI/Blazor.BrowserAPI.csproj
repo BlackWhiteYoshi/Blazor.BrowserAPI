@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>12</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     
@@ -24,6 +25,7 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 
     <Version>0.1.0</Version>
+    <IsAotCompatible>true</IsAotCompatible>
     <DebugType>embedded</DebugType>
   </PropertyGroup>
 
@@ -43,8 +45,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.11" />
-    <PackageReference Include="AutoInterface" Version="1.2.3" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+    <PackageReference Include="AutoInterface" Version="1.2.4" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>

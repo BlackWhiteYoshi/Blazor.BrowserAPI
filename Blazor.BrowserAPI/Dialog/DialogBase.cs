@@ -9,6 +9,7 @@ namespace BrowserAPI;
 /// </summary>
 [AutoInterface(Name = "IDialog", Modifier = "public partial")]
 [AutoInterface(Name = "IDialogInProcess", Modifier = "public partial")]
+[RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 internal abstract class DialogBase {
     protected abstract Task<IJSObjectReference> DialogJS { get; }
 
@@ -44,16 +45,10 @@ internal abstract class DialogBase {
         }
     }
 
-    private sealed class CancelTrigger {
-        private readonly DialogBase _dialogBase;
-
-        [DynamicDependency(nameof(Trigger))]
-        public CancelTrigger(DialogBase dialogBase) {
-            _dialogBase = dialogBase;
-        }
-
+    [method: DynamicDependency(nameof(Trigger))]
+    private sealed class CancelTrigger(DialogBase dialogBase) {
         [JSInvokable]
-        public void Trigger() => _dialogBase._onCancel?.Invoke();
+        public void Trigger() => dialogBase._onCancel?.Invoke();
     }
 
     #endregion
@@ -90,16 +85,10 @@ internal abstract class DialogBase {
         }
     }
 
-    private sealed class CloseTrigger {
-        private readonly DialogBase _dialogBase;
-
-        [DynamicDependency(nameof(Trigger))]
-        public CloseTrigger(DialogBase dialogBase) {
-            _dialogBase = dialogBase;
-        }
-
+    [method: DynamicDependency(nameof(Trigger))]
+    private sealed class CloseTrigger(DialogBase dialogBase) {
         [JSInvokable]
-        public void Trigger() => _dialogBase._onClose?.Invoke();
+        public void Trigger() => dialogBase._onClose?.Invoke();
     }
 
     #endregion

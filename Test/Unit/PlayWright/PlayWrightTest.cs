@@ -4,7 +4,7 @@ using Xunit;
 namespace BrowserAPI.UnitTest;
 
 [Collection("PlayWright")]
-public abstract class PlayWrightTest : IAsyncLifetime {
+public abstract class PlayWrightTest(PlayWrightFixture playWrightFixture) : IAsyncLifetime {
     /// <summary>
     /// BrowserContext
     /// </summary>
@@ -14,15 +14,10 @@ public abstract class PlayWrightTest : IAsyncLifetime {
     /// BrowserPage
     /// </summary>
     protected IPage Page { get; private set; } = null!;
-    
-
-    private readonly PlayWrightFixture _playWrightFixture;
-
-    public PlayWrightTest(PlayWrightFixture playWrightFixture) => _playWrightFixture = playWrightFixture;
 
 
     public virtual async Task InitializeAsync() {
-        Context = await _playWrightFixture.NewBrowserContext();
+        Context = await playWrightFixture.NewBrowserContext();
         Page = await Context.NewPageAsync();
         await Page.GotoAsync("/");
     }

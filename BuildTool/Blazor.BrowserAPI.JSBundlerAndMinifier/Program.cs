@@ -12,7 +12,7 @@ public static class Program {
         };
         const string outputPath = "wwwroot/BrowserAPI.js";
 
-        List<string> jsFilePaths = new();
+        List<string> jsFilePaths = [];
         {
             string[] directories = Directory.GetDirectories(inputPath);
             foreach (string path in directories) {

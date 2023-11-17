@@ -1,4 +1,5 @@
 using Microsoft.JSInterop;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI;
 
@@ -9,6 +10,7 @@ namespace BrowserAPI;
 /// </para>
 /// <para>It contains a get-property to retrieve and observe the state of the module download.</para>
 /// </summary>
+[RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 internal sealed class ModuleManager : IModuleManager, IDisposable, IAsyncDisposable {
     /// <summary>
     /// A Task that represents the download of the module. If this tasks finishes, the download finishes.

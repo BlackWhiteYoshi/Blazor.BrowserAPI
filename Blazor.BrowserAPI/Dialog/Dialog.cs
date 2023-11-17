@@ -1,15 +1,13 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI;
 
-[AutoInterface(Modifier = "public partial", Inheritance = new[] { typeof(IAsyncDisposable) })]
-internal sealed class Dialog : DialogBase, IDialog {
-    protected override Task<IJSObjectReference> DialogJS { get; }
-
-    public Dialog(Task<IJSObjectReference> dialogJS) {
-        DialogJS = dialogJS;
-    }
+[AutoInterface(Modifier = "public partial", Inheritance = [typeof(IAsyncDisposable)])]
+[RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
+internal sealed class Dialog(Task<IJSObjectReference> dialogJS) : DialogBase, IDialog {
+    protected override Task<IJSObjectReference> DialogJS { get; } = dialogJS;
 
     [IgnoreAutoInterface]
     public async ValueTask DisposeAsync() => await (await DialogJS).DisposeAsync();

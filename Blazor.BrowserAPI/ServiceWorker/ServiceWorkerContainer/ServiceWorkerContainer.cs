@@ -1,11 +1,13 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI;
 
 [AutoInterface(Modifier = "public partial")]
-internal sealed class ServiceWorkerContainer : ServiceWorkerContainerBase, IServiceWorkerContainer {
-    public ServiceWorkerContainer(IModuleManager moduleManager) : base(moduleManager) { }
+[RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
+internal sealed class ServiceWorkerContainer(IModuleManager moduleManager) : ServiceWorkerContainerBase, IServiceWorkerContainer {
+    protected override IModuleManager ModuleManager => moduleManager;
 
 
     /// <summary>
@@ -82,7 +84,7 @@ internal sealed class ServiceWorkerContainer : ServiceWorkerContainerBase, IServ
     /// <returns></returns>
     public async ValueTask<IServiceWorker?> GetController(CancellationToken cancellationToken) {
         try {
-            IJSObjectReference serviceWorker = await _moduleManager.InvokeTrySync<IJSObjectReference>("serviceWorkerContainerController", cancellationToken);
+            IJSObjectReference serviceWorker = await moduleManager.InvokeTrySync<IJSObjectReference>("serviceWorkerContainerController", cancellationToken);
             return new ServiceWorker(serviceWorker);
         }
         catch (JSException) {
@@ -98,5 +100,5 @@ internal sealed class ServiceWorkerContainer : ServiceWorkerContainerBase, IServ
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask StartMessages(CancellationToken cancellationToken = default)
-        => _moduleManager.InvokeTrySync("serviceWorkerContainerStartMessages", cancellationToken);
+        => moduleManager.InvokeTrySync("serviceWorkerContainerStartMessages", cancellationToken);
 }

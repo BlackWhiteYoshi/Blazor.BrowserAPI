@@ -1,19 +1,16 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI;
 
-[AutoInterface(Modifier = "public partial", Inheritance = new[] { typeof(IDisposable) })]
-internal sealed class ServiceWorkerRegistrationInProcess : ServiceWorkerRegistrationBase, IServiceWorkerRegistrationInProcess {
-    private readonly IJSInProcessObjectReference _serviceWorkerRegistration;
-    protected override IJSObjectReference ServiceWorkerRegistrationJS => _serviceWorkerRegistration;
-
-    public ServiceWorkerRegistrationInProcess(IJSInProcessObjectReference serviceWorkerRegistration) {
-        _serviceWorkerRegistration = serviceWorkerRegistration;
-    }
+[AutoInterface(Modifier = "public partial", Inheritance = [typeof(IDisposable)])]
+[RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
+internal sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReference serviceWorkerRegistration) : ServiceWorkerRegistrationBase, IServiceWorkerRegistrationInProcess {
+    protected override IJSObjectReference ServiceWorkerRegistrationJS => serviceWorkerRegistration;
 
     [IgnoreAutoInterface]
-    public void Dispose() => _serviceWorkerRegistration.Dispose();
+    public void Dispose() => serviceWorkerRegistration.Dispose();
 
 
     /// <summary>
@@ -22,7 +19,7 @@ internal sealed class ServiceWorkerRegistrationInProcess : ServiceWorkerRegistra
     public IServiceWorkerInProcess? Active {
         get {
             try {
-                IJSInProcessObjectReference serviceWorker = _serviceWorkerRegistration.Invoke<IJSInProcessObjectReference>("active");
+                IJSInProcessObjectReference serviceWorker = serviceWorkerRegistration.Invoke<IJSInProcessObjectReference>("active");
                 return new ServiceWorkerInProcess(serviceWorker);
             }
             catch (JSException) {
@@ -37,7 +34,7 @@ internal sealed class ServiceWorkerRegistrationInProcess : ServiceWorkerRegistra
     public IServiceWorkerInProcess? Installing {
         get {
             try {
-                IJSInProcessObjectReference serviceWorker = _serviceWorkerRegistration.Invoke<IJSInProcessObjectReference>("installing");
+                IJSInProcessObjectReference serviceWorker = serviceWorkerRegistration.Invoke<IJSInProcessObjectReference>("installing");
                 return new ServiceWorkerInProcess(serviceWorker);
             }
             catch (JSException) {
@@ -52,7 +49,7 @@ internal sealed class ServiceWorkerRegistrationInProcess : ServiceWorkerRegistra
     public IServiceWorkerInProcess? Waiting {
         get {
             try {
-                IJSInProcessObjectReference serviceWorker = _serviceWorkerRegistration.Invoke<IJSInProcessObjectReference>("waiting");
+                IJSInProcessObjectReference serviceWorker = serviceWorkerRegistration.Invoke<IJSInProcessObjectReference>("waiting");
                 return new ServiceWorkerInProcess(serviceWorker);
             }
             catch (JSException) {
@@ -65,7 +62,7 @@ internal sealed class ServiceWorkerRegistrationInProcess : ServiceWorkerRegistra
     /// <summary>
     /// The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration. The service worker must be on the same origin as the document that registers the ServiceWorker.
     /// </summary>
-    public string Scope => _serviceWorkerRegistration.Invoke<string>("scope");
+    public string Scope => serviceWorkerRegistration.Invoke<string>("scope");
 
     /// <summary>
     /// <para>The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register. Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.</para>
@@ -76,7 +73,7 @@ internal sealed class ServiceWorkerRegistrationInProcess : ServiceWorkerRegistra
     /// - <b>none</b>: meaning the HTTP cache is never consulted.
     /// </para>
     /// </summary>
-    public string UpdateViaCache => _serviceWorkerRegistration.Invoke<string>("updateViaCache");
+    public string UpdateViaCache => serviceWorkerRegistration.Invoke<string>("updateViaCache");
 
 
     /// <summary>

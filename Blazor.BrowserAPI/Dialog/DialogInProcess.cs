@@ -1,19 +1,16 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI;
 
-[AutoInterface(Modifier = "public partial", Inheritance = new[] { typeof(IDisposable) })]
-internal sealed class DialogInProcess : DialogBase, IDialogInProcess {
-    private readonly IJSInProcessObjectReference _dialogJS;
+[AutoInterface(Modifier = "public partial", Inheritance = [typeof(IDisposable)])]
+[RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
+internal sealed class DialogInProcess(IJSInProcessObjectReference dialogJS) : DialogBase, IDialogInProcess {
+    private readonly IJSInProcessObjectReference _dialogJS = dialogJS;
 
-    private readonly Task<IJSObjectReference> dialogJSTask;
+    private readonly Task<IJSObjectReference> dialogJSTask = Task.FromResult<IJSObjectReference>(dialogJS);
     protected override Task<IJSObjectReference> DialogJS => dialogJSTask;
-
-    public DialogInProcess(IJSInProcessObjectReference dialogJS) {
-        _dialogJS = dialogJS;
-        dialogJSTask = Task.FromResult<IJSObjectReference>(dialogJS);
-    }
 
     [IgnoreAutoInterface]
     public void Dispose() => _dialogJS.Dispose();

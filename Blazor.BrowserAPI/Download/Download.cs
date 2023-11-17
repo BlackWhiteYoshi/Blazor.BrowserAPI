@@ -9,14 +9,7 @@ namespace BrowserAPI;
 /// <para>For file upload use the <see cref="Microsoft.AspNetCore.Components.Forms.InputFile">InputFile</see> component.</para>
 /// </summary>
 [AutoInterface]
-internal sealed class Download : IDownload {
-    private readonly IModuleManager _moduleManager;
-
-    public Download(IModuleManager moduleManager) {
-        _moduleManager = moduleManager;
-    }
-
-
+internal sealed class Download(IModuleManager moduleManager) : IDownload {
     /// <summary>
     /// Triggers a download by adding an &lt;a&gt;-element to the document and simulate a click on it.
     /// </summary>
@@ -48,5 +41,5 @@ internal sealed class Download : IDownload {
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask DownloadAsFile(string fileName, DotNetStreamReference fileContent, CancellationToken cancellationToken = default)
-        => _moduleManager.InvokeAsync("downloadAsFile", cancellationToken, fileName, fileContent);
+        => moduleManager.InvokeAsync("downloadAsFile", cancellationToken, fileName, fileContent);
 }

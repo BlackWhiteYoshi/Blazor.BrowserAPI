@@ -1,18 +1,16 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI;
 
-[AutoInterface(Modifier = "public partial", Inheritance = new[] { typeof(IAsyncDisposable) })]
-internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase, IServiceWorkerRegistration {
-    protected override IJSObjectReference ServiceWorkerRegistrationJS { get; }
-
-    public ServiceWorkerRegistration(IJSObjectReference serviceWorkerRegistration) {
-        ServiceWorkerRegistrationJS = serviceWorkerRegistration;
-    }
+[AutoInterface(Modifier = "public partial", Inheritance = [typeof(IAsyncDisposable)])]
+[RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
+internal sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRegistration) : ServiceWorkerRegistrationBase, IServiceWorkerRegistration {
+    protected override IJSObjectReference ServiceWorkerRegistrationJS => serviceWorkerRegistration;
 
     [IgnoreAutoInterface]
-    public ValueTask DisposeAsync() => ServiceWorkerRegistrationJS.DisposeAsync();
+    public ValueTask DisposeAsync() => serviceWorkerRegistration.DisposeAsync();
 
 
     /// <summary>
@@ -27,7 +25,7 @@ internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase,
     /// <returns></returns>
     public async ValueTask<IServiceWorker?> GetActive(CancellationToken cancellationToken) {
         try {
-            IJSObjectReference serviceWorker = await ServiceWorkerRegistrationJS.InvokeTrySync<IJSObjectReference>("active", cancellationToken);
+            IJSObjectReference serviceWorker = await serviceWorkerRegistration.InvokeTrySync<IJSObjectReference>("active", cancellationToken);
             return new ServiceWorker(serviceWorker);
         }
         catch (JSException) {
@@ -48,7 +46,7 @@ internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase,
     /// <returns></returns>
     public async ValueTask<IServiceWorker?> GetInstalling(CancellationToken cancellationToken) {
         try {
-            IJSObjectReference serviceWorker = await ServiceWorkerRegistrationJS.InvokeTrySync<IJSObjectReference>("installing", cancellationToken);
+            IJSObjectReference serviceWorker = await serviceWorkerRegistration.InvokeTrySync<IJSObjectReference>("installing", cancellationToken);
             return new ServiceWorker(serviceWorker);
         }
         catch (JSException) {
@@ -69,7 +67,7 @@ internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase,
     /// <returns></returns>
     public async ValueTask<IServiceWorker?> GetWaiting(CancellationToken cancellationToken) {
         try {
-            IJSObjectReference serviceWorker = await ServiceWorkerRegistrationJS.InvokeTrySync<IJSObjectReference>("waiting", cancellationToken);
+            IJSObjectReference serviceWorker = await serviceWorkerRegistration.InvokeTrySync<IJSObjectReference>("waiting", cancellationToken);
             return new ServiceWorker(serviceWorker);
         }
         catch (JSException) {
@@ -89,7 +87,7 @@ internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase,
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetScope(CancellationToken cancellationToken) => ServiceWorkerRegistrationJS.InvokeTrySync<string>("scope", default);
+    public ValueTask<string> GetScope(CancellationToken cancellationToken) => serviceWorkerRegistration.InvokeTrySync<string>("scope", default);
 
 
     /// <summary>
@@ -114,7 +112,7 @@ internal sealed class ServiceWorkerRegistration : ServiceWorkerRegistrationBase,
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetUpdateViaCache(CancellationToken cancellationToken) => ServiceWorkerRegistrationJS.InvokeTrySync<string>("updateViaCache", default);
+    public ValueTask<string> GetUpdateViaCache(CancellationToken cancellationToken) => serviceWorkerRegistration.InvokeTrySync<string>("updateViaCache", default);
 
 
 

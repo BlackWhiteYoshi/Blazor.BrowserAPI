@@ -4,10 +4,7 @@ using Xunit;
 
 namespace BrowserAPI.UnitTest;
 
-public sealed class CookieStorageInProcessTest : PlayWrightTest {
-    public CookieStorageInProcessTest(PlayWrightFixture playWrightFixture) : base(playWrightFixture) { }
-
-
+public sealed class CookieStorageInProcessTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     [Theory]
     [InlineData(0)]
     [InlineData(1)]
