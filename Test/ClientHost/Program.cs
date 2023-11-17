@@ -1,4 +1,4 @@
-namespace BrowserAPI.Test.Server;
+namespace BrowserAPI.Test.ClientHost;
 
 public static class Program {
     public interface IAssemblyMarker { }

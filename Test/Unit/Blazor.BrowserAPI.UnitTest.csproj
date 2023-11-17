@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Server\Blazor.BrowserAPI.Test.Server.csproj" />
+    <ProjectReference Include="..\ClientHost\Blazor.BrowserAPI.Test.ClientHost.csproj" />
   </ItemGroup>
 
 </Project>

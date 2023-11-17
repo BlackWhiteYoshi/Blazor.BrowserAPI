@@ -8,7 +8,7 @@ namespace BrowserAPI.UnitTest;
 public sealed class PlayWrightFixture : ICollectionFixture<PlayWrightFixture>, IAsyncLifetime {
     private const string BASE_URL = "https://localhost:5000";
 
-    private readonly WebApplicationFactory<Test.Server.Program.IAssemblyMarker> hostFactory;
+    private readonly WebApplicationFactory<Test.ClientHost.Program.IAssemblyMarker> hostFactory;
     private readonly HttpClient httpClient;
     private IPlaywright playWright = null!;
     private IBrowser browser = null!;

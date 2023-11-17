@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{B43AEBB0-C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.BrowserAPI.Test.Client", "Test\Client\Blazor.BrowserAPI.Test.Client.csproj", "{EAE8EC51-8FCA-413D-B8BE-969A10314541}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.BrowserAPI.Test.Server", "Test\Server\Blazor.BrowserAPI.Test.Server.csproj", "{697BBC63-D827-46EE-852F-66F2BB8BA179}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.BrowserAPI.Test.ClientHost", "Test\ClientHost\Blazor.BrowserAPI.Test.ClientHost.csproj", "{697BBC63-D827-46EE-852F-66F2BB8BA179}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.BrowserAPI.UnitTest", "Test\Unit\Blazor.BrowserAPI.UnitTest.csproj", "{CD751187-3C9C-4423-BAA9-9104E1A15892}"
 EndProject
