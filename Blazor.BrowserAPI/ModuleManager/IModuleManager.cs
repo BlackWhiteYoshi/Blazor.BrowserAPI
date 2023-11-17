@@ -6,12 +6,17 @@ namespace BrowserAPI;
 /// <summary>
 /// <para>
 /// The ModuleManager is responsible for the access of the JS-module at "_content/Blazor.BrowserAPI/BrowserAPI.js".<br />
-/// It starts fetching the js file with the constructor.
+/// The necessary module is lazy loaded the first time when it is needed,
+/// but it also contains a method to start the module download manually.
 /// </para>
-/// <para>It contains a get-property to retrieve and observe the state of the module download.</para>
+/// <para>However, when *InProcess*-classes are used, the module must be loaded beforehand, otherwise an Exception is thrown.</para>
 /// </summary>
 public interface IModuleManager {
-    public Task<IJSObjectReference> ModuleDownload { get; }
+    /// <summary>
+    /// Starts the download of the JS module. Returns a Task that represents the download of the module. If this tasks finishes, the download finishes.
+    /// </summary>
+    /// <returns>A Task that represents the download of the module. If this tasks finishes, the download finishes.</returns>
+    public Task<IJSObjectReference> LoadModule();
 
 
     internal void InvokeSync(string identifier, object?[]? args = null) => InvokeSync<IJSVoidResult>(identifier, args);

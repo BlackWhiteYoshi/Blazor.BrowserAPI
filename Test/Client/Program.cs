@@ -10,10 +10,8 @@ public static class Program {
         builder.RootComponents.Add<App>("#app");
         WebAssemblyHost host = builder.Build();
 
-        // instantiate the object and therefore starts fetching the js module.
         IModuleManager moduleManager = host.Services.GetRequiredService<IModuleManager>();
-        // waits until js module download finishes
-        await moduleManager.ModuleDownload;
+        await moduleManager.LoadModule();
 
         await host.RunAsync();
     }

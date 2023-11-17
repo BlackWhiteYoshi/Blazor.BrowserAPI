@@ -1,15 +1,16 @@
 # ModuleManager
 
 The ModuleManager is responsible for the access of the JS-module at "_content/Blazor.BrowserAPI/BrowserAPI.js".  
-It starts fetching the js file with the constructor.
+The necessary module is lazy loaded the first time when it is needed,
+but it also contains a method to start the module download manually.
 
-It contains a get-property to retrieve and observe the state of the module download.
+However, when *InProcess*-classes are used, the module must be loaded beforehand, otherwise an Exception is thrown.
 
 
 <br><br />
 ## Example
 
-To ensure the download of the JS-file has finished, you can inject the *IModuleLoader* interface and await *ModuleDownload*.
+To ensure the download of the JS-file has finished, you can inject the *IModuleLoader* interface and await *LoadModule()*.
 
 ```csharp
 using BrowserAPI;
@@ -21,10 +22,9 @@ public static class Program {
         builder.Services.AddBrowserAPI();
         WebAssemblyHost host = builder.Build();
 
-        // instantiate the object and therefore starts fetching the js module.
-        IModuleLoader moduleLoader = host.Services.GetRequiredService<IModuleLoader>();
-        // waits until js module download finishes
-        await moduleLoader.ModuleDownload;
+        IModuleManager moduleManager = host.Services.GetRequiredService<IModuleManager>();
+        // starts and awaits fetching the js module
+        await moduleManager.LoadModule();
 
         await host.RunAsync();
     }
@@ -41,7 +41,8 @@ Furthermore you can prefetch the module into JavaScript, so the ModuleLoader wil
 
 **Note**:  
 Asynchronous functionalities work without the need to await the download.
-If the download has not finished yet, they will first await the download before invoking the function in the module.
+If the download has not finished yet, they will first await the download before invoking the function in the module.  
+Synchronous functionalities will throw an Exception when the module is not loaded.
 
 
 <br><br />
@@ -49,8 +50,8 @@ If the download has not finished yet, they will first await the download before 
 
 ### IModuleManager
 
-#### Properties
+#### Methods
 
-| **Name**         | **Type**                 | get/set | **Dexcription**                                                                                   |
-| ---------------- | ------------------------ | ------- | ------------------------------------------------------------------------------------------------- |
-| ModuleDownload   | Task<IJSObjectReference> | get     | A Task that represents the download of the module. If this tasks finishes, the download finishes. |
+| **Name**   | **Parameters** | ReturnType                     | **Dexcription**                                                                                                                                 |
+| ---------- | -------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| LoadModule | *empty*        | Task&lt;IJSObjectReference&gt; | Starts the download of the JS module. Returns a Task that represents the download of the module. If this tasks finishes, the download finishes. |

@@ -3,25 +3,10 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI;
 
-/// <summary>
-/// <para>
-/// The ModuleManager is responsible for the access of the JS-module at "_content/Blazor.BrowserAPI/BrowserAPI.js".<br />
-/// It starts fetching the js file with the constructor.
-/// </para>
-/// <para>It contains a get-property to retrieve and observe the state of the module download.</para>
-/// </summary>
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-internal sealed class ModuleManager : IModuleManager, IDisposable, IAsyncDisposable {
-    /// <summary>
-    /// A Task that represents the download of the module. If this tasks finishes, the download finishes.
-    /// </summary>
-    public Task<IJSObjectReference> ModuleDownload { get; }
-    
+internal sealed class ModuleManager(IJSRuntime jsRuntime) : IModuleManager, IDisposable, IAsyncDisposable {
     private readonly CancellationTokenSource cancellationTokenSource = new();
-
-    public ModuleManager(IJSRuntime jsRuntime) {
-        ModuleDownload = jsRuntime.InvokeAsync<IJSObjectReference>("import", cancellationTokenSource.Token, "/_content/Blazor.BrowserAPI/BrowserAPI.js").AsTask();
-    }
+    private Task<IJSObjectReference>? moduleDownload;
 
     public void Dispose() {
         if (cancellationTokenSource.IsCancellationRequested)
@@ -30,8 +15,8 @@ internal sealed class ModuleManager : IModuleManager, IDisposable, IAsyncDisposa
         cancellationTokenSource.Cancel();
         cancellationTokenSource.Dispose();
 
-        if (ModuleDownload.IsCompletedSuccessfully)
-            _ = ModuleDownload.Result.DisposeAsync().Preserve();
+        if (moduleDownload?.IsCompletedSuccessfully == true)
+            _ = moduleDownload.Result.DisposeAsync().Preserve();
     }
 
     public ValueTask DisposeAsync() {
@@ -41,28 +26,32 @@ internal sealed class ModuleManager : IModuleManager, IDisposable, IAsyncDisposa
         cancellationTokenSource.Cancel();
         cancellationTokenSource.Dispose();
 
-        if (ModuleDownload.IsCompletedSuccessfully)
-            return ModuleDownload.Result.DisposeAsync();
+        if (moduleDownload?.IsCompletedSuccessfully == true)
+            return moduleDownload.Result.DisposeAsync();
         else
             return ValueTask.CompletedTask;
     }
 
 
+    public Task<IJSObjectReference> LoadModule() => moduleDownload ??= jsRuntime.InvokeAsync<IJSObjectReference>("import", cancellationTokenSource.Token, "/_content/Blazor.BrowserAPI/BrowserAPI.js").AsTask();
+
+
     TResult IModuleManager.InvokeSync<TResult>(string identifier, object?[]? args = null) {
-        if (!ModuleDownload.IsCompletedSuccessfully)
+        Task<IJSObjectReference> moduleTask = LoadModule();
+        if (!moduleTask.IsCompletedSuccessfully)
             throw new JSException("JS-module is not loaded yet. To make sure the module is downloaded, you can await IModuleLoader.ModuleDownload.");
 
-        IJSInProcessObjectReference module = (IJSInProcessObjectReference)ModuleDownload.Result;
+        IJSInProcessObjectReference module = (IJSInProcessObjectReference)moduleTask.Result;
         return module.Invoke<TResult>(identifier, args);
     }
 
     async ValueTask<TResult> IModuleManager.InvokeTrySync<TResult>(string identifier, CancellationToken cancellationToken, object?[]? args = null) {
-        IJSObjectReference module = await ModuleDownload;
+        IJSObjectReference module = await LoadModule();
         return await module.InvokeTrySync<TResult>(identifier, cancellationToken, args);
     }
 
     async ValueTask<TResult> IModuleManager.InvokeAsync<TResult>(string identifier, CancellationToken cancellationToken, object?[]? args = null) {
-        IJSObjectReference module = await ModuleDownload;
+        IJSObjectReference module = await LoadModule();
         return await module.InvokeAsync<TResult>(identifier, cancellationToken, args);
     }
 }
