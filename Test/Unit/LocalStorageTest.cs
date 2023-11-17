@@ -13,12 +13,14 @@ public sealed class LocalStorageTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetLength_Property(int number) {
         for (int i = 0; i < number; i++)
             await Page.EvaluateAsync($"localStorage.setItem('test-key-{i}', 'test-value-{i}');");
-        
+
+        // strange "blazor-resource-hash:Blazor.BrowserAPI.Test.Client" is also added to localStorage
+        number++;
+
         await Page.GetByTestId(LocalStorageGroup.BUTTON_GET_LENGTH_PROPERTY).ClickAsync();
 
         string? result = await Page.GetByTestId(LocalStorageGroup.LABEL_OUTPUT).TextContentAsync();
         Assert.Equal(number.ToString(), result);
-        
     }
 
     [Theory]
@@ -29,6 +31,9 @@ public sealed class LocalStorageTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetLength_Method(int number) {
         for (int i = 0; i < number; i++)
             await Page.EvaluateAsync($"localStorage.setItem('test-key-{i}', 'test-value-{i}');");
+
+        // strange "blazor-resource-hash:Blazor.BrowserAPI.Test.Client" is also added to localStorage
+        number++;
 
         await Page.GetByTestId(LocalStorageGroup.BUTTON_GET_LENGTH_METHOD).ClickAsync();
 

@@ -7,7 +7,7 @@
     <InvariantGlobalization>true</InvariantGlobalization>
     <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
     <StaticWebAssetProjectMode>Default</StaticWebAssetProjectMode>
-    <BlazorEnableCompression>false</BlazorEnableCompression>
+    <CompressionEnabled>false</CompressionEnabled>
     <BlazorCacheBootResources>false</BlazorCacheBootResources>
     <DisableScopedCssBundling>true</DisableScopedCssBundling>
     <!--<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>-->

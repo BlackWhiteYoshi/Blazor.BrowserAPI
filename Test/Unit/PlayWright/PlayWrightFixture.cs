@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Playwright;
 using Xunit;
 
@@ -15,6 +17,11 @@ public sealed class PlayWrightFixture : ICollectionFixture<PlayWrightFixture>, I
 
     public PlayWrightFixture() {
         hostFactory = new();
+        hostFactory.WithWebHostBuilder((IWebHostBuilder builder) =>
+            builder.ConfigureAppConfiguration((IConfigurationBuilder configBuilder) =>
+                configBuilder.AddCommandLine([$"--RenderMode=webassembly", "--Prerender=false"])
+            )
+        );
         httpClient = hostFactory.CreateClient(new WebApplicationFactoryClientOptions() { BaseAddress = new Uri(BASE_URL) });
     }
 

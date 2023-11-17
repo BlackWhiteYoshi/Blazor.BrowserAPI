@@ -1,17 +1,40 @@
 ﻿@namespace BrowserAPI.Test.Client
+@page "/"
 
-<div id="test-page">
-    <h1>Testing Page</h1>
+@if (!loaded) {
+    <svg class="loading-progress">
+        <circle r="40%" cx="50%" cy="50%" />
+        <circle r="40%" cx="50%" cy="50%" />
+    </svg>
+    <div class="loading-progress-text"></div>
+}
+else {
+    <div id="test-page">
+        <h1>Testing Page</h1>
 
-    <ClipboardGroup />
-    <ConsoleGroup />
-    <CookieStorageGroup />
-    <DialogGroup />
-    <DownloadGroup />
-    <LanguageGroup />
-    <LocalStorageGroup />
-    <ServiceWorkerContainerGroup />
-    <ServiceWorkerRegistrationGroup />
-    <ServiceWorkerGroup />
-    <SessionStorageGroup />  
-</div>
+        <ClipboardGroup />
+        <ConsoleGroup />
+        <CookieStorageGroup />
+        <DialogGroup />
+        <DownloadGroup />
+        <LanguageGroup />
+        <LocalStorageGroup />
+        <ServiceWorkerContainerGroup />
+        <ServiceWorkerRegistrationGroup />
+        <ServiceWorkerGroup />
+        <SessionStorageGroup />  
+    </div>
+}
+
+@code {
+    private bool loaded = false;
+
+    protected override void OnAfterRender(bool firstRender) {
+        base.OnAfterRender(firstRender);
+
+        if (firstRender) {
+            loaded = true;
+            StateHasChanged();
+        }
+    }
+}
