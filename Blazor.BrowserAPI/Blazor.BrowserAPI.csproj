@@ -5,7 +5,7 @@
     <LangVersion>12</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    
+
     <Title>Blazor.BrowserAPI</Title>
     <Description>A Blazor Library that provides easy access to browser APIs without the need to use any JavaScript. It supports asynchronous communication as well as synchronous (JSRuntime and JSInProcessRuntime).</Description>
     <Authors>BlackWhiteYoshi</Authors>

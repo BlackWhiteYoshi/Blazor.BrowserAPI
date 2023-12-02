@@ -14,7 +14,7 @@ import { DotNet } from "../../blazor";
 export async function serviceWorkerContainerRegister(filePath) {
     if (!("serviceWorker" in navigator))
         return false;
-    
+
     await navigator.serviceWorker.register(filePath);
     return true;
 }

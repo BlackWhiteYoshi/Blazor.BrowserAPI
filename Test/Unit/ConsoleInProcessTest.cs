@@ -36,7 +36,7 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     [Fact]
     public async Task Assert_String() {
         assertValue = ConsoleGroup.TEST_ASSERT;
-        
+
         await Page.GetByTestId(ConsoleGroup.BUTTON_ASSERT_STRING_INPROCESS).ClickAsync();
     }
 

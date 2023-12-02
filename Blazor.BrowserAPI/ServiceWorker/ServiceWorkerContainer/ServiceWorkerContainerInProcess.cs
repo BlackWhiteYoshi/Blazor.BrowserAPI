@@ -81,7 +81,7 @@ internal sealed class ServiceWorkerContainerInProcess(IModuleManager moduleManag
         }
     }
 
-    
+
     /// <summary>
     /// The <i>startMessages()</i> method of the ServiceWorkerContainer interface explicitly starts the flow of messages being dispatched from a service worker to pages under its control (e.g. sent via Client.postMessage()). This can be used to react to sent messages earlier, even before that page's content has finished loading.
     /// </summary>

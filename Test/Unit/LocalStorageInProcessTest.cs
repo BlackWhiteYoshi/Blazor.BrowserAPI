@@ -13,7 +13,7 @@ public sealed class LocalStorageInProcessTest(PlayWrightFixture playWrightFixtur
     public async Task GetLength(int number) {
         for (int i = 0; i < number; i++)
             await Page.EvaluateAsync($"localStorage.setItem('test-key-{i}', 'test-value-{i}');");
-        
+
         // strange "blazor-resource-hash:Blazor.BrowserAPI.Test.Client" is also added to localStorage
         number++;
 
@@ -61,8 +61,6 @@ public sealed class LocalStorageInProcessTest(PlayWrightFixture playWrightFixtur
 
         string? result = await Page.EvaluateAsync<string?>($"localStorage.getItem('{LocalStorageGroup.TEST_REMOVE_ITEM}');");
         Assert.Null(result);
-
-        
     }
 
     [Theory]
@@ -77,6 +75,6 @@ public sealed class LocalStorageInProcessTest(PlayWrightFixture playWrightFixtur
         await Page.GetByTestId(LocalStorageGroup.BUTTON_CLEAR_INPROCESS).ClickAsync();
 
         int length = await Page.EvaluateAsync<int>("localStorage.length;");
-        Assert.Equal(0, length);        
+        Assert.Equal(0, length);
     }
 }

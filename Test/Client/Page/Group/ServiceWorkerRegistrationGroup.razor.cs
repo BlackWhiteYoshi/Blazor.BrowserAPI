@@ -39,7 +39,7 @@ public sealed partial class ServiceWorkerRegistrationGroup : ComponentBase {
         bool result = await (await ServiceWorkerRegistration).Unregister();
         labelOutput = result.ToString();
     }
-    
+
     public const string BUTTON_ACTIVE_PROPERTY = "service-worker-registration-active-property";
     private async Task Active_Property() {
         IServiceWorker? serviceWorker = await (await ServiceWorkerRegistration).Active;

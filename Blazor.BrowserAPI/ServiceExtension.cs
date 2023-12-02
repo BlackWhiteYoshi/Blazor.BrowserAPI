@@ -20,7 +20,7 @@ public static class ServiceExtension {
             .AddScoped<IServiceWorkerContainerInProcess, ServiceWorkerContainerInProcess>()
             .AddScoped<ISessionStorage, SessionStorage>()
             .AddScoped<ISessionStorageInProcess, SessionStorageInProcess>();
-            
+
         return services;
     }
 }

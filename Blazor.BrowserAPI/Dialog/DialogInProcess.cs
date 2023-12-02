@@ -34,7 +34,7 @@ internal sealed class DialogInProcess(IJSInProcessObjectReference dialogJS) : Di
     /// The <i>show()</i> method of the HTMLDialogElement interface displays the dialog modelessly, i.e. still allowing interaction with content outside of the dialog.
     /// </summary>
     public void Show() => dialogJS.InvokeVoid("show");
-    
+
     /// <summary>
     /// The <i>showModal()</i> method of the HTMLDialogElement interface displays the dialog as a modal, over the top of any other dialogs that might be present. It displays in the top layer, along with a ::backdrop pseudo-element. Interaction outside the dialog is blocked and the content outside it is rendered inert.
     /// </summary>
