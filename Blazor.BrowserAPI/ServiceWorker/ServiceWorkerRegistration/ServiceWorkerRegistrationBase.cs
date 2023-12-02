@@ -29,22 +29,30 @@ internal abstract class ServiceWorkerRegistrationBase {
 
     #region UpdateFound event
 
+    private DotNetObjectReference<UpdateFoundTrigger>? objectReferenceUpdateFoundTrigger;
+
     private Action? _onUpdateFound;
     /// <summary>
     /// The <i>updatefound</i> event of the ServiceWorkerRegistration interface is fired any time the <i>ServiceWorkerRegistration.installing</i> property acquires a new service worker.
     /// </summary>
     public event Action OnUpdateFound {
         add {
-            if (_onUpdateFound == null)
-                _ = ServiceWorkerRegistrationJS.InvokeVoidTrySync("activateOnupdatefound", default, [DotNetObjectReference.Create(new UpdateFoundTrigger(this))]).Preserve();
+            if (objectReferenceUpdateFoundTrigger == null)
+                Task.Factory.StartNew(async () => {
+                    objectReferenceUpdateFoundTrigger = DotNetObjectReference.Create(new UpdateFoundTrigger(this));
+                    await ServiceWorkerRegistrationJS.InvokeVoidTrySync("activateOnupdatefound", default, [objectReferenceUpdateFoundTrigger]);
+                });
 
             _onUpdateFound += value;
         }
         remove {
             _onUpdateFound -= value;
 
-            if (_onUpdateFound == null)
-                _ = ServiceWorkerRegistrationJS.InvokeVoidTrySync("deactivateOnupdatefound", default).Preserve();
+            if (_onUpdateFound == null && objectReferenceUpdateFoundTrigger != null)
+                Task.Factory.StartNew(async () => {
+                    await ServiceWorkerRegistrationJS.InvokeVoidTrySync("deactivateOnupdatefound", default);
+                    objectReferenceUpdateFoundTrigger.Dispose();
+                });
         }
     }
 

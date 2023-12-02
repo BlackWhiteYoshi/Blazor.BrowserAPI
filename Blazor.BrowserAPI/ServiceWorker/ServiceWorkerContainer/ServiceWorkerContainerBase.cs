@@ -52,22 +52,30 @@ internal abstract class ServiceWorkerContainerBase {
 
     #region ControllerChange event
 
+    private DotNetObjectReference<ControllerChangeTrigger>? objectReferenceControllerChangeTrigger;
+
     private Action? _onControllerChange;
     /// <summary>
     /// Occurs when the document's associated <i>ServiceWorkerRegistration</i> acquires a new active worker.
     /// </summary>
     public event Action OnControllerChange {
         add {
-            if (_onControllerChange == null)
-                _ = ModuleManager.InvokeTrySync("serviceWorkerContainerActivateOncontrollerchange", default, [DotNetObjectReference.Create(new ControllerChangeTrigger(this))]).Preserve();
+            if (objectReferenceControllerChangeTrigger == null)
+                Task.Factory.StartNew(async () => {
+                    objectReferenceControllerChangeTrigger = DotNetObjectReference.Create(new ControllerChangeTrigger(this));
+                    await ModuleManager.InvokeTrySync("serviceWorkerContainerActivateOncontrollerchange", default, [objectReferenceControllerChangeTrigger]);
+                });
 
             _onControllerChange += value;
         }
         remove {
             _onControllerChange -= value;
 
-            if (_onControllerChange == null)
-                _ = ModuleManager.InvokeTrySync("serviceWorkerContainerDeactivateOncontrollerchange", default).Preserve();
+            if (_onControllerChange == null && objectReferenceControllerChangeTrigger != null)
+                Task.Factory.StartNew(async () => {
+                    await ModuleManager.InvokeTrySync("serviceWorkerContainerDeactivateOncontrollerchange", default);
+                    objectReferenceControllerChangeTrigger.Dispose();
+                });
         }
     }
 
@@ -82,6 +90,8 @@ internal abstract class ServiceWorkerContainerBase {
 
     #region Message event
 
+    private DotNetObjectReference<MessageTrigger>? objectReferenceMessageTrigger;
+
     private Action<string>? _onMessage;
     /// <summary>
     /// <para>The message event is used in a page controlled by a service worker to receive messages from the service worker.</para>
@@ -89,16 +99,23 @@ internal abstract class ServiceWorkerContainerBase {
     /// </summary>
     public event Action<string> OnMessage {
         add {
-            if (_onMessage == null)
-                _ = ModuleManager.InvokeTrySync("serviceWorkerContainerActivateOnMessage", default, [DotNetObjectReference.Create(new ControllerChangeTrigger(this))]).Preserve();
+            if (objectReferenceMessageTrigger == null)
+                Task.Factory.StartNew(async () => {
+                    objectReferenceMessageTrigger = DotNetObjectReference.Create(new MessageTrigger(this));
+                    await ModuleManager.InvokeTrySync("serviceWorkerContainerActivateOnMessage", default, [objectReferenceMessageTrigger]);
+                });
 
             _onMessage += value;
         }
         remove {
             _onMessage -= value;
 
-            if (_onMessage == null)
-                _ = ModuleManager.InvokeTrySync("serviceWorkerContainerDeactivateOnMessage", default).Preserve();
+            if (_onMessage == null && objectReferenceMessageTrigger != null)
+                Task.Factory.StartNew(async () => {
+                    await ModuleManager.InvokeTrySync("serviceWorkerContainerDeactivateOnMessage", default);
+                    objectReferenceMessageTrigger.Dispose();
+                });
+
         }
     }
 

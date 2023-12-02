@@ -17,6 +17,8 @@ internal abstract class ServiceWorkerBase {
 
     #region StateChange event
 
+    private DotNetObjectReference<StateChangeTrigger>? objectReferenceStateChangeTrigger;
+
     private Action<string>? _onStateChange;
     /// <summary>
     /// <para>The <i>statechange</i> event fires anytime the ServiceWorker.state changes.</para>
@@ -24,16 +26,22 @@ internal abstract class ServiceWorkerBase {
     /// </summary>
     public event Action<string> OnStateChange {
         add {
-            if (_onStateChange == null)
-                _ = ServiceWorkerJS.InvokeVoidTrySync("activateOnstatechange", default, [DotNetObjectReference.Create(new StateChangeTrigger(this))]).Preserve();
+            if (objectReferenceStateChangeTrigger == null)
+                Task.Factory.StartNew(async () => {
+                    objectReferenceStateChangeTrigger = DotNetObjectReference.Create(new StateChangeTrigger(this));
+                    await ServiceWorkerJS.InvokeVoidTrySync("activateOnstatechange", default, [objectReferenceStateChangeTrigger]);
+                });
 
             _onStateChange += value;
         }
         remove {
             _onStateChange -= value;
 
-            if (_onStateChange == null)
-                _ = ServiceWorkerJS.InvokeVoidTrySync("deactivateOnstatechange", default).Preserve();
+            if (_onStateChange == null && objectReferenceStateChangeTrigger != null)
+                Task.Factory.StartNew(async () => {
+                    await ServiceWorkerJS.InvokeVoidTrySync("deactivateOnstatechange", default);
+                    objectReferenceStateChangeTrigger.Dispose();
+                });
         }
     }
 
@@ -48,6 +56,8 @@ internal abstract class ServiceWorkerBase {
 
     #region Error event
 
+    private DotNetObjectReference<ErrorTrigger>? objectReferenceErrorTrigger;
+
     private Action<string>? _onError;
     /// <summary>
     /// <para>The <i>error</i> event fires whenever an error occurs in the service worker.</para>
@@ -55,16 +65,22 @@ internal abstract class ServiceWorkerBase {
     /// </summary>
     public event Action<string> OnError {
         add {
-            if (_onError == null)
-                _ = ServiceWorkerJS.InvokeVoidTrySync("activateOnerror", default, [DotNetObjectReference.Create(new ErrorTrigger(this))]).Preserve();
+            if (objectReferenceErrorTrigger == null)
+                Task.Factory.StartNew(async () => {
+                    objectReferenceErrorTrigger = DotNetObjectReference.Create(new ErrorTrigger(this));
+                    await ServiceWorkerJS.InvokeVoidTrySync("activateOnerror", default, [objectReferenceErrorTrigger]);
+                });
 
             _onError += value;
         }
         remove {
             _onError -= value;
 
-            if (_onError == null)
-                _ = ServiceWorkerJS.InvokeVoidTrySync("deactivateOnerror", default).Preserve();
+            if (_onError == null && objectReferenceErrorTrigger != null)
+                Task.Factory.StartNew(async () => {
+                    await ServiceWorkerJS.InvokeVoidTrySync("deactivateOnerror", default);
+                    objectReferenceErrorTrigger.Dispose();
+                });
         }
     }
 
