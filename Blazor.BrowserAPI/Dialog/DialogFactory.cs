@@ -17,8 +17,8 @@ internal sealed class DialogFactory(IModuleManager moduleManager) : IDialogFacto
     /// <param name="dialog">An <see cref="ElementReference"/> referencing a &lt;dialog&gt; html tag.</param>
     /// <returns>An object that can be used to interact with the given &lt;dialog&gt; element.</returns>
     public IDialog Create(ElementReference dialog) {
-        Task<IJSObjectReference> dialogJS = moduleManager.InvokeTrySync<IJSObjectReference>("createDialog", default, [dialog]).AsTask();
-        return new Dialog(dialogJS);
+        Task<IJSObjectReference> dialogTask = moduleManager.InvokeTrySync<IJSObjectReference>("createDialog", default, [dialog]).AsTask();
+        return new Dialog(dialogTask);
     }
 
     /// <summary>
