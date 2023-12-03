@@ -4,6 +4,10 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI;
 
+/// <summary>
+/// <para>The <i>HTMLDialogElement</i> interface provides methods to manipulate &lt;dialog&gt; elements. It inherits properties and methods from the HTMLElement interface.</para>
+/// <para>Objects of this class must disposed manually, so do not forget to call <see cref="DisposeAsync"/> when you are done with it.</para>
+/// </summary>
 [AutoInterface(Modifier = "public partial", Inheritance = [typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 internal sealed class Dialog(Task<IJSObjectReference> dialogTask) : DialogBase, IDialog {

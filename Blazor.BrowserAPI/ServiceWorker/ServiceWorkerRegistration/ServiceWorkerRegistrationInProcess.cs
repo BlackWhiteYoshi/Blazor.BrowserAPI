@@ -4,6 +4,13 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI;
 
+/// <summary>
+/// <para>
+/// The <i>ServiceWorkerRegistration</i> interface of the Service Worker API represents the service worker registration.
+/// You register a service worker to control one or more pages that share the same origin.
+/// </para>
+/// <para>Objects of this class must disposed manually, so do not forget to call <see cref="Dispose"/> when you are done with it.</para>
+/// </summary>
 [AutoInterface(Modifier = "public partial", Inheritance = [typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 internal sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReference serviceWorkerRegistration) : ServiceWorkerRegistrationBase, IServiceWorkerRegistrationInProcess {

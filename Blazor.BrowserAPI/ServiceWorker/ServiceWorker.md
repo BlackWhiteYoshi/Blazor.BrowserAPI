@@ -65,6 +65,8 @@ and the *ServiceWorkerContainer.controller* property used to determine whether o
 The ServiceWorkerRegistration* interface of the Service Worker API represents the service worker registration.
 You register a service worker to control one or more pages that share the same origin.
 
+Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.
+
 
 #### Properties
 
@@ -100,6 +102,8 @@ You register a service worker to control one or more pages that share the same o
 
 The *ServiceWorker* interface of the Service Worker API provides a reference to a service worker.
 Multiple browsing contexts (e.g. pages, workers, etc.) can be associated with the same service worker, each through a unique ServiceWorker object.
+
+Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.
 
 
 #### Properties
@@ -168,6 +172,8 @@ and the *ServiceWorkerContainer.controller* property used to determine whether o
 The ServiceWorkerRegistration* interface of the Service Worker API represents the service worker registration.
 You register a service worker to control one or more pages that share the same origin.
 
+Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.
+
 
 #### Properties
 
@@ -198,6 +204,8 @@ You register a service worker to control one or more pages that share the same o
 
 The *ServiceWorker* interface of the Service Worker API provides a reference to a service worker.
 Multiple browsing contexts (e.g. pages, workers, etc.) can be associated with the same service worker, each through a unique ServiceWorker object.
+
+Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.
 
 
 #### Properties

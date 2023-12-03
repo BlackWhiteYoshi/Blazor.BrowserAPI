@@ -6,7 +6,11 @@ using System.Diagnostics.CodeAnalysis;
 namespace BrowserAPI;
 
 /// <summary>
-/// This class can take a <see cref="ElementReference"/> of &lt;dialog&gt; and creates a <see cref="IDialog"/> or <see cref="IDialogInProcess"/> object with it.
+/// <para>This class can take a <see cref="ElementReference"/> of &lt;dialog&gt; and creates a <see cref="IDialog"/> or <see cref="IDialogInProcess"/> object with it.</para>
+/// <para>
+/// This factory <b>does not dispose</b> the created onjects, they must disposed manually.
+/// So do not forget to call <see cref="IDisposable.Dispose"/>/<see cref="IAsyncDisposable.DisposeAsync"/> on a dialog-object when you are done with it.
+/// </para>
 /// </summary>
 [AutoInterface]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]

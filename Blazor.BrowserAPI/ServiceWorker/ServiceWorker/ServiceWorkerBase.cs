@@ -4,10 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI;
 
-/// <summary>
-/// The <i>ServiceWorker</i> interface of the Service Worker API provides a reference to a service worker.
-/// Multiple browsing contexts (e.g. pages, workers, etc.) can be associated with the same service worker, each through a unique ServiceWorker object.
-/// </summary>
 [AutoInterface(Name = "IServiceWorker", Modifier = "public partial")]
 [AutoInterface(Name = "IServiceWorkerInProcess", Modifier = "public partial")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]

@@ -49,6 +49,9 @@ If *Example* is used for an interaction event, like a click event, this is fine,
 
 This class can take a *ElementReference* of &lt;dialog&gt; and creates a *IDialog* or *IDialogInProcess* object with it.
 
+This factory <b>does not dispose</b> the created onjects, they must disposed manually.
+So do not forget to call Dispose()/DisposeAsync() on a dialog-object when you are done with it.
+
 #### Methods
 
 | **Name**        | **Parameters**          | **ReturnType**   | **Dexcription**                                                                                                                   |
@@ -61,6 +64,8 @@ This class can take a *ElementReference* of &lt;dialog&gt; and creates a *IDialo
 ### IDialog
 
 The *HTMLDialogElement* interface provides methods to manipulate &lt;dialog&gt; elements. It inherits properties and methods from the HTMLElement interface.
+
+Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.
 
 #### Properties
 
@@ -94,6 +99,8 @@ The *HTMLDialogElement* interface provides methods to manipulate &lt;dialog&gt; 
 ### IDialogInProcess
 
 The *HTMLDialogElement* interface provides methods to manipulate &lt;dialog&gt; elements. It inherits properties and methods from the HTMLElement interface.
+
+Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.
 
 #### Properties
 

@@ -4,9 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI;
 
-/// <summary>
-/// The <i>HTMLDialogElement</i> interface provides methods to manipulate &lt;dialog&gt; elements. It inherits properties and methods from the HTMLElement interface.
-/// </summary>
 [AutoInterface(Name = "IDialog", Modifier = "public partial")]
 [AutoInterface(Name = "IDialogInProcess", Modifier = "public partial")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
