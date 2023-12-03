@@ -14,7 +14,7 @@ internal sealed class Dialog(Task<IJSObjectReference> dialogTask) : DialogBase, 
     protected override Task<IJSObjectReference> DialogTask { get; } = dialogTask;
 
     [IgnoreAutoInterface]
-    public async ValueTask DisposeAsync() => await (await DialogTask).DisposeAsync();
+    public async ValueTask DisposeAsync() => await (await DialogTask).DisposeTrySync();
 
 
     /// <summary>

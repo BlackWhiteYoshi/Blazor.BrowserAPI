@@ -17,7 +17,7 @@ internal sealed class ServiceWorker(IJSObjectReference serviceWorker) : ServiceW
     protected override IJSObjectReference ServiceWorkerJS => serviceWorker;
 
     [IgnoreAutoInterface]
-    public ValueTask DisposeAsync() => serviceWorker.DisposeAsync();
+    public ValueTask DisposeAsync() => serviceWorker.DisposeTrySync();
 
 
     /// <summary>

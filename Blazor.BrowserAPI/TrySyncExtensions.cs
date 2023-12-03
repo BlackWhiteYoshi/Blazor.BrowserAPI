@@ -67,4 +67,18 @@ public static class TrySyncExtensions {
         else
             return await module.InvokeAsync<TResult>(identifier, cancellationToken, args);
     }
+
+    /// <summary>
+    /// Invokes Dispose if possible, otherwise DisposeAsync.
+    /// </summary>
+    /// <param name="module"></param>
+    /// <returns></returns>
+    public static ValueTask DisposeTrySync(this IJSObjectReference module) {
+        if (module is IJSInProcessObjectReference moduleInProcess) {
+            moduleInProcess.Dispose();
+            return ValueTask.CompletedTask;
+        }
+        else
+            return module.DisposeAsync();
+    }
 }

@@ -8,6 +8,10 @@ internal sealed class ModuleManager(IJSRuntime jsRuntime) : IModuleManager, IDis
     private readonly CancellationTokenSource cancellationTokenSource = new();
     private Task<IJSObjectReference>? moduleDownload;
 
+    /// <summary>
+    /// <para>Disposes the module synchronously if possible, otherwise asynchronously as fire and forget.</para>
+    /// <para>If the download is running and not finished, the download will be aborted.</para>
+    /// </summary>
     public void Dispose() {
         if (cancellationTokenSource.IsCancellationRequested)
             return;
@@ -16,9 +20,13 @@ internal sealed class ModuleManager(IJSRuntime jsRuntime) : IModuleManager, IDis
         cancellationTokenSource.Dispose();
 
         if (moduleDownload?.IsCompletedSuccessfully == true)
-            _ = moduleDownload.Result.DisposeAsync().Preserve();
+            _ = moduleDownload.Result.DisposeTrySync().Preserve();
     }
 
+    /// <summary>
+    /// <para>Disposes the module synchronously if possible, otherwise asynchronously.</para>
+    /// <para>If the download is running and not finished, the download will be aborted.</para>
+    /// </summary>
     public ValueTask DisposeAsync() {
         if (cancellationTokenSource.IsCancellationRequested)
             return ValueTask.CompletedTask;
@@ -27,7 +35,7 @@ internal sealed class ModuleManager(IJSRuntime jsRuntime) : IModuleManager, IDis
         cancellationTokenSource.Dispose();
 
         if (moduleDownload?.IsCompletedSuccessfully == true)
-            return moduleDownload.Result.DisposeAsync();
+            return moduleDownload.Result.DisposeTrySync();
         else
             return ValueTask.CompletedTask;
     }

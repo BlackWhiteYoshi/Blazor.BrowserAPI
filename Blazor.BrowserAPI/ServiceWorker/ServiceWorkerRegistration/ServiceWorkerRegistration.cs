@@ -17,7 +17,7 @@ internal sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorker
     protected override IJSObjectReference ServiceWorkerRegistrationJS => serviceWorkerRegistration;
 
     [IgnoreAutoInterface]
-    public ValueTask DisposeAsync() => serviceWorkerRegistration.DisposeAsync();
+    public ValueTask DisposeAsync() => serviceWorkerRegistration.DisposeTrySync();
 
 
     /// <summary>

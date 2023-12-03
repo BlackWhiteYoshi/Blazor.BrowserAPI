@@ -61,7 +61,7 @@ export async function serviceWorkerContainerGetRegistration(clientUrl) {
 }
 
 /**
- * returns something like Promise<JSObjectReference<ServiceWorkerRegistrationWrapper[]>>
+ * returns something like Promise<JSObjectReference<ServiceWorkerRegistrationWrapper>[]>
  * @returns {Promise<any[]>}
  */
 export async function serviceWorkerContainerGetRegistrations() {
