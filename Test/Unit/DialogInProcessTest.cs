@@ -91,6 +91,7 @@ public sealed class DialogInProcessTest(PlayWrightFixture playWrightFixture) : P
         ILocator dialog = Page.GetByTestId(DialogGroup.DIALOG_ELEMENT);
         await dialog.EvaluateAsync("dialog => dialog.showModal();");
         await dialog.PressAsync("Escape");
+        await Task.Delay(100);
 
         string? result = await Page.GetByTestId(DialogGroup.LABEL_OUTPUT).TextContentAsync();
         Assert.Equal(DialogGroup.TEST_CANCEL_EVENT, result);
@@ -100,7 +101,9 @@ public sealed class DialogInProcessTest(PlayWrightFixture playWrightFixture) : P
     public async Task RegisterOnClose_InProcess() {
         await Page.GetByTestId(DialogGroup.BUTTON_REGISTER_ON_CLOSE_INPROCESS).ClickAsync();
         ILocator dialog = Page.GetByTestId(DialogGroup.DIALOG_ELEMENT);
-        await dialog.EvaluateAsync("dialog => { dialog.show(); dialog.close() }");
+        await dialog.EvaluateAsync("dialog => dialog.show();");
+        await dialog.EvaluateAsync("dialog => dialog.close();");
+        await Task.Delay(100);
 
         string? result = await Page.GetByTestId(DialogGroup.LABEL_OUTPUT).TextContentAsync();
         Assert.Equal(DialogGroup.TEST_CLOSE_EVENT, result);
