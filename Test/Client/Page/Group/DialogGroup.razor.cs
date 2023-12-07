@@ -26,10 +26,7 @@ public sealed partial class DialogGroup : ComponentBase, IAsyncDisposable {
 
     public ValueTask DisposeAsync() {
         _dialogInProcess?.Dispose();
-        return _dialog switch {
-            IDialog => _dialog.DisposeAsync(),
-            null => ValueTask.CompletedTask
-        };
+        return _dialog?.DisposeAsync() ?? ValueTask.CompletedTask;
     }
 
 

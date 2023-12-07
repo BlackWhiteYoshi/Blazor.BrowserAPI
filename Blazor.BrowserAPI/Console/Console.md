@@ -11,7 +11,7 @@ The specifics of how it works varies from browser to browser, but there is a de 
 public sealed partial class ExampleComponent : ComponentBase {
     [Inject]
     public required IConsole Console { private get; init; }
-    
+
     private async Task Example() {
         await Console.Log("output to browser console");
     }

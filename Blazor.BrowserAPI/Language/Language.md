@@ -11,7 +11,7 @@ The document.documentElement.lang attribute sets the language of the content in 
 public sealed class ExampleComponent : ComponentBase {
     [Inject]
     public required ILanguage Language { private get; init; }
-    
+
     private async Task Example() {
         string browserLanguage = await Language.BrowserLanguage;
     }

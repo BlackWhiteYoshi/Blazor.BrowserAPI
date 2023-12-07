@@ -22,7 +22,12 @@
                 padding: 0.4em 0.6em;
                 color: #DDD;
                 background-color: #000;
+                border: 0.15em #DDD outset;
                 border-radius: 0.2em;
+
+                &:hover {
+                    border: 0.15em #DDD inset;
+                }
             }
         }
 

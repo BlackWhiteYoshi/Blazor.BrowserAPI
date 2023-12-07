@@ -12,7 +12,7 @@ They will also allow access to push notifications and background sync APIs.
 public sealed partial class ExampleComponent : ComponentBase {
     [Inject]
     public required IServiceWorkerContainer ServiceWorkerContainer { private get; init; }
-    
+
     private async Task Example() {
         await ServiceWorkerContainer.Register("service-worker.js");
     }

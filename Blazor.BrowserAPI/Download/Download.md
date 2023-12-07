@@ -10,7 +10,7 @@ Save data as a file download on the filesystem. For file upload use the *InputFi
 public sealed partial class ExampleComponent : ComponentBase {
     [Inject]
     public required IDownload Download { private get; init; }
-    
+
     private async Task Example() {
         await Download.DownloadAsFile("example.txt", "example content");
     }
