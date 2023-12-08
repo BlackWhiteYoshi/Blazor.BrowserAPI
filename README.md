@@ -59,3 +59,10 @@ To ensure the download has finished, you can use the [*IModuleManager*](Blazor.B
 
 This package is in preview and breaking changes may occur.  
 There are more interfaces coming.
+
+
+<br></br>
+## Release Notes
+
+- 0.1  
+  First version. Includes 10 BrowserAPIs: Clipboard, Console, CookieStorage, Dialog, Download, HTMLElement, Language, LocalStorage, ServiceWorker, SessionStorage
