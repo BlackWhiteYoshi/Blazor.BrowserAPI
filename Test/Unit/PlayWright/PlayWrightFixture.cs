@@ -28,6 +28,7 @@ public sealed class PlayWrightFixture : ICollectionFixture<PlayWrightFixture>, I
     public async Task InitializeAsync() {
         playWright = await Playwright.CreateAsync();
         browser = await playWright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions() { Headless = true });
+        //browser = await playWright.Firefox.LaunchAsync(new BrowserTypeLaunchOptions() { Headless = true });
     }
 
     public async Task DisposeAsync() {

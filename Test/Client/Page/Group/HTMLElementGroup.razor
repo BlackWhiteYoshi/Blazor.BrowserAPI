@@ -1,0 +1,175 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>HTML Element</h2>
+    <div>
+        <button data-testid="@BUTTON_GET_INNERTEXT_PROPERTY" @onclick="GetInnerText_Property">GetInnerText_Property</button>
+        <button data-testid="@BUTTON_GET_INNERTEXT_METHOD" @onclick="GetInnerText_Method">GetInnerText_Method</button>
+        <button data-testid="@BUTTON_SET_INNERTEXT" @onclick="SetInnerText">SetInnerText</button>
+        <button data-testid="@BUTTON_GET_OUTERTEXT_PROPERTY" @onclick="GetOuterText_Property">GetOuterText_Property</button>
+        <button data-testid="@BUTTON_GET_OUTERTEXT_METHOD" @onclick="GetOuterText_Method">GetOuterText_Method</button>
+        <button data-testid="@BUTTON_SET_OUTERTEXT" @onclick="SetOuterText">SetOuterText</button>
+        <button data-testid="@BUTTON_GET_STYLE_PROPERTY" @onclick="GetStyle_Property">GetStyle_Property</button>
+        <button data-testid="@BUTTON_GET_STYLE_METHOD" @onclick="GetStyle_Method">GetStyle_Method</button>
+        <button data-testid="@BUTTON_SET_STYLE" @onclick="SetStyle">SetStyle</button>
+
+        <button data-testid="@BUTTON_GET_OFFSETWIDTH_PROPERTY" @onclick="GetOffsetWidth_Property">GetOffsetWidth_Property</button>
+        <button data-testid="@BUTTON_GET_OFFSETWIDTH_METHOD" @onclick="GetOffsetWidth_Method">GetOffsetWidth_Method</button>
+        <button data-testid="@BUTTON_GET_OFFSETHEIGHT_PROPERTY" @onclick="GetOffsetHeight_Property">GetOffsetHeight_Property</button>
+        <button data-testid="@BUTTON_GET_OFFSETHEIGHT_METHOD" @onclick="GetOffsetHeight_Method">GetOffsetHeight_Method</button>
+        <button data-testid="@BUTTON_GET_OFFSETLEFT_PROPERTY" @onclick="GetOffsetLeft_Property">GetOffsetLeft_Property</button>
+        <button data-testid="@BUTTON_GET_OFFSETLEFT_METHOD" @onclick="GetOffsetLeft_Method">GetOffsetLeft_Method</button>
+        <button data-testid="@BUTTON_GET_OFFSETTOP_PROPERTY" @onclick="GetOffsetTop_Property">GetOffsetTop_Property</button>
+        <button data-testid="@BUTTON_GET_OFFSETTOP_METHOD" @onclick="GetOffsetTop_Method">GetOffsetTop_Method</button>
+        <button data-testid="@BUTTON_GET_OFFSETPARENT_PROPERTY" @onclick="GetOffsetParent_Property">GetOffsetParent_Property</button>
+        <button data-testid="@BUTTON_GET_OFFSETPARENT_METHOD" @onclick="GetOffsetParent_Method">GetOffsetParent_Method</button>
+
+        <button data-testid="@BUTTON_GET_HASFOCUS_PROPERTY" @onclick="GetHasFocus_Property" @onpointerenter="GetHasFocus_Property">GetHasFocus_Property</button>
+        <button data-testid="@BUTTON_GET_HASFOCUS_METHOD" @onclick="GetHasFocus_Method" @onpointerenter="GetHasFocus_Method">GetHasFocus_Method</button>
+
+        <button data-testid="@BUTTON_CLICK" @onclick="Click">Click</button>
+        <button data-testid="@BUTTON_FOCUS" @onclick="Focus">Focus</button>
+        <button data-testid="@BUTTON_BLUR" @onclick="Blur" @onpointerenter="Blur">Blur</button>
+        <button data-testid="@BUTTON_SHOW_POPOVER" @onclick="ShowPopover">ShowPopover</button>
+        <button data-testid="@BUTTON_HIDE_POPOVER" @onclick="HidePopover">HidePopover</button>
+        <button data-testid="@BUTTON_TOGGLE_POPOVER" @onclick="TogglePopover">TogglePopover</button>
+        <button data-testid="@BUTTON_TOGGLE_POPOVER_PARAMETER" @onclick="TogglePopoverParameter">TogglePopoverParameter</button>
+
+
+        <button data-testid="@BUTTON_GET_INNERHTML_PROPERTY" @onclick="GetInnerHTML_Property">GetInnerHTML_Property</button>
+        <button data-testid="@BUTTON_GET_INNERHTML_METHOD" @onclick="GetInnerHTML_Method">GetInnerHTML_Method</button>
+        <button data-testid="@BUTTON_SET_INNERHTML" @onclick="SetInnerHTML">SetInnerHTML</button>
+        <button data-testid="@BUTTON_GET_OUTERHTML_PROPERTY" @onclick="GetOuterHTML_Property">GetOuterHTML_Property</button>
+        <button data-testid="@BUTTON_GET_OUTERHTML_METHOD" @onclick="GetOuterHTML_Method">GetOuterHTML_Method</button>
+        <button data-testid="@BUTTON_SET_OUTERHTML" @onclick="SetOuterHTML">SetOuterHTML</button>
+        <button data-testid="@BUTTON_GET_ATTRIBUTES_PROPERTY" @onclick="GetAttributes_Property">GetAttributes_Property</button>
+        <button data-testid="@BUTTON_GET_ATTRIBUTES_METHOD" @onclick="GetAttributes_Method">GetAttributes_Method</button>
+        <button data-testid="@BUTTON_GET_CHILD_ELEMENT_COUNT_PROPERTY" @onclick="GetChildElementCount_Property">GetChildElementCount_Property</button>
+        <button data-testid="@BUTTON_GET_CHILD_ELEMENT_COUNT_METHOD" @onclick="GetChildElementCount_Method">GetChildElementCount_Method</button>
+        <button data-testid="@BUTTON_GET_CHILDREN_PROPERTY" @onclick="GetChildren_Property">GetChildren_Property</button>
+        <button data-testid="@BUTTON_GET_CHILDREN_METHOD" @onclick="GetChildren_Method">GetChildren_Method</button>
+        <button data-testid="@BUTTON_GET_CLASSNAME_PROPERTY" @onclick="GetClassName_Property">GetClassName_Property</button>
+        <button data-testid="@BUTTON_GET_CLASSNAME_METHOD" @onclick="GetClassName_Method">GetClassName_Method</button>
+        <button data-testid="@BUTTON_SET_CLASSNAME" @onclick="SetClassName">SetClassName</button>
+        <button data-testid="@BUTTON_GET_CLASSLIST_PROPERTY" @onclick="GetClassList_Property">GetClassList_Property</button>
+        <button data-testid="@BUTTON_GET_CLASSLIST_METHOD" @onclick="GetClassList_Method">GetClassList_Method</button>
+
+        <button data-testid="@BUTTON_GET_CLIENTWIDTH_PROPERTY" @onclick="GetClientWidth_Property">GetClientWidth_Property</button>
+        <button data-testid="@BUTTON_GET_CLIENTWIDTH_METHOD" @onclick="GetClientWidth_Method">GetClientWidth_Method</button>
+        <button data-testid="@BUTTON_GET_CLIENTHEIGHT_PROPERTY" @onclick="GetClientHeight_Property">GetClientHeight_Property</button>
+        <button data-testid="@BUTTON_GET_CLIENTHEIGHT_METHOD" @onclick="GetClientHeight_Method">GetClientHeight_Method</button>
+        <button data-testid="@BUTTON_GET_CLIENTLEFT_PROPERTY" @onclick="GetClientLeft_Property">GetClientLeft_Property</button>
+        <button data-testid="@BUTTON_GET_CLIENTLEFT_METHOD" @onclick="GetClientLeft_Method">GetClientLeft_Method</button>
+        <button data-testid="@BUTTON_GET_CLIENTTOP_PROPERTY" @onclick="GetClientTop_Property">GetClientTop_Property</button>
+        <button data-testid="@BUTTON_GET_CLIENTTOP_METHOD" @onclick="GetClientTop_Method">GetClientTop_Method</button>
+
+        <button data-testid="@BUTTON_GET_SCROLLWIDTH_PROPERTY" @onclick="GetScrollWidth_Property">GetClientWidth_Property</button>
+        <button data-testid="@BUTTON_GET_SCROLLWIDTH_METHOD" @onclick="GetScrollWidth_Method">GetScrollWidth_Method</button>
+        <button data-testid="@BUTTON_GET_SCROLLHEIGHT_PROPERTY" @onclick="GetScrollHeight_Property">GetScrollHeight_Property</button>
+        <button data-testid="@BUTTON_GET_SCROLLHEIGHT_METHOD" @onclick="GetScrollHeight_Method">GetScrollHeight_Method</button>
+        <button data-testid="@BUTTON_GET_SCROLLLEFT_PROPERTY" @onclick="GetScrollLeft_Property">GetScrollLeft_Property</button>
+        <button data-testid="@BUTTON_GET_SCROLLLEFT_METHOD" @onclick="GetScrollLeft_Method">GetScrollLeft_Method</button>
+        <button data-testid="@BUTTON_SET_SCROLLLEFT" @onclick="SetScrollLeft">SetScrollLeft</button>
+        <button data-testid="@BUTTON_GET_SCROLLTOP_PROPERTY" @onclick="GetScrollTop_Property">GetScrollTop_Property</button>
+        <button data-testid="@BUTTON_GET_SCROLLTOP_METHOD" @onclick="GetScrollTop_Method">GetScrollTop_Method</button>
+        <button data-testid="@BUTTON_SET_SCROLLTOP" @onclick="SetScrollTop">SetScrollTop</button>
+
+        <button data-testid="@BUTTON_GET_BOUNDING_CLIENT_RECT" @onclick="GetBoundingClientRect">GetBoundingClientRect</button>
+        <button data-testid="@BUTTON_GET_CLIENT_RECTS" @onclick="GetClientRects">GetClientRects</button>
+        <button data-testid="@BUTTON_HAS_ATTRIBUTE" @onclick="HasAttribute">HasAttribute</button>
+        <button data-testid="@BUTTON_HAS_ATTRIBUTES" @onclick="HasAttributes">HasAttributes</button>
+        <button data-testid="@BUTTON_SCROLL" @onclick="Scroll">Scroll</button>
+        <button data-testid="@BUTTON_SCROLL_BY" @onclick="ScrollBy">ScrollBy</button>
+        <button data-testid="@BUTTON_SCROLL_INTO_VIEW" @onclick="ScrollIntoView">ScrollIntoView</button>
+        <button data-testid="@BUTTON_REQUEST_FULLSCREEN" @onclick="RequestFullscreen">RequestFullscreen</button>
+
+
+        <button data-testid="@BUTTON_REGISTER_ON_TRANSITIONSTART" @onclick="RegisterOnTransitionstart">RegisterOnTransitionstart</button>
+        <button data-testid="@BUTTON_REGISTER_ON_TRANSITIONEND" @onclick="RegisterOnTransitionend">RegisterOnTransitionend</button>
+        <button data-testid="@BUTTON_REGISTER_ON_TRANSITIONRUN" @onclick="RegisterOnTransitionrun">RegisterOnTransitionrun</button>
+        <button data-testid="@BUTTON_REGISTER_ON_TRANSITIONCANCEL" @onclick="RegisterOnTransitioncancel">RegisterOnTransitioncancel</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ANIMATIONSTART" @onclick="RegisterOnAnimationstart">RegisterOnAnimationstart</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ANIMATIONEND" @onclick="RegisterOnAnimationend">RegisterOnAnimationend</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ANIMATIONITERATION" @onclick="RegisterOnAnimationiteration">RegisterOnAnimationiteration</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ANIMATIONCANCEL" @onclick="RegisterOnAnimationcancel">RegisterOnAnimationcancel</button>
+
+
+
+        <button data-testid="@BUTTON_GET_INNERTEXT_INPROCESS" @onclick="GetInnerText_InProcess">GetInnerText_InProcess</button>
+        <button data-testid="@BUTTON_SET_INNERTEXT_INPROCESS" @onclick="SetInnerText_InProcess">SetInnerText_InProcess</button>
+        <button data-testid="@BUTTON_GET_OUTERTEXT_INPROCESS" @onclick="GetOuterText_InProcess">GetOuterText_InProcess</button>
+        <button data-testid="@BUTTON_SET_OUTERTEXT_INPROCESS" @onclick="SetOuterText_InProcess">SetOuterText_InProcess</button>
+        <button data-testid="@BUTTON_GET_STYLE_INPROCESS" @onclick="GetStyle_InProcess">GetStyle_InProcess</button>
+        <button data-testid="@BUTTON_SET_STYLE_INPROCESS" @onclick="SetStyle_InProcess">SetStyle_InProcess</button>
+
+        <button data-testid="@BUTTON_GET_OFFSETWIDTH_INPROCESS" @onclick="GetOffsetWidth_InProcess">GetOffsetWidth_InProcess</button>
+        <button data-testid="@BUTTON_GET_OFFSETHEIGHT_INPROCESS" @onclick="GetOffsetHeight_InProcess">GetOffsetHeight_InProcess</button>
+        <button data-testid="@BUTTON_GET_OFFSETLEFT_INPROCESS" @onclick="GetOffsetLeft_InProcess">GetOffsetLeft_InProcess</button>
+        <button data-testid="@BUTTON_GET_OFFSETTOP_INPROCESS" @onclick="GetOffsetTop_InProcess">GetOffsetTop_InProcess</button>
+        <button data-testid="@BUTTON_GET_OFFSETPARENT_INPROCESS" @onclick="GetOffsetParent_InProcess">GetOffsetParent_InProcess</button>
+
+        <button data-testid="@BUTTON_GET_HASFOCUS_INPROCESS" @onclick="GetHasFocus_InProcess" @onpointerenter="GetHasFocus_InProcess">GetHasFocus_InProcess</button>
+
+        <button data-testid="@BUTTON_CLICK_INPROCESS" @onclick="Click_InProcess">Click_InProcess</button>
+        <button data-testid="@BUTTON_FOCUS_INPROCESS" @onclick="Focus_InProcess">Focus_InProcess</button>
+        <button data-testid="@BUTTON_BLUR_INPROCESS" @onclick="Blur_InProcess" @onpointerenter="Blur_InProcess">Blur_InProcess</button>
+        <button data-testid="@BUTTON_SHOW_POPOVER_INPROCESS" @onclick="ShowPopover_InProcess">ShowPopover_InProcess</button>
+        <button data-testid="@BUTTON_HIDE_POPOVER_INPROCESS" @onclick="HidePopover_InProcess">HidePopover_InProcess</button>
+        <button data-testid="@BUTTON_TOGGLE_POPOVER_INPROCESS" @onclick="TogglePopover_InProcess">TogglePopover_InProcess</button>
+        <button data-testid="@BUTTON_TOGGLE_POPOVER_PARAMETER_INPROCESS" @onclick="TogglePopoverParameter_InProcess">TogglePopoverParameter_InProcess</button>
+
+
+        <button data-testid="@BUTTON_GET_INNERHTML_INPROCESS" @onclick="GetInnerHTML_InProcess">GetInnerHTML_InProcess</button>
+        <button data-testid="@BUTTON_SET_INNERHTML_INPROCESS" @onclick="SetInnerHTML_InProcess">SetInnerHTML_InProcess</button>
+        <button data-testid="@BUTTON_GET_OUTERHTML_INPROCESS" @onclick="GetOuterHTML_InProcess">GetOuterHTML_InProcess</button>
+        <button data-testid="@BUTTON_SET_OUTERHTML_INPROCESS" @onclick="SetOuterHTML_InProcess">SetOuterHTML_InProcess</button>
+        <button data-testid="@BUTTON_GET_ATTRIBUTES_INPROCESS" @onclick="GetAttributes_InProcess">GetAttributes_InProcess</button>
+        <button data-testid="@BUTTON_GET_CHILD_ELEMENT_COUNT_INPROCESS" @onclick="GetChildElementCount_InProcess">GetChildElementCount_InProcess</button>
+        <button data-testid="@BUTTON_GET_CHILDREN_INPROCESS" @onclick="GetChildren_InProcess">GetChildren_InProcess</button>
+        <button data-testid="@BUTTON_GET_CLASSNAME_INPROCESS" @onclick="GetClassName_InProcess">GetClassName_InProcess</button>
+        <button data-testid="@BUTTON_SET_CLASSNAME_INPROCESS" @onclick="SetClassName_InProcess">SetClassName_InProcess</button>
+        <button data-testid="@BUTTON_GET_CLASSLIST_INPROCESS" @onclick="GetClassList_InProcess">GetClassList_InProcess</button>
+
+        <button data-testid="@BUTTON_GET_CLIENTWIDTH_INPROCESS" @onclick="GetClientWidth_InProcess">GetClientWidth_InProcess</button>
+        <button data-testid="@BUTTON_GET_CLIENTHEIGHT_INPROCESS" @onclick="GetClientHeight_InProcess">GetClientHeight_InProcess</button>
+        <button data-testid="@BUTTON_GET_CLIENTLEFT_INPROCESS" @onclick="GetClientLeft_InProcess">GetClientLeft_InProcess</button>
+        <button data-testid="@BUTTON_GET_CLIENTTOP_INPROCESS" @onclick="GetClientTop_InProcess">GetClientTop_InProcess</button>
+
+        <button data-testid="@BUTTON_GET_SCROLLWIDTH_INPROCESS" @onclick="GetScrollWidth_InProcess">GetScrollWidth_InProcess</button>
+        <button data-testid="@BUTTON_GET_SCROLLHEIGHT_INPROCESS" @onclick="GetScrollHeight_InProcess">GetScrollHeight_InProcess</button>
+        <button data-testid="@BUTTON_GET_SCROLLLEFT_INPROCESS" @onclick="GetScrollLeft_InProcess">GetScrollLeft_InProcess</button>
+        <button data-testid="@BUTTON_SET_SCROLLLEFT_INPROCESS" @onclick="SetScrollLeft_InProcess">SetScrollLeft_InProcess</button>
+        <button data-testid="@BUTTON_GET_SCROLLTOP_INPROCESS" @onclick="GetScrollTop_InProcess">GetScrollTop_InProcess</button>
+        <button data-testid="@BUTTON_SET_SCROLLTOP_INPROCESS" @onclick="SetScrollTop_InProcess">SetScrollTop_InProcess</button>
+
+        <button data-testid="@BUTTON_GET_BOUNDING_CLIENT_RECT_INPROCESS" @onclick="GetBoundingClientRect_InProcess">GetBoundingClientRect_InProcess</button>
+        <button data-testid="@BUTTON_GET_CLIENT_RECTS_INPROCESS" @onclick="GetClientRects_InProcess">GetClientRects_InProcess</button>
+        <button data-testid="@BUTTON_HAS_ATTRIBUTE_INPROCESS" @onclick="HasAttribute_InProcess">HasAttribute_InProcess</button>
+        <button data-testid="@BUTTON_HAS_ATTRIBUTES_INPROCESS" @onclick="HasAttributes_InProcess">HasAttributes_InProcess</button>
+        <button data-testid="@BUTTON_SCROLL_INPROCESS" @onclick="Scroll_InProcess">Scroll_InProcess</button>
+        <button data-testid="@BUTTON_SCROLL_BY_INPROCESS" @onclick="ScrollBy_InProcess">ScrollBy_InProcess</button>
+        <button data-testid="@BUTTON_SCROLL_INTO_VIEW_INPROCESS" @onclick="ScrollIntoView_InProcess">ScrollIntoView_InProcess</button>
+        <button data-testid="@BUTTON_REQUEST_FULLSCREEN_INPROCESS" @onclick="RequestFullscreen_InProcess">RequestFullscreen_InProcess</button>
+
+
+        <button data-testid="@BUTTON_REGISTER_ON_TRANSITIONSTART_INPROCESS" @onclick="RegisterOnTransitionstart_InProcess">RegisterOnTransitionstart_InProcess</button>
+        <button data-testid="@BUTTON_REGISTER_ON_TRANSITIONEND_INPROCESS" @onclick="RegisterOnTransitionend_InProcess">RegisterOnTransitionend_InProcess</button>
+        <button data-testid="@BUTTON_REGISTER_ON_TRANSITIONRUN_INPROCESS" @onclick="RegisterOnTransitionrun_InProcess">RegisterOnTransitionrun_InProcess</button>
+        <button data-testid="@BUTTON_REGISTER_ON_TRANSITIONCANCEL_INPROCESS" @onclick="RegisterOnTransitioncancel_InProcess">RegisterOnTransitioncancel_InProcess</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ANIMATIONSTART_INPROCESS" @onclick="RegisterOnAnimationstart_InProcess">RegisterOnAnimationstart_InProcess</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ANIMATIONEND_INPROCESS" @onclick="RegisterOnAnimationend_InProcess">RegisterOnAnimationend_InProcess</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ANIMATIONITERATION_INPROCESS" @onclick="RegisterOnAnimationiteration_InProcess">RegisterOnAnimationiteration_InProcess</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ANIMATIONCANCEL_INPROCESS" @onclick="RegisterOnAnimationcancel_InProcess">RegisterOnAnimationcancel_InProcess</button>
+    </div>
+    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+    <div data-testid="@HTML_ELEMENT_CONTAINER" class="html-element-container">
+        <div data-testid="@HTML_ELEMENT" @ref="htmlElement"
+              @onpointerdown="SetPointerCapture" @onpointermove="HasPointerCapture" @onpointerup="ReleasePointerCapture"
+              class="html-element" tabindex="-1" style="visibility: visible;">
+            test <b>bold</b> <i>italic</i> <u>underlined</u>
+        </div>
+    </div>
+    <p data-testid="@POPOVER_ELEMENT" @ref="popoverElement"
+       @onpointerdown="SetPointerCapture_InProcess" @onpointermove="HasPointerCapture_InProcess" @onpointerup="ReleasePointerCapture_InProcess"
+          class="html-element-popover" popover>Popover</p>
+</div>

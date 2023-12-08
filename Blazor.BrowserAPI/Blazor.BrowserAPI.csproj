@@ -7,7 +7,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
 
     <Title>Blazor.BrowserAPI</Title>
-    <Description>A Blazor Library that provides easy access to browser APIs without the need to use any JavaScript. It supports asynchronous communication as well as synchronous (JSRuntime and JSInProcessRuntime).</Description>
+    <Description>A Blazor library that provides easy access to browser APIs without the need to use any JavaScript. Since JavaScript functionality for Blazor is primarly used for accessing BrowserAPIs, for most applications there will be no need to write any additional JavaScript. It supports asynchronous communication as well as synchronous (JSRuntime and JSInProcessRuntime).</Description>
     <Authors>BlackWhiteYoshi</Authors>
     <PackageTags>C#;Blazor;Browser;Web;API;Interop;JavaScript</PackageTags>
 
@@ -18,7 +18,7 @@
     <RepositoryUrl>https://github.com/BlackWhiteYoshi/Blazor.BrowserAPI.git</RepositoryUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
 
-    <PackageIconUrl>https://raw.githubusercontent.com/BlackWhiteYoshi/Blazor.BrowserAPI/master/ICON.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/BlackWhiteYoshi/Blazor.BrowserAPI/main/ICON.png</PackageIconUrl>
     <PackageIcon>ICON.png</PackageIcon>
 
     <PackageLicenseFile>LICENSE</PackageLicenseFile>

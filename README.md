@@ -1,6 +1,7 @@
 # Blazor.BrowserAPI
 
-A Blazor Library that provides easy access to browser APIs without the need to use any JavaScript.
+A Blazor library that provides easy access to browser APIs without the need to use any JavaScript.
+Since JavaScript functionality for Blazor is primarly used for accessing BrowserAPIs, for most applications there will be no need to write any additional JavaScript.  
 It supports asynchronous communication as well as synchronous (JSRuntime and JSInProcessRuntime).
 
 
@@ -11,6 +12,7 @@ It supports asynchronous communication as well as synchronous (JSRuntime and JSI
 - [CookieStorage](Blazor.BrowserAPI/CookieStorage/CookieStorage.md)
 - [Dialog](Blazor.BrowserAPI/Dialog/Dialog.md)
 - [Download](Blazor.BrowserAPI/Download/Download.md)
+- [HTMLElement](Blazor.BrowserAPI/HTMLElement/HTMLElement.md)
 - [Language](Blazor.BrowserAPI/Language/Language.md)
 - [LocalStorage](Blazor.BrowserAPI/LocalStorage/LocalStorage.md)
 - [ServiceWorker](Blazor.BrowserAPI/ServiceWorker/ServiceWorker.md)

@@ -12,6 +12,7 @@ public static class ServiceExtension {
             .AddScoped<ICookieStorageInProcess, CookieStorageInProcess>()
             .AddScoped<IDialogFactory, DialogFactory>()
             .AddScoped<IDownload, Download>()
+            .AddScoped<IHTMLElementFactory, HTMLElementFactory>()
             .AddScoped<ILanguage, Language>()
             .AddScoped<ILanguageInProcess, LanguageInProcess>()
             .AddScoped<ILocalStorage, LocalStorage>()
