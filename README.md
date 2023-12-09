@@ -66,5 +66,5 @@ There are more interfaces coming.
 
 - 0.1  
   First version. Includes 10 BrowserAPIs: Clipboard, Console, CookieStorage, Dialog, Download, HTMLElement, Language, LocalStorage, ServiceWorker, SessionStorage
-- 0.1.1
-  changed SetCookie parameters: *expires* to seconds and *samesite* to string.
+- 0.1.1  
+  Changed SetCookie parameters: *expires* to seconds and *samesite* to string.
