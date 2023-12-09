@@ -55,7 +55,7 @@ public sealed partial class CookieStorageGroup : ComponentBase {
 
     public const string BUTTON_SET_COOKIE = "cookie-storage-set-cookie";
     private async Task SetCookie() {
-        await CookieStorage.SetCookie(TEST_SET_COOKIE_KEY, TEST_SET_COOKIE_VALUE, sameSite: CookieSameSite.Strict);
+        await CookieStorage.SetCookie(TEST_SET_COOKIE_KEY, TEST_SET_COOKIE_VALUE, sameSite: "strict");
     }
 
     public const string BUTTON_REMOVE_COOKIE = "cookie-storage-remove-cookie";
@@ -92,7 +92,7 @@ public sealed partial class CookieStorageGroup : ComponentBase {
 
     public const string BUTTON_SET_COOKIE_INPROCESS = "cookie-storage-set-cookie-inprocess";
     private void SetCookie_InProcess() {
-        CookieStorageInProcess.SetCookie(TEST_SET_COOKIE_KEY, TEST_SET_COOKIE_VALUE, sameSite: CookieSameSite.Strict);
+        CookieStorageInProcess.SetCookie(TEST_SET_COOKIE_KEY, TEST_SET_COOKIE_VALUE, sameSite: "strict");
     }
 
     public const string BUTTON_REMOVE_COOKIE_INPROCESS = "cookie-storage-remove-cookie-inprocess";

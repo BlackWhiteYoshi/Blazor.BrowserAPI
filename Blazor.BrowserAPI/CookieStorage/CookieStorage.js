@@ -65,7 +65,7 @@ export function cookieStorageSetCookie(key, value, expires, path, sameSite, secu
     let cookie = `${key}=${value}`;
 
     if (expires !== null)
-        cookie += `;expires=${new Date(Date.now() + expires).toUTCString()}`;
+        cookie += `;expires=${new Date(Date.now() + expires * 1000).toUTCString()}`;
     cookie += `;path=${path}`;
     cookie += `;SameSite=${sameSite}`;
     if (secure)

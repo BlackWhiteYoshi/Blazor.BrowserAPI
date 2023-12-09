@@ -60,13 +60,13 @@ internal sealed class CookieStorage(IModuleManager moduleManager) : ICookieStora
     /// </summary>
     /// <param name="key">A string containing the name of the key you want to create/update.</param>
     /// <param name="value">A string containing the value you want to give the key you are creating/updating.</param>
-    /// <param name="expires">The expiry date of the cookie. If neither expires nor max-age is specified, it will expire at the end of session.</param>
+    /// <param name="expires">The expiry time in seconds. If not set, it will expire at the end of session.</param>
     /// <param name="path">Indicates the path that must exist in the requested URL for the browser to send the Cookie header (e.g., '/', '/mydir').<br/>Default is "/"</param>
-    /// <param name="sameSite">SameSite prevents the browser from sending this cookie along with cross-site requests. Possible values are lax, strict or none.<br/>Defailt is None</param>
+    /// <param name="sameSite">SameSite prevents the browser from sending this cookie along with cross-site requests. Possible values are<br />-"lax"<br />-"strict"<br />-"none"<br/>Defailt is "none"</param>
     /// <param name="secure">Specifies that the cookie should only be transmitted over a secure protocol.<br/>Default is false</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask SetCookie(string key, string value, int? expires = null, string path = "/", CookieSameSite sameSite = CookieSameSite.None, bool secure = false, CancellationToken cancellationToken = default)
+    public ValueTask SetCookie(string key, string value, int? expires = null, string path = "/", string sameSite = "none", bool secure = false, CancellationToken cancellationToken = default)
         => moduleManager.InvokeTrySync("cookieStorageSetCookie", cancellationToken, [key, value, expires, path, sameSite.ToString(), secure]);
 
     /// <summary>
