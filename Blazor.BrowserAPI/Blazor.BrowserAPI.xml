@@ -668,29 +668,6 @@
             <para>A JavaScript string containing zero or more substitution strings: JavaScript objects with which to replace substitution strings within msg. This parameter gives you additional control over the format of the output.</para>
             </param>
         </member>
-        <member name="T:BrowserAPI.CookieSameSite">
-            <summary>
-            <i>SameSite</i> prevents the browser from sending this cookie along with cross-site requests. Possible values are <i>lax</i>, <i>strict</i> or <i>none</i>.
-            </summary>
-        </member>
-        <member name="F:BrowserAPI.CookieSameSite.None">
-            <summary>
-            The <i>none</i> value explicitly states no restrictions will be applied.
-            The cookie will be sent in all requests—both cross-site and same-site.
-            </summary>
-        </member>
-        <member name="F:BrowserAPI.CookieSameSite.Lax">
-            <summary>
-            The <i>lax</i> value will send the cookie for all same-site requests and top-level navigation GET requests.
-            This is sufficient for user tracking, but it will prevent many Cross-Site Request Forgery (CSRF) attacks.
-            This is the default value in modern browsers.
-            </summary>
-        </member>
-        <member name="F:BrowserAPI.CookieSameSite.Strict">
-            <summary>
-            The <i>strict</i> value will prevent the cookie from being sent by the browser to the target site in all cross-site browsing contexts, even when following a regular link.
-            </summary>
-        </member>
         <member name="T:BrowserAPI.CookieStorage">
             <summary>
             The Document property cookie lets you read and write cookies associated with the document.
@@ -749,15 +726,15 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:BrowserAPI.CookieStorage.SetCookie(System.String,System.String,System.Nullable{System.Int32},System.String,BrowserAPI.CookieSameSite,System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:BrowserAPI.CookieStorage.SetCookie(System.String,System.String,System.Nullable{System.Int32},System.String,System.String,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             When passed a key name and value, will add that key to cookieStorage, or update that key's value if it already exists.
             </summary>
             <param name="key">A string containing the name of the key you want to create/update.</param>
             <param name="value">A string containing the value you want to give the key you are creating/updating.</param>
-            <param name="expires">The expiry date of the cookie. If neither expires nor max-age is specified, it will expire at the end of session.</param>
+            <param name="expires">The expiry time in seconds. If not set, it will expire at the end of session.</param>
             <param name="path">Indicates the path that must exist in the requested URL for the browser to send the Cookie header (e.g., '/', '/mydir').<br/>Default is "/"</param>
-            <param name="sameSite">SameSite prevents the browser from sending this cookie along with cross-site requests. Possible values are lax, strict or none.<br/>Defailt is None</param>
+            <param name="sameSite">SameSite prevents the browser from sending this cookie along with cross-site requests. Possible values are<br />-"lax"<br />-"strict"<br />-"none"<br/>Defailt is "none"</param>
             <param name="secure">Specifies that the cookie should only be transmitted over a secure protocol.<br/>Default is false</param>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -815,15 +792,15 @@
             <param name="key">A string containing the name of the key you want to retrieve the value of.</param>
             <returns></returns>
         </member>
-        <member name="M:BrowserAPI.CookieStorageInProcess.SetCookie(System.String,System.String,System.Nullable{System.Int32},System.String,BrowserAPI.CookieSameSite,System.Boolean)">
+        <member name="M:BrowserAPI.CookieStorageInProcess.SetCookie(System.String,System.String,System.Nullable{System.Int32},System.String,System.String,System.Boolean)">
             <summary>
             When passed a key name and value, will add that key to cookieStorage, or update that key's value if it already exists.
             </summary>
             <param name="key">A string containing the name of the key you want to create/update.</param>
             <param name="value">A string containing the value you want to give the key you are creating/updating.</param>
-            <param name="expires">The expiry date of the cookie. If neither expires nor max-age is specified, it will expire at the end of session.</param>
+            <param name="expires">The expiry time in seconds. If not set, it will expire at the end of session.</param>
             <param name="path">Indicates the path that must exist in the requested URL for the browser to send the Cookie header (e.g., '/', '/mydir').<br/>Default is "/"</param>
-            <param name="sameSite">SameSite prevents the browser from sending this cookie along with cross-site requests. Possible values are lax, strict or none.<br/>Defailt is None</param>
+            <param name="sameSite">SameSite prevents the browser from sending this cookie along with cross-site requests. Possible values are<br />-"lax"<br />-"strict"<br />-"none"<br/>Defailt is "none"</param>
             <param name="secure">Specifies that the cookie should only be transmitted over a secure protocol.<br/>Default is false</param>
         </member>
         <member name="M:BrowserAPI.CookieStorageInProcess.RemoveCookie(System.String)">
@@ -4155,15 +4132,15 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:BrowserAPI.ICookieStorage.SetCookie(System.String,System.String,System.Nullable{System.Int32},System.String,BrowserAPI.CookieSameSite,System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:BrowserAPI.ICookieStorage.SetCookie(System.String,System.String,System.Nullable{System.Int32},System.String,System.String,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             When passed a key name and value, will add that key to cookieStorage, or update that key's value if it already exists.
             </summary>
             <param name="key">A string containing the name of the key you want to create/update.</param>
             <param name="value">A string containing the value you want to give the key you are creating/updating.</param>
-            <param name="expires">The expiry date of the cookie. If neither expires nor max-age is specified, it will expire at the end of session.</param>
+            <param name="expires">The expiry time in seconds. If not set, it will expire at the end of session.</param>
             <param name="path">Indicates the path that must exist in the requested URL for the browser to send the Cookie header (e.g., '/', '/mydir').<br/>Default is "/"</param>
-            <param name="sameSite">SameSite prevents the browser from sending this cookie along with cross-site requests. Possible values are lax, strict or none.<br/>Defailt is None</param>
+            <param name="sameSite">SameSite prevents the browser from sending this cookie along with cross-site requests. Possible values are<br />-"lax"<br />-"strict"<br />-"none"<br/>Defailt is "none"</param>
             <param name="secure">Specifies that the cookie should only be transmitted over a secure protocol.<br/>Default is false</param>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -4216,15 +4193,15 @@
             <param name="key">A string containing the name of the key you want to retrieve the value of.</param>
             <returns></returns>
         </member>
-        <member name="M:BrowserAPI.ICookieStorageInProcess.SetCookie(System.String,System.String,System.Nullable{System.Int32},System.String,BrowserAPI.CookieSameSite,System.Boolean)">
+        <member name="M:BrowserAPI.ICookieStorageInProcess.SetCookie(System.String,System.String,System.Nullable{System.Int32},System.String,System.String,System.Boolean)">
             <summary>
             When passed a key name and value, will add that key to cookieStorage, or update that key's value if it already exists.
             </summary>
             <param name="key">A string containing the name of the key you want to create/update.</param>
             <param name="value">A string containing the value you want to give the key you are creating/updating.</param>
-            <param name="expires">The expiry date of the cookie. If neither expires nor max-age is specified, it will expire at the end of session.</param>
+            <param name="expires">The expiry time in seconds. If not set, it will expire at the end of session.</param>
             <param name="path">Indicates the path that must exist in the requested URL for the browser to send the Cookie header (e.g., '/', '/mydir').<br/>Default is "/"</param>
-            <param name="sameSite">SameSite prevents the browser from sending this cookie along with cross-site requests. Possible values are lax, strict or none.<br/>Defailt is None</param>
+            <param name="sameSite">SameSite prevents the browser from sending this cookie along with cross-site requests. Possible values are<br />-"lax"<br />-"strict"<br />-"none"<br/>Defailt is "none"</param>
             <param name="secure">Specifies that the cookie should only be transmitted over a secure protocol.<br/>Default is false</param>
         </member>
         <member name="M:BrowserAPI.ICookieStorageInProcess.RemoveCookie(System.String)">
