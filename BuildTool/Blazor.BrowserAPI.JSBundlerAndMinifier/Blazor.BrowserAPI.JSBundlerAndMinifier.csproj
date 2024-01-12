@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NUglify" Version="1.21.0" />
+    <PackageReference Include="NUglify" Version="1.21.2" />
   </ItemGroup>
 
 </Project>
