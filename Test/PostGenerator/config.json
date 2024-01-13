@@ -1,0 +1,33 @@
+{
+  "working directory": "../../../../Client/bin/Release/net8.0/browser-wasm/publish/wwwroot",
+  "site url": "https://blazor-browserapi.firerocket.de",
+  "generate files": {
+    "html page": {
+      "enabled": true,
+      "page folder": "__html_page",
+      "render mode": "webassembly"
+    },
+    "other files": [ "_framework/blazor.web.js" ]
+  },
+  "generate html pages": {
+    "enabled": true,
+    "page folder": "__html_page"
+  },
+  "create robots.txt": true,
+  "create sitemap.xml": true,
+  "remove files": {
+    "enabled": true,
+    "folder list": [],
+    "file list": [ "_framework/Blazor.BrowserAPI.Test.Client.pdb.gz" ]
+  },
+  "minify css/js": {
+    "enabled": true,
+    "exclude list startsWith": [ "_content", "_framework", "service-worker.js" ],
+    "exclude list endsWith": []
+  },
+  "zip files": {
+    "enabled": true,
+    "exclude list startsWith": [],
+    "exclude list endsWith": [ ".gz", ".br", ".jpg", ".png", ".woff2" ]
+  }
+}
