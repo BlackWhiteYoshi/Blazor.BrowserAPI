@@ -38,7 +38,6 @@ public sealed class Config {
     public required string SiteUrl { get; init; }
 
     public required bool GenerateHtmlPage { get; init; }
-    public required string RenderMode { get; init; }
     public required string[] GenerateFiles { get; init; }
 
     public required bool CreateRobotsTxt { get; init; }
@@ -73,7 +72,6 @@ public sealed class Config {
         SiteUrl = root.GetString("site url");
 
         GenerateHtmlPage = root.Get("generate files").Get("html page").GetBool("enabled");
-        RenderMode = root.Get("generate files").Get("html page").GetString("render mode");
         GenerateFiles = root.Get("generate files").Get("other files").AsStringArray();
 
         CreateRobotsTxt = root.GetBool("create robots.txt");

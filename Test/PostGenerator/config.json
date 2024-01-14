@@ -4,8 +4,7 @@
   "generate files": {
     "html page": {
       "enabled": true,
-      "page folder": "__html_page",
-      "render mode": "webassembly"
+      "page folder": "__html_page"
     },
     "other files": [ "_framework/blazor.web.js" ]
   },

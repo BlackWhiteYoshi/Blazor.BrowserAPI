@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.Configuration;
 using NUglify;
 using NUglify.Css;
 using NUglify.Html;
@@ -14,15 +12,8 @@ public static class Generator {
         public List<string> ErrorList { get; private set; } = [];
 
 
-        public async Task GenerateHtmlPage() {
+        public async Task GenerateFiles() {
             using WebApplicationFactory<ClientHost.Program.IAssemblyMarker> webApplicationFactory = new();
-            string renderMode = config.RenderMode;
-            webApplicationFactory.WithWebHostBuilder((IWebHostBuilder builder) =>
-                builder.ConfigureAppConfiguration((IConfigurationBuilder configBuilder) =>
-                    configBuilder.AddCommandLine([$"--RenderMode={renderMode}", "--Prerender=true"])
-                )
-            );
-
             using HttpClient httpClient = webApplicationFactory.CreateClient();
 
             if (config.GenerateHtmlPage) {
@@ -200,9 +191,9 @@ public static class Generator {
 
 
         if (config.GenerateHtmlPage || config.GenerateFiles.Length > 0) {
-            Console.WriteLine("Generating html pages...");
-            await core.GenerateHtmlPage();
-            Console.WriteLine("Done html pages.\n");
+            Console.WriteLine("Generating files...");
+            await core.GenerateFiles();
+            Console.WriteLine("Done file generating.\n");
         }
         else
             Console.WriteLine("Skip html pages.\n");
