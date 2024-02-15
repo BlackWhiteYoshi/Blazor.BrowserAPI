@@ -32,7 +32,7 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 
 ```xml
 <ItemGroup>
-  <PackageReference Include="Blazor.BrowserAPI" Version="x.x.x" />
+  <PackageReference Include="Blazor.BrowserAPI" Version="{latest version}" />
 </ItemGroup>
 ```
 
