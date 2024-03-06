@@ -46,7 +46,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.26" />
-    <PackageReference Include="AutoInterface" Version="1.2.6" PrivateAssets="all" />
+    <PackageReference Include="AutoInterface" Version="2.1.0" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>
