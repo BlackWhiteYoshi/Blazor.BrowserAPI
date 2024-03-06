@@ -24,7 +24,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <IsAotCompatible>true</IsAotCompatible>
     <DebugType>embedded</DebugType>
   </PropertyGroup>
