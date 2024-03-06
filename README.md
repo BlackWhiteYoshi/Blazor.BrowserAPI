@@ -57,6 +57,14 @@ To ensure the download has finished, you can use the [*IModuleManager*](Blazor.B
 
 
 <br></br>
+## Namespace BrowserAPI.Implementation
+
+There exists 2 namespaces in this Library: *BrowserAPI* and *BrowserAPI.Implementation*.
+Members inside the *BrowserAPI.Implementation* namespace should not be used directly and there is no guarantee that the members of a class will be stable.
+However, the class names inside *BrowserAPI.Implementation* will be stable, so using them for service provider registration is fine.
+
+
+<br></br>
 ## Preview
 
 This package is in preview and breaking changes may occur.  
@@ -70,3 +78,5 @@ There are more interfaces coming.
   First version. Includes 10 BrowserAPIs: Clipboard, Console, CookieStorage, Dialog, Download, HTMLElement, Language, LocalStorage, ServiceWorker, SessionStorage
 - 0.1.1  
   Changed SetCookie parameters: *expires* to seconds and *samesite* to string.
+- 0.1.2
+  Changed internal classes to public and moved them to namespace *BrowserAPI.Implementation*

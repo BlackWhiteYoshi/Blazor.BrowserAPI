@@ -1,10 +1,10 @@
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BrowserAPI;
+namespace BrowserAPI.Implementation;
 
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-internal sealed class ModuleManager(IJSRuntime jsRuntime) : IModuleManager, IDisposable, IAsyncDisposable {
+public sealed class ModuleManager(IJSRuntime jsRuntime) : IModuleManager, IDisposable, IAsyncDisposable {
     private readonly CancellationTokenSource cancellationTokenSource = new();
     private Task<IJSObjectReference>? moduleDownload;
 

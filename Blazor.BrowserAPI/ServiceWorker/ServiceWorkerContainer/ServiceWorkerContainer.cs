@@ -2,11 +2,11 @@
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BrowserAPI;
+namespace BrowserAPI.Implementation;
 
-[AutoInterface(Modifier = "public partial")]
+[AutoInterface(Namespace = "BrowserAPI", Modifier = "public partial")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-internal sealed class ServiceWorkerContainer(IModuleManager moduleManager) : ServiceWorkerContainerBase, IServiceWorkerContainer {
+public sealed class ServiceWorkerContainer(IModuleManager moduleManager) : ServiceWorkerContainerBase, IServiceWorkerContainer {
     protected override IModuleManager ModuleManager => moduleManager;
 
 

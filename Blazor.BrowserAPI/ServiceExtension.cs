@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using BrowserAPI.Implementation;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BrowserAPI;
 
@@ -6,7 +7,7 @@ public static class ServiceExtension {
     public static IServiceCollection AddBrowserAPI(this IServiceCollection services) {
         services.AddScoped<IModuleManager, ModuleManager>()
             .AddScoped<IClipboard, Clipboard>()
-            .AddScoped<IConsole, Console>()
+            .AddScoped<IConsole, Implementation.Console>()
             .AddScoped<IConsoleInProcess, ConsoleInProcess>()
             .AddScoped<ICookieStorage, CookieStorage>()
             .AddScoped<ICookieStorageInProcess, CookieStorageInProcess>()

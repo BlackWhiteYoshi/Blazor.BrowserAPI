@@ -1,13 +1,13 @@
 ﻿using AutoInterfaceAttributes;
 
-namespace BrowserAPI;
+namespace BrowserAPI.Implementation;
 
 /// <summary>
 /// The read-only sessionStorage property accesses a session Storage object for the current origin.<br />
 /// sessionStorage is similar to localStorage; the difference is that while data in localStorage doesn't expire, data in sessionStorage is cleared when the page session ends.
 /// </summary>
-[AutoInterface]
-internal sealed class SessionStorage(IModuleManager moduleManager) : ISessionStorage {
+[AutoInterface(Namespace = "BrowserAPI")]
+public sealed class SessionStorage(IModuleManager moduleManager) : ISessionStorage {
     /// <summary>
     /// Returns an integer representing the number of data items stored in sessionStorage.
     /// </summary>

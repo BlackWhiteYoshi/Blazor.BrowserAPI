@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BrowserAPI;
+namespace BrowserAPI.Implementation;
 
 /// <summary>
 /// <para>This class can take a <see cref="ElementReference"/> of &lt;dialog&gt; and creates a <see cref="IDialog"/> or <see cref="IDialogInProcess"/> object with it.</para>
@@ -12,9 +12,9 @@ namespace BrowserAPI;
 /// So do not forget to call <see cref="IDisposable.Dispose"/>/<see cref="IAsyncDisposable.DisposeAsync"/> on a dialog-object when you are done with it.
 /// </para>
 /// </summary>
-[AutoInterface]
+[AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-internal sealed class DialogFactory(IModuleManager moduleManager) : IDialogFactory {
+public sealed class DialogFactory(IModuleManager moduleManager) : IDialogFactory {
     /// <summary>
     /// Takes a <see cref="ElementReference"/> of &lt;dialog&gt; and returns a <see cref="IDialog"/> interface to interact with the given &lt;dialog&gt;.
     /// </summary>

@@ -2,7 +2,7 @@
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BrowserAPI;
+namespace BrowserAPI.Implementation;
 
 /// <summary>
 /// <para>navigator.serviceWorker</para>
@@ -11,9 +11,9 @@ namespace BrowserAPI;
 /// Most importantly, it exposes the <i>ServiceWorkerContainer.register()</i> method used to register service workers, and the <i>ServiceWorkerContainer.controller</i> property used to determine whether or not the current page is actively controlled.
 /// </para>
 /// </summary>
-[AutoInterface(Name = "IServiceWorkerContainer", Modifier = "public partial")]
-[AutoInterface(Name = "IServiceWorkerContainerInProcess", Modifier = "public partial")]
-internal abstract class ServiceWorkerContainerBase {
+[AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerContainer", Modifier = "public partial")]
+[AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerContainerInProcess", Modifier = "public partial")]
+public abstract class ServiceWorkerContainerBase {
     protected abstract IModuleManager ModuleManager { get; }
 
 

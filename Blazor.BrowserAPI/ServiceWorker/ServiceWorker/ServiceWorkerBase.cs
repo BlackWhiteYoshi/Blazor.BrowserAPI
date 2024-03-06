@@ -2,12 +2,12 @@
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BrowserAPI;
+namespace BrowserAPI.Implementation;
 
-[AutoInterface(Name = "IServiceWorker", Modifier = "public partial")]
-[AutoInterface(Name = "IServiceWorkerInProcess", Modifier = "public partial")]
+[AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorker", Modifier = "public partial")]
+[AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerInProcess", Modifier = "public partial")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-internal abstract class ServiceWorkerBase {
+public abstract class ServiceWorkerBase {
     protected abstract IJSObjectReference ServiceWorkerJS { get; }
 
 

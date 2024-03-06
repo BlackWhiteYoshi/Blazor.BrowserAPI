@@ -1,12 +1,12 @@
 ﻿using AutoInterfaceAttributes;
 
-namespace BrowserAPI;
+namespace BrowserAPI.Implementation;
 
 /// <summary>
 /// The Document property cookie lets you read and write cookies associated with the document.
 /// </summary>
-[AutoInterface]
-internal sealed class CookieStorage(IModuleManager moduleManager) : ICookieStorage {
+[AutoInterface(Namespace = "BrowserAPI")]
+public sealed class CookieStorage(IModuleManager moduleManager) : ICookieStorage {
     /// <summary>
     /// <para>document.cookie</para>
     /// <para>

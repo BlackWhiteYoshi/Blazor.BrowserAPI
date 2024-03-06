@@ -2,7 +2,7 @@
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BrowserAPI;
+namespace BrowserAPI.Implementation;
 
 /// <summary>
 /// <para>
@@ -11,9 +11,9 @@ namespace BrowserAPI;
 /// </para>
 /// <para>Objects of this class must disposed manually, so do not forget to call <see cref="DisposeAsync"/> when you are done with it.</para>
 /// </summary>
-[AutoInterface(Modifier = "public partial", Inheritance = [typeof(IAsyncDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Modifier = "public partial", Inheritance = [typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-internal sealed class ServiceWorker(IJSObjectReference serviceWorker) : ServiceWorkerBase, IServiceWorker {
+public sealed class ServiceWorker(IJSObjectReference serviceWorker) : ServiceWorkerBase, IServiceWorker {
     protected override IJSObjectReference ServiceWorkerJS => serviceWorker;
 
     [IgnoreAutoInterface]

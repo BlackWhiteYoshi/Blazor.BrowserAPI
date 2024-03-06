@@ -2,15 +2,15 @@
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BrowserAPI;
+namespace BrowserAPI.Implementation;
 
 /// <summary>
 /// <para>The <i>HTMLElement</i> interface represents any HTML element. Some elements directly implement this interface, while others implement it via an interface that inherits it.</para>
 /// <para>Objects of this class must disposed manually, so do not forget to call <see cref="Dispose"/> when you are done with it.</para>
 /// </summary>
-[AutoInterface(Modifier = "public partial", Inheritance = [typeof(IDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Modifier = "public partial", Inheritance = [typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-internal sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElementJS) : HTMLElementBase, IHTMLElementInProcess {
+public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElementJS) : HTMLElementBase, IHTMLElementInProcess {
     protected override Task<IJSObjectReference> HTMLElementTask { get; } = Task.FromResult<IJSObjectReference>(htmlElementJS);
 
     [IgnoreAutoInterface]

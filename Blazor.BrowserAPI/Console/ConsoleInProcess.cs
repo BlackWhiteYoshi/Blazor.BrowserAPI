@@ -1,12 +1,12 @@
 ﻿using AutoInterfaceAttributes;
 
-namespace BrowserAPI;
+namespace BrowserAPI.Implementation;
 
 /// <summary>
 /// The <i>console</i> object provides access to the browser's debugging console (e.g. the Web console in Firefox). The specifics of how it works varies from browser to browser, but there is a de facto set of features that are typically provided.
 /// </summary>
-[AutoInterface]
-internal sealed class ConsoleInProcess(IModuleManager moduleManager) : IConsoleInProcess {
+[AutoInterface(Namespace = "BrowserAPI")]
+public sealed class ConsoleInProcess(IModuleManager moduleManager) : IConsoleInProcess {
     /// <summary>
     /// The <i>console.assert()</i> method writes an error message to the console if the assertion is false. If the assertion is true, nothing happens.
     /// </summary>

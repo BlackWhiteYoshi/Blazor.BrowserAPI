@@ -2,12 +2,12 @@
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BrowserAPI;
+namespace BrowserAPI.Implementation;
 
-[AutoInterface(Name = "IDialog", Modifier = "public partial")]
-[AutoInterface(Name = "IDialogInProcess", Modifier = "public partial")]
+[AutoInterface(Namespace = "BrowserAPI", Name = "IDialog", Modifier = "public partial")]
+[AutoInterface(Namespace = "BrowserAPI", Name = "IDialogInProcess", Modifier = "public partial")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-internal abstract class DialogBase {
+public abstract class DialogBase {
     protected abstract Task<IJSObjectReference> DialogTask { get; }
 
 

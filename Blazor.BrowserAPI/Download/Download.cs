@@ -2,14 +2,14 @@
 using Microsoft.JSInterop;
 using System.Text;
 
-namespace BrowserAPI;
+namespace BrowserAPI.Implementation;
 
 /// <summary>
 /// Save data as a file download on the filesystem.
 /// <para>For file upload use the <see cref="Microsoft.AspNetCore.Components.Forms.InputFile">InputFile</see> component.</para>
 /// </summary>
-[AutoInterface]
-internal sealed class Download(IModuleManager moduleManager) : IDownload {
+[AutoInterface(Namespace = "BrowserAPI")]
+public sealed class Download(IModuleManager moduleManager) : IDownload {
     /// <summary>
     /// Triggers a download by adding an &lt;a&gt;-element to the document and simulate a click on it.
     /// </summary>

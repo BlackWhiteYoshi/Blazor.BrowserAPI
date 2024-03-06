@@ -1,13 +1,13 @@
 ﻿using AutoInterfaceAttributes;
 
-namespace BrowserAPI;
+namespace BrowserAPI.Implementation;
 
 /// <summary>
 /// The localStorage read-only property of the window interface allows you to access a Storage object for the Document's origin;<br />
 /// the stored data is saved across browser sessions.
 /// </summary>
-[AutoInterface]
-internal sealed class LocalStorage(IModuleManager moduleManager) : ILocalStorage {
+[AutoInterface(Namespace = "BrowserAPI")]
+public sealed class LocalStorage(IModuleManager moduleManager) : ILocalStorage {
     /// <summary>
     /// Returns an integer representing the number of data items stored in localStorage.
     /// </summary>

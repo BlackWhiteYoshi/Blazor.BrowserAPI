@@ -2,12 +2,12 @@
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BrowserAPI;
+namespace BrowserAPI.Implementation;
 
-[AutoInterface(Name = "IHTMLElement", Modifier = "public partial")]
-[AutoInterface(Name = "IHTMLElementInProcess", Modifier = "public partial")]
+[AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLElement", Modifier = "public partial")]
+[AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLElementInProcess", Modifier = "public partial")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-internal abstract class HTMLElementBase {
+public abstract class HTMLElementBase {
     protected abstract Task<IJSObjectReference> HTMLElementTask { get; }
 
 

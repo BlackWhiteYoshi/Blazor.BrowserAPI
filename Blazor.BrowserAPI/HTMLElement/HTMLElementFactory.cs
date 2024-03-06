@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BrowserAPI;
+namespace BrowserAPI.Implementation;
 
 /// <summary>
 /// <para>This class can take a <see cref="ElementReference"/> and creates a <see cref="IHTMLElement"/> or <see cref="IHTMLElementProcess"/> object with it.</para>
@@ -12,9 +12,9 @@ namespace BrowserAPI;
 /// So do not forget to call <see cref="IDisposable.Dispose"/>/<see cref="IAsyncDisposable.DisposeAsync"/> on a htmlElement-object when you are done with it.
 /// </para>
 /// </summary>
-[AutoInterface]
+[AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-internal sealed class HTMLElementFactory(IModuleManager moduleManager) : IHTMLElementFactory {
+public sealed class HTMLElementFactory(IModuleManager moduleManager) : IHTMLElementFactory {
     /// <summary>
     /// Takes a <see cref="ElementReference"/> and returns a <see cref="IHTMLElement"/> interface to interact with the given html-element.
     /// </summary>
