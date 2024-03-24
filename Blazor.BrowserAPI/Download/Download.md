@@ -25,7 +25,7 @@ public sealed partial class ExampleComponent : ComponentBase {
 
 #### Methods
 
-| **Name**       | **Parameters**                                                                                      | **ReturnType** | **Dexcription**                                                                                |
+| **Name**       | **Parameters**                                                                                      | **ReturnType** | **Description**                                                                                |
 | -------------- | --------------------------------------------------------------------------------------------------- | ---------------| ---------------------------------------------------------------------------------------------- |
 | DownloadAsFile | string fileName, string fileContent, [CancellationToken cancellationToken = default]                | ValueTask      | Triggers a download by adding an &lt;a&gt;-element to the document and simulate a click on it. |
 | DownloadAsFile | string fileName, byte[] fileContent, [CancellationToken cancellationToken = default]                | ValueTask      | Triggers a download by adding an &lt;a&gt;-element to the document and simulate a click on it. |

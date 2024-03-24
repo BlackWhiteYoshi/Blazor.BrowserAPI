@@ -52,6 +52,6 @@ Synchronous functionalities will throw an Exception when the module is not loade
 
 #### Methods
 
-| **Name**   | **Parameters** | ReturnType                     | **Dexcription**                                                                                                                                 |
+| **Name**   | **Parameters** | ReturnType                     | **Description**                                                                                                                                 |
 | ---------- | -------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | LoadModule | *empty*        | Task&lt;IJSObjectReference&gt; | Starts the download of the JS module. Returns a Task that represents the download of the module. If this tasks finishes, the download finishes. |

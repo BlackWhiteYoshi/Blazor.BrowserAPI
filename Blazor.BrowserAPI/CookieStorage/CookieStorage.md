@@ -26,14 +26,14 @@ public sealed partial class ExampleComponent : ComponentBase {
 
 #### Properties
 
-| **Name**   | **Type**          | get/set | **Dexcription**                                                                                                                                                                                         |
+| **Name**   | **Type**          | get/set | **Description**                                                                                                                                                                                         |
 | ---------- | ----------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | AllCookies | ValueTask<string> | get     | document.cookie; Returns a string containing a semicolon-separated list of all cookies (i.e. key=value pairs). Note that each key and value may be surrounded by whitespace (space and tab characters). |
 | Length     | ValueTask<int>    | get     | Returns an integer representing the number of cookies stored in cookieStorage.                                                                                                                          |
 
 #### Methods
 
-| **Name**      | **Parameters**                                                                                                                                                           | **ReturnType**     | **Dexcription**                                                                                                                                                                                         |
+| **Name**      | **Parameters**                                                                                                                                                           | **ReturnType**     | **Description**                                                                                                                                                                                         |
 | ----------    | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | GetAllCookies | CancellationToken cancellationToken                                                                                                                                      | ValueTask<string>  | document.cookie; Returns a string containing a semicolon-separated list of all cookies (i.e. key=value pairs). Note that each key and value may be surrounded by whitespace (space and tab characters). |
 | GetLength     | CancellationToken cancellationToken                                                                                                                                      | ValueTask<int>     | Returns an integer representing the number of cookies stored in cookieStorage.                                                                                                                          |
@@ -49,14 +49,14 @@ public sealed partial class ExampleComponent : ComponentBase {
 
 #### Properties
 
-| **Name**   | **Type** | get/set | **Dexcription**                                                                                                                                                                                         |
+| **Name**   | **Type** | get/set | **Description**                                                                                                                                                                                         |
 | ---------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | AllCookies | string   | get     | document.cookie; Returns a string containing a semicolon-separated list of all cookies (i.e. key=value pairs). Note that each key and value may be surrounded by whitespace (space and tab characters). |
 | Length     | int      | get     | Returns an integer representing the number of data items stored in sessionStorage.                                                                                                                      |
 
 #### Methods
 
-| **Name**     | **Parameters**                                                                                                          | **ReturnType**     | **Dexcription**                                                                                              |
+| **Name**     | **Parameters**                                                                                                          | **ReturnType**     | **Description**                                                                                              |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------ |
 | Key          | int index                                                                                                               | string? | When passed a number *n*, this method will return the name of the nth key in cookieStorage.                             |
 | GetCookie    | string key                                                                                                              | string? | When passed a key name, will return that key's value.                                                                   |

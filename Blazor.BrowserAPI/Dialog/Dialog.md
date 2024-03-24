@@ -51,7 +51,7 @@ So do not forget to call Dispose()/DisposeAsync() on a dialog-object when you ar
 
 #### Methods
 
-| **Name**        | **Parameters**          | **ReturnType**   | **Dexcription**                                                                                                                   |
+| **Name**        | **Parameters**          | **ReturnType**   | **Description**                                                                                                                   |
 | --------------- | ----------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | Create          | ElementReference dialog | IDialog          | Takes a *ElementReference* of &lt;dialog&gt; and returns *IDialog"* interface to interact with the given &lt;dialog&gt;.          |
 | CreateInProcess | ElementReference dialog | IDialogInProcess | Takes a *ElementReference* of &lt;dialog&gt; and returns *IDialogInProcess"* interface to interact with the given &lt;dialog&gt;. |
@@ -66,14 +66,14 @@ Objects of this class must disposed manually, so do not forget to call DisposeAs
 
 #### Properties
 
-| **Name**    | **Type**                | get/set | **Dexcription**                                                                                                                                                                    |
+| **Name**    | **Type**                | get/set | **Description**                                                                                                                                                                    |
 | ----------- | ----------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Open        | ValueTask&lt;bool&gt;   | get     | The *open* property of the HTMLDialogElement interface is a boolean value reflecting the open HTML attribute, indicating whether the &lt;dialog&gt; is available for interaction.  |
 | ReturnValue | ValueTask&lt;string&gt; | get     | The *returnValue* property of the HTMLDialogElement interface gets or sets the return value for the &lt;dialog&gt;, usually to indicate which button the user pressed to close it. |
 
 #### Methods
 
-| **Name**       | **Parameters**                                                      | **ReturnType**           | **Dexcription**                                                                                                                                                                                                                                                                                                    |
+| **Name**       | **Parameters**                                                      | **ReturnType**           | **Description**                                                                                                                                                                                                                                                                                                    |
 | -------------- | ------------------------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | GetOpen        | CancellationToken cancellationToken                                 | ValueTask&lt;bool&gt;    | The *open* property of the HTMLDialogElement interface is a boolean value reflecting the open HTML attribute, indicating whether the &lt;dialog&gt; is available for interaction.                                                                                                                                  |
 | SetOpen        | bool value, [CancellationToken cancellationToken = default]         | ValueTask                | The *open* property of the HTMLDialogElement interface is a boolean value reflecting the open HTML attribute, indicating whether the &lt;dialog&gt; is available for interaction.                                                                                                                                  |
@@ -86,7 +86,7 @@ Objects of this class must disposed manually, so do not forget to call DisposeAs
 
 #### Events
 
-| **Name** | **Type** | **Dexcription**                                                                                                                                                                                     |
+| **Name** | **Type** | **Description**                                                                                                                                                                                     |
 | -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | OnCancel | Action   | The *cancel* event fires on a &lt;dialog&gt; when the user instructs the browser that they wish to dismiss the current open dialog. The browser fires this event when the user presses the Esc key. |
 | OnClose  | Action   | The *close* event is fired on an HTMLDialogElement object when the &lt;dialog&gt; it represents has been closed.                                                                                    |
@@ -101,14 +101,14 @@ Objects of this class must disposed manually, so do not forget to call Dispose()
 
 #### Properties
 
-| **Name**    | **Type** | get/set | **Dexcription**                                                                                                                                                                    |
+| **Name**    | **Type** | get/set | **Description**                                                                                                                                                                    |
 | ----------- | -------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Open        | bool     | get/set | The *open* property of the HTMLDialogElement interface is a boolean value reflecting the open HTML attribute, indicating whether the &lt;dialog&gt; is available for interaction.  |
 | ReturnValue | string   | get/set | The *returnValue* property of the HTMLDialogElement interface gets or sets the return value for the &lt;dialog&gt;, usually to indicate which button the user pressed to close it. |
 
 #### Methods
 
-| **Name**       | **Parameters**     | **ReturnType** | **Dexcription**                                                                                                                                                                                                                                                                                                    |
+| **Name**       | **Parameters**     | **ReturnType** | **Description**                                                                                                                                                                                                                                                                                                    |
 | -------------- | ------------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Show           | *empty*            | void           | The *show()* method of the HTMLDialogElement interface displays the dialog modelessly, i.e. still allowing interaction with content outside of the dialog.                                                                                                                                                         |
 | ShowModal      | *empty*            | void           | The *showModal()* method of the HTMLDialogElement interface displays the dialog as a modal, over the top of any other dialogs that might be present. It displays in the top layer, along with a ::backdrop pseudo-element. Interaction outside the dialog is blocked and the content outside it is rendered inert. |
@@ -117,7 +117,7 @@ Objects of this class must disposed manually, so do not forget to call Dispose()
 
 #### Events
 
-| **Name** | **Type** | **Dexcription**                                                                                                                                                                                     |
+| **Name** | **Type** | **Description**                                                                                                                                                                                     |
 | -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | OnCancel | Action   | The *cancel* event fires on a &lt;dialog&gt; when the user instructs the browser that they wish to dismiss the current open dialog. The browser fires this event when the user presses the Esc key. |
 | OnClose  | Action   | The *close* event is fired on an HTMLDialogElement object when the &lt;dialog&gt; it represents has been closed.                                                                                    |

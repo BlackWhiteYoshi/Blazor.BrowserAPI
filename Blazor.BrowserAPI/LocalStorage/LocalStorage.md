@@ -27,13 +27,13 @@ public sealed partial class ExampleComponent : ComponentBase {
 
 #### Properties
 
-| **Name** | **Type**       | get/set | **Dexcription**                                                                  |
+| **Name** | **Type**       | get/set | **Description**                                                                  |
 | -------- | -------------- | ------- | -------------------------------------------------------------------------------- |
 | Length   | ValueTask<int> | get     | Returns an integer representing the number of data items stored in localStorage. |
 
 #### Methods
 
-| **Name**   | **Parameters**                                                            | **ReturnType**     | **Dexcription**                                                                                                       |
+| **Name**   | **Parameters**                                                            | **ReturnType**     | **Description**                                                                                                       |
 | ---------- | ------------------------------------------------------------------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------- |
 | GetLength  | CancellationToken cancellationToken                                       | ValueTask<int>     | Returns an integer representing the number of data items stored in localStorage.                                      |
 | Key        | int index, [CancellationToken cancellationToken = default]                | ValueTask<string?> | When passed a number *n*, this method will return the name of the nth key in localStorage.                            |
@@ -48,13 +48,13 @@ public sealed partial class ExampleComponent : ComponentBase {
 
 #### Properties
 
-| **Name** | **Type** | get/set | **Dexcription**                                                                  |
+| **Name** | **Type** | get/set | **Description**                                                                  |
 | -------- | -------- | ------- | -------------------------------------------------------------------------------- |
 | Length   | int      | get     | Returns an integer representing the number of data items stored in localStorage. |
 
 #### Methods
 
-| **Name**   | **Parameters**                                                            | **ReturnType**     | **Dexcription**                                           |
+| **Name**   | **Parameters**                                                            | **ReturnType**     | **Description**                                           |
 | ---------- | ------------------------------------------------------------------------- | ------------------ | --------------------------------------------------------- |
 | Key        | int index                | string? | When passed a number *n*, this method will return the name of the nth key in localStorage.                            |
 | GetItem    | string key               | string? | When passed a key name, will return that key's value.                                                                 |
