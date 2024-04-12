@@ -13,7 +13,6 @@ namespace BrowserAPI.Implementation;
 public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTMLElementBase, IHTMLElement {
     protected override Task<IJSObjectReference> HTMLElementTask { get; } = htmlElementTask;
 
-    [IgnoreAutoInterface]
     public async ValueTask DisposeAsync() => await (await HTMLElementTask).DisposeTrySync();
 
 

@@ -1,6 +1,3 @@
-// @ts-check
-
-
 /**
  * @param {string} fileName
  * @param {import("../blazor").DotNet.DotNetStreamReference} fileContent

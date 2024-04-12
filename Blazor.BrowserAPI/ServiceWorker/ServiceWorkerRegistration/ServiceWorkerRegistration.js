@@ -1,5 +1,3 @@
-// @ts-check
-
 import { ServiceWorkerWrapper } from "../ServiceWorker/ServiceWorker.js";
 import { createServiceWorker } from "../ServiceWorker/ServiceWorker.js";
 
@@ -73,9 +71,8 @@ export class ServiceWorkerRegistrationWrapper {
      * @returns {Promise<ServiceWorkerRegistrationWrapper>}
      */
     async update() {
-        /** @type {ServiceWorkerRegistration} */
-        // @ts-ignore -> wrong return type definition for update(): expected ServiceWorkerRegistration, actually void
-        const updatedServiceWorkerRegistration = (await this.#serviceWorkerRegistration.update());
+        // wrong return type definition for update(): expected ServiceWorkerRegistration, actually void
+        const updatedServiceWorkerRegistration = /** @type {ServiceWorkerRegistration} */ (/** @type {unknown} */ (await this.#serviceWorkerRegistration.update()));
         return createServiceWorkerRegistration(updatedServiceWorkerRegistration);
     }
 

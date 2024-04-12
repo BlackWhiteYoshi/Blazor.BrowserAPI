@@ -1,6 +1,3 @@
-// @ts-check
-
-
 /**
  * @param {HTMLDialogElement} dialog
  * @returns {DialogWrapper}

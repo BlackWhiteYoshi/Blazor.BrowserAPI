@@ -13,7 +13,6 @@ namespace BrowserAPI.Implementation;
 public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElementJS) : HTMLElementBase, IHTMLElementInProcess {
     protected override Task<IJSObjectReference> HTMLElementTask { get; } = Task.FromResult<IJSObjectReference>(htmlElementJS);
 
-    [IgnoreAutoInterface]
     public void Dispose() => htmlElementJS.Dispose();
 
 

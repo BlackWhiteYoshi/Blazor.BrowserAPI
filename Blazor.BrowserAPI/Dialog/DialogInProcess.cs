@@ -13,7 +13,6 @@ namespace BrowserAPI.Implementation;
 public sealed class DialogInProcess(IJSInProcessObjectReference dialogJS) : DialogBase, IDialogInProcess {
     protected override Task<IJSObjectReference> DialogTask { get; } = Task.FromResult<IJSObjectReference>(dialogJS);
 
-    [IgnoreAutoInterface]
     public void Dispose() => dialogJS.Dispose();
 
 

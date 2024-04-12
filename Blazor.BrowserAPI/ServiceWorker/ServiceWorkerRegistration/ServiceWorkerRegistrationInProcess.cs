@@ -16,7 +16,6 @@ namespace BrowserAPI.Implementation;
 public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReference serviceWorkerRegistration) : ServiceWorkerRegistrationBase, IServiceWorkerRegistrationInProcess {
     protected override IJSObjectReference ServiceWorkerRegistrationJS => serviceWorkerRegistration;
 
-    [IgnoreAutoInterface]
     public void Dispose() => serviceWorkerRegistration.Dispose();
 
 

@@ -1,6 +1,3 @@
-// @ts-check
-
-
 /**
  * @returns {string}
  */
@@ -9,7 +6,7 @@ export function LanguageBrowser() {
 }
 
 /**
- * @returns string
+ * @returns {string}
  */
 export function LanguageHtmlRead() {
     return document.documentElement.lang;
@@ -17,7 +14,7 @@ export function LanguageHtmlRead() {
 
 /**
  * @param {string} language
- * @returns string
+ * @returns {string}
  */
 export function LanguageHtmlWrite(language) {
     return document.documentElement.lang = language;

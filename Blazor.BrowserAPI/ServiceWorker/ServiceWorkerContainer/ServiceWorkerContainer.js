@@ -1,5 +1,3 @@
-// @ts-check
-
 import { ServiceWorkerRegistrationWrapper } from "../ServiceWorkerRegistration/ServiceWorkerRegistration.js";
 import { createServiceWorkerRegistration } from "../ServiceWorkerRegistration/ServiceWorkerRegistration.js";
 import { ServiceWorkerWrapper } from "../ServiceWorker/ServiceWorker.js";

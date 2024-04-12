@@ -16,7 +16,6 @@ namespace BrowserAPI.Implementation;
 public sealed class ServiceWorker(IJSObjectReference serviceWorker) : ServiceWorkerBase, IServiceWorker {
     protected override IJSObjectReference ServiceWorkerJS => serviceWorker;
 
-    [IgnoreAutoInterface]
     public ValueTask DisposeAsync() => serviceWorker.DisposeTrySync();
 
 

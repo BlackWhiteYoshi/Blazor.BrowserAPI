@@ -1,6 +1,3 @@
-// @ts-check
-
-
 /**
  * @param {ServiceWorker | null} serviceWorker
  * @returns {ServiceWorkerWrapper | null}
