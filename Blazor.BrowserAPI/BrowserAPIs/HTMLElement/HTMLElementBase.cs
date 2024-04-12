@@ -4,11 +4,14 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
+/// Base class for <see cref="HTMLElement"/> and <see cref="HTMLElementInProcess"/>.
+/// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLElement", Modifier = "public partial")]
 [AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLElementInProcess", Modifier = "public partial")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class HTMLElementBase {
-    protected abstract Task<IJSObjectReference> HTMLElementTask { get; }
+    private protected abstract Task<IJSObjectReference> HTMLElementTask { get; }
 
 
     /// <summary>

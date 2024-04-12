@@ -4,11 +4,14 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
+/// Base class for <see cref="ServiceWorkerRegistration"/> and <see cref="ServiceWorkerRegistrationInProcess"/>.
+/// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerRegistration", Modifier = "public partial")]
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerRegistrationInProcess", Modifier = "public partial")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class ServiceWorkerRegistrationBase {
-    protected abstract IJSObjectReference ServiceWorkerRegistrationJS { get; }
+    private protected abstract IJSObjectReference ServiceWorkerRegistrationJS { get; }
 
 
     /// <summary>
@@ -20,7 +23,7 @@ public abstract class ServiceWorkerRegistrationBase {
     /// <returns>false if no registration was found, otherwise true (irrespective of whether unregistration happened or not)</returns>
     public ValueTask<bool> Unregister(CancellationToken cancellationToken = default) => ServiceWorkerRegistrationJS.InvokeAsync<bool>("unregister", cancellationToken);
 
-    protected ValueTask<IJSObjectReference> UpdateBase(CancellationToken cancellationToken = default) => ServiceWorkerRegistrationJS.InvokeAsync<IJSObjectReference>("update", cancellationToken);
+    private protected ValueTask<IJSObjectReference> UpdateBase(CancellationToken cancellationToken = default) => ServiceWorkerRegistrationJS.InvokeAsync<IJSObjectReference>("update", cancellationToken);
 
 
     #region UpdateFound event

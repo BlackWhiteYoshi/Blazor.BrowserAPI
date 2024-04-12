@@ -4,11 +4,14 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
+/// Base class for <see cref="Dialog"/> and <see cref="DialogInProcess"/>.
+/// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Name = "IDialog", Modifier = "public partial")]
 [AutoInterface(Namespace = "BrowserAPI", Name = "IDialogInProcess", Modifier = "public partial")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class DialogBase {
-    protected abstract Task<IJSObjectReference> DialogTask { get; }
+    private protected abstract Task<IJSObjectReference> DialogTask { get; }
 
 
     #region Cancel event

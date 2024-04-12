@@ -35,7 +35,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <NoWarn>$(NoWarn);CS1066</NoWarn> <!-- Explicitly Implementing an Interface with Optional Parameters -->
+    <NoWarn>$(NoWarn);CS1066</NoWarn> <!-- Explicitly Implementing an Interface with optional Parameters -->
   </PropertyGroup>
 
   <ItemGroup>

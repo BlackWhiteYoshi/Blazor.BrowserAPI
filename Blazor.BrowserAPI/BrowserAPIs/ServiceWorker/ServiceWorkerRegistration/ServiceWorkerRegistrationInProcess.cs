@@ -14,8 +14,11 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Modifier = "public partial", Inheritance = [typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReference serviceWorkerRegistration) : ServiceWorkerRegistrationBase, IServiceWorkerRegistrationInProcess {
-    protected override IJSObjectReference ServiceWorkerRegistrationJS => serviceWorkerRegistration;
+    private protected override IJSObjectReference ServiceWorkerRegistrationJS => serviceWorkerRegistration;
 
+    /// <summary>
+    /// Releases the JS instance for this service worker registration.
+    /// </summary>
     public void Dispose() => serviceWorkerRegistration.Dispose();
 
 

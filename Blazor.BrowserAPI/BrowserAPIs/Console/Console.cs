@@ -55,14 +55,14 @@ public sealed class Console(IModuleManager moduleManager) : IConsole {
     public ValueTask Count(string label, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleCount", cancellationToken, [label]);
 
     /// <summary>
-    /// The <i>console.countReset()</i> method resets counter used with <see cref="Count"/>.
+    /// The <i>console.countReset()</i> method resets counter used with <see cref="Count(CancellationToken)"/>.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask CountReset(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleCountReset", cancellationToken);
 
     /// <summary>
-    /// The <i>console.countReset()</i> method resets counter used with <see cref="Count(string)"/>.
+    /// The <i>console.countReset()</i> method resets counter used with <see cref="Count(string, CancellationToken)"/>.
     /// </summary>
     /// <param name="label">A string. If supplied, <i>countReset()</i> resets the count for that label to 0.
     /// If omitted, <i>countReset()</i> resets the default counter to 0.</param>
@@ -152,7 +152,7 @@ public sealed class Console(IModuleManager moduleManager) : IConsole {
 
     /// <summary>
     /// <para>
-    /// The <i>console.groupCollapsed()</i> method creates a new inline group in the Web Console. Unlike <see cref="Group"/>, however, the new group is created collapsed.
+    /// The <i>console.groupCollapsed()</i> method creates a new inline group in the Web Console. Unlike <see cref="Group(CancellationToken)"/>, however, the new group is created collapsed.
     /// The user will need to use the disclosure button next to it to expand it, revealing the entries created in the group.
     /// </para>
     /// <para>Call <see cref="GroupEnd"/> to back out to the parent group.</para>
@@ -163,7 +163,7 @@ public sealed class Console(IModuleManager moduleManager) : IConsole {
 
     /// <summary>
     /// <para>
-    /// The <i>console.groupCollapsed()</i> method creates a new inline group in the Web Console. Unlike <see cref="Group(string)"/>, however, the new group is created collapsed.
+    /// The <i>console.groupCollapsed()</i> method creates a new inline group in the Web Console. Unlike <see cref="Group(string, CancellationToken)"/>, however, the new group is created collapsed.
     /// The user will need to use the disclosure button next to it to expand it, revealing the entries created in the group.
     /// </para>
     /// <para>Call <see cref="GroupEnd"/> to back out to the parent group.</para>
@@ -260,7 +260,7 @@ public sealed class Console(IModuleManager moduleManager) : IConsole {
     /// <summary>
     /// The <i>console.time()</i> method starts a timer you can use to track how long an operation takes.
     /// You give each timer a unique name, and may have up to 10,000 timers running on a given page.
-    /// When you call <see cref="TimeEnd"/>, the browser will output the time, in milliseconds, that elapsed since the timer was started.
+    /// When you call <see cref="TimeEnd(CancellationToken)"/>, the browser will output the time, in milliseconds, that elapsed since the timer was started.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
@@ -269,7 +269,7 @@ public sealed class Console(IModuleManager moduleManager) : IConsole {
     /// <summary>
     /// The <i>console.time()</i> method starts a timer you can use to track how long an operation takes.
     /// You give each timer a unique name, and may have up to 10,000 timers running on a given page.
-    /// When you call <see cref="TimeEnd(string)"/> with the same name, the browser will output the time, in milliseconds, that elapsed since the timer was started.
+    /// When you call <see cref="TimeEnd(string, CancellationToken)"/> with the same name, the browser will output the time, in milliseconds, that elapsed since the timer was started.
     /// </summary>
     /// <param name="label">
     /// A string representing the name to give the new timer.
@@ -281,14 +281,14 @@ public sealed class Console(IModuleManager moduleManager) : IConsole {
     public ValueTask Time(string label, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleTime", cancellationToken, [label]);
 
     /// <summary>
-    /// The <i>console.timeEnd()</i> stops a timer that was previously started by calling <see cref="Time"/>.
+    /// The <i>console.timeEnd()</i> stops a timer that was previously started by calling <see cref="Time(CancellationToken)"/>.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask TimeEnd(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleTimeEnd", cancellationToken);
 
     /// <summary>
-    /// The <i>console.timeEnd()</i> stops a timer that was previously started by calling <see cref="Time(string)"/>.
+    /// The <i>console.timeEnd()</i> stops a timer that was previously started by calling <see cref="Time(string, CancellationToken)"/>.
     /// </summary>
     /// <param name="label">
     /// A string representing the name of the timer to stop.
@@ -300,14 +300,14 @@ public sealed class Console(IModuleManager moduleManager) : IConsole {
     public ValueTask TimeEnd(string label, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleTimeEnd", cancellationToken, [label]);
 
     /// <summary>
-    /// The <i>console.timeLog()</i> method logs the current value of a timer that was previously started by calling <see cref="Time"/>.
+    /// The <i>console.timeLog()</i> method logs the current value of a timer that was previously started by calling <see cref="Time(CancellationToken)"/>.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask TimeLog(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleTimeLog", cancellationToken);
 
     /// <summary>
-    /// The <i>console.timeLog()</i> method logs the current value of a timer that was previously started by calling <see cref="Time(string)"/>.
+    /// The <i>console.timeLog()</i> method logs the current value of a timer that was previously started by calling <see cref="Time(string, CancellationToken)"/>.
     /// </summary>
     /// <param name="label">The name of the timer to log to the console. If this is omitted the label "default" is used.</param>
     /// <param name="cancellationToken"></param>
@@ -315,7 +315,7 @@ public sealed class Console(IModuleManager moduleManager) : IConsole {
     public ValueTask TimeLog(string label, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("consoleTimeLog", cancellationToken, [label]);
 
     /// <summary>
-    /// The <i>console.timeLog()</i> method logs the current value of a timer that was previously started by calling <see cref="Time(string)"/>.
+    /// The <i>console.timeLog()</i> method logs the current value of a timer that was previously started by calling <see cref="Time(string, CancellationToken)"/>.
     /// </summary>
     /// <param name="label">The name of the timer to log to the console. If this is omitted the label "default" is used.</param>
     /// <param name="data">Additional values to be logged to the console after the timer output.</param>
@@ -337,7 +337,7 @@ public sealed class Console(IModuleManager moduleManager) : IConsole {
     /// </summary>
     /// <param name="objects">
     /// Zero or more objects to be output to console along with the trace.
-    /// These are assembled and formatted the same way they would be if passed to the <see cref="Log(object?[]?)"/> method.
+    /// These are assembled and formatted the same way they would be if passed to the <see cref="Log(object[], CancellationToken)"/> method.
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>

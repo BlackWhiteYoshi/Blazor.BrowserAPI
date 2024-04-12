@@ -3,6 +3,10 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
+/// Implementation of <see cref="IModuleManager"/>.
+/// </summary>
+/// <param name="jsRuntime"></param>
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class ModuleManager(IJSRuntime jsRuntime) : IModuleManager, IDisposable, IAsyncDisposable {
     private readonly CancellationTokenSource cancellationTokenSource = new();
@@ -41,6 +45,10 @@ public sealed class ModuleManager(IJSRuntime jsRuntime) : IModuleManager, IDispo
     }
 
 
+    /// <summary>
+    /// Implementation of <see cref="IModuleManager.LoadModule"/>.
+    /// </summary>
+    /// <returns></returns>
     public Task<IJSObjectReference> LoadModule() => moduleDownload ??= jsRuntime.InvokeAsync<IJSObjectReference>("import", cancellationTokenSource.Token, "/_content/Blazor.BrowserAPI/BrowserAPI.js").AsTask();
 
 

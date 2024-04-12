@@ -5,16 +5,12 @@ using System.Diagnostics.CodeAnalysis;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// <para>navigator.serviceWorker</para>
-/// <para>
-/// The <i>ServiceWorkerContainer</i> interface of the <i>Service Worker API</i> provides an object representing the service worker as an overall unit in the network ecosystem, including facilities to register, unregister and update service workers, and access the state of service workers and their registrations.<br />
-/// Most importantly, it exposes the <i>ServiceWorkerContainer.register()</i> method used to register service workers, and the <i>ServiceWorkerContainer.controller</i> property used to determine whether or not the current page is actively controlled.
-/// </para>
+/// Base class for <see cref="ServiceWorkerContainer"/> and <see cref="ServiceWorkerContainerInProcess"/>.
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerContainer", Modifier = "public partial")]
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerContainerInProcess", Modifier = "public partial")]
 public abstract class ServiceWorkerContainerBase {
-    protected abstract IModuleManager ModuleManager { get; }
+    private protected abstract IModuleManager ModuleManager { get; }
 
 
     /// <summary>
@@ -25,7 +21,7 @@ public abstract class ServiceWorkerContainerBase {
     /// <returns>true, if service worker is supported, otherwise false</returns>
     public ValueTask<bool> Register(string scriptURL, CancellationToken cancellationToken = default) => ModuleManager.InvokeAsync<bool>("serviceWorkerContainerRegister", cancellationToken, [scriptURL]);
 
-    protected async ValueTask<IJSObjectReference?> RegisterWithWorkerRegistrationBase(string scriptURL, CancellationToken cancellationToken) {
+    private protected async ValueTask<IJSObjectReference?> RegisterWithWorkerRegistrationBase(string scriptURL, CancellationToken cancellationToken) {
         try {
             return await ModuleManager.InvokeAsync<IJSObjectReference>("serviceWorkerContainerRegisterWithWorkerRegistration", cancellationToken, [scriptURL]);
         }
@@ -35,10 +31,10 @@ public abstract class ServiceWorkerContainerBase {
     }
 
 
-    protected ValueTask<IJSObjectReference> DelayUntilReadyBase(CancellationToken cancellationToken) => ModuleManager.InvokeAsync<IJSObjectReference>("serviceWorkerContainerReady", cancellationToken);
+    private protected ValueTask<IJSObjectReference> DelayUntilReadyBase(CancellationToken cancellationToken) => ModuleManager.InvokeAsync<IJSObjectReference>("serviceWorkerContainerReady", cancellationToken);
 
 
-    protected async ValueTask<IJSObjectReference?> GetRegistrationBase(string clientUrl, CancellationToken cancellationToken) {
+    private protected async ValueTask<IJSObjectReference?> GetRegistrationBase(string clientUrl, CancellationToken cancellationToken) {
         try {
             return await ModuleManager.InvokeAsync<IJSObjectReference>("serviceWorkerContainerGetRegistration", cancellationToken, [clientUrl]);
         }
@@ -47,7 +43,7 @@ public abstract class ServiceWorkerContainerBase {
         }
     }
 
-    protected ValueTask<IJSObjectReference[]> GetRegistrationsBase(CancellationToken cancellationToken) => ModuleManager.InvokeAsync<IJSObjectReference[]>("serviceWorkerContainerGetRegistrations", cancellationToken);
+    private protected ValueTask<IJSObjectReference[]> GetRegistrationsBase(CancellationToken cancellationToken) => ModuleManager.InvokeAsync<IJSObjectReference[]>("serviceWorkerContainerGetRegistrations", cancellationToken);
 
 
     #region ControllerChange event

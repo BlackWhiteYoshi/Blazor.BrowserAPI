@@ -5,7 +5,7 @@ namespace CircleDIAttributes;
 
 /// <summary>
 /// <para>Specifies a scoped service. That means this service will only be available in the ScopedProvider and there will be a single instance of that service in every ScopedProvider instance.</para>
-/// <para>If <see cref="ServiceProviderAttribute"/> is used at the same class, this service will be added to the provider.</para>
+/// <para>If ServiceProviderAttribute is used at the same class, this service will be added to the provider.</para>
 /// </summary>
 /// <typeparam name="TService">Type of the service.</typeparam>
 /// <typeparam name="TImplementation">Type of the implementation.</typeparam>
@@ -26,13 +26,13 @@ internal sealed class ScopedAttribute<TService, TImplementation> : Attribute whe
 
     /// <summary>
     /// <para>Decides whether this service will be lazy constructed or instantiated inside the constructor.</para>
-    /// <para>Defaults to <see cref="ServiceProviderAttribute.CreationTime"/> or <see cref="ScopedProviderAttribute.CreationTime"/>.</para>
+    /// <para>Defaults to ServiceProviderAttribute.CreationTime or ScopedProviderAttribute.CreationTime.</para>
     /// </summary>
     public CreationTiming CreationTime { get; init; }
 
     /// <summary>
     /// <para>Decides whether the type of the member to access this service will be a property or method.</para>
-    /// <para>Defaults to <see cref="ServiceProviderAttribute.GetAccessor"/> or <see cref="ScopedProviderAttribute.GetAccessor"/>.</para>
+    /// <para>Defaults to ServiceProviderAttribute.GetAccessor or ScopedProviderAttribute.GetAccessor.</para>
     /// </summary>
     public GetAccess GetAccessor { get; init; }
 

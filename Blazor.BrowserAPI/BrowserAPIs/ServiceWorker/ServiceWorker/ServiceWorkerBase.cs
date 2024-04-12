@@ -4,11 +4,14 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
+/// Base class for <see cref="ServiceWorker"/> and <see cref="ServiceWorkerInProcess"/>.
+/// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorker", Modifier = "public partial")]
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerInProcess", Modifier = "public partial")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class ServiceWorkerBase {
-    protected abstract IJSObjectReference ServiceWorkerJS { get; }
+    private protected abstract IJSObjectReference ServiceWorkerJS { get; }
 
 
     #region StateChange event

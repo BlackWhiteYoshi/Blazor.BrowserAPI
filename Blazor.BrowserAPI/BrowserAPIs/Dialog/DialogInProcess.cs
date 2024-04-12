@@ -11,8 +11,11 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Modifier = "public partial", Inheritance = [typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class DialogInProcess(IJSInProcessObjectReference dialogJS) : DialogBase, IDialogInProcess {
-    protected override Task<IJSObjectReference> DialogTask { get; } = Task.FromResult<IJSObjectReference>(dialogJS);
+    private protected override Task<IJSObjectReference> DialogTask { get; } = Task.FromResult<IJSObjectReference>(dialogJS);
 
+    /// <summary>
+    /// Releases the JS instance for this dialog.
+    /// </summary>
     public void Dispose() => dialogJS.Dispose();
 
 

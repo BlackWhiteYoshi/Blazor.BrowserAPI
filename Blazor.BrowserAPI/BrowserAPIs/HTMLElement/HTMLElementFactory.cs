@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// <para>This class can take a <see cref="ElementReference"/> and creates a <see cref="IHTMLElement"/> or <see cref="IHTMLElementProcess"/> object with it.</para>
+/// <para>This class can take a <see cref="ElementReference"/> and creates a <see cref="IHTMLElement"/> or <see cref="IHTMLElementInProcess"/> object with it.</para>
 /// <para>
 /// This factory <b>does not dispose</b> the created onjects, they must disposed manually.
 /// So do not forget to call <see cref="IDisposable.Dispose"/>/<see cref="IAsyncDisposable.DisposeAsync"/> on a htmlElement-object when you are done with it.

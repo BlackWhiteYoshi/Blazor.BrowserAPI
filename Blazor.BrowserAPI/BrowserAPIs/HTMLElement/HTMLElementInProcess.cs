@@ -11,8 +11,11 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Modifier = "public partial", Inheritance = [typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElementJS) : HTMLElementBase, IHTMLElementInProcess {
-    protected override Task<IJSObjectReference> HTMLElementTask { get; } = Task.FromResult<IJSObjectReference>(htmlElementJS);
+    private protected override Task<IJSObjectReference> HTMLElementTask { get; } = Task.FromResult<IJSObjectReference>(htmlElementJS);
 
+    /// <summary>
+    /// Releases the JS instance for this HTML element.
+    /// </summary>
     public void Dispose() => htmlElementJS.Dispose();
 
 

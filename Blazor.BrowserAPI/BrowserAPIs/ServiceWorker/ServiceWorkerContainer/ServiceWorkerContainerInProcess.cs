@@ -4,10 +4,18 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
+/// <para>navigator.serviceWorker</para>
+/// <para>
+/// The <i>ServiceWorkerContainer</i> interface of the <i>Service Worker API</i> provides an object representing the service worker as an overall unit in the network ecosystem, including facilities to register, unregister and update service workers, and access the state of service workers and their registrations.<br />
+/// Most importantly, it exposes the <i>ServiceWorkerContainer.register()</i> method used to register service workers, and the <i>ServiceWorkerContainer.controller</i> property used to determine whether or not the current page is actively controlled.
+/// </para>
+/// </summary>
+/// <param name="moduleManager"></param>
 [AutoInterface(Namespace = "BrowserAPI", Modifier = "public partial")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class ServiceWorkerContainerInProcess(IModuleManager moduleManager) : ServiceWorkerContainerBase, IServiceWorkerContainerInProcess {
-    protected override IModuleManager ModuleManager => moduleManager;
+    private protected override IModuleManager ModuleManager => moduleManager;
 
 
     /// <summary>
