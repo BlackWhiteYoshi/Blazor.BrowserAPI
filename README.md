@@ -78,5 +78,7 @@ There are more interfaces coming.
   First version. Includes 10 BrowserAPIs: Clipboard, Console, CookieStorage, Dialog, Download, HTMLElement, Language, LocalStorage, ServiceWorker, SessionStorage
 - 0.1.1  
   Changed SetCookie parameters: *expires* to seconds and *samesite* to string.
-- 0.1.2
+- 0.1.2  
   Changed internal classes to public and moved them to namespace *BrowserAPI.Implementation*
+- 0.2.0  
+  Added IBrowserAPIModule for [CircleDI](https://github.com/BlackWhiteYoshi/CircleDI) and [Jab](https://github.com/pakrym/jab)
