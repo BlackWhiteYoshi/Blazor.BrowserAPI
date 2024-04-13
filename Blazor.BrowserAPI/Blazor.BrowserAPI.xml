@@ -3504,15 +3504,6 @@
             <param name="services"></param>
             <returns></returns>
         </member>
-        <member name="T:BrowserAPI.IBrowserAPICircleDIModule">
-            <summary>
-            <para>
-            CircleDI service providers can import this module to register all services available in this library.<br />
-            All services includes every BrowserAPI service and <see cref="T:BrowserAPI.IModuleManager"/>.
-            </para>
-            <para>All services will be registered as scoped.</para>
-            </summary>
-        </member>
         <member name="T:BrowserAPI.TrySyncExtensions">
             <summary>
             <para>Extensions for <see cref="T:Microsoft.JSInterop.IJSRuntime"/> and <see cref="T:Microsoft.JSInterop.IJSObjectReference"/>.</para>
@@ -6953,83 +6944,22 @@
             When invoked, will empty all keys out of sessionStorage.
             </summary>
         </member>
-        <member name="T:CircleDIAttributes.CreationTiming">
+        <member name="T:CircleDIAttributes.IBrowserAPIModule">
             <summary>
-            Configuration when the instantiation of the service happens.<br />
-            At ServiceProvider instantiation (inside the constructor) or lazy (first time used).
-            </summary>
-        </member>
-        <member name="F:CircleDIAttributes.CreationTiming.Constructor">
-            <summary>
-            The instantiation of the service happens inside the constructor of the ServiceProvider.
-            </summary>
-        </member>
-        <member name="F:CircleDIAttributes.CreationTiming.Lazy">
-            <summary>
-            The instantiation of the service happens the first time it is requested.
-            </summary>
-        </member>
-        <member name="T:CircleDIAttributes.GetAccess">
-            <summary>
-            The type of the member to access the service.<br />
-            It can be either property or method.
-            </summary>
-        </member>
-        <member name="F:CircleDIAttributes.GetAccess.Property">
-            <summary>
-            <para>The member will be a property with a get-accessor.</para>
-            <para>The name of the property will be the same as the service name.</para>
-            </summary>
-        </member>
-        <member name="F:CircleDIAttributes.GetAccess.Method">
-            <summary>
-            <para>The member will be a method with no parameters.</para>
             <para>
-            The name will be prefixed with "Get"<br />
-            e.g. name "MyService" will generate member "GetMyService()".
+            CircleDI service providers can import this module to register all services available in this library.<br />
+            All services includes every BrowserAPI service and <see cref="!:IModuleManager"/>.
             </para>
+            <para>All services will be registered as scoped.</para>
             </summary>
         </member>
         <member name="T:CircleDIAttributes.ScopedAttribute`2">
             <summary>
-            <para>Specifies a scoped service. That means this service will only be available in the ScopedProvider and there will be a single instance of that service in every ScopedProvider instance.</para>
-            <para>If ServiceProviderAttribute is used at the same class, this service will be added to the provider.</para>
+            <para>The register attribute from CircleDI to register a scoped service to a CircleDI service provider.</para>
+            <para>This attributes members are omitted, because only the attribute class and the type parameters are used here.</para>
             </summary>
             <typeparam name="TService">Type of the service.</typeparam>
             <typeparam name="TImplementation">Type of the implementation.</typeparam>
-        </member>
-        <member name="P:CircleDIAttributes.ScopedAttribute`2.Implementation">
-            <summary>
-            <para>Fieldname, propertyname or methodname that will be the implementation supplier for the given service.</para>
-            <para>The parameters of the method will be dependency injected.</para>
-            </summary>
-        </member>
-        <member name="P:CircleDIAttributes.ScopedAttribute`2.Name">
-            <summary>
-            <para>The name of this service.</para>
-            <para>If omitted, it will be the name of TImplementation.</para>
-            <para>If the getter is a method, for the identifier a "Get" prefix will be used, but this does not affect the name.</para>
-            </summary>
-        </member>
-        <member name="P:CircleDIAttributes.ScopedAttribute`2.CreationTime">
-            <summary>
-            <para>Decides whether this service will be lazy constructed or instantiated inside the constructor.</para>
-            <para>Defaults to ServiceProviderAttribute.CreationTime or ScopedProviderAttribute.CreationTime.</para>
-            </summary>
-        </member>
-        <member name="P:CircleDIAttributes.ScopedAttribute`2.GetAccessor">
-            <summary>
-            <para>Decides whether the type of the member to access this service will be a property or method.</para>
-            <para>Defaults to ServiceProviderAttribute.GetAccessor or ScopedProviderAttribute.GetAccessor.</para>
-            </summary>
-        </member>
-        <member name="P:CircleDIAttributes.ScopedAttribute`2.NoDispose">
-            <summary>
-            <para>When true, the ServiceProvider does not dispose this service on <see cref="M:System.IDisposable.Dispose">Dispose()</see> or <see cref="M:System.IAsyncDisposable.DisposeAsync">DisposeAsync()</see>,
-            regardless the service implements <see cref="T:System.IDisposable">IDisposable</see> or <see cref="T:System.IAsyncDisposable">IAsyncDisposable</see>.</para>
-            <para>If the service does not implement <see cref="T:System.IDisposable">IDisposable</see>/<see cref="T:System.IAsyncDisposable">IAsyncDisposable</see>, this will have no effect.</para>
-            <para>Default is false.</para>
-            </summary>
         </member>
         <member name="T:AutoInterfaceAttributes.AutoInterfaceAttribute">
             <summary>
