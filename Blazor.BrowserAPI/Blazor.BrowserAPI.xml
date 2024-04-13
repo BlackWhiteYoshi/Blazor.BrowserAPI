@@ -6948,9 +6948,9 @@
             <summary>
             <para>
             CircleDI service providers can import this module to register all services available in this library.<br />
-            All services includes every BrowserAPI service and <see cref="!:IModuleManager"/>.
+            All services includes every BrowserAPI service and <see cref="T:BrowserAPI.IModuleManager"/>.
             </para>
-            <para>All services will be registered as scoped.</para>
+            <para>All services will be registered as scoped, CreationTiming.Constructor, GetAccess.Property and default Name (name of the implementation class).</para>
             </summary>
         </member>
         <member name="T:CircleDIAttributes.ScopedAttribute`2">
@@ -6960,6 +6960,28 @@
             </summary>
             <typeparam name="TService">Type of the service.</typeparam>
             <typeparam name="TImplementation">Type of the implementation.</typeparam>
+        </member>
+        <member name="T:Jab.IBrowserAPIModule">
+            <summary>
+            <para>
+            Jab service providers can import this module to register all services available in this library.<br />
+            All services includes every BrowserAPI service and <see cref="T:BrowserAPI.IModuleManager"/>.
+            </para>
+            <para>All services will be registered as scoped.</para>
+            </summary>
+        </member>
+        <member name="T:Jab.ServiceProviderModuleAttribute">
+            <summary>
+            The attribute from Jab to mark an interface as module.
+            </summary>
+        </member>
+        <member name="T:Jab.ScopedAttribute`2">
+            <summary>
+            <para>The register attribute from Jab to register a scoped service to a Jab service provider.</para>
+            <para>This attributes members are omitted, because only the attribute class and the type parameters are used here.</para>
+            </summary>
+            <typeparam name="TService">Type of the service.</typeparam>
+            <typeparam name="TImpl">Type of the implementation.</typeparam>
         </member>
         <member name="T:AutoInterfaceAttributes.AutoInterfaceAttribute">
             <summary>
