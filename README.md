@@ -9,16 +9,16 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 
 ## Available Browser APIs
 
-- [Clipboard](Blazor.BrowserAPI/Clipboard/Clipboard.md)
-- [Console](Blazor.BrowserAPI/Console/Console.md)
-- [CookieStorage](Blazor.BrowserAPI/CookieStorage/CookieStorage.md)
-- [Dialog](Blazor.BrowserAPI/Dialog/Dialog.md)
-- [Download](Blazor.BrowserAPI/Download/Download.md)
-- [HTMLElement](Blazor.BrowserAPI/HTMLElement/HTMLElement.md)
-- [Language](Blazor.BrowserAPI/Language/Language.md)
-- [LocalStorage](Blazor.BrowserAPI/LocalStorage/LocalStorage.md)
-- [ServiceWorker](Blazor.BrowserAPI/ServiceWorker/ServiceWorker.md)
-- [SessionStorage](Blazor.BrowserAPI/SessionStorage/SessionStorage.md)
+- [Clipboard](Blazor.BrowserAPI/BrowserAPIs/Clipboard/Clipboard.md)
+- [Console](Blazor.BrowserAPI/BrowserAPIs/Console/Console.md)
+- [CookieStorage](Blazor.BrowserAPI/BrowserAPIs/CookieStorage/CookieStorage.md)
+- [Dialog](Blazor.BrowserAPI/BrowserAPIs/Dialog/Dialog.md)
+- [Download](Blazor.BrowserAPI/BrowserAPIs/Download/Download.md)
+- [HTMLElement](Blazor.BrowserAPI/BrowserAPIs/HTMLElement/HTMLElement.md)
+- [Language](Blazor.BrowserAPI/BrowserAPIs/Language/Language.md)
+- [LocalStorage](Blazor.BrowserAPI/BrowserAPIs/LocalStorage/LocalStorage.md)
+- [ServiceWorker](Blazor.BrowserAPI/BrowserAPIs/ServiceWorker/ServiceWorker.md)
+- [SessionStorage](Blazor.BrowserAPI/BrowserAPIs/SessionStorage/SessionStorage.md)
 
 ## Other APIs
 

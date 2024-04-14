@@ -71,7 +71,7 @@ export class DialogWrapper {
 
 
     /**
-     * @param {import("../blazor").DotNet.DotNetObject} cancelTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} cancelTrigger
      */
     activateOncancel(cancelTrigger) {
         this.#dialog.oncancel = () => cancelTrigger.invokeMethodAsync("Trigger");
@@ -85,7 +85,7 @@ export class DialogWrapper {
 
 
     /**
-     * @param {import("../blazor").DotNet.DotNetObject} closeTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} closeTrigger
      */
     activateOnclose(closeTrigger) {
         this.#dialog.onclose = () => closeTrigger.invokeMethodAsync("Trigger");

@@ -7,8 +7,8 @@ namespace BrowserAPI.Implementation;
 /// <summary>
 /// Base class for <see cref="ServiceWorker"/> and <see cref="ServiceWorkerInProcess"/>.
 /// </summary>
-[AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorker", Modifier = "public partial")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerInProcess", Modifier = "public partial")]
+[AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorker")]
+[AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerInProcess")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class ServiceWorkerBase {
     private protected abstract IJSObjectReference ServiceWorkerJS { get; }

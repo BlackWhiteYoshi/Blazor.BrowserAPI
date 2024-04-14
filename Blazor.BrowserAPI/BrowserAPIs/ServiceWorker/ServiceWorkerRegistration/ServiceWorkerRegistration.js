@@ -78,7 +78,7 @@ export class ServiceWorkerRegistrationWrapper {
 
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} updateFoundTrigger
+     * @param {import("../../../blazor").DotNet.DotNetObject} updateFoundTrigger
      */
     activateOnupdatefound(updateFoundTrigger) {
         this.#serviceWorkerRegistration.onupdatefound = () => updateFoundTrigger.invokeMethodAsync("Trigger");

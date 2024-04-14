@@ -7,8 +7,8 @@ namespace BrowserAPI.Implementation;
 /// <summary>
 /// Base class for <see cref="ServiceWorkerContainer"/> and <see cref="ServiceWorkerContainerInProcess"/>.
 /// </summary>
-[AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerContainer", Modifier = "public partial")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerContainerInProcess", Modifier = "public partial")]
+[AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerContainer")]
+[AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerContainerInProcess")]
 public abstract class ServiceWorkerContainerBase {
     private protected abstract IModuleManager ModuleManager { get; }
 

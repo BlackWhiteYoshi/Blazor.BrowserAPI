@@ -7,8 +7,8 @@ namespace BrowserAPI.Implementation;
 /// <summary>
 /// Base class for <see cref="Dialog"/> and <see cref="DialogInProcess"/>.
 /// </summary>
-[AutoInterface(Namespace = "BrowserAPI", Name = "IDialog", Modifier = "public partial")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IDialogInProcess", Modifier = "public partial")]
+[AutoInterface(Namespace = "BrowserAPI", Name = "IDialog")]
+[AutoInterface(Namespace = "BrowserAPI", Name = "IDialogInProcess")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class DialogBase {
     private protected abstract Task<IJSObjectReference> DialogTask { get; }

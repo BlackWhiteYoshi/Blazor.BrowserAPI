@@ -1,14 +1,14 @@
 /**
  * @returns {string}
  */
-export function LanguageBrowser() {
+export function languageBrowser() {
     return navigator.language;
 }
 
 /**
  * @returns {string}
  */
-export function LanguageHtmlRead() {
+export function languageHtmlRead() {
     return document.documentElement.lang;
 }
 
@@ -16,6 +16,6 @@ export function LanguageHtmlRead() {
  * @param {string} language
  * @returns {string}
  */
-export function LanguageHtmlWrite(language) {
+export function languageHtmlWrite(language) {
     return document.documentElement.lang = language;
 }

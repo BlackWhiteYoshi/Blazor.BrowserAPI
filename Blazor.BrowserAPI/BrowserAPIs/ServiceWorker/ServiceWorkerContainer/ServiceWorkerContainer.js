@@ -2,7 +2,7 @@ import { ServiceWorkerRegistrationWrapper } from "../ServiceWorkerRegistration/S
 import { createServiceWorkerRegistration } from "../ServiceWorkerRegistration/ServiceWorkerRegistration.js";
 import { ServiceWorkerWrapper } from "../ServiceWorker/ServiceWorker.js";
 import { createServiceWorker } from "../ServiceWorker/ServiceWorker.js";
-import { DotNet } from "../../blazor";
+import { DotNet } from "../../../blazor";
 
 
 /**
@@ -75,7 +75,7 @@ export function serviceWorkerContainerStartMessages() {
 
 
 /**
- * @param {import("../../blazor").DotNet.DotNetObject} controllerChangeTrigger
+ * @param {import("../../../blazor").DotNet.DotNetObject} controllerChangeTrigger
  */
 export function serviceWorkerContainerActivateOncontrollerchange(controllerChangeTrigger) {
     navigator.serviceWorker.oncontrollerchange = () => controllerChangeTrigger.invokeMethodAsync("Trigger");
@@ -89,7 +89,7 @@ export function serviceWorkerContainerDeactivateOncontrollerchange() {
 
 
 /**
- * @param {import("../../blazor").DotNet.DotNetObject} messageTrigger
+ * @param {import("../../../blazor").DotNet.DotNetObject} messageTrigger
  */
 export function serviceWorkerContainerActivateOnMessage(messageTrigger) {
     navigator.serviceWorker.onmessage = () => messageTrigger.invokeMethodAsync("Trigger");

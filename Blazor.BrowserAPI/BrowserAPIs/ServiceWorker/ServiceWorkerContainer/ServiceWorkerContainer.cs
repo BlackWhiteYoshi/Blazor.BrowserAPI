@@ -12,7 +12,7 @@ namespace BrowserAPI.Implementation;
 /// </para>
 /// </summary>
 /// <param name="moduleManager"></param>
-[AutoInterface(Namespace = "BrowserAPI", Modifier = "public partial")]
+[AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class ServiceWorkerContainer(IModuleManager moduleManager) : ServiceWorkerContainerBase, IServiceWorkerContainer {
     private protected override IModuleManager ModuleManager => moduleManager;

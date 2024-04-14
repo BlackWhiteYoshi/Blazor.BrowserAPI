@@ -45,7 +45,7 @@ export class ServiceWorkerWrapper {
 
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} stateChangeTrigger
+     * @param {import("../../../blazor").DotNet.DotNetObject} stateChangeTrigger
      */
     activateOnstatechange(stateChangeTrigger) {
         this.#serviceWorker.onstatechange = (event) => stateChangeTrigger.invokeMethodAsync("Trigger", /** @type {ServiceWorker} */(event.target).state);
@@ -59,7 +59,7 @@ export class ServiceWorkerWrapper {
 
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} errorTrigger
+     * @param {import("../../../blazor").DotNet.DotNetObject} errorTrigger
      */
     activateOnerror(errorTrigger) {
         this.#serviceWorker.onerror = (event) => errorTrigger.invokeMethodAsync("Trigger", event);

@@ -7,8 +7,8 @@ namespace BrowserAPI.Implementation;
 /// <summary>
 /// Base class for <see cref="HTMLElement"/> and <see cref="HTMLElementInProcess"/>.
 /// </summary>
-[AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLElement", Modifier = "public partial")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLElementInProcess", Modifier = "public partial")]
+[AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLElement")]
+[AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLElementInProcess")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class HTMLElementBase {
     private protected abstract Task<IJSObjectReference> HTMLElementTask { get; }

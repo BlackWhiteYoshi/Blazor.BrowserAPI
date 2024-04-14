@@ -398,7 +398,7 @@ export class HTMLElementWrapper {
     // events
 
     /**
-     * @param {import("../blazor").DotNet.DotNetObject} animationstartTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} animationstartTrigger
      */
     activateOnanimationstart(animationstartTrigger) {
         this.#htmlElement.onanimationstart = (animationEvent) => animationstartTrigger.invokeMethodAsync("Trigger", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
@@ -411,7 +411,7 @@ export class HTMLElementWrapper {
     }
 
     /**
-     * @param {import("../blazor").DotNet.DotNetObject} animationendTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} animationendTrigger
      */
     activateOnanimationend(animationendTrigger) {
         this.#htmlElement.onanimationend = (animationEvent) => animationendTrigger.invokeMethodAsync("Trigger", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
@@ -424,7 +424,7 @@ export class HTMLElementWrapper {
     }
 
     /**
-     * @param {import("../blazor").DotNet.DotNetObject} animationiterationTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} animationiterationTrigger
      */
     activateOnanimationiteration(animationiterationTrigger) {
         this.#htmlElement.onanimationiteration = (animationEvent) => animationiterationTrigger.invokeMethodAsync("Trigger", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
@@ -437,7 +437,7 @@ export class HTMLElementWrapper {
     }
 
     /**
-     * @param {import("../blazor").DotNet.DotNetObject} animationcancelTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} animationcancelTrigger
      */
     activateOnanimationcancel(animationcancelTrigger) {
         this.#htmlElement.onanimationcancel = (animationEvent) => animationcancelTrigger.invokeMethodAsync("Trigger", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
@@ -451,7 +451,7 @@ export class HTMLElementWrapper {
 
 
     /**
-     * @param {import("../blazor").DotNet.DotNetObject} transitionstartTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} transitionstartTrigger
      */
     activateOntransitionstart(transitionstartTrigger) {
         this.#htmlElement.ontransitionstart = (transitionEvent) => transitionstartTrigger.invokeMethodAsync("Trigger", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
@@ -464,7 +464,7 @@ export class HTMLElementWrapper {
     }
 
     /**
-     * @param {import("../blazor").DotNet.DotNetObject} transitionendTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} transitionendTrigger
      */
     activateOntransitionend(transitionendTrigger) {
         this.#htmlElement.ontransitionend = (transitionEvent) => transitionendTrigger.invokeMethodAsync("Trigger", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
@@ -477,7 +477,7 @@ export class HTMLElementWrapper {
     }
 
     /**
-     * @param {import("../blazor").DotNet.DotNetObject} transitionrunTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} transitionrunTrigger
      */
     activateOntransitionrun(transitionrunTrigger) {
         this.#htmlElement.ontransitionrun = (transitionEvent) => transitionrunTrigger.invokeMethodAsync("Trigger", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
@@ -490,7 +490,7 @@ export class HTMLElementWrapper {
     }
 
     /**
-     * @param {import("../blazor").DotNet.DotNetObject} transitioncancelTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} transitioncancelTrigger
      */
     activateOntransitioncancel(transitioncancelTrigger) {
         this.#htmlElement.ontransitioncancel = (transitionEvent) => transitioncancelTrigger.invokeMethodAsync("Trigger", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
