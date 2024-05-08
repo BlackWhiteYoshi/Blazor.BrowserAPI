@@ -16,6 +16,8 @@
 [ScopedAttribute<BrowserAPI.ICookieStorageInProcess, BrowserAPI.Implementation.CookieStorageInProcess>]
 [ScopedAttribute<BrowserAPI.IDialogFactory, BrowserAPI.Implementation.DialogFactory>]
 [ScopedAttribute<BrowserAPI.IDownload, BrowserAPI.Implementation.Download>]
+[ScopedAttribute<BrowserAPI.IGeolocation, BrowserAPI.Implementation.Geolocation>]
+[ScopedAttribute<BrowserAPI.IGeolocationInProcess, BrowserAPI.Implementation.GeolocationInProcess>]
 [ScopedAttribute<BrowserAPI.IHTMLElementFactory, BrowserAPI.Implementation.HTMLElementFactory>]
 [ScopedAttribute<BrowserAPI.ILanguage, BrowserAPI.Implementation.Language>]
 [ScopedAttribute<BrowserAPI.ILanguageInProcess, BrowserAPI.Implementation.LanguageInProcess>]

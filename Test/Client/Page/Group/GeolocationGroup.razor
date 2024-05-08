@@ -1,0 +1,15 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Geolocation</h2>
+    <div>
+        <button data-testid="@BUTTON_GET_CURRENT_POSITION" @onclick="GetCurrentPosition">GetCurrentPosition</button>
+        <button data-testid="@BUTTON_WATCH_POSITION" @onclick="WatchPosition">WatchPosition</button>
+        <button data-testid="@BUTTON_CLEAR_WATCH" @onclick="ClearWatch">ClearWatch</button>
+
+        <button data-testid="@BUTTON_GET_CURRENT_POSITION_INPROCESS" @onclick="GetCurrentPosition_InProcess">GetCurrentPosition_InProcess</button>
+        <button data-testid="@BUTTON_WATCH_POSITION_INPROCESS" @onclick="WatchPosition_InProcess">WatchPosition_InProcess</button>
+        <button data-testid="@BUTTON_CLEAR_WATCH_INPROCESS" @onclick="ClearWatch_InProcess">ClearWatch_InProcess</button>
+    </div>
+    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+</div>

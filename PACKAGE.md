@@ -16,6 +16,7 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - CookieStorage
 - Dialog
 - Download
+- Geolocation
 - HTMLElement
 - Language
 - LocalStorage
