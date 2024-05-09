@@ -83,3 +83,5 @@ There are more interfaces coming.
   Changed internal classes to public and moved them to namespace *BrowserAPI.Implementation*
 - 0.2.0  
   Added IBrowserAPIModule for [CircleDI](https://github.com/BlackWhiteYoshi/CircleDI) and [Jab](https://github.com/pakrym/jab)
+- 0.3.0  
+  Added Geolocation

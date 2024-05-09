@@ -1035,6 +1035,265 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="T:BrowserAPI.Implementation.CallbackGeolocation">
+            <summary>
+            <para>Callback class for <see cref="M:BrowserAPI.Implementation.Geolocation.GetCurrentPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)"/> and <see cref="M:BrowserAPI.Implementation.Geolocation.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)"/>.</para>
+            <para>It contains 2 callbacks: <see cref="M:BrowserAPI.Implementation.CallbackGeolocation.Success(BrowserAPI.GeolocationCoordinates,System.Int64)"/> and <see cref="M:BrowserAPI.Implementation.CallbackGeolocation.Error(System.Int32,System.String)"/>.</para>
+            </summary>
+            <param name="successCallback">callback with parameters GeolocationCoordinates geolocationCoordinates, long timestamp</param>
+            <param name="errorCallback">callback with parameters int errorCode, string message</param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.CallbackGeolocation.#ctor(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String})">
+            <summary>
+            <para>Callback class for <see cref="M:BrowserAPI.Implementation.Geolocation.GetCurrentPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)"/> and <see cref="M:BrowserAPI.Implementation.Geolocation.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)"/>.</para>
+            <para>It contains 2 callbacks: <see cref="M:BrowserAPI.Implementation.CallbackGeolocation.Success(BrowserAPI.GeolocationCoordinates,System.Int64)"/> and <see cref="M:BrowserAPI.Implementation.CallbackGeolocation.Error(System.Int32,System.String)"/>.</para>
+            </summary>
+            <param name="successCallback">callback with parameters GeolocationCoordinates geolocationCoordinates, long timestamp</param>
+            <param name="errorCallback">callback with parameters int errorCode, string message</param>
+        </member>
+        <member name="T:BrowserAPI.Implementation.Geolocation">
+            <summary>
+            The Geolocation API allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Geolocation.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            The Geolocation API allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Geolocation.GetCurrentPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            The getCurrentPosition() method of the Geolocation interface is used to get the current position of the device.
+            </summary>
+            <param name="successCallback">
+            <para>A callback function that takes a <see cref="T:BrowserAPI.GeolocationCoordinates"/> object and a <see cref="T:System.Int64"/> timestamp  as its input parameter.</para>
+            <para>
+            GeolocationCoordinates:<br />
+            The GeolocationCoordinates interface represents the position and altitude of the device on Earth, as well as the accuracy with which these properties are calculated.
+            The geographic position information is provided in terms of World Geodetic System coordinates (WGS84).
+            </para>
+            <para>
+            timestamp:<br />
+            Returns a timestamp, given as Unix time in milliseconds, representing the time at which the location was retrieved.
+            </para>
+            </param>
+            <param name="errorCallback">
+            <para>An optional callback function that takes an <see cref="T:System.Int32"/> errorCode and <see cref="T:System.String"/> message as its input parameter.</para>
+            <para>
+            errorCode:<br />
+            Returns an unsigned short representing the error code.
+            The following values are possible:<br />
+            1: PERMISSION_DENIED - The acquisition of the geolocation information failed because the page didn't have the necessary permissions, for example because it is blocked by a Permissions Policy<br />
+            2: POSITION_UNAVAILABLE - The acquisition of the geolocation failed because at least one internal source of position returned an internal error.<br />
+            3: TIMEOUT - The time allowed to acquire the geolocation was reached before the information was obtained.
+            </para>
+            <para>
+            message:<br />
+            Returns a human-readable string describing the details of the error.
+            Specifications note that this is primarily intended for debugging use and not to be shown directly in a user interface.
+            </para>
+            </param>
+            <param name="maximumAge">
+            A positive long value indicating the maximum age in milliseconds of a possible cached position that is acceptable to return.
+            If set to 0, it means that the device cannot use a cached position and must attempt to retrieve the real current position.
+            If set to a value less than zero the device must return a cached position regardless of its age.
+            Default: 0.
+            </param>
+            <param name="timeout">
+            A positive long value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position.
+            The default value is -1, meaning that getCurrentPosition() won't return until the position is available.
+            </param>
+            <param name="timeoutenableHighAccuracy">
+            A boolean value that indicates the application would like to receive the best possible results.
+            If true and if the device is able to provide a more accurate position, it will do so.
+            Note that this can result in slower response times or increased power consumption (with a GPS chip on a mobile device for example).
+            On the other hand, if false, the device can take the liberty to save resources by responding more quickly and/or using less power.
+            Default: false.
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Geolocation.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            The watchPosition() method of the Geolocation interface is used to register a handler function that will be called automatically each time the position of the device changes.
+            You can also, optionally, specify an error handling callback function.
+            </summary>
+            <param name="successCallback">
+            <para>A callback function that takes a <see cref="T:BrowserAPI.GeolocationCoordinates"/> object and a <see cref="T:System.Int64"/> timestamp  as its input parameter.</para>
+            <para>
+            GeolocationCoordinates:<br />
+            The GeolocationCoordinates interface represents the position and altitude of the device on Earth, as well as the accuracy with which these properties are calculated.
+            The geographic position information is provided in terms of World Geodetic System coordinates (WGS84).
+            </para>
+            <para>
+            timestamp:<br />
+            Returns a timestamp, given as Unix time in milliseconds, representing the time at which the location was retrieved.
+            </para>
+            </param>
+            <param name="errorCallback">
+            <para>An optional callback function that takes an <see cref="T:System.Int32"/> errorCode and <see cref="T:System.String"/> message as its input parameter.</para>
+            <para>
+            errorCode:<br />
+            Returns an unsigned short representing the error code.
+            The following values are possible:<br />
+            1: PERMISSION_DENIED - The acquisition of the geolocation information failed because the page didn't have the necessary permissions, for example because it is blocked by a Permissions Policy<br />
+            2: POSITION_UNAVAILABLE - The acquisition of the geolocation failed because at least one internal source of position returned an internal error.<br />
+            3: TIMEOUT - The time allowed to acquire the geolocation was reached before the information was obtained.
+            </para>
+            <para>
+            message:<br />
+            Returns a human-readable string describing the details of the error.
+            Specifications note that this is primarily intended for debugging use and not to be shown directly in a user interface.
+            </para>
+            </param>
+            <param name="maximumAge">
+            A positive long value indicating the maximum age in milliseconds of a possible cached position that is acceptable to return.
+            If set to 0, it means that the device cannot use a cached position and must attempt to retrieve the real current position.
+            If set to a value less than zero the device must return a cached position regardless of its age.
+            Default: 0.
+            </param>
+            <param name="timeout">
+            A positive long value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position.
+            The default value is -1, meaning that getCurrentPosition() won't return until the position is available.
+            </param>
+            <param name="timeoutenableHighAccuracy">
+            A boolean value that indicates the application would like to receive the best possible results.
+            If true and if the device is able to provide a more accurate position, it will do so.
+            Note that this can result in slower response times or increased power consumption (with a GPS chip on a mobile device for example).
+            On the other hand, if false, the device can take the liberty to save resources by responding more quickly and/or using less power.
+            Default: false.
+            </param>
+            <param name="cancellationToken"></param>
+            <returns>WatchId - can be used to <see cref="M:BrowserAPI.Implementation.Geolocation.ClearWatch(System.Int32,System.Threading.CancellationToken)">clear</see> this registration.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Geolocation.ClearWatch(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            The clearWatch() method of the Geolocation interface is used to unregister location/error monitoring handlers previously installed using <see cref="M:BrowserAPI.Implementation.Geolocation.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)"/>.
+            </summary>
+            <param name="watchId">The id of the registration from <see cref="M:BrowserAPI.Implementation.Geolocation.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)"/></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.GeolocationInProcess">
+            <summary>
+            The Geolocation API allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.GeolocationInProcess.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            The Geolocation API allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.GeolocationInProcess.GetCurrentPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean)">
+            <summary>
+            The getCurrentPosition() method of the Geolocation interface is used to get the current position of the device.
+            </summary>
+            <param name="successCallback">
+            <para>A callback function that takes a <see cref="T:BrowserAPI.GeolocationCoordinates"/> object and a <see cref="T:System.Int64"/> timestamp  as its input parameter.</para>
+            <para>
+            GeolocationCoordinates:<br />
+            The GeolocationCoordinates interface represents the position and altitude of the device on Earth, as well as the accuracy with which these properties are calculated.
+            The geographic position information is provided in terms of World Geodetic System coordinates (WGS84).
+            </para>
+            <para>
+            timestamp:<br />
+            Returns a timestamp, given as Unix time in milliseconds, representing the time at which the location was retrieved.
+            </para>
+            </param>
+            <param name="errorCallback">
+            <para>An optional callback function that takes an <see cref="T:System.Int32"/> errorCode and <see cref="T:System.String"/> message as its input parameter.</para>
+            <para>
+            errorCode:<br />
+            Returns an unsigned short representing the error code.
+            The following values are possible:<br />
+            1: PERMISSION_DENIED - The acquisition of the geolocation information failed because the page didn't have the necessary permissions, for example because it is blocked by a Permissions Policy<br />
+            2: POSITION_UNAVAILABLE - The acquisition of the geolocation failed because at least one internal source of position returned an internal error.<br />
+            3: TIMEOUT - The time allowed to acquire the geolocation was reached before the information was obtained.
+            </para>
+            <para>
+            message:<br />
+            Returns a human-readable string describing the details of the error.
+            Specifications note that this is primarily intended for debugging use and not to be shown directly in a user interface.
+            </para>
+            </param>
+            <param name="maximumAge">
+            A positive long value indicating the maximum age in milliseconds of a possible cached position that is acceptable to return.
+            If set to 0, it means that the device cannot use a cached position and must attempt to retrieve the real current position.
+            If set to a value less than zero the device must return a cached position regardless of its age.
+            Default: 0.
+            </param>
+            <param name="timeout">
+            A positive long value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position.
+            The default value is -1, meaning that getCurrentPosition() won't return until the position is available.
+            </param>
+            <param name="timeoutenableHighAccuracy">
+            A boolean value that indicates the application would like to receive the best possible results.
+            If true and if the device is able to provide a more accurate position, it will do so.
+            Note that this can result in slower response times or increased power consumption (with a GPS chip on a mobile device for example).
+            On the other hand, if false, the device can take the liberty to save resources by responding more quickly and/or using less power.
+            Default: false.
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.GeolocationInProcess.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean)">
+            <summary>
+            The watchPosition() method of the Geolocation interface is used to register a handler function that will be called automatically each time the position of the device changes.
+            You can also, optionally, specify an error handling callback function.
+            </summary>
+            <param name="successCallback">
+            <para>A callback function that takes a <see cref="T:BrowserAPI.GeolocationCoordinates"/> object and a <see cref="T:System.Int64"/> timestamp  as its input parameter.</para>
+            <para>
+            GeolocationCoordinates:<br />
+            The GeolocationCoordinates interface represents the position and altitude of the device on Earth, as well as the accuracy with which these properties are calculated.
+            The geographic position information is provided in terms of World Geodetic System coordinates (WGS84).
+            </para>
+            <para>
+            timestamp:<br />
+            Returns a timestamp, given as Unix time in milliseconds, representing the time at which the location was retrieved.
+            </para>
+            </param>
+            <param name="errorCallback">
+            <para>An optional callback function that takes an <see cref="T:System.Int32"/> errorCode and <see cref="T:System.String"/> message as its input parameter.</para>
+            <para>
+            errorCode:<br />
+            Returns an unsigned short representing the error code.
+            The following values are possible:<br />
+            1: PERMISSION_DENIED - The acquisition of the geolocation information failed because the page didn't have the necessary permissions, for example because it is blocked by a Permissions Policy<br />
+            2: POSITION_UNAVAILABLE - The acquisition of the geolocation failed because at least one internal source of position returned an internal error.<br />
+            3: TIMEOUT - The time allowed to acquire the geolocation was reached before the information was obtained.
+            </para>
+            <para>
+            message:<br />
+            Returns a human-readable string describing the details of the error.
+            Specifications note that this is primarily intended for debugging use and not to be shown directly in a user interface.
+            </para>
+            </param>
+            <param name="maximumAge">
+            A positive long value indicating the maximum age in milliseconds of a possible cached position that is acceptable to return.
+            If set to 0, it means that the device cannot use a cached position and must attempt to retrieve the real current position.
+            If set to a value less than zero the device must return a cached position regardless of its age.
+            Default: 0.
+            </param>
+            <param name="timeout">
+            A positive long value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position.
+            The default value is -1, meaning that getCurrentPosition() won't return until the position is available.
+            </param>
+            <param name="timeoutenableHighAccuracy">
+            A boolean value that indicates the application would like to receive the best possible results.
+            If true and if the device is able to provide a more accurate position, it will do so.
+            Note that this can result in slower response times or increased power consumption (with a GPS chip on a mobile device for example).
+            On the other hand, if false, the device can take the liberty to save resources by responding more quickly and/or using less power.
+            Default: false.
+            </param>
+            <returns>WatchId - can be used to <see cref="M:BrowserAPI.Implementation.GeolocationInProcess.ClearWatch(System.Int32)">clear</see> this registration.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.GeolocationInProcess.ClearWatch(System.Int32)">
+            <summary>
+            The clearWatch() method of the Geolocation interface is used to unregister location/error monitoring handlers previously installed using <see cref="M:BrowserAPI.Implementation.GeolocationInProcess.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean)"/>.
+            </summary>
+            <param name="watchId">The id of the registration from <see cref="M:BrowserAPI.Implementation.GeolocationInProcess.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean)"/></param>
+            <returns></returns>
+        </member>
         <member name="T:BrowserAPI.Implementation.HTMLElement">
             <summary>
             <para>The <i>HTMLElement</i> interface represents any HTML element. Some elements directly implement this interface, while others implement it via an interface that inherits it.</para>
@@ -3423,6 +3682,52 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:BrowserAPI.GeolocationCoordinates">
+            <summary>
+            The GeolocationCoordinates interface represents the position and altitude of the device on Earth, as well as the accuracy with which these properties are calculated.
+            The geographic position information is provided in terms of World Geodetic System coordinates (WGS84).
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.GeolocationCoordinates.Latitude">
+            <summary>
+            Returns a double representing the position's latitude in decimal degrees.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.GeolocationCoordinates.Longitude">
+            <summary>
+            Returns a double representing the position's longitude in decimal degrees.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.GeolocationCoordinates.Altitude">
+            <summary>
+            Returns a double representing the position's altitude in meters, relative to nominal sea level.
+            This value can be null if the implementation cannot provide the data.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.GeolocationCoordinates.Accuracy">
+            <summary>
+            Returns a double representing the accuracy of the latitude and longitude properties, expressed in meters.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.GeolocationCoordinates.AltitudeAccuracy">
+            <summary>
+            Returns a double representing the accuracy of the altitude expressed in meters. This value can be null if the implementation cannot provide the data.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.GeolocationCoordinates.Heading">
+            <summary>
+            Returns a double representing the direction towards which the device is facing.
+            This value, specified in degrees, indicates how far off from heading true north the device is.
+            0 degrees represents true north, and the direction is determined clockwise (which means that east is 90 degrees and west is 270 degrees).
+            If speed is 0, heading is NaN. If the device is unable to provide heading information, this value is null.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.GeolocationCoordinates.Speed">
+            <summary>
+            Returns a double representing the velocity of the device in meters per second.
+            This value can be null.
+            </summary>
+        </member>
         <member name="T:BrowserAPI.DOMRect">
             <summary>
             <para>A DOMRect describes the size and position of a rectangle.</para>
@@ -4540,6 +4845,239 @@
             <param name="fileName">The name of the downloaded file.</param>
             <param name="fileContent">Data stream that gets downloaded and saved in a file.</param>
             <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IGeolocation">
+            <summary>
+            The Geolocation API allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IGeolocation.GetCurrentPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            The getCurrentPosition() method of the Geolocation interface is used to get the current position of the device.
+            </summary>
+            <param name="successCallback">
+            <para>A callback function that takes a <see cref="T:BrowserAPI.GeolocationCoordinates"/> object and a <see cref="T:System.Int64"/> timestamp  as its input parameter.</para>
+            <para>
+            GeolocationCoordinates:<br />
+            The GeolocationCoordinates interface represents the position and altitude of the device on Earth, as well as the accuracy with which these properties are calculated.
+            The geographic position information is provided in terms of World Geodetic System coordinates (WGS84).
+            </para>
+            <para>
+            timestamp:<br />
+            Returns a timestamp, given as Unix time in milliseconds, representing the time at which the location was retrieved.
+            </para>
+            </param>
+            <param name="errorCallback">
+            <para>An optional callback function that takes an <see cref="T:System.Int32"/> errorCode and <see cref="T:System.String"/> message as its input parameter.</para>
+            <para>
+            errorCode:<br />
+            Returns an unsigned short representing the error code.
+            The following values are possible:<br />
+            1: PERMISSION_DENIED - The acquisition of the geolocation information failed because the page didn't have the necessary permissions, for example because it is blocked by a Permissions Policy<br />
+            2: POSITION_UNAVAILABLE - The acquisition of the geolocation failed because at least one internal source of position returned an internal error.<br />
+            3: TIMEOUT - The time allowed to acquire the geolocation was reached before the information was obtained.
+            </para>
+            <para>
+            message:<br />
+            Returns a human-readable string describing the details of the error.
+            Specifications note that this is primarily intended for debugging use and not to be shown directly in a user interface.
+            </para>
+            </param>
+            <param name="maximumAge">
+            A positive long value indicating the maximum age in milliseconds of a possible cached position that is acceptable to return.
+            If set to 0, it means that the device cannot use a cached position and must attempt to retrieve the real current position.
+            If set to a value less than zero the device must return a cached position regardless of its age.
+            Default: 0.
+            </param>
+            <param name="timeout">
+            A positive long value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position.
+            The default value is -1, meaning that getCurrentPosition() won't return until the position is available.
+            </param>
+            <param name="timeoutenableHighAccuracy">
+            A boolean value that indicates the application would like to receive the best possible results.
+            If true and if the device is able to provide a more accurate position, it will do so.
+            Note that this can result in slower response times or increased power consumption (with a GPS chip on a mobile device for example).
+            On the other hand, if false, the device can take the liberty to save resources by responding more quickly and/or using less power.
+            Default: false.
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IGeolocation.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            The watchPosition() method of the Geolocation interface is used to register a handler function that will be called automatically each time the position of the device changes.
+            You can also, optionally, specify an error handling callback function.
+            </summary>
+            <param name="successCallback">
+            <para>A callback function that takes a <see cref="T:BrowserAPI.GeolocationCoordinates"/> object and a <see cref="T:System.Int64"/> timestamp  as its input parameter.</para>
+            <para>
+            GeolocationCoordinates:<br />
+            The GeolocationCoordinates interface represents the position and altitude of the device on Earth, as well as the accuracy with which these properties are calculated.
+            The geographic position information is provided in terms of World Geodetic System coordinates (WGS84).
+            </para>
+            <para>
+            timestamp:<br />
+            Returns a timestamp, given as Unix time in milliseconds, representing the time at which the location was retrieved.
+            </para>
+            </param>
+            <param name="errorCallback">
+            <para>An optional callback function that takes an <see cref="T:System.Int32"/> errorCode and <see cref="T:System.String"/> message as its input parameter.</para>
+            <para>
+            errorCode:<br />
+            Returns an unsigned short representing the error code.
+            The following values are possible:<br />
+            1: PERMISSION_DENIED - The acquisition of the geolocation information failed because the page didn't have the necessary permissions, for example because it is blocked by a Permissions Policy<br />
+            2: POSITION_UNAVAILABLE - The acquisition of the geolocation failed because at least one internal source of position returned an internal error.<br />
+            3: TIMEOUT - The time allowed to acquire the geolocation was reached before the information was obtained.
+            </para>
+            <para>
+            message:<br />
+            Returns a human-readable string describing the details of the error.
+            Specifications note that this is primarily intended for debugging use and not to be shown directly in a user interface.
+            </para>
+            </param>
+            <param name="maximumAge">
+            A positive long value indicating the maximum age in milliseconds of a possible cached position that is acceptable to return.
+            If set to 0, it means that the device cannot use a cached position and must attempt to retrieve the real current position.
+            If set to a value less than zero the device must return a cached position regardless of its age.
+            Default: 0.
+            </param>
+            <param name="timeout">
+            A positive long value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position.
+            The default value is -1, meaning that getCurrentPosition() won't return until the position is available.
+            </param>
+            <param name="timeoutenableHighAccuracy">
+            A boolean value that indicates the application would like to receive the best possible results.
+            If true and if the device is able to provide a more accurate position, it will do so.
+            Note that this can result in slower response times or increased power consumption (with a GPS chip on a mobile device for example).
+            On the other hand, if false, the device can take the liberty to save resources by responding more quickly and/or using less power.
+            Default: false.
+            </param>
+            <param name="cancellationToken"></param>
+            <returns>WatchId - can be used to <see cref="M:BrowserAPI.IGeolocation.ClearWatch(System.Int32,System.Threading.CancellationToken)">clear</see> this registration.</returns>
+        </member>
+        <member name="M:BrowserAPI.IGeolocation.ClearWatch(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            The clearWatch() method of the Geolocation interface is used to unregister location/error monitoring handlers previously installed using <see cref="M:BrowserAPI.IGeolocation.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)"/>.
+            </summary>
+            <param name="watchId">The id of the registration from <see cref="M:BrowserAPI.IGeolocation.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)"/></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IGeolocationInProcess">
+            <summary>
+            The Geolocation API allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IGeolocationInProcess.GetCurrentPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean)">
+            <summary>
+            The getCurrentPosition() method of the Geolocation interface is used to get the current position of the device.
+            </summary>
+            <param name="successCallback">
+            <para>A callback function that takes a <see cref="T:BrowserAPI.GeolocationCoordinates"/> object and a <see cref="T:System.Int64"/> timestamp  as its input parameter.</para>
+            <para>
+            GeolocationCoordinates:<br />
+            The GeolocationCoordinates interface represents the position and altitude of the device on Earth, as well as the accuracy with which these properties are calculated.
+            The geographic position information is provided in terms of World Geodetic System coordinates (WGS84).
+            </para>
+            <para>
+            timestamp:<br />
+            Returns a timestamp, given as Unix time in milliseconds, representing the time at which the location was retrieved.
+            </para>
+            </param>
+            <param name="errorCallback">
+            <para>An optional callback function that takes an <see cref="T:System.Int32"/> errorCode and <see cref="T:System.String"/> message as its input parameter.</para>
+            <para>
+            errorCode:<br />
+            Returns an unsigned short representing the error code.
+            The following values are possible:<br />
+            1: PERMISSION_DENIED - The acquisition of the geolocation information failed because the page didn't have the necessary permissions, for example because it is blocked by a Permissions Policy<br />
+            2: POSITION_UNAVAILABLE - The acquisition of the geolocation failed because at least one internal source of position returned an internal error.<br />
+            3: TIMEOUT - The time allowed to acquire the geolocation was reached before the information was obtained.
+            </para>
+            <para>
+            message:<br />
+            Returns a human-readable string describing the details of the error.
+            Specifications note that this is primarily intended for debugging use and not to be shown directly in a user interface.
+            </para>
+            </param>
+            <param name="maximumAge">
+            A positive long value indicating the maximum age in milliseconds of a possible cached position that is acceptable to return.
+            If set to 0, it means that the device cannot use a cached position and must attempt to retrieve the real current position.
+            If set to a value less than zero the device must return a cached position regardless of its age.
+            Default: 0.
+            </param>
+            <param name="timeout">
+            A positive long value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position.
+            The default value is -1, meaning that getCurrentPosition() won't return until the position is available.
+            </param>
+            <param name="timeoutenableHighAccuracy">
+            A boolean value that indicates the application would like to receive the best possible results.
+            If true and if the device is able to provide a more accurate position, it will do so.
+            Note that this can result in slower response times or increased power consumption (with a GPS chip on a mobile device for example).
+            On the other hand, if false, the device can take the liberty to save resources by responding more quickly and/or using less power.
+            Default: false.
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IGeolocationInProcess.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean)">
+            <summary>
+            The watchPosition() method of the Geolocation interface is used to register a handler function that will be called automatically each time the position of the device changes.
+            You can also, optionally, specify an error handling callback function.
+            </summary>
+            <param name="successCallback">
+            <para>A callback function that takes a <see cref="T:BrowserAPI.GeolocationCoordinates"/> object and a <see cref="T:System.Int64"/> timestamp  as its input parameter.</para>
+            <para>
+            GeolocationCoordinates:<br />
+            The GeolocationCoordinates interface represents the position and altitude of the device on Earth, as well as the accuracy with which these properties are calculated.
+            The geographic position information is provided in terms of World Geodetic System coordinates (WGS84).
+            </para>
+            <para>
+            timestamp:<br />
+            Returns a timestamp, given as Unix time in milliseconds, representing the time at which the location was retrieved.
+            </para>
+            </param>
+            <param name="errorCallback">
+            <para>An optional callback function that takes an <see cref="T:System.Int32"/> errorCode and <see cref="T:System.String"/> message as its input parameter.</para>
+            <para>
+            errorCode:<br />
+            Returns an unsigned short representing the error code.
+            The following values are possible:<br />
+            1: PERMISSION_DENIED - The acquisition of the geolocation information failed because the page didn't have the necessary permissions, for example because it is blocked by a Permissions Policy<br />
+            2: POSITION_UNAVAILABLE - The acquisition of the geolocation failed because at least one internal source of position returned an internal error.<br />
+            3: TIMEOUT - The time allowed to acquire the geolocation was reached before the information was obtained.
+            </para>
+            <para>
+            message:<br />
+            Returns a human-readable string describing the details of the error.
+            Specifications note that this is primarily intended for debugging use and not to be shown directly in a user interface.
+            </para>
+            </param>
+            <param name="maximumAge">
+            A positive long value indicating the maximum age in milliseconds of a possible cached position that is acceptable to return.
+            If set to 0, it means that the device cannot use a cached position and must attempt to retrieve the real current position.
+            If set to a value less than zero the device must return a cached position regardless of its age.
+            Default: 0.
+            </param>
+            <param name="timeout">
+            A positive long value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position.
+            The default value is -1, meaning that getCurrentPosition() won't return until the position is available.
+            </param>
+            <param name="timeoutenableHighAccuracy">
+            A boolean value that indicates the application would like to receive the best possible results.
+            If true and if the device is able to provide a more accurate position, it will do so.
+            Note that this can result in slower response times or increased power consumption (with a GPS chip on a mobile device for example).
+            On the other hand, if false, the device can take the liberty to save resources by responding more quickly and/or using less power.
+            Default: false.
+            </param>
+            <returns>WatchId - can be used to <see cref="M:BrowserAPI.IGeolocationInProcess.ClearWatch(System.Int32)">clear</see> this registration.</returns>
+        </member>
+        <member name="M:BrowserAPI.IGeolocationInProcess.ClearWatch(System.Int32)">
+            <summary>
+            The clearWatch() method of the Geolocation interface is used to unregister location/error monitoring handlers previously installed using <see cref="M:BrowserAPI.IGeolocationInProcess.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean)"/>.
+            </summary>
+            <param name="watchId">The id of the registration from <see cref="M:BrowserAPI.IGeolocationInProcess.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean)"/></param>
             <returns></returns>
         </member>
         <member name="T:BrowserAPI.IHTMLElement">
@@ -6997,7 +7535,7 @@
         <member name="P:AutoInterfaceAttributes.AutoInterfaceAttribute.Modifier">
             <summary>
             <para>The modifier(s) for the interface.</para>
-            <para>Deault is "public"</para>
+            <para>Deault is "public partial"</para>
             </summary>
         </member>
         <member name="P:AutoInterfaceAttributes.AutoInterfaceAttribute.Namespace">
