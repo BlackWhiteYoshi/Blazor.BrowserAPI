@@ -28,21 +28,24 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
 
     [Inject]
-    public required IHTMLElementFactory HTMLElementFactory { private get; init; }
+    public required IElementFactory ElementFactory { private get; init; }
+
+    [Inject]
+    public required IElementFactoryInProcess ElementFactoryInProcess { private get; init; }
 
 
     private IHTMLElement? _htmlElement;
-    private IHTMLElement HTMLElement => _htmlElement ??= HTMLElementFactory.Create(htmlElement);
+    private IHTMLElement HTMLElement => _htmlElement ??= ElementFactory.CreateHTMLElement(htmlElement);
 
     private IHTMLElementInProcess? _htmlElementInProcess;
-    private IHTMLElementInProcess HTMLElementInProcess => _htmlElementInProcess ??= HTMLElementFactory.CreateInProcess(htmlElement);
+    private IHTMLElementInProcess HTMLElementInProcess => _htmlElementInProcess ??= ElementFactoryInProcess.CreateHTMLElement(htmlElement);
 
 
     private IHTMLElement? _popoverElement;
-    private IHTMLElement PopoverElement => _popoverElement ??= HTMLElementFactory.Create(popoverElement);
+    private IHTMLElement PopoverElement => _popoverElement ??= ElementFactory.CreateHTMLElement(popoverElement);
 
     private IHTMLElementInProcess? _popoverElementInProcess;
-    private IHTMLElementInProcess PopoverElementInProcess => _popoverElementInProcess ??= HTMLElementFactory.CreateInProcess(popoverElement);
+    private IHTMLElementInProcess PopoverElementInProcess => _popoverElementInProcess ??= ElementFactoryInProcess.CreateHTMLElement(popoverElement);
 
 
     public const string LABEL_OUTPUT = "htmlelement-output";

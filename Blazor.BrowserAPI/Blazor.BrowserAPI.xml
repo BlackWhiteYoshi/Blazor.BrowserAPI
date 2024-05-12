@@ -916,38 +916,6 @@
             The <i>close</i> event is fired on an HTMLDialogElement object when the &lt;dialog&gt; it represents has been closed.
             </summary>
         </member>
-        <member name="T:BrowserAPI.Implementation.DialogFactory">
-            <summary>
-            <para>This class can take a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> of &lt;dialog&gt; and creates a <see cref="T:BrowserAPI.IDialog"/> or <see cref="T:BrowserAPI.IDialogInProcess"/> object with it.</para>
-            <para>
-            This factory <b>does not dispose</b> the created onjects, they must disposed manually.
-            So do not forget to call <see cref="M:System.IDisposable.Dispose"/>/<see cref="M:System.IAsyncDisposable.DisposeAsync"/> on a dialog-object when you are done with it.
-            </para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.DialogFactory.#ctor(BrowserAPI.IModuleManager)">
-            <summary>
-            <para>This class can take a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> of &lt;dialog&gt; and creates a <see cref="T:BrowserAPI.IDialog"/> or <see cref="T:BrowserAPI.IDialogInProcess"/> object with it.</para>
-            <para>
-            This factory <b>does not dispose</b> the created onjects, they must disposed manually.
-            So do not forget to call <see cref="M:System.IDisposable.Dispose"/>/<see cref="M:System.IAsyncDisposable.DisposeAsync"/> on a dialog-object when you are done with it.
-            </para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.DialogFactory.Create(Microsoft.AspNetCore.Components.ElementReference)">
-            <summary>
-            Takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> of &lt;dialog&gt; and returns a <see cref="T:BrowserAPI.IDialog"/> interface to interact with the given &lt;dialog&gt;.
-            </summary>
-            <param name="dialog">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a &lt;dialog&gt; html tag.</param>
-            <returns>An object that can be used to interact with the given &lt;dialog&gt; element.</returns>
-        </member>
-        <member name="M:BrowserAPI.Implementation.DialogFactory.CreateInProcess(Microsoft.AspNetCore.Components.ElementReference)">
-            <summary>
-            Takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> of &lt;dialog&gt; and returns a <see cref="T:BrowserAPI.IDialogInProcess"/> interface to interact with the given &lt;dialog&gt;.
-            </summary>
-            <param name="dialog">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a &lt;dialog&gt; html tag.</param>
-            <returns>An object that can be used to interact with the given &lt;dialog&gt; element.</returns>
-        </member>
         <member name="T:BrowserAPI.Implementation.DialogInProcess">
             <summary>
             <para>The <i>HTMLDialogElement</i> interface provides methods to manipulate &lt;dialog&gt; elements. It inherits properties and methods from the HTMLElement interface.</para>
@@ -995,6 +963,70 @@
             The <i>close()</i> method of the HTMLDialogElement interface closes the &lt;dialog&gt; and updates the returnValue of the dialog.
             </summary>
             <param name="returnValue">A string representing an updated value for the <see cref="P:BrowserAPI.Implementation.DialogInProcess.ReturnValue"/> of the dialog.</param>
+        </member>
+        <member name="T:BrowserAPI.Implementation.ElementFactory">
+            <summary>
+            <para>An instance of this class takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> and exposes an interface to interact with it.</para>
+            <para>
+            This factory <b>does not dispose</b> the created objects, they must disposed manually.
+            So do not forget to call <see cref="M:System.IAsyncDisposable.DisposeAsync"/> on a htmlElement-object when you are done with it.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ElementFactory.CreateDialog(Microsoft.AspNetCore.Components.ElementReference)">
+            <summary>
+            Takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> of &lt;dialog&gt; and returns a <see cref="T:BrowserAPI.IDialog"/> interface to interact with the given &lt;dialog&gt;.
+            </summary>
+            <param name="dialog">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a &lt;dialog&gt; html tag.</param>
+            <returns>An object that can be used to interact with the given &lt;dialog&gt; element.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ElementFactory.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            <para>An instance of this class takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> and exposes an interface to interact with it.</para>
+            <para>
+            This factory <b>does not dispose</b> the created objects, they must disposed manually.
+            So do not forget to call <see cref="M:System.IAsyncDisposable.DisposeAsync"/> on a htmlElement-object when you are done with it.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ElementFactory.CreateHTMLElement(Microsoft.AspNetCore.Components.ElementReference)">
+            <summary>
+            Takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> and returns a <see cref="T:BrowserAPI.IHTMLElement"/> interface to interact with the given html-element.
+            </summary>
+            <param name="htmlElement">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a html tag.</param>
+            <returns>An object that can be used to interact with the given html element.</returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.ElementFactoryInProcess">
+            <summary>
+            <para>An instance of this class takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> and exposes an interface to interact with it.</para>
+            <para>
+            This factory <b>does not dispose</b> the created objects, they must disposed manually.
+            So do not forget to call <see cref="M:System.IDisposable.Dispose"/> on a htmlElement-object when you are done with it.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ElementFactoryInProcess.CreateDialog(Microsoft.AspNetCore.Components.ElementReference)">
+            <summary>
+            Takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> of &lt;dialog&gt; and returns a <see cref="T:BrowserAPI.IDialogInProcess"/> interface to interact with the given &lt;dialog&gt;.
+            </summary>
+            <param name="dialog">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a &lt;dialog&gt; html tag.</param>
+            <returns>An object that can be used to interact with the given &lt;dialog&gt; element.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ElementFactoryInProcess.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            <para>An instance of this class takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> and exposes an interface to interact with it.</para>
+            <para>
+            This factory <b>does not dispose</b> the created objects, they must disposed manually.
+            So do not forget to call <see cref="M:System.IDisposable.Dispose"/> on a htmlElement-object when you are done with it.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ElementFactoryInProcess.CreateHTMLElement(Microsoft.AspNetCore.Components.ElementReference)">
+            <summary>
+            Takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> and returns a <see cref="T:BrowserAPI.IHTMLElementInProcess"/> interface to interact with the given html-element.
+            </summary>
+            <param name="htmlElement">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a html tag.</param>
+            <returns>An object that can be used to interact with the given html element.</returns>
         </member>
         <member name="T:BrowserAPI.Implementation.Download">
             <summary>
@@ -2356,38 +2388,6 @@
             - string <i>pseudoElement</i>: A string, starting with '::', containing the name of the pseudo-element the animation runs on. If the transition doesn't run on a pseudo-element but on the element, an empty string.
             </para>
             </summary>
-        </member>
-        <member name="T:BrowserAPI.Implementation.HTMLElementFactory">
-            <summary>
-            <para>This class can take a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> and creates a <see cref="T:BrowserAPI.IHTMLElement"/> or <see cref="T:BrowserAPI.IHTMLElementInProcess"/> object with it.</para>
-            <para>
-            This factory <b>does not dispose</b> the created onjects, they must disposed manually.
-            So do not forget to call <see cref="M:System.IDisposable.Dispose"/>/<see cref="M:System.IAsyncDisposable.DisposeAsync"/> on a htmlElement-object when you are done with it.
-            </para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.HTMLElementFactory.#ctor(BrowserAPI.IModuleManager)">
-            <summary>
-            <para>This class can take a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> and creates a <see cref="T:BrowserAPI.IHTMLElement"/> or <see cref="T:BrowserAPI.IHTMLElementInProcess"/> object with it.</para>
-            <para>
-            This factory <b>does not dispose</b> the created onjects, they must disposed manually.
-            So do not forget to call <see cref="M:System.IDisposable.Dispose"/>/<see cref="M:System.IAsyncDisposable.DisposeAsync"/> on a htmlElement-object when you are done with it.
-            </para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.HTMLElementFactory.Create(Microsoft.AspNetCore.Components.ElementReference)">
-            <summary>
-            Takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> and returns a <see cref="T:BrowserAPI.IHTMLElement"/> interface to interact with the given html-element.
-            </summary>
-            <param name="htmlElement">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a html tag.</param>
-            <returns>An object that can be used to interact with the given html element.</returns>
-        </member>
-        <member name="M:BrowserAPI.Implementation.HTMLElementFactory.CreateInProcess(Microsoft.AspNetCore.Components.ElementReference)">
-            <summary>
-            Takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> and returns a <see cref="T:BrowserAPI.IHTMLElementInProcess"/> interface to interact with the given html-element.
-            </summary>
-            <param name="htmlElement">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a html tag.</param>
-            <returns>An object that can be used to interact with the given html element.</returns>
         </member>
         <member name="T:BrowserAPI.Implementation.HTMLElementInProcess">
             <summary>
@@ -4791,28 +4791,51 @@
             </summary>
             <param name="returnValue">A string representing an updated value for the <see cref="P:BrowserAPI.IDialogInProcess.ReturnValue"/> of the dialog.</param>
         </member>
-        <member name="T:BrowserAPI.IDialogFactory">
+        <member name="T:BrowserAPI.IElementFactory">
             <summary>
-            <para>This class can take a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> of &lt;dialog&gt; and creates a <see cref="T:BrowserAPI.IDialog"/> or <see cref="T:BrowserAPI.IDialogInProcess"/> object with it.</para>
+            <para>An instance of this class takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> and exposes an interface to interact with it.</para>
             <para>
-            This factory <b>does not dispose</b> the created onjects, they must disposed manually.
-            So do not forget to call <see cref="M:System.IDisposable.Dispose"/>/<see cref="M:System.IAsyncDisposable.DisposeAsync"/> on a dialog-object when you are done with it.
+            This factory <b>does not dispose</b> the created objects, they must disposed manually.
+            So do not forget to call <see cref="M:System.IAsyncDisposable.DisposeAsync"/> on a htmlElement-object when you are done with it.
             </para>
             </summary>
         </member>
-        <member name="M:BrowserAPI.IDialogFactory.Create(Microsoft.AspNetCore.Components.ElementReference)">
+        <member name="M:BrowserAPI.IElementFactory.CreateDialog(Microsoft.AspNetCore.Components.ElementReference)">
             <summary>
             Takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> of &lt;dialog&gt; and returns a <see cref="T:BrowserAPI.IDialog"/> interface to interact with the given &lt;dialog&gt;.
             </summary>
             <param name="dialog">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a &lt;dialog&gt; html tag.</param>
             <returns>An object that can be used to interact with the given &lt;dialog&gt; element.</returns>
         </member>
-        <member name="M:BrowserAPI.IDialogFactory.CreateInProcess(Microsoft.AspNetCore.Components.ElementReference)">
+        <member name="M:BrowserAPI.IElementFactory.CreateHTMLElement(Microsoft.AspNetCore.Components.ElementReference)">
+            <summary>
+            Takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> and returns a <see cref="T:BrowserAPI.IHTMLElement"/> interface to interact with the given html-element.
+            </summary>
+            <param name="htmlElement">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a html tag.</param>
+            <returns>An object that can be used to interact with the given html element.</returns>
+        </member>
+        <member name="T:BrowserAPI.IElementFactoryInProcess">
+            <summary>
+            <para>An instance of this class takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> and exposes an interface to interact with it.</para>
+            <para>
+            This factory <b>does not dispose</b> the created objects, they must disposed manually.
+            So do not forget to call <see cref="M:System.IDisposable.Dispose"/> on a htmlElement-object when you are done with it.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IElementFactoryInProcess.CreateDialog(Microsoft.AspNetCore.Components.ElementReference)">
             <summary>
             Takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> of &lt;dialog&gt; and returns a <see cref="T:BrowserAPI.IDialogInProcess"/> interface to interact with the given &lt;dialog&gt;.
             </summary>
             <param name="dialog">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a &lt;dialog&gt; html tag.</param>
             <returns>An object that can be used to interact with the given &lt;dialog&gt; element.</returns>
+        </member>
+        <member name="M:BrowserAPI.IElementFactoryInProcess.CreateHTMLElement(Microsoft.AspNetCore.Components.ElementReference)">
+            <summary>
+            Takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> and returns a <see cref="T:BrowserAPI.IHTMLElementInProcess"/> interface to interact with the given html-element.
+            </summary>
+            <param name="htmlElement">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a html tag.</param>
+            <returns>An object that can be used to interact with the given html element.</returns>
         </member>
         <member name="T:BrowserAPI.IDownload">
             <summary>
@@ -6742,29 +6765,6 @@
             - "auto": scroll behavior is determined by the computed value of scroll-behavior<br />
             Defaults to "auto".
             </param>
-        </member>
-        <member name="T:BrowserAPI.IHTMLElementFactory">
-            <summary>
-            <para>This class can take a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> and creates a <see cref="T:BrowserAPI.IHTMLElement"/> or <see cref="T:BrowserAPI.IHTMLElementInProcess"/> object with it.</para>
-            <para>
-            This factory <b>does not dispose</b> the created onjects, they must disposed manually.
-            So do not forget to call <see cref="M:System.IDisposable.Dispose"/>/<see cref="M:System.IAsyncDisposable.DisposeAsync"/> on a htmlElement-object when you are done with it.
-            </para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.IHTMLElementFactory.Create(Microsoft.AspNetCore.Components.ElementReference)">
-            <summary>
-            Takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> and returns a <see cref="T:BrowserAPI.IHTMLElement"/> interface to interact with the given html-element.
-            </summary>
-            <param name="htmlElement">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a html tag.</param>
-            <returns>An object that can be used to interact with the given html element.</returns>
-        </member>
-        <member name="M:BrowserAPI.IHTMLElementFactory.CreateInProcess(Microsoft.AspNetCore.Components.ElementReference)">
-            <summary>
-            Takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> and returns a <see cref="T:BrowserAPI.IHTMLElementInProcess"/> interface to interact with the given html-element.
-            </summary>
-            <param name="htmlElement">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a html tag.</param>
-            <returns>An object that can be used to interact with the given html element.</returns>
         </member>
         <member name="T:BrowserAPI.ILanguage">
             <summary>

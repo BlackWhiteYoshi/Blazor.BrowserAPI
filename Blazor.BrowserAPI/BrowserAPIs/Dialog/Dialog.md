@@ -16,14 +16,14 @@ It inherits properties and methods from the HTMLElement interface.
 ```csharp
 public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
     [Inject]
-    public required IDialogFactory DialogFactory { private get; init; }
+    public required IElementFactory ElementFactory { private get; init; }
 
     private ElementReference dialogElement;
     private IDialog? dialog;
 
     protected override void OnAfterRender(bool firstRender) {
         if (firstRender)
-            dialog = DialogFactory.Create(dialogElement);
+            dialog = ElementFactory.CreateDialog(dialogElement);
     }
 
     public ValueTask DisposeAsync() => dialog?.DisposeAsync() ?? ValueTask.CompletedTask;
@@ -42,19 +42,18 @@ If *Example* is used for an interaction event, like a click event, this is fine,
 <br><br />
 ## Members
 
-### IDialogFactory
+### IElementFactory
 
-This class can take a *ElementReference* of &lt;dialog&gt; and creates a *IDialog* or *IDialogInProcess* object with it.
+An instance of this class takes a *ElementReference* and exposes an interface to interact with it.
 
-This factory **does not dispose** the created onjects, they must disposed manually.
-So do not forget to call Dispose()/DisposeAsync() on a dialog-object when you are done with it.
+This factory **does not dispose** the created objects, they must disposed manually.
+So do not forget to call DisposeAsync() on a dialog-object when you are done with it.
 
 #### Methods
 
-| **Name**        | **Parameters**          | **ReturnType**   | **Description**                                                                                                                   |
-| --------------- | ----------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| Create          | ElementReference dialog | IDialog          | Takes a *ElementReference* of &lt;dialog&gt; and returns *IDialog"* interface to interact with the given &lt;dialog&gt;.          |
-| CreateInProcess | ElementReference dialog | IDialogInProcess | Takes a *ElementReference* of &lt;dialog&gt; and returns *IDialogInProcess"* interface to interact with the given &lt;dialog&gt;. |
+| **Name**     | **Parameters**          | **ReturnType** | **Description**                                                                                                                   |
+| ------------ | ----------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| CreateDialog | ElementReference dialog | IDialog        | Takes a *ElementReference* of &lt;dialog&gt; and returns *IDialog"* interface to interact with the given &lt;dialog&gt;.          |
 
 
 <br></br>
@@ -90,6 +89,22 @@ Objects of this class must disposed manually, so do not forget to call DisposeAs
 | -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | OnCancel | Action   | The *cancel* event fires on a &lt;dialog&gt; when the user instructs the browser that they wish to dismiss the current open dialog. The browser fires this event when the user presses the Esc key. |
 | OnClose  | Action   | The *close* event is fired on an HTMLDialogElement object when the &lt;dialog&gt; it represents has been closed.                                                                                    |
+
+
+
+<br></br>
+### IElementFactoryInProcess
+
+An instance of this class takes a *ElementReference* and exposes an interface to interact with it.
+
+This factory **does not dispose** the created onjects, they must disposed manually.
+So do not forget to call Dispose() on a dialog-object when you are done with it.
+
+#### Methods
+
+| **Name**     | **Parameters**          | **ReturnType**   | **Description**                                                                                                                   |
+| ------------ | ----------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| CreateDialog | ElementReference dialog | IDialogInProcess | Takes a *ElementReference* of &lt;dialog&gt; and returns *IDialogInProcess"* interface to interact with the given &lt;dialog&gt;. |
 
 
 <br></br>

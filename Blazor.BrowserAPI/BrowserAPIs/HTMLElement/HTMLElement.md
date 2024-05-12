@@ -19,7 +19,7 @@ Some elements directly implement this interface, while others implement it via a
 ```csharp
 public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
     [Inject]
-    public required IHTMLElementFactory HTMLElementFactory { private get; init; }
+    public required IElementFactory ElementFactory { private get; init; }
 
     private ElementReference divElement;
     private IHTMLElement? div;
@@ -29,7 +29,7 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
 
     protected override async Task OnAfterRenderAsync(bool firstRender) {
         if (firstRender) {
-            div = HTMLElementFactory.Create(divElement);
+            div = ElementFactory.CreateHTMLElement(divElement);
             divWidth = await div.ClientWidth;
             divHeight = await div.ClientHeight;
             StateHasChanged();
@@ -44,19 +44,18 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
 <br><br />
 ## Members
 
-### IHTMLElementFactory
+### IElementFactory
 
-This class can take a *ElementReference* and creates a *IHTMLElement* or *IHTMLElementProcess* object with it.
+An instance of this class takes a *ElementReference* and exposes an interface to interact with it.
 
-This factory **does not dispose** the created onjects, they must disposed manually.
-So do not forget to call Dispose()/DisposeAsync() on a htmlElement-object when you are done with it.
+This factory **does not dispose** the created objects, they must disposed manually.
+So do not forget to call DisposeAsync() on a dialog-object when you are done with it.
 
 #### Methods
 
-| **Name**        | **Parameters**               | **ReturnType**        | **Description**                                                                                                     |
-| --------------- | ---------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| Create          | ElementReference htmlElement | IHTMLElement          | Takes a *ElementReference* and returns a *IHTMLElement* interface to interact with the given html-element.          |
-| CreateInProcess | ElementReference htmlElement | IHTMLElementInProcess | Takes a *ElementReference* and returns a *IHTMLElementInProcess* interface to interact with the given html-element. |
+| **Name**          | **Parameters**               | **ReturnType** | **Description**                                                                                                     |
+| ----------------- | ---------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------- |
+| CreateHTMLElement | ElementReference htmlElement | IHTMLElement   | Takes a *ElementReference* and returns a *IHTMLElement* interface to interact with the given html-element.          |
 
 
 <br></br>
@@ -162,6 +161,22 @@ Objects of this class must disposed manually, so do not forget to call DisposeAs
 | OnAnimationend       | Action<string, double, string> | The *animationend* event is fired when a CSS Animation has completed. If the animation aborts before reaching completion, such as if the element is removed from the DOM or the animation is removed from the element, the animationend event is not fired.<br></br>**Parameters**<br></br>- string *animationName*: A string containing the value of the animation-name that generated the animation.<br></br>- double *elapsedTime*: A float giving the amount of time the animation has been running, in seconds, when this event fired, excluding any time the animation was paused. For an animationstart event, elapsedTime is 0.0 unless there was a negative value for animation-delay, in which case the event will be fired with elapsedTime containing (-1 * delay).<br></br>- string *pseudoElement*: A string, starting with '::', containing the name of the pseudo-element the animation runs on. If the transition doesn't run on a pseudo-element but on the element, an empty string.                                                                                                                                                                                                                                                                    |
 | OnAnimationiteration | Action<string, double, string> | The *animationiteration* event is fired when an iteration of a CSS Animation ends, and another one begins. This event does not occur at the same time as the animationend event, and therefore does not occur for animations with an animation-iteration-count of one.<br></br>**Parameters**<br></br>- string *animationName*: A string containing the value of the animation-name that generated the animation.<br></br>- double *elapsedTime*: A float giving the amount of time the animation has been running, in seconds, when this event fired, excluding any time the animation was paused. For an animationstart event, elapsedTime is 0.0 unless there was a negative value for animation-delay, in which case the event will be fired with elapsedTime containing (-1 * delay).<br></br>- string *pseudoElement*: A string, starting with '::', containing the name of the pseudo-element the animation runs on. If the transition doesn't run on a pseudo-element but on the element, an empty string.                                                                                                                                                                                                                                                         |
 | OnAnimationcancel    | Action<string, double, string> | The *animationcancel* event is fired when a CSS Animation unexpectedly aborts. In other words, any time it stops running without sending an animationend event. This might happen when the animation-name is changed such that the animation is removed, or when the animating node is hidden using CSS. Therefore, either directly or because any of its containing nodes are hidden. An event handler for this event can be added by setting the onanimationcancel property, or using addEventListener().<br></br>**Parameters**<br></br>- string *animationName*: A string containing the value of the animation-name that generated the animation.<br></br>- double *elapsedTime*: A float giving the amount of time the animation has been running, in seconds, when this event fired, excluding any time the animation was paused. For an animationstart event, elapsedTime is 0.0 unless there was a negative value for animation-delay, in which case the event will be fired with elapsedTime containing (-1 * delay).<br></br>- string *pseudoElement*: A string, starting with '::', containing the name of the pseudo-element the animation runs on. If the transition doesn't run on a pseudo-element but on the element, an empty string.                    |
+
+
+
+<br></br>
+### IElementFactoryInProcess
+
+An instance of this class takes a *ElementReference* and exposes an interface to interact with it.
+
+This factory **does not dispose** the created onjects, they must disposed manually.
+So do not forget to call Dispose() on a dialog-object when you are done with it.
+
+#### Methods
+
+| **Name**          | **Parameters**               | **ReturnType**        | **Description**                                                                                                     |
+| ----------------- | ---------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| CreateHTMLElement | ElementReference htmlElement | IHTMLElementInProcess | Takes a *ElementReference* and returns a *IHTMLElementInProcess* interface to interact with the given html-element. |
 
 
 <br></br>

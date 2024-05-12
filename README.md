@@ -84,4 +84,6 @@ There are more interfaces coming.
 - 0.2.0  
   Added IBrowserAPIModule for [CircleDI](https://github.com/BlackWhiteYoshi/CircleDI) and [Jab](https://github.com/pakrym/jab)
 - 0.3.0  
-  Added Geolocation
+  Added Geolocation (11 BrowserAPIs)
+- 0.4.0  
+  Breaking Change: removed HTMLElementFactory and DialogFactory and added ElementFactory/ElementFactoryInProcess instead.

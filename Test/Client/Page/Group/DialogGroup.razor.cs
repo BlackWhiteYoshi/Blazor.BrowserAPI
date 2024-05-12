@@ -9,13 +9,17 @@ public sealed partial class DialogGroup : ComponentBase, IAsyncDisposable {
 
 
     [Inject]
-    public required IDialogFactory DialogFactory { private get; init; }
+    public required IElementFactory ElementFactory { private get; init; }
+
+    [Inject]
+    public required IElementFactoryInProcess ElementFactoryInProcess { private get; init; }
+
 
     private IDialog? _dialog;
-    private IDialog Dialog => _dialog ??= DialogFactory.Create(dialogElement);
+    private IDialog Dialog => _dialog ??= ElementFactory.CreateDialog(dialogElement);
 
     private IDialogInProcess? _dialogInProcess;
-    private IDialogInProcess DialogInProcess => _dialogInProcess ??= DialogFactory.CreateInProcess(dialogElement);
+    private IDialogInProcess DialogInProcess => _dialogInProcess ??= ElementFactoryInProcess.CreateDialog(dialogElement);
 
 
     public const string LABEL_OUTPUT = "dialog-output";
