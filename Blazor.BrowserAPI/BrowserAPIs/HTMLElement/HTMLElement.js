@@ -1,4 +1,4 @@
-import { DotNet } from "../blazor";
+import { DotNet } from "../../blazor";
 
 
 /**

@@ -1,5 +1,4 @@
-﻿using BrowserAPI.Implementation;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace BrowserAPI.Test.Client;
 

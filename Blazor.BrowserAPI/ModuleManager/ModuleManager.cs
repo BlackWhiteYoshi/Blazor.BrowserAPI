@@ -55,7 +55,10 @@ public sealed class ModuleManager(IJSRuntime jsRuntime) : IModuleManager, IDispo
     TResult IModuleManager.InvokeSync<TResult>(string identifier, object?[]? args = null) {
         Task<IJSObjectReference> moduleTask = LoadModule();
         if (!moduleTask.IsCompletedSuccessfully)
-            throw new JSException("JS-module is not loaded yet. To make sure the module is downloaded, you can await IModuleLoader.ModuleDownload.");
+            throw new JSException(jsRuntime switch {
+                IJSInProcessRuntime => "JS-module is not loaded yet. To make sure the module is downloaded, you can await IModuleLoader.ModuleDownload.",
+                _ => "Synchronous JS invoke is only supported in Blazor webassembly."
+            });
 
         IJSInProcessObjectReference module = (IJSInProcessObjectReference)moduleTask.Result;
         return module.Invoke<TResult>(identifier, args);

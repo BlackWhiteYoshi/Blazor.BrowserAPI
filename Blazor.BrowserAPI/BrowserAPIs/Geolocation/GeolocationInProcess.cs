@@ -1,8 +1,6 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
-using System.Diagnostics.CodeAnalysis;
 #pragma warning disable IDE0005 // used for AutoInterface code generation
-using BrowserAPI.Implementation;
 #pragma warning restore
 
 namespace BrowserAPI.Implementation;
@@ -53,7 +51,7 @@ public sealed class GeolocationInProcess(IModuleManager moduleManager) : IGeoloc
     /// A positive long value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position.
     /// The default value is -1, meaning that getCurrentPosition() won't return until the position is available.
     /// </param>
-    /// <param name="timeoutenableHighAccuracy">
+    /// <param name="enableHighAccuracy">
     /// A boolean value that indicates the application would like to receive the best possible results.
     /// If true and if the device is able to provide a more accurate position, it will do so.
     /// Note that this can result in slower response times or increased power consumption (with a GPS chip on a mobile device for example).
@@ -120,7 +118,7 @@ public sealed class GeolocationInProcess(IModuleManager moduleManager) : IGeoloc
     /// A positive long value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position.
     /// The default value is -1, meaning that getCurrentPosition() won't return until the position is available.
     /// </param>
-    /// <param name="timeoutenableHighAccuracy">
+    /// <param name="enableHighAccuracy">
     /// A boolean value that indicates the application would like to receive the best possible results.
     /// If true and if the device is able to provide a more accurate position, it will do so.
     /// Note that this can result in slower response times or increased power consumption (with a GPS chip on a mobile device for example).

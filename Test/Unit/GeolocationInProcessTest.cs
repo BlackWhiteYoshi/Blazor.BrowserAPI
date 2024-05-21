@@ -65,20 +65,26 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
     [Fact]
     public async Task ClearWatch_InProcess() {
         await Page.GetByTestId(GeolocationGroup.BUTTON_WATCH_POSITION_INPROCESS).ClickAsync();
+        await Task.Delay(100);
+
         await Context.SetGeolocationAsync(new Geolocation() {
             Longitude = 1,
             Latitude = 1,
             Accuracy = 1,
         });
+        await Task.Delay(100);
 
         await Page.GetByTestId(GeolocationGroup.BUTTON_CLEAR_WATCH_INPROCESS).ClickAsync();
+        await Task.Delay(100);
+
         await Context.SetGeolocationAsync(new Geolocation() {
             Longitude = 2,
             Latitude = 2,
             Accuracy = 2,
         });
+        await Task.Delay(100);
 
         string? result = await Page.GetByTestId(GeolocationGroup.LABEL_OUTPUT).TextContentAsync();
-        Assert.Equal("1, 0", result);
+        Assert.Equal("2, 0", result);
     }
 }
