@@ -9,8 +9,13 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerContainer")]
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerContainerInProcess")]
-public abstract class ServiceWorkerContainerBase {
+public abstract class ServiceWorkerContainerBase : IDisposable {
     private protected abstract IModuleManager ModuleManager { get; }
+
+    /// <summary>
+    /// Releases the <see cref="EventTrigger"/> object used to trigger the events.
+    /// </summary>
+    public void Dispose() => DisposeEventTrigger();
 
 
     /// <summary>
@@ -46,9 +51,20 @@ public abstract class ServiceWorkerContainerBase {
     private protected ValueTask<IJSObjectReference[]> GetRegistrationsBase(CancellationToken cancellationToken) => ModuleManager.InvokeAsync<IJSObjectReference[]>("serviceWorkerContainerGetRegistrations", cancellationToken);
 
 
-    #region ControllerChange event
+    #region Events
 
-    private DotNetObjectReference<ControllerChangeTrigger>? objectReferenceControllerChangeTrigger;
+    [method: DynamicDependency(nameof(InvokeControllerChange))]
+    [method: DynamicDependency(nameof(InvokeMessage))]
+    private sealed class EventTrigger(ServiceWorkerContainerBase serviceWorkerContainer) {
+        [JSInvokable] public void InvokeControllerChange() => serviceWorkerContainer._onControllerChange?.Invoke();
+        [JSInvokable] public void InvokeMessage(object message) => serviceWorkerContainer._onMessage?.Invoke(message.ToString()!);
+    }
+
+    private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
+    private DotNetObjectReference<EventTrigger> ObjectReferenceEventTrigger => _objectReferenceEventTrigger ??= DotNetObjectReference.Create(new EventTrigger(this));
+
+    private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
+
 
     private Action? _onControllerChange;
     /// <summary>
@@ -56,37 +72,16 @@ public abstract class ServiceWorkerContainerBase {
     /// </summary>
     public event Action OnControllerChange {
         add {
-            if (objectReferenceControllerChangeTrigger == null)
-                Task.Factory.StartNew(async () => {
-                    objectReferenceControllerChangeTrigger = DotNetObjectReference.Create(new ControllerChangeTrigger(this));
-                    await ModuleManager.InvokeTrySync("serviceWorkerContainerActivateOncontrollerchange", default, [objectReferenceControllerChangeTrigger]);
-                });
-
+            if (_onControllerChange == null)
+                Task.Factory.StartNew(async () => await ModuleManager.InvokeTrySync("serviceWorkerContainerActivateOncontrollerchange", default, [ObjectReferenceEventTrigger]));
             _onControllerChange += value;
         }
         remove {
             _onControllerChange -= value;
-
-            if (_onControllerChange == null && objectReferenceControllerChangeTrigger != null)
-                Task.Factory.StartNew(async () => {
-                    await ModuleManager.InvokeTrySync("serviceWorkerContainerDeactivateOncontrollerchange", default);
-                    objectReferenceControllerChangeTrigger.Dispose();
-                });
+            if (_onControllerChange == null)
+                Task.Factory.StartNew(async () => await ModuleManager.InvokeTrySync("serviceWorkerContainerDeactivateOncontrollerchange", default));
         }
     }
-
-    [method: DynamicDependency(nameof(Trigger))]
-    private sealed class ControllerChangeTrigger(ServiceWorkerContainerBase serviceWorkerContainer) {
-        [JSInvokable]
-        public void Trigger() => serviceWorkerContainer._onControllerChange?.Invoke();
-    }
-
-    #endregion
-
-
-    #region Message event
-
-    private DotNetObjectReference<MessageTrigger>? objectReferenceMessageTrigger;
 
     private Action<string>? _onMessage;
     /// <summary>
@@ -95,30 +90,15 @@ public abstract class ServiceWorkerContainerBase {
     /// </summary>
     public event Action<string> OnMessage {
         add {
-            if (objectReferenceMessageTrigger == null)
-                Task.Factory.StartNew(async () => {
-                    objectReferenceMessageTrigger = DotNetObjectReference.Create(new MessageTrigger(this));
-                    await ModuleManager.InvokeTrySync("serviceWorkerContainerActivateOnMessage", default, [objectReferenceMessageTrigger]);
-                });
-
+            if (_onMessage == null)
+                Task.Factory.StartNew(async () => await ModuleManager.InvokeTrySync("serviceWorkerContainerActivateOnMessage", default, [ObjectReferenceEventTrigger]));
             _onMessage += value;
         }
         remove {
             _onMessage -= value;
-
-            if (_onMessage == null && objectReferenceMessageTrigger != null)
-                Task.Factory.StartNew(async () => {
-                    await ModuleManager.InvokeTrySync("serviceWorkerContainerDeactivateOnMessage", default);
-                    objectReferenceMessageTrigger.Dispose();
-                });
-
+            if (_onMessage == null)
+                Task.Factory.StartNew(async () => await ModuleManager.InvokeTrySync("serviceWorkerContainerDeactivateOnMessage", default));
         }
-    }
-
-    [method: DynamicDependency(nameof(Trigger))]
-    private sealed class MessageTrigger(ServiceWorkerContainerBase serviceWorkerContainer) {
-        [JSInvokable]
-        public void Trigger(object message) => serviceWorkerContainer._onMessage?.Invoke(message.ToString()!);
     }
 
     #endregion

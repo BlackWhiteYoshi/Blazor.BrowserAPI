@@ -20,7 +20,10 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
     /// Releases the JS instance for this service worker registration.
     /// </summary>
     /// <returns></returns>
-    public ValueTask DisposeAsync() => serviceWorkerRegistration.DisposeTrySync();
+    public ValueTask DisposeAsync() {
+        DisposeEventTrigger();
+        return serviceWorkerRegistration.DisposeTrySync();
+    }
 
 
     /// <summary>

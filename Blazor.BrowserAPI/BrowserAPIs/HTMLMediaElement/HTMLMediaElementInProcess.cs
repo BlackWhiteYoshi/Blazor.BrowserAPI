@@ -17,7 +17,10 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// <summary>
     /// Releases the JS instance for this htmlMediaElement.
     /// </summary>
-    public void Dispose() => htmlMediaElementJS.Dispose();
+    public void Dispose() {
+        DisposeEventTrigger();
+        htmlMediaElementJS.Dispose();
+    }
 
 
     // Attributes

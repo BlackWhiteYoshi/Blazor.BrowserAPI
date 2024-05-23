@@ -17,7 +17,10 @@ public sealed class Dialog(Task<IJSObjectReference> dialogTask) : DialogBase, ID
     /// Releases the JS instance for this dialog.
     /// </summary>
     /// <returns></returns>
-    public async ValueTask DisposeAsync() => await (await DialogTask).DisposeTrySync();
+    public async ValueTask DisposeAsync() {
+        DisposeEventTrigger();
+        await (await DialogTask).DisposeTrySync();
+    }
 
 
     /// <summary>

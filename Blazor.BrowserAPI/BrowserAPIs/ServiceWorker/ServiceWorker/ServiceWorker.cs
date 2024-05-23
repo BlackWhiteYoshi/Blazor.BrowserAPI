@@ -19,7 +19,10 @@ public sealed class ServiceWorker(IJSObjectReference serviceWorker) : ServiceWor
     /// <summary>
     /// Releases the JS instance for this service worker.
     /// </summary>
-    public ValueTask DisposeAsync() => serviceWorker.DisposeTrySync();
+    public ValueTask DisposeAsync() {
+        DisposeEventTrigger();
+        return serviceWorker.DisposeTrySync();
+    }
 
 
     /// <summary>

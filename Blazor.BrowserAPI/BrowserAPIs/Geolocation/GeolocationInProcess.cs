@@ -1,7 +1,5 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
-#pragma warning disable IDE0005 // used for AutoInterface code generation
-#pragma warning restore
 
 namespace BrowserAPI.Implementation;
 
@@ -74,7 +72,11 @@ public sealed class GeolocationInProcess(IModuleManager moduleManager) : IGeoloc
     }
 
 
-    private readonly List<(int watchId, DotNetObjectReference<CallbackGeolocation> callbackGeolocation)> watchList = [];
+    /// <summary>
+    /// Key = int watchId<br />
+    /// Value = DotNetObjectReference&lt;CallbackGeolocation&gt; callbackGeolocation
+    /// </summary>
+    private readonly SortedList<int, DotNetObjectReference<CallbackGeolocation>> watchList = [];
 
     /// <summary>
     /// The watchPosition() method of the Geolocation interface is used to register a handler function that will be called automatically each time the position of the device changes.
@@ -129,7 +131,7 @@ public sealed class GeolocationInProcess(IModuleManager moduleManager) : IGeoloc
     public int WatchPosition(Action<GeolocationCoordinates, long> successCallback, Action<int, string>? errorCallback = null, long maximumAge = 0, long timeout = -1, bool enableHighAccuracy = false) {
         DotNetObjectReference<CallbackGeolocation> callbackGeolocation = DotNetObjectReference.Create(new CallbackGeolocation(successCallback, errorCallback));
         int watchId = moduleManager.InvokeSync<int>("geolocationWatchPosition", [callbackGeolocation, maximumAge, timeout, enableHighAccuracy]);
-        watchList.Add((watchId, callbackGeolocation));
+        watchList.Add(watchId, callbackGeolocation);
         return watchId;
     }
 
@@ -141,11 +143,9 @@ public sealed class GeolocationInProcess(IModuleManager moduleManager) : IGeoloc
     public void ClearWatch(int watchId) {
         moduleManager.InvokeSync("geolocationClearWatch", [watchId]);
 
-        for (int i = 0; i < watchList.Count; i++)
-            if (watchList[i].watchId == watchId) {
-                watchList[i].callbackGeolocation.Dispose();
-                watchList.RemoveAt(i);
-                break;
-            }
+        if (watchList.TryGetValue(watchId, out DotNetObjectReference<CallbackGeolocation>? callbackGeolocation)) {
+            callbackGeolocation.Dispose();
+            watchList.Remove(watchId);
+        }
     }
 }

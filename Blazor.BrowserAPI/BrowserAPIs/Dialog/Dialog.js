@@ -70,27 +70,26 @@ export class DialogWrapper {
     }
 
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} cancelTrigger
-     */
-    activateOncancel(cancelTrigger) {
-        this.#dialog.oncancel = () => cancelTrigger.invokeMethodAsync("Trigger");
-    }
+    // events
 
+    /**
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     */
+    activateOncancel(eventTrigger) {
+        this.#dialog.oncancel = () => eventTrigger.invokeMethodAsync("InvokeCancel");
+    }
     /**
      */
     deactivateOncancel() {
         this.#dialog.oncancel = null;
     }
-
-
+    
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} closeTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnclose(closeTrigger) {
-        this.#dialog.onclose = () => closeTrigger.invokeMethodAsync("Trigger");
+    activateOnclose(eventTrigger) {
+        this.#dialog.onclose = () => eventTrigger.invokeMethodAsync("InvokeClose");
     }
-
     /**
      */
     deactivateOnclose() {

@@ -755,6 +755,7 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
     [Fact]
     public async Task RegisterOnTransitionstart() {
         await Page.GetByTestId(HTMLElementGroup.BUTTON_REGISTER_ON_TRANSITIONSTART).ClickAsync();
+        await Task.Delay(100);
 
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#000';");
         await Task.Delay(100);
@@ -766,6 +767,7 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
     [Fact]
     public async Task RegisterOnTransitionend() {
         await Page.GetByTestId(HTMLElementGroup.BUTTON_REGISTER_ON_TRANSITIONEND).ClickAsync();
+        await Task.Delay(100);
 
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#000';");
         await Task.Delay(600);
@@ -777,6 +779,7 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
     [Fact]
     public async Task RegisterOnTransitionrun() {
         await Page.GetByTestId(HTMLElementGroup.BUTTON_REGISTER_ON_TRANSITIONRUN).ClickAsync();
+        await Task.Delay(100);
 
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#000';");
         await Task.Delay(100);
@@ -788,6 +791,7 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
     [Fact]
     public async Task RegisterOnTransitioncancel() {
         await Page.GetByTestId(HTMLElementGroup.BUTTON_REGISTER_ON_TRANSITIONCANCEL).ClickAsync();
+        await Task.Delay(100);
 
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#000';");
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#222';");
@@ -801,6 +805,7 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
     [Fact]
     public async Task RegisterOnAnimationstart() {
         await Page.GetByTestId(HTMLElementGroup.BUTTON_REGISTER_ON_ANIMATIONSTART).ClickAsync();
+        await Task.Delay(100);
 
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.classList.add('animation-start');");
         await Task.Delay(100);
@@ -812,6 +817,7 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
     [Fact]
     public async Task RegisterOnAnimationnend() {
         await Page.GetByTestId(HTMLElementGroup.BUTTON_REGISTER_ON_ANIMATIONEND).ClickAsync();
+        await Task.Delay(100);
 
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.classList.add('animation-start');");
         await Task.Delay(600);
@@ -823,6 +829,7 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
     [Fact]
     public async Task RegisterOnAnimationiteration() {
         await Page.GetByTestId(HTMLElementGroup.BUTTON_REGISTER_ON_ANIMATIONITERATION).ClickAsync();
+        await Task.Delay(100);
 
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.classList.add('animation-start-infinite');");
         await Task.Delay(600);
@@ -835,6 +842,7 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
     //[Fact]
     //public async Task RegisterOnAnimationcancel() {
     //    await Page.GetByTestId(HTMLElementGroup.BUTTON_REGISTER_ON_ANIMATIONCANCEL).ClickAsync();
+    //    await Task.Delay(100);
 
     //    await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.classList.add('animation-start');");
     //    await Task.Delay(100);

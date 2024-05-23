@@ -5,7 +5,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// Base class for <see cref="ServiceWorkerRegistration"/> and <see cref="ServiceWorkerRegistrationInProcess"/>.
+/// <para>Base class for <see cref="ServiceWorkerRegistration"/> and <see cref="ServiceWorkerRegistrationInProcess"/>.</para>
+/// <para>Derived class should implement <see cref="IDisposable"/> or <see cref="IAsyncDisposable"/> and call <see cref="DisposeEventTrigger"/> there.</para>
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerRegistration")]
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerRegistrationInProcess")]
@@ -26,9 +27,19 @@ public abstract class ServiceWorkerRegistrationBase {
     private protected ValueTask<IJSObjectReference> UpdateBase(CancellationToken cancellationToken = default) => ServiceWorkerRegistrationJS.InvokeAsync<IJSObjectReference>("update", cancellationToken);
 
 
-    #region UpdateFound event
+    #region Events
 
-    private DotNetObjectReference<UpdateFoundTrigger>? objectReferenceUpdateFoundTrigger;
+    [method: DynamicDependency(nameof(InvokeUpdateFound))]
+    private sealed class EventTrigger(ServiceWorkerRegistrationBase serviceWorkerRegistration) {
+        [JSInvokable]
+        public void InvokeUpdateFound() => serviceWorkerRegistration._onUpdateFound?.Invoke();
+    }
+
+    private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
+    private DotNetObjectReference<EventTrigger> ObjectReferenceEventTrigger => _objectReferenceEventTrigger ??= DotNetObjectReference.Create(new EventTrigger(this));
+
+    private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
+
 
     private Action? _onUpdateFound;
     /// <summary>
@@ -36,29 +47,15 @@ public abstract class ServiceWorkerRegistrationBase {
     /// </summary>
     public event Action OnUpdateFound {
         add {
-            if (objectReferenceUpdateFoundTrigger == null)
-                Task.Factory.StartNew(async () => {
-                    objectReferenceUpdateFoundTrigger = DotNetObjectReference.Create(new UpdateFoundTrigger(this));
-                    await ServiceWorkerRegistrationJS.InvokeVoidTrySync("activateOnupdatefound", default, [objectReferenceUpdateFoundTrigger]);
-                });
-
+            if (_onUpdateFound == null)
+                Task.Factory.StartNew(async () => await ServiceWorkerRegistrationJS.InvokeVoidTrySync("activateOnupdatefound", default, [ObjectReferenceEventTrigger]));
             _onUpdateFound += value;
         }
         remove {
             _onUpdateFound -= value;
-
-            if (_onUpdateFound == null && objectReferenceUpdateFoundTrigger != null)
-                Task.Factory.StartNew(async () => {
-                    await ServiceWorkerRegistrationJS.InvokeVoidTrySync("deactivateOnupdatefound", default);
-                    objectReferenceUpdateFoundTrigger.Dispose();
-                });
+            if (_onUpdateFound == null)
+                Task.Factory.StartNew(async () => await ServiceWorkerRegistrationJS.InvokeVoidTrySync("deactivateOnupdatefound", default));
         }
-    }
-
-    [method: DynamicDependency(nameof(Trigger))]
-    private sealed class UpdateFoundTrigger(ServiceWorkerRegistrationBase serviceWorkerRegistration) {
-        [JSInvokable]
-        public void Trigger() => serviceWorkerRegistration._onUpdateFound?.Invoke();
     }
 
     #endregion

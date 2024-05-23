@@ -5,7 +5,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// Base class for <see cref="ServiceWorker"/> and <see cref="ServiceWorkerInProcess"/>.
+/// <para>Base class for <see cref="ServiceWorker"/> and <see cref="ServiceWorkerInProcess"/>.</para>
+/// <para>Derived class should implement <see cref="IDisposable"/> or <see cref="IAsyncDisposable"/> and call <see cref="DisposeEventTrigger"/> there.</para>
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorker")]
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerInProcess")]
@@ -14,9 +15,20 @@ public abstract class ServiceWorkerBase {
     private protected abstract IJSObjectReference ServiceWorkerJS { get; }
 
 
-    #region StateChange event
+    #region Events
 
-    private DotNetObjectReference<StateChangeTrigger>? objectReferenceStateChangeTrigger;
+    [method: DynamicDependency(nameof(InvokeStateChange))]
+    [method: DynamicDependency(nameof(InvokeError))]
+    private sealed class EventTrigger(ServiceWorkerBase serviceWorker) {
+        [JSInvokable] public void InvokeStateChange(string state) => serviceWorker._onStateChange?.Invoke(state);
+        [JSInvokable] public void InvokeError(object message) => serviceWorker._onError?.Invoke(message.ToString()!);
+    }
+
+    private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
+    private DotNetObjectReference<EventTrigger> ObjectReferenceEventTrigger => _objectReferenceEventTrigger ??= DotNetObjectReference.Create(new EventTrigger(this));
+
+    private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
+
 
     private Action<string>? _onStateChange;
     /// <summary>
@@ -25,37 +37,16 @@ public abstract class ServiceWorkerBase {
     /// </summary>
     public event Action<string> OnStateChange {
         add {
-            if (objectReferenceStateChangeTrigger == null)
-                Task.Factory.StartNew(async () => {
-                    objectReferenceStateChangeTrigger = DotNetObjectReference.Create(new StateChangeTrigger(this));
-                    await ServiceWorkerJS.InvokeVoidTrySync("activateOnstatechange", default, [objectReferenceStateChangeTrigger]);
-                });
-
+            if (_onStateChange == null)
+                Task.Factory.StartNew(async () => await ServiceWorkerJS.InvokeVoidTrySync("activateOnstatechange", default, [ObjectReferenceEventTrigger]));
             _onStateChange += value;
         }
         remove {
             _onStateChange -= value;
-
-            if (_onStateChange == null && objectReferenceStateChangeTrigger != null)
-                Task.Factory.StartNew(async () => {
-                    await ServiceWorkerJS.InvokeVoidTrySync("deactivateOnstatechange", default);
-                    objectReferenceStateChangeTrigger.Dispose();
-                });
+            if (_onStateChange == null)
+                Task.Factory.StartNew(async () => await ServiceWorkerJS.InvokeVoidTrySync("deactivateOnstatechange", default));
         }
     }
-
-    [method: DynamicDependency(nameof(Trigger))]
-    private sealed class StateChangeTrigger(ServiceWorkerBase serviceWorker) {
-        [JSInvokable]
-        public void Trigger(string state) => serviceWorker._onStateChange?.Invoke(state);
-    }
-
-    #endregion
-
-
-    #region Error event
-
-    private DotNetObjectReference<ErrorTrigger>? objectReferenceErrorTrigger;
 
     private Action<string>? _onError;
     /// <summary>
@@ -64,29 +55,15 @@ public abstract class ServiceWorkerBase {
     /// </summary>
     public event Action<string> OnError {
         add {
-            if (objectReferenceErrorTrigger == null)
-                Task.Factory.StartNew(async () => {
-                    objectReferenceErrorTrigger = DotNetObjectReference.Create(new ErrorTrigger(this));
-                    await ServiceWorkerJS.InvokeVoidTrySync("activateOnerror", default, [objectReferenceErrorTrigger]);
-                });
-
+            if (_onError == null)
+                Task.Factory.StartNew(async () => await ServiceWorkerJS.InvokeVoidTrySync("activateOnerror", default, [ObjectReferenceEventTrigger]));
             _onError += value;
         }
         remove {
             _onError -= value;
-
-            if (_onError == null && objectReferenceErrorTrigger != null)
-                Task.Factory.StartNew(async () => {
-                    await ServiceWorkerJS.InvokeVoidTrySync("deactivateOnerror", default);
-                    objectReferenceErrorTrigger.Dispose();
-                });
+            if (_onError == null)
+                Task.Factory.StartNew(async () => await ServiceWorkerJS.InvokeVoidTrySync("deactivateOnerror", default));
         }
-    }
-
-    [method: DynamicDependency(nameof(Trigger))]
-    private sealed class ErrorTrigger(ServiceWorkerBase serviceWorker) {
-        [JSInvokable]
-        public void Trigger(object message) => serviceWorker._onError?.Invoke(message.ToString()!);
     }
 
     #endregion

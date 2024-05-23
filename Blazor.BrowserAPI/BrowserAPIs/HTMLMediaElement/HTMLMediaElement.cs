@@ -19,7 +19,10 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// Releases the JS instance for this htmlMediaElement.
     /// </summary>
     /// <returns></returns>
-    public async ValueTask DisposeAsync() => await (await HTMLMediaElementTask).DisposeTrySync();
+    public async ValueTask DisposeAsync() {
+        DisposeEventTrigger();
+        await (await HTMLMediaElementTask).DisposeTrySync();
+    }
 
 
     // Attributes

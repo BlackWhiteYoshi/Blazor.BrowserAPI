@@ -19,7 +19,10 @@ public sealed class ServiceWorkerInProcess(IJSInProcessObjectReference serviceWo
     /// <summary>
     /// Releases the JS instance for this service worker.
     /// </summary>
-    public void Dispose() => serviceWorker.Dispose();
+    public void Dispose() {
+        DisposeEventTrigger();
+        serviceWorker.Dispose();
+    }
 
 
     /// <summary>

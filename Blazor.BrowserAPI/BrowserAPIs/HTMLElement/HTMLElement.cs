@@ -17,7 +17,10 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// Releases the JS instance for this HTML element.
     /// </summary>
     /// <returns></returns>
-    public async ValueTask DisposeAsync() => await (await HTMLElementTask).DisposeTrySync();
+    public async ValueTask DisposeAsync() {
+        DisposeEventTrigger();
+        await (await HTMLElementTask).DisposeTrySync();
+    }
 
 
     #region HTMLElement

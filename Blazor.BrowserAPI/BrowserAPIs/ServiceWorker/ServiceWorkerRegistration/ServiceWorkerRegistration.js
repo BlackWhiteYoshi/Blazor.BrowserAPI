@@ -77,13 +77,14 @@ export class ServiceWorkerRegistrationWrapper {
     }
 
 
-    /**
-     * @param {import("../../../blazor").DotNet.DotNetObject} updateFoundTrigger
-     */
-    activateOnupdatefound(updateFoundTrigger) {
-        this.#serviceWorkerRegistration.onupdatefound = () => updateFoundTrigger.invokeMethodAsync("Trigger");
-    }
+    // events
 
+    /**
+     * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
+     */
+    activateOnupdatefound(eventTrigger) {
+        this.#serviceWorkerRegistration.onupdatefound = () => eventTrigger.invokeMethodAsync("InvokeUpdateFound");
+    }
     /**
      */
     deactivateOnupdatefound() {

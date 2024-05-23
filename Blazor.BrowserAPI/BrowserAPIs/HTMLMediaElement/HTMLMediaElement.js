@@ -348,12 +348,12 @@ export class HTMLMediaElementWrapper {
     // Ready
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} errorTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnerror(errorTrigger) {
-        this.#htmlMediaElement.onerror = () => errorTrigger.invokeMethodAsync("Trigger", /** @type {MediaError} */(this.#htmlMediaElement.error).code, /** @type {MediaError} */(this.#htmlMediaElement.error).message);
+    activateOnerror(eventTrigger) {
+        this.#htmlMediaElement.onerror = () => eventTrigger.invokeMethodAsync("InvokeError", /** @type {MediaError} */(this.#htmlMediaElement.error).code, /** @type {MediaError} */(this.#htmlMediaElement.error).message);
         if (this.#htmlMediaElement.error !== null)
-            errorTrigger.invokeMethodAsync("Trigger", this.#htmlMediaElement.error.code, this.#htmlMediaElement.error.message);
+            eventTrigger.invokeMethodAsync("InvokeError", this.#htmlMediaElement.error.code, this.#htmlMediaElement.error.message);
     }
     /**
      */
@@ -362,10 +362,10 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} canplayTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOncanplay(canplayTrigger) {
-        this.#htmlMediaElement.oncanplay = () => canplayTrigger.invokeMethodAsync("Trigger");
+    activateOncanplay(eventTrigger) {
+        this.#htmlMediaElement.oncanplay = () => eventTrigger.invokeMethodAsync("InvokeCanplay");
     }
     /**
      */
@@ -374,10 +374,10 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} canplaythroughTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOncanplaythrough(canplaythroughTrigger) {
-        this.#htmlMediaElement.oncanplaythrough = () => canplaythroughTrigger.invokeMethodAsync("Trigger");
+    activateOncanplaythrough(eventTrigger) {
+        this.#htmlMediaElement.oncanplaythrough = () => eventTrigger.invokeMethodAsync("InvokeCanplaythrough");
     }
     /**
      */
@@ -386,10 +386,10 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} playingTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnplaying(playingTrigger) {
-        this.#htmlMediaElement.onplaying = () => playingTrigger.invokeMethodAsync("Trigger");
+    activateOnplaying(eventTrigger) {
+        this.#htmlMediaElement.onplaying = () => eventTrigger.invokeMethodAsync("InvokePlaying");
     }
     /**
      */
@@ -401,10 +401,10 @@ export class HTMLMediaElementWrapper {
     // Data
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} loadstartTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnloadstart(loadstartTrigger) {
-        this.#htmlMediaElement.onloadstart = () => loadstartTrigger.invokeMethodAsync("Trigger");
+    activateOnloadstart(eventTrigger) {
+        this.#htmlMediaElement.onloadstart = () => eventTrigger.invokeMethodAsync("InvokeLoadstart");
     }
     /**
      */
@@ -413,10 +413,10 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} progressTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnprogress(progressTrigger) {
-        this.#htmlMediaElement.onprogress = () => progressTrigger.invokeMethodAsync("Trigger");
+    activateOnprogress(eventTrigger) {
+        this.#htmlMediaElement.onprogress = () => eventTrigger.invokeMethodAsync("InvokeProgress");
     }
     /**
      */
@@ -425,10 +425,10 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} loadeddataTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnloadeddata(loadeddataTrigger) {
-        this.#htmlMediaElement.onloadeddata = () => loadeddataTrigger.invokeMethodAsync("Trigger");
+    activateOnloadeddata(eventTrigger) {
+        this.#htmlMediaElement.onloadeddata = () => eventTrigger.invokeMethodAsync("InvokeLoadeddata");
     }
     /**
      */
@@ -437,10 +437,10 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} loadedmetadataTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnloadedmetadata(loadedmetadataTrigger) {
-        this.#htmlMediaElement.onloadedmetadata = () => loadedmetadataTrigger.invokeMethodAsync("Trigger");
+    activateOnloadedmetadata(eventTrigger) {
+        this.#htmlMediaElement.onloadedmetadata = () => eventTrigger.invokeMethodAsync("InvokeLoadedmetadata");
     }
     /**
      */
@@ -449,10 +449,10 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} stalledTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnstalled(stalledTrigger) {
-        this.#htmlMediaElement.onstalled = () => stalledTrigger.invokeMethodAsync("Trigger");
+    activateOnstalled(eventTrigger) {
+        this.#htmlMediaElement.onstalled = () => eventTrigger.invokeMethodAsync("InvokeStalled");
     }
     /**
      */
@@ -461,10 +461,10 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} suspendTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnsuspend(suspendTrigger) {
-        this.#htmlMediaElement.onsuspend = () => suspendTrigger.invokeMethodAsync("Trigger");
+    activateOnsuspend(eventTrigger) {
+        this.#htmlMediaElement.onsuspend = () => eventTrigger.invokeMethodAsync("InvokeSuspend");
     }
     /**
      */
@@ -473,10 +473,10 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} waitingTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnwaiting(waitingTrigger) {
-        this.#htmlMediaElement.onwaiting = () => waitingTrigger.invokeMethodAsync("Trigger");
+    activateOnwaiting(eventTrigger) {
+        this.#htmlMediaElement.onwaiting = () => eventTrigger.invokeMethodAsync("InvokeWaiting");
     }
     /**
      */
@@ -485,10 +485,10 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} abortTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnabort(abortTrigger) {
-        this.#htmlMediaElement.onabort = () => abortTrigger.invokeMethodAsync("Trigger");
+    activateOnabort(eventTrigger) {
+        this.#htmlMediaElement.onabort = () => eventTrigger.invokeMethodAsync("InvokeAbort");
     }
     /**
      */
@@ -497,10 +497,10 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} emptiedTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnemptied(emptiedTrigger) {
-        this.#htmlMediaElement.onemptied = () => emptiedTrigger.invokeMethodAsync("Trigger");
+    activateOnemptied(eventTrigger) {
+        this.#htmlMediaElement.onemptied = () => eventTrigger.invokeMethodAsync("InvokeEmptied");
     }
     /**
      */
@@ -512,10 +512,10 @@ export class HTMLMediaElementWrapper {
     // Timing
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} playTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnplay(playTrigger) {
-        this.#htmlMediaElement.onplay = () => playTrigger.invokeMethodAsync("Trigger");
+    activateOnplay(eventTrigger) {
+        this.#htmlMediaElement.onplay = () => eventTrigger.invokeMethodAsync("InvokePlay");
     }
     /**
      */
@@ -524,10 +524,10 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} pauseTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnpause(pauseTrigger) {
-        this.#htmlMediaElement.onpause = () => pauseTrigger.invokeMethodAsync("Trigger");
+    activateOnpause(eventTrigger) {
+        this.#htmlMediaElement.onpause = () => eventTrigger.invokeMethodAsync("InvokePause");
     }
     /**
      */
@@ -536,10 +536,10 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} endedTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnended(endedTrigger) {
-        this.#htmlMediaElement.onended = () => endedTrigger.invokeMethodAsync("Trigger");
+    activateOnended(eventTrigger) {
+        this.#htmlMediaElement.onended = () => eventTrigger.invokeMethodAsync("InvokeEnded");
     }
     /**
      */
@@ -548,10 +548,10 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} seekingTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnseeking(seekingTrigger) {
-        this.#htmlMediaElement.onseeking = () => seekingTrigger.invokeMethodAsync("Trigger");
+    activateOnseeking(eventTrigger) {
+        this.#htmlMediaElement.onseeking = () => eventTrigger.invokeMethodAsync("InvokeSeeking");
     }
     /**
      */
@@ -560,10 +560,10 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} seekedTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnseeked(seekedTrigger) {
-        this.#htmlMediaElement.onseeked = () => seekedTrigger.invokeMethodAsync("Trigger");
+    activateOnseeked(eventTrigger) {
+        this.#htmlMediaElement.onseeked = () => eventTrigger.invokeMethodAsync("InvokeSeeked");
     }
     /**
      */
@@ -572,10 +572,10 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} timeupdateTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOntimeupdate(timeupdateTrigger) {
-        this.#htmlMediaElement.ontimeupdate = () => timeupdateTrigger.invokeMethodAsync("Trigger");
+    activateOntimeupdate(eventTrigger) {
+        this.#htmlMediaElement.ontimeupdate = () => eventTrigger.invokeMethodAsync("InvokeTimeupdate");
     }
     /**
      */
@@ -587,10 +587,10 @@ export class HTMLMediaElementWrapper {
     // Setting
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} volumechangeTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnvolumechange(volumechangeTrigger) {
-        this.#htmlMediaElement.onvolumechange = () => volumechangeTrigger.invokeMethodAsync("Trigger");
+    activateOnvolumechange(eventTrigger) {
+        this.#htmlMediaElement.onvolumechange = () => eventTrigger.invokeMethodAsync("InvokeVolumechange");
     }
     /**
      */
@@ -599,10 +599,10 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} ratechangeTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnratechange(ratechangeTrigger) {
-        this.#htmlMediaElement.onratechange = () => ratechangeTrigger.invokeMethodAsync("Trigger");
+    activateOnratechange(eventTrigger) {
+        this.#htmlMediaElement.onratechange = () => eventTrigger.invokeMethodAsync("InvokeRatechange");
     }
     /**
      */
@@ -611,10 +611,10 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @param {import("../../blazor").DotNet.DotNetObject} durationchangeTrigger
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOndurationchange(durationchangeTrigger) {
-        this.#htmlMediaElement.ondurationchange = () => durationchangeTrigger.invokeMethodAsync("Trigger");
+    activateOndurationchange(eventTrigger) {
+        this.#htmlMediaElement.ondurationchange = () => eventTrigger.invokeMethodAsync("InvokeDurationchange");
     }
     /**
      */

@@ -44,27 +44,26 @@ export class ServiceWorkerWrapper {
     }
 
 
-    /**
-     * @param {import("../../../blazor").DotNet.DotNetObject} stateChangeTrigger
-     */
-    activateOnstatechange(stateChangeTrigger) {
-        this.#serviceWorker.onstatechange = (event) => stateChangeTrigger.invokeMethodAsync("Trigger", /** @type {ServiceWorker} */(event.target).state);
-    }
+    // events
 
+    /**
+     * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
+     */
+    activateOnstatechange(eventTrigger) {
+        this.#serviceWorker.onstatechange = (event) => eventTrigger.invokeMethodAsync("InvokeStateChange", /** @type {ServiceWorker} */(event.target).state);
+    }
     /**
      */
     deactivateOnstatechange() {
         this.#serviceWorker.onstatechange = null;
     }
 
-
     /**
-     * @param {import("../../../blazor").DotNet.DotNetObject} errorTrigger
+     * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
      */
-    activateOnerror(errorTrigger) {
-        this.#serviceWorker.onerror = (event) => errorTrigger.invokeMethodAsync("Trigger", event);
+    activateOnerror(eventTrigger) {
+        this.#serviceWorker.onerror = (event) => eventTrigger.invokeMethodAsync("InvokeError", event);
     }
-
     /**
      */
     deactivateOnerror() {

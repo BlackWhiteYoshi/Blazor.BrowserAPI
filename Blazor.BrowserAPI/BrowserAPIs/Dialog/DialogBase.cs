@@ -5,7 +5,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// Base class for <see cref="Dialog"/> and <see cref="DialogInProcess"/>.
+/// <para>Base class for <see cref="Dialog"/> and <see cref="DialogInProcess"/>.</para>
+/// <para>Derived class should implement <see cref="IDisposable"/> or <see cref="IAsyncDisposable"/> and call <see cref="DisposeEventTrigger"/> there.</para>
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Name = "IDialog")]
 [AutoInterface(Namespace = "BrowserAPI", Name = "IDialogInProcess")]
@@ -14,9 +15,20 @@ public abstract class DialogBase {
     private protected abstract Task<IJSObjectReference> DialogTask { get; }
 
 
-    #region Cancel event
+    #region Events
 
-    private DotNetObjectReference<CancelTrigger>? objectReferenceCancelTrigger;
+    [method: DynamicDependency(nameof(InvokeCancel))]
+    [method: DynamicDependency(nameof(InvokeClose))]
+    private sealed class EventTrigger(DialogBase dialog) {
+        [JSInvokable] public void InvokeCancel() => dialog._onCancel?.Invoke();
+        [JSInvokable] public void InvokeClose() => dialog._onClose?.Invoke();
+    }
+
+    private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
+    private DotNetObjectReference<EventTrigger> ObjectReferenceEventTrigger => _objectReferenceEventTrigger ??= DotNetObjectReference.Create(new EventTrigger(this));
+
+    private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
+
 
     private Action? _onCancel;
     /// <summary>
@@ -24,37 +36,16 @@ public abstract class DialogBase {
     /// </summary>
     public event Action OnCancel {
         add {
-            if (objectReferenceCancelTrigger == null)
-                Task.Factory.StartNew(async () => {
-                    objectReferenceCancelTrigger = DotNetObjectReference.Create(new CancelTrigger(this));
-                    await (await DialogTask).InvokeVoidTrySync("activateOncancel", default, [objectReferenceCancelTrigger]);
-                });
-
+            if (_onCancel == null)
+                Task.Factory.StartNew(async () => await (await DialogTask).InvokeVoidTrySync("activateOncancel", default, [ObjectReferenceEventTrigger]));
             _onCancel += value;
         }
         remove {
             _onCancel -= value;
-
-            if (_onCancel == null && objectReferenceCancelTrigger != null)
-                Task.Factory.StartNew(async () => {
-                    await (await DialogTask).InvokeVoidTrySync("deactivateOncancel", default);
-                    objectReferenceCancelTrigger.Dispose();
-                });
+            if (_onCancel == null)
+                Task.Factory.StartNew(async () => await (await DialogTask).InvokeVoidTrySync("deactivateOncancel", default));
         }
     }
-
-    [method: DynamicDependency(nameof(Trigger))]
-    private sealed class CancelTrigger(DialogBase dialog) {
-        [JSInvokable]
-        public void Trigger() => dialog._onCancel?.Invoke();
-    }
-
-    #endregion
-
-
-    #region Close event
-
-    private DotNetObjectReference<CloseTrigger>? objectReferenceCloseTrigger;
 
     private Action? _onClose;
     /// <summary>
@@ -62,30 +53,15 @@ public abstract class DialogBase {
     /// </summary>
     public event Action OnClose {
         add {
-            if (objectReferenceCloseTrigger == null)
-                Task.Factory.StartNew(async () => {
-                    objectReferenceCloseTrigger = DotNetObjectReference.Create(new CloseTrigger(this));
-                    await (await DialogTask).InvokeVoidTrySync("activateOnclose", default, [objectReferenceCloseTrigger]);
-                });
-
+            if (_onClose == null)
+                Task.Factory.StartNew(async () => await (await DialogTask).InvokeVoidTrySync("activateOnclose", default, [ObjectReferenceEventTrigger]));
             _onClose += value;
         }
         remove {
             _onClose -= value;
-
-            if (_onClose == null && objectReferenceCloseTrigger != null) {
-                Task.Factory.StartNew(async () => {
-                    await (await DialogTask).InvokeVoidTrySync("deactivateOnclose", default);
-                    objectReferenceCloseTrigger.Dispose();
-                });
-            }
+            if (_onClose == null)
+                Task.Factory.StartNew(async () => await (await DialogTask).InvokeVoidTrySync("deactivateOnclose", default));
         }
-    }
-
-    [method: DynamicDependency(nameof(Trigger))]
-    private sealed class CloseTrigger(DialogBase dialog) {
-        [JSInvokable]
-        public void Trigger() => dialog._onClose?.Invoke();
     }
 
     #endregion

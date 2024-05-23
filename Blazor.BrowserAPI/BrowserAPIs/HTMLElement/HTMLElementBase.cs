@@ -5,7 +5,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// Base class for <see cref="HTMLElement"/> and <see cref="HTMLElementInProcess"/>.
+/// <para>Base class for <see cref="HTMLElement"/> and <see cref="HTMLElementInProcess"/>.</para>
+/// <para>Derived class should implement <see cref="IDisposable"/> or <see cref="IAsyncDisposable"/> and call <see cref="DisposeEventTrigger"/> there.</para>
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLElement")]
 [AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLElementInProcess")]
@@ -36,9 +37,36 @@ public abstract class HTMLElementBase {
     public async ValueTask RequestFullscreen(string navigationUI = "auto", CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeVoidAsync("requestFullscreen", cancellationToken, [navigationUI]);
 
 
-    #region Transitionstart event
+    #region Events
 
-    private DotNetObjectReference<TransitionstartTrigger>? objectReferenceTransitionstartTrigger;
+    [method: DynamicDependency(nameof(InvokeTransitionstart))]
+    [method: DynamicDependency(nameof(InvokeTransitionend))]
+    [method: DynamicDependency(nameof(InvokeTransitionrun))]
+    [method: DynamicDependency(nameof(InvokeTransitioncancel))]
+
+    [method: DynamicDependency(nameof(InvokeAnimationstart))]
+    [method: DynamicDependency(nameof(InvokeAnimationend))]
+    [method: DynamicDependency(nameof(InvokeAnimationiteration))]
+    [method: DynamicDependency(nameof(InvokeAnimationcancel))]
+    private sealed class EventTrigger(HTMLElementBase htmlElement) {
+        [JSInvokable] public void InvokeTransitionstart(string propertyName, double elapsedTime, string pseudoElement) => htmlElement._onTransitionstart?.Invoke(propertyName, elapsedTime, pseudoElement);
+        [JSInvokable] public void InvokeTransitionend(string propertyName, double elapsedTime, string pseudoElement) => htmlElement._onTransitionend?.Invoke(propertyName, elapsedTime, pseudoElement);
+        [JSInvokable] public void InvokeTransitionrun(string propertyName, double elapsedTime, string pseudoElement) => htmlElement._onTransitionrun?.Invoke(propertyName, elapsedTime, pseudoElement);
+        [JSInvokable] public void InvokeTransitioncancel(string propertyName, double elapsedTime, string pseudoElement) => htmlElement._onTransitioncancel?.Invoke(propertyName, elapsedTime, pseudoElement);
+
+        [JSInvokable] public void InvokeAnimationstart(string animationName, double elapsedTime, string pseudoElement) => htmlElement._onAnimationstart?.Invoke(animationName, elapsedTime, pseudoElement);
+        [JSInvokable] public void InvokeAnimationend(string animationName, double elapsedTime, string pseudoElement) => htmlElement._onAnimationend?.Invoke(animationName, elapsedTime, pseudoElement);
+        [JSInvokable] public void InvokeAnimationiteration(string animationName, double elapsedTime, string pseudoElement) => htmlElement._onAnimationiteration?.Invoke(animationName, elapsedTime, pseudoElement);
+        [JSInvokable] public void InvokeAnimationcancel(string animationName, double elapsedTime, string pseudoElement) => htmlElement._onAnimationcancel?.Invoke(animationName, elapsedTime, pseudoElement);
+    }
+
+    private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
+    private DotNetObjectReference<EventTrigger> ObjectReferenceEventTrigger => _objectReferenceEventTrigger ??= DotNetObjectReference.Create(new EventTrigger(this));
+
+    private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
+
+
+    #region Transition Events
 
     private Action<string, double, string>? _onTransitionstart;
     /// <summary>
@@ -53,37 +81,16 @@ public abstract class HTMLElementBase {
     /// </summary>
     public event Action<string, double, string> OnTransitionstart {
         add {
-            if (objectReferenceTransitionstartTrigger == null)
-                Task.Factory.StartNew(async () => {
-                    objectReferenceTransitionstartTrigger = DotNetObjectReference.Create(new TransitionstartTrigger(this));
-                    await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitionstart", default, [objectReferenceTransitionstartTrigger]);
-                });
-
+            if (_onTransitionstart == null)
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitionstart", default, [ObjectReferenceEventTrigger]));
             _onTransitionstart += value;
         }
         remove {
             _onTransitionstart -= value;
-
-            if (_onTransitionstart == null && objectReferenceTransitionstartTrigger != null)
-                Task.Factory.StartNew(async () => {
-                    await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitionstart", default);
-                    objectReferenceTransitionstartTrigger.Dispose();
-                });
+            if (_onTransitionstart == null)
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitionstart", default));
         }
     }
-
-    [method: DynamicDependency(nameof(Trigger))]
-    private sealed class TransitionstartTrigger(HTMLElementBase htmlElement) {
-        [JSInvokable]
-        public void Trigger(string propertyName, double elapsedTime, string pseudoElement) => htmlElement._onTransitionstart?.Invoke(propertyName, elapsedTime, pseudoElement);
-    }
-
-    #endregion
-
-
-    #region Transitionend event
-
-    private DotNetObjectReference<TransitionendTrigger>? objectReferenceTransitionendTrigger;
 
     private Action<string, double, string>? _onTransitionend;
     /// <summary>
@@ -106,37 +113,16 @@ public abstract class HTMLElementBase {
     /// </summary>
     public event Action<string, double, string> OnTransitionend {
         add {
-            if (objectReferenceTransitionendTrigger == null)
-                Task.Factory.StartNew(async () => {
-                    objectReferenceTransitionendTrigger = DotNetObjectReference.Create(new TransitionendTrigger(this));
-                    await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitionend", default, [objectReferenceTransitionendTrigger]);
-                });
-
+            if (_onTransitionend == null)
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitionend", default, [ObjectReferenceEventTrigger]));
             _onTransitionend += value;
         }
         remove {
             _onTransitionend -= value;
-
-            if (_onTransitionend == null && objectReferenceTransitionendTrigger != null)
-                Task.Factory.StartNew(async () => {
-                    await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitionend", default);
-                    objectReferenceTransitionendTrigger.Dispose();
-                });
+            if (_onTransitionend == null)
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitionend", default));
         }
     }
-
-    [method: DynamicDependency(nameof(Trigger))]
-    private sealed class TransitionendTrigger(HTMLElementBase htmlElement) {
-        [JSInvokable]
-        public void Trigger(string propertyName, double elapsedTime, string pseudoElement) => htmlElement._onTransitionend?.Invoke(propertyName, elapsedTime, pseudoElement);
-    }
-
-    #endregion
-
-
-    #region Transitionrun event
-
-    private DotNetObjectReference<TransitionrunTrigger>? objectReferenceTransitionrunTrigger;
 
     private Action<string, double, string>? _onTransitionrun;
     /// <summary>
@@ -151,37 +137,16 @@ public abstract class HTMLElementBase {
     /// </summary>
     public event Action<string, double, string> OnTransitionrun {
         add {
-            if (objectReferenceTransitionrunTrigger == null)
-                Task.Factory.StartNew(async () => {
-                    objectReferenceTransitionrunTrigger = DotNetObjectReference.Create(new TransitionrunTrigger(this));
-                    await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitionrun", default, [objectReferenceTransitionrunTrigger]);
-                });
-
+            if (_onTransitionrun == null)
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitionrun", default, [ObjectReferenceEventTrigger]));
             _onTransitionrun += value;
         }
         remove {
             _onTransitionrun -= value;
-
-            if (_onTransitionrun == null && objectReferenceTransitionrunTrigger != null)
-                Task.Factory.StartNew(async () => {
-                    await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitionrun", default);
-                    objectReferenceTransitionrunTrigger.Dispose();
-                });
+            if (_onTransitionrun == null)
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitionrun", default));
         }
     }
-
-    [method: DynamicDependency(nameof(Trigger))]
-    private sealed class TransitionrunTrigger(HTMLElementBase htmlElement) {
-        [JSInvokable]
-        public void Trigger(string propertyName, double elapsedTime, string pseudoElement) => htmlElement._onTransitionrun?.Invoke(propertyName, elapsedTime, pseudoElement);
-    }
-
-    #endregion
-
-
-    #region Transitioncancel event
-
-    private DotNetObjectReference<TransitioncancelTrigger>? objectReferenceTransitioncancelTrigger;
 
     private Action<string, double, string>? _onTransitioncancel;
     /// <summary>
@@ -195,38 +160,21 @@ public abstract class HTMLElementBase {
     /// </summary>
     public event Action<string, double, string> OnTransitioncancel {
         add {
-            if (objectReferenceTransitioncancelTrigger == null)
-                Task.Factory.StartNew(async () => {
-                    objectReferenceTransitioncancelTrigger = DotNetObjectReference.Create(new TransitioncancelTrigger(this));
-                    await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitioncancel", default, [objectReferenceTransitioncancelTrigger]);
-                });
-
+            if (_onTransitioncancel == null)
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitioncancel", default, [ObjectReferenceEventTrigger]));
             _onTransitioncancel += value;
         }
         remove {
             _onTransitioncancel -= value;
-
-            if (_onTransitioncancel == null && objectReferenceTransitioncancelTrigger != null)
-                Task.Factory.StartNew(async () => {
-                    await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitioncancel", default);
-                    objectReferenceTransitioncancelTrigger.Dispose();
-                });
+            if (_onTransitioncancel == null)
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitioncancel", default));
         }
-    }
-
-    [method: DynamicDependency(nameof(Trigger))]
-    private sealed class TransitioncancelTrigger(HTMLElementBase htmlElement) {
-        [JSInvokable]
-        public void Trigger(string propertyName, double elapsedTime, string pseudoElement) => htmlElement._onTransitioncancel?.Invoke(propertyName, elapsedTime, pseudoElement);
     }
 
     #endregion
 
 
-
-    #region Animationstart event
-
-    private DotNetObjectReference<AnimationstartTrigger>? objectReferenceAnimationstartTrigger;
+    #region Animation Events
 
     private Action<string, double, string>? _onAnimationstart;
     /// <summary>
@@ -245,37 +193,16 @@ public abstract class HTMLElementBase {
     /// </summary>
     public event Action<string, double, string> OnAnimationstart {
         add {
-            if (objectReferenceAnimationstartTrigger == null)
-                Task.Factory.StartNew(async () => {
-                    objectReferenceAnimationstartTrigger = DotNetObjectReference.Create(new AnimationstartTrigger(this));
-                    await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationstart", default, [objectReferenceAnimationstartTrigger]);
-                });
-
+            if (_onAnimationstart == null)
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationstart", default, [ObjectReferenceEventTrigger]));
             _onAnimationstart += value;
         }
         remove {
             _onAnimationstart -= value;
-
-            if (_onAnimationstart == null && objectReferenceAnimationstartTrigger != null)
-                Task.Factory.StartNew(async () => {
-                    await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationstart", default);
-                    objectReferenceAnimationstartTrigger.Dispose();
-                });
+            if (_onAnimationstart == null)
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationstart", default));
         }
     }
-
-    [method: DynamicDependency(nameof(Trigger))]
-    private sealed class AnimationstartTrigger(HTMLElementBase htmlElement) {
-        [JSInvokable]
-        public void Trigger(string animationName, double elapsedTime, string pseudoElement) => htmlElement._onAnimationstart?.Invoke(animationName, elapsedTime, pseudoElement);
-    }
-
-    #endregion
-
-
-    #region Animationend event
-
-    private DotNetObjectReference<AnimationendTrigger>? objectReferenceAnimationendTrigger;
 
     private Action<string, double, string>? _onAnimationend;
     /// <summary>
@@ -293,37 +220,16 @@ public abstract class HTMLElementBase {
     /// </summary>
     public event Action<string, double, string> OnAnimationend {
         add {
-            if (objectReferenceAnimationendTrigger == null)
-                Task.Factory.StartNew(async () => {
-                    objectReferenceAnimationendTrigger = DotNetObjectReference.Create(new AnimationendTrigger(this));
-                    await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationend", default, [objectReferenceAnimationendTrigger]);
-                });
-
+            if (_onAnimationend == null)
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationend", default, [ObjectReferenceEventTrigger]));
             _onAnimationend += value;
         }
         remove {
             _onAnimationend -= value;
-
-            if (_onAnimationend == null && objectReferenceAnimationendTrigger != null)
-                Task.Factory.StartNew(async () => {
-                    await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationend", default);
-                    objectReferenceAnimationendTrigger.Dispose();
-                });
+            if (_onAnimationend == null)
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationend", default));
         }
     }
-
-    [method: DynamicDependency(nameof(Trigger))]
-    private sealed class AnimationendTrigger(HTMLElementBase htmlElement) {
-        [JSInvokable]
-        public void Trigger(string animationName, double elapsedTime, string pseudoElement) => htmlElement._onAnimationend?.Invoke(animationName, elapsedTime, pseudoElement);
-    }
-
-    #endregion
-
-
-    #region Animationiteration event
-
-    private DotNetObjectReference<AnimationiterationTrigger>? objectReferenceAnimationiterationTrigger;
 
     private Action<string, double, string>? _onAnimationiteration;
     /// <summary>
@@ -341,37 +247,16 @@ public abstract class HTMLElementBase {
     /// </summary>
     public event Action<string, double, string> OnAnimationiteration {
         add {
-            if (objectReferenceAnimationiterationTrigger == null)
-                Task.Factory.StartNew(async () => {
-                    objectReferenceAnimationiterationTrigger = DotNetObjectReference.Create(new AnimationiterationTrigger(this));
-                    await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationiteration", default, [objectReferenceAnimationiterationTrigger]);
-                });
-
+            if (_onAnimationiteration == null)
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationiteration", default, [ObjectReferenceEventTrigger]));
             _onAnimationiteration += value;
         }
         remove {
             _onAnimationiteration -= value;
-
-            if (_onAnimationiteration == null && objectReferenceAnimationiterationTrigger != null)
-                Task.Factory.StartNew(async () => {
-                    await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationiteration", default);
-                    objectReferenceAnimationiterationTrigger.Dispose();
-                });
+            if (_onAnimationiteration == null)
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationiteration", default));
         }
     }
-
-    [method: DynamicDependency(nameof(Trigger))]
-    private sealed class AnimationiterationTrigger(HTMLElementBase htmlElement) {
-        [JSInvokable]
-        public void Trigger(string animationName, double elapsedTime, string pseudoElement) => htmlElement._onAnimationiteration?.Invoke(animationName, elapsedTime, pseudoElement);
-    }
-
-    #endregion
-
-
-    #region Animationcancel event
-
-    private DotNetObjectReference<AnimationcancelTrigger>? objectReferenceAnimationcancelTrigger;
 
     private Action<string, double, string>? _onAnimationcancel;
     /// <summary>
@@ -392,30 +277,18 @@ public abstract class HTMLElementBase {
     /// </summary>
     public event Action<string, double, string> OnAnimationcancel {
         add {
-            if (objectReferenceAnimationcancelTrigger == null)
-                Task.Factory.StartNew(async () => {
-                    objectReferenceAnimationcancelTrigger = DotNetObjectReference.Create(new AnimationcancelTrigger(this));
-                    await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationcancel", default, [objectReferenceAnimationcancelTrigger]);
-                });
-
+            if (_onAnimationcancel == null)
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationcancel", default, [ObjectReferenceEventTrigger]));
             _onAnimationcancel += value;
         }
         remove {
             _onAnimationcancel -= value;
-
-            if (_onAnimationcancel == null && objectReferenceAnimationcancelTrigger != null)
-                Task.Factory.StartNew(async () => {
-                    await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationcancel", default);
-                    objectReferenceAnimationcancelTrigger.Dispose();
-                });
+            if (_onAnimationcancel == null)
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationcancel", default));
         }
     }
 
-    [method: DynamicDependency(nameof(Trigger))]
-    private sealed class AnimationcancelTrigger(HTMLElementBase htmlElement) {
-        [JSInvokable]
-        public void Trigger(string animationName, double elapsedTime, string pseudoElement) => htmlElement._onAnimationcancel?.Invoke(animationName, elapsedTime, pseudoElement);
-    }
+    #endregion
 
     #endregion
 }

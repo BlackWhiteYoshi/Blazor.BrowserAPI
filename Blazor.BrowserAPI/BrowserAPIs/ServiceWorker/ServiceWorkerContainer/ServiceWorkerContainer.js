@@ -74,27 +74,26 @@ export function serviceWorkerContainerStartMessages() {
 }
 
 
-/**
- * @param {import("../../../blazor").DotNet.DotNetObject} controllerChangeTrigger
- */
-export function serviceWorkerContainerActivateOncontrollerchange(controllerChangeTrigger) {
-    navigator.serviceWorker.oncontrollerchange = () => controllerChangeTrigger.invokeMethodAsync("Trigger");
-}
+// events
 
+/**
+ * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
+ */
+export function serviceWorkerContainerActivateOncontrollerchange(eventTrigger) {
+    navigator.serviceWorker.oncontrollerchange = () => eventTrigger.invokeMethodAsync("InvokeControllerChange");
+}
 /**
  */
 export function serviceWorkerContainerDeactivateOncontrollerchange() {
     navigator.serviceWorker.oncontrollerchange = null;
 }
 
-
 /**
- * @param {import("../../../blazor").DotNet.DotNetObject} messageTrigger
+ * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
  */
-export function serviceWorkerContainerActivateOnMessage(messageTrigger) {
-    navigator.serviceWorker.onmessage = () => messageTrigger.invokeMethodAsync("Trigger");
+export function serviceWorkerContainerActivateOnMessage(eventTrigger) {
+    navigator.serviceWorker.onmessage = () => eventTrigger.invokeMethodAsync("InvokeMessage");
 }
-
 /**
  */
 export function serviceWorkerContainerDeactivateOnMessage() {

@@ -535,6 +535,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     [Fact]
     public async Task RegisterOnTransitionstart_InProcess() {
         await Page.GetByTestId(HTMLElementGroup.BUTTON_REGISTER_ON_TRANSITIONSTART_INPROCESS).ClickAsync();
+        await Task.Delay(100);
 
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#000';");
         await Task.Delay(100);
@@ -546,6 +547,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     [Fact]
     public async Task RegisterOnTransitionend_InProcess() {
         await Page.GetByTestId(HTMLElementGroup.BUTTON_REGISTER_ON_TRANSITIONEND_INPROCESS).ClickAsync();
+        await Task.Delay(100);
 
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#000';");
         await Task.Delay(600);
@@ -557,6 +559,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     [Fact]
     public async Task RegisterOnTransitionrun_InProcess() {
         await Page.GetByTestId(HTMLElementGroup.BUTTON_REGISTER_ON_TRANSITIONRUN_INPROCESS).ClickAsync();
+        await Task.Delay(100);
 
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#000';");
         await Task.Delay(100);
@@ -568,6 +571,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     [Fact]
     public async Task RegisterOnTransitioncancel_InProcess() {
         await Page.GetByTestId(HTMLElementGroup.BUTTON_REGISTER_ON_TRANSITIONCANCEL_INPROCESS).ClickAsync();
+        await Task.Delay(100);
 
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#000';");
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#222';");
@@ -581,6 +585,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     [Fact]
     public async Task RegisterOnAnimationstart_InProcess() {
         await Page.GetByTestId(HTMLElementGroup.BUTTON_REGISTER_ON_ANIMATIONSTART_INPROCESS).ClickAsync();
+        await Task.Delay(100);
 
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.classList.add('animation-start');");
         await Task.Delay(100);
@@ -592,6 +597,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     [Fact]
     public async Task RegisterOnAnimationnend_InProcess() {
         await Page.GetByTestId(HTMLElementGroup.BUTTON_REGISTER_ON_ANIMATIONEND_INPROCESS).ClickAsync();
+        await Task.Delay(100);
 
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.classList.add('animation-start');");
         await Task.Delay(600);
@@ -603,6 +609,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     [Fact]
     public async Task RegisterOnAnimationiteration_InProcess() {
         await Page.GetByTestId(HTMLElementGroup.BUTTON_REGISTER_ON_ANIMATIONITERATION_INPROCESS).ClickAsync();
+        await Task.Delay(100);
 
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.classList.add('animation-start-infinite');");
         await Task.Delay(600);
@@ -616,6 +623,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     //[Fact]
     //public async Task RegisterOnAnimationcancel_InProcess() {
     //    await Page.GetByTestId(HTMLElementGroup.BUTTON_REGISTER_ON_ANIMATIONCANCEL_INPROCESS).ClickAsync();
+    //    await Task.Delay(100);
 
     //    await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.classList.add('animation-start');");
     //    await Task.Delay(100);

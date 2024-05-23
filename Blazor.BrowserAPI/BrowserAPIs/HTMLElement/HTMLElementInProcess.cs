@@ -16,7 +16,10 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <summary>
     /// Releases the JS instance for this HTML element.
     /// </summary>
-    public void Dispose() => htmlElementJS.Dispose();
+    public void Dispose() {
+        DisposeEventTrigger();
+        htmlElementJS.Dispose();
+    }
 
 
     #region HTMLElement

@@ -16,7 +16,10 @@ public sealed class DialogInProcess(IJSInProcessObjectReference dialogJS) : Dial
     /// <summary>
     /// Releases the JS instance for this dialog.
     /// </summary>
-    public void Dispose() => dialogJS.Dispose();
+    public void Dispose() {
+        DisposeEventTrigger();
+        dialogJS.Dispose();
+    }
 
 
     /// <summary>

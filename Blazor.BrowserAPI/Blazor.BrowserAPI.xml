@@ -903,7 +903,8 @@
         </member>
         <member name="T:BrowserAPI.Implementation.DialogBase">
             <summary>
-            Base class for <see cref="T:BrowserAPI.Implementation.Dialog"/> and <see cref="T:BrowserAPI.Implementation.DialogInProcess"/>.
+            <para>Base class for <see cref="T:BrowserAPI.Implementation.Dialog"/> and <see cref="T:BrowserAPI.Implementation.DialogInProcess"/>.</para>
+            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="M:BrowserAPI.Implementation.DialogBase.DisposeEventTrigger"/> there.</para>
             </summary>
         </member>
         <member name="E:BrowserAPI.Implementation.DialogBase.OnCancel">
@@ -1159,6 +1160,12 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="F:BrowserAPI.Implementation.Geolocation.watchList">
+            <summary>
+            Key = int watchId<br />
+            Value = DotNetObjectReference&lt;CallbackGeolocation&gt; callbackGeolocation
+            </summary>
+        </member>
         <member name="M:BrowserAPI.Implementation.Geolocation.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             The watchPosition() method of the Geolocation interface is used to register a handler function that will be called automatically each time the position of the device changes.
@@ -1280,6 +1287,12 @@
             Default: false.
             </param>
             <returns></returns>
+        </member>
+        <member name="F:BrowserAPI.Implementation.GeolocationInProcess.watchList">
+            <summary>
+            Key = int watchId<br />
+            Value = DotNetObjectReference&lt;CallbackGeolocation&gt; callbackGeolocation
+            </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.GeolocationInProcess.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates,System.Int64},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean)">
             <summary>
@@ -2260,7 +2273,8 @@
         </member>
         <member name="T:BrowserAPI.Implementation.HTMLElementBase">
             <summary>
-            Base class for <see cref="T:BrowserAPI.Implementation.HTMLElement"/> and <see cref="T:BrowserAPI.Implementation.HTMLElementInProcess"/>.
+            <para>Base class for <see cref="T:BrowserAPI.Implementation.HTMLElement"/> and <see cref="T:BrowserAPI.Implementation.HTMLElementInProcess"/>.</para>
+            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="M:BrowserAPI.Implementation.HTMLElementBase.DisposeEventTrigger"/> there.</para>
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.HTMLElementBase.RequestFullscreen(System.String,System.Threading.CancellationToken)">
@@ -3516,7 +3530,8 @@
         </member>
         <member name="T:BrowserAPI.Implementation.HTMLMediaElementBase">
             <summary>
-            Base class for <see cref="T:BrowserAPI.Implementation.HTMLMediaElement"/> and <see cref="T:BrowserAPI.Implementation.HTMLMediaElementInProcess"/>.
+            <para>Base class for <see cref="T:BrowserAPI.Implementation.HTMLMediaElement"/> and <see cref="T:BrowserAPI.Implementation.HTMLMediaElementInProcess"/>.</para>
+            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="M:BrowserAPI.Implementation.HTMLMediaElementBase.DisposeEventTrigger"/> there.</para>
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.HTMLMediaElementBase.Play(System.Threading.CancellationToken)">
@@ -4183,6 +4198,11 @@
             Base class for <see cref="T:BrowserAPI.Implementation.ServiceWorkerContainer"/> and <see cref="T:BrowserAPI.Implementation.ServiceWorkerContainerInProcess"/>.
             </summary>
         </member>
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerBase.Dispose">
+            <summary>
+            Releases the <see cref="T:BrowserAPI.Implementation.ServiceWorkerContainerBase.EventTrigger"/> object used to trigger the events.
+            </summary>
+        </member>
         <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerBase.Register(System.String,System.Threading.CancellationToken)">
             <summary>
             Registers a service worker.
@@ -4370,7 +4390,8 @@
         </member>
         <member name="T:BrowserAPI.Implementation.ServiceWorkerRegistrationBase">
             <summary>
-            Base class for <see cref="T:BrowserAPI.Implementation.ServiceWorkerRegistration"/> and <see cref="T:BrowserAPI.Implementation.ServiceWorkerRegistrationInProcess"/>.
+            <para>Base class for <see cref="T:BrowserAPI.Implementation.ServiceWorkerRegistration"/> and <see cref="T:BrowserAPI.Implementation.ServiceWorkerRegistrationInProcess"/>.</para>
+            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="M:BrowserAPI.Implementation.ServiceWorkerRegistrationBase.DisposeEventTrigger"/> there.</para>
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.ServiceWorkerRegistrationBase.Unregister(System.Threading.CancellationToken)">
@@ -4517,7 +4538,8 @@
         </member>
         <member name="T:BrowserAPI.Implementation.ServiceWorkerBase">
             <summary>
-            Base class for <see cref="T:BrowserAPI.Implementation.ServiceWorker"/> and <see cref="T:BrowserAPI.Implementation.ServiceWorkerInProcess"/>.
+            <para>Base class for <see cref="T:BrowserAPI.Implementation.ServiceWorker"/> and <see cref="T:BrowserAPI.Implementation.ServiceWorkerInProcess"/>.</para>
+            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="M:BrowserAPI.Implementation.ServiceWorkerBase.DisposeEventTrigger"/> there.</para>
             </summary>
         </member>
         <member name="E:BrowserAPI.Implementation.ServiceWorkerBase.OnStateChange">
@@ -5738,7 +5760,8 @@
             <para>Objects of this class must disposed manually, so do not forget to call <see cref="!:DisposeAsync"/> when you are done with it.</para>
             </summary>
             <summary>
-            Base class for <see cref="!:Dialog"/> and <see cref="!:DialogInProcess"/>.
+            <para>Base class for <see cref="!:Dialog"/> and <see cref="!:DialogInProcess"/>.</para>
+            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
             </summary>
         </member>
         <member name="P:BrowserAPI.IDialog.Open">
@@ -5822,7 +5845,8 @@
         </member>
         <member name="T:BrowserAPI.IDialogInProcess">
             <summary>
-            Base class for <see cref="!:Dialog"/> and <see cref="!:DialogInProcess"/>.
+            <para>Base class for <see cref="!:Dialog"/> and <see cref="!:DialogInProcess"/>.</para>
+            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
             </summary>
             <summary>
             <para>The <i>HTMLDialogElement</i> interface provides methods to manipulate &lt;dialog&gt; elements. It inherits properties and methods from the HTMLElement interface.</para>
@@ -6202,7 +6226,8 @@
             <para>Objects of this class must disposed manually, so do not forget to call <see cref="!:DisposeAsync"/> when you are done with it.</para>
             </summary>
             <summary>
-            Base class for <see cref="!:HTMLElement"/> and <see cref="!:HTMLElementInProcess"/>.
+            <para>Base class for <see cref="!:HTMLElement"/> and <see cref="!:HTMLElementInProcess"/>.</para>
+            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
             </summary>
         </member>
         <member name="P:BrowserAPI.IHTMLElement.InnerText">
@@ -7247,7 +7272,8 @@
         </member>
         <member name="T:BrowserAPI.IHTMLElementInProcess">
             <summary>
-            Base class for <see cref="!:HTMLElement"/> and <see cref="!:HTMLElementInProcess"/>.
+            <para>Base class for <see cref="!:HTMLElement"/> and <see cref="!:HTMLElementInProcess"/>.</para>
+            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
             </summary>
             <summary>
             <para>The <i>HTMLElement</i> interface represents any HTML element. Some elements directly implement this interface, while others implement it via an interface that inherits it.</para>
@@ -7866,7 +7892,8 @@
             <para>Objects of this class must disposed manually, so do not forget to call <see cref="!:DisposeAsync"/> when you are done with it.</para>
             </summary>
             <summary>
-            Base class for <see cref="!:HTMLMediaElement"/> and <see cref="!:HTMLMediaElementInProcess"/>.
+            <para>Base class for <see cref="!:HTMLMediaElement"/> and <see cref="!:HTMLMediaElementInProcess"/>.</para>
+            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
             </summary>
         </member>
         <member name="P:BrowserAPI.IHTMLMediaElement.Src">
@@ -8636,7 +8663,8 @@
         </member>
         <member name="T:BrowserAPI.IHTMLMediaElementInProcess">
             <summary>
-            Base class for <see cref="!:HTMLMediaElement"/> and <see cref="!:HTMLMediaElementInProcess"/>.
+            <para>Base class for <see cref="!:HTMLMediaElement"/> and <see cref="!:HTMLMediaElementInProcess"/>.</para>
+            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
             </summary>
             <summary>
             <para>The <i>HTMLMediaElement</i> interface adds to HTMLElement the properties and methods needed to support basic media-related capabilities that are common to audio and video.</para>
@@ -9249,6 +9277,11 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:BrowserAPI.IServiceWorkerContainer.Dispose">
+            <summary>
+            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            </summary>
+        </member>
         <member name="M:BrowserAPI.IServiceWorkerContainer.Register(System.String,System.Threading.CancellationToken)">
             <summary>
             Registers a service worker.
@@ -9280,6 +9313,11 @@
             </para>
             </summary>
             <param name="moduleManager"></param>
+        </member>
+        <member name="M:BrowserAPI.IServiceWorkerContainerInProcess.Dispose">
+            <summary>
+            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            </summary>
         </member>
         <member name="M:BrowserAPI.IServiceWorkerContainerInProcess.Register(System.String,System.Threading.CancellationToken)">
             <summary>
@@ -9350,7 +9388,8 @@
             <para>Objects of this class must disposed manually, so do not forget to call <see cref="!:DisposeAsync"/> when you are done with it.</para>
             </summary>
             <summary>
-            Base class for <see cref="!:ServiceWorkerRegistration"/> and <see cref="!:ServiceWorkerRegistrationInProcess"/>.
+            <para>Base class for <see cref="!:ServiceWorkerRegistration"/> and <see cref="!:ServiceWorkerRegistrationInProcess"/>.</para>
+            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
             </summary>
         </member>
         <member name="P:BrowserAPI.IServiceWorkerRegistration.Active">
@@ -9450,7 +9489,8 @@
         </member>
         <member name="T:BrowserAPI.IServiceWorkerRegistrationInProcess">
             <summary>
-            Base class for <see cref="!:ServiceWorkerRegistration"/> and <see cref="!:ServiceWorkerRegistrationInProcess"/>.
+            <para>Base class for <see cref="!:ServiceWorkerRegistration"/> and <see cref="!:ServiceWorkerRegistrationInProcess"/>.</para>
+            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
             </summary>
             <summary>
             <para>
@@ -9521,7 +9561,8 @@
             <para>Objects of this class must disposed manually, so do not forget to call <see cref="!:DisposeAsync"/> when you are done with it.</para>
             </summary>
             <summary>
-            Base class for <see cref="!:ServiceWorker"/> and <see cref="!:ServiceWorkerInProcess"/>.
+            <para>Base class for <see cref="!:ServiceWorker"/> and <see cref="!:ServiceWorkerInProcess"/>.</para>
+            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
             </summary>
         </member>
         <member name="P:BrowserAPI.IServiceWorker.ScriptUrl">
@@ -9582,7 +9623,8 @@
         </member>
         <member name="T:BrowserAPI.IServiceWorkerInProcess">
             <summary>
-            Base class for <see cref="!:ServiceWorker"/> and <see cref="!:ServiceWorkerInProcess"/>.
+            <para>Base class for <see cref="!:ServiceWorker"/> and <see cref="!:ServiceWorkerInProcess"/>.</para>
+            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
             </summary>
             <summary>
             <para>
