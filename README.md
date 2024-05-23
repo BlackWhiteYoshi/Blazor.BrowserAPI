@@ -16,6 +16,7 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - [Download](Blazor.BrowserAPI/BrowserAPIs/Download/Download.md)
 - [Geolocation](Blazor.BrowserAPI/BrowserAPIs/Geolocation/Geolocation.md)
 - [HTMLElement](Blazor.BrowserAPI/BrowserAPIs/HTMLElement/HTMLElement.md)
+- [HTMLMediaElement (audio/video)](Blazor.BrowserAPI/BrowserAPIs/HTMLMediaElement/HTMLMediaElement.md)
 - [Language](Blazor.BrowserAPI/BrowserAPIs/Language/Language.md)
 - [LocalStorage](Blazor.BrowserAPI/BrowserAPIs/LocalStorage/LocalStorage.md)
 - [ServiceWorker](Blazor.BrowserAPI/BrowserAPIs/ServiceWorker/ServiceWorker.md)
@@ -87,3 +88,5 @@ There are more interfaces coming.
   Added Geolocation (11 BrowserAPIs)
 - 0.4.0  
   Breaking Change: removed HTMLElementFactory and DialogFactory and added ElementFactory/ElementFactoryInProcess instead.
+- 0.5.0  
+  Added HTMLMediaElement (12 BrowserAPIs)

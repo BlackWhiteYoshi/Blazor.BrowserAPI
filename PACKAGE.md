@@ -18,6 +18,7 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - Download
 - Geolocation
 - HTMLElement
+- HTMLMediaElement (audio/video)
 - Language
 - LocalStorage
 - ServiceWorker

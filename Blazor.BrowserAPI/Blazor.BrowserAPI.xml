@@ -996,6 +996,13 @@
             <param name="htmlElement">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a html tag.</param>
             <returns>An object that can be used to interact with the given html element.</returns>
         </member>
+        <member name="M:BrowserAPI.Implementation.ElementFactory.CreateHTMLMediaElement(Microsoft.AspNetCore.Components.ElementReference)">
+            <summary>
+            Takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> of <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">&lt;video&gt;</see> or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">&lt;audio&gt;</see> and returns a <see cref="T:BrowserAPI.IHTMLMediaElement"/> interface to interact with the given element.
+            </summary>
+            <param name="htmlMediaElement">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">&lt;video&gt;</see> or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">&lt;audio&gt;</see> html tag.</param>
+            <returns>An object that can be used to interact with the given <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">&lt;video&gt;</see> or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">&lt;audio&gt;</see> element.</returns>
+        </member>
         <member name="T:BrowserAPI.Implementation.ElementFactoryInProcess">
             <summary>
             <para>An instance of this class takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> and exposes an interface to interact with it.</para>
@@ -1027,6 +1034,13 @@
             </summary>
             <param name="htmlElement">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a html tag.</param>
             <returns>An object that can be used to interact with the given html element.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ElementFactoryInProcess.CreateHTMLMediaElement(Microsoft.AspNetCore.Components.ElementReference)">
+            <summary>
+            Takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> of <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">&lt;video&gt;</see> or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">&lt;audio&gt;</see> and returns a <see cref="T:BrowserAPI.IHTMLMediaElementInProcess"/> interface to interact with the given element.
+            </summary>
+            <param name="htmlMediaElement">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">&lt;video&gt;</see> or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">&lt;audio&gt;</see> html tag.</param>
+            <returns>An object that can be used to interact with the given <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">&lt;video&gt;</see> or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">&lt;audio&gt;</see> element.</returns>
         </member>
         <member name="T:BrowserAPI.Implementation.Download">
             <summary>
@@ -1135,7 +1149,7 @@
             A positive long value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position.
             The default value is -1, meaning that getCurrentPosition() won't return until the position is available.
             </param>
-            <param name="timeoutenableHighAccuracy">
+            <param name="enableHighAccuracy">
             A boolean value that indicates the application would like to receive the best possible results.
             If true and if the device is able to provide a more accurate position, it will do so.
             Note that this can result in slower response times or increased power consumption (with a GPS chip on a mobile device for example).
@@ -1188,7 +1202,7 @@
             A positive long value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position.
             The default value is -1, meaning that getCurrentPosition() won't return until the position is available.
             </param>
-            <param name="timeoutenableHighAccuracy">
+            <param name="enableHighAccuracy">
             A boolean value that indicates the application would like to receive the best possible results.
             If true and if the device is able to provide a more accurate position, it will do so.
             Note that this can result in slower response times or increased power consumption (with a GPS chip on a mobile device for example).
@@ -1258,7 +1272,7 @@
             A positive long value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position.
             The default value is -1, meaning that getCurrentPosition() won't return until the position is available.
             </param>
-            <param name="timeoutenableHighAccuracy">
+            <param name="enableHighAccuracy">
             A boolean value that indicates the application would like to receive the best possible results.
             If true and if the device is able to provide a more accurate position, it will do so.
             Note that this can result in slower response times or increased power consumption (with a GPS chip on a mobile device for example).
@@ -1310,7 +1324,7 @@
             A positive long value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position.
             The default value is -1, meaning that getCurrentPosition() won't return until the position is available.
             </param>
-            <param name="timeoutenableHighAccuracy">
+            <param name="enableHighAccuracy">
             A boolean value that indicates the application would like to receive the best possible results.
             If true and if the device is able to provide a more accurate position, it will do so.
             Note that this can result in slower response times or increased power consumption (with a GPS chip on a mobile device for example).
@@ -2871,6 +2885,1035 @@
             Defaults to "auto".
             </param>
         </member>
+        <member name="T:BrowserAPI.Implementation.HTMLMediaElement">
+            <summary>
+            <para>The <i>HTMLMediaElement</i> interface adds to HTMLElement the properties and methods needed to support basic media-related capabilities that are common to audio and video.</para>
+            <para>The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see> and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see> elements both inherit this interface.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call <see cref="M:BrowserAPI.Implementation.HTMLMediaElement.DisposeAsync"/> when you are done with it.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.#ctor(System.Threading.Tasks.Task{Microsoft.JSInterop.IJSObjectReference})">
+            <summary>
+            <para>The <i>HTMLMediaElement</i> interface adds to HTMLElement the properties and methods needed to support basic media-related capabilities that are common to audio and video.</para>
+            <para>The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see> and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see> elements both inherit this interface.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call <see cref="M:BrowserAPI.Implementation.HTMLMediaElement.DisposeAsync"/> when you are done with it.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.DisposeAsync">
+            <summary>
+            Releases the JS instance for this htmlMediaElement.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.Src">
+            <summary>
+            <para>A string that reflects the src HTML attribute, which contains the URL of a media resource to use.</para>
+            <para>
+            Note: The best way to know the URL of the media resource currently in active use in this element is to look at the value of the currentSrc attribute,
+            which also takes into account selection of a best or preferred media resource from a list provided in an HTMLSourceElement (which represents a &lt;source&gt; element).
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetSrc(System.Threading.CancellationToken)">
+            <summary>
+            <para>A string that reflects the src HTML attribute, which contains the URL of a media resource to use.</para>
+            <para>
+            Note: The best way to know the URL of the media resource currently in active use in this element is to look at the value of the currentSrc attribute,
+            which also takes into account selection of a best or preferred media resource from a list provided in an HTMLSourceElement (which represents a &lt;source&gt; element).
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.SetSrc(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>A string that reflects the src HTML attribute, which contains the URL of a media resource to use.</para>
+            <para>
+            Note: The best way to know the URL of the media resource currently in active use in this element is to look at the value of the currentSrc attribute,
+            which also takes into account selection of a best or preferred media resource from a list provided in an HTMLSourceElement (which represents a &lt;source&gt; element).
+            </para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.Controls">
+            <summary>
+            A boolean that reflects the controls HTML attribute, indicating whether user interface items for controlling the resource should be displayed.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetControls(System.Threading.CancellationToken)">
+            <summary>
+            A boolean that reflects the controls HTML attribute, indicating whether user interface items for controlling the resource should be displayed.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.SetControls(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            A boolean that reflects the controls HTML attribute, indicating whether user interface items for controlling the resource should be displayed.
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.Autoplay">
+            <summary>
+            <para>A boolean value that reflects the autoplay HTML attribute, indicating whether playback should automatically begin as soon as enough media is available to do so without interruption.</para>
+            <para>A media element whose source is a MediaStream and whose autoplay property is true will begin playback when it becomes active(that is, when MediaStream.active becomes true).</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetAutoplay(System.Threading.CancellationToken)">
+            <summary>
+            <para>A boolean value that reflects the autoplay HTML attribute, indicating whether playback should automatically begin as soon as enough media is available to do so without interruption.</para>
+            <para>A media element whose source is a MediaStream and whose autoplay property is true will begin playback when it becomes active(that is, when MediaStream.active becomes true).</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.SetAutoplay(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>A boolean value that reflects the autoplay HTML attribute, indicating whether playback should automatically begin as soon as enough media is available to do so without interruption.</para>
+            <para>A media element whose source is a MediaStream and whose autoplay property is true will begin playback when it becomes active(that is, when MediaStream.active becomes true).</para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.Loop">
+            <summary>
+            A boolean that reflects the loop HTML attribute, which indicates whether the media element should start over when it reaches the end.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetLoop(System.Threading.CancellationToken)">
+            <summary>
+            A boolean that reflects the loop HTML attribute, which indicates whether the media element should start over when it reaches the end.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.SetLoop(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            A boolean that reflects the loop HTML attribute, which indicates whether the media element should start over when it reaches the end.
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.DefaultMuted">
+            <summary>
+            <para>A boolean that reflects the muted HTML attribute, which indicates whether the media element's audio output should be muted by default.</para>
+            <para>This property has no dynamic effect. To mute and unmute the audio output, use the muted property.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetDefaultMuted(System.Threading.CancellationToken)">
+            <summary>
+            <para>A boolean that reflects the muted HTML attribute, which indicates whether the media element's audio output should be muted by default.</para>
+            <para>This property has no dynamic effect. To mute and unmute the audio output, use the muted property.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.SetDefaultMuted(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>A boolean that reflects the muted HTML attribute, which indicates whether the media element's audio output should be muted by default.</para>
+            <para>This property has no dynamic effect. To mute and unmute the audio output, use the muted property.</para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.Preload">
+            <summary>
+            <para>A string that reflects the preload HTML attribute, indicating what data should be preloaded, if any.</para>
+            <para>
+            Possible values are:<br />
+            - "none": Indicates that the media should not be preloaded.<br />
+            - "metadata": Indicates that only media metadata (e.g. length) is fetched.<br />
+            - "auto": Indicates that the whole media file can be downloaded, even if the user is not expected to use it.<br />
+            - "": A synonym of the auto value.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetPreload(System.Threading.CancellationToken)">
+            <summary>
+            <para>A string that reflects the preload HTML attribute, indicating what data should be preloaded, if any.</para>
+            <para>
+            Possible values are:<br />
+            - "none": Indicates that the media should not be preloaded.<br />
+            - "metadata": Indicates that only media metadata (e.g. length) is fetched.<br />
+            - "auto": Indicates that the whole media file can be downloaded, even if the user is not expected to use it.<br />
+            - "": A synonym of the auto value.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.SetPreload(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>A string that reflects the preload HTML attribute, indicating what data should be preloaded, if any.</para>
+            <para>
+            Possible values are:<br />
+            - "none": Indicates that the media should not be preloaded.<br />
+            - "metadata": Indicates that only media metadata (e.g. length) is fetched.<br />
+            - "auto": Indicates that the whole media file can be downloaded, even if the user is not expected to use it.<br />
+            - "": A synonym of the auto value.
+            </para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.CurrentSrc">
+            <summary>
+            <para>Returns a string with the absolute URL of the chosen media resource.</para>
+            <para>This could happen, for example, if the web server selects a media file based on the resolution of the user's display. The value is an empty string if the networkState property is EMPTY.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetCurrentSrc(System.Threading.CancellationToken)">
+            <summary>
+            <para>Returns a string with the absolute URL of the chosen media resource.</para>
+            <para>This could happen, for example, if the web server selects a media file based on the resolution of the user's display. The value is an empty string if the networkState property is EMPTY.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.CurrentTime">
+            <summary>
+            <para>A double-precision floating-point value indicating the current playback time in seconds.</para>
+            <para>
+            if the media has not started to play and has not been seeked, this value is the media's initial playback time.
+            Setting this value seeks the media to the new time. The time is specified relative to the media's timeline.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetCurrentTime(System.Threading.CancellationToken)">
+            <summary>
+            <para>A double-precision floating-point value indicating the current playback time in seconds.</para>
+            <para>
+            if the media has not started to play and has not been seeked, this value is the media's initial playback time.
+            Setting this value seeks the media to the new time. The time is specified relative to the media's timeline.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.SetCurrentTime(System.Double,System.Threading.CancellationToken)">
+            <summary>
+            <para>A double-precision floating-point value indicating the current playback time in seconds</para>
+            <para>
+            if the media has not started to play and has not been seeked, this value is the media's initial playback time.
+            Setting this value seeks the media to the new time. The time is specified relative to the media's timeline.
+            </para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.Duration">
+            <summary>
+            <para>A read-only double-precision floating-point value indicating the total duration of the media in seconds.</para>
+            <para>
+            If no media data is available, the returned value is NaN.<br />
+            If the media is of indefinite length (such as streamed live media, a WebRTC call's media, or similar), the value is +Infinity.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetDuration(System.Threading.CancellationToken)">
+            <summary>
+            <para>A read-only double-precision floating-point value indicating the total duration of the media in seconds.</para>
+            <para>
+            If no media data is available, the returned value is NaN.<br />
+            If the media is of indefinite length (such as streamed live media, a WebRTC call's media, or similar), the value is +Infinity.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.Seekable">
+            <summary>
+            Returns a TimeRanges object that contains the time ranges that the user is able to seek to.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetSeekable(System.Threading.CancellationToken)">
+            <summary>
+            Returns a TimeRanges object that contains the time ranges that the user is able to seek to.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.Muted">
+            <summary>
+            <para>A boolean that determines whether audio is muted. true if the audio is muted and false otherwise.</para>
+            <para>true means muted and false means not muted.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetMuted(System.Threading.CancellationToken)">
+            <summary>
+            <para>A boolean that determines whether audio is muted. true if the audio is muted and false otherwise.</para>
+            <para>true means muted and false means not muted.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.SetMuted(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>A boolean that determines whether audio is muted. true if the audio is muted and false otherwise.</para>
+            <para>true means muted and false means not muted.</para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.Volume">
+            <summary>
+            A double indicating the audio volume, from 0.0 (silent) to 1.0 (loudest).
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetVolume(System.Threading.CancellationToken)">
+            <summary>
+            A double indicating the audio volume, from 0.0 (silent) to 1.0 (loudest).
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.SetVolume(System.Double,System.Threading.CancellationToken)">
+            <summary>
+            A double indicating the audio volume, from 0.0 (silent) to 1.0 (loudest).
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.Paused">
+            <summary>
+            <para>Returns a boolean that indicates whether the media element is paused.</para>
+            <para>true is paused and false is not paused.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetPaused(System.Threading.CancellationToken)">
+            <summary>
+            <para>Returns a boolean that indicates whether the media element is paused.</para>
+            <para>true is paused and false is not paused.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.Ended">
+            <summary>
+            <para>Returns a boolean that indicates whether the media element has finished playing.</para>
+            <para>true if the media contained in the element has finished playing.</para>
+            <para>If the source of the media is a MediaStream, this value is true if the value of the stream's active property is false.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetEnded(System.Threading.CancellationToken)">
+            <summary>
+            <para>Returns a boolean that indicates whether the media element has finished playing.</para>
+            <para>true if the media contained in the element has finished playing.</para>
+            <para>If the source of the media is a MediaStream, this value is true if the value of the stream's active property is false.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.Seeking">
+            <summary>
+            Returns a boolean that indicates whether the media is in the process of seeking to a new position.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetSeeking(System.Threading.CancellationToken)">
+            <summary>
+            Returns a boolean that indicates whether the media is in the process of seeking to a new position.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.ReadyState">
+            <summary>
+            <para>Returns a unsigned short (enumeration) indicating the readiness state of the media.</para>
+            <para>
+            Possible values are:<br />
+            0 = HAVE_NOTHING: No information is available about the media resource.<br />
+            1 = HAVE_METADATA: Enough of the media resource has been retrieved that the metadata attributes are initialized. Seeking will no longer raise an exception.<br />
+            2 = HAVE_CURRENT_DATA: Data is available for the current playback position, but not enough to actually play more than one frame.<br />
+            3 = HAVE_FUTURE_DATA: Data for the current playback position as well as for at least a little bit of time into the future is available (in other words, at least two frames of video, for example).<br />
+            4 = HAVE_ENOUGH_DATA: Enough data is available—and the download rate is high enough—that the media can be played through to the end without interruption.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetReadyState(System.Threading.CancellationToken)">
+            <summary>
+            <para>Returns a unsigned short (enumeration) indicating the readiness state of the media.</para>
+            <para>
+            Possible values are:<br />
+            0 = HAVE_NOTHING: No information is available about the media resource.<br />
+            1 = HAVE_METADATA: Enough of the media resource has been retrieved that the metadata attributes are initialized. Seeking will no longer raise an exception.<br />
+            2 = HAVE_CURRENT_DATA: Data is available for the current playback position, but not enough to actually play more than one frame.<br />
+            3 = HAVE_FUTURE_DATA: Data for the current playback position as well as for at least a little bit of time into the future is available (in other words, at least two frames of video, for example).<br />
+            4 = HAVE_ENOUGH_DATA: Enough data is available—and the download rate is high enough—that the media can be played through to the end without interruption.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.NetworkState">
+            <summary>
+            <para>Returns a unsigned short (enumeration) indicating the current state of fetching the media over the network.</para>
+            <para>
+            Possible values are:<br />
+            0 = NETWORK_EMPTY: There is no data yet. Also, readyState is HAVE_NOTHING.<br />
+            1 = NETWORK_IDLE: HTMLMediaElement is active and has selected a resource, but is not using the network.<br />
+            2 = NETWORK_LOADING: The browser is downloading HTMLMediaElement data.<br />
+            3 = NETWORK_NO_SOURCE: No HTMLMediaElement src found.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetNetworkState(System.Threading.CancellationToken)">
+            <summary>
+            <para>Returns a unsigned short (enumeration) indicating the current state of fetching the media over the network.</para>
+            <para>
+            Possible values are:<br />
+            0 = NETWORK_EMPTY: There is no data yet. Also, readyState is HAVE_NOTHING.<br />
+            1 = NETWORK_IDLE: HTMLMediaElement is active and has selected a resource, but is not using the network.<br />
+            2 = NETWORK_LOADING: The browser is downloading HTMLMediaElement data.<br />
+            3 = NETWORK_NO_SOURCE: No HTMLMediaElement src found.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.Buffered">
+            <summary>
+            Returns a TimeRanges object that indicates the ranges of the media source that the browser has buffered (if any) at the moment the buffered property is accessed.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetBuffered(System.Threading.CancellationToken)">
+            <summary>
+            Returns a TimeRanges object that indicates the ranges of the media source that the browser has buffered (if any) at the moment the buffered property is accessed.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.Played">
+            <summary>
+            Returns a TimeRanges object that contains the ranges of the media source that the browser has played, if any.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetPlayed(System.Threading.CancellationToken)">
+            <summary>
+            Returns a TimeRanges object that contains the ranges of the media source that the browser has played, if any.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.PlaybackRate">
+            <summary>
+            <para>A double that indicates the rate at which the media is being played back.</para>
+            <para>
+            This is used to implement user controls for fast forward, slow motion, and so forth.<br />
+            The normal playback rate is multiplied by this value to obtain the current rate, so a value of 1.0 indicates normal speed.
+            </para>
+            <para>A negative playbackRate value indicates that the media should be played backwards, but support for this is not yet widespread.</para>
+            <para>The audio is muted when the fast forward or slow motion is outside a useful range(for example, Gecko mutes the sound outside the range 0.25 to 4.0).</para>
+            <para>The pitch of the audio is corrected by default. You can disable pitch correction using the HTMLMediaElement.preservesPitch property.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetPlaybackRate(System.Threading.CancellationToken)">
+            <summary>
+            <para>A double that indicates the rate at which the media is being played back.</para>
+            <para>
+            This is used to implement user controls for fast forward, slow motion, and so forth.<br />
+            The normal playback rate is multiplied by this value to obtain the current rate, so a value of 1.0 indicates normal speed.
+            </para>
+            <para>A negative playbackRate value indicates that the media should be played backwards, but support for this is not yet widespread.</para>
+            <para>The audio is muted when the fast forward or slow motion is outside a useful range(for example, Gecko mutes the sound outside the range 0.25 to 4.0).</para>
+            <para>The pitch of the audio is corrected by default. You can disable pitch correction using the HTMLMediaElement.preservesPitch property.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.SetPlaybackRate(System.Double,System.Threading.CancellationToken)">
+            <summary>
+            <para>A double that indicates the rate at which the media is being played back.</para>
+            <para>
+            This is used to implement user controls for fast forward, slow motion, and so forth.<br />
+            The normal playback rate is multiplied by this value to obtain the current rate, so a value of 1.0 indicates normal speed.
+            </para>
+            <para>A negative playbackRate value indicates that the media should be played backwards, but support for this is not yet widespread.</para>
+            <para>The audio is muted when the fast forward or slow motion is outside a useful range(for example, Gecko mutes the sound outside the range 0.25 to 4.0).</para>
+            <para>The pitch of the audio is corrected by default. You can disable pitch correction using the HTMLMediaElement.preservesPitch property.</para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.DefaultPlaybackRate">
+            <summary>
+            <para>A double indicating the default playback rate for the media.</para>
+            <para>A double. 1.0 is "normal speed," values lower than 1.0 make the media play slower than normal, higher values make it play faster.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetDefaultPlaybackRate(System.Threading.CancellationToken)">
+            <summary>
+            <para>A double indicating the default playback rate for the media.</para>
+            <para>A double. 1.0 is "normal speed," values lower than 1.0 make the media play slower than normal, higher values make it play faster.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.SetDefaultPlaybackRate(System.Double,System.Threading.CancellationToken)">
+            <summary>
+            <para>A double indicating the default playback rate for the media.</para>
+            <para>A double. 1.0 is "normal speed," values lower than 1.0 make the media play slower than normal, higher values make it play faster.</para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.CrossOrigin">
+            <summary>
+            <para>A string indicating the CORS setting for this media element. See <see href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin">CORS settings attributes</see> for details.</para>
+            <para>
+            Possible values are:<br />
+            "anonymous":
+            Requests sent by the HTMLMediaElement will use the <i>cors</i> mode and the <i>same-origin</i> credentials mode.
+            This means that CORS is enabled and credentials are sent if the resource is fetched from the same origin from which the document was loaded.<br />
+            "use-credentials":
+            Requests sent by the HTMLMediaElement will use the <i>cors</i> mode and the <i>include</i> credentials mode.
+            All resources requests by the element will use CORS, regardless of what domain the fetch is from.<br />
+            "" (or any other value):
+            The same as specifing as "anonymous".
+            </para>
+            <para>If the <i>crossOrigin</i> property is not specified, the resource is fetched without CORS (the <i>no-cors</i> mode and the <i>same-origin</i> credentials mode).</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetCrossOrigin(System.Threading.CancellationToken)">
+            <summary>
+            <para>A string indicating the CORS setting for this media element. See <see href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin">CORS settings attributes</see> for details.</para>
+            <para>
+            Possible values are:<br />
+            "anonymous":
+            Requests sent by the HTMLMediaElement will use the <i>cors</i> mode and the <i>same-origin</i> credentials mode.
+            This means that CORS is enabled and credentials are sent if the resource is fetched from the same origin from which the document was loaded.<br />
+            "use-credentials":
+            Requests sent by the HTMLMediaElement will use the <i>cors</i> mode and the <i>include</i> credentials mode.
+            All resources requests by the element will use CORS, regardless of what domain the fetch is from.<br />
+            "" (or any other value):
+            The same as specifing as "anonymous".
+            </para>
+            <para>If the <i>crossOrigin</i> property is not specified, the resource is fetched without CORS (the <i>no-cors</i> mode and the <i>same-origin</i> credentials mode).</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.SetCrossOrigin(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>A string indicating the CORS setting for this media element. See <see href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin">CORS settings attributes</see> for details.</para>
+            <para>
+            Possible values are:<br />
+            "anonymous":
+            Requests sent by the HTMLMediaElement will use the <i>cors</i> mode and the <i>same-origin</i> credentials mode.
+            This means that CORS is enabled and credentials are sent if the resource is fetched from the same origin from which the document was loaded.<br />
+            "use-credentials":
+            Requests sent by the HTMLMediaElement will use the <i>cors</i> mode and the <i>include</i> credentials mode.
+            All resources requests by the element will use CORS, regardless of what domain the fetch is from.<br />
+            "" (or any other value):
+            The same as specifing as "anonymous".
+            </para>
+            <para>If the <i>crossOrigin</i> property is not specified, the resource is fetched without CORS (the <i>no-cors</i> mode and the <i>same-origin</i> credentials mode).</para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.PreservesPitch">
+            <summary>
+            <para>
+            A boolean value that determines if the pitch of the sound will be preserved.<br />
+            If set to false, the pitch will adjust to the speed of the audio.</para>
+            <para>Default is true.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetPreservesPitch(System.Threading.CancellationToken)">
+            <summary>
+            <para>
+            A boolean value that determines if the pitch of the sound will be preserved.<br />
+            If set to false, the pitch will adjust to the speed of the audio.</para>
+            <para>Default is true.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.SetPreservesPitch(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>
+            A boolean value that determines if the pitch of the sound will be preserved.<br />
+            If set to false, the pitch will adjust to the speed of the audio.
+            </para>
+            <para>Default is true.</para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.DisableRemotePlayback">
+            <summary>
+            <para>A boolean that sets or returns the remote playback state, indicating whether the media element is allowed to have a remote playback UI.</para>
+            <para>false means "not disabled", which means "enabled"</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetDisableRemotePlayback(System.Threading.CancellationToken)">
+            <summary>
+            <para>A boolean that sets or returns the remote playback state, indicating whether the media element is allowed to have a remote playback UI.</para>
+            <para>false means "not disabled", which means "enabled"</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.SetDisableRemotePlayback(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>A boolean that sets or returns the remote playback state, indicating whether the media element is allowed to have a remote playback UI.</para>
+            <para>false means "not disabled", which means "enabled"</para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.Pause(System.Threading.CancellationToken)">
+            play() is declared in HTMLMediaElementBase
+            <summary>
+            <para>Pauses the media playback.</para>
+            <para>If the media is already in a paused state this method will have no effect.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.Load(System.Threading.CancellationToken)">
+            <summary>
+            Resets the media to the beginning and selects the best available source from the sources provided using the <i>src</i> attribute or the <i>&lt;source&gt;</i> element.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.FastSeek(System.Double,System.Threading.CancellationToken)">
+            <summary>
+            <para>Quickly seeks to the given time with low precision.</para>
+            <para>Note: If you need to seek with precision, you should set HTMLMediaElement.currentTime instead.</para>
+            </summary>
+            <param name="time"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.CanPlayType(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Given a string specifying a MIME media type (potentially with the codecs parameter included), canPlayType() returns the string<br />
+            - "probably", if the media should be playable<br />
+            - "maybe", if there's not enough information to determine whether the media will play or not<br />
+            - "", if the media cannot be played
+            </summary>
+            <param name="type">A string specifying the MIME type of the media and (optionally) a codecs parameter containing a comma-separated list of the supported codecs.</param>
+            <param name="cancellationToken"></param>
+            <returns>"probably", "maybe" or ""</returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.HTMLMediaElementBase">
+            <summary>
+            Base class for <see cref="T:BrowserAPI.Implementation.HTMLMediaElement"/> and <see cref="T:BrowserAPI.Implementation.HTMLMediaElementInProcess"/>.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElementBase.Play(System.Threading.CancellationToken)">
+            <summary>
+            Attempts to begin playback of the media. It returns a Promise which is resolved when playback has been successfully started.<br />
+            Failure to begin playback for any reason, such as permission issues, result in the promise being rejected.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnError">
+            <summary>
+            <para>Fired when the resource could not be loaded due to an error (for example, a network connectivity problem).</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            <para>
+            If an error already occurred when subscribing (<see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/error">error</see> property is not empty), this event is fired immediately.<br />
+            Note: When <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/error">error</see> is not empty, this event is fired with every subscription.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - int <i>code</i>:<br />
+            A number which represents the general type of error that occurred.<br />
+            Possible values are:<br />
+            1 = MEDIA_ERR_ABORTED: The fetching of the associated resource was aborted by the user's request.<br />
+            2 = MEDIA_ERR_NETWORK: Some kind of network error occurred which prevented the media from being successfully fetched, despite having previously been available.<br />
+            3 = MEDIA_ERR_DECODE: Despite having previously been determined to be usable, an error occurred while trying to decode the media resource, resulting in an error.<br />
+            4 = MEDIA_ERR_SRC_NOT_SUPPORTED: The associated resource or media provider object (such as a MediaStream) has been found to be unsuitable.<br />
+            - string <i>message</i>:<br />
+            A human-readable string which provides specific diagnostic information to help the reader understand the error condition which occurred;
+            specifically, it isn't a summary of what the error code means, but actual diagnostic information to help in understanding what exactly went wrong.
+            This text and its format is not defined by the specification and will vary from one user agent to another.
+            If no diagnostics are available, or no explanation can be provided, this value is an empty string ("").
+            </para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnCanplay">
+            <summary>
+            <para>Fired when the user agent can play the media, but estimates that not enough data has been loaded to play the media up to its end without having to stop for further buffering of content.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnCanplaythrough">
+            <summary>
+            <para>Fired when the user agent can play the media, and estimates that enough data has been loaded to play the media up to its end without having to stop for further buffering of content.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnPlaying">
+            <summary>
+            <para>Fired after playback is first started, and whenever it is restarted. For example it is fired when playback resumes after having been paused or delayed due to lack of data.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnLoadstart">
+            <summary>
+            Fired when the browser has started to load a resource.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnProgress">
+            <summary>
+            <para>Fired periodically as the browser loads a resource.></para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnLoadeddata">
+            <summary>
+            Fired when the first frame of the media has finished loading; often the first frame.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnLoadedmetadata">
+            <summary>
+            Fired when the metadata has been loaded.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnStalled">
+            <summary>
+            <para>Fired when the user agent is trying to fetch media data, but data is unexpectedly not forthcoming.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnSuspend">
+            <summary>
+            <para>Fired when the media data loading has been suspended.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnWaiting">
+            <summary>
+            <para>Fired when playback has stopped because of a temporary lack of data.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnAbort">
+            <summary>
+            <para>Fired when the resource was not fully loaded, but not as the result of an error.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnEmptied">
+            <summary>
+            <para>Fired when the media has become empty; for example, when the media has already been loaded (or partially loaded), and the <see cref="M:BrowserAPI.Implementation.HTMLMediaElement.Load(System.Threading.CancellationToken)">Load()</see> method is called to reload it.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnPlay">
+            <summary>
+            <para>Fired when the paused property is changed from true to false, as a result of the <see cref="M:BrowserAPI.Implementation.HTMLMediaElementBase.Play(System.Threading.CancellationToken)">Play()</see> method, or the autoplay attribute.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnPause">
+            <summary>
+            <para>Fired when a request to pause play is handled and the activity has entered its paused state, most commonly occurring when the media's <see cref="M:BrowserAPI.Implementation.HTMLMediaElement.Pause(System.Threading.CancellationToken)">Pause()</see> method is called.</para>
+            <para>The event is sent once the <see cref="M:BrowserAPI.Implementation.HTMLMediaElement.Pause(System.Threading.CancellationToken)">Pause()</see> method returns and after the media element's paused property has been changed to true.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnEnded">
+            <summary>
+            <para>Fired when playback stops when end of the media (&lt;audio&gt; and &lt;video&gt;) is reached or because no further data is available.</para>
+            <para>This event occurs based upon HTMLMediaElement (&lt;audio&gt; and &lt;video&gt;) fire ended when playback reaches the end of the media.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnSeeking">
+            <summary>
+            <para>Fired when a seek operation starts, meaning the Boolean seeking attribute has changed to true and the media is seeking a new position.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnSeeked">
+            <summary>
+            <para>Fired when a seek operation completed, the current playback position has changed, and the Boolean seeking attribute is changed to false.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnTimeupdate">
+            <summary>
+            <para>Fired when the time indicated by the currentTime attribute has been updated.</para>
+            <para>
+            The event frequency is dependent on the system load, but will be thrown between about 4Hz and 66Hz (assuming the event handlers don't take longer than 250ms to run).
+            User agents are encouraged to vary the frequency of the event based on the system load and the average cost of processing the event each time,
+            so that the UI updates are not any more frequent than the user agent can comfortably handle while decoding the video.
+            </para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnVolumechange">
+            <summary>
+            <para>Fired when either the volume attribute or the muted attribute has changed.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnRatechange">
+            <summary>
+            <para>Fired when the playback rate has changed.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnDurationchange">
+            <summary>
+            Fired when the duration attribute has been updated.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.HTMLMediaElementInProcess">
+            <summary>
+            <para>The <i>HTMLMediaElement</i> interface adds to HTMLElement the properties and methods needed to support basic media-related capabilities that are common to audio and video.</para>
+            <para>The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see> and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see> elements both inherit this interface.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call <see cref="M:BrowserAPI.Implementation.HTMLMediaElementInProcess.Dispose"/> when you are done with it.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElementInProcess.#ctor(Microsoft.JSInterop.IJSInProcessObjectReference)">
+            <summary>
+            <para>The <i>HTMLMediaElement</i> interface adds to HTMLElement the properties and methods needed to support basic media-related capabilities that are common to audio and video.</para>
+            <para>The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see> and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see> elements both inherit this interface.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call <see cref="M:BrowserAPI.Implementation.HTMLMediaElementInProcess.Dispose"/> when you are done with it.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElementInProcess.Dispose">
+            <summary>
+            Releases the JS instance for this htmlMediaElement.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.Src">
+            <summary>
+            <para>A string that reflects the src HTML attribute, which contains the URL of a media resource to use.</para>
+            <para>
+            Note: The best way to know the URL of the media resource currently in active use in this element is to look at the value of the currentSrc attribute,
+            which also takes into account selection of a best or preferred media resource from a list provided in an HTMLSourceElement (which represents a &lt;source&gt; element).
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.Controls">
+            <summary>
+            A boolean that reflects the controls HTML attribute, indicating whether user interface items for controlling the resource should be displayed.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.Autoplay">
+            <summary>
+            <para>A boolean value that reflects the autoplay HTML attribute, indicating whether playback should automatically begin as soon as enough media is available to do so without interruption.</para>
+            <para>A media element whose source is a MediaStream and whose autoplay property is true will begin playback when it becomes active(that is, when MediaStream.active becomes true).</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.Loop">
+            <summary>
+            A boolean that reflects the loop HTML attribute, which indicates whether the media element should start over when it reaches the end.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.DefaultMuted">
+            <summary>
+            <para>A boolean that reflects the muted HTML attribute, which indicates whether the media element's audio output should be muted by default.</para>
+            <para>This property has no dynamic effect. To mute and unmute the audio output, use the muted property.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.Preload">
+            <summary>
+            <para>A string that reflects the preload HTML attribute, indicating what data should be preloaded, if any.</para>
+            <para>
+            Possible values are:<br />
+            - "none": Indicates that the media should not be preloaded.<br />
+            - "metadata": Indicates that only media metadata (e.g. length) is fetched.<br />
+            - "auto": Indicates that the whole media file can be downloaded, even if the user is not expected to use it.<br />
+            - "": A synonym of the auto value.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.CurrentSrc">
+            <summary>
+            <para>Returns a string with the absolute URL of the chosen media resource.</para>
+            <para>This could happen, for example, if the web server selects a media file based on the resolution of the user's display. The value is an empty string if the networkState property is EMPTY.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.CurrentTime">
+            <summary>
+            <para>A double-precision floating-point value indicating the current playback time in seconds.</para>
+            <para>
+            if the media has not started to play and has not been seeked, this value is the media's initial playback time.
+            Setting this value seeks the media to the new time. The time is specified relative to the media's timeline.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.Duration">
+            <summary>
+            <para>A read-only double-precision floating-point value indicating the total duration of the media in seconds.</para>
+            <para>
+            If no media data is available, the returned value is NaN.<br />
+            If the media is of indefinite length (such as streamed live media, a WebRTC call's media, or similar), the value is +Infinity.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.Seekable">
+            <summary>
+            Returns a TimeRanges object that contains the time ranges that the user is able to seek to.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.Muted">
+            <summary>
+            <para>A boolean that determines whether audio is muted. true if the audio is muted and false otherwise.</para>
+            <para>true means muted and false means not muted.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.Volume">
+            <summary>
+            A double indicating the audio volume, from 0.0 (silent) to 1.0 (loudest).
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.Paused">
+            <summary>
+            <para>Returns a boolean that indicates whether the media element is paused.</para>
+            <para>true is paused and false is not paused.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.Ended">
+            <summary>
+            <para>Returns a boolean that indicates whether the media element has finished playing.</para>
+            <para>true if the media contained in the element has finished playing.</para>
+            <para>If the source of the media is a MediaStream, this value is true if the value of the stream's active property is false.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.Seeking">
+            <summary>
+            Returns a boolean that indicates whether the media is in the process of seeking to a new position.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.ReadyState">
+            <summary>
+            <para>Returns a unsigned short (enumeration) indicating the readiness state of the media.</para>
+            <para>
+            Possible values are:<br />
+            0 = HAVE_NOTHING: No information is available about the media resource.<br />
+            1 = HAVE_METADATA: Enough of the media resource has been retrieved that the metadata attributes are initialized. Seeking will no longer raise an exception.<br />
+            2 = HAVE_CURRENT_DATA: Data is available for the current playback position, but not enough to actually play more than one frame.<br />
+            3 = HAVE_FUTURE_DATA: Data for the current playback position as well as for at least a little bit of time into the future is available (in other words, at least two frames of video, for example).<br />
+            4 = HAVE_ENOUGH_DATA: Enough data is available—and the download rate is high enough—that the media can be played through to the end without interruption.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.NetworkState">
+            <summary>
+            <para>Returns a unsigned short (enumeration) indicating the current state of fetching the media over the network.</para>
+            <para>
+            Possible values are:<br />
+            0 = NETWORK_EMPTY: There is no data yet. Also, readyState is HAVE_NOTHING.<br />
+            1 = NETWORK_IDLE: HTMLMediaElement is active and has selected a resource, but is not using the network.<br />
+            2 = NETWORK_LOADING: The browser is downloading HTMLMediaElement data.<br />
+            3 = NETWORK_NO_SOURCE: No HTMLMediaElement src found.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.Buffered">
+            <summary>
+            Returns a TimeRanges object that indicates the ranges of the media source that the browser has buffered (if any) at the moment the buffered property is accessed.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.Played">
+            <summary>
+            Returns a TimeRanges object that contains the ranges of the media source that the browser has played, if any.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.PlaybackRate">
+            <summary>
+            <para>A double that indicates the rate at which the media is being played back.</para>
+            <para>
+            This is used to implement user controls for fast forward, slow motion, and so forth.<br />
+            The normal playback rate is multiplied by this value to obtain the current rate, so a value of 1.0 indicates normal speed.
+            </para>
+            <para>A negative playbackRate value indicates that the media should be played backwards, but support for this is not yet widespread.</para>
+            <para>The audio is muted when the fast forward or slow motion is outside a useful range(for example, Gecko mutes the sound outside the range 0.25 to 4.0).</para>
+            <para>The pitch of the audio is corrected by default. You can disable pitch correction using the HTMLMediaElement.preservesPitch property.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.DefaultPlaybackRate">
+            <summary>
+            <para>A double indicating the default playback rate for the media.</para>
+            <para>A double. 1.0 is "normal speed," values lower than 1.0 make the media play slower than normal, higher values make it play faster.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.CrossOrigin">
+            <summary>
+            <para>A string indicating the CORS setting for this media element. See <see href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin">CORS settings attributes</see> for details.</para>
+            <para>
+            Possible values are:<br />
+            "anonymous":
+            Requests sent by the HTMLMediaElement will use the <i>cors</i> mode and the <i>same-origin</i> credentials mode.
+            This means that CORS is enabled and credentials are sent if the resource is fetched from the same origin from which the document was loaded.<br />
+            "use-credentials":
+            Requests sent by the HTMLMediaElement will use the <i>cors</i> mode and the <i>include</i> credentials mode.
+            All resources requests by the element will use CORS, regardless of what domain the fetch is from.<br />
+            "" (or any other value):
+            The same as specifing as "anonymous".
+            </para>
+            <para>If the <i>crossOrigin</i> property is not specified, the resource is fetched without CORS (the <i>no-cors</i> mode and the <i>same-origin</i> credentials mode).</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.PreservesPitch">
+            <summary>
+            <para>
+            A boolean value that determines if the pitch of the sound will be preserved.<br />
+            If set to false, the pitch will adjust to the speed of the audio.</para>
+            <para>Default is true.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.DisableRemotePlayback">
+            <summary>
+            <para>A boolean that sets or returns the remote playback state, indicating whether the media element is allowed to have a remote playback UI.</para>
+            <para>false means "not disabled", which means "enabled"</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElementInProcess.Pause">
+            play() is declared in HTMLMediaElementBase
+            <summary>
+            <para>Pauses the media playback.</para>
+            <para>If the media is already in a paused state this method will have no effect.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElementInProcess.Load">
+            <summary>
+            Resets the media to the beginning and selects the best available source from the sources provided using the <i>src</i> attribute or the <i>&lt;source&gt;</i> element.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElementInProcess.FastSeek(System.Double)">
+            <summary>
+            <para>Quickly seeks to the given time with low precision.</para>
+            <para>Note: If you need to seek with precision, you should set HTMLMediaElement.currentTime instead.</para>
+            </summary>
+            <param name="time"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElementInProcess.CanPlayType(System.String)">
+            <summary>
+            Given a string specifying a MIME media type (potentially with the codecs parameter included), canPlayType() returns the string<br />
+            - "probably", if the media should be playable<br />
+            - "maybe", if there's not enough information to determine whether the media will play or not<br />
+            - "", if the media cannot be played
+            </summary>
+            <param name="type">A string specifying the MIME type of the media and (optionally) a codecs parameter containing a comma-separated list of the supported codecs.</param>
+            <returns>"probably", "maybe" or ""</returns>
+        </member>
         <member name="T:BrowserAPI.Implementation.Language">
             <summary>
             <para>The Navigator.language read-only property returns a string representing the preferred language of the user, usually the language of the browser UI.</para>
@@ -3776,6 +4819,42 @@
             <summary>
             Returns the right coordinate value of the DOMRect (has the same value as x + width, or x if width is negative).
             </summary>
+        </member>
+        <member name="T:BrowserAPI.TimeRange">
+            <summary>
+            <para>
+            When loading a media resource for use by an &lt;audio&gt; or &lt;video&gt; element, the TimeRanges interface is used for representing the time ranges of the media resource that have been buffered,
+            the time ranges that have been played, and the time ranges that are seekable.
+            </para>
+            <para>
+            Several members of HTMLMediaElement objects return a normalized TimeRanges object — which the spec describes as having the following characteristics:<br />
+            The ranges in such an object are ordered, don't overlap, and don't touch(adjacent ranges are folded into one bigger range).
+            A range can be empty(referencing just a single moment in time).
+            </para>
+            </summary>
+            <param name="Start">The time for the start of the range.</param>
+            <param name="End">The time for the end of the range.</param>
+        </member>
+        <member name="M:BrowserAPI.TimeRange.#ctor(System.Double,System.Double)">
+            <summary>
+            <para>
+            When loading a media resource for use by an &lt;audio&gt; or &lt;video&gt; element, the TimeRanges interface is used for representing the time ranges of the media resource that have been buffered,
+            the time ranges that have been played, and the time ranges that are seekable.
+            </para>
+            <para>
+            Several members of HTMLMediaElement objects return a normalized TimeRanges object — which the spec describes as having the following characteristics:<br />
+            The ranges in such an object are ordered, don't overlap, and don't touch(adjacent ranges are folded into one bigger range).
+            A range can be empty(referencing just a single moment in time).
+            </para>
+            </summary>
+            <param name="Start">The time for the start of the range.</param>
+            <param name="End">The time for the end of the range.</param>
+        </member>
+        <member name="P:BrowserAPI.TimeRange.Start">
+            <summary>The time for the start of the range.</summary>
+        </member>
+        <member name="P:BrowserAPI.TimeRange.End">
+            <summary>The time for the end of the range.</summary>
         </member>
         <member name="T:BrowserAPI.IModuleManager">
             <summary>
@@ -4814,6 +5893,13 @@
             <param name="htmlElement">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a html tag.</param>
             <returns>An object that can be used to interact with the given html element.</returns>
         </member>
+        <member name="M:BrowserAPI.IElementFactory.CreateHTMLMediaElement(Microsoft.AspNetCore.Components.ElementReference)">
+            <summary>
+            Takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> of <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">&lt;video&gt;</see> or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">&lt;audio&gt;</see> and returns a <see cref="T:BrowserAPI.IHTMLMediaElement"/> interface to interact with the given element.
+            </summary>
+            <param name="htmlMediaElement">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">&lt;video&gt;</see> or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">&lt;audio&gt;</see> html tag.</param>
+            <returns>An object that can be used to interact with the given <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">&lt;video&gt;</see> or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">&lt;audio&gt;</see> element.</returns>
+        </member>
         <member name="T:BrowserAPI.IElementFactoryInProcess">
             <summary>
             <para>An instance of this class takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> and exposes an interface to interact with it.</para>
@@ -4836,6 +5922,13 @@
             </summary>
             <param name="htmlElement">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a html tag.</param>
             <returns>An object that can be used to interact with the given html element.</returns>
+        </member>
+        <member name="M:BrowserAPI.IElementFactoryInProcess.CreateHTMLMediaElement(Microsoft.AspNetCore.Components.ElementReference)">
+            <summary>
+            Takes a <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> of <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">&lt;video&gt;</see> or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">&lt;audio&gt;</see> and returns a <see cref="T:BrowserAPI.IHTMLMediaElementInProcess"/> interface to interact with the given element.
+            </summary>
+            <param name="htmlMediaElement">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">&lt;video&gt;</see> or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">&lt;audio&gt;</see> html tag.</param>
+            <returns>An object that can be used to interact with the given <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">&lt;video&gt;</see> or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">&lt;audio&gt;</see> element.</returns>
         </member>
         <member name="T:BrowserAPI.IDownload">
             <summary>
@@ -4917,7 +6010,7 @@
             A positive long value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position.
             The default value is -1, meaning that getCurrentPosition() won't return until the position is available.
             </param>
-            <param name="timeoutenableHighAccuracy">
+            <param name="enableHighAccuracy">
             A boolean value that indicates the application would like to receive the best possible results.
             If true and if the device is able to provide a more accurate position, it will do so.
             Note that this can result in slower response times or increased power consumption (with a GPS chip on a mobile device for example).
@@ -4970,7 +6063,7 @@
             A positive long value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position.
             The default value is -1, meaning that getCurrentPosition() won't return until the position is available.
             </param>
-            <param name="timeoutenableHighAccuracy">
+            <param name="enableHighAccuracy">
             A boolean value that indicates the application would like to receive the best possible results.
             If true and if the device is able to provide a more accurate position, it will do so.
             Note that this can result in slower response times or increased power consumption (with a GPS chip on a mobile device for example).
@@ -5035,7 +6128,7 @@
             A positive long value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position.
             The default value is -1, meaning that getCurrentPosition() won't return until the position is available.
             </param>
-            <param name="timeoutenableHighAccuracy">
+            <param name="enableHighAccuracy">
             A boolean value that indicates the application would like to receive the best possible results.
             If true and if the device is able to provide a more accurate position, it will do so.
             Note that this can result in slower response times or increased power consumption (with a GPS chip on a mobile device for example).
@@ -5087,7 +6180,7 @@
             A positive long value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position.
             The default value is -1, meaning that getCurrentPosition() won't return until the position is available.
             </param>
-            <param name="timeoutenableHighAccuracy">
+            <param name="enableHighAccuracy">
             A boolean value that indicates the application would like to receive the best possible results.
             If true and if the device is able to provide a more accurate position, it will do so.
             Note that this can result in slower response times or increased power consumption (with a GPS chip on a mobile device for example).
@@ -6765,6 +7858,1163 @@
             - "auto": scroll behavior is determined by the computed value of scroll-behavior<br />
             Defaults to "auto".
             </param>
+        </member>
+        <member name="T:BrowserAPI.IHTMLMediaElement">
+            <summary>
+            <para>The <i>HTMLMediaElement</i> interface adds to HTMLElement the properties and methods needed to support basic media-related capabilities that are common to audio and video.</para>
+            <para>The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see> and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see> elements both inherit this interface.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call <see cref="!:DisposeAsync"/> when you are done with it.</para>
+            </summary>
+            <summary>
+            Base class for <see cref="!:HTMLMediaElement"/> and <see cref="!:HTMLMediaElementInProcess"/>.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.Src">
+            <summary>
+            <para>A string that reflects the src HTML attribute, which contains the URL of a media resource to use.</para>
+            <para>
+            Note: The best way to know the URL of the media resource currently in active use in this element is to look at the value of the currentSrc attribute,
+            which also takes into account selection of a best or preferred media resource from a list provided in an HTMLSourceElement (which represents a &lt;source&gt; element).
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetSrc(System.Threading.CancellationToken)">
+            <summary>
+            <para>A string that reflects the src HTML attribute, which contains the URL of a media resource to use.</para>
+            <para>
+            Note: The best way to know the URL of the media resource currently in active use in this element is to look at the value of the currentSrc attribute,
+            which also takes into account selection of a best or preferred media resource from a list provided in an HTMLSourceElement (which represents a &lt;source&gt; element).
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.SetSrc(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>A string that reflects the src HTML attribute, which contains the URL of a media resource to use.</para>
+            <para>
+            Note: The best way to know the URL of the media resource currently in active use in this element is to look at the value of the currentSrc attribute,
+            which also takes into account selection of a best or preferred media resource from a list provided in an HTMLSourceElement (which represents a &lt;source&gt; element).
+            </para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.Controls">
+            <summary>
+            A boolean that reflects the controls HTML attribute, indicating whether user interface items for controlling the resource should be displayed.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetControls(System.Threading.CancellationToken)">
+            <summary>
+            A boolean that reflects the controls HTML attribute, indicating whether user interface items for controlling the resource should be displayed.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.SetControls(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            A boolean that reflects the controls HTML attribute, indicating whether user interface items for controlling the resource should be displayed.
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.Autoplay">
+            <summary>
+            <para>A boolean value that reflects the autoplay HTML attribute, indicating whether playback should automatically begin as soon as enough media is available to do so without interruption.</para>
+            <para>A media element whose source is a MediaStream and whose autoplay property is true will begin playback when it becomes active(that is, when MediaStream.active becomes true).</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetAutoplay(System.Threading.CancellationToken)">
+            <summary>
+            <para>A boolean value that reflects the autoplay HTML attribute, indicating whether playback should automatically begin as soon as enough media is available to do so without interruption.</para>
+            <para>A media element whose source is a MediaStream and whose autoplay property is true will begin playback when it becomes active(that is, when MediaStream.active becomes true).</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.SetAutoplay(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>A boolean value that reflects the autoplay HTML attribute, indicating whether playback should automatically begin as soon as enough media is available to do so without interruption.</para>
+            <para>A media element whose source is a MediaStream and whose autoplay property is true will begin playback when it becomes active(that is, when MediaStream.active becomes true).</para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.Loop">
+            <summary>
+            A boolean that reflects the loop HTML attribute, which indicates whether the media element should start over when it reaches the end.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetLoop(System.Threading.CancellationToken)">
+            <summary>
+            A boolean that reflects the loop HTML attribute, which indicates whether the media element should start over when it reaches the end.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.SetLoop(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            A boolean that reflects the loop HTML attribute, which indicates whether the media element should start over when it reaches the end.
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.DefaultMuted">
+            <summary>
+            <para>A boolean that reflects the muted HTML attribute, which indicates whether the media element's audio output should be muted by default.</para>
+            <para>This property has no dynamic effect. To mute and unmute the audio output, use the muted property.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetDefaultMuted(System.Threading.CancellationToken)">
+            <summary>
+            <para>A boolean that reflects the muted HTML attribute, which indicates whether the media element's audio output should be muted by default.</para>
+            <para>This property has no dynamic effect. To mute and unmute the audio output, use the muted property.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.SetDefaultMuted(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>A boolean that reflects the muted HTML attribute, which indicates whether the media element's audio output should be muted by default.</para>
+            <para>This property has no dynamic effect. To mute and unmute the audio output, use the muted property.</para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.Preload">
+            <summary>
+            <para>A string that reflects the preload HTML attribute, indicating what data should be preloaded, if any.</para>
+            <para>
+            Possible values are:<br />
+            - "none": Indicates that the media should not be preloaded.<br />
+            - "metadata": Indicates that only media metadata (e.g. length) is fetched.<br />
+            - "auto": Indicates that the whole media file can be downloaded, even if the user is not expected to use it.<br />
+            - "": A synonym of the auto value.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetPreload(System.Threading.CancellationToken)">
+            <summary>
+            <para>A string that reflects the preload HTML attribute, indicating what data should be preloaded, if any.</para>
+            <para>
+            Possible values are:<br />
+            - "none": Indicates that the media should not be preloaded.<br />
+            - "metadata": Indicates that only media metadata (e.g. length) is fetched.<br />
+            - "auto": Indicates that the whole media file can be downloaded, even if the user is not expected to use it.<br />
+            - "": A synonym of the auto value.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.SetPreload(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>A string that reflects the preload HTML attribute, indicating what data should be preloaded, if any.</para>
+            <para>
+            Possible values are:<br />
+            - "none": Indicates that the media should not be preloaded.<br />
+            - "metadata": Indicates that only media metadata (e.g. length) is fetched.<br />
+            - "auto": Indicates that the whole media file can be downloaded, even if the user is not expected to use it.<br />
+            - "": A synonym of the auto value.
+            </para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.CurrentSrc">
+            <summary>
+            <para>Returns a string with the absolute URL of the chosen media resource.</para>
+            <para>This could happen, for example, if the web server selects a media file based on the resolution of the user's display. The value is an empty string if the networkState property is EMPTY.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetCurrentSrc(System.Threading.CancellationToken)">
+            <summary>
+            <para>Returns a string with the absolute URL of the chosen media resource.</para>
+            <para>This could happen, for example, if the web server selects a media file based on the resolution of the user's display. The value is an empty string if the networkState property is EMPTY.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.CurrentTime">
+            <summary>
+            <para>A double-precision floating-point value indicating the current playback time in seconds.</para>
+            <para>
+            if the media has not started to play and has not been seeked, this value is the media's initial playback time.
+            Setting this value seeks the media to the new time. The time is specified relative to the media's timeline.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetCurrentTime(System.Threading.CancellationToken)">
+            <summary>
+            <para>A double-precision floating-point value indicating the current playback time in seconds.</para>
+            <para>
+            if the media has not started to play and has not been seeked, this value is the media's initial playback time.
+            Setting this value seeks the media to the new time. The time is specified relative to the media's timeline.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.SetCurrentTime(System.Double,System.Threading.CancellationToken)">
+            <summary>
+            <para>A double-precision floating-point value indicating the current playback time in seconds</para>
+            <para>
+            if the media has not started to play and has not been seeked, this value is the media's initial playback time.
+            Setting this value seeks the media to the new time. The time is specified relative to the media's timeline.
+            </para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.Duration">
+            <summary>
+            <para>A read-only double-precision floating-point value indicating the total duration of the media in seconds.</para>
+            <para>
+            If no media data is available, the returned value is NaN.<br />
+            If the media is of indefinite length (such as streamed live media, a WebRTC call's media, or similar), the value is +Infinity.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetDuration(System.Threading.CancellationToken)">
+            <summary>
+            <para>A read-only double-precision floating-point value indicating the total duration of the media in seconds.</para>
+            <para>
+            If no media data is available, the returned value is NaN.<br />
+            If the media is of indefinite length (such as streamed live media, a WebRTC call's media, or similar), the value is +Infinity.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.Seekable">
+            <summary>
+            Returns a TimeRanges object that contains the time ranges that the user is able to seek to.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetSeekable(System.Threading.CancellationToken)">
+            <summary>
+            Returns a TimeRanges object that contains the time ranges that the user is able to seek to.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.Muted">
+            <summary>
+            <para>A boolean that determines whether audio is muted. true if the audio is muted and false otherwise.</para>
+            <para>true means muted and false means not muted.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetMuted(System.Threading.CancellationToken)">
+            <summary>
+            <para>A boolean that determines whether audio is muted. true if the audio is muted and false otherwise.</para>
+            <para>true means muted and false means not muted.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.SetMuted(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>A boolean that determines whether audio is muted. true if the audio is muted and false otherwise.</para>
+            <para>true means muted and false means not muted.</para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.Volume">
+            <summary>
+            A double indicating the audio volume, from 0.0 (silent) to 1.0 (loudest).
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetVolume(System.Threading.CancellationToken)">
+            <summary>
+            A double indicating the audio volume, from 0.0 (silent) to 1.0 (loudest).
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.SetVolume(System.Double,System.Threading.CancellationToken)">
+            <summary>
+            A double indicating the audio volume, from 0.0 (silent) to 1.0 (loudest).
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.Paused">
+            <summary>
+            <para>Returns a boolean that indicates whether the media element is paused.</para>
+            <para>true is paused and false is not paused.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetPaused(System.Threading.CancellationToken)">
+            <summary>
+            <para>Returns a boolean that indicates whether the media element is paused.</para>
+            <para>true is paused and false is not paused.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.Ended">
+            <summary>
+            <para>Returns a boolean that indicates whether the media element has finished playing.</para>
+            <para>true if the media contained in the element has finished playing.</para>
+            <para>If the source of the media is a MediaStream, this value is true if the value of the stream's active property is false.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetEnded(System.Threading.CancellationToken)">
+            <summary>
+            <para>Returns a boolean that indicates whether the media element has finished playing.</para>
+            <para>true if the media contained in the element has finished playing.</para>
+            <para>If the source of the media is a MediaStream, this value is true if the value of the stream's active property is false.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.Seeking">
+            <summary>
+            Returns a boolean that indicates whether the media is in the process of seeking to a new position.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetSeeking(System.Threading.CancellationToken)">
+            <summary>
+            Returns a boolean that indicates whether the media is in the process of seeking to a new position.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.ReadyState">
+            <summary>
+            <para>Returns a unsigned short (enumeration) indicating the readiness state of the media.</para>
+            <para>
+            Possible values are:<br />
+            0 = HAVE_NOTHING: No information is available about the media resource.<br />
+            1 = HAVE_METADATA: Enough of the media resource has been retrieved that the metadata attributes are initialized. Seeking will no longer raise an exception.<br />
+            2 = HAVE_CURRENT_DATA: Data is available for the current playback position, but not enough to actually play more than one frame.<br />
+            3 = HAVE_FUTURE_DATA: Data for the current playback position as well as for at least a little bit of time into the future is available (in other words, at least two frames of video, for example).<br />
+            4 = HAVE_ENOUGH_DATA: Enough data is available—and the download rate is high enough—that the media can be played through to the end without interruption.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetReadyState(System.Threading.CancellationToken)">
+            <summary>
+            <para>Returns a unsigned short (enumeration) indicating the readiness state of the media.</para>
+            <para>
+            Possible values are:<br />
+            0 = HAVE_NOTHING: No information is available about the media resource.<br />
+            1 = HAVE_METADATA: Enough of the media resource has been retrieved that the metadata attributes are initialized. Seeking will no longer raise an exception.<br />
+            2 = HAVE_CURRENT_DATA: Data is available for the current playback position, but not enough to actually play more than one frame.<br />
+            3 = HAVE_FUTURE_DATA: Data for the current playback position as well as for at least a little bit of time into the future is available (in other words, at least two frames of video, for example).<br />
+            4 = HAVE_ENOUGH_DATA: Enough data is available—and the download rate is high enough—that the media can be played through to the end without interruption.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.NetworkState">
+            <summary>
+            <para>Returns a unsigned short (enumeration) indicating the current state of fetching the media over the network.</para>
+            <para>
+            Possible values are:<br />
+            0 = NETWORK_EMPTY: There is no data yet. Also, readyState is HAVE_NOTHING.<br />
+            1 = NETWORK_IDLE: HTMLMediaElement is active and has selected a resource, but is not using the network.<br />
+            2 = NETWORK_LOADING: The browser is downloading HTMLMediaElement data.<br />
+            3 = NETWORK_NO_SOURCE: No HTMLMediaElement src found.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetNetworkState(System.Threading.CancellationToken)">
+            <summary>
+            <para>Returns a unsigned short (enumeration) indicating the current state of fetching the media over the network.</para>
+            <para>
+            Possible values are:<br />
+            0 = NETWORK_EMPTY: There is no data yet. Also, readyState is HAVE_NOTHING.<br />
+            1 = NETWORK_IDLE: HTMLMediaElement is active and has selected a resource, but is not using the network.<br />
+            2 = NETWORK_LOADING: The browser is downloading HTMLMediaElement data.<br />
+            3 = NETWORK_NO_SOURCE: No HTMLMediaElement src found.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.Buffered">
+            <summary>
+            Returns a TimeRanges object that indicates the ranges of the media source that the browser has buffered (if any) at the moment the buffered property is accessed.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetBuffered(System.Threading.CancellationToken)">
+            <summary>
+            Returns a TimeRanges object that indicates the ranges of the media source that the browser has buffered (if any) at the moment the buffered property is accessed.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.Played">
+            <summary>
+            Returns a TimeRanges object that contains the ranges of the media source that the browser has played, if any.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetPlayed(System.Threading.CancellationToken)">
+            <summary>
+            Returns a TimeRanges object that contains the ranges of the media source that the browser has played, if any.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.PlaybackRate">
+            <summary>
+            <para>A double that indicates the rate at which the media is being played back.</para>
+            <para>
+            This is used to implement user controls for fast forward, slow motion, and so forth.<br />
+            The normal playback rate is multiplied by this value to obtain the current rate, so a value of 1.0 indicates normal speed.
+            </para>
+            <para>A negative playbackRate value indicates that the media should be played backwards, but support for this is not yet widespread.</para>
+            <para>The audio is muted when the fast forward or slow motion is outside a useful range(for example, Gecko mutes the sound outside the range 0.25 to 4.0).</para>
+            <para>The pitch of the audio is corrected by default. You can disable pitch correction using the HTMLMediaElement.preservesPitch property.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetPlaybackRate(System.Threading.CancellationToken)">
+            <summary>
+            <para>A double that indicates the rate at which the media is being played back.</para>
+            <para>
+            This is used to implement user controls for fast forward, slow motion, and so forth.<br />
+            The normal playback rate is multiplied by this value to obtain the current rate, so a value of 1.0 indicates normal speed.
+            </para>
+            <para>A negative playbackRate value indicates that the media should be played backwards, but support for this is not yet widespread.</para>
+            <para>The audio is muted when the fast forward or slow motion is outside a useful range(for example, Gecko mutes the sound outside the range 0.25 to 4.0).</para>
+            <para>The pitch of the audio is corrected by default. You can disable pitch correction using the HTMLMediaElement.preservesPitch property.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.SetPlaybackRate(System.Double,System.Threading.CancellationToken)">
+            <summary>
+            <para>A double that indicates the rate at which the media is being played back.</para>
+            <para>
+            This is used to implement user controls for fast forward, slow motion, and so forth.<br />
+            The normal playback rate is multiplied by this value to obtain the current rate, so a value of 1.0 indicates normal speed.
+            </para>
+            <para>A negative playbackRate value indicates that the media should be played backwards, but support for this is not yet widespread.</para>
+            <para>The audio is muted when the fast forward or slow motion is outside a useful range(for example, Gecko mutes the sound outside the range 0.25 to 4.0).</para>
+            <para>The pitch of the audio is corrected by default. You can disable pitch correction using the HTMLMediaElement.preservesPitch property.</para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.DefaultPlaybackRate">
+            <summary>
+            <para>A double indicating the default playback rate for the media.</para>
+            <para>A double. 1.0 is "normal speed," values lower than 1.0 make the media play slower than normal, higher values make it play faster.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetDefaultPlaybackRate(System.Threading.CancellationToken)">
+            <summary>
+            <para>A double indicating the default playback rate for the media.</para>
+            <para>A double. 1.0 is "normal speed," values lower than 1.0 make the media play slower than normal, higher values make it play faster.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.SetDefaultPlaybackRate(System.Double,System.Threading.CancellationToken)">
+            <summary>
+            <para>A double indicating the default playback rate for the media.</para>
+            <para>A double. 1.0 is "normal speed," values lower than 1.0 make the media play slower than normal, higher values make it play faster.</para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.CrossOrigin">
+            <summary>
+            <para>A string indicating the CORS setting for this media element. See <see href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin">CORS settings attributes</see> for details.</para>
+            <para>
+            Possible values are:<br />
+            "anonymous":
+            Requests sent by the HTMLMediaElement will use the <i>cors</i> mode and the <i>same-origin</i> credentials mode.
+            This means that CORS is enabled and credentials are sent if the resource is fetched from the same origin from which the document was loaded.<br />
+            "use-credentials":
+            Requests sent by the HTMLMediaElement will use the <i>cors</i> mode and the <i>include</i> credentials mode.
+            All resources requests by the element will use CORS, regardless of what domain the fetch is from.<br />
+            "" (or any other value):
+            The same as specifing as "anonymous".
+            </para>
+            <para>If the <i>crossOrigin</i> property is not specified, the resource is fetched without CORS (the <i>no-cors</i> mode and the <i>same-origin</i> credentials mode).</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetCrossOrigin(System.Threading.CancellationToken)">
+            <summary>
+            <para>A string indicating the CORS setting for this media element. See <see href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin">CORS settings attributes</see> for details.</para>
+            <para>
+            Possible values are:<br />
+            "anonymous":
+            Requests sent by the HTMLMediaElement will use the <i>cors</i> mode and the <i>same-origin</i> credentials mode.
+            This means that CORS is enabled and credentials are sent if the resource is fetched from the same origin from which the document was loaded.<br />
+            "use-credentials":
+            Requests sent by the HTMLMediaElement will use the <i>cors</i> mode and the <i>include</i> credentials mode.
+            All resources requests by the element will use CORS, regardless of what domain the fetch is from.<br />
+            "" (or any other value):
+            The same as specifing as "anonymous".
+            </para>
+            <para>If the <i>crossOrigin</i> property is not specified, the resource is fetched without CORS (the <i>no-cors</i> mode and the <i>same-origin</i> credentials mode).</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.SetCrossOrigin(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>A string indicating the CORS setting for this media element. See <see href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin">CORS settings attributes</see> for details.</para>
+            <para>
+            Possible values are:<br />
+            "anonymous":
+            Requests sent by the HTMLMediaElement will use the <i>cors</i> mode and the <i>same-origin</i> credentials mode.
+            This means that CORS is enabled and credentials are sent if the resource is fetched from the same origin from which the document was loaded.<br />
+            "use-credentials":
+            Requests sent by the HTMLMediaElement will use the <i>cors</i> mode and the <i>include</i> credentials mode.
+            All resources requests by the element will use CORS, regardless of what domain the fetch is from.<br />
+            "" (or any other value):
+            The same as specifing as "anonymous".
+            </para>
+            <para>If the <i>crossOrigin</i> property is not specified, the resource is fetched without CORS (the <i>no-cors</i> mode and the <i>same-origin</i> credentials mode).</para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.PreservesPitch">
+            <summary>
+            <para>
+            A boolean value that determines if the pitch of the sound will be preserved.<br />
+            If set to false, the pitch will adjust to the speed of the audio.</para>
+            <para>Default is true.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetPreservesPitch(System.Threading.CancellationToken)">
+            <summary>
+            <para>
+            A boolean value that determines if the pitch of the sound will be preserved.<br />
+            If set to false, the pitch will adjust to the speed of the audio.</para>
+            <para>Default is true.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.SetPreservesPitch(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>
+            A boolean value that determines if the pitch of the sound will be preserved.<br />
+            If set to false, the pitch will adjust to the speed of the audio.
+            </para>
+            <para>Default is true.</para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.DisableRemotePlayback">
+            <summary>
+            <para>A boolean that sets or returns the remote playback state, indicating whether the media element is allowed to have a remote playback UI.</para>
+            <para>false means "not disabled", which means "enabled"</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetDisableRemotePlayback(System.Threading.CancellationToken)">
+            <summary>
+            <para>A boolean that sets or returns the remote playback state, indicating whether the media element is allowed to have a remote playback UI.</para>
+            <para>false means "not disabled", which means "enabled"</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.SetDisableRemotePlayback(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>A boolean that sets or returns the remote playback state, indicating whether the media element is allowed to have a remote playback UI.</para>
+            <para>false means "not disabled", which means "enabled"</para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.Pause(System.Threading.CancellationToken)">
+            play() is declared in HTMLMediaElementBase
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.Load(System.Threading.CancellationToken)">
+            <summary>
+            Resets the media to the beginning and selects the best available source from the sources provided using the <i>src</i> attribute or the <i>&lt;source&gt;</i> element.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.FastSeek(System.Double,System.Threading.CancellationToken)">
+            <summary>
+            <para>Quickly seeks to the given time with low precision.</para>
+            <para>Note: If you need to seek with precision, you should set HTMLMediaElement.currentTime instead.</para>
+            </summary>
+            <param name="time"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.CanPlayType(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Given a string specifying a MIME media type (potentially with the codecs parameter included), canPlayType() returns the string<br />
+            - "probably", if the media should be playable<br />
+            - "maybe", if there's not enough information to determine whether the media will play or not<br />
+            - "", if the media cannot be played
+            </summary>
+            <param name="type">A string specifying the MIME type of the media and (optionally) a codecs parameter containing a comma-separated list of the supported codecs.</param>
+            <param name="cancellationToken"></param>
+            <returns>"probably", "maybe" or ""</returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.Play(System.Threading.CancellationToken)">
+            <summary>
+            Attempts to begin playback of the media. It returns a Promise which is resolved when playback has been successfully started.<br />
+            Failure to begin playback for any reason, such as permission issues, result in the promise being rejected.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnError">
+            <summary>
+            <para>Fired when the resource could not be loaded due to an error (for example, a network connectivity problem).</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            <para>
+            If an error already occurred when subscribing (<see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/error">error</see> property is not empty), this event is fired immediately.<br />
+            Note: When <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/error">error</see> is not empty, this event is fired with every subscription.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - int <i>code</i>:<br />
+            A number which represents the general type of error that occurred.<br />
+            Possible values are:<br />
+            1 = MEDIA_ERR_ABORTED: The fetching of the associated resource was aborted by the user's request.<br />
+            2 = MEDIA_ERR_NETWORK: Some kind of network error occurred which prevented the media from being successfully fetched, despite having previously been available.<br />
+            3 = MEDIA_ERR_DECODE: Despite having previously been determined to be usable, an error occurred while trying to decode the media resource, resulting in an error.<br />
+            4 = MEDIA_ERR_SRC_NOT_SUPPORTED: The associated resource or media provider object (such as a MediaStream) has been found to be unsuitable.<br />
+            - string <i>message</i>:<br />
+            A human-readable string which provides specific diagnostic information to help the reader understand the error condition which occurred;
+            specifically, it isn't a summary of what the error code means, but actual diagnostic information to help in understanding what exactly went wrong.
+            This text and its format is not defined by the specification and will vary from one user agent to another.
+            If no diagnostics are available, or no explanation can be provided, this value is an empty string ("").
+            </para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnCanplay">
+            <summary>
+            <para>Fired when the user agent can play the media, but estimates that not enough data has been loaded to play the media up to its end without having to stop for further buffering of content.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnCanplaythrough">
+            <summary>
+            <para>Fired when the user agent can play the media, and estimates that enough data has been loaded to play the media up to its end without having to stop for further buffering of content.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnPlaying">
+            <summary>
+            <para>Fired after playback is first started, and whenever it is restarted. For example it is fired when playback resumes after having been paused or delayed due to lack of data.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnLoadstart">
+            <summary>
+            Fired when the browser has started to load a resource.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnProgress">
+            <summary>
+            <para>Fired periodically as the browser loads a resource.></para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnLoadeddata">
+            <summary>
+            Fired when the first frame of the media has finished loading; often the first frame.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnLoadedmetadata">
+            <summary>
+            Fired when the metadata has been loaded.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnStalled">
+            <summary>
+            <para>Fired when the user agent is trying to fetch media data, but data is unexpectedly not forthcoming.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnSuspend">
+            <summary>
+            <para>Fired when the media data loading has been suspended.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnWaiting">
+            <summary>
+            <para>Fired when playback has stopped because of a temporary lack of data.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnAbort">
+            <summary>
+            <para>Fired when the resource was not fully loaded, but not as the result of an error.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnEmptied">
+            <summary>
+            <para>Fired when the media has become empty; for example, when the media has already been loaded (or partially loaded), and the <see cref="!:HTMLMediaElement.Load">Load()</see> method is called to reload it.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnPlay">
+            <summary>
+            <para>Fired when the paused property is changed from true to false, as a result of the <see cref="M:BrowserAPI.IHTMLMediaElement.Play(System.Threading.CancellationToken)">Play()</see> method, or the autoplay attribute.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnPause">
+            <summary>
+            <para>Fired when a request to pause play is handled and the activity has entered its paused state, most commonly occurring when the media's <see cref="!:HTMLMediaElement.Pause">Pause()</see> method is called.</para>
+            <para>The event is sent once the <see cref="!:HTMLMediaElement.Pause">Pause()</see> method returns and after the media element's paused property has been changed to true.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnEnded">
+            <summary>
+            <para>Fired when playback stops when end of the media (&lt;audio&gt; and &lt;video&gt;) is reached or because no further data is available.</para>
+            <para>This event occurs based upon HTMLMediaElement (&lt;audio&gt; and &lt;video&gt;) fire ended when playback reaches the end of the media.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnSeeking">
+            <summary>
+            <para>Fired when a seek operation starts, meaning the Boolean seeking attribute has changed to true and the media is seeking a new position.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnSeeked">
+            <summary>
+            <para>Fired when a seek operation completed, the current playback position has changed, and the Boolean seeking attribute is changed to false.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnTimeupdate">
+            <summary>
+            <para>Fired when the time indicated by the currentTime attribute has been updated.</para>
+            <para>
+            The event frequency is dependent on the system load, but will be thrown between about 4Hz and 66Hz (assuming the event handlers don't take longer than 250ms to run).
+            User agents are encouraged to vary the frequency of the event based on the system load and the average cost of processing the event each time,
+            so that the UI updates are not any more frequent than the user agent can comfortably handle while decoding the video.
+            </para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnVolumechange">
+            <summary>
+            <para>Fired when either the volume attribute or the muted attribute has changed.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnRatechange">
+            <summary>
+            <para>Fired when the playback rate has changed.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnDurationchange">
+            <summary>
+            Fired when the duration attribute has been updated.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IHTMLMediaElementInProcess">
+            <summary>
+            Base class for <see cref="!:HTMLMediaElement"/> and <see cref="!:HTMLMediaElementInProcess"/>.
+            </summary>
+            <summary>
+            <para>The <i>HTMLMediaElement</i> interface adds to HTMLElement the properties and methods needed to support basic media-related capabilities that are common to audio and video.</para>
+            <para>The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see> and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see> elements both inherit this interface.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call <see cref="!:Dispose"/> when you are done with it.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElementInProcess.Play(System.Threading.CancellationToken)">
+            <summary>
+            Attempts to begin playback of the media. It returns a Promise which is resolved when playback has been successfully started.<br />
+            Failure to begin playback for any reason, such as permission issues, result in the promise being rejected.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnError">
+            <summary>
+            <para>Fired when the resource could not be loaded due to an error (for example, a network connectivity problem).</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            <para>
+            If an error already occurred when subscribing (<see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/error">error</see> property is not empty), this event is fired immediately.<br />
+            Note: When <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/error">error</see> is not empty, this event is fired with every subscription.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - int <i>code</i>:<br />
+            A number which represents the general type of error that occurred.<br />
+            Possible values are:<br />
+            1 = MEDIA_ERR_ABORTED: The fetching of the associated resource was aborted by the user's request.<br />
+            2 = MEDIA_ERR_NETWORK: Some kind of network error occurred which prevented the media from being successfully fetched, despite having previously been available.<br />
+            3 = MEDIA_ERR_DECODE: Despite having previously been determined to be usable, an error occurred while trying to decode the media resource, resulting in an error.<br />
+            4 = MEDIA_ERR_SRC_NOT_SUPPORTED: The associated resource or media provider object (such as a MediaStream) has been found to be unsuitable.<br />
+            - string <i>message</i>:<br />
+            A human-readable string which provides specific diagnostic information to help the reader understand the error condition which occurred;
+            specifically, it isn't a summary of what the error code means, but actual diagnostic information to help in understanding what exactly went wrong.
+            This text and its format is not defined by the specification and will vary from one user agent to another.
+            If no diagnostics are available, or no explanation can be provided, this value is an empty string ("").
+            </para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnCanplay">
+            <summary>
+            <para>Fired when the user agent can play the media, but estimates that not enough data has been loaded to play the media up to its end without having to stop for further buffering of content.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnCanplaythrough">
+            <summary>
+            <para>Fired when the user agent can play the media, and estimates that enough data has been loaded to play the media up to its end without having to stop for further buffering of content.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnPlaying">
+            <summary>
+            <para>Fired after playback is first started, and whenever it is restarted. For example it is fired when playback resumes after having been paused or delayed due to lack of data.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnLoadstart">
+            <summary>
+            Fired when the browser has started to load a resource.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnProgress">
+            <summary>
+            <para>Fired periodically as the browser loads a resource.></para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnLoadeddata">
+            <summary>
+            Fired when the first frame of the media has finished loading; often the first frame.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnLoadedmetadata">
+            <summary>
+            Fired when the metadata has been loaded.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnStalled">
+            <summary>
+            <para>Fired when the user agent is trying to fetch media data, but data is unexpectedly not forthcoming.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnSuspend">
+            <summary>
+            <para>Fired when the media data loading has been suspended.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnWaiting">
+            <summary>
+            <para>Fired when playback has stopped because of a temporary lack of data.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnAbort">
+            <summary>
+            <para>Fired when the resource was not fully loaded, but not as the result of an error.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnEmptied">
+            <summary>
+            <para>Fired when the media has become empty; for example, when the media has already been loaded (or partially loaded), and the <see cref="!:HTMLMediaElement.Load">Load()</see> method is called to reload it.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnPlay">
+            <summary>
+            <para>Fired when the paused property is changed from true to false, as a result of the <see cref="M:BrowserAPI.IHTMLMediaElementInProcess.Play(System.Threading.CancellationToken)">Play()</see> method, or the autoplay attribute.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnPause">
+            <summary>
+            <para>Fired when a request to pause play is handled and the activity has entered its paused state, most commonly occurring when the media's <see cref="!:HTMLMediaElement.Pause">Pause()</see> method is called.</para>
+            <para>The event is sent once the <see cref="!:HTMLMediaElement.Pause">Pause()</see> method returns and after the media element's paused property has been changed to true.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnEnded">
+            <summary>
+            <para>Fired when playback stops when end of the media (&lt;audio&gt; and &lt;video&gt;) is reached or because no further data is available.</para>
+            <para>This event occurs based upon HTMLMediaElement (&lt;audio&gt; and &lt;video&gt;) fire ended when playback reaches the end of the media.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnSeeking">
+            <summary>
+            <para>Fired when a seek operation starts, meaning the Boolean seeking attribute has changed to true and the media is seeking a new position.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnSeeked">
+            <summary>
+            <para>Fired when a seek operation completed, the current playback position has changed, and the Boolean seeking attribute is changed to false.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnTimeupdate">
+            <summary>
+            <para>Fired when the time indicated by the currentTime attribute has been updated.</para>
+            <para>
+            The event frequency is dependent on the system load, but will be thrown between about 4Hz and 66Hz (assuming the event handlers don't take longer than 250ms to run).
+            User agents are encouraged to vary the frequency of the event based on the system load and the average cost of processing the event each time,
+            so that the UI updates are not any more frequent than the user agent can comfortably handle while decoding the video.
+            </para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnVolumechange">
+            <summary>
+            <para>Fired when either the volume attribute or the muted attribute has changed.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnRatechange">
+            <summary>
+            <para>Fired when the playback rate has changed.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnDurationchange">
+            <summary>
+            Fired when the duration attribute has been updated.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.Src">
+            <summary>
+            <para>A string that reflects the src HTML attribute, which contains the URL of a media resource to use.</para>
+            <para>
+            Note: The best way to know the URL of the media resource currently in active use in this element is to look at the value of the currentSrc attribute,
+            which also takes into account selection of a best or preferred media resource from a list provided in an HTMLSourceElement (which represents a &lt;source&gt; element).
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.Controls">
+            <summary>
+            A boolean that reflects the controls HTML attribute, indicating whether user interface items for controlling the resource should be displayed.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.Autoplay">
+            <summary>
+            <para>A boolean value that reflects the autoplay HTML attribute, indicating whether playback should automatically begin as soon as enough media is available to do so without interruption.</para>
+            <para>A media element whose source is a MediaStream and whose autoplay property is true will begin playback when it becomes active(that is, when MediaStream.active becomes true).</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.Loop">
+            <summary>
+            A boolean that reflects the loop HTML attribute, which indicates whether the media element should start over when it reaches the end.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.DefaultMuted">
+            <summary>
+            <para>A boolean that reflects the muted HTML attribute, which indicates whether the media element's audio output should be muted by default.</para>
+            <para>This property has no dynamic effect. To mute and unmute the audio output, use the muted property.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.Preload">
+            <summary>
+            <para>A string that reflects the preload HTML attribute, indicating what data should be preloaded, if any.</para>
+            <para>
+            Possible values are:<br />
+            - "none": Indicates that the media should not be preloaded.<br />
+            - "metadata": Indicates that only media metadata (e.g. length) is fetched.<br />
+            - "auto": Indicates that the whole media file can be downloaded, even if the user is not expected to use it.<br />
+            - "": A synonym of the auto value.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.CurrentSrc">
+            <summary>
+            <para>Returns a string with the absolute URL of the chosen media resource.</para>
+            <para>This could happen, for example, if the web server selects a media file based on the resolution of the user's display. The value is an empty string if the networkState property is EMPTY.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.CurrentTime">
+            <summary>
+            <para>A double-precision floating-point value indicating the current playback time in seconds.</para>
+            <para>
+            if the media has not started to play and has not been seeked, this value is the media's initial playback time.
+            Setting this value seeks the media to the new time. The time is specified relative to the media's timeline.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.Duration">
+            <summary>
+            <para>A read-only double-precision floating-point value indicating the total duration of the media in seconds.</para>
+            <para>
+            If no media data is available, the returned value is NaN.<br />
+            If the media is of indefinite length (such as streamed live media, a WebRTC call's media, or similar), the value is +Infinity.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.Seekable">
+            <summary>
+            Returns a TimeRanges object that contains the time ranges that the user is able to seek to.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.Muted">
+            <summary>
+            <para>A boolean that determines whether audio is muted. true if the audio is muted and false otherwise.</para>
+            <para>true means muted and false means not muted.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.Volume">
+            <summary>
+            A double indicating the audio volume, from 0.0 (silent) to 1.0 (loudest).
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.Paused">
+            <summary>
+            <para>Returns a boolean that indicates whether the media element is paused.</para>
+            <para>true is paused and false is not paused.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.Ended">
+            <summary>
+            <para>Returns a boolean that indicates whether the media element has finished playing.</para>
+            <para>true if the media contained in the element has finished playing.</para>
+            <para>If the source of the media is a MediaStream, this value is true if the value of the stream's active property is false.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.Seeking">
+            <summary>
+            Returns a boolean that indicates whether the media is in the process of seeking to a new position.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.ReadyState">
+            <summary>
+            <para>Returns a unsigned short (enumeration) indicating the readiness state of the media.</para>
+            <para>
+            Possible values are:<br />
+            0 = HAVE_NOTHING: No information is available about the media resource.<br />
+            1 = HAVE_METADATA: Enough of the media resource has been retrieved that the metadata attributes are initialized. Seeking will no longer raise an exception.<br />
+            2 = HAVE_CURRENT_DATA: Data is available for the current playback position, but not enough to actually play more than one frame.<br />
+            3 = HAVE_FUTURE_DATA: Data for the current playback position as well as for at least a little bit of time into the future is available (in other words, at least two frames of video, for example).<br />
+            4 = HAVE_ENOUGH_DATA: Enough data is available—and the download rate is high enough—that the media can be played through to the end without interruption.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.NetworkState">
+            <summary>
+            <para>Returns a unsigned short (enumeration) indicating the current state of fetching the media over the network.</para>
+            <para>
+            Possible values are:<br />
+            0 = NETWORK_EMPTY: There is no data yet. Also, readyState is HAVE_NOTHING.<br />
+            1 = NETWORK_IDLE: HTMLMediaElement is active and has selected a resource, but is not using the network.<br />
+            2 = NETWORK_LOADING: The browser is downloading HTMLMediaElement data.<br />
+            3 = NETWORK_NO_SOURCE: No HTMLMediaElement src found.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.Buffered">
+            <summary>
+            Returns a TimeRanges object that indicates the ranges of the media source that the browser has buffered (if any) at the moment the buffered property is accessed.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.Played">
+            <summary>
+            Returns a TimeRanges object that contains the ranges of the media source that the browser has played, if any.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.PlaybackRate">
+            <summary>
+            <para>A double that indicates the rate at which the media is being played back.</para>
+            <para>
+            This is used to implement user controls for fast forward, slow motion, and so forth.<br />
+            The normal playback rate is multiplied by this value to obtain the current rate, so a value of 1.0 indicates normal speed.
+            </para>
+            <para>A negative playbackRate value indicates that the media should be played backwards, but support for this is not yet widespread.</para>
+            <para>The audio is muted when the fast forward or slow motion is outside a useful range(for example, Gecko mutes the sound outside the range 0.25 to 4.0).</para>
+            <para>The pitch of the audio is corrected by default. You can disable pitch correction using the HTMLMediaElement.preservesPitch property.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.DefaultPlaybackRate">
+            <summary>
+            <para>A double indicating the default playback rate for the media.</para>
+            <para>A double. 1.0 is "normal speed," values lower than 1.0 make the media play slower than normal, higher values make it play faster.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.CrossOrigin">
+            <summary>
+            <para>A string indicating the CORS setting for this media element. See <see href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin">CORS settings attributes</see> for details.</para>
+            <para>
+            Possible values are:<br />
+            "anonymous":
+            Requests sent by the HTMLMediaElement will use the <i>cors</i> mode and the <i>same-origin</i> credentials mode.
+            This means that CORS is enabled and credentials are sent if the resource is fetched from the same origin from which the document was loaded.<br />
+            "use-credentials":
+            Requests sent by the HTMLMediaElement will use the <i>cors</i> mode and the <i>include</i> credentials mode.
+            All resources requests by the element will use CORS, regardless of what domain the fetch is from.<br />
+            "" (or any other value):
+            The same as specifing as "anonymous".
+            </para>
+            <para>If the <i>crossOrigin</i> property is not specified, the resource is fetched without CORS (the <i>no-cors</i> mode and the <i>same-origin</i> credentials mode).</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.PreservesPitch">
+            <summary>
+            <para>
+            A boolean value that determines if the pitch of the sound will be preserved.<br />
+            If set to false, the pitch will adjust to the speed of the audio.</para>
+            <para>Default is true.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.DisableRemotePlayback">
+            <summary>
+            <para>A boolean that sets or returns the remote playback state, indicating whether the media element is allowed to have a remote playback UI.</para>
+            <para>false means "not disabled", which means "enabled"</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElementInProcess.Pause">
+            play() is declared in HTMLMediaElementBase
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElementInProcess.Load">
+            <summary>
+            Resets the media to the beginning and selects the best available source from the sources provided using the <i>src</i> attribute or the <i>&lt;source&gt;</i> element.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElementInProcess.FastSeek(System.Double)">
+            <summary>
+            <para>Quickly seeks to the given time with low precision.</para>
+            <para>Note: If you need to seek with precision, you should set HTMLMediaElement.currentTime instead.</para>
+            </summary>
+            <param name="time"></param>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElementInProcess.CanPlayType(System.String)">
+            <summary>
+            Given a string specifying a MIME media type (potentially with the codecs parameter included), canPlayType() returns the string<br />
+            - "probably", if the media should be playable<br />
+            - "maybe", if there's not enough information to determine whether the media will play or not<br />
+            - "", if the media cannot be played
+            </summary>
+            <param name="type">A string specifying the MIME type of the media and (optionally) a codecs parameter containing a comma-separated list of the supported codecs.</param>
+            <returns>"probably", "maybe" or ""</returns>
         </member>
         <member name="T:BrowserAPI.ILanguage">
             <summary>
