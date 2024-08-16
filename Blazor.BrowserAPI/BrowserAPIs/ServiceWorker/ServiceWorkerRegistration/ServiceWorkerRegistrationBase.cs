@@ -4,14 +4,12 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
-/// <summary>
-/// <para>Base class for <see cref="ServiceWorkerRegistration"/> and <see cref="ServiceWorkerRegistrationInProcess"/>.</para>
-/// <para>Derived class should implement <see cref="IDisposable"/> or <see cref="IAsyncDisposable"/> and call <see cref="DisposeEventTrigger"/> there.</para>
-/// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerRegistration")]
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerRegistrationInProcess")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
+#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
 public abstract class ServiceWorkerRegistrationBase {
+#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
     private protected abstract IJSObjectReference ServiceWorkerRegistrationJS { get; }
 
 
@@ -38,6 +36,9 @@ public abstract class ServiceWorkerRegistrationBase {
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
     private DotNetObjectReference<EventTrigger> ObjectReferenceEventTrigger => _objectReferenceEventTrigger ??= DotNetObjectReference.Create(new EventTrigger(this));
 
+    /// <summary>
+    /// Derived class should implement <see cref="IDisposable"/> or <see cref="IAsyncDisposable"/> and call this method.
+    /// </summary>
     private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
 
 

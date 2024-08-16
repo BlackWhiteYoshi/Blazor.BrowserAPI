@@ -4,12 +4,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
-/// <summary>
-/// Base class for <see cref="ServiceWorkerContainer"/> and <see cref="ServiceWorkerContainerInProcess"/>.
-/// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerContainer")]
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerContainerInProcess")]
+#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
 public abstract class ServiceWorkerContainerBase : IDisposable {
+#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
     private protected abstract IModuleManager ModuleManager { get; }
 
     /// <summary>
@@ -63,6 +62,9 @@ public abstract class ServiceWorkerContainerBase : IDisposable {
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
     private DotNetObjectReference<EventTrigger> ObjectReferenceEventTrigger => _objectReferenceEventTrigger ??= DotNetObjectReference.Create(new EventTrigger(this));
 
+    /// <summary>
+    /// Derived class should implement <see cref="IDisposable"/> or <see cref="IAsyncDisposable"/> and call this method.
+    /// </summary>
     private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
 
 

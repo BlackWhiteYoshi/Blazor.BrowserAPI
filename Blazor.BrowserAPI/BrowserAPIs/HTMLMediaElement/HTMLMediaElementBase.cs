@@ -4,14 +4,12 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
-/// <summary>
-/// <para>Base class for <see cref="HTMLMediaElement"/> and <see cref="HTMLMediaElementInProcess"/>.</para>
-/// <para>Derived class should implement <see cref="IDisposable"/> or <see cref="IAsyncDisposable"/> and call <see cref="DisposeEventTrigger"/> there.</para>
-/// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLMediaElement")]
 [AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLMediaElementInProcess")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
+#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
 public abstract class HTMLMediaElementBase {
+#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
     private protected abstract Task<IJSObjectReference> HTMLMediaElementTask { get; }
 
 
@@ -90,6 +88,9 @@ public abstract class HTMLMediaElementBase {
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
     private DotNetObjectReference<EventTrigger> ObjectReferenceEventTrigger => _objectReferenceEventTrigger ??= DotNetObjectReference.Create(new EventTrigger(this));
 
+    /// <summary>
+    /// Derived class should implement <see cref="IDisposable"/> or <see cref="IAsyncDisposable"/> and call this method.
+    /// </summary>
     private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
 
 
