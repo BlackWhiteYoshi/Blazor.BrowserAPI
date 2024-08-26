@@ -123,13 +123,13 @@ public abstract class HTMLMediaElementBase {
     public event Action<int, string> OnError {
         add {
             if (_onError == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnerror", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnerror", [ObjectReferenceEventTrigger]));
             _onError += value;
         }
         remove {
             _onError -= value;
             if (_onError == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnerror", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnerror"));
         }
     }
 
@@ -141,13 +141,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnCanplay {
         add {
             if (_onCanplay == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOncanplay", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOncanplay", [ObjectReferenceEventTrigger]));
             _onCanplay += value;
         }
         remove {
             _onCanplay -= value;
             if (_onCanplay == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOncanplay", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOncanplay"));
         }
     }
 
@@ -159,13 +159,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnCanplaythrough {
         add {
             if (_onCanplaythrough == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOncanplaythrough", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOncanplaythrough", [ObjectReferenceEventTrigger]));
             _onCanplaythrough += value;
         }
         remove {
             _onCanplaythrough -= value;
             if (_onCanplaythrough == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOncanplaythrough", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOncanplaythrough"));
         }
     }
 
@@ -177,13 +177,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnPlaying {
         add {
             if (_onPlaying == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnplaying", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnplaying", [ObjectReferenceEventTrigger]));
             _onPlaying += value;
         }
         remove {
             _onPlaying -= value;
             if (_onPlaying == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnplaying", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnplaying"));
         }
     }
 
@@ -199,13 +199,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnLoadstart {
         add {
             if (_onLoadstart == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnloadstart", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnloadstart", [ObjectReferenceEventTrigger]));
             _onLoadstart += value;
         }
         remove {
             _onLoadstart -= value;
             if (_onLoadstart == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnloadstart", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnloadstart"));
         }
     }
 
@@ -217,13 +217,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnProgress {
         add {
             if (_onProgress == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnprogress", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnprogress", [ObjectReferenceEventTrigger]));
             _onProgress += value;
         }
         remove {
             _onProgress -= value;
             if (_onProgress == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnprogress", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnprogress"));
         }
     }
 
@@ -234,13 +234,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnLoadeddata {
         add {
             if (_onLoadeddata == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnloadeddata", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnloadeddata", [ObjectReferenceEventTrigger]));
             _onLoadeddata += value;
         }
         remove {
             _onLoadeddata -= value;
             if (_onLoadeddata == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnloadeddata", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnloadeddata"));
         }
     }
 
@@ -251,13 +251,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnLoadedmetadata {
         add {
             if (_onLoadedmetadata == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnloadedmetadata", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnloadedmetadata", [ObjectReferenceEventTrigger]));
             _onLoadedmetadata += value;
         }
         remove {
             _onLoadedmetadata -= value;
             if (_onLoadedmetadata == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnloadedmetadata", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnloadedmetadata"));
         }
     }
 
@@ -269,13 +269,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnStalled {
         add {
             if (_onStalled == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnstalled", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnstalled", [ObjectReferenceEventTrigger]));
             _onStalled += value;
         }
         remove {
             _onStalled -= value;
             if (_onStalled == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnstalled", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnstalled"));
         }
     }
 
@@ -287,13 +287,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnSuspend {
         add {
             if (_onSuspend == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnsuspend", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnsuspend", [ObjectReferenceEventTrigger]));
             _onSuspend += value;
         }
         remove {
             _onSuspend -= value;
             if (_onSuspend == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnsuspend", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnsuspend"));
         }
     }
 
@@ -305,13 +305,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnWaiting {
         add {
             if (_onWaiting == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnwaiting", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnwaiting", [ObjectReferenceEventTrigger]));
             _onWaiting += value;
         }
         remove {
             _onWaiting -= value;
             if (_onWaiting == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnwaiting", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnwaiting"));
         }
     }
 
@@ -323,13 +323,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnAbort {
         add {
             if (_onAbort == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnabort", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnabort", [ObjectReferenceEventTrigger]));
             _onAbort += value;
         }
         remove {
             _onAbort -= value;
             if (_onAbort == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnabort", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnabort"));
         }
     }
 
@@ -341,13 +341,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnEmptied {
         add {
             if (_onEmptied == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnemptied", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnemptied", [ObjectReferenceEventTrigger]));
             _onEmptied += value;
         }
         remove {
             _onEmptied -= value;
             if (_onEmptied == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnemptied", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnemptied"));
         }
     }
 
@@ -364,13 +364,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnPlay {
         add {
             if (_onPlay == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnplay", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnplay", [ObjectReferenceEventTrigger]));
             _onPlay += value;
         }
         remove {
             _onPlay -= value;
             if (_onPlay == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnplay", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnplay"));
         }
     }
 
@@ -383,13 +383,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnPause {
         add {
             if (_onPause == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnpause", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnpause", [ObjectReferenceEventTrigger]));
             _onPause += value;
         }
         remove {
             _onPause -= value;
             if (_onPause == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnpause", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnpause"));
         }
     }
 
@@ -402,13 +402,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnEnded {
         add {
             if (_onEnded == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnended", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnended", [ObjectReferenceEventTrigger]));
             _onEnded += value;
         }
         remove {
             _onEnded -= value;
             if (_onEnded == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnended", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnended"));
         }
     }
 
@@ -420,13 +420,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnSeeking {
         add {
             if (_onSeeking == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnseeking", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnseeking", [ObjectReferenceEventTrigger]));
             _onSeeking += value;
         }
         remove {
             _onSeeking -= value;
             if (_onSeeking == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnseeking", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnseeking"));
         }
     }
 
@@ -438,13 +438,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnSeeked {
         add {
             if (_onSeeked == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnseeked", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnseeked", [ObjectReferenceEventTrigger]));
             _onSeeked += value;
         }
         remove {
             _onSeeked -= value;
             if (_onSeeked == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnseeked", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnseeked"));
         }
     }
 
@@ -461,13 +461,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnTimeupdate {
         add {
             if (_onTimeupdate == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOntimeupdate", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOntimeupdate", [ObjectReferenceEventTrigger]));
             _onTimeupdate += value;
         }
         remove {
             _onTimeupdate -= value;
             if (_onTimeupdate == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOntimeupdate", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOntimeupdate"));
         }
     }
 
@@ -484,13 +484,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnVolumechange {
         add {
             if (_onVolumechange == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnvolumechange", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnvolumechange", [ObjectReferenceEventTrigger]));
             _onVolumechange += value;
         }
         remove {
             _onVolumechange -= value;
             if (_onVolumechange == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnvolumechange", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnvolumechange"));
         }
     }
 
@@ -502,13 +502,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnRatechange {
         add {
             if (_onRatechange == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnratechange", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOnratechange", [ObjectReferenceEventTrigger]));
             _onRatechange += value;
         }
         remove {
             _onRatechange -= value;
             if (_onRatechange == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnratechange", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOnratechange"));
         }
     }
 
@@ -519,13 +519,13 @@ public abstract class HTMLMediaElementBase {
     public event Action OnDurationchange {
         add {
             if (_onDurationchange == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOndurationchange", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("activateOndurationchange", [ObjectReferenceEventTrigger]));
             _onDurationchange += value;
         }
         remove {
             _onDurationchange -= value;
             if (_onDurationchange == null)
-                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOndurationchange", default));
+                Task.Factory.StartNew(async () => await (await HTMLMediaElementTask).InvokeVoidTrySync("deactivateOndurationchange"));
         }
     }
 

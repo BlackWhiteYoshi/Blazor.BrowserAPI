@@ -39,13 +39,13 @@ public abstract class ServiceWorkerBase {
     public event Action<string> OnStateChange {
         add {
             if (_onStateChange == null)
-                Task.Factory.StartNew(async () => await ServiceWorkerJS.InvokeVoidTrySync("activateOnstatechange", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await ServiceWorkerJS.InvokeVoidTrySync("activateOnstatechange", [ObjectReferenceEventTrigger]));
             _onStateChange += value;
         }
         remove {
             _onStateChange -= value;
             if (_onStateChange == null)
-                Task.Factory.StartNew(async () => await ServiceWorkerJS.InvokeVoidTrySync("deactivateOnstatechange", default));
+                Task.Factory.StartNew(async () => await ServiceWorkerJS.InvokeVoidTrySync("deactivateOnstatechange"));
         }
     }
 
@@ -57,13 +57,13 @@ public abstract class ServiceWorkerBase {
     public event Action<string> OnError {
         add {
             if (_onError == null)
-                Task.Factory.StartNew(async () => await ServiceWorkerJS.InvokeVoidTrySync("activateOnerror", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await ServiceWorkerJS.InvokeVoidTrySync("activateOnerror", [ObjectReferenceEventTrigger]));
             _onError += value;
         }
         remove {
             _onError -= value;
             if (_onError == null)
-                Task.Factory.StartNew(async () => await ServiceWorkerJS.InvokeVoidTrySync("deactivateOnerror", default));
+                Task.Factory.StartNew(async () => await ServiceWorkerJS.InvokeVoidTrySync("deactivateOnerror"));
         }
     }
 

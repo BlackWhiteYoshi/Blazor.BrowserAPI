@@ -38,13 +38,13 @@ public abstract class DialogBase {
     public event Action OnCancel {
         add {
             if (_onCancel == null)
-                Task.Factory.StartNew(async () => await (await DialogTask).InvokeVoidTrySync("activateOncancel", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await DialogTask).InvokeVoidTrySync("activateOncancel", [ObjectReferenceEventTrigger]));
             _onCancel += value;
         }
         remove {
             _onCancel -= value;
             if (_onCancel == null)
-                Task.Factory.StartNew(async () => await (await DialogTask).InvokeVoidTrySync("deactivateOncancel", default));
+                Task.Factory.StartNew(async () => await (await DialogTask).InvokeVoidTrySync("deactivateOncancel"));
         }
     }
 
@@ -55,13 +55,13 @@ public abstract class DialogBase {
     public event Action OnClose {
         add {
             if (_onClose == null)
-                Task.Factory.StartNew(async () => await (await DialogTask).InvokeVoidTrySync("activateOnclose", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await DialogTask).InvokeVoidTrySync("activateOnclose", [ObjectReferenceEventTrigger]));
             _onClose += value;
         }
         remove {
             _onClose -= value;
             if (_onClose == null)
-                Task.Factory.StartNew(async () => await (await DialogTask).InvokeVoidTrySync("deactivateOnclose", default));
+                Task.Factory.StartNew(async () => await (await DialogTask).InvokeVoidTrySync("deactivateOnclose"));
         }
     }
 

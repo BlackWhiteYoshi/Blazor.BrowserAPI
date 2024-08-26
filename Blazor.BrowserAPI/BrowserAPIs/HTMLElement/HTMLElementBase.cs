@@ -83,13 +83,13 @@ public abstract class HTMLElementBase {
     public event Action<string, double, string> OnTransitionstart {
         add {
             if (_onTransitionstart == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitionstart", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitionstart", [ObjectReferenceEventTrigger]));
             _onTransitionstart += value;
         }
         remove {
             _onTransitionstart -= value;
             if (_onTransitionstart == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitionstart", default));
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitionstart"));
         }
     }
 
@@ -115,13 +115,13 @@ public abstract class HTMLElementBase {
     public event Action<string, double, string> OnTransitionend {
         add {
             if (_onTransitionend == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitionend", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitionend", [ObjectReferenceEventTrigger]));
             _onTransitionend += value;
         }
         remove {
             _onTransitionend -= value;
             if (_onTransitionend == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitionend", default));
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitionend"));
         }
     }
 
@@ -139,13 +139,13 @@ public abstract class HTMLElementBase {
     public event Action<string, double, string> OnTransitionrun {
         add {
             if (_onTransitionrun == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitionrun", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitionrun", [ObjectReferenceEventTrigger]));
             _onTransitionrun += value;
         }
         remove {
             _onTransitionrun -= value;
             if (_onTransitionrun == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitionrun", default));
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitionrun"));
         }
     }
 
@@ -162,13 +162,13 @@ public abstract class HTMLElementBase {
     public event Action<string, double, string> OnTransitioncancel {
         add {
             if (_onTransitioncancel == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitioncancel", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitioncancel", [ObjectReferenceEventTrigger]));
             _onTransitioncancel += value;
         }
         remove {
             _onTransitioncancel -= value;
             if (_onTransitioncancel == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitioncancel", default));
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitioncancel"));
         }
     }
 
@@ -195,13 +195,13 @@ public abstract class HTMLElementBase {
     public event Action<string, double, string> OnAnimationstart {
         add {
             if (_onAnimationstart == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationstart", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationstart", [ObjectReferenceEventTrigger]));
             _onAnimationstart += value;
         }
         remove {
             _onAnimationstart -= value;
             if (_onAnimationstart == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationstart", default));
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationstart"));
         }
     }
 
@@ -222,13 +222,13 @@ public abstract class HTMLElementBase {
     public event Action<string, double, string> OnAnimationend {
         add {
             if (_onAnimationend == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationend", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationend", [ObjectReferenceEventTrigger]));
             _onAnimationend += value;
         }
         remove {
             _onAnimationend -= value;
             if (_onAnimationend == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationend", default));
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationend"));
         }
     }
 
@@ -249,13 +249,13 @@ public abstract class HTMLElementBase {
     public event Action<string, double, string> OnAnimationiteration {
         add {
             if (_onAnimationiteration == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationiteration", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationiteration", [ObjectReferenceEventTrigger]));
             _onAnimationiteration += value;
         }
         remove {
             _onAnimationiteration -= value;
             if (_onAnimationiteration == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationiteration", default));
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationiteration"));
         }
     }
 
@@ -279,13 +279,13 @@ public abstract class HTMLElementBase {
     public event Action<string, double, string> OnAnimationcancel {
         add {
             if (_onAnimationcancel == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationcancel", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationcancel", [ObjectReferenceEventTrigger]));
             _onAnimationcancel += value;
         }
         remove {
             _onAnimationcancel -= value;
             if (_onAnimationcancel == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationcancel", default));
+                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationcancel"));
         }
     }
 

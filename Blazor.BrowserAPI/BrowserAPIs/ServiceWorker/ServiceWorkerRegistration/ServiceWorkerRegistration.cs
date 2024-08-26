@@ -100,7 +100,7 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetScope(CancellationToken cancellationToken) => serviceWorkerRegistration.InvokeTrySync<string>("scope", default);
+    public ValueTask<string> GetScope(CancellationToken cancellationToken) => serviceWorkerRegistration.InvokeTrySync<string>("scope", cancellationToken);
 
 
     /// <summary>
@@ -125,7 +125,7 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetUpdateViaCache(CancellationToken cancellationToken) => serviceWorkerRegistration.InvokeTrySync<string>("updateViaCache", default);
+    public ValueTask<string> GetUpdateViaCache(CancellationToken cancellationToken) => serviceWorkerRegistration.InvokeTrySync<string>("updateViaCache", cancellationToken);
 
 
 

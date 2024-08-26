@@ -49,13 +49,13 @@ public abstract class ServiceWorkerRegistrationBase {
     public event Action OnUpdateFound {
         add {
             if (_onUpdateFound == null)
-                Task.Factory.StartNew(async () => await ServiceWorkerRegistrationJS.InvokeVoidTrySync("activateOnupdatefound", default, [ObjectReferenceEventTrigger]));
+                Task.Factory.StartNew(async () => await ServiceWorkerRegistrationJS.InvokeVoidTrySync("activateOnupdatefound", [ObjectReferenceEventTrigger]));
             _onUpdateFound += value;
         }
         remove {
             _onUpdateFound -= value;
             if (_onUpdateFound == null)
-                Task.Factory.StartNew(async () => await ServiceWorkerRegistrationJS.InvokeVoidTrySync("deactivateOnupdatefound", default));
+                Task.Factory.StartNew(async () => await ServiceWorkerRegistrationJS.InvokeVoidTrySync("deactivateOnupdatefound"));
         }
     }
 
