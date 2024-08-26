@@ -37,7 +37,7 @@ public sealed partial class ConsoleGroup : ComponentBase {
 
     public const string BUTTON_ASSERT = "console-assert";
     private async Task Assert() {
-        await Console.Assert(false, new object[] { TEST_ASSERT, TEST_ASSERT });
+        await Console.Assert(false, [TEST_ASSERT, TEST_ASSERT]);
     }
 
     public const string BUTTON_CLEAR = "console-clear";
@@ -74,7 +74,7 @@ public sealed partial class ConsoleGroup : ComponentBase {
 
     public const string BUTTON_DEBUG = "console-debug";
     private async Task Debug() {
-        await Console.Debug(new object[] { TEST_DEBUG, TEST_DEBUG });
+        await Console.Debug([TEST_DEBUG, TEST_DEBUG]);
     }
 
     public const string BUTTON_DIR = "console-dir";
@@ -94,7 +94,7 @@ public sealed partial class ConsoleGroup : ComponentBase {
 
     public const string BUTTON_ERROR = "console-error";
     private async Task Error() {
-        await Console.Error(new object[] { TEST_ERROR, TEST_ERROR });
+        await Console.Error([TEST_ERROR, TEST_ERROR]);
     }
 
 
@@ -131,7 +131,7 @@ public sealed partial class ConsoleGroup : ComponentBase {
 
     public const string BUTTON_INFO = "console-info";
     private async Task Info() {
-        await Console.Info(new object[] { TEST_INFO, TEST_INFO });
+        await Console.Info([TEST_INFO, TEST_INFO]);
     }
 
     public const string BUTTON_LOG_STRING = "console-log-string";
@@ -141,12 +141,12 @@ public sealed partial class ConsoleGroup : ComponentBase {
 
     public const string BUTTON_LOG = "console-log";
     private async Task Log() {
-        await Console.Log(new object[] { TEST_LOG, TEST_LOG });
+        await Console.Log([TEST_LOG, TEST_LOG]);
     }
 
     public const string BUTTON_TABLE = "console-table";
     private async Task Table() {
-        await Console.Table(new object[] { TEST_TABLE, TEST_TABLE });
+        await Console.Table((object[])[TEST_TABLE, TEST_TABLE]);
     }
 
     public const string BUTTON_TABLE_COLUMNS = "console-table-columns";
@@ -187,7 +187,7 @@ public sealed partial class ConsoleGroup : ComponentBase {
 
     public const string BUTTON_TIME_LOG_LABEL_DATA = "console-time-log-label-data";
     private async Task TimeLog_LabelData() {
-        await Console.TimeLog(TEST_TIME_LABEL, new object[] { TEST_TIME_LOG_DATA, TEST_TIME_LOG_DATA });
+        await Console.TimeLog(TEST_TIME_LABEL, [TEST_TIME_LOG_DATA, TEST_TIME_LOG_DATA]);
     }
 
 
@@ -198,7 +198,7 @@ public sealed partial class ConsoleGroup : ComponentBase {
 
     public const string BUTTON_TRACE = "console-trace";
     private async Task Trace() {
-        await Console.Trace(new object[] { TEST_TRACE, TEST_TRACE });
+        await Console.Trace([TEST_TRACE, TEST_TRACE]);
     }
 
     public const string BUTTON_WARN_STRING = "console-warn-string";
@@ -208,7 +208,7 @@ public sealed partial class ConsoleGroup : ComponentBase {
 
     public const string BUTTON_WARN = "console-warn";
     private async Task Warn() {
-        await Console.Warn(new object[] { TEST_WARN, TEST_WARN });
+        await Console.Warn([TEST_WARN, TEST_WARN]);
     }
 
     #endregion
@@ -224,8 +224,8 @@ public sealed partial class ConsoleGroup : ComponentBase {
 
     public const string BUTTON_ASSERT_INPROCESS = "console-assert-inprocess";
     private void Assert_InProcess() {
-        ConsoleInProcess.Assert(true, new object[] { TEST_ASSERT, TEST_ASSERT });
-        ConsoleInProcess.Assert(false, new object[] { TEST_ASSERT, TEST_ASSERT });
+        ConsoleInProcess.Assert(true, [TEST_ASSERT, TEST_ASSERT]);
+        ConsoleInProcess.Assert(false, [TEST_ASSERT, TEST_ASSERT]);
     }
 
     public const string BUTTON_CLEAR_INPROCESS = "console-clear-inprocess";
@@ -262,7 +262,7 @@ public sealed partial class ConsoleGroup : ComponentBase {
 
     public const string BUTTON_DEBUG_INPROCESS = "console-debug-inprocess";
     private void Debug_InProcess() {
-        ConsoleInProcess.Debug(new object[] { TEST_DEBUG, TEST_DEBUG });
+        ConsoleInProcess.Debug([TEST_DEBUG, TEST_DEBUG]);
     }
 
     public const string BUTTON_DIR_INPROCESS = "console-dir-inprocess";
@@ -282,7 +282,7 @@ public sealed partial class ConsoleGroup : ComponentBase {
 
     public const string BUTTON_ERROR_INPROCESS = "console-error-inprocess";
     private void Error_InProcess() {
-        ConsoleInProcess.Error(new object[] { TEST_ERROR, TEST_ERROR });
+        ConsoleInProcess.Error([TEST_ERROR, TEST_ERROR]);
     }
 
 
@@ -319,7 +319,7 @@ public sealed partial class ConsoleGroup : ComponentBase {
 
     public const string BUTTON_INFO_INPROCESS = "console-info-inprocess";
     private void Info_InProcess() {
-        ConsoleInProcess.Info(new object[] { TEST_INFO, TEST_INFO });
+        ConsoleInProcess.Info([TEST_INFO, TEST_INFO]);
     }
 
     public const string BUTTON_LOG_STRING_INPROCESS = "console-log-string-inprocess";
@@ -329,12 +329,12 @@ public sealed partial class ConsoleGroup : ComponentBase {
 
     public const string BUTTON_LOG_INPROCESS = "console-log-inprocess";
     private void Log_InProcess() {
-        ConsoleInProcess.Log(new object[] { TEST_LOG, TEST_LOG });
+        ConsoleInProcess.Log([TEST_LOG, TEST_LOG]);
     }
 
     public const string BUTTON_TABLE_INPROCESS = "console-table-inprocess";
     private void Table_InProcess() {
-        ConsoleInProcess.Table(new object[] { TEST_TABLE, TEST_TABLE });
+        ConsoleInProcess.Table((object[])[TEST_TABLE, TEST_TABLE]);
     }
 
     public const string BUTTON_TABLE_COLUMNS_INPROCESS = "console-table-columns-inprocess";
@@ -375,7 +375,7 @@ public sealed partial class ConsoleGroup : ComponentBase {
 
     public const string BUTTON_TIME_LOG_LABEL_DATA_INPROCESS = "console-time-log-label-data-inprocess";
     private void TimeLog_LabelData_InProcess() {
-        ConsoleInProcess.TimeLog(TEST_TIME_LABEL, new object[] { TEST_TIME_LOG_DATA, TEST_TIME_LOG_DATA });
+        ConsoleInProcess.TimeLog(TEST_TIME_LABEL, [TEST_TIME_LOG_DATA, TEST_TIME_LOG_DATA]);
     }
 
 
@@ -386,7 +386,7 @@ public sealed partial class ConsoleGroup : ComponentBase {
 
     public const string BUTTON_TRACE_INPROCESS = "console-trace-inprocess";
     private void Trace_InProcess() {
-        ConsoleInProcess.Trace(new object[] { TEST_TRACE, TEST_TRACE });
+        ConsoleInProcess.Trace([TEST_TRACE, TEST_TRACE]);
     }
 
     public const string BUTTON_WARN_STRING_INPROCESS = "console-warn-string-inprocess";
@@ -396,7 +396,7 @@ public sealed partial class ConsoleGroup : ComponentBase {
 
     public const string BUTTON_WARN_INPROCESS = "console-warn-inprocess";
     private void Warn_InProcess() {
-        ConsoleInProcess.Warn(new object[] { TEST_WARN, TEST_WARN });
+        ConsoleInProcess.Warn([TEST_WARN, TEST_WARN]);
     }
 
     #endregion
