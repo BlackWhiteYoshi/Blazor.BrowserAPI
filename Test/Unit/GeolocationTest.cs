@@ -4,6 +4,7 @@ using Xunit;
 
 namespace BrowserAPI.UnitTest;
 
+[Collection("PlayWright")]
 public sealed class GeolocationTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     public override async Task InitializeAsync() {
         await base.InitializeAsync();

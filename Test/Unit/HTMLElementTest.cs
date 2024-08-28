@@ -5,6 +5,7 @@ using Xunit;
 
 namespace BrowserAPI.UnitTest;
 
+[Collection("PlayWright")]
 public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     #region HTMLElement
 

@@ -4,6 +4,7 @@ using Xunit;
 
 namespace BrowserAPI.UnitTest;
 
+[Collection("PlayWright")]
 public sealed class DialogTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     [Fact]
     public async Task GetOpen_Property() {

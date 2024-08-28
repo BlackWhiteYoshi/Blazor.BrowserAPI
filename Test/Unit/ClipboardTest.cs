@@ -3,6 +3,7 @@ using Xunit;
 
 namespace BrowserAPI.UnitTest;
 
+[Collection("PlayWright")]
 public sealed class ClipboardTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     public override async Task InitializeAsync() {
         await base.InitializeAsync();

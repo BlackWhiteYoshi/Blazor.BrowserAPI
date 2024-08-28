@@ -4,6 +4,7 @@ using Xunit;
 
 namespace BrowserAPI.UnitTest;
 
+[Collection("PlayWright")]
 public sealed class LanguageTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     [Fact]
     public async Task GetBrowserLanguage_Property() {
