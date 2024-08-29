@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI;
 
@@ -15,6 +16,7 @@ public static class AddBrowserAPIExtension {
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
+    [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
     public static IServiceCollection AddBrowserAPI(this IServiceCollection services) {
         services.AddScoped<IModuleManager, Implementation.ModuleManager>()
             .AddScoped<IClipboard, Implementation.Clipboard>()
