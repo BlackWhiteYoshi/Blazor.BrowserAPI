@@ -62,6 +62,26 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     }
 
 
+    public const string BUTTON_GET_SRC_OBJECT_PROPERTY = "htmlmediaelement-get-src-object-property";
+    private async Task GetSrcObject_Property() {
+        IMediaStream? value = await AudioElement.SrcObject;
+        if (value != null)
+            await value.DisposeAsync();
+    }
+
+    public const string BUTTON_GET_SRC_OBJECT_METHOD = "htmlmediaelement-get-src-object-method";
+    private async Task GetSrcObject_Method() {
+        IMediaStream? value = await AudioElement.GetSrcObject(default);
+        if (value != null)
+            await value.DisposeAsync();
+    }
+
+    public const string BUTTON_SET_SRC_OBJECT = "htmlmediaelement-set-src-object";
+    private async Task SetSrcObject() {
+        await AudioElement.SetSrcObject(null);
+    }
+
+
     public const string BUTTON_GET_CONTROLS_PROPERTY = "htmlmediaelement-get-controls-property";
     private async Task GetControls_Property() {
         bool value = await AudioElement.Controls;
@@ -666,6 +686,18 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_SET_SRC_INPROCESS = "htmlmediaelement-set-src-inprocess";
     private void SetSrc_InProcess() {
         AudioElementInProcess.Src = TEST_SRC;
+    }
+
+
+    public const string BUTTON_GET_SRC_OBJECT_INPROCESS = "htmlmediaelement-get-src-object-inprocess";
+    private void GetSrcObject_InProcess() {
+        IMediaStreamInProcess? value = AudioElementInProcess.SrcObject;
+        value?.Dispose();
+    }
+
+    public const string BUTTON_SET_SRC_OBJECT_INPROCESS = "htmlmediaelement-set-src-object-inprocess";
+    private void SetSrcObject_InProcess() {
+        AudioElementInProcess.SrcObject = null;
     }
 
 

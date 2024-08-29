@@ -901,10 +901,9 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:BrowserAPI.Implementation.DialogBase">
+        <member name="M:BrowserAPI.Implementation.DialogBase.DisposeEventTrigger">
             <summary>
-            <para>Base class for <see cref="T:BrowserAPI.Implementation.Dialog"/> and <see cref="T:BrowserAPI.Implementation.DialogInProcess"/>.</para>
-            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="M:BrowserAPI.Implementation.DialogBase.DisposeEventTrigger"/> there.</para>
+            Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call this method.
             </summary>
         </member>
         <member name="E:BrowserAPI.Implementation.DialogBase.OnCancel">
@@ -2271,12 +2270,6 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:BrowserAPI.Implementation.HTMLElementBase">
-            <summary>
-            <para>Base class for <see cref="T:BrowserAPI.Implementation.HTMLElement"/> and <see cref="T:BrowserAPI.Implementation.HTMLElementInProcess"/>.</para>
-            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="M:BrowserAPI.Implementation.HTMLElementBase.DisposeEventTrigger"/> there.</para>
-            </summary>
-        </member>
         <member name="M:BrowserAPI.Implementation.HTMLElementBase.RequestFullscreen(System.String,System.Threading.CancellationToken)">
             <summary>
             <para>The <i>Element.requestFullscreen()</i> method issues an asynchronous request to make the element be displayed in fullscreen mode.</para>
@@ -2297,6 +2290,11 @@
             </param>
             <param name="cancellationToken"></param>
             <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLElementBase.DisposeEventTrigger">
+            <summary>
+            Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call this method.
+            </summary>
         </member>
         <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnTransitionstart">
             <summary>
@@ -2951,6 +2949,26 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.SrcObject">
+            <summary>
+            A MediaStream representing the media to play or that has played in the current HTMLMediaElement, or null if not assigned.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetSrcObject(System.Threading.CancellationToken)">
+            <summary>
+            A MediaStream representing the media to play or that has played in the current HTMLMediaElement, or null if not assigned.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.SetSrcObject(BrowserAPI.IMediaStream,System.Threading.CancellationToken)">
+            <summary>
+            A MediaStream representing the media to play or that has played in the current HTMLMediaElement, or null if not assigned.
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="P:BrowserAPI.Implementation.HTMLMediaElement.Controls">
             <summary>
             A boolean that reflects the controls HTML attribute, indicating whether user interface items for controlling the resource should be displayed.
@@ -3528,12 +3546,6 @@
             <param name="cancellationToken"></param>
             <returns>"probably", "maybe" or ""</returns>
         </member>
-        <member name="T:BrowserAPI.Implementation.HTMLMediaElementBase">
-            <summary>
-            <para>Base class for <see cref="T:BrowserAPI.Implementation.HTMLMediaElement"/> and <see cref="T:BrowserAPI.Implementation.HTMLMediaElementInProcess"/>.</para>
-            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="M:BrowserAPI.Implementation.HTMLMediaElementBase.DisposeEventTrigger"/> there.</para>
-            </summary>
-        </member>
         <member name="M:BrowserAPI.Implementation.HTMLMediaElementBase.Play(System.Threading.CancellationToken)">
             <summary>
             Attempts to begin playback of the media. It returns a Promise which is resolved when playback has been successfully started.<br />
@@ -3541,6 +3553,11 @@
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElementBase.DisposeEventTrigger">
+            <summary>
+            Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call this method.
+            </summary>
         </member>
         <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnError">
             <summary>
@@ -3722,6 +3739,11 @@
             Note: The best way to know the URL of the media resource currently in active use in this element is to look at the value of the currentSrc attribute,
             which also takes into account selection of a best or preferred media resource from a list provided in an HTMLSourceElement (which represents a &lt;source&gt; element).
             </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.SrcObject">
+            <summary>
+            A MediaStream representing the media to play or that has played in the current HTMLMediaElement, or null if not assigned.
             </summary>
         </member>
         <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.Controls">
@@ -4116,6 +4138,728 @@
             When invoked, will empty all keys out of localStorage.
             </summary>
         </member>
+        <member name="T:BrowserAPI.Implementation.MediaDevices">
+            <summary>
+            The <i>MediaDevices</i> interface of the Media Capture and Streams API provides access to connected media input devices like cameras and microphones, as well as screen sharing.
+            In essence, it lets you obtain access to any hardware source of media data.
+            </summary>
+            <param name="moduleManager"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevices.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            The <i>MediaDevices</i> interface of the Media Capture and Streams API provides access to connected media input devices like cameras and microphones, as well as screen sharing.
+            In essence, it lets you obtain access to any hardware source of media data.
+            </summary>
+            <param name="moduleManager"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.MediaDevices.SupportedConstraints">
+            <summary>
+            The getSupportedConstraints() method of the MediaDevices interface returns an object based on the MediaTrackSupportedConstraints dictionary,
+            whose member fields each specify one of the constrainable properties the user agent understands.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevices.GetSupportedConstraints(System.Threading.CancellationToken)">
+            <summary>
+            The getSupportedConstraints() method of the MediaDevices interface returns an object based on the MediaTrackSupportedConstraints dictionary,
+            whose member fields each specify one of the constrainable properties the user agent understands.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns>
+            A new object based on the MediaTrackSupportedConstraints dictionary listing the constraints supported by the user agent.
+            Because only constraints supported by the user agent are included in the list, each of these Boolean properties has the value true.
+            </returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevices.GetUserMedia(System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
+            <para>
+            That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
+            an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
+            and possibly other track types.
+            </para>
+            <para>
+            It returns a Promise that resolves to a MediaStream object.
+            If the user denies permission, or matching media is not available, then the promise is rejected with NotAllowedError or NotFoundError DOMException respectively.
+            </para>
+            </summary>
+            <param name="audio">A flag that indicates an audio track is included to the stream.</param>
+            <param name="video">A flag that indicates a video track is included to the stream.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevices.GetUserMedia(BrowserAPI.MediaTrackConstraints,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
+            <para>
+            That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
+            an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
+            and possibly other track types.
+            </para>
+            <para>
+            It returns a Promise that resolves to a MediaStream object.
+            If the user denies permission, or matching media is not available, then the promise is rejected with NotAllowedError or NotFoundError DOMException respectively.
+            </para>
+            </summary>
+            <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
+            <param name="video">A flag that indicates a video track is included to the stream.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevices.GetUserMedia(System.Boolean,BrowserAPI.MediaTrackConstraints,System.Threading.CancellationToken)">
+            <summary>
+            <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
+            <para>
+            That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
+            an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
+            and possibly other track types.
+            </para>
+            <para>
+            It returns a Promise that resolves to a MediaStream object.
+            If the user denies permission, or matching media is not available, then the promise is rejected with NotAllowedError or NotFoundError DOMException respectively.
+            </para>
+            </summary>
+            <param name="audio">A flag that indicates an audio track is included to the stream.</param>
+            <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevices.GetUserMedia(BrowserAPI.MediaTrackConstraints,BrowserAPI.MediaTrackConstraints,System.Threading.CancellationToken)">
+            <summary>
+            <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
+            <para>
+            That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
+            an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
+            and possibly other track types.
+            </para>
+            <para>
+            It returns a Promise that resolves to a MediaStream object.
+            If the user denies permission, or matching media is not available, then the promise is rejected with NotAllowedError or NotFoundError DOMException respectively.
+            </para>
+            </summary>
+            <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
+            <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevices.GetDisplayMedia(System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            With the user's permission through a prompt, turns on a camera and/or a microphone on the system and provides a MediaStream containing a video track and/or an audio track with the input.
+            </summary>
+            <param name="audio">A flag that indicates an audio track is included to the stream.</param>
+            <param name="video">A flag that indicates a video track is included to the stream.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevices.GetDisplayMedia(BrowserAPI.MediaTrackConstraints,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            With the user's permission through a prompt, turns on a camera and/or a microphone on the system and provides a MediaStream containing a video track and/or an audio track with the input.
+            </summary>
+            <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
+            <param name="video">A flag that indicates a video track is included to the stream.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevices.GetDisplayMedia(System.Boolean,BrowserAPI.MediaTrackConstraints,System.Threading.CancellationToken)">
+            <summary>
+            With the user's permission through a prompt, turns on a camera and/or a microphone on the system and provides a MediaStream containing a video track and/or an audio track with the input.
+            </summary>
+            <param name="audio">A flag that indicates an audio track is included to the stream.</param>
+            <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevices.GetDisplayMedia(BrowserAPI.MediaTrackConstraints,BrowserAPI.MediaTrackConstraints,System.Threading.CancellationToken)">
+            <summary>
+            With the user's permission through a prompt, turns on a camera and/or a microphone on the system and provides a MediaStream containing a video track and/or an audio track with the input.
+            </summary>
+            <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
+            <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevicesBase.EnumerateDevices(System.Threading.CancellationToken)">
+            <summary>
+            <para>
+            The enumerateDevices() method of the MediaDevices interface requests a list of the currently available media input and output devices, such as microphones, cameras, headsets, and so forth.
+            The returned Promise is resolved with an array of MediaDeviceInfo objects describing the devices.
+            </para>
+            <para>
+            The returned list will omit any devices that are blocked by the document Permission Policy: microphone, camera, speaker-selection(for output devices), and so on.
+            Access to particular non-default devices is also gated by the Permissions API, and the list will omit devices for which the user has not granted explicit permission.
+            </para>
+            </summary>
+            <returns>
+            <para>
+            A Promise that is fulfilled with an array of MediaDeviceInfo objects. Each object in the array describes one of the available media input and output devices.
+            The order is significant — the default capture devices will be listed first.
+            </para>
+            <para>Other than default devices, only devices for which permission has been granted are "available".</para>
+            <para>If the media device is an input device, an InputDeviceInfo object will be returned instead.</para>
+            <para>If enumeration fails, the promise is rejected.</para>
+            </returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.MediaDevicesInProcess">
+            <summary>
+            The <i>MediaDevices</i> interface of the Media Capture and Streams API provides access to connected media input devices like cameras and microphones, as well as screen sharing.
+            In essence, it lets you obtain access to any hardware source of media data.
+            </summary>
+            <param name="moduleManager"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevicesInProcess.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            The <i>MediaDevices</i> interface of the Media Capture and Streams API provides access to connected media input devices like cameras and microphones, as well as screen sharing.
+            In essence, it lets you obtain access to any hardware source of media data.
+            </summary>
+            <param name="moduleManager"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.MediaDevicesInProcess.SupportedConstraints">
+            <summary>
+            The getSupportedConstraints() method of the MediaDevices interface returns an object based on the MediaTrackSupportedConstraints dictionary,
+            whose member fields each specify one of the constrainable properties the user agent understands.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevicesInProcess.GetUserMedia(System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
+            <para>
+            That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
+            an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
+            and possibly other track types.
+            </para>
+            <para>
+            It returns a Promise that resolves to a MediaStream object.
+            If the user denies permission, or matching media is not available, then the promise is rejected with NotAllowedError or NotFoundError DOMException respectively.
+            </para>
+            </summary>
+            <param name="audio">A flag that indicates an audio track is included to the stream.</param>
+            <param name="video">A flag that indicates a video track is included to the stream.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevicesInProcess.GetUserMedia(BrowserAPI.MediaTrackConstraints,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
+            <para>
+            That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
+            an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
+            and possibly other track types.
+            </para>
+            <para>
+            It returns a Promise that resolves to a MediaStream object.
+            If the user denies permission, or matching media is not available, then the promise is rejected with NotAllowedError or NotFoundError DOMException respectively.
+            </para>
+            </summary>
+            <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
+            <param name="video">A flag that indicates a video track is included to the stream.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevicesInProcess.GetUserMedia(System.Boolean,BrowserAPI.MediaTrackConstraints,System.Threading.CancellationToken)">
+            <summary>
+            <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
+            <para>
+            That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
+            an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
+            and possibly other track types.
+            </para>
+            <para>
+            It returns a Promise that resolves to a MediaStream object.
+            If the user denies permission, or matching media is not available, then the promise is rejected with NotAllowedError or NotFoundError DOMException respectively.
+            </para>
+            </summary>
+            <param name="audio">A flag that indicates an audio track is included to the stream.</param>
+            <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevicesInProcess.GetUserMedia(BrowserAPI.MediaTrackConstraints,BrowserAPI.MediaTrackConstraints,System.Threading.CancellationToken)">
+            <summary>
+            <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
+            <para>
+            That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
+            an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
+            and possibly other track types.
+            </para>
+            <para>
+            It returns a Promise that resolves to a MediaStream object.
+            If the user denies permission, or matching media is not available, then the promise is rejected with NotAllowedError or NotFoundError DOMException respectively.
+            </para>
+            </summary>
+            <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
+            <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevicesInProcess.GetDisplayMedia(System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            With the user's permission through a prompt, turns on a camera and/or a microphone on the system and provides a MediaStream containing a video track and/or an audio track with the input.
+            </summary>
+            <param name="audio">A flag that indicates an audio track is included to the stream.</param>
+            <param name="video">A flag that indicates a video track is included to the stream.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevicesInProcess.GetDisplayMedia(BrowserAPI.MediaTrackConstraints,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            With the user's permission through a prompt, turns on a camera and/or a microphone on the system and provides a MediaStream containing a video track and/or an audio track with the input.
+            </summary>
+            <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
+            <param name="video">A flag that indicates a video track is included to the stream.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevicesInProcess.GetDisplayMedia(System.Boolean,BrowserAPI.MediaTrackConstraints,System.Threading.CancellationToken)">
+            <summary>
+            With the user's permission through a prompt, turns on a camera and/or a microphone on the system and provides a MediaStream containing a video track and/or an audio track with the input.
+            </summary>
+            <param name="audio">A flag that indicates an audio track is included to the stream.</param>
+            <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevicesInProcess.GetDisplayMedia(BrowserAPI.MediaTrackConstraints,BrowserAPI.MediaTrackConstraints,System.Threading.CancellationToken)">
+            <summary>
+            With the user's permission through a prompt, turns on a camera and/or a microphone on the system and provides a MediaStream containing a video track and/or an audio track with the input.
+            </summary>
+            <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
+            <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.MediaRecorder">
+            <summary>
+            <para>
+            The <i>MediaRecorder</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API">MediaStream Recording API</see> provides functionality to easily record media.<br />
+            It is created using the <see cref="M:BrowserAPI.IMediaStream.CreateRecorder(System.String,System.Int32,System.Int32,System.Int32,System.Threading.CancellationToken)">CreateRecorder() method</see>.
+            </para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorder.#ctor(Microsoft.JSInterop.IJSObjectReference)">
+            <summary>
+            <para>
+            The <i>MediaRecorder</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API">MediaStream Recording API</see> provides functionality to easily record media.<br />
+            It is created using the <see cref="M:BrowserAPI.IMediaStream.CreateRecorder(System.String,System.Int32,System.Int32,System.Int32,System.Threading.CancellationToken)">CreateRecorder() method</see>.
+            </para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorder.DisposeAsync">
+            <summary>
+            Stops recording and releases the JS instance for this media recorder.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.MediaRecorder.MimeType">
+            <summary>
+            <para>
+            The <i>mimeType</i> read-only property of the MediaRecorder interface returns the <see href="https://developer.mozilla.org/en-US/docs/Glossary/MIME">MIME</see> media type that was specified when creating the MediaRecorder object,
+            or, if none was specified, which was chosen by the browser.
+            This is the file format of the file that would result from writing all of the recorded data to disk.
+            </para>
+            <para>
+            Keep in mind that not all codecs are supported by a given container;
+            if you write media using a codec that is not supported by a given media container, the resulting file may not work reliably if at all when you try to play it back.
+            See our <see href="https://developer.mozilla.org/en-US/docs/Web/Media/Formats">media type and format guide</see> for information about container and codec support across browsers.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorder.GetMimeType(System.Threading.CancellationToken)">
+            <summary>
+            <para>
+            The <i>mimeType</i> read-only property of the MediaRecorder interface returns the <see href="https://developer.mozilla.org/en-US/docs/Glossary/MIME">MIME</see> media type that was specified when creating the MediaRecorder object,
+            or, if none was specified, which was chosen by the browser.
+            This is the file format of the file that would result from writing all of the recorded data to disk.
+            </para>
+            <para>
+            Keep in mind that not all codecs are supported by a given container;
+            if you write media using a codec that is not supported by a given media container, the resulting file may not work reliably if at all when you try to play it back.
+            See our <see href="https://developer.mozilla.org/en-US/docs/Web/Media/Formats">media type and format guide</see> for information about container and codec support across browsers.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.MediaRecorder.State">
+            <summary>
+            <para>The <i>state</i> read-only property of the MediaRecorder interface returns the current state of the current MediaRecorder object:</para>
+            <para>
+            "inactive" - Recording is not occurring — it has either not been started yet, or it has been started and then stopped.<br />
+            "recording" - Recording has been started and the user agent is capturing data.<br />
+            "paused" - Recording has been started, then paused, but not yet stopped or resumed.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorder.GetState(System.Threading.CancellationToken)">
+            <summary>
+            <para>The <i>state</i> read-only property of the MediaRecorder interface returns the current state of the current MediaRecorder object:</para>
+            <para>
+            "inactive" - Recording is not occurring — it has either not been started yet, or it has been started and then stopped.<br />
+            "recording" - Recording has been started and the user agent is capturing data.<br />
+            "paused" - Recording has been started, then paused, but not yet stopped or resumed.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.MediaRecorder.Stream">
+            <summary>
+            The <i>stream</i> read-only property of the MediaRecorder interface returns the stream that was passed into the <see cref="M:BrowserAPI.IMediaStream.CreateRecorder(System.String,System.Int32,System.Int32,System.Int32,System.Threading.CancellationToken)">CreateRecorder() method</see> when the MediaRecorder was created.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorder.GetStream(System.Threading.CancellationToken)">
+            <summary>
+            The <i>stream</i> read-only property of the MediaRecorder interface returns the stream that was passed into the <see cref="M:BrowserAPI.IMediaStream.CreateRecorder(System.String,System.Int32,System.Int32,System.Int32,System.Threading.CancellationToken)">CreateRecorder() method</see> when the MediaRecorder was created.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.MediaRecorder.AudioBitsPerSecond">
+            <summary>
+            The <i>audioBitsPerSecond</i> read-only property of the MediaRecorder interface returns the audio encoding bit rate in use.<br />
+            This may differ from the bit rate specified in the constructor (if it was provided).
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorder.GetAudioBitsPerSecond(System.Threading.CancellationToken)">
+            <summary>
+            The <i>audioBitsPerSecond</i> read-only property of the MediaRecorder interface returns the audio encoding bit rate in use.<br />
+            This may differ from the bit rate specified in the constructor (if it was provided).
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.MediaRecorder.VideoBitsPerSecond">
+            <summary>
+            The <i>videoBitsPerSecond</i> read-only property of the MediaRecorder interface returns the video encoding bit rate in use.<br />
+            This may differ from the bit rate specified in the constructor, if it was provided.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorder.GetVideoBitsPerSecond(System.Threading.CancellationToken)">
+            <summary>
+            The <i>videoBitsPerSecond</i> read-only property of the MediaRecorder interface returns the video encoding bit rate in use.<br />
+            This may differ from the bit rate specified in the constructor, if it was provided.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorder.Start(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Begins recording media; this method can optionally be passed a timeslice argument with a value in milliseconds.
+            If this is specified, the media will be captured in separate chunks of that duration, rather than the default behavior of recording the media in a single large chunk.
+            </summary>
+            <param name="timeslice">
+            <para>
+            The number of milliseconds to record into each Blob.
+            If this parameter isn't included (a value less or equal 0), the entire media duration is recorded into a single Blob unless the requestData() method is called to obtain the Blob
+            and trigger the creation of a new Blob into which the media continues to be recorded.
+            </para>
+            <para>Note: Like other time values in web APIs, timeslice is not exact and the real intervals may be slightly longer due to other pending tasks before the creation of the next blob.</para>
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorder.Stop(System.Threading.CancellationToken)">
+            <summary>
+            Stops recording, at which point a dataavailable event containing the final Blob of saved data is fired. No more recording occurs.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorder.Resume(System.Threading.CancellationToken)">
+            <summary>
+            Resumes recording of media after having been paused.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorder.Pause(System.Threading.CancellationToken)">
+            <summary>
+            Pauses the recording of media.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorder.RequestData(System.Threading.CancellationToken)">
+            <summary>
+            Requests a Blob containing the saved data received thus far (or since the last time requestData() was called.
+            After calling this method, recording continues, but in a new Blob.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorder.IsTypeSupported(System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>isTypeSupported()</i> static method of the MediaRecorder interface returns a Boolean which is true if the MIME media type specified is one the user agent should be able to successfully record.
+            </summary>
+            <remarks>In C# this method is not static because it needs an reference to the JS-module.</remarks>
+            <param name="mimeType"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorderBase.DisposeEventTrigger">
+            <summary>
+            Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call this method.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.MediaRecorderBase.OnDataavailable">
+            <summary>
+            <para>
+            Fires periodically each time timeslice milliseconds of media have been recorded (or when the entire media has been recorded, if timeslice wasn't specified).
+            The event, of type BlobEvent, contains the recorded media in its data property.
+            </para>
+            <para>Parameter is the recorded binary data.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.MediaRecorderBase.OnError">
+            <summary>
+            <para>
+            Fired when there are fatal errors that stop recording.
+            The received event is based on the MediaRecorderErrorEvent interface, whose error property contains a DOMException that describes the actual error that occurred.
+            </para>
+            <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</see> as JSON.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.MediaRecorderBase.OnStart">
+            <summary>
+            Fired when media recording starts.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.MediaRecorderBase.OnStop">
+            <summary>
+            Fired when media recording ends, either when the MediaStream ends, or after the MediaRecorder.stop() method is called.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.MediaRecorderBase.OnResume">
+            <summary>
+            Fired when media recording resumes after being paused.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.MediaRecorderBase.OnPause">
+            <summary>
+            Fired when media recording is paused.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.MediaRecorderInProcess">
+            <summary>
+            <para>
+            The <i>MediaRecorder</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API">MediaStream Recording API</see> provides functionality to easily record media.<br />
+            It is created using the <see cref="M:BrowserAPI.IMediaStreamInProcess.CreateRecorder(System.String,System.Int32,System.Int32,System.Int32)">CreateRecorder() method</see>.
+            </para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorderInProcess.#ctor(Microsoft.JSInterop.IJSInProcessObjectReference)">
+            <summary>
+            <para>
+            The <i>MediaRecorder</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API">MediaStream Recording API</see> provides functionality to easily record media.<br />
+            It is created using the <see cref="M:BrowserAPI.IMediaStreamInProcess.CreateRecorder(System.String,System.Int32,System.Int32,System.Int32)">CreateRecorder() method</see>.
+            </para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorderInProcess.Dispose">
+            <summary>
+            Stops recording and releases the JS instance for this media recorder.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.MediaRecorderInProcess.MimeType">
+            <summary>
+            <para>
+            The <i>mimeType</i> read-only property of the MediaRecorder interface returns the <see href="https://developer.mozilla.org/en-US/docs/Glossary/MIME">MIME</see> media type that was specified when creating the MediaRecorder object,
+            or, if none was specified, which was chosen by the browser.
+            This is the file format of the file that would result from writing all of the recorded data to disk.
+            </para>
+            <para>
+            Keep in mind that not all codecs are supported by a given container;
+            if you write media using a codec that is not supported by a given media container, the resulting file may not work reliably if at all when you try to play it back.
+            See our <see href="https://developer.mozilla.org/en-US/docs/Web/Media/Formats">media type and format guide</see> for information about container and codec support across browsers.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.MediaRecorderInProcess.State">
+            <summary>
+            <para>The <i>state</i> read-only property of the MediaRecorder interface returns the current state of the current MediaRecorder object:</para>
+            <para>
+            "inactive" - Recording is not occurring — it has either not been started yet, or it has been started and then stopped.<br />
+            "recording" - Recording has been started and the user agent is capturing data.<br />
+            "paused" - Recording has been started, then paused, but not yet stopped or resumed.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.MediaRecorderInProcess.Stream">
+            <summary>
+            The <i>stream</i> read-only property of the MediaRecorder interface returns the stream that was passed into the <see cref="M:BrowserAPI.IMediaStreamInProcess.CreateRecorder(System.String,System.Int32,System.Int32,System.Int32)">CreateRecorder() method</see> when the MediaRecorder was created.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.MediaRecorderInProcess.AudioBitsPerSecond">
+            <summary>
+            The <i>videoBitsPerSecond</i> read-only property of the MediaRecorder interface returns the video encoding bit rate in use.<br />
+            This may differ from the bit rate specified in the constructor, if it was provided.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.MediaRecorderInProcess.VideoBitsPerSecond">
+            <summary>
+            The <i>videoBitsPerSecond</i> read-only property of the MediaRecorder interface returns the video encoding bit rate in use.<br />
+            This may differ from the bit rate specified in the constructor, if it was provided.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorderInProcess.Start(System.Int32)">
+            <summary>
+            Begins recording media; this method can optionally be passed a timeslice argument with a value in milliseconds.
+            If this is specified, the media will be captured in separate chunks of that duration, rather than the default behavior of recording the media in a single large chunk.
+            </summary>
+            <param name="timeslice">
+            <para>
+            The number of milliseconds to record into each Blob.
+            If this parameter isn't included (a value less or equal 0), the entire media duration is recorded into a single Blob unless the requestData() method is called to obtain the Blob
+            and trigger the creation of a new Blob into which the media continues to be recorded.
+            </para>
+            <para>Note: Like other time values in web APIs, timeslice is not exact and the real intervals may be slightly longer due to other pending tasks before the creation of the next blob.</para>
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorderInProcess.Stop">
+            <summary>
+            Stops recording, at which point a dataavailable event containing the final Blob of saved data is fired. No more recording occurs.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorderInProcess.Resume">
+            <summary>
+            Resumes recording of media after having been paused.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorderInProcess.Pause">
+            <summary>
+            Pauses the recording of media.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorderInProcess.RequestData">
+            <summary>
+            Requests a Blob containing the saved data received thus far (or since the last time requestData() was called.
+            After calling this method, recording continues, but in a new Blob.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaRecorderInProcess.IsTypeSupported(System.String)">
+            <summary>
+            The <i>isTypeSupported()</i> static method of the MediaRecorder interface returns a Boolean which is true if the MIME media type specified is one the user agent should be able to successfully record.
+            </summary>
+            <remarks>In C# this method is not static because it needs an reference to the JS-module.</remarks>
+            <param name="mimeType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.MediaStream">
+            <summary>
+            <para>
+            The <i>MediaStream</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Media_Capture_and_Streams_API">Media Capture and Streams API</see> represents a stream of media content.
+            A stream consists of several tracks, such as video or audio tracks. Each track is specified as an instance of <see href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack">MediaStreamTrack</see>.
+            </para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaStream.#ctor(Microsoft.JSInterop.IJSObjectReference)">
+            <summary>
+            <para>
+            The <i>MediaStream</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Media_Capture_and_Streams_API">Media Capture and Streams API</see> represents a stream of media content.
+            A stream consists of several tracks, such as video or audio tracks. Each track is specified as an instance of <see href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack">MediaStreamTrack</see>.
+            </para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaStream.DisposeAsync">
+            <summary>
+            Stops and removes every <see href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack">media stream track</see> of this <see href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStream">media stream</see>
+            and releases the JS instance for this media stream.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.MediaStream.Active">
+            <summary>
+            A Boolean value that returns true if the MediaStream is active, or false otherwise.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaStream.GetActive(System.Threading.CancellationToken)">
+            <summary>
+            A Boolean value that returns true if the MediaStream is active, or false otherwise.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.MediaStream.Id">
+            <summary>
+            A string containing a 36-character universally unique identifier (UUID) for the object.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaStream.GetId(System.Threading.CancellationToken)">
+            <summary>
+            A string containing a 36-character universally unique identifier (UUID) for the object.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaStream.CreateRecorder(System.String,System.Int32,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Creates a new MediaRecorder object, given a MediaStream to record.
+            Options are available to do things like set the container's MIME type (such as "video/webm" or "video/mp4") and the bit rates of the audio and video tracks or a single overall bit rate.
+            </summary>
+            <remarks>
+            <para>If bits per second values are not specified for video and/or audio, the default adopted for video is 2.5Mbps, while the audio default is adaptive, depending upon the sample rate and the number of channels.</para>
+            <para>Video resolution, frame rate and similar settings are specified as constraints when calling getUserMedia(), not here in the MediaStream Recording API.</para>
+            </remarks>
+            <param name="mimeType">A MIME type specifying the format for the resulting media; you may specify the container format (the browser will select its preferred codecs for audio and/or video), or you may use the codecs parameter and/or the profiles parameter to provide detailed information about which codecs to use and how to configure them. Applications can check in advance if a mimeType is supported by the user agent by calling MediaRecorder.isTypeSupported(). Defaults to an empty string.</param>
+            <param name="audioBitsPerSecond">The chosen bitrate for the audio component of the media.</param>
+            <param name="videoBitsPerSecond">The chosen bitrate for the video component of the media.</param>
+            <param name="bitsPerSecond">The chosen bitrate for the audio and video components of the media. This can be specified instead of the above two properties. If this is specified along with one or the other of the above properties, this will be used for the one that isn't specified.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.MediaStreamInProcess">
+            <summary>
+            <para>
+            The <i>MediaStream</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Media_Capture_and_Streams_API">Media Capture and Streams API</see> represents a stream of media content.
+            A stream consists of several tracks, such as video or audio tracks. Each track is specified as an instance of <see href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack">MediaStreamTrack</see>.
+            </para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaStreamInProcess.#ctor(Microsoft.JSInterop.IJSInProcessObjectReference)">
+            <summary>
+            <para>
+            The <i>MediaStream</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Media_Capture_and_Streams_API">Media Capture and Streams API</see> represents a stream of media content.
+            A stream consists of several tracks, such as video or audio tracks. Each track is specified as an instance of <see href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack">MediaStreamTrack</see>.
+            </para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaStreamInProcess.Dispose">
+            <summary>
+            Releases the JS instance for this media stream.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.MediaStreamInProcess.Active">
+            <summary>
+            A Boolean value that returns true if the MediaStream is active, or false otherwise.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.MediaStreamInProcess.Id">
+            <summary>
+            A string containing a 36-character universally unique identifier (UUID) for the object.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaStreamInProcess.CreateRecorder(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a new MediaRecorder object, given a MediaStream to record.
+            Options are available to do things like set the container's MIME type (such as "video/webm" or "video/mp4") and the bit rates of the audio and video tracks or a single overall bit rate.
+            </summary>
+            <remarks>
+            <para>If bits per second values are not specified for video and/or audio, the default adopted for video is 2.5Mbps, while the audio default is adaptive, depending upon the sample rate and the number of channels.</para>
+            <para>Video resolution, frame rate and similar settings are specified as constraints when calling getUserMedia(), not here in the MediaStream Recording API.</para>
+            </remarks>
+            <param name="mimeType">A MIME type specifying the format for the resulting media; you may specify the container format (the browser will select its preferred codecs for audio and/or video), or you may use the codecs parameter and/or the profiles parameter to provide detailed information about which codecs to use and how to configure them. Applications can check in advance if a mimeType is supported by the user agent by calling MediaRecorder.isTypeSupported(). Defaults to an empty string.</param>
+            <param name="audioBitsPerSecond">The chosen bitrate for the audio component of the media.</param>
+            <param name="videoBitsPerSecond">The chosen bitrate for the video component of the media.</param>
+            <param name="bitsPerSecond">The chosen bitrate for the audio and video components of the media. This can be specified instead of the above two properties. If this is specified along with one or the other of the above properties, this will be used for the one that isn't specified.</param>
+            <returns></returns>
+        </member>
         <member name="T:BrowserAPI.Implementation.ServiceWorkerContainer">
             <summary>
             <para>navigator.serviceWorker</para>
@@ -4193,11 +4937,6 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:BrowserAPI.Implementation.ServiceWorkerContainerBase">
-            <summary>
-            Base class for <see cref="T:BrowserAPI.Implementation.ServiceWorkerContainer"/> and <see cref="T:BrowserAPI.Implementation.ServiceWorkerContainerInProcess"/>.
-            </summary>
-        </member>
         <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerBase.Dispose">
             <summary>
             Releases the <see cref="T:BrowserAPI.Implementation.ServiceWorkerContainerBase.EventTrigger"/> object used to trigger the events.
@@ -4210,6 +4949,11 @@
             <param name="scriptURL">relative file path to the service worker script (e.g. "/sw.js")</param>
             <param name="cancellationToken"></param>
             <returns>true, if service worker is supported, otherwise false</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerBase.DisposeEventTrigger">
+            <summary>
+            Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call this method.
+            </summary>
         </member>
         <member name="E:BrowserAPI.Implementation.ServiceWorkerContainerBase.OnControllerChange">
             <summary>
@@ -4388,12 +5132,6 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:BrowserAPI.Implementation.ServiceWorkerRegistrationBase">
-            <summary>
-            <para>Base class for <see cref="T:BrowserAPI.Implementation.ServiceWorkerRegistration"/> and <see cref="T:BrowserAPI.Implementation.ServiceWorkerRegistrationInProcess"/>.</para>
-            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="M:BrowserAPI.Implementation.ServiceWorkerRegistrationBase.DisposeEventTrigger"/> there.</para>
-            </summary>
-        </member>
         <member name="M:BrowserAPI.Implementation.ServiceWorkerRegistrationBase.Unregister(System.Threading.CancellationToken)">
             <summary>
             The <i>unregister()</i> method of the ServiceWorkerRegistration interface unregisters the service worker registration and returns a Promise.
@@ -4402,6 +5140,11 @@
             </summary>
             <param name="cancellationToken"></param>
             <returns>false if no registration was found, otherwise true (irrespective of whether unregistration happened or not)</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerRegistrationBase.DisposeEventTrigger">
+            <summary>
+            Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call this method.
+            </summary>
         </member>
         <member name="E:BrowserAPI.Implementation.ServiceWorkerRegistrationBase.OnUpdateFound">
             <summary>
@@ -4536,10 +5279,9 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:BrowserAPI.Implementation.ServiceWorkerBase">
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerBase.DisposeEventTrigger">
             <summary>
-            <para>Base class for <see cref="T:BrowserAPI.Implementation.ServiceWorker"/> and <see cref="T:BrowserAPI.Implementation.ServiceWorkerInProcess"/>.</para>
-            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="M:BrowserAPI.Implementation.ServiceWorkerBase.DisposeEventTrigger"/> there.</para>
+            Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call this method.
             </summary>
         </member>
         <member name="E:BrowserAPI.Implementation.ServiceWorkerBase.OnStateChange">
@@ -4878,6 +5620,414 @@
         <member name="P:BrowserAPI.TimeRange.End">
             <summary>The time for the end of the range.</summary>
         </member>
+        <member name="T:BrowserAPI.MediaDeviceInfo">
+            <summary>
+            <para>
+            The MediaDeviceInfo interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Media_Capture_and_Streams_API">Media Capture and Streams API</see>
+            contains information that describes a single media input or output device.
+            </para>
+            <para>
+            The list of devices obtained by calling <see cref="M:BrowserAPI.IMediaDevices.EnumerateDevices(System.Threading.CancellationToken)">navigator.mediaDevices.enumerateDevices()</see>
+            is an array of MediaDeviceInfo objects, one per media device.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaDeviceInfo.DeviceId">
+            <summary>
+            Returns a string that is an identifier for the represented device that is persisted across sessions.
+            It is un-guessable by other applications and unique to the origin of the calling application.
+            It is reset when the user clears cookies (for Private Browsing, a different identifier is used that is not persisted across sessions).
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaDeviceInfo.GroupId">
+            <summary>
+            Returns a string that is a group identifier.
+            Two devices have the same group identifier if they belong to the same physical device
+            — for example a monitor with both a built-in camera and a microphone.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaDeviceInfo.Kind">
+            <summary>
+            Returns an enumerated value that is either<br />
+            - "videoinput"<br />
+            - "audioinput"<br />
+            - "audiooutput"
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaDeviceInfo.Label">
+            <summary>
+            Returns a string describing this device (for example "External USB Webcam").
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.MediaTrackConstraints">
+            <summary>
+            The MediaTrackConstraints dictionary is used to describe a set of capabilities and the value or values each can take on.
+            A constraints dictionary is passed into <see href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack/applyConstraints">applyConstraints()</see> to allow a script to establish a set of exact (required) values or ranges and/or preferred values or ranges of values for the track,
+            and the most recently-requested set of custom constraints can be retrieved by calling <see href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack/getConstraints">getConstraints()</see>.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackConstraints.AspectRatio">
+            <summary>
+            A ConstrainDouble specifying the video aspect ratio or range of aspect ratios which are acceptable and/or required.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackConstraints.AutoGainControl">
+            <summary>
+            A ConstrainBoolean object which specifies whether automatic gain control is preferred and/or required.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackConstraints.ChannelCount">
+            <summary>
+            A ConstrainULong specifying the channel count or range of channel counts which are acceptable and/or required.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackConstraints.DeviceId">
+            <summary>
+            A ConstrainDOMString object specifying a device ID or an array of device IDs which are acceptable and/or required.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackConstraints.DisplaySurface">
+            <summary>
+            <para>
+            A ConstrainDOMString which specifies the types of display surface that may be selected by the user.
+            This may be a single one of the following strings, or a list of them to allow multiple source surfaces:
+            </para>
+            <para>
+            "browser" - The stream contains the contents of a single browser tab selected by the user.<br />
+            "monitor" - The stream's video track contains the entire contents of one or more of the user's screens.<br />
+            "window" - The stream contains a single window selected by the user for sharing.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackConstraints.EchoCancellation">
+            <summary>
+            A ConstrainBoolean object specifying whether or not echo cancellation is preferred and/or required.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackConstraints.FacingMode">
+            <summary>
+            <para>
+            A ConstrainDOMString object specifying a facing or an array of facings which are acceptable and/or required.<br />
+            The following strings are permitted values for the facing mode.
+            These may represent separate cameras, or they may represent directions in which an adjustable camera can be pointed.
+            </para>
+            <para>
+            "user" - The video source is facing toward the user; this includes, for example, the front-facing camera on a smartphone.<br />
+            "environment" - The video source is facing away from the user, thereby viewing their environment. This is the back camera on a smartphone.<br />
+            "left" - The video source is facing toward the user but to their left, such as a camera aimed toward the user but over their left shoulder.<br />
+            "right" - The video source is facing toward the user but to their right, such as a camera aimed toward the user but over their right shoulder.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackConstraints.FrameRate">
+            <summary>
+            A ConstrainDouble specifying the frame rate or range of frame rates which are acceptable and/or required.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackConstraints.GroupId">
+            <summary>
+            A ConstrainDOMString object specifying a group ID or an array of group IDs which are acceptable and/or required.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackConstraints.Height">
+            <summary>
+            A ConstrainULong specifying the video height or range of heights which are acceptable and/or required.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackConstraints.NoiseSuppression">
+            <summary>
+            A ConstrainBoolean which specifies whether noise suppression is preferred and/or required.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackConstraints.SampleRate">
+            <summary>
+            A ConstrainULong specifying the sample rate or range of sample rates which are acceptable and/or required.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackConstraints.SampleSize">
+            <summary>
+            A ConstrainULong specifying the sample size or range of sample sizes which are acceptable and/or required.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackConstraints.Width">
+            <summary>
+            A ConstrainULong specifying the video width or range of widths which are acceptable and/or required.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.ConstrainBoolean">
+            <summary>
+            <para>
+            The <i>ConstrainBoolean</i> constraint type is used to specify a constraint for a property whose value is a Boolean value.<br />
+            Its value may be:
+            </para>
+            <para>
+            <see cref="T:System.Boolean">bool</see> - a plain Boolean.<br />
+            <see cref="M:BrowserAPI.ConstrainBoolean.Exact(System.Boolean)">Exact</see> - A Boolean which must be the value of the property. If the property can't be set to this value, matching will fail.<br />
+            <see cref="M:BrowserAPI.ConstrainBoolean.Ideal(System.Boolean)">Ideal</see> - A Boolean specifying an ideal value for the property. If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.ConstrainBoolean.op_Implicit(System.Boolean)~BrowserAPI.ConstrainBoolean">
+            <summary>
+            implicit conversion, so a plain bool can be used.
+            </summary>
+            <param name="value">a plain bool</param>
+        </member>
+        <member name="M:BrowserAPI.ConstrainBoolean.Exact(System.Boolean)">
+            <summary>
+            Creates an <see cref="T:BrowserAPI.ConstrainBoolean"/> as an "exact" object.<br />
+            If the property can't be set to this value, matching will fail.
+            </summary>
+            <param name="value">The required value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.ConstrainBoolean.Ideal(System.Boolean)">
+            <summary>
+            Creates an <see cref="T:BrowserAPI.ConstrainBoolean"/> as an "ideal" object.<br />
+            If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match.
+            </summary>
+            <param name="value">The ideal value.</param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.ConstrainDouble">
+            <summary>
+            <para>
+            The <i>ConstrainDouble</i> constraint type is used to specify a constraint for a property whose value is a double-precision floating-point number.<br />
+            Its value may be:
+            </para>
+            <para>
+            <see cref="T:System.Double">double</see> - a plain Double.<br />
+            <see cref="M:BrowserAPI.ConstrainDouble.Exact(System.Double)">Exact</see> - A decimal number specifying a specific, required, value the property must have to be considered acceptable.<br />
+            <see cref="M:BrowserAPI.ConstrainDouble.Ideal(System.Double)">Ideal</see> - A decimal number specifying an ideal value for the property. If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match.<br />
+            <see cref="M:BrowserAPI.ConstrainDouble.Ideal(System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.Double})">Ideal(ideal, min, max)</see> - A decimal number specifying the smallest/largest permissible value of the property it describes. If the value cannot remain equal to or greater/less than this value, matching will fail.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.ConstrainDouble.op_Implicit(System.Double)~BrowserAPI.ConstrainDouble">
+            <summary>
+            implicit conversion, so a plain double can be used.
+            </summary>
+            <param name="value">a plain double</param>
+        </member>
+        <member name="M:BrowserAPI.ConstrainDouble.Exact(System.Double)">
+            <summary>
+            Creates an <see cref="T:BrowserAPI.ConstrainDouble"/> as an "exact" object.<br />
+            If the property can't be set to this value, matching will fail.
+            </summary>
+            <param name="value">A double specifying a specific, required, value the property must have to be considered acceptable.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.ConstrainDouble.Ideal(System.Double)">
+            <summary>
+            Creates an <see cref="T:BrowserAPI.ConstrainDouble"/> as an "ideal" object.<br />
+            If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match.
+            </summary>
+            <param name="value">The ideal value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.ConstrainDouble.Ideal(System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.Double})">
+            <summary>
+            Creates an <see cref="T:BrowserAPI.ConstrainDouble"/> as an "ideal-min-max" object. Each value is optional, but at least one value should be set.<br />
+            When ideal value is specified - If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match.<br />
+            When min value is specified - If the value cannot remain equal to or greater than than this value, matching will fail.<br />
+            When max value is specified - If the value cannot remain equal to or less than than this value, matching will fail.
+            </summary>
+            <param name="ideal">The ideal value.</param>
+            <param name="min">The minimum value.</param>
+            <param name="max">The maximum value.</param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.ConstrainULong">
+            <summary>
+            <para>
+            The <i>ConstrainULong</i> constraint type is used to specify a constraint for a property whose value is an integer.<br />
+            Its value may be:
+            </para>
+            <para>
+            <see cref="T:System.UInt64">ulong</see> - a plain UInt64.<br />
+            <see cref="M:BrowserAPI.ConstrainULong.Exact(System.UInt64)">Exact</see> - An integer specifying a specific, required, value the property must have to be considered acceptable.<br />
+            <see cref="M:BrowserAPI.ConstrainULong.Ideal(System.UInt64)">Ideal</see> - An integer specifying an ideal value for the property. If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match.<br />
+            <see cref="M:BrowserAPI.ConstrainULong.Ideal(System.Nullable{System.UInt64},System.Nullable{System.UInt64},System.Nullable{System.UInt64})">Ideal(ideal, min, max)</see> - An integer specifying the smallest/largest permissible value of the property it describes. If the value cannot remain equal to or greater/less than this value, matching will fail.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.ConstrainULong.op_Implicit(System.UInt64)~BrowserAPI.ConstrainULong">
+            <summary>
+            implicit conversion, so a plain ulong can be used.
+            </summary>
+            <param name="value">a plain ulong</param>
+        </member>
+        <member name="M:BrowserAPI.ConstrainULong.Exact(System.UInt64)">
+            <summary>
+            Creates an <see cref="T:BrowserAPI.ConstrainULong"/> as an "exact" object.<br />
+            If the property can't be set to this value, matching will fail.
+            </summary>
+            <param name="value">A ulong specifying a specific, required, value the property must have to be considered acceptable.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.ConstrainULong.Ideal(System.UInt64)">
+            <summary>
+            Creates an <see cref="T:BrowserAPI.ConstrainULong"/> as an "ideal" object.<br />
+            If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match.
+            </summary>
+            <param name="value">The ideal value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.ConstrainULong.Ideal(System.Nullable{System.UInt64},System.Nullable{System.UInt64},System.Nullable{System.UInt64})">
+            <summary>
+            Creates an <see cref="T:BrowserAPI.ConstrainULong"/> as an "ideal-min-max" object. Each value is optional, but at least one value should be set.<br />
+            When ideal value is specified - If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match.<br />
+            When min value is specified - If the value cannot remain equal to or greater than than this value, matching will fail.<br />
+            When max value is specified - If the value cannot remain equal to or less than than this value, matching will fail.
+            </summary>
+            <param name="ideal">The ideal value.</param>
+            <param name="min">The minimum value.</param>
+            <param name="max">The maximum value.</param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.ConstrainDOMString">
+            <summary>
+            <para>
+            The <i>ConstrainDOMString</i> constraint type is used to specify a constraint for a property whose value is a string.
+            Its value may be:
+            </para>
+            <para>
+            <see cref="T:System.String">string</see> or <see cref="T:System.String">string</see>[] - a plain String or an array of String.<br />
+            <see cref="M:BrowserAPI.ConstrainDOMString.Exact(System.String)">Exact</see> - A string or an array of strings, one of which must be the value of the property. If the property can't be set to one of the listed values, matching will fail.<br />
+            <see cref="M:BrowserAPI.ConstrainDOMString.Ideal(System.String)">Ideal</see> - A string or an array of strings, specifying ideal values for the property. If possible, one of the listed values will be used, but if it's not possible, the user agent will use the closest possible match.<br />
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.ConstrainDOMString.op_Implicit(System.String)~BrowserAPI.ConstrainDOMString">
+            <summary>
+            implicit conversion, so a plain string can be used.
+            </summary>
+            <param name="value">a plain string</param>
+        </member>
+        <member name="M:BrowserAPI.ConstrainDOMString.op_Implicit(System.String[])~BrowserAPI.ConstrainDOMString">
+            <summary>
+            implicit conversion, so a plain string[] can be used.
+            </summary>
+            <param name="values">a plain string[]</param>
+        </member>
+        <member name="M:BrowserAPI.ConstrainDOMString.Exact(System.String)">
+            <summary>
+            Creates an <see cref="T:BrowserAPI.ConstrainDOMString"/> as an "exact" object.<br />
+            If the property can't be set to this value, matching will fail.
+            </summary>
+            <param name="value">The required value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.ConstrainDOMString.Exact(System.String[])">
+            <summary>
+            Creates an <see cref="T:BrowserAPI.ConstrainDOMString"/> as an "exact" object.<br />
+            If the property can't be set to one of the listed values, matching will fail.
+            </summary>
+            <param name="values">The list of possible values.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.ConstrainDOMString.Ideal(System.String)">
+            <summary>
+            Creates an <see cref="T:BrowserAPI.ConstrainDOMString"/> as an "ideal" object.<br />
+            If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match.
+            </summary>
+            <param name="value">The ideal value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.ConstrainDOMString.Ideal(System.String[])">
+            <summary>
+            Creates an <see cref="T:BrowserAPI.ConstrainDOMString"/> as an "ideal" object.<br />
+            If possible, one of the listed values will be used, but if it's not possible, the user agent will use the closest possible match.
+            </summary>
+            <param name="values">The list of ideal values.</param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.MediaTrackSupportedConstraints">
+            <summary>
+            <para>
+            The <i>MediaTrackSupportedConstraints</i> dictionary establishes the list of constrainable properties recognized by the user agent or browser in its implementation of the MediaStreamTrack object.
+            An object conforming to MediaTrackSupportedConstraints is returned by <see cref="M:BrowserAPI.IMediaDevices.GetSupportedConstraints(System.Threading.CancellationToken)"/>.
+            </para>
+            <para>
+            Because of the way interface definitions in WebIDL work, if a constraint is requested but not supported, no error will occur.
+            Instead, the specified constraints will be applied, with any unrecognized constraints stripped from the request.
+            That can lead to confusing and hard to debug errors, so be sure to use getSupportedConstraints() to retrieve this information before attempting to establish constraints
+            if you need to know the difference between silently ignoring a constraint and a constraint being accepted.
+            </para>
+            <para>n actual constraint set is described using an object based on the MediaTrackConstraints dictionary.</para>
+            <para>To learn more about how constraints work, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/Media_Capture_and_Streams_API/Constraints">Capabilities, constraints, and settings</see>.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackSupportedConstraints.AspectRatio">
+            <summary>
+            A Flag whose value is true if this constraint is supported in the current environment.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackSupportedConstraints.AutoGainControl">
+            <summary>
+            A Flag whose value is true if this constraint is supported in the current environment.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackSupportedConstraints.ChannelCount">
+            <summary>
+            A Flag whose value is true if this constraint is supported in the current environment.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackSupportedConstraints.DeviceId">
+            <summary>
+            A Flag whose value is true if this constraint is supported in the current environment.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackSupportedConstraints.DisplaySurface">
+            <summary>
+            A Flag whose value is true if this constraint is supported in the current environment.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackSupportedConstraints.EchoCancellation">
+            <summary>
+            A Flag whose value is true if this constraint is supported in the current environment.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackSupportedConstraints.FacingMode">
+            <summary>
+            A Flag whose value is true if this constraint is supported in the current environment.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackSupportedConstraints.FrameRate">
+            <summary>
+            A Flag whose value is true if this constraint is supported in the current environment.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackSupportedConstraints.GroupId">
+            <summary>
+            A Flag whose value is true if this constraint is supported in the current environment.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackSupportedConstraints.Height">
+            <summary>
+            A Flag whose value is true if this constraint is supported in the current environment.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackSupportedConstraints.NoiseSuppression">
+            <summary>
+            A Flag whose value is true if this constraint is supported in the current environment.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackSupportedConstraints.SampleRate">
+            <summary>
+            A Flag whose value is true if this constraint is supported in the current environment.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackSupportedConstraints.SampleSize">
+            <summary>
+            A Flag whose value is true if this constraint is supported in the current environment.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.MediaTrackSupportedConstraints.Width">
+            <summary>
+            A Flag whose value is true if this constraint is supported in the current environment.
+            </summary>
+        </member>
         <member name="T:BrowserAPI.IModuleManager">
             <summary>
             <para>
@@ -4916,6 +6066,16 @@
             <para>This class contains <i>TrySync</i>-methods, which will use <see cref="M:Microsoft.JSInterop.IJSInProcessRuntime.Invoke``1(System.String,System.Object[])"/> if possible, otherwise <see cref="M:Microsoft.JSInterop.IJSRuntime.InvokeAsync``1(System.String,System.Object[])"/>.</para>
             </summary>
         </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeVoidTrySync(Microsoft.JSInterop.IJSRuntime,System.String,System.Object[])">
+            <summary>
+            <para>Invokes the specified JavaScript function synchronously if possible, otherwise asynchronously.</para>
+            <para>When the specified JavaScript function returns a promise, you should use <see cref="M:Microsoft.JSInterop.IJSRuntime.InvokeAsync``1(System.String,System.Object[])"/> instead.</para>
+            </summary>
+            <param name="jsRuntime">Represents an instance of a JavaScript runtime to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the function to invoke. For example, the value <c>"someScope.someFunction"</c> will invoke the function <c>window.someScope.someFunction</c>.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns></returns>
+        </member>
         <member name="M:BrowserAPI.TrySyncExtensions.InvokeVoidTrySync(Microsoft.JSInterop.IJSRuntime,System.String,System.Threading.CancellationToken,System.Object[])">
             <summary>
             <para>Invokes the specified JavaScript function synchronously if possible, otherwise asynchronously.</para>
@@ -4926,6 +6086,17 @@
             <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
             <param name="args">JSON-serializable arguments.</param>
             <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,System.Object[])">
+            <summary>
+            <para>Invokes the specified JavaScript function synchronously if possible, otherwise asynchronously.</para>
+            <para>When the specified JavaScript function returns a promise, you should use <see cref="M:Microsoft.JSInterop.IJSRuntime.InvokeAsync``1(System.String,System.Object[])"/> instead.</para>
+            </summary>
+            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
+            <param name="jsRuntime">Represents an instance of a JavaScript runtime to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the function to invoke. For example, the value <c>"someScope.someFunction"</c> will invoke the function <c>window.someScope.someFunction</c>.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
         </member>
         <member name="M:BrowserAPI.TrySyncExtensions.InvokeTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,System.Threading.CancellationToken,System.Object[])">
             <summary>
@@ -4939,6 +6110,16 @@
             <param name="args">JSON-serializable arguments.</param>
             <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
         </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeVoidTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Object[])">
+            <summary>
+            <para>Invokes the specified JavaScript function synchronously if possible, otherwise asynchronously.</para>
+            <para>When the specified JavaScript function returns a promise, you should use <see cref="M:Microsoft.JSInterop.IJSRuntime.InvokeAsync``1(System.String,System.Object[])"/> instead.</para>
+            </summary>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the function to invoke. For example, the value <c>"someScope.someFunction"</c> will invoke the function <c>window.someScope.someFunction</c>.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns></returns>
+        </member>
         <member name="M:BrowserAPI.TrySyncExtensions.InvokeVoidTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Threading.CancellationToken,System.Object[])">
             <summary>
             <para>Invokes the specified JavaScript function synchronously if possible, otherwise asynchronously.</para>
@@ -4949,6 +6130,17 @@
             <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
             <param name="args">JSON-serializable arguments.</param>
             <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,System.Object[])">
+            <summary>
+            <para>Invokes the specified JavaScript function synchronously if possible, otherwise asynchronously.</para>
+            <para>When the specified JavaScript function returns a promise, you should use <see cref="M:Microsoft.JSInterop.IJSRuntime.InvokeAsync``1(System.String,System.Object[])"/> instead.</para>
+            </summary>
+            <typeparam name="TResult">The JSON-serializable return type.</typeparam>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the function to invoke. For example, the value <c>"someScope.someFunction"</c> will invoke the function <c>window.someScope.someFunction</c>.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An instance of <typeparamref name="TResult"/> obtained by JSON-deserializing the return value.</returns>
         </member>
         <member name="M:BrowserAPI.TrySyncExtensions.InvokeTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,System.Threading.CancellationToken,System.Object[])">
             <summary>
@@ -5759,10 +6951,6 @@
             <para>The <i>HTMLDialogElement</i> interface provides methods to manipulate &lt;dialog&gt; elements. It inherits properties and methods from the HTMLElement interface.</para>
             <para>Objects of this class must disposed manually, so do not forget to call <see cref="!:DisposeAsync"/> when you are done with it.</para>
             </summary>
-            <summary>
-            <para>Base class for <see cref="!:Dialog"/> and <see cref="!:DialogInProcess"/>.</para>
-            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
-            </summary>
         </member>
         <member name="P:BrowserAPI.IDialog.Open">
             <summary>
@@ -5844,10 +7032,6 @@
             </summary>
         </member>
         <member name="T:BrowserAPI.IDialogInProcess">
-            <summary>
-            <para>Base class for <see cref="!:Dialog"/> and <see cref="!:DialogInProcess"/>.</para>
-            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
-            </summary>
             <summary>
             <para>The <i>HTMLDialogElement</i> interface provides methods to manipulate &lt;dialog&gt; elements. It inherits properties and methods from the HTMLElement interface.</para>
             <para>Objects of this class must disposed manually, so do not forget to call <see cref="!:Dispose"/> when you are done with it.</para>
@@ -6224,10 +7408,6 @@
             <summary>
             <para>The <i>HTMLElement</i> interface represents any HTML element. Some elements directly implement this interface, while others implement it via an interface that inherits it.</para>
             <para>Objects of this class must disposed manually, so do not forget to call <see cref="!:DisposeAsync"/> when you are done with it.</para>
-            </summary>
-            <summary>
-            <para>Base class for <see cref="!:HTMLElement"/> and <see cref="!:HTMLElementInProcess"/>.</para>
-            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
             </summary>
         </member>
         <member name="P:BrowserAPI.IHTMLElement.InnerText">
@@ -7272,10 +8452,6 @@
         </member>
         <member name="T:BrowserAPI.IHTMLElementInProcess">
             <summary>
-            <para>Base class for <see cref="!:HTMLElement"/> and <see cref="!:HTMLElementInProcess"/>.</para>
-            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
-            </summary>
-            <summary>
             <para>The <i>HTMLElement</i> interface represents any HTML element. Some elements directly implement this interface, while others implement it via an interface that inherits it.</para>
             <para>Objects of this class must disposed manually, so do not forget to call <see cref="!:Dispose"/> when you are done with it.</para>
             </summary>
@@ -7891,10 +9067,6 @@
             <para>The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see> and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see> elements both inherit this interface.</para>
             <para>Objects of this class must disposed manually, so do not forget to call <see cref="!:DisposeAsync"/> when you are done with it.</para>
             </summary>
-            <summary>
-            <para>Base class for <see cref="!:HTMLMediaElement"/> and <see cref="!:HTMLMediaElementInProcess"/>.</para>
-            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
-            </summary>
         </member>
         <member name="P:BrowserAPI.IHTMLMediaElement.Src">
             <summary>
@@ -7923,6 +9095,26 @@
             Note: The best way to know the URL of the media resource currently in active use in this element is to look at the value of the currentSrc attribute,
             which also takes into account selection of a best or preferred media resource from a list provided in an HTMLSourceElement (which represents a &lt;source&gt; element).
             </para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.SrcObject">
+            <summary>
+            A MediaStream representing the media to play or that has played in the current HTMLMediaElement, or null if not assigned.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetSrcObject(System.Threading.CancellationToken)">
+            <summary>
+            A MediaStream representing the media to play or that has played in the current HTMLMediaElement, or null if not assigned.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.SetSrcObject(BrowserAPI.IMediaStream,System.Threading.CancellationToken)">
+            <summary>
+            A MediaStream representing the media to play or that has played in the current HTMLMediaElement, or null if not assigned.
             </summary>
             <param name="value"></param>
             <param name="cancellationToken"></param>
@@ -8663,10 +9855,6 @@
         </member>
         <member name="T:BrowserAPI.IHTMLMediaElementInProcess">
             <summary>
-            <para>Base class for <see cref="!:HTMLMediaElement"/> and <see cref="!:HTMLMediaElementInProcess"/>.</para>
-            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
-            </summary>
-            <summary>
             <para>The <i>HTMLMediaElement</i> interface adds to HTMLElement the properties and methods needed to support basic media-related capabilities that are common to audio and video.</para>
             <para>The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see> and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see> elements both inherit this interface.</para>
             <para>Objects of this class must disposed manually, so do not forget to call <see cref="!:Dispose"/> when you are done with it.</para>
@@ -8841,6 +10029,11 @@
             Note: The best way to know the URL of the media resource currently in active use in this element is to look at the value of the currentSrc attribute,
             which also takes into account selection of a best or preferred media resource from a list provided in an HTMLSourceElement (which represents a &lt;source&gt; element).
             </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.SrcObject">
+            <summary>
+            A MediaStream representing the media to play or that has played in the current HTMLMediaElement, or null if not assigned.
             </summary>
         </member>
         <member name="P:BrowserAPI.IHTMLMediaElementInProcess.Controls">
@@ -9207,6 +10400,709 @@
             When invoked, will empty all keys out of localStorage.
             </summary>
         </member>
+        <member name="T:BrowserAPI.IMediaDevices">
+            <summary>
+            The <i>MediaDevices</i> interface of the Media Capture and Streams API provides access to connected media input devices like cameras and microphones, as well as screen sharing.
+            In essence, it lets you obtain access to any hardware source of media data.
+            </summary>
+            <param name="moduleManager"></param>
+        </member>
+        <member name="P:BrowserAPI.IMediaDevices.SupportedConstraints">
+            <summary>
+            The getSupportedConstraints() method of the MediaDevices interface returns an object based on the MediaTrackSupportedConstraints dictionary,
+            whose member fields each specify one of the constrainable properties the user agent understands.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevices.GetSupportedConstraints(System.Threading.CancellationToken)">
+            <summary>
+            The getSupportedConstraints() method of the MediaDevices interface returns an object based on the MediaTrackSupportedConstraints dictionary,
+            whose member fields each specify one of the constrainable properties the user agent understands.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns>
+            A new object based on the MediaTrackSupportedConstraints dictionary listing the constraints supported by the user agent.
+            Because only constraints supported by the user agent are included in the list, each of these Boolean properties has the value true.
+            </returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevices.GetUserMedia(System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
+            <para>
+            That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
+            an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
+            and possibly other track types.
+            </para>
+            <para>
+            It returns a Promise that resolves to a MediaStream object.
+            If the user denies permission, or matching media is not available, then the promise is rejected with NotAllowedError or NotFoundError DOMException respectively.
+            </para>
+            </summary>
+            <param name="audio">A flag that indicates an audio track is included to the stream.</param>
+            <param name="video">A flag that indicates a video track is included to the stream.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevices.GetUserMedia(BrowserAPI.MediaTrackConstraints,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
+            <para>
+            That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
+            an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
+            and possibly other track types.
+            </para>
+            <para>
+            It returns a Promise that resolves to a MediaStream object.
+            If the user denies permission, or matching media is not available, then the promise is rejected with NotAllowedError or NotFoundError DOMException respectively.
+            </para>
+            </summary>
+            <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
+            <param name="video">A flag that indicates a video track is included to the stream.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevices.GetUserMedia(System.Boolean,BrowserAPI.MediaTrackConstraints,System.Threading.CancellationToken)">
+            <summary>
+            <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
+            <para>
+            That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
+            an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
+            and possibly other track types.
+            </para>
+            <para>
+            It returns a Promise that resolves to a MediaStream object.
+            If the user denies permission, or matching media is not available, then the promise is rejected with NotAllowedError or NotFoundError DOMException respectively.
+            </para>
+            </summary>
+            <param name="audio">A flag that indicates an audio track is included to the stream.</param>
+            <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevices.GetUserMedia(BrowserAPI.MediaTrackConstraints,BrowserAPI.MediaTrackConstraints,System.Threading.CancellationToken)">
+            <summary>
+            <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
+            <para>
+            That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
+            an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
+            and possibly other track types.
+            </para>
+            <para>
+            It returns a Promise that resolves to a MediaStream object.
+            If the user denies permission, or matching media is not available, then the promise is rejected with NotAllowedError or NotFoundError DOMException respectively.
+            </para>
+            </summary>
+            <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
+            <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevices.GetDisplayMedia(System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            With the user's permission through a prompt, turns on a camera and/or a microphone on the system and provides a MediaStream containing a video track and/or an audio track with the input.
+            </summary>
+            <param name="audio">A flag that indicates an audio track is included to the stream.</param>
+            <param name="video">A flag that indicates a video track is included to the stream.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevices.GetDisplayMedia(BrowserAPI.MediaTrackConstraints,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            With the user's permission through a prompt, turns on a camera and/or a microphone on the system and provides a MediaStream containing a video track and/or an audio track with the input.
+            </summary>
+            <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
+            <param name="video">A flag that indicates a video track is included to the stream.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevices.GetDisplayMedia(System.Boolean,BrowserAPI.MediaTrackConstraints,System.Threading.CancellationToken)">
+            <summary>
+            With the user's permission through a prompt, turns on a camera and/or a microphone on the system and provides a MediaStream containing a video track and/or an audio track with the input.
+            </summary>
+            <param name="audio">A flag that indicates an audio track is included to the stream.</param>
+            <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevices.GetDisplayMedia(BrowserAPI.MediaTrackConstraints,BrowserAPI.MediaTrackConstraints,System.Threading.CancellationToken)">
+            <summary>
+            With the user's permission through a prompt, turns on a camera and/or a microphone on the system and provides a MediaStream containing a video track and/or an audio track with the input.
+            </summary>
+            <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
+            <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevices.EnumerateDevices(System.Threading.CancellationToken)">
+            <summary>
+            <para>
+            The enumerateDevices() method of the MediaDevices interface requests a list of the currently available media input and output devices, such as microphones, cameras, headsets, and so forth.
+            The returned Promise is resolved with an array of MediaDeviceInfo objects describing the devices.
+            </para>
+            <para>
+            The returned list will omit any devices that are blocked by the document Permission Policy: microphone, camera, speaker-selection(for output devices), and so on.
+            Access to particular non-default devices is also gated by the Permissions API, and the list will omit devices for which the user has not granted explicit permission.
+            </para>
+            </summary>
+            <returns>
+            <para>
+            A Promise that is fulfilled with an array of MediaDeviceInfo objects. Each object in the array describes one of the available media input and output devices.
+            The order is significant — the default capture devices will be listed first.
+            </para>
+            <para>Other than default devices, only devices for which permission has been granted are "available".</para>
+            <para>If the media device is an input device, an InputDeviceInfo object will be returned instead.</para>
+            <para>If enumeration fails, the promise is rejected.</para>
+            </returns>
+        </member>
+        <member name="T:BrowserAPI.IMediaDevicesInProcess">
+            <summary>
+            The <i>MediaDevices</i> interface of the Media Capture and Streams API provides access to connected media input devices like cameras and microphones, as well as screen sharing.
+            In essence, it lets you obtain access to any hardware source of media data.
+            </summary>
+            <param name="moduleManager"></param>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevicesInProcess.EnumerateDevices(System.Threading.CancellationToken)">
+            <summary>
+            <para>
+            The enumerateDevices() method of the MediaDevices interface requests a list of the currently available media input and output devices, such as microphones, cameras, headsets, and so forth.
+            The returned Promise is resolved with an array of MediaDeviceInfo objects describing the devices.
+            </para>
+            <para>
+            The returned list will omit any devices that are blocked by the document Permission Policy: microphone, camera, speaker-selection(for output devices), and so on.
+            Access to particular non-default devices is also gated by the Permissions API, and the list will omit devices for which the user has not granted explicit permission.
+            </para>
+            </summary>
+            <returns>
+            <para>
+            A Promise that is fulfilled with an array of MediaDeviceInfo objects. Each object in the array describes one of the available media input and output devices.
+            The order is significant — the default capture devices will be listed first.
+            </para>
+            <para>Other than default devices, only devices for which permission has been granted are "available".</para>
+            <para>If the media device is an input device, an InputDeviceInfo object will be returned instead.</para>
+            <para>If enumeration fails, the promise is rejected.</para>
+            </returns>
+        </member>
+        <member name="P:BrowserAPI.IMediaDevicesInProcess.SupportedConstraints">
+            <summary>
+            The getSupportedConstraints() method of the MediaDevices interface returns an object based on the MediaTrackSupportedConstraints dictionary,
+            whose member fields each specify one of the constrainable properties the user agent understands.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevicesInProcess.GetUserMedia(System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
+            <para>
+            That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
+            an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
+            and possibly other track types.
+            </para>
+            <para>
+            It returns a Promise that resolves to a MediaStream object.
+            If the user denies permission, or matching media is not available, then the promise is rejected with NotAllowedError or NotFoundError DOMException respectively.
+            </para>
+            </summary>
+            <param name="audio">A flag that indicates an audio track is included to the stream.</param>
+            <param name="video">A flag that indicates a video track is included to the stream.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevicesInProcess.GetUserMedia(BrowserAPI.MediaTrackConstraints,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
+            <para>
+            That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
+            an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
+            and possibly other track types.
+            </para>
+            <para>
+            It returns a Promise that resolves to a MediaStream object.
+            If the user denies permission, or matching media is not available, then the promise is rejected with NotAllowedError or NotFoundError DOMException respectively.
+            </para>
+            </summary>
+            <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
+            <param name="video">A flag that indicates a video track is included to the stream.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevicesInProcess.GetUserMedia(System.Boolean,BrowserAPI.MediaTrackConstraints,System.Threading.CancellationToken)">
+            <summary>
+            <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
+            <para>
+            That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
+            an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
+            and possibly other track types.
+            </para>
+            <para>
+            It returns a Promise that resolves to a MediaStream object.
+            If the user denies permission, or matching media is not available, then the promise is rejected with NotAllowedError or NotFoundError DOMException respectively.
+            </para>
+            </summary>
+            <param name="audio">A flag that indicates an audio track is included to the stream.</param>
+            <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevicesInProcess.GetUserMedia(BrowserAPI.MediaTrackConstraints,BrowserAPI.MediaTrackConstraints,System.Threading.CancellationToken)">
+            <summary>
+            <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
+            <para>
+            That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
+            an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
+            and possibly other track types.
+            </para>
+            <para>
+            It returns a Promise that resolves to a MediaStream object.
+            If the user denies permission, or matching media is not available, then the promise is rejected with NotAllowedError or NotFoundError DOMException respectively.
+            </para>
+            </summary>
+            <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
+            <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevicesInProcess.GetDisplayMedia(System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            With the user's permission through a prompt, turns on a camera and/or a microphone on the system and provides a MediaStream containing a video track and/or an audio track with the input.
+            </summary>
+            <param name="audio">A flag that indicates an audio track is included to the stream.</param>
+            <param name="video">A flag that indicates a video track is included to the stream.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevicesInProcess.GetDisplayMedia(BrowserAPI.MediaTrackConstraints,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            With the user's permission through a prompt, turns on a camera and/or a microphone on the system and provides a MediaStream containing a video track and/or an audio track with the input.
+            </summary>
+            <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
+            <param name="video">A flag that indicates a video track is included to the stream.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevicesInProcess.GetDisplayMedia(System.Boolean,BrowserAPI.MediaTrackConstraints,System.Threading.CancellationToken)">
+            <summary>
+            With the user's permission through a prompt, turns on a camera and/or a microphone on the system and provides a MediaStream containing a video track and/or an audio track with the input.
+            </summary>
+            <param name="audio">A flag that indicates an audio track is included to the stream.</param>
+            <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevicesInProcess.GetDisplayMedia(BrowserAPI.MediaTrackConstraints,BrowserAPI.MediaTrackConstraints,System.Threading.CancellationToken)">
+            <summary>
+            With the user's permission through a prompt, turns on a camera and/or a microphone on the system and provides a MediaStream containing a video track and/or an audio track with the input.
+            </summary>
+            <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
+            <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
+            <param name="cancellationToken"></param>
+            <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
+        </member>
+        <member name="T:BrowserAPI.IMediaRecorder">
+            <summary>
+            <para>
+            The <i>MediaRecorder</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API">MediaStream Recording API</see> provides functionality to easily record media.<br />
+            It is created using the <see cref="M:BrowserAPI.IMediaStream.CreateRecorder(System.String,System.Int32,System.Int32,System.Int32,System.Threading.CancellationToken)">CreateRecorder() method</see>.
+            </para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IMediaRecorder.MimeType">
+            <summary>
+            <para>
+            The <i>mimeType</i> read-only property of the MediaRecorder interface returns the <see href="https://developer.mozilla.org/en-US/docs/Glossary/MIME">MIME</see> media type that was specified when creating the MediaRecorder object,
+            or, if none was specified, which was chosen by the browser.
+            This is the file format of the file that would result from writing all of the recorded data to disk.
+            </para>
+            <para>
+            Keep in mind that not all codecs are supported by a given container;
+            if you write media using a codec that is not supported by a given media container, the resulting file may not work reliably if at all when you try to play it back.
+            See our <see href="https://developer.mozilla.org/en-US/docs/Web/Media/Formats">media type and format guide</see> for information about container and codec support across browsers.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IMediaRecorder.GetMimeType(System.Threading.CancellationToken)">
+            <summary>
+            <para>
+            The <i>mimeType</i> read-only property of the MediaRecorder interface returns the <see href="https://developer.mozilla.org/en-US/docs/Glossary/MIME">MIME</see> media type that was specified when creating the MediaRecorder object,
+            or, if none was specified, which was chosen by the browser.
+            This is the file format of the file that would result from writing all of the recorded data to disk.
+            </para>
+            <para>
+            Keep in mind that not all codecs are supported by a given container;
+            if you write media using a codec that is not supported by a given media container, the resulting file may not work reliably if at all when you try to play it back.
+            See our <see href="https://developer.mozilla.org/en-US/docs/Web/Media/Formats">media type and format guide</see> for information about container and codec support across browsers.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IMediaRecorder.State">
+            <summary>
+            <para>The <i>state</i> read-only property of the MediaRecorder interface returns the current state of the current MediaRecorder object:</para>
+            <para>
+            "inactive" - Recording is not occurring — it has either not been started yet, or it has been started and then stopped.<br />
+            "recording" - Recording has been started and the user agent is capturing data.<br />
+            "paused" - Recording has been started, then paused, but not yet stopped or resumed.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IMediaRecorder.GetState(System.Threading.CancellationToken)">
+            <summary>
+            <para>The <i>state</i> read-only property of the MediaRecorder interface returns the current state of the current MediaRecorder object:</para>
+            <para>
+            "inactive" - Recording is not occurring — it has either not been started yet, or it has been started and then stopped.<br />
+            "recording" - Recording has been started and the user agent is capturing data.<br />
+            "paused" - Recording has been started, then paused, but not yet stopped or resumed.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IMediaRecorder.Stream">
+            <summary>
+            The <i>stream</i> read-only property of the MediaRecorder interface returns the stream that was passed into the <see cref="M:BrowserAPI.IMediaStream.CreateRecorder(System.String,System.Int32,System.Int32,System.Int32,System.Threading.CancellationToken)">CreateRecorder() method</see> when the MediaRecorder was created.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IMediaRecorder.GetStream(System.Threading.CancellationToken)">
+            <summary>
+            The <i>stream</i> read-only property of the MediaRecorder interface returns the stream that was passed into the <see cref="M:BrowserAPI.IMediaStream.CreateRecorder(System.String,System.Int32,System.Int32,System.Int32,System.Threading.CancellationToken)">CreateRecorder() method</see> when the MediaRecorder was created.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IMediaRecorder.AudioBitsPerSecond">
+            <summary>
+            The <i>audioBitsPerSecond</i> read-only property of the MediaRecorder interface returns the audio encoding bit rate in use.<br />
+            This may differ from the bit rate specified in the constructor (if it was provided).
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IMediaRecorder.GetAudioBitsPerSecond(System.Threading.CancellationToken)">
+            <summary>
+            The <i>audioBitsPerSecond</i> read-only property of the MediaRecorder interface returns the audio encoding bit rate in use.<br />
+            This may differ from the bit rate specified in the constructor (if it was provided).
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IMediaRecorder.VideoBitsPerSecond">
+            <summary>
+            The <i>videoBitsPerSecond</i> read-only property of the MediaRecorder interface returns the video encoding bit rate in use.<br />
+            This may differ from the bit rate specified in the constructor, if it was provided.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IMediaRecorder.GetVideoBitsPerSecond(System.Threading.CancellationToken)">
+            <summary>
+            The <i>videoBitsPerSecond</i> read-only property of the MediaRecorder interface returns the video encoding bit rate in use.<br />
+            This may differ from the bit rate specified in the constructor, if it was provided.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaRecorder.Start(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Begins recording media; this method can optionally be passed a timeslice argument with a value in milliseconds.
+            If this is specified, the media will be captured in separate chunks of that duration, rather than the default behavior of recording the media in a single large chunk.
+            </summary>
+            <param name="timeslice">
+            <para>
+            The number of milliseconds to record into each Blob.
+            If this parameter isn't included (a value less or equal 0), the entire media duration is recorded into a single Blob unless the requestData() method is called to obtain the Blob
+            and trigger the creation of a new Blob into which the media continues to be recorded.
+            </para>
+            <para>Note: Like other time values in web APIs, timeslice is not exact and the real intervals may be slightly longer due to other pending tasks before the creation of the next blob.</para>
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaRecorder.Stop(System.Threading.CancellationToken)">
+            <summary>
+            Stops recording, at which point a dataavailable event containing the final Blob of saved data is fired. No more recording occurs.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaRecorder.Resume(System.Threading.CancellationToken)">
+            <summary>
+            Resumes recording of media after having been paused.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaRecorder.Pause(System.Threading.CancellationToken)">
+            <summary>
+            Pauses the recording of media.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaRecorder.RequestData(System.Threading.CancellationToken)">
+            <summary>
+            Requests a Blob containing the saved data received thus far (or since the last time requestData() was called.
+            After calling this method, recording continues, but in a new Blob.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaRecorder.IsTypeSupported(System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>isTypeSupported()</i> static method of the MediaRecorder interface returns a Boolean which is true if the MIME media type specified is one the user agent should be able to successfully record.
+            </summary>
+            <remarks>In C# this method is not static because it needs an reference to the JS-module.</remarks>
+            <param name="mimeType"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="E:BrowserAPI.IMediaRecorder.OnDataavailable">
+            <summary>
+            <para>
+            Fires periodically each time timeslice milliseconds of media have been recorded (or when the entire media has been recorded, if timeslice wasn't specified).
+            The event, of type BlobEvent, contains the recorded media in its data property.
+            </para>
+            <para>Parameter is the recorded binary data.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IMediaRecorder.OnError">
+            <summary>
+            <para>
+            Fired when there are fatal errors that stop recording.
+            The received event is based on the MediaRecorderErrorEvent interface, whose error property contains a DOMException that describes the actual error that occurred.
+            </para>
+            <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</see> as JSON.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IMediaRecorder.OnStart">
+            <summary>
+            Fired when media recording starts.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IMediaRecorder.OnStop">
+            <summary>
+            Fired when media recording ends, either when the MediaStream ends, or after the MediaRecorder.stop() method is called.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IMediaRecorder.OnResume">
+            <summary>
+            Fired when media recording resumes after being paused.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IMediaRecorder.OnPause">
+            <summary>
+            Fired when media recording is paused.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IMediaRecorderInProcess">
+            <summary>
+            <para>
+            The <i>MediaRecorder</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API">MediaStream Recording API</see> provides functionality to easily record media.<br />
+            It is created using the <see cref="M:BrowserAPI.IMediaStreamInProcess.CreateRecorder(System.String,System.Int32,System.Int32,System.Int32)">CreateRecorder() method</see>.
+            </para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IMediaRecorderInProcess.OnDataavailable">
+            <summary>
+            <para>
+            Fires periodically each time timeslice milliseconds of media have been recorded (or when the entire media has been recorded, if timeslice wasn't specified).
+            The event, of type BlobEvent, contains the recorded media in its data property.
+            </para>
+            <para>Parameter is the recorded binary data.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IMediaRecorderInProcess.OnError">
+            <summary>
+            <para>
+            Fired when there are fatal errors that stop recording.
+            The received event is based on the MediaRecorderErrorEvent interface, whose error property contains a DOMException that describes the actual error that occurred.
+            </para>
+            <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</see> as JSON.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IMediaRecorderInProcess.OnStart">
+            <summary>
+            Fired when media recording starts.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IMediaRecorderInProcess.OnStop">
+            <summary>
+            Fired when media recording ends, either when the MediaStream ends, or after the MediaRecorder.stop() method is called.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IMediaRecorderInProcess.OnResume">
+            <summary>
+            Fired when media recording resumes after being paused.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IMediaRecorderInProcess.OnPause">
+            <summary>
+            Fired when media recording is paused.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IMediaRecorderInProcess.MimeType">
+            <summary>
+            <para>
+            The <i>mimeType</i> read-only property of the MediaRecorder interface returns the <see href="https://developer.mozilla.org/en-US/docs/Glossary/MIME">MIME</see> media type that was specified when creating the MediaRecorder object,
+            or, if none was specified, which was chosen by the browser.
+            This is the file format of the file that would result from writing all of the recorded data to disk.
+            </para>
+            <para>
+            Keep in mind that not all codecs are supported by a given container;
+            if you write media using a codec that is not supported by a given media container, the resulting file may not work reliably if at all when you try to play it back.
+            See our <see href="https://developer.mozilla.org/en-US/docs/Web/Media/Formats">media type and format guide</see> for information about container and codec support across browsers.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IMediaRecorderInProcess.State">
+            <summary>
+            <para>The <i>state</i> read-only property of the MediaRecorder interface returns the current state of the current MediaRecorder object:</para>
+            <para>
+            "inactive" - Recording is not occurring — it has either not been started yet, or it has been started and then stopped.<br />
+            "recording" - Recording has been started and the user agent is capturing data.<br />
+            "paused" - Recording has been started, then paused, but not yet stopped or resumed.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IMediaRecorderInProcess.Stream">
+            <summary>
+            The <i>stream</i> read-only property of the MediaRecorder interface returns the stream that was passed into the <see cref="M:BrowserAPI.IMediaStreamInProcess.CreateRecorder(System.String,System.Int32,System.Int32,System.Int32)">CreateRecorder() method</see> when the MediaRecorder was created.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IMediaRecorderInProcess.AudioBitsPerSecond">
+            <summary>
+            The <i>videoBitsPerSecond</i> read-only property of the MediaRecorder interface returns the video encoding bit rate in use.<br />
+            This may differ from the bit rate specified in the constructor, if it was provided.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IMediaRecorderInProcess.VideoBitsPerSecond">
+            <summary>
+            The <i>videoBitsPerSecond</i> read-only property of the MediaRecorder interface returns the video encoding bit rate in use.<br />
+            This may differ from the bit rate specified in the constructor, if it was provided.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IMediaRecorderInProcess.Start(System.Int32)">
+            <summary>
+            Begins recording media; this method can optionally be passed a timeslice argument with a value in milliseconds.
+            If this is specified, the media will be captured in separate chunks of that duration, rather than the default behavior of recording the media in a single large chunk.
+            </summary>
+            <param name="timeslice">
+            <para>
+            The number of milliseconds to record into each Blob.
+            If this parameter isn't included (a value less or equal 0), the entire media duration is recorded into a single Blob unless the requestData() method is called to obtain the Blob
+            and trigger the creation of a new Blob into which the media continues to be recorded.
+            </para>
+            <para>Note: Like other time values in web APIs, timeslice is not exact and the real intervals may be slightly longer due to other pending tasks before the creation of the next blob.</para>
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaRecorderInProcess.Stop">
+            <summary>
+            Stops recording, at which point a dataavailable event containing the final Blob of saved data is fired. No more recording occurs.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaRecorderInProcess.Resume">
+            <summary>
+            Resumes recording of media after having been paused.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaRecorderInProcess.Pause">
+            <summary>
+            Pauses the recording of media.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaRecorderInProcess.RequestData">
+            <summary>
+            Requests a Blob containing the saved data received thus far (or since the last time requestData() was called.
+            After calling this method, recording continues, but in a new Blob.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IMediaRecorderInProcess.IsTypeSupported(System.String)">
+            <summary>
+            The <i>isTypeSupported()</i> static method of the MediaRecorder interface returns a Boolean which is true if the MIME media type specified is one the user agent should be able to successfully record.
+            </summary>
+            <remarks>In C# this method is not static because it needs an reference to the JS-module.</remarks>
+            <param name="mimeType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IMediaStream">
+            <summary>
+            <para>
+            The <i>MediaStream</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Media_Capture_and_Streams_API">Media Capture and Streams API</see> represents a stream of media content.
+            A stream consists of several tracks, such as video or audio tracks. Each track is specified as an instance of <see href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack">MediaStreamTrack</see>.
+            </para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IMediaStream.Active">
+            <summary>
+            A Boolean value that returns true if the MediaStream is active, or false otherwise.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IMediaStream.GetActive(System.Threading.CancellationToken)">
+            <summary>
+            A Boolean value that returns true if the MediaStream is active, or false otherwise.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IMediaStream.Id">
+            <summary>
+            A string containing a 36-character universally unique identifier (UUID) for the object.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IMediaStream.GetId(System.Threading.CancellationToken)">
+            <summary>
+            A string containing a 36-character universally unique identifier (UUID) for the object.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IMediaStream.CreateRecorder(System.String,System.Int32,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Creates a new MediaRecorder object, given a MediaStream to record.
+            Options are available to do things like set the container's MIME type (such as "video/webm" or "video/mp4") and the bit rates of the audio and video tracks or a single overall bit rate.
+            </summary>
+            <remarks>
+            <para>If bits per second values are not specified for video and/or audio, the default adopted for video is 2.5Mbps, while the audio default is adaptive, depending upon the sample rate and the number of channels.</para>
+            <para>Video resolution, frame rate and similar settings are specified as constraints when calling getUserMedia(), not here in the MediaStream Recording API.</para>
+            </remarks>
+            <param name="mimeType">A MIME type specifying the format for the resulting media; you may specify the container format (the browser will select its preferred codecs for audio and/or video), or you may use the codecs parameter and/or the profiles parameter to provide detailed information about which codecs to use and how to configure them. Applications can check in advance if a mimeType is supported by the user agent by calling MediaRecorder.isTypeSupported(). Defaults to an empty string.</param>
+            <param name="audioBitsPerSecond">The chosen bitrate for the audio component of the media.</param>
+            <param name="videoBitsPerSecond">The chosen bitrate for the video component of the media.</param>
+            <param name="bitsPerSecond">The chosen bitrate for the audio and video components of the media. This can be specified instead of the above two properties. If this is specified along with one or the other of the above properties, this will be used for the one that isn't specified.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IMediaStreamInProcess">
+            <summary>
+            <para>
+            The <i>MediaStream</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Media_Capture_and_Streams_API">Media Capture and Streams API</see> represents a stream of media content.
+            A stream consists of several tracks, such as video or audio tracks. Each track is specified as an instance of <see href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack">MediaStreamTrack</see>.
+            </para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IMediaStreamInProcess.Active">
+            <summary>
+            A Boolean value that returns true if the MediaStream is active, or false otherwise.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IMediaStreamInProcess.Id">
+            <summary>
+            A string containing a 36-character universally unique identifier (UUID) for the object.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IMediaStreamInProcess.CreateRecorder(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a new MediaRecorder object, given a MediaStream to record.
+            Options are available to do things like set the container's MIME type (such as "video/webm" or "video/mp4") and the bit rates of the audio and video tracks or a single overall bit rate.
+            </summary>
+            <remarks>
+            <para>If bits per second values are not specified for video and/or audio, the default adopted for video is 2.5Mbps, while the audio default is adaptive, depending upon the sample rate and the number of channels.</para>
+            <para>Video resolution, frame rate and similar settings are specified as constraints when calling getUserMedia(), not here in the MediaStream Recording API.</para>
+            </remarks>
+            <param name="mimeType">A MIME type specifying the format for the resulting media; you may specify the container format (the browser will select its preferred codecs for audio and/or video), or you may use the codecs parameter and/or the profiles parameter to provide detailed information about which codecs to use and how to configure them. Applications can check in advance if a mimeType is supported by the user agent by calling MediaRecorder.isTypeSupported(). Defaults to an empty string.</param>
+            <param name="audioBitsPerSecond">The chosen bitrate for the audio component of the media.</param>
+            <param name="videoBitsPerSecond">The chosen bitrate for the video component of the media.</param>
+            <param name="bitsPerSecond">The chosen bitrate for the audio and video components of the media. This can be specified instead of the above two properties. If this is specified along with one or the other of the above properties, this will be used for the one that isn't specified.</param>
+            <returns></returns>
+        </member>
         <member name="T:BrowserAPI.IServiceWorkerContainer">
             <summary>
             <para>navigator.serviceWorker</para>
@@ -9216,9 +11112,6 @@
             </para>
             </summary>
             <param name="moduleManager"></param>
-            <summary>
-            Base class for <see cref="!:ServiceWorkerContainer"/> and <see cref="!:ServiceWorkerContainerInProcess"/>.
-            </summary>
         </member>
         <member name="M:BrowserAPI.IServiceWorkerContainer.RegisterWithWorkerRegistration(System.String,System.Threading.CancellationToken)">
             <summary>
@@ -9303,9 +11196,6 @@
         </member>
         <member name="T:BrowserAPI.IServiceWorkerContainerInProcess">
             <summary>
-            Base class for <see cref="!:ServiceWorkerContainer"/> and <see cref="!:ServiceWorkerContainerInProcess"/>.
-            </summary>
-            <summary>
             <para>navigator.serviceWorker</para>
             <para>
             The <i>ServiceWorkerContainer</i> interface of the <i>Service Worker API</i> provides an object representing the service worker as an overall unit in the network ecosystem, including facilities to register, unregister and update service workers, and access the state of service workers and their registrations.<br />
@@ -9386,10 +11276,6 @@
             You register a service worker to control one or more pages that share the same origin.
             </para>
             <para>Objects of this class must disposed manually, so do not forget to call <see cref="!:DisposeAsync"/> when you are done with it.</para>
-            </summary>
-            <summary>
-            <para>Base class for <see cref="!:ServiceWorkerRegistration"/> and <see cref="!:ServiceWorkerRegistrationInProcess"/>.</para>
-            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
             </summary>
         </member>
         <member name="P:BrowserAPI.IServiceWorkerRegistration.Active">
@@ -9489,10 +11375,6 @@
         </member>
         <member name="T:BrowserAPI.IServiceWorkerRegistrationInProcess">
             <summary>
-            <para>Base class for <see cref="!:ServiceWorkerRegistration"/> and <see cref="!:ServiceWorkerRegistrationInProcess"/>.</para>
-            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
-            </summary>
-            <summary>
             <para>
             The <i>ServiceWorkerRegistration</i> interface of the Service Worker API represents the service worker registration.
             You register a service worker to control one or more pages that share the same origin.
@@ -9560,10 +11442,6 @@
             </para>
             <para>Objects of this class must disposed manually, so do not forget to call <see cref="!:DisposeAsync"/> when you are done with it.</para>
             </summary>
-            <summary>
-            <para>Base class for <see cref="!:ServiceWorker"/> and <see cref="!:ServiceWorkerInProcess"/>.</para>
-            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
-            </summary>
         </member>
         <member name="P:BrowserAPI.IServiceWorker.ScriptUrl">
             <summary>
@@ -9622,10 +11500,6 @@
             </summary>
         </member>
         <member name="T:BrowserAPI.IServiceWorkerInProcess">
-            <summary>
-            <para>Base class for <see cref="!:ServiceWorker"/> and <see cref="!:ServiceWorkerInProcess"/>.</para>
-            <para>Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call <see cref="!:DisposeEventTrigger"/> there.</para>
-            </summary>
             <summary>
             <para>
             The <i>ServiceWorker</i> interface of the Service Worker API provides a reference to a service worker.
@@ -9861,6 +11735,31 @@
         <member name="T:AutoInterfaceAttributes.IgnoreAutoInterfaceAttribute">
             <summary>
             The decorated member will be Ignored by the generator.
+            </summary>
+        </member>
+        <member name="T:AutoInterfaceAttributes.AutoInterfaceVisibilityPublic">
+            <summary>
+            Adds a "public" access modifier to the interface member.
+            </summary>
+        </member>
+        <member name="T:AutoInterfaceAttributes.AutoInterfaceVisibilityInternal">
+            <summary>
+            Adds a "internal" access modifier to the interface member.
+            </summary>
+        </member>
+        <member name="T:AutoInterfaceAttributes.AutoInterfaceVisibilityProtected">
+            <summary>
+            Adds a "protected" access modifier to the interface member.
+            </summary>
+        </member>
+        <member name="T:AutoInterfaceAttributes.AutoInterfaceVisibilityProtectedInternal">
+            <summary>
+            Adds a "protected internal" access modifier to the interface member.
+            </summary>
+        </member>
+        <member name="T:AutoInterfaceAttributes.AutoInterfaceVisibilityPrivateProtected">
+            <summary>
+            Adds a "private protected" access modifier to the interface member.
             </summary>
         </member>
     </members>

@@ -1,3 +1,6 @@
+import { MediaStreamWrapper, createMediaStream } from "../MediaDevices/MediaStream/MediaStream";
+
+
 /**
  * @param {HTMLMediaElement} htmlMediaElement
  * @returns {HTMLMediaElementWrapper}
@@ -49,6 +52,26 @@ export class HTMLMediaElementWrapper {
      */
     setSrc(value) {
         this.#htmlMediaElement.src = value;
+    }
+
+    /**
+     * @returns {MediaStreamWrapper | null}
+     */
+    getSrcObject() {
+        const result = this.#htmlMediaElement.srcObject;
+        if (result instanceof MediaStream)
+            return new MediaStreamWrapper(result);
+        else
+            return null;
+    }
+    /**
+     * @param {MediaStreamWrapper | null} value
+     */
+    setSrcObject(value) {
+        if (value !== null)
+            this.#htmlMediaElement.srcObject = value.getStream();
+        else
+            this.#htmlMediaElement.srcObject = value;
     }
 
     /**

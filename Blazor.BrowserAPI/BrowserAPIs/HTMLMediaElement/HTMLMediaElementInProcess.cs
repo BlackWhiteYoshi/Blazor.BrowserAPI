@@ -38,6 +38,22 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     }
 
     /// <summary>
+    /// A MediaStream representing the media to play or that has played in the current HTMLMediaElement, or null if not assigned.
+    /// </summary>
+    public IMediaStreamInProcess? SrcObject {
+        get {
+            try {
+                IJSInProcessObjectReference mediaStream = htmlMediaElementJS.Invoke<IJSInProcessObjectReference>("getSrcObject");
+                return new MediaStreamInProcess(mediaStream);
+            }
+            catch (JSException) {
+                return null;
+            }
+        }
+        set => htmlMediaElementJS.InvokeVoid("setSrcObject", [value?.MediaStreamJS]);
+    }
+
+    /// <summary>
     /// A boolean that reflects the controls HTML attribute, indicating whether user interface items for controlling the resource should be displayed.
     /// </summary>
     public bool Controls {

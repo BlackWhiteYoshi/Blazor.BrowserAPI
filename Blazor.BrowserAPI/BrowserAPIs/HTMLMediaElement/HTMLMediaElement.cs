@@ -61,6 +61,36 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
 
 
     /// <summary>
+    /// A MediaStream representing the media to play or that has played in the current HTMLMediaElement, or null if not assigned.
+    /// </summary>
+    public ValueTask<IMediaStream?> SrcObject => GetSrcObject(default);
+
+    /// <summary>
+    /// A MediaStream representing the media to play or that has played in the current HTMLMediaElement, or null if not assigned.
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IMediaStream?> GetSrcObject(CancellationToken cancellationToken) {
+        try {
+            IJSObjectReference mediaStream = await (await HTMLMediaElementTask).InvokeTrySync<IJSObjectReference>("getSrcObject", cancellationToken);
+            return new MediaStream(mediaStream);
+        }
+        catch (JSException) {
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// A MediaStream representing the media to play or that has played in the current HTMLMediaElement, or null if not assigned.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetSrcObject(IMediaStream? value, CancellationToken cancellationToken = default)
+        => await (await HTMLMediaElementTask).InvokeVoidTrySync("setSrcObject", cancellationToken, [value?.MediaStreamJS]);
+
+
+    /// <summary>
     /// A boolean that reflects the controls HTML attribute, indicating whether user interface items for controlling the resource should be displayed.
     /// </summary>
     public ValueTask<bool> Controls => GetControls(default);

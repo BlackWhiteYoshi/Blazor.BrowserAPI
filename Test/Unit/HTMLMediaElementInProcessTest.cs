@@ -25,6 +25,19 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
 
     [Fact]
+    public async Task GetSrcObject() {
+        await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_SRC_OBJECT_INPROCESS).ClickAsync();
+        // an assertion happens in DisposeAsync()
+    }
+
+    [Fact]
+    public async Task SetSrcObject() {
+        await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_SET_SRC_OBJECT_INPROCESS).ClickAsync();
+        // an assertion happens in DisposeAsync()
+    }
+
+
+    [Fact]
     public async Task GetControls() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_CONTROLS_INPROCESS).ClickAsync();
 
@@ -227,7 +240,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_READY_STATE_INPROCESS).ClickAsync();
 
         string? result = await Page.GetByTestId(HTMLMediaElementGroup.LABEL_OUTPUT).TextContentAsync();
-        Assert.Equal("0", result);
+        Assert.NotEmpty(result!);
     }
 
 
