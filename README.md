@@ -91,3 +91,5 @@ There are more interfaces coming.
   Breaking Change: removed HTMLElementFactory and DialogFactory and added ElementFactory/ElementFactoryInProcess instead.
 - 0.5.0  
   Added HTMLMediaElement (12 BrowserAPIs)
+- 0.6.0  
+  Added MediaDevices (13 BrowserAPIs)
