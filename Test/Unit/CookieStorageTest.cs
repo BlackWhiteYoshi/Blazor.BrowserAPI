@@ -13,8 +13,7 @@ public sealed class CookieStorageTest(PlayWrightFixture playWrightFixture) : Pla
     [InlineData(10)]
     public async Task GetAllCookies_Property(int number) {
         string expected = string.Empty;
-        if (number > 0)
-        {
+        if (number > 0) {
             StringBuilder builder = new();
             for (int i = 0; i < number; i++)
                 builder.Append($"test-key-{i}=test-value-{i}; ");

@@ -91,7 +91,7 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
     public const string BUTTON_GET_ACTIVE_PROPERTY = "media-stream-get-active-property";
     private async Task GetActive_Property() {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
-        
+
         bool active = await mediaStream.Active;
         labelOutput = active.ToString();
     }
@@ -99,7 +99,7 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
     public const string BUTTON_GET_ACTIVE_METHOD = "media-stream-get-active-method";
     private async Task GetActive_Method() {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
-        
+
         bool active = await mediaStream.GetActive(default);
         labelOutput = active.ToString();
     }
@@ -108,7 +108,7 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
     public const string BUTTON_GET_ID_PROPERTY = "media-stream-get-id-property";
     private async Task GetId_Property() {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
-        
+
         string id = await mediaStream.Id;
         labelOutput = id;
     }
@@ -116,7 +116,7 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
     public const string BUTTON_GET_ID_METHOD = "media-stream-get-id-method";
     private async Task GetId_Method() {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
-        
+
         string id = await mediaStream.GetId(default);
         labelOutput = id;
     }

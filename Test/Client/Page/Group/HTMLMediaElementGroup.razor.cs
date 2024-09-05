@@ -29,7 +29,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string AUDIO_ELEMENT = "htmlmediaelement-audio-element";
     private ElementReference audioElement;
 
-    
+
     public const string LABEL_OUTPUT = "htmlmediaelement-output";
     private string labelOutput = string.Empty;
 

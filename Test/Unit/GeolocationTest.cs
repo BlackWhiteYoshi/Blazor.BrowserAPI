@@ -24,7 +24,7 @@ public sealed class GeolocationTest(PlayWrightFixture playWrightFixture) : PlayW
         });
 
         await Page.GetByTestId(GeolocationGroup.BUTTON_GET_CURRENT_POSITION).ClickAsync();
-        
+
         string? result = await Page.GetByTestId(GeolocationGroup.LABEL_OUTPUT).TextContentAsync();
 
         int secondParameterIndex = result?.LastIndexOf("}, ") ?? throw new Exception("result is null");
@@ -41,7 +41,7 @@ public sealed class GeolocationTest(PlayWrightFixture playWrightFixture) : PlayW
         const float LONGITUDE = 10.0f;
         const float LATITUDE = 12.0f;
         const float ACCURACY = 1.0f;
-        
+
         await Page.GetByTestId(GeolocationGroup.BUTTON_WATCH_POSITION).ClickAsync();
 
         for (int i = 0; i < 5; i++) {

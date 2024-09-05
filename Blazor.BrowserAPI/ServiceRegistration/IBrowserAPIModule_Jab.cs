@@ -62,7 +62,7 @@ internal class ImportAttribute : Attribute;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true, Inherited = true)]
 internal class SingletonAttribute : Attribute;
-    
+
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true, Inherited = true)]
 internal class TransientAttribute : Attribute;
 

@@ -59,12 +59,12 @@ public sealed class Config {
     [SetsRequiredMembers]
     public Config(string json) {
         JsonNode root = JsonNode.Parse(json) ?? throw new Exception($"json is not in a valid format:\n{json}");
-        
+
         WorkingDirectory = root.GetString("working directory");
         if (!Directory.Exists(WorkingDirectory))
             throw new InvalidDataException($"working directory does not exist:\n{Path.Combine(Directory.GetCurrentDirectory(), WorkingDirectory)}");
         WorkingDirectoryWithTrailingSlash = $"{WorkingDirectory}{Path.DirectorySeparatorChar}";
-        
+
         string relativePageFolderPath = root.Get("generate html pages").GetString("page folder");
         PageFolderPath = $"{WorkingDirectory}{Path.DirectorySeparatorChar}{relativePageFolderPath}";
         PageFolderPathWithTrailingSlash = $"{WorkingDirectory}{Path.DirectorySeparatorChar}{relativePageFolderPath}{Path.DirectorySeparatorChar}";

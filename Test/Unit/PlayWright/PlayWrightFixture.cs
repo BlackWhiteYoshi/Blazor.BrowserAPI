@@ -16,6 +16,9 @@ public sealed class PlayWrightFixture : ICollectionFixture<PlayWrightFixture>, I
     private IBrowser browser = null!;
 
     public PlayWrightFixture() {
+        // enusre the right version is installed
+        Program.Main(["install"]);
+
         hostFactory = new();
         hostFactory.WithWebHostBuilder((IWebHostBuilder builder) =>
             builder.ConfigureAppConfiguration((IConfigurationBuilder configBuilder) =>

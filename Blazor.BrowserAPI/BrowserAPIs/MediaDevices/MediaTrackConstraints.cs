@@ -27,7 +27,7 @@ public readonly record struct MediaTrackConstraints {
     /// A ConstrainDOMString object specifying a device ID or an array of device IDs which are acceptable and/or required.
     /// </summary>
     public ConstrainDOMString? DeviceId { get; init; }
-    
+
     /// <summary>
     /// <para>
     /// A ConstrainDOMString which specifies the types of display surface that may be selected by the user.
