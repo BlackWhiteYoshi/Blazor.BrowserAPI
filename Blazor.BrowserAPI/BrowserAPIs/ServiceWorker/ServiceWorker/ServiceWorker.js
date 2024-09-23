@@ -46,27 +46,54 @@ export class ServiceWorkerWrapper {
 
     // events
 
+    /** @type {import("../../../blazor").DotNet.DotNetObject} */
+    #eventTrigger;
+
+
+    // #region statechange event
+
+    /**
+     * @param {Event} event
+     */
+    #onstatechangeCallback = (event) => this.#eventTrigger.invokeMethodAsync("InvokeStateChange", /** @type {ServiceWorker} */(event.target).state);
+
     /**
      * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnstatechange(eventTrigger) {
-        this.#serviceWorker.onstatechange = (event) => eventTrigger.invokeMethodAsync("InvokeStateChange", /** @type {ServiceWorker} */(event.target).state);
+        this.#eventTrigger = eventTrigger;
+        this.#serviceWorker.addEventListener("statechange", this.#onstatechangeCallback);
     }
+
     /**
      */
     deactivateOnstatechange() {
-        this.#serviceWorker.onstatechange = null;
+        this.#serviceWorker.removeEventListener("statechange", this.#onstatechangeCallback);
     }
+
+    // #endregion
+
+
+    // #region error event
+
+    /**
+     * @param {ErrorEvent} event
+     */
+    #onerrorCallback = (event) => this.#eventTrigger.invokeMethodAsync("InvokeError", event);
 
     /**
      * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnerror(eventTrigger) {
-        this.#serviceWorker.onerror = (event) => eventTrigger.invokeMethodAsync("InvokeError", event);
+        this.#eventTrigger = eventTrigger;
+        this.#serviceWorker.addEventListener("error", this.#onerrorCallback);
     }
+
     /**
      */
     deactivateOnerror() {
-        this.#serviceWorker.onerror = null;
+        this.#serviceWorker.removeEventListener("error", this.#onerrorCallback);
     }
+
+    // #endregion
 }

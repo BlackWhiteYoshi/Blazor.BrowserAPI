@@ -72,27 +72,52 @@ export class DialogWrapper {
 
     // events
 
+    /** @type {import("../../blazor").DotNet.DotNetObject} */
+    #eventTrigger;
+
+
+    // #region cancel event
+
+    /**
+     */
+    #oncancelCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeCancel");
+
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOncancel(eventTrigger) {
-        this.#dialog.oncancel = () => eventTrigger.invokeMethodAsync("InvokeCancel");
+        this.#eventTrigger = eventTrigger;
+        this.#dialog.addEventListener("cancel", this.#oncancelCallback);
     }
+
     /**
      */
     deactivateOncancel() {
-        this.#dialog.oncancel = null;
+        this.#dialog.removeEventListener("cancel", this.#oncancelCallback);
     }
-    
+
+    // #endregion
+
+
+    // #region close event
+
+    /**
+     */
+    #oncloseCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeClose");
+
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnclose(eventTrigger) {
-        this.#dialog.onclose = () => eventTrigger.invokeMethodAsync("InvokeClose");
+        this.#eventTrigger = eventTrigger;
+        this.#dialog.addEventListener("close", this.#oncloseCallback);
     }
+
     /**
      */
     deactivateOnclose() {
-        this.#dialog.onclose = null;
+        this.#dialog.removeEventListener("close", this.#oncloseCallback);
     }
+
+    // #endregion
 }

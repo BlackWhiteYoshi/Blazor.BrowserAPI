@@ -76,26 +76,51 @@ export function serviceWorkerContainerStartMessages() {
 
 // events
 
+/** @type {import("../../../blazor").DotNet.DotNetObject} */
+let serviceWorkerContainerEventTrigger;
+
+
+// #region controllerchange event
+
+/**
+ */
+const serviceWorkerContainerOncontrollerchangeCallback = () => serviceWorkerContainerEventTrigger.invokeMethodAsync("InvokeControllerChange");
+
 /**
  * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
  */
 export function serviceWorkerContainerActivateOncontrollerchange(eventTrigger) {
-    navigator.serviceWorker.oncontrollerchange = () => eventTrigger.invokeMethodAsync("InvokeControllerChange");
+    serviceWorkerContainerEventTrigger = eventTrigger;
+    navigator.serviceWorker.addEventListener("controllerchange", serviceWorkerContainerOncontrollerchangeCallback);
 }
+
 /**
  */
 export function serviceWorkerContainerDeactivateOncontrollerchange() {
-    navigator.serviceWorker.oncontrollerchange = null;
+    navigator.serviceWorker.removeEventListener("controllerchange", serviceWorkerContainerOncontrollerchangeCallback);
 }
+
+// #endregion
+
+
+// #region message event
+
+/**
+ */
+const serviceWorkerContainerOnmessageCallback = () => serviceWorkerContainerEventTrigger.invokeMethodAsync("InvokeMessage");
 
 /**
  * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
  */
 export function serviceWorkerContainerActivateOnMessage(eventTrigger) {
-    navigator.serviceWorker.onmessage = () => eventTrigger.invokeMethodAsync("InvokeMessage");
+    serviceWorkerContainerEventTrigger = eventTrigger;
+    navigator.serviceWorker.addEventListener("message", serviceWorkerContainerOnmessageCallback);
 }
+
 /**
  */
 export function serviceWorkerContainerDeactivateOnMessage() {
-    navigator.serviceWorker.onmessage = null;
+    navigator.serviceWorker.removeEventListener("message", serviceWorkerContainerOnmessageCallback);
 }
+
+// #endregion

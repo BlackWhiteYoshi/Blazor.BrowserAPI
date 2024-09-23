@@ -368,280 +368,522 @@ export class HTMLMediaElementWrapper {
      * Events
      **/
 
+    /** @type {import("../../blazor").DotNet.DotNetObject} */
+    #eventTrigger;
+
+
     // Ready
+
+    // #region error event
+
+    /**
+     */
+    #onerrorCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeError", /** @type {MediaError} */(this.#htmlMediaElement.error).code, /** @type {MediaError} */(this.#htmlMediaElement.error).message);
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnerror(eventTrigger) {
-        this.#htmlMediaElement.onerror = () => eventTrigger.invokeMethodAsync("InvokeError", /** @type {MediaError} */(this.#htmlMediaElement.error).code, /** @type {MediaError} */(this.#htmlMediaElement.error).message);
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("error", this.#onerrorCallback);
         if (this.#htmlMediaElement.error !== null)
-            eventTrigger.invokeMethodAsync("InvokeError", this.#htmlMediaElement.error.code, this.#htmlMediaElement.error.message);
+            this.#onerrorCallback();
     }
+
     /**
      */
     deactivateOnerror() {
-        this.#htmlMediaElement.onerror = null;
+        this.#htmlMediaElement.removeEventListener("error", this.#onerrorCallback);
     }
+
+    // #endregion
+
+
+    // #region canplay event
+
+    /**
+     */
+    #oncanplayCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeCanplay");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOncanplay(eventTrigger) {
-        this.#htmlMediaElement.oncanplay = () => eventTrigger.invokeMethodAsync("InvokeCanplay");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("canplay", this.#oncanplayCallback);
     }
+
     /**
      */
     deactivateOncanplay() {
-        this.#htmlMediaElement.oncanplay = null;
+        this.#htmlMediaElement.removeEventListener("canplay", this.#oncanplayCallback);
     }
+
+    // #endregion
+
+
+    // #region canplaythrough event
+
+    /**
+     */
+    #oncanplaythroughCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeCanplaythrough");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOncanplaythrough(eventTrigger) {
-        this.#htmlMediaElement.oncanplaythrough = () => eventTrigger.invokeMethodAsync("InvokeCanplaythrough");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("canplaythrough", this.#oncanplaythroughCallback);
     }
+
     /**
      */
     deactivateOncanplaythrough() {
-        this.#htmlMediaElement.oncanplaythrough = null;
+        this.#htmlMediaElement.removeEventListener("canplaythrough", this.#oncanplaythroughCallback);
     }
+
+    // #endregion
+
+
+    // #region playing event
+
+    /**
+     */
+    #onplayingCallback = () => this.#eventTrigger.invokeMethodAsync("InvokePlaying");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnplaying(eventTrigger) {
-        this.#htmlMediaElement.onplaying = () => eventTrigger.invokeMethodAsync("InvokePlaying");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("playing", this.#onplayingCallback);
     }
+
     /**
      */
     deactivateOnplaying() {
-        this.#htmlMediaElement.onplaying = null;
+        this.#htmlMediaElement.removeEventListener("playing", this.#onplayingCallback);
     }
+
+    // #endregion
 
 
     // Data
+
+    // #region loadstart event
+
+    /**
+     */
+    #onloadstartCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeLoadstart");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnloadstart(eventTrigger) {
-        this.#htmlMediaElement.onloadstart = () => eventTrigger.invokeMethodAsync("InvokeLoadstart");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("loadstart", this.#onloadstartCallback);
     }
+
     /**
      */
     deactivateOnloadstart() {
-        this.#htmlMediaElement.onloadstart = null;
+        this.#htmlMediaElement.removeEventListener("loadstart", this.#onloadstartCallback);
     }
+
+    // #endregion
+
+
+    // #region progress event
+
+    /**
+     */
+    #onprogressCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeProgress");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnprogress(eventTrigger) {
-        this.#htmlMediaElement.onprogress = () => eventTrigger.invokeMethodAsync("InvokeProgress");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("progress", this.#onprogressCallback);
     }
+
     /**
      */
     deactivateOnprogress() {
-        this.#htmlMediaElement.onprogress = null;
+        this.#htmlMediaElement.removeEventListener("progress", this.#onprogressCallback);
     }
+
+    // #endregion
+
+
+    // #region loadeddata event
+
+    /**
+     */
+    #onloadeddataCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeLoadeddata");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnloadeddata(eventTrigger) {
-        this.#htmlMediaElement.onloadeddata = () => eventTrigger.invokeMethodAsync("InvokeLoadeddata");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("loadeddata", this.#onloadeddataCallback);
     }
+
     /**
      */
     deactivateOnloadeddata() {
-        this.#htmlMediaElement.onloadeddata = null;
+        this.#htmlMediaElement.removeEventListener("loadeddata", this.#onloadeddataCallback);
     }
+
+    // #endregion
+
+
+    // #region loadedmetadata event
+
+    /**
+     */
+    #onloadedmetadataCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeLoadedmetadata");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnloadedmetadata(eventTrigger) {
-        this.#htmlMediaElement.onloadedmetadata = () => eventTrigger.invokeMethodAsync("InvokeLoadedmetadata");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("loadedmetadata", this.#onloadedmetadataCallback);
     }
+
     /**
      */
     deactivateOnloadedmetadata() {
-        this.#htmlMediaElement.onloadedmetadata = null;
+        this.#htmlMediaElement.removeEventListener("loadedmetadata", this.#onloadedmetadataCallback);
     }
+
+    // #endregion
+
+
+    // #region stalled event
+
+    /**
+     */
+    #onstalledCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeStalled");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnstalled(eventTrigger) {
-        this.#htmlMediaElement.onstalled = () => eventTrigger.invokeMethodAsync("InvokeStalled");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("stalled", this.#onstalledCallback);
     }
+
     /**
      */
     deactivateOnstalled() {
-        this.#htmlMediaElement.onstalled = null;
+        this.#htmlMediaElement.removeEventListener("stalled", this.#onstalledCallback);
     }
+
+    // #endregion
+
+
+    // #region suspend event
+
+    /**
+     */
+    #onsuspendCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeSuspend");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnsuspend(eventTrigger) {
-        this.#htmlMediaElement.onsuspend = () => eventTrigger.invokeMethodAsync("InvokeSuspend");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("suspend", this.#onsuspendCallback);
     }
+
     /**
      */
     deactivateOnsuspend() {
-        this.#htmlMediaElement.onsuspend = null;
+        this.#htmlMediaElement.removeEventListener("suspend", this.#onsuspendCallback);
     }
+
+    // #endregion
+
+
+    // #region waiting event
+
+    /**
+     */
+    #onwaitingCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeWaiting");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnwaiting(eventTrigger) {
-        this.#htmlMediaElement.onwaiting = () => eventTrigger.invokeMethodAsync("InvokeWaiting");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("waiting", this.#onwaitingCallback);
     }
+
     /**
      */
     deactivateOnwaiting() {
-        this.#htmlMediaElement.onwaiting = null;
+        this.#htmlMediaElement.removeEventListener("waiting", this.#onwaitingCallback);
     }
+
+    // #endregion
+
+
+    // #region abort event
+
+    /**
+     */
+    #onabortCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeAbort");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnabort(eventTrigger) {
-        this.#htmlMediaElement.onabort = () => eventTrigger.invokeMethodAsync("InvokeAbort");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("abort", this.#onabortCallback);
     }
+
     /**
      */
     deactivateOnabort() {
-        this.#htmlMediaElement.onabort = null;
+        this.#htmlMediaElement.removeEventListener("abort", this.#onabortCallback);
     }
+
+    // #endregion
+
+
+    // #region emptied event
+
+    /**
+     */
+    #onemptiedCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeEmptied");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnemptied(eventTrigger) {
-        this.#htmlMediaElement.onemptied = () => eventTrigger.invokeMethodAsync("InvokeEmptied");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("emptied", this.#onemptiedCallback);
     }
+
     /**
      */
     deactivateOnemptied() {
-        this.#htmlMediaElement.onemptied = null;
+        this.#htmlMediaElement.removeEventListener("emptied", this.#onemptiedCallback);
     }
+
+    // #endregion
 
 
     // Timing
+
+    // #region play event
+
+    /**
+     */
+    #onplayCallback = () => this.#eventTrigger.invokeMethodAsync("InvokePlay");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnplay(eventTrigger) {
-        this.#htmlMediaElement.onplay = () => eventTrigger.invokeMethodAsync("InvokePlay");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("play", this.#onplayCallback);
     }
+
     /**
      */
     deactivateOnplay() {
-        this.#htmlMediaElement.onplay = null;
+        this.#htmlMediaElement.removeEventListener("play", this.#onplayCallback);
     }
+
+    // #endregion
+
+
+    // #region pause event
+
+    /**
+     */
+    #onpauseCallback = () => this.#eventTrigger.invokeMethodAsync("InvokePause");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnpause(eventTrigger) {
-        this.#htmlMediaElement.onpause = () => eventTrigger.invokeMethodAsync("InvokePause");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("pause", this.#onpauseCallback);
     }
+
     /**
      */
     deactivateOnpause() {
-        this.#htmlMediaElement.onpause = null;
+        this.#htmlMediaElement.removeEventListener("pause", this.#onpauseCallback);
     }
+
+    // #endregion
+
+
+    // #region ended event
+
+    /**
+     */
+    #onendedCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeEnded");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnended(eventTrigger) {
-        this.#htmlMediaElement.onended = () => eventTrigger.invokeMethodAsync("InvokeEnded");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("ended", this.#onendedCallback);
     }
+
     /**
      */
     deactivateOnended() {
-        this.#htmlMediaElement.onended = null;
+        this.#htmlMediaElement.removeEventListener("ended", this.#onendedCallback);
     }
+
+    // #endregion
+
+
+    // #region seeking event
+
+    /**
+     */
+    #onseekingCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeSeeking");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnseeking(eventTrigger) {
-        this.#htmlMediaElement.onseeking = () => eventTrigger.invokeMethodAsync("InvokeSeeking");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("seeking", this.#onseekingCallback);
     }
+
     /**
      */
     deactivateOnseeking() {
-        this.#htmlMediaElement.onseeking = null;
+        this.#htmlMediaElement.removeEventListener("seeking", this.#onseekingCallback);
     }
+
+    // #endregion
+
+
+    // #region seeked event
+
+    /**
+     */
+    #onseekedCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeSeeked");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnseeked(eventTrigger) {
-        this.#htmlMediaElement.onseeked = () => eventTrigger.invokeMethodAsync("InvokeSeeked");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("seeked", this.#onseekedCallback);
     }
+
     /**
      */
     deactivateOnseeked() {
-        this.#htmlMediaElement.onseeked = null;
+        this.#htmlMediaElement.removeEventListener("seeked", this.#onseekedCallback);
     }
+
+    // #endregion
+
+
+    // #region timeupdate event
+
+    /**
+     */
+    #ontimeupdateCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeTimeupdate");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOntimeupdate(eventTrigger) {
-        this.#htmlMediaElement.ontimeupdate = () => eventTrigger.invokeMethodAsync("InvokeTimeupdate");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("timeupdate", this.#ontimeupdateCallback);
     }
+
     /**
      */
     deactivateOntimeupdate() {
-        this.#htmlMediaElement.ontimeupdate = null;
+        this.#htmlMediaElement.removeEventListener("timeupdate", this.#ontimeupdateCallback);
     }
+
+    // #endregion
 
 
     // Setting
+
+    // #region volumechange event
+
+    /**
+     */
+    #onvolumechangeCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeVolumechange");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnvolumechange(eventTrigger) {
-        this.#htmlMediaElement.onvolumechange = () => eventTrigger.invokeMethodAsync("InvokeVolumechange");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("volumechange", this.#onvolumechangeCallback);
     }
+
     /**
      */
     deactivateOnvolumechange() {
-        this.#htmlMediaElement.onvolumechange = null;
+        this.#htmlMediaElement.removeEventListener("volumechange", this.#onvolumechangeCallback);
     }
+
+    // #endregion
+
+
+    // #region ratechange event
+
+    /**
+     */
+    #onratechangeCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeRatechange");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnratechange(eventTrigger) {
-        this.#htmlMediaElement.onratechange = () => eventTrigger.invokeMethodAsync("InvokeRatechange");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("ratechange", this.#onratechangeCallback);
     }
+
     /**
      */
     deactivateOnratechange() {
-        this.#htmlMediaElement.onratechange = null;
+        this.#htmlMediaElement.removeEventListener("ratechange", this.#onratechangeCallback);
     }
+
+    // #endregion
+
+
+    // #region durationchange event
+
+    /**
+     */
+    #ondurationchangeCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeDurationchange");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOndurationchange(eventTrigger) {
-        this.#htmlMediaElement.ondurationchange = () => eventTrigger.invokeMethodAsync("InvokeDurationchange");
+        this.#eventTrigger = eventTrigger;
+        this.#htmlMediaElement.addEventListener("durationchange", this.#ondurationchangeCallback);
     }
+
     /**
      */
     deactivateOndurationchange() {
-        this.#htmlMediaElement.ondurationchange = null;
+        this.#htmlMediaElement.removeEventListener("durationchange", this.#ondurationchangeCallback);
     }
+
+    // #endregion
 }

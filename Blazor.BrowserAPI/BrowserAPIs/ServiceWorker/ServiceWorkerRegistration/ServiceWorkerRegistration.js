@@ -79,15 +79,29 @@ export class ServiceWorkerRegistrationWrapper {
 
     // events
 
+    /** @type {import("../../../blazor").DotNet.DotNetObject} */
+    #eventTrigger;
+
+
+    // #region updatefound event
+
+    /**
+     */
+    #onupdatefoundCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeUpdateFound");
+
     /**
      * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnupdatefound(eventTrigger) {
-        this.#serviceWorkerRegistration.onupdatefound = () => eventTrigger.invokeMethodAsync("InvokeUpdateFound");
+        this.#eventTrigger = eventTrigger;
+        this.#serviceWorkerRegistration.addEventListener("updatefound", this.#onupdatefoundCallback);
     }
+
     /**
      */
     deactivateOnupdatefound() {
-        this.#serviceWorkerRegistration.onupdatefound = null;
+        this.#serviceWorkerRegistration.removeEventListener("updatefound", this.#onupdatefoundCallback);
     }
+
+    // #endregion
 }

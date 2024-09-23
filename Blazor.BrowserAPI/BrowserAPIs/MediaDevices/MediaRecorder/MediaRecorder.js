@@ -92,75 +92,146 @@ export class MediaRecorderWrapper {
 
     // events
 
+    /** @type {import("../../../blazor").DotNet.DotNetObject} */
+    #eventTrigger;
+
+
+    // #region dataavailable event
+
+    /**
+     * @param {BlobEvent} event
+     */
+    #ondataavailableCallback = async (event) => await this.#eventTrigger.invokeMethodAsync("InvokeDataavailable", new Uint8Array(await event.data.arrayBuffer()));
+
     /**
      * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOndataavailable(eventTrigger) {
-        this.#mediaRecorder.ondataavailable = async (event) => await eventTrigger.invokeMethodAsync("InvokeDataavailable", new Uint8Array(await event.data.arrayBuffer()));
+        this.#eventTrigger = eventTrigger;
+        this.#mediaRecorder.addEventListener("dataavailable", this.#ondataavailableCallback);
     }
+
     /**
      */
     deactivateOndataavailable() {
-        this.#mediaRecorder.ondataavailable = null;
+        this.#mediaRecorder.removeEventListener("dataavailable", this.#ondataavailableCallback);
     }
+
+    // #endregion
+
+
+    // #region error event
+
+    /**
+     * @param {Event} event
+     */
+    #onerrorCallback = (event) => this.#eventTrigger.invokeMethodAsync("InvokeError", event);
 
     /**
      * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnerror(eventTrigger) {
-        this.#mediaRecorder.onerror = (event) => eventTrigger.invokeMethodAsync("InvokeError", event);
+        this.#eventTrigger = eventTrigger;
+        this.#mediaRecorder.addEventListener("error", this.#onerrorCallback);
     }
+
     /**
      */
     deactivateOnerror() {
-        this.#mediaRecorder.onerror = null;
+        this.#mediaRecorder.removeEventListener("error", this.#onerrorCallback);
     }
+
+    // #endregion
+
+
+    // #region start event
+
+    /**
+     */
+    #onstartCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeStart");
 
     /**
      * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnstart(eventTrigger) {
-        this.#mediaRecorder.onstart = () => eventTrigger.invokeMethodAsync("InvokeStart");
+        this.#eventTrigger = eventTrigger;
+        this.#mediaRecorder.addEventListener("start", this.#onstartCallback);
     }
+
     /**
      */
     deactivateOnstart() {
-        this.#mediaRecorder.onstart = null;
+        this.#mediaRecorder.removeEventListener("start", this.#onstartCallback);
     }
+
+    // #endregion
+
+
+    // #region stop event
+
+    /**
+     */
+    #onstopCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeStop");
 
     /**
      * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnstop(eventTrigger) {
-        this.#mediaRecorder.onstop = () => eventTrigger.invokeMethodAsync("InvokeStop");
+        this.#eventTrigger = eventTrigger;
+        this.#mediaRecorder.addEventListener("stop", this.#onstopCallback);
     }
+
     /**
      */
     deactivateOnstop() {
-        this.#mediaRecorder.onstop = null;
+        this.#mediaRecorder.removeEventListener("stop", this.#onstopCallback);
     }
+
+    // #endregion
+
+
+    // #region resume event
+
+    /**
+     */
+    #onresumeCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeResume");
 
     /**
      * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnresume(eventTrigger) {
-        this.#mediaRecorder.onresume = () => eventTrigger.invokeMethodAsync("InvokeResume");
+        this.#eventTrigger = eventTrigger;
+        this.#mediaRecorder.addEventListener("resume", this.#onresumeCallback);
     }
+
     /**
      */
     deactivateOnresume() {
-        this.#mediaRecorder.onresume = null;
+        this.#mediaRecorder.removeEventListener("resume", this.#onresumeCallback);
     }
+
+    // #endregion
+
+
+    // #region pause event
+
+    /**
+     */
+    #onpauseCallback = () => this.#eventTrigger.invokeMethodAsync("InvokePause");
 
     /**
      * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnpause(eventTrigger) {
-        this.#mediaRecorder.onpause = () => eventTrigger.invokeMethodAsync("InvokePause");
+        this.#eventTrigger = eventTrigger;
+        this.#mediaRecorder.addEventListener("pause", this.#onpauseCallback);
     }
+
     /**
      */
     deactivateOnpause() {
-        this.#mediaRecorder.onpause = null;
+        this.#mediaRecorder.removeEventListener("pause", this.#onpauseCallback);
     }
+
+    // #endregion
 }

@@ -4,19 +4,19 @@ using System.Text.Json.Nodes;
 namespace BrowserAPI.Test.PostGenerator;
 
 /** config.json hints
- * 
+ *
  * working directory:
  *   path to published core folder
- * 
+ *
  * remove folder list:
  *   remove exceeding folders: "folderPath1, folderPath2, ..."
  *
  * remove file list:
  *   remove exceeding files: "filePath1, filePath2, ..."
- * 
+ *
  * zip exclude list startsWith:
  *   skips zipping paths that begins with given pattern: "startsWith1, startsWith2, ..."
- * 
+ *
  * zip exclude list endsWith:
  *   skips zipping paths that ends with given pattern: "endsWith1, endsWith2, ..."
  *

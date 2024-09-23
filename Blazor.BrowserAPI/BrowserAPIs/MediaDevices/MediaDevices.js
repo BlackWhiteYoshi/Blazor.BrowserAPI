@@ -36,12 +36,12 @@ export async function getDisplayMedia(audio, video) {
 
 /**
  * @typedef {0 | 1 | 2} Type - 0 = none, 1 = exact, 2 = ideal
- * 
+ *
  * @typedef {{ type: Type; value: boolean; }} BooleanConstrain
  * @typedef {{ type: Type; value: number; min: number; max: number }} DoubleConstrain
  * @typedef {{ type: Type; value: number; min: number; max: number }} ULongConstrain
  * @typedef {{ type: Type; value: string; values: string[] | null; }} DOMStringConstrain
- * 
+ *
  * @typedef {{ aspectRatio: DoubleConstrain | null; autoGainControl: BooleanConstrain | null; channelCount: ULongConstrain | null; deviceId: DOMStringConstrain | null; displaySurface: DOMStringConstrain | null; echoCancellation: BooleanConstrain | null; facingMode: DOMStringConstrain | null; frameRate: DoubleConstrain | null; groupId: DOMStringConstrain | null; height: ULongConstrain | null; noiseSuppression: BooleanConstrain | null; sampleRate: ULongConstrain | null; sampleSize: ULongConstrain | null; width: ULongConstrain | null; }} ConstrainMediaTrack
  */
 

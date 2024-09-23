@@ -397,101 +397,199 @@ export class HTMLElementWrapper {
 
     // events
 
+    /** @type {import("../../blazor").DotNet.DotNetObject} */
+    #eventTrigger;
+
+
+    // #region transitionstart event
+
+    /**
+     * @param {TransitionEvent} transitionEvent
+     */
+    #ontransitionstartCallback = (transitionEvent) => this.#eventTrigger.invokeMethodAsync("InvokeTransitionstart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
+
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOntransitionstart(eventTrigger) {
-        this.#htmlElement.ontransitionstart = (transitionEvent) => eventTrigger.invokeMethodAsync("InvokeTransitionstart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
+        this.#eventTrigger = eventTrigger;
+        this.#htmlElement.addEventListener("transitionstart", this.#ontransitionstartCallback);
     }
+
     /**
      */
     deactivateOntransitionstart() {
-        this.#htmlElement.ontransitionstart = null;
+        this.#htmlElement.removeEventListener("transitionstart", this.#ontransitionstartCallback);
     }
+
+    // #endregion
+
+
+    // #region transitionend event
+
+    /**
+     * @param {TransitionEvent} transitionEvent
+     */
+    #ontransitionendCallback = (transitionEvent) => this.#eventTrigger.invokeMethodAsync("InvokeTransitionend", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOntransitionend(eventTrigger) {
-        this.#htmlElement.ontransitionend = (transitionEvent) => eventTrigger.invokeMethodAsync("InvokeTransitionend", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
+        this.#eventTrigger = eventTrigger;
+        this.#htmlElement.addEventListener("transitionend", this.#ontransitionendCallback);
     }
+
     /**
      */
     deactivateOntransitionend() {
-        this.#htmlElement.ontransitionend = null;
+        this.#htmlElement.removeEventListener("transitionend", this.#ontransitionendCallback);
     }
+
+    // #endregion
+
+
+    // #region transitionrun event
+
+    /**
+     * @param {TransitionEvent} transitionEvent
+     */
+    #ontransitionrunCallback = (transitionEvent) => this.#eventTrigger.invokeMethodAsync("InvokeTransitionrun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOntransitionrun(eventTrigger) {
-        this.#htmlElement.ontransitionrun = (transitionEvent) => eventTrigger.invokeMethodAsync("InvokeTransitionrun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
+        this.#eventTrigger = eventTrigger;
+        this.#htmlElement.addEventListener("transitionrun", this.#ontransitionrunCallback);
     }
+
     /**
      */
     deactivateOntransitionrun() {
-        this.#htmlElement.ontransitionrun = null;
+        this.#htmlElement.removeEventListener("transitionrun", this.#ontransitionrunCallback);
     }
+
+    // #endregion
+
+
+    // #region transitioncancel event
+
+    /**
+     * @param {TransitionEvent} transitionEvent
+     */
+    #ontransitioncancelCallback = (transitionEvent) => this.#eventTrigger.invokeMethodAsync("InvokeTransitioncancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOntransitioncancel(eventTrigger) {
-        this.#htmlElement.ontransitioncancel = (transitionEvent) => eventTrigger.invokeMethodAsync("InvokeTransitioncancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
+        this.#eventTrigger = eventTrigger;
+        this.#htmlElement.addEventListener("transitioncancel", this.#ontransitioncancelCallback);
     }
+
     /**
      */
     deactivateOntransitioncancel() {
-        this.#htmlElement.ontransitioncancel = null;
+        this.#htmlElement.removeEventListener("transitioncancel", this.#ontransitioncancelCallback);
     }
 
+    // #endregion
+
+
+
+    // #region animationstart event
 
     /**
- * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
- */
+     * @param {AnimationEvent} animationEvent
+     */
+    #onanimationstartCallback = (animationEvent) => this.#eventTrigger.invokeMethodAsync("InvokeAnimationstart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
+
+    /**
+     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     */
     activateOnanimationstart(eventTrigger) {
-        this.#htmlElement.onanimationstart = (animationEvent) => eventTrigger.invokeMethodAsync("InvokeAnimationstart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
+        this.#eventTrigger = eventTrigger;
+        this.#htmlElement.addEventListener("animationstart", this.#onanimationstartCallback);
     }
+
     /**
      */
     deactivateOnanimationstart() {
-        this.#htmlElement.onanimationstart = null;
+        this.#htmlElement.removeEventListener("animationstart", this.#onanimationstartCallback);
     }
+
+    // #endregion
+
+
+    // #region animationend event
+
+    /**
+     * @param {AnimationEvent} animationEvent
+     */
+    #onanimationendCallback = (animationEvent) => this.#eventTrigger.invokeMethodAsync("InvokeAnimationend", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnanimationend(eventTrigger) {
-        this.#htmlElement.onanimationend = (animationEvent) => eventTrigger.invokeMethodAsync("InvokeAnimationend", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
+        this.#eventTrigger = eventTrigger;
+        this.#htmlElement.addEventListener("animationend", this.#onanimationendCallback);
     }
+
     /**
      */
     deactivateOnanimationend() {
-        this.#htmlElement.onanimationend = null;
+        this.#htmlElement.removeEventListener("animationend", this.#onanimationendCallback);
     }
+
+    // #endregion
+
+
+    // #region animationiteration event
+
+    /**
+     * @param {AnimationEvent} animationEvent
+     */
+    #onanimationiterationCallback = (animationEvent) => this.#eventTrigger.invokeMethodAsync("InvokeAnimationiteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnanimationiteration(eventTrigger) {
-        this.#htmlElement.onanimationiteration = (animationEvent) => eventTrigger.invokeMethodAsync("InvokeAnimationiteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
+        this.#eventTrigger = eventTrigger;
+        this.#htmlElement.addEventListener("animationiteration", this.#onanimationiterationCallback);
     }
+
     /**
      */
     deactivateOnanimationiteration() {
-        this.#htmlElement.onanimationiteration = null;
+        this.#htmlElement.removeEventListener("animationiteration", this.#onanimationiterationCallback);
     }
+
+    // #endregion
+
+
+    // #region animationcancel event
+
+    /**
+     * @param {AnimationEvent} animationEvent
+     */
+    #onanimationcancelCallback = (animationEvent) => this.#eventTrigger.invokeMethodAsync("InvokeAnimationcancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
      */
     activateOnanimationcancel(eventTrigger) {
-        this.#htmlElement.onanimationcancel = (animationEvent) => eventTrigger.invokeMethodAsync("InvokeAnimationcancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
+        this.#eventTrigger = eventTrigger;
+        this.#htmlElement.addEventListener("animationcancel", this.#onanimationcancelCallback);
     }
 
     /**
      */
     deactivateOnanimationcancel() {
-        this.#htmlElement.onanimationcancel = null;
+        this.#htmlElement.removeEventListener("animationcancel", this.#onanimationcancelCallback);
     }
+
+    // #endregion
 }

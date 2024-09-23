@@ -908,7 +908,9 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
         await Task.Delay(100);
 
         await Page.GetByTestId(HTMLMediaElementGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.src = 'invalid';");
-        await Task.Delay(500);
+        await Task.Delay(300);
+        await Page.GetByTestId(HTMLMediaElementGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.src = 'HTMLMediaElement_audio.mp3';");
+        await Task.Delay(300);
 
         string? result = await Page.GetByTestId(HTMLMediaElementGroup.LABEL_OUTPUT).TextContentAsync();
         Assert.Equal("Durationchange", result);
