@@ -400,19 +400,26 @@ export class HTMLElementWrapper {
     /** @type {import("../../blazor").DotNet.DotNetObject} */
     #eventTrigger;
 
+    /** @type {boolean} */
+    #isEventTriggerSync;
+
 
     // #region transitionstart event
 
     /**
      * @param {TransitionEvent} transitionEvent
      */
-    #ontransitionstartCallback = (transitionEvent) => this.#eventTrigger.invokeMethodAsync("InvokeTransitionstart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
+    #ontransitionstartCallback = (transitionEvent) => this.#isEventTriggerSync
+        ? this.#eventTrigger.invokeMethod("InvokeTransitionstart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
+        : this.#eventTrigger.invokeMethodAsync("InvokeTransitionstart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOntransitionstart(eventTrigger) {
+    activateOntransitionstart(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlElement.addEventListener("transitionstart", this.#ontransitionstartCallback);
     }
 
@@ -430,13 +437,17 @@ export class HTMLElementWrapper {
     /**
      * @param {TransitionEvent} transitionEvent
      */
-    #ontransitionendCallback = (transitionEvent) => this.#eventTrigger.invokeMethodAsync("InvokeTransitionend", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
+    #ontransitionendCallback = (transitionEvent) => this.#isEventTriggerSync
+        ? this.#eventTrigger.invokeMethod("InvokeTransitionend", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
+        : this.#eventTrigger.invokeMethodAsync("InvokeTransitionend", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOntransitionend(eventTrigger) {
+    activateOntransitionend(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlElement.addEventListener("transitionend", this.#ontransitionendCallback);
     }
 
@@ -454,13 +465,17 @@ export class HTMLElementWrapper {
     /**
      * @param {TransitionEvent} transitionEvent
      */
-    #ontransitionrunCallback = (transitionEvent) => this.#eventTrigger.invokeMethodAsync("InvokeTransitionrun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
+    #ontransitionrunCallback = (transitionEvent) => this.#isEventTriggerSync
+        ? this.#eventTrigger.invokeMethod("InvokeTransitionrun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
+        : this.#eventTrigger.invokeMethodAsync("InvokeTransitionrun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOntransitionrun(eventTrigger) {
+    activateOntransitionrun(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlElement.addEventListener("transitionrun", this.#ontransitionrunCallback);
     }
 
@@ -478,13 +493,17 @@ export class HTMLElementWrapper {
     /**
      * @param {TransitionEvent} transitionEvent
      */
-    #ontransitioncancelCallback = (transitionEvent) => this.#eventTrigger.invokeMethodAsync("InvokeTransitioncancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
+    #ontransitioncancelCallback = (transitionEvent) => this.#isEventTriggerSync
+        ? this.#eventTrigger.invokeMethod("InvokeTransitioncancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
+        : this.#eventTrigger.invokeMethodAsync("InvokeTransitioncancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOntransitioncancel(eventTrigger) {
+    activateOntransitioncancel(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlElement.addEventListener("transitioncancel", this.#ontransitioncancelCallback);
     }
 
@@ -503,13 +522,17 @@ export class HTMLElementWrapper {
     /**
      * @param {AnimationEvent} animationEvent
      */
-    #onanimationstartCallback = (animationEvent) => this.#eventTrigger.invokeMethodAsync("InvokeAnimationstart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
+    #onanimationstartCallback = (animationEvent) => this.#isEventTriggerSync
+        ? this.#eventTrigger.invokeMethod("InvokeAnimationstart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+        : this.#eventTrigger.invokeMethodAsync("InvokeAnimationstart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnanimationstart(eventTrigger) {
+    activateOnanimationstart(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlElement.addEventListener("animationstart", this.#onanimationstartCallback);
     }
 
@@ -527,13 +550,17 @@ export class HTMLElementWrapper {
     /**
      * @param {AnimationEvent} animationEvent
      */
-    #onanimationendCallback = (animationEvent) => this.#eventTrigger.invokeMethodAsync("InvokeAnimationend", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
+    #onanimationendCallback = (animationEvent) => this.#isEventTriggerSync
+        ? this.#eventTrigger.invokeMethod("InvokeAnimationend", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+        : this.#eventTrigger.invokeMethodAsync("InvokeAnimationend", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnanimationend(eventTrigger) {
+    activateOnanimationend(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlElement.addEventListener("animationend", this.#onanimationendCallback);
     }
 
@@ -551,13 +578,17 @@ export class HTMLElementWrapper {
     /**
      * @param {AnimationEvent} animationEvent
      */
-    #onanimationiterationCallback = (animationEvent) => this.#eventTrigger.invokeMethodAsync("InvokeAnimationiteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
+    #onanimationiterationCallback = (animationEvent) => this.#isEventTriggerSync
+        ? this.#eventTrigger.invokeMethod("InvokeAnimationiteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+        : this.#eventTrigger.invokeMethodAsync("InvokeAnimationiteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnanimationiteration(eventTrigger) {
+    activateOnanimationiteration(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlElement.addEventListener("animationiteration", this.#onanimationiterationCallback);
     }
 
@@ -575,13 +606,17 @@ export class HTMLElementWrapper {
     /**
      * @param {AnimationEvent} animationEvent
      */
-    #onanimationcancelCallback = (animationEvent) => this.#eventTrigger.invokeMethodAsync("InvokeAnimationcancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
+    #onanimationcancelCallback = (animationEvent) => this.#isEventTriggerSync
+        ? this.#eventTrigger.invokeMethod("InvokeAnimationcancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+        : this.#eventTrigger.invokeMethodAsync("InvokeAnimationcancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnanimationcancel(eventTrigger) {
+    activateOnanimationcancel(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlElement.addEventListener("animationcancel", this.#onanimationcancelCallback);
     }
 

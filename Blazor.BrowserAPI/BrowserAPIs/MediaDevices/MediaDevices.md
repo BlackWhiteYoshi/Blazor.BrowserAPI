@@ -44,10 +44,12 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
 
     private async Task StartRecording() {
         mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
-
-        mediaRecorder = await mediaStream.CreateRecorder(mimeType: "video/mp4");
+        
         videoData.Clear();
+        mediaRecorder = await mediaStream.CreateRecorder(mimeType: "video/mp4");
+        mediaRecorder.OnError += Console.WriteLine;
         mediaRecorder.OnDataavailable += SaveChunk;
+
         await mediaRecorder.Start(100);
 
 
@@ -64,6 +66,8 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
         await Task.Delay(100); // wait a little bit until last chunk is saved
 
         mediaRecorder.OnDataavailable -= SaveChunk;
+        mediaRecorder.OnError -= Console.WriteLine;
+
         await mediaRecorder.DisposeAsync();
         await mediaStream.DisposeAsync();
         mediaRecorder = null;

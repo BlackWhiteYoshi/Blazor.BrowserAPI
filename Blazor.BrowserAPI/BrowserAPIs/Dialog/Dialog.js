@@ -75,18 +75,23 @@ export class DialogWrapper {
     /** @type {import("../../blazor").DotNet.DotNetObject} */
     #eventTrigger;
 
+    /** @type {boolean} */
+    #isEventTriggerSync;
+
 
     // #region cancel event
 
     /**
      */
-    #oncancelCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeCancel");
+    #oncancelCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeCancel") : this.#eventTrigger.invokeMethodAsync("InvokeCancel");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOncancel(eventTrigger) {
+    activateOncancel(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#dialog.addEventListener("cancel", this.#oncancelCallback);
     }
 
@@ -103,13 +108,15 @@ export class DialogWrapper {
 
     /**
      */
-    #oncloseCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeClose");
+    #oncloseCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeClose") : this.#eventTrigger.invokeMethodAsync("InvokeClose");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnclose(eventTrigger) {
+    activateOnclose(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#dialog.addEventListener("close", this.#oncloseCallback);
     }
 

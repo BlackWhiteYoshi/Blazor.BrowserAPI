@@ -49,19 +49,26 @@ export class ServiceWorkerWrapper {
     /** @type {import("../../../blazor").DotNet.DotNetObject} */
     #eventTrigger;
 
+    /** @type {boolean} */
+    #isEventTriggerSync;
+
 
     // #region statechange event
 
     /**
      * @param {Event} event
      */
-    #onstatechangeCallback = (event) => this.#eventTrigger.invokeMethodAsync("InvokeStateChange", /** @type {ServiceWorker} */(event.target).state);
+    #onstatechangeCallback = (event) => this.#isEventTriggerSync
+        ? this.#eventTrigger.invokeMethod("InvokeStateChange", /** @type {ServiceWorker} */(event.target).state)
+        : this.#eventTrigger.invokeMethodAsync("InvokeStateChange", /** @type {ServiceWorker} */(event.target).state);
 
     /**
      * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnstatechange(eventTrigger) {
+    activateOnstatechange(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#serviceWorker.addEventListener("statechange", this.#onstatechangeCallback);
     }
 
@@ -79,13 +86,15 @@ export class ServiceWorkerWrapper {
     /**
      * @param {ErrorEvent} event
      */
-    #onerrorCallback = (event) => this.#eventTrigger.invokeMethodAsync("InvokeError", event);
+    #onerrorCallback = (event) => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeError", event) : this.#eventTrigger.invokeMethodAsync("InvokeError", event);
 
     /**
      * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnerror(eventTrigger) {
+    activateOnerror(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#serviceWorker.addEventListener("error", this.#onerrorCallback);
     }
 

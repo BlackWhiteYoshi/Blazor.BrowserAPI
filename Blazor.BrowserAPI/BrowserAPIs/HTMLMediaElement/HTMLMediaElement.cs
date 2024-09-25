@@ -14,7 +14,6 @@ namespace BrowserAPI.Implementation;
 public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTask) : HTMLMediaElementBase, IHTMLMediaElement {
     private protected override Task<IJSObjectReference> HTMLMediaElementTask { get; } = htmlMediaElementTask;
 
-
     /// <summary>
     /// Releases the JS instance for this htmlMediaElement.
     /// </summary>

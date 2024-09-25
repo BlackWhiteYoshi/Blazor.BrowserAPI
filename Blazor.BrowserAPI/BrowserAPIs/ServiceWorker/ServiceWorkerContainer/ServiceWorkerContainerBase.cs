@@ -68,6 +68,11 @@ public abstract class ServiceWorkerContainerBase : IDisposable {
     private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
 
 
+    private ValueTask ActivateJSEvent(string jsMethodName) => ModuleManager.InvokeTrySync(jsMethodName, default, [ObjectReferenceEventTrigger, ModuleManager.IsInProcess]);
+
+    private ValueTask DeactivateJSEvent(string jsMethodName) => ModuleManager.InvokeTrySync(jsMethodName, default);
+
+
     private Action? _onControllerChange;
     /// <summary>
     /// Occurs when the document's associated <i>ServiceWorkerRegistration</i> acquires a new active worker.
@@ -75,13 +80,13 @@ public abstract class ServiceWorkerContainerBase : IDisposable {
     public event Action OnControllerChange {
         add {
             if (_onControllerChange == null)
-                Task.Factory.StartNew(async () => await ModuleManager.InvokeTrySync("serviceWorkerContainerActivateOncontrollerchange", default, [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("serviceWorkerContainerActivateOncontrollerchange").Preserve();
             _onControllerChange += value;
         }
         remove {
             _onControllerChange -= value;
             if (_onControllerChange == null)
-                Task.Factory.StartNew(async () => await ModuleManager.InvokeTrySync("serviceWorkerContainerDeactivateOncontrollerchange", default));
+                _ = DeactivateJSEvent("serviceWorkerContainerDeactivateOncontrollerchange").Preserve();
         }
     }
 
@@ -93,13 +98,13 @@ public abstract class ServiceWorkerContainerBase : IDisposable {
     public event Action<string> OnMessage {
         add {
             if (_onMessage == null)
-                Task.Factory.StartNew(async () => await ModuleManager.InvokeTrySync("serviceWorkerContainerActivateOnMessage", default, [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("serviceWorkerContainerActivateOnMessage").Preserve();
             _onMessage += value;
         }
         remove {
             _onMessage -= value;
             if (_onMessage == null)
-                Task.Factory.StartNew(async () => await ModuleManager.InvokeTrySync("serviceWorkerContainerDeactivateOnMessage", default));
+                _ = DeactivateJSEvent("serviceWorkerContainerDeactivateOnMessage").Preserve();
         }
     }
 

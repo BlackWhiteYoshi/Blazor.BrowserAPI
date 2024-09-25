@@ -39,6 +39,11 @@ public abstract class MediaRecorderBase {
     private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
 
 
+    private ValueTask ActivateJSEvent(string jsMethodName) => MediaRecorderJS.InvokeVoidTrySync(jsMethodName, [ObjectReferenceEventTrigger, MediaRecorderJS is IJSInProcessObjectReference]);
+
+    private ValueTask DeactivateJSEvent(string jsMethodName) => MediaRecorderJS.InvokeVoidTrySync(jsMethodName);
+
+
     private Action<byte[]>? _onDataavailable;
     /// <summary>
     /// <para>
@@ -50,13 +55,13 @@ public abstract class MediaRecorderBase {
     public event Action<byte[]> OnDataavailable {
         add {
             if (_onDataavailable == null)
-                Task.Factory.StartNew(async () => await MediaRecorderJS.InvokeVoidTrySync("activateOndataavailable", [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("activateOndataavailable").Preserve();
             _onDataavailable += value;
         }
         remove {
             _onDataavailable -= value;
             if (_onDataavailable == null)
-                Task.Factory.StartNew(async () => await MediaRecorderJS.InvokeVoidTrySync("deactivateOndataavailable"));
+                _ = DeactivateJSEvent("deactivateOndataavailable").Preserve();
         }
     }
 
@@ -71,13 +76,13 @@ public abstract class MediaRecorderBase {
     public event Action<string> OnError {
         add {
             if (_onError == null)
-                Task.Factory.StartNew(async () => await MediaRecorderJS.InvokeVoidTrySync("activateOnerror", [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("activateOnerror").Preserve();
             _onError += value;
         }
         remove {
             _onError -= value;
             if (_onError == null)
-                Task.Factory.StartNew(async () => await MediaRecorderJS.InvokeVoidTrySync("deactivateOnerror"));
+                _ = DeactivateJSEvent("deactivateOnerror").Preserve();
         }
     }
 
@@ -88,13 +93,13 @@ public abstract class MediaRecorderBase {
     public event Action OnStart {
         add {
             if (_onStart == null)
-                Task.Factory.StartNew(async () => await MediaRecorderJS.InvokeVoidTrySync("activateOnstart", [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("activateOnstart").Preserve();
             _onStart += value;
         }
         remove {
             _onStart -= value;
             if (_onStart == null)
-                Task.Factory.StartNew(async () => await MediaRecorderJS.InvokeVoidTrySync("deactivateOnstart"));
+                _ = DeactivateJSEvent("deactivateOnstart").Preserve();
         }
     }
 
@@ -105,13 +110,13 @@ public abstract class MediaRecorderBase {
     public event Action OnStop {
         add {
             if (_onStop == null)
-                Task.Factory.StartNew(async () => await MediaRecorderJS.InvokeVoidTrySync("activateOnstop", [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("activateOnstop").Preserve();
             _onStop += value;
         }
         remove {
             _onStop -= value;
             if (_onStop == null)
-                Task.Factory.StartNew(async () => await MediaRecorderJS.InvokeVoidTrySync("deactivateOnstop"));
+                _ = DeactivateJSEvent("deactivateOnstop").Preserve();
         }
     }
 
@@ -122,13 +127,13 @@ public abstract class MediaRecorderBase {
     public event Action OnResume {
         add {
             if (_onResume == null)
-                Task.Factory.StartNew(async () => await MediaRecorderJS.InvokeVoidTrySync("activateOnresume", [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("activateOnresume").Preserve();
             _onResume += value;
         }
         remove {
             _onResume -= value;
             if (_onResume == null)
-                Task.Factory.StartNew(async () => await MediaRecorderJS.InvokeVoidTrySync("deactivateOnresume"));
+                _ = DeactivateJSEvent("deactivateOnresume").Preserve();
         }
     }
 
@@ -139,13 +144,13 @@ public abstract class MediaRecorderBase {
     public event Action OnPause {
         add {
             if (_onPause == null)
-                Task.Factory.StartNew(async () => await MediaRecorderJS.InvokeVoidTrySync("activateOnpause", [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("activateOnpause").Preserve();
             _onPause += value;
         }
         remove {
             _onPause -= value;
             if (_onPause == null)
-                Task.Factory.StartNew(async () => await MediaRecorderJS.InvokeVoidTrySync("deactivateOnpause"));
+                _ = DeactivateJSEvent("deactivateOnpause").Preserve();
         }
     }
 

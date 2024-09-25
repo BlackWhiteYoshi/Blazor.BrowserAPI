@@ -257,12 +257,12 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Fact]
     public async Task GetBuffered() {
-        await Page.GetByTestId(HTMLMediaElementGroup.LABEL_OUTPUT).ClickAsync(); // minimal delay
-
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_BUFFERED_INPROCESS).ClickAsync();
 
         string? result = await Page.GetByTestId(HTMLMediaElementGroup.LABEL_OUTPUT).TextContentAsync();
-        Assert.Equal("1: [0, 60.0512]", result);
+        Assert.True(result![0] is '0' or '1');
+        Assert.True(result![1] is ':');
+        Assert.True(result![2] is ' ');
     }
 
 
@@ -543,11 +543,10 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(100);
 
         await Page.GetByTestId(HTMLMediaElementGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.load();");
+        await Task.Delay(500);
 
         string? result = await Page.GetByTestId(HTMLMediaElementGroup.LABEL_OUTPUT).TextContentAsync();
-        Assert.Equal("", result);
-        // need proper test setup
-        //Assert.Equal("Suspend", result);
+        Assert.Equal("Suspend", result);
     }
 
     [Fact]

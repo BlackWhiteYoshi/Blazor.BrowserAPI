@@ -31,6 +31,17 @@ public abstract class DialogBase {
     private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
 
 
+    private async ValueTask ActivateJSEvent(string jsMethodName) {
+        IJSObjectReference dialog = await DialogTask;
+        await dialog.InvokeVoidTrySync(jsMethodName, [ObjectReferenceEventTrigger, dialog is IJSInProcessObjectReference]);
+    }
+
+    private async ValueTask DeactivateJSEvent(string jsMethodName) {
+        IJSObjectReference dialog = await DialogTask;
+        await dialog.InvokeVoidTrySync(jsMethodName);
+    }
+
+
     private Action? _onCancel;
     /// <summary>
     /// The <i>cancel</i> event fires on a &lt;dialog&gt; when the user instructs the browser that they wish to dismiss the current open dialog. The browser fires this event when the user presses the Esc key.
@@ -38,13 +49,13 @@ public abstract class DialogBase {
     public event Action OnCancel {
         add {
             if (_onCancel == null)
-                Task.Factory.StartNew(async () => await (await DialogTask).InvokeVoidTrySync("activateOncancel", [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("activateOncancel").Preserve();
             _onCancel += value;
         }
         remove {
             _onCancel -= value;
             if (_onCancel == null)
-                Task.Factory.StartNew(async () => await (await DialogTask).InvokeVoidTrySync("deactivateOncancel"));
+                _ = DeactivateJSEvent("deactivateOncancel").Preserve();
         }
     }
 
@@ -55,13 +66,13 @@ public abstract class DialogBase {
     public event Action OnClose {
         add {
             if (_onClose == null)
-                Task.Factory.StartNew(async () => await (await DialogTask).InvokeVoidTrySync("activateOnclose", [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("activateOnclose").Preserve();
             _onClose += value;
         }
         remove {
             _onClose -= value;
             if (_onClose == null)
-                Task.Factory.StartNew(async () => await (await DialogTask).InvokeVoidTrySync("deactivateOnclose"));
+                _ = DeactivateJSEvent("deactivateOnclose").Preserve();
         }
     }
 

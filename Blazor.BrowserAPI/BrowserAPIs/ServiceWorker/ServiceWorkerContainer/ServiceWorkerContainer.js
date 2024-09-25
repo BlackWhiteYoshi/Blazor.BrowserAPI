@@ -79,18 +79,23 @@ export function serviceWorkerContainerStartMessages() {
 /** @type {import("../../../blazor").DotNet.DotNetObject} */
 let serviceWorkerContainerEventTrigger;
 
+/** @type {boolean} */
+let serviceWorkerContainerIsEventTriggerSync;
+
 
 // #region controllerchange event
 
 /**
  */
-const serviceWorkerContainerOncontrollerchangeCallback = () => serviceWorkerContainerEventTrigger.invokeMethodAsync("InvokeControllerChange");
+const serviceWorkerContainerOncontrollerchangeCallback = () => serviceWorkerContainerIsEventTriggerSync ? serviceWorkerContainerEventTrigger.invokeMethod("InvokeControllerChange") : serviceWorkerContainerEventTrigger.invokeMethodAsync("InvokeControllerChange");
 
 /**
  * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
+ * @param {boolean} isEventTriggerSync
  */
-export function serviceWorkerContainerActivateOncontrollerchange(eventTrigger) {
+export function serviceWorkerContainerActivateOncontrollerchange(eventTrigger, isEventTriggerSync) {
     serviceWorkerContainerEventTrigger = eventTrigger;
+    serviceWorkerContainerIsEventTriggerSync = isEventTriggerSync;
     navigator.serviceWorker.addEventListener("controllerchange", serviceWorkerContainerOncontrollerchangeCallback);
 }
 
@@ -100,6 +105,7 @@ export function serviceWorkerContainerDeactivateOncontrollerchange() {
     navigator.serviceWorker.removeEventListener("controllerchange", serviceWorkerContainerOncontrollerchangeCallback);
 }
 
+
 // #endregion
 
 
@@ -107,13 +113,15 @@ export function serviceWorkerContainerDeactivateOncontrollerchange() {
 
 /**
  */
-const serviceWorkerContainerOnmessageCallback = () => serviceWorkerContainerEventTrigger.invokeMethodAsync("InvokeMessage");
+const serviceWorkerContainerOnmessageCallback = () => serviceWorkerContainerIsEventTriggerSync ? serviceWorkerContainerEventTrigger.invokeMethod("InvokeMessage") : serviceWorkerContainerEventTrigger.invokeMethodAsync("InvokeMessage");
 
 /**
  * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
+ * @param {boolean} isEventTriggerSync
  */
-export function serviceWorkerContainerActivateOnMessage(eventTrigger) {
+export function serviceWorkerContainerActivateOnMessage(eventTrigger, isEventTriggerSync) {
     serviceWorkerContainerEventTrigger = eventTrigger;
+    serviceWorkerContainerIsEventTriggerSync = isEventTriggerSync;
     navigator.serviceWorker.addEventListener("message", serviceWorkerContainerOnmessageCallback);
 }
 

@@ -95,19 +95,26 @@ export class MediaRecorderWrapper {
     /** @type {import("../../../blazor").DotNet.DotNetObject} */
     #eventTrigger;
 
+    /** @type {boolean} */
+    #isEventTriggerSync;
+
 
     // #region dataavailable event
 
     /**
      * @param {BlobEvent} event
      */
-    #ondataavailableCallback = async (event) => await this.#eventTrigger.invokeMethodAsync("InvokeDataavailable", new Uint8Array(await event.data.arrayBuffer()));
+    #ondataavailableCallback = async (event) => this.#isEventTriggerSync
+        ? this.#eventTrigger.invokeMethod("InvokeDataavailable", new Uint8Array(await event.data.arrayBuffer()))
+        : await this.#eventTrigger.invokeMethodAsync("InvokeDataavailable", new Uint8Array(await event.data.arrayBuffer()));
 
     /**
      * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOndataavailable(eventTrigger) {
+    activateOndataavailable(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#mediaRecorder.addEventListener("dataavailable", this.#ondataavailableCallback);
     }
 
@@ -125,13 +132,15 @@ export class MediaRecorderWrapper {
     /**
      * @param {Event} event
      */
-    #onerrorCallback = (event) => this.#eventTrigger.invokeMethodAsync("InvokeError", event);
+    #onerrorCallback = (event) => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeError", event) : this.#eventTrigger.invokeMethodAsync("InvokeError", event);
 
     /**
      * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnerror(eventTrigger) {
+    activateOnerror(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#mediaRecorder.addEventListener("error", this.#onerrorCallback);
     }
 
@@ -148,13 +157,15 @@ export class MediaRecorderWrapper {
 
     /**
      */
-    #onstartCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeStart");
+    #onstartCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeStart") : this.#eventTrigger.invokeMethodAsync("InvokeStart");
 
     /**
      * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnstart(eventTrigger) {
+    activateOnstart(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#mediaRecorder.addEventListener("start", this.#onstartCallback);
     }
 
@@ -171,13 +182,15 @@ export class MediaRecorderWrapper {
 
     /**
      */
-    #onstopCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeStop");
+    #onstopCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeStop") : this.#eventTrigger.invokeMethodAsync("InvokeStop");
 
     /**
      * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnstop(eventTrigger) {
+    activateOnstop(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#mediaRecorder.addEventListener("stop", this.#onstopCallback);
     }
 
@@ -194,13 +207,15 @@ export class MediaRecorderWrapper {
 
     /**
      */
-    #onresumeCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeResume");
+    #onresumeCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeResume") : this.#eventTrigger.invokeMethodAsync("InvokeResume");
 
     /**
      * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnresume(eventTrigger) {
+    activateOnresume(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#mediaRecorder.addEventListener("resume", this.#onresumeCallback);
     }
 
@@ -217,13 +232,15 @@ export class MediaRecorderWrapper {
 
     /**
      */
-    #onpauseCallback = () => this.#eventTrigger.invokeMethodAsync("InvokePause");
+    #onpauseCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokePause") : this.#eventTrigger.invokeMethodAsync("InvokePause");
 
     /**
      * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnpause(eventTrigger) {
+    activateOnpause(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#mediaRecorder.addEventListener("pause", this.#onpauseCallback);
     }
 

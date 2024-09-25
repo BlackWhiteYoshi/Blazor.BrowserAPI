@@ -82,18 +82,23 @@ export class ServiceWorkerRegistrationWrapper {
     /** @type {import("../../../blazor").DotNet.DotNetObject} */
     #eventTrigger;
 
+    /** @type {boolean} */
+    #isEventTriggerSync;
+
 
     // #region updatefound event
 
     /**
      */
-    #onupdatefoundCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeUpdateFound");
+    #onupdatefoundCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeUpdateFound") : this.#eventTrigger.invokeMethodAsync("InvokeUpdateFound");
 
     /**
      * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnupdatefound(eventTrigger) {
+    activateOnupdatefound(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#serviceWorkerRegistration.addEventListener("updatefound", this.#onupdatefoundCallback);
     }
 

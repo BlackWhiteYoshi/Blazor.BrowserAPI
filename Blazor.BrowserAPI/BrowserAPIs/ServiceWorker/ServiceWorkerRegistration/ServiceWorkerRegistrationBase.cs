@@ -42,6 +42,11 @@ public abstract class ServiceWorkerRegistrationBase {
     private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
 
 
+    private ValueTask ActivateJSEvent(string jsMethodName) => ServiceWorkerRegistrationJS.InvokeVoidTrySync(jsMethodName, [ObjectReferenceEventTrigger, ServiceWorkerRegistrationJS is IJSInProcessObjectReference]);
+
+    private ValueTask DeactivateJSEvent(string jsMethodName) => ServiceWorkerRegistrationJS.InvokeVoidTrySync(jsMethodName);
+
+
     private Action? _onUpdateFound;
     /// <summary>
     /// The <i>updatefound</i> event of the ServiceWorkerRegistration interface is fired any time the <i>ServiceWorkerRegistration.installing</i> property acquires a new service worker.
@@ -49,13 +54,14 @@ public abstract class ServiceWorkerRegistrationBase {
     public event Action OnUpdateFound {
         add {
             if (_onUpdateFound == null)
-                Task.Factory.StartNew(async () => await ServiceWorkerRegistrationJS.InvokeVoidTrySync("activateOnupdatefound", [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("activateOnupdatefound").Preserve();
             _onUpdateFound += value;
         }
         remove {
             _onUpdateFound -= value;
             if (_onUpdateFound == null)
-                Task.Factory.StartNew(async () => await ServiceWorkerRegistrationJS.InvokeVoidTrySync("deactivateOnupdatefound"));
+                _ = DeactivateJSEvent("deactivateOnupdatefound").Preserve();
+            ;
         }
     }
 

@@ -371,6 +371,9 @@ export class HTMLMediaElementWrapper {
     /** @type {import("../../blazor").DotNet.DotNetObject} */
     #eventTrigger;
 
+    /** @type {boolean} */
+    #isEventTriggerSync;
+
 
     // Ready
 
@@ -378,13 +381,17 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #onerrorCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeError", /** @type {MediaError} */(this.#htmlMediaElement.error).code, /** @type {MediaError} */(this.#htmlMediaElement.error).message);
+    #onerrorCallback = () => this.#isEventTriggerSync
+        ? this.#eventTrigger.invokeMethod("InvokeError", /** @type {MediaError} */(this.#htmlMediaElement.error).code, /** @type {MediaError} */(this.#htmlMediaElement.error).message)
+        : this.#eventTrigger.invokeMethodAsync("InvokeError", /** @type {MediaError} */(this.#htmlMediaElement.error).code, /** @type {MediaError} */(this.#htmlMediaElement.error).message);
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnerror(eventTrigger) {
+    activateOnerror(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("error", this.#onerrorCallback);
         if (this.#htmlMediaElement.error !== null)
             this.#onerrorCallback();
@@ -403,13 +410,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #oncanplayCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeCanplay");
+    #oncanplayCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeCanplay") : this.#eventTrigger.invokeMethodAsync("InvokeCanplay");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOncanplay(eventTrigger) {
+    activateOncanplay(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("canplay", this.#oncanplayCallback);
     }
 
@@ -426,13 +435,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #oncanplaythroughCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeCanplaythrough");
+    #oncanplaythroughCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeCanplaythrough") : this.#eventTrigger.invokeMethodAsync("InvokeCanplaythrough");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOncanplaythrough(eventTrigger) {
+    activateOncanplaythrough(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("canplaythrough", this.#oncanplaythroughCallback);
     }
 
@@ -449,13 +460,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #onplayingCallback = () => this.#eventTrigger.invokeMethodAsync("InvokePlaying");
+    #onplayingCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokePlaying") : this.#eventTrigger.invokeMethodAsync("InvokePlaying");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnplaying(eventTrigger) {
+    activateOnplaying(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("playing", this.#onplayingCallback);
     }
 
@@ -474,13 +487,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #onloadstartCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeLoadstart");
+    #onloadstartCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeLoadstart") : this.#eventTrigger.invokeMethodAsync("InvokeLoadstart");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnloadstart(eventTrigger) {
+    activateOnloadstart(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("loadstart", this.#onloadstartCallback);
     }
 
@@ -497,13 +512,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #onprogressCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeProgress");
+    #onprogressCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeProgress") : this.#eventTrigger.invokeMethodAsync("InvokeProgress");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnprogress(eventTrigger) {
+    activateOnprogress(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("progress", this.#onprogressCallback);
     }
 
@@ -520,13 +537,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #onloadeddataCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeLoadeddata");
+    #onloadeddataCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeLoadeddata") : this.#eventTrigger.invokeMethodAsync("InvokeLoadeddata");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnloadeddata(eventTrigger) {
+    activateOnloadeddata(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("loadeddata", this.#onloadeddataCallback);
     }
 
@@ -543,13 +562,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #onloadedmetadataCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeLoadedmetadata");
+    #onloadedmetadataCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeLoadedmetadata") : this.#eventTrigger.invokeMethodAsync("InvokeLoadedmetadata");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnloadedmetadata(eventTrigger) {
+    activateOnloadedmetadata(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("loadedmetadata", this.#onloadedmetadataCallback);
     }
 
@@ -566,13 +587,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #onstalledCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeStalled");
+    #onstalledCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeStalled") : this.#eventTrigger.invokeMethodAsync("InvokeStalled");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnstalled(eventTrigger) {
+    activateOnstalled(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("stalled", this.#onstalledCallback);
     }
 
@@ -589,13 +612,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #onsuspendCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeSuspend");
+    #onsuspendCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeSuspend") : this.#eventTrigger.invokeMethodAsync("InvokeSuspend");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnsuspend(eventTrigger) {
+    activateOnsuspend(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("suspend", this.#onsuspendCallback);
     }
 
@@ -612,13 +637,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #onwaitingCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeWaiting");
+    #onwaitingCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeWaiting") : this.#eventTrigger.invokeMethodAsync("InvokeWaiting");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnwaiting(eventTrigger) {
+    activateOnwaiting(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("waiting", this.#onwaitingCallback);
     }
 
@@ -635,13 +662,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #onabortCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeAbort");
+    #onabortCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeAbort") : this.#eventTrigger.invokeMethodAsync("InvokeAbort");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnabort(eventTrigger) {
+    activateOnabort(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("abort", this.#onabortCallback);
     }
 
@@ -658,13 +687,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #onemptiedCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeEmptied");
+    #onemptiedCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeEmptied") : this.#eventTrigger.invokeMethodAsync("InvokeEmptied");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnemptied(eventTrigger) {
+    activateOnemptied(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("emptied", this.#onemptiedCallback);
     }
 
@@ -683,13 +714,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #onplayCallback = () => this.#eventTrigger.invokeMethodAsync("InvokePlay");
+    #onplayCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokePlay") : this.#eventTrigger.invokeMethodAsync("InvokePlay");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnplay(eventTrigger) {
+    activateOnplay(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("play", this.#onplayCallback);
     }
 
@@ -706,13 +739,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #onpauseCallback = () => this.#eventTrigger.invokeMethodAsync("InvokePause");
+    #onpauseCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokePause") : this.#eventTrigger.invokeMethodAsync("InvokePause");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnpause(eventTrigger) {
+    activateOnpause(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("pause", this.#onpauseCallback);
     }
 
@@ -729,13 +764,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #onendedCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeEnded");
+    #onendedCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeEnded") : this.#eventTrigger.invokeMethodAsync("InvokeEnded");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnended(eventTrigger) {
+    activateOnended(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("ended", this.#onendedCallback);
     }
 
@@ -752,13 +789,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #onseekingCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeSeeking");
+    #onseekingCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeSeeking") : this.#eventTrigger.invokeMethodAsync("InvokeSeeking");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnseeking(eventTrigger) {
+    activateOnseeking(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("seeking", this.#onseekingCallback);
     }
 
@@ -775,13 +814,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #onseekedCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeSeeked");
+    #onseekedCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeSeeked") : this.#eventTrigger.invokeMethodAsync("InvokeSeeked");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnseeked(eventTrigger) {
+    activateOnseeked(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("seeked", this.#onseekedCallback);
     }
 
@@ -798,13 +839,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #ontimeupdateCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeTimeupdate");
+    #ontimeupdateCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeTimeupdate") : this.#eventTrigger.invokeMethodAsync("InvokeTimeupdate");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOntimeupdate(eventTrigger) {
+    activateOntimeupdate(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("timeupdate", this.#ontimeupdateCallback);
     }
 
@@ -823,13 +866,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #onvolumechangeCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeVolumechange");
+    #onvolumechangeCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeVolumechange") : this.#eventTrigger.invokeMethodAsync("InvokeVolumechange");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnvolumechange(eventTrigger) {
+    activateOnvolumechange(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("volumechange", this.#onvolumechangeCallback);
     }
 
@@ -846,13 +891,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #onratechangeCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeRatechange");
+    #onratechangeCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeRatechange") : this.#eventTrigger.invokeMethodAsync("InvokeRatechange");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOnratechange(eventTrigger) {
+    activateOnratechange(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("ratechange", this.#onratechangeCallback);
     }
 
@@ -869,13 +916,15 @@ export class HTMLMediaElementWrapper {
 
     /**
      */
-    #ondurationchangeCallback = () => this.#eventTrigger.invokeMethodAsync("InvokeDurationchange");
+    #ondurationchangeCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeDurationchange") : this.#eventTrigger.invokeMethodAsync("InvokeDurationchange");
 
     /**
      * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
+     * @param {boolean} isEventTriggerSync
      */
-    activateOndurationchange(eventTrigger) {
+    activateOndurationchange(eventTrigger, isEventTriggerSync) {
         this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("durationchange", this.#ondurationchangeCallback);
     }
 

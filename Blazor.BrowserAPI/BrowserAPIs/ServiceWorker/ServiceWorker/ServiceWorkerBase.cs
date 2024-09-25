@@ -31,6 +31,11 @@ public abstract class ServiceWorkerBase {
     private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
 
 
+    private ValueTask ActivateJSEvent(string jsMethodName) => ServiceWorkerJS.InvokeVoidTrySync(jsMethodName, [ObjectReferenceEventTrigger, ServiceWorkerJS is IJSInProcessObjectReference]);
+
+    private ValueTask DeactivateJSEvent(string jsMethodName) => ServiceWorkerJS.InvokeVoidTrySync(jsMethodName);
+
+
     private Action<string>? _onStateChange;
     /// <summary>
     /// <para>The <i>statechange</i> event fires anytime the ServiceWorker.state changes.</para>
@@ -39,13 +44,13 @@ public abstract class ServiceWorkerBase {
     public event Action<string> OnStateChange {
         add {
             if (_onStateChange == null)
-                Task.Factory.StartNew(async () => await ServiceWorkerJS.InvokeVoidTrySync("activateOnstatechange", [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("activateOnstatechange").Preserve();
             _onStateChange += value;
         }
         remove {
             _onStateChange -= value;
             if (_onStateChange == null)
-                Task.Factory.StartNew(async () => await ServiceWorkerJS.InvokeVoidTrySync("deactivateOnstatechange"));
+                _ = DeactivateJSEvent("deactivateOnstatechange").Preserve();
         }
     }
 
@@ -57,13 +62,13 @@ public abstract class ServiceWorkerBase {
     public event Action<string> OnError {
         add {
             if (_onError == null)
-                Task.Factory.StartNew(async () => await ServiceWorkerJS.InvokeVoidTrySync("activateOnerror", [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("activateOnerror").Preserve();
             _onError += value;
         }
         remove {
             _onError -= value;
             if (_onError == null)
-                Task.Factory.StartNew(async () => await ServiceWorkerJS.InvokeVoidTrySync("deactivateOnerror"));
+                _ = DeactivateJSEvent("deactivateOnerror").Preserve();
         }
     }
 

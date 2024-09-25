@@ -67,7 +67,18 @@ public abstract class HTMLElementBase {
     private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
 
 
-    #region Transition Events
+    private async ValueTask ActivateJSEvent(string jsMethodName) {
+        IJSObjectReference htmlElement = await HTMLElementTask;
+        await htmlElement.InvokeVoidTrySync(jsMethodName, [ObjectReferenceEventTrigger, htmlElement is IJSInProcessObjectReference]);
+    }
+
+    private async ValueTask DeactivateJSEvent(string jsMethodName) {
+        IJSObjectReference htmlElement = await HTMLElementTask;
+        await htmlElement.InvokeVoidTrySync(jsMethodName);
+    }
+
+
+    // Transition Events
 
     private Action<string, double, string>? _onTransitionstart;
     /// <summary>
@@ -83,13 +94,13 @@ public abstract class HTMLElementBase {
     public event Action<string, double, string> OnTransitionstart {
         add {
             if (_onTransitionstart == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitionstart", [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("activateOntransitionstart").Preserve();
             _onTransitionstart += value;
         }
         remove {
             _onTransitionstart -= value;
             if (_onTransitionstart == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitionstart"));
+                _ = DeactivateJSEvent("deactivateOntransitionstart").Preserve();
         }
     }
 
@@ -115,13 +126,13 @@ public abstract class HTMLElementBase {
     public event Action<string, double, string> OnTransitionend {
         add {
             if (_onTransitionend == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitionend", [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("activateOntransitionend").Preserve();
             _onTransitionend += value;
         }
         remove {
             _onTransitionend -= value;
             if (_onTransitionend == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitionend"));
+                _ = DeactivateJSEvent("deactivateOntransitionend").Preserve();
         }
     }
 
@@ -139,13 +150,13 @@ public abstract class HTMLElementBase {
     public event Action<string, double, string> OnTransitionrun {
         add {
             if (_onTransitionrun == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitionrun", [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("activateOntransitionrun").Preserve();
             _onTransitionrun += value;
         }
         remove {
             _onTransitionrun -= value;
             if (_onTransitionrun == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitionrun"));
+                _ = DeactivateJSEvent("deactivateOntransitionrun").Preserve();
         }
     }
 
@@ -162,20 +173,18 @@ public abstract class HTMLElementBase {
     public event Action<string, double, string> OnTransitioncancel {
         add {
             if (_onTransitioncancel == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOntransitioncancel", [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("activateOntransitioncancel").Preserve();
             _onTransitioncancel += value;
         }
         remove {
             _onTransitioncancel -= value;
             if (_onTransitioncancel == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOntransitioncancel"));
+                _ = DeactivateJSEvent("deactivateOntransitioncancel").Preserve();
         }
     }
 
-    #endregion
 
-
-    #region Animation Events
+    // Animation Events
 
     private Action<string, double, string>? _onAnimationstart;
     /// <summary>
@@ -195,13 +204,13 @@ public abstract class HTMLElementBase {
     public event Action<string, double, string> OnAnimationstart {
         add {
             if (_onAnimationstart == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationstart", [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("activateOnanimationstart").Preserve();
             _onAnimationstart += value;
         }
         remove {
             _onAnimationstart -= value;
             if (_onAnimationstart == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationstart"));
+                _ = DeactivateJSEvent("deactivateOnanimationstart").Preserve();
         }
     }
 
@@ -222,13 +231,13 @@ public abstract class HTMLElementBase {
     public event Action<string, double, string> OnAnimationend {
         add {
             if (_onAnimationend == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationend", [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("activateOnanimationend").Preserve();
             _onAnimationend += value;
         }
         remove {
             _onAnimationend -= value;
             if (_onAnimationend == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationend"));
+                _ = DeactivateJSEvent("deactivateOnanimationend").Preserve();
         }
     }
 
@@ -249,13 +258,13 @@ public abstract class HTMLElementBase {
     public event Action<string, double, string> OnAnimationiteration {
         add {
             if (_onAnimationiteration == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationiteration", [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("activateOnanimationiteration").Preserve();
             _onAnimationiteration += value;
         }
         remove {
             _onAnimationiteration -= value;
             if (_onAnimationiteration == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationiteration"));
+                _ = DeactivateJSEvent("deactivateOnanimationiteration").Preserve();
         }
     }
 
@@ -279,17 +288,15 @@ public abstract class HTMLElementBase {
     public event Action<string, double, string> OnAnimationcancel {
         add {
             if (_onAnimationcancel == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("activateOnanimationcancel", [ObjectReferenceEventTrigger]));
+                _ = ActivateJSEvent("activateOnanimationcancel").Preserve();
             _onAnimationcancel += value;
         }
         remove {
             _onAnimationcancel -= value;
             if (_onAnimationcancel == null)
-                Task.Factory.StartNew(async () => await (await HTMLElementTask).InvokeVoidTrySync("deactivateOnanimationcancel"));
+                _ = DeactivateJSEvent("deactivateOnanimationcancel").Preserve();
         }
     }
-
-    #endregion
 
     #endregion
 }
