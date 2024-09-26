@@ -8,17 +8,16 @@ public abstract class PlayWrightTest(PlayWrightFixture playWrightFixture) : IAsy
     /// <summary>
     /// BrowserContext
     /// </summary>
-    protected IBrowserContext Context { get; private set; } = null!;
+    protected IBrowserContext Context => playWrightFixture.BrowserContext;
 
     /// <summary>
     /// BrowserPage
     /// </summary>
-    protected IPage Page { get; private set; } = null!;
+    protected IPage Page => playWrightFixture.Page;
 
 
     public virtual async Task InitializeAsync() {
-        Context = await playWrightFixture.NewBrowserContext();
-        Page = await Context.NewPageAsync();
+        // get page from pool
         await Page.GotoAsync("/");
     }
 
@@ -28,7 +27,7 @@ public abstract class PlayWrightTest(PlayWrightFixture playWrightFixture) : IAsy
             await Assertions.Expect(Page.Locator("#blazor-error-ui")).ToBeVisibleAsync(new LocatorAssertionsToBeVisibleOptions() { Visible = false });
         }
         finally {
-            await Context.DisposeAsync().AsTask();
+            // release page from pool
         }
     }
 }
