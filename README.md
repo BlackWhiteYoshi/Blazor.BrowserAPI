@@ -94,3 +94,6 @@ There are more interfaces coming.
   Added HTMLMediaElement (12 BrowserAPIs)
 - 0.6.0  
   Added MediaDevices (13 BrowserAPIs)
+- 0.7.0  
+  Added SensorAPI (14 BrowserAPIs)  
+  Changed events to use sync interop if possible
