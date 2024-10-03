@@ -36,23 +36,23 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
 
     [Fact]
     public async Task Assert_String() {
-        assertValue = ConsoleGroup.TEST_ASSERT;
+        assertValue = ConsoleInProcessGroup.TEST_ASSERT;
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_ASSERT_STRING_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_ASSERT_STRING).ClickAsync();
     }
 
     [Fact]
     public async Task Assert_Test() {
-        assertValue = $"[{ConsoleGroup.TEST_ASSERT}, {ConsoleGroup.TEST_ASSERT}]";
+        assertValue = $"[{ConsoleInProcessGroup.TEST_ASSERT}, {ConsoleInProcessGroup.TEST_ASSERT}]";
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_ASSERT_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_ASSERT).ClickAsync();
     }
 
     [Fact]
     public async Task Clear() {
         assertValue = "console.clear";
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_CLEAR_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_CLEAR).ClickAsync();
     }
 
 
@@ -60,71 +60,71 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     public async Task Count() {
         assertValue = "default: 1";
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_COUNT_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_COUNT).ClickAsync();
     }
 
     [Fact]
     public async Task Count_Label() {
-        assertValue = $"{ConsoleGroup.TEST_COUNT_LABEL}: 1";
+        assertValue = $"{ConsoleInProcessGroup.TEST_COUNT_LABEL}: 1";
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_COUNT_LABEL_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_COUNT_LABEL).ClickAsync();
     }
 
     [Fact]
     public async Task CountReset() {
         assertValue = "Count for 'default' does not exist";
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_COUNT_RESET_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_COUNT_RESET).ClickAsync();
     }
 
     [Fact]
     public async Task CountReset_Label() {
-        assertValue = $"Count for '{ConsoleGroup.TEST_COUNT_LABEL}' does not exist";
+        assertValue = $"Count for '{ConsoleInProcessGroup.TEST_COUNT_LABEL}' does not exist";
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_COUNT_RESET_LABEL_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_COUNT_RESET_LABEL).ClickAsync();
     }
 
 
     [Fact]
     public async Task Debug_String() {
-        assertValue = ConsoleGroup.TEST_DEBUG;
+        assertValue = ConsoleInProcessGroup.TEST_DEBUG;
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_DEBUG_STRING_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_DEBUG_STRING).ClickAsync();
     }
 
     [Fact]
     public async Task Debug() {
-        assertValue = $"[{ConsoleGroup.TEST_DEBUG}, {ConsoleGroup.TEST_DEBUG}]";
+        assertValue = $"[{ConsoleInProcessGroup.TEST_DEBUG}, {ConsoleInProcessGroup.TEST_DEBUG}]";
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_DEBUG_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_DEBUG).ClickAsync();
     }
 
     [Fact]
     public async Task Dir() {
-        assertValue = ConsoleGroup.TEST_DIR;
+        assertValue = ConsoleInProcessGroup.TEST_DIR;
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_DIR_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_DIR).ClickAsync();
     }
 
     [Fact]
     public async Task Dirxml() {
-        assertValue = ConsoleGroup.TEST_DIRXML;
+        assertValue = ConsoleInProcessGroup.TEST_DIRXML;
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_DIRXML_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_DIRXML).ClickAsync();
     }
 
     [Fact]
     public async Task Error_String() {
-        assertValue = ConsoleGroup.TEST_ERROR;
+        assertValue = ConsoleInProcessGroup.TEST_ERROR;
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_ERROR_STRING_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_ERROR_STRING).ClickAsync();
     }
 
     [Fact]
     public async Task Error() {
-        assertValue = $"[{ConsoleGroup.TEST_ERROR}, {ConsoleGroup.TEST_ERROR}]";
+        assertValue = $"[{ConsoleInProcessGroup.TEST_ERROR}, {ConsoleInProcessGroup.TEST_ERROR}]";
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_ERROR_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_ERROR).ClickAsync();
     }
 
 
@@ -132,72 +132,72 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     public async Task Group() {
         assertValue = "undefined";
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_GROUP_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_GROUP).ClickAsync();
     }
 
     [Fact]
     public async Task Group_Label() {
-        assertValue = ConsoleGroup.TEST_GROUP_LABEL;
+        assertValue = ConsoleInProcessGroup.TEST_GROUP_LABEL;
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_GROUP_LABEL_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_GROUP_LABEL).ClickAsync();
     }
 
     [Fact]
     public async Task GroupCollapsed() {
         assertValue = "undefined";
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_GROUP_COLLAPSED_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_GROUP_COLLAPSED).ClickAsync();
     }
 
     [Fact]
     public async Task GroupCollapsed_Label() {
-        assertValue = ConsoleGroup.TEST_GROUP_COLLAPSED_LABEL;
+        assertValue = ConsoleInProcessGroup.TEST_GROUP_COLLAPSED_LABEL;
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_GROUP_COLLAPSED_LABEL_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_GROUP_COLLAPSED_LABEL).ClickAsync();
     }
 
 
 
     [Fact]
     public async Task Info_String() {
-        assertValue = ConsoleGroup.TEST_INFO;
+        assertValue = ConsoleInProcessGroup.TEST_INFO;
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_INFO_STRING_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_INFO_STRING).ClickAsync();
     }
 
     [Fact]
     public async Task Info() {
-        assertValue = $"[{ConsoleGroup.TEST_INFO}, {ConsoleGroup.TEST_INFO}]";
+        assertValue = $"[{ConsoleInProcessGroup.TEST_INFO}, {ConsoleInProcessGroup.TEST_INFO}]";
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_INFO_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_INFO).ClickAsync();
     }
 
     [Fact]
     public async Task Log_String() {
-        assertValue = ConsoleGroup.TEST_LOG;
+        assertValue = ConsoleInProcessGroup.TEST_LOG;
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_LOG_STRING_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_LOG_STRING).ClickAsync();
     }
 
     [Fact]
     public async Task Log() {
-        assertValue = $"[{ConsoleGroup.TEST_LOG}, {ConsoleGroup.TEST_LOG}]";
+        assertValue = $"[{ConsoleInProcessGroup.TEST_LOG}, {ConsoleInProcessGroup.TEST_LOG}]";
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_LOG_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_LOG).ClickAsync();
     }
 
     [Fact]
     public async Task Table() {
-        assertValue = $"[{ConsoleGroup.TEST_TABLE}, {ConsoleGroup.TEST_TABLE}]";
+        assertValue = $"[{ConsoleInProcessGroup.TEST_TABLE}, {ConsoleInProcessGroup.TEST_TABLE}]";
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TABLE_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_TABLE).ClickAsync();
     }
 
     [Fact]
     public async Task Table_Columns() {
-        assertValue = $"[{ConsoleGroup.TEST_TABLE_COLUMNS}, {ConsoleGroup.TEST_TABLE_COLUMNS}]";
+        assertValue = $"[{ConsoleInProcessGroup.TEST_TABLE_COLUMNS}, {ConsoleInProcessGroup.TEST_TABLE_COLUMNS}]";
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TABLE_COLUMNS_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_TABLE_COLUMNS).ClickAsync();
     }
 
 
@@ -206,17 +206,17 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
         assertRegex = true;
         assertValue = "^default: .* ms$";
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TIME_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_TIME).ClickAsync();
         await Page.EvaluateAsync("console.timeEnd();");
     }
 
     [Fact]
     public async Task Time_Label() {
         assertRegex = true;
-        assertValue = $"^{ConsoleGroup.TEST_TIME_LABEL}: .* ms$";
+        assertValue = $"^{ConsoleInProcessGroup.TEST_TIME_LABEL}: .* ms$";
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TIME_LABEL_INPROCESS).ClickAsync();
-        await Page.EvaluateAsync($"console.timeEnd('{ConsoleGroup.TEST_TIME_LABEL}');");
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_TIME_LABEL).ClickAsync();
+        await Page.EvaluateAsync($"console.timeEnd('{ConsoleInProcessGroup.TEST_TIME_LABEL}');");
     }
 
     [Fact]
@@ -225,16 +225,16 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
         assertValue = "^default: .* ms$";
         await Page.EvaluateAsync($"console.time();");
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TIME_END_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_TIME_END).ClickAsync();
     }
 
     [Fact]
     public async Task TimeEnd_Label() {
         assertRegex = true;
-        assertValue = $"^{ConsoleGroup.TEST_TIME_LABEL}: .* ms$";
-        await Page.EvaluateAsync($"console.time('{ConsoleGroup.TEST_TIME_LABEL}');");
+        assertValue = $"^{ConsoleInProcessGroup.TEST_TIME_LABEL}: .* ms$";
+        await Page.EvaluateAsync($"console.time('{ConsoleInProcessGroup.TEST_TIME_LABEL}');");
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TIME_END_LABEL_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_TIME_END_LABEL).ClickAsync();
     }
 
     [Fact]
@@ -243,53 +243,53 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
         assertValue = "^default: .* ms$";
         await Page.EvaluateAsync($"console.time();");
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TIME_LOG_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_TIME_LOG).ClickAsync();
     }
 
     [Fact]
     public async Task TimeLog_Label() {
         assertRegex = true;
-        assertValue = $"^{ConsoleGroup.TEST_TIME_LABEL}: .* ms$";
-        await Page.EvaluateAsync($"console.time('{ConsoleGroup.TEST_TIME_LABEL}');");
+        assertValue = $"^{ConsoleInProcessGroup.TEST_TIME_LABEL}: .* ms$";
+        await Page.EvaluateAsync($"console.time('{ConsoleInProcessGroup.TEST_TIME_LABEL}');");
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TIME_LOG_LABEL_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_TIME_LOG_LABEL).ClickAsync();
     }
 
     [Fact]
     public async Task TimeLog_LabelData() {
         assertRegex = true;
-        assertValue = $"^{ConsoleGroup.TEST_TIME_LABEL}: .* ms \\[{ConsoleGroup.TEST_TIME_LOG_DATA}, {ConsoleGroup.TEST_TIME_LOG_DATA}\\]$";
-        await Page.EvaluateAsync($"console.time('{ConsoleGroup.TEST_TIME_LABEL}');");
+        assertValue = $"^{ConsoleInProcessGroup.TEST_TIME_LABEL}: .* ms \\[{ConsoleInProcessGroup.TEST_TIME_LOG_DATA}, {ConsoleInProcessGroup.TEST_TIME_LOG_DATA}\\]$";
+        await Page.EvaluateAsync($"console.time('{ConsoleInProcessGroup.TEST_TIME_LABEL}');");
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TIME_LOG_LABEL_DATA_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_TIME_LOG_LABEL_DATA).ClickAsync();
     }
 
 
     [Fact]
     public async Task Trace_String() {
-        assertValue = ConsoleGroup.TEST_TRACE;
+        assertValue = ConsoleInProcessGroup.TEST_TRACE;
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TRACE_STRING_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_TRACE_STRING).ClickAsync();
     }
 
     [Fact]
     public async Task Trace() {
-        assertValue = $"[{ConsoleGroup.TEST_TRACE}, {ConsoleGroup.TEST_TRACE}]";
+        assertValue = $"[{ConsoleInProcessGroup.TEST_TRACE}, {ConsoleInProcessGroup.TEST_TRACE}]";
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TRACE_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_TRACE).ClickAsync();
     }
 
     [Fact]
     public async Task Warn_String() {
-        assertValue = ConsoleGroup.TEST_WARN;
+        assertValue = ConsoleInProcessGroup.TEST_WARN;
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_WARN_STRING_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_WARN_STRING).ClickAsync();
     }
 
     [Fact]
     public async Task Warn() {
-        assertValue = $"[{ConsoleGroup.TEST_WARN}, {ConsoleGroup.TEST_WARN}]";
+        assertValue = $"[{ConsoleInProcessGroup.TEST_WARN}, {ConsoleInProcessGroup.TEST_WARN}]";
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_WARN_INPROCESS).ClickAsync();
+        await Page.GetByTestId(ConsoleInProcessGroup.BUTTON_WARN).ClickAsync();
     }
 }

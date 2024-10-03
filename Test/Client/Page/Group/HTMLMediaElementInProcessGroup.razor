@@ -1,0 +1,115 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>HTML MediaElement InProcess</h2>
+    <div>
+        @* Attributes *@
+        <button data-testid="@BUTTON_GET_SRC" @onclick="GetSrc">GetSrc</button>
+        <button data-testid="@BUTTON_SET_SRC" @onclick="SetSrc">SetSrc</button>
+
+        <button data-testid="@BUTTON_GET_SRC_OBJECT" @onclick="GetSrcObject">GetSrcObject</button>
+        <button data-testid="@BUTTON_SET_SRC_OBJECT" @onclick="SetSrcObject">SetSrcObject</button>
+
+        <button data-testid="@BUTTON_GET_CONTROLS" @onclick="GetControls">GetControls</button>
+        <button data-testid="@BUTTON_SET_CONTROLS" @onclick="SetControls">SetControls</button>
+
+        <button data-testid="@BUTTON_GET_AUTOPLAY" @onclick="GetAutoplay">GetAutoplay</button>
+        <button data-testid="@BUTTON_SET_AUTOPLAY" @onclick="SetAutoplay">SetAutoplay</button>
+
+        <button data-testid="@BUTTON_GET_LOOP" @onclick="GetLoop">GetLoop</button>
+        <button data-testid="@BUTTON_SET_LOOP" @onclick="SetLoop">SetLoop</button>
+
+        <button data-testid="@BUTTON_GET_DEFAULT_MUTED" @onclick="GetDefaultMuted">GetDefaultMuted</button>
+        <button data-testid="@BUTTON_SET_DEFAULT_MUTED" @onclick="SetDefaultMuted">SetDefaultMuted</button>
+
+        <button data-testid="@BUTTON_GET_PRELOAD" @onclick="GetPreload">GetPreload</button>
+        <button data-testid="@BUTTON_SET_PRELOAD" @onclick="SetPreload">SetPreload</button>
+
+        @* State *@
+        <button data-testid="@BUTTON_GET_CURRENT_SRC" @onclick="GetCurrentSrc">GetCurrentSrc</button>
+
+        <button data-testid="@BUTTON_GET_CURRENT_TIME" @onclick="GetCurrentTime">GetCurrentTime</button>
+        <button data-testid="@BUTTON_SET_CURRENT_TIME" @onclick="SetCurrentTime">SetCurrentTime</button>
+
+        <button data-testid="@BUTTON_GET_DURATION" @onclick="GetDuration">GetDuration</button>
+
+        <button data-testid="@BUTTON_GET_SEEKABLE" @onclick="GetSeekable">GetSeekable</button>
+
+        <button data-testid="@BUTTON_GET_MUTED" @onclick="GetMuted">GetMuted</button>
+        <button data-testid="@BUTTON_SET_MUTED" @onclick="SetMuted">SetMuted</button>
+
+        <button data-testid="@BUTTON_GET_VOLUME" @onclick="GetVolume">GetVolume</button>
+        <button data-testid="@BUTTON_SET_VOLUME" @onclick="SetVolume">SetVolume</button>
+
+        <button data-testid="@BUTTON_GET_PAUSED" @onclick="GetPaused">GetPaused</button>
+
+        <button data-testid="@BUTTON_GET_ENDED" @onclick="GetEnded">GetEnded</button>
+
+        <button data-testid="@BUTTON_GET_SEEKING" @onclick="GetSeeking">GetSeeking</button>
+
+        <button data-testid="@BUTTON_GET_READY_STATE" @onclick="GetReadyState">GetReadyState</button>
+
+        <button data-testid="@BUTTON_GET_NETWORK_STATE" @onclick="GetNetworkState">GetNetworkState</button>
+
+        <button data-testid="@BUTTON_GET_BUFFERED" @onclick="GetBuffered">GetBuffered</button>
+
+        <button data-testid="@BUTTON_GET_PLAYED" @onclick="GetPlayed">GetPlayed</button>
+
+        @* Settings *@
+        <button data-testid="@BUTTON_GET_PLAYBACK_RATE" @onclick="GetPlaybackRate">GetPlaybackRate</button>
+        <button data-testid="@BUTTON_SET_PLAYBACK_RATE" @onclick="SetPlaybackRate">SetPlaybackRate</button>
+
+        <button data-testid="@BUTTON_GET_DEFAULT_PLAYBACK_RATE" @onclick="GetDefaultPlaybackRate">GetDefaultPlaybackRate</button>
+        <button data-testid="@BUTTON_SET_DEFAULT_PLAYBACK_RATE" @onclick="SetDefaultPlaybackRate">SetDefaultPlaybackRate</button>
+
+        <button data-testid="@BUTTON_GET_CROSS_ORIGIN" @onclick="GetCrossOrigin">GetCrossOrigin</button>
+        <button data-testid="@BUTTON_SET_CROSS_ORIGIN" @onclick="SetCrossOrigin">SetCrossOrigin</button>
+
+        <button data-testid="@BUTTON_GET_PRESERVES_PITCH" @onclick="GetPreservesPitch">GetPreservesPitch</button>
+        <button data-testid="@BUTTON_SET_PRESERVES_PITCH" @onclick="SetPreservesPitch">SetPreservesPitch</button>
+
+        <button data-testid="@BUTTON_GET_DISABLE_REMOTE_PLAYBACK" @onclick="GetDisableRemotePlayback">GetDisableRemotePlayback</button>
+        <button data-testid="@BUTTON_SET_DISABLE_REMOTE_PLAYBACK" @onclick="SetDisableRemotePlayback">SetDisableRemotePlayback</button>
+
+        @* Methods *@
+        <button data-testid="@BUTTON_PLAY" @onclick="Play">Play</button>
+        <button data-testid="@BUTTON_PAUSE" @onclick="Pause">Pause</button>
+        <button data-testid="@BUTTON_LOAD" @onclick="Load">Load</button>
+        <button data-testid="@BUTTON_FAST_SEEK" @onclick="FastSeek">FastSeek</button>
+        <button data-testid="@BUTTON_CAN_PLAY_TYPE" @onclick="CanPlayType">CanPlayType</button>
+
+        @* Events *@
+
+        @* Ready *@
+        <button data-testid="@BUTTON_REGISTER_ON_ERROR" @onclick="RegisterOnError">RegisterOnError</button>
+        <button data-testid="@BUTTON_REGISTER_ON_CANPLAY" @onclick="RegisterOnCanplay">RegisterOnCanplay</button>
+        <button data-testid="@BUTTON_REGISTER_ON_CANPLAYTHROUGH" @onclick="RegisterOnCanplaythrough">RegisterOnCanplaythrough</button>
+        <button data-testid="@BUTTON_REGISTER_ON_PLAYING" @onclick="RegisterOnPlaying">RegisterOnPlaying</button>
+
+        @* Data *@
+        <button data-testid="@BUTTON_REGISTER_ON_LOADSTART" @onclick="RegisterOnLoadstart">RegisterOnLoadstart</button>
+        <button data-testid="@BUTTON_REGISTER_ON_PROGRESS" @onclick="RegisterOnProgress">RegisterOnProgress</button>
+        <button data-testid="@BUTTON_REGISTER_ON_LOADEDDATA" @onclick="RegisterOnLoadeddata">RegisterOnLoadeddata</button>
+        <button data-testid="@BUTTON_REGISTER_ON_LOADEDMETADATA" @onclick="RegisterOnLoadedmetadata">RegisterOnLoadedmetadata</button>
+        <button data-testid="@BUTTON_REGISTER_ON_STALLED" @onclick="RegisterOnStalled">RegisterOnStalled</button>
+        <button data-testid="@BUTTON_REGISTER_ON_SUSPEND" @onclick="RegisterOnSuspend">RegisterOnSuspend</button>
+        <button data-testid="@BUTTON_REGISTER_ON_WAITING" @onclick="RegisterOnWaiting">RegisterOnWaiting</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ABORT" @onclick="RegisterOnAbort">RegisterOnAbort</button>
+        <button data-testid="@BUTTON_REGISTER_ON_EMPTIED" @onclick="RegisterOnEmptied">RegisterOnEmptied</button>
+
+        @* Timing *@
+        <button data-testid="@BUTTON_REGISTER_ON_PLAY" @onclick="RegisterOnPlay">RegisterOnPlay</button>
+        <button data-testid="@BUTTON_REGISTER_ON_PAUSE" @onclick="RegisterOnPause">RegisterOnPause</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ENDED" @onclick="RegisterOnEnded">RegisterOnEnded</button>
+        <button data-testid="@BUTTON_REGISTER_ON_SEEKING" @onclick="RegisterOnSeeking">RegisterOnSeeking</button>
+        <button data-testid="@BUTTON_REGISTER_ON_SEEKED" @onclick="RegisterOnSeeked">RegisterOnSeeked</button>
+        <button data-testid="@BUTTON_REGISTER_ON_TIMEUPDATE" @onclick="RegisterOnTimeupdate">RegisterOnTimeupdate</button>
+
+        @* Setting *@
+        <button data-testid="@BUTTON_REGISTER_ON_VOLUMECHANGE" @onclick="RegisterOnVolumechange">RegisterOnVolumechange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_RATECHANGE" @onclick="RegisterOnRatechange">RegisterOnRatechange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_DURATIONCHANGE" @onclick="RegisterOnDurationchange">RegisterOnDurationchange</button>
+    </div>
+    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+    <audio data-testid="@AUDIO_ELEMENT" @ref="audioElement" src="HTMLMediaElement_audio.mp3" preload="auto"></audio>
+</div>

@@ -331,7 +331,7 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
         const string expected = """
-            <div data-testid="htmlelement-html-element" class="html-element" tabindex="-1" style="visibility: visible;" _bl_3=""><!--!-->
+            <div data-testid="htmlelement-html-element" class="html-element" tabindex="-1" style="visibility: visible;" _bl_4=""><!--!-->
                         test <!--!--><b>bold</b> <!--!--><i>italic</i> <!--!--><u>underlined</u></div>
             """;
         Assert.Equal(expected, result);
@@ -343,7 +343,7 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
         const string expected = """
-            <div data-testid="htmlelement-html-element" class="html-element" tabindex="-1" style="visibility: visible;" _bl_3=""><!--!-->
+            <div data-testid="htmlelement-html-element" class="html-element" tabindex="-1" style="visibility: visible;" _bl_4=""><!--!-->
                         test <!--!--><b>bold</b> <!--!--><i>italic</i> <!--!--><u>underlined</u></div>
             """;
         Assert.Equal(expected, result);
@@ -364,7 +364,7 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
         await Page.GetByTestId(HTMLElementGroup.BUTTON_GET_ATTRIBUTES_PROPERTY).ClickAsync();
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
-        Assert.Equal("""{"data-testid":"htmlelement-html-element","class":"html-element","tabindex":"-1","style":"visibility: visible;","_bl_3":""}""", result);
+        Assert.Equal("""{"data-testid":"htmlelement-html-element","class":"html-element","tabindex":"-1","style":"visibility: visible;","_bl_4":""}""", result);
     }
 
     [Fact]
@@ -372,7 +372,7 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
         await Page.GetByTestId(HTMLElementGroup.BUTTON_GET_ATTRIBUTES_METHOD).ClickAsync();
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
-        Assert.Equal("""{"data-testid":"htmlelement-html-element","class":"html-element","tabindex":"-1","style":"visibility: visible;","_bl_3":""}""", result);
+        Assert.Equal("""{"data-testid":"htmlelement-html-element","class":"html-element","tabindex":"-1","style":"visibility: visible;","_bl_4":""}""", result);
     }
 
 

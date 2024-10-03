@@ -1,0 +1,33 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Service Worker InProcess</h2>
+    <div>
+        @* Service Worker Container *@
+        <button data-testid="@BUTTON_REGISTER" @onclick="Register">Register</button>
+        <button data-testid="@BUTTON_REGISTER_WITH_WORKER_REGISTRATION" @onclick="RegisterWithWorkerRegistration">RegisterWithWorkerRegistration</button>
+        <button data-testid="@BUTTON_DELAY_UNTIL_READY" @onclick="DelayUntilReady">DelayUntilReady</button>
+        <button data-testid="@BUTTON_GET_REGISTRATION" @onclick="GetRegistration">GetRegistration</button>
+        <button data-testid="@BUTTON_GET_REGISTRATIONS" @onclick="GetRegistrations">GetRegistrations</button>
+        <button data-testid="@BUTTON_GET_CONTROLLER" @onclick="GetController">GetController</button>
+        <button data-testid="@BUTTON_START_MESSAGES" @onclick="StartMessages">StartMessages</button>
+        <button data-testid="@BUTTON_REGISTER_ON_CONTROLLER_CHANGE" @onclick="RegisterOnControllerChange">RegisterOnControllerChange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_MESSAGE" @onclick="RegisterOnMessage">RegisterOnMessage</button>
+        @* Service Worker Registration *@
+        <button data-testid="@BUTTON_UNREGISTER" @onclick="Unregister">Unregister</button>
+        <button data-testid="@BUTTON_ACTIVE" @onclick="Active">Active</button>
+        <button data-testid="@BUTTON_INSTALLING" @onclick="Installing">Installing</button>
+        <button data-testid="@BUTTON_WAITING" @onclick="Waiting">Waiting</button>
+        <button data-testid="@BUTTON_SCOPE" @onclick="Scope">Scope</button>
+        <button data-testid="@BUTTON_UPDATE_VIA_CACHE" @onclick="UpdateViaCache">UpdateViaCache</button>
+        <button data-testid="@BUTTON_UPDATE" @onclick="Update">Update</button>
+        <button data-testid="@BUTTON_REGISTER_ON_UPDATE_FOUND" @onclick="RegisterOnUpdateFound">RegisterOnUpdateFound</button>
+        @* Service Worker *@
+        <button data-testid="@BUTTON_SCRIPT_URL" @onclick="ScriptUrl">ScriptUrl</button>
+        <button data-testid="@BUTTON_STATE" @onclick="State">State</button>
+        <button data-testid="@BUTTON_POST_MESSAGE" @onclick="PostMessage">PostMessage</button>
+        <button data-testid="@BUTTON_REGISTER_ON_STATE_CHANGE" @onclick="RegisterOnStateChange">RegisterOnStateChange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ERROR" @onclick="RegisterOnError">RegisterOnError</button>
+    </div>
+    <label data-testId="@LABEL_OUTPUT">@labelOutput</label>
+</div>

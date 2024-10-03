@@ -1,32 +1,24 @@
 ﻿@namespace BrowserAPI.Test.Client
 
 <div class="group">
-    <h2>Media Devices</h2>
+    <h2>Media Devices InProcess</h2>
     <div>
         @* Media Devices *@
         <button data-testid="@BUTTON_ENUMERATE_DEVICES" @onclick="EnumerateDevices">EnumerateDevices</button>
-        <button data-testid="@BUTTON_GET_SUPPORTED_CONSTRAINTS_PROPERTY" @onclick="GetSupportedConstraints_Property">GetSupportedConstraints_Property</button>
-        <button data-testid="@BUTTON_GET_SUPPORTED_CONSTRAINTS_METHOD" @onclick="GetSupportedConstraints_Method">GetSupportedConstraints_Method</button>
+        <button data-testid="@BUTTON_GET_SUPPORTED_CONSTRAINTS" @onclick="GetSupportedConstraints">GetSupportedConstraints</button>
         <button data-testid="@BUTTON_GET_USER_MEDIA" @onclick="GetUserMedia">GetUserMedia</button>
         <button data-testid="@BUTTON_GET_USER_MEDIA_WITH_CONSTRAINT" @onclick="GetUserMediaWithConstraint">GetUserMediaWithConstraint</button>
         <button data-testid="@BUTTON_GET_DISPLAY_MEDIA" @onclick="GetDisplayMedia">GetDisplayMedia</button>
         <button data-testid="@BUTTON_GET_DISPLAY_MEDIA_WITH_CONSTRAINT" @onclick="GetDisplayMediaWithConstraint">GetDisplayMediaWithConstraint</button>
         @* Media Stream *@
-        <button data-testid="@BUTTON_GET_ACTIVE_PROPERTY" @onclick="GetActive_Property">GetActive_Property</button>
-        <button data-testid="@BUTTON_GET_ACTIVE_METHOD" @onclick="GetActive_Method">GetActive_Method</button>
-        <button data-testid="@BUTTON_GET_ID_PROPERTY" @onclick="GetId_Property">GetId_Property</button>
-        <button data-testid="@BUTTON_GET_ID_METHOD" @onclick="GetId_Method">GetId_Method</button>
+        <button data-testid="@BUTTON_GET_ACTIVE" @onclick="GetActive">GetActive</button>
+        <button data-testid="@BUTTON_GET_ID" @onclick="GetId">GetId</button>
         @* Media Recorder Properties *@
-        <button data-testid="@BUTTON_GET_MIME_TYPE_PROPERTY" @onclick="GetMimeType_Property">GetMimeType_Property</button>
-        <button data-testid="@BUTTON_GET_MIME_TYPE_METHOD" @onclick="GetMimeType_Method">GetMimeType_Method</button>
-        <button data-testid="@BUTTON_GET_STATE_PROPERTY" @onclick="GetState_Property">GetState_Property</button>
-        <button data-testid="@BUTTON_GET_STATE_METHOD" @onclick="GetState_Method">GetState_Method</button>
-        <button data-testid="@BUTTON_GET_STREAM_PROPERTY" @onclick="GetStream_Property">GetStream_Property</button>
-        <button data-testid="@BUTTON_GET_STREAM_METHOD" @onclick="GetStream_Method">GetStream_Method</button>
-        <button data-testid="@BUTTON_GET_AUDIO_BITS_PER_SECOND_PROPERTY" @onclick="GetAudioBitsPerSecond_Property">GetAudioBitsPerSecond_Property</button>
-        <button data-testid="@BUTTON_GET_AUDIO_BITS_PER_SECOND_METHOD" @onclick="GetAudioBitsPerSecond_Method">GetAudioBitsPerSecond_Method</button>
-        <button data-testid="@BUTTON_GET_VIDEO_BITS_PER_SECOND_PROPERTY" @onclick="GetVideoBitsPerSecond_Property">GetVideoBitsPerSecond_Property</button>
-        <button data-testid="@BUTTON_GET_VIDEO_BITS_PER_SECOND_METHOD" @onclick="GetVideoBitsPerSecond_Method">GetVideoBitsPerSecond_Method</button>
+        <button data-testid="@BUTTON_GET_MIME_TYPE" @onclick="GetMimeType">GetMimeType</button>
+        <button data-testid="@BUTTON_GET_STATE" @onclick="GetState">GetState</button>
+        <button data-testid="@BUTTON_GET_STREAM" @onclick="GetStream">GetStream</button>
+        <button data-testid="@BUTTON_GET_AUDIO_BITS_PER_SECOND" @onclick="GetAudioBitsPerSecond">GetAudioBitsPerSecond</button>
+        <button data-testid="@BUTTON_GET_VIDEO_BITS_PER_SECOND" @onclick="GetVideoBitsPerSecond">GetVideoBitsPerSecond</button>
         @* Media Recorder Methods *@
         <button data-testid="@BUTTON_START" @onclick="Start">Start</button>
         <button data-testid="@BUTTON_STOP" @onclick="Stop">Stop</button>

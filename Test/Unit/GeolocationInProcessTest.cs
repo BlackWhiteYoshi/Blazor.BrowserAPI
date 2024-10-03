@@ -11,9 +11,14 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
         await Context.GrantPermissionsAsync(["geolocation"]);
     }
 
+    public override async Task DisposeAsync() {
+        await Context.ClearPermissionsAsync();
+        await base.DisposeAsync();
+    }
+
 
     [Fact]
-    public async Task GetCurrentPosition_InProcess() {
+    public async Task GetCurrentPosition() {
         const float LONGITUDE = 10.0f;
         const float LATITUDE = 12.0f;
         const float ACCURACY = 2.0f;
@@ -23,9 +28,9 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
             Accuracy = ACCURACY,
         });
 
-        await Page.GetByTestId(GeolocationGroup.BUTTON_GET_CURRENT_POSITION_INPROCESS).ClickAsync();
+        await Page.GetByTestId(GeolocationInProcessGroup.BUTTON_GET_CURRENT_POSITION).ClickAsync();
 
-        string? result = await Page.GetByTestId(GeolocationGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
 
         int secondParameterIndex = result?.LastIndexOf("}, ") ?? throw new Exception("result is null");
         string secondParameter = result[(secondParameterIndex + 3)..];
@@ -37,12 +42,12 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Fact]
-    public async Task WatchPosition_InProcess() {
+    public async Task WatchPosition() {
         const float LONGITUDE = 10.0f;
         const float LATITUDE = 12.0f;
         const float ACCURACY = 1.0f;
 
-        await Page.GetByTestId(GeolocationGroup.BUTTON_WATCH_POSITION_INPROCESS).ClickAsync();
+        await Page.GetByTestId(GeolocationInProcessGroup.BUTTON_WATCH_POSITION).ClickAsync();
 
         for (int i = 0; i < 5; i++) {
             await Context.SetGeolocationAsync(new Geolocation() {
@@ -51,7 +56,7 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
                 Accuracy = ACCURACY * i,
             });
             await Task.Delay(100);
-            string? result = await Page.GetByTestId(GeolocationGroup.LABEL_OUTPUT).TextContentAsync();
+            string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
 
             int secondParameterIndex = result?.LastIndexOf("}, ") ?? throw new Exception("result is null");
             string secondParameter = result[(secondParameterIndex + 3)..];
@@ -64,8 +69,8 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Fact]
-    public async Task ClearWatch_InProcess() {
-        await Page.GetByTestId(GeolocationGroup.BUTTON_WATCH_POSITION_INPROCESS).ClickAsync();
+    public async Task ClearWatch() {
+        await Page.GetByTestId(GeolocationInProcessGroup.BUTTON_WATCH_POSITION).ClickAsync();
         await Task.Delay(100);
 
         await Context.SetGeolocationAsync(new Geolocation() {
@@ -75,7 +80,7 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
         });
         await Task.Delay(100);
 
-        await Page.GetByTestId(GeolocationGroup.BUTTON_CLEAR_WATCH_INPROCESS).ClickAsync();
+        await Page.GetByTestId(GeolocationInProcessGroup.BUTTON_CLEAR_WATCH).ClickAsync();
         await Task.Delay(100);
 
         await Context.SetGeolocationAsync(new Geolocation() {
@@ -85,7 +90,7 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
         });
         await Task.Delay(100);
 
-        string? result = await Page.GetByTestId(GeolocationGroup.LABEL_OUTPUT).TextContentAsync();
-        Assert.Equal("2, 0", result);
+        string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        Assert.Equal("watchId: 3, count: 0", result);
     }
 }

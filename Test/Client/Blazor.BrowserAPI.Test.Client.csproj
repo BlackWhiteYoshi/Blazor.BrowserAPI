@@ -22,4 +22,10 @@
     <ProjectReference Include="..\..\Blazor.BrowserAPI\Blazor.BrowserAPI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Page\Group\HTMLElementInProcessGroup.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
 </Project>

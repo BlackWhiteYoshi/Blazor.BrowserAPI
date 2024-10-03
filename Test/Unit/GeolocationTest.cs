@@ -11,6 +11,11 @@ public sealed class GeolocationTest(PlayWrightFixture playWrightFixture) : PlayW
         await Context.GrantPermissionsAsync(["geolocation"]);
     }
 
+    public override async Task DisposeAsync() {
+        await Context.ClearPermissionsAsync();
+        await base.DisposeAsync();
+    }
+
 
     [Fact]
     public async Task GetCurrentPosition() {
@@ -86,6 +91,6 @@ public sealed class GeolocationTest(PlayWrightFixture playWrightFixture) : PlayW
         await Task.Delay(100);
 
         string? result = await Page.GetByTestId(GeolocationGroup.LABEL_OUTPUT).TextContentAsync();
-        Assert.Equal("2, 0", result);
+        Assert.Equal("watchId: 3, count: 0", result);
     }
 }

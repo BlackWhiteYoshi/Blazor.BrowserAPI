@@ -1,14 +1,12 @@
 ﻿@namespace BrowserAPI.Test.Client
 
 <div class="group">
-    <h2>Dialog</h2>
+    <h2>Dialog InProcess</h2>
     <div>
-        <button data-testid="@BUTTON_GET_OPEN_PROPERTY" @onclick="GetOpen_Property">GetOpen_Property</button>
-        <button data-testid="@BUTTON_GET_OPEN_METHOD" @onclick="GetOpen_Method">GetOpen_Method</button>
+        <button data-testid="@BUTTON_GET_OPEN" @onclick="GetOpen">GetOpen</button>
         <button data-testid="@BUTTON_SET_OPEN" @onclick="SetOpen">SetOpen</button>
 
-        <button data-testid="@BUTTON_GET_RETURN_VALUE_PROPERTY" @onclick="GetReturnValue_Property">GetReturnValue_Property</button>
-        <button data-testid="@BUTTON_GET_RETURN_VALUE_METHOD" @onclick="GetReturnValue_Method">GetReturnValue_Method</button>
+        <button data-testid="@BUTTON_GET_RETURN_VALUE" @onclick="GetReturnValue">GetReturnValue</button>
         <button data-testid="@BUTTON_SET_RETURN_VALUE" @onclick="SetReturnValue">SetReturnValue</button>
 
         <button data-testid="@BUTTON_SHOW" @onclick="Show">Show</button>
@@ -21,6 +19,6 @@
     </div>
     <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
     <dialog data-testid="@DIALOG_ELEMENT" @ref="dialogElement">
-        <p style="margin: 0;">placeholder text in dialog</p>
+        <p style="margin: 0;">placeholder text in dialog-inprocess</p>
     </dialog>
 </div>

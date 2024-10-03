@@ -11,15 +11,9 @@ public sealed partial class DialogGroup : ComponentBase, IAsyncDisposable {
     [Inject]
     public required IElementFactory ElementFactory { private get; init; }
 
-    [Inject]
-    public required IElementFactoryInProcess ElementFactoryInProcess { private get; init; }
-
 
     private IDialog? _dialog;
     private IDialog Dialog => _dialog ??= ElementFactory.CreateDialog(dialogElement);
-
-    private IDialogInProcess? _dialogInProcess;
-    private IDialogInProcess DialogInProcess => _dialogInProcess ??= ElementFactoryInProcess.CreateDialog(dialogElement);
 
 
     public const string LABEL_OUTPUT = "dialog-output";
@@ -28,10 +22,7 @@ public sealed partial class DialogGroup : ComponentBase, IAsyncDisposable {
     public const string DIALOG_ELEMENT = "dialog-dialog-element";
     private ElementReference dialogElement;
 
-    public ValueTask DisposeAsync() {
-        _dialogInProcess?.Dispose();
-        return _dialog?.DisposeAsync() ?? ValueTask.CompletedTask;
-    }
+    public ValueTask DisposeAsync() => _dialog?.DisposeAsync() ?? ValueTask.CompletedTask;
 
 
     public const string BUTTON_GET_OPEN_PROPERTY = "dialog-get-open-property";
@@ -100,68 +91,6 @@ public sealed partial class DialogGroup : ComponentBase, IAsyncDisposable {
     public const string BUTTON_REGISTER_ON_CLOSE = "dialog-close-event";
     private void RegisterOnClose() {
         Dialog.OnClose += () => {
-            labelOutput = TEST_CLOSE_EVENT;
-            StateHasChanged();
-        };
-    }
-
-
-
-    public const string BUTTON_GET_OPEN_INPROCESS = "dialog-get-open-inprocess";
-    private void GetOpen_InProcess() {
-        bool state = DialogInProcess.Open;
-        labelOutput = state.ToString();
-    }
-
-    public const string BUTTON_SET_OPEN_INPROCESS = "dialog-set-open-inprocess";
-    private void SetOpen_InProcess() {
-        DialogInProcess.Open = true;
-    }
-
-
-    public const string BUTTON_GET_RETURN_VALUE_INPROCESS = "dialog-get-return-value-inprocess";
-    private void GetReturnValue_InProcess() {
-        labelOutput = DialogInProcess.ReturnValue;
-    }
-
-    public const string BUTTON_SET_RETURN_VALUE_INPROCESS = "dialog-set-return-value-inprocess";
-    private void SetReturnValue_InProcess() {
-        DialogInProcess.ReturnValue = TEST_RETURN_VALUE;
-    }
-
-
-    public const string BUTTON_SHOW_INPROCESS = "dialog-show-inprocess";
-    private void Show_InProcess() {
-        DialogInProcess.Show();
-    }
-
-    public const string BUTTON_SHOW_MODAL_INPROCESS = "dialog-show-modal-inprocess";
-    private void ShowModal_InProcess() {
-        DialogInProcess.ShowModal();
-    }
-
-    public const string BUTTON_CLOSE_INPROCESS = "dialog-close-inprocess";
-    private void Close_InProcess() {
-        DialogInProcess.Close();
-    }
-
-    public const string BUTTON_CLOSE_RETURN_VALUE_INPROCESS = "dialog-close-return-value-inprocess";
-    private void CloseReturnValue_InProcess() {
-        DialogInProcess.Close(TEST_RETURN_VALUE);
-    }
-
-
-    public const string BUTTON_REGISTER_ON_CANCEL_INPROCESS = "dialog-cancel-event-inprocess";
-    private void RegisterOnCancel_InProcess() {
-        DialogInProcess.OnCancel += () => {
-            labelOutput = TEST_CANCEL_EVENT;
-            StateHasChanged();
-        };
-    }
-
-    public const string BUTTON_REGISTER_ON_CLOSE_INPROCESS = "dialog-close-event-inprocess";
-    private void RegisterOnClose_InProcess() {
-        DialogInProcess.OnClose += () => {
             labelOutput = TEST_CLOSE_EVENT;
             StateHasChanged();
         };

@@ -3,6 +3,32 @@
 <div class="group">
     <h2>Service Worker</h2>
     <div>
+        @* Service Worker Container *@
+        <button data-testid="@BUTTON_REGISTER" @onclick="Register">Register</button>
+        <button data-testid="@BUTTON_REGISTER_WITH_WORKER_REGISTRATION" @onclick="RegisterWithWorkerRegistration">RegisterWithWorkerRegistration</button>
+        <button data-testid="@BUTTON_DELAY_UNTIL_READY" @onclick="DelayUntilReady">DelayUntilReady</button>
+        <button data-testid="@BUTTON_GET_REGISTRATION" @onclick="GetRegistration">GetRegistration</button>
+        <button data-testid="@BUTTON_GET_REGISTRATIONS" @onclick="GetRegistrations">GetRegistrations</button>
+        <button data-testid="@BUTTON_GET_CONTROLLER_PROPERTY" @onclick="GetController_Property">GetController_Property</button>
+        <button data-testid="@BUTTON_GET_CONTROLLER_METHOD" @onclick="GetController_Method">GetController_Method</button>
+        <button data-testid="@BUTTON_START_MESSAGES" @onclick="StartMessages">StartMessages</button>
+        <button data-testid="@BUTTON_REGISTER_ON_CONTROLLER_CHANGE" @onclick="RegisterOnControllerChange">RegisterOnControllerChange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_MESSAGE" @onclick="RegisterOnMessage">RegisterOnMessage</button>
+        @* Service Worker Registration *@
+        <button data-testid="@BUTTON_UNREGISTER" @onclick="Unregister">Unregister</button>
+        <button data-testid="@BUTTON_ACTIVE_PROPERTY" @onclick="Active_Property">Active_Property</button>
+        <button data-testid="@BUTTON_ACTIVE_METHOD" @onclick="Active_Method">Active_Method</button>
+        <button data-testid="@BUTTON_INSTALLING_PROPERTY" @onclick="Installing_Property">Installing_Property</button>
+        <button data-testid="@BUTTON_INSTALLING_METHOD" @onclick="Installing_Method">Installing_Method</button>
+        <button data-testid="@BUTTON_WAITING_PROPERTY" @onclick="Waiting_Property">Waiting_Property</button>
+        <button data-testid="@BUTTON_WAITING_METHOD" @onclick="Waiting_Method">Waiting_Method</button>
+        <button data-testid="@BUTTON_SCOPE_PROPERTY" @onclick="Scope_Property">Scope_Property</button>
+        <button data-testid="@BUTTON_SCOPE_METHOD" @onclick="Scope_Method">Scope_Method</button>
+        <button data-testid="@BUTTON_UPDATE_VIA_CACHE_PROPERTY" @onclick="UpdateViaCache_Property">UpdateViaCache_Property</button>
+        <button data-testid="@BUTTON_UPDATE_VIA_CACHE_METHOD" @onclick="UpdateViaCache_Method">UpdateViaCache_Method</button>
+        <button data-testid="@BUTTON_UPDATE" @onclick="Update">Update</button>
+        <button data-testid="@BUTTON_REGISTER_ON_UPDATE_FOUND" @onclick="RegisterOnUpdateFound">RegisterOnUpdateFound</button>
+        @* Service Worker *@
         <button data-testid="@BUTTON_SCRIPT_URL_PROPERTY" @onclick="ScriptUrl_Property">ScriptUrl_Property</button>
         <button data-testid="@BUTTON_SCRIPT_URL_METHOD" @onclick="ScriptUrl_Method">ScriptUrl_Method</button>
         <button data-testid="@BUTTON_STATE_PROPERTY" @onclick="State_Property">State_Property</button>
@@ -10,12 +36,6 @@
         <button data-testid="@BUTTON_POST_MESSAGE" @onclick="PostMessage">PostMessage</button>
         <button data-testid="@BUTTON_REGISTER_ON_STATE_CHANGE" @onclick="RegisterOnStateChange">RegisterOnStateChange</button>
         <button data-testid="@BUTTON_REGISTER_ON_ERROR" @onclick="RegisterOnError">RegisterOnError</button>
-
-        <button data-testid="@BUTTON_SCRIPT_URL_INPROCESS" @onclick="ScriptUrl_InProcess">ScriptUrl_InProcess</button>
-        <button data-testid="@BUTTON_STATE_INPROCESS" @onclick="State_InProcess">State_InProcess</button>
-        <button data-testid="@BUTTON_POST_MESSAGE_INPROCESS" @onclick="PostMessage_InProcess">PostMessage_InProcess</button>
-        <button data-testid="@BUTTON_REGISTER_ON_STATE_CHANGE_INPROCESS" @onclick="RegisterOnStateChange_InProcess">RegisterOnStateChange_InProcess</button>
-        <button data-testid="@BUTTON_REGISTER_ON_ERROR_INPROCESS" @onclick="RegisterOnError_InProcess">RegisterOnError_InProcess</button>
     </div>
     <label data-testId="@LABEL_OUTPUT">@labelOutput</label>
 </div>
