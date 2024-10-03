@@ -4860,6 +4860,1060 @@
             <param name="bitsPerSecond">The chosen bitrate for the audio and video components of the media. This can be specified instead of the above two properties. If this is specified along with one or the other of the above properties, this will be used for the one that isn't specified.</param>
             <returns></returns>
         </member>
+        <member name="T:BrowserAPI.Implementation.SensorAPI">
+            <summary>
+            The Sensor APIs are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
+            </summary>
+            <param name="moduleManager"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPI.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            The Sensor APIs are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
+            </summary>
+            <param name="moduleManager"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPI.CreateAmbientLightSensor(System.Double,System.Threading.CancellationToken)">
+            <summary>
+            The <i>AmbientLightSensor()</i> constructor creates a new AmbientLightSensor object, which returns the current light level or illuminance of the ambient light around the hosting device.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="cancellationToken"></param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPI.CreateGyroscope(System.Double,System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>Gyroscope()</i> constructor creates a new Gyroscope object which provides on each reading the angular velocity of the device along all three axes.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <param name="cancellationToken"></param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPI.CreateAccelerometer(System.Double,System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>Accelerometer()</i> constructor creates a new Accelerometer object which returns the acceleration of the device along all three axes at the time it is read.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <param name="cancellationToken"></param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPI.CreateLinearAccelerationSensor(System.Double,System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>LinearAccelerationSensor()</i> constructor creates a new LinearAccelerationSensor object which provides on each reading the acceleration applied to the device along all three axes, but without the contribution of gravity.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <param name="cancellationToken"></param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPI.CreateGravitySensor(System.Double,System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>GravitySensor()</i> constructor creates a new GravitySensor object which provides on each reading the gravity applied to the device along all three axes.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <param name="cancellationToken"></param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPI.CreateAbsoluteOrientationSensor(System.Double,System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>AbsoluteOrientationSensor()</i> constructor creates a new AbsoluteOrientationSensor object which describes the device's physical orientation in relation to the Earth's reference coordinate system.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <param name="cancellationToken"></param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPI.CreateRelativeOrientationSensor(System.Double,System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>RelativeOrientationSensor()</i> constructor creates a new RelativeOrientationSensor object which describes the device's physical orientation.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <param name="cancellationToken"></param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPI.CreateMagnetometer(System.Double,System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>Magnetometer()</i> constructor creates a new Magnetometer object which returns information about the magnetic field as detected by a device's primary magnetometer sensor.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <param name="cancellationToken"></param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPI.CreateUncalibratedMagnetometer(System.Double,System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>The <i>UncalibratedMagnetometer()</i> constructor creates a new UncalibratedMagnetometer object which returns information about the uncalibrated magnetic field as detected by a device's primary magnetometer sensor.</para>
+            <para>
+            <i>Hard iron distortion</i> is created by objects that produce a magnetic field, such as magnetized iron.<br />
+            <i>Soft iron distortion</i> stretches or distorts the magnetic field and is caused by metals such as nickel and iron.<br />
+            The <i>calibrated magnetic field</i> is a magnetic field with hard iron distortion and soft iron distortion correction applied.<br />
+            The <i>uncalibrated magnetic field</i> is the magnetic field without hard iron distortion correction and with soft iron distortion correction applied, and as such reports changes in the magnetic field caused by magnetized objects moving near the magnetometer.
+            </para>
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <param name="cancellationToken"></param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.SensorAPIInProcess">
+            <summary>
+            The Sensor APIs are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
+            </summary>
+            <param name="moduleManager"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPIInProcess.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            The Sensor APIs are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
+            </summary>
+            <param name="moduleManager"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPIInProcess.CreateAmbientLightSensor(System.Double)">
+            <summary>
+            The <i>AmbientLightSensor()</i> constructor creates a new AmbientLightSensor object, which returns the current light level or illuminance of the ambient light around the hosting device.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPIInProcess.CreateGyroscope(System.Double,System.String)">
+            <summary>
+            The <i>Gyroscope()</i> constructor creates a new Gyroscope object which provides on each reading the angular velocity of the device along all three axes.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPIInProcess.CreateAccelerometer(System.Double,System.String)">
+            <summary>
+            The <i>Accelerometer()</i> constructor creates a new Accelerometer object which returns the acceleration of the device along all three axes at the time it is read.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPIInProcess.CreateLinearAccelerationSensor(System.Double,System.String)">
+            <summary>
+            The <i>LinearAccelerationSensor()</i> constructor creates a new LinearAccelerationSensor object which provides on each reading the acceleration applied to the device along all three axes, but without the contribution of gravity.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPIInProcess.CreateGravitySensor(System.Double,System.String)">
+            <summary>
+            The <i>GravitySensor()</i> constructor creates a new GravitySensor object which provides on each reading the gravity applied to the device along all three axes.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPIInProcess.CreateAbsoluteOrientationSensor(System.Double,System.String)">
+            <summary>
+            The <i>AbsoluteOrientationSensor()</i> constructor creates a new AbsoluteOrientationSensor object which describes the device's physical orientation in relation to the Earth's reference coordinate system.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPIInProcess.CreateRelativeOrientationSensor(System.Double,System.String)">
+            <summary>
+            The <i>RelativeOrientationSensor()</i> constructor creates a new RelativeOrientationSensor object which describes the device's physical orientation.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPIInProcess.CreateMagnetometer(System.Double,System.String)">
+            <summary>
+            The <i>Magnetometer()</i> constructor creates a new Magnetometer object which returns information about the magnetic field as detected by a device's primary magnetometer sensor.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPIInProcess.CreateUncalibratedMagnetometer(System.Double,System.String)">
+            <summary>
+            <para>The <i>UncalibratedMagnetometer()</i> constructor creates a new UncalibratedMagnetometer object which returns information about the uncalibrated magnetic field as detected by a device's primary magnetometer sensor.</para>
+            <para>
+            <i>Hard iron distortion</i> is created by objects that produce a magnetic field, such as magnetized iron.<br />
+            <i>Soft iron distortion</i> stretches or distorts the magnetic field and is caused by metals such as nickel and iron.<br />
+            The <i>calibrated magnetic field</i> is a magnetic field with hard iron distortion and soft iron distortion correction applied.<br />
+            The <i>uncalibrated magnetic field</i> is the magnetic field without hard iron distortion correction and with soft iron distortion correction applied, and as such reports changes in the magnetic field caused by magnetized objects moving near the magnetometer.
+            </para>
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.AbsoluteOrientationSensor">
+            <summary>
+            <para>The <i>AbsoluteOrientationSensor</i> interface of the Sensor APIs describes the device's physical orientation in relation to the Earth's reference coordinate system.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer', 'gyroscope', and 'magnetometer' device sensors through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="absoluteOrientationSensor"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.AbsoluteOrientationSensor.#ctor(Microsoft.JSInterop.IJSObjectReference)">
+            <summary>
+            <para>The <i>AbsoluteOrientationSensor</i> interface of the Sensor APIs describes the device's physical orientation in relation to the Earth's reference coordinate system.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer', 'gyroscope', and 'magnetometer' device sensors through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="absoluteOrientationSensor"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.AbsoluteOrientationSensor.Quaternion">
+            <summary>
+            Returns a unit quaternion representing the device's orientation.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.AbsoluteOrientationSensor.GetQuaternion(System.Threading.CancellationToken)">
+            <summary>
+            Returns a four element Array whose elements contain the components of the unit quaternion representing the device's orientation.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.AbsoluteOrientationSensor.PopulateMatrix(System.Threading.CancellationToken)">
+            <summary>
+            Returns a rotation matrix based on the latest sensor reading.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.AbsoluteOrientationSensorInProcess">
+            <summary>
+            <para>The <i>AbsoluteOrientationSensor</i> interface of the Sensor APIs describes the device's physical orientation in relation to the Earth's reference coordinate system.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer', 'gyroscope', and 'magnetometer' device sensors through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="absoluteOrientationSensor"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.AbsoluteOrientationSensorInProcess.#ctor(Microsoft.JSInterop.IJSInProcessObjectReference)">
+            <summary>
+            <para>The <i>AbsoluteOrientationSensor</i> interface of the Sensor APIs describes the device's physical orientation in relation to the Earth's reference coordinate system.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer', 'gyroscope', and 'magnetometer' device sensors through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="absoluteOrientationSensor"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.AbsoluteOrientationSensorInProcess.Quaternion">
+            <summary>
+            Returns a unit quaternion representing the device's orientation.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.AbsoluteOrientationSensorInProcess.PopulateMatrix">
+            <summary>
+            Returns a rotation matrix based on the latest sensor reading.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.Accelerometer">
+            <summary>
+            <para>The <i>Accelerometer</i> interface of the Sensor APIs provides on each reading the acceleration applied to the device along all three axes.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer', device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="accelerometer"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Accelerometer.#ctor(Microsoft.JSInterop.IJSObjectReference)">
+            <summary>
+            <para>The <i>Accelerometer</i> interface of the Sensor APIs provides on each reading the acceleration applied to the device along all three axes.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer', device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="accelerometer"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Accelerometer.X">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's x axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Accelerometer.GetX(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's x axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Accelerometer.Y">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's y axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Accelerometer.GetY(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's y axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Accelerometer.Z">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's z axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Accelerometer.GetZ(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's z axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.AccelerometerInProcess">
+            <summary>
+            <para>The <i>Accelerometer</i> interface of the Sensor APIs provides on each reading the acceleration applied to the device along all three axes.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer', device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="accelerometer"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.AccelerometerInProcess.#ctor(Microsoft.JSInterop.IJSInProcessObjectReference)">
+            <summary>
+            <para>The <i>Accelerometer</i> interface of the Sensor APIs provides on each reading the acceleration applied to the device along all three axes.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer', device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="accelerometer"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.AccelerometerInProcess.X">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's x axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.AccelerometerInProcess.Y">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's y axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.AccelerometerInProcess.Z">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's z axis.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.AmbientLightSensor">
+            <summary>
+            <para>The <i>AmbientLightSensor</i> interface of the Sensor APIs returns the current light level or illuminance of the ambient light around the hosting device.</para>
+            <para>To use this sensor, the user must grant permission to the 'ambient-light-sensor' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="ambientLightSensor"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.AmbientLightSensor.#ctor(Microsoft.JSInterop.IJSObjectReference)">
+            <summary>
+            <para>The <i>AmbientLightSensor</i> interface of the Sensor APIs returns the current light level or illuminance of the ambient light around the hosting device.</para>
+            <para>To use this sensor, the user must grant permission to the 'ambient-light-sensor' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="ambientLightSensor"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.AmbientLightSensor.Illuminance">
+            <summary>
+            Returns the current light level in lux of the ambient light level around the hosting device.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.AmbientLightSensor.GetIlluminance(System.Threading.CancellationToken)">
+            <summary>
+            Returns the current light level in lux of the ambient light level around the hosting device.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.AmbientLightSensorInProcess">
+            <summary>
+            <para>The <i>AmbientLightSensor</i> interface of the Sensor APIs returns the current light level or illuminance of the ambient light around the hosting device.</para>
+            <para>To use this sensor, the user must grant permission to the 'ambient-light-sensor' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="ambientLightSensor"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.AmbientLightSensorInProcess.#ctor(Microsoft.JSInterop.IJSInProcessObjectReference)">
+            <summary>
+            <para>The <i>AmbientLightSensor</i> interface of the Sensor APIs returns the current light level or illuminance of the ambient light around the hosting device.</para>
+            <para>To use this sensor, the user must grant permission to the 'ambient-light-sensor' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="ambientLightSensor"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.AmbientLightSensorInProcess.Illuminance">
+            <summary>
+            Returns the current light level in lux of the ambient light level around the hosting device.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.GravitySensor">
+            <summary>
+            <para>The <i>GravitySensor</i> interface of the Sensor APIs provides on each reading the gravity applied to the device along all three axes.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="gravitySensor"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.GravitySensor.#ctor(Microsoft.JSInterop.IJSObjectReference)">
+            <summary>
+            <para>The <i>GravitySensor</i> interface of the Sensor APIs provides on each reading the gravity applied to the device along all three axes.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="gravitySensor"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.GravitySensor.X">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's x axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.GravitySensor.GetX(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's x axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.GravitySensor.Y">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's y axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.GravitySensor.GetY(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's y axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.GravitySensor.Z">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's z axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.GravitySensor.GetZ(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's z axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.GravitySensorInProcess">
+            <summary>
+            <para>The <i>GravitySensor</i> interface of the Sensor APIs provides on each reading the gravity applied to the device along all three axes.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="gravitySensor"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.GravitySensorInProcess.#ctor(Microsoft.JSInterop.IJSInProcessObjectReference)">
+            <summary>
+            <para>The <i>GravitySensor</i> interface of the Sensor APIs provides on each reading the gravity applied to the device along all three axes.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="gravitySensor"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.GravitySensorInProcess.X">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's x axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.GravitySensorInProcess.Y">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's y axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.GravitySensorInProcess.Z">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's z axis.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.Gyroscope">
+            <summary>
+            <para>The <i>Gyroscope</i> interface of the Sensor APIs provides on each reading the angular velocity of the device along all three axes.</para>
+            <para>To use this sensor, the user must grant permission to the 'gyroscope' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="gyroscope"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Gyroscope.#ctor(Microsoft.JSInterop.IJSObjectReference)">
+            <summary>
+            <para>The <i>Gyroscope</i> interface of the Sensor APIs provides on each reading the angular velocity of the device along all three axes.</para>
+            <para>To use this sensor, the user must grant permission to the 'gyroscope' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="gyroscope"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Gyroscope.X">
+            <summary>
+            Returns a double, containing the angular velocity of the device along the device's x axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Gyroscope.GetX(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double, containing the angular velocity of the device along the device's x axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Gyroscope.Y">
+            <summary>
+            Returns a double, containing the angular velocity of the device along the device's y axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Gyroscope.GetY(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double, containing the angular velocity of the device along the device's y axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Gyroscope.Z">
+            <summary>
+            Returns a double, containing the angular velocity of the device along the device's z axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Gyroscope.GetZ(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double, containing the angular velocity of the device along the device's z axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.GyroscopeInProcess">
+            <summary>
+            <para>The <i>Gyroscope</i> interface of the Sensor APIs provides on each reading the angular velocity of the device along all three axes.</para>
+            <para>To use this sensor, the user must grant permission to the 'gyroscope' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="gyroscope"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.GyroscopeInProcess.#ctor(Microsoft.JSInterop.IJSInProcessObjectReference)">
+            <summary>
+            <para>The <i>Gyroscope</i> interface of the Sensor APIs provides on each reading the angular velocity of the device along all three axes.</para>
+            <para>To use this sensor, the user must grant permission to the 'gyroscope' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="gyroscope"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.GyroscopeInProcess.X">
+            <summary>
+            Returns a double, containing the angular velocity of the device along the device's x axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.GyroscopeInProcess.Y">
+            <summary>
+            Returns a double, containing the angular velocity of the device along the device's y axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.GyroscopeInProcess.Z">
+            <summary>
+            Returns a double, containing the angular velocity of the device along the device's z axis.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.LinearAccelerationSensor">
+            <summary>
+            <para>The <i>LinearAccelerationSensor</i> interface of the Sensor APIs provides on each reading the acceleration applied to the device along all three axes, but without the contribution of gravity.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="linearAccelerationSensor"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.LinearAccelerationSensor.#ctor(Microsoft.JSInterop.IJSObjectReference)">
+            <summary>
+            <para>The <i>LinearAccelerationSensor</i> interface of the Sensor APIs provides on each reading the acceleration applied to the device along all three axes, but without the contribution of gravity.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="linearAccelerationSensor"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.LinearAccelerationSensor.X">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's x axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.LinearAccelerationSensor.GetX(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's x axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.LinearAccelerationSensor.Y">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's y axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.LinearAccelerationSensor.GetY(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's y axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.LinearAccelerationSensor.Z">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's z axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.LinearAccelerationSensor.GetZ(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's z axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.LinearAccelerationSensorInProcess">
+            <summary>
+            <para>The <i>LinearAccelerationSensor</i> interface of the Sensor APIs provides on each reading the acceleration applied to the device along all three axes, but without the contribution of gravity.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="linearAccelerationSensor"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.LinearAccelerationSensorInProcess.#ctor(Microsoft.JSInterop.IJSInProcessObjectReference)">
+            <summary>
+            <para>The <i>LinearAccelerationSensor</i> interface of the Sensor APIs provides on each reading the acceleration applied to the device along all three axes, but without the contribution of gravity.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="linearAccelerationSensor"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.LinearAccelerationSensorInProcess.X">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's x axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.LinearAccelerationSensorInProcess.Y">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's y axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.LinearAccelerationSensorInProcess.Z">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's z axis.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.Magnetometer">
+            <summary>
+            <para>The <i>Magnetometer</i> interface of the Sensor APIs provides information about the magnetic field as detected by the device's primary magnetometer sensor.</para>
+            <para>To use this sensor, the user must grant permission to the 'magnetometer' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="magnetometer"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Magnetometer.#ctor(Microsoft.JSInterop.IJSObjectReference)">
+            <summary>
+            <para>The <i>Magnetometer</i> interface of the Sensor APIs provides information about the magnetic field as detected by the device's primary magnetometer sensor.</para>
+            <para>To use this sensor, the user must grant permission to the 'magnetometer' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="magnetometer"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Magnetometer.X">
+            <summary>
+            Returns a double containing the magnetic field around the device's x axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Magnetometer.GetX(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the magnetic field around the device's x axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Magnetometer.Y">
+            <summary>
+            Returns a double containing the magnetic field around the device's y axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Magnetometer.GetY(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the magnetic field around the device's y axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Magnetometer.Z">
+            <summary>
+            Returns a double containing the magnetic field around the device's z axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Magnetometer.GetZ(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the magnetic field around the device's z axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.MagnetometerInProcess">
+            <summary>
+            <para>The <i>Magnetometer</i> interface of the Sensor APIs provides information about the magnetic field as detected by the device's primary magnetometer sensor.</para>
+            <para>To use this sensor, the user must grant permission to the 'magnetometer' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="magnetometer"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MagnetometerInProcess.#ctor(Microsoft.JSInterop.IJSInProcessObjectReference)">
+            <summary>
+            <para>The <i>Magnetometer</i> interface of the Sensor APIs provides information about the magnetic field as detected by the device's primary magnetometer sensor.</para>
+            <para>To use this sensor, the user must grant permission to the 'magnetometer' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="magnetometer"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.MagnetometerInProcess.X">
+            <summary>
+            Returns a double containing the magnetic field around the device's x axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.MagnetometerInProcess.Y">
+            <summary>
+            Returns a double containing the magnetic field around the device's y axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.MagnetometerInProcess.Z">
+            <summary>
+            Returns a double containing the magnetic field around the device's z axis.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.RelativeOrientationSensor">
+            <summary>
+            <para>The <i>RelativeOrientationSensor</i> interface of the Sensor APIs describes the device's physical orientation without regard to the Earth's reference coordinate system.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer', and 'gyroscope' device sensors through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="relativeOrientationSensor"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.RelativeOrientationSensor.#ctor(Microsoft.JSInterop.IJSObjectReference)">
+            <summary>
+            <para>The <i>RelativeOrientationSensor</i> interface of the Sensor APIs describes the device's physical orientation without regard to the Earth's reference coordinate system.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer', and 'gyroscope' device sensors through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="relativeOrientationSensor"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.RelativeOrientationSensor.Quaternion">
+            <summary>
+            Returns a unit quaternion representing the device's orientation.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.RelativeOrientationSensor.GetQuaternion(System.Threading.CancellationToken)">
+            <summary>
+            Returns a four element Array whose elements contain the components of the unit quaternion representing the device's orientation.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.RelativeOrientationSensor.PopulateMatrix(System.Threading.CancellationToken)">
+            <summary>
+            Returns a rotation matrix based on the latest sensor reading.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.RelativeOrientationSensorInProcess">
+            <summary>
+            <para>The <i>RelativeOrientationSensor</i> interface of the Sensor APIs describes the device's physical orientation without regard to the Earth's reference coordinate system.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer', and 'gyroscope' device sensors through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="relativeOrientationSensor"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.RelativeOrientationSensorInProcess.#ctor(Microsoft.JSInterop.IJSInProcessObjectReference)">
+            <summary>
+            <para>The <i>RelativeOrientationSensor</i> interface of the Sensor APIs describes the device's physical orientation without regard to the Earth's reference coordinate system.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer', and 'gyroscope' device sensors through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="relativeOrientationSensor"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.RelativeOrientationSensorInProcess.Quaternion">
+            <summary>
+            Returns a unit quaternion representing the device's orientation.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.RelativeOrientationSensorInProcess.PopulateMatrix">
+            <summary>
+            Returns a rotation matrix based on the latest sensor reading.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.Sensor">
+            <summary>
+            The Sensor interface of the Sensor APIs is the base class for all the other sensor interfaces.
+            This interface cannot be used directly.
+            Instead it provides properties, event handlers, and methods accessed by interfaces that inherit from it.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Sensor.DisposeAsync">
+            <summary>
+            Releases the JS instance for this service worker.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Sensor.Activated">
+            <summary>
+            Returns a boolean value indicating whether the sensor is active.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Sensor.GetActivated(System.Threading.CancellationToken)">
+            <summary>
+            Returns a boolean value indicating whether the sensor is active.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Sensor.HasReading">
+            <summary>
+            Returns a boolean value indicating whether the sensor has a reading.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Sensor.GetHasReading(System.Threading.CancellationToken)">
+            <summary>
+            Returns a boolean value indicating whether the sensor has a reading.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Sensor.Timestamp">
+            <summary>
+            Returns the timestamp of the latest sensor reading.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Sensor.GetTimestamp(System.Threading.CancellationToken)">
+            <summary>
+            Returns the timestamp of the latest sensor reading.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Sensor.Start(System.Threading.CancellationToken)">
+            <summary>
+            Activates one of the sensors based on Sensor.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Sensor.Stop(System.Threading.CancellationToken)">
+            <summary>
+            Deactivates one of the sensors based on Sensor.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorBase.DisposeEventTrigger">
+            <summary>
+            Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call this method.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.SensorBase.OnError">
+            <summary>
+            <para>
+            The error event is fired when an exception occurs on a sensor.
+            After this event has occurred, the Sensor object becomes idle. If the sensor was reading values, it will stop until it restarts.
+            </para>
+            <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</see> as JSON.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.SensorBase.OnActivate">
+            <summary>
+            The activate event is fired when a sensor becomes activated. It means that it will start obtaining readings.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.SensorBase.OnReading">
+            <summary>
+            The reading event is fired when a new reading is available on a sensor.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.SensorInProcess">
+            <summary>
+            The Sensor interface of the Sensor APIs is the base class for all the other sensor interfaces.
+            This interface cannot be used directly.
+            Instead it provides properties, event handlers, and methods accessed by interfaces that inherit from it.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorInProcess.Dispose">
+            <summary>
+            Releases the JS instance for this service worker.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.SensorInProcess.Activated">
+            <summary>
+            Returns a boolean value indicating whether the sensor is active.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.SensorInProcess.HasReading">
+            <summary>
+            Returns a boolean value indicating whether the sensor has a reading.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.SensorInProcess.Timestamp">
+            <summary>
+            Returns the timestamp of the latest sensor reading.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorInProcess.Start">
+            <summary>
+            Activates one of the sensors based on Sensor.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.SensorInProcess.Stop">
+            <summary>
+            Deactivates one of the sensors based on Sensor.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.UncalibratedMagnetometer">
+            <summary>
+            <para>The <i>UncalibratedMagnetometer</i> interface of the Sensor APIs provides information about the uncalibrated magnetic field as detected by the device's primary magnetometer sensor.</para>
+            <para>To use this sensor, the user must grant permission to the 'magnetometer' device sensor through the Permissions API.</para>
+            <para>
+            <i>Hard iron distortion</i> is created by objects that produce a magnetic field, such as magnetized iron.<br />
+            <i>Soft iron distortion</i> stretches or distorts the magnetic field and is caused by metals such as nickel and iron.<br />
+            The <i>calibrated magnetic field</i> is a magnetic field with hard iron distortion and soft iron distortion correction applied.<br />
+            The <i>uncalibrated magnetic field</i> is the magnetic field without hard iron distortion correction and with soft iron distortion correction applied, and as such reports changes in the magnetic field caused by magnetized objects moving near the magnetometer.
+            </para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="uncalibratedMagnetometer"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.UncalibratedMagnetometer.#ctor(Microsoft.JSInterop.IJSObjectReference)">
+            <summary>
+            <para>The <i>UncalibratedMagnetometer</i> interface of the Sensor APIs provides information about the uncalibrated magnetic field as detected by the device's primary magnetometer sensor.</para>
+            <para>To use this sensor, the user must grant permission to the 'magnetometer' device sensor through the Permissions API.</para>
+            <para>
+            <i>Hard iron distortion</i> is created by objects that produce a magnetic field, such as magnetized iron.<br />
+            <i>Soft iron distortion</i> stretches or distorts the magnetic field and is caused by metals such as nickel and iron.<br />
+            The <i>calibrated magnetic field</i> is a magnetic field with hard iron distortion and soft iron distortion correction applied.<br />
+            The <i>uncalibrated magnetic field</i> is the magnetic field without hard iron distortion correction and with soft iron distortion correction applied, and as such reports changes in the magnetic field caused by magnetized objects moving near the magnetometer.
+            </para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="uncalibratedMagnetometer"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.UncalibratedMagnetometer.X">
+            <summary>
+            Returns a double containing the uncalibrated magnetic field around the device's x axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.UncalibratedMagnetometer.GetX(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the uncalibrated magnetic field around the device's x axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.UncalibratedMagnetometer.Y">
+            <summary>
+            Returns a double containing the uncalibrated magnetic field around the device's y axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.UncalibratedMagnetometer.GetY(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the uncalibrated magnetic field around the device's y axis
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.UncalibratedMagnetometer.Z">
+            <summary>
+            Returns a double containing the uncalibrated magnetic field around the device's z axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.UncalibratedMagnetometer.GetZ(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the uncalibrated magnetic field around the device's z axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.UncalibratedMagnetometer.XBias">
+            <summary>
+            Returns a double representing the hard iron distortion correction around x axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.UncalibratedMagnetometer.GetXBias(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double representing the hard iron distortion correction around x axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.UncalibratedMagnetometer.YBias">
+            <summary>
+            Returns a double representing the hard iron distortion correction around y axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.UncalibratedMagnetometer.GetYBias(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double representing the hard iron distortion correction around y axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.UncalibratedMagnetometer.ZBias">
+            <summary>
+            Returns a double representing the hard iron distortion correction around z axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.UncalibratedMagnetometer.GetZBias(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double representing the hard iron distortion correction around z axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.UncalibratedMagnetometerInProcess">
+            <summary>
+            <para>The <i>UncalibratedMagnetometer</i> interface of the Sensor APIs provides information about the uncalibrated magnetic field as detected by the device's primary magnetometer sensor.</para>
+            <para>To use this sensor, the user must grant permission to the 'magnetometer' device sensor through the Permissions API.</para>
+            <para>
+            <i>Hard iron distortion</i> is created by objects that produce a magnetic field, such as magnetized iron.<br />
+            <i>Soft iron distortion</i> stretches or distorts the magnetic field and is caused by metals such as nickel and iron.<br />
+            The <i>calibrated magnetic field</i> is a magnetic field with hard iron distortion and soft iron distortion correction applied.<br />
+            The <i>uncalibrated magnetic field</i> is the magnetic field without hard iron distortion correction and with soft iron distortion correction applied, and as such reports changes in the magnetic field caused by magnetized objects moving near the magnetometer.
+            </para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="uncalibratedMagnetometer"></param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.UncalibratedMagnetometerInProcess.#ctor(Microsoft.JSInterop.IJSInProcessObjectReference)">
+            <summary>
+            <para>The <i>UncalibratedMagnetometer</i> interface of the Sensor APIs provides information about the uncalibrated magnetic field as detected by the device's primary magnetometer sensor.</para>
+            <para>To use this sensor, the user must grant permission to the 'magnetometer' device sensor through the Permissions API.</para>
+            <para>
+            <i>Hard iron distortion</i> is created by objects that produce a magnetic field, such as magnetized iron.<br />
+            <i>Soft iron distortion</i> stretches or distorts the magnetic field and is caused by metals such as nickel and iron.<br />
+            The <i>calibrated magnetic field</i> is a magnetic field with hard iron distortion and soft iron distortion correction applied.<br />
+            The <i>uncalibrated magnetic field</i> is the magnetic field without hard iron distortion correction and with soft iron distortion correction applied, and as such reports changes in the magnetic field caused by magnetized objects moving near the magnetometer.
+            </para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="uncalibratedMagnetometer"></param>
+        </member>
+        <member name="P:BrowserAPI.Implementation.UncalibratedMagnetometerInProcess.X">
+            <summary>
+            Returns a double containing the uncalibrated magnetic field around the device's x axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.UncalibratedMagnetometerInProcess.Y">
+            <summary>
+            Returns a double containing the uncalibrated magnetic field around the device's y axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.UncalibratedMagnetometerInProcess.Z">
+            <summary>
+            Returns a double containing the uncalibrated magnetic field around the device's z axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.UncalibratedMagnetometerInProcess.XBias">
+            <summary>
+            Returns a double representing the hard iron distortion correction around x axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.UncalibratedMagnetometerInProcess.YBias">
+            <summary>
+            Returns a double representing the hard iron distortion correction around y axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.UncalibratedMagnetometerInProcess.ZBias">
+            <summary>
+            Returns a double representing the hard iron distortion correction around z axis.
+            </summary>
+        </member>
         <member name="T:BrowserAPI.Implementation.ServiceWorkerContainer">
             <summary>
             <para>navigator.serviceWorker</para>
@@ -6043,6 +7097,11 @@
             Starts the download of the JS module. Returns a Task that represents the download of the module. If this tasks finishes, the download finishes.
             </summary>
             <returns>A Task that represents the download of the module. If this tasks finishes, the download finishes.</returns>
+        </member>
+        <member name="P:BrowserAPI.IModuleManager.IsInProcess">
+            <summary>
+            Checks if IJSRuntime object is IJSInProcessRuntime.
+            </summary>
         </member>
         <member name="T:BrowserAPI.AddBrowserAPIExtension">
             <summary>
@@ -11102,6 +12161,896 @@
             <param name="videoBitsPerSecond">The chosen bitrate for the video component of the media.</param>
             <param name="bitsPerSecond">The chosen bitrate for the audio and video components of the media. This can be specified instead of the above two properties. If this is specified along with one or the other of the above properties, this will be used for the one that isn't specified.</param>
             <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.ISensorAPI">
+            <summary>
+            The Sensor APIs are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
+            </summary>
+            <param name="moduleManager"></param>
+        </member>
+        <member name="M:BrowserAPI.ISensorAPI.CreateAmbientLightSensor(System.Double,System.Threading.CancellationToken)">
+            <summary>
+            The <i>AmbientLightSensor()</i> constructor creates a new AmbientLightSensor object, which returns the current light level or illuminance of the ambient light around the hosting device.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="cancellationToken"></param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.ISensorAPI.CreateGyroscope(System.Double,System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>Gyroscope()</i> constructor creates a new Gyroscope object which provides on each reading the angular velocity of the device along all three axes.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <param name="cancellationToken"></param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.ISensorAPI.CreateAccelerometer(System.Double,System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>Accelerometer()</i> constructor creates a new Accelerometer object which returns the acceleration of the device along all three axes at the time it is read.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <param name="cancellationToken"></param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.ISensorAPI.CreateLinearAccelerationSensor(System.Double,System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>LinearAccelerationSensor()</i> constructor creates a new LinearAccelerationSensor object which provides on each reading the acceleration applied to the device along all three axes, but without the contribution of gravity.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <param name="cancellationToken"></param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.ISensorAPI.CreateGravitySensor(System.Double,System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>GravitySensor()</i> constructor creates a new GravitySensor object which provides on each reading the gravity applied to the device along all three axes.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <param name="cancellationToken"></param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.ISensorAPI.CreateAbsoluteOrientationSensor(System.Double,System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>AbsoluteOrientationSensor()</i> constructor creates a new AbsoluteOrientationSensor object which describes the device's physical orientation in relation to the Earth's reference coordinate system.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <param name="cancellationToken"></param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.ISensorAPI.CreateRelativeOrientationSensor(System.Double,System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>RelativeOrientationSensor()</i> constructor creates a new RelativeOrientationSensor object which describes the device's physical orientation.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <param name="cancellationToken"></param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.ISensorAPI.CreateMagnetometer(System.Double,System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>Magnetometer()</i> constructor creates a new Magnetometer object which returns information about the magnetic field as detected by a device's primary magnetometer sensor.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <param name="cancellationToken"></param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.ISensorAPI.CreateUncalibratedMagnetometer(System.Double,System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>The <i>UncalibratedMagnetometer()</i> constructor creates a new UncalibratedMagnetometer object which returns information about the uncalibrated magnetic field as detected by a device's primary magnetometer sensor.</para>
+            <para>
+            <i>Hard iron distortion</i> is created by objects that produce a magnetic field, such as magnetized iron.<br />
+            <i>Soft iron distortion</i> stretches or distorts the magnetic field and is caused by metals such as nickel and iron.<br />
+            The <i>calibrated magnetic field</i> is a magnetic field with hard iron distortion and soft iron distortion correction applied.<br />
+            The <i>uncalibrated magnetic field</i> is the magnetic field without hard iron distortion correction and with soft iron distortion correction applied, and as such reports changes in the magnetic field caused by magnetized objects moving near the magnetometer.
+            </para>
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <param name="cancellationToken"></param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="T:BrowserAPI.ISensorAPIInProcess">
+            <summary>
+            The Sensor APIs are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
+            </summary>
+            <param name="moduleManager"></param>
+        </member>
+        <member name="M:BrowserAPI.ISensorAPIInProcess.CreateAmbientLightSensor(System.Double)">
+            <summary>
+            The <i>AmbientLightSensor()</i> constructor creates a new AmbientLightSensor object, which returns the current light level or illuminance of the ambient light around the hosting device.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.ISensorAPIInProcess.CreateGyroscope(System.Double,System.String)">
+            <summary>
+            The <i>Gyroscope()</i> constructor creates a new Gyroscope object which provides on each reading the angular velocity of the device along all three axes.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.ISensorAPIInProcess.CreateAccelerometer(System.Double,System.String)">
+            <summary>
+            The <i>Accelerometer()</i> constructor creates a new Accelerometer object which returns the acceleration of the device along all three axes at the time it is read.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.ISensorAPIInProcess.CreateLinearAccelerationSensor(System.Double,System.String)">
+            <summary>
+            The <i>LinearAccelerationSensor()</i> constructor creates a new LinearAccelerationSensor object which provides on each reading the acceleration applied to the device along all three axes, but without the contribution of gravity.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.ISensorAPIInProcess.CreateGravitySensor(System.Double,System.String)">
+            <summary>
+            The <i>GravitySensor()</i> constructor creates a new GravitySensor object which provides on each reading the gravity applied to the device along all three axes.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.ISensorAPIInProcess.CreateAbsoluteOrientationSensor(System.Double,System.String)">
+            <summary>
+            The <i>AbsoluteOrientationSensor()</i> constructor creates a new AbsoluteOrientationSensor object which describes the device's physical orientation in relation to the Earth's reference coordinate system.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.ISensorAPIInProcess.CreateRelativeOrientationSensor(System.Double,System.String)">
+            <summary>
+            The <i>RelativeOrientationSensor()</i> constructor creates a new RelativeOrientationSensor object which describes the device's physical orientation.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.ISensorAPIInProcess.CreateMagnetometer(System.Double,System.String)">
+            <summary>
+            The <i>Magnetometer()</i> constructor creates a new Magnetometer object which returns information about the magnetic field as detected by a device's primary magnetometer sensor.
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="M:BrowserAPI.ISensorAPIInProcess.CreateUncalibratedMagnetometer(System.Double,System.String)">
+            <summary>
+            <para>The <i>UncalibratedMagnetometer()</i> constructor creates a new UncalibratedMagnetometer object which returns information about the uncalibrated magnetic field as detected by a device's primary magnetometer sensor.</para>
+            <para>
+            <i>Hard iron distortion</i> is created by objects that produce a magnetic field, such as magnetized iron.<br />
+            <i>Soft iron distortion</i> stretches or distorts the magnetic field and is caused by metals such as nickel and iron.<br />
+            The <i>calibrated magnetic field</i> is a magnetic field with hard iron distortion and soft iron distortion correction applied.<br />
+            The <i>uncalibrated magnetic field</i> is the magnetic field without hard iron distortion correction and with soft iron distortion correction applied, and as such reports changes in the magnetic field caused by magnetized objects moving near the magnetometer.
+            </para>
+            </summary>
+            <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
+            <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
+            <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
+        </member>
+        <member name="T:BrowserAPI.IAbsoluteOrientationSensor">
+            <summary>
+            <para>The <i>AbsoluteOrientationSensor</i> interface of the Sensor APIs describes the device's physical orientation in relation to the Earth's reference coordinate system.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer', 'gyroscope', and 'magnetometer' device sensors through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="absoluteOrientationSensor"></param>
+        </member>
+        <member name="P:BrowserAPI.IAbsoluteOrientationSensor.Quaternion">
+            <summary>
+            Returns a unit quaternion representing the device's orientation.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IAbsoluteOrientationSensor.GetQuaternion(System.Threading.CancellationToken)">
+            <summary>
+            Returns a four element Array whose elements contain the components of the unit quaternion representing the device's orientation.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IAbsoluteOrientationSensor.PopulateMatrix(System.Threading.CancellationToken)">
+            <summary>
+            Returns a rotation matrix based on the latest sensor reading.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IAbsoluteOrientationSensorInProcess">
+            <summary>
+            <para>The <i>AbsoluteOrientationSensor</i> interface of the Sensor APIs describes the device's physical orientation in relation to the Earth's reference coordinate system.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer', 'gyroscope', and 'magnetometer' device sensors through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="absoluteOrientationSensor"></param>
+        </member>
+        <member name="P:BrowserAPI.IAbsoluteOrientationSensorInProcess.Quaternion">
+            <summary>
+            Returns a unit quaternion representing the device's orientation.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IAbsoluteOrientationSensorInProcess.PopulateMatrix">
+            <summary>
+            Returns a rotation matrix based on the latest sensor reading.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IAccelerometer">
+            <summary>
+            <para>The <i>Accelerometer</i> interface of the Sensor APIs provides on each reading the acceleration applied to the device along all three axes.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer', device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="accelerometer"></param>
+        </member>
+        <member name="P:BrowserAPI.IAccelerometer.X">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's x axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IAccelerometer.GetX(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's x axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IAccelerometer.Y">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's y axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IAccelerometer.GetY(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's y axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IAccelerometer.Z">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's z axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IAccelerometer.GetZ(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's z axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IAccelerometerInProcess">
+            <summary>
+            <para>The <i>Accelerometer</i> interface of the Sensor APIs provides on each reading the acceleration applied to the device along all three axes.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer', device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="accelerometer"></param>
+        </member>
+        <member name="P:BrowserAPI.IAccelerometerInProcess.X">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's x axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IAccelerometerInProcess.Y">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's y axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IAccelerometerInProcess.Z">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's z axis.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IAmbientLightSensor">
+            <summary>
+            <para>The <i>AmbientLightSensor</i> interface of the Sensor APIs returns the current light level or illuminance of the ambient light around the hosting device.</para>
+            <para>To use this sensor, the user must grant permission to the 'ambient-light-sensor' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="ambientLightSensor"></param>
+        </member>
+        <member name="P:BrowserAPI.IAmbientLightSensor.Illuminance">
+            <summary>
+            Returns the current light level in lux of the ambient light level around the hosting device.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IAmbientLightSensor.GetIlluminance(System.Threading.CancellationToken)">
+            <summary>
+            Returns the current light level in lux of the ambient light level around the hosting device.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IAmbientLightSensorInProcess">
+            <summary>
+            <para>The <i>AmbientLightSensor</i> interface of the Sensor APIs returns the current light level or illuminance of the ambient light around the hosting device.</para>
+            <para>To use this sensor, the user must grant permission to the 'ambient-light-sensor' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="ambientLightSensor"></param>
+        </member>
+        <member name="P:BrowserAPI.IAmbientLightSensorInProcess.Illuminance">
+            <summary>
+            Returns the current light level in lux of the ambient light level around the hosting device.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IGravitySensor">
+            <summary>
+            <para>The <i>GravitySensor</i> interface of the Sensor APIs provides on each reading the gravity applied to the device along all three axes.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="gravitySensor"></param>
+        </member>
+        <member name="P:BrowserAPI.IGravitySensor.X">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's x axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IGravitySensor.GetX(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's x axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IGravitySensor.Y">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's y axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IGravitySensor.GetY(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's y axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IGravitySensor.Z">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's z axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IGravitySensor.GetZ(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's z axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IGravitySensorInProcess">
+            <summary>
+            <para>The <i>GravitySensor</i> interface of the Sensor APIs provides on each reading the gravity applied to the device along all three axes.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="gravitySensor"></param>
+        </member>
+        <member name="P:BrowserAPI.IGravitySensorInProcess.X">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's x axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IGravitySensorInProcess.Y">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's y axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IGravitySensorInProcess.Z">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's z axis.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IGyroscope">
+            <summary>
+            <para>The <i>Gyroscope</i> interface of the Sensor APIs provides on each reading the angular velocity of the device along all three axes.</para>
+            <para>To use this sensor, the user must grant permission to the 'gyroscope' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="gyroscope"></param>
+        </member>
+        <member name="P:BrowserAPI.IGyroscope.X">
+            <summary>
+            Returns a double, containing the angular velocity of the device along the device's x axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IGyroscope.GetX(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double, containing the angular velocity of the device along the device's x axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IGyroscope.Y">
+            <summary>
+            Returns a double, containing the angular velocity of the device along the device's y axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IGyroscope.GetY(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double, containing the angular velocity of the device along the device's y axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IGyroscope.Z">
+            <summary>
+            Returns a double, containing the angular velocity of the device along the device's z axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IGyroscope.GetZ(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double, containing the angular velocity of the device along the device's z axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IGyroscopeInProcess">
+            <summary>
+            <para>The <i>Gyroscope</i> interface of the Sensor APIs provides on each reading the angular velocity of the device along all three axes.</para>
+            <para>To use this sensor, the user must grant permission to the 'gyroscope' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="gyroscope"></param>
+        </member>
+        <member name="P:BrowserAPI.IGyroscopeInProcess.X">
+            <summary>
+            Returns a double, containing the angular velocity of the device along the device's x axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IGyroscopeInProcess.Y">
+            <summary>
+            Returns a double, containing the angular velocity of the device along the device's y axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IGyroscopeInProcess.Z">
+            <summary>
+            Returns a double, containing the angular velocity of the device along the device's z axis.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.ILinearAccelerationSensor">
+            <summary>
+            <para>The <i>LinearAccelerationSensor</i> interface of the Sensor APIs provides on each reading the acceleration applied to the device along all three axes, but without the contribution of gravity.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="linearAccelerationSensor"></param>
+        </member>
+        <member name="P:BrowserAPI.ILinearAccelerationSensor.X">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's x axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.ILinearAccelerationSensor.GetX(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's x axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.ILinearAccelerationSensor.Y">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's y axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.ILinearAccelerationSensor.GetY(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's y axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.ILinearAccelerationSensor.Z">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's z axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.ILinearAccelerationSensor.GetZ(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's z axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.ILinearAccelerationSensorInProcess">
+            <summary>
+            <para>The <i>LinearAccelerationSensor</i> interface of the Sensor APIs provides on each reading the acceleration applied to the device along all three axes, but without the contribution of gravity.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="linearAccelerationSensor"></param>
+        </member>
+        <member name="P:BrowserAPI.ILinearAccelerationSensorInProcess.X">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's x axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.ILinearAccelerationSensorInProcess.Y">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's y axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.ILinearAccelerationSensorInProcess.Z">
+            <summary>
+            Returns a double containing the acceleration of the device along the device's z axis.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IMagnetometer">
+            <summary>
+            <para>The <i>Magnetometer</i> interface of the Sensor APIs provides information about the magnetic field as detected by the device's primary magnetometer sensor.</para>
+            <para>To use this sensor, the user must grant permission to the 'magnetometer' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="magnetometer"></param>
+        </member>
+        <member name="P:BrowserAPI.IMagnetometer.X">
+            <summary>
+            Returns a double containing the magnetic field around the device's x axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IMagnetometer.GetX(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the magnetic field around the device's x axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IMagnetometer.Y">
+            <summary>
+            Returns a double containing the magnetic field around the device's y axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IMagnetometer.GetY(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the magnetic field around the device's y axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IMagnetometer.Z">
+            <summary>
+            Returns a double containing the magnetic field around the device's z axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IMagnetometer.GetZ(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the magnetic field around the device's z axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IMagnetometerInProcess">
+            <summary>
+            <para>The <i>Magnetometer</i> interface of the Sensor APIs provides information about the magnetic field as detected by the device's primary magnetometer sensor.</para>
+            <para>To use this sensor, the user must grant permission to the 'magnetometer' device sensor through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="magnetometer"></param>
+        </member>
+        <member name="P:BrowserAPI.IMagnetometerInProcess.X">
+            <summary>
+            Returns a double containing the magnetic field around the device's x axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IMagnetometerInProcess.Y">
+            <summary>
+            Returns a double containing the magnetic field around the device's y axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IMagnetometerInProcess.Z">
+            <summary>
+            Returns a double containing the magnetic field around the device's z axis.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IRelativeOrientationSensor">
+            <summary>
+            <para>The <i>RelativeOrientationSensor</i> interface of the Sensor APIs describes the device's physical orientation without regard to the Earth's reference coordinate system.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer', and 'gyroscope' device sensors through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="relativeOrientationSensor"></param>
+        </member>
+        <member name="P:BrowserAPI.IRelativeOrientationSensor.Quaternion">
+            <summary>
+            Returns a unit quaternion representing the device's orientation.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IRelativeOrientationSensor.GetQuaternion(System.Threading.CancellationToken)">
+            <summary>
+            Returns a four element Array whose elements contain the components of the unit quaternion representing the device's orientation.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IRelativeOrientationSensor.PopulateMatrix(System.Threading.CancellationToken)">
+            <summary>
+            Returns a rotation matrix based on the latest sensor reading.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IRelativeOrientationSensorInProcess">
+            <summary>
+            <para>The <i>RelativeOrientationSensor</i> interface of the Sensor APIs describes the device's physical orientation without regard to the Earth's reference coordinate system.</para>
+            <para>To use this sensor, the user must grant permission to the 'accelerometer', and 'gyroscope' device sensors through the Permissions API.</para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="relativeOrientationSensor"></param>
+        </member>
+        <member name="P:BrowserAPI.IRelativeOrientationSensorInProcess.Quaternion">
+            <summary>
+            Returns a unit quaternion representing the device's orientation.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IRelativeOrientationSensorInProcess.PopulateMatrix">
+            <summary>
+            Returns a rotation matrix based on the latest sensor reading.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.ISensor">
+            <summary>
+            The Sensor interface of the Sensor APIs is the base class for all the other sensor interfaces.
+            This interface cannot be used directly.
+            Instead it provides properties, event handlers, and methods accessed by interfaces that inherit from it.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.ISensor.Activated">
+            <summary>
+            Returns a boolean value indicating whether the sensor is active.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.ISensor.GetActivated(System.Threading.CancellationToken)">
+            <summary>
+            Returns a boolean value indicating whether the sensor is active.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.ISensor.HasReading">
+            <summary>
+            Returns a boolean value indicating whether the sensor has a reading.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.ISensor.GetHasReading(System.Threading.CancellationToken)">
+            <summary>
+            Returns a boolean value indicating whether the sensor has a reading.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.ISensor.Timestamp">
+            <summary>
+            Returns the timestamp of the latest sensor reading.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.ISensor.GetTimestamp(System.Threading.CancellationToken)">
+            <summary>
+            Returns the timestamp of the latest sensor reading.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.ISensor.Start(System.Threading.CancellationToken)">
+            <summary>
+            Activates one of the sensors based on Sensor.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.ISensor.Stop(System.Threading.CancellationToken)">
+            <summary>
+            Deactivates one of the sensors based on Sensor.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="E:BrowserAPI.ISensor.OnError">
+            <summary>
+            <para>
+            The error event is fired when an exception occurs on a sensor.
+            After this event has occurred, the Sensor object becomes idle. If the sensor was reading values, it will stop until it restarts.
+            </para>
+            <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</see> as JSON.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.ISensor.OnActivate">
+            <summary>
+            The activate event is fired when a sensor becomes activated. It means that it will start obtaining readings.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.ISensor.OnReading">
+            <summary>
+            The reading event is fired when a new reading is available on a sensor.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.ISensorInProcess">
+            <summary>
+            The Sensor interface of the Sensor APIs is the base class for all the other sensor interfaces.
+            This interface cannot be used directly.
+            Instead it provides properties, event handlers, and methods accessed by interfaces that inherit from it.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.ISensorInProcess.OnError">
+            <summary>
+            <para>
+            The error event is fired when an exception occurs on a sensor.
+            After this event has occurred, the Sensor object becomes idle. If the sensor was reading values, it will stop until it restarts.
+            </para>
+            <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</see> as JSON.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.ISensorInProcess.OnActivate">
+            <summary>
+            The activate event is fired when a sensor becomes activated. It means that it will start obtaining readings.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.ISensorInProcess.OnReading">
+            <summary>
+            The reading event is fired when a new reading is available on a sensor.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.ISensorInProcess.Activated">
+            <summary>
+            Returns a boolean value indicating whether the sensor is active.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.ISensorInProcess.HasReading">
+            <summary>
+            Returns a boolean value indicating whether the sensor has a reading.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.ISensorInProcess.Timestamp">
+            <summary>
+            Returns the timestamp of the latest sensor reading.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.ISensorInProcess.Start">
+            <summary>
+            Activates one of the sensors based on Sensor.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.ISensorInProcess.Stop">
+            <summary>
+            Deactivates one of the sensors based on Sensor.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IUncalibratedMagnetometer">
+            <summary>
+            <para>The <i>UncalibratedMagnetometer</i> interface of the Sensor APIs provides information about the uncalibrated magnetic field as detected by the device's primary magnetometer sensor.</para>
+            <para>To use this sensor, the user must grant permission to the 'magnetometer' device sensor through the Permissions API.</para>
+            <para>
+            <i>Hard iron distortion</i> is created by objects that produce a magnetic field, such as magnetized iron.<br />
+            <i>Soft iron distortion</i> stretches or distorts the magnetic field and is caused by metals such as nickel and iron.<br />
+            The <i>calibrated magnetic field</i> is a magnetic field with hard iron distortion and soft iron distortion correction applied.<br />
+            The <i>uncalibrated magnetic field</i> is the magnetic field without hard iron distortion correction and with soft iron distortion correction applied, and as such reports changes in the magnetic field caused by magnetized objects moving near the magnetometer.
+            </para>
+            <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
+            </summary>
+            <param name="uncalibratedMagnetometer"></param>
+        </member>
+        <member name="P:BrowserAPI.IUncalibratedMagnetometer.X">
+            <summary>
+            Returns a double containing the uncalibrated magnetic field around the device's x axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IUncalibratedMagnetometer.GetX(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the uncalibrated magnetic field around the device's x axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IUncalibratedMagnetometer.Y">
+            <summary>
+            Returns a double containing the uncalibrated magnetic field around the device's y axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IUncalibratedMagnetometer.GetY(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the uncalibrated magnetic field around the device's y axis
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IUncalibratedMagnetometer.Z">
+            <summary>
+            Returns a double containing the uncalibrated magnetic field around the device's z axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IUncalibratedMagnetometer.GetZ(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double containing the uncalibrated magnetic field around the device's z axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IUncalibratedMagnetometer.XBias">
+            <summary>
+            Returns a double representing the hard iron distortion correction around x axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IUncalibratedMagnetometer.GetXBias(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double representing the hard iron distortion correction around x axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IUncalibratedMagnetometer.YBias">
+            <summary>
+            Returns a double representing the hard iron distortion correction around y axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IUncalibratedMagnetometer.GetYBias(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double representing the hard iron distortion correction around y axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IUncalibratedMagnetometer.ZBias">
+            <summary>
+            Returns a double representing the hard iron distortion correction around z axis.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IUncalibratedMagnetometer.GetZBias(System.Threading.CancellationToken)">
+            <summary>
+            Returns a double representing the hard iron distortion correction around z axis.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IUncalibratedMagnetometerInProcess">
+            <summary>
+            <para>The <i>UncalibratedMagnetometer</i> interface of the Sensor APIs provides information about the uncalibrated magnetic field as detected by the device's primary magnetometer sensor.</para>
+            <para>To use this sensor, the user must grant permission to the 'magnetometer' device sensor through the Permissions API.</para>
+            <para>
+            <i>Hard iron distortion</i> is created by objects that produce a magnetic field, such as magnetized iron.<br />
+            <i>Soft iron distortion</i> stretches or distorts the magnetic field and is caused by metals such as nickel and iron.<br />
+            The <i>calibrated magnetic field</i> is a magnetic field with hard iron distortion and soft iron distortion correction applied.<br />
+            The <i>uncalibrated magnetic field</i> is the magnetic field without hard iron distortion correction and with soft iron distortion correction applied, and as such reports changes in the magnetic field caused by magnetized objects moving near the magnetometer.
+            </para>
+            <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+            </summary>
+            <param name="uncalibratedMagnetometer"></param>
+        </member>
+        <member name="P:BrowserAPI.IUncalibratedMagnetometerInProcess.X">
+            <summary>
+            Returns a double containing the uncalibrated magnetic field around the device's x axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IUncalibratedMagnetometerInProcess.Y">
+            <summary>
+            Returns a double containing the uncalibrated magnetic field around the device's y axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IUncalibratedMagnetometerInProcess.Z">
+            <summary>
+            Returns a double containing the uncalibrated magnetic field around the device's z axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IUncalibratedMagnetometerInProcess.XBias">
+            <summary>
+            Returns a double representing the hard iron distortion correction around x axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IUncalibratedMagnetometerInProcess.YBias">
+            <summary>
+            Returns a double representing the hard iron distortion correction around y axis.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IUncalibratedMagnetometerInProcess.ZBias">
+            <summary>
+            Returns a double representing the hard iron distortion correction around z axis.
+            </summary>
         </member>
         <member name="T:BrowserAPI.IServiceWorkerContainer">
             <summary>

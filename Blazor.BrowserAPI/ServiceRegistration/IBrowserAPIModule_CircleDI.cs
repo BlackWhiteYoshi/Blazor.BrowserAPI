@@ -24,6 +24,8 @@
 [Scoped<BrowserAPI.ILocalStorageInProcess, BrowserAPI.Implementation.LocalStorageInProcess>]
 [Scoped<BrowserAPI.IMediaDevices, BrowserAPI.Implementation.MediaDevices>]
 [Scoped<BrowserAPI.IMediaDevicesInProcess, BrowserAPI.Implementation.MediaDevicesInProcess>]
+[Scoped<BrowserAPI.ISensorAPI, BrowserAPI.Implementation.SensorAPI>]
+[Scoped<BrowserAPI.ISensorAPIInProcess, BrowserAPI.Implementation.SensorAPIInProcess>]
 [Scoped<BrowserAPI.IServiceWorkerContainer, BrowserAPI.Implementation.ServiceWorkerContainer>]
 [Scoped<BrowserAPI.IServiceWorkerContainerInProcess, BrowserAPI.Implementation.ServiceWorkerContainerInProcess>]
 [Scoped<BrowserAPI.ISessionStorage, BrowserAPI.Implementation.SessionStorage>]

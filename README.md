@@ -20,6 +20,7 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - [Language](Blazor.BrowserAPI/BrowserAPIs/Language/Language.md)
 - [LocalStorage](Blazor.BrowserAPI/BrowserAPIs/LocalStorage/LocalStorage.md)
 - [MediaDevices (microphone/camera)](Blazor.BrowserAPI/BrowserAPIs/MediaDevices/MediaDevices.md)
+- [SensorAPI](Blazor.BrowserAPI/BrowserAPIs/SensorAPI/SensorAPI.md)
 - [ServiceWorker](Blazor.BrowserAPI/BrowserAPIs/ServiceWorker/ServiceWorker.md)
 - [SessionStorage](Blazor.BrowserAPI/BrowserAPIs/SessionStorage/SessionStorage.md)
 

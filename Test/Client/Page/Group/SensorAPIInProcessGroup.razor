@@ -1,0 +1,54 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Sensor API InProcess</h2>
+    <div>
+        @* Sensor Properties *@
+        <button data-testid="@BUTTON_GET_ACTIVATED" @onclick="GetActivated">GetActivated</button>
+        <button data-testid="@BUTTON_GET_HAS_READING" @onclick="GetHasReading">HasReading</button>
+        <button data-testid="@BUTTON_GET_TIMESTAMP" @onclick="GetTimestamp">GetTimestamp</button>
+        @* Sensor methods *@
+        <button data-testid="@BUTTON_START" @onclick="Start">Start</button>
+        <button data-testid="@BUTTON_STOP" @onclick="Stop">Stop</button>
+        @* Sensor Events *@
+        <button data-testid="@BUTTON_REGISTER_ON_ERROR" @onclick="RegisterOnError">RegisterOnError</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ACTIVATE" @onclick="RegisterOnActivate">RegisterOnActivate</button>
+        <button data-testid="@BUTTON_REGISTER_ON_READING" @onclick="RegisterOnReading">RegisterOnReading</button>
+        @* AmbientLightSensor *@
+        <button data-testid="@BUTTON_AMBIENT_LIGHT_SENSOR_GET_ILLUMINANCE" @onclick="AmbientLightSensorGetIlluminance">GetIlluminance</button>
+        @* Gyroscope *@
+        <button data-testid="@BUTTON_GYROSCOPE_GET_X" @onclick="GyroscopeGetX">GetGyroscopeX</button>
+        <button data-testid="@BUTTON_GYROSCOPE_GET_Y" @onclick="GyroscopeGetY">GetGyroscopeY</button>
+        <button data-testid="@BUTTON_GYROSCOPE_GET_Z" @onclick="GyroscopeGetZ">GetGyroscopeZ</button>
+        @* Accelerometer *@
+        <button data-testid="@BUTTON_ACCELEROMETER_GET_X" @onclick="AccelerometerGetX">GetAccelerometerX</button>
+        <button data-testid="@BUTTON_ACCELEROMETER_GET_Y" @onclick="AccelerometerGetY">GetAccelerometerY</button>
+        <button data-testid="@BUTTON_ACCELEROMETER_GET_Z" @onclick="AccelerometerGetZ">GetAccelerometerZ</button>
+        @* LinearAccelerationSensor *@
+        <button data-testid="@BUTTON_LINEAR_ACCELERATION_SENSOR_GET_X" @onclick="LinearAccelerationSensorGetX">GetLinearAccelerationSensorX</button>
+        <button data-testid="@BUTTON_LINEAR_ACCELERATION_SENSOR_GET_Y" @onclick="LinearAccelerationSensorGetY">GetLinearAccelerationSensorY</button>
+        <button data-testid="@BUTTON_LINEAR_ACCELERATION_SENSOR_GET_Z" @onclick="LinearAccelerationSensorGetZ">GetLinearAccelerationSensorZ</button>
+        @* GravitySensor *@
+        <button data-testid="@BUTTON_GRAVITY_SENSOR_GET_X" @onclick="GravitySensorGetX">GetGravitySensorX</button>
+        <button data-testid="@BUTTON_GRAVITY_SENSOR_GET_Y" @onclick="GravitySensorGetY">GetGravitySensorY</button>
+        <button data-testid="@BUTTON_GRAVITY_SENSOR_GET_Z" @onclick="GravitySensorGetZ">GetGravitySensorZ</button>
+        @* AbsoluteOrientationSensor *@
+        <button data-testid="@BUTTON_ABSOLUTE_ORIENTATION_SENSOR_GET_QUATERNION" @onclick="AbsoluteOrientationSensorGetQuaternion">AbsoluteOrientationSensorGetQuaternion</button>
+        <button data-testid="@BUTTON_ABSOLUTE_ORIENTATION_SENSOR_POPULATE_MATRIX" @onclick="AbsoluteOrientationSensorPopulateMatrix">AbsoluteOrientationSensorPopulateMatrix</button>
+        @* RelativeOrientationSensor *@
+        <button data-testid="@BUTTON_RELATIVE_ORIENTATION_SENSOR_GET_QUATERNION" @onclick="RelativeOrientationSensorGetQuaternion">RelativeOrientationSensorGetQuaternion</button>
+        <button data-testid="@BUTTON_RELATIVE_ORIENTATION_SENSOR_POPULATE_MATRIX" @onclick="RelativeOrientationSensorPopulateMatrix">RelativeOrientationSensorPopulateMatrix</button>
+        @* Magnetometer *@
+        <button data-testid="@BUTTON_MAGNETOMETER_GET_X" @onclick="MagnetometerGetX">MagnetometerGetX</button>
+        <button data-testid="@BUTTON_MAGNETOMETER_GET_Y" @onclick="MagnetometerGetY">MagnetometerGetY</button>
+        <button data-testid="@BUTTON_MAGNETOMETER_GET_Z" @onclick="MagnetometerGetZ">MagnetometerGetZ</button>
+        @* UncalibratedMagnetometer *@
+        <button data-testid="@BUTTON_UNCALIBRATED_MAGNETOMETER_GET_X" @onclick="UncalibratedMagnetometerGetX">UncalibratedMagnetometerGetX</button>
+        <button data-testid="@BUTTON_UNCALIBRATED_MAGNETOMETER_GET_Y" @onclick="UncalibratedMagnetometerGetY">UncalibratedMagnetometerGetY</button>
+        <button data-testid="@BUTTON_UNCALIBRATED_MAGNETOMETER_GET_Z" @onclick="UncalibratedMagnetometerGetZ">UncalibratedMagnetometerGetZ</button>
+        <button data-testid="@BUTTON_UNCALIBRATED_MAGNETOMETER_GET_X_BIAS" @onclick="UncalibratedMagnetometerGetXBias">UncalibratedMagnetometerGetXBias</button>
+        <button data-testid="@BUTTON_UNCALIBRATED_MAGNETOMETER_GET_Y_BIAS" @onclick="UncalibratedMagnetometerGetYBias">UncalibratedMagnetometerGetYBias</button>
+        <button data-testid="@BUTTON_UNCALIBRATED_MAGNETOMETER_GET_Z_BIAS" @onclick="UncalibratedMagnetometerGetZBias">UncalibratedMagnetometerGetZBias</button>
+    </div>
+    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+</div>
