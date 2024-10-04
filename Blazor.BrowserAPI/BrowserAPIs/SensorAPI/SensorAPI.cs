@@ -19,7 +19,7 @@ public sealed class SensorAPI(IModuleManager moduleManager) : ISensorAPI {
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public async ValueTask<IAmbientLightSensor?> CreateAmbientLightSensor(double frequency = 0, CancellationToken cancellationToken = default) {
         try {
-            IJSObjectReference ambientLightSensorJS = await moduleManager.InvokeTrySync<IJSObjectReference>("createAmbientLightSensor", cancellationToken, [frequency]);
+            IJSObjectReference ambientLightSensorJS = await moduleManager.InvokeTrySync<IJSObjectReference>("AmbientLightSensorAPI.create", cancellationToken, [frequency]);
             return new AmbientLightSensor(ambientLightSensorJS);
         }
         catch (JSException) {
@@ -37,7 +37,7 @@ public sealed class SensorAPI(IModuleManager moduleManager) : ISensorAPI {
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public async ValueTask<IGyroscope?> CreateGyroscope(double frequency = 0, string referenceFrame = "device", CancellationToken cancellationToken = default) {
         try {
-            IJSObjectReference gyroscopeJS = await moduleManager.InvokeTrySync<IJSObjectReference>("createGyroscope", cancellationToken, [frequency, referenceFrame]);
+            IJSObjectReference gyroscopeJS = await moduleManager.InvokeTrySync<IJSObjectReference>("GyroscopeAPI.create", cancellationToken, [frequency, referenceFrame]);
             return new Gyroscope(gyroscopeJS);
         }
         catch (JSException) {
@@ -55,7 +55,7 @@ public sealed class SensorAPI(IModuleManager moduleManager) : ISensorAPI {
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public async ValueTask<IAccelerometer?> CreateAccelerometer(double frequency = 0, string referenceFrame = "device", CancellationToken cancellationToken = default) {
         try {
-            IJSObjectReference accelerometerJS = await moduleManager.InvokeTrySync<IJSObjectReference>("createAccelerometer", cancellationToken, [frequency, referenceFrame]);
+            IJSObjectReference accelerometerJS = await moduleManager.InvokeTrySync<IJSObjectReference>("AccelerometerAPI.create", cancellationToken, [frequency, referenceFrame]);
             return new Accelerometer(accelerometerJS);
         }
         catch (JSException) {
@@ -72,7 +72,7 @@ public sealed class SensorAPI(IModuleManager moduleManager) : ISensorAPI {
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public async ValueTask<ILinearAccelerationSensor?> CreateLinearAccelerationSensor(double frequency = 0, string referenceFrame = "device", CancellationToken cancellationToken = default) {
         try {
-            IJSObjectReference linearAccelerationSensorJS = await moduleManager.InvokeTrySync<IJSObjectReference>("createLinearAccelerationSensor", cancellationToken, [frequency, referenceFrame]);
+            IJSObjectReference linearAccelerationSensorJS = await moduleManager.InvokeTrySync<IJSObjectReference>("LinearAccelerationSensorAPI.create", cancellationToken, [frequency, referenceFrame]);
             return new LinearAccelerationSensor(linearAccelerationSensorJS);
         }
         catch (JSException) {
@@ -89,7 +89,7 @@ public sealed class SensorAPI(IModuleManager moduleManager) : ISensorAPI {
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public async ValueTask<IGravitySensor?> CreateGravitySensor(double frequency = 0, string referenceFrame = "device", CancellationToken cancellationToken = default) {
         try {
-            IJSObjectReference gravitySensorJS = await moduleManager.InvokeTrySync<IJSObjectReference>("createGravitySensor", cancellationToken, [frequency, referenceFrame]);
+            IJSObjectReference gravitySensorJS = await moduleManager.InvokeTrySync<IJSObjectReference>("GravitySensorAPI.create", cancellationToken, [frequency, referenceFrame]);
             return new GravitySensor(gravitySensorJS);
         }
         catch (JSException) {
@@ -107,7 +107,7 @@ public sealed class SensorAPI(IModuleManager moduleManager) : ISensorAPI {
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public async ValueTask<IAbsoluteOrientationSensor?> CreateAbsoluteOrientationSensor(double frequency = 0, string referenceFrame = "device", CancellationToken cancellationToken = default) {
         try {
-            IJSObjectReference absoluteOrientationSensorJS = await moduleManager.InvokeTrySync<IJSObjectReference>("createAbsoluteOrientationSensor", cancellationToken, [frequency, referenceFrame]);
+            IJSObjectReference absoluteOrientationSensorJS = await moduleManager.InvokeTrySync<IJSObjectReference>("AbsoluteOrientationSensorAPI.create", cancellationToken, [frequency, referenceFrame]);
             return new AbsoluteOrientationSensor(absoluteOrientationSensorJS);
         }
         catch (JSException) {
@@ -124,7 +124,7 @@ public sealed class SensorAPI(IModuleManager moduleManager) : ISensorAPI {
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public async ValueTask<IRelativeOrientationSensor?> CreateRelativeOrientationSensor(double frequency = 0, string referenceFrame = "device", CancellationToken cancellationToken = default) {
         try {
-            IJSObjectReference relativeOrientationSensorJS = await moduleManager.InvokeTrySync<IJSObjectReference>("createRelativeOrientationSensor", cancellationToken, [frequency, referenceFrame]);
+            IJSObjectReference relativeOrientationSensorJS = await moduleManager.InvokeTrySync<IJSObjectReference>("RelativeOrientationSensorAPI.create", cancellationToken, [frequency, referenceFrame]);
             return new RelativeOrientationSensor(relativeOrientationSensorJS);
         }
         catch (JSException) {
@@ -142,7 +142,7 @@ public sealed class SensorAPI(IModuleManager moduleManager) : ISensorAPI {
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public async ValueTask<IMagnetometer?> CreateMagnetometer(double frequency = 0, string referenceFrame = "device", CancellationToken cancellationToken = default) {
         try {
-            IJSObjectReference magnetometerJS = await moduleManager.InvokeTrySync<IJSObjectReference>("createMagnetometer", cancellationToken, [frequency, referenceFrame]);
+            IJSObjectReference magnetometerJS = await moduleManager.InvokeTrySync<IJSObjectReference>("MagnetometerAPI.create", cancellationToken, [frequency, referenceFrame]);
             return new Magnetometer(magnetometerJS);
         }
         catch (JSException) {
@@ -165,7 +165,7 @@ public sealed class SensorAPI(IModuleManager moduleManager) : ISensorAPI {
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public async ValueTask<IUncalibratedMagnetometer?> CreateUncalibratedMagnetometer(double frequency = 0, string referenceFrame = "device", CancellationToken cancellationToken = default) {
         try {
-            IJSObjectReference uncalibratedMagnetometerJS = await moduleManager.InvokeTrySync<IJSObjectReference>("createUncalibratedMagnetometer", cancellationToken, [frequency, referenceFrame]);
+            IJSObjectReference uncalibratedMagnetometerJS = await moduleManager.InvokeTrySync<IJSObjectReference>("UncalibratedMagnetometerAPI.create", cancellationToken, [frequency, referenceFrame]);
             return new UncalibratedMagnetometer(uncalibratedMagnetometerJS);
         }
         catch (JSException) {

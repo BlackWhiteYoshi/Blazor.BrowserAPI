@@ -80,7 +80,7 @@ public sealed class ServiceWorkerContainerInProcess(IModuleManager moduleManager
     public IServiceWorkerInProcess? Controller {
         get {
             try {
-                IJSInProcessObjectReference serviceWorker = moduleManager.InvokeSync<IJSInProcessObjectReference>("serviceWorkerContainerController");
+                IJSInProcessObjectReference serviceWorker = moduleManager.InvokeSync<IJSInProcessObjectReference>("ServiceWorkerContainerAPI.controller");
                 return new ServiceWorkerInProcess(serviceWorker);
             }
             catch (JSException) {
@@ -93,5 +93,5 @@ public sealed class ServiceWorkerContainerInProcess(IModuleManager moduleManager
     /// <summary>
     /// The <i>startMessages()</i> method of the ServiceWorkerContainer interface explicitly starts the flow of messages being dispatched from a service worker to pages under its control (e.g. sent via Client.postMessage()). This can be used to react to sent messages earlier, even before that page's content has finished loading.
     /// </summary>
-    public void StartMessages() => moduleManager.InvokeSync("serviceWorkerContainerStartMessages");
+    public void StartMessages() => moduleManager.InvokeSync("ServiceWorkerContainerAPI.startMessages");
 }

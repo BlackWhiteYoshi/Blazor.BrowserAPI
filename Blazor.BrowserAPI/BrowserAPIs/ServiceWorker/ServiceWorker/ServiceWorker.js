@@ -1,16 +1,4 @@
-/**
- * @param {ServiceWorker | null} serviceWorker
- * @returns {ServiceWorkerWrapper | null}
- */
-export function createServiceWorker(serviceWorker) {
-    if (serviceWorker === null)
-        return null;
-
-    return new ServiceWorkerWrapper(serviceWorker);
-}
-
-
-export class ServiceWorkerWrapper {
+export class ServiceWorkerAPI {
     /** @type {ServiceWorker} */
     #serviceWorker;
 
@@ -19,6 +7,17 @@ export class ServiceWorkerWrapper {
      */
     constructor(serviceWorker) {
         this.#serviceWorker = serviceWorker;
+    }
+
+    /**
+     * @param {ServiceWorker | null} serviceWorker
+     * @returns {ServiceWorkerAPI | null}
+     */
+    static create(serviceWorker) {
+        if (serviceWorker === null)
+            return null;
+
+        return new ServiceWorkerAPI(serviceWorker);
     }
 
 

@@ -23,11 +23,11 @@ public abstract class ServiceWorkerContainerBase : IDisposable {
     /// <param name="scriptURL">relative file path to the service worker script (e.g. "/sw.js")</param>
     /// <param name="cancellationToken"></param>
     /// <returns>true, if service worker is supported, otherwise false</returns>
-    public ValueTask<bool> Register(string scriptURL, CancellationToken cancellationToken = default) => ModuleManager.InvokeAsync<bool>("serviceWorkerContainerRegister", cancellationToken, [scriptURL]);
+    public ValueTask<bool> Register(string scriptURL, CancellationToken cancellationToken = default) => ModuleManager.InvokeAsync<bool>("ServiceWorkerContainerAPI.register", cancellationToken, [scriptURL]);
 
     private protected async ValueTask<IJSObjectReference?> RegisterWithWorkerRegistrationBase(string scriptURL, CancellationToken cancellationToken) {
         try {
-            return await ModuleManager.InvokeAsync<IJSObjectReference>("serviceWorkerContainerRegisterWithWorkerRegistration", cancellationToken, [scriptURL]);
+            return await ModuleManager.InvokeAsync<IJSObjectReference>("ServiceWorkerContainerAPI.registerWithWorkerRegistration", cancellationToken, [scriptURL]);
         }
         catch (JSException) {
             return null;
@@ -35,19 +35,19 @@ public abstract class ServiceWorkerContainerBase : IDisposable {
     }
 
 
-    private protected ValueTask<IJSObjectReference> DelayUntilReadyBase(CancellationToken cancellationToken) => ModuleManager.InvokeAsync<IJSObjectReference>("serviceWorkerContainerReady", cancellationToken);
+    private protected ValueTask<IJSObjectReference> DelayUntilReadyBase(CancellationToken cancellationToken) => ModuleManager.InvokeAsync<IJSObjectReference>("ServiceWorkerContainerAPI.ready", cancellationToken);
 
 
     private protected async ValueTask<IJSObjectReference?> GetRegistrationBase(string clientUrl, CancellationToken cancellationToken) {
         try {
-            return await ModuleManager.InvokeAsync<IJSObjectReference>("serviceWorkerContainerGetRegistration", cancellationToken, [clientUrl]);
+            return await ModuleManager.InvokeAsync<IJSObjectReference>("ServiceWorkerContainerAPI.getRegistration", cancellationToken, [clientUrl]);
         }
         catch (JSException) {
             return null;
         }
     }
 
-    private protected ValueTask<IJSObjectReference[]> GetRegistrationsBase(CancellationToken cancellationToken) => ModuleManager.InvokeAsync<IJSObjectReference[]>("serviceWorkerContainerGetRegistrations", cancellationToken);
+    private protected ValueTask<IJSObjectReference[]> GetRegistrationsBase(CancellationToken cancellationToken) => ModuleManager.InvokeAsync<IJSObjectReference[]>("ServiceWorkerContainerAPI.getRegistrations", cancellationToken);
 
 
     #region Events
@@ -80,13 +80,13 @@ public abstract class ServiceWorkerContainerBase : IDisposable {
     public event Action OnControllerChange {
         add {
             if (_onControllerChange == null)
-                _ = ActivateJSEvent("serviceWorkerContainerActivateOncontrollerchange").Preserve();
+                _ = ActivateJSEvent("ServiceWorkerContainerAPI.activateOncontrollerchange").Preserve();
             _onControllerChange += value;
         }
         remove {
             _onControllerChange -= value;
             if (_onControllerChange == null)
-                _ = DeactivateJSEvent("serviceWorkerContainerDeactivateOncontrollerchange").Preserve();
+                _ = DeactivateJSEvent("ServiceWorkerContainerAPI.deactivateOncontrollerchange").Preserve();
         }
     }
 
@@ -98,13 +98,13 @@ public abstract class ServiceWorkerContainerBase : IDisposable {
     public event Action<string> OnMessage {
         add {
             if (_onMessage == null)
-                _ = ActivateJSEvent("serviceWorkerContainerActivateOnMessage").Preserve();
+                _ = ActivateJSEvent("ServiceWorkerContainerAPI.activateOnMessage").Preserve();
             _onMessage += value;
         }
         remove {
             _onMessage -= value;
             if (_onMessage == null)
-                _ = DeactivateJSEvent("serviceWorkerContainerDeactivateOnMessage").Preserve();
+                _ = DeactivateJSEvent("ServiceWorkerContainerAPI.deactivateOnMessage").Preserve();
         }
     }
 

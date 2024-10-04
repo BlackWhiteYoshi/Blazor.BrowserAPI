@@ -21,7 +21,7 @@ public sealed partial class ElementFactory(IModuleManager moduleManager) : IElem
     /// <param name="htmlElement">An <see cref="ElementReference"/> referencing a html tag.</param>
     /// <returns>An object that can be used to interact with the given html element.</returns>
     public IHTMLElement CreateHTMLElement(ElementReference htmlElement) {
-        Task<IJSObjectReference> htmlElementJS = moduleManager.InvokeTrySync<IJSObjectReference>("createHTMLElement", default, [htmlElement]).AsTask();
+        Task<IJSObjectReference> htmlElementJS = moduleManager.InvokeTrySync<IJSObjectReference>("HTMLElementAPI.create", default, [htmlElement]).AsTask();
         return new HTMLElement(htmlElementJS);
     }
 }

@@ -12,7 +12,7 @@ public sealed partial class ElementFactory : IElementFactory {
     /// <param name="dialog">An <see cref="ElementReference"/> referencing a &lt;dialog&gt; html tag.</param>
     /// <returns>An object that can be used to interact with the given &lt;dialog&gt; element.</returns>
     public IDialog CreateDialog(ElementReference dialog) {
-        Task<IJSObjectReference> dialogTask = moduleManager.InvokeTrySync<IJSObjectReference>("createDialog", default, [dialog]).AsTask();
+        Task<IJSObjectReference> dialogTask = moduleManager.InvokeTrySync<IJSObjectReference>("DialogAPI.create", default, [dialog]).AsTask();
         return new Dialog(dialogTask);
     }
 }

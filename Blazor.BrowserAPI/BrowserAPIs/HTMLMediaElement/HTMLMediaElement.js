@@ -1,16 +1,6 @@
-import { MediaStreamWrapper, createMediaStream } from "../MediaDevices/MediaStream/MediaStream";
+import { MediaStreamAPI, createMediaStream } from "../MediaDevices/MediaStream/MediaStream";
 
-
-/**
- * @param {HTMLMediaElement} htmlMediaElement
- * @returns {HTMLMediaElementWrapper}
- */
-export function createHTMLMediaElement(htmlMediaElement) {
-    return new HTMLMediaElementWrapper(htmlMediaElement);
-}
-
-
-export class HTMLMediaElementWrapper {
+export class HTMLMediaElementAPI {
     /** @type {HTMLMediaElement} */
     #htmlMediaElement;
 
@@ -22,17 +12,12 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @param {TimeRanges} timeRanges
+     * @param {HTMLMediaElement} htmlMediaElement
+     * @returns {HTMLMediaElementAPI}
      */
-    static #toTimeRangeArray(timeRanges) {
-        let result = [];
-
-        for (let i = 0; i < timeRanges.length; i++)
-            result.push({ start: timeRanges.start(i), end: timeRanges.end(i) });
-
-        return result;
+    static create(htmlMediaElement) {
+        return new HTMLMediaElementAPI(htmlMediaElement);
     }
-
 
 
     /**
@@ -55,17 +40,17 @@ export class HTMLMediaElementWrapper {
     }
 
     /**
-     * @returns {MediaStreamWrapper | null}
+     * @returns {MediaStreamAPI | null}
      */
     getSrcObject() {
         const result = this.#htmlMediaElement.srcObject;
         if (result instanceof MediaStream)
-            return new MediaStreamWrapper(result);
+            return new MediaStreamAPI(result);
         else
             return null;
     }
     /**
-     * @param {MediaStreamWrapper | null} value
+     * @param {MediaStreamAPI | null} value
      */
     setSrcObject(value) {
         if (value !== null)
@@ -174,7 +159,7 @@ export class HTMLMediaElementWrapper {
      * @returns {{ start: number, end: number }[]}
      */
     getSeekable() {
-        return HTMLMediaElementWrapper.#toTimeRangeArray(this.#htmlMediaElement.seekable);
+        return HTMLMediaElementAPI.#toTimeRangeArray(this.#htmlMediaElement.seekable);
     }
 
     /**
@@ -243,7 +228,7 @@ export class HTMLMediaElementWrapper {
      * @returns {{ start: number, end: number }[]}
      */
     getBuffered() {
-        return HTMLMediaElementWrapper.#toTimeRangeArray(this.#htmlMediaElement.buffered);
+        return HTMLMediaElementAPI.#toTimeRangeArray(this.#htmlMediaElement.buffered);
     }
 
     /**
@@ -251,7 +236,7 @@ export class HTMLMediaElementWrapper {
      * @returns {{ start: number, end: number }[]}
      */
     getPlayed() {
-        return HTMLMediaElementWrapper.#toTimeRangeArray(this.#htmlMediaElement.played);
+        return HTMLMediaElementAPI.#toTimeRangeArray(this.#htmlMediaElement.played);
     }
 
 
@@ -935,4 +920,18 @@ export class HTMLMediaElementWrapper {
     }
 
     // #endregion
+
+
+
+    /**
+     * @param {TimeRanges} timeRanges
+     */
+    static #toTimeRangeArray(timeRanges) {
+        let result = [];
+
+        for (let i = 0; i < timeRanges.length; i++)
+            result.push({ start: timeRanges.start(i), end: timeRanges.end(i) });
+
+        return result;
+    }
 }

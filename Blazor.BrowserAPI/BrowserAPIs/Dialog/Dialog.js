@@ -1,13 +1,4 @@
-/**
- * @param {HTMLDialogElement} dialog
- * @returns {DialogWrapper}
- */
-export function createDialog(dialog) {
-    return new DialogWrapper(dialog);
-}
-
-
-export class DialogWrapper {
+export class DialogAPI {
     /** @type {HTMLDialogElement} */
     #dialog;
 
@@ -16,6 +7,14 @@ export class DialogWrapper {
      */
     constructor(dialog) {
         this.#dialog = dialog;
+    }
+
+    /**
+     * @param {HTMLDialogElement} dialog
+     * @returns {DialogAPI}
+     */
+    static create(dialog) {
+        return new DialogAPI(dialog);
     }
 
 

@@ -12,7 +12,7 @@ public sealed partial class ElementFactoryInProcess : IElementFactoryInProcess {
     /// <param name="dialog">An <see cref="ElementReference"/> referencing a &lt;dialog&gt; html tag.</param>
     /// <returns>An object that can be used to interact with the given &lt;dialog&gt; element.</returns>
     public IDialogInProcess CreateDialog(ElementReference dialog) {
-        IJSInProcessObjectReference dialogJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("createDialog", [dialog]);
+        IJSInProcessObjectReference dialogJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("DialogAPI.create", [dialog]);
         return new DialogInProcess(dialogJS);
     }
 }

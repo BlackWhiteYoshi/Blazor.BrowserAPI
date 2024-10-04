@@ -1,7 +1,7 @@
 /**
  * @abstract
  */
-export class SensorWrapper {
+export class SensorAPI {
     /**
      * @protected
      * @type {Sensor}

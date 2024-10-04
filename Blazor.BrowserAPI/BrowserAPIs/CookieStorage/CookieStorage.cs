@@ -25,7 +25,7 @@ public sealed class CookieStorage(IModuleManager moduleManager) : ICookieStorage
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetAllCookies(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<string>("getAllCookies", cancellationToken);
+    public ValueTask<string> GetAllCookies(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<string>("CookieStorageAPI.getAllCookies", cancellationToken);
 
     /// <summary>
     /// Returns an integer representing the number of cookies stored in cookieStorage.
@@ -37,7 +37,7 @@ public sealed class CookieStorage(IModuleManager moduleManager) : ICookieStorage
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<int> GetLength(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<int>("cookieStorageLength", cancellationToken);
+    public ValueTask<int> GetLength(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<int>("CookieStorageAPI.count", cancellationToken);
 
     /// <summary>
     /// When passed a number <i>n</i>, this method will return the name of the nth key in cookieStorage.
@@ -45,7 +45,7 @@ public sealed class CookieStorage(IModuleManager moduleManager) : ICookieStorage
     /// <param name="index">An integer representing the number of the key you want to get the name of. This is a zero-based index.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string?> Key(int index, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync<string?>("cookieStorageKey", cancellationToken, [index]);
+    public ValueTask<string?> Key(int index, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync<string?>("CookieStorageAPI.key", cancellationToken, [index]);
 
     /// <summary>
     /// When passed a key name, will return that key's value.
@@ -53,7 +53,7 @@ public sealed class CookieStorage(IModuleManager moduleManager) : ICookieStorage
     /// <param name="key">A string containing the name of the key you want to retrieve the value of.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string?> GetCookie(string key, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync<string?>("cookieStorageGetCookie", cancellationToken, [key]);
+    public ValueTask<string?> GetCookie(string key, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync<string?>("CookieStorageAPI.getCookie", cancellationToken, [key]);
 
     /// <summary>
     /// When passed a key name and value, will add that key to cookieStorage, or update that key's value if it already exists.
@@ -67,7 +67,7 @@ public sealed class CookieStorage(IModuleManager moduleManager) : ICookieStorage
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask SetCookie(string key, string value, int? expires = null, string path = "/", string sameSite = "none", bool secure = false, CancellationToken cancellationToken = default)
-        => moduleManager.InvokeTrySync("cookieStorageSetCookie", cancellationToken, [key, value, expires, path, sameSite.ToString(), secure]);
+        => moduleManager.InvokeTrySync("CookieStorageAPI.setCookie", cancellationToken, [key, value, expires, path, sameSite.ToString(), secure]);
 
     /// <summary>
     /// When passed a key name, will remove that key from cookieStorage.
@@ -75,12 +75,12 @@ public sealed class CookieStorage(IModuleManager moduleManager) : ICookieStorage
     /// <param name="key">A string containing the name of the key you want to remove.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask RemoveCookie(string key, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("cookieStorageRemoveCookie", cancellationToken, [key]);
+    public ValueTask RemoveCookie(string key, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("CookieStorageAPI.removeCookie", cancellationToken, [key]);
 
     /// <summary>
     /// When invoked, will empty all keys out of cookieStorage.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Clear(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("cookieStorageClear", cancellationToken);
+    public ValueTask Clear(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("CookieStorageAPI.clear", cancellationToken);
 }

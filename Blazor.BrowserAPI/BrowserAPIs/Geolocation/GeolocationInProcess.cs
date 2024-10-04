@@ -68,7 +68,7 @@ public sealed class GeolocationInProcess(IModuleManager moduleManager) : IGeoloc
             callbackGeolocation.Dispose();
         };
 
-        moduleManager.InvokeSync("geolocationGetCurrentPosition", [callbackGeolocation, maximumAge, timeout, enableHighAccuracy]);
+        moduleManager.InvokeSync("GeolocationAPI.getCurrentPosition", [callbackGeolocation, maximumAge, timeout, enableHighAccuracy]);
     }
 
 
@@ -130,7 +130,7 @@ public sealed class GeolocationInProcess(IModuleManager moduleManager) : IGeoloc
     /// <returns>WatchId - can be used to <see cref="ClearWatch">clear</see> this registration.</returns>
     public int WatchPosition(Action<GeolocationCoordinates, long> successCallback, Action<int, string>? errorCallback = null, long maximumAge = 0, long timeout = -1, bool enableHighAccuracy = false) {
         DotNetObjectReference<CallbackGeolocation> callbackGeolocation = DotNetObjectReference.Create(new CallbackGeolocation(successCallback, errorCallback));
-        int watchId = moduleManager.InvokeSync<int>("geolocationWatchPosition", [callbackGeolocation, maximumAge, timeout, enableHighAccuracy]);
+        int watchId = moduleManager.InvokeSync<int>("GeolocationAPI.watchPosition", [callbackGeolocation, maximumAge, timeout, enableHighAccuracy]);
         watchList.Add(watchId, callbackGeolocation);
         return watchId;
     }
@@ -141,7 +141,7 @@ public sealed class GeolocationInProcess(IModuleManager moduleManager) : IGeoloc
     /// <param name="watchId">The id of the registration from <see cref="WatchPosition"/></param>
     /// <returns></returns>
     public void ClearWatch(int watchId) {
-        moduleManager.InvokeSync("geolocationClearWatch", [watchId]);
+        moduleManager.InvokeSync("GeolocationAPI.clearWatch", [watchId]);
 
         if (watchList.TryGetValue(watchId, out DotNetObjectReference<CallbackGeolocation>? callbackGeolocation)) {
             callbackGeolocation.Dispose();

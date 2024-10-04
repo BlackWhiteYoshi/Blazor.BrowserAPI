@@ -1,16 +1,6 @@
 import { DotNet } from "../../blazor";
 
-
-/**
- * @param {HTMLElement} htmlElement
- * @returns {HTMLElementWrapper}
- */
-export function createHTMLElement(htmlElement) {
-    return new HTMLElementWrapper(htmlElement);
-}
-
-
-export class HTMLElementWrapper {
+export class HTMLElementAPI {
     /** @type {HTMLElement} */
     #htmlElement;
 
@@ -19,6 +9,14 @@ export class HTMLElementWrapper {
      */
     constructor(htmlElement) {
         this.#htmlElement = htmlElement;
+    }
+
+    /**
+     * @param {HTMLElement} htmlElement
+     * @returns {HTMLElementAPI}
+     */
+    static create(htmlElement) {
+        return new HTMLElementAPI(htmlElement);
     }
 
 
@@ -208,7 +206,7 @@ export class HTMLElementWrapper {
      * @returns {any[]}
      */
     getChildren() {
-        return [... this.#htmlElement.children].map((/** @type {HTMLElement} */ child) => DotNet.createJSObjectReference(createHTMLElement(child)));
+        return [... this.#htmlElement.children].map((/** @type {HTMLElement} */ child) => DotNet.createJSObjectReference(HTMLElementAPI.create(child)));
     }
 
     /**

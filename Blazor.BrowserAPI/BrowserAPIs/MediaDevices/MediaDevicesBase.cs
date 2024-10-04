@@ -31,5 +31,5 @@ public abstract class MediaDevicesBase {
     /// <para>If the media device is an input device, an InputDeviceInfo object will be returned instead.</para>
     /// <para>If enumeration fails, the promise is rejected.</para>
     /// </returns>
-    public ValueTask<MediaDeviceInfo[]> EnumerateDevices(CancellationToken cancellationToken = default) => ModuleManager.InvokeAsync<MediaDeviceInfo[]>("enumerateDevices", cancellationToken);
+    public ValueTask<MediaDeviceInfo[]> EnumerateDevices(CancellationToken cancellationToken = default) => ModuleManager.InvokeAsync<MediaDeviceInfo[]>("MediaDevicesAPI.enumerateDevices", cancellationToken);
 }

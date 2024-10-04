@@ -1,31 +1,30 @@
-import { SensorWrapper } from "../Sensor";
+import { SensorAPI } from "../Sensor";
 
-/**
- * @param {number} frequency
- * @param {"device" | "screen"} referenceFrame
- * @returns {RelativeOrientationSensorWrapper | null}
- */
-export function createRelativeOrientationSensor(frequency, referenceFrame) {
-    if (!("RelativeOrientationSensor" in window))
-        return null;
-
-    /** @type {MotionSensorOptions} */
-    let options;
-    if (frequency > 0)
-        options = { frequency, referenceFrame };
-    else
-        options = { referenceFrame };
-
-    return new RelativeOrientationSensorWrapper(new RelativeOrientationSensor(options));
-}
-
-
-export class RelativeOrientationSensorWrapper extends SensorWrapper {
+export class RelativeOrientationSensorAPI extends SensorAPI {
     /**
      * @param {RelativeOrientationSensor} relativeOrientationSensor
      */
     constructor(relativeOrientationSensor) {
         super(relativeOrientationSensor);
+    }
+
+    /**
+     * @param {number} frequency
+     * @param {"device" | "screen"} referenceFrame
+     * @returns {RelativeOrientationSensorAPI | null}
+     */
+    static create(frequency, referenceFrame) {
+        if (!("RelativeOrientationSensor" in window))
+            return null;
+
+        /** @type {MotionSensorOptions} */
+        let options;
+        if (frequency > 0)
+            options = { frequency, referenceFrame };
+        else
+            options = { referenceFrame };
+
+        return new RelativeOrientationSensorAPI(new RelativeOrientationSensor(options));
     }
 
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System.Diagnostics;
 
 namespace BrowserAPI.Test.Client;
 
@@ -25,9 +26,9 @@ public sealed partial class ServiceWorkerInProcessGroup : ComponentBase, IAsyncD
         get {
             return _serviceWorker ??= DoAsync();
             async Task<IServiceWorkerInProcess> DoAsync() {
-                await ServiceWorkerContainer.Register(SERVICE_WORKER_URL);
+                await ServiceWorkerRegistration;
                 using IServiceWorkerRegistrationInProcess serviceWorkerRegistration = await ServiceWorkerContainer.DelayUntilReady();
-                return serviceWorkerRegistration.Active ?? throw new ArgumentNullException(null, "service worker could not be retrieved.");
+                return serviceWorkerRegistration.Active ?? throw new UnreachableException("DelayUntilReady() ensures there is a active service worker.");
             }
         }
     }
@@ -111,7 +112,14 @@ public sealed partial class ServiceWorkerInProcessGroup : ComponentBase, IAsyncD
 
     public const string BUTTON_UNREGISTER = "service-worker-registration-inprocess-unregister";
     private async Task Unregister() {
-        bool result = await (await ServiceWorkerRegistration).Unregister();
+        IServiceWorkerRegistrationInProcess serviceWorkerRegistration = await ServiceWorkerRegistration;
+        bool result = await serviceWorkerRegistration.Unregister();
+
+        if (result) {
+            serviceWorkerRegistration.Dispose();
+            _serviceWorkerRegistration = null;
+        }
+
         labelOutput = result.ToString();
     }
 

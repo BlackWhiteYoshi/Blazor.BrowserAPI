@@ -1,31 +1,30 @@
-import { SensorWrapper } from "../Sensor";
+import { SensorAPI } from "../Sensor";
 
-/**
- * @param {number} frequency
- * @param {"device" | "screen"} referenceFrame
- * @returns {GyroscopeWrapper | null}
- */
-export function createGyroscope(frequency, referenceFrame) {
-    if (!("Gyroscope" in window))
-        return null;
-
-    /** @type {MotionSensorOptions} */
-    let options;
-    if (frequency > 0)
-        options = { frequency, referenceFrame };
-    else
-        options = { referenceFrame };
-
-    return new GyroscopeWrapper(new Gyroscope(options));
-}
-
-
-export class GyroscopeWrapper extends SensorWrapper {
+export class GyroscopeAPI extends SensorAPI {
     /**
      * @param {Gyroscope} gyroscope
      */
     constructor(gyroscope) {
         super(gyroscope);
+    }
+
+    /**
+     * @param {number} frequency
+     * @param {"device" | "screen"} referenceFrame
+     * @returns {GyroscopeAPI | null}
+     */
+    static create(frequency, referenceFrame) {
+        if (!("Gyroscope" in window))
+            return null;
+
+        /** @type {MotionSensorOptions} */
+        let options;
+        if (frequency > 0)
+            options = { frequency, referenceFrame };
+        else
+            options = { referenceFrame };
+
+        return new GyroscopeAPI(new Gyroscope(options));
     }
 
 

@@ -1,16 +1,6 @@
-import { MediaRecorderWrapper } from "../MediaRecorder/MediaRecorder";
+import { MediaRecorderAPI } from "../MediaRecorder/MediaRecorder";
 
-
-/**
- * @param {MediaStream} mediaStream
- * @returns {MediaStreamWrapper}
- */
-export function createMediaStream(mediaStream) {
-    return new MediaStreamWrapper(mediaStream);
-}
-
-
-export class MediaStreamWrapper {
+export class MediaStreamAPI {
     /** @type {MediaStream} */
     #mediaStream;
 
@@ -68,6 +58,6 @@ export class MediaStreamWrapper {
             videoBitsPerSecond: videoBitsPerSecond > 0 ? videoBitsPerSecond : undefined,
             bitsPerSecond: bitsPerSecond > 0 ? bitsPerSecond : undefined
         };
-        return new MediaRecorderWrapper(this.#mediaStream, options);
+        return new MediaRecorderAPI(this.#mediaStream, options);
     }
 }

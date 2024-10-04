@@ -14,7 +14,7 @@ public sealed class Clipboard(IModuleManager moduleManager) : IClipboard {
     /// <param name="text">The string to be written to the clipboard.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask Write(string text, CancellationToken cancellationToken = default) => moduleManager.InvokeAsync("clipboardWriteText", cancellationToken, [text]);
+    public ValueTask Write(string text, CancellationToken cancellationToken = default) => moduleManager.InvokeAsync("ClipboardAPI.writeText", cancellationToken, [text]);
 
     /// <summary>
     /// <para>navigator.clipboard.readText();</para>
@@ -22,5 +22,5 @@ public sealed class Clipboard(IModuleManager moduleManager) : IClipboard {
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> Read(CancellationToken cancellationToken = default) => moduleManager.InvokeAsync<string>("clipboardReadText", cancellationToken);
+    public ValueTask<string> Read(CancellationToken cancellationToken = default) => moduleManager.InvokeAsync<string>("ClipboardAPI.readText", cancellationToken);
 }

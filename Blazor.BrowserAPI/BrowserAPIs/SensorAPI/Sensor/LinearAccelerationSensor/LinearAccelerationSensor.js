@@ -1,31 +1,30 @@
-import { SensorWrapper } from "../Sensor";
+import { SensorAPI } from "../Sensor";
 
-/**
- * @param {number} frequency
- * @param {"device" | "screen"} referenceFrame
- * @returns {LinearAccelerationSensorWrapper | null}
- */
-export function createLinearAccelerationSensor(frequency, referenceFrame) {
-    if (!("LinearAccelerationSensor" in window))
-        return null;
-
-    /** @type {MotionSensorOptions} */
-    let options;
-    if (frequency > 0)
-        options = { frequency, referenceFrame };
-    else
-        options = { referenceFrame };
-
-    return new LinearAccelerationSensorWrapper(new LinearAccelerationSensor(options));
-}
-
-
-export class LinearAccelerationSensorWrapper extends SensorWrapper {
+export class LinearAccelerationSensorAPI extends SensorAPI {
     /**
      * @param {LinearAccelerationSensor} linearAccelerationSensor
      */
     constructor(linearAccelerationSensor) {
         super(linearAccelerationSensor);
+    }
+
+    /**
+     * @param {number} frequency
+     * @param {"device" | "screen"} referenceFrame
+     * @returns {LinearAccelerationSensorAPI | null}
+     */
+    static create(frequency, referenceFrame) {
+        if (!("LinearAccelerationSensor" in window))
+            return null;
+
+        /** @type {MotionSensorOptions} */
+        let options;
+        if (frequency > 0)
+            options = { frequency, referenceFrame };
+        else
+            options = { referenceFrame };
+
+        return new LinearAccelerationSensorAPI(new LinearAccelerationSensor(options));
     }
 
 

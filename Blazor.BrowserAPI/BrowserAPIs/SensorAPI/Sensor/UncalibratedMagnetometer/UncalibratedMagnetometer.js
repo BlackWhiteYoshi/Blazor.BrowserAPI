@@ -1,31 +1,30 @@
-import { SensorWrapper } from "../Sensor";
+import { SensorAPI } from "../Sensor";
 
-/**
- * @param {number} frequency
- * @param {"device" | "screen"} referenceFrame
- * @returns {UncalibratedMagnetometerWrapper | null}
- */
-export function createUncalibratedMagnetometer(frequency, referenceFrame) {
-    if (!("UncalibratedMagnetometer" in window))
-        return null;
-
-    /** @type {MotionSensorOptions} */
-    let options;
-    if (frequency > 0)
-        options = { frequency, referenceFrame };
-    else
-        options = { referenceFrame };
-
-    return new UncalibratedMagnetometerWrapper(new UncalibratedMagnetometer(options));
-}
-
-
-export class UncalibratedMagnetometerWrapper extends SensorWrapper {
+export class UncalibratedMagnetometerAPI extends SensorAPI {
     /**
      * @param {UncalibratedMagnetometer} uncalibratedMagnetometer
      */
     constructor(uncalibratedMagnetometer) {
         super(uncalibratedMagnetometer);
+    }
+
+    /**
+     * @param {number} frequency
+     * @param {"device" | "screen"} referenceFrame
+     * @returns {UncalibratedMagnetometerAPI | null}
+     */
+    static create(frequency, referenceFrame) {
+        if (!("UncalibratedMagnetometer" in window))
+            return null;
+
+        /** @type {MotionSensorOptions} */
+        let options;
+        if (frequency > 0)
+            options = { frequency, referenceFrame };
+        else
+            options = { referenceFrame };
+
+        return new UncalibratedMagnetometerAPI(new UncalibratedMagnetometer(options));
     }
 
 

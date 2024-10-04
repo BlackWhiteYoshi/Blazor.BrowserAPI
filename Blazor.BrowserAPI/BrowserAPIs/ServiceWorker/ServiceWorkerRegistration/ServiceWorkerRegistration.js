@@ -1,17 +1,6 @@
-import { ServiceWorkerWrapper } from "../ServiceWorker/ServiceWorker.js";
-import { createServiceWorker } from "../ServiceWorker/ServiceWorker.js";
+import { ServiceWorkerAPI } from "../ServiceWorker/ServiceWorker.js";
 
-
-/**
- * @param {ServiceWorkerRegistration} serviceWorkerRegistration
- * @returns {ServiceWorkerRegistrationWrapper}
- */
-export function createServiceWorkerRegistration(serviceWorkerRegistration) {
-    return new ServiceWorkerRegistrationWrapper(serviceWorkerRegistration);
-}
-
-
-export class ServiceWorkerRegistrationWrapper {
+export class ServiceWorkerRegistrationAPI {
     /** @type {ServiceWorkerRegistration} */
     #serviceWorkerRegistration;
 
@@ -24,24 +13,24 @@ export class ServiceWorkerRegistrationWrapper {
 
 
     /**
-     * @returns {ServiceWorkerWrapper | null}
+     * @returns {ServiceWorkerAPI | null}
      */
     active() {
-        return createServiceWorker(this.#serviceWorkerRegistration.active);
+        return ServiceWorkerAPI.create(this.#serviceWorkerRegistration.active);
     }
 
     /**
-     * @returns {ServiceWorkerWrapper | null}
+     * @returns {ServiceWorkerAPI | null}
      */
     installing() {
-        return createServiceWorker(this.#serviceWorkerRegistration.installing);
+        return ServiceWorkerAPI.create(this.#serviceWorkerRegistration.installing);
     }
 
     /**
-     * @returns {ServiceWorkerWrapper | null}
+     * @returns {ServiceWorkerAPI | null}
      */
     waiting() {
-        return createServiceWorker(this.#serviceWorkerRegistration.waiting);
+        return ServiceWorkerAPI.create(this.#serviceWorkerRegistration.waiting);
     }
 
 
@@ -68,12 +57,12 @@ export class ServiceWorkerRegistrationWrapper {
     }
 
     /**
-     * @returns {Promise<ServiceWorkerRegistrationWrapper>}
+     * @returns {Promise<ServiceWorkerRegistrationAPI>}
      */
     async update() {
         // wrong return type definition for update(): expected ServiceWorkerRegistration, actually void
         const updatedServiceWorkerRegistration = /** @type {ServiceWorkerRegistration} */ (/** @type {unknown} */ (await this.#serviceWorkerRegistration.update()));
-        return createServiceWorkerRegistration(updatedServiceWorkerRegistration);
+        return new ServiceWorkerRegistrationAPI(updatedServiceWorkerRegistration);
     }
 
 

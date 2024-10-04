@@ -1,31 +1,30 @@
-import { SensorWrapper } from "../Sensor";
+import { SensorAPI } from "../Sensor";
 
-/**
- * @param {number} frequency
- * @param {"device" | "screen"} referenceFrame
- * @returns {AccelerometerWrapper | null}
- */
-export function createAccelerometer(frequency, referenceFrame) {
-    if (!("Accelerometer" in window))
-        return null;
-
-    /** @type {MotionSensorOptions} */
-    let options;
-    if (frequency > 0)
-        options = { frequency, referenceFrame };
-    else
-        options = { referenceFrame };
-
-    return new AccelerometerWrapper(new Accelerometer(options));
-}
-
-
-export class AccelerometerWrapper extends SensorWrapper {
+export class AccelerometerAPI extends SensorAPI {
     /**
      * @param {Accelerometer} accelerometer
      */
     constructor(accelerometer) {
         super(accelerometer);
+    }
+
+    /**
+     * @param {number} frequency
+     * @param {"device" | "screen"} referenceFrame
+     * @returns {AccelerometerAPI | null}
+     */
+    static create(frequency, referenceFrame) {
+        if (!("Accelerometer" in window))
+            return null;
+
+        /** @type {MotionSensorOptions} */
+        let options;
+        if (frequency > 0)
+            options = { frequency, referenceFrame };
+        else
+            options = { referenceFrame };
+
+        return new AccelerometerAPI(new Accelerometer(options));
     }
 
 

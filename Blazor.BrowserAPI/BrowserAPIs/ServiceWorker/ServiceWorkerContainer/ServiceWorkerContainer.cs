@@ -92,7 +92,7 @@ public sealed class ServiceWorkerContainer(IModuleManager moduleManager) : Servi
     /// <returns></returns>
     public async ValueTask<IServiceWorker?> GetController(CancellationToken cancellationToken) {
         try {
-            IJSObjectReference serviceWorker = await moduleManager.InvokeTrySync<IJSObjectReference>("serviceWorkerContainerController", cancellationToken);
+            IJSObjectReference serviceWorker = await moduleManager.InvokeTrySync<IJSObjectReference>("ServiceWorkerContainerAPI.controller", cancellationToken);
             return new ServiceWorker(serviceWorker);
         }
         catch (JSException) {
@@ -107,5 +107,5 @@ public sealed class ServiceWorkerContainer(IModuleManager moduleManager) : Servi
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask StartMessages(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("serviceWorkerContainerStartMessages", cancellationToken);
+    public ValueTask StartMessages(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("ServiceWorkerContainerAPI.startMessages", cancellationToken);
 }

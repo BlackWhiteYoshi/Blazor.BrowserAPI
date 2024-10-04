@@ -1,30 +1,29 @@
-import { SensorWrapper } from "../Sensor";
+import { SensorAPI } from "../Sensor";
 
-/**
- * @param {number} frequency
- * @returns {AmbientLightSensorWrapper | null}
- */
-export function createAmbientLightSensor(frequency) {
-    if (!("AmbientLightSensor" in window))
-        return null;
-
-    /** @type {SensorOptions} */
-    let options;
-    if (frequency > 0)
-        options = { frequency };
-    else
-        options = { };
-
-    return new AmbientLightSensorWrapper(new AmbientLightSensor(options));
-}
-
-
-export class AmbientLightSensorWrapper extends SensorWrapper {
+export class AmbientLightSensorAPI extends SensorAPI {
     /**
      * @param {AmbientLightSensor} ambientLightSensor
      */
     constructor(ambientLightSensor) {
         super(ambientLightSensor);
+    }
+
+    /**
+     * @param {number} frequency
+     * @returns {AmbientLightSensorAPI | null}
+     */
+    static create(frequency) {
+        if (!("AmbientLightSensor" in window))
+            return null;
+
+        /** @type {SensorOptions} */
+        let options;
+        if (frequency > 0)
+            options = { frequency };
+        else
+            options = {};
+
+        return new AmbientLightSensorAPI(new AmbientLightSensor(options));
     }
 
 

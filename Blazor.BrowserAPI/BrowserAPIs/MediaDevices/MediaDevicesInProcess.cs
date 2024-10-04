@@ -19,7 +19,7 @@ public sealed class MediaDevicesInProcess(IModuleManager moduleManager) : MediaD
     /// The getSupportedConstraints() method of the MediaDevices interface returns an object based on the MediaTrackSupportedConstraints dictionary,
     /// whose member fields each specify one of the constrainable properties the user agent understands.
     /// </summary>
-    public MediaTrackSupportedConstraints SupportedConstraints => ModuleManager.InvokeSync<MediaTrackSupportedConstraints>("getSupportedConstraints");
+    public MediaTrackSupportedConstraints SupportedConstraints => ModuleManager.InvokeSync<MediaTrackSupportedConstraints>("MediaDevicesAPI.getSupportedConstraints");
 
     /// <summary>
     /// <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
@@ -38,7 +38,7 @@ public sealed class MediaDevicesInProcess(IModuleManager moduleManager) : MediaD
     /// <param name="cancellationToken"></param>
     /// <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
     public async ValueTask<IMediaStreamInProcess> GetUserMedia(bool audio, bool video, CancellationToken cancellationToken = default) {
-        IJSInProcessObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSInProcessObjectReference>("getUserMedia", cancellationToken, [audio, video]);
+        IJSInProcessObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSInProcessObjectReference>("MediaDevicesAPI.getUserMedia", cancellationToken, [audio, video]);
         return new MediaStreamInProcess(mediaStreamWrapper);
     }
 
@@ -59,7 +59,7 @@ public sealed class MediaDevicesInProcess(IModuleManager moduleManager) : MediaD
     /// <param name="cancellationToken"></param>
     /// <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
     public async ValueTask<IMediaStreamInProcess> GetUserMedia(MediaTrackConstraints audio, bool video, CancellationToken cancellationToken = default) {
-        IJSInProcessObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSInProcessObjectReference>("getUserMedia", cancellationToken, [audio, video]);
+        IJSInProcessObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSInProcessObjectReference>("MediaDevicesAPI.getUserMedia", cancellationToken, [audio, video]);
         return new MediaStreamInProcess(mediaStreamWrapper);
     }
 
@@ -80,7 +80,7 @@ public sealed class MediaDevicesInProcess(IModuleManager moduleManager) : MediaD
     /// <param name="cancellationToken"></param>
     /// <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
     public async ValueTask<IMediaStreamInProcess> GetUserMedia(bool audio, MediaTrackConstraints video, CancellationToken cancellationToken = default) {
-        IJSInProcessObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSInProcessObjectReference>("getUserMedia", cancellationToken, [audio, video]);
+        IJSInProcessObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSInProcessObjectReference>("MediaDevicesAPI.getUserMedia", cancellationToken, [audio, video]);
         return new MediaStreamInProcess(mediaStreamWrapper);
     }
 
@@ -101,7 +101,7 @@ public sealed class MediaDevicesInProcess(IModuleManager moduleManager) : MediaD
     /// <param name="cancellationToken"></param>
     /// <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
     public async ValueTask<IMediaStreamInProcess> GetUserMedia(MediaTrackConstraints audio, MediaTrackConstraints video, CancellationToken cancellationToken = default) {
-        IJSInProcessObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSInProcessObjectReference>("getUserMedia", cancellationToken, [audio, video]);
+        IJSInProcessObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSInProcessObjectReference>("MediaDevicesAPI.getUserMedia", cancellationToken, [audio, video]);
         return new MediaStreamInProcess(mediaStreamWrapper);
     }
 
@@ -114,7 +114,7 @@ public sealed class MediaDevicesInProcess(IModuleManager moduleManager) : MediaD
     /// <param name="cancellationToken"></param>
     /// <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
     public async ValueTask<IMediaStreamInProcess> GetDisplayMedia(bool audio, bool video, CancellationToken cancellationToken = default) {
-        IJSInProcessObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSInProcessObjectReference>("getDisplayMedia", cancellationToken, [audio, video]);
+        IJSInProcessObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSInProcessObjectReference>("MediaDevicesAPI.getDisplayMedia", cancellationToken, [audio, video]);
         return new MediaStreamInProcess(mediaStreamWrapper);
     }
 
@@ -126,7 +126,7 @@ public sealed class MediaDevicesInProcess(IModuleManager moduleManager) : MediaD
     /// <param name="cancellationToken"></param>
     /// <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
     public async ValueTask<IMediaStreamInProcess> GetDisplayMedia(MediaTrackConstraints audio, bool video, CancellationToken cancellationToken = default) {
-        IJSInProcessObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSInProcessObjectReference>("getDisplayMedia", cancellationToken, [audio, video]);
+        IJSInProcessObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSInProcessObjectReference>("MediaDevicesAPI.getDisplayMedia", cancellationToken, [audio, video]);
         return new MediaStreamInProcess(mediaStreamWrapper);
     }
 
@@ -138,7 +138,7 @@ public sealed class MediaDevicesInProcess(IModuleManager moduleManager) : MediaD
     /// <param name="cancellationToken"></param>
     /// <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
     public async ValueTask<IMediaStreamInProcess> GetDisplayMedia(bool audio, MediaTrackConstraints video, CancellationToken cancellationToken = default) {
-        IJSInProcessObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSInProcessObjectReference>("getDisplayMedia", cancellationToken, [audio, video]);
+        IJSInProcessObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSInProcessObjectReference>("MediaDevicesAPI.getDisplayMedia", cancellationToken, [audio, video]);
         return new MediaStreamInProcess(mediaStreamWrapper);
     }
 
@@ -150,7 +150,7 @@ public sealed class MediaDevicesInProcess(IModuleManager moduleManager) : MediaD
     /// <param name="cancellationToken"></param>
     /// <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
     public async ValueTask<IMediaStreamInProcess> GetDisplayMedia(MediaTrackConstraints audio, MediaTrackConstraints video, CancellationToken cancellationToken = default) {
-        IJSInProcessObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSInProcessObjectReference>("getDisplayMedia", cancellationToken, [audio, video]);
+        IJSInProcessObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSInProcessObjectReference>("MediaDevicesAPI.getDisplayMedia", cancellationToken, [audio, video]);
         return new MediaStreamInProcess(mediaStreamWrapper);
     }
 }

@@ -114,6 +114,7 @@ body {
   gap: 1em;
 }
 #test-page .group > div > button {
+  cursor: pointer;
   padding: 0.4em 0.6em;
   color: #DDD;
   background-color: #000;
@@ -121,6 +122,10 @@ body {
   border-radius: 0.2em;
 }
 #test-page .group > div > button:hover {
+  background-color: #222;
+}
+#test-page .group > div > button:active {
+  background-color: #222;
   border: 0.15em #DDD inset;
 }
 #test-page .group > label {

@@ -20,7 +20,7 @@ public sealed class Language(IModuleManager moduleManager) : ILanguage {
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetBrowserLanguage(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<string>("languageBrowser", cancellationToken);
+    public ValueTask<string> GetBrowserLanguage(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<string>("LanguageAPI.getBrowserLanguage", cancellationToken);
 
     /// <summary>
     /// <para>document.documentElement.lang</para>
@@ -34,7 +34,7 @@ public sealed class Language(IModuleManager moduleManager) : ILanguage {
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetHtmlLanguage(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<string>("languageHtmlRead", cancellationToken);
+    public ValueTask<string> GetHtmlLanguage(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<string>("LanguageAPI.getHtmlLanguage", cancellationToken);
 
     /// <summary>
     /// <para>document.documentElement.lang</para>
@@ -43,5 +43,5 @@ public sealed class Language(IModuleManager moduleManager) : ILanguage {
     /// <param name="language">language abbreviation: e.g. "en", "fr", "es", "de"</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask SetHtmlLanguage(string language, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("languageHtmlWrite", cancellationToken, [language]);
+    public ValueTask SetHtmlLanguage(string language, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("LanguageAPI.setHtmlLanguage", cancellationToken, [language]);
 }

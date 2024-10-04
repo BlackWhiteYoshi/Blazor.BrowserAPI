@@ -1,6 +1,6 @@
-import { MediaStreamWrapper } from "../MediaStream/MediaStream";
+import { MediaStreamAPI } from "../MediaStream/MediaStream";
 
-export class MediaRecorderWrapper {
+export class MediaRecorderAPI {
     /** @type {MediaRecorder} */
     #mediaRecorder;
 
@@ -28,10 +28,10 @@ export class MediaRecorderWrapper {
     }
 
     /**
-     * @returns {MediaStreamWrapper}
+     * @returns {MediaStreamAPI}
      */
     getStream() {
-        return new MediaStreamWrapper(this.#mediaRecorder.stream);
+        return new MediaStreamAPI(this.#mediaRecorder.stream);
     }
 
     /**

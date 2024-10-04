@@ -14,26 +14,26 @@ public sealed class CookieStorageInProcess(IModuleManager moduleManager) : ICook
     /// Note that each key and value may be surrounded by whitespace (space and tab characters).
     /// </para>
     /// </summary>
-    public string AllCookies => moduleManager.InvokeSync<string>("getAllCookies");
+    public string AllCookies => moduleManager.InvokeSync<string>("CookieStorageAPI.getAllCookies");
 
     /// <summary>
     /// Returns an integer representing the number of cookies stored in cookieStorage.
     /// </summary>
-    public int Length => moduleManager.InvokeSync<int>("cookieStorageLength");
+    public int Length => moduleManager.InvokeSync<int>("CookieStorageAPI.count");
 
     /// <summary>
     /// When passed a number <i>n</i>, this method will return the name of the nth key in cookieStorage.
     /// </summary>
     /// <param name="index">An integer representing the number of the key you want to get the name of. This is a zero-based index.</param>
     /// <returns></returns>
-    public string? Key(int index) => moduleManager.InvokeSync<string?>("cookieStorageKey", [index]);
+    public string? Key(int index) => moduleManager.InvokeSync<string?>("CookieStorageAPI.key", [index]);
 
     /// <summary>
     /// When passed a key name, will return that key's value.
     /// </summary>
     /// <param name="key">A string containing the name of the key you want to retrieve the value of.</param>
     /// <returns></returns>
-    public string? GetCookie(string key) => moduleManager.InvokeSync<string?>("cookieStorageGetCookie", [key]);
+    public string? GetCookie(string key) => moduleManager.InvokeSync<string?>("CookieStorageAPI.getCookie", [key]);
 
     /// <summary>
     /// When passed a key name and value, will add that key to cookieStorage, or update that key's value if it already exists.
@@ -45,16 +45,16 @@ public sealed class CookieStorageInProcess(IModuleManager moduleManager) : ICook
     /// <param name="sameSite">SameSite prevents the browser from sending this cookie along with cross-site requests. Possible values are<br />-"lax"<br />-"strict"<br />-"none"<br/>Defailt is "none"</param>
     /// <param name="secure">Specifies that the cookie should only be transmitted over a secure protocol.<br/>Default is false</param>
     public void SetCookie(string key, string value, int? expires = null, string path = "/", string sameSite = "none", bool secure = false)
-        => moduleManager.InvokeSync("cookieStorageSetCookie", [key, value, expires, path, sameSite.ToString(), secure]);
+        => moduleManager.InvokeSync("CookieStorageAPI.setCookie", [key, value, expires, path, sameSite.ToString(), secure]);
 
     /// <summary>
     /// When passed a key name, will remove that key from cookieStorage.
     /// </summary>
     /// <param name="key">A string containing the name of the key you want to remove.</param>
-    public void RemoveCookie(string key) => moduleManager.InvokeSync("cookieStorageRemoveCookie", [key]);
+    public void RemoveCookie(string key) => moduleManager.InvokeSync("CookieStorageAPI.removeCookie", [key]);
 
     /// <summary>
     /// When invoked, will empty all keys out of cookieStorage.
     /// </summary>
-    public void Clear() => moduleManager.InvokeSync("cookieStorageClear");
+    public void Clear() => moduleManager.InvokeSync("CookieStorageAPI.clear");
 }

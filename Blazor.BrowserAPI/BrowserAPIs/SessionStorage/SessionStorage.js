@@ -1,43 +1,45 @@
-/**
- * @returns {number}
- */
-export function sessionStorageLength() {
-    return sessionStorage.length;
-}
+export class SessionStorageAPI {
+    /**
+     * @returns {number}
+     */
+    static count() {
+        return sessionStorage.length;
+    }
 
-/**
- * @param {number} index
- * @returns {string | null}
- */
-export function sessionStorageKey(index) {
-    return sessionStorage.key(index);
-}
+    /**
+     * @param {number} index
+     * @returns {string | null}
+     */
+    static key(index) {
+        return sessionStorage.key(index);
+    }
 
-/**
- * @param {string} key
- * @returns {string | null}
- */
-export function sessionStorageGetItem(key) {
-    return sessionStorage.getItem(key);
-}
+    /**
+     * @param {string} key
+     * @returns {string | null}
+     */
+    static getItem(key) {
+        return sessionStorage.getItem(key);
+    }
 
-/**
- * @param {string} key
- * @param {string} value
- */
-export function sessionStorageSetItem(key, value) {
-    sessionStorage.setItem(key, value);
-}
+    /**
+     * @param {string} key
+     * @param {string} value
+     */
+    static setItem(key, value) {
+        sessionStorage.setItem(key, value);
+    }
 
-/**
- * @param {string} key
- */
-export function sessionStorageRemoveItem(key) {
-    sessionStorage.removeItem(key);
-}
+    /**
+     * @param {string} key
+     */
+    static removeItem(key) {
+        sessionStorage.removeItem(key);
+    }
 
-/**
- */
-export function sessionStorageClear() {
-    sessionStorage.clear();
+    /**
+     */
+    static clear() {
+        sessionStorage.clear();
+    }
 }

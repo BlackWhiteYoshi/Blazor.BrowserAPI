@@ -21,7 +21,7 @@ public sealed partial class ElementFactoryInProcess(IModuleManager moduleManager
     /// <param name="htmlElement">An <see cref="ElementReference"/> referencing a html tag.</param>
     /// <returns>An object that can be used to interact with the given html element.</returns>
     public IHTMLElementInProcess CreateHTMLElement(ElementReference htmlElement) {
-        IJSInProcessObjectReference htmlElementJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("createHTMLElement", [htmlElement]);
+        IJSInProcessObjectReference htmlElementJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("HTMLElementAPI.create", [htmlElement]);
         return new HTMLElementInProcess(htmlElementJS);
     }
 }

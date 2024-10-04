@@ -1,31 +1,30 @@
-import { SensorWrapper } from "../Sensor";
+import { SensorAPI } from "../Sensor";
 
-/**
- * @param {number} frequency
- * @param {"device" | "screen"} referenceFrame
- * @returns {AbsoluteOrientationSensorWrapper | null}
- */
-export function createAbsoluteOrientationSensor(frequency, referenceFrame) {
-    if (!("AbsoluteOrientationSensor" in window))
-        return null;
-
-    /** @type {MotionSensorOptions} */
-    let options;
-    if (frequency > 0)
-        options = { frequency, referenceFrame };
-    else
-        options = { referenceFrame };
-
-    return new AbsoluteOrientationSensorWrapper(new AbsoluteOrientationSensor(options));
-}
-
-
-export class AbsoluteOrientationSensorWrapper extends SensorWrapper {
+export class AbsoluteOrientationSensorAPI extends SensorAPI {
     /**
      * @param {AbsoluteOrientationSensor} absoluteOrientationSensor
      */
     constructor(absoluteOrientationSensor) {
         super(absoluteOrientationSensor);
+    }
+
+    /**
+     * @param {number} frequency
+     * @param {"device" | "screen"} referenceFrame
+     * @returns {AbsoluteOrientationSensorAPI | null}
+     */
+    static create(frequency, referenceFrame) {
+        if (!("AbsoluteOrientationSensor" in window))
+            return null;
+
+        /** @type {MotionSensorOptions} */
+        let options;
+        if (frequency > 0)
+            options = { frequency, referenceFrame };
+        else
+            options = { referenceFrame };
+
+        return new AbsoluteOrientationSensorAPI(new AbsoluteOrientationSensor(options));
     }
 
 

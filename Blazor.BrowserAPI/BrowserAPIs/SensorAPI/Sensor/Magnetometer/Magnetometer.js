@@ -1,31 +1,30 @@
-import { SensorWrapper } from "../Sensor";
+import { SensorAPI } from "../Sensor";
 
-/**
- * @param {number} frequency
- * @param {"device" | "screen"} referenceFrame
- * @returns {MagnetometerWrapper | null}
- */
-export function createMagnetometer(frequency, referenceFrame) {
-    if (!("Magnetometer" in window))
-        return null;
-
-    /** @type {MotionSensorOptions} */
-    let options;
-    if (frequency > 0)
-        options = { frequency, referenceFrame };
-    else
-        options = { referenceFrame };
-
-    return new MagnetometerWrapper(new Magnetometer(options));
-}
-
-
-export class MagnetometerWrapper extends SensorWrapper {
+export class MagnetometerAPI extends SensorAPI {
     /**
      * @param {Magnetometer} magnetometer
      */
     constructor(magnetometer) {
         super(magnetometer);
+    }
+
+    /**
+     * @param {number} frequency
+     * @param {"device" | "screen"} referenceFrame
+     * @returns {MagnetometerAPI | null}
+     */
+    static create(frequency, referenceFrame) {
+        if (!("Magnetometer" in window))
+            return null;
+
+        /** @type {MotionSensorOptions} */
+        let options;
+        if (frequency > 0)
+            options = { frequency, referenceFrame };
+        else
+            options = { referenceFrame };
+
+        return new MagnetometerAPI(new Magnetometer(options));
     }
 
 

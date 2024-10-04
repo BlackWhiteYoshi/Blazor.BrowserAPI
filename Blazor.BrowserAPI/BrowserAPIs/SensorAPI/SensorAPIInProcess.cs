@@ -18,7 +18,7 @@ public sealed class SensorAPIInProcess(IModuleManager moduleManager) : ISensorAP
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public IAmbientLightSensorInProcess? CreateAmbientLightSensor(double frequency = 0) {
         try {
-            IJSInProcessObjectReference ambientLightSensorJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("createAmbientLightSensor", [frequency]);
+            IJSInProcessObjectReference ambientLightSensorJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("AmbientLightSensorAPI.create", [frequency]);
             return new AmbientLightSensorInProcess(ambientLightSensorJS);
         }
         catch (JSException) {
@@ -35,7 +35,7 @@ public sealed class SensorAPIInProcess(IModuleManager moduleManager) : ISensorAP
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public IGyroscopeInProcess? CreateGyroscope(double frequency = 0, string referenceFrame = "device") {
         try {
-            IJSInProcessObjectReference gyroscopeJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("createGyroscope", [frequency, referenceFrame]);
+            IJSInProcessObjectReference gyroscopeJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("GyroscopeAPI.create", [frequency, referenceFrame]);
             return new GyroscopeInProcess(gyroscopeJS);
         }
         catch (JSException) {
@@ -52,7 +52,7 @@ public sealed class SensorAPIInProcess(IModuleManager moduleManager) : ISensorAP
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public IAccelerometerInProcess? CreateAccelerometer(double frequency = 0, string referenceFrame = "device") {
         try {
-            IJSInProcessObjectReference accelerometerJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("createAccelerometer", [frequency, referenceFrame]);
+            IJSInProcessObjectReference accelerometerJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("AccelerometerAPI.create", [frequency, referenceFrame]);
             return new AccelerometerInProcess(accelerometerJS);
         }
         catch (JSException) {
@@ -68,7 +68,7 @@ public sealed class SensorAPIInProcess(IModuleManager moduleManager) : ISensorAP
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public ILinearAccelerationSensorInProcess? CreateLinearAccelerationSensor(double frequency = 0, string referenceFrame = "device") {
         try {
-            IJSInProcessObjectReference linearAccelerationSensorJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("createLinearAccelerationSensor", [frequency, referenceFrame]);
+            IJSInProcessObjectReference linearAccelerationSensorJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("LinearAccelerationSensorAPI.create", [frequency, referenceFrame]);
             return new LinearAccelerationSensorInProcess(linearAccelerationSensorJS);
         }
         catch (JSException) {
@@ -84,7 +84,7 @@ public sealed class SensorAPIInProcess(IModuleManager moduleManager) : ISensorAP
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public IGravitySensorInProcess? CreateGravitySensor(double frequency = 0, string referenceFrame = "device") {
         try {
-            IJSInProcessObjectReference gravitySensorJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("createGravitySensor", [frequency, referenceFrame]);
+            IJSInProcessObjectReference gravitySensorJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("GravitySensorAPI.create", [frequency, referenceFrame]);
             return new GravitySensorInProcess(gravitySensorJS);
         }
         catch (JSException) {
@@ -101,7 +101,7 @@ public sealed class SensorAPIInProcess(IModuleManager moduleManager) : ISensorAP
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public IAbsoluteOrientationSensorInProcess? CreateAbsoluteOrientationSensor(double frequency = 0, string referenceFrame = "device") {
         try {
-            IJSInProcessObjectReference absoluteOrientationSensorJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("createAbsoluteOrientationSensor", [frequency, referenceFrame]);
+            IJSInProcessObjectReference absoluteOrientationSensorJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("AbsoluteOrientationSensorAPI.create", [frequency, referenceFrame]);
             return new AbsoluteOrientationSensorInProcess(absoluteOrientationSensorJS);
         }
         catch (JSException) {
@@ -117,7 +117,7 @@ public sealed class SensorAPIInProcess(IModuleManager moduleManager) : ISensorAP
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public IRelativeOrientationSensorInProcess? CreateRelativeOrientationSensor(double frequency = 0, string referenceFrame = "device") {
         try {
-            IJSInProcessObjectReference relativeOrientationSensorJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("createRelativeOrientationSensor", [frequency, referenceFrame]);
+            IJSInProcessObjectReference relativeOrientationSensorJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("RelativeOrientationSensorAPI.create", [frequency, referenceFrame]);
             return new RelativeOrientationSensorInProcess(relativeOrientationSensorJS);
         }
         catch (JSException) {
@@ -134,7 +134,7 @@ public sealed class SensorAPIInProcess(IModuleManager moduleManager) : ISensorAP
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public IMagnetometerInProcess? CreateMagnetometer(double frequency = 0, string referenceFrame = "device") {
         try {
-            IJSInProcessObjectReference magnetometerJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("createMagnetometer", [frequency, referenceFrame]);
+            IJSInProcessObjectReference magnetometerJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("MagnetometerAPI.create", [frequency, referenceFrame]);
             return new MagnetometerInProcess(magnetometerJS);
         }
         catch (JSException) {
@@ -156,7 +156,7 @@ public sealed class SensorAPIInProcess(IModuleManager moduleManager) : ISensorAP
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public IUncalibratedMagnetometerInProcess? CreateUncalibratedMagnetometer(double frequency = 0, string referenceFrame = "device") {
         try {
-            IJSInProcessObjectReference uncalibratedMagnetometerJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("createUncalibratedMagnetometer", [frequency, referenceFrame]);
+            IJSInProcessObjectReference uncalibratedMagnetometerJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("UncalibratedMagnetometerAPI.create", [frequency, referenceFrame]);
             return new UncalibratedMagnetometerInProcess(uncalibratedMagnetometerJS);
         }
         catch (JSException) {
