@@ -1,17 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "ClientHost.auto": {
-      "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": false,
-      "applicationUrl": "https://localhost:5000",
-      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "commandLineArgs": "--RenderMode=auto --Prerender=true"
-    },
     "ClientHost.server": {
       "commandName": "Project",
       "dotnetRunMessages": true,
@@ -32,7 +21,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "commandLineArgs": "--RenderMode=webassembly --Prerender=true"
+      "commandLineArgs": "--RenderMode=static --Prerender=true"
     }
   }
 }

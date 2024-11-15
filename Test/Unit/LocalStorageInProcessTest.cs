@@ -22,9 +22,6 @@ public sealed class LocalStorageInProcessTest(PlayWrightFixture playWrightFixtur
         for (int i = 0; i < number; i++)
             await Page.EvaluateAsync($"localStorage.setItem('test-key-{i}', 'test-value-{i}');");
 
-        // strange "blazor-resource-hash:Blazor.BrowserAPI.Test.Client" is also added to localStorage
-        number++;
-
         await Page.GetByTestId(LocalStorageInProcessGroup.BUTTON_GET_LENGTH).ClickAsync();
 
         string? result = await Page.GetByTestId(LocalStorageInProcessGroup.LABEL_OUTPUT).TextContentAsync();

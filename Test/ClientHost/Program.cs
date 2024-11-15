@@ -58,7 +58,9 @@ public static class Program {
                 app.UseWebAssemblyDebugging();
             }
 
+            app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
+            //app.MapStaticAssets(); // does not serve audio file correctly
             app.UseAntiforgery();
 
             RazorComponentsEndpointConventionBuilder razorComponentsEndpointBuilder = app.MapRazorComponents<Root>().AddAdditionalAssemblies(typeof(Client.App).Assembly);

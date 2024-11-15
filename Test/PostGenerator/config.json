@@ -1,16 +1,12 @@
 {
-  "working directory": "../../../../Client/bin/Release/net8.0/browser-wasm/publish/wwwroot",
+  "working directory": "../../../../Client/bin/Release/net9.0/browser-wasm/publish/wwwroot",
   "site url": "https://blazor-browserapi.firerocket.de",
   "generate files": {
     "html page": {
       "enabled": true,
       "page folder": "__html_page"
     },
-    "other files": [ "_framework/blazor.web.js" ]
-  },
-  "generate html pages": {
-    "enabled": true,
-    "page folder": "__html_page"
+    "other files": []
   },
   "create robots.txt": true,
   "create sitemap.xml": true,

@@ -13,12 +13,19 @@
 
         <link rel="stylesheet" href="site.css">
 
-        <script src="_framework/blazor.web.js" defer></script>
+        @if (renderMode is not null) {
+            <script src="_framework/blazor.web.js" defer></script>
+        }
+        else {
+            <script src="_framework/blazor.webassembly.js" defer></script>
+        }
         <link rel="modulepreload" href="_content/Blazor.BrowserAPI/BrowserAPI.js">
     </head>
 
     <body>
-        <App @rendermode="renderMode" />
+        <div id="anchor">
+            <App @rendermode="renderMode" />
+        </div>
 
         <div id="blazor-error-ui">
             <div>

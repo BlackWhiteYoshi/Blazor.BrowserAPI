@@ -65,7 +65,7 @@ public sealed class Config {
             throw new InvalidDataException($"working directory does not exist:\n{Path.Combine(Directory.GetCurrentDirectory(), WorkingDirectory)}");
         WorkingDirectoryWithTrailingSlash = $"{WorkingDirectory}{Path.DirectorySeparatorChar}";
 
-        string relativePageFolderPath = root.Get("generate html pages").GetString("page folder");
+        string relativePageFolderPath = root.Get("generate files").Get("html page").GetString("page folder");
         PageFolderPath = $"{WorkingDirectory}{Path.DirectorySeparatorChar}{relativePageFolderPath}";
         PageFolderPathWithTrailingSlash = $"{WorkingDirectory}{Path.DirectorySeparatorChar}{relativePageFolderPath}{Path.DirectorySeparatorChar}";
 

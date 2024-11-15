@@ -1,7 +1,7 @@
 ﻿@namespace BrowserAPI.Test.Client
 @page "/"
 
-@if (!loaded) {
+@if (!RendererInfo.IsInteractive) {
     <svg class="loading-progress">
         <circle r="40%" cx="50%" cy="50%" />
         <circle r="40%" cx="50%" cy="50%" />
@@ -39,17 +39,4 @@ else {
         <SessionStorageGroup />
         <SessionStorageInProcessGroup />
     </div>
-}
-
-@code {
-    private bool loaded = false;
-
-    protected override void OnAfterRender(bool firstRender) {
-        base.OnAfterRender(firstRender);
-
-        if (firstRender) {
-            loaded = true;
-            StateHasChanged();
-        }
-    }
 }

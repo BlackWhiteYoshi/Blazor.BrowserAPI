@@ -29,7 +29,7 @@ public sealed class PlayWrightFixture : ICollectionFixture<PlayWrightFixture>, I
         // enusre the right version is installed
         Program.Main(["install"]);
 
-        hostFactory = new WebApplicationFactoryWithRenderMode("webassembly");
+        hostFactory = new WebApplicationFactoryWithRenderMode("static");
         httpClient = hostFactory.CreateClient(new WebApplicationFactoryClientOptions() { BaseAddress = new Uri(BASE_URL) });
     }
 
