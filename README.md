@@ -79,21 +79,23 @@ There are more interfaces coming.
 ## Release Notes
 
 - 0.1  
-  First version. Includes 10 BrowserAPIs: Clipboard, Console, CookieStorage, Dialog, Download, HTMLElement, Language, LocalStorage, ServiceWorker, SessionStorage
+  - first version, includes 10 BrowserAPIs: Clipboard, Console, CookieStorage, Dialog, Download, HTMLElement, Language, LocalStorage, ServiceWorker, SessionStorage
 - 0.1.1  
-  Changed SetCookie parameters: *expires* to seconds and *samesite* to string.
+  - changed SetCookie parameters: *expires* to seconds and *samesite* to string
 - 0.1.2  
-  Changed internal classes to public and moved them to namespace *BrowserAPI.Implementation*
+  - changed internal classes to public and moved them to namespace *BrowserAPI.Implementation*
 - 0.2.0  
-  Added IBrowserAPIModule for [CircleDI](https://github.com/BlackWhiteYoshi/CircleDI) and [Jab](https://github.com/pakrym/jab)
+  - added IBrowserAPIModule for [CircleDI](https://github.com/BlackWhiteYoshi/CircleDI) and [Jab](https://github.com/pakrym/jab)
 - 0.3.0  
-  Added Geolocation (11 BrowserAPIs)
+  - added Geolocation (11 BrowserAPIs)
 - 0.4.0  
-  Breaking Change: removed HTMLElementFactory and DialogFactory and added ElementFactory/ElementFactoryInProcess instead.
+  - breaking change: removed HTMLElementFactory and DialogFactory and added ElementFactory/ElementFactoryInProcess instead
 - 0.5.0  
-  Added HTMLMediaElement (12 BrowserAPIs)
+  - added HTMLMediaElement (12 BrowserAPIs)
 - 0.6.0  
-  Added MediaDevices (13 BrowserAPIs)
+  - added MediaDevices (13 BrowserAPIs)
 - 0.7.0  
-  Added SensorAPI (14 BrowserAPIs)  
-  Changed events to use sync interop if possible
+  - added SensorAPI (14 BrowserAPIs)  
+  - changed events to use sync interop if possible
+- 0.7.1  
+  - added .NET 9 and removed obsolete versions .NET 6 and .NET 7
