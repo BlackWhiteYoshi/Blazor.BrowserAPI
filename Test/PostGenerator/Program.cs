@@ -1,12 +1,12 @@
 ﻿namespace BrowserAPI.Test.PostGenerator;
 
 public static class Program {
-    public static async Task<int> Main(string[] args) {
-        string json = await File.ReadAllTextAsync("config.json");
+    public static int Main() {
+        string json = File.ReadAllText("config.json");
         Config config = new(json);
 
 
-        List<string> errorList = await Generator.Generate(config);
+        List<string> errorList = Generator.Generate(config);
 
 
         if (errorList.Count > 0) {

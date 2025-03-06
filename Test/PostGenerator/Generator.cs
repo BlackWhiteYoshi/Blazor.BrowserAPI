@@ -8,11 +8,11 @@ using System.IO.Compression;
 namespace BrowserAPI.Test.PostGenerator;
 
 public static class Generator {
-    private struct Core(Config config) {
-        public List<string> ErrorList { get; private set; } = [];
+    private readonly struct Core(Config config) {
+        public readonly List<string> ErrorList { get; } = [];
 
 
-        public async Task GenerateFiles() {
+        public void GenerateFiles() {
             using WebApplicationFactory<ClientHost.Program.IAssemblyMarker> webApplicationFactory = new();
             using HttpClient httpClient = webApplicationFactory.CreateClient();
 
@@ -22,8 +22,8 @@ public static class Generator {
                     RemoveOptionalTags = false
                 };
 
-                using HttpResponseMessage response = await httpClient.GetAsync("");
-                string htmlContent = await response.Content.ReadAsStringAsync();
+                using HttpResponseMessage response = httpClient.GetAsync("").GetAwaiter().GetResult();
+                string htmlContent = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
                 UglifyResult minifyResult = Uglify.Html(htmlContent, htmlSettings);
                 if (minifyResult.HasErrors) {
@@ -32,26 +32,26 @@ public static class Generator {
                         ErrorList.Add(error.Message);
                 }
 
-                string fileName = $"{config.PageFolderPathWithTrailingSlash}index.html";
+                string fileName = $"{config.PageFolderPath}/index.html";
                 Directory.CreateDirectory(Path.GetDirectoryName(fileName)!);
-                await File.WriteAllTextAsync(fileName, minifyResult.Code);
+                File.WriteAllText(fileName, minifyResult.Code);
             }
 
             foreach (string filePath in config.GenerateFiles) {
-                using HttpResponseMessage response = await httpClient.GetAsync(filePath);
-                string content = await response.Content.ReadAsStringAsync();
+                using HttpResponseMessage response = httpClient.GetAsync(filePath).GetAwaiter().GetResult();
+                string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
-                string absoluteFilePath = $"{config.WorkingDirectoryWithTrailingSlash}{filePath}";
+                string absoluteFilePath = $"{config.WorkingDirectory}/{filePath}";
                 Directory.CreateDirectory(Path.GetDirectoryName(absoluteFilePath)!);
-                await File.WriteAllTextAsync(absoluteFilePath, content);
+                File.WriteAllText(absoluteFilePath, content);
             }
         }
 
-        public async Task CreateRobotsTxt() {
-            await File.WriteAllTextAsync($"{config.WorkingDirectoryWithTrailingSlash}robots.txt", $"User-agent: *\nSitemap: {config.SiteUrl}/sitemap.xml\n");
+        public void CreateRobotsTxt() {
+            File.WriteAllTextAsync($"{config.WorkingDirectory}/robots.txt", $"User-agent: *\nSitemap: {config.SiteUrl}/sitemap.xml\n");
         }
 
-        public async Task CreateSiteMap() {
+        public void CreateSiteMap() {
             string siteMapContent = $"""
                 <?xml version="1.0" encoding="UTF-8"?>
                 <urlset
@@ -64,29 +64,29 @@ public static class Generator {
                 </urlset>
 
                 """;
-            await File.WriteAllTextAsync($"{config.WorkingDirectoryWithTrailingSlash}sitemap.xml", siteMapContent);
+            File.WriteAllText($"{config.WorkingDirectory}/sitemap.xml", siteMapContent);
         }
 
         public void RemoveFiles() {
             foreach (string folder in config.RemoveFileList.folders) {
-                string path = $"{config.WorkingDirectoryWithTrailingSlash}{folder}";
+                string path = $"{config.WorkingDirectory}/{folder}";
                 if (Directory.Exists(path))
                     Directory.Delete(path, true);
             }
 
             foreach (string file in config.RemoveFileList.files) {
-                string path = $"{config.WorkingDirectoryWithTrailingSlash}{file}";
+                string path = $"{config.WorkingDirectory}/{file}";
                 if (File.Exists(path))
                     File.Delete(path);
             }
         }
 
-        public async Task MinifyCssJs() {
+        public void MinifyCssJs() {
             Config configRef = config;
             string[] files = Directory.GetFiles(config.WorkingDirectory, "*", SearchOption.AllDirectories);
 
             IEnumerable<string> cssFileList = files.Where((string file) => {
-                string fileRelative = file[configRef.WorkingDirectoryWithTrailingSlash.Length..];
+                string fileRelative = file[(configRef.WorkingDirectory.Length + 1)..];
 
                 foreach (string startsWith in configRef.MinifyExcludeList.startsWith)
                     if (fileRelative.StartsWith(startsWith))
@@ -103,7 +103,7 @@ public static class Generator {
             };
 
             foreach (string file in cssFileList) {
-                string fileContent = await File.ReadAllTextAsync(file);
+                string fileContent = File.ReadAllText(file);
 
                 UglifyResult minifyResult = Uglify.Css(fileContent, cssSettings);
                 if (minifyResult.HasErrors) {
@@ -112,12 +112,12 @@ public static class Generator {
                         ErrorList.Add(error.Message);
                 }
 
-                await File.WriteAllTextAsync(file, minifyResult.Code);
+                File.WriteAllText(file, minifyResult.Code);
             }
 
 
             IEnumerable<string> jsFileList = files.Where((string file) => {
-                string fileRelative = file[configRef.WorkingDirectoryWithTrailingSlash.Length..];
+                string fileRelative = file[(configRef.WorkingDirectory.Length + 1)..];
 
                 foreach (string startsWith in configRef.MinifyExcludeList.startsWith)
                     if (fileRelative.StartsWith(startsWith))
@@ -132,7 +132,7 @@ public static class Generator {
             CodeSettings jsSettings = new();
 
             foreach (string file in jsFileList) {
-                string fileContent = await File.ReadAllTextAsync(file);
+                string fileContent = File.ReadAllText(file);
 
                 UglifyResult minifyResult = Uglify.Js(fileContent, jsSettings);
                 if (minifyResult.HasErrors) {
@@ -141,15 +141,15 @@ public static class Generator {
                         ErrorList.Add(error.Message);
                 }
 
-                await File.WriteAllTextAsync(file, minifyResult.Code);
+                File.WriteAllText(file, minifyResult.Code);
             }
         }
 
-        public async Task ZipFiles() {
+        public void ZipFiles() {
             Config configRef = config;
             string[] files = Directory.GetFiles(configRef.WorkingDirectory, "*", SearchOption.AllDirectories);
             IEnumerable<string> fileList = files.Where((string file) => {
-                string fileRelative = file[configRef.WorkingDirectoryWithTrailingSlash.Length..];
+                string fileRelative = file[(configRef.WorkingDirectory.Length + 1)..];
 
                 foreach (string startsWith in configRef.ZipExcludeList.startsWith)
                     if (fileRelative.StartsWith(startsWith))
@@ -162,37 +162,43 @@ public static class Generator {
                 return true;
             });
 
-            ParallelOptions parallelOptions = new() { MaxDegreeOfParallelism = Environment.ProcessorCount };
-            await Parallel.ForEachAsync(fileList, parallelOptions, async ValueTask (string filePath, CancellationToken token) => {
-                byte[] fileContent = await File.ReadAllBytesAsync(filePath, token);
-                using MemoryStream originalStream = new(fileContent, false);
+            List<Task> tasklist = new(files.Length);
+            foreach (string filePath in fileList) {
+                Task zipTask = ZipAsync(filePath);
+                tasklist.Add(zipTask);
 
-                // compress gzip
-                {
-                    using FileStream fileStream = File.Create($"{filePath}.gz");
-                    using GZipStream gZipStream = new(fileStream, CompressionLevel.SmallestSize);
-                    await originalStream.CopyToAsync(gZipStream, token);
+                static async Task ZipAsync(string filePath) {
+                    byte[] fileContent = await File.ReadAllBytesAsync(filePath);
+                    using MemoryStream originalStream = new(fileContent, false);
+
+                    // compress gzip
+                    {
+                        using FileStream fileStream = File.Create($"{filePath}.gz");
+                        using GZipStream gZipStream = new(fileStream, CompressionLevel.SmallestSize);
+                        await originalStream.CopyToAsync(gZipStream);
+                    }
+
+                    originalStream.Seek(0, SeekOrigin.Begin);
+
+                    // compress brotli
+                    {
+                        using FileStream fileStream = File.Create($"{filePath}.br");
+                        using BrotliStream brotliStream = new(fileStream, CompressionLevel.SmallestSize);
+                        await originalStream.CopyToAsync(brotliStream);
+                    }
                 }
-
-                originalStream.Seek(0, SeekOrigin.Begin);
-
-                // compress brotli
-                {
-                    using FileStream fileStream = File.Create($"{filePath}.br");
-                    using BrotliStream brotliStream = new(fileStream, CompressionLevel.SmallestSize);
-                    await originalStream.CopyToAsync(brotliStream, token);
-                }
-            });
+            }
+            Task.WhenAll(tasklist).GetAwaiter().GetResult();
         }
     }
 
-    public static async Task<List<string>> Generate(Config config) {
+    public static List<string> Generate(Config config) {
         Core core = new(config);
 
 
         if (config.GenerateHtmlPage || config.GenerateFiles.Length > 0) {
             Console.WriteLine("Generating files...");
-            await core.GenerateFiles();
+            core.GenerateFiles();
             Console.WriteLine("Done file generating.\n");
         }
         else
@@ -200,7 +206,7 @@ public static class Generator {
 
         if (config.CreateRobotsTxt) {
             Console.WriteLine("Creating robots.txt...");
-            await core.CreateRobotsTxt();
+            core.CreateRobotsTxt();
             Console.WriteLine("Done robots.txt.\n");
         }
         else
@@ -208,7 +214,7 @@ public static class Generator {
 
         if (config.CreateSitemapXml) {
             Console.WriteLine("Creating sitemap.xml...");
-            await core.CreateSiteMap();
+            core.CreateSiteMap();
             Console.WriteLine("Done sitemap.xml.\n");
         }
         else
@@ -224,7 +230,7 @@ public static class Generator {
 
         if (config.MinifyCssJs) {
             Console.WriteLine("Minify css and js files...");
-            await core.MinifyCssJs();
+            core.MinifyCssJs();
             Console.WriteLine("Done minifying.\n");
         }
         else
@@ -232,7 +238,7 @@ public static class Generator {
 
         if (config.ZipFiles) {
             Console.WriteLine("Zipping files...");
-            await core.ZipFiles();
+            core.ZipFiles();
             Console.WriteLine("Done zipping.\n");
         }
         else

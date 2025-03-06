@@ -31,9 +31,7 @@ file static class JsonNodeExtension {
 
 public sealed class Config {
     public required string WorkingDirectory { get; init; }
-    public required string WorkingDirectoryWithTrailingSlash { get; init; }
     public required string PageFolderPath { get; init; }
-    public required string PageFolderPathWithTrailingSlash { get; init; }
 
     public required string SiteUrl { get; init; }
 
@@ -63,11 +61,9 @@ public sealed class Config {
         WorkingDirectory = root.GetString("working directory");
         if (!Directory.Exists(WorkingDirectory))
             throw new InvalidDataException($"working directory does not exist:\n{Path.Combine(Directory.GetCurrentDirectory(), WorkingDirectory)}");
-        WorkingDirectoryWithTrailingSlash = $"{WorkingDirectory}{Path.DirectorySeparatorChar}";
 
         string relativePageFolderPath = root.Get("generate files").Get("html page").GetString("page folder");
-        PageFolderPath = $"{WorkingDirectory}{Path.DirectorySeparatorChar}{relativePageFolderPath}";
-        PageFolderPathWithTrailingSlash = $"{WorkingDirectory}{Path.DirectorySeparatorChar}{relativePageFolderPath}{Path.DirectorySeparatorChar}";
+        PageFolderPath = $"{WorkingDirectory}/{relativePageFolderPath}";
 
         SiteUrl = root.GetString("site url");
 
