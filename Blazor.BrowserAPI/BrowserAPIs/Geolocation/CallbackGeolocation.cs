@@ -11,13 +11,13 @@ namespace BrowserAPI.Implementation;
 /// <param name="errorCallback">callback with parameters int errorCode, string message</param>
 [method: DynamicDependency(nameof(Success))]
 [method: DynamicDependency(nameof(Error))]
-internal sealed class CallbackGeolocation(Action<GeolocationCoordinates, long> successCallback, Action<int, string>? errorCallback = null) {
-    public Action<GeolocationCoordinates, long> SuccessCallback { get; set; } = successCallback;
+internal sealed class CallbackGeolocation(Action<GeolocationCoordinates> successCallback, Action<int, string>? errorCallback = null) {
+    public Action<GeolocationCoordinates> SuccessCallback { get; set; } = successCallback;
     public Action<int, string>? ErrorCallback { get; set; } = errorCallback;
 
 
     [JSInvokable]
-    public void Success(GeolocationCoordinates geolocationCoordinates, long timestamp) => SuccessCallback(geolocationCoordinates, timestamp);
+    public void Success(GeolocationCoordinates geolocationCoordinates) => SuccessCallback(geolocationCoordinates);
 
     [JSInvokable]
     public void Error(int errorCode, string message) => ErrorCallback?.Invoke(errorCode, message);

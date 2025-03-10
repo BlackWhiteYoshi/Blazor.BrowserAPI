@@ -99,3 +99,6 @@ There are more interfaces coming.
   - changed events to use sync interop if possible
 - 0.7.1  
   - added .NET 9 and removed obsolete versions .NET 6 and .NET 7
+- 0.7.2  
+  - breaking change: *Geolocation.GetCurrentPosition()* -> first parameter *successCallback* only takes 1 parameter *GeolocationCoordinates* now and the previous second parameter *timestamp* is inlcuded in the first parameter
+  - added method *Geolocation.GetCurrentPositionAsync()*

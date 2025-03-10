@@ -15,16 +15,22 @@ public sealed partial class GeolocationInProcessGroup : ComponentBase {
 
     public const string BUTTON_GET_CURRENT_POSITION = "geolocation-inprocess-get-current-position";
     private void GetCurrentPosition() {
-        Geolocation.GetCurrentPosition((GeolocationCoordinates geolocationCoordinates, long timestamp) => {
-            labelOutput = $"{geolocationCoordinates}, {timestamp}";
+        Geolocation.GetCurrentPosition((GeolocationCoordinates geolocationCoordinates) => {
+            labelOutput = geolocationCoordinates.ToString();
             StateHasChanged();
         });
     }
 
+    public const string BUTTON_GET_CURRENT_POSITION_ASYNC = "geolocation-inprocess-get-current-position-async";
+    private async Task GetCurrentPositionAsync() {
+        GeolocationCoordinates geolocationCoordinates = await Geolocation.GetCurrentPositionAsync();
+        labelOutput = geolocationCoordinates.ToString();
+    }
+
     public const string BUTTON_WATCH_POSITION = "geolocation-inprocess-watch-position";
     private void WatchPosition() {
-        int watchId = Geolocation.WatchPosition((GeolocationCoordinates geolocationCoordinates, long timestamp) => {
-            labelOutput = $"{geolocationCoordinates}, {timestamp}";
+        int watchId = Geolocation.WatchPosition((GeolocationCoordinates geolocationCoordinates) => {
+            labelOutput = geolocationCoordinates.ToString();
             StateHasChanged();
         });
         watchRegistrations.Add(watchId);

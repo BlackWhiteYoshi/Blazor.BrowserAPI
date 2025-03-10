@@ -32,13 +32,33 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
 
         string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
 
-        int secondParameterIndex = result?.LastIndexOf("}, ") ?? throw new Exception("result is null");
-        string secondParameter = result[(secondParameterIndex + 3)..];
-        Assert.True(long.TryParse(secondParameter, out _));
+        string expectedStart = $"GeolocationCoordinates {{ Latitude = {LATITUDE}, Longitude = {LONGITUDE}, Altitude = , Accuracy = {ACCURACY}, AltitudeAccuracy = , Heading = , Speed = , Timestamp = ";
+        Assert.StartsWith(expectedStart, result);
+        string expectedEnd = " }";
+        Assert.EndsWith(expectedEnd, result);
+        Assert.True(long.TryParse(result?[expectedStart.Length..^expectedEnd.Length], out _));
+    }
 
-        string firstParameter = result[..(secondParameterIndex + 1)];
+    [Fact]
+    public async Task GetCurrentPositionAsync() {
+        const float LONGITUDE = 10.0f;
+        const float LATITUDE = 12.0f;
+        const float ACCURACY = 2.0f;
+        await Context.SetGeolocationAsync(new Geolocation() {
+            Longitude = LONGITUDE,
+            Latitude = LATITUDE,
+            Accuracy = ACCURACY,
+        });
 
-        Assert.Equal($"GeolocationCoordinates {{ Latitude = {LATITUDE}, Longitude = {LONGITUDE}, Altitude = , Accuracy = {ACCURACY}, AltitudeAccuracy = , Heading = , Speed =  }}", firstParameter);
+        await Page.GetByTestId(GeolocationInProcessGroup.BUTTON_GET_CURRENT_POSITION_ASYNC).ClickAsync();
+
+        string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+
+        string expectedStart = $"GeolocationCoordinates {{ Latitude = {LATITUDE}, Longitude = {LONGITUDE}, Altitude = , Accuracy = {ACCURACY}, AltitudeAccuracy = , Heading = , Speed = , Timestamp = ";
+        Assert.StartsWith(expectedStart, result);
+        string expectedEnd = " }";
+        Assert.EndsWith(expectedEnd, result);
+        Assert.True(long.TryParse(result?[expectedStart.Length..^expectedEnd.Length], out _));
     }
 
     [Fact]
@@ -58,13 +78,11 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
             await Task.Delay(100);
             string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
 
-            int secondParameterIndex = result?.LastIndexOf("}, ") ?? throw new Exception("result is null");
-            string secondParameter = result[(secondParameterIndex + 3)..];
-            Assert.True(long.TryParse(secondParameter, out _));
-
-            string firstParameter = result[..(secondParameterIndex + 1)];
-
-            Assert.Equal($"GeolocationCoordinates {{ Latitude = {LATITUDE * i}, Longitude = {LONGITUDE * i}, Altitude = , Accuracy = {ACCURACY * i}, AltitudeAccuracy = , Heading = , Speed =  }}", firstParameter);
+            string expectedStart = $"GeolocationCoordinates {{ Latitude = {LATITUDE * i}, Longitude = {LONGITUDE * i}, Altitude = , Accuracy = {ACCURACY * i}, AltitudeAccuracy = , Heading = , Speed = , Timestamp = ";
+            Assert.StartsWith(expectedStart, result);
+            string expectedEnd = " }";
+            Assert.EndsWith(expectedEnd, result);
+            Assert.True(long.TryParse(result?[expectedStart.Length..^expectedEnd.Length], out _));
         }
     }
 

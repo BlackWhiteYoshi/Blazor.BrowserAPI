@@ -44,4 +44,9 @@ public readonly record struct GeolocationCoordinates {
     /// This value can be null.
     /// </summary>
     public double? Speed { get; init; }
+
+    /// <summary>
+    /// Returns a timestamp, given as Unix time in milliseconds, representing the time at which the location was retrieved.
+    /// </summary>
+    public long Timestamp { get; init; }
 }
