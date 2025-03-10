@@ -23,7 +23,14 @@ public abstract class DialogBase {
     }
 
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
-    private DotNetObjectReference<EventTrigger> ObjectReferenceEventTrigger => _objectReferenceEventTrigger ??= DotNetObjectReference.Create(new EventTrigger(this));
+
+    private ValueTask InitEventTrigger(IJSObjectReference dialog) {
+        if (_objectReferenceEventTrigger is not null)
+            return ValueTask.CompletedTask;
+
+        _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
+        return dialog.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, dialog is IJSInProcessObjectReference]);
+    }
 
     /// <summary>
     /// Derived class should implement <see cref="IDisposable"/> or <see cref="IAsyncDisposable"/> and call this method.
@@ -33,7 +40,8 @@ public abstract class DialogBase {
 
     private async ValueTask ActivateJSEvent(string jsMethodName) {
         IJSObjectReference dialog = await DialogTask;
-        await dialog.InvokeVoidTrySync(jsMethodName, [ObjectReferenceEventTrigger, dialog is IJSInProcessObjectReference]);
+        await InitEventTrigger(dialog);
+        await dialog.InvokeVoidTrySync(jsMethodName);
     }
 
     private async ValueTask DeactivateJSEvent(string jsMethodName) {

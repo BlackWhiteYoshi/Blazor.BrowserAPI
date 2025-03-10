@@ -59,7 +59,14 @@ public abstract class HTMLElementBase {
     }
 
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
-    private DotNetObjectReference<EventTrigger> ObjectReferenceEventTrigger => _objectReferenceEventTrigger ??= DotNetObjectReference.Create(new EventTrigger(this));
+
+    private ValueTask InitEventTrigger(IJSObjectReference htmlElement) {
+        if (_objectReferenceEventTrigger is not null)
+            return ValueTask.CompletedTask;
+
+        _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
+        return htmlElement.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, htmlElement is IJSInProcessObjectReference]);
+    }
 
     /// <summary>
     /// Derived class should implement <see cref="IDisposable"/> or <see cref="IAsyncDisposable"/> and call this method.
@@ -69,7 +76,8 @@ public abstract class HTMLElementBase {
 
     private async ValueTask ActivateJSEvent(string jsMethodName) {
         IJSObjectReference htmlElement = await HTMLElementTask;
-        await htmlElement.InvokeVoidTrySync(jsMethodName, [ObjectReferenceEventTrigger, htmlElement is IJSInProcessObjectReference]);
+        await InitEventTrigger(htmlElement);
+        await htmlElement.InvokeVoidTrySync(jsMethodName);
     }
 
     private async ValueTask DeactivateJSEvent(string jsMethodName) {

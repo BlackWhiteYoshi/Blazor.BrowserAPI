@@ -25,7 +25,14 @@ public abstract class SensorBase {
     }
 
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
-    private DotNetObjectReference<EventTrigger> ObjectReferenceEventTrigger => _objectReferenceEventTrigger ??= DotNetObjectReference.Create(new EventTrigger(this));
+
+    private ValueTask InitEventTrigger() {
+        if (_objectReferenceEventTrigger is not null)
+            return ValueTask.CompletedTask;
+
+        _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
+        return SensorJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, SensorJS is IJSInProcessObjectReference]);
+    }
 
     /// <summary>
     /// Derived class should implement <see cref="IDisposable"/> or <see cref="IAsyncDisposable"/> and call this method.
@@ -33,7 +40,10 @@ public abstract class SensorBase {
     private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
 
 
-    private ValueTask ActivateJSEvent(string jsMethodName) => SensorJS.InvokeVoidTrySync(jsMethodName, [ObjectReferenceEventTrigger, SensorJS is IJSInProcessObjectReference]);
+    private async ValueTask ActivateJSEvent(string jsMethodName) {
+        await InitEventTrigger();
+        await SensorJS.InvokeVoidTrySync(jsMethodName);
+    }
 
     private ValueTask DeactivateJSEvent(string jsMethodName) => SensorJS.InvokeVoidTrySync(jsMethodName);
 

@@ -23,7 +23,14 @@ public abstract class ServiceWorkerBase {
     }
 
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
-    private DotNetObjectReference<EventTrigger> ObjectReferenceEventTrigger => _objectReferenceEventTrigger ??= DotNetObjectReference.Create(new EventTrigger(this));
+
+    private ValueTask InitEventTrigger() {
+        if (_objectReferenceEventTrigger is not null)
+            return ValueTask.CompletedTask;
+
+        _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
+        return ServiceWorkerJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, ServiceWorkerJS is IJSInProcessObjectReference]);
+    }
 
     /// <summary>
     /// Derived class should implement <see cref="IDisposable"/> or <see cref="IAsyncDisposable"/> and call this method.
@@ -31,7 +38,10 @@ public abstract class ServiceWorkerBase {
     private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
 
 
-    private ValueTask ActivateJSEvent(string jsMethodName) => ServiceWorkerJS.InvokeVoidTrySync(jsMethodName, [ObjectReferenceEventTrigger, ServiceWorkerJS is IJSInProcessObjectReference]);
+    private async ValueTask ActivateJSEvent(string jsMethodName) {
+        await InitEventTrigger();
+        await ServiceWorkerJS.InvokeVoidTrySync(jsMethodName);
+    }
 
     private ValueTask DeactivateJSEvent(string jsMethodName) => ServiceWorkerJS.InvokeVoidTrySync(jsMethodName);
 

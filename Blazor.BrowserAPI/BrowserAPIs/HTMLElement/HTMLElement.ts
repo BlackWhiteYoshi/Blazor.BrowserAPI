@@ -239,6 +239,11 @@ export class HTMLElementAPI {
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
 
+    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+        this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
+    }
+
 
     // #region transitionstart event
 
@@ -246,9 +251,7 @@ export class HTMLElementAPI {
         ? this.#eventTrigger.invokeMethod("InvokeTransitionstart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
         : this.#eventTrigger.invokeMethodAsync("InvokeTransitionstart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
-    activateOntransitionstart(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOntransitionstart() {
         this.#htmlElement.addEventListener("transitionstart", this.#ontransitionstartCallback);
     }
 
@@ -265,9 +268,7 @@ export class HTMLElementAPI {
         ? this.#eventTrigger.invokeMethod("InvokeTransitionend", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
         : this.#eventTrigger.invokeMethodAsync("InvokeTransitionend", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
-    activateOntransitionend(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOntransitionend() {
         this.#htmlElement.addEventListener("transitionend", this.#ontransitionendCallback);
     }
 
@@ -284,9 +285,7 @@ export class HTMLElementAPI {
         ? this.#eventTrigger.invokeMethod("InvokeTransitionrun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
         : this.#eventTrigger.invokeMethodAsync("InvokeTransitionrun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
-    activateOntransitionrun(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOntransitionrun() {
         this.#htmlElement.addEventListener("transitionrun", this.#ontransitionrunCallback);
     }
 
@@ -303,9 +302,7 @@ export class HTMLElementAPI {
         ? this.#eventTrigger.invokeMethod("InvokeTransitioncancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
         : this.#eventTrigger.invokeMethodAsync("InvokeTransitioncancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
-    activateOntransitioncancel(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOntransitioncancel() {
         this.#htmlElement.addEventListener("transitioncancel", this.#ontransitioncancelCallback);
     }
 
@@ -323,9 +320,7 @@ export class HTMLElementAPI {
         ? this.#eventTrigger.invokeMethod("InvokeAnimationstart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
         : this.#eventTrigger.invokeMethodAsync("InvokeAnimationstart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
 
-    activateOnanimationstart(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnanimationstart() {
         this.#htmlElement.addEventListener("animationstart", this.#onanimationstartCallback);
     }
 
@@ -342,9 +337,7 @@ export class HTMLElementAPI {
         ? this.#eventTrigger.invokeMethod("InvokeAnimationend", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
         : this.#eventTrigger.invokeMethodAsync("InvokeAnimationend", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
 
-    activateOnanimationend(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnanimationend() {
         this.#htmlElement.addEventListener("animationend", this.#onanimationendCallback);
     }
 
@@ -361,9 +354,7 @@ export class HTMLElementAPI {
         ? this.#eventTrigger.invokeMethod("InvokeAnimationiteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
         : this.#eventTrigger.invokeMethodAsync("InvokeAnimationiteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
 
-    activateOnanimationiteration(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnanimationiteration() {
         this.#htmlElement.addEventListener("animationiteration", this.#onanimationiterationCallback);
     }
 
@@ -380,9 +371,7 @@ export class HTMLElementAPI {
         ? this.#eventTrigger.invokeMethod("InvokeAnimationcancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
         : this.#eventTrigger.invokeMethodAsync("InvokeAnimationcancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
 
-    activateOnanimationcancel(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnanimationcancel() {
         this.#htmlElement.addEventListener("animationcancel", this.#onanimationcancelCallback);
     }
 

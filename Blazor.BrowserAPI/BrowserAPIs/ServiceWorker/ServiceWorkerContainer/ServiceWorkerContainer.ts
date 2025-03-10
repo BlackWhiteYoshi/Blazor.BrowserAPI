@@ -54,14 +54,17 @@ export class ServiceWorkerContainerAPI {
     static #eventTrigger: DotNet.DotNetObject;
     static #isEventTriggerSync: boolean;
 
+    static initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+        this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
+    }
+
 
     // #region controllerchange event
 
     static #oncontrollerchangeCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeControllerChange") : this.#eventTrigger.invokeMethodAsync("InvokeControllerChange");
 
-    static activateOncontrollerchange(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    static activateOncontrollerchange() {
         navigator.serviceWorker.addEventListener("controllerchange", this.#oncontrollerchangeCallback);
     }
 
@@ -77,9 +80,7 @@ export class ServiceWorkerContainerAPI {
 
     static #onmessageCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeMessage") : this.#eventTrigger.invokeMethodAsync("InvokeMessage");
 
-    static activateOnMessage(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    static activateOnMessage() {
         navigator.serviceWorker.addEventListener("message", this.#onmessageCallback);
     }
 

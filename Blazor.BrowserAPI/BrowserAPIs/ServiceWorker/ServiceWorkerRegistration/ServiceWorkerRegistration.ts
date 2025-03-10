@@ -47,14 +47,17 @@ export class ServiceWorkerRegistrationAPI {
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
 
+    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+        this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
+    }
+
 
     // #region updatefound event
 
     #onupdatefoundCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeUpdateFound") : this.#eventTrigger.invokeMethodAsync("InvokeUpdateFound");
 
-    activateOnupdatefound(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnupdatefound() {
         this.#serviceWorkerRegistration.addEventListener("updatefound", this.#onupdatefoundCallback);
     }
 

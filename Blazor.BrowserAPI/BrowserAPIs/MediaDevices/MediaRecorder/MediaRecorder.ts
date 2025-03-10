@@ -61,6 +61,11 @@ export class MediaRecorderAPI {
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
 
+    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+        this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
+    }
+
 
     // #region dataavailable event
 
@@ -68,9 +73,7 @@ export class MediaRecorderAPI {
         ? this.#eventTrigger.invokeMethod("InvokeDataavailable", new Uint8Array(await event.data.arrayBuffer()))
         : await this.#eventTrigger.invokeMethodAsync("InvokeDataavailable", new Uint8Array(await event.data.arrayBuffer()));
 
-    activateOndataavailable(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOndataavailable() {
         this.#mediaRecorder.addEventListener("dataavailable", this.#ondataavailableCallback);
     }
 
@@ -85,9 +88,7 @@ export class MediaRecorderAPI {
 
     #onerrorCallback = (event: Event) => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeError", event) : this.#eventTrigger.invokeMethodAsync("InvokeError", event);
 
-    activateOnerror(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnerror() {
         this.#mediaRecorder.addEventListener("error", this.#onerrorCallback);
     }
 
@@ -102,9 +103,7 @@ export class MediaRecorderAPI {
 
     #onstartCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeStart") : this.#eventTrigger.invokeMethodAsync("InvokeStart");
 
-    activateOnstart(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnstart() {
         this.#mediaRecorder.addEventListener("start", this.#onstartCallback);
     }
 
@@ -119,9 +118,7 @@ export class MediaRecorderAPI {
 
     #onstopCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeStop") : this.#eventTrigger.invokeMethodAsync("InvokeStop");
 
-    activateOnstop(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnstop() {
         this.#mediaRecorder.addEventListener("stop", this.#onstopCallback);
     }
 
@@ -136,9 +133,7 @@ export class MediaRecorderAPI {
 
     #onresumeCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeResume") : this.#eventTrigger.invokeMethodAsync("InvokeResume");
 
-    activateOnresume(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnresume() {
         this.#mediaRecorder.addEventListener("resume", this.#onresumeCallback);
     }
 
@@ -153,9 +148,7 @@ export class MediaRecorderAPI {
 
     #onpauseCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokePause") : this.#eventTrigger.invokeMethodAsync("InvokePause");
 
-    activateOnpause(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnpause() {
         this.#mediaRecorder.addEventListener("pause", this.#onpauseCallback);
     }
 

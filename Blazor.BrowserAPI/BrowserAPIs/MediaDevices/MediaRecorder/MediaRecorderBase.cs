@@ -31,7 +31,14 @@ public abstract class MediaRecorderBase {
     }
 
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
-    private DotNetObjectReference<EventTrigger> ObjectReferenceEventTrigger => _objectReferenceEventTrigger ??= DotNetObjectReference.Create(new EventTrigger(this));
+
+    private ValueTask InitEventTrigger() {
+        if (_objectReferenceEventTrigger is not null)
+            return ValueTask.CompletedTask;
+
+        _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
+        return MediaRecorderJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, MediaRecorderJS is IJSInProcessObjectReference]);
+    }
 
     /// <summary>
     /// Derived class should implement <see cref="IDisposable"/> or <see cref="IAsyncDisposable"/> and call this method.
@@ -39,7 +46,10 @@ public abstract class MediaRecorderBase {
     private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
 
 
-    private ValueTask ActivateJSEvent(string jsMethodName) => MediaRecorderJS.InvokeVoidTrySync(jsMethodName, [ObjectReferenceEventTrigger, MediaRecorderJS is IJSInProcessObjectReference]);
+    private async ValueTask ActivateJSEvent(string jsMethodName) {
+        await InitEventTrigger();
+        await MediaRecorderJS.InvokeVoidTrySync(jsMethodName);
+    }
 
     private ValueTask DeactivateJSEvent(string jsMethodName) => MediaRecorderJS.InvokeVoidTrySync(jsMethodName);
 

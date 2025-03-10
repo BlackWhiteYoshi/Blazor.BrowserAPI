@@ -295,6 +295,7 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
         mediaRecorder.OnDataavailable += (byte[] data) => labelOutput = data.Length.ToString();
         await mediaRecorder.Start();
         await mediaRecorder.Stop();
+        await Task.Delay(100);
     }
 
     public const string BUTTON_REGISTER_ON_ERROR = "media-recorder-error-event";

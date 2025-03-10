@@ -60,7 +60,14 @@ public abstract class ServiceWorkerContainerBase : IDisposable {
     }
 
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
-    private DotNetObjectReference<EventTrigger> ObjectReferenceEventTrigger => _objectReferenceEventTrigger ??= DotNetObjectReference.Create(new EventTrigger(this));
+
+    private ValueTask InitEventTrigger() {
+        if (_objectReferenceEventTrigger is not null)
+            return ValueTask.CompletedTask;
+
+        _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
+        return ModuleManager.InvokeTrySync("ServiceWorkerContainerAPI.initEvents", default, [_objectReferenceEventTrigger, ModuleManager.IsInProcess]);
+    }
 
     /// <summary>
     /// Derived class should implement <see cref="IDisposable"/> or <see cref="IAsyncDisposable"/> and call this method.
@@ -68,7 +75,10 @@ public abstract class ServiceWorkerContainerBase : IDisposable {
     private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
 
 
-    private ValueTask ActivateJSEvent(string jsMethodName) => ModuleManager.InvokeTrySync(jsMethodName, default, [ObjectReferenceEventTrigger, ModuleManager.IsInProcess]);
+    private async ValueTask ActivateJSEvent(string jsMethodName) {
+        await InitEventTrigger();
+        await ModuleManager.InvokeTrySync(jsMethodName, default);
+    }
 
     private ValueTask DeactivateJSEvent(string jsMethodName) => ModuleManager.InvokeTrySync(jsMethodName, default);
 

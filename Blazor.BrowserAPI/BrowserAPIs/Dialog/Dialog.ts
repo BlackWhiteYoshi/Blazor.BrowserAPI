@@ -49,14 +49,17 @@ export class DialogAPI {
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
 
+    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+        this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
+    }
+
 
     // #region cancel event
 
     #oncancelCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeCancel") : this.#eventTrigger.invokeMethodAsync("InvokeCancel");
 
-    activateOncancel(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOncancel() {
         this.#dialog.addEventListener("cancel", this.#oncancelCallback);
     }
 
@@ -71,9 +74,7 @@ export class DialogAPI {
 
     #oncloseCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeClose") : this.#eventTrigger.invokeMethodAsync("InvokeClose");
 
-    activateOnclose(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnclose() {
         this.#dialog.addEventListener("close", this.#oncloseCallback);
     }
 

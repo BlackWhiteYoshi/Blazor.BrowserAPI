@@ -86,7 +86,14 @@ public abstract class HTMLMediaElementBase {
     }
 
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
-    private DotNetObjectReference<EventTrigger> ObjectReferenceEventTrigger => _objectReferenceEventTrigger ??= DotNetObjectReference.Create(new EventTrigger(this));
+
+    private ValueTask InitEventTrigger(IJSObjectReference htmlMediaElement) {
+        if (_objectReferenceEventTrigger is not null)
+            return ValueTask.CompletedTask;
+
+        _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
+        return htmlMediaElement.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, htmlMediaElement is IJSInProcessObjectReference]);
+    }
 
     /// <summary>
     /// Derived class should implement <see cref="IDisposable"/> or <see cref="IAsyncDisposable"/> and call this method.
@@ -96,7 +103,8 @@ public abstract class HTMLMediaElementBase {
 
     private async ValueTask ActivateJSEvent(string jsMethodName) {
         IJSObjectReference htmlMediaElement = await HTMLMediaElementTask;
-        await htmlMediaElement.InvokeVoidTrySync(jsMethodName, [ObjectReferenceEventTrigger, htmlMediaElement is IJSInProcessObjectReference]);
+        await InitEventTrigger(htmlMediaElement);
+        await htmlMediaElement.InvokeVoidTrySync(jsMethodName);
     }
 
     private async ValueTask DeactivateJSEvent(string jsMethodName) {

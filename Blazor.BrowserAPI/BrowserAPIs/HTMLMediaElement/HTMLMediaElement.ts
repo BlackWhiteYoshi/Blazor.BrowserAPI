@@ -13,9 +13,9 @@ export class HTMLMediaElementAPI {
     }
 
 
-    /**
-     * Properties
-     **/
+
+    // Properties
+
 
     // Attributes
 
@@ -202,9 +202,7 @@ export class HTMLMediaElementAPI {
 
 
 
-    /**
-     * Methods
-     **/
+    // Methods
 
     play(): Promise<void> {
         return this.#htmlMediaElement.play();
@@ -228,12 +226,15 @@ export class HTMLMediaElementAPI {
 
 
 
-    /**
-     * Events
-     **/
+    // events
 
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
+
+    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+        this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
+    }
 
 
     // Ready
@@ -244,9 +245,7 @@ export class HTMLMediaElementAPI {
         ? this.#eventTrigger.invokeMethod("InvokeError", this.#htmlMediaElement.error!.code, this.#htmlMediaElement.error!.message)
         : this.#eventTrigger.invokeMethodAsync("InvokeError", this.#htmlMediaElement.error!.code, this.#htmlMediaElement.error!.message);
 
-    activateOnerror(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnerror() {
         this.#htmlMediaElement.addEventListener("error", this.#onerrorCallback);
         if (this.#htmlMediaElement.error !== null)
             this.#onerrorCallback();
@@ -263,9 +262,7 @@ export class HTMLMediaElementAPI {
 
     #oncanplayCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeCanplay") : this.#eventTrigger.invokeMethodAsync("InvokeCanplay");
 
-    activateOncanplay(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOncanplay() {
         this.#htmlMediaElement.addEventListener("canplay", this.#oncanplayCallback);
     }
 
@@ -280,9 +277,7 @@ export class HTMLMediaElementAPI {
 
     #oncanplaythroughCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeCanplaythrough") : this.#eventTrigger.invokeMethodAsync("InvokeCanplaythrough");
 
-    activateOncanplaythrough(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOncanplaythrough() {
         this.#htmlMediaElement.addEventListener("canplaythrough", this.#oncanplaythroughCallback);
     }
 
@@ -297,9 +292,7 @@ export class HTMLMediaElementAPI {
 
     #onplayingCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokePlaying") : this.#eventTrigger.invokeMethodAsync("InvokePlaying");
 
-    activateOnplaying(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnplaying() {
         this.#htmlMediaElement.addEventListener("playing", this.#onplayingCallback);
     }
 
@@ -316,9 +309,7 @@ export class HTMLMediaElementAPI {
 
     #onloadstartCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeLoadstart") : this.#eventTrigger.invokeMethodAsync("InvokeLoadstart");
 
-    activateOnloadstart(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnloadstart() {
         this.#htmlMediaElement.addEventListener("loadstart", this.#onloadstartCallback);
     }
 
@@ -333,9 +324,7 @@ export class HTMLMediaElementAPI {
 
     #onprogressCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeProgress") : this.#eventTrigger.invokeMethodAsync("InvokeProgress");
 
-    activateOnprogress(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnprogress() {
         this.#htmlMediaElement.addEventListener("progress", this.#onprogressCallback);
     }
 
@@ -350,9 +339,7 @@ export class HTMLMediaElementAPI {
 
     #onloadeddataCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeLoadeddata") : this.#eventTrigger.invokeMethodAsync("InvokeLoadeddata");
 
-    activateOnloadeddata(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnloadeddata() {
         this.#htmlMediaElement.addEventListener("loadeddata", this.#onloadeddataCallback);
     }
 
@@ -367,9 +354,7 @@ export class HTMLMediaElementAPI {
 
     #onloadedmetadataCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeLoadedmetadata") : this.#eventTrigger.invokeMethodAsync("InvokeLoadedmetadata");
 
-    activateOnloadedmetadata(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnloadedmetadata() {
         this.#htmlMediaElement.addEventListener("loadedmetadata", this.#onloadedmetadataCallback);
     }
 
@@ -384,9 +369,7 @@ export class HTMLMediaElementAPI {
 
     #onstalledCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeStalled") : this.#eventTrigger.invokeMethodAsync("InvokeStalled");
 
-    activateOnstalled(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnstalled() {
         this.#htmlMediaElement.addEventListener("stalled", this.#onstalledCallback);
     }
 
@@ -401,9 +384,7 @@ export class HTMLMediaElementAPI {
 
     #onsuspendCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeSuspend") : this.#eventTrigger.invokeMethodAsync("InvokeSuspend");
 
-    activateOnsuspend(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnsuspend() {
         this.#htmlMediaElement.addEventListener("suspend", this.#onsuspendCallback);
     }
 
@@ -418,9 +399,7 @@ export class HTMLMediaElementAPI {
 
     #onwaitingCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeWaiting") : this.#eventTrigger.invokeMethodAsync("InvokeWaiting");
 
-    activateOnwaiting(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnwaiting() {
         this.#htmlMediaElement.addEventListener("waiting", this.#onwaitingCallback);
     }
 
@@ -435,9 +414,7 @@ export class HTMLMediaElementAPI {
 
     #onabortCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeAbort") : this.#eventTrigger.invokeMethodAsync("InvokeAbort");
 
-    activateOnabort(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnabort() {
         this.#htmlMediaElement.addEventListener("abort", this.#onabortCallback);
     }
 
@@ -452,9 +429,7 @@ export class HTMLMediaElementAPI {
 
     #onemptiedCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeEmptied") : this.#eventTrigger.invokeMethodAsync("InvokeEmptied");
 
-    activateOnemptied(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnemptied() {
         this.#htmlMediaElement.addEventListener("emptied", this.#onemptiedCallback);
     }
 
@@ -471,9 +446,7 @@ export class HTMLMediaElementAPI {
 
     #onplayCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokePlay") : this.#eventTrigger.invokeMethodAsync("InvokePlay");
 
-    activateOnplay(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnplay() {
         this.#htmlMediaElement.addEventListener("play", this.#onplayCallback);
     }
 
@@ -488,9 +461,7 @@ export class HTMLMediaElementAPI {
 
     #onpauseCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokePause") : this.#eventTrigger.invokeMethodAsync("InvokePause");
 
-    activateOnpause(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnpause() {
         this.#htmlMediaElement.addEventListener("pause", this.#onpauseCallback);
     }
 
@@ -505,9 +476,7 @@ export class HTMLMediaElementAPI {
 
     #onendedCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeEnded") : this.#eventTrigger.invokeMethodAsync("InvokeEnded");
 
-    activateOnended(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnended() {
         this.#htmlMediaElement.addEventListener("ended", this.#onendedCallback);
     }
 
@@ -522,9 +491,7 @@ export class HTMLMediaElementAPI {
 
     #onseekingCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeSeeking") : this.#eventTrigger.invokeMethodAsync("InvokeSeeking");
 
-    activateOnseeking(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnseeking() {
         this.#htmlMediaElement.addEventListener("seeking", this.#onseekingCallback);
     }
 
@@ -539,9 +506,7 @@ export class HTMLMediaElementAPI {
 
     #onseekedCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeSeeked") : this.#eventTrigger.invokeMethodAsync("InvokeSeeked");
 
-    activateOnseeked(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnseeked() {
         this.#htmlMediaElement.addEventListener("seeked", this.#onseekedCallback);
     }
 
@@ -556,9 +521,7 @@ export class HTMLMediaElementAPI {
 
     #ontimeupdateCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeTimeupdate") : this.#eventTrigger.invokeMethodAsync("InvokeTimeupdate");
 
-    activateOntimeupdate(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOntimeupdate() {
         this.#htmlMediaElement.addEventListener("timeupdate", this.#ontimeupdateCallback);
     }
 
@@ -575,9 +538,7 @@ export class HTMLMediaElementAPI {
 
     #onvolumechangeCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeVolumechange") : this.#eventTrigger.invokeMethodAsync("InvokeVolumechange");
 
-    activateOnvolumechange(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnvolumechange() {
         this.#htmlMediaElement.addEventListener("volumechange", this.#onvolumechangeCallback);
     }
 
@@ -592,9 +553,7 @@ export class HTMLMediaElementAPI {
 
     #onratechangeCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeRatechange") : this.#eventTrigger.invokeMethodAsync("InvokeRatechange");
 
-    activateOnratechange(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnratechange() {
         this.#htmlMediaElement.addEventListener("ratechange", this.#onratechangeCallback);
     }
 
@@ -609,9 +568,7 @@ export class HTMLMediaElementAPI {
 
     #ondurationchangeCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeDurationchange") : this.#eventTrigger.invokeMethodAsync("InvokeDurationchange");
 
-    activateOndurationchange(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOndurationchange() {
         this.#htmlMediaElement.addEventListener("durationchange", this.#ondurationchangeCallback);
     }
 

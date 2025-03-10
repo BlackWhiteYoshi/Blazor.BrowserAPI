@@ -33,6 +33,11 @@ export class ServiceWorkerAPI {
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
 
+    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+        this.#eventTrigger = eventTrigger;
+        this.#isEventTriggerSync = isEventTriggerSync;
+    }
+
 
     // #region statechange event
 
@@ -40,9 +45,7 @@ export class ServiceWorkerAPI {
         ? this.#eventTrigger.invokeMethod("InvokeStateChange", (event.target as ServiceWorker).state)
         : this.#eventTrigger.invokeMethodAsync("InvokeStateChange", (event.target as ServiceWorker).state);
 
-    activateOnstatechange(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnstatechange() {
         this.#serviceWorker.addEventListener("statechange", this.#onstatechangeCallback);
     }
 
@@ -57,9 +60,7 @@ export class ServiceWorkerAPI {
 
     #onerrorCallback = (event: ErrorEvent) => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeError", event) : this.#eventTrigger.invokeMethodAsync("InvokeError", event);
 
-    activateOnerror(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+    activateOnerror() {
         this.#serviceWorker.addEventListener("error", this.#onerrorCallback);
     }
 
