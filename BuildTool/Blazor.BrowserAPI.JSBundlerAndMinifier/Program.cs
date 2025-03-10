@@ -1,4 +1,6 @@
-﻿using NUglify;
+﻿using CliWrap;
+using CliWrap.Buffered;
+using NUglify;
 using NUglify.JavaScript;
 using System.Text;
 
@@ -6,39 +8,54 @@ namespace Blazor.BrowserAPI.JSBundlerAndMinifier;
 
 public static class Program {
     public static void Main(string[] args) {
-        string inputPath = args.Length switch {
+        string workingDirectory = args.Length switch {
             >= 1 => args[0],
             _ => "."
         };
-        const string outputPath = "wwwroot/BrowserAPI.js";
-
-        List<string> jsFilePaths = [];
-        {
-            string[] directories = Directory.GetDirectories(inputPath);
-            foreach (string path in directories) {
-                string directory = path.Replace("\\", "/");
-                if (directory.EndsWith($"/bin") || directory.EndsWith($"/obj") || directory.EndsWith($"/wwwroot"))
-                    continue;
-
-                string[] filePaths = Directory.GetFiles(directory, "*.js", SearchOption.AllDirectories);
-                foreach (string filePath in filePaths)
-                    jsFilePaths.Add(filePath);
-            }
-        }
+        string outputPath = Path.Combine(workingDirectory, "wwwroot/BrowserAPI.js");
 
         string bundleJS;
-        {
-            StringBuilder builder = new(1024 * jsFilePaths.Count);
+        try {
+            Console.WriteLine("creating temp.ts ...");
+            {
+                File.Delete("./temp.ts");
+                using FileStream tempTsStream = new("./temp.ts", FileMode.OpenOrCreate, FileAccess.Write);
+                using StreamWriter tempTsWriter = new(tempTsStream, Encoding.UTF8);
 
-            foreach (string filePath in jsFilePaths)
-                foreach (string line in File.ReadLines(filePath))
-                    if (!line.StartsWith("import"))
-                        builder.Append(line).Append('\n');
+                foreach (string filePath in Directory.GetFiles(workingDirectory, "*.ts", SearchOption.AllDirectories)) {
+                    foreach (string line in File.ReadLines(filePath))
+                        if (!line.StartsWith("import")) {
+                            tempTsWriter.Write(line);
+                            tempTsWriter.Write('\n');
+                        }
+                    tempTsWriter.Write('\n');
+                }
+            }
+            Console.WriteLine("Done creating temp.ts\n");
 
-            bundleJS = builder.ToString();
+            Console.WriteLine("executing 'tsc temp.ts --target ES2022 --module ES6' and read in resulting temp.js");
+            {
+                // tsc temp.ts --target ES2022 --module ES6
+                CommandResult result = Cli.Wrap("tsc")
+                    .WithWorkingDirectory(".")
+                    .WithArguments("temp.ts --target ES2022 --module ES6")
+                    .WithStandardOutputPipe(PipeTarget.ToDelegate(Console.WriteLine))
+                    .ExecuteBufferedAsync().GetAwaiter().GetResult();
+                if (result.ExitCode != 0)
+                    throw new Exception("'tsc temp.ts --target ES2022 --module ES6' failed");
+
+                bundleJS = File.ReadAllText("./temp.js");
+            }
+            Console.WriteLine("Done getting temp.js\n");
         }
+        finally {
+            File.Delete("temp.js");
+            File.Delete("temp.ts");
+        }            
+
 
         string minifiedJS;
+        Console.WriteLine("Minifying ...");
         {
             UglifyResult minifyResult = Uglify.Js(bundleJS, new CodeSettings());
             if (minifyResult.HasErrors)
@@ -46,8 +63,9 @@ public static class Program {
 
             minifiedJS = minifyResult.Code;
         }
+        Console.WriteLine("Done minifying\n");
 
-        string absoluteOutputPath = Path.Combine(inputPath, outputPath);
-        File.WriteAllText(absoluteOutputPath, minifiedJS);
+
+        File.WriteAllText(outputPath, minifiedJS);
     }
 }

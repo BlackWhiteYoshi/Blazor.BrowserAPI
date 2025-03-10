@@ -1,18 +1,12 @@
 import { MediaRecorderAPI } from "../MediaRecorder/MediaRecorder";
 
 export class MediaStreamAPI {
-    /** @type {MediaStream} */
-    #mediaStream;
+    #mediaStream: MediaStream;
 
-    /**
-     * @param {MediaStream} mediaStream
-     */
-    constructor(mediaStream) {
+    constructor(mediaStream: MediaStream) {
         this.#mediaStream = mediaStream;
     }
 
-    /**
-     */
     dispose() {
         for (const mediaStreamTrack of this.#mediaStream.getTracks()) {
             mediaStreamTrack.stop();
@@ -21,38 +15,22 @@ export class MediaStreamAPI {
     }
 
 
-    /**
-     * @returns {MediaStream}
-     */
-    getStream() {
+    getStream(): MediaStream {
         return this.#mediaStream;
     }
 
 
-    /**
-     * @returns {boolean}
-     */
-    getActive() {
+    getActive(): boolean {
         return this.#mediaStream.active;
     }
 
-    /**
-     * @returns {string}
-     */
-    getId() {
+    getId(): string {
         return this.#mediaStream.id;
     }
 
 
-    /**
-     * @param {string} mimeType
-     * @param {number} audioBitsPerSecond
-     * @param {number} videoBitsPerSecond
-     * @param {number} bitsPerSecond
-     */
-    createMediaRecorder(mimeType, audioBitsPerSecond, videoBitsPerSecond, bitsPerSecond) {
-        /** @type {MediaRecorderOptions} */
-        const options = {
+    createMediaRecorder(mimeType: string, audioBitsPerSecond: number, videoBitsPerSecond: number, bitsPerSecond: number) {
+        const options: MediaRecorderOptions = {
             mimeType: mimeType !== "" ? mimeType : undefined,
             audioBitsPerSecond: audioBitsPerSecond > 0 ? audioBitsPerSecond : undefined,
             videoBitsPerSecond: videoBitsPerSecond > 0 ? videoBitsPerSecond : undefined,

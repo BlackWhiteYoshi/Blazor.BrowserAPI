@@ -1,21 +1,14 @@
-import { MediaStreamAPI, createMediaStream } from "../MediaDevices/MediaStream/MediaStream";
+import { DotNet } from "../../blazor";
+import { MediaStreamAPI } from "../MediaDevices/MediaStream/MediaStream";
 
 export class HTMLMediaElementAPI {
-    /** @type {HTMLMediaElement} */
-    #htmlMediaElement;
+    #htmlMediaElement: HTMLMediaElement;
 
-    /**
-     * @param {HTMLMediaElement} htmlMediaElement
-     */
-    constructor(htmlMediaElement) {
+    constructor(htmlMediaElement: HTMLMediaElement) {
         this.#htmlMediaElement = htmlMediaElement;
     }
 
-    /**
-     * @param {HTMLMediaElement} htmlMediaElement
-     * @returns {HTMLMediaElementAPI}
-     */
-    static create(htmlMediaElement) {
+    static create(htmlMediaElement: HTMLMediaElement): HTMLMediaElementAPI {
         return new HTMLMediaElementAPI(htmlMediaElement);
     }
 
@@ -26,284 +19,184 @@ export class HTMLMediaElementAPI {
 
     // Attributes
 
-    /**
-     * @returns {string}
-     */
-    getSrc() {
+    getSrc(): string {
         return this.#htmlMediaElement.src;
     }
-    /**
-     * @param {string} value
-     */
-    setSrc(value) {
+
+    setSrc(value: string) {
         this.#htmlMediaElement.src = value;
     }
 
-    /**
-     * @returns {MediaStreamAPI | null}
-     */
-    getSrcObject() {
+    getSrcObject(): MediaStreamAPI | null {
         const result = this.#htmlMediaElement.srcObject;
         if (result instanceof MediaStream)
             return new MediaStreamAPI(result);
         else
             return null;
     }
-    /**
-     * @param {MediaStreamAPI | null} value
-     */
-    setSrcObject(value) {
+
+    setSrcObject(value: MediaStreamAPI | null) {
         if (value !== null)
-            this.#htmlMediaElement.srcObject = value.getStream();
+            this.#htmlMediaElement.srcObject = value?.getStream();
         else
-            this.#htmlMediaElement.srcObject = value;
+            this.#htmlMediaElement.srcObject = null;
     }
 
-    /**
-     * @returns {boolean}
-     */
-    getControls() {
+    getControls(): boolean {
         return this.#htmlMediaElement.controls;
     }
-    /**
-     * @param {boolean} value
-     */
-    setControls(value) {
+
+    setControls(value: boolean) {
         this.#htmlMediaElement.controls = value;
     }
 
-    /**
-     * @returns {boolean}
-     */
-    getAutoplay() {
+    getAutoplay(): boolean {
         return this.#htmlMediaElement.autoplay;
     }
-    /**
-     * @param {boolean} value
-     */
-    setAutoplay(value) {
+
+    setAutoplay(value: boolean) {
         this.#htmlMediaElement.autoplay = value;
     }
 
-    /**
-     * @returns {boolean}
-     */
-    getLoop() {
+    getLoop(): boolean {
         return this.#htmlMediaElement.loop;
     }
-    /**
-     *  @param {boolean} value
-     */
-    setLoop(value) {
+
+    setLoop(value: boolean) {
         this.#htmlMediaElement.loop = value;
     }
 
-    /**
-     * @returns {boolean}
-     */
-    getDefaultMuted() {
+    getDefaultMuted(): boolean {
         return this.#htmlMediaElement.defaultMuted;
     }
-    /**
-     *  @param {boolean} value
-     */
-    setDefaultMuted(value) {
+
+    setDefaultMuted(value: boolean) {
         this.#htmlMediaElement.defaultMuted = value;
     }
 
-    /**
-     * @returns {string}
-     */
-    getPreload() {
+
+    getPreload(): "none" | "metadata" | "auto" | "" {
         return this.#htmlMediaElement.preload;
     }
-    /**
-     * @param {"none" | "metadata" | "auto" | ""} value
-     */
-    setPreload(value) {
+
+    setPreload(value: "none" | "metadata" | "auto" | "") {
         this.#htmlMediaElement.preload = value;
     }
 
 
     // State
 
-    /**
-     * @returns {string}
-     */
-    getCurrentSrc() {
+    getCurrentSrc(): string {
         return this.#htmlMediaElement.currentSrc;
     }
 
-    /**
-     * @returns {number}
-     */
-    getCurrentTime() {
+    getCurrentTime(): number {
         return this.#htmlMediaElement.currentTime;
     }
-    /**
-     *  @param {number} value
-     */
-    setCurrentTime(value) {
+
+    setCurrentTime(value: number) {
         this.#htmlMediaElement.currentTime = value;
     }
 
-    /**
-     * @returns {number}
-     */
-    getDuration() {
+
+    getDuration(): number {
         return this.#htmlMediaElement.duration;
     }
 
-    /**
-     * TimeRanges
-     * @returns {{ start: number, end: number }[]}
-     */
-    getSeekable() {
+    /** @returns TimeRanges */
+    getSeekable(): { start: number, end: number; }[] {
         return HTMLMediaElementAPI.#toTimeRangeArray(this.#htmlMediaElement.seekable);
     }
 
-    /**
-     * @returns {boolean}
-     */
-    getMuted() {
+    getMuted(): boolean {
         return this.#htmlMediaElement.muted;
     }
-    /**
-     *  @param {boolean} value
-     */
-    setMuted(value) {
+
+    setMuted(value: boolean) {
         this.#htmlMediaElement.muted = value;
     }
 
-    /**
-     * @returns {number}
-     */
-    getVolume() {
+    getVolume(): number {
         return this.#htmlMediaElement.volume;
     }
-    /**
-     * @param {number} value
-     */
-    setVolume(value) {
+
+    setVolume(value: number) {
         this.#htmlMediaElement.volume = value;
     }
 
-    /**
-     * @returns {boolean}
-     */
-    getPaused() {
+    getPaused(): boolean {
         return this.#htmlMediaElement.paused;
     }
 
-    /**
-     * @returns {boolean}
-     */
-    getEnded() {
+    getEnded(): boolean {
         return this.#htmlMediaElement.ended;
     }
 
-    /**
-     * @returns {boolean}
-     */
-    getSeeking() {
+    getSeeking(): boolean {
         return this.#htmlMediaElement.seeking;
     }
 
-    /**
-     * @returns {number} // 0 = HAVE_NOTHING, 1 = HAVE_METADATA, 2 = HAVE_CURRENT_DATA, 3 = HAVE_FUTURE_DATA, 4 = HAVE_ENOUGH_DATA
-     */
-    getReadyState() {
+    /** @returns 0 = HAVE_NOTHING, 1 = HAVE_METADATA, 2 = HAVE_CURRENT_DATA, 3 = HAVE_FUTURE_DATA, 4 = HAVE_ENOUGH_DATA */
+    getReadyState(): number {
         return this.#htmlMediaElement.readyState;
     }
 
-    /**
-     * @returns {number} // 0 = NETWORK_EMPTY, 1 = NETWORK_IDLE, 2 = NETWORK_LOADING or 3 = NETWORK_NO_SOURCE
-     */
-    getNetworkState() {
+    /** @returns 0 = NETWORK_EMPTY, 1 = NETWORK_IDLE, 2 = NETWORK_LOADING or 3 = NETWORK_NO_SOURCE */
+    getNetworkState(): number {
         return this.#htmlMediaElement.networkState;
     }
 
-    /**
-     * TimeRanges
-     * @returns {{ start: number, end: number }[]}
-     */
-    getBuffered() {
+    /** @returns TimeRanges */
+    getBuffered(): { start: number, end: number; }[] {
         return HTMLMediaElementAPI.#toTimeRangeArray(this.#htmlMediaElement.buffered);
     }
 
-    /**
-     * TimeRanges
-     * @returns {{ start: number, end: number }[]}
-     */
-    getPlayed() {
+    /** @returns  TimeRanges */
+    getPlayed(): { start: number, end: number; }[] {
         return HTMLMediaElementAPI.#toTimeRangeArray(this.#htmlMediaElement.played);
     }
 
 
     // Settings
 
-    /**
-     * @returns {number}
-     */
-    getPlaybackRate() {
+    getPlaybackRate(): number {
         return this.#htmlMediaElement.playbackRate;
     }
-    /**
-     * @param {number} value
-     */
-    setPlaybackRate(value) {
+
+    setPlaybackRate(value: number) {
         this.#htmlMediaElement.playbackRate = value;
     }
 
-    /**
-     * @returns {number}
-     */
-    getDefaultPlaybackRate() {
+    getDefaultPlaybackRate(): number {
         return this.#htmlMediaElement.defaultPlaybackRate;
     }
-    /**
-     *  @param {number} value
-     */
-    setDefaultPlaybackRate(value) {
+
+    setDefaultPlaybackRate(value: number) {
         this.#htmlMediaElement.defaultPlaybackRate = value;
     }
 
-    /**
-     * @returns {string}
-     */
-    getCrossOrigin() {
+    getCrossOrigin(): string {
         return this.#htmlMediaElement.crossOrigin ?? "anonymous";
     }
-    /**
-     * @param {string} value // "anonymous" | "use-credentials"
-     */
-    setCrossOrigin(value) {
+
+    /** @param value "anonymous" | "use-credentials" */
+    setCrossOrigin(value: string) {
         this.#htmlMediaElement.crossOrigin = value;
     }
 
-    /**
-     * @returns {boolean}
-     */
-    getPreservesPitch() {
+    getPreservesPitch(): boolean {
         return this.#htmlMediaElement.preservesPitch;
     }
-    /**
-     * @param {boolean} value
-     */
-    setPreservesPitch(value) {
+
+    setPreservesPitch(value: boolean) {
         this.#htmlMediaElement.preservesPitch = value;
     }
 
-    /**
-     * @returns {boolean}
-     */
-    getDisableRemotePlayback() {
+    getDisableRemotePlayback(): boolean {
         return this.#htmlMediaElement.disableRemotePlayback;
     }
-    /**
-     *  @param {boolean} value
-     */
-    setDisableRemotePlayback(value) {
+
+    setDisableRemotePlayback(value: boolean) {
         this.#htmlMediaElement.disableRemotePlayback = value;
     }
 
@@ -313,37 +206,23 @@ export class HTMLMediaElementAPI {
      * Methods
      **/
 
-    /**
-     * @returns {Promise<void>}
-     */
-    play() {
+    play(): Promise<void> {
         return this.#htmlMediaElement.play();
     }
 
-    /**
-     */
     pause() {
         this.#htmlMediaElement.pause();
     }
 
-    /**
-     */
     load() {
         this.#htmlMediaElement.load();
     }
 
-    /**
-     * @param {number} time
-     */
-    fastSeek(time) {
+    fastSeek(time: number) {
         this.#htmlMediaElement.fastSeek(time);
     }
 
-    /**
-     * @param {string} type
-     * @returns {"probably" | "maybe" | ""}
-     */
-    canPlayType(type) {
+    canPlayType(type: string): "probably" | "maybe" | "" {
         return this.#htmlMediaElement.canPlayType(type);
     }
 
@@ -353,28 +232,19 @@ export class HTMLMediaElementAPI {
      * Events
      **/
 
-    /** @type {import("../../blazor").DotNet.DotNetObject} */
-    #eventTrigger;
-
-    /** @type {boolean} */
-    #isEventTriggerSync;
+    #eventTrigger: DotNet.DotNetObject;
+    #isEventTriggerSync: boolean;
 
 
     // Ready
 
     // #region error event
 
-    /**
-     */
     #onerrorCallback = () => this.#isEventTriggerSync
-        ? this.#eventTrigger.invokeMethod("InvokeError", /** @type {MediaError} */(this.#htmlMediaElement.error).code, /** @type {MediaError} */(this.#htmlMediaElement.error).message)
-        : this.#eventTrigger.invokeMethodAsync("InvokeError", /** @type {MediaError} */(this.#htmlMediaElement.error).code, /** @type {MediaError} */(this.#htmlMediaElement.error).message);
+        ? this.#eventTrigger.invokeMethod("InvokeError", this.#htmlMediaElement.error!.code, this.#htmlMediaElement.error!.message)
+        : this.#eventTrigger.invokeMethodAsync("InvokeError", this.#htmlMediaElement.error!.code, this.#htmlMediaElement.error!.message);
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnerror(eventTrigger, isEventTriggerSync) {
+    activateOnerror(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("error", this.#onerrorCallback);
@@ -382,8 +252,6 @@ export class HTMLMediaElementAPI {
             this.#onerrorCallback();
     }
 
-    /**
-     */
     deactivateOnerror() {
         this.#htmlMediaElement.removeEventListener("error", this.#onerrorCallback);
     }
@@ -393,22 +261,14 @@ export class HTMLMediaElementAPI {
 
     // #region canplay event
 
-    /**
-     */
     #oncanplayCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeCanplay") : this.#eventTrigger.invokeMethodAsync("InvokeCanplay");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOncanplay(eventTrigger, isEventTriggerSync) {
+    activateOncanplay(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("canplay", this.#oncanplayCallback);
     }
 
-    /**
-     */
     deactivateOncanplay() {
         this.#htmlMediaElement.removeEventListener("canplay", this.#oncanplayCallback);
     }
@@ -418,22 +278,14 @@ export class HTMLMediaElementAPI {
 
     // #region canplaythrough event
 
-    /**
-     */
     #oncanplaythroughCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeCanplaythrough") : this.#eventTrigger.invokeMethodAsync("InvokeCanplaythrough");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOncanplaythrough(eventTrigger, isEventTriggerSync) {
+    activateOncanplaythrough(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("canplaythrough", this.#oncanplaythroughCallback);
     }
 
-    /**
-     */
     deactivateOncanplaythrough() {
         this.#htmlMediaElement.removeEventListener("canplaythrough", this.#oncanplaythroughCallback);
     }
@@ -443,22 +295,14 @@ export class HTMLMediaElementAPI {
 
     // #region playing event
 
-    /**
-     */
     #onplayingCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokePlaying") : this.#eventTrigger.invokeMethodAsync("InvokePlaying");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnplaying(eventTrigger, isEventTriggerSync) {
+    activateOnplaying(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("playing", this.#onplayingCallback);
     }
 
-    /**
-     */
     deactivateOnplaying() {
         this.#htmlMediaElement.removeEventListener("playing", this.#onplayingCallback);
     }
@@ -470,22 +314,14 @@ export class HTMLMediaElementAPI {
 
     // #region loadstart event
 
-    /**
-     */
     #onloadstartCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeLoadstart") : this.#eventTrigger.invokeMethodAsync("InvokeLoadstart");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnloadstart(eventTrigger, isEventTriggerSync) {
+    activateOnloadstart(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("loadstart", this.#onloadstartCallback);
     }
 
-    /**
-     */
     deactivateOnloadstart() {
         this.#htmlMediaElement.removeEventListener("loadstart", this.#onloadstartCallback);
     }
@@ -495,22 +331,14 @@ export class HTMLMediaElementAPI {
 
     // #region progress event
 
-    /**
-     */
     #onprogressCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeProgress") : this.#eventTrigger.invokeMethodAsync("InvokeProgress");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnprogress(eventTrigger, isEventTriggerSync) {
+    activateOnprogress(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("progress", this.#onprogressCallback);
     }
 
-    /**
-     */
     deactivateOnprogress() {
         this.#htmlMediaElement.removeEventListener("progress", this.#onprogressCallback);
     }
@@ -520,22 +348,14 @@ export class HTMLMediaElementAPI {
 
     // #region loadeddata event
 
-    /**
-     */
     #onloadeddataCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeLoadeddata") : this.#eventTrigger.invokeMethodAsync("InvokeLoadeddata");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnloadeddata(eventTrigger, isEventTriggerSync) {
+    activateOnloadeddata(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("loadeddata", this.#onloadeddataCallback);
     }
 
-    /**
-     */
     deactivateOnloadeddata() {
         this.#htmlMediaElement.removeEventListener("loadeddata", this.#onloadeddataCallback);
     }
@@ -545,22 +365,14 @@ export class HTMLMediaElementAPI {
 
     // #region loadedmetadata event
 
-    /**
-     */
     #onloadedmetadataCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeLoadedmetadata") : this.#eventTrigger.invokeMethodAsync("InvokeLoadedmetadata");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnloadedmetadata(eventTrigger, isEventTriggerSync) {
+    activateOnloadedmetadata(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("loadedmetadata", this.#onloadedmetadataCallback);
     }
 
-    /**
-     */
     deactivateOnloadedmetadata() {
         this.#htmlMediaElement.removeEventListener("loadedmetadata", this.#onloadedmetadataCallback);
     }
@@ -570,22 +382,14 @@ export class HTMLMediaElementAPI {
 
     // #region stalled event
 
-    /**
-     */
     #onstalledCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeStalled") : this.#eventTrigger.invokeMethodAsync("InvokeStalled");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnstalled(eventTrigger, isEventTriggerSync) {
+    activateOnstalled(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("stalled", this.#onstalledCallback);
     }
 
-    /**
-     */
     deactivateOnstalled() {
         this.#htmlMediaElement.removeEventListener("stalled", this.#onstalledCallback);
     }
@@ -595,22 +399,14 @@ export class HTMLMediaElementAPI {
 
     // #region suspend event
 
-    /**
-     */
     #onsuspendCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeSuspend") : this.#eventTrigger.invokeMethodAsync("InvokeSuspend");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnsuspend(eventTrigger, isEventTriggerSync) {
+    activateOnsuspend(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("suspend", this.#onsuspendCallback);
     }
 
-    /**
-     */
     deactivateOnsuspend() {
         this.#htmlMediaElement.removeEventListener("suspend", this.#onsuspendCallback);
     }
@@ -620,22 +416,14 @@ export class HTMLMediaElementAPI {
 
     // #region waiting event
 
-    /**
-     */
     #onwaitingCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeWaiting") : this.#eventTrigger.invokeMethodAsync("InvokeWaiting");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnwaiting(eventTrigger, isEventTriggerSync) {
+    activateOnwaiting(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("waiting", this.#onwaitingCallback);
     }
 
-    /**
-     */
     deactivateOnwaiting() {
         this.#htmlMediaElement.removeEventListener("waiting", this.#onwaitingCallback);
     }
@@ -645,22 +433,14 @@ export class HTMLMediaElementAPI {
 
     // #region abort event
 
-    /**
-     */
     #onabortCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeAbort") : this.#eventTrigger.invokeMethodAsync("InvokeAbort");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnabort(eventTrigger, isEventTriggerSync) {
+    activateOnabort(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("abort", this.#onabortCallback);
     }
 
-    /**
-     */
     deactivateOnabort() {
         this.#htmlMediaElement.removeEventListener("abort", this.#onabortCallback);
     }
@@ -670,22 +450,14 @@ export class HTMLMediaElementAPI {
 
     // #region emptied event
 
-    /**
-     */
     #onemptiedCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeEmptied") : this.#eventTrigger.invokeMethodAsync("InvokeEmptied");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnemptied(eventTrigger, isEventTriggerSync) {
+    activateOnemptied(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("emptied", this.#onemptiedCallback);
     }
 
-    /**
-     */
     deactivateOnemptied() {
         this.#htmlMediaElement.removeEventListener("emptied", this.#onemptiedCallback);
     }
@@ -697,22 +469,14 @@ export class HTMLMediaElementAPI {
 
     // #region play event
 
-    /**
-     */
     #onplayCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokePlay") : this.#eventTrigger.invokeMethodAsync("InvokePlay");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnplay(eventTrigger, isEventTriggerSync) {
+    activateOnplay(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("play", this.#onplayCallback);
     }
 
-    /**
-     */
     deactivateOnplay() {
         this.#htmlMediaElement.removeEventListener("play", this.#onplayCallback);
     }
@@ -722,22 +486,14 @@ export class HTMLMediaElementAPI {
 
     // #region pause event
 
-    /**
-     */
     #onpauseCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokePause") : this.#eventTrigger.invokeMethodAsync("InvokePause");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnpause(eventTrigger, isEventTriggerSync) {
+    activateOnpause(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("pause", this.#onpauseCallback);
     }
 
-    /**
-     */
     deactivateOnpause() {
         this.#htmlMediaElement.removeEventListener("pause", this.#onpauseCallback);
     }
@@ -747,22 +503,14 @@ export class HTMLMediaElementAPI {
 
     // #region ended event
 
-    /**
-     */
     #onendedCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeEnded") : this.#eventTrigger.invokeMethodAsync("InvokeEnded");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnended(eventTrigger, isEventTriggerSync) {
+    activateOnended(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("ended", this.#onendedCallback);
     }
 
-    /**
-     */
     deactivateOnended() {
         this.#htmlMediaElement.removeEventListener("ended", this.#onendedCallback);
     }
@@ -772,22 +520,14 @@ export class HTMLMediaElementAPI {
 
     // #region seeking event
 
-    /**
-     */
     #onseekingCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeSeeking") : this.#eventTrigger.invokeMethodAsync("InvokeSeeking");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnseeking(eventTrigger, isEventTriggerSync) {
+    activateOnseeking(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("seeking", this.#onseekingCallback);
     }
 
-    /**
-     */
     deactivateOnseeking() {
         this.#htmlMediaElement.removeEventListener("seeking", this.#onseekingCallback);
     }
@@ -797,22 +537,14 @@ export class HTMLMediaElementAPI {
 
     // #region seeked event
 
-    /**
-     */
     #onseekedCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeSeeked") : this.#eventTrigger.invokeMethodAsync("InvokeSeeked");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnseeked(eventTrigger, isEventTriggerSync) {
+    activateOnseeked(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("seeked", this.#onseekedCallback);
     }
 
-    /**
-     */
     deactivateOnseeked() {
         this.#htmlMediaElement.removeEventListener("seeked", this.#onseekedCallback);
     }
@@ -822,22 +554,14 @@ export class HTMLMediaElementAPI {
 
     // #region timeupdate event
 
-    /**
-     */
     #ontimeupdateCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeTimeupdate") : this.#eventTrigger.invokeMethodAsync("InvokeTimeupdate");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOntimeupdate(eventTrigger, isEventTriggerSync) {
+    activateOntimeupdate(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("timeupdate", this.#ontimeupdateCallback);
     }
 
-    /**
-     */
     deactivateOntimeupdate() {
         this.#htmlMediaElement.removeEventListener("timeupdate", this.#ontimeupdateCallback);
     }
@@ -849,22 +573,14 @@ export class HTMLMediaElementAPI {
 
     // #region volumechange event
 
-    /**
-     */
     #onvolumechangeCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeVolumechange") : this.#eventTrigger.invokeMethodAsync("InvokeVolumechange");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnvolumechange(eventTrigger, isEventTriggerSync) {
+    activateOnvolumechange(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("volumechange", this.#onvolumechangeCallback);
     }
 
-    /**
-     */
     deactivateOnvolumechange() {
         this.#htmlMediaElement.removeEventListener("volumechange", this.#onvolumechangeCallback);
     }
@@ -874,22 +590,14 @@ export class HTMLMediaElementAPI {
 
     // #region ratechange event
 
-    /**
-     */
     #onratechangeCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeRatechange") : this.#eventTrigger.invokeMethodAsync("InvokeRatechange");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnratechange(eventTrigger, isEventTriggerSync) {
+    activateOnratechange(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("ratechange", this.#onratechangeCallback);
     }
 
-    /**
-     */
     deactivateOnratechange() {
         this.#htmlMediaElement.removeEventListener("ratechange", this.#onratechangeCallback);
     }
@@ -899,22 +607,14 @@ export class HTMLMediaElementAPI {
 
     // #region durationchange event
 
-    /**
-     */
     #ondurationchangeCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeDurationchange") : this.#eventTrigger.invokeMethodAsync("InvokeDurationchange");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOndurationchange(eventTrigger, isEventTriggerSync) {
+    activateOndurationchange(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlMediaElement.addEventListener("durationchange", this.#ondurationchangeCallback);
     }
 
-    /**
-     */
     deactivateOndurationchange() {
         this.#htmlMediaElement.removeEventListener("durationchange", this.#ondurationchangeCallback);
     }
@@ -923,10 +623,7 @@ export class HTMLMediaElementAPI {
 
 
 
-    /**
-     * @param {TimeRanges} timeRanges
-     */
-    static #toTimeRangeArray(timeRanges) {
+    static #toTimeRangeArray(timeRanges: TimeRanges) {
         let result = [];
 
         for (let i = 0; i < timeRanges.length; i++)

@@ -1,98 +1,63 @@
-import { ServiceWorkerAPI } from "../ServiceWorker/ServiceWorker.js";
+import { ServiceWorkerAPI } from "../ServiceWorker/ServiceWorker";
+import { DotNet } from "../../../blazor";
 
 export class ServiceWorkerRegistrationAPI {
-    /** @type {ServiceWorkerRegistration} */
-    #serviceWorkerRegistration;
+    #serviceWorkerRegistration: ServiceWorkerRegistration;
 
-    /**
-     * @param {ServiceWorkerRegistration} serviceWorkerRegistration
-     */
-    constructor(serviceWorkerRegistration) {
+    constructor(serviceWorkerRegistration: ServiceWorkerRegistration) {
         this.#serviceWorkerRegistration = serviceWorkerRegistration;
     }
 
 
-    /**
-     * @returns {ServiceWorkerAPI | null}
-     */
-    active() {
+    active(): ServiceWorkerAPI | null {
         return ServiceWorkerAPI.create(this.#serviceWorkerRegistration.active);
     }
 
-    /**
-     * @returns {ServiceWorkerAPI | null}
-     */
-    installing() {
+    installing(): ServiceWorkerAPI | null {
         return ServiceWorkerAPI.create(this.#serviceWorkerRegistration.installing);
     }
 
-    /**
-     * @returns {ServiceWorkerAPI | null}
-     */
-    waiting() {
+    waiting(): ServiceWorkerAPI | null {
         return ServiceWorkerAPI.create(this.#serviceWorkerRegistration.waiting);
     }
 
 
-    /**
-     * @returns {string}
-     */
-    scope() {
+    scope(): string {
         return this.#serviceWorkerRegistration.scope;
     }
 
-    /**
-     * @returns {string}
-     */
-    updateViaCache() {
+    updateViaCache(): string {
         return this.#serviceWorkerRegistration.updateViaCache;
     }
 
 
-    /**
-     * @returns {Promise<boolean>}
-     */
-    unregister() {
+    unregister(): Promise<boolean> {
         return this.#serviceWorkerRegistration.unregister();
     }
 
-    /**
-     * @returns {Promise<ServiceWorkerRegistrationAPI>}
-     */
-    async update() {
+    async update(): Promise<ServiceWorkerRegistrationAPI> {
         // wrong return type definition for update(): expected ServiceWorkerRegistration, actually void
-        const updatedServiceWorkerRegistration = /** @type {ServiceWorkerRegistration} */ (/** @type {unknown} */ (await this.#serviceWorkerRegistration.update()));
+        const updatedServiceWorkerRegistration = await this.#serviceWorkerRegistration.update() as unknown as ServiceWorkerRegistration;
         return new ServiceWorkerRegistrationAPI(updatedServiceWorkerRegistration);
     }
 
 
     // events
 
-    /** @type {import("../../../blazor").DotNet.DotNetObject} */
-    #eventTrigger;
-
-    /** @type {boolean} */
-    #isEventTriggerSync;
+    #eventTrigger: DotNet.DotNetObject;
+    #isEventTriggerSync: boolean;
 
 
     // #region updatefound event
 
-    /**
-     */
     #onupdatefoundCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeUpdateFound") : this.#eventTrigger.invokeMethodAsync("InvokeUpdateFound");
 
-    /**
-     * @param {import("../../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnupdatefound(eventTrigger, isEventTriggerSync) {
+    activateOnupdatefound(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#serviceWorkerRegistration.addEventListener("updatefound", this.#onupdatefoundCallback);
     }
 
-    /**
-     */
     deactivateOnupdatefound() {
         this.#serviceWorkerRegistration.removeEventListener("updatefound", this.#onupdatefoundCallback);
     }

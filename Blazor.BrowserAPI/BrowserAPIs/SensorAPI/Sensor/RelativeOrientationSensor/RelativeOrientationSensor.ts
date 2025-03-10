@@ -1,24 +1,17 @@
 import { SensorAPI } from "../Sensor";
 
 export class RelativeOrientationSensorAPI extends SensorAPI {
-    /**
-     * @param {RelativeOrientationSensor} relativeOrientationSensor
-     */
-    constructor(relativeOrientationSensor) {
+    declare sensor: RelativeOrientationSensor;
+
+    constructor(relativeOrientationSensor: RelativeOrientationSensor) {
         super(relativeOrientationSensor);
     }
 
-    /**
-     * @param {number} frequency
-     * @param {"device" | "screen"} referenceFrame
-     * @returns {RelativeOrientationSensorAPI | null}
-     */
-    static create(frequency, referenceFrame) {
+    static create(frequency: number, referenceFrame: "device" | "screen"): RelativeOrientationSensorAPI | null {
         if (!("RelativeOrientationSensor" in window))
             return null;
 
-        /** @type {MotionSensorOptions} */
-        let options;
+        let options: MotionSensorOptions;
         if (frequency > 0)
             options = { frequency, referenceFrame };
         else
@@ -28,23 +21,17 @@ export class RelativeOrientationSensorAPI extends SensorAPI {
     }
 
 
-    /**
-     * @returns {number[]}
-     */
-    getQuaternion() {
-        return /** @type {RelativeOrientationSensor} */(this.sensor).quaternion ?? [0, 0, 0, 0];
+    getQuaternion(): number[] {
+        return this.sensor.quaternion ?? [0, 0, 0, 0];
     }
 
 
-    /**
-     * @returns {number[]}
-     */
-    populateMatrix() {
-        if (/** @type {RelativeOrientationSensor} */(this.sensor).quaternion === null)
+    populateMatrix(): number[] {
+        if (this.sensor.quaternion === null)
             return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
         let matrix4x4 = new DOMMatrix();
-        /** @type {RelativeOrientationSensor} */(this.sensor).populateMatrix(matrix4x4);
+        this.sensor.populateMatrix(matrix4x4);
         return [
             matrix4x4.m11,
             matrix4x4.m12,

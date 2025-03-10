@@ -1,11 +1,7 @@
+import { DotNet } from "../../blazor";
+
 export class GeolocationAPI {
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} callbackGeolocation
-     * @param {number} maximumAge;
-     * @param {number} timeout;
-     * @param {boolean} enableHighAccuracy
-     */
-    static getCurrentPosition(callbackGeolocation, maximumAge, timeout, enableHighAccuracy) {
+    static getCurrentPosition(callbackGeolocation: DotNet.DotNetObject, maximumAge: number, timeout: number, enableHighAccuracy: boolean) {
         navigator.geolocation.getCurrentPosition(
             (geolocationPosition) => callbackGeolocation.invokeMethodAsync("Success", this.#toGeoCoordsObject(geolocationPosition.coords), geolocationPosition.timestamp),
             (geolocationPositionError) => callbackGeolocation.invokeMethodAsync("Error", geolocationPositionError.code, geolocationPositionError.message),
@@ -17,14 +13,8 @@ export class GeolocationAPI {
         );
     }
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} callbackGeolocation
-     * @param {number} maximumAge;
-     * @param {number} timeout;
-     * @param {boolean} enableHighAccuracy
-     * @returns {number} watchId
-     */
-    static watchPosition(callbackGeolocation, maximumAge, timeout, enableHighAccuracy) {
+    /** @returns watchId */
+    static watchPosition(callbackGeolocation: DotNet.DotNetObject, maximumAge: number, timeout: number, enableHighAccuracy: boolean): number {
         return navigator.geolocation.watchPosition(
             (geolocationPosition) => callbackGeolocation.invokeMethodAsync("Success", this.#toGeoCoordsObject(geolocationPosition.coords), geolocationPosition.timestamp),
             (geolocationPositionError) => callbackGeolocation.invokeMethodAsync("Error", geolocationPositionError.code, geolocationPositionError.message),
@@ -36,20 +26,13 @@ export class GeolocationAPI {
         );
     }
 
-    /**
-     * @param {number} watchId
-     */
-    static clearWatch(watchId) {
+    static clearWatch(watchId: number) {
         navigator.geolocation.clearWatch(watchId)
     }
 
 
 
-    /**
-     * @param {GeolocationCoordinates} geolocationCoordinates
-     * @returns { {latitude: number, longitude: number, altitude: number | null, accuracy: number, altitudeAccuracy: number | null, heading: number | null, speed: number | null} }
-     */
-    static #toGeoCoordsObject(geolocationCoordinates) {
+    static #toGeoCoordsObject(geolocationCoordinates: GeolocationCoordinates): { latitude: number, longitude: number, altitude: number | null, accuracy: number, altitudeAccuracy: number | null, heading: number | null, speed: number | null; } {
         return {
             latitude: geolocationCoordinates.latitude,
             longitude: geolocationCoordinates.longitude,

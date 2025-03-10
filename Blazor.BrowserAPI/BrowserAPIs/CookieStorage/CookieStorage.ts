@@ -1,15 +1,9 @@
 export class CookieStorageAPI {
-    /**
-     * @returns {string}
-     */
-    static getAllCookies() {
+    static getAllCookies(): string {
         return document.cookie;
     }
 
-    /**
-     * @returns {number}
-     */
-    static count() {
+    static count(): number {
         if (document.cookie === "")
             return 0;
 
@@ -17,11 +11,7 @@ export class CookieStorageAPI {
         return cookies.length;
     }
 
-    /**
-     * @param {number} index
-     * @returns {string | null}
-     */
-    static key(index) {
+    static key(index: number): string | null {
         if (index < 0)
             return null;
 
@@ -34,11 +24,7 @@ export class CookieStorageAPI {
         return key.trim();
     }
 
-    /**
-     * @param {string} key
-     * @returns {string | null}
-     */
-    static getCookie(key) {
+    static getCookie(key: string): string | null {
         let cookies = document.cookie.split(';');
         for (let i = 0; i < cookies.length; i++) {
             let keyValuePair = cookies[i].split('=');
@@ -51,15 +37,7 @@ export class CookieStorageAPI {
         return null;
     }
 
-    /**
-     * @param {string} key
-     * @param {string} value
-     * @param {number | null} expires
-     * @param {string} path
-     * @param {string} sameSite
-     * @param {boolean} secure
-     */
-    static setCookie(key, value, expires, path, sameSite, secure) {
+    static setCookie(key: string, value: string, expires: number | null, path: string, sameSite: string, secure: boolean) {
         let cookie = `${key}=${value}`;
 
         if (expires !== null)
@@ -72,15 +50,10 @@ export class CookieStorageAPI {
         document.cookie = cookie;
     }
 
-    /**
-     * @param {string} key
-     */
-    static removeCookie(key) {
+    static removeCookie(key: string) {
         document.cookie = `${key}=;expires=Thu, 01 Jan 1970 00:00:00 GMT`;
     }
 
-    /**
-     */
     static clear() {
         let cookies = document.cookie.split(';');
         for (let i = 0; i < cookies.length; i++) {

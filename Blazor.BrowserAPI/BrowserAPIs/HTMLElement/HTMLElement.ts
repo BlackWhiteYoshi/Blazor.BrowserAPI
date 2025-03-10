@@ -1,190 +1,116 @@
 import { DotNet } from "../../blazor";
 
 export class HTMLElementAPI {
-    /** @type {HTMLElement} */
-    #htmlElement;
+    #htmlElement: HTMLElement;
 
-    /**
-     * @param {HTMLElement} htmlElement
-     */
-    constructor(htmlElement) {
+    constructor(htmlElement: HTMLElement) {
         this.#htmlElement = htmlElement;
     }
 
-    /**
-     * @param {HTMLElement} htmlElement
-     * @returns {HTMLElementAPI}
-     */
-    static create(htmlElement) {
+    static create(htmlElement: HTMLElement): HTMLElementAPI {
         return new HTMLElementAPI(htmlElement);
     }
 
 
     // HTMLElement
 
-    /**
-     * @returns {string}
-     */
-    getInnerText() {
+    getInnerText(): string {
         return this.#htmlElement.innerText;
     }
 
-    /**
-     * @param {string} value
-     */
-    setInnerText(value) {
+    setInnerText(value: string) {
         this.#htmlElement.innerText = value;
     }
 
-    /**
-     * @returns {string}
-     */
-    getOuterText() {
+    getOuterText(): string {
         return this.#htmlElement.outerText;
     }
 
-    /**
-     * @param {string} value
-     */
-    setOuterText(value) {
+    setOuterText(value: string) {
         this.#htmlElement.outerText = value;
     }
 
-    /**
-     * @returns {string}
-     */
-    getInlineStyle() {
+    getInlineStyle(): string {
         return this.#htmlElement.style.cssText;
     }
 
-    /**
-     * @param {string} value
-     */
-    setInlineStyle(value) {
+    setInlineStyle(value: string) {
         this.#htmlElement.style.cssText = value;
     }
 
 
-    /**
-     * @returns {number}
-     */
-    getOffsetWidth() {
+    getOffsetWidth(): number {
         return this.#htmlElement.offsetWidth;
     }
 
-    /**
-     * @returns {number}
-     */
-    getOffsetHeight() {
+    getOffsetHeight(): number {
         return this.#htmlElement.offsetHeight;
     }
 
-    /**
-     * @returns {number}
-     */
-    getOffsetLeft() {
+    getOffsetLeft(): number {
         return this.#htmlElement.offsetLeft;
     }
 
-    /**
-     * @returns {number}
-     */
-    getOffsetTop() {
+    getOffsetTop(): number {
         return this.#htmlElement.offsetTop;
     }
 
-    /**
-     * @returns {Element | null}
-     */
-    getOffsetParent() {
+    getOffsetParent(): Element | null {
         return this.#htmlElement.offsetParent;
     }
 
 
-    /**
-     * @returns {boolean}
-     */
-    hasFocus() {
+    hasFocus(): boolean {
         return this.#htmlElement === document.activeElement;
     }
 
 
-    /**
-     */
     click() {
         this.#htmlElement.click();
     }
 
-    /**
-     * @param {boolean} [preventScroll]
-     */
-    focus(preventScroll = false) {
+    focus(preventScroll: boolean = false) {
         this.#htmlElement.focus({ preventScroll });
     }
 
-    /**
-     */
     blur() {
         this.#htmlElement.blur();
     }
 
-    /**
-     */
     showPopover() {
         this.#htmlElement.showPopover();
     }
 
-    /**
-     */
     hidePopover() {
         this.#htmlElement.hidePopover();
     }
 
-    /**
-     * @param {boolean} [force]
-     * @returns {boolean}
-     */
-    togglePopover(force) {
-        return /** @type {boolean} */ (/** @type {unknown} */ (this.#htmlElement.togglePopover(force)));
+    togglePopover(force?: boolean): boolean {
+        return this.#htmlElement.togglePopover(force) as unknown as boolean;
     }
 
 
     // Element
 
 
-    /**
-     * @returns {string}
-     */
-    getInnerHTML() {
+    getInnerHTML(): string {
         return this.#htmlElement.innerHTML;
     }
 
-    /**
-     * @param {string} value
-     */
-    setInnerHTML(value) {
+    setInnerHTML(value: string) {
         this.#htmlElement.innerHTML = value;
     }
 
-    /**
-     * @returns {string}
-     */
-    getOuterHTML() {
+    getOuterHTML(): string {
         return this.#htmlElement.outerHTML;
     }
 
-    /**
-     * @param {string} value
-     */
-    setOuterHTML(value) {
+    setOuterHTML(value: string) {
         this.#htmlElement.outerHTML = value;
     }
 
-    /**
-     * returns something like { "key1": "value1", "key2": "value2", "key3": "value3", ... }
-     * @returns {any}
-     */
-    getAttributes() {
+    /** @returns actually something like { "key1": "value1", "key2": "value2", "key3": "value3", ... } */
+    getAttributes(): any {
         const attributes = this.#htmlElement.attributes;
 
         let result = {};
@@ -194,200 +120,115 @@ export class HTMLElementAPI {
         return result;
     }
 
-    /**
-     * @returns {number}
-     */
-    getChildElementCount() {
+    getChildElementCount(): number {
         return this.#htmlElement.childElementCount;
     }
 
-    /**
-     * returns something like JSObjectReference<HTMLElement>[]
-     * @returns {any[]}
-     */
-    getChildren() {
-        return [... this.#htmlElement.children].map((/** @type {HTMLElement} */ child) => DotNet.createJSObjectReference(HTMLElementAPI.create(child)));
+    /** @returns actually something like JSObjectReference<HTMLElement>[] */
+    getChildren(): any[] {
+        return [... this.#htmlElement.children].map((child: HTMLElement) => DotNet.createJSObjectReference(HTMLElementAPI.create(child)));
     }
 
-    /**
-     * @returns {string}
-     */
-    getClassName() {
+    getClassName(): string {
         return this.#htmlElement.className;
     }
 
-    /**
-     * @param {string} value
-     */
-    setClassName(value) {
+    setClassName(value: string) {
         this.#htmlElement.className = value;
     }
 
-    /**
-     * @returns {string[]}
-     */
-    getClassList() {
+    getClassList(): string[] {
         return [... this.#htmlElement.classList];
     }
 
 
-    /**
-     * @returns {number}
-     */
-    getClientWidth() {
+    getClientWidth(): number {
         return this.#htmlElement.clientWidth;
     }
 
-    /**
-     * @returns {number}
-     */
-    getClientHeight() {
+    getClientHeight(): number {
         return this.#htmlElement.clientHeight;
     }
 
-    /**
-     * @returns {number}
-     */
-    getClientLeft() {
+    getClientLeft(): number {
         return this.#htmlElement.clientLeft;
     }
 
-    /**
-     * @returns {number}
-     */
-    getClientTop() {
+    getClientTop(): number {
         return this.#htmlElement.clientTop;
     }
 
 
-    /**
-     * @returns {number}
-     */
-    getScrollWidth() {
+    getScrollWidth(): number {
         return this.#htmlElement.scrollWidth;
     }
 
-    /**
-     * @returns {number}
-     */
-    getScrollHeight() {
+    getScrollHeight(): number {
         return this.#htmlElement.scrollHeight;
     }
 
-    /**
-     * @returns {number}
-     */
-    getScrollLeft() {
+    getScrollLeft(): number {
         return this.#htmlElement.scrollLeft;
     }
 
-    /**
-     * @param {number} value
-     */
-    setScrollLeft(value) {
+    setScrollLeft(value: number) {
         this.#htmlElement.scrollLeft = value;
     }
 
-    /**
-     * @returns {number}
-     */
-    getScrollTop() {
+    getScrollTop(): number {
         return this.#htmlElement.scrollTop;
     }
 
-    /**
-     * @param {number} value
-     */
-    setScrollTop(value) {
+    setScrollTop(value: number) {
         this.#htmlElement.scrollTop = value;
     }
 
 
-    /**
-     * @returns {DOMRect}
-     */
-    getBoundingClientRect() {
+    getBoundingClientRect(): DOMRect {
         return this.#htmlElement.getBoundingClientRect();
     }
 
-    /**
-     * @returns {DOMRect[]}
-     */
-    getClientRects() {
+    getClientRects(): DOMRect[] {
         return [... this.#htmlElement.getClientRects()];
     }
 
 
-    /**
-     * @param {string} name
-     * @returns {boolean}
-     */
-    hasAttribute(name) {
+    hasAttribute(name: string): boolean {
         return this.#htmlElement.hasAttribute(name);
     }
 
-    /**
-     * @returns {boolean}
-     */
-    hasAttributes() {
+    hasAttributes(): boolean {
         return this.#htmlElement.hasAttributes();
     }
 
 
-    /**
-     * @param {number} pointerId
-     */
-    setPointerCapture(pointerId) {
+    setPointerCapture(pointerId: number) {
         this.#htmlElement.setPointerCapture(pointerId);
     }
 
-    /**
-     * @param {number} pointerId
-     */
-    releasePointerCapture(pointerId) {
+    releasePointerCapture(pointerId: number) {
         this.#htmlElement.releasePointerCapture(pointerId);
     }
 
-    /**
-     * @param {number} pointerId
-     * @returns {boolean}
-     */
-    hasPointerCapture(pointerId) {
+    hasPointerCapture(pointerId: number): boolean {
         return this.#htmlElement.hasPointerCapture(pointerId);
     }
 
 
-    /**
-     * @param {number} left
-     * @param {number} top
-     */
-    scroll(left, top) {
+    scroll(left: number, top: number) {
         this.#htmlElement.scroll(left, top);
     }
 
-    /**
-     * @param {number} x
-     * @param {number} y
-     */
-    scrollBy(x, y) {
+    scrollBy(x: number, y: number) {
         this.#htmlElement.scrollBy(x, y);
     }
 
-    /**
-     * @param {"start" | "center" | "end" | "nearest"} [block]
-     * @param {"start" | "center" | "end" | "nearest"} [inline]
-     * @param {"instant" | "smooth" | "auto"} [behavior]
-     */
-    scrollIntoView(block = "start", inline = "nearest", behavior = "auto") {
+    scrollIntoView(block: "start" | "center" | "end" | "nearest" = "start", inline: "start" | "center" | "end" | "nearest" = "nearest", behavior: "instant" | "smooth" | "auto" = "auto") {
         this.#htmlElement.scrollIntoView({ block, inline, behavior });
     }
 
 
-    /**
-     * @param {"hide" | "show" | "auto"} navigationUI
-     * @returns {Promise<void>}
-     */
-    requestFullscreen(navigationUI = "auto") {
+    requestFullscreen(navigationUI: "hide" | "show" | "auto" = "auto"): Promise<void> {
         return this.#htmlElement.requestFullscreen({ navigationUI });
     }
 
@@ -395,34 +236,22 @@ export class HTMLElementAPI {
 
     // events
 
-    /** @type {import("../../blazor").DotNet.DotNetObject} */
-    #eventTrigger;
-
-    /** @type {boolean} */
-    #isEventTriggerSync;
+    #eventTrigger: DotNet.DotNetObject;
+    #isEventTriggerSync: boolean;
 
 
     // #region transitionstart event
 
-    /**
-     * @param {TransitionEvent} transitionEvent
-     */
-    #ontransitionstartCallback = (transitionEvent) => this.#isEventTriggerSync
+    #ontransitionstartCallback = (transitionEvent: TransitionEvent) => this.#isEventTriggerSync
         ? this.#eventTrigger.invokeMethod("InvokeTransitionstart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
         : this.#eventTrigger.invokeMethodAsync("InvokeTransitionstart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOntransitionstart(eventTrigger, isEventTriggerSync) {
+    activateOntransitionstart(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlElement.addEventListener("transitionstart", this.#ontransitionstartCallback);
     }
 
-    /**
-     */
     deactivateOntransitionstart() {
         this.#htmlElement.removeEventListener("transitionstart", this.#ontransitionstartCallback);
     }
@@ -432,25 +261,16 @@ export class HTMLElementAPI {
 
     // #region transitionend event
 
-    /**
-     * @param {TransitionEvent} transitionEvent
-     */
-    #ontransitionendCallback = (transitionEvent) => this.#isEventTriggerSync
+    #ontransitionendCallback = (transitionEvent: TransitionEvent) => this.#isEventTriggerSync
         ? this.#eventTrigger.invokeMethod("InvokeTransitionend", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
         : this.#eventTrigger.invokeMethodAsync("InvokeTransitionend", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOntransitionend(eventTrigger, isEventTriggerSync) {
+    activateOntransitionend(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlElement.addEventListener("transitionend", this.#ontransitionendCallback);
     }
 
-    /**
-     */
     deactivateOntransitionend() {
         this.#htmlElement.removeEventListener("transitionend", this.#ontransitionendCallback);
     }
@@ -460,25 +280,16 @@ export class HTMLElementAPI {
 
     // #region transitionrun event
 
-    /**
-     * @param {TransitionEvent} transitionEvent
-     */
-    #ontransitionrunCallback = (transitionEvent) => this.#isEventTriggerSync
+    #ontransitionrunCallback = (transitionEvent: TransitionEvent) => this.#isEventTriggerSync
         ? this.#eventTrigger.invokeMethod("InvokeTransitionrun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
         : this.#eventTrigger.invokeMethodAsync("InvokeTransitionrun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOntransitionrun(eventTrigger, isEventTriggerSync) {
+    activateOntransitionrun(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlElement.addEventListener("transitionrun", this.#ontransitionrunCallback);
     }
 
-    /**
-     */
     deactivateOntransitionrun() {
         this.#htmlElement.removeEventListener("transitionrun", this.#ontransitionrunCallback);
     }
@@ -488,25 +299,16 @@ export class HTMLElementAPI {
 
     // #region transitioncancel event
 
-    /**
-     * @param {TransitionEvent} transitionEvent
-     */
-    #ontransitioncancelCallback = (transitionEvent) => this.#isEventTriggerSync
+    #ontransitioncancelCallback = (transitionEvent: TransitionEvent) => this.#isEventTriggerSync
         ? this.#eventTrigger.invokeMethod("InvokeTransitioncancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
         : this.#eventTrigger.invokeMethodAsync("InvokeTransitioncancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOntransitioncancel(eventTrigger, isEventTriggerSync) {
+    activateOntransitioncancel(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlElement.addEventListener("transitioncancel", this.#ontransitioncancelCallback);
     }
 
-    /**
-     */
     deactivateOntransitioncancel() {
         this.#htmlElement.removeEventListener("transitioncancel", this.#ontransitioncancelCallback);
     }
@@ -517,25 +319,16 @@ export class HTMLElementAPI {
 
     // #region animationstart event
 
-    /**
-     * @param {AnimationEvent} animationEvent
-     */
-    #onanimationstartCallback = (animationEvent) => this.#isEventTriggerSync
+    #onanimationstartCallback = (animationEvent: AnimationEvent) => this.#isEventTriggerSync
         ? this.#eventTrigger.invokeMethod("InvokeAnimationstart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
         : this.#eventTrigger.invokeMethodAsync("InvokeAnimationstart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnanimationstart(eventTrigger, isEventTriggerSync) {
+    activateOnanimationstart(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlElement.addEventListener("animationstart", this.#onanimationstartCallback);
     }
 
-    /**
-     */
     deactivateOnanimationstart() {
         this.#htmlElement.removeEventListener("animationstart", this.#onanimationstartCallback);
     }
@@ -545,25 +338,16 @@ export class HTMLElementAPI {
 
     // #region animationend event
 
-    /**
-     * @param {AnimationEvent} animationEvent
-     */
-    #onanimationendCallback = (animationEvent) => this.#isEventTriggerSync
+    #onanimationendCallback = (animationEvent: AnimationEvent) => this.#isEventTriggerSync
         ? this.#eventTrigger.invokeMethod("InvokeAnimationend", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
         : this.#eventTrigger.invokeMethodAsync("InvokeAnimationend", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnanimationend(eventTrigger, isEventTriggerSync) {
+    activateOnanimationend(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlElement.addEventListener("animationend", this.#onanimationendCallback);
     }
 
-    /**
-     */
     deactivateOnanimationend() {
         this.#htmlElement.removeEventListener("animationend", this.#onanimationendCallback);
     }
@@ -573,25 +357,16 @@ export class HTMLElementAPI {
 
     // #region animationiteration event
 
-    /**
-     * @param {AnimationEvent} animationEvent
-     */
-    #onanimationiterationCallback = (animationEvent) => this.#isEventTriggerSync
+    #onanimationiterationCallback = (animationEvent: AnimationEvent) => this.#isEventTriggerSync
         ? this.#eventTrigger.invokeMethod("InvokeAnimationiteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
         : this.#eventTrigger.invokeMethodAsync("InvokeAnimationiteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnanimationiteration(eventTrigger, isEventTriggerSync) {
+    activateOnanimationiteration(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlElement.addEventListener("animationiteration", this.#onanimationiterationCallback);
     }
 
-    /**
-     */
     deactivateOnanimationiteration() {
         this.#htmlElement.removeEventListener("animationiteration", this.#onanimationiterationCallback);
     }
@@ -601,25 +376,16 @@ export class HTMLElementAPI {
 
     // #region animationcancel event
 
-    /**
-     * @param {AnimationEvent} animationEvent
-     */
-    #onanimationcancelCallback = (animationEvent) => this.#isEventTriggerSync
+    #onanimationcancelCallback = (animationEvent: AnimationEvent) => this.#isEventTriggerSync
         ? this.#eventTrigger.invokeMethod("InvokeAnimationcancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
         : this.#eventTrigger.invokeMethodAsync("InvokeAnimationcancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnanimationcancel(eventTrigger, isEventTriggerSync) {
+    activateOnanimationcancel(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#htmlElement.addEventListener("animationcancel", this.#onanimationcancelCallback);
     }
 
-    /**
-     */
     deactivateOnanimationcancel() {
         this.#htmlElement.removeEventListener("animationcancel", this.#onanimationcancelCallback);
     }

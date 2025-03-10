@@ -79,7 +79,7 @@ export declare module DotNet {
          *
          * @returns stream as ArrayBuffer
          */
-        arrayBuffer(): ArrayBuffer;
+        arrayBuffer(): Promise<ArrayBuffer>;
 
         /**
          * Access underlying data as ReadableStream.

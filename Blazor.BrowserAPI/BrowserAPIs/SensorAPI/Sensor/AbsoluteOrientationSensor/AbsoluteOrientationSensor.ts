@@ -1,24 +1,17 @@
 import { SensorAPI } from "../Sensor";
 
 export class AbsoluteOrientationSensorAPI extends SensorAPI {
-    /**
-     * @param {AbsoluteOrientationSensor} absoluteOrientationSensor
-     */
-    constructor(absoluteOrientationSensor) {
+    declare sensor: AbsoluteOrientationSensor;
+
+    constructor(absoluteOrientationSensor: AbsoluteOrientationSensor) {
         super(absoluteOrientationSensor);
     }
 
-    /**
-     * @param {number} frequency
-     * @param {"device" | "screen"} referenceFrame
-     * @returns {AbsoluteOrientationSensorAPI | null}
-     */
-    static create(frequency, referenceFrame) {
+    static create(frequency: number, referenceFrame: "device" | "screen"): AbsoluteOrientationSensorAPI | null {
         if (!("AbsoluteOrientationSensor" in window))
             return null;
 
-        /** @type {MotionSensorOptions} */
-        let options;
+        let options: MotionSensorOptions;
         if (frequency > 0)
             options = { frequency, referenceFrame };
         else
@@ -28,23 +21,17 @@ export class AbsoluteOrientationSensorAPI extends SensorAPI {
     }
 
 
-    /**
-     * @returns {number[]}
-     */
-    getQuaternion() {
-        return /** @type {AbsoluteOrientationSensor} */(this.sensor).quaternion ?? [0, 0, 0, 0];
+    getQuaternion(): number[] {
+        return this.sensor.quaternion ?? [0, 0, 0, 0];
     }
 
 
-    /**
-     * @returns {number[]}
-     */
-    populateMatrix() {
-        if (/** @type {AbsoluteOrientationSensor} */(this.sensor).quaternion === null)
+    populateMatrix(): number[] {
+        if (this.sensor.quaternion === null)
             return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
         let matrix4x4 = new DOMMatrix();
-        /** @type {AbsoluteOrientationSensor} */(this.sensor).populateMatrix(matrix4x4);
+        this.sensor.populateMatrix(matrix4x4);
         return [
             matrix4x4.m11,
             matrix4x4.m12,

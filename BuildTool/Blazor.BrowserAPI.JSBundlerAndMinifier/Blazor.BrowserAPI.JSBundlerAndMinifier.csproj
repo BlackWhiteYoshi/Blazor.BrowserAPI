@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CliWrap" Version="3.8.2" />
     <PackageReference Include="NUglify" Version="1.21.13" />
   </ItemGroup>
 

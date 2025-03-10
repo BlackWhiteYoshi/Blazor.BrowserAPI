@@ -1,69 +1,44 @@
-export class DialogAPI {
-    /** @type {HTMLDialogElement} */
-    #dialog;
+import { DotNet } from "../../blazor";
 
-    /**
-     * @param {HTMLDialogElement} dialog
-     */
-    constructor(dialog) {
+export class DialogAPI {
+    #dialog: HTMLDialogElement;
+
+    constructor(dialog: HTMLDialogElement) {
         this.#dialog = dialog;
     }
 
-    /**
-     * @param {HTMLDialogElement} dialog
-     * @returns {DialogAPI}
-     */
-    static create(dialog) {
+    static create(dialog: HTMLDialogElement): DialogAPI {
         return new DialogAPI(dialog);
     }
 
 
-    /**
-     * @returns {boolean}
-     */
-    getOpen() {
+    getOpen(): boolean {
         return this.#dialog.open;
     }
 
-    /**
-     * @param {boolean} value
-     */
-    setOpen(value) {
+    setOpen(value: boolean) {
         this.#dialog.open = value;
     }
 
 
-    /**
-     * @returns {string}
-     */
-    getReturnValue() {
+    getReturnValue(): string {
         return this.#dialog.returnValue;
     }
 
-    /**
-     * @param {string} returnValue
-     */
-    setReturnValue(returnValue) {
+    setReturnValue(returnValue: string) {
         this.#dialog.returnValue = returnValue;
     }
 
 
-    /**
-     * @param {string | undefined} returnValue
-     */
-    close(returnValue) {
+    close(returnValue: string | undefined) {
         this.#dialog.close(returnValue);
     }
 
 
-    /**
-     */
     show() {
         this.#dialog.show();
     }
 
-    /**
-     */
     showModal() {
         this.#dialog.showModal();
     }
@@ -71,31 +46,20 @@ export class DialogAPI {
 
     // events
 
-    /** @type {import("../../blazor").DotNet.DotNetObject} */
-    #eventTrigger;
-
-    /** @type {boolean} */
-    #isEventTriggerSync;
+    #eventTrigger: DotNet.DotNetObject;
+    #isEventTriggerSync: boolean;
 
 
     // #region cancel event
 
-    /**
-     */
     #oncancelCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeCancel") : this.#eventTrigger.invokeMethodAsync("InvokeCancel");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOncancel(eventTrigger, isEventTriggerSync) {
+    activateOncancel(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#dialog.addEventListener("cancel", this.#oncancelCallback);
     }
 
-    /**
-     */
     deactivateOncancel() {
         this.#dialog.removeEventListener("cancel", this.#oncancelCallback);
     }
@@ -105,22 +69,14 @@ export class DialogAPI {
 
     // #region close event
 
-    /**
-     */
     #oncloseCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeClose") : this.#eventTrigger.invokeMethodAsync("InvokeClose");
 
-    /**
-     * @param {import("../../blazor").DotNet.DotNetObject} eventTrigger
-     * @param {boolean} isEventTriggerSync
-     */
-    activateOnclose(eventTrigger, isEventTriggerSync) {
+    activateOnclose(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
         this.#dialog.addEventListener("close", this.#oncloseCallback);
     }
 
-    /**
-     */
     deactivateOnclose() {
         this.#dialog.removeEventListener("close", this.#oncloseCallback);
     }

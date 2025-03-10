@@ -110,11 +110,11 @@ public readonly record struct MediaTrackConstraints {
 /// </para>
 /// </summary>
 public readonly record struct ConstrainBoolean {
-    [JsonInclude] internal MediaTrackConstraintType Type { get; }
+    [JsonInclude] internal MediaTrackConstraintPreference Preference { get; }
     [JsonInclude] internal bool Value { get; }
 
-    private ConstrainBoolean(MediaTrackConstraintType type, bool value) {
-        Type = type;
+    private ConstrainBoolean(MediaTrackConstraintPreference preference, bool value) {
+        Preference = preference;
         Value = value;
     }
 
@@ -123,7 +123,7 @@ public readonly record struct ConstrainBoolean {
     /// implicit conversion, so a plain bool can be used.
     /// </summary>
     /// <param name="value">a plain bool</param>
-    public static implicit operator ConstrainBoolean(bool value) => new(MediaTrackConstraintType.None, value);
+    public static implicit operator ConstrainBoolean(bool value) => new(MediaTrackConstraintPreference.None, value);
 
     /// <summary>
     /// Creates an <see cref="ConstrainBoolean"/> as an "exact" object.<br />
@@ -131,7 +131,7 @@ public readonly record struct ConstrainBoolean {
     /// </summary>
     /// <param name="value">The required value.</param>
     /// <returns></returns>
-    public static ConstrainBoolean Exact(bool value) => new(MediaTrackConstraintType.Exact, value);
+    public static ConstrainBoolean Exact(bool value) => new(MediaTrackConstraintPreference.Exact, value);
 
     /// <summary>
     /// Creates an <see cref="ConstrainBoolean"/> as an "ideal" object.<br />
@@ -139,7 +139,7 @@ public readonly record struct ConstrainBoolean {
     /// </summary>
     /// <param name="value">The ideal value.</param>
     /// <returns></returns>
-    public static ConstrainBoolean Ideal(bool value) => new(MediaTrackConstraintType.Ideal, value);
+    public static ConstrainBoolean Ideal(bool value) => new(MediaTrackConstraintPreference.Ideal, value);
 }
 
 /// <summary>
@@ -155,13 +155,13 @@ public readonly record struct ConstrainBoolean {
 /// </para>
 /// </summary>
 public readonly record struct ConstrainDouble {
-    [JsonInclude] internal MediaTrackConstraintType Type { get; }
+    [JsonInclude] internal MediaTrackConstraintPreference Preference { get; }
     [JsonInclude] internal double? Value { get; }
     [JsonInclude] internal double? Min { get; }
     [JsonInclude] internal double? Max { get; }
 
-    private ConstrainDouble(MediaTrackConstraintType type, double? value, double? min, double? max) {
-        Type = type;
+    private ConstrainDouble(MediaTrackConstraintPreference preference, double? value, double? min, double? max) {
+        Preference = preference;
         Value = value;
         Min = min;
         Max = max;
@@ -172,7 +172,7 @@ public readonly record struct ConstrainDouble {
     /// implicit conversion, so a plain double can be used.
     /// </summary>
     /// <param name="value">a plain double</param>
-    public static implicit operator ConstrainDouble(double value) => new(MediaTrackConstraintType.None, value, null, null);
+    public static implicit operator ConstrainDouble(double value) => new(MediaTrackConstraintPreference.None, value, null, null);
 
     /// <summary>
     /// Creates an <see cref="ConstrainDouble"/> as an "exact" object.<br />
@@ -180,7 +180,7 @@ public readonly record struct ConstrainDouble {
     /// </summary>
     /// <param name="value">A double specifying a specific, required, value the property must have to be considered acceptable.</param>
     /// <returns></returns>
-    public static ConstrainDouble Exact(double value) => new(MediaTrackConstraintType.Exact, value, null, null);
+    public static ConstrainDouble Exact(double value) => new(MediaTrackConstraintPreference.Exact, value, null, null);
 
     /// <summary>
     /// Creates an <see cref="ConstrainDouble"/> as an "ideal" object.<br />
@@ -188,7 +188,7 @@ public readonly record struct ConstrainDouble {
     /// </summary>
     /// <param name="value">The ideal value.</param>
     /// <returns></returns>
-    public static ConstrainDouble Ideal(double value) => new(MediaTrackConstraintType.Ideal, value, null, null);
+    public static ConstrainDouble Ideal(double value) => new(MediaTrackConstraintPreference.Ideal, value, null, null);
     /// <summary>
     /// Creates an <see cref="ConstrainDouble"/> as an "ideal-min-max" object. Each value is optional, but at least one value should be set.<br />
     /// When ideal value is specified - If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match.<br />
@@ -199,7 +199,7 @@ public readonly record struct ConstrainDouble {
     /// <param name="min">The minimum value.</param>
     /// <param name="max">The maximum value.</param>
     /// <returns></returns>
-    public static ConstrainDouble Ideal(double? ideal, double? min, double? max) => new(MediaTrackConstraintType.Ideal, ideal, min, max);
+    public static ConstrainDouble Ideal(double? ideal, double? min, double? max) => new(MediaTrackConstraintPreference.Ideal, ideal, min, max);
 }
 
 /// <summary>
@@ -215,13 +215,13 @@ public readonly record struct ConstrainDouble {
 /// </para>
 /// </summary>
 public readonly record struct ConstrainULong {
-    [JsonInclude] internal MediaTrackConstraintType Type { get; }
+    [JsonInclude] internal MediaTrackConstraintPreference Preference { get; }
     [JsonInclude] internal ulong? Value { get; }
     [JsonInclude] internal ulong? Min { get; }
     [JsonInclude] internal ulong? Max { get; }
 
-    private ConstrainULong(MediaTrackConstraintType type, ulong? value, ulong? min, ulong? max) {
-        Type = type;
+    private ConstrainULong(MediaTrackConstraintPreference preference, ulong? value, ulong? min, ulong? max) {
+        Preference = preference;
         Value = value;
         Min = min;
         Max = max;
@@ -232,7 +232,7 @@ public readonly record struct ConstrainULong {
     /// implicit conversion, so a plain ulong can be used.
     /// </summary>
     /// <param name="value">a plain ulong</param>
-    public static implicit operator ConstrainULong(ulong value) => new(MediaTrackConstraintType.None, value, null, null);
+    public static implicit operator ConstrainULong(ulong value) => new(MediaTrackConstraintPreference.None, value, null, null);
 
     /// <summary>
     /// Creates an <see cref="ConstrainULong"/> as an "exact" object.<br />
@@ -240,7 +240,7 @@ public readonly record struct ConstrainULong {
     /// </summary>
     /// <param name="value">A ulong specifying a specific, required, value the property must have to be considered acceptable.</param>
     /// <returns></returns>
-    public static ConstrainULong Exact(ulong value) => new(MediaTrackConstraintType.Exact, value, null, null);
+    public static ConstrainULong Exact(ulong value) => new(MediaTrackConstraintPreference.Exact, value, null, null);
 
     /// <summary>
     /// Creates an <see cref="ConstrainULong"/> as an "ideal" object.<br />
@@ -248,7 +248,7 @@ public readonly record struct ConstrainULong {
     /// </summary>
     /// <param name="value">The ideal value.</param>
     /// <returns></returns>
-    public static ConstrainULong Ideal(ulong value) => new(MediaTrackConstraintType.Ideal, value, null, null);
+    public static ConstrainULong Ideal(ulong value) => new(MediaTrackConstraintPreference.Ideal, value, null, null);
     /// <summary>
     /// Creates an <see cref="ConstrainULong"/> as an "ideal-min-max" object. Each value is optional, but at least one value should be set.<br />
     /// When ideal value is specified - If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match.<br />
@@ -259,7 +259,7 @@ public readonly record struct ConstrainULong {
     /// <param name="min">The minimum value.</param>
     /// <param name="max">The maximum value.</param>
     /// <returns></returns>
-    public static ConstrainULong Ideal(ulong? ideal, ulong? min, ulong? max) => new(MediaTrackConstraintType.Ideal, ideal, min, max);
+    public static ConstrainULong Ideal(ulong? ideal, ulong? min, ulong? max) => new(MediaTrackConstraintPreference.Ideal, ideal, min, max);
 }
 
 /// <summary>
@@ -274,17 +274,17 @@ public readonly record struct ConstrainULong {
 /// </para>
 /// </summary>
 public readonly record struct ConstrainDOMString {
-    [JsonInclude] internal MediaTrackConstraintType Type { get; }
+    [JsonInclude] internal MediaTrackConstraintPreference Preference { get; }
     [JsonInclude] internal string Value { get; } = string.Empty;
     [JsonInclude] internal string[]? Values { get; }
 
-    private ConstrainDOMString(MediaTrackConstraintType type, string value) {
-        Type = type;
+    private ConstrainDOMString(MediaTrackConstraintPreference preference, string value) {
+        Preference = preference;
         Value = value;
     }
 
-    private ConstrainDOMString(MediaTrackConstraintType type, string[] values) {
-        Type = type;
+    private ConstrainDOMString(MediaTrackConstraintPreference preference, string[] values) {
+        Preference = preference;
         Values = values;
     }
 
@@ -293,12 +293,12 @@ public readonly record struct ConstrainDOMString {
     /// implicit conversion, so a plain string can be used.
     /// </summary>
     /// <param name="value">a plain string</param>
-    public static implicit operator ConstrainDOMString(string value) => new(MediaTrackConstraintType.None, value);
+    public static implicit operator ConstrainDOMString(string value) => new(MediaTrackConstraintPreference.None, value);
     /// <summary>
     /// implicit conversion, so a plain string[] can be used.
     /// </summary>
     /// <param name="values">a plain string[]</param>
-    public static implicit operator ConstrainDOMString(string[] values) => new(MediaTrackConstraintType.None, values);
+    public static implicit operator ConstrainDOMString(string[] values) => new(MediaTrackConstraintPreference.None, values);
 
     /// <summary>
     /// Creates an <see cref="ConstrainDOMString"/> as an "exact" object.<br />
@@ -306,14 +306,14 @@ public readonly record struct ConstrainDOMString {
     /// </summary>
     /// <param name="value">The required value.</param>
     /// <returns></returns>
-    public static ConstrainDOMString Exact(string value) => new(MediaTrackConstraintType.Exact, value);
+    public static ConstrainDOMString Exact(string value) => new(MediaTrackConstraintPreference.Exact, value);
     /// <summary>
     /// Creates an <see cref="ConstrainDOMString"/> as an "exact" object.<br />
     /// If the property can't be set to one of the listed values, matching will fail.
     /// </summary>
     /// <param name="values">The list of possible values.</param>
     /// <returns></returns>
-    public static ConstrainDOMString Exact(string[] values) => new(MediaTrackConstraintType.Exact, values);
+    public static ConstrainDOMString Exact(string[] values) => new(MediaTrackConstraintPreference.Exact, values);
 
     /// <summary>
     /// Creates an <see cref="ConstrainDOMString"/> as an "ideal" object.<br />
@@ -321,18 +321,18 @@ public readonly record struct ConstrainDOMString {
     /// </summary>
     /// <param name="value">The ideal value.</param>
     /// <returns></returns>
-    public static ConstrainDOMString Ideal(string value) => new(MediaTrackConstraintType.Ideal, value);
+    public static ConstrainDOMString Ideal(string value) => new(MediaTrackConstraintPreference.Ideal, value);
     /// <summary>
     /// Creates an <see cref="ConstrainDOMString"/> as an "ideal" object.<br />
     /// If possible, one of the listed values will be used, but if it's not possible, the user agent will use the closest possible match.
     /// </summary>
     /// <param name="values">The list of ideal values.</param>
     /// <returns></returns>
-    public static ConstrainDOMString Ideal(string[] values) => new(MediaTrackConstraintType.Ideal, values);
+    public static ConstrainDOMString Ideal(string[] values) => new(MediaTrackConstraintPreference.Ideal, values);
 }
 
 
-internal enum MediaTrackConstraintType {
+internal enum MediaTrackConstraintPreference {
     None = 0,
     Exact = 1,
     Ideal = 2

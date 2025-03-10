@@ -1,9 +1,7 @@
+import { DotNet } from "../../blazor";
+
 export class DownloadAPI {
-    /**
-     * @param {string} fileName
-     * @param {import("../../blazor").DotNet.DotNetStreamReference} fileContent
-     */
-    static async downloadAsFile(fileName, fileContent) {
+    static async downloadAsFile(fileName: string, fileContent: DotNet.DotNetStreamReference) {
         const arrayBuffer = await fileContent.arrayBuffer();
         const blob = new Blob([arrayBuffer]);
         const url = URL.createObjectURL(blob);
