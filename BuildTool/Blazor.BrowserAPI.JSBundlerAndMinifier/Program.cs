@@ -67,5 +67,6 @@ public static class Program {
 
 
         File.WriteAllText(outputPath, minifiedJS);
+        Console.WriteLine("completed successfully");
     }
 }

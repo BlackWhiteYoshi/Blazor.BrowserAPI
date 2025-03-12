@@ -1,23 +1,53 @@
 *, *::before, *::after {
     box-sizing: border-box;
-    interpolate-size: allow-keywords;
 }
 
 html {
-    scroll-behavior: smooth;
+    color-scheme: dark;
+    font-family: system-ui;
+    interpolate-size: allow-keywords;
+
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+
+    @media (prefers-reduced-motion: no-preference) {
+        scroll-behavior: smooth;
+    }
 }
 
 body {
     min-height: 100vh;
-    line-height: 1.5;
+    line-height: 1.6;
     margin: 0;
     color: #DDD;
     background-color: #222;
 }
 
-#app {
-    position: relative;
-    margin: 2em;
+h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+}
+
+p {
+    text-wrap: pretty;
+}
+
+button, select, input, textarea {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+button:not(:disabled) {
+    cursor: pointer;
+}
+
+img, picture {
+    display: block;
+    max-width: 100%;
+}
+
+:target {
+    scroll-margin-block: 5rlh;
 }
 
 

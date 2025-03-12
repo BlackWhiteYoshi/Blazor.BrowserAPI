@@ -1,5 +1,6 @@
 ﻿@namespace BrowserAPI.Test.Client
 @page "/"
+@inject IJSRuntime JsRuntime
 
 @if (!RendererInfo.IsInteractive) {
     <svg class="loading-progress">
@@ -9,34 +10,36 @@
     <div class="loading-progress-text"></div>
 }
 else {
+    bool isInProcess = JsRuntime is IJSInProcessRuntime;
+
     <div id="test-page">
-        <h1>Testing Page</h1>
+        <h1>Testing Page @RendererInfo.Name</h1>
 
         <ClipboardGroup />
         <ConsoleGroup />
-        <ConsoleInProcessGroup />
+        @if (isInProcess) { <ConsoleInProcessGroup /> }
         <CookieStorageGroup />
-        <CookieStorageInProcessGroup />
+        @if (isInProcess) { <CookieStorageInProcessGroup /> }
         <DialogGroup />
-        <DialogInProcessGroup />
+        @if (isInProcess) { <DialogInProcessGroup /> }
         <DownloadGroup />
         <GeolocationGroup />
-        <GeolocationInProcessGroup />
+        @if (isInProcess) { <GeolocationInProcessGroup /> }
         <HTMLElementGroup />
-        <HTMLElementInProcessGroup />
+        @if (isInProcess) { <HTMLElementInProcessGroup /> }
         <HTMLMediaElementGroup />
-        <HTMLMediaElementInProcessGroup />
+        @if (isInProcess) { <HTMLMediaElementInProcessGroup /> }
         <LanguageGroup />
-        <LanguageInProcessGroup />
+        @if (isInProcess) { <LanguageInProcessGroup /> }
         <LocalStorageGroup />
-        <LocalStorageInProcessGroup />
+        @if (isInProcess) { <LocalStorageInProcessGroup /> }
         <MediaDevicesGroup />
-        <MediaDevicesInProcessGroup />
+        @if (isInProcess) { <MediaDevicesInProcessGroup /> }
         <SensorAPIGroup />
-        <SensorAPIInProcessGroup />
+        @if (isInProcess) { <SensorAPIInProcessGroup /> }
         <ServiceWorkerGroup />
-        <ServiceWorkerInProcessGroup />
+        @if (isInProcess) { <ServiceWorkerInProcessGroup /> }
         <SessionStorageGroup />
-        <SessionStorageInProcessGroup />
+        @if (isInProcess) { <SessionStorageInProcessGroup /> }
     </div>
 }
