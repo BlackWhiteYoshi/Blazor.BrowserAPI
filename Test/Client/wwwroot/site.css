@@ -34,7 +34,7 @@ p {
 
 button, select, input, textarea {
   font-family: inherit;
-  font-size: inherit;
+  font-size: 0.8rem;
 }
 
 button:not(:disabled) {
@@ -136,14 +136,14 @@ img, picture {
   background-color: #333;
 }
 #test-page .group > h2 {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   margin: 0;
 }
 #test-page .group > div {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 1em;
+  gap: 0.8em;
 }
 #test-page .group > div > button {
   cursor: pointer;

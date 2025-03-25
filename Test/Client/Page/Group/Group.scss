@@ -9,7 +9,7 @@
         background-color: #333;
 
         & > h2 {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             margin: 0;
         }
 
@@ -17,7 +17,7 @@
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            gap: 1em;
+            gap: 0.8em;
 
             & > button {
                 cursor: pointer;
