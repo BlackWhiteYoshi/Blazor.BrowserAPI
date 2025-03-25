@@ -6,20 +6,6 @@ namespace BrowserAPI.UnitTest;
 
 [Collection("PlayWright")]
 public sealed class CookieStorageTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
-    public override async Task DisposeAsync() {
-        await base.DisposeAsync();
-
-        // remove all cookies
-        await Page.EvaluateAsync("""
-            let cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                let key = cookies[i].split('=')[0];
-                document.cookie = `${key}=;expires=Thu, 01 Jan 1970 00:00:00 GMT`;
-            }
-            """);
-    }
-
-
     [Theory]
     [InlineData(0)]
     [InlineData(1)]

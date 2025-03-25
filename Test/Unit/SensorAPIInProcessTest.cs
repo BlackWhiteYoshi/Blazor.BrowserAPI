@@ -11,11 +11,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
         await Context.GrantPermissionsAsync(["ambient-light-sensor", "gyroscope", "accelerometer", "magnetometer"]);
     }
 
-    public override async Task DisposeAsync() {
-        await Context.ClearPermissionsAsync();
-        await base.DisposeAsync();
-    }
-
 
     // Sensor Properties
 

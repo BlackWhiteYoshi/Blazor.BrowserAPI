@@ -17,9 +17,8 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     public override async Task DisposeAsync() {
-        Page.Console -= Assertion;
-        await base.DisposeAsync();
         Assert.True(assertSuccess);
+        await base.DisposeAsync();
     }
 
     private void Assertion(object? sender, IConsoleMessage message) {

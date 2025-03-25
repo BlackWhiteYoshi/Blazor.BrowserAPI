@@ -10,11 +10,6 @@ public sealed class ClipboardTest(PlayWrightFixture playWrightFixture) : PlayWri
         await Context.GrantPermissionsAsync(["clipboard-read", "clipboard-write"]);
     }
 
-    public override async Task DisposeAsync() {
-        await Context.ClearPermissionsAsync();
-        await base.DisposeAsync();
-    }
-
 
     [Fact]
     public async Task Read() {

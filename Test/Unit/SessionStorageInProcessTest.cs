@@ -5,14 +5,6 @@ namespace BrowserAPI.UnitTest;
 
 [Collection("PlayWright")]
 public sealed class SessionStorageInProcessTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
-    public override async Task DisposeAsync() {
-        await base.DisposeAsync();
-
-        // clean up all entries
-        await Page.EvaluateAsync("sessionStorage.clear();");
-    }
-
-
     [Theory]
     [InlineData(0)]
     [InlineData(1)]

@@ -11,11 +11,6 @@ public sealed class GeolocationTest(PlayWrightFixture playWrightFixture) : PlayW
         await Context.GrantPermissionsAsync(["geolocation"]);
     }
 
-    public override async Task DisposeAsync() {
-        await Context.ClearPermissionsAsync();
-        await base.DisposeAsync();
-    }
-
 
     [Fact]
     public async Task GetCurrentPosition() {

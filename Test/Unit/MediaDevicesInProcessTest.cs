@@ -10,11 +10,6 @@ public sealed class MediaDevicesInProcessTest(PlayWrightFixture playWrightFixtur
         await Context.GrantPermissionsAsync(["camera", "microphone"]);
     }
 
-    public override async Task DisposeAsync() {
-        await Context.ClearPermissionsAsync();
-        await base.DisposeAsync();
-    }
-
 
     // Media Devices
 

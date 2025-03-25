@@ -21,8 +21,6 @@ public sealed class PlayWrightFixture : ICollectionFixture<PlayWrightFixture>, I
 
     private IPlaywright playWright = null!;
     private IBrowser browser = null!;
-    public IBrowserContext BrowserContext { get; private set; } = null!;
-    public IPage Page { get; private set; } = null!; // testing in parallel: Page-pool instead of 1 single page
 
 
     public PlayWrightFixture() {
@@ -37,10 +35,25 @@ public sealed class PlayWrightFixture : ICollectionFixture<PlayWrightFixture>, I
         playWright = await Playwright.CreateAsync();
         browser = await playWright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions() { Headless = true });
         //browser = await playWright.Firefox.LaunchAsync(new BrowserTypeLaunchOptions() { Headless = true });
+    }
 
-        // wire up with in memory server.
-        BrowserContext = await browser.NewContextAsync(new BrowserNewContextOptions() { BaseURL = BASE_URL });
-        await BrowserContext.RouteAsync($"{BASE_URL}/**", async (IRoute route) => {
+     public async Task DisposeAsync() {
+        await browser.DisposeAsync();
+        playWright.Dispose();
+
+        httpClient.Dispose();
+        await hostFactory.DisposeAsync();
+    }
+
+
+    /// <summary>
+    /// Creates a new browser context wired up with in memory server.
+    /// </summary>
+    /// <returns></returns>
+    public async Task<IBrowserContext> NewBrowserContext() {
+        IBrowserContext browserContext = await browser.NewContextAsync(new BrowserNewContextOptions() { BaseURL = BASE_URL });
+        
+        await browserContext.RouteAsync($"{BASE_URL}/**", async (IRoute route) => {
             using HttpRequestMessage requestMessage = CreateRequestMessage(route);
             static HttpRequestMessage CreateRequestMessage(IRoute route) {
                 IRequest request = route.Request;
@@ -66,17 +79,6 @@ public sealed class PlayWrightFixture : ICollectionFixture<PlayWrightFixture>, I
             await route.FulfillAsync(routeFulfillOptions);
         });
 
-        Page = await BrowserContext.NewPageAsync();
-    }
-
-
-    public async Task DisposeAsync() {
-        await Page.CloseAsync();
-        await BrowserContext.DisposeAsync();
-        await browser.DisposeAsync();
-        playWright.Dispose();
-
-        httpClient.Dispose();
-        await hostFactory.DisposeAsync();
+        return browserContext;
     }
 }
