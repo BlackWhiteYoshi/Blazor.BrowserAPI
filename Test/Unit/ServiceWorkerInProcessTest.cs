@@ -6,11 +6,10 @@
 
 
 //using BrowserAPI.Test.Client;
-//using Xunit;
 
 //namespace BrowserAPI.UnitTest;
 
-//[Collection("PlayWright")]
+//[ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 //public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
 
 //}

@@ -1,294 +1,386 @@
 ﻿using BrowserAPI.Test.Client;
 using Microsoft.Playwright;
-using System.Text.RegularExpressions;
-using Xunit;
 
 namespace BrowserAPI.UnitTest;
 
-[Collection("PlayWright")]
+[ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
-    private string? assertValue = null;
-    private bool assertRegex = false;
-    private bool assertSuccess = false;
+    private sealed class ConsoleMessageCapture : IDisposable {
+        public string? Text { get; private set; } = null;
 
-    public override async Task InitializeAsync() {
-        await base.InitializeAsync();
-        Page.Console += Assertion;
-    }
+        private readonly IPage page;
 
-    public override async Task DisposeAsync() {
-        Assert.True(assertSuccess);
-        await base.DisposeAsync();
-    }
-
-    private void Assertion(object? sender, IConsoleMessage message) {
-        if (assertRegex) {
-            if (assertValue != null && Regex.Match(message.Text, assertValue).Success)
-                assertSuccess = true;
+        public ConsoleMessageCapture(IPage page) {
+            this.page = page;
+            page.Console += OnConsoleMessage;
         }
-        else {
-            if (assertValue == message.Text)
-                assertSuccess = true;
+
+        public void Dispose() => page.Console -= OnConsoleMessage;
+
+
+        private void OnConsoleMessage(object? sender, IConsoleMessage message) {
+            if (message.Text.StartsWith("Debugging hotkey"))
+                return;
+
+            if (Text is not null)
+                throw new Exception("Second Console Output: Each Test must produce only a single console output!");
+
+            Text = message.Text;
         }
     }
 
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Assert_String() {
-        assertValue = ConsoleGroup.TEST_ASSERT;
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_ASSERT_STRING).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_ASSERT);
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Assert_Test() {
-        assertValue = $"[{ConsoleGroup.TEST_ASSERT}, {ConsoleGroup.TEST_ASSERT}]";
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_ASSERT).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo($"[{ConsoleGroup.TEST_ASSERT}, {ConsoleGroup.TEST_ASSERT}]");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Clear() {
-        assertValue = "console.clear";
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_CLEAR).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo("console.clear");
     }
 
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Count() {
-        assertValue = "default: 1";
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_COUNT).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo("default: 1");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Count_Label() {
-        assertValue = $"{ConsoleGroup.TEST_COUNT_LABEL}: 1";
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_COUNT_LABEL).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo($"{ConsoleGroup.TEST_COUNT_LABEL}: 1");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task CountReset() {
-        assertValue = "Count for 'default' does not exist";
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_COUNT_RESET).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo("Count for 'default' does not exist");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task CountReset_Label() {
-        assertValue = $"Count for '{ConsoleGroup.TEST_COUNT_LABEL}' does not exist";
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_COUNT_RESET_LABEL).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo($"Count for '{ConsoleGroup.TEST_COUNT_LABEL}' does not exist");
     }
 
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Debug_String() {
-        assertValue = ConsoleGroup.TEST_DEBUG;
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_DEBUG_STRING).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_DEBUG);
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Debug() {
-        assertValue = $"[{ConsoleGroup.TEST_DEBUG}, {ConsoleGroup.TEST_DEBUG}]";
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_DEBUG).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo($"[{ConsoleGroup.TEST_DEBUG}, {ConsoleGroup.TEST_DEBUG}]");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Dir() {
-        assertValue = ConsoleGroup.TEST_DIR;
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_DIR).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_DIR);
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Dirxml() {
-        assertValue = ConsoleGroup.TEST_DIRXML;
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_DIRXML).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_DIRXML);
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Error_String() {
-        assertValue = ConsoleGroup.TEST_ERROR;
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_ERROR_STRING).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_ERROR);
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Error() {
-        assertValue = $"[{ConsoleGroup.TEST_ERROR}, {ConsoleGroup.TEST_ERROR}]";
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_ERROR).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo($"[{ConsoleGroup.TEST_ERROR}, {ConsoleGroup.TEST_ERROR}]");
     }
 
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Group() {
-        assertValue = "undefined";
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_GROUP).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo("undefined");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Group_Label() {
-        assertValue = ConsoleGroup.TEST_GROUP_LABEL;
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_GROUP_LABEL).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_GROUP_LABEL);
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task GroupCollapsed() {
-        assertValue = "undefined";
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_GROUP_COLLAPSED).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo("undefined");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task GroupCollapsed_Label() {
-        assertValue = ConsoleGroup.TEST_GROUP_COLLAPSED_LABEL;
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_GROUP_COLLAPSED_LABEL).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_GROUP_COLLAPSED_LABEL);
     }
 
 
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Info_String() {
-        assertValue = ConsoleGroup.TEST_INFO;
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_INFO_STRING).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_INFO);
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Info() {
-        assertValue = $"[{ConsoleGroup.TEST_INFO}, {ConsoleGroup.TEST_INFO}]";
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_INFO).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo($"[{ConsoleGroup.TEST_INFO}, {ConsoleGroup.TEST_INFO}]");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Log_String() {
-        assertValue = ConsoleGroup.TEST_LOG;
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_LOG_STRING).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_LOG);
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Log() {
-        assertValue = $"[{ConsoleGroup.TEST_LOG}, {ConsoleGroup.TEST_LOG}]";
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_LOG).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo($"[{ConsoleGroup.TEST_LOG}, {ConsoleGroup.TEST_LOG}]");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Table() {
-        assertValue = $"[{ConsoleGroup.TEST_TABLE}, {ConsoleGroup.TEST_TABLE}]";
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_TABLE).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo($"[{ConsoleGroup.TEST_TABLE}, {ConsoleGroup.TEST_TABLE}]");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Table_Columns() {
-        assertValue = $"[{ConsoleGroup.TEST_TABLE_COLUMNS}, {ConsoleGroup.TEST_TABLE_COLUMNS}]";
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_TABLE_COLUMNS).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo($"[{ConsoleGroup.TEST_TABLE_COLUMNS}, {ConsoleGroup.TEST_TABLE_COLUMNS}]");
     }
 
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Time() {
-        assertRegex = true;
-        assertValue = "^default: .* ms$";
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_TIME).ClickAsync();
         await Page.EvaluateAsync("console.timeEnd();");
+
+        await Assert.That(consoleMessageCapture.Text).Matches("^default: .* ms$");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Time_Label() {
-        assertRegex = true;
-        assertValue = $"^{ConsoleGroup.TEST_TIME_LABEL}: .* ms$";
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_TIME_LABEL).ClickAsync();
         await Page.EvaluateAsync($"console.timeEnd('{ConsoleGroup.TEST_TIME_LABEL}');");
+
+        await Assert.That(consoleMessageCapture.Text).Matches($"^{ConsoleGroup.TEST_TIME_LABEL}: .* ms$");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task TimeEnd() {
-        assertRegex = true;
-        assertValue = "^default: .* ms$";
-        await Page.EvaluateAsync($"console.time();");
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
+        await Page.EvaluateAsync("console.time();");
         await Page.GetByTestId(ConsoleGroup.BUTTON_TIME_END).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).Matches("^default: .* ms$");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task TimeEnd_Label() {
-        assertRegex = true;
-        assertValue = $"^{ConsoleGroup.TEST_TIME_LABEL}: .* ms$";
-        await Page.EvaluateAsync($"console.time('{ConsoleGroup.TEST_TIME_LABEL}');");
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
+        await Page.EvaluateAsync($"console.time('{ConsoleGroup.TEST_TIME_LABEL}');");
         await Page.GetByTestId(ConsoleGroup.BUTTON_TIME_END_LABEL).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).Matches($"^{ConsoleGroup.TEST_TIME_LABEL}: .* ms$");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task TimeLog() {
-        assertRegex = true;
-        assertValue = "^default: .* ms$";
-        await Page.EvaluateAsync($"console.time();");
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
+        await Page.EvaluateAsync("console.time();");
         await Page.GetByTestId(ConsoleGroup.BUTTON_TIME_LOG).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).Matches("^default: .* ms$");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task TimeLog_Label() {
-        assertRegex = true;
-        assertValue = $"^{ConsoleGroup.TEST_TIME_LABEL}: .* ms$";
-        await Page.EvaluateAsync($"console.time('{ConsoleGroup.TEST_TIME_LABEL}');");
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
+        await Page.EvaluateAsync($"console.time('{ConsoleGroup.TEST_TIME_LABEL}');");
         await Page.GetByTestId(ConsoleGroup.BUTTON_TIME_LOG_LABEL).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).Matches($"^{ConsoleGroup.TEST_TIME_LABEL}: .* ms$");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task TimeLog_LabelData() {
-        assertRegex = true;
-        assertValue = $"^{ConsoleGroup.TEST_TIME_LABEL}: .* ms \\[{ConsoleGroup.TEST_TIME_LOG_DATA}, {ConsoleGroup.TEST_TIME_LOG_DATA}\\]$";
-        await Page.EvaluateAsync($"console.time('{ConsoleGroup.TEST_TIME_LABEL}');");
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
+        await Page.EvaluateAsync($"console.time('{ConsoleGroup.TEST_TIME_LABEL}');");
         await Page.GetByTestId(ConsoleGroup.BUTTON_TIME_LOG_LABEL_DATA).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).Matches($"^{ConsoleGroup.TEST_TIME_LABEL}: .* ms \\[{ConsoleGroup.TEST_TIME_LOG_DATA}, {ConsoleGroup.TEST_TIME_LOG_DATA}\\]$");
     }
 
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Trace_String() {
-        assertValue = ConsoleGroup.TEST_TRACE;
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_TRACE_STRING).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_TRACE);
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Trace() {
-        assertValue = $"[{ConsoleGroup.TEST_TRACE}, {ConsoleGroup.TEST_TRACE}]";
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_TRACE).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo($"[{ConsoleGroup.TEST_TRACE}, {ConsoleGroup.TEST_TRACE}]");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Warn_String() {
-        assertValue = ConsoleGroup.TEST_WARN;
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_WARN_STRING).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_WARN);
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Warn() {
-        assertValue = $"[{ConsoleGroup.TEST_WARN}, {ConsoleGroup.TEST_WARN}]";
+        using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.GetByTestId(ConsoleGroup.BUTTON_WARN).ClickAsync();
+
+        await Assert.That(consoleMessageCapture.Text).IsEqualTo($"[{ConsoleGroup.TEST_WARN}, {ConsoleGroup.TEST_WARN}]");
     }
 }

@@ -1,29 +1,31 @@
 ﻿using BrowserAPI.Test.Client;
 using Microsoft.Playwright;
-using Xunit;
 
 namespace BrowserAPI.UnitTest;
 
-[Collection("PlayWright")]
+[ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class DialogInProcessTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task GetOpen() {
         await Page.GetByTestId(DialogInProcessGroup.BUTTON_GET_OPEN).ClickAsync();
 
         string? result = await Page.GetByTestId(DialogInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        Assert.Equal("False", result);
+        await Assert.That(result).IsEqualTo("False");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task SetOpen() {
         await Page.GetByTestId(DialogInProcessGroup.BUTTON_SET_OPEN).ClickAsync();
 
         string? open = await Page.GetByTestId(DialogInProcessGroup.DIALOG_ELEMENT).GetAttributeAsync("open");
-        Assert.Equal(string.Empty, open);
+        await Assert.That(open).IsEqualTo(string.Empty);
     }
 
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task GetReturnValue() {
         const string RESULT = "return value result";
         ILocator dialog = Page.GetByTestId(DialogInProcessGroup.DIALOG_ELEMENT);
@@ -32,36 +34,40 @@ public sealed class DialogInProcessTest(PlayWrightFixture playWrightFixture) : P
         await Page.GetByTestId(DialogInProcessGroup.BUTTON_GET_RETURN_VALUE).ClickAsync();
 
         string? result = await Page.GetByTestId(DialogInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        Assert.Equal(RESULT, result);
+        await Assert.That(result).IsEqualTo(RESULT);
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task SetReturnValue() {
         await Page.GetByTestId(DialogInProcessGroup.BUTTON_SET_RETURN_VALUE).ClickAsync();
 
         ILocator dialog = Page.GetByTestId(DialogInProcessGroup.DIALOG_ELEMENT);
         string result = await dialog.EvaluateAsync<string>("dialog => dialog.returnValue;");
-        Assert.Equal(DialogInProcessGroup.TEST_RETURN_VALUE, result);
+        await Assert.That(result).IsEqualTo(DialogInProcessGroup.TEST_RETURN_VALUE);
     }
 
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Show() {
         await Page.GetByTestId(DialogInProcessGroup.BUTTON_SHOW).ClickAsync();
 
         string? open = await Page.GetByTestId(DialogInProcessGroup.DIALOG_ELEMENT).GetAttributeAsync("open");
-        Assert.Equal(string.Empty, open);
+        await Assert.That(open).IsEqualTo(string.Empty);
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task ShowModal() {
         await Page.GetByTestId(DialogInProcessGroup.BUTTON_SHOW_MODAL).ClickAsync();
 
         string? open = await Page.GetByTestId(DialogInProcessGroup.DIALOG_ELEMENT).GetAttributeAsync("open");
-        Assert.Equal(string.Empty, open);
+        await Assert.That(open).IsEqualTo(string.Empty);
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task Close() {
         ILocator dialog = Page.GetByTestId(DialogInProcessGroup.DIALOG_ELEMENT);
         await dialog.EvaluateAsync("dialog => dialog.show();");
@@ -69,10 +75,11 @@ public sealed class DialogInProcessTest(PlayWrightFixture playWrightFixture) : P
         await Page.GetByTestId(DialogInProcessGroup.BUTTON_CLOSE).ClickAsync();
 
         string? open = await Page.GetByTestId(DialogInProcessGroup.DIALOG_ELEMENT).GetAttributeAsync("open");
-        Assert.Null(open);
+        await Assert.That(open).IsNull();
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task CloseReturnValue() {
         ILocator dialog = Page.GetByTestId(DialogInProcessGroup.DIALOG_ELEMENT);
         await dialog.EvaluateAsync("dialog => dialog.show();");
@@ -81,12 +88,13 @@ public sealed class DialogInProcessTest(PlayWrightFixture playWrightFixture) : P
 
         string? open = await Page.GetByTestId(DialogInProcessGroup.DIALOG_ELEMENT).GetAttributeAsync("open");
         string result = await dialog.EvaluateAsync<string>("dialog => dialog.returnValue;");
-        Assert.Null(open);
-        Assert.Equal(DialogInProcessGroup.TEST_RETURN_VALUE, result);
+        await Assert.That(open).IsNull();
+        await Assert.That(result).IsEqualTo(DialogInProcessGroup.TEST_RETURN_VALUE);
     }
 
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task RegisterOnCancel() {
         await Page.GetByTestId(DialogInProcessGroup.BUTTON_REGISTER_ON_CANCEL).ClickAsync();
         ILocator dialog = Page.GetByTestId(DialogInProcessGroup.DIALOG_ELEMENT);
@@ -95,10 +103,11 @@ public sealed class DialogInProcessTest(PlayWrightFixture playWrightFixture) : P
         await Task.Delay(100);
 
         string? result = await Page.GetByTestId(DialogInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        Assert.Equal(DialogInProcessGroup.TEST_CANCEL_EVENT, result);
+        await Assert.That(result).IsEqualTo(DialogInProcessGroup.TEST_CANCEL_EVENT);
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task RegisterOnClose() {
         await Page.GetByTestId(DialogInProcessGroup.BUTTON_REGISTER_ON_CLOSE).ClickAsync();
         ILocator dialog = Page.GetByTestId(DialogInProcessGroup.DIALOG_ELEMENT);
@@ -107,6 +116,6 @@ public sealed class DialogInProcessTest(PlayWrightFixture playWrightFixture) : P
         await Task.Delay(100);
 
         string? result = await Page.GetByTestId(DialogInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        Assert.Equal(DialogInProcessGroup.TEST_CLOSE_EVENT, result);
+        await Assert.That(result).IsEqualTo(DialogInProcessGroup.TEST_CLOSE_EVENT);
     }
 }

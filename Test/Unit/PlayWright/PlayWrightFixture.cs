@@ -2,12 +2,11 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Playwright;
-using Xunit;
+using TUnit.Core.Interfaces;
 
 namespace BrowserAPI.UnitTest;
 
-[CollectionDefinition("PlayWright")]
-public sealed class PlayWrightFixture : ICollectionFixture<PlayWrightFixture>, IAsyncLifetime {
+public sealed class PlayWrightFixture : IAsyncInitializer, IAsyncDisposable {
     private sealed class WebApplicationFactoryWithRenderMode(string renderMode) : WebApplicationFactory<Test.ClientHost.Program.IAssemblyMarker> {
         protected override IHost CreateHost(IHostBuilder builder)
             => base.CreateHost(builder.ConfigureHostConfiguration(configBuilder => configBuilder.AddCommandLine([$"--RenderMode={renderMode}", "--Prerender=true"])));
@@ -16,28 +15,25 @@ public sealed class PlayWrightFixture : ICollectionFixture<PlayWrightFixture>, I
     private const string BASE_URL = "https://localhost:5000";
 
 
-    private readonly WebApplicationFactoryWithRenderMode hostFactory;
-    private readonly HttpClient httpClient;
+    private WebApplicationFactoryWithRenderMode hostFactory = null!;
+    private HttpClient httpClient = null!;
 
     private IPlaywright playWright = null!;
     private IBrowser browser = null!;
 
-
-    public PlayWrightFixture() {
+    public async Task InitializeAsync() {
         // enusre the right version is installed
         Program.Main(["install"]);
 
         hostFactory = new WebApplicationFactoryWithRenderMode("static");
         httpClient = hostFactory.CreateClient(new WebApplicationFactoryClientOptions() { BaseAddress = new Uri(BASE_URL) });
-    }
 
-    public async Task InitializeAsync() {
         playWright = await Playwright.CreateAsync();
         browser = await playWright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions() { Headless = true });
         //browser = await playWright.Firefox.LaunchAsync(new BrowserTypeLaunchOptions() { Headless = true });
     }
 
-     public async Task DisposeAsync() {
+    public async ValueTask DisposeAsync() {
         await browser.DisposeAsync();
         playWright.Dispose();
 

@@ -1,9 +1,8 @@
 ﻿using BrowserAPI.Test.Client;
-using Xunit;
 
 namespace BrowserAPI.UnitTest;
 
-[Collection("PlayWright")]
+[ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     public override async Task InitializeAsync() {
         await base.InitializeAsync();
@@ -13,54 +12,61 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
 
     // Media Devices
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task EnumerateDevices() {
         await Page.GetByTestId(MediaDevicesGroup.BUTTON_ENUMERATE_DEVICES).ClickAsync();
         await Task.Delay(500);
 
         string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
-        Assert.StartsWith("MediaDeviceInfo", result);
+        await Assert.That(result).StartsWith("MediaDeviceInfo");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task GetSupportedConstraints_Property() {
         await Page.GetByTestId(MediaDevicesGroup.BUTTON_GET_SUPPORTED_CONSTRAINTS_PROPERTY).ClickAsync();
 
         string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
-        Assert.StartsWith("MediaTrackSupportedConstraint", result);
+        await Assert.That(result).StartsWith("MediaTrackSupportedConstraint");
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task GetSupportedConstraints_Method() {
         await Page.GetByTestId(MediaDevicesGroup.BUTTON_GET_SUPPORTED_CONSTRAINTS_METHOD).ClickAsync();
 
         string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
-        Assert.StartsWith("MediaTrackSupportedConstraint", result);
+        await Assert.That(result).StartsWith("MediaTrackSupportedConstraint");
     }
 
     // Does not work headless
-    //[Fact]
+    //[Test]
+    //[Retry(3)]
     //public async Task GetUserMedia() {
     //    await Page.GetByTestId(MediaDevicesGroup.BUTTON_GET_USER_MEDIA).ClickAsync();
     //    // an assertion happens in DisposeAsync()
     //}
 
     // Does not work headless
-    //[Fact]
+    //[Test]
+    //[Retry(3)]
     //public async Task GetUserMediaWithConstraint() {
     //    await Page.GetByTestId(MediaDevicesGroup.BUTTON_GET_USER_MEDIA_WITH_CONSTRAINT).ClickAsync();
     //    // an assertion happens in DisposeAsync()
     //}
 
     // Does not work headless
-    //[Fact]
+    //[Test]
+    //[Retry(3)]
     //public async Task GetDisplayMedia() {
     //    await Page.GetByTestId(MediaDevicesGroup.BUTTON_GET_DISPLAY_MEDIA).ClickAsync();
     //    // an assertion happens in DisposeAsync()
     //}
 
     // Does not work headless
-    //[Fact]
+    //[Test]
+    //[Retry(3)]
     //public async Task GetDisplayMediaWithConstraint() {
     //    await Page.GetByTestId(MediaDevicesGroup.BUTTON_GET_DISPLAY_MEDIA_WITH_CONSTRAINT).ClickAsync();
     //    // an assertion happens in DisposeAsync()

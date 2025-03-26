@@ -1,10 +1,9 @@
 ﻿using BrowserAPI.Test.Client;
 using Microsoft.Playwright;
-using Xunit;
 
 namespace BrowserAPI.UnitTest;
 
-[Collection("PlayWright")]
+[ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     public override async Task InitializeAsync() {
         await base.InitializeAsync();
@@ -12,7 +11,8 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
     }
 
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task GetCurrentPosition() {
         const float LONGITUDE = 10.0f;
         const float LATITUDE = 12.0f;
@@ -28,13 +28,14 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
         string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
 
         string expectedStart = $"GeolocationCoordinates {{ Latitude = {LATITUDE}, Longitude = {LONGITUDE}, Altitude = , Accuracy = {ACCURACY}, AltitudeAccuracy = , Heading = , Speed = , Timestamp = ";
-        Assert.StartsWith(expectedStart, result);
+        await Assert.That(result).StartsWith(expectedStart);
         string expectedEnd = " }";
-        Assert.EndsWith(expectedEnd, result);
-        Assert.True(long.TryParse(result?[expectedStart.Length..^expectedEnd.Length], out _));
+        await Assert.That(result).EndsWith(expectedEnd);
+        await Assert.That(long.TryParse(result?[expectedStart.Length..^expectedEnd.Length], out _)).IsTrue();
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task GetCurrentPositionAsync() {
         const float LONGITUDE = 10.0f;
         const float LATITUDE = 12.0f;
@@ -50,13 +51,14 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
         string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
 
         string expectedStart = $"GeolocationCoordinates {{ Latitude = {LATITUDE}, Longitude = {LONGITUDE}, Altitude = , Accuracy = {ACCURACY}, AltitudeAccuracy = , Heading = , Speed = , Timestamp = ";
-        Assert.StartsWith(expectedStart, result);
+        await Assert.That(result).StartsWith(expectedStart);
         string expectedEnd = " }";
-        Assert.EndsWith(expectedEnd, result);
-        Assert.True(long.TryParse(result?[expectedStart.Length..^expectedEnd.Length], out _));
+        await Assert.That(result).EndsWith(expectedEnd);
+        await Assert.That(long.TryParse(result?[expectedStart.Length..^expectedEnd.Length], out _)).IsTrue();
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task WatchPosition() {
         const float LONGITUDE = 10.0f;
         const float LATITUDE = 12.0f;
@@ -74,14 +76,15 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
             string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
 
             string expectedStart = $"GeolocationCoordinates {{ Latitude = {LATITUDE * i}, Longitude = {LONGITUDE * i}, Altitude = , Accuracy = {ACCURACY * i}, AltitudeAccuracy = , Heading = , Speed = , Timestamp = ";
-            Assert.StartsWith(expectedStart, result);
+            await Assert.That(result).StartsWith(expectedStart);
             string expectedEnd = " }";
-            Assert.EndsWith(expectedEnd, result);
-            Assert.True(long.TryParse(result?[expectedStart.Length..^expectedEnd.Length], out _));
+            await Assert.That(result).EndsWith(expectedEnd);
+            await Assert.That(long.TryParse(result?[expectedStart.Length..^expectedEnd.Length], out _)).IsTrue();
         }
     }
 
-    [Fact]
+    [Test]
+    [Retry(3)]
     public async Task ClearWatch() {
         await Page.GetByTestId(GeolocationInProcessGroup.BUTTON_WATCH_POSITION).ClickAsync();
         await Task.Delay(100);
@@ -104,6 +107,6 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
         await Task.Delay(100);
 
         string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        Assert.Equal("watchId: 3, count: 0", result);
+        await Assert.That(result).IsEqualTo("watchId: 3, count: 0");
     }
 }

@@ -1,10 +1,9 @@
 ﻿using Microsoft.Playwright;
-using Xunit;
+using TUnit.Core.Interfaces;
 
 namespace BrowserAPI.UnitTest;
 
-[Collection("PlayWright")]
-public abstract class PlayWrightTest(PlayWrightFixture playWrightFixture) : IAsyncLifetime {
+public abstract class PlayWrightTest(PlayWrightFixture playWrightFixture) : IAsyncInitializer, IAsyncDisposable {
     /// <summary>
     /// BrowserContext
     /// </summary>
@@ -22,7 +21,7 @@ public abstract class PlayWrightTest(PlayWrightFixture playWrightFixture) : IAsy
         await Page.GotoAsync("/");
     }
 
-    public virtual async Task DisposeAsync() {
+    public virtual async ValueTask DisposeAsync() {
         try {
             // Asserts that no exception has been occured.
             await Assertions.Expect(Page.Locator("#blazor-error-ui")).ToBeVisibleAsync(new LocatorAssertionsToBeVisibleOptions() { Visible = false });
