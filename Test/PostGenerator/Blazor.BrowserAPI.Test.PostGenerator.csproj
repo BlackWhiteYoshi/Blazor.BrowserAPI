@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.3" />
-    <PackageReference Include="NUglify" Version="1.21.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.6" />
+    <PackageReference Include="NUglify" Version="1.21.15" />
   </ItemGroup>
 
   <ItemGroup>
