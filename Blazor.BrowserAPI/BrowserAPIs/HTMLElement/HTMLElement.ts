@@ -1,5 +1,3 @@
-import { DotNet } from "../../blazor";
-
 export class HTMLElementAPI {
     #htmlElement: HTMLElement;
 

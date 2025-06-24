@@ -1,6 +1,5 @@
 import { ServiceWorkerRegistrationAPI } from "../ServiceWorkerRegistration/ServiceWorkerRegistration";
 import { ServiceWorkerAPI } from "../ServiceWorker/ServiceWorker";
-import { DotNet } from "../../../blazor";
 
 export class ServiceWorkerContainerAPI {
     static async register(filePath: string): Promise<boolean> {

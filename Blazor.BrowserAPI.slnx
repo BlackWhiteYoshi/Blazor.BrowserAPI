@@ -1,12 +1,9 @@
-﻿<Solution>
+<Solution>
   <Project Path="Blazor.BrowserAPI/Blazor.BrowserAPI.csproj" />
   <Folder Name="/Test/">
     <Project Path="Test/Client/Blazor.BrowserAPI.Test.Client.csproj" />
     <Project Path="Test/ClientHost/Blazor.BrowserAPI.Test.ClientHost.csproj" />
     <Project Path="Test/PostGenerator/Blazor.BrowserAPI.Test.PostGenerator.csproj" />
     <Project Path="Test/Unit/Blazor.BrowserAPI.UnitTest.csproj" />
-  </Folder>
-  <Folder Name="/BuildTool/">
-    <Project Path="BuildTool/Blazor.BrowserAPI.JSBundlerAndMinifier/Blazor.BrowserAPI.JSBundlerAndMinifier.csproj" />
   </Folder>
 </Solution>
