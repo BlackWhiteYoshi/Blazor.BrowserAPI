@@ -8,7 +8,6 @@ namespace BrowserAPI.Implementation;
 /// The <i>MediaDevices</i> interface of the Media Capture and Streams API provides access to connected media input devices like cameras and microphones, as well as screen sharing.
 /// In essence, it lets you obtain access to any hardware source of media data.
 /// </summary>
-/// <param name="moduleManager"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class MediaDevices(IModuleManager moduleManager) : MediaDevicesBase, IMediaDevices {
@@ -50,8 +49,8 @@ public sealed class MediaDevices(IModuleManager moduleManager) : MediaDevicesBas
     /// <param name="cancellationToken"></param>
     /// <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
     public async ValueTask<IMediaStream> GetUserMedia(bool audio, bool video, CancellationToken cancellationToken = default) {
-        IJSObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSObjectReference>("MediaDevicesAPI.getUserMedia", cancellationToken, [audio, video]);
-        return new MediaStream(mediaStreamWrapper);
+        IJSObjectReference mediaStreamJS = await ModuleManager.InvokeAsync<IJSObjectReference>("MediaDevicesAPI.getUserMedia", cancellationToken, [audio, video]);
+        return new MediaStream(mediaStreamJS);
     }
 
     /// <summary>
@@ -71,8 +70,8 @@ public sealed class MediaDevices(IModuleManager moduleManager) : MediaDevicesBas
     /// <param name="cancellationToken"></param>
     /// <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
     public async ValueTask<IMediaStream> GetUserMedia(MediaTrackConstraints audio, bool video, CancellationToken cancellationToken = default) {
-        IJSObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSObjectReference>("MediaDevicesAPI.getUserMedia", cancellationToken, [audio, video]);
-        return new MediaStream(mediaStreamWrapper);
+        IJSObjectReference mediaStreamJS = await ModuleManager.InvokeAsync<IJSObjectReference>("MediaDevicesAPI.getUserMedia", cancellationToken, [audio, video]);
+        return new MediaStream(mediaStreamJS);
     }
 
     /// <summary>
@@ -92,8 +91,8 @@ public sealed class MediaDevices(IModuleManager moduleManager) : MediaDevicesBas
     /// <param name="cancellationToken"></param>
     /// <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
     public async ValueTask<IMediaStream> GetUserMedia(bool audio, MediaTrackConstraints video, CancellationToken cancellationToken = default) {
-        IJSObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSObjectReference>("MediaDevicesAPI.getUserMedia", cancellationToken, [audio, video]);
-        return new MediaStream(mediaStreamWrapper);
+        IJSObjectReference mediaStreamJS = await ModuleManager.InvokeAsync<IJSObjectReference>("MediaDevicesAPI.getUserMedia", cancellationToken, [audio, video]);
+        return new MediaStream(mediaStreamJS);
     }
 
     /// <summary>
@@ -113,8 +112,8 @@ public sealed class MediaDevices(IModuleManager moduleManager) : MediaDevicesBas
     /// <param name="cancellationToken"></param>
     /// <returns>A Promise whose fulfillment handler receives a MediaStream object when the requested media has successfully been obtained.</returns>
     public async ValueTask<IMediaStream> GetUserMedia(MediaTrackConstraints audio, MediaTrackConstraints video, CancellationToken cancellationToken = default) {
-        IJSObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSObjectReference>("MediaDevicesAPI.getUserMedia", cancellationToken, [audio, video]);
-        return new MediaStream(mediaStreamWrapper);
+        IJSObjectReference mediaStreamJS = await ModuleManager.InvokeAsync<IJSObjectReference>("MediaDevicesAPI.getUserMedia", cancellationToken, [audio, video]);
+        return new MediaStream(mediaStreamJS);
     }
 
 
@@ -126,8 +125,8 @@ public sealed class MediaDevices(IModuleManager moduleManager) : MediaDevicesBas
     /// <param name="cancellationToken"></param>
     /// <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
     public async ValueTask<IMediaStream> GetDisplayMedia(bool audio, bool video, CancellationToken cancellationToken = default) {
-        IJSObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSObjectReference>("MediaDevicesAPI.getDisplayMedia", cancellationToken, [audio, video]);
-        return new MediaStream(mediaStreamWrapper);
+        IJSObjectReference mediaStreamJS = await ModuleManager.InvokeAsync<IJSObjectReference>("MediaDevicesAPI.getDisplayMedia", cancellationToken, [audio, video]);
+        return new MediaStream(mediaStreamJS);
     }
 
     /// <summary>
@@ -138,8 +137,8 @@ public sealed class MediaDevices(IModuleManager moduleManager) : MediaDevicesBas
     /// <param name="cancellationToken"></param>
     /// <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
     public async ValueTask<IMediaStream> GetDisplayMedia(MediaTrackConstraints audio, bool video, CancellationToken cancellationToken = default) {
-        IJSObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSObjectReference>("MediaDevicesAPI.getDisplayMedia", cancellationToken, [audio, video]);
-        return new MediaStream(mediaStreamWrapper);
+        IJSObjectReference mediaStreamJS = await ModuleManager.InvokeAsync<IJSObjectReference>("MediaDevicesAPI.getDisplayMedia", cancellationToken, [audio, video]);
+        return new MediaStream(mediaStreamJS);
     }
 
     /// <summary>
@@ -150,8 +149,8 @@ public sealed class MediaDevices(IModuleManager moduleManager) : MediaDevicesBas
     /// <param name="cancellationToken"></param>
     /// <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
     public async ValueTask<IMediaStream> GetDisplayMedia(bool audio, MediaTrackConstraints video, CancellationToken cancellationToken = default) {
-        IJSObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSObjectReference>("MediaDevicesAPI.getDisplayMedia", cancellationToken, [audio, video]);
-        return new MediaStream(mediaStreamWrapper);
+        IJSObjectReference mediaStreamJS = await ModuleManager.InvokeAsync<IJSObjectReference>("MediaDevicesAPI.getDisplayMedia", cancellationToken, [audio, video]);
+        return new MediaStream(mediaStreamJS);
     }
 
     /// <summary>
@@ -162,7 +161,7 @@ public sealed class MediaDevices(IModuleManager moduleManager) : MediaDevicesBas
     /// <param name="cancellationToken"></param>
     /// <returns>A Promise that resolves to a MediaStream containing a video track whose contents come from a user-selected screen area, as well as an optional audio track.</returns>
     public async ValueTask<IMediaStream> GetDisplayMedia(MediaTrackConstraints audio, MediaTrackConstraints video, CancellationToken cancellationToken = default) {
-        IJSObjectReference mediaStreamWrapper = await ModuleManager.InvokeAsync<IJSObjectReference>("MediaDevicesAPI.getDisplayMedia", cancellationToken, [audio, video]);
-        return new MediaStream(mediaStreamWrapper);
+        IJSObjectReference mediaStreamJS = await ModuleManager.InvokeAsync<IJSObjectReference>("MediaDevicesAPI.getDisplayMedia", cancellationToken, [audio, video]);
+        return new MediaStream(mediaStreamJS);
     }
 }

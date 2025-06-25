@@ -107,24 +107,16 @@ export class HTMLElementAPI {
         this.#htmlElement.outerHTML = value;
     }
 
-    /** @returns actually something like { "key1": "value1", "key2": "value2", "key3": "value3", ... } */
-    getAttributes(): any {
-        const attributes = this.#htmlElement.attributes;
-
-        let result = {};
-        for (let i = 0; i < attributes.length; i++)
-            Object.assign(result, { [attributes[i].name]: attributes[i].value });
-
-        return result;
+    getAttributes(): Record<string, string> {
+        return Object.fromEntries([... this.#htmlElement.attributes].map(attribute => [attribute.name, attribute.value]));
     }
 
     getChildElementCount(): number {
         return this.#htmlElement.childElementCount;
     }
 
-    /** @returns actually something like JSObjectReference<HTMLElement>[] */
-    getChildren(): any[] {
-        return [... this.#htmlElement.children].map((child: HTMLElement) => DotNet.createJSObjectReference(HTMLElementAPI.create(child)));
+    getChildren(): HTMLElementAPI[] {
+        return [... this.#htmlElement.children].map((child: HTMLElement) => DotNet.createJSObjectReference(new HTMLElementAPI(child)));
     }
 
     getClassName(): string {

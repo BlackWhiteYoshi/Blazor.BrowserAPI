@@ -1,5 +1,4 @@
 import { ServiceWorkerAPI } from "../ServiceWorker/ServiceWorker";
-import { DotNet } from "../../../blazor";
 
 export class ServiceWorkerRegistrationAPI {
     #serviceWorkerRegistration: ServiceWorkerRegistration;

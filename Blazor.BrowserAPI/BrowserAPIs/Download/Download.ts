@@ -1,5 +1,3 @@
-import { DotNet } from "../../blazor";
-
 export class DownloadAPI {
     static async downloadAsFile(fileName: string, fileContent: DotNet.DotNetStreamReference) {
         const arrayBuffer = await fileContent.arrayBuffer();

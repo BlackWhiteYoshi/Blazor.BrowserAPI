@@ -15,7 +15,6 @@ namespace BrowserAPI.Implementation;
 /// </para>
 /// <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
 /// </summary>
-/// <param name="uncalibratedMagnetometer"></param>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensor)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class UncalibratedMagnetometer(IJSObjectReference uncalibratedMagnetometer) : Sensor, IUncalibratedMagnetometer {

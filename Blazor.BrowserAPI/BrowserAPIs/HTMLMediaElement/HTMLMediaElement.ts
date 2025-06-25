@@ -1,4 +1,3 @@
-import { DotNet } from "../../blazor";
 import { MediaStreamAPI } from "../MediaDevices/MediaStream/MediaStream";
 
 export class HTMLMediaElementAPI {

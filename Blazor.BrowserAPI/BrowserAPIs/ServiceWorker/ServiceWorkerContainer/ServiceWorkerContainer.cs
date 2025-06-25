@@ -11,7 +11,6 @@ namespace BrowserAPI.Implementation;
 /// Most importantly, it exposes the <i>ServiceWorkerContainer.register()</i> method used to register service workers, and the <i>ServiceWorkerContainer.controller</i> property used to determine whether or not the current page is actively controlled.
 /// </para>
 /// </summary>
-/// <param name="moduleManager"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class ServiceWorkerContainer(IModuleManager moduleManager) : ServiceWorkerContainerBase, IServiceWorkerContainer {

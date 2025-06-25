@@ -9,7 +9,6 @@ namespace BrowserAPI.Implementation;
 /// <para>To use this sensor, the user must grant permission to the 'accelerometer', device sensor through the Permissions API.</para>
 /// <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
 /// </summary>
-/// <param name="accelerometer"></param>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensorInProcess)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 internal class AccelerometerInProcess(IJSInProcessObjectReference accelerometer) : SensorInProcess, IAccelerometerInProcess {

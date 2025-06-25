@@ -1,5 +1,3 @@
-import { DotNet } from "../../../blazor";
-
 export abstract class SensorAPI {
     protected sensor: Sensor;
 

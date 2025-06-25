@@ -29,25 +29,22 @@ import { LocalStorageAPI } from "./BrowserAPIs/LocalStorage/LocalStorage";
 export { LocalStorageAPI };
 
 import { MediaDevicesAPI } from "./BrowserAPIs/MediaDevices/MediaDevices";
-import { MediaRecorderAPI } from "./BrowserAPIs/MediaDevices/MediaRecorder/MediaRecorder";
-import { MediaStreamAPI } from "./BrowserAPIs/MediaDevices/MediaStream/MediaStream";
-export { MediaDevicesAPI, MediaRecorderAPI, MediaStreamAPI };
+export { MediaDevicesAPI };
 
-import { AbsoluteOrientationSensorAPI }  from "./BrowserAPIs/SensorAPI/Sensor/AbsoluteOrientationSensor/AbsoluteOrientationSensor";
-import { AccelerometerAPI }  from "./BrowserAPIs/SensorAPI/Sensor/Accelerometer/Accelerometer";
-import { AmbientLightSensorAPI }  from "./BrowserAPIs/SensorAPI/Sensor/AmbientLightSensor/AmbientLightSensor";
-import { GravitySensorAPI }  from "./BrowserAPIs/SensorAPI/Sensor/GravitySensor/GravitySensor";
-import { GyroscopeAPI }  from "./BrowserAPIs/SensorAPI/Sensor/Gyroscope/Gyroscope";
-import { LinearAccelerationSensorAPI }  from "./BrowserAPIs/SensorAPI/Sensor/LinearAccelerationSensor/LinearAccelerationSensor";
-import { MagnetometerAPI }  from "./BrowserAPIs/SensorAPI/Sensor/Magnetometer/Magnetometer";
-import { RelativeOrientationSensorAPI }  from "./BrowserAPIs/SensorAPI/Sensor/RelativeOrientationSensor/RelativeOrientationSensor";
+// SensorAPI
+import { AbsoluteOrientationSensorAPI } from "./BrowserAPIs/SensorAPI/Sensor/AbsoluteOrientationSensor/AbsoluteOrientationSensor";
+import { AccelerometerAPI } from "./BrowserAPIs/SensorAPI/Sensor/Accelerometer/Accelerometer";
+import { AmbientLightSensorAPI } from "./BrowserAPIs/SensorAPI/Sensor/AmbientLightSensor/AmbientLightSensor";
+import { GravitySensorAPI } from "./BrowserAPIs/SensorAPI/Sensor/GravitySensor/GravitySensor";
+import { GyroscopeAPI } from "./BrowserAPIs/SensorAPI/Sensor/Gyroscope/Gyroscope";
+import { LinearAccelerationSensorAPI } from "./BrowserAPIs/SensorAPI/Sensor/LinearAccelerationSensor/LinearAccelerationSensor";
+import { MagnetometerAPI } from "./BrowserAPIs/SensorAPI/Sensor/Magnetometer/Magnetometer";
+import { RelativeOrientationSensorAPI } from "./BrowserAPIs/SensorAPI/Sensor/RelativeOrientationSensor/RelativeOrientationSensor";
 import { UncalibratedMagnetometerAPI } from "./BrowserAPIs/SensorAPI/Sensor/UncalibratedMagnetometer/UncalibratedMagnetometer";
 export { AbsoluteOrientationSensorAPI, AccelerometerAPI, AmbientLightSensorAPI, GravitySensorAPI, GyroscopeAPI, LinearAccelerationSensorAPI, MagnetometerAPI, RelativeOrientationSensorAPI, UncalibratedMagnetometerAPI };
 
-import { ServiceWorkerAPI } from "./BrowserAPIs/ServiceWorker/ServiceWorker/ServiceWorker";
 import { ServiceWorkerContainerAPI } from "./BrowserAPIs/ServiceWorker/ServiceWorkerContainer/ServiceWorkerContainer";
-import { ServiceWorkerRegistrationAPI } from "./BrowserAPIs/ServiceWorker/ServiceWorkerRegistration/ServiceWorkerRegistration";
-export { ServiceWorkerAPI, ServiceWorkerContainerAPI, ServiceWorkerRegistrationAPI };
+export { ServiceWorkerContainerAPI };
 
 import { SessionStorageAPI } from "./BrowserAPIs/SessionStorage/SessionStorage";
 export { SessionStorageAPI };

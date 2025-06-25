@@ -10,7 +10,6 @@ namespace BrowserAPI.Implementation;
 /// <para>To use this sensor, the user must grant permission to the 'accelerometer', 'gyroscope', and 'magnetometer' device sensors through the Permissions API.</para>
 /// <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
 /// </summary>
-/// <param name="absoluteOrientationSensor"></param>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensor)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class AbsoluteOrientationSensor(IJSObjectReference absoluteOrientationSensor) : Sensor, IAbsoluteOrientationSensor {

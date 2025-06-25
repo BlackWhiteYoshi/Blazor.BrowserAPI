@@ -1,5 +1,3 @@
-import { DotNet } from "../../blazor";
-
 type GeolocationCoordinateObject = {
     latitude: number,
     longitude: number,

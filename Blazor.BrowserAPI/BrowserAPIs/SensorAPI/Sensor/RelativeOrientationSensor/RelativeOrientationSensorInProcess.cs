@@ -11,7 +11,6 @@ namespace BrowserAPI.Implementation;
 /// <para>To use this sensor, the user must grant permission to the 'accelerometer', and 'gyroscope' device sensors through the Permissions API.</para>
 /// <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
 /// </summary>
-/// <param name="relativeOrientationSensor"></param>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensorInProcess)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class RelativeOrientationSensorInProcess(IJSInProcessObjectReference relativeOrientationSensor) : SensorInProcess, IRelativeOrientationSensorInProcess {

@@ -2,6 +2,7 @@ import path from "path";
 
 export default {
     mode: "production",
+    target: "es2022",
     devtool: false,
     entry: "./Main.ts",
     output: {

@@ -1,5 +1,4 @@
 import { MediaStreamAPI } from "../MediaStream/MediaStream";
-import { DotNet } from "../../../blazor";
 
 export class MediaRecorderAPI {
     #mediaRecorder: MediaRecorder;
