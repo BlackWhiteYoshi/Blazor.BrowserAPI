@@ -1,4 +1,5 @@
 ﻿using AutoInterfaceAttributes;
+using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
@@ -10,13 +11,13 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class Sensor : SensorBase, ISensor {
+public abstract class Sensor(IJSObjectReference sensorJS) : SensorBase(sensorJS), ISensor {
     /// <summary>
     /// Releases the JS instance for this service worker.
     /// </summary>
     public ValueTask DisposeAsync() {
         DisposeEventTrigger();
-        return SensorJS.DisposeTrySync();
+        return sensorJS.DisposeTrySync();
     }
 
 
@@ -30,7 +31,7 @@ public abstract class Sensor : SensorBase, ISensor {
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<bool> GetActivated(CancellationToken cancellationToken) => SensorJS.InvokeTrySync<bool>("getActivated", cancellationToken);
+    public ValueTask<bool> GetActivated(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<bool>("getActivated", cancellationToken);
 
 
     /// <summary>
@@ -43,7 +44,7 @@ public abstract class Sensor : SensorBase, ISensor {
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<bool> GetHasReading(CancellationToken cancellationToken) => SensorJS.InvokeTrySync<bool>("getHasReading", cancellationToken);
+    public ValueTask<bool> GetHasReading(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<bool>("getHasReading", cancellationToken);
 
 
     /// <summary>
@@ -56,7 +57,7 @@ public abstract class Sensor : SensorBase, ISensor {
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetTimestamp(CancellationToken cancellationToken) => SensorJS.InvokeTrySync<double>("getTimestamp", cancellationToken);
+    public ValueTask<double> GetTimestamp(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getTimestamp", cancellationToken);
 
 
 
@@ -64,11 +65,11 @@ public abstract class Sensor : SensorBase, ISensor {
     /// Activates one of the sensors based on Sensor.
     /// </summary>
     /// <returns></returns>
-    public ValueTask Start(CancellationToken cancellationToken = default) => SensorJS.InvokeVoidTrySync("start", cancellationToken);
+    public ValueTask Start(CancellationToken cancellationToken = default) => sensorJS.InvokeVoidTrySync("start", cancellationToken);
 
     /// <summary>
     /// Deactivates one of the sensors based on Sensor.
     /// </summary>
     /// <returns></returns>
-    public ValueTask Stop(CancellationToken cancellationToken = default) => SensorJS.InvokeVoidTrySync("stop", cancellationToken);
+    public ValueTask Stop(CancellationToken cancellationToken = default) => sensorJS.InvokeVoidTrySync("stop", cancellationToken);
 }

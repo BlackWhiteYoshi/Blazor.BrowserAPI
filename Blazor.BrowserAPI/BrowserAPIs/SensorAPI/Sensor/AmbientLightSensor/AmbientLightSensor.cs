@@ -11,10 +11,7 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensor)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class AmbientLightSensor(IJSObjectReference ambientLightSensor) : Sensor, IAmbientLightSensor {
-    private protected override IJSObjectReference SensorJS => ambientLightSensor;
-
-
+public sealed class AmbientLightSensor(IJSObjectReference ambientLightSensor) : Sensor(ambientLightSensor), IAmbientLightSensor {
     /// <summary>
     /// Returns the current light level in lux of the ambient light level around the hosting device.
     /// </summary>
@@ -25,5 +22,5 @@ public sealed class AmbientLightSensor(IJSObjectReference ambientLightSensor) : 
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetIlluminance(CancellationToken cancellationToken) => ambientLightSensor.InvokeTrySync<double>("getIlluminance", cancellationToken);
+    public ValueTask<double> GetIlluminance(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getIlluminance", cancellationToken);
 }

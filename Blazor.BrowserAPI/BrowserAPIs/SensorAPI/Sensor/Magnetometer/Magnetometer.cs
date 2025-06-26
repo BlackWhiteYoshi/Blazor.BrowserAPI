@@ -11,10 +11,7 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensor)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class Magnetometer(IJSObjectReference magnetometer) : Sensor, IMagnetometer {
-    private protected override IJSObjectReference SensorJS => magnetometer;
-
-
+public sealed class Magnetometer(IJSObjectReference magnetometer) : Sensor(magnetometer), IMagnetometer {
     /// <summary>
     /// Returns a double containing the magnetic field around the device's x axis.
     /// </summary>
@@ -25,7 +22,7 @@ public sealed class Magnetometer(IJSObjectReference magnetometer) : Sensor, IMag
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetX(CancellationToken cancellationToken) => magnetometer.InvokeTrySync<double>("getX", cancellationToken);
+    public ValueTask<double> GetX(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getX", cancellationToken);
 
 
     /// <summary>
@@ -38,7 +35,7 @@ public sealed class Magnetometer(IJSObjectReference magnetometer) : Sensor, IMag
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetY(CancellationToken cancellationToken) => magnetometer.InvokeTrySync<double>("getY", cancellationToken);
+    public ValueTask<double> GetY(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getY", cancellationToken);
 
 
     /// <summary>
@@ -51,5 +48,5 @@ public sealed class Magnetometer(IJSObjectReference magnetometer) : Sensor, IMag
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetZ(CancellationToken cancellationToken) => magnetometer.InvokeTrySync<double>("getZ", cancellationToken);
+    public ValueTask<double> GetZ(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getZ", cancellationToken);
 }

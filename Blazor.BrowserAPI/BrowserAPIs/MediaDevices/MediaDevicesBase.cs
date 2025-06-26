@@ -7,9 +7,9 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Name = "IMediaDevicesInProcess")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 #pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class MediaDevicesBase {
+public abstract class MediaDevicesBase(IModuleManager moduleManager) {
 #pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected abstract IModuleManager ModuleManager { get; }
+    private protected IModuleManager moduleManager = moduleManager;
 
 
     /// <summary>
@@ -31,5 +31,5 @@ public abstract class MediaDevicesBase {
     /// <para>If the media device is an input device, an InputDeviceInfo object will be returned instead.</para>
     /// <para>If enumeration fails, the promise is rejected.</para>
     /// </returns>
-    public ValueTask<MediaDeviceInfo[]> EnumerateDevices(CancellationToken cancellationToken = default) => ModuleManager.InvokeAsync<MediaDeviceInfo[]>("MediaDevicesAPI.enumerateDevices", cancellationToken);
+    public ValueTask<MediaDeviceInfo[]> EnumerateDevices(CancellationToken cancellationToken = default) => moduleManager.InvokeAsync<MediaDeviceInfo[]>("MediaDevicesAPI.enumerateDevices", cancellationToken);
 }

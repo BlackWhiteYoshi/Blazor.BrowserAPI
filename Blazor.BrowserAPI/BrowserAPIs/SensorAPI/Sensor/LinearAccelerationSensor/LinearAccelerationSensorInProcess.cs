@@ -11,22 +11,19 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensorInProcess)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class LinearAccelerationSensorInProcess(IJSInProcessObjectReference linearAccelerationSensor) : SensorInProcess, ILinearAccelerationSensorInProcess {
-    private protected override IJSInProcessObjectReference SensorJSInProcess => linearAccelerationSensor;
-
-
+public sealed class LinearAccelerationSensorInProcess(IJSInProcessObjectReference linearAccelerationSensor) : SensorInProcess(linearAccelerationSensor), ILinearAccelerationSensorInProcess {
     /// <summary>
     /// Returns a double containing the acceleration of the device along the device's x axis.
     /// </summary>
-    public double X => SensorJSInProcess.Invoke<double>("getX");
+    public double X => SensorJS.Invoke<double>("getX");
 
     /// <summary>
     /// Returns a double containing the acceleration of the device along the device's y axis.
     /// </summary>
-    public double Y => SensorJSInProcess.Invoke<double>("getY");
+    public double Y => SensorJS.Invoke<double>("getY");
 
     /// <summary>
     /// Returns a double containing the acceleration of the device along the device's z axis.
     /// </summary>
-    public double Z => SensorJSInProcess.Invoke<double>("getZ");
+    public double Z => SensorJS.Invoke<double>("getZ");
 }

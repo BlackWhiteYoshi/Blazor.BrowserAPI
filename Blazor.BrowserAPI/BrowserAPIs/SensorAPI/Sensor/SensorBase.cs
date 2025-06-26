@@ -8,9 +8,9 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Name = "ISensorInProcess")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 #pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class SensorBase {
+public abstract class SensorBase(IJSObjectReference sensorJS) {
 #pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected abstract IJSObjectReference SensorJS { get; }
+    private protected IJSObjectReference sensorJS = sensorJS;
 
 
     #region Events
@@ -31,7 +31,7 @@ public abstract class SensorBase {
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return SensorJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, SensorJS is IJSInProcessObjectReference]);
+        return sensorJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, sensorJS is IJSInProcessObjectReference]);
     }
 
     /// <summary>
@@ -42,10 +42,10 @@ public abstract class SensorBase {
 
     private async ValueTask ActivateJSEvent(string jsMethodName) {
         await InitEventTrigger();
-        await SensorJS.InvokeVoidTrySync(jsMethodName);
+        await sensorJS.InvokeVoidTrySync(jsMethodName);
     }
 
-    private ValueTask DeactivateJSEvent(string jsMethodName) => SensorJS.InvokeVoidTrySync(jsMethodName);
+    private ValueTask DeactivateJSEvent(string jsMethodName) => sensorJS.InvokeVoidTrySync(jsMethodName);
 
 
     private Action<string>? _onError;

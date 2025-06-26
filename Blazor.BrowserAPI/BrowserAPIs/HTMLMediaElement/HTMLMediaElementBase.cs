@@ -8,9 +8,9 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLMediaElementInProcess")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 #pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class HTMLMediaElementBase {
+public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaElementTask) {
 #pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected abstract Task<IJSObjectReference> HTMLMediaElementTask { get; }
+    private protected Task<IJSObjectReference> htmlMediaElementTask = htmlMediaElementTask;
 
 
     /// <summary>
@@ -19,7 +19,7 @@ public abstract class HTMLMediaElementBase {
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask Play(CancellationToken cancellationToken = default) => await (await HTMLMediaElementTask).InvokeVoidAsync("play", cancellationToken);
+    public async ValueTask Play(CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidAsync("play", cancellationToken);
 
 
     #region Events
@@ -102,13 +102,13 @@ public abstract class HTMLMediaElementBase {
 
 
     private async ValueTask ActivateJSEvent(string jsMethodName) {
-        IJSObjectReference htmlMediaElement = await HTMLMediaElementTask;
+        IJSObjectReference htmlMediaElement = await htmlMediaElementTask;
         await InitEventTrigger(htmlMediaElement);
         await htmlMediaElement.InvokeVoidTrySync(jsMethodName);
     }
 
     private async ValueTask DeactivateJSEvent(string jsMethodName) {
-        IJSObjectReference htmlMediaElement = await HTMLMediaElementTask;
+        IJSObjectReference htmlMediaElement = await htmlMediaElementTask;
         await htmlMediaElement.InvokeVoidTrySync(jsMethodName);
     }
 

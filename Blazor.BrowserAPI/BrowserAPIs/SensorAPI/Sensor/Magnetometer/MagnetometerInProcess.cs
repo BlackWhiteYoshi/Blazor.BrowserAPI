@@ -11,22 +11,19 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensorInProcess)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class MagnetometerInProcess(IJSInProcessObjectReference magnetometer) : SensorInProcess, IMagnetometerInProcess {
-    private protected override IJSInProcessObjectReference SensorJSInProcess => magnetometer;
-
-
+public sealed class MagnetometerInProcess(IJSInProcessObjectReference magnetometer) : SensorInProcess(magnetometer), IMagnetometerInProcess {
     /// <summary>
     /// Returns a double containing the magnetic field around the device's x axis.
     /// </summary>
-    public double X => SensorJSInProcess.Invoke<double>("getX");
+    public double X => SensorJS.Invoke<double>("getX");
 
     /// <summary>
     /// Returns a double containing the magnetic field around the device's y axis.
     /// </summary>
-    public double Y => SensorJSInProcess.Invoke<double>("getY");
+    public double Y => SensorJS.Invoke<double>("getY");
 
     /// <summary>
     /// Returns a double containing the magnetic field around the device's z axis.
     /// </summary>
-    public double Z => SensorJSInProcess.Invoke<double>("getZ");
+    public double Z => SensorJS.Invoke<double>("getZ");
 }

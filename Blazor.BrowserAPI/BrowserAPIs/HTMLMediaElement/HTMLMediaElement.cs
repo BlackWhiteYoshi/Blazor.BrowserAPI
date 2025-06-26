@@ -11,16 +11,14 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTask) : HTMLMediaElementBase, IHTMLMediaElement {
-    private protected override Task<IJSObjectReference> HTMLMediaElementTask { get; } = htmlMediaElementTask;
-
+public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTask) : HTMLMediaElementBase(htmlMediaElementTask), IHTMLMediaElement {
     /// <summary>
     /// Releases the JS instance for this htmlMediaElement.
     /// </summary>
     /// <returns></returns>
     public async ValueTask DisposeAsync() {
         DisposeEventTrigger();
-        await (await HTMLMediaElementTask).DisposeTrySync();
+        await (await htmlMediaElementTask).DisposeTrySync();
     }
 
 
@@ -44,7 +42,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<string> GetSrc(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<string>("getSrc", cancellationToken);
+    public async ValueTask<string> GetSrc(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<string>("getSrc", cancellationToken);
 
     /// <summary>
     /// <para>A string that reflects the src HTML attribute, which contains the URL of a media resource to use.</para>
@@ -56,7 +54,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetSrc(string value, CancellationToken cancellationToken = default) => await (await HTMLMediaElementTask).InvokeVoidTrySync("setSrc", cancellationToken, [value]);
+    public async ValueTask SetSrc(string value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setSrc", cancellationToken, [value]);
 
 
     /// <summary>
@@ -71,7 +69,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <returns></returns>
     public async ValueTask<IMediaStream?> GetSrcObject(CancellationToken cancellationToken) {
         try {
-            IJSObjectReference mediaStream = await (await HTMLMediaElementTask).InvokeTrySync<IJSObjectReference>("getSrcObject", cancellationToken);
+            IJSObjectReference mediaStream = await (await htmlMediaElementTask).InvokeTrySync<IJSObjectReference>("getSrcObject", cancellationToken);
             return new MediaStream(mediaStream);
         }
         catch (JSException) {
@@ -86,7 +84,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask SetSrcObject(IMediaStream? value, CancellationToken cancellationToken = default)
-        => await (await HTMLMediaElementTask).InvokeVoidTrySync("setSrcObject", cancellationToken, [value?.MediaStreamJS]);
+        => await (await htmlMediaElementTask).InvokeVoidTrySync("setSrcObject", cancellationToken, [value?.MediaStreamJS]);
 
 
     /// <summary>
@@ -99,7 +97,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<bool> GetControls(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<bool>("getControls", cancellationToken);
+    public async ValueTask<bool> GetControls(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<bool>("getControls", cancellationToken);
 
     /// <summary>
     /// A boolean that reflects the controls HTML attribute, indicating whether user interface items for controlling the resource should be displayed.
@@ -107,7 +105,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetControls(bool value, CancellationToken cancellationToken = default) => await (await HTMLMediaElementTask).InvokeVoidTrySync("setControls", cancellationToken, [value]);
+    public async ValueTask SetControls(bool value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setControls", cancellationToken, [value]);
 
 
     /// <summary>
@@ -122,7 +120,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<bool> GetAutoplay(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<bool>("getAutoplay", cancellationToken);
+    public async ValueTask<bool> GetAutoplay(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<bool>("getAutoplay", cancellationToken);
 
     /// <summary>
     /// <para>A boolean value that reflects the autoplay HTML attribute, indicating whether playback should automatically begin as soon as enough media is available to do so without interruption.</para>
@@ -131,7 +129,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetAutoplay(bool value, CancellationToken cancellationToken = default) => await (await HTMLMediaElementTask).InvokeVoidTrySync("setAutoplay", cancellationToken, [value]);
+    public async ValueTask SetAutoplay(bool value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setAutoplay", cancellationToken, [value]);
 
 
     /// <summary>
@@ -144,7 +142,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<bool> GetLoop(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<bool>("getLoop", cancellationToken);
+    public async ValueTask<bool> GetLoop(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<bool>("getLoop", cancellationToken);
 
     /// <summary>
     /// A boolean that reflects the loop HTML attribute, which indicates whether the media element should start over when it reaches the end.
@@ -152,7 +150,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetLoop(bool value, CancellationToken cancellationToken = default) => await (await HTMLMediaElementTask).InvokeVoidTrySync("setLoop", cancellationToken, [value]);
+    public async ValueTask SetLoop(bool value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setLoop", cancellationToken, [value]);
 
 
     /// <summary>
@@ -167,7 +165,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<bool> GetDefaultMuted(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<bool>("getDefaultMuted", cancellationToken);
+    public async ValueTask<bool> GetDefaultMuted(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<bool>("getDefaultMuted", cancellationToken);
 
     /// <summary>
     /// <para>A boolean that reflects the muted HTML attribute, which indicates whether the media element's audio output should be muted by default.</para>
@@ -176,7 +174,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetDefaultMuted(bool value, CancellationToken cancellationToken = default) => await (await HTMLMediaElementTask).InvokeVoidTrySync("setDefaultMuted", cancellationToken, [value]);
+    public async ValueTask SetDefaultMuted(bool value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setDefaultMuted", cancellationToken, [value]);
 
 
     /// <summary>
@@ -203,7 +201,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<string> GetPreload(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<string>("getPreload", cancellationToken);
+    public async ValueTask<string> GetPreload(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<string>("getPreload", cancellationToken);
 
     /// <summary>
     /// <para>A string that reflects the preload HTML attribute, indicating what data should be preloaded, if any.</para>
@@ -218,7 +216,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetPreload(string value, CancellationToken cancellationToken = default) => await (await HTMLMediaElementTask).InvokeVoidTrySync("setPreload", cancellationToken, [value]);
+    public async ValueTask SetPreload(string value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setPreload", cancellationToken, [value]);
 
 
     // State
@@ -235,7 +233,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<string> GetCurrentSrc(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<string>("getCurrentSrc", cancellationToken);
+    public async ValueTask<string> GetCurrentSrc(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<string>("getCurrentSrc", cancellationToken);
 
 
     /// <summary>
@@ -256,7 +254,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<double> GetCurrentTime(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<double>("getCurrentTime", cancellationToken);
+    public async ValueTask<double> GetCurrentTime(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<double>("getCurrentTime", cancellationToken);
 
     /// <summary>
     /// <para>A double-precision floating-point value indicating the current playback time in seconds</para>
@@ -268,7 +266,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetCurrentTime(double value, CancellationToken cancellationToken = default) => await (await HTMLMediaElementTask).InvokeVoidTrySync("setCurrentTime", cancellationToken, [value]);
+    public async ValueTask SetCurrentTime(double value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setCurrentTime", cancellationToken, [value]);
 
 
     /// <summary>
@@ -289,7 +287,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<double> GetDuration(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<double>("getDuration", cancellationToken);
+    public async ValueTask<double> GetDuration(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<double>("getDuration", cancellationToken);
 
 
     /// <summary>
@@ -302,7 +300,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<TimeRange[]> GetSeekable(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<TimeRange[]>("getSeekable", cancellationToken);
+    public async ValueTask<TimeRange[]> GetSeekable(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<TimeRange[]>("getSeekable", cancellationToken);
 
 
     /// <summary>
@@ -317,7 +315,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<bool> GetMuted(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<bool>("getMuted", cancellationToken);
+    public async ValueTask<bool> GetMuted(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<bool>("getMuted", cancellationToken);
 
     /// <summary>
     /// <para>A boolean that determines whether audio is muted. true if the audio is muted and false otherwise.</para>
@@ -326,7 +324,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetMuted(bool value, CancellationToken cancellationToken = default) => await (await HTMLMediaElementTask).InvokeVoidTrySync("setMuted", cancellationToken, [value]);
+    public async ValueTask SetMuted(bool value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setMuted", cancellationToken, [value]);
 
 
     /// <summary>
@@ -339,7 +337,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<double> GetVolume(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<double>("getVolume", cancellationToken);
+    public async ValueTask<double> GetVolume(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<double>("getVolume", cancellationToken);
 
     /// <summary>
     /// A double indicating the audio volume, from 0.0 (silent) to 1.0 (loudest).
@@ -347,7 +345,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetVolume(double value, CancellationToken cancellationToken = default) => await (await HTMLMediaElementTask).InvokeVoidTrySync("setVolume", cancellationToken, [value]);
+    public async ValueTask SetVolume(double value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setVolume", cancellationToken, [value]);
 
 
     /// <summary>
@@ -362,7 +360,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<bool> GetPaused(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<bool>("getPaused", cancellationToken);
+    public async ValueTask<bool> GetPaused(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<bool>("getPaused", cancellationToken);
 
 
     /// <summary>
@@ -379,7 +377,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<bool> GetEnded(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<bool>("getEnded", cancellationToken);
+    public async ValueTask<bool> GetEnded(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<bool>("getEnded", cancellationToken);
 
 
     /// <summary>
@@ -392,7 +390,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<bool> GetSeeking(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<bool>("getSeeking", cancellationToken);
+    public async ValueTask<bool> GetSeeking(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<bool>("getSeeking", cancellationToken);
 
 
     /// <summary>
@@ -421,7 +419,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetReadyState(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<int>("getReadyState", cancellationToken);
+    public async ValueTask<int> GetReadyState(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<int>("getReadyState", cancellationToken);
 
 
     /// <summary>
@@ -448,7 +446,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetNetworkState(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<int>("getNetworkState", cancellationToken);
+    public async ValueTask<int> GetNetworkState(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<int>("getNetworkState", cancellationToken);
 
 
     /// <summary>
@@ -461,7 +459,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<TimeRange[]> GetBuffered(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<TimeRange[]>("getBuffered", cancellationToken);
+    public async ValueTask<TimeRange[]> GetBuffered(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<TimeRange[]>("getBuffered", cancellationToken);
 
 
     /// <summary>
@@ -474,7 +472,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<TimeRange[]> GetPlayed(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<TimeRange[]>("getPlayed", cancellationToken);
+    public async ValueTask<TimeRange[]> GetPlayed(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<TimeRange[]>("getPlayed", cancellationToken);
 
 
     // Settings
@@ -503,7 +501,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<double> GetPlaybackRate(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<double>("getPlaybackRate", cancellationToken);
+    public async ValueTask<double> GetPlaybackRate(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<double>("getPlaybackRate", cancellationToken);
 
     /// <summary>
     /// <para>A double that indicates the rate at which the media is being played back.</para>
@@ -518,7 +516,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetPlaybackRate(double value, CancellationToken cancellationToken = default) => await (await HTMLMediaElementTask).InvokeVoidTrySync("setPlaybackRate", cancellationToken, [value]);
+    public async ValueTask SetPlaybackRate(double value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setPlaybackRate", cancellationToken, [value]);
 
 
     /// <summary>
@@ -533,7 +531,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<double> GetDefaultPlaybackRate(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<double>("getDefaultPlaybackRate", cancellationToken);
+    public async ValueTask<double> GetDefaultPlaybackRate(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<double>("getDefaultPlaybackRate", cancellationToken);
 
     /// <summary>
     /// <para>A double indicating the default playback rate for the media.</para>
@@ -542,7 +540,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetDefaultPlaybackRate(double value, CancellationToken cancellationToken = default) => await (await HTMLMediaElementTask).InvokeVoidTrySync("setDefaultPlaybackRate", cancellationToken, [value]);
+    public async ValueTask SetDefaultPlaybackRate(double value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setDefaultPlaybackRate", cancellationToken, [value]);
 
 
     /// <summary>
@@ -579,7 +577,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<string> GetCrossOrigin(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<string>("getCrossOrigin", cancellationToken);
+    public async ValueTask<string> GetCrossOrigin(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<string>("getCrossOrigin", cancellationToken);
 
     /// <summary>
     /// <para>A string indicating the CORS setting for this media element. See <see href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin">CORS settings attributes</see> for details.</para>
@@ -599,7 +597,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetCrossOrigin(string value, CancellationToken cancellationToken = default) => await (await HTMLMediaElementTask).InvokeVoidTrySync("setCrossOrigin", cancellationToken, [value]);
+    public async ValueTask SetCrossOrigin(string value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setCrossOrigin", cancellationToken, [value]);
 
 
     /// <summary>
@@ -618,7 +616,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<bool> GetPreservesPitch(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<bool>("getPreservesPitch", cancellationToken);
+    public async ValueTask<bool> GetPreservesPitch(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<bool>("getPreservesPitch", cancellationToken);
 
     /// <summary>
     /// <para>
@@ -630,7 +628,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetPreservesPitch(bool value, CancellationToken cancellationToken = default) => await (await HTMLMediaElementTask).InvokeVoidTrySync("setPreservesPitch", cancellationToken, [value]);
+    public async ValueTask SetPreservesPitch(bool value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setPreservesPitch", cancellationToken, [value]);
 
 
     /// <summary>
@@ -645,7 +643,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<bool> GetDisableRemotePlayback(CancellationToken cancellationToken) => await (await HTMLMediaElementTask).InvokeTrySync<bool>("getDisableRemotePlayback", cancellationToken);
+    public async ValueTask<bool> GetDisableRemotePlayback(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<bool>("getDisableRemotePlayback", cancellationToken);
 
     /// <summary>
     /// <para>A boolean that sets or returns the remote playback state, indicating whether the media element is allowed to have a remote playback UI.</para>
@@ -654,7 +652,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetDisableRemotePlayback(bool value, CancellationToken cancellationToken = default) => await (await HTMLMediaElementTask).InvokeVoidTrySync("setDisableRemotePlayback", cancellationToken, [value]);
+    public async ValueTask SetDisableRemotePlayback(bool value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setDisableRemotePlayback", cancellationToken, [value]);
 
 
     // Methods
@@ -667,14 +665,14 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask Pause(CancellationToken cancellationToken = default) => await (await HTMLMediaElementTask).InvokeVoidTrySync("pause", cancellationToken);
+    public async ValueTask Pause(CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("pause", cancellationToken);
 
     /// <summary>
     /// Resets the media to the beginning and selects the best available source from the sources provided using the <i>src</i> attribute or the <i>&lt;source&gt;</i> element.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask Load(CancellationToken cancellationToken = default) => await (await HTMLMediaElementTask).InvokeVoidTrySync("load", cancellationToken);
+    public async ValueTask Load(CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("load", cancellationToken);
 
     /// <summary>
     /// <para>Quickly seeks to the given time with low precision.</para>
@@ -683,7 +681,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="time"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask FastSeek(double time, CancellationToken cancellationToken = default) => await (await HTMLMediaElementTask).InvokeVoidTrySync("fastSeek", cancellationToken, [time]);
+    public async ValueTask FastSeek(double time, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("fastSeek", cancellationToken, [time]);
 
     /// <summary>
     /// Given a string specifying a MIME media type (potentially with the codecs parameter included), canPlayType() returns the string<br />
@@ -694,5 +692,5 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="type">A string specifying the MIME type of the media and (optionally) a codecs parameter containing a comma-separated list of the supported codecs.</param>
     /// <param name="cancellationToken"></param>
     /// <returns>"probably", "maybe" or ""</returns>
-    public async ValueTask<string> CanPlayType(string type, CancellationToken cancellationToken = default) => await (await HTMLMediaElementTask).InvokeTrySync<string>("canPlayType", cancellationToken, [type]);
+    public async ValueTask<string> CanPlayType(string type, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeTrySync<string>("canPlayType", cancellationToken, [type]);
 }

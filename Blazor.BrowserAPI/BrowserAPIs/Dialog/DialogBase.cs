@@ -8,9 +8,9 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Name = "IDialogInProcess")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 #pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class DialogBase {
+public abstract class DialogBase(Task<IJSObjectReference> dialogTask) {
 #pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected abstract Task<IJSObjectReference> DialogTask { get; }
+    private protected Task<IJSObjectReference> dialogTask = dialogTask;
 
 
     #region Events
@@ -39,13 +39,13 @@ public abstract class DialogBase {
 
 
     private async ValueTask ActivateJSEvent(string jsMethodName) {
-        IJSObjectReference dialog = await DialogTask;
+        IJSObjectReference dialog = await dialogTask;
         await InitEventTrigger(dialog);
         await dialog.InvokeVoidTrySync(jsMethodName);
     }
 
     private async ValueTask DeactivateJSEvent(string jsMethodName) {
-        IJSObjectReference dialog = await DialogTask;
+        IJSObjectReference dialog = await dialogTask;
         await dialog.InvokeVoidTrySync(jsMethodName);
     }
 

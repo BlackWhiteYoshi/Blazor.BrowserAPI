@@ -12,10 +12,7 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensor)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class AbsoluteOrientationSensor(IJSObjectReference absoluteOrientationSensor) : Sensor, IAbsoluteOrientationSensor {
-    private protected override IJSObjectReference SensorJS => absoluteOrientationSensor;
-
-
+public sealed class AbsoluteOrientationSensor(IJSObjectReference absoluteOrientationSensor) : Sensor(absoluteOrientationSensor), IAbsoluteOrientationSensor {
     /// <summary>
     /// Returns a unit quaternion representing the device's orientation.
     /// </summary>
@@ -27,7 +24,7 @@ public sealed class AbsoluteOrientationSensor(IJSObjectReference absoluteOrienta
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<Quaternion> GetQuaternion(CancellationToken cancellationToken) {
-        float[] quaternion = await absoluteOrientationSensor.InvokeTrySync<float[]>("getQuaternion", cancellationToken);
+        float[] quaternion = await sensorJS.InvokeTrySync<float[]>("getQuaternion", cancellationToken);
         return new Quaternion(quaternion[0], quaternion[1], quaternion[2], quaternion[3]);
     }
 
@@ -38,7 +35,7 @@ public sealed class AbsoluteOrientationSensor(IJSObjectReference absoluteOrienta
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<Matrix4x4> PopulateMatrix(CancellationToken cancellationToken = default) {
-        float[] matrix4x4 = await absoluteOrientationSensor.InvokeTrySync<float[]>("populateMatrix", cancellationToken);
+        float[] matrix4x4 = await sensorJS.InvokeTrySync<float[]>("populateMatrix", cancellationToken);
         return new Matrix4x4(
             matrix4x4[0],
             matrix4x4[1],

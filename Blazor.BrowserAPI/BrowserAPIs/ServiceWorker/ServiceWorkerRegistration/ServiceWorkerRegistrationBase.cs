@@ -8,9 +8,9 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerRegistrationInProcess")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 #pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class ServiceWorkerRegistrationBase {
+public abstract class ServiceWorkerRegistrationBase(IJSObjectReference serviceWorkerRegistrationJS) {
 #pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected abstract IJSObjectReference ServiceWorkerRegistrationJS { get; }
+    private protected IJSObjectReference serviceWorkerRegistrationJS = serviceWorkerRegistrationJS;
 
 
     /// <summary>
@@ -20,9 +20,9 @@ public abstract class ServiceWorkerRegistrationBase {
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns>false if no registration was found, otherwise true (irrespective of whether unregistration happened or not)</returns>
-    public ValueTask<bool> Unregister(CancellationToken cancellationToken = default) => ServiceWorkerRegistrationJS.InvokeAsync<bool>("unregister", cancellationToken);
+    public ValueTask<bool> Unregister(CancellationToken cancellationToken = default) => serviceWorkerRegistrationJS.InvokeAsync<bool>("unregister", cancellationToken);
 
-    private protected ValueTask<IJSObjectReference> UpdateBase(CancellationToken cancellationToken = default) => ServiceWorkerRegistrationJS.InvokeAsync<IJSObjectReference>("update", cancellationToken);
+    private protected ValueTask<IJSObjectReference> UpdateBase(CancellationToken cancellationToken = default) => serviceWorkerRegistrationJS.InvokeAsync<IJSObjectReference>("update", cancellationToken);
 
 
     #region Events
@@ -40,7 +40,7 @@ public abstract class ServiceWorkerRegistrationBase {
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return ServiceWorkerRegistrationJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, ServiceWorkerRegistrationJS is IJSInProcessObjectReference]);
+        return serviceWorkerRegistrationJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, serviceWorkerRegistrationJS is IJSInProcessObjectReference]);
     }
 
     /// <summary>
@@ -51,10 +51,10 @@ public abstract class ServiceWorkerRegistrationBase {
 
     private async ValueTask ActivateJSEvent(string jsMethodName) {
         await InitEventTrigger();
-        await ServiceWorkerRegistrationJS.InvokeVoidTrySync(jsMethodName);
+        await serviceWorkerRegistrationJS.InvokeVoidTrySync(jsMethodName);
     }
 
-    private ValueTask DeactivateJSEvent(string jsMethodName) => ServiceWorkerRegistrationJS.InvokeVoidTrySync(jsMethodName);
+    private ValueTask DeactivateJSEvent(string jsMethodName) => serviceWorkerRegistrationJS.InvokeVoidTrySync(jsMethodName);
 
 
     private Action? _onUpdateFound;

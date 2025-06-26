@@ -13,15 +13,13 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class ServiceWorker(IJSObjectReference serviceWorker) : ServiceWorkerBase, IServiceWorker {
-    private protected override IJSObjectReference ServiceWorkerJS => serviceWorker;
-
+public sealed class ServiceWorker(IJSObjectReference serviceWorkerJS) : ServiceWorkerBase(serviceWorkerJS), IServiceWorker {
     /// <summary>
     /// Releases the JS instance for this service worker.
     /// </summary>
     public ValueTask DisposeAsync() {
         DisposeEventTrigger();
-        return serviceWorker.DisposeTrySync();
+        return serviceWorkerJS.DisposeTrySync();
     }
 
 
@@ -35,7 +33,7 @@ public sealed class ServiceWorker(IJSObjectReference serviceWorker) : ServiceWor
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetScriptUrl(CancellationToken cancellationToken) => serviceWorker.InvokeTrySync<string>("scriptURL", cancellationToken);
+    public ValueTask<string> GetScriptUrl(CancellationToken cancellationToken) => serviceWorkerJS.InvokeTrySync<string>("scriptURL", cancellationToken);
 
 
     /// <summary>
@@ -49,7 +47,7 @@ public sealed class ServiceWorker(IJSObjectReference serviceWorker) : ServiceWor
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetState(CancellationToken cancellationToken) => serviceWorker.InvokeTrySync<string>("state", cancellationToken);
+    public ValueTask<string> GetState(CancellationToken cancellationToken) => serviceWorkerJS.InvokeTrySync<string>("state", cancellationToken);
 
 
     /// <summary>
@@ -69,5 +67,5 @@ public sealed class ServiceWorker(IJSObjectReference serviceWorker) : ServiceWor
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask PostMessage(object message, CancellationToken cancellationToken = default) => serviceWorker.InvokeVoidTrySync("postMessage", cancellationToken, [message]);
+    public ValueTask PostMessage(object message, CancellationToken cancellationToken = default) => serviceWorkerJS.InvokeVoidTrySync("postMessage", cancellationToken, [message]);
 }

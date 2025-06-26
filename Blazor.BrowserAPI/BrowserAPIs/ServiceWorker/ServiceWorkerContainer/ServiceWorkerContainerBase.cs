@@ -7,9 +7,9 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerContainer")]
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerContainerInProcess")]
 #pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class ServiceWorkerContainerBase : IDisposable {
+public abstract class ServiceWorkerContainerBase(IModuleManager moduleManager) : IDisposable {
 #pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected abstract IModuleManager ModuleManager { get; }
+    private protected IModuleManager moduleManager = moduleManager;
 
     /// <summary>
     /// Releases the <see cref="EventTrigger"/> object used to trigger the events.
@@ -23,11 +23,11 @@ public abstract class ServiceWorkerContainerBase : IDisposable {
     /// <param name="scriptURL">relative file path to the service worker script (e.g. "/sw.js")</param>
     /// <param name="cancellationToken"></param>
     /// <returns>true, if service worker is supported, otherwise false</returns>
-    public ValueTask<bool> Register(string scriptURL, CancellationToken cancellationToken = default) => ModuleManager.InvokeAsync<bool>("ServiceWorkerContainerAPI.register", cancellationToken, [scriptURL]);
+    public ValueTask<bool> Register(string scriptURL, CancellationToken cancellationToken = default) => moduleManager.InvokeAsync<bool>("ServiceWorkerContainerAPI.register", cancellationToken, [scriptURL]);
 
     private protected async ValueTask<IJSObjectReference?> RegisterWithWorkerRegistrationBase(string scriptURL, CancellationToken cancellationToken) {
         try {
-            return await ModuleManager.InvokeAsync<IJSObjectReference>("ServiceWorkerContainerAPI.registerWithWorkerRegistration", cancellationToken, [scriptURL]);
+            return await moduleManager.InvokeAsync<IJSObjectReference>("ServiceWorkerContainerAPI.registerWithWorkerRegistration", cancellationToken, [scriptURL]);
         }
         catch (JSException) {
             return null;
@@ -35,19 +35,19 @@ public abstract class ServiceWorkerContainerBase : IDisposable {
     }
 
 
-    private protected ValueTask<IJSObjectReference> DelayUntilReadyBase(CancellationToken cancellationToken) => ModuleManager.InvokeAsync<IJSObjectReference>("ServiceWorkerContainerAPI.ready", cancellationToken);
+    private protected ValueTask<IJSObjectReference> DelayUntilReadyBase(CancellationToken cancellationToken) => moduleManager.InvokeAsync<IJSObjectReference>("ServiceWorkerContainerAPI.ready", cancellationToken);
 
 
     private protected async ValueTask<IJSObjectReference?> GetRegistrationBase(string clientUrl, CancellationToken cancellationToken) {
         try {
-            return await ModuleManager.InvokeAsync<IJSObjectReference>("ServiceWorkerContainerAPI.getRegistration", cancellationToken, [clientUrl]);
+            return await moduleManager.InvokeAsync<IJSObjectReference>("ServiceWorkerContainerAPI.getRegistration", cancellationToken, [clientUrl]);
         }
         catch (JSException) {
             return null;
         }
     }
 
-    private protected ValueTask<IJSObjectReference[]> GetRegistrationsBase(CancellationToken cancellationToken) => ModuleManager.InvokeAsync<IJSObjectReference[]>("ServiceWorkerContainerAPI.getRegistrations", cancellationToken);
+    private protected ValueTask<IJSObjectReference[]> GetRegistrationsBase(CancellationToken cancellationToken) => moduleManager.InvokeAsync<IJSObjectReference[]>("ServiceWorkerContainerAPI.getRegistrations", cancellationToken);
 
 
     #region Events
@@ -66,7 +66,7 @@ public abstract class ServiceWorkerContainerBase : IDisposable {
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return ModuleManager.InvokeTrySync("ServiceWorkerContainerAPI.initEvents", default, [_objectReferenceEventTrigger, ModuleManager.IsInProcess]);
+        return moduleManager.InvokeTrySync("ServiceWorkerContainerAPI.initEvents", default, [_objectReferenceEventTrigger, moduleManager.IsInProcess]);
     }
 
     /// <summary>
@@ -77,10 +77,10 @@ public abstract class ServiceWorkerContainerBase : IDisposable {
 
     private async ValueTask ActivateJSEvent(string jsMethodName) {
         await InitEventTrigger();
-        await ModuleManager.InvokeTrySync(jsMethodName, default);
+        await moduleManager.InvokeTrySync(jsMethodName, default);
     }
 
-    private ValueTask DeactivateJSEvent(string jsMethodName) => ModuleManager.InvokeTrySync(jsMethodName, default);
+    private ValueTask DeactivateJSEvent(string jsMethodName) => moduleManager.InvokeTrySync(jsMethodName, default);
 
 
     private Action? _onControllerChange;

@@ -13,16 +13,14 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRegistration) : ServiceWorkerRegistrationBase, IServiceWorkerRegistration {
-    private protected override IJSObjectReference ServiceWorkerRegistrationJS => serviceWorkerRegistration;
-
+public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRegistrationJS) : ServiceWorkerRegistrationBase(serviceWorkerRegistrationJS), IServiceWorkerRegistration {
     /// <summary>
     /// Releases the JS instance for this service worker registration.
     /// </summary>
     /// <returns></returns>
     public ValueTask DisposeAsync() {
         DisposeEventTrigger();
-        return serviceWorkerRegistration.DisposeTrySync();
+        return serviceWorkerRegistrationJS.DisposeTrySync();
     }
 
 
@@ -38,7 +36,7 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
     /// <returns></returns>
     public async ValueTask<IServiceWorker?> GetActive(CancellationToken cancellationToken) {
         try {
-            IJSObjectReference serviceWorker = await serviceWorkerRegistration.InvokeTrySync<IJSObjectReference>("active", cancellationToken);
+            IJSObjectReference serviceWorker = await serviceWorkerRegistrationJS.InvokeTrySync<IJSObjectReference>("active", cancellationToken);
             return new ServiceWorker(serviceWorker);
         }
         catch (JSException) {
@@ -59,7 +57,7 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
     /// <returns></returns>
     public async ValueTask<IServiceWorker?> GetInstalling(CancellationToken cancellationToken) {
         try {
-            IJSObjectReference serviceWorker = await serviceWorkerRegistration.InvokeTrySync<IJSObjectReference>("installing", cancellationToken);
+            IJSObjectReference serviceWorker = await serviceWorkerRegistrationJS.InvokeTrySync<IJSObjectReference>("installing", cancellationToken);
             return new ServiceWorker(serviceWorker);
         }
         catch (JSException) {
@@ -80,7 +78,7 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
     /// <returns></returns>
     public async ValueTask<IServiceWorker?> GetWaiting(CancellationToken cancellationToken) {
         try {
-            IJSObjectReference serviceWorker = await serviceWorkerRegistration.InvokeTrySync<IJSObjectReference>("waiting", cancellationToken);
+            IJSObjectReference serviceWorker = await serviceWorkerRegistrationJS.InvokeTrySync<IJSObjectReference>("waiting", cancellationToken);
             return new ServiceWorker(serviceWorker);
         }
         catch (JSException) {
@@ -100,7 +98,7 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetScope(CancellationToken cancellationToken) => serviceWorkerRegistration.InvokeTrySync<string>("scope", cancellationToken);
+    public ValueTask<string> GetScope(CancellationToken cancellationToken) => serviceWorkerRegistrationJS.InvokeTrySync<string>("scope", cancellationToken);
 
 
     /// <summary>
@@ -125,7 +123,7 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetUpdateViaCache(CancellationToken cancellationToken) => serviceWorkerRegistration.InvokeTrySync<string>("updateViaCache", cancellationToken);
+    public ValueTask<string> GetUpdateViaCache(CancellationToken cancellationToken) => serviceWorkerRegistrationJS.InvokeTrySync<string>("updateViaCache", cancellationToken);
 
 
 

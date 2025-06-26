@@ -10,16 +10,14 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTMLElementBase, IHTMLElement {
-    private protected override Task<IJSObjectReference> HTMLElementTask { get; } = htmlElementTask;
-
+public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTMLElementBase(htmlElementTask), IHTMLElement {
     /// <summary>
     /// Releases the JS instance for this HTML element.
     /// </summary>
     /// <returns></returns>
     public async ValueTask DisposeAsync() {
         DisposeEventTrigger();
-        await (await HTMLElementTask).DisposeTrySync();
+        await (await htmlElementTask).DisposeTrySync();
     }
 
 
@@ -51,7 +49,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<string> GetInnerText(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<string>("getInnerText", cancellationToken);
+    public async ValueTask<string> GetInnerText(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getInnerText", cancellationToken);
 
     /// <summary>
     /// <para>The <i>innerText</i> property of the HTMLElement interface represents the rendered text content of a node and its descendants.</para>
@@ -67,7 +65,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetInnerText(string value, CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeVoidTrySync("setInnerText", cancellationToken, [value]);
+    public async ValueTask SetInnerText(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setInnerText", cancellationToken, [value]);
 
 
     /// <summary>
@@ -88,7 +86,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<string> GetOuterText(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<string>("getOuterText", cancellationToken);
+    public async ValueTask<string> GetOuterText(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getOuterText", cancellationToken);
 
     /// <summary>
     /// <para>
@@ -100,7 +98,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetOuterText(string value, CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeVoidTrySync("setOuterText", cancellationToken, [value]);
+    public async ValueTask SetOuterText(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setOuterText", cancellationToken, [value]);
 
 
     /// <summary>
@@ -119,7 +117,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<string> GetStyle(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<string>("getInlineStyle", cancellationToken);
+    public async ValueTask<string> GetStyle(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getInlineStyle", cancellationToken);
 
     /// <summary>
     /// <para>JS-property: style.cssText</para>
@@ -130,7 +128,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetStyle(string value, CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeVoidTrySync("setInlineStyle", cancellationToken, [value]);
+    public async ValueTask SetStyle(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setInlineStyle", cancellationToken, [value]);
 
 
 
@@ -156,7 +154,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetOffsetWidth(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<int>("getOffsetWidth", cancellationToken);
+    public async ValueTask<int> GetOffsetWidth(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getOffsetWidth", cancellationToken);
 
 
     /// <summary>
@@ -181,7 +179,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetOffsetHeight(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<int>("getOffsetHeight", cancellationToken);
+    public async ValueTask<int> GetOffsetHeight(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getOffsetHeight", cancellationToken);
 
 
     /// <summary>
@@ -206,7 +204,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetOffsetLeft(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<int>("getOffsetLeft", cancellationToken);
+    public async ValueTask<int> GetOffsetLeft(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getOffsetLeft", cancellationToken);
 
 
     /// <summary>
@@ -221,7 +219,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetOffsetTop(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<int>("getOffsetTop", cancellationToken);
+    public async ValueTask<int> GetOffsetTop(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getOffsetTop", cancellationToken);
 
 
     /// <summary>
@@ -262,9 +260,8 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <returns></returns>
     public async ValueTask<IHTMLElement?> GetOffsetParent(CancellationToken cancellationToken) {
         try {
-            Task<IJSObjectReference> htmlElementTask = (await HTMLElementTask).InvokeTrySync<IJSObjectReference>("getOffsetParent", cancellationToken).AsTask();
-            await htmlElementTask;
-            return new HTMLElement(htmlElementTask);
+            Task<IJSObjectReference> htmlElementParent = (await htmlElementTask).InvokeTrySync<IJSObjectReference>("getOffsetParent", cancellationToken).AsTask();
+            return new HTMLElement(htmlElementParent);
         }
         catch (JSException) {
             return null;
@@ -285,7 +282,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<bool> GetHasFocus(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<bool>("hasFocus", cancellationToken);
+    public async ValueTask<bool> GetHasFocus(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<bool>("hasFocus", cancellationToken);
 
 
     /// <summary>
@@ -297,7 +294,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask Click(CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeVoidTrySync("click", cancellationToken);
+    public async ValueTask Click(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("click", cancellationToken);
 
     /// <summary>
     /// <para>
@@ -316,14 +313,14 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask Focus(bool preventScroll = false, CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeVoidTrySync("focus", cancellationToken, [preventScroll]);
+    public async ValueTask Focus(bool preventScroll = false, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("focus", cancellationToken, [preventScroll]);
 
     /// <summary>
     /// The <i>HTMLElement.blur()</i> method removes keyboard focus from the current element.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask Blur(CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeVoidTrySync("blur", cancellationToken);
+    public async ValueTask Blur(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("blur", cancellationToken);
 
     /// <summary>
     /// <para>The <i>showPopover()</i> method of the HTMLElement interface shows a popover element (i.e. one that has a valid popover attribute) by adding it to the top layer.</para>
@@ -334,7 +331,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask ShowPopover(CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeVoidTrySync("showPopover", cancellationToken);
+    public async ValueTask ShowPopover(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("showPopover", cancellationToken);
 
     /// <summary>
     /// <para>The <i>hidePopover()</i> method of the HTMLElement interface hides a popover element (i.e. one that has a valid popover attribute) by removing it from the top layer and styling it with display: none.</para>
@@ -345,7 +342,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask HidePopover(CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeVoidTrySync("hidePopover", cancellationToken);
+    public async ValueTask HidePopover(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("hidePopover", cancellationToken);
 
     /// <summary>
     /// <para>The <i>togglePopover()</i> method of the HTMLElement interface toggles a popover element (i.e. one that has a valid popover attribute) between the hidden and showing states.</para>
@@ -363,7 +360,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>true if the popup is open after the call, and false otherwise.</para>
     /// <para>None(undefined) may be returned in older browser versions(see browser compatibility).</para>
     /// </returns>
-    public async ValueTask<bool> TogglePopover(CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeTrySync<bool>("togglePopover", cancellationToken);
+    public async ValueTask<bool> TogglePopover(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<bool>("togglePopover", cancellationToken);
 
     /// <summary>
     /// <para>The <i>togglePopover()</i> method of the HTMLElement interface toggles a popover element (i.e. one that has a valid popover attribute) between the hidden and showing states.</para>
@@ -386,7 +383,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>true if the popup is open after the call, and false otherwise.</para>
     /// <para>None(undefined) may be returned in older browser versions(see browser compatibility).</para>
     /// </returns>
-    public async ValueTask<bool> TogglePopover(bool force, CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeTrySync<bool>("togglePopover", cancellationToken, [force]);
+    public async ValueTask<bool> TogglePopover(bool force, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<bool>("togglePopover", cancellationToken, [force]);
 
     #endregion
 
@@ -405,7 +402,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<string> GetInnerHTML(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<string>("getInnerHTML", cancellationToken);
+    public async ValueTask<string> GetInnerHTML(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getInnerHTML", cancellationToken);
 
     /// <summary>
     /// <para>The Element property <i>innerHTML</i> gets or sets the HTML or XML markup contained within the element.</para>
@@ -414,7 +411,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetInnerHTML(string value, CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeVoidTrySync("setInnerHTML", cancellationToken, [value]);
+    public async ValueTask SetInnerHTML(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setInnerHTML", cancellationToken, [value]);
 
 
     /// <summary>
@@ -435,7 +432,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<string> GetOuterHTML(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<string>("getOuterHTML", cancellationToken);
+    public async ValueTask<string> GetOuterHTML(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getOuterHTML", cancellationToken);
 
     /// <summary>
     /// <para>
@@ -447,7 +444,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetOuterHTML(string value, CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeVoidTrySync("setOuterHTML", cancellationToken, [value]);
+    public async ValueTask SetOuterHTML(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setOuterHTML", cancellationToken, [value]);
 
 
     /// <summary>
@@ -464,7 +461,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<Dictionary<string, string>> GetAttributes(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<Dictionary<string, string>>("getAttributes", cancellationToken);
+    public async ValueTask<Dictionary<string, string>> GetAttributes(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<Dictionary<string, string>>("getAttributes", cancellationToken);
 
 
     /// <summary>
@@ -477,7 +474,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetChildElementCount(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<int>("getChildElementCount", cancellationToken);
+    public async ValueTask<int> GetChildElementCount(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getChildElementCount", cancellationToken);
 
 
     /// <summary>
@@ -493,7 +490,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IHTMLElement[]> GetChildren(CancellationToken cancellationToken) {
-        IJSObjectReference[] children = await (await HTMLElementTask).InvokeTrySync<IJSObjectReference[]>("getChildren", cancellationToken);
+        IJSObjectReference[] children = await (await htmlElementTask).InvokeTrySync<IJSObjectReference[]>("getChildren", cancellationToken);
 
         HTMLElement[] result = new HTMLElement[children.Length];
         for (int i = 0; i < result.Length; i++)
@@ -512,7 +509,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns>A string variable representing the class or space-separated classes of the current element.</returns>
-    public async ValueTask<string> GetClassName(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<string>("getClassName", cancellationToken);
+    public async ValueTask<string> GetClassName(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getClassName", cancellationToken);
 
     /// <summary>
     /// The <i>className</i> property of the Element interface gets and sets the value of the class attribute of the specified element.
@@ -520,7 +517,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="value">A string variable representing the class or space-separated classes of the current element.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetClassName(string value, CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeVoidTrySync("setClassName", cancellationToken, [value]);
+    public async ValueTask SetClassName(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setClassName", cancellationToken, [value]);
 
 
     /// <summary>
@@ -535,7 +532,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<string[]> GetClassList(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<string[]>("getClassList", cancellationToken);
+    public async ValueTask<string[]> GetClassList(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string[]>("getClassList", cancellationToken);
 
 
 
@@ -565,7 +562,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetClientWidth(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<int>("getClientWidth", cancellationToken);
+    public async ValueTask<int> GetClientWidth(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getClientWidth", cancellationToken);
 
 
     /// <summary>
@@ -596,7 +593,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetClientHeight(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<int>("getClientHeight", cancellationToken);
+    public async ValueTask<int> GetClientHeight(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getClientHeight", cancellationToken);
 
 
     /// <summary>
@@ -621,7 +618,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetClientLeft(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<int>("getClientLeft", cancellationToken);
+    public async ValueTask<int> GetClientLeft(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getClientLeft", cancellationToken);
 
 
     /// <summary>
@@ -648,7 +645,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetClientTop(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<int>("getClientTop", cancellationToken);
+    public async ValueTask<int> GetClientTop(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getClientTop", cancellationToken);
 
 
 
@@ -676,7 +673,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetScrollWidth(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<int>("getScrollWidth", cancellationToken);
+    public async ValueTask<int> GetScrollWidth(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getScrollWidth", cancellationToken);
 
 
     /// <summary>
@@ -711,7 +708,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetScrollHeight(CancellationToken cancellationToken) => await (await HTMLElementTask).InvokeTrySync<int>("getScrollHeight", cancellationToken);
+    public async ValueTask<int> GetScrollHeight(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getScrollHeight", cancellationToken);
 
 
     /// <summary>
@@ -746,7 +743,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetScrollLeft(CancellationToken cancellationToken) => (int)await (await HTMLElementTask).InvokeTrySync<double>("getScrollLeft", cancellationToken);
+    public async ValueTask<int> GetScrollLeft(CancellationToken cancellationToken) => (int)await (await htmlElementTask).InvokeTrySync<double>("getScrollLeft", cancellationToken);
 
     /// <summary>
     /// <para>The <i>Element.scrollLeft</i> property gets or sets the number of pixels that an element's content is scrolled from its left edge.</para>
@@ -765,7 +762,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetScrollLeft(int value, CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeVoidTrySync("setScrollLeft", cancellationToken, [value]);
+    public async ValueTask SetScrollLeft(int value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setScrollLeft", cancellationToken, [value]);
 
 
     /// <summary>
@@ -808,7 +805,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetScrollTop(CancellationToken cancellationToken) => (int)await (await HTMLElementTask).InvokeTrySync<double>("getScrollTop", cancellationToken);
+    public async ValueTask<int> GetScrollTop(CancellationToken cancellationToken) => (int)await (await htmlElementTask).InvokeTrySync<double>("getScrollTop", cancellationToken);
 
     /// <summary>
     /// <para>The <i>Element.scrollTop</i> property gets or sets the number of pixels that an element's content is scrolled vertically.</para>
@@ -831,7 +828,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetScrollTop(int value, CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeVoidTrySync("setScrollTop", cancellationToken, [value]);
+    public async ValueTask SetScrollTop(int value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setScrollTop", cancellationToken, [value]);
 
 
 
@@ -865,7 +862,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// (these can be obtained using window.scrollY and window.scrollX) to get a bounding rectangle which is independent from the current scrolling position.
     /// </para>
     /// </returns>
-    public async ValueTask<DOMRect> GetBoundingClientRect(CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeTrySync<DOMRect>("getBoundingClientRect", cancellationToken);
+    public async ValueTask<DOMRect> GetBoundingClientRect(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<DOMRect>("getBoundingClientRect", cancellationToken);
 
     /// <summary>
     /// <para>The <i>getClientRects()</i> method of the Element interface returns a collection of DOMRect objects that indicate the bounding rectangles for each CSS border box in a client.</para>
@@ -886,7 +883,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Rectangles are returned even for CSS boxes that have empty border-boxes.The left, top, right, and bottom coordinates can still be meaningful.</para>
     /// <para>Fractional pixel offsets are possible.</para>
     /// </returns>
-    public async ValueTask<DOMRect[]> GetClientRects(CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeTrySync<DOMRect[]>("getClientRects", cancellationToken);
+    public async ValueTask<DOMRect[]> GetClientRects(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<DOMRect[]>("getClientRects", cancellationToken);
 
 
     /// <summary>
@@ -895,14 +892,14 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="name">A string representing the name of the attribute.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<bool> HasAttribute(string name, CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeTrySync<bool>("hasAttribute", cancellationToken, [name]);
+    public async ValueTask<bool> HasAttribute(string name, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<bool>("hasAttribute", cancellationToken, [name]);
 
     /// <summary>
     /// The <i>hasAttributes()</i> method of the Element interface returns a boolean value indicating whether the current element has any attributes or not.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<bool> HasAttributes(CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeTrySync<bool>("hasAttributes", cancellationToken);
+    public async ValueTask<bool> HasAttributes(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<bool>("hasAttributes", cancellationToken);
 
 
     /// <summary>
@@ -924,7 +921,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="pointerId">The pointerId of a PointerEvent object.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetPointerCapture(long pointerId, CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeVoidTrySync("setPointerCapture", cancellationToken, [pointerId]);
+    public async ValueTask SetPointerCapture(long pointerId, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setPointerCapture", cancellationToken, [pointerId]);
 
     /// <summary>
     /// <para>The <i>releasePointerCapture()</i> method of the Element interface releases (stops) pointer capture that was previously set for a specific (PointerEvent) pointer.</para>
@@ -933,7 +930,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="pointerId">The pointerId of a PointerEvent object.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask ReleasePointerCapture(long pointerId, CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeVoidTrySync("releasePointerCapture", cancellationToken, [pointerId]);
+    public async ValueTask ReleasePointerCapture(long pointerId, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("releasePointerCapture", cancellationToken, [pointerId]);
 
     /// <summary>
     /// The <i>hasPointerCapture()</i> method of the Element interface checks whether the element on which it is invoked has pointer capture for the pointer identified by the given pointer ID.
@@ -941,7 +938,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="pointerId">The pointerId of a PointerEvent object.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<bool> HasPointerCapture(long pointerId, CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeTrySync<bool>("hasPointerCapture", cancellationToken, [pointerId]);
+    public async ValueTask<bool> HasPointerCapture(long pointerId, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<bool>("hasPointerCapture", cancellationToken, [pointerId]);
 
 
     /// <summary>
@@ -951,7 +948,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="top">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask Scroll(int left, int top, CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeVoidTrySync("scroll", cancellationToken, [left, top]);
+    public async ValueTask Scroll(int left, int top, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("scroll", cancellationToken, [left, top]);
 
     /// <summary>
     /// The <i>scrollBy()</i> method of the Element interface scrolls an element by the given amount.
@@ -960,7 +957,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="y">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask ScrollBy(int x, int y, CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeVoidTrySync("scrollBy", cancellationToken, [x, y]);
+    public async ValueTask ScrollBy(int x, int y, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("scrollBy", cancellationToken, [x, y]);
 
     /// <summary>
     /// The Element interface's <i>scrollIntoView()</i> method scrolls the element's ancestor containers such that the element on which <i>scrollIntoView()</i> is called is visible to the user.
@@ -977,7 +974,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask ScrollIntoView(string block = "start", string inline = "nearest", string behavior = "auto", CancellationToken cancellationToken = default)
-        => await (await HTMLElementTask).InvokeVoidTrySync("scrollIntoView", cancellationToken, [block, inline, behavior]);
+        => await (await htmlElementTask).InvokeVoidTrySync("scrollIntoView", cancellationToken, [block, inline, behavior]);
 
     #endregion
 }

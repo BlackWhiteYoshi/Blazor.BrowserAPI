@@ -13,15 +13,15 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReference serviceWorkerRegistration) : ServiceWorkerRegistrationBase, IServiceWorkerRegistrationInProcess {
-    private protected override IJSObjectReference ServiceWorkerRegistrationJS => serviceWorkerRegistration;
+public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReference serviceWorkerRegistrationJS) : ServiceWorkerRegistrationBase(serviceWorkerRegistrationJS), IServiceWorkerRegistrationInProcess {
+    private IJSInProcessObjectReference ServiceWorkerRegistrationJS => (IJSInProcessObjectReference)base.serviceWorkerRegistrationJS;
 
     /// <summary>
     /// Releases the JS instance for this service worker registration.
     /// </summary>
     public void Dispose() {
         DisposeEventTrigger();
-        serviceWorkerRegistration.Dispose();
+        ServiceWorkerRegistrationJS.Dispose();
     }
 
 
@@ -31,7 +31,7 @@ public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReferen
     public IServiceWorkerInProcess? Active {
         get {
             try {
-                IJSInProcessObjectReference serviceWorker = serviceWorkerRegistration.Invoke<IJSInProcessObjectReference>("active");
+                IJSInProcessObjectReference serviceWorker = ServiceWorkerRegistrationJS.Invoke<IJSInProcessObjectReference>("active");
                 return new ServiceWorkerInProcess(serviceWorker);
             }
             catch (JSException) {
@@ -46,7 +46,7 @@ public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReferen
     public IServiceWorkerInProcess? Installing {
         get {
             try {
-                IJSInProcessObjectReference serviceWorker = serviceWorkerRegistration.Invoke<IJSInProcessObjectReference>("installing");
+                IJSInProcessObjectReference serviceWorker = ServiceWorkerRegistrationJS.Invoke<IJSInProcessObjectReference>("installing");
                 return new ServiceWorkerInProcess(serviceWorker);
             }
             catch (JSException) {
@@ -61,7 +61,7 @@ public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReferen
     public IServiceWorkerInProcess? Waiting {
         get {
             try {
-                IJSInProcessObjectReference serviceWorker = serviceWorkerRegistration.Invoke<IJSInProcessObjectReference>("waiting");
+                IJSInProcessObjectReference serviceWorker = ServiceWorkerRegistrationJS.Invoke<IJSInProcessObjectReference>("waiting");
                 return new ServiceWorkerInProcess(serviceWorker);
             }
             catch (JSException) {
@@ -74,7 +74,7 @@ public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReferen
     /// <summary>
     /// The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration. The service worker must be on the same origin as the document that registers the ServiceWorker.
     /// </summary>
-    public string Scope => serviceWorkerRegistration.Invoke<string>("scope");
+    public string Scope => ServiceWorkerRegistrationJS.Invoke<string>("scope");
 
     /// <summary>
     /// <para>The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register. Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.</para>
@@ -85,7 +85,7 @@ public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReferen
     /// - <b>none</b>: meaning the HTTP cache is never consulted.
     /// </para>
     /// </summary>
-    public string UpdateViaCache => serviceWorkerRegistration.Invoke<string>("updateViaCache");
+    public string UpdateViaCache => ServiceWorkerRegistrationJS.Invoke<string>("updateViaCache");
 
 
     /// <summary>

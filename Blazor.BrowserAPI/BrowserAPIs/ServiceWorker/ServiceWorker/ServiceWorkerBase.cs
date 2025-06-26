@@ -8,9 +8,9 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerInProcess")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 #pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class ServiceWorkerBase {
+public abstract class ServiceWorkerBase(IJSObjectReference serviceWorkerJS) {
 #pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected abstract IJSObjectReference ServiceWorkerJS { get; }
+    private protected IJSObjectReference serviceWorkerJS = serviceWorkerJS;
 
 
     #region Events
@@ -29,7 +29,7 @@ public abstract class ServiceWorkerBase {
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return ServiceWorkerJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, ServiceWorkerJS is IJSInProcessObjectReference]);
+        return serviceWorkerJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, serviceWorkerJS is IJSInProcessObjectReference]);
     }
 
     /// <summary>
@@ -40,10 +40,10 @@ public abstract class ServiceWorkerBase {
 
     private async ValueTask ActivateJSEvent(string jsMethodName) {
         await InitEventTrigger();
-        await ServiceWorkerJS.InvokeVoidTrySync(jsMethodName);
+        await serviceWorkerJS.InvokeVoidTrySync(jsMethodName);
     }
 
-    private ValueTask DeactivateJSEvent(string jsMethodName) => ServiceWorkerJS.InvokeVoidTrySync(jsMethodName);
+    private ValueTask DeactivateJSEvent(string jsMethodName) => serviceWorkerJS.InvokeVoidTrySync(jsMethodName);
 
 
     private Action<string>? _onStateChange;

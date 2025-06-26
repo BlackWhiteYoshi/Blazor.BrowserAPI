@@ -11,10 +11,7 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensor)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class Gyroscope(IJSObjectReference gyroscope) : Sensor, IGyroscope {
-    private protected override IJSObjectReference SensorJS => gyroscope;
-
-
+public sealed class Gyroscope(IJSObjectReference gyroscope) : Sensor(gyroscope), IGyroscope {
     /// <summary>
     /// Returns a double, containing the angular velocity of the device along the device's x axis.
     /// </summary>
@@ -25,7 +22,7 @@ public sealed class Gyroscope(IJSObjectReference gyroscope) : Sensor, IGyroscope
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetX(CancellationToken cancellationToken) => gyroscope.InvokeTrySync<double>("getX", cancellationToken);
+    public ValueTask<double> GetX(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getX", cancellationToken);
 
 
     /// <summary>
@@ -38,7 +35,7 @@ public sealed class Gyroscope(IJSObjectReference gyroscope) : Sensor, IGyroscope
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetY(CancellationToken cancellationToken) => gyroscope.InvokeTrySync<double>("getY", cancellationToken);
+    public ValueTask<double> GetY(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getY", cancellationToken);
 
 
     /// <summary>
@@ -51,5 +48,5 @@ public sealed class Gyroscope(IJSObjectReference gyroscope) : Sensor, IGyroscope
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetZ(CancellationToken cancellationToken) => gyroscope.InvokeTrySync<double>("getZ", cancellationToken);
+    public ValueTask<double> GetZ(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getZ", cancellationToken);
 }

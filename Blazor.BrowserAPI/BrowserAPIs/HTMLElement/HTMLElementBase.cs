@@ -8,9 +8,9 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLElementInProcess")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 #pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class HTMLElementBase {
+public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) {
 #pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected abstract Task<IJSObjectReference> HTMLElementTask { get; }
+    private protected Task<IJSObjectReference> htmlElementTask = htmlElementTask;
 
 
     /// <summary>
@@ -32,7 +32,7 @@ public abstract class HTMLElementBase {
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask RequestFullscreen(string navigationUI = "auto", CancellationToken cancellationToken = default) => await (await HTMLElementTask).InvokeVoidAsync("requestFullscreen", cancellationToken, [navigationUI]);
+    public async ValueTask RequestFullscreen(string navigationUI = "auto", CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidAsync("requestFullscreen", cancellationToken, [navigationUI]);
 
 
     #region Events
@@ -75,13 +75,13 @@ public abstract class HTMLElementBase {
 
 
     private async ValueTask ActivateJSEvent(string jsMethodName) {
-        IJSObjectReference htmlElement = await HTMLElementTask;
+        IJSObjectReference htmlElement = await htmlElementTask;
         await InitEventTrigger(htmlElement);
         await htmlElement.InvokeVoidTrySync(jsMethodName);
     }
 
     private async ValueTask DeactivateJSEvent(string jsMethodName) {
-        IJSObjectReference htmlElement = await HTMLElementTask;
+        IJSObjectReference htmlElement = await htmlElementTask;
         await htmlElement.InvokeVoidTrySync(jsMethodName);
     }
 

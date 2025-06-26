@@ -10,16 +10,14 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class Dialog(Task<IJSObjectReference> dialogTask) : DialogBase, IDialog {
-    private protected override Task<IJSObjectReference> DialogTask { get; } = dialogTask;
-
+public sealed class Dialog(Task<IJSObjectReference> dialogTask) : DialogBase(dialogTask), IDialog {
     /// <summary>
     /// Releases the JS instance for this dialog.
     /// </summary>
     /// <returns></returns>
     public async ValueTask DisposeAsync() {
         DisposeEventTrigger();
-        await (await DialogTask).DisposeTrySync();
+        await (await dialogTask).DisposeTrySync();
     }
 
 
@@ -33,7 +31,7 @@ public sealed class Dialog(Task<IJSObjectReference> dialogTask) : DialogBase, ID
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<bool> GetOpen(CancellationToken cancellationToken) => await (await DialogTask).InvokeTrySync<bool>("getOpen", cancellationToken);
+    public async ValueTask<bool> GetOpen(CancellationToken cancellationToken) => await (await dialogTask).InvokeTrySync<bool>("getOpen", cancellationToken);
 
     /// <summary>
     /// The <i>open</i> property of the HTMLDialogElement interface is a boolean value reflecting the open HTML attribute, indicating whether the &lt;dialog&gt; is available for interaction.
@@ -41,7 +39,7 @@ public sealed class Dialog(Task<IJSObjectReference> dialogTask) : DialogBase, ID
     /// <param name="value">Sets the dialog state:<br/>true = open<br/>false = close</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetOpen(bool value, CancellationToken cancellationToken = default) => await (await DialogTask).InvokeVoidTrySync("setOpen", cancellationToken, [value]);
+    public async ValueTask SetOpen(bool value, CancellationToken cancellationToken = default) => await (await dialogTask).InvokeVoidTrySync("setOpen", cancellationToken, [value]);
 
 
     /// <summary>
@@ -54,7 +52,7 @@ public sealed class Dialog(Task<IJSObjectReference> dialogTask) : DialogBase, ID
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<string> GetReturnValue(CancellationToken cancellationToken) => await (await DialogTask).InvokeTrySync<string>("getReturnValue", cancellationToken);
+    public async ValueTask<string> GetReturnValue(CancellationToken cancellationToken) => await (await dialogTask).InvokeTrySync<string>("getReturnValue", cancellationToken);
 
     /// <summary>
     /// The <i>returnValue</i> property of the HTMLDialogElement interface gets or sets the return value for the &lt;dialog&gt;, usually to indicate which button the user pressed to close it.
@@ -62,7 +60,7 @@ public sealed class Dialog(Task<IJSObjectReference> dialogTask) : DialogBase, ID
     /// <param name="returnValue">A string representing the updated value of the dialog.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetReturnValue(string returnValue, CancellationToken cancellationToken = default) => await (await DialogTask).InvokeVoidTrySync("setReturnValue", cancellationToken, [returnValue]);
+    public async ValueTask SetReturnValue(string returnValue, CancellationToken cancellationToken = default) => await (await dialogTask).InvokeVoidTrySync("setReturnValue", cancellationToken, [returnValue]);
 
 
     /// <summary>
@@ -70,14 +68,14 @@ public sealed class Dialog(Task<IJSObjectReference> dialogTask) : DialogBase, ID
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask Show(CancellationToken cancellationToken = default) => await (await DialogTask).InvokeVoidTrySync("show", cancellationToken);
+    public async ValueTask Show(CancellationToken cancellationToken = default) => await (await dialogTask).InvokeVoidTrySync("show", cancellationToken);
 
     /// <summary>
     /// The <i>showModal()</i> method of the HTMLDialogElement interface displays the dialog as a modal, over the top of any other dialogs that might be present. It displays in the top layer, along with a ::backdrop pseudo-element. Interaction outside the dialog is blocked and the content outside it is rendered inert.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask ShowModal(CancellationToken cancellationToken = default) => await (await DialogTask).InvokeVoidTrySync("showModal", cancellationToken);
+    public async ValueTask ShowModal(CancellationToken cancellationToken = default) => await (await dialogTask).InvokeVoidTrySync("showModal", cancellationToken);
 
 
     /// <summary>
@@ -85,7 +83,7 @@ public sealed class Dialog(Task<IJSObjectReference> dialogTask) : DialogBase, ID
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask Close(CancellationToken cancellationToken = default) => await (await DialogTask).InvokeVoidTrySync("close", cancellationToken);
+    public async ValueTask Close(CancellationToken cancellationToken = default) => await (await dialogTask).InvokeVoidTrySync("close", cancellationToken);
 
     /// <summary>
     /// The <i>close()</i> method of the HTMLDialogElement interface closes the &lt;dialog&gt; and updates the returnValue of the dialog.
@@ -93,5 +91,5 @@ public sealed class Dialog(Task<IJSObjectReference> dialogTask) : DialogBase, ID
     /// <param name="returnValue">A string representing an updated value for the <see cref="ReturnValue"/> of the dialog.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask Close(string returnValue, CancellationToken cancellationToken = default) => await (await DialogTask).InvokeVoidTrySync("close", cancellationToken, [returnValue]);
+    public async ValueTask Close(string returnValue, CancellationToken cancellationToken = default) => await (await dialogTask).InvokeVoidTrySync("close", cancellationToken, [returnValue]);
 }

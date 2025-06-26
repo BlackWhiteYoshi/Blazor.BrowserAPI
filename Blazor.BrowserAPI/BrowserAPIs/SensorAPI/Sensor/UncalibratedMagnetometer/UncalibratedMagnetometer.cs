@@ -17,10 +17,7 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensor)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class UncalibratedMagnetometer(IJSObjectReference uncalibratedMagnetometer) : Sensor, IUncalibratedMagnetometer {
-    private protected override IJSObjectReference SensorJS => uncalibratedMagnetometer;
-
-
+public sealed class UncalibratedMagnetometer(IJSObjectReference uncalibratedMagnetometer) : Sensor(uncalibratedMagnetometer), IUncalibratedMagnetometer {
     /// <summary>
     /// Returns a double containing the uncalibrated magnetic field around the device's x axis.
     /// </summary>
@@ -31,7 +28,7 @@ public sealed class UncalibratedMagnetometer(IJSObjectReference uncalibratedMagn
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetX(CancellationToken cancellationToken) => uncalibratedMagnetometer.InvokeTrySync<double>("getX", cancellationToken);
+    public ValueTask<double> GetX(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getX", cancellationToken);
 
 
     /// <summary>
@@ -44,7 +41,7 @@ public sealed class UncalibratedMagnetometer(IJSObjectReference uncalibratedMagn
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetY(CancellationToken cancellationToken) => uncalibratedMagnetometer.InvokeTrySync<double>("getY", cancellationToken);
+    public ValueTask<double> GetY(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getY", cancellationToken);
 
 
     /// <summary>
@@ -57,7 +54,7 @@ public sealed class UncalibratedMagnetometer(IJSObjectReference uncalibratedMagn
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetZ(CancellationToken cancellationToken) => uncalibratedMagnetometer.InvokeTrySync<double>("getZ", cancellationToken);
+    public ValueTask<double> GetZ(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getZ", cancellationToken);
 
 
 
@@ -71,7 +68,7 @@ public sealed class UncalibratedMagnetometer(IJSObjectReference uncalibratedMagn
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetXBias(CancellationToken cancellationToken) => uncalibratedMagnetometer.InvokeTrySync<double>("getXBias", cancellationToken);
+    public ValueTask<double> GetXBias(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getXBias", cancellationToken);
 
 
     /// <summary>
@@ -84,7 +81,7 @@ public sealed class UncalibratedMagnetometer(IJSObjectReference uncalibratedMagn
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetYBias(CancellationToken cancellationToken) => uncalibratedMagnetometer.InvokeTrySync<double>("getYBias", cancellationToken);
+    public ValueTask<double> GetYBias(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getYBias", cancellationToken);
 
 
     /// <summary>
@@ -97,5 +94,5 @@ public sealed class UncalibratedMagnetometer(IJSObjectReference uncalibratedMagn
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetZBias(CancellationToken cancellationToken) => uncalibratedMagnetometer.InvokeTrySync<double>("getZBias", cancellationToken);
+    public ValueTask<double> GetZBias(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getZBias", cancellationToken);
 }

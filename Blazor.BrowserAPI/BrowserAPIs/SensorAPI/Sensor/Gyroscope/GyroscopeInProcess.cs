@@ -11,22 +11,19 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensorInProcess)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class GyroscopeInProcess(IJSInProcessObjectReference gyroscope) : SensorInProcess, IGyroscopeInProcess {
-    private protected override IJSInProcessObjectReference SensorJSInProcess => gyroscope;
-
-
+public sealed class GyroscopeInProcess(IJSInProcessObjectReference gyroscope) : SensorInProcess(gyroscope), IGyroscopeInProcess {
     /// <summary>
     /// Returns a double, containing the angular velocity of the device along the device's x axis.
     /// </summary>
-    public double X => SensorJSInProcess.Invoke<double>("getX");
+    public double X => SensorJS.Invoke<double>("getX");
 
     /// <summary>
     /// Returns a double, containing the angular velocity of the device along the device's y axis.
     /// </summary>
-    public double Y => SensorJSInProcess.Invoke<double>("getY");
+    public double Y => SensorJS.Invoke<double>("getY");
 
     /// <summary>
     /// Returns a double, containing the angular velocity of the device along the device's z axis.
     /// </summary>
-    public double Z => SensorJSInProcess.Invoke<double>("getZ");
+    public double Z => SensorJS.Invoke<double>("getZ");
 }

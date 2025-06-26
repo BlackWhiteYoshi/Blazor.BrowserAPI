@@ -13,27 +13,27 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class ServiceWorkerInProcess(IJSInProcessObjectReference serviceWorker) : ServiceWorkerBase, IServiceWorkerInProcess {
-    private protected override IJSObjectReference ServiceWorkerJS => serviceWorker;
+public sealed class ServiceWorkerInProcess(IJSInProcessObjectReference serviceWorkerJS) : ServiceWorkerBase(serviceWorkerJS), IServiceWorkerInProcess {
+    private IJSInProcessObjectReference ServiceWorkerJS => (IJSInProcessObjectReference)base.serviceWorkerJS;
 
     /// <summary>
     /// Releases the JS instance for this service worker.
     /// </summary>
     public void Dispose() {
         DisposeEventTrigger();
-        serviceWorker.Dispose();
+        ServiceWorkerJS.Dispose();
     }
 
 
     /// <summary>
     /// Returns the <i>ServiceWorker</i> serialized script URL defined as part of ServiceWorkerRegistration. The URL must be on the same origin as the document that registers the ServiceWorker.
     /// </summary>
-    public string ScriptUrl => serviceWorker.Invoke<string>("scriptURL");
+    public string ScriptUrl => ServiceWorkerJS.Invoke<string>("scriptURL");
 
     /// <summary>
     /// The state read-only property of the <i>ServiceWorker</i> interface returns a string representing the current state of the service worker. It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.
     /// </summary>
-    public string State => serviceWorker.Invoke<string>("state");
+    public string State => ServiceWorkerJS.Invoke<string>("state");
 
     /// <summary>
     /// <para>
@@ -50,5 +50,5 @@ public sealed class ServiceWorkerInProcess(IJSInProcessObjectReference serviceWo
     /// <para>The object to deliver to the worker; this will be in the data field in the event delivered to the message event. This may be any JavaScript object handled by the structured clone algorithm.</para>
     /// <para>The message parameter is mandatory.If the data to be passed to the worker is unimportant, null or undefined must be passed explicitly.</para>
     /// </param>
-    public void PostMessage(object message) => serviceWorker.InvokeVoid("postMessage", [message]);
+    public void PostMessage(object message) => ServiceWorkerJS.InvokeVoid("postMessage", [message]);
 }

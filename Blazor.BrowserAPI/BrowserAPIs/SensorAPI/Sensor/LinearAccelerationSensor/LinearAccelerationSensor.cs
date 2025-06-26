@@ -11,10 +11,7 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensor)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-internal class LinearAccelerationSensor(IJSObjectReference linearAccelerationSensor) : Sensor, ILinearAccelerationSensor {
-    private protected override IJSObjectReference SensorJS => linearAccelerationSensor;
-
-
+internal class LinearAccelerationSensor(IJSObjectReference linearAccelerationSensor) : Sensor(linearAccelerationSensor), ILinearAccelerationSensor {
     /// <summary>
     /// Returns a double containing the acceleration of the device along the device's x axis.
     /// </summary>
@@ -25,7 +22,7 @@ internal class LinearAccelerationSensor(IJSObjectReference linearAccelerationSen
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetX(CancellationToken cancellationToken) => linearAccelerationSensor.InvokeTrySync<double>("getX", cancellationToken);
+    public ValueTask<double> GetX(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getX", cancellationToken);
 
 
     /// <summary>
@@ -38,7 +35,7 @@ internal class LinearAccelerationSensor(IJSObjectReference linearAccelerationSen
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetY(CancellationToken cancellationToken) => linearAccelerationSensor.InvokeTrySync<double>("getY", cancellationToken);
+    public ValueTask<double> GetY(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getY", cancellationToken);
 
 
     /// <summary>
@@ -51,5 +48,5 @@ internal class LinearAccelerationSensor(IJSObjectReference linearAccelerationSen
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetZ(CancellationToken cancellationToken) => linearAccelerationSensor.InvokeTrySync<double>("getZ", cancellationToken);
+    public ValueTask<double> GetZ(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getZ", cancellationToken);
 }

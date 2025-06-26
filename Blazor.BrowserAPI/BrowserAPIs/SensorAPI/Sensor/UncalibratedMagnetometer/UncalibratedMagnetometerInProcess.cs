@@ -17,38 +17,35 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensorInProcess)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class UncalibratedMagnetometerInProcess(IJSInProcessObjectReference uncalibratedMagnetometer) : SensorInProcess, IUncalibratedMagnetometerInProcess {
-    private protected override IJSInProcessObjectReference SensorJSInProcess => uncalibratedMagnetometer;
-
-
+public sealed class UncalibratedMagnetometerInProcess(IJSInProcessObjectReference uncalibratedMagnetometer) : SensorInProcess(uncalibratedMagnetometer), IUncalibratedMagnetometerInProcess {
     /// <summary>
     /// Returns a double containing the uncalibrated magnetic field around the device's x axis.
     /// </summary>
-    public double X => SensorJSInProcess.Invoke<double>("getX");
+    public double X => SensorJS.Invoke<double>("getX");
 
     /// <summary>
     /// Returns a double containing the uncalibrated magnetic field around the device's y axis.
     /// </summary>
-    public double Y => SensorJSInProcess.Invoke<double>("getY");
+    public double Y => SensorJS.Invoke<double>("getY");
 
     /// <summary>
     /// Returns a double containing the uncalibrated magnetic field around the device's z axis.
     /// </summary>
-    public double Z => SensorJSInProcess.Invoke<double>("getZ");
+    public double Z => SensorJS.Invoke<double>("getZ");
 
 
     /// <summary>
     /// Returns a double representing the hard iron distortion correction around x axis.
     /// </summary>
-    public double XBias => SensorJSInProcess.Invoke<double>("getXBias");
+    public double XBias => SensorJS.Invoke<double>("getXBias");
 
     /// <summary>
     /// Returns a double representing the hard iron distortion correction around y axis.
     /// </summary>
-    public double YBias => SensorJSInProcess.Invoke<double>("getYBias");
+    public double YBias => SensorJS.Invoke<double>("getYBias");
 
     /// <summary>
     /// Returns a double representing the hard iron distortion correction around z axis.
     /// </summary>
-    public double ZBias => SensorJSInProcess.Invoke<double>("getZBias");
+    public double ZBias => SensorJS.Invoke<double>("getZBias");
 }

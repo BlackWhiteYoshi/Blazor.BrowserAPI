@@ -11,12 +11,9 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensorInProcess)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class AmbientLightSensorInProcess(IJSInProcessObjectReference ambientLightSensor) : SensorInProcess, IAmbientLightSensorInProcess {
-    private protected override IJSInProcessObjectReference SensorJSInProcess => ambientLightSensor;
-
-
+public sealed class AmbientLightSensorInProcess(IJSInProcessObjectReference ambientLightSensor) : SensorInProcess(ambientLightSensor), IAmbientLightSensorInProcess {
     /// <summary>
     /// Returns the current light level in lux of the ambient light level around the hosting device.
     /// </summary>
-    public double Illuminance => ambientLightSensor.Invoke<double>("getIlluminance");
+    public double Illuminance => SensorJS.Invoke<double>("getIlluminance");
 }

@@ -13,9 +13,7 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecorderBase, IMediaRecorder {
-    private protected override IJSObjectReference MediaRecorderJS => mediaRecorder;
-
+public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecorderBase(mediaRecorder), IMediaRecorder {
     /// <summary>
     /// Stops recording and releases the JS instance for this media recorder.
     /// </summary>
@@ -23,7 +21,7 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     public async ValueTask DisposeAsync() {
         await Stop();
         DisposeEventTrigger();
-        await MediaRecorderJS.DisposeTrySync();
+        await mediaRecorderJS.DisposeTrySync();
     }
 
 
@@ -55,7 +53,7 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<string> GetMimeType(CancellationToken cancellationToken) => await MediaRecorderJS.InvokeTrySync<string>("getMimeType", cancellationToken);
+    public async ValueTask<string> GetMimeType(CancellationToken cancellationToken) => await mediaRecorderJS.InvokeTrySync<string>("getMimeType", cancellationToken);
 
 
     /// <summary>
@@ -78,7 +76,7 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<string> GetState(CancellationToken cancellationToken) => await MediaRecorderJS.InvokeTrySync<string>("getState", cancellationToken);
+    public async ValueTask<string> GetState(CancellationToken cancellationToken) => await mediaRecorderJS.InvokeTrySync<string>("getState", cancellationToken);
 
 
     /// <summary>
@@ -91,7 +89,7 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<IMediaStream> GetStream(CancellationToken cancellationToken) => new MediaStream(await MediaRecorderJS.InvokeTrySync<IJSObjectReference>("getStream", cancellationToken));
+    public async ValueTask<IMediaStream> GetStream(CancellationToken cancellationToken) => new MediaStream(await mediaRecorderJS.InvokeTrySync<IJSObjectReference>("getStream", cancellationToken));
 
 
     /// <summary>
@@ -106,7 +104,7 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<ulong> GetAudioBitsPerSecond(CancellationToken cancellationToken) => await MediaRecorderJS.InvokeTrySync<ulong>("getAudioBitsPerSecond", cancellationToken);
+    public async ValueTask<ulong> GetAudioBitsPerSecond(CancellationToken cancellationToken) => await mediaRecorderJS.InvokeTrySync<ulong>("getAudioBitsPerSecond", cancellationToken);
 
 
     /// <summary>
@@ -121,7 +119,7 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<ulong> GetVideoBitsPerSecond(CancellationToken cancellationToken) => await MediaRecorderJS.InvokeTrySync<ulong>("getVideoBitsPerSecond", cancellationToken);
+    public async ValueTask<ulong> GetVideoBitsPerSecond(CancellationToken cancellationToken) => await mediaRecorderJS.InvokeTrySync<ulong>("getVideoBitsPerSecond", cancellationToken);
 
 
     /// <summary>
@@ -138,28 +136,28 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask Start(int timeslice = 0, CancellationToken cancellationToken = default) => await MediaRecorderJS.InvokeVoidTrySync("start", cancellationToken, [timeslice]);
+    public async ValueTask Start(int timeslice = 0, CancellationToken cancellationToken = default) => await mediaRecorderJS.InvokeVoidTrySync("start", cancellationToken, [timeslice]);
 
     /// <summary>
     /// Stops recording, at which point a dataavailable event containing the final Blob of saved data is fired. No more recording occurs.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask Stop(CancellationToken cancellationToken = default) => await MediaRecorderJS.InvokeVoidTrySync("stop", cancellationToken);
+    public async ValueTask Stop(CancellationToken cancellationToken = default) => await mediaRecorderJS.InvokeVoidTrySync("stop", cancellationToken);
 
     /// <summary>
     /// Resumes recording of media after having been paused.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask Resume(CancellationToken cancellationToken = default) => await MediaRecorderJS.InvokeVoidTrySync("resume", cancellationToken);
+    public async ValueTask Resume(CancellationToken cancellationToken = default) => await mediaRecorderJS.InvokeVoidTrySync("resume", cancellationToken);
 
     /// <summary>
     /// Pauses the recording of media.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask Pause(CancellationToken cancellationToken = default) => await MediaRecorderJS.InvokeVoidTrySync("pause", cancellationToken);
+    public async ValueTask Pause(CancellationToken cancellationToken = default) => await mediaRecorderJS.InvokeVoidTrySync("pause", cancellationToken);
 
     /// <summary>
     /// Requests a Blob containing the saved data received thus far (or since the last time requestData() was called.
@@ -167,7 +165,7 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask RequestData(CancellationToken cancellationToken = default) => await MediaRecorderJS.InvokeVoidTrySync("requestData", cancellationToken);
+    public async ValueTask RequestData(CancellationToken cancellationToken = default) => await mediaRecorderJS.InvokeVoidTrySync("requestData", cancellationToken);
 
 
     /// <summary>
@@ -177,5 +175,5 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     /// <param name="mimeType"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<bool> IsTypeSupported(string mimeType, CancellationToken cancellationToken = default) => await MediaRecorderJS.InvokeTrySync<bool>("isTypeSupported", cancellationToken);
+    public async ValueTask<bool> IsTypeSupported(string mimeType, CancellationToken cancellationToken = default) => await mediaRecorderJS.InvokeTrySync<bool>("isTypeSupported", cancellationToken);
 }

@@ -8,11 +8,11 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Name = "IMediaRecorderInProcess")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 #pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class MediaRecorderBase {
+public abstract class MediaRecorderBase(IJSObjectReference mediaRecorderJS) {
 #pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected abstract IJSObjectReference MediaRecorderJS { get; }
+    private protected IJSObjectReference mediaRecorderJS = mediaRecorderJS;
 
-
+    
     #region Events
 
     [method: DynamicDependency(nameof(InvokeDataavailable))]
@@ -37,7 +37,7 @@ public abstract class MediaRecorderBase {
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return MediaRecorderJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, MediaRecorderJS is IJSInProcessObjectReference]);
+        return mediaRecorderJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, mediaRecorderJS is IJSInProcessObjectReference]);
     }
 
     /// <summary>
@@ -48,10 +48,10 @@ public abstract class MediaRecorderBase {
 
     private async ValueTask ActivateJSEvent(string jsMethodName) {
         await InitEventTrigger();
-        await MediaRecorderJS.InvokeVoidTrySync(jsMethodName);
+        await mediaRecorderJS.InvokeVoidTrySync(jsMethodName);
     }
 
-    private ValueTask DeactivateJSEvent(string jsMethodName) => MediaRecorderJS.InvokeVoidTrySync(jsMethodName);
+    private ValueTask DeactivateJSEvent(string jsMethodName) => mediaRecorderJS.InvokeVoidTrySync(jsMethodName);
 
 
     private Action<byte[]>? _onDataavailable;

@@ -13,10 +13,7 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class ServiceWorkerContainerInProcess(IModuleManager moduleManager) : ServiceWorkerContainerBase, IServiceWorkerContainerInProcess {
-    private protected override IModuleManager ModuleManager => moduleManager;
-
-
+public sealed class ServiceWorkerContainerInProcess(IModuleManager moduleManager) : ServiceWorkerContainerBase(moduleManager), IServiceWorkerContainerInProcess {
     /// <summary>
     /// Registers a service worker and returns a <see cref="IServiceWorkerRegistration">ServiceWorkerRegistration</see> object, which can be used to track the registration.<br />
     /// If service worker is not supported, null is returned.
