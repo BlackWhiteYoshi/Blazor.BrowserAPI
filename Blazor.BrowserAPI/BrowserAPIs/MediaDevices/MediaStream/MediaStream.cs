@@ -5,12 +5,10 @@ using System.Diagnostics.CodeAnalysis;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// <para>
 /// The <i>MediaStream</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Media_Capture_and_Streams_API">Media Capture and Streams API</see> represents a stream of media content.
 /// A stream consists of several tracks, such as video or audio tracks. Each track is specified as an instance of <see href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack">MediaStreamTrack</see>.
-/// </para>
-/// <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
 /// </summary>
+/// <remarks>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class MediaStream(IJSObjectReference mediaStreamJS) : IMediaStream {

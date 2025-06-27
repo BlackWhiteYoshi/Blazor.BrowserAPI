@@ -7,8 +7,8 @@ namespace BrowserAPI.Implementation;
 /// <summary>
 /// <para>The <i>Accelerometer</i> interface of the Sensor APIs provides on each reading the acceleration applied to the device along all three axes.</para>
 /// <para>To use this sensor, the user must grant permission to the 'accelerometer', device sensor through the Permissions API.</para>
-/// <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
 /// </summary>
+/// <remarks>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensor)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class Accelerometer(IJSObjectReference accelerometer) : Sensor(accelerometer), IAccelerometer {

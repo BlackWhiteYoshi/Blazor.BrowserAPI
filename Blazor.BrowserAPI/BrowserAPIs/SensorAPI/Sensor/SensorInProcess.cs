@@ -12,7 +12,7 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class SensorInProcess(IJSInProcessObjectReference sensorJS) : SensorBase(sensorJS), ISensorInProcess {
-    protected IJSInProcessObjectReference SensorJS => (IJSInProcessObjectReference)base.sensorJS;
+    private protected IJSInProcessObjectReference SensorJS => (IJSInProcessObjectReference)base.sensorJS;
 
     /// <summary>
     /// Releases the JS instance for this service worker.

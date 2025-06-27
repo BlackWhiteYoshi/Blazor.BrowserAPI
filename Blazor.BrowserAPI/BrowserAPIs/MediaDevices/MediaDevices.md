@@ -171,7 +171,8 @@ Objects of this class must disposed manually, so do not forget to call DisposeAs
 <br></br>
 ### IMediaRecoder
 
-The *MediaRecorder* interface of the [MediaStream Recording API](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API) provides functionality to easily record media.  
+The *MediaRecorder* interface of the [MediaStream Recording API](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API) provides functionality to easily record media.
+
 It is created using the IMediaStream.CreateRecorder() method.
 
 Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.
@@ -267,7 +268,8 @@ Objects of this class must disposed manually, so do not forget to call Dispose()
 <br></br>
 ### IMediaRecoderInProcess
 
-The *MediaRecorder* interface of the [MediaStream Recording API](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API) provides functionality to easily record media.  
+The *MediaRecorder* interface of the [MediaStream Recording API](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API) provides functionality to easily record media.
+
 It is created using the IMediaStreamInProcess.CreateRecorder() method.
 
 Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.

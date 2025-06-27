@@ -8,8 +8,8 @@ namespace BrowserAPI.Implementation;
 /// <summary>
 /// <para>The <i>AbsoluteOrientationSensor</i> interface of the Sensor APIs describes the device's physical orientation in relation to the Earth's reference coordinate system.</para>
 /// <para>To use this sensor, the user must grant permission to the 'accelerometer', 'gyroscope', and 'magnetometer' device sensors through the Permissions API.</para>
-/// <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
 /// </summary>
+/// <remarks>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensorInProcess)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class AbsoluteOrientationSensorInProcess(IJSInProcessObjectReference absoluteOrientationSensor) : SensorInProcess(absoluteOrientationSensor), IAbsoluteOrientationSensorInProcess {

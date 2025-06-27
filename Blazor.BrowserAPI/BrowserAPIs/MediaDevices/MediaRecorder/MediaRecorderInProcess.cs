@@ -5,12 +5,10 @@ using System.Diagnostics.CodeAnalysis;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// <para>
-/// The <i>MediaRecorder</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API">MediaStream Recording API</see> provides functionality to easily record media.<br />
-/// It is created using the <see cref="IMediaStreamInProcess.CreateRecorder">CreateRecorder() method</see>.
-/// </para>
-/// <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
+/// <para>The <i>MediaRecorder</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API">MediaStream Recording API</see> provides functionality to easily record media.</para>
+/// <para>It is created using the <see cref="IMediaStreamInProcess.CreateRecorder">CreateRecorder() method</see>.</para>
 /// </summary>
+/// <remarks>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class MediaRecorderInProcess(IJSInProcessObjectReference mediaRecorderJS) : MediaRecorderBase(mediaRecorderJS), IMediaRecorderInProcess {

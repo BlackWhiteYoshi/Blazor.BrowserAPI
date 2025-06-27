@@ -13,8 +13,8 @@ namespace BrowserAPI.Implementation;
 /// The <i>calibrated magnetic field</i> is a magnetic field with hard iron distortion and soft iron distortion correction applied.<br />
 /// The <i>uncalibrated magnetic field</i> is the magnetic field without hard iron distortion correction and with soft iron distortion correction applied, and as such reports changes in the magnetic field caused by magnetized objects moving near the magnetometer.
 /// </para>
-/// <para>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</para>
 /// </summary>
+/// <remarks>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensorInProcess)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class UncalibratedMagnetometerInProcess(IJSInProcessObjectReference uncalibratedMagnetometer) : SensorInProcess(uncalibratedMagnetometer), IUncalibratedMagnetometerInProcess {

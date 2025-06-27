@@ -7,8 +7,8 @@ namespace BrowserAPI.Implementation;
 /// <summary>
 /// <para>The <i>Magnetometer</i> interface of the Sensor APIs provides information about the magnetic field as detected by the device's primary magnetometer sensor.</para>
 /// <para>To use this sensor, the user must grant permission to the 'magnetometer' device sensor through the Permissions API.</para>
-/// <para>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</para>
 /// </summary>
+/// <remarks>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensor)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class Magnetometer(IJSObjectReference magnetometer) : Sensor(magnetometer), IMagnetometer {
