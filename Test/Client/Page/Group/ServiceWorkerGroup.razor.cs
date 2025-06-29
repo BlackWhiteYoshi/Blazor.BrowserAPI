@@ -76,8 +76,7 @@ public sealed partial class ServiceWorkerGroup : ComponentBase, IAsyncDisposable
         IServiceWorkerRegistration[] serviceWorkerRegistrations = await ServiceWorkerContainer.GetRegistrations();
         labelOutput = serviceWorkerRegistrations.Length.ToString();
 
-        foreach (IServiceWorkerRegistration serviceWorkerRegistration in serviceWorkerRegistrations)
-            await serviceWorkerRegistration.DisposeAsync();
+        await serviceWorkerRegistrations.DisposeAsync();
     }
 
     public const string BUTTON_GET_CONTROLLER_PROPERTY = "service-worker-container-get-controller-property";

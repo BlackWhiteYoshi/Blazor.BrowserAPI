@@ -224,8 +224,7 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
         IHTMLElementInProcess[] children = HTMLElement.Children;
         labelOutput = children.Length.ToString();
 
-        foreach (IHTMLElementInProcess child in children)
-            child.Dispose();
+        children.Dispose();
     }
 
 

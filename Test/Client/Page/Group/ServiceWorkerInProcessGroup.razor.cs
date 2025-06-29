@@ -76,8 +76,7 @@ public sealed partial class ServiceWorkerInProcessGroup : ComponentBase, IAsyncD
         IServiceWorkerRegistrationInProcess[] serviceWorkerRegistrations = await ServiceWorkerContainer.GetRegistrations();
         labelOutput = serviceWorkerRegistrations.Length.ToString();
 
-        foreach (IServiceWorkerRegistrationInProcess serviceWorkerRegistration in serviceWorkerRegistrations)
-            serviceWorkerRegistration.Dispose();
+        serviceWorkerRegistrations.Dispose();
     }
 
     public const string BUTTON_GET_CONTROLLER = "service-worker-container-inprocess-get-controller";

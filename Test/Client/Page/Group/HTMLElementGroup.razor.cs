@@ -309,8 +309,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
         IHTMLElement[] children = await HTMLElement.Children;
         labelOutput = children.Length.ToString();
 
-        foreach (IHTMLElement child in children)
-            await child.DisposeAsync();
+        await children.DisposeAsync();
     }
 
     public const string BUTTON_GET_CHILDREN_METHOD = "htmlelement-get-children-method";
@@ -318,8 +317,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
         IHTMLElement[] children = await HTMLElement.GetChildren(default);
         labelOutput = children.Length.ToString();
 
-        foreach (IHTMLElement child in children)
-            await child.DisposeAsync();
+        await children.DisposeAsync();
     }
 
 
