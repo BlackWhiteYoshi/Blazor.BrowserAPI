@@ -27,20 +27,20 @@ public sealed partial class ExampleComponent : ComponentBase {
 
 #### Properties
 
-| **Name** | **Type**       | get/set | **Description**                                                                    |
-| -------- | -------------- | ------- | ---------------------------------------------------------------------------------- |
-| Length   | ValueTask<int> | get     | Returns an integer representing the number of data items stored in sessionStorage. |
+| **Name** | **Type**             | get/set | **Description**                                                                    |
+| -------- | -------------------- | ------- | ---------------------------------------------------------------------------------- |
+| Length   | ValueTask&lt;int&gt; | get     | Returns an integer representing the number of data items stored in sessionStorage. |
 
 #### Methods
 
-| **Name**   | **Parameters**                                                            | **ReturnType**     | **Description**                                                                                                         |
-| ---------- | ------------------------------------------------------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| GetLength  | CancellationToken cancellationToken                                       | ValueTask<int>     | Returns an integer representing the number of data items stored in sessionStorage.                                      |
-| Key        | int index, [CancellationToken cancellationToken = default]                | ValueTask<string?> | When passed a number *n*, this method will return the name of the nth key in sessionStorage.                            |
-| GetItem    | string key, [CancellationToken cancellationToken = default]               | ValueTask<string?> | When passed a key name, will return that key's value.                                                                   |
-| SetItem    | string key, string value, [CancellationToken cancellationToken = default] | ValueTask          | When passed a key name and value, will add that key to sessionStorage, or update that key's value if it already exists. |
-| RemoveItem | string key, [CancellationToken cancellationToken = default]               | ValueTask          | When passed a key name, will remove that key from sessionStorage.                                                       |
-| Clear      | [CancellationToken cancellationToken = default]                           | ValueTask          | When invoked, will empty all keys out of sessionStorage.                                                                |
+| **Name**   | **Parameters**                                                            | **ReturnType**           | **Description**                                                                                                         |
+| ---------- | ------------------------------------------------------------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| GetLength  | CancellationToken cancellationToken                                       | ValueTask&lt;int&gt;     | Returns an integer representing the number of data items stored in sessionStorage.                                      |
+| Key        | int index, [CancellationToken cancellationToken = default]                | ValueTask&lt;string?&gt; | When passed a number *n*, this method will return the name of the nth key in sessionStorage.                            |
+| GetItem    | string key, [CancellationToken cancellationToken = default]               | ValueTask&lt;string?&gt; | When passed a key name, will return that key's value.                                                                   |
+| SetItem    | string key, string value, [CancellationToken cancellationToken = default] | ValueTask                | When passed a key name and value, will add that key to sessionStorage, or update that key's value if it already exists. |
+| RemoveItem | string key, [CancellationToken cancellationToken = default]               | ValueTask                | When passed a key name, will remove that key from sessionStorage.                                                       |
+| Clear      | [CancellationToken cancellationToken = default]                           | ValueTask                | When invoked, will empty all keys out of sessionStorage.                                                                |
 
 
 <br></br>
