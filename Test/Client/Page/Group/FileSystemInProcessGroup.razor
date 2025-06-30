@@ -1,0 +1,54 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>File System InProcess</h2>
+    <div>
+        <button data-testid="@BUTTON_SHOW_OPEN_FILE_PICKER" @onclick="ShowOpenFilePicker">ShowOpenFilePicker</button>
+        <button data-testid="@BUTTON_SHOW_OPEN_FILE_PICKER_MULTIPLE_FILES" @onclick="ShowOpenFilePickerMultipleFiles">ShowOpenFilePickerMultipleFiles</button>
+        <button data-testid="@BUTTON_SHOW_SAVE_FILE_PICKER" @onclick="ShowSaveFilePicker">ShowSaveFilePicker</button>
+        <button data-testid="@BUTTON_SHOW_DIRECTORY_PICKER" @onclick="ShowDirectoryPicker">ShowDirectoryPicker</button>
+
+        <button data-testid="@BUTTON_STORAGE_MANAGER_ESTIMATE" @onclick="StorageManagerEstimate">StorageManagerEstimate</button>
+        <button data-testid="@BUTTON_STORAGE_MANAGER_PERSIST" @onclick="StorageManagerPersist">StorageManagerPersist</button>
+        <button data-testid="@BUTTON_STORAGE_MANAGER_PERSISTED" @onclick="StorageManagerPersisted">StorageManagerPersisted</button>
+        <button data-testid="@BUTTON_STORAGE_MANAGER_GET_DIRECTORY" @onclick="StorageManagerGetDirectory">StorageManagerGetDirectory</button>
+
+
+        <button data-testid="@BUTTON_FILEHANDLE_GET_NAME" @onclick="FileHandle_GetName">FileHandle_GetName</button>
+        <button data-testid="@BUTTON_FILEHANDLE_GET_KIND" @onclick="FileHandle_GetKind">FileHandle_GetKind</button>
+
+        <button data-testid="@BUTTON_FILEHANDLE_IS_SAME_Entry" @onclick="FileHandle_IsSameEntry">FileHandle_IsSameEntry</button>
+        <button data-testid="@BUTTON_FILEHANDLE_GET_FILE" @onclick="FileHandle_GetFile">FileHandle_GetFile</button>
+        <button data-testid="@BUTTON_FILEHANDLE_CREATE_WRITABLE" @onclick="FileHandle_CreateWritable">FileHandle_CreateWritable</button>
+
+
+        <button data-testid="@BUTTON_DIRECTORYHANDLE_GET_NAME" @onclick="DirectoryHandle_GetName">DirectoryHandle_GetName</button>
+        <button data-testid="@BUTTON_DIRECTORYHANDLE_GET_KIND" @onclick="DirectoryHandle_GetKind">DirectoryHandle_GetKind</button>
+
+        <button data-testid="@BUTTON_DIRECTORYHANDLE_IS_SAME_Entry" @onclick="DirectoryHandle_IsSameEntry">DirectoryHandle_IsSameEntry</button>
+        <button data-testid="@BUTTON_DIRECTORYHANDLE_GET_DIRECTORYHANDLE" @onclick="DirectoryHandle_GetDirectoryHandle">DirectoryHandle_GetDirectoryHandle</button>
+        <button data-testid="@BUTTON_DIRECTORYHANDLE_GET_FILEHANDLE" @onclick="DirectoryHandle_GetFileHandle">DirectoryHandle_GetFileHandle</button>
+        <button data-testid="@BUTTON_DIRECTORYHANDLE_REMOVE_ENTRY" @onclick="DirectoryHandle_RemoveEntry">DirectoryHandle_RemoveEntry</button>
+        <button data-testid="@BUTTON_DIRECTORYHANDLE_VALUES" @onclick="DirectoryHandle_Values">DirectoryHandle_Values</button>
+
+
+        <button data-testid="@BUTTON_FILE_GET_NAME" @onclick="File_GetName">File_GetName</button>
+        <button data-testid="@BUTTON_FILE_GET_SIZE" @onclick="File_GetSize">File_GetSize</button>
+        <button data-testid="@BUTTON_FILE_GET_TYPE" @onclick="File_GetType">File_GetType</button>
+        <button data-testid="@BUTTON_FILE_GET_LAST_MODIFIED" @onclick="File_GetLastModified">File_GetLastModified</button>
+        <button data-testid="@BUTTON_FILE_GET_WEBKIT_RELATIVE_PATH" @onclick="File_GetWebkitRelativePath">File_GetWebkitRelativePath</button>
+
+        <button data-testid="@BUTTON_FILE_TEXT" @onclick="File_Text">File_Text</button>
+
+
+        <button data-testid="@BUTTON_WRITABLE_FILE_STREAM_GET_LOCKED" @onclick="WritableFileStream_GetLocked">WritableFileStream_GetLocked</button>
+
+        <button data-testid="@BUTTON_WRITABLE_FILE_STREAM_WRITE_TEXT" @onclick="WritableFileStream_WriteText">WritableFileStream_WriteText</button>
+        <button data-testid="@BUTTON_WRITABLE_FILE_STREAM_WRITE_BYTES" @onclick="WritableFileStream_WriteBytes">WritableFileStream_WriteBytes</button>
+        <button data-testid="@BUTTON_WRITABLE_FILE_STREAM_SEEK" @onclick="WritableFileStream_Seek">WritableFileStream_Seek</button>
+        <button data-testid="@BUTTON_WRITABLE_FILE_STREAM_TRUNCATE" @onclick="WritableFileStream_Truncate">WritableFileStream_Truncate</button>
+        <button data-testid="@BUTTON_WRITABLE_FILE_STREAM_ABORT" @onclick="WritableFileStream_Abort">WritableFileStream_Abort</button>
+        <button data-testid="@BUTTON_WRITABLE_FILE_STREAM_CLOSE" @onclick="WritableFileStream_Close">WritableFileStream_Close</button>
+    </div>
+    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+</div>

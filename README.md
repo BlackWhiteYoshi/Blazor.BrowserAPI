@@ -14,6 +14,7 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - [CookieStorage](Blazor.BrowserAPI/BrowserAPIs/CookieStorage/CookieStorage.md)
 - [Dialog](Blazor.BrowserAPI/BrowserAPIs/Dialog/Dialog.md)
 - [Download](Blazor.BrowserAPI/BrowserAPIs/Download/Download.md)
+- [File System](Blazor.BrowserAPI/BrowserAPIs/FileSystem/FileSystem.md)
 - [Geolocation](Blazor.BrowserAPI/BrowserAPIs/Geolocation/Geolocation.md)
 - [HTMLElement](Blazor.BrowserAPI/BrowserAPIs/HTMLElement/HTMLElement.md)
 - [HTMLMediaElement (audio/video)](Blazor.BrowserAPI/BrowserAPIs/HTMLMediaElement/HTMLMediaElement.md)

@@ -23,6 +23,8 @@ else {
         <DialogGroup />
         @if (isInProcess) { <DialogInProcessGroup /> }
         <DownloadGroup />
+        <FileSystemGroup />
+        @if (isInProcess) { <FileSystemInProcessGroup /> }
         <GeolocationGroup />
         @if (isInProcess) { <GeolocationInProcessGroup /> }
         <HTMLElementGroup />

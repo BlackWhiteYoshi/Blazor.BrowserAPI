@@ -27,6 +27,8 @@ public static class AddBrowserAPIExtension {
             .AddScoped<IDownload, Implementation.Download>()
             .AddScoped<IElementFactory, Implementation.ElementFactory>()
             .AddScoped<IElementFactoryInProcess, Implementation.ElementFactoryInProcess>()
+            .AddScoped<IFileSystem, Implementation.FileSystem>()
+            .AddScoped<IFileSystemInProcess, Implementation.FileSystemInProcess>()
             .AddScoped<IGeolocation, Implementation.Geolocation>()
             .AddScoped<IGeolocationInProcess, Implementation.GeolocationInProcess>()
             .AddScoped<ILanguage, Implementation.Language>()

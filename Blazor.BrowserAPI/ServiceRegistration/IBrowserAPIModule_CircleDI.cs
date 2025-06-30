@@ -16,6 +16,8 @@
 [Scoped<BrowserAPI.IDownload, BrowserAPI.Implementation.Download>]
 [Scoped<BrowserAPI.IElementFactory, BrowserAPI.Implementation.ElementFactory>]
 [Scoped<BrowserAPI.IElementFactoryInProcess, BrowserAPI.Implementation.ElementFactoryInProcess>]
+[Scoped<BrowserAPI.IFileSystem, BrowserAPI.Implementation.FileSystem>]
+[Scoped<BrowserAPI.IFileSystemInProcess, BrowserAPI.Implementation.FileSystemInProcess>]
 [Scoped<BrowserAPI.IGeolocation, BrowserAPI.Implementation.Geolocation>]
 [Scoped<BrowserAPI.IGeolocationInProcess, BrowserAPI.Implementation.GeolocationInProcess>]
 [Scoped<BrowserAPI.ILanguage, BrowserAPI.Implementation.Language>]

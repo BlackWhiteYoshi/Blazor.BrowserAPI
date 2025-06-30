@@ -1,0 +1,62 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>File System</h2>
+    <div>
+        <button data-testid="@BUTTON_SHOW_OPEN_FILE_PICKER" @onclick="ShowOpenFilePicker">ShowOpenFilePicker</button>
+        <button data-testid="@BUTTON_SHOW_OPEN_FILE_PICKER_MULTIPLE_FILES" @onclick="ShowOpenFilePickerMultipleFiles">ShowOpenFilePickerMultipleFiles</button>
+        <button data-testid="@BUTTON_SHOW_SAVE_FILE_PICKER" @onclick="ShowSaveFilePicker">ShowSaveFilePicker</button>
+        <button data-testid="@BUTTON_SHOW_DIRECTORY_PICKER" @onclick="ShowDirectoryPicker">ShowDirectoryPicker</button>
+
+        <button data-testid="@BUTTON_STORAGE_MANAGER_ESTIMATE" @onclick="StorageManagerEstimate">StorageManagerEstimate</button>
+        <button data-testid="@BUTTON_STORAGE_MANAGER_PERSIST" @onclick="StorageManagerPersist">StorageManagerPersist</button>
+        <button data-testid="@BUTTON_STORAGE_MANAGER_PERSISTED" @onclick="StorageManagerPersisted">StorageManagerPersisted</button>
+        <button data-testid="@BUTTON_STORAGE_MANAGER_GET_DIRECTORY" @onclick="StorageManagerGetDirectory">StorageManagerGetDirectory</button>
+
+        
+        <button data-testid="@BUTTON_FILEHANDLE_GET_NAME_PROPERTY" @onclick="FileHandle_GetName_Property">FileHandle_GetName_Property</button>
+        <button data-testid="@BUTTON_FILEHANDLE_GET_NAME_METHOD" @onclick="FileHandle_GetName_Method">FileHandle_GetName_Method</button>
+        <button data-testid="@BUTTON_FILEHANDLE_GET_KIND" @onclick="FileHandle_GetKind">FileHandle_GetKind</button>
+
+        <button data-testid="@BUTTON_FILEHANDLE_IS_SAME_Entry" @onclick="FileHandle_IsSameEntry">FileHandle_IsSameEntry</button>
+        <button data-testid="@BUTTON_FILEHANDLE_GET_FILE" @onclick="FileHandle_GetFile">FileHandle_GetFile</button>
+        <button data-testid="@BUTTON_FILEHANDLE_CREATE_WRITABLE" @onclick="FileHandle_CreateWritable">FileHandle_CreateWritable</button>
+        
+
+        <button data-testid="@BUTTON_DIRECTORYHANDLE_GET_NAME_PROPERTY" @onclick="DirectoryHandle_GetName_Property">DirectoryHandle_GetName_Property</button>
+        <button data-testid="@BUTTON_DIRECTORYHANDLE_GET_NAME_METHOD" @onclick="DirectoryHandle_GetName_Method">DirectoryHandle_GetName_Method</button>
+        <button data-testid="@BUTTON_DIRECTORYHANDLE_GET_KIND" @onclick="DirectoryHandle_GetKind">DirectoryHandle_GetKind</button>
+
+        <button data-testid="@BUTTON_DIRECTORYHANDLE_IS_SAME_Entry" @onclick="DirectoryHandle_IsSameEntry">DirectoryHandle_IsSameEntry</button>
+        <button data-testid="@BUTTON_DIRECTORYHANDLE_GET_DIRECTORYHANDLE" @onclick="DirectoryHandle_GetDirectoryHandle">DirectoryHandle_GetDirectoryHandle</button>
+        <button data-testid="@BUTTON_DIRECTORYHANDLE_GET_FILEHANDLE" @onclick="DirectoryHandle_GetFileHandle">DirectoryHandle_GetFileHandle</button>
+        <button data-testid="@BUTTON_DIRECTORYHANDLE_REMOVE_ENTRY" @onclick="DirectoryHandle_RemoveEntry">DirectoryHandle_RemoveEntry</button>
+        <button data-testid="@BUTTON_DIRECTORYHANDLE_VALUES" @onclick="DirectoryHandle_Values">DirectoryHandle_Values</button>
+
+
+        <button data-testid="@BUTTON_FILE_GET_NAME_PROPERTY" @onclick="File_GetName_Property">File_GetName_Property</button>
+        <button data-testid="@BUTTON_FILE_GET_NAME_METHOD" @onclick="File_GetName_Method">File_GetName_Method</button>
+        <button data-testid="@BUTTON_FILE_GET_SIZE_PROPERTY" @onclick="File_GetSize_Property">File_GetSize_Property</button>
+        <button data-testid="@BUTTON_FILE_GET_SIZE_METHOD" @onclick="File_GetSize_Method">File_GetSize_Method</button>
+        <button data-testid="@BUTTON_FILE_GET_TYPE_PROPERTY" @onclick="File_GetType_Property">File_GetType_Property</button>
+        <button data-testid="@BUTTON_FILE_GET_TYPE_METHOD" @onclick="File_GetType_Method">File_GetType_Method</button>
+        <button data-testid="@BUTTON_FILE_GET_LAST_MODIFIED_PROPERTY" @onclick="File_GetLastModified_Property">File_GetLastModified_Property</button>
+        <button data-testid="@BUTTON_FILE_GET_LAST_MODIFIED_METHOD" @onclick="File_GetLastModified_Method">File_GetLastModified_Method</button>
+        <button data-testid="@BUTTON_FILE_GET_WEBKIT_RELATIVE_PATH_PROPERTY" @onclick="File_GetWebkitRelativePath_Property">File_GetWebkitRelativePath_Property</button>
+        <button data-testid="@BUTTON_FILE_GET_WEBKIT_RELATIVE_PATH_METHOD" @onclick="File_GetWebkitRelativePath_Method">File_GetWebkitRelativePath_Method</button>
+
+        <button data-testid="@BUTTON_FILE_TEXT" @onclick="File_Text">File_Text</button>
+
+
+        <button data-testid="@BUTTON_WRITABLE_FILE_STREAM_GET_LOCKED_PROPERTY" @onclick="WritableFileStream_GetLocked_Property">WritableFileStream_GetLocked_Property</button>
+        <button data-testid="@BUTTON_WRITABLE_FILE_STREAM_GET_LOCKED_METHOD" @onclick="WritableFileStream_GetLocked_Method">WritableFileStream_GetLocked_Method</button>
+
+        <button data-testid="@BUTTON_WRITABLE_FILE_STREAM_WRITE_TEXT" @onclick="WritableFileStream_WriteText">WritableFileStream_WriteText</button>
+        <button data-testid="@BUTTON_WRITABLE_FILE_STREAM_WRITE_BYTES" @onclick="WritableFileStream_WriteBytes">WritableFileStream_WriteBytes</button>
+        <button data-testid="@BUTTON_WRITABLE_FILE_STREAM_SEEK" @onclick="WritableFileStream_Seek">WritableFileStream_Seek</button>
+        <button data-testid="@BUTTON_WRITABLE_FILE_STREAM_TRUNCATE" @onclick="WritableFileStream_Truncate">WritableFileStream_Truncate</button>
+        <button data-testid="@BUTTON_WRITABLE_FILE_STREAM_ABORT" @onclick="WritableFileStream_Abort">WritableFileStream_Abort</button>
+        <button data-testid="@BUTTON_WRITABLE_FILE_STREAM_CLOSE" @onclick="WritableFileStream_Close">WritableFileStream_Close</button>
+    </div>
+    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+</div>
