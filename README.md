@@ -79,27 +79,29 @@ There are more interfaces coming.
 <br></br>
 ## Release Notes
 
-- 0.1  
+- 0.1
   - first version, includes 10 BrowserAPIs: Clipboard, Console, CookieStorage, Dialog, Download, HTMLElement, Language, LocalStorage, ServiceWorker, SessionStorage
-- 0.1.1  
+- 0.1.1
   - changed SetCookie parameters: *expires* to seconds and *samesite* to string
-- 0.1.2  
+- 0.1.2
   - changed internal classes to public and moved them to namespace *BrowserAPI.Implementation*
-- 0.2.0  
+- 0.2.0
   - added IBrowserAPIModule for [CircleDI](https://github.com/BlackWhiteYoshi/CircleDI) and [Jab](https://github.com/pakrym/jab)
-- 0.3.0  
+- 0.3.0
   - added Geolocation (11 BrowserAPIs)
-- 0.4.0  
+- 0.4.0
   - breaking change: removed HTMLElementFactory and DialogFactory and added ElementFactory/ElementFactoryInProcess instead
-- 0.5.0  
+- 0.5.0
   - added HTMLMediaElement (12 BrowserAPIs)
-- 0.6.0  
+- 0.6.0
   - added MediaDevices (13 BrowserAPIs)
-- 0.7.0  
+- 0.7.0
   - added SensorAPI (14 BrowserAPIs)  
   - changed events to use sync interop if possible
-- 0.7.1  
+- 0.7.1
   - added .NET 9 and removed obsolete versions .NET 6 and .NET 7
-- 0.7.2  
+- 0.7.2
   - small breaking change: *Geolocation.GetCurrentPosition()* -> first parameter *successCallback* only takes 1 parameter *GeolocationCoordinates* now and the previous second parameter *timestamp* is inlcuded in the first parameter
   - added method *Geolocation.GetCurrentPositionAsync()*
+- 0.8.0
+  - added FileSystem (15 BrowserAPIs)
