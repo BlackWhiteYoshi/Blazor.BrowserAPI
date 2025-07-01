@@ -7,7 +7,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     #region Attributes
 
     [Test]
-    [Retry(3)]
     public async Task GetSrc_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_SRC_PROPERTY).ClickAsync();
 
@@ -16,7 +15,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetSrc_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_SRC_METHOD).ClickAsync();
 
@@ -25,7 +23,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetSrc() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_SET_SRC).ClickAsync();
 
@@ -35,21 +32,18 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetSrcObject_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_SRC_OBJECT_PROPERTY).ClickAsync();
         // an assertion happens in DisposeAsync()
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetSrcObject_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_SRC_OBJECT_METHOD).ClickAsync();
         // an assertion happens in DisposeAsync()
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetSrcObject() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_SET_SRC_OBJECT).ClickAsync();
         // an assertion happens in DisposeAsync()
@@ -57,7 +51,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetControls_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_CONTROLS_PROPERTY).ClickAsync();
 
@@ -66,7 +59,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetControls_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_CONTROLS_METHOD).ClickAsync();
 
@@ -75,7 +67,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetControls() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_SET_CONTROLS).ClickAsync();
 
@@ -85,7 +76,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetAutoplay_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_AUTOPLAY_PROPERTY).ClickAsync();
 
@@ -94,7 +84,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetAutoplay_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_AUTOPLAY_METHOD).ClickAsync();
 
@@ -103,7 +92,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetAutoplay() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_SET_AUTOPLAY).ClickAsync();
 
@@ -113,7 +101,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetLoop_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_LOOP_PROPERTY).ClickAsync();
 
@@ -122,7 +109,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetLoop_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_LOOP_METHOD).ClickAsync();
 
@@ -131,7 +117,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetLoop() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_SET_LOOP).ClickAsync();
 
@@ -141,7 +126,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetDefaultMuted_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_DEFAULT_MUTED_PROPERTY).ClickAsync();
 
@@ -150,7 +134,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetDefaultMuted_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_DEFAULT_MUTED_METHOD).ClickAsync();
 
@@ -159,7 +142,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetDefaultMuted() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_SET_DEFAULT_MUTED).ClickAsync();
 
@@ -169,7 +151,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetPreload_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_PRELOAD_PROPERTY).ClickAsync();
 
@@ -178,7 +159,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetPreload_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_PRELOAD_METHOD).ClickAsync();
 
@@ -187,7 +167,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetPreload() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_SET_PRELOAD).ClickAsync();
 
@@ -201,7 +180,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     #region State
 
     [Test]
-    [Retry(3)]
     public async Task GetCurrentSrc_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_CURRENT_SRC_PROPERTY).ClickAsync();
 
@@ -210,7 +188,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetCurrentSrc_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_CURRENT_SRC_METHOD).ClickAsync();
 
@@ -220,7 +197,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetCurrentTime_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_CURRENT_TIME_PROPERTY).ClickAsync();
 
@@ -229,7 +205,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetCurrentTime_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_CURRENT_TIME_METHOD).ClickAsync();
 
@@ -238,7 +213,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetCurrentTime() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_SET_CURRENT_TIME).ClickAsync();
 
@@ -248,7 +222,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetDuration_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.LABEL_OUTPUT).ClickAsync(); // minimal delay
 
@@ -259,7 +232,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetDuration_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.LABEL_OUTPUT).ClickAsync(); // minimal delay
 
@@ -271,7 +243,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetSeekable_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.LABEL_OUTPUT).ClickAsync(); // minimal delay
 
@@ -282,7 +253,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetSeekable_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.LABEL_OUTPUT).ClickAsync(); // minimal delay
 
@@ -294,7 +264,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetMuted_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_MUTED_PROPERTY).ClickAsync();
 
@@ -303,7 +272,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetMuted_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_MUTED_METHOD).ClickAsync();
 
@@ -312,7 +280,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetMuted() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_SET_MUTED).ClickAsync();
 
@@ -322,7 +289,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetVolume_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_VOLUME_PROPERTY).ClickAsync();
 
@@ -331,7 +297,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetVolume_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_VOLUME_METHOD).ClickAsync();
 
@@ -340,7 +305,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetVolume() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_SET_VOLUME).ClickAsync();
 
@@ -350,7 +314,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetPaused_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_PAUSED_PROPERTY).ClickAsync();
 
@@ -359,7 +322,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetPaused_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_PAUSED_METHOD).ClickAsync();
 
@@ -369,7 +331,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetEnded_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_ENDED_PROPERTY).ClickAsync();
 
@@ -378,7 +339,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetEnded_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_ENDED_METHOD).ClickAsync();
 
@@ -388,7 +348,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetSeeking_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_SEEKING_PROPERTY).ClickAsync();
 
@@ -397,7 +356,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetSeeking_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_SEEKING_METHOD).ClickAsync();
 
@@ -407,7 +365,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetReadyState_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_READY_STATE_PROPERTY).ClickAsync();
 
@@ -416,7 +373,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetReadyState_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_READY_STATE_METHOD).ClickAsync();
 
@@ -426,7 +382,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetNetworkState_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.LABEL_OUTPUT).ClickAsync(); // minimal delay
 
@@ -437,7 +392,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetNetworkState_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.LABEL_OUTPUT).ClickAsync(); // minimal delay
 
@@ -449,7 +403,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetBuffered_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_BUFFERED_PROPERTY).ClickAsync();
 
@@ -460,7 +413,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetBuffered_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_BUFFERED_METHOD).ClickAsync();
 
@@ -472,7 +424,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetPlayed_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_PLAYED_PROPERTY).ClickAsync();
 
@@ -481,7 +432,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetPlayed_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_PLAYED_METHOD).ClickAsync();
 
@@ -495,7 +445,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     #region Settings
 
     [Test]
-    [Retry(3)]
     public async Task GetPlaybackRate_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_PLAYBACK_RATE_PROPERTY).ClickAsync();
 
@@ -504,7 +453,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetPlaybackRate_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_PLAYBACK_RATE_METHOD).ClickAsync();
 
@@ -513,7 +461,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetPlaybackRate() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_SET_PLAYBACK_RATE).ClickAsync();
 
@@ -523,7 +470,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetDefaultPlaybackRate_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_DEFAULT_PLAYBACK_RATE_PROPERTY).ClickAsync();
 
@@ -532,7 +478,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetDefaultPlaybackRate_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_DEFAULT_PLAYBACK_RATE_METHOD).ClickAsync();
 
@@ -541,7 +486,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetDefaultPlaybackRate() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_SET_DEFAULT_PLAYBACK_RATE).ClickAsync();
 
@@ -551,7 +495,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetCrossOrigin_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_CROSS_ORIGIN_PROPERTY).ClickAsync();
 
@@ -560,7 +503,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetCrossOrigin_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_CROSS_ORIGIN_METHOD).ClickAsync();
 
@@ -569,7 +511,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetCrossOrigin() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_SET_CROSS_ORIGIN).ClickAsync();
 
@@ -579,7 +520,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetPreservesPitch_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_PRESERVES_PITCH_PROPERTY).ClickAsync();
 
@@ -588,7 +528,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetPreservesPitch_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_PRESERVES_PITCH_METHOD).ClickAsync();
 
@@ -597,7 +536,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetPreservesPitch() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_SET_PRESERVES_PITCH).ClickAsync();
 
@@ -607,7 +545,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task GetDisableRemotePlayback_Property() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_DISABLE_REMOTE_PLAYBACK_PROPERTY).ClickAsync();
 
@@ -616,7 +553,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetDisableRemotePlayback_Method() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_GET_DISABLE_REMOTE_PLAYBACK_METHOD).ClickAsync();
 
@@ -625,7 +561,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetDisableRemotePlayback() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_SET_DISABLE_REMOTE_PLAYBACK).ClickAsync();
 
@@ -639,7 +574,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     #region Methods
 
     [Test]
-    [Retry(3)]
     public async Task Play() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_PLAY).ClickAsync();
 
@@ -648,7 +582,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Pause() {
         await Page.GetByTestId(HTMLMediaElementGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.play();");
         await Task.Delay(100);
@@ -661,7 +594,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Load() {
         await Page.GetByTestId(HTMLMediaElementGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.play();");
         await Task.Delay(100);
@@ -685,7 +617,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task CanPlayType() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_CAN_PLAY_TYPE).ClickAsync();
 
@@ -699,7 +630,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     #region Events Ready
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnError() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_ERROR).ClickAsync();
         await Task.Delay(100);
@@ -712,7 +642,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnCanplay() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_CANPLAY).ClickAsync();
         await Task.Delay(100);
@@ -725,7 +654,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnCanplaythrough() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_CANPLAYTHROUGH).ClickAsync();
         await Task.Delay(100);
@@ -738,7 +666,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnPlaying() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_PLAYING).ClickAsync();
         await Task.Delay(100);
@@ -756,7 +683,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     #region Events Data
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnLoadstart() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_LOADSTART).ClickAsync();
         await Task.Delay(100);
@@ -768,7 +694,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnProgress() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_PROGRESS).ClickAsync();
         await Task.Delay(100);
@@ -781,7 +706,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnLoadeddata() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_LOADEDDATA).ClickAsync();
         await Task.Delay(100);
@@ -794,7 +718,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnLoadedmetadata() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_LOADEDMETADATA).ClickAsync();
         await Task.Delay(100);
@@ -807,7 +730,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnStalled() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_STALLED).ClickAsync();
         await Task.Delay(100);
@@ -821,7 +743,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnSuspend() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_SUSPEND).ClickAsync();
         await Task.Delay(100);
@@ -834,7 +755,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnWaiting() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_WAITING).ClickAsync();
         await Task.Delay(100);
@@ -848,7 +768,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnAbort() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_ABORT).ClickAsync();
         await Task.Delay(100);
@@ -860,7 +779,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnEmptied() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_EMPTIED).ClickAsync();
         await Task.Delay(100);
@@ -877,7 +795,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     #region Events Timing
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnPlay() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_PLAY).ClickAsync();
         await Task.Delay(100);
@@ -889,7 +806,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnPause() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_PAUSE).ClickAsync();
         await Task.Delay(100);
@@ -906,7 +822,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnEnded() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_ENDED).ClickAsync();
         await Task.Delay(100);
@@ -924,7 +839,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnSeeking() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_SEEKING).ClickAsync();
         await Task.Delay(100);
@@ -936,7 +850,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnSeeked() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_SEEKED).ClickAsync();
         await Task.Delay(100);
@@ -949,7 +862,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnTimeupdate() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_TIMEUPDATE).ClickAsync();
         await Task.Delay(100);
@@ -967,7 +879,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     #region Events Setting
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnVolumechange() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_VOLUMECHANGE).ClickAsync();
         await Task.Delay(100);
@@ -979,7 +890,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnRatechange() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_RATECHANGE).ClickAsync();
         await Task.Delay(100);
@@ -991,7 +901,6 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnDurationchange() {
         await Page.GetByTestId(HTMLMediaElementGroup.BUTTON_REGISTER_ON_DURATIONCHANGE).ClickAsync();
         await Task.Delay(100);

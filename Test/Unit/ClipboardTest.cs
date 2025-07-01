@@ -11,7 +11,6 @@ public sealed class ClipboardTest(PlayWrightFixture playWrightFixture) : PlayWri
 
 
     [Test]
-    [Retry(3)]
     [NotInParallel("ClipboardTest")]
     public async Task Read() {
         const string TEST_STR = "clipboard read test";
@@ -25,7 +24,6 @@ public sealed class ClipboardTest(PlayWrightFixture playWrightFixture) : PlayWri
     }
 
     [Test]
-    [Retry(3)]
     [NotInParallel("ClipboardTest")]
     public async Task Write() {
         await Page.GetByTestId(ClipboardGroup.BUTTON_WRITE).ClickAsync();

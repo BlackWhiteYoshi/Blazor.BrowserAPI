@@ -5,7 +5,6 @@ namespace BrowserAPI.UnitTest;
 [ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class SessionStorageInProcessTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     [Test]
-    [Retry(3)]
     [Arguments(0)]
     [Arguments(1)]
     [Arguments(3)]
@@ -21,7 +20,6 @@ public sealed class SessionStorageInProcessTest(PlayWrightFixture playWrightFixt
     }
 
     [Test]
-    [Retry(3)]
     public async Task Key() {
         const string KEY = "test-key-0";
         await Page.EvaluateAsync($"sessionStorage.setItem('{KEY}', 'test-value-0');");
@@ -33,7 +31,6 @@ public sealed class SessionStorageInProcessTest(PlayWrightFixture playWrightFixt
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetItem() {
         const string VALUE = "test-getItem-value";
         await Page.EvaluateAsync($"sessionStorage.setItem('{SessionStorageInProcessGroup.TEST_GET_ITEM}', '{VALUE}');");
@@ -45,7 +42,6 @@ public sealed class SessionStorageInProcessTest(PlayWrightFixture playWrightFixt
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetItem() {
         await Page.GetByTestId(SessionStorageInProcessGroup.BUTTON_SET_ITEM).ClickAsync();
 
@@ -54,7 +50,6 @@ public sealed class SessionStorageInProcessTest(PlayWrightFixture playWrightFixt
     }
 
     [Test]
-    [Retry(3)]
     public async Task RemoveItem() {
         await Page.EvaluateAsync($"sessionStorage.setItem('{SessionStorageInProcessGroup.TEST_REMOVE_ITEM}', 'test-value');");
 
@@ -67,7 +62,6 @@ public sealed class SessionStorageInProcessTest(PlayWrightFixture playWrightFixt
     }
 
     [Test]
-    [Retry(3)]
     [Arguments(0)]
     [Arguments(1)]
     [Arguments(3)]

@@ -12,7 +12,6 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetCurrentPosition() {
         const float LONGITUDE = 10.0f;
         const float LATITUDE = 12.0f;
@@ -35,7 +34,6 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetCurrentPositionAsync() {
         const float LONGITUDE = 10.0f;
         const float LATITUDE = 12.0f;
@@ -58,7 +56,6 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task WatchPosition() {
         const float LONGITUDE = 10.0f;
         const float LATITUDE = 12.0f;
@@ -84,7 +81,6 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task ClearWatch() {
         await Page.GetByTestId(GeolocationInProcessGroup.BUTTON_WATCH_POSITION).ClickAsync();
         await Task.Delay(100);

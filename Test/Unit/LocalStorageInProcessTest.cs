@@ -5,7 +5,6 @@ namespace BrowserAPI.UnitTest;
 [ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class LocalStorageInProcessTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     [Test]
-    [Retry(3)]
     [Arguments(0)]
     [Arguments(1)]
     [Arguments(3)]
@@ -21,7 +20,6 @@ public sealed class LocalStorageInProcessTest(PlayWrightFixture playWrightFixtur
     }
 
     [Test]
-    [Retry(3)]
     public async Task Key() {
         const string KEY = "test-key-0";
         await Page.EvaluateAsync($"localStorage.setItem('{KEY}', 'test-value-0');");
@@ -33,7 +31,6 @@ public sealed class LocalStorageInProcessTest(PlayWrightFixture playWrightFixtur
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetItem() {
         const string VALUE = "test-getItem-value";
         await Page.EvaluateAsync($"localStorage.setItem('{LocalStorageInProcessGroup.TEST_GET_ITEM}', '{VALUE}');");
@@ -45,7 +42,6 @@ public sealed class LocalStorageInProcessTest(PlayWrightFixture playWrightFixtur
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetItem() {
         await Page.GetByTestId(LocalStorageInProcessGroup.BUTTON_SET_ITEM).ClickAsync();
 
@@ -54,7 +50,6 @@ public sealed class LocalStorageInProcessTest(PlayWrightFixture playWrightFixtur
     }
 
     [Test]
-    [Retry(3)]
     public async Task RemoveItem() {
         await Page.EvaluateAsync($"localStorage.setItem('{LocalStorageInProcessGroup.TEST_REMOVE_ITEM}', 'test-value');");
 
@@ -65,7 +60,6 @@ public sealed class LocalStorageInProcessTest(PlayWrightFixture playWrightFixtur
     }
 
     [Test]
-    [Retry(3)]
     [Arguments(0)]
     [Arguments(1)]
     [Arguments(3)]

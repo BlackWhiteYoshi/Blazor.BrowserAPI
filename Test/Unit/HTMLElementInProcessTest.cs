@@ -9,7 +9,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     #region HTMLElement
 
     [Test]
-    [Retry(3)]
     public async Task GetInnerText() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_INNERTEXT).ClickAsync();
 
@@ -18,7 +17,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetInnerText() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_SET_INNERTEXT).ClickAsync();
 
@@ -29,7 +27,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetOuterText() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_OUTERTEXT).ClickAsync();
 
@@ -38,7 +35,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetOuterText() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_SET_OUTERTEXT).ClickAsync();
 
@@ -49,7 +45,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetStyle() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_STYLE).ClickAsync();
 
@@ -58,7 +53,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetStyle() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_SET_STYLE).ClickAsync();
 
@@ -69,7 +63,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetOffsetWidth() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_OFFSETWIDTH).ClickAsync();
 
@@ -81,7 +74,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetOffsetHeight() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_OFFSETHEIGHT).ClickAsync();
 
@@ -93,7 +85,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetOffsetLeft() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_OFFSETLEFT).ClickAsync();
 
@@ -105,7 +96,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetOffsetTop() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_OFFSETTOP).ClickAsync();
 
@@ -117,7 +107,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetOffsetParent() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_OFFSETPARENT).ClickAsync();
 
@@ -128,7 +117,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task HasFocus() {
         await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync("node => node.focus();");
 
@@ -140,7 +128,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task Click() {
         bool consoleClicked = false;
         Page.Console += ConsoleListener;
@@ -154,7 +141,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task Focus() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_FOCUS).ClickAsync();
 
@@ -163,7 +149,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task Blur() {
         ILocator htmlElement = Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT);
 
@@ -184,7 +169,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task ShowPopover() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_SHOW_POPOVER).ClickAsync();
 
@@ -193,7 +177,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task HidePopover() {
         // show popover
         {
@@ -213,7 +196,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task TogglePopover() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_TOGGLE_POPOVER).ClickAsync();
 
@@ -222,7 +204,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task TogglePopoverParameter() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_TOGGLE_POPOVER_PARAMETER).ClickAsync();
 
@@ -236,7 +217,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     #region Element
 
     [Test]
-    [Retry(3)]
     public async Task GetInnerHtml() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_INNERHTML).ClickAsync();
 
@@ -245,7 +225,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetInnerHtml() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_SET_INNERHTML).ClickAsync();
 
@@ -256,7 +235,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetOuterHtml() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_OUTERHTML).ClickAsync();
 
@@ -269,7 +247,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetOuterHtml() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_SET_OUTERHTML).ClickAsync();
 
@@ -280,7 +257,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetAttributes() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_ATTRIBUTES).ClickAsync();
 
@@ -290,7 +266,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetChildElementCount() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_CHILD_ELEMENT_COUNT).ClickAsync();
 
@@ -300,7 +275,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetChildren() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_CHILDREN).ClickAsync();
 
@@ -310,7 +284,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetClassNamey() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_CLASSNAME).ClickAsync();
 
@@ -319,7 +292,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetClassName() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_SET_CLASSNAME).ClickAsync();
 
@@ -329,7 +301,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetClassList() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_CLASSLIST).ClickAsync();
 
@@ -340,7 +311,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetClientWidthy() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_CLIENTWIDTH).ClickAsync();
 
@@ -352,7 +322,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetClientHeight() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_CLIENTHEIGHT).ClickAsync();
 
@@ -364,7 +333,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetClientLeft() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_CLIENTLEFT).ClickAsync();
 
@@ -376,7 +344,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetClientTop() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_CLIENTTOP).ClickAsync();
 
@@ -389,7 +356,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetScrollWidth() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_SCROLLWIDTH).ClickAsync();
 
@@ -401,7 +367,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetScrollHeight() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_SCROLLHEIGHT).ClickAsync();
 
@@ -413,7 +378,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetScrollLeft() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_SCROLLLEFT).ClickAsync();
 
@@ -424,7 +388,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetScrollLeft() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_SET_SCROLLLEFT).ClickAsync();
 
@@ -434,7 +397,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetScrollTop() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_SCROLLTOP).ClickAsync();
 
@@ -445,7 +407,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetScrollTop() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_SET_SCROLLTOP).ClickAsync();
 
@@ -456,7 +417,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task GetBoundingClientRect() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_BOUNDING_CLIENT_RECT).ClickAsync();
 
@@ -468,7 +428,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetClientRects() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_GET_CLIENT_RECTS).ClickAsync();
 
@@ -483,7 +442,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task HasAttribute() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_HAS_ATTRIBUTE).ClickAsync();
 
@@ -492,7 +450,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task HasAttributes() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_HAS_ATTRIBUTES).ClickAsync();
 
@@ -502,7 +459,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task PointerCapture() {
         ILocator htmlElement = Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT);
         ILocator labelOutput = Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT);
@@ -535,7 +491,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task Scroll() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_SCROLL).ClickAsync();
 
@@ -546,7 +501,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task ScrollBy() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_SCROLL_BY).ClickAsync();
 
@@ -557,7 +511,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task ScrollIntoView() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_SCROLL_INTO_VIEW).HoverAsync();
         int initial = await Page.EvaluateAsync<int>("window.scrollY;");
@@ -571,7 +524,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task RequestFullscreen() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_REQUEST_FULLSCREEN).ClickAsync();
     }
@@ -579,7 +531,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnTransitionstart() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_TRANSITIONSTART).ClickAsync();
         await Task.Delay(100);
@@ -592,7 +543,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnTransitionend() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_TRANSITIONEND).ClickAsync();
         await Task.Delay(100);
@@ -605,7 +555,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnTransitionrun() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_TRANSITIONRUN).ClickAsync();
         await Task.Delay(100);
@@ -618,7 +567,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnTransitioncancel() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_TRANSITIONCANCEL).ClickAsync();
         await Task.Delay(100);
@@ -633,7 +581,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnAnimationstart() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_ANIMATIONSTART).ClickAsync();
         await Task.Delay(100);
@@ -646,7 +593,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnAnimationnend() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_ANIMATIONEND).ClickAsync();
         await Task.Delay(100);
@@ -659,7 +605,6 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnAnimationiteration() {
         await Page.GetByTestId(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_ANIMATIONITERATION).ClickAsync();
         await Task.Delay(100);

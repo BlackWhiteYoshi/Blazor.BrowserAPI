@@ -6,7 +6,6 @@ namespace BrowserAPI.UnitTest;
 [ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class LanguageInProcessTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     [Test]
-    [Retry(3)]
     public async Task GetBrowserLanguage() {
         string expected = await Page.EvaluateAsync<string>("navigator.language;");
 
@@ -17,7 +16,6 @@ public sealed class LanguageInProcessTest(PlayWrightFixture playWrightFixture) :
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetHtmlLanguage() {
         await Page.GetByTestId(LanguageInProcessGroup.BUTTON_GET_HTML_LANGUAGE).ClickAsync();
 
@@ -26,7 +24,6 @@ public sealed class LanguageInProcessTest(PlayWrightFixture playWrightFixture) :
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetHtmlLanguage() {
         await Page.GetByTestId(LanguageInProcessGroup.BUTTON_SET_HTML_LANGUAGE).ClickAsync();
 

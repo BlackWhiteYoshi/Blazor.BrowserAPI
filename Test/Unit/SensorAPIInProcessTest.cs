@@ -13,7 +13,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     // Sensor Properties
 
     [Test]
-    [Retry(3)]
     public async Task GetActivated() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_GET_ACTIVATED).ClickAsync();
 
@@ -22,7 +21,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetHasReading() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_GET_HAS_READING).ClickAsync();
 
@@ -31,7 +29,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetTimestamp() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_GET_TIMESTAMP).ClickAsync();
 
@@ -43,7 +40,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     // Sensor Methods
 
     [Test]
-    [Retry(3)]
     public async Task Start() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_START).ClickAsync();
 
@@ -52,7 +48,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Stop() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_STOP).ClickAsync();
 
@@ -64,7 +59,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     // Sensor Events
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnError() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_REGISTER_ON_ERROR).ClickAsync();
 
@@ -73,7 +67,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnActivate() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_REGISTER_ON_ACTIVATE).ClickAsync();
 
@@ -82,7 +75,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnReading() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_REGISTER_ON_READING).ClickAsync();
 
@@ -94,7 +86,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     // AmbientLightSensor
 
     [Test]
-    [Retry(3)]
     public async Task AmbientLightSensorGetIlluminance() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_AMBIENT_LIGHT_SENSOR_GET_ILLUMINANCE).ClickAsync();
 
@@ -106,7 +97,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     // Gyroscope
 
     [Test]
-    [Retry(3)]
     public async Task GyroscopeGetX() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_GYROSCOPE_GET_X).ClickAsync();
 
@@ -115,7 +105,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GyroscopeGetY() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_GYROSCOPE_GET_Y).ClickAsync();
 
@@ -124,7 +113,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GyroscopeGetZ() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_GYROSCOPE_GET_Z).ClickAsync();
 
@@ -136,7 +124,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     // Accelerometer
 
     [Test]
-    [Retry(3)]
     public async Task AccelerometerGetX() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_ACCELEROMETER_GET_X).ClickAsync();
 
@@ -145,7 +132,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task AccelerometerGetY() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_ACCELEROMETER_GET_Y).ClickAsync();
 
@@ -154,7 +140,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task AccelerometerGetZ() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_ACCELEROMETER_GET_Z).ClickAsync();
 
@@ -166,7 +151,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     // LinearAccelerationSensor
 
     [Test]
-    [Retry(3)]
     public async Task LinearAccelerationSensorGetX() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_LINEAR_ACCELERATION_SENSOR_GET_X).ClickAsync();
 
@@ -175,7 +159,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task LinearAccelerationSensorGetY() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_LINEAR_ACCELERATION_SENSOR_GET_Y).ClickAsync();
 
@@ -184,7 +167,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task LinearAccelerationSensorGetZ() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_LINEAR_ACCELERATION_SENSOR_GET_Z).ClickAsync();
 
@@ -196,7 +178,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     // GravitySensor
 
     [Test]
-    [Retry(3)]
     public async Task GravitySensorGetX() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_GRAVITY_SENSOR_GET_X).ClickAsync();
 
@@ -205,7 +186,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GravitySensorGetY() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_GRAVITY_SENSOR_GET_Y).ClickAsync();
 
@@ -214,7 +194,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GravitySensorGetZ() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_GRAVITY_SENSOR_GET_Z).ClickAsync();
 
@@ -226,7 +205,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     // AbsoluteOrientationSensor
 
     [Test]
-    [Retry(3)]
     public async Task AbsoluteOrientationSensorGetQuaternion() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_ABSOLUTE_ORIENTATION_SENSOR_GET_QUATERNION).ClickAsync();
 
@@ -235,7 +213,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task AbsoluteOrientationSensorPopulateMatrix() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_ABSOLUTE_ORIENTATION_SENSOR_POPULATE_MATRIX).ClickAsync();
 
@@ -247,7 +224,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     // RelativeOrientationSensor
 
     [Test]
-    [Retry(3)]
     public async Task RelativeOrientationSensorGetQuaternion() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_RELATIVE_ORIENTATION_SENSOR_GET_QUATERNION).ClickAsync();
 
@@ -256,7 +232,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task RelativeOrientationSensorPopulateMatrix() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_RELATIVE_ORIENTATION_SENSOR_POPULATE_MATRIX).ClickAsync();
 
@@ -268,7 +243,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     // Magnetometer
 
     [Test]
-    [Retry(3)]
     public async Task MagnetometerGetX() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_MAGNETOMETER_GET_X).ClickAsync();
 
@@ -277,7 +251,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task MagnetometerGetY() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_MAGNETOMETER_GET_Y).ClickAsync();
 
@@ -286,7 +259,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task MagnetometerGetZ() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_MAGNETOMETER_GET_Z).ClickAsync();
 
@@ -298,7 +270,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     // UncalibratedMagnetometer
 
     [Test]
-    [Retry(3)]
     public async Task UncalibratedMagnetometerGetX() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_UNCALIBRATED_MAGNETOMETER_GET_X).ClickAsync();
 
@@ -307,7 +278,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task UncalibratedMagnetometerGetY() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_UNCALIBRATED_MAGNETOMETER_GET_Y).ClickAsync();
 
@@ -316,7 +286,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task UncalibratedMagnetometerGetZ() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_UNCALIBRATED_MAGNETOMETER_GET_Z).ClickAsync();
 
@@ -325,7 +294,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task UncalibratedMagnetometerGetXBias() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_UNCALIBRATED_MAGNETOMETER_GET_X_BIAS).ClickAsync();
 
@@ -334,7 +302,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task UncalibratedMagnetometerGetYBias() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_UNCALIBRATED_MAGNETOMETER_GET_Y_BIAS).ClickAsync();
 
@@ -343,7 +310,6 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     }
 
     [Test]
-    [Retry(3)]
     public async Task UncalibratedMagnetometerGetZBias() {
         await Page.GetByTestId(SensorAPIInProcessGroup.BUTTON_UNCALIBRATED_MAGNETOMETER_GET_Z_BIAS).ClickAsync();
 

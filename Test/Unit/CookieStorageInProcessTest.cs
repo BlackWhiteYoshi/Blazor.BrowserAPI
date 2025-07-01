@@ -6,7 +6,6 @@ namespace BrowserAPI.UnitTest;
 [ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class CookieStorageInProcessTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     [Test]
-    [Retry(3)]
     [Arguments(0)]
     [Arguments(1)]
     [Arguments(3)]
@@ -31,7 +30,6 @@ public sealed class CookieStorageInProcessTest(PlayWrightFixture playWrightFixtu
     }
 
     [Test]
-    [Retry(3)]
     [Arguments(0)]
     [Arguments(1)]
     [Arguments(3)]
@@ -47,7 +45,6 @@ public sealed class CookieStorageInProcessTest(PlayWrightFixture playWrightFixtu
     }
 
     [Test]
-    [Retry(3)]
     public async Task Key() {
         const string KEY = "test-key-0";
         await Page.EvaluateAsync($"document.cookie = '{KEY}=test-value-0';");
@@ -59,7 +56,6 @@ public sealed class CookieStorageInProcessTest(PlayWrightFixture playWrightFixtu
     }
 
     [Test]
-    [Retry(3)]
     public async Task GetCookie() {
         const string VALUE = "test-getCOOKIE-value";
         await Page.EvaluateAsync($"document.cookie = '{CookieStorageInProcessGroup.TEST_GET_COOKIE}={VALUE}';");
@@ -71,7 +67,6 @@ public sealed class CookieStorageInProcessTest(PlayWrightFixture playWrightFixtu
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetCookie() {
         await Page.GetByTestId(CookieStorageInProcessGroup.BUTTON_SET_COOKIE).ClickAsync();
 
@@ -80,7 +75,6 @@ public sealed class CookieStorageInProcessTest(PlayWrightFixture playWrightFixtu
     }
 
     [Test]
-    [Retry(3)]
     public async Task RemoveCookie() {
         await Page.EvaluateAsync($"document.cookie = '{CookieStorageInProcessGroup.TEST_REMOVE_COOKIE}=test-value';");
 
@@ -93,7 +87,6 @@ public sealed class CookieStorageInProcessTest(PlayWrightFixture playWrightFixtu
     }
 
     [Test]
-    [Retry(3)]
     [Arguments(0)]
     [Arguments(1)]
     [Arguments(3)]

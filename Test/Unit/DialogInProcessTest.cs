@@ -6,7 +6,6 @@ namespace BrowserAPI.UnitTest;
 [ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class DialogInProcessTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     [Test]
-    [Retry(3)]
     public async Task GetOpen() {
         await Page.GetByTestId(DialogInProcessGroup.BUTTON_GET_OPEN).ClickAsync();
 
@@ -15,7 +14,6 @@ public sealed class DialogInProcessTest(PlayWrightFixture playWrightFixture) : P
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetOpen() {
         await Page.GetByTestId(DialogInProcessGroup.BUTTON_SET_OPEN).ClickAsync();
 
@@ -25,7 +23,6 @@ public sealed class DialogInProcessTest(PlayWrightFixture playWrightFixture) : P
 
 
     [Test]
-    [Retry(3)]
     public async Task GetReturnValue() {
         const string RESULT = "return value result";
         ILocator dialog = Page.GetByTestId(DialogInProcessGroup.DIALOG_ELEMENT);
@@ -38,7 +35,6 @@ public sealed class DialogInProcessTest(PlayWrightFixture playWrightFixture) : P
     }
 
     [Test]
-    [Retry(3)]
     public async Task SetReturnValue() {
         await Page.GetByTestId(DialogInProcessGroup.BUTTON_SET_RETURN_VALUE).ClickAsync();
 
@@ -49,7 +45,6 @@ public sealed class DialogInProcessTest(PlayWrightFixture playWrightFixture) : P
 
 
     [Test]
-    [Retry(3)]
     public async Task Show() {
         await Page.GetByTestId(DialogInProcessGroup.BUTTON_SHOW).ClickAsync();
 
@@ -58,7 +53,6 @@ public sealed class DialogInProcessTest(PlayWrightFixture playWrightFixture) : P
     }
 
     [Test]
-    [Retry(3)]
     public async Task ShowModal() {
         await Page.GetByTestId(DialogInProcessGroup.BUTTON_SHOW_MODAL).ClickAsync();
 
@@ -67,7 +61,6 @@ public sealed class DialogInProcessTest(PlayWrightFixture playWrightFixture) : P
     }
 
     [Test]
-    [Retry(3)]
     public async Task Close() {
         ILocator dialog = Page.GetByTestId(DialogInProcessGroup.DIALOG_ELEMENT);
         await dialog.EvaluateAsync("dialog => dialog.show();");
@@ -79,7 +72,6 @@ public sealed class DialogInProcessTest(PlayWrightFixture playWrightFixture) : P
     }
 
     [Test]
-    [Retry(3)]
     public async Task CloseReturnValue() {
         ILocator dialog = Page.GetByTestId(DialogInProcessGroup.DIALOG_ELEMENT);
         await dialog.EvaluateAsync("dialog => dialog.show();");
@@ -94,7 +86,6 @@ public sealed class DialogInProcessTest(PlayWrightFixture playWrightFixture) : P
 
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnCancel() {
         await Page.GetByTestId(DialogInProcessGroup.BUTTON_REGISTER_ON_CANCEL).ClickAsync();
         ILocator dialog = Page.GetByTestId(DialogInProcessGroup.DIALOG_ELEMENT);
@@ -107,7 +98,6 @@ public sealed class DialogInProcessTest(PlayWrightFixture playWrightFixture) : P
     }
 
     [Test]
-    [Retry(3)]
     public async Task RegisterOnClose() {
         await Page.GetByTestId(DialogInProcessGroup.BUTTON_REGISTER_ON_CLOSE).ClickAsync();
         ILocator dialog = Page.GetByTestId(DialogInProcessGroup.DIALOG_ELEMENT);

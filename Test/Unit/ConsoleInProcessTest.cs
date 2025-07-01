@@ -31,7 +31,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task Assert_String() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -41,7 +40,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Assert_Test() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -51,7 +49,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Clear() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -62,7 +59,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task Count() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -72,7 +68,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Count_Label() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -82,7 +77,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task CountReset() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -92,7 +86,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task CountReset_Label() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -103,7 +96,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task Debug_String() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -113,7 +105,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Debug() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -123,7 +114,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Dir() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -133,7 +123,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Dirxml() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -143,7 +132,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Error_String() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -153,7 +141,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Error() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -164,7 +151,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task Group() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -174,7 +160,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Group_Label() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -184,7 +169,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GroupCollapsed() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -194,7 +178,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task GroupCollapsed_Label() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -206,7 +189,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task Info_String() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -216,7 +198,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Info() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -226,7 +207,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Log_String() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -236,7 +216,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Log() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -246,7 +225,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Table() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -256,7 +234,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Table_Columns() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -267,7 +244,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task Time() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -278,7 +254,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Time_Label() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -289,7 +264,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task TimeEnd() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -300,7 +274,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task TimeEnd_Label() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -311,7 +284,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task TimeLog() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -322,7 +294,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task TimeLog_Label() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -333,7 +304,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task TimeLog_LabelData() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -345,7 +315,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
 
 
     [Test]
-    [Retry(3)]
     public async Task Trace_String() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -355,7 +324,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Trace() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -365,7 +333,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Warn_String() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
@@ -375,7 +342,6 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
     }
 
     [Test]
-    [Retry(3)]
     public async Task Warn() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
