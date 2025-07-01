@@ -1,6 +1,7 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 
 namespace BrowserAPI.Implementation;
 
@@ -19,7 +20,7 @@ public abstract class SensorBase(IJSObjectReference sensorJS) {
     [method: DynamicDependency(nameof(InvokeActivate))]
     [method: DynamicDependency(nameof(InvokeReading))]
     private sealed class EventTrigger(SensorBase sensor) {
-        [JSInvokable] public void InvokeError(object message) => sensor._onError?.Invoke(message.ToString()!);
+        [JSInvokable] public void InvokeError(JsonElement errorEvent) => sensor._onError?.Invoke(errorEvent);
         [JSInvokable] public void InvokeActivate() => sensor._onActivate?.Invoke();
         [JSInvokable] public void InvokeReading() => sensor._onReading?.Invoke();
     }
@@ -48,7 +49,7 @@ public abstract class SensorBase(IJSObjectReference sensorJS) {
     private ValueTask DeactivateJSEvent(string jsMethodName) => sensorJS.InvokeVoidTrySync(jsMethodName);
 
 
-    private Action<string>? _onError;
+    private Action<JsonElement>? _onError;
     /// <summary>
     /// <para>
     /// The error event is fired when an exception occurs on a sensor.
@@ -56,7 +57,7 @@ public abstract class SensorBase(IJSObjectReference sensorJS) {
     /// </para>
     /// <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</see> as JSON.</para>
     /// </summary>
-    public event Action<string> OnError {
+    public event Action<JsonElement> OnError {
         add {
             if (_onError == null)
                 _ = ActivateJSEvent("activateOnerror").Preserve();

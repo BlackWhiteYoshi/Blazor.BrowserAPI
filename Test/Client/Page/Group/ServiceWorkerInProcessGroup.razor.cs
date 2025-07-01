@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace BrowserAPI.Test.Client;
 
@@ -197,8 +198,8 @@ public sealed partial class ServiceWorkerInProcessGroup : ComponentBase, IAsyncD
 
     public const string BUTTON_REGISTER_ON_ERROR = "service-worker-inprocess-event-error";
     private async void RegisterOnError() {
-        (await ServiceWorker).OnError += (string error) => {
-            labelOutput = error;
+        (await ServiceWorker).OnError += (JsonElement error) => {
+            labelOutput = error.ToString();
             StateHasChanged();
         };
     }

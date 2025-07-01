@@ -123,10 +123,10 @@ Objects of this class must disposed manually, so do not forget to call DisposeAs
 
 #### Events
 
-| **Name**      | **Type**             | **Description**                                                                                                                                                                                                                          |
-| ------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OnStateChange | Action&lt;string&gt; | The *statechange* event fires anytime the ServiceWorker.state changes.<br />Parameter is the new state of the service worker. It can be one of the following values: parsed, installing, installed, activating, activated, or redundant. |
-| OnError       | Action&lt;string&gt; | The *error* event fires whenever an error occurs in the service worker.<br />Parameter is of type [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event) as JSON.                                                               |
+| **Name**      | **Type**                  | **Description**                                                                                                                                                                                                                          |
+| ------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OnStateChange | Action&lt;string&gt;      | The *statechange* event fires anytime the ServiceWorker.state changes.<br />Parameter is the new state of the service worker. It can be one of the following values: parsed, installing, installed, activating, activated, or redundant. |
+| OnError       | Action&lt;JsonElement&gt; | The *error* event fires whenever an error occurs in the service worker.<br />Parameter is of type [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event) as JSON.                                                               |
 
 
 <br></br>
@@ -223,7 +223,7 @@ Objects of this class must disposed manually, so do not forget to call Dispose()
 
 #### Events
 
-| **Name**      | **Type**             | **Description**                                                                                                                                                                                                                          |
-| ------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OnStateChange | Action&lt;string&gt; | The *statechange* event fires anytime the ServiceWorker.state changes.<br />Parameter is the new state of the service worker. It can be one of the following values: parsed, installing, installed, activating, activated, or redundant. |
-| OnError       | Action&lt;string&gt; | The *error* event fires whenever an error occurs in the service worker.<br />Parameter is of type [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event) as JSON.                                                               |
+| **Name**      | **Type**                  | **Description**                                                                                                                                                                                                                          |
+| ------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OnStateChange | Action&lt;string&gt;      | The *statechange* event fires anytime the ServiceWorker.state changes.<br />Parameter is the new state of the service worker. It can be one of the following values: parsed, installing, installed, activating, activated, or redundant. |
+| OnError       | Action&lt;JsonElement&gt; | The *error* event fires whenever an error occurs in the service worker.<br />Parameter is of type [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event) as JSON.                                                               |

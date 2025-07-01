@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Numerics;
+using System.Text.Json;
 
 namespace BrowserAPI.Test.Client;
 
@@ -80,35 +81,66 @@ public sealed partial class SensorAPIInProcessGroup {
 
     public const string BUTTON_REGISTER_ON_ERROR = "sensor-api-inprocess-error-event";
     private void RegisterOnError() {
-        using IGyroscopeInProcess? gyroscope = SensorAPI.CreateGyroscope();
+        IGyroscopeInProcess? gyroscope = SensorAPI.CreateGyroscope();
         if (gyroscope == null) {
             labelOutput = "not supported";
             return;
         }
 
-        gyroscope.OnError += (string error) => labelOutput = error;
+        gyroscope.OnError += OnError;
+        gyroscope.Start();
+        gyroscope.Stop();
+
+
+        void OnError(JsonElement error) {
+            labelOutput = error.ToString();
+            StateHasChanged();
+            gyroscope.OnError -= OnError;
+            gyroscope.Dispose();
+        }
     }
 
     public const string BUTTON_REGISTER_ON_ACTIVATE = "sensor-api-inprocess-activate-event";
     private void RegisterOnActivate() {
-        using IGyroscopeInProcess? gyroscope = SensorAPI.CreateGyroscope();
+        IGyroscopeInProcess? gyroscope = SensorAPI.CreateGyroscope();
         if (gyroscope == null) {
             labelOutput = "not supported";
             return;
         }
 
-        gyroscope.OnActivate += () => labelOutput = "activate";
+        gyroscope.OnActivate += OnActivate;
+        gyroscope.Start();
+        gyroscope.Stop();
+
+
+        void OnActivate() {
+            labelOutput = "activate";
+            StateHasChanged();
+            gyroscope.OnActivate -= OnActivate;
+            gyroscope.Dispose();
+        }
     }
 
     public const string BUTTON_REGISTER_ON_READING = "sensor-api-inprocess-reading-event";
-    private void RegisterOnReading() {
-        using IGyroscopeInProcess? gyroscope = SensorAPI.CreateGyroscope();
+    private async Task RegisterOnReading() {
+        IGyroscopeInProcess? gyroscope = SensorAPI.CreateGyroscope();
         if (gyroscope == null) {
             labelOutput = "not supported";
             return;
         }
 
-        gyroscope.OnReading += () => labelOutput = "reading";
+        gyroscope.OnReading += OnReading;
+        gyroscope.Start();
+        await Task.Delay(500);
+        gyroscope.Stop();
+
+
+        void OnReading() {
+            labelOutput = "reading";
+            StateHasChanged();
+            gyroscope.OnReading -= OnReading;
+            gyroscope.Dispose();
+        }
     }
 
 

@@ -100,11 +100,11 @@ Instead it provides properties, event handlers, and methods accessed by interfac
 
 #### Events
 
-| **Name**   | **Type**             | **Description**                                                                                                                                                                                 |
-| ---------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OnError    | Action&lt;string&gt; | The error event is fired when an exception occurs on a sensor. After this event has occurred, the Sensor object becomes idle. If the sensor was reading values, it will stop until it restarts. |
-| OnActivate | Action               | The activate event is fired when a sensor becomes activated. It means that it will start obtaining readings.                                                                                    |
-| OnReading  | Action               | The reading event is fired when a new reading is available on a sensor.                                                                                                                         |
+| **Name**   | **Type**                  | **Description**                                                                                                                                                                                                                                                                                    |
+| ---------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OnError    | Action&lt;JsonElement&gt; | The error event is fired when an exception occurs on a sensor. After this event has occurred, the Sensor object becomes idle. If the sensor was reading values, it will stop until it restarts.<br />Parameter is of type [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event) as JSON. |
+| OnActivate | Action                    | The activate event is fired when a sensor becomes activated. It means that it will start obtaining readings.                                                                                                                                                                                       |
+| OnReading  | Action                    | The reading event is fired when a new reading is available on a sensor.                                                                                                                                                                                                                            |
 
 
 <br></br>
@@ -423,11 +423,11 @@ Instead it provides properties, event handlers, and methods accessed by interfac
 
 #### Events
 
-| **Name**   | **Type**             | **Description**                                                                                                                                                                                 |
-| ---------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OnError    | Action&lt;string&gt; | The error event is fired when an exception occurs on a sensor. After this event has occurred, the Sensor object becomes idle. If the sensor was reading values, it will stop until it restarts. |
-| OnActivate | Action               | The activate event is fired when a sensor becomes activated. It means that it will start obtaining readings.                                                                                    |
-| OnReading  | Action               | The reading event is fired when a new reading is available on a sensor.                                                                                                                         |
+| **Name**   | **Type**                  | **Description**                                                                                                                                                                                                                                                                                    |
+| ---------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OnError    | Action&lt;JsonElement&gt; | The error event is fired when an exception occurs on a sensor. After this event has occurred, the Sensor object becomes idle. If the sensor was reading values, it will stop until it restarts.<br />Parameter is of type [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event) as JSON. |
+| OnActivate | Action                    | The activate event is fired when a sensor becomes activated. It means that it will start obtaining readings.                                                                                                                                                                                       |
+| OnReading  | Action                    | The reading event is fired when a new reading is available on a sensor.                                                                                                                                                                                                                            |
 
 
 <br></br>

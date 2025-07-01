@@ -1,6 +1,7 @@
 using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 
 namespace BrowserAPI.Implementation;
 
@@ -23,7 +24,7 @@ public abstract class MediaRecorderBase(IJSObjectReference mediaRecorderJS) {
     [method: DynamicDependency(nameof(InvokePause))]
     private sealed class EventTrigger(MediaRecorderBase mediaRecorder) {
         [JSInvokable] public void InvokeDataavailable(byte[] data) => mediaRecorder._onDataavailable?.Invoke(data);
-        [JSInvokable] public void InvokeError(object message) => mediaRecorder._onError?.Invoke(message.ToString()!);
+        [JSInvokable] public void InvokeError(JsonElement errorEvent) => mediaRecorder._onError?.Invoke(errorEvent);
         [JSInvokable] public void InvokeStart() => mediaRecorder._onStart?.Invoke();
         [JSInvokable] public void InvokeStop() => mediaRecorder._onStop?.Invoke();
         [JSInvokable] public void InvokeResume() => mediaRecorder._onResume?.Invoke();
@@ -75,7 +76,7 @@ public abstract class MediaRecorderBase(IJSObjectReference mediaRecorderJS) {
         }
     }
 
-    private Action<string>? _onError;
+    private Action<JsonElement>? _onError;
     /// <summary>
     /// <para>
     /// Fired when there are fatal errors that stop recording.
@@ -83,7 +84,7 @@ public abstract class MediaRecorderBase(IJSObjectReference mediaRecorderJS) {
     /// </para>
     /// <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</see> as JSON.</para>
     /// </summary>
-    public event Action<string> OnError {
+    public event Action<JsonElement> OnError {
         add {
             if (_onError == null)
                 _ = ActivateJSEvent("activateOnerror").Preserve();

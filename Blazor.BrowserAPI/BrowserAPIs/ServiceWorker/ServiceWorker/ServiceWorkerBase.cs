@@ -1,6 +1,7 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 
 namespace BrowserAPI.Implementation;
 
@@ -19,7 +20,7 @@ public abstract class ServiceWorkerBase(IJSObjectReference serviceWorkerJS) {
     [method: DynamicDependency(nameof(InvokeError))]
     private sealed class EventTrigger(ServiceWorkerBase serviceWorker) {
         [JSInvokable] public void InvokeStateChange(string state) => serviceWorker._onStateChange?.Invoke(state);
-        [JSInvokable] public void InvokeError(object message) => serviceWorker._onError?.Invoke(message.ToString()!);
+        [JSInvokable] public void InvokeError(JsonElement errorEvent) => serviceWorker._onError?.Invoke(errorEvent);
     }
 
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
@@ -64,12 +65,12 @@ public abstract class ServiceWorkerBase(IJSObjectReference serviceWorkerJS) {
         }
     }
 
-    private Action<string>? _onError;
+    private Action<JsonElement>? _onError;
     /// <summary>
     /// <para>The <i>error</i> event fires whenever an error occurs in the service worker.</para>
     /// <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</see> as JSON.</para>
     /// </summary>
-    public event Action<string> OnError {
+    public event Action<JsonElement> OnError {
         add {
             if (_onError == null)
                 _ = ActivateJSEvent("activateOnerror").Preserve();

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Text;
+using System.Text.Json;
 
 namespace BrowserAPI.Test.Client;
 
@@ -259,20 +260,20 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
     public const string BUTTON_REQUEST_DATA = "media-recorder-request-data";
     private async Task RequestData() {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
-        await using IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
+        IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 
-        TaskCompletionSource taskCompletionSource = new();
         mediaRecorder.OnDataavailable += OnDataavailable;
         await mediaRecorder.Start();
+        await Task.Delay(100);
         await mediaRecorder.RequestData();
-        await taskCompletionSource.Task;
 
 
         void OnDataavailable(byte[] data) {
             labelOutput = data.Length.ToString();
+            StateHasChanged();
             mediaRecorder.OnDataavailable -= OnDataavailable;
-            taskCompletionSource.SetResult();
-        };
+            _ = mediaRecorder.DisposeAsync().Preserve();
+        }
     }
 
     public const string BUTTON_IS_TYPE_SUPPORTED = "media-recorder-is-type-supported";
@@ -290,62 +291,110 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_DATAAVAILABLE = "media-recorder-dataavailable-event";
     private async Task RegisterOnDataavailable() {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
-        await using IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
+        IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 
-        mediaRecorder.OnDataavailable += (byte[] data) => labelOutput = data.Length.ToString();
+        mediaRecorder.OnDataavailable += OnDataavailable;
         await mediaRecorder.Start();
-        await mediaRecorder.Stop();
         await Task.Delay(100);
+        await mediaRecorder.Stop();
+
+
+        void OnDataavailable(byte[] data) {
+            labelOutput = data.Length.ToString();
+            StateHasChanged();
+            mediaRecorder.OnDataavailable -= OnDataavailable;
+            _ = mediaRecorder.DisposeAsync().Preserve();
+        }
     }
 
     public const string BUTTON_REGISTER_ON_ERROR = "media-recorder-error-event";
     private async Task RegisterOnError() {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
-        await using IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
+        IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 
-        mediaRecorder.OnError += (string error) => labelOutput = error;
+        mediaRecorder.OnError += OnError;
+
+
+        void OnError(JsonElement error) {
+            labelOutput = error.ToString();
+            StateHasChanged();
+            mediaRecorder.OnError -= OnError;
+            _ = mediaRecorder.DisposeAsync().Preserve();
+        }
     }
 
     public const string BUTTON_REGISTER_ON_START = "media-recorder-start-event";
     private async Task RegisterOnStart() {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
-        await using IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
+        IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 
-        mediaRecorder.OnStart += () => labelOutput = "started";
+        mediaRecorder.OnStart += OnStart;
         await mediaRecorder.Start();
         await mediaRecorder.Stop();
+
+
+        void OnStart() {
+            labelOutput = "started";
+            StateHasChanged();
+            mediaRecorder.OnStart -= OnStart;
+            _ = mediaRecorder.DisposeAsync().Preserve();
+        }
     }
 
     public const string BUTTON_REGISTER_ON_STOP = "media-recorder-stop-event";
     private async Task RegisterOnStop() {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
-        await using IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
+        IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 
-        mediaRecorder.OnStop += () => labelOutput = "stopped";
+        mediaRecorder.OnStop += OnStop;
         await mediaRecorder.Start();
         await mediaRecorder.Stop();
+
+
+        void OnStop() {
+            labelOutput = "stopped";
+            StateHasChanged();
+            mediaRecorder.OnStop -= OnStop;
+            _ = mediaRecorder.DisposeAsync().Preserve();
+        }
     }
 
     public const string BUTTON_REGISTER_ON_RESUME = "media-recorder-resume-event";
     private async Task RegisterOnResume() {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
-        await using IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
+        IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 
-        mediaRecorder.OnResume += () => labelOutput = "resumed";
+        mediaRecorder.OnResume += OnResume;
         await mediaRecorder.Start();
         await mediaRecorder.Pause();
         await mediaRecorder.Resume();
         await mediaRecorder.Stop();
+
+
+        void OnResume() {
+            labelOutput = "resumed";
+            StateHasChanged();
+            mediaRecorder.OnResume -= OnResume;
+            _ = mediaRecorder.DisposeAsync().Preserve();
+        }
     }
 
     public const string BUTTON_REGISTER_ON_PAUSE = "media-recorder-pause-event";
     private async Task RegisterOnPause() {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
-        await using IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
+        IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 
-        mediaRecorder.OnPause += () => labelOutput = "paused";
+        mediaRecorder.OnPause += OnPause;
         await mediaRecorder.Start();
         await mediaRecorder.Pause();
         await mediaRecorder.Stop();
+
+
+        void OnPause() {
+            labelOutput = "paused";
+            StateHasChanged();
+            mediaRecorder.OnPause -= OnPause;
+            _ = mediaRecorder.DisposeAsync().Preserve();
+        }
     }
 }

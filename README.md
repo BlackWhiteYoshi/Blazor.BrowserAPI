@@ -105,3 +105,6 @@ There are more interfaces coming.
   - added method *Geolocation.GetCurrentPositionAsync()*
 - 0.8.0
   - added FileSystem (15 BrowserAPIs)
+- 0.9.0
+  - TODO added History (16 BrowserAPIs)
+  - small breaking change: *OnError* in MediaRecorder, Sensor and ServiceWorker has as parameter a JsonElement instead of a string. To get the previous value, just use *ToString()* on it.
