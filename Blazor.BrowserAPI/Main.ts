@@ -19,6 +19,9 @@ export { FileSystemAPI };
 import { GeolocationAPI } from "./BrowserAPIs/Geolocation/Geolocation";
 export { GeolocationAPI };
 
+import { HistoryAPI } from "./BrowserAPIs/History/History";
+export { HistoryAPI };
+
 import { HTMLElementAPI } from "./BrowserAPIs/HTMLElement/HTMLElement";
 export { HTMLElementAPI };
 

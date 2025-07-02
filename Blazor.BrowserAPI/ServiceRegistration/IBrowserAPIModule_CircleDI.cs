@@ -20,6 +20,8 @@
 [Scoped<BrowserAPI.IFileSystemInProcess, BrowserAPI.Implementation.FileSystemInProcess>]
 [Scoped<BrowserAPI.IGeolocation, BrowserAPI.Implementation.Geolocation>]
 [Scoped<BrowserAPI.IGeolocationInProcess, BrowserAPI.Implementation.GeolocationInProcess>]
+[Scoped<BrowserAPI.IHistory, BrowserAPI.Implementation.History>]
+[Scoped<BrowserAPI.IHistoryInProcess,  BrowserAPI.Implementation.HistoryInProcess>]
 [Scoped<BrowserAPI.ILanguage, BrowserAPI.Implementation.Language>]
 [Scoped<BrowserAPI.ILanguageInProcess, BrowserAPI.Implementation.LanguageInProcess>]
 [Scoped<BrowserAPI.ILocalStorage, BrowserAPI.Implementation.LocalStorage>]

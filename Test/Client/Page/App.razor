@@ -27,6 +27,8 @@ else {
         @if (isInProcess) { <FileSystemInProcessGroup /> }
         <GeolocationGroup />
         @if (isInProcess) { <GeolocationInProcessGroup /> }
+        <HistoryGroup />
+        @if (isInProcess) { <HistoryInProcessGroup /> }
         <HTMLElementGroup />
         @if (isInProcess) { <HTMLElementInProcessGroup /> }
         <HTMLMediaElementGroup />

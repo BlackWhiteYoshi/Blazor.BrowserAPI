@@ -53,37 +53,46 @@ export class ServiceWorkerContainerAPI {
     static #isEventTriggerSync: boolean;
 
     static initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
-        this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
+        ServiceWorkerContainerAPI.#eventTrigger = eventTrigger;
+        ServiceWorkerContainerAPI.#isEventTriggerSync = isEventTriggerSync;
     }
 
 
     // #region controllerchange event
 
-    static #oncontrollerchangeCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeControllerChange") : this.#eventTrigger.invokeMethodAsync("InvokeControllerChange");
+    static #oncontrollerchangeCallback() {
+        if (ServiceWorkerContainerAPI.#isEventTriggerSync)
+            ServiceWorkerContainerAPI.#eventTrigger.invokeMethod("InvokeControllerChange");
+        else
+            ServiceWorkerContainerAPI.#eventTrigger.invokeMethodAsync("InvokeControllerChange");
+    }
 
     static activateOncontrollerchange() {
-        navigator.serviceWorker.addEventListener("controllerchange", this.#oncontrollerchangeCallback);
+        navigator.serviceWorker.addEventListener("controllerchange", ServiceWorkerContainerAPI.#oncontrollerchangeCallback);
     }
 
     static deactivateOncontrollerchange() {
-        navigator.serviceWorker.removeEventListener("controllerchange", this.#oncontrollerchangeCallback);
+        navigator.serviceWorker.removeEventListener("controllerchange", ServiceWorkerContainerAPI.#oncontrollerchangeCallback);
     }
-
 
     // #endregion
 
 
     // #region message event
 
-    static #onmessageCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeMessage") : this.#eventTrigger.invokeMethodAsync("InvokeMessage");
+    static #onmessageCallback() {
+        if (ServiceWorkerContainerAPI.#isEventTriggerSync)
+            ServiceWorkerContainerAPI.#eventTrigger.invokeMethod("InvokeMessage");
+        else
+            ServiceWorkerContainerAPI.#eventTrigger.invokeMethodAsync("InvokeMessage");
+    }
 
     static activateOnMessage() {
-        navigator.serviceWorker.addEventListener("message", this.#onmessageCallback);
+        navigator.serviceWorker.addEventListener("message", ServiceWorkerContainerAPI.#onmessageCallback);
     }
 
     static deactivateOnMessage() {
-        navigator.serviceWorker.removeEventListener("message", this.#onmessageCallback);
+        navigator.serviceWorker.removeEventListener("message", ServiceWorkerContainerAPI.#onmessageCallback);
     }
 
     // #endregion

@@ -1,0 +1,25 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>History</h2>
+    <div>
+        <button data-testid="@BUTTON_GET_LENGTH_PROPERTY" @onclick="GetLength_Property">GetLength_Property</button>
+        <button data-testid="@BUTTON_GET_LENGTH_METHOD" @onclick="GetLength_Method">GetLength_Method</button>
+
+        <button data-testid="@BUTTON_GET_SCROLL_RESTORATION_PROPERTY" @onclick="GetScrollRestoration_Property">GetScrollRestoration_Property</button>
+        <button data-testid="@BUTTON_GET_SCROLL_RESTORATION_METHOD" @onclick="GetScrollRestoration_Method">GetScrollRestoration_Method</button>
+        <button data-testid="@BUTTON_SET_SCROLL_RESTORATION" @onclick="SetScrollRestoration">SetScrollRestoration</button>
+
+        <button data-testid="@BUTTON_GET_STATE_PROPERTY" @onclick="GetState_Property">GetState_Property</button>
+        <button data-testid="@BUTTON_GET_STATE_METHOD" @onclick="GetState_Method">GetState_Method</button>
+
+        <button data-testid="@BUTTON_FORWARD" @onclick="Forward">Forward</button>
+        <button data-testid="@BUTTON_BACK" @onclick="Back">Back</button>
+        <button data-testid="@BUTTON_GO" @onclick="Go">Go</button>
+        <button data-testid="@BUTTON_PUSH_STATE" @onclick="PushState">PushState</button>
+        <button data-testid="@BUTTON_REPLACE_STATE" @onclick="ReplaceState">ReplaceState</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_POP_STATE" @onclick="RegisterOnPopState">RegisterOnPopState</button>
+    </div>
+    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+</div>

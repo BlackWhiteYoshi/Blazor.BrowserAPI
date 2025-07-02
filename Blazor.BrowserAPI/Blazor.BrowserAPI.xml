@@ -2313,6 +2313,244 @@
             <param name="watchId">The id of the registration from <see cref="M:BrowserAPI.Implementation.GeolocationInProcess.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean)"/></param>
             <returns></returns>
         </member>
+        <member name="T:BrowserAPI.Implementation.History">
+            <summary>
+            <para>The <i>History</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/History_API">History API</see> allows manipulation of the browser session history, that is the pages visited in the tab or frame that the current page is loaded in.</para>
+            <para>There is only one instance of history (It is a singleton.) accessible via the global object <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/history">history</see>.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.History.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            <para>The <i>History</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/History_API">History API</see> allows manipulation of the browser session history, that is the pages visited in the tab or frame that the current page is loaded in.</para>
+            <para>There is only one instance of history (It is a singleton.) accessible via the global object <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/history">history</see>.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.History.Length">
+            <summary>
+            Returns an Integer representing the number of elements in the session history, including the currently loaded page. For example, for a page loaded in a new tab this property returns 1.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.History.GetLength(System.Threading.CancellationToken)">
+            <summary>
+            Returns an Integer representing the number of elements in the session history, including the currently loaded page. For example, for a page loaded in a new tab this property returns 1.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.History.ScrollRestoration">
+            <summary>
+            <para>Allows web applications to explicitly set default scroll restoration behavior on history navigation.</para>
+            <para>This property can be either "auto" or "manual".</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.History.GetScrollRestoration(System.Threading.CancellationToken)">
+            <summary>
+            <para>Allows web applications to explicitly set default scroll restoration behavior on history navigation.</para>
+            <para>This property can be either "auto" or "manual".</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.History.SetScrollRestoration(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>Allows web applications to explicitly set default scroll restoration behavior on history navigation.</para>
+            <para>This property can be either "auto" or "manual".</para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.History.State">
+            <summary>
+            Returns an <i>any</i> value representing the state at the top of the history stack. This is a way to look at the state without having to wait for a <i>popstate</i> event.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.History.GetState(System.Threading.CancellationToken)">
+            <summary>
+            Returns an <i>any</i> value representing the state at the top of the history stack. This is a way to look at the state without having to wait for a <i>popstate</i> event.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.History.Forward(System.Threading.CancellationToken)">
+            <summary>
+            <para>This asynchronous method goes to the next page in session history, the same action as when the user clicks the browser's <i>Forward</i> button; this is equivalent to <i>history.go(1)</i>.</para>
+            <para>Calling this method to go forward beyond the most recent page in the session history has no effect and doesn't raise an exception.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.History.Back(System.Threading.CancellationToken)">
+            <summary>
+            <para>This asynchronous method goes to the previous page in session history, the same action as when the user clicks the browser's <i>Back</i> button. Equivalent to <i>history.go(-1)</i>.</para>
+            <para>Calling this method to go forward beyond the most recent page in the session history has no effect and doesn't raise an exception.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.History.Go(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously loads a page from the session history, identified by its relative location to the current page, for example -1 for the previous page or 1 for the next page.
+            If you specify an out-of-bounds value (for instance, specifying -1 when there are no previously-visited pages in the session history), this method silently has no effect.
+            Calling <i>go()</i> without parameters or a value of 0 reloads the current page.
+            </summary>
+            <param name="delta">
+            The position in the history to which you want to move, relative to the current page.
+            A negative value moves backwards, a positive value moves forwards.
+            So, for example, history.go(2) moves forward two pages and history.go(-2) moves back two pages.
+            If no value is passed or if delta equals 0, it has the same result as calling location.reload().</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.History.PushState(System.Object,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Pushes the given data onto the session history stack with the specified title (and, if provided, URL).
+            The data is treated as opaque by the DOM; you may specify any JavaScript object that can be serialized.
+            Note that all browsers but Safari currently ignore the title parameter.
+            For more information, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API">Working with the History API</see>.
+            </summary>
+            <param name="data">
+            <para>
+            The state object is a JavaScript object which is associated with the new history entry created by pushState().
+            Whenever the user navigates to the new state, a popstate event is fired, and the state property of the event contains a copy of the history entry's state object.
+            </para>
+            <para>The state object can be anything that can be serialized.</para>
+            </param>
+            <param name="title">This parameter exists for historical reasons, and cannot be omitted; passing an empty string is safe against future changes to the method. (Safari uses it as title though)</param>
+            <param name="url">
+            The new history entry's URL.
+            Note that the browser won't attempt to load this URL after a call to pushState(), but it may attempt to load the URL later, for instance, after the user restarts the browser.
+            The new URL does not need to be absolute; if it's relative, it's resolved relative to the current URL.
+            The new URL must be of the same origin as the current URL; otherwise, pushState() will throw an exception.
+            If this parameter isn't specified, it's set to the document's current URL.
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.History.ReplaceState(System.Object,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Updates the most recent entry on the history stack to have the specified data, title, and, if provided, URL.
+            The data is treated as opaque by the DOM; you may specify any JavaScript object that can be serialized.
+            Note that all browsers but Safari currently ignore the title parameter.
+            For more information, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API">Working with the History API</see>.
+            </summary>
+            <param name="data">An object which is associated with the history entry passed to the replaceState() method. The state object can be null.</param>
+            <param name="title">This parameter exists for historical reasons, and cannot be omitted; passing the empty string is traditional, and safe against future changes to the method.</param>
+            <param name="url">The URL of the history entry. The new URL must be of the same origin as the current URL; otherwise the replaceState() method throws an exception.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HistoryBase.Dispose">
+            <summary>
+            Releases the <see cref="T:BrowserAPI.Implementation.HistoryBase.EventTrigger"/> object used to trigger the events.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HistoryBase.DisposeEventTrigger">
+            <summary>
+            Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call this method.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HistoryBase.OnPopState">
+            <summary>
+            <para>
+            The popstate event of the Window interface is fired when the active history entry changes while the user navigates the session history.
+            It changes the current history entry to that of the last page the user visited or,
+            if <i>history.pushState()</i> has been used to add a history entry to the history stack, that history entry is used instead.
+            </para>
+            <para>Parameter is the <see href="https://developer.mozilla.org/en-US/docs/Web/API/History/state">state</see> value as JSON.</para>
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.HistoryInProcess">
+            <summary>
+            <para>The <i>History</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/History_API">History API</see> allows manipulation of the browser session history, that is the pages visited in the tab or frame that the current page is loaded in.</para>
+            <para>There is only one instance of history (It is a singleton.) accessible via the global object <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/history">history</see>.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HistoryInProcess.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            <para>The <i>History</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/History_API">History API</see> allows manipulation of the browser session history, that is the pages visited in the tab or frame that the current page is loaded in.</para>
+            <para>There is only one instance of history (It is a singleton.) accessible via the global object <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/history">history</see>.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HistoryInProcess.Length">
+            <summary>
+            Returns an Integer representing the number of elements in the session history, including the currently loaded page. For example, for a page loaded in a new tab this property returns 1.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HistoryInProcess.ScrollRestoration">
+            <summary>
+            <para>Allows web applications to explicitly set default scroll restoration behavior on history navigation.</para>
+            <para>This property can be either "auto" or "manual".</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HistoryInProcess.State">
+            <summary>
+            Returns an <i>any</i> value representing the state at the top of the history stack. This is a way to look at the state without having to wait for a <i>popstate</i> event.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HistoryInProcess.Forward">
+            <summary>
+            <para>This asynchronous method goes to the next page in session history, the same action as when the user clicks the browser's <i>Forward</i> button; this is equivalent to <i>history.go(1)</i>.</para>
+            <para>Calling this method to go forward beyond the most recent page in the session history has no effect and doesn't raise an exception.</para>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HistoryInProcess.Back">
+            <summary>
+            <para>This asynchronous method goes to the previous page in session history, the same action as when the user clicks the browser's <i>Back</i> button. Equivalent to <i>history.go(-1)</i>.</para>
+            <para>Calling this method to go forward beyond the most recent page in the session history has no effect and doesn't raise an exception.</para>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HistoryInProcess.Go(System.Int32)">
+            <summary>
+            Asynchronously loads a page from the session history, identified by its relative location to the current page, for example -1 for the previous page or 1 for the next page.
+            If you specify an out-of-bounds value (for instance, specifying -1 when there are no previously-visited pages in the session history), this method silently has no effect.
+            Calling <i>go()</i> without parameters or a value of 0 reloads the current page.
+            </summary>
+            <param name="delta">
+            The position in the history to which you want to move, relative to the current page.
+            A negative value moves backwards, a positive value moves forwards.
+            So, for example, history.go(2) moves forward two pages and history.go(-2) moves back two pages.
+            If no value is passed or if delta equals 0, it has the same result as calling location.reload().</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HistoryInProcess.PushState(System.Object,System.String,System.String)">
+            <summary>
+            Pushes the given data onto the session history stack with the specified title (and, if provided, URL).
+            The data is treated as opaque by the DOM; you may specify any JavaScript object that can be serialized.
+            Note that all browsers but Safari currently ignore the title parameter.
+            For more information, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API">Working with the History API</see>.
+            </summary>
+            <param name="data">
+            <para>
+            The state object is a JavaScript object which is associated with the new history entry created by pushState().
+            Whenever the user navigates to the new state, a popstate event is fired, and the state property of the event contains a copy of the history entry's state object.
+            </para>
+            <para>The state object can be anything that can be serialized.</para>
+            </param>
+            <param name="title">This parameter exists for historical reasons, and cannot be omitted; passing an empty string is safe against future changes to the method. (Safari uses it as title though)</param>
+            <param name="url">
+            The new history entry's URL.
+            Note that the browser won't attempt to load this URL after a call to pushState(), but it may attempt to load the URL later, for instance, after the user restarts the browser.
+            The new URL does not need to be absolute; if it's relative, it's resolved relative to the current URL.
+            The new URL must be of the same origin as the current URL; otherwise, pushState() will throw an exception.
+            If this parameter isn't specified, it's set to the document's current URL.
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HistoryInProcess.ReplaceState(System.Object,System.String,System.String)">
+            <summary>
+            Updates the most recent entry on the history stack to have the specified data, title, and, if provided, URL.
+            The data is treated as opaque by the DOM; you may specify any JavaScript object that can be serialized.
+            Note that all browsers but Safari currently ignore the title parameter.
+            For more information, see Working with the History API.
+            </summary>
+            <param name="data">An object which is associated with the history entry passed to the replaceState() method. The state object can be null.</param>
+            <param name="title">This parameter exists for historical reasons, and cannot be omitted; passing the empty string is traditional, and safe against future changes to the method.</param>
+            <param name="url">The URL of the history entry. The new URL must be of the same origin as the current URL; otherwise the replaceState() method throws an exception.</param>
+            <returns></returns>
+        </member>
         <member name="T:BrowserAPI.Implementation.HTMLElement">
             <summary>
             The <i>HTMLElement</i> interface represents any HTML element. Some elements directly implement this interface, while others implement it via an interface that inherits it.
@@ -10445,6 +10683,242 @@
             The clearWatch() method of the Geolocation interface is used to unregister location/error monitoring handlers previously installed using <see cref="M:BrowserAPI.IGeolocationInProcess.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean)"/>.
             </summary>
             <param name="watchId">The id of the registration from <see cref="M:BrowserAPI.IGeolocationInProcess.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean)"/></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IHistory">
+            <summary>
+            <para>The <i>History</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/History_API">History API</see> allows manipulation of the browser session history, that is the pages visited in the tab or frame that the current page is loaded in.</para>
+            <para>There is only one instance of history (It is a singleton.) accessible via the global object <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/history">history</see>.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHistory.Length">
+            <summary>
+            Returns an Integer representing the number of elements in the session history, including the currently loaded page. For example, for a page loaded in a new tab this property returns 1.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHistory.GetLength(System.Threading.CancellationToken)">
+            <summary>
+            Returns an Integer representing the number of elements in the session history, including the currently loaded page. For example, for a page loaded in a new tab this property returns 1.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHistory.ScrollRestoration">
+            <summary>
+            <para>Allows web applications to explicitly set default scroll restoration behavior on history navigation.</para>
+            <para>This property can be either "auto" or "manual".</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHistory.GetScrollRestoration(System.Threading.CancellationToken)">
+            <summary>
+            <para>Allows web applications to explicitly set default scroll restoration behavior on history navigation.</para>
+            <para>This property can be either "auto" or "manual".</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHistory.SetScrollRestoration(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>Allows web applications to explicitly set default scroll restoration behavior on history navigation.</para>
+            <para>This property can be either "auto" or "manual".</para>
+            </summary>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHistory.State">
+            <summary>
+            Returns an <i>any</i> value representing the state at the top of the history stack. This is a way to look at the state without having to wait for a <i>popstate</i> event.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHistory.GetState(System.Threading.CancellationToken)">
+            <summary>
+            Returns an <i>any</i> value representing the state at the top of the history stack. This is a way to look at the state without having to wait for a <i>popstate</i> event.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHistory.Forward(System.Threading.CancellationToken)">
+            <summary>
+            <para>This asynchronous method goes to the next page in session history, the same action as when the user clicks the browser's <i>Forward</i> button; this is equivalent to <i>history.go(1)</i>.</para>
+            <para>Calling this method to go forward beyond the most recent page in the session history has no effect and doesn't raise an exception.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHistory.Back(System.Threading.CancellationToken)">
+            <summary>
+            <para>This asynchronous method goes to the previous page in session history, the same action as when the user clicks the browser's <i>Back</i> button. Equivalent to <i>history.go(-1)</i>.</para>
+            <para>Calling this method to go forward beyond the most recent page in the session history has no effect and doesn't raise an exception.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHistory.Go(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously loads a page from the session history, identified by its relative location to the current page, for example -1 for the previous page or 1 for the next page.
+            If you specify an out-of-bounds value (for instance, specifying -1 when there are no previously-visited pages in the session history), this method silently has no effect.
+            Calling <i>go()</i> without parameters or a value of 0 reloads the current page.
+            </summary>
+            <param name="delta">
+            The position in the history to which you want to move, relative to the current page.
+            A negative value moves backwards, a positive value moves forwards.
+            So, for example, history.go(2) moves forward two pages and history.go(-2) moves back two pages.
+            If no value is passed or if delta equals 0, it has the same result as calling location.reload().</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHistory.PushState(System.Object,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Pushes the given data onto the session history stack with the specified title (and, if provided, URL).
+            The data is treated as opaque by the DOM; you may specify any JavaScript object that can be serialized.
+            Note that all browsers but Safari currently ignore the title parameter.
+            For more information, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API">Working with the History API</see>.
+            </summary>
+            <param name="data">
+            <para>
+            The state object is a JavaScript object which is associated with the new history entry created by pushState().
+            Whenever the user navigates to the new state, a popstate event is fired, and the state property of the event contains a copy of the history entry's state object.
+            </para>
+            <para>The state object can be anything that can be serialized.</para>
+            </param>
+            <param name="title">This parameter exists for historical reasons, and cannot be omitted; passing an empty string is safe against future changes to the method. (Safari uses it as title though)</param>
+            <param name="url">
+            The new history entry's URL.
+            Note that the browser won't attempt to load this URL after a call to pushState(), but it may attempt to load the URL later, for instance, after the user restarts the browser.
+            The new URL does not need to be absolute; if it's relative, it's resolved relative to the current URL.
+            The new URL must be of the same origin as the current URL; otherwise, pushState() will throw an exception.
+            If this parameter isn't specified, it's set to the document's current URL.
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHistory.ReplaceState(System.Object,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Updates the most recent entry on the history stack to have the specified data, title, and, if provided, URL.
+            The data is treated as opaque by the DOM; you may specify any JavaScript object that can be serialized.
+            Note that all browsers but Safari currently ignore the title parameter.
+            For more information, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API">Working with the History API</see>.
+            </summary>
+            <param name="data">An object which is associated with the history entry passed to the replaceState() method. The state object can be null.</param>
+            <param name="title">This parameter exists for historical reasons, and cannot be omitted; passing the empty string is traditional, and safe against future changes to the method.</param>
+            <param name="url">The URL of the history entry. The new URL must be of the same origin as the current URL; otherwise the replaceState() method throws an exception.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHistory.Dispose">
+            <summary>
+            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHistory.OnPopState">
+            <summary>
+            <para>
+            The popstate event of the Window interface is fired when the active history entry changes while the user navigates the session history.
+            It changes the current history entry to that of the last page the user visited or,
+            if <i>history.pushState()</i> has been used to add a history entry to the history stack, that history entry is used instead.
+            </para>
+            <para>Parameter is the <see href="https://developer.mozilla.org/en-US/docs/Web/API/History/state">state</see> value as JSON.</para>
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IHistoryInProcess">
+            <summary>
+            <para>The <i>History</i> interface of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/History_API">History API</see> allows manipulation of the browser session history, that is the pages visited in the tab or frame that the current page is loaded in.</para>
+            <para>There is only one instance of history (It is a singleton.) accessible via the global object <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/history">history</see>.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHistoryInProcess.Dispose">
+            <summary>
+            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHistoryInProcess.OnPopState">
+            <summary>
+            <para>
+            The popstate event of the Window interface is fired when the active history entry changes while the user navigates the session history.
+            It changes the current history entry to that of the last page the user visited or,
+            if <i>history.pushState()</i> has been used to add a history entry to the history stack, that history entry is used instead.
+            </para>
+            <para>Parameter is the <see href="https://developer.mozilla.org/en-US/docs/Web/API/History/state">state</see> value as JSON.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHistoryInProcess.Length">
+            <summary>
+            Returns an Integer representing the number of elements in the session history, including the currently loaded page. For example, for a page loaded in a new tab this property returns 1.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHistoryInProcess.ScrollRestoration">
+            <summary>
+            <para>Allows web applications to explicitly set default scroll restoration behavior on history navigation.</para>
+            <para>This property can be either "auto" or "manual".</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHistoryInProcess.State">
+            <summary>
+            Returns an <i>any</i> value representing the state at the top of the history stack. This is a way to look at the state without having to wait for a <i>popstate</i> event.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHistoryInProcess.Forward">
+            <summary>
+            <para>This asynchronous method goes to the next page in session history, the same action as when the user clicks the browser's <i>Forward</i> button; this is equivalent to <i>history.go(1)</i>.</para>
+            <para>Calling this method to go forward beyond the most recent page in the session history has no effect and doesn't raise an exception.</para>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHistoryInProcess.Back">
+            <summary>
+            <para>This asynchronous method goes to the previous page in session history, the same action as when the user clicks the browser's <i>Back</i> button. Equivalent to <i>history.go(-1)</i>.</para>
+            <para>Calling this method to go forward beyond the most recent page in the session history has no effect and doesn't raise an exception.</para>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHistoryInProcess.Go(System.Int32)">
+            <summary>
+            Asynchronously loads a page from the session history, identified by its relative location to the current page, for example -1 for the previous page or 1 for the next page.
+            If you specify an out-of-bounds value (for instance, specifying -1 when there are no previously-visited pages in the session history), this method silently has no effect.
+            Calling <i>go()</i> without parameters or a value of 0 reloads the current page.
+            </summary>
+            <param name="delta">
+            The position in the history to which you want to move, relative to the current page.
+            A negative value moves backwards, a positive value moves forwards.
+            So, for example, history.go(2) moves forward two pages and history.go(-2) moves back two pages.
+            If no value is passed or if delta equals 0, it has the same result as calling location.reload().</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHistoryInProcess.PushState(System.Object,System.String,System.String)">
+            <summary>
+            Pushes the given data onto the session history stack with the specified title (and, if provided, URL).
+            The data is treated as opaque by the DOM; you may specify any JavaScript object that can be serialized.
+            Note that all browsers but Safari currently ignore the title parameter.
+            For more information, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API">Working with the History API</see>.
+            </summary>
+            <param name="data">
+            <para>
+            The state object is a JavaScript object which is associated with the new history entry created by pushState().
+            Whenever the user navigates to the new state, a popstate event is fired, and the state property of the event contains a copy of the history entry's state object.
+            </para>
+            <para>The state object can be anything that can be serialized.</para>
+            </param>
+            <param name="title">This parameter exists for historical reasons, and cannot be omitted; passing an empty string is safe against future changes to the method. (Safari uses it as title though)</param>
+            <param name="url">
+            The new history entry's URL.
+            Note that the browser won't attempt to load this URL after a call to pushState(), but it may attempt to load the URL later, for instance, after the user restarts the browser.
+            The new URL does not need to be absolute; if it's relative, it's resolved relative to the current URL.
+            The new URL must be of the same origin as the current URL; otherwise, pushState() will throw an exception.
+            If this parameter isn't specified, it's set to the document's current URL.
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHistoryInProcess.ReplaceState(System.Object,System.String,System.String)">
+            <summary>
+            Updates the most recent entry on the history stack to have the specified data, title, and, if provided, URL.
+            The data is treated as opaque by the DOM; you may specify any JavaScript object that can be serialized.
+            Note that all browsers but Safari currently ignore the title parameter.
+            For more information, see Working with the History API.
+            </summary>
+            <param name="data">An object which is associated with the history entry passed to the replaceState() method. The state object can be null.</param>
+            <param name="title">This parameter exists for historical reasons, and cannot be omitted; passing the empty string is traditional, and safe against future changes to the method.</param>
+            <param name="url">The URL of the history entry. The new URL must be of the same origin as the current URL; otherwise the replaceState() method throws an exception.</param>
             <returns></returns>
         </member>
         <member name="T:BrowserAPI.IHTMLElement">
