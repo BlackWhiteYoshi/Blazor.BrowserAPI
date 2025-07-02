@@ -226,6 +226,7 @@ export class HTMLElementAPI {
 
     // events
 
+
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
 
@@ -235,7 +236,7 @@ export class HTMLElementAPI {
     }
 
 
-    // #region transitionstart event
+    // transitionstart event
 
     #ontransitionstartCallback = (transitionEvent: TransitionEvent) => this.#isEventTriggerSync
         ? this.#eventTrigger.invokeMethod("InvokeTransitionstart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
@@ -249,10 +250,8 @@ export class HTMLElementAPI {
         this.#htmlElement.removeEventListener("transitionstart", this.#ontransitionstartCallback);
     }
 
-    // #endregion
 
-
-    // #region transitionend event
+    // transitionend event
 
     #ontransitionendCallback = (transitionEvent: TransitionEvent) => this.#isEventTriggerSync
         ? this.#eventTrigger.invokeMethod("InvokeTransitionend", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
@@ -266,10 +265,8 @@ export class HTMLElementAPI {
         this.#htmlElement.removeEventListener("transitionend", this.#ontransitionendCallback);
     }
 
-    // #endregion
 
-
-    // #region transitionrun event
+    // transitionrun event
 
     #ontransitionrunCallback = (transitionEvent: TransitionEvent) => this.#isEventTriggerSync
         ? this.#eventTrigger.invokeMethod("InvokeTransitionrun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
@@ -283,10 +280,8 @@ export class HTMLElementAPI {
         this.#htmlElement.removeEventListener("transitionrun", this.#ontransitionrunCallback);
     }
 
-    // #endregion
 
-
-    // #region transitioncancel event
+    // transitioncancel event
 
     #ontransitioncancelCallback = (transitionEvent: TransitionEvent) => this.#isEventTriggerSync
         ? this.#eventTrigger.invokeMethod("InvokeTransitioncancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
@@ -300,11 +295,9 @@ export class HTMLElementAPI {
         this.#htmlElement.removeEventListener("transitioncancel", this.#ontransitioncancelCallback);
     }
 
-    // #endregion
 
 
-
-    // #region animationstart event
+    // animationstart event
 
     #onanimationstartCallback = (animationEvent: AnimationEvent) => this.#isEventTriggerSync
         ? this.#eventTrigger.invokeMethod("InvokeAnimationstart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
@@ -318,10 +311,8 @@ export class HTMLElementAPI {
         this.#htmlElement.removeEventListener("animationstart", this.#onanimationstartCallback);
     }
 
-    // #endregion
 
-
-    // #region animationend event
+    // animationend event
 
     #onanimationendCallback = (animationEvent: AnimationEvent) => this.#isEventTriggerSync
         ? this.#eventTrigger.invokeMethod("InvokeAnimationend", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
@@ -335,10 +326,8 @@ export class HTMLElementAPI {
         this.#htmlElement.removeEventListener("animationend", this.#onanimationendCallback);
     }
 
-    // #endregion
 
-
-    // #region animationiteration event
+    // animationiteration event
 
     #onanimationiterationCallback = (animationEvent: AnimationEvent) => this.#isEventTriggerSync
         ? this.#eventTrigger.invokeMethod("InvokeAnimationiteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
@@ -352,10 +341,8 @@ export class HTMLElementAPI {
         this.#htmlElement.removeEventListener("animationiteration", this.#onanimationiterationCallback);
     }
 
-    // #endregion
 
-
-    // #region animationcancel event
+    // animationcancel event
 
     #onanimationcancelCallback = (animationEvent: AnimationEvent) => this.#isEventTriggerSync
         ? this.#eventTrigger.invokeMethod("InvokeAnimationcancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
@@ -368,6 +355,4 @@ export class HTMLElementAPI {
     deactivateOnanimationcancel() {
         this.#htmlElement.removeEventListener("animationcancel", this.#onanimationcancelCallback);
     }
-
-    // #endregion
 }

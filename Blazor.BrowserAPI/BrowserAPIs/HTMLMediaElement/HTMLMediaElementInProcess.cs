@@ -21,7 +21,7 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     }
 
 
-    // Attributes
+    #region Attributes
 
     /// <summary>
     /// <para>A string that reflects the src HTML attribute, which contains the URL of a media resource to use.</para>
@@ -100,8 +100,10 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
         set => htmlMediaElementJS.InvokeVoid("setPreload", [value]);
     }
 
+    #endregion
 
-    // State
+
+    #region State
 
     /// <summary>
     /// <para>Returns a string with the absolute URL of the chosen media resource.</para>
@@ -205,8 +207,10 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// </summary>
     public TimeRange[] Played => htmlMediaElementJS.Invoke<TimeRange[]>("getPlayed");
 
+    #endregion
 
-    // Settings
+
+    #region Settings
 
     /// <summary>
     /// <para>A double that indicates the rate at which the media is being played back.</para>
@@ -272,8 +276,10 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
         set => htmlMediaElementJS.InvokeVoid("setDisableRemotePlayback", [value]);
     }
 
+    #endregion
 
-    // Methods
+
+    #region Methods
 
     /// play() is declared in HTMLMediaElementBase
 
@@ -304,4 +310,6 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// <param name="type">A string specifying the MIME type of the media and (optionally) a codecs parameter containing a comma-separated list of the supported codecs.</param>
     /// <returns>"probably", "maybe" or ""</returns>
     public string CanPlayType(string type) => htmlMediaElementJS.Invoke<string>("canPlayType", [type]);
+
+    #endregion
 }

@@ -31,7 +31,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public ValueTask DisposeAsync() => _audioElement?.DisposeAsync() ?? ValueTask.CompletedTask;
 
 
-    // Attributes
+    #region Attributes
 
     public const string BUTTON_GET_SRC_PROPERTY = "htmlmediaelement-get-src-property";
     private async Task GetSrc_Property() {
@@ -160,9 +160,10 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
         await AudioElement.SetPreload(TEST_PRELOAD);
     }
 
+    #endregion
 
 
-    // State
+    #region State
 
     public const string BUTTON_GET_CURRENT_SRC_PROPERTY = "htmlmediaelement-get-current-src-property";
     private async Task GetCurrentSrc_Property() {
@@ -347,9 +348,10 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
         labelOutput = $"{value.Length}: {string.Join(", ", value.Select((TimeRange timeRange) => $"[{timeRange.Start}, {timeRange.End}]"))}";
     }
 
+    #endregion
 
 
-    // Settings
+    #region Settings
 
     public const string BUTTON_GET_PLAYBACK_RATE_PROPERTY = "htmlmediaelement-get-playback-rate-property";
     private async Task GetPlaybackRate_Property() {
@@ -440,9 +442,10 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
         await AudioElement.SetDisableRemotePlayback(true);
     }
 
+    #endregion
 
 
-    // Methods
+    #region Methods
 
     public const string BUTTON_PLAY = "htmlmediaelement-play";
     private async Task Play() {
@@ -470,9 +473,12 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
         labelOutput = value;
     }
 
+    #endregion
 
 
-    // Events Ready
+    #region Events
+
+    // Ready
 
     public const string BUTTON_REGISTER_ON_ERROR = "htmlmediaelement-error-event";
     private void RegisterOnError() {
@@ -506,8 +512,8 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
         };
     }
 
-
-    // Events Data
+    
+    // Data
 
     public const string BUTTON_REGISTER_ON_LOADSTART = "htmlmediaelement-loadstart-event";
     private void RegisterOnLoadstart() {
@@ -581,8 +587,8 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
         };
     }
 
-
-    // Events Timing
+    
+    // Timing
 
     public const string BUTTON_REGISTER_ON_PLAY = "htmlmediaelement-play-event";
     private void RegisterOnPlay() {
@@ -632,8 +638,8 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
         };
     }
 
-
-    // Events Setting
+    
+    // Setting
 
     public const string BUTTON_REGISTER_ON_VOLUMECHANGE = "htmlmediaelement-volumechange-event";
     private void RegisterOnVolumechange() {
@@ -658,4 +664,6 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
             StateHasChanged();
         };
     }
+
+    #endregion
 }

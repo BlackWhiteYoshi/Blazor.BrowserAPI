@@ -57,6 +57,7 @@ export class MediaRecorderAPI {
 
     // events
 
+
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
 
@@ -66,7 +67,7 @@ export class MediaRecorderAPI {
     }
 
 
-    // #region dataavailable event
+    // dataavailable event
 
     #ondataavailableCallback = async (event: BlobEvent) => this.#isEventTriggerSync
         ? this.#eventTrigger.invokeMethod("InvokeDataavailable", new Uint8Array(await event.data.arrayBuffer()))
@@ -80,10 +81,8 @@ export class MediaRecorderAPI {
         this.#mediaRecorder.removeEventListener("dataavailable", this.#ondataavailableCallback);
     }
 
-    // #endregion
 
-
-    // #region error event
+    // error event
 
     #onerrorCallback = (event: Event) => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeError", event) : this.#eventTrigger.invokeMethodAsync("InvokeError", event);
 
@@ -95,10 +94,8 @@ export class MediaRecorderAPI {
         this.#mediaRecorder.removeEventListener("error", this.#onerrorCallback);
     }
 
-    // #endregion
 
-
-    // #region start event
+    // start event
 
     #onstartCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeStart") : this.#eventTrigger.invokeMethodAsync("InvokeStart");
 
@@ -110,10 +107,8 @@ export class MediaRecorderAPI {
         this.#mediaRecorder.removeEventListener("start", this.#onstartCallback);
     }
 
-    // #endregion
 
-
-    // #region stop event
+    // stop event
 
     #onstopCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeStop") : this.#eventTrigger.invokeMethodAsync("InvokeStop");
 
@@ -125,10 +120,8 @@ export class MediaRecorderAPI {
         this.#mediaRecorder.removeEventListener("stop", this.#onstopCallback);
     }
 
-    // #endregion
 
-
-    // #region resume event
+    // resume event
 
     #onresumeCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeResume") : this.#eventTrigger.invokeMethodAsync("InvokeResume");
 
@@ -140,10 +133,8 @@ export class MediaRecorderAPI {
         this.#mediaRecorder.removeEventListener("resume", this.#onresumeCallback);
     }
 
-    // #endregion
 
-
-    // #region pause event
+    // pause event
 
     #onpauseCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokePause") : this.#eventTrigger.invokeMethodAsync("InvokePause");
 
@@ -154,6 +145,4 @@ export class MediaRecorderAPI {
     deactivateOnpause() {
         this.#mediaRecorder.removeEventListener("pause", this.#onpauseCallback);
     }
-
-    // #endregion
 }

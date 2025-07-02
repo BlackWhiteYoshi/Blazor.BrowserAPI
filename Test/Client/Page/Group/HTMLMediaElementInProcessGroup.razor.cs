@@ -31,7 +31,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public void Dispose() => _audioElement?.Dispose();
 
 
-    // Attributes
+    #region Attributes
 
     public const string BUTTON_GET_SRC = "htmlmediaelement-inprocess-get-src";
     private void GetSrc() {
@@ -116,9 +116,10 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
         AudioElement.Preload = TEST_PRELOAD;
     }
 
+    #endregion
 
 
-    // State
+    #region State
 
     public const string BUTTON_GET_CURRENT_SRC = "htmlmediaelement-inprocess-get-current-src";
     private void GetCurrentSrc() {
@@ -225,9 +226,10 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
         labelOutput = $"{value.Length}: {string.Join(", ", value.Select((TimeRange timeRange) => $"[{timeRange.Start}, {timeRange.End}]"))}";
     }
 
+    #endregion
 
 
-    // Settings
+    #region Settings
 
     public const string BUTTON_GET_PLAYBACK_RATE = "htmlmediaelement-inprocess-get-playback-rate";
     private void GetPlaybackRate() {
@@ -288,9 +290,10 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
         AudioElement.DisableRemotePlayback = true;
     }
 
+    #endregion
 
 
-    // Methods
+    #region Methods
 
     public const string BUTTON_PLAY = "htmlmediaelement-inprocess-play";
     private async Task Play() {
@@ -318,9 +321,12 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
         labelOutput = value;
     }
 
+    #endregion
 
 
-    // Events Ready
+    #region Events
+
+    // Ready
 
     public const string BUTTON_REGISTER_ON_ERROR = "htmlmediaelement-inprocess-error-event";
     private void RegisterOnError() {
@@ -355,7 +361,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     }
 
 
-    // Events Data
+    // Data
 
     public const string BUTTON_REGISTER_ON_LOADSTART = "htmlmediaelement-inprocess-loadstart-event";
     private void RegisterOnLoadstart() {
@@ -430,7 +436,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     }
 
 
-    // Events Timing
+    // Timing
 
     public const string BUTTON_REGISTER_ON_PLAY = "htmlmediaelement-inprocess-play-event";
     private void RegisterOnPlay() {
@@ -481,7 +487,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     }
 
 
-    // Events Setting
+    // Setting
 
     public const string BUTTON_REGISTER_ON_VOLUMECHANGE = "htmlmediaelement-inprocess-volumechange-event";
     private void RegisterOnVolumechange() {
@@ -506,4 +512,6 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
             StateHasChanged();
         };
     }
+
+    #endregion
 }

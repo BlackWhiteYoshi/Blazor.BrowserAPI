@@ -40,6 +40,7 @@ export class HistoryAPI {
 
     // events
 
+
     static #eventTrigger: DotNet.DotNetObject;
     static #isEventTriggerSync: boolean;
 
@@ -49,7 +50,7 @@ export class HistoryAPI {
     }
 
 
-    // #region popstate event
+    // popstate event
 
     static #onpopstate(popStateEvent: PopStateEvent) {
         if (HistoryAPI.#isEventTriggerSync)
@@ -65,6 +66,4 @@ export class HistoryAPI {
     static deactivateOnpopstate() {
         window.removeEventListener("popstate", HistoryAPI.#onpopstate);
     }
-
-    // #endregion
 }

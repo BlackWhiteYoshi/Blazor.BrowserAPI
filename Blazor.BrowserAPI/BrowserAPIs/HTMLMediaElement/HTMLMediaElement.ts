@@ -227,6 +227,7 @@ export class HTMLMediaElementAPI {
 
     // events
 
+
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
 
@@ -238,7 +239,7 @@ export class HTMLMediaElementAPI {
 
     // Ready
 
-    // #region error event
+    // error event
 
     #onerrorCallback = () => this.#isEventTriggerSync
         ? this.#eventTrigger.invokeMethod("InvokeError", this.#htmlMediaElement.error!.code, this.#htmlMediaElement.error!.message)
@@ -254,10 +255,8 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("error", this.#onerrorCallback);
     }
 
-    // #endregion
 
-
-    // #region canplay event
+    // canplay event
 
     #oncanplayCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeCanplay") : this.#eventTrigger.invokeMethodAsync("InvokeCanplay");
 
@@ -269,10 +268,8 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("canplay", this.#oncanplayCallback);
     }
 
-    // #endregion
 
-
-    // #region canplaythrough event
+    // canplaythrough event
 
     #oncanplaythroughCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeCanplaythrough") : this.#eventTrigger.invokeMethodAsync("InvokeCanplaythrough");
 
@@ -284,10 +281,8 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("canplaythrough", this.#oncanplaythroughCallback);
     }
 
-    // #endregion
 
-
-    // #region playing event
+    // playing event
 
     #onplayingCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokePlaying") : this.#eventTrigger.invokeMethodAsync("InvokePlaying");
 
@@ -299,12 +294,10 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("playing", this.#onplayingCallback);
     }
 
-    // #endregion
-
 
     // Data
 
-    // #region loadstart event
+    // loadstart event
 
     #onloadstartCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeLoadstart") : this.#eventTrigger.invokeMethodAsync("InvokeLoadstart");
 
@@ -316,10 +309,8 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("loadstart", this.#onloadstartCallback);
     }
 
-    // #endregion
 
-
-    // #region progress event
+    // progress event
 
     #onprogressCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeProgress") : this.#eventTrigger.invokeMethodAsync("InvokeProgress");
 
@@ -331,10 +322,8 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("progress", this.#onprogressCallback);
     }
 
-    // #endregion
 
-
-    // #region loadeddata event
+    // loadeddata event
 
     #onloadeddataCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeLoadeddata") : this.#eventTrigger.invokeMethodAsync("InvokeLoadeddata");
 
@@ -346,10 +335,8 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("loadeddata", this.#onloadeddataCallback);
     }
 
-    // #endregion
 
-
-    // #region loadedmetadata event
+    // loadedmetadata event
 
     #onloadedmetadataCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeLoadedmetadata") : this.#eventTrigger.invokeMethodAsync("InvokeLoadedmetadata");
 
@@ -361,10 +348,8 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("loadedmetadata", this.#onloadedmetadataCallback);
     }
 
-    // #endregion
 
-
-    // #region stalled event
+    // stalled event
 
     #onstalledCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeStalled") : this.#eventTrigger.invokeMethodAsync("InvokeStalled");
 
@@ -376,10 +361,8 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("stalled", this.#onstalledCallback);
     }
 
-    // #endregion
 
-
-    // #region suspend event
+    // suspend event
 
     #onsuspendCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeSuspend") : this.#eventTrigger.invokeMethodAsync("InvokeSuspend");
 
@@ -391,10 +374,8 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("suspend", this.#onsuspendCallback);
     }
 
-    // #endregion
 
-
-    // #region waiting event
+    // waiting event
 
     #onwaitingCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeWaiting") : this.#eventTrigger.invokeMethodAsync("InvokeWaiting");
 
@@ -406,10 +387,8 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("waiting", this.#onwaitingCallback);
     }
 
-    // #endregion
 
-
-    // #region abort event
+    // abort event
 
     #onabortCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeAbort") : this.#eventTrigger.invokeMethodAsync("InvokeAbort");
 
@@ -421,10 +400,8 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("abort", this.#onabortCallback);
     }
 
-    // #endregion
 
-
-    // #region emptied event
+    // emptied event
 
     #onemptiedCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeEmptied") : this.#eventTrigger.invokeMethodAsync("InvokeEmptied");
 
@@ -436,12 +413,10 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("emptied", this.#onemptiedCallback);
     }
 
-    // #endregion
-
 
     // Timing
 
-    // #region play event
+    // play event
 
     #onplayCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokePlay") : this.#eventTrigger.invokeMethodAsync("InvokePlay");
 
@@ -453,10 +428,8 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("play", this.#onplayCallback);
     }
 
-    // #endregion
 
-
-    // #region pause event
+    // pause event
 
     #onpauseCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokePause") : this.#eventTrigger.invokeMethodAsync("InvokePause");
 
@@ -468,10 +441,8 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("pause", this.#onpauseCallback);
     }
 
-    // #endregion
 
-
-    // #region ended event
+    // ended event
 
     #onendedCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeEnded") : this.#eventTrigger.invokeMethodAsync("InvokeEnded");
 
@@ -483,10 +454,8 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("ended", this.#onendedCallback);
     }
 
-    // #endregion
 
-
-    // #region seeking event
+    // seeking event
 
     #onseekingCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeSeeking") : this.#eventTrigger.invokeMethodAsync("InvokeSeeking");
 
@@ -498,10 +467,8 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("seeking", this.#onseekingCallback);
     }
 
-    // #endregion
 
-
-    // #region seeked event
+    // seeked event
 
     #onseekedCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeSeeked") : this.#eventTrigger.invokeMethodAsync("InvokeSeeked");
 
@@ -513,10 +480,8 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("seeked", this.#onseekedCallback);
     }
 
-    // #endregion
 
-
-    // #region timeupdate event
+    // timeupdate event
 
     #ontimeupdateCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeTimeupdate") : this.#eventTrigger.invokeMethodAsync("InvokeTimeupdate");
 
@@ -528,12 +493,10 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("timeupdate", this.#ontimeupdateCallback);
     }
 
-    // #endregion
-
 
     // Setting
 
-    // #region volumechange event
+    // volumechange event
 
     #onvolumechangeCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeVolumechange") : this.#eventTrigger.invokeMethodAsync("InvokeVolumechange");
 
@@ -545,10 +508,8 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("volumechange", this.#onvolumechangeCallback);
     }
 
-    // #endregion
 
-
-    // #region ratechange event
+    // ratechange event
 
     #onratechangeCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeRatechange") : this.#eventTrigger.invokeMethodAsync("InvokeRatechange");
 
@@ -560,10 +521,8 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.removeEventListener("ratechange", this.#onratechangeCallback);
     }
 
-    // #endregion
 
-
-    // #region durationchange event
+    // durationchange event
 
     #ondurationchangeCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeDurationchange") : this.#eventTrigger.invokeMethodAsync("InvokeDurationchange");
 
@@ -574,8 +533,6 @@ export class HTMLMediaElementAPI {
     deactivateOndurationchange() {
         this.#htmlMediaElement.removeEventListener("durationchange", this.#ondurationchangeCallback);
     }
-
-    // #endregion
 
 
 

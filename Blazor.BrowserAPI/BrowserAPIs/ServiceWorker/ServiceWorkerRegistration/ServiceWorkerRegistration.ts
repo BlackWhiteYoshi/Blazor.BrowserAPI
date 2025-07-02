@@ -43,6 +43,7 @@ export class ServiceWorkerRegistrationAPI {
 
     // events
 
+
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
 
@@ -52,7 +53,7 @@ export class ServiceWorkerRegistrationAPI {
     }
 
 
-    // #region updatefound event
+    // updatefound event
 
     #onupdatefoundCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeUpdateFound") : this.#eventTrigger.invokeMethodAsync("InvokeUpdateFound");
 
@@ -63,6 +64,4 @@ export class ServiceWorkerRegistrationAPI {
     deactivateOnupdatefound() {
         this.#serviceWorkerRegistration.removeEventListener("updatefound", this.#onupdatefoundCallback);
     }
-
-    // #endregion
 }

@@ -22,7 +22,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     }
 
 
-    // Attributes
+    #region Attributes
 
     /// <summary>
     /// <para>A string that reflects the src HTML attribute, which contains the URL of a media resource to use.</para>
@@ -218,8 +218,10 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <returns></returns>
     public async ValueTask SetPreload(string value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setPreload", cancellationToken, [value]);
 
+    #endregion
 
-    // State
+
+    #region State
 
     /// <summary>
     /// <para>Returns a string with the absolute URL of the chosen media resource.</para>
@@ -474,8 +476,10 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <returns></returns>
     public async ValueTask<TimeRange[]> GetPlayed(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<TimeRange[]>("getPlayed", cancellationToken);
 
+    #endregion
 
-    // Settings
+
+    #region Settings
 
     /// <summary>
     /// <para>A double that indicates the rate at which the media is being played back.</para>
@@ -654,8 +658,10 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <returns></returns>
     public async ValueTask SetDisableRemotePlayback(bool value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setDisableRemotePlayback", cancellationToken, [value]);
 
+    #endregion
 
-    // Methods
+
+    #region Methods
 
     /// play() is declared in HTMLMediaElementBase
 
@@ -693,4 +699,6 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="cancellationToken"></param>
     /// <returns>"probably", "maybe" or ""</returns>
     public async ValueTask<string> CanPlayType(string type, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeTrySync<string>("canPlayType", cancellationToken, [type]);
+
+    #endregion
 }

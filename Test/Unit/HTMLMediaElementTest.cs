@@ -627,7 +627,9 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
     #endregion
 
 
-    #region Events Ready
+    #region Events
+
+    // Ready
 
     [Test]
     public async Task RegisterOnError() {
@@ -677,10 +679,8 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
         await Assert.That(result).IsEqualTo("Playing");
     }
 
-    #endregion
-
-
-    #region Events Data
+    
+    // Data
 
     [Test]
     public async Task RegisterOnLoadstart() {
@@ -789,10 +789,8 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
         await Assert.That(result).IsEqualTo("Emptied");
     }
 
-    #endregion
-
-
-    #region Events Timing
+    
+    // Timing
 
     [Test]
     public async Task RegisterOnPlay() {
@@ -873,10 +871,8 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
         await Assert.That(result).IsEqualTo("Timeupdate");
     }
 
-    #endregion
-
-
-    #region Events Setting
+    
+    // Setting
 
     [Test]
     public async Task RegisterOnVolumechange() {

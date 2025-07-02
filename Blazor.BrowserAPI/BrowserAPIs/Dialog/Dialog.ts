@@ -44,6 +44,7 @@ export class DialogAPI {
 
     // events
 
+
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
 
@@ -53,7 +54,7 @@ export class DialogAPI {
     }
 
 
-    // #region cancel event
+    // cancel event
 
     #oncancelCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeCancel") : this.#eventTrigger.invokeMethodAsync("InvokeCancel");
 
@@ -65,10 +66,8 @@ export class DialogAPI {
         this.#dialog.removeEventListener("cancel", this.#oncancelCallback);
     }
 
-    // #endregion
 
-
-    // #region close event
+    // close event
 
     #oncloseCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeClose") : this.#eventTrigger.invokeMethodAsync("InvokeClose");
 
@@ -79,6 +78,4 @@ export class DialogAPI {
     deactivateOnclose() {
         this.#dialog.removeEventListener("close", this.#oncloseCallback);
     }
-
-    // #endregion
 }

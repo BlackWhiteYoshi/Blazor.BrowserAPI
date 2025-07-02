@@ -49,6 +49,7 @@ export class ServiceWorkerContainerAPI {
 
     // events
 
+
     static #eventTrigger: DotNet.DotNetObject;
     static #isEventTriggerSync: boolean;
 
@@ -58,7 +59,7 @@ export class ServiceWorkerContainerAPI {
     }
 
 
-    // #region controllerchange event
+    // controllerchange event
 
     static #oncontrollerchangeCallback() {
         if (ServiceWorkerContainerAPI.#isEventTriggerSync)
@@ -75,10 +76,8 @@ export class ServiceWorkerContainerAPI {
         navigator.serviceWorker.removeEventListener("controllerchange", ServiceWorkerContainerAPI.#oncontrollerchangeCallback);
     }
 
-    // #endregion
 
-
-    // #region message event
+    // message event
 
     static #onmessageCallback() {
         if (ServiceWorkerContainerAPI.#isEventTriggerSync)
@@ -94,6 +93,4 @@ export class ServiceWorkerContainerAPI {
     static deactivateOnMessage() {
         navigator.serviceWorker.removeEventListener("message", ServiceWorkerContainerAPI.#onmessageCallback);
     }
-
-    // #endregion
 }

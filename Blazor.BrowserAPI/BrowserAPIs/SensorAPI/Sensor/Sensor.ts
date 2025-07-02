@@ -30,6 +30,7 @@ export abstract class SensorAPI {
 
     // events
 
+
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
 
@@ -39,7 +40,7 @@ export abstract class SensorAPI {
     }
 
 
-    // #region error event
+    // error event
 
     #onerrorCallback = (event: Event) => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeError", event) : this.#eventTrigger.invokeMethodAsync("InvokeError", event);
 
@@ -51,10 +52,8 @@ export abstract class SensorAPI {
         this.sensor.removeEventListener("error", this.#onerrorCallback);
     }
 
-    // #endregion
 
-
-    // #region error event
+    // activate event
 
     #onactivateCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeActivate") : this.#eventTrigger.invokeMethodAsync("InvokeActivate");
 
@@ -66,10 +65,8 @@ export abstract class SensorAPI {
         this.sensor.removeEventListener("activate", this.#onactivateCallback);
     }
 
-    // #endregion
 
-
-    // #region error event
+    // reading event
 
     #onreadingCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeReading") : this.#eventTrigger.invokeMethodAsync("InvokeReading");
 
@@ -80,6 +77,4 @@ export abstract class SensorAPI {
     deactivateOnreading() {
         this.sensor.removeEventListener("reading", this.#onreadingCallback);
     }
-
-    // #endregion
 }
