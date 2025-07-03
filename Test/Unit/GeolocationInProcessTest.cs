@@ -22,7 +22,7 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
             Accuracy = ACCURACY,
         });
 
-        await Page.GetByTestId(GeolocationInProcessGroup.BUTTON_GET_CURRENT_POSITION).ClickAsync();
+        await ExecuteTest(GeolocationInProcessGroup.BUTTON_GET_CURRENT_POSITION);
 
         string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
 
@@ -44,7 +44,7 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
             Accuracy = ACCURACY,
         });
 
-        await Page.GetByTestId(GeolocationInProcessGroup.BUTTON_GET_CURRENT_POSITION_ASYNC).ClickAsync();
+        await ExecuteTest(GeolocationInProcessGroup.BUTTON_GET_CURRENT_POSITION_ASYNC);
 
         string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
 
@@ -61,7 +61,7 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
         const float LATITUDE = 12.0f;
         const float ACCURACY = 1.0f;
 
-        await Page.GetByTestId(GeolocationInProcessGroup.BUTTON_WATCH_POSITION).ClickAsync();
+        await ExecuteTest(GeolocationInProcessGroup.BUTTON_WATCH_POSITION);
 
         for (int i = 0; i < 5; i++) {
             await Context.SetGeolocationAsync(new Geolocation() {
@@ -69,7 +69,7 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
                 Latitude = LATITUDE * i,
                 Accuracy = ACCURACY * i,
             });
-            await Task.Delay(100);
+            await Task.Delay(STANDARD_WAIT_TIME);
             string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
 
             string expectedStart = $"GeolocationCoordinates {{ Latitude = {LATITUDE * i}, Longitude = {LONGITUDE * i}, Altitude = , Accuracy = {ACCURACY * i}, AltitudeAccuracy = , Heading = , Speed = , Timestamp = ";
@@ -82,25 +82,23 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
 
     [Test]
     public async Task ClearWatch() {
-        await Page.GetByTestId(GeolocationInProcessGroup.BUTTON_WATCH_POSITION).ClickAsync();
-        await Task.Delay(100);
+        await ExecuteTest(GeolocationInProcessGroup.BUTTON_WATCH_POSITION);
 
         await Context.SetGeolocationAsync(new Geolocation() {
             Longitude = 1,
             Latitude = 1,
             Accuracy = 1,
         });
-        await Task.Delay(100);
+        await Task.Delay(STANDARD_WAIT_TIME);
 
-        await Page.GetByTestId(GeolocationInProcessGroup.BUTTON_CLEAR_WATCH).ClickAsync();
-        await Task.Delay(100);
+        await ExecuteTest(GeolocationInProcessGroup.BUTTON_CLEAR_WATCH);
 
         await Context.SetGeolocationAsync(new Geolocation() {
             Longitude = 2,
             Latitude = 2,
             Accuracy = 2,
         });
-        await Task.Delay(100);
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("watchId: 3, count: 0");

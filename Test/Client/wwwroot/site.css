@@ -170,17 +170,17 @@ img, picture {
   overflow: scroll;
   height: 80px;
   width: 70px;
-  transition: all 500ms;
+  transition: all 100ms;
   background-color: #282828;
   padding: 0.5em;
 }
 
 .animation-start {
-  animation: change-background-color 500ms;
+  animation: change-background-color 100ms;
 }
 
 .animation-start-infinite {
-  animation: change-background-color 500ms infinite;
+  animation: change-background-color 100ms infinite;
 }
 
 @keyframes change-background-color {

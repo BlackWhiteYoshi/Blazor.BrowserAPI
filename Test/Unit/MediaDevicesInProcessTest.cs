@@ -14,8 +14,7 @@ public sealed class MediaDevicesInProcessTest(PlayWrightFixture playWrightFixtur
 
     [Test]
     public async Task EnumerateDevices() {
-        await Page.GetByTestId(MediaDevicesInProcessGroup.BUTTON_ENUMERATE_DEVICES).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(MediaDevicesInProcessGroup.BUTTON_ENUMERATE_DEVICES);
 
         string? result = await Page.GetByTestId(MediaDevicesInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("MediaDeviceInfo");
@@ -23,7 +22,7 @@ public sealed class MediaDevicesInProcessTest(PlayWrightFixture playWrightFixtur
 
     [Test]
     public async Task GetSupportedConstraints() {
-        await Page.GetByTestId(MediaDevicesInProcessGroup.BUTTON_GET_SUPPORTED_CONSTRAINTS).ClickAsync();
+        await ExecuteTest(MediaDevicesInProcessGroup.BUTTON_GET_SUPPORTED_CONSTRAINTS);
 
         string? result = await Page.GetByTestId(MediaDevicesInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("MediaTrackSupportedConstraint");
@@ -33,25 +32,25 @@ public sealed class MediaDevicesInProcessTest(PlayWrightFixture playWrightFixtur
 
     [Test]
     public async Task GetUserMedia() {
-        await Page.GetByTestId(MediaDevicesInProcessGroup.BUTTON_GET_USER_MEDIA).ClickAsync();
+        await ExecuteTest(MediaDevicesInProcessGroup.BUTTON_GET_USER_MEDIA);
         // an assertion happens in DisposeAsync()
     }
 
     [Test]
     public async Task GetUserMediaWithConstraint() {
-        await Page.GetByTestId(MediaDevicesInProcessGroup.BUTTON_GET_USER_MEDIA_WITH_CONSTRAINT).ClickAsync();
+        await ExecuteTest(MediaDevicesInProcessGroup.BUTTON_GET_USER_MEDIA_WITH_CONSTRAINT);
         // an assertion happens in DisposeAsync()
     }
 
     [Test]
     public async Task GetDisplayMedia() {
-        await Page.GetByTestId(MediaDevicesInProcessGroup.BUTTON_GET_DISPLAY_MEDIA).ClickAsync();
+        await ExecuteTest(MediaDevicesInProcessGroup.BUTTON_GET_DISPLAY_MEDIA);
         // an assertion happens in DisposeAsync()
     }
 
     [Test]
     public async Task GetDisplayMediaWithConstraint() {
-        await Page.GetByTestId(MediaDevicesInProcessGroup.BUTTON_GET_DISPLAY_MEDIA_WITH_CONSTRAINT).ClickAsync();
+        await ExecuteTest(MediaDevicesInProcessGroup.BUTTON_GET_DISPLAY_MEDIA_WITH_CONSTRAINT);
         // an assertion happens in DisposeAsync()
     }
 

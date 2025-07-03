@@ -34,7 +34,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Assert_String() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_ASSERT_STRING).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_ASSERT_STRING);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_ASSERT);
     }
@@ -43,7 +43,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Assert_Test() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_ASSERT).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_ASSERT);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo($"[{ConsoleGroup.TEST_ASSERT}, {ConsoleGroup.TEST_ASSERT}]");
     }
@@ -52,7 +52,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Clear() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_CLEAR).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_CLEAR);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo("console.clear");
     }
@@ -62,7 +62,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Count() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_COUNT).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_COUNT);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo("default: 1");
     }
@@ -71,7 +71,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Count_Label() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_COUNT_LABEL).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_COUNT_LABEL);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo($"{ConsoleGroup.TEST_COUNT_LABEL}: 1");
     }
@@ -80,7 +80,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task CountReset() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_COUNT_RESET).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_COUNT_RESET);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo("Count for 'default' does not exist");
     }
@@ -89,7 +89,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task CountReset_Label() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_COUNT_RESET_LABEL).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_COUNT_RESET_LABEL);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo($"Count for '{ConsoleGroup.TEST_COUNT_LABEL}' does not exist");
     }
@@ -99,7 +99,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Debug_String() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_DEBUG_STRING).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_DEBUG_STRING);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_DEBUG);
     }
@@ -108,7 +108,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Debug() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_DEBUG).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_DEBUG);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo($"[{ConsoleGroup.TEST_DEBUG}, {ConsoleGroup.TEST_DEBUG}]");
     }
@@ -117,7 +117,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Dir() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_DIR).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_DIR);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_DIR);
     }
@@ -126,7 +126,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Dirxml() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_DIRXML).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_DIRXML);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_DIRXML);
     }
@@ -135,7 +135,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Error_String() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_ERROR_STRING).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_ERROR_STRING);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_ERROR);
     }
@@ -144,7 +144,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Error() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_ERROR).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_ERROR);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo($"[{ConsoleGroup.TEST_ERROR}, {ConsoleGroup.TEST_ERROR}]");
     }
@@ -154,7 +154,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Group() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_GROUP).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_GROUP);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo("undefined");
     }
@@ -163,7 +163,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Group_Label() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_GROUP_LABEL).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_GROUP_LABEL);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_GROUP_LABEL);
     }
@@ -172,7 +172,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task GroupCollapsed() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_GROUP_COLLAPSED).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_GROUP_COLLAPSED);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo("undefined");
     }
@@ -181,7 +181,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task GroupCollapsed_Label() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_GROUP_COLLAPSED_LABEL).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_GROUP_COLLAPSED_LABEL);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_GROUP_COLLAPSED_LABEL);
     }
@@ -192,7 +192,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Info_String() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_INFO_STRING).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_INFO_STRING);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_INFO);
     }
@@ -201,7 +201,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Info() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_INFO).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_INFO);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo($"[{ConsoleGroup.TEST_INFO}, {ConsoleGroup.TEST_INFO}]");
     }
@@ -210,7 +210,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Log_String() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_LOG_STRING).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_LOG_STRING);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_LOG);
     }
@@ -219,7 +219,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Log() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_LOG).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_LOG);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo($"[{ConsoleGroup.TEST_LOG}, {ConsoleGroup.TEST_LOG}]");
     }
@@ -228,7 +228,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Table() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TABLE).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_TABLE);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo($"[{ConsoleGroup.TEST_TABLE}, {ConsoleGroup.TEST_TABLE}]");
     }
@@ -237,7 +237,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Table_Columns() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TABLE_COLUMNS).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_TABLE_COLUMNS);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo($"[{ConsoleGroup.TEST_TABLE_COLUMNS}, {ConsoleGroup.TEST_TABLE_COLUMNS}]");
     }
@@ -247,7 +247,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Time() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TIME).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_TIME);
         await Page.EvaluateAsync("console.timeEnd();");
 
         await Assert.That(consoleMessageCapture.Text).Matches("^default: .* ms$");
@@ -257,7 +257,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Time_Label() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TIME_LABEL).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_TIME_LABEL);
         await Page.EvaluateAsync($"console.timeEnd('{ConsoleGroup.TEST_TIME_LABEL}');");
 
         await Assert.That(consoleMessageCapture.Text).Matches($"^{ConsoleGroup.TEST_TIME_LABEL}: .* ms$");
@@ -268,7 +268,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.EvaluateAsync("console.time();");
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TIME_END).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_TIME_END);
 
         await Assert.That(consoleMessageCapture.Text).Matches("^default: .* ms$");
     }
@@ -278,7 +278,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.EvaluateAsync($"console.time('{ConsoleGroup.TEST_TIME_LABEL}');");
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TIME_END_LABEL).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_TIME_END_LABEL);
 
         await Assert.That(consoleMessageCapture.Text).Matches($"^{ConsoleGroup.TEST_TIME_LABEL}: .* ms$");
     }
@@ -288,7 +288,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.EvaluateAsync("console.time();");
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TIME_LOG).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_TIME_LOG);
 
         await Assert.That(consoleMessageCapture.Text).Matches("^default: .* ms$");
     }
@@ -298,7 +298,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.EvaluateAsync($"console.time('{ConsoleGroup.TEST_TIME_LABEL}');");
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TIME_LOG_LABEL).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_TIME_LOG_LABEL);
 
         await Assert.That(consoleMessageCapture.Text).Matches($"^{ConsoleGroup.TEST_TIME_LABEL}: .* ms$");
     }
@@ -308,7 +308,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
         await Page.EvaluateAsync($"console.time('{ConsoleGroup.TEST_TIME_LABEL}');");
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TIME_LOG_LABEL_DATA).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_TIME_LOG_LABEL_DATA);
 
         await Assert.That(consoleMessageCapture.Text).Matches($"^{ConsoleGroup.TEST_TIME_LABEL}: .* ms \\[{ConsoleGroup.TEST_TIME_LOG_DATA}, {ConsoleGroup.TEST_TIME_LOG_DATA}\\]$");
     }
@@ -318,7 +318,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Trace_String() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TRACE_STRING).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_TRACE_STRING);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_TRACE);
     }
@@ -327,7 +327,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Trace() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_TRACE).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_TRACE);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo($"[{ConsoleGroup.TEST_TRACE}, {ConsoleGroup.TEST_TRACE}]");
     }
@@ -336,7 +336,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Warn_String() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_WARN_STRING).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_WARN_STRING);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo(ConsoleGroup.TEST_WARN);
     }
@@ -345,7 +345,7 @@ public sealed class ConsoleTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task Warn() {
         using ConsoleMessageCapture consoleMessageCapture = new(Page);
 
-        await Page.GetByTestId(ConsoleGroup.BUTTON_WARN).ClickAsync();
+        await ExecuteTest(ConsoleGroup.BUTTON_WARN);
 
         await Assert.That(consoleMessageCapture.Text).IsEqualTo($"[{ConsoleGroup.TEST_WARN}, {ConsoleGroup.TEST_WARN}]");
     }

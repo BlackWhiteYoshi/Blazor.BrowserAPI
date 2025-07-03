@@ -14,8 +14,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
 
     [Test]
     public async Task EnumerateDevices() {
-        await Page.GetByTestId(MediaDevicesGroup.BUTTON_ENUMERATE_DEVICES).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(MediaDevicesGroup.BUTTON_ENUMERATE_DEVICES);
 
         string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("MediaDeviceInfo");
@@ -23,7 +22,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
 
     [Test]
     public async Task GetSupportedConstraints_Property() {
-        await Page.GetByTestId(MediaDevicesGroup.BUTTON_GET_SUPPORTED_CONSTRAINTS_PROPERTY).ClickAsync();
+        await ExecuteTest(MediaDevicesGroup.BUTTON_GET_SUPPORTED_CONSTRAINTS_PROPERTY);
 
         string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("MediaTrackSupportedConstraint");
@@ -31,7 +30,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
 
     [Test]
     public async Task GetSupportedConstraints_Method() {
-        await Page.GetByTestId(MediaDevicesGroup.BUTTON_GET_SUPPORTED_CONSTRAINTS_METHOD).ClickAsync();
+        await ExecuteTest(MediaDevicesGroup.BUTTON_GET_SUPPORTED_CONSTRAINTS_METHOD);
 
         string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("MediaTrackSupportedConstraint");
@@ -41,25 +40,25 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
 
     [Test]
     public async Task GetUserMedia() {
-        await Page.GetByTestId(MediaDevicesGroup.BUTTON_GET_USER_MEDIA).ClickAsync();
+        await ExecuteTest(MediaDevicesGroup.BUTTON_GET_USER_MEDIA);
         // an assertion happens in DisposeAsync()
     }
 
     [Test]
     public async Task GetUserMediaWithConstraint() {
-        await Page.GetByTestId(MediaDevicesGroup.BUTTON_GET_USER_MEDIA_WITH_CONSTRAINT).ClickAsync();
+        await ExecuteTest(MediaDevicesGroup.BUTTON_GET_USER_MEDIA_WITH_CONSTRAINT);
         // an assertion happens in DisposeAsync()
     }
 
     [Test]
     public async Task GetDisplayMedia() {
-        await Page.GetByTestId(MediaDevicesGroup.BUTTON_GET_DISPLAY_MEDIA).ClickAsync();
+        await ExecuteTest(MediaDevicesGroup.BUTTON_GET_DISPLAY_MEDIA);
         // an assertion happens in DisposeAsync()
     }
 
     [Test]
     public async Task GetDisplayMediaWithConstraint() {
-        await Page.GetByTestId(MediaDevicesGroup.BUTTON_GET_DISPLAY_MEDIA_WITH_CONSTRAINT).ClickAsync();
+        await ExecuteTest(MediaDevicesGroup.BUTTON_GET_DISPLAY_MEDIA_WITH_CONSTRAINT);
         // an assertion happens in DisposeAsync()
     }
 

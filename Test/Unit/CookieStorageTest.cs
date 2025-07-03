@@ -23,7 +23,7 @@ public sealed class CookieStorageTest(PlayWrightFixture playWrightFixture) : Pla
         for (int i = 0; i < number; i++)
             await Page.EvaluateAsync($$"""document.cookie = `test-key-{{i}}=test-value-{{i}};expires=${new Date(Date.now() + 3600000).toUTCString()}`;""");
 
-        await Page.GetByTestId(CookieStorageGroup.BUTTON_GET_ALL_COOKIES_PROPERTY).ClickAsync();
+        await ExecuteTest(CookieStorageGroup.BUTTON_GET_ALL_COOKIES_PROPERTY);
 
         string? result = await Page.GetByTestId(CookieStorageGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(expected);
@@ -48,7 +48,7 @@ public sealed class CookieStorageTest(PlayWrightFixture playWrightFixture) : Pla
         for (int i = 0; i < number; i++)
             await Page.EvaluateAsync($$"""document.cookie = `test-key-{{i}}=test-value-{{i}};expires=${new Date(Date.now() + 3600000).toUTCString()}`;""");
 
-        await Page.GetByTestId(CookieStorageGroup.BUTTON_GET_ALL_COOKIES_METHOD).ClickAsync();
+        await ExecuteTest(CookieStorageGroup.BUTTON_GET_ALL_COOKIES_METHOD);
 
         string? result = await Page.GetByTestId(CookieStorageGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(expected);
@@ -63,7 +63,7 @@ public sealed class CookieStorageTest(PlayWrightFixture playWrightFixture) : Pla
         for (int i = 0; i < number; i++)
             await Page.EvaluateAsync($"document.cookie = 'test-key-{i}=test-value-{i}';");
 
-        await Page.GetByTestId(CookieStorageGroup.BUTTON_GET_LENGTH_PROPERTY).ClickAsync();
+        await ExecuteTest(CookieStorageGroup.BUTTON_GET_LENGTH_PROPERTY);
 
         string? result = await Page.GetByTestId(CookieStorageGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(number.ToString());
@@ -79,7 +79,7 @@ public sealed class CookieStorageTest(PlayWrightFixture playWrightFixture) : Pla
         for (int i = 0; i < number; i++)
             await Page.EvaluateAsync($"document.cookie = 'test-key-{i}=test-value-{i}';");
 
-        await Page.GetByTestId(CookieStorageGroup.BUTTON_GET_LENGTH_METHOD).ClickAsync();
+        await ExecuteTest(CookieStorageGroup.BUTTON_GET_LENGTH_METHOD);
 
         string? result = await Page.GetByTestId(CookieStorageGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(number.ToString());
@@ -90,7 +90,7 @@ public sealed class CookieStorageTest(PlayWrightFixture playWrightFixture) : Pla
         const string KEY = "test-key-0";
         await Page.EvaluateAsync($"document.cookie = '{KEY}=test-value-0';");
 
-        await Page.GetByTestId(CookieStorageGroup.BUTTON_KEY).ClickAsync();
+        await ExecuteTest(CookieStorageGroup.BUTTON_KEY);
 
         string? result = await Page.GetByTestId(CookieStorageGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(KEY);
@@ -101,7 +101,7 @@ public sealed class CookieStorageTest(PlayWrightFixture playWrightFixture) : Pla
         const string VALUE = "test-getCOOKIE-value";
         await Page.EvaluateAsync($"document.cookie = '{CookieStorageGroup.TEST_GET_COOKIE}={VALUE}';");
 
-        await Page.GetByTestId(CookieStorageGroup.BUTTON_GET_COOKIE).ClickAsync();
+        await ExecuteTest(CookieStorageGroup.BUTTON_GET_COOKIE);
 
         string? result = await Page.GetByTestId(CookieStorageGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(VALUE);
@@ -109,7 +109,7 @@ public sealed class CookieStorageTest(PlayWrightFixture playWrightFixture) : Pla
 
     [Test]
     public async Task SetCookie() {
-        await Page.GetByTestId(CookieStorageGroup.BUTTON_SET_COOKIE).ClickAsync();
+        await ExecuteTest(CookieStorageGroup.BUTTON_SET_COOKIE);
 
         string result = await Page.EvaluateAsync<string>("document.cookie;");
         await Assert.That(result).IsEqualTo($"{CookieStorageGroup.TEST_SET_COOKIE_KEY}={CookieStorageGroup.TEST_SET_COOKIE_VALUE}");
@@ -119,7 +119,7 @@ public sealed class CookieStorageTest(PlayWrightFixture playWrightFixture) : Pla
     public async Task RemoveCookie() {
         await Page.EvaluateAsync($"document.cookie = '{CookieStorageGroup.TEST_REMOVE_COOKIE}=test-value';");
 
-        await Page.GetByTestId(CookieStorageGroup.BUTTON_REMOVE_COOKIE).ClickAsync();
+        await ExecuteTest(CookieStorageGroup.BUTTON_REMOVE_COOKIE);
 
         string result = await Page.EvaluateAsync<string>("document.cookie;");
         await Assert.That(result).IsEmpty();
@@ -134,7 +134,7 @@ public sealed class CookieStorageTest(PlayWrightFixture playWrightFixture) : Pla
         for (int i = 0; i < number; i++)
             await Page.EvaluateAsync($"document.cookie = 'test-key-{i}=test-value-{i}';");
 
-        await Page.GetByTestId(CookieStorageGroup.BUTTON_CLEAR).ClickAsync();
+        await ExecuteTest(CookieStorageGroup.BUTTON_CLEAR);
 
         string result = await Page.EvaluateAsync<string>("document.cookie;");
         await Assert.That(result).IsEmpty();

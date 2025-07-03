@@ -8,7 +8,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetSrc() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_SRC).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_SRC);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("https://localhost:5000/HTMLMediaElement_audio.mp3");
@@ -16,7 +16,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task SetSrc() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_SET_SRC).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_SRC);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).GetAttributeAsync("src");
         await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_SRC);
@@ -25,20 +25,20 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetSrcObject() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_SRC_OBJECT).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_SRC_OBJECT);
         // an assertion happens in DisposeAsync()
     }
 
     [Test]
     public async Task SetSrcObject() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_SET_SRC_OBJECT).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_SRC_OBJECT);
         // an assertion happens in DisposeAsync()
     }
 
 
     [Test]
     public async Task GetControls() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_CONTROLS).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_CONTROLS);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
@@ -46,7 +46,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task SetControls() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_SET_CONTROLS).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_CONTROLS);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).GetAttributeAsync("controls");
         await Assert.That(result).IsEqualTo("");
@@ -55,7 +55,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetAutoplay() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_AUTOPLAY).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_AUTOPLAY);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
@@ -63,7 +63,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task SetAutoplay() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_SET_AUTOPLAY).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_AUTOPLAY);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).GetAttributeAsync("autoplay");
         await Assert.That(result).IsEqualTo("");
@@ -72,7 +72,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetLoop() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_LOOP).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_LOOP);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
@@ -80,7 +80,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task SetLoop() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_SET_LOOP).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_LOOP);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).GetAttributeAsync("loop");
         await Assert.That(result).IsEqualTo("");
@@ -89,7 +89,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetDefaultMuted() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_DEFAULT_MUTED).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_DEFAULT_MUTED);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
@@ -97,7 +97,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task SetDefaultMuted() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_SET_DEFAULT_MUTED).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_DEFAULT_MUTED);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).GetAttributeAsync("muted");
         await Assert.That(result).IsEqualTo("");
@@ -106,7 +106,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetPreload() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_PRELOAD).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_PRELOAD);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("auto");
@@ -114,7 +114,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task SetPreload() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_SET_PRELOAD).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_PRELOAD);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).GetAttributeAsync("preload");
         await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_PRELOAD);
@@ -127,7 +127,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetCurrentSrc() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_CURRENT_SRC).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_CURRENT_SRC);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("https://localhost:5000/HTMLMediaElement_audio.mp3");
@@ -136,7 +136,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetCurrentTime() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_CURRENT_TIME).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_CURRENT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("0");
@@ -144,7 +144,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task SetCurrentTime() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_SET_CURRENT_TIME).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_CURRENT_TIME);
 
         double result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync<double>("audioElement => audioElement.currentTime;");
         await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_CURRENT_TIME);
@@ -153,9 +153,8 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetDuration() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).ClickAsync(); // minimal delay
-
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_DURATION).ClickAsync();
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_DURATION).WaitForAsync(); // minimal delay
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_DURATION);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("60.0512");
@@ -164,9 +163,8 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetSeekable() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).ClickAsync(); // minimal delay
-
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_SEEKABLE).ClickAsync();
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_SEEKABLE).WaitForAsync(); // minimal delay
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_SEEKABLE);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("1: [0, 60.0512]");
@@ -175,7 +173,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetMuted() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_MUTED).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_MUTED);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
@@ -183,7 +181,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task SetMuted() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_SET_MUTED).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_MUTED);
 
         bool result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync<bool>("audioElement => audioElement.muted;");
         await Assert.That(result).IsTrue();
@@ -192,7 +190,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetVolume() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_VOLUME).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_VOLUME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("1");
@@ -200,7 +198,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task SetVolume() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_SET_VOLUME).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_VOLUME);
 
         double result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync<double>("audioElement => audioElement.volume;");
         await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_VOLUME);
@@ -209,7 +207,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetPaused() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_PAUSED).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_PAUSED);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
@@ -218,7 +216,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetEnded() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_ENDED).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_ENDED);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
@@ -227,7 +225,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetSeeking() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_SEEKING).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_SEEKING);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
@@ -236,7 +234,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetReadyState() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_READY_STATE).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_READY_STATE);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsNotNull().IsNotEmpty();
@@ -245,9 +243,8 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetNetworkState() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).ClickAsync(); // minimal delay
-
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_NETWORK_STATE).ClickAsync();
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_NETWORK_STATE).WaitForAsync(); // minimal delay
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_NETWORK_STATE);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("1");
@@ -256,18 +253,18 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetBuffered() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_BUFFERED).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_BUFFERED);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result![0] is '0' or '1').IsTrue();
-        await Assert.That(result![1] is ':').IsTrue();
-        await Assert.That(result![2] is ' ').IsTrue();
+        await Assert.That(result![1]).IsEqualTo(':');
+        await Assert.That(result![2]).IsEqualTo(' ');
     }
 
 
     [Test]
     public async Task GetPlayed() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_PLAYED).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_PLAYED);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("0: ");
@@ -280,7 +277,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetPlaybackRate() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_PLAYBACK_RATE).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_PLAYBACK_RATE);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("1");
@@ -288,7 +285,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task SetPlaybackRate() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_SET_PLAYBACK_RATE).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_PLAYBACK_RATE);
 
         double result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync<double>("audioElement => audioElement.playbackRate;");
         await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_PLAYBACK_RATE);
@@ -297,7 +294,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetDefaultPlaybackRate() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_DEFAULT_PLAYBACK_RATE).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_DEFAULT_PLAYBACK_RATE);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("1");
@@ -305,7 +302,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task SetDefaultPlaybackRate() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_SET_DEFAULT_PLAYBACK_RATE).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_DEFAULT_PLAYBACK_RATE);
 
         double result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync<double>("audioElement => audioElement.defaultPlaybackRate;");
         await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_DEFAULT_PLAYBACK_RATE);
@@ -314,7 +311,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetCrossOrigin() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_CROSS_ORIGIN).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_CROSS_ORIGIN);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("anonymous");
@@ -322,7 +319,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task SetCrossOrigin() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_SET_CROSS_ORIGIN).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_CROSS_ORIGIN);
 
         string result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync<string>("audioElement => audioElement.crossOrigin;");
         await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_CROSS_ORIGIN);
@@ -331,7 +328,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetPreservesPitch() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_PRESERVES_PITCH).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_PRESERVES_PITCH);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
@@ -339,7 +336,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task SetPreservesPitch() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_SET_PRESERVES_PITCH).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_PRESERVES_PITCH);
 
         bool result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync<bool>("audioElement => audioElement.preservesPitch;");
         await Assert.That(result).IsFalse();
@@ -348,7 +345,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task GetDisableRemotePlayback() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_GET_DISABLE_REMOTE_PLAYBACK).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_DISABLE_REMOTE_PLAYBACK);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
@@ -356,7 +353,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task SetDisableRemotePlayback() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_SET_DISABLE_REMOTE_PLAYBACK).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_DISABLE_REMOTE_PLAYBACK);
 
         bool result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync<bool>("audioElement => audioElement.disableRemotePlayback;");
         await Assert.That(result).IsTrue();
@@ -369,7 +366,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task Play() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_PLAY).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_PLAY);
 
         bool result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync<bool>("audioElement => audioElement.paused;");
         await Assert.That(result).IsFalse();
@@ -378,8 +375,8 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
     [Test]
     public async Task Pause() {
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.play();");
-        await Task.Delay(100);
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_PAUSE).ClickAsync();
+        await Task.Delay(SMALL_WAIT_TIME);
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_PAUSE);
 
         bool result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync<bool>("audioElement => audioElement.paused;");
         await Assert.That(result).IsTrue();
@@ -390,8 +387,8 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
     [Test]
     public async Task Load() {
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.play();");
-        await Task.Delay(100);
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_LOAD).ClickAsync();
+        await Task.Delay(SMALL_WAIT_TIME);
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_LOAD);
 
         bool result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync<bool>("audioElement => audioElement.paused;");
         await Assert.That(result).IsTrue();
@@ -402,9 +399,8 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
     // does not work in Chromium Browser. To make this test work, go to PlayWrightFixture.InitializeAsync() and change "Chromium" to "Firefox"
     [Test, Explicit]
     public async Task FastSeek() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).ClickAsync(); // minimal delay
-
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_FAST_SEEK).ClickAsync();
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_FAST_SEEK).WaitForAsync(); // minimal delay
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_FAST_SEEK);
 
         double result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync<double>("audioElement => audioElement.currentTime;");
         await Assert.That(Math.Abs(HTMLMediaElementInProcessGroup.TEST_FAST_SEEK - result) < 0.1).IsTrue();
@@ -412,7 +408,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task CanPlayType() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_CAN_PLAY_TYPE).ClickAsync();
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_CAN_PLAY_TYPE);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("probably");
@@ -427,11 +423,9 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnError() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_ERROR).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_ERROR);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.src = 'invalid';");
-        await Task.Delay(500);
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Error: errorCode = 4, MEDIA_ELEMENT_ERROR: Format error");
@@ -439,11 +433,9 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnCanplay() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_CANPLAY).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_CANPLAY);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.load();");
-        await Task.Delay(500);
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Canplay");
@@ -451,11 +443,9 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnCanplaythrough() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_CANPLAYTHROUGH).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_CANPLAYTHROUGH);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.load();");
-        await Task.Delay(500);
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Canplaythrough");
@@ -463,11 +453,9 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnPlaying() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_PLAYING).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_PLAYING);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.play();");
-        await Task.Delay(500);
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Playing");
@@ -478,10 +466,9 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnLoadstart() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_LOADSTART).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_LOADSTART);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.load();");
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Loadstart");
@@ -489,11 +476,9 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnProgress() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_PROGRESS).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_PROGRESS);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.load();");
-        await Task.Delay(500);
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Progress");
@@ -501,11 +486,9 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnLoadeddata() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_LOADEDDATA).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_LOADEDDATA);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.load();");
-        await Task.Delay(100);
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Loadeddata");
@@ -513,11 +496,9 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnLoadedmetadata() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_LOADEDMETADATA).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_LOADEDMETADATA);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.load();");
-        await Task.Delay(100);
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Loadedmetadata");
@@ -525,10 +506,9 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnStalled() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_STALLED).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_STALLED);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.load();");
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("");
@@ -538,11 +518,9 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnSuspend() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_SUSPEND).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_SUSPEND);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.load();");
-        await Task.Delay(500);
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Suspend");
@@ -550,10 +528,9 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnWaiting() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_WAITING).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_WAITING);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.load();");
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("");
@@ -563,10 +540,9 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnAbort() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_ABORT).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_ABORT);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.load();");
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Abort");
@@ -574,10 +550,9 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnEmptied() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_EMPTIED).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_EMPTIED);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.load();");
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Emptied");
@@ -588,10 +563,9 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnPlay() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_PLAY).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_PLAY);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.play();");
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Play");
@@ -599,15 +573,14 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnPause() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_PAUSE).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_PAUSE);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("""
             audioElement => {
                 audioElement.play();
                 audioElement.pause();
             }
             """);
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Pause");
@@ -615,16 +588,14 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnEnded() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_ENDED).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_ENDED);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("""
             audioElement => {
                 audioElement.currentTime = 60.0;
                 audioElement.play();
             }
             """);
-        await Task.Delay(1000);
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Ended");
@@ -632,10 +603,9 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnSeeking() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_SEEKING).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_SEEKING);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.currentTime = 10.0;");
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Seeking");
@@ -643,11 +613,9 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnSeeked() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_SEEKED).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_SEEKED);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.currentTime = 10.0;");
-        await Task.Delay(200);
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Seeked");
@@ -655,11 +623,9 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnTimeupdate() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_TIMEUPDATE).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_TIMEUPDATE);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.currentTime = 10.0;");
-        await Task.Delay(200);
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Timeupdate");
@@ -670,10 +636,9 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnVolumechange() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_VOLUMECHANGE).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_VOLUMECHANGE);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.volume = 0.5;");
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Volumechange");
@@ -681,10 +646,9 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnRatechange() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_RATECHANGE).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_RATECHANGE);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.playbackRate = 0.5;");
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Ratechange");
@@ -692,13 +656,11 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
 
     [Test]
     public async Task RegisterOnDurationchange() {
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_DURATIONCHANGE).ClickAsync();
-        await Task.Delay(100);
-
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_DURATIONCHANGE);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.src = 'invalid';");
-        await Task.Delay(300);
+        await Task.Delay(STANDARD_WAIT_TIME);
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.src = 'HTMLMediaElement_audio.mp3';");
-        await Task.Delay(300);
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Durationchange");

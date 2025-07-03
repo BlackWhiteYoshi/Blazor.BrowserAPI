@@ -13,7 +13,7 @@ public sealed class SessionStorageTest(PlayWrightFixture playWrightFixture) : Pl
         for (int i = 0; i < number; i++)
             await Page.EvaluateAsync($"sessionStorage.setItem('test-key-{i}', 'test-value-{i}');");
 
-        await Page.GetByTestId(SessionStorageGroup.BUTTON_GET_LENGTH_PROPERTY).ClickAsync();
+        await ExecuteTest(SessionStorageGroup.BUTTON_GET_LENGTH_PROPERTY);
 
         string? result = await Page.GetByTestId(SessionStorageGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(number.ToString());
@@ -29,7 +29,7 @@ public sealed class SessionStorageTest(PlayWrightFixture playWrightFixture) : Pl
         for (int i = 0; i < number; i++)
             await Page.EvaluateAsync($"sessionStorage.setItem('test-key-{i}', 'test-value-{i}');");
 
-        await Page.GetByTestId(SessionStorageGroup.BUTTON_GET_LENGTH_METHOD).ClickAsync();
+        await ExecuteTest(SessionStorageGroup.BUTTON_GET_LENGTH_METHOD);
 
         string? result = await Page.GetByTestId(SessionStorageGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(number.ToString());
@@ -40,7 +40,7 @@ public sealed class SessionStorageTest(PlayWrightFixture playWrightFixture) : Pl
         const string KEY = "test-key-0";
         await Page.EvaluateAsync($"sessionStorage.setItem('{KEY}', 'test-value-0');");
 
-        await Page.GetByTestId(SessionStorageGroup.BUTTON_KEY).ClickAsync();
+        await ExecuteTest(SessionStorageGroup.BUTTON_KEY);
 
         string? result = await Page.GetByTestId(SessionStorageGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(KEY);
@@ -51,7 +51,7 @@ public sealed class SessionStorageTest(PlayWrightFixture playWrightFixture) : Pl
         const string VALUE = "test-getItem-value";
         await Page.EvaluateAsync($"sessionStorage.setItem('{SessionStorageGroup.TEST_GET_ITEM}', '{VALUE}');");
 
-        await Page.GetByTestId(SessionStorageGroup.BUTTON_GET_ITEM).ClickAsync();
+        await ExecuteTest(SessionStorageGroup.BUTTON_GET_ITEM);
 
         string? result = await Page.GetByTestId(SessionStorageGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(VALUE);
@@ -59,7 +59,7 @@ public sealed class SessionStorageTest(PlayWrightFixture playWrightFixture) : Pl
 
     [Test]
     public async Task SetItem() {
-        await Page.GetByTestId(SessionStorageGroup.BUTTON_SET_ITEM).ClickAsync();
+        await ExecuteTest(SessionStorageGroup.BUTTON_SET_ITEM);
 
         string result = await Page.EvaluateAsync<string>($"sessionStorage.getItem('{SessionStorageGroup.TEST_SET_ITEM_KEY}');");
         await Assert.That(result).IsEqualTo(SessionStorageGroup.TEST_SET_ITEM_VALUE);
@@ -69,7 +69,7 @@ public sealed class SessionStorageTest(PlayWrightFixture playWrightFixture) : Pl
     public async Task RemoveItem() {
         await Page.EvaluateAsync($"sessionStorage.setItem('{SessionStorageGroup.TEST_REMOVE_ITEM}', 'test-value');");
 
-        await Page.GetByTestId(SessionStorageGroup.BUTTON_REMOVE_ITEM).ClickAsync();
+        await ExecuteTest(SessionStorageGroup.BUTTON_REMOVE_ITEM);
 
         string? result = await Page.EvaluateAsync<string?>($"sessionStorage.getItem('{SessionStorageGroup.TEST_REMOVE_ITEM}');");
         await Assert.That(result).IsNull();
@@ -84,7 +84,7 @@ public sealed class SessionStorageTest(PlayWrightFixture playWrightFixture) : Pl
         for (int i = 0; i < number; i++)
             await Page.EvaluateAsync($"sessionStorage.setItem('test-key-{i}', 'test-value-{i}');");
 
-        await Page.GetByTestId(SessionStorageGroup.BUTTON_CLEAR).ClickAsync();
+        await ExecuteTest(SessionStorageGroup.BUTTON_CLEAR);
 
         int length = await Page.EvaluateAsync<int>("sessionStorage.length;");
         await Assert.That(length).IsEqualTo(0);

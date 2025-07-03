@@ -9,7 +9,7 @@ public sealed class LanguageTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetBrowserLanguage_Property() {
         string expected = await Page.EvaluateAsync<string>("navigator.language;");
 
-        await Page.GetByTestId(LanguageGroup.BUTTON_GET_BROWSER_LANGUAGE_PROPERTY).ClickAsync();
+        await ExecuteTest(LanguageGroup.BUTTON_GET_BROWSER_LANGUAGE_PROPERTY);
 
         string? result = await Page.GetByTestId(LanguageGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(expected);
@@ -19,7 +19,7 @@ public sealed class LanguageTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetBrowserLanguage_Method() {
         string expected = await Page.EvaluateAsync<string>("navigator.language;");
 
-        await Page.GetByTestId(LanguageGroup.BUTTON_GET_BROWSER_LANGUAGE_METHOD).ClickAsync();
+        await ExecuteTest(LanguageGroup.BUTTON_GET_BROWSER_LANGUAGE_METHOD);
 
         string? result = await Page.GetByTestId(LanguageGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(expected);
@@ -30,7 +30,7 @@ public sealed class LanguageTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetBrowserLanguages_Property() {
         string expected = await Page.EvaluateAsync<string>("navigator.languages.join('; ');");
 
-        await Page.GetByTestId(LanguageGroup.BUTTON_GET_BROWSER_LANGUAGES_PROPERTY).ClickAsync();
+        await ExecuteTest(LanguageGroup.BUTTON_GET_BROWSER_LANGUAGES_PROPERTY);
 
         string? result = await Page.GetByTestId(LanguageGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(expected);
@@ -40,7 +40,7 @@ public sealed class LanguageTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetBrowserLanguages_Method() {
         string expected = await Page.EvaluateAsync<string>("navigator.languages.join('; ');");
 
-        await Page.GetByTestId(LanguageGroup.BUTTON_GET_BROWSER_LANGUAGES_METHOD).ClickAsync();
+        await ExecuteTest(LanguageGroup.BUTTON_GET_BROWSER_LANGUAGES_METHOD);
 
         string? result = await Page.GetByTestId(LanguageGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(expected);
@@ -49,7 +49,7 @@ public sealed class LanguageTest(PlayWrightFixture playWrightFixture) : PlayWrig
 
     [Test]
     public async Task GetHtmlLanguage_Property() {
-        await Page.GetByTestId(LanguageGroup.BUTTON_GET_HTML_LANGUAGE_PROPERTY).ClickAsync();
+        await ExecuteTest(LanguageGroup.BUTTON_GET_HTML_LANGUAGE_PROPERTY);
 
         string? result = await Page.GetByTestId(LanguageGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("en");
@@ -57,7 +57,7 @@ public sealed class LanguageTest(PlayWrightFixture playWrightFixture) : PlayWrig
 
     [Test]
     public async Task GetHtmlLanguage_Method() {
-        await Page.GetByTestId(LanguageGroup.BUTTON_GET_HTML_LANGUAGE_METHOD).ClickAsync();
+        await ExecuteTest(LanguageGroup.BUTTON_GET_HTML_LANGUAGE_METHOD);
 
         string? result = await Page.GetByTestId(LanguageGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("en");
@@ -65,7 +65,7 @@ public sealed class LanguageTest(PlayWrightFixture playWrightFixture) : PlayWrig
 
     [Test]
     public async Task SetHtmlLanguage() {
-        await Page.GetByTestId(LanguageGroup.BUTTON_SET_HTML_LANGUAGE).ClickAsync();
+        await ExecuteTest(LanguageGroup.BUTTON_SET_HTML_LANGUAGE);
 
         IElementHandle? htmlElement = await Page.QuerySelectorAsync("html");
         string? htmlLanguage = await htmlElement!.GetAttributeAsync("lang");

@@ -13,7 +13,7 @@ public sealed class LocalStorageInProcessTest(PlayWrightFixture playWrightFixtur
         for (int i = 0; i < number; i++)
             await Page.EvaluateAsync($"localStorage.setItem('test-key-{i}', 'test-value-{i}');");
 
-        await Page.GetByTestId(LocalStorageInProcessGroup.BUTTON_GET_LENGTH).ClickAsync();
+        await ExecuteTest(LocalStorageInProcessGroup.BUTTON_GET_LENGTH);
 
         string? result = await Page.GetByTestId(LocalStorageInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(number.ToString());
@@ -24,7 +24,7 @@ public sealed class LocalStorageInProcessTest(PlayWrightFixture playWrightFixtur
         const string KEY = "test-key-0";
         await Page.EvaluateAsync($"localStorage.setItem('{KEY}', 'test-value-0');");
 
-        await Page.GetByTestId(LocalStorageInProcessGroup.BUTTON_KEY).ClickAsync();
+        await ExecuteTest(LocalStorageInProcessGroup.BUTTON_KEY);
 
         string? result = await Page.GetByTestId(LocalStorageInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(KEY);
@@ -35,7 +35,7 @@ public sealed class LocalStorageInProcessTest(PlayWrightFixture playWrightFixtur
         const string VALUE = "test-getItem-value";
         await Page.EvaluateAsync($"localStorage.setItem('{LocalStorageInProcessGroup.TEST_GET_ITEM}', '{VALUE}');");
 
-        await Page.GetByTestId(LocalStorageInProcessGroup.BUTTON_GET_ITEM).ClickAsync();
+        await ExecuteTest(LocalStorageInProcessGroup.BUTTON_GET_ITEM);
 
         string? result = await Page.GetByTestId(LocalStorageInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(VALUE);
@@ -43,7 +43,7 @@ public sealed class LocalStorageInProcessTest(PlayWrightFixture playWrightFixtur
 
     [Test]
     public async Task SetItem() {
-        await Page.GetByTestId(LocalStorageInProcessGroup.BUTTON_SET_ITEM).ClickAsync();
+        await ExecuteTest(LocalStorageInProcessGroup.BUTTON_SET_ITEM);
 
         string result = await Page.EvaluateAsync<string>($"localStorage.getItem('{LocalStorageInProcessGroup.TEST_SET_ITEM_KEY}');");
         await Assert.That(result).IsEqualTo(LocalStorageInProcessGroup.TEST_SET_ITEM_VALUE);
@@ -53,7 +53,7 @@ public sealed class LocalStorageInProcessTest(PlayWrightFixture playWrightFixtur
     public async Task RemoveItem() {
         await Page.EvaluateAsync($"localStorage.setItem('{LocalStorageInProcessGroup.TEST_REMOVE_ITEM}', 'test-value');");
 
-        await Page.GetByTestId(LocalStorageInProcessGroup.BUTTON_REMOVE_ITEM).ClickAsync();
+        await ExecuteTest(LocalStorageInProcessGroup.BUTTON_REMOVE_ITEM);
 
         string? result = await Page.EvaluateAsync<string?>($"localStorage.getItem('{LocalStorageInProcessGroup.TEST_REMOVE_ITEM}');");
         await Assert.That(result).IsNull();
@@ -68,7 +68,7 @@ public sealed class LocalStorageInProcessTest(PlayWrightFixture playWrightFixtur
         for (int i = 0; i < number; i++)
             await Page.EvaluateAsync($"localStorage.setItem('test-key-{i}', 'test-value-{i}');");
 
-        await Page.GetByTestId(LocalStorageInProcessGroup.BUTTON_CLEAR).ClickAsync();
+        await ExecuteTest(LocalStorageInProcessGroup.BUTTON_CLEAR);
 
         int length = await Page.EvaluateAsync<int>("localStorage.length;");
         await Assert.That(length).IsEqualTo(0);

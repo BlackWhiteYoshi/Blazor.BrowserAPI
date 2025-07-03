@@ -9,7 +9,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
     [Test]
     public async Task ShowOpenFilePicker() {
         Page.FileChooser += (object? _, IFileChooser fileChooser) => fileChooser.SetFilesAsync("test.txt");
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_SHOW_OPEN_FILE_PICKER).ClickAsync();
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_SHOW_OPEN_FILE_PICKER);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
@@ -18,7 +18,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
     [Test]
     public async Task ShowOpenFilePickerMultipleFiles() {
         Page.FileChooser += (object? _, IFileChooser fileChooser) => fileChooser.SetFilesAsync("test.txt");
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_SHOW_OPEN_FILE_PICKER_MULTIPLE_FILES).ClickAsync();
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_SHOW_OPEN_FILE_PICKER_MULTIPLE_FILES);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(int.Parse(result!)).IsGreaterThanOrEqualTo(0);
@@ -27,7 +27,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
     [Test]
     public async Task ShowSaveFilePicker() {
         Page.FileChooser += (object? _, IFileChooser fileChooser) => fileChooser.SetFilesAsync("test.txt");
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_SHOW_SAVE_FILE_PICKER).ClickAsync();
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_SHOW_SAVE_FILE_PICKER);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
@@ -36,7 +36,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
     [Test]
     public async Task ShowDirectoryPicker() {
         Page.FileChooser += (object? _, IFileChooser fileChooser) => fileChooser.SetFilesAsync(".");
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_SHOW_DIRECTORY_PICKER).ClickAsync();
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_SHOW_DIRECTORY_PICKER);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
@@ -47,10 +47,9 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task StorageManagerEstimate() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_STORAGE_MANAGER_ESTIMATE).ClickAsync();
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_STORAGE_MANAGER_ESTIMATE);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-
         // e.g. result = "(usage: 0, quota: 613807656960)"
 
         const string usagePart = "(usage: ";
@@ -73,7 +72,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task StorageManagerPersist() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_STORAGE_MANAGER_PERSIST).ClickAsync();
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_STORAGE_MANAGER_PERSIST);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
@@ -81,7 +80,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task StorageManagerPersisted() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_STORAGE_MANAGER_PERSISTED).ClickAsync();
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_STORAGE_MANAGER_PERSISTED);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
@@ -89,7 +88,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task StorageManagerGetDirectory() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_STORAGE_MANAGER_GET_DIRECTORY).ClickAsync();
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_STORAGE_MANAGER_GET_DIRECTORY);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
@@ -99,8 +98,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task FileHandle_GetName() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_FILEHANDLE_GET_NAME).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_FILEHANDLE_GET_NAME);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(FileSystemInProcessGroup.TEMP_FILE_NAME);
@@ -108,8 +106,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task FileHandle_GetKind() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_FILEHANDLE_GET_KIND).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_FILEHANDLE_GET_KIND);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("file");
@@ -118,8 +115,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task FileHandle_IsSameEntry() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_FILEHANDLE_IS_SAME_Entry).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_FILEHANDLE_IS_SAME_Entry);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
@@ -127,8 +123,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task FileHandle_GetFile() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_FILEHANDLE_GET_FILE).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_FILEHANDLE_GET_FILE);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
@@ -136,8 +131,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task FileHandle_CreateWritable() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_FILEHANDLE_CREATE_WRITABLE).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_FILEHANDLE_CREATE_WRITABLE);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
@@ -147,8 +141,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task DirectoryHandle_GetName() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_DIRECTORYHANDLE_GET_NAME).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_DIRECTORYHANDLE_GET_NAME);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(string.Empty);
@@ -156,8 +149,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task DirectoryHandle_GetKind() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_DIRECTORYHANDLE_GET_KIND).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_DIRECTORYHANDLE_GET_KIND);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("directory");
@@ -166,8 +158,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task DirectoryHandle_IsSameEntry() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_DIRECTORYHANDLE_IS_SAME_Entry).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_DIRECTORYHANDLE_IS_SAME_Entry);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
@@ -175,8 +166,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task DirectoryHandle_GetDirectoryHandle() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_DIRECTORYHANDLE_GET_DIRECTORYHANDLE).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_DIRECTORYHANDLE_GET_DIRECTORYHANDLE);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
@@ -184,8 +174,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task DirectoryHandle_GetFileHandle() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_DIRECTORYHANDLE_GET_FILEHANDLE).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_DIRECTORYHANDLE_GET_FILEHANDLE);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
@@ -193,8 +182,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task DirectoryHandle_RemoveEntry() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_DIRECTORYHANDLE_REMOVE_ENTRY).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_DIRECTORYHANDLE_REMOVE_ENTRY);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("usage: 0");
@@ -202,8 +190,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task DirectoryHandle_Values() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_DIRECTORYHANDLE_VALUES).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_DIRECTORYHANDLE_VALUES);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("(3): folder: sub2, folder: sub1, file: temp1.txt");
@@ -213,8 +200,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task File_GetName() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_FILE_GET_NAME).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_FILE_GET_NAME);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(FileSystemInProcessGroup.TEMP_FILE_NAME);
@@ -222,8 +208,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task File_GetSize() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_FILE_GET_SIZE).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_FILE_GET_SIZE);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("0");
@@ -231,8 +216,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task File_GetType() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_FILE_GET_TYPE).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_FILE_GET_TYPE);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("text/plain");
@@ -240,8 +224,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task File_GetLastModified() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_FILE_GET_LAST_MODIFIED).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_FILE_GET_LAST_MODIFIED);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(long.Parse(result!)).IsGreaterThan(0L);
@@ -249,8 +232,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task File_GetWebkitRelativePath() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_FILE_GET_WEBKIT_RELATIVE_PATH).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_FILE_GET_WEBKIT_RELATIVE_PATH);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(string.Empty);
@@ -259,8 +241,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task File_Text() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_FILE_TEXT).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_FILE_TEXT);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(FileSystemInProcessGroup.FILE_TEXT_RESULT);
@@ -270,8 +251,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task WritableFileStream_GetLocked() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_WRITABLE_FILE_STREAM_GET_LOCKED).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_WRITABLE_FILE_STREAM_GET_LOCKED);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
@@ -280,8 +260,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task WritableFileStream_WriteText() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_WRITABLE_FILE_STREAM_WRITE_TEXT).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_WRITABLE_FILE_STREAM_WRITE_TEXT);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(FileSystemInProcessGroup.WRITABLE_FILE_STREAM_WRITE_TEXT);
@@ -289,8 +268,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task WritableFileStream_WriteBytes() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_WRITABLE_FILE_STREAM_WRITE_BYTES).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_WRITABLE_FILE_STREAM_WRITE_BYTES);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(FileSystemInProcessGroup.WRITABLE_FILE_STREAM_WRITE_TEXT);
@@ -298,32 +276,28 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task WritableFileStream_Seek() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_WRITABLE_FILE_STREAM_SEEK).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_WRITABLE_FILE_STREAM_SEEK);
 
         // an assertion happens in DisposeAsync()
     }
 
     [Test]
     public async Task WritableFileStream_Truncate() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_WRITABLE_FILE_STREAM_TRUNCATE).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_WRITABLE_FILE_STREAM_TRUNCATE);
 
         // an assertion happens in DisposeAsync()
     }
 
     [Test]
     public async Task WritableFileStream_Abort() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_WRITABLE_FILE_STREAM_ABORT).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_WRITABLE_FILE_STREAM_ABORT);
 
         // an assertion happens in DisposeAsync()
     }
 
     [Test]
     public async Task WritableFileStream_Close() {
-        await Page.GetByTestId(FileSystemInProcessGroup.BUTTON_WRITABLE_FILE_STREAM_CLOSE).ClickAsync();
-        await Task.Delay(500);
+        await ExecuteTest(FileSystemInProcessGroup.BUTTON_WRITABLE_FILE_STREAM_CLOSE);
 
         // an assertion happens in DisposeAsync()
     }

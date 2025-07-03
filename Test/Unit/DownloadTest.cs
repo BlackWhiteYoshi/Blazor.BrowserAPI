@@ -7,7 +7,7 @@ public sealed class DownloadTest(PlayWrightFixture playWrightFixture) : PlayWrig
     [Test]
     public async Task Download() {
         Task<Microsoft.Playwright.IDownload> downloadTask = Page.WaitForDownloadAsync();
-        await Page.GetByTestId(DownloadGroup.BUTTON_DOWNLOAD_AS_FILE).ClickAsync();
+        await ExecuteTest(DownloadGroup.BUTTON_DOWNLOAD_AS_FILE);
         Microsoft.Playwright.IDownload download = await downloadTask;
 
         Stream downloadData = await download.CreateReadStreamAsync() ?? throw new Exception("download data is null");

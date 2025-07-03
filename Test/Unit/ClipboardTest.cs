@@ -14,10 +14,9 @@ public sealed class ClipboardTest(PlayWrightFixture playWrightFixture) : PlayWri
     [NotInParallel("ClipboardTest")]
     public async Task Read() {
         const string TEST_STR = "clipboard read test";
-
         await Page.EvaluateAsync($"navigator.clipboard.writeText('{TEST_STR}');");
 
-        await Page.GetByTestId(ClipboardGroup.BUTTON_READ).ClickAsync();
+        await ExecuteTest(ClipboardGroup.BUTTON_READ);
 
         string? result = await Page.GetByTestId(ClipboardGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(TEST_STR);
@@ -26,7 +25,7 @@ public sealed class ClipboardTest(PlayWrightFixture playWrightFixture) : PlayWri
     [Test]
     [NotInParallel("ClipboardTest")]
     public async Task Write() {
-        await Page.GetByTestId(ClipboardGroup.BUTTON_WRITE).ClickAsync();
+        await ExecuteTest(ClipboardGroup.BUTTON_WRITE);
 
         string clipboardContent = await Page.EvaluateAsync<string>($"navigator.clipboard.readText();");
         await Assert.That(clipboardContent).IsEqualTo(ClipboardGroup.TEST_WRITE);

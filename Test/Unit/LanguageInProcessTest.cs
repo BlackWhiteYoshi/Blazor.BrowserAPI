@@ -9,7 +9,7 @@ public sealed class LanguageInProcessTest(PlayWrightFixture playWrightFixture) :
     public async Task GetBrowserLanguage() {
         string expected = await Page.EvaluateAsync<string>("navigator.language;");
 
-        await Page.GetByTestId(LanguageInProcessGroup.BUTTON_GET_BROWSER_LANGUAGE).ClickAsync();
+        await ExecuteTest(LanguageInProcessGroup.BUTTON_GET_BROWSER_LANGUAGE);
 
         string? result = await Page.GetByTestId(LanguageInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(expected);
@@ -19,7 +19,7 @@ public sealed class LanguageInProcessTest(PlayWrightFixture playWrightFixture) :
     public async Task GetBrowserLanguages() {
         string expected = await Page.EvaluateAsync<string>("navigator.languages.join('; ');");
 
-        await Page.GetByTestId(LanguageInProcessGroup.BUTTON_GET_BROWSER_LANGUAGES).ClickAsync();
+        await ExecuteTest(LanguageInProcessGroup.BUTTON_GET_BROWSER_LANGUAGES);
 
         string? result = await Page.GetByTestId(LanguageInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(expected);
@@ -27,7 +27,7 @@ public sealed class LanguageInProcessTest(PlayWrightFixture playWrightFixture) :
 
     [Test]
     public async Task GetHtmlLanguage() {
-        await Page.GetByTestId(LanguageInProcessGroup.BUTTON_GET_HTML_LANGUAGE).ClickAsync();
+        await ExecuteTest(LanguageInProcessGroup.BUTTON_GET_HTML_LANGUAGE);
 
         string? result = await Page.GetByTestId(LanguageInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("en");
@@ -35,7 +35,7 @@ public sealed class LanguageInProcessTest(PlayWrightFixture playWrightFixture) :
 
     [Test]
     public async Task SetHtmlLanguage() {
-        await Page.GetByTestId(LanguageInProcessGroup.BUTTON_SET_HTML_LANGUAGE).ClickAsync();
+        await ExecuteTest(LanguageInProcessGroup.BUTTON_SET_HTML_LANGUAGE);
 
         IElementHandle? htmlElement = await Page.QuerySelectorAsync("html");
         string? htmlLanguage = await htmlElement!.GetAttributeAsync("lang");

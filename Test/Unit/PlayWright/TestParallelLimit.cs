@@ -10,5 +10,5 @@ public readonly struct TestParallelLimit : IParallelLimit {
     /// <para>Depending on your available RAM you can increase this number to speed up the process.</para>
     /// <para>Or lower this number to lower the RAM usage for the sacrifice of speed.</para>
     /// </summary>
-    public int Limit => 5;
+    public int Limit => 8;
 }

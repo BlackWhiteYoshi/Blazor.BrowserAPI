@@ -1,4 +1,5 @@
-﻿using Microsoft.Playwright;
+﻿using BrowserAPI.Test.Client;
+using Microsoft.Playwright;
 using TUnit.Core.Interfaces;
 
 namespace BrowserAPI.UnitTest;
@@ -30,5 +31,27 @@ public abstract class PlayWrightTest(PlayWrightFixture playWrightFixture) : IAsy
             await Page.CloseAsync();
             await Context.DisposeAsync();
         }
+    }
+
+
+    /// <summary>
+    /// Small waiting time in ms
+    /// </summary>
+    protected const int SMALL_WAIT_TIME = 50;
+    
+    /// <summary>
+    /// Standard waiting time in ms
+    /// </summary>
+    protected const int STANDARD_WAIT_TIME = 500;
+
+    /// <summary>
+    /// Performs a click on the button with the given data-testid
+    /// and then waits <see cref="STANDARD_WAIT_TIME"/>.
+    /// </summary>
+    /// <param name="testId"></param>
+    /// <returns></returns>
+    protected async Task ExecuteTest(string testId) {
+        await Page.GetByTestId(testId).ClickAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
     }
 }
