@@ -1,5 +1,6 @@
 import { ServiceWorkerRegistrationAPI } from "../ServiceWorkerRegistration/ServiceWorkerRegistration";
 import { ServiceWorkerAPI } from "../ServiceWorker/ServiceWorker";
+import { blazorInvokeMethod } from "../../../Extensions/blazorExtensions";
 
 export class ServiceWorkerContainerAPI {
     static async register(filePath: string): Promise<boolean> {
@@ -62,10 +63,7 @@ export class ServiceWorkerContainerAPI {
     // controllerchange event
 
     static #oncontrollerchangeCallback() {
-        if (ServiceWorkerContainerAPI.#isEventTriggerSync)
-            ServiceWorkerContainerAPI.#eventTrigger.invokeMethod("InvokeControllerChange");
-        else
-            ServiceWorkerContainerAPI.#eventTrigger.invokeMethodAsync("InvokeControllerChange");
+        blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeControllerChange");
     }
 
     static activateOncontrollerchange() {
@@ -80,10 +78,7 @@ export class ServiceWorkerContainerAPI {
     // message event
 
     static #onmessageCallback() {
-        if (ServiceWorkerContainerAPI.#isEventTriggerSync)
-            ServiceWorkerContainerAPI.#eventTrigger.invokeMethod("InvokeMessage");
-        else
-            ServiceWorkerContainerAPI.#eventTrigger.invokeMethodAsync("InvokeMessage");
+        blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeMessage");
     }
 
     static activateOnMessage() {

@@ -1,3 +1,5 @@
+import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
+
 export class HistoryAPI {
     static getLength(): number {
         return history.length;
@@ -53,10 +55,7 @@ export class HistoryAPI {
     // popstate event
 
     static #onpopstate(popStateEvent: PopStateEvent) {
-        if (HistoryAPI.#isEventTriggerSync)
-            HistoryAPI.#eventTrigger.invokeMethod("InvokePopState", popStateEvent.state);
-        else
-            HistoryAPI.#eventTrigger.invokeMethodAsync("InvokePopState", popStateEvent.state);
+        blazorInvokeMethod(HistoryAPI.#eventTrigger, HistoryAPI.#isEventTriggerSync, "InvokePopState", popStateEvent.state);
     }
 
     static activateOnpopstate() {

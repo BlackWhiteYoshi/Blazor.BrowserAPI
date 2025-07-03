@@ -1,4 +1,5 @@
 import { ServiceWorkerAPI } from "../ServiceWorker/ServiceWorker";
+import { blazorInvokeMethod } from "../../../Extensions/blazorExtensions";
 
 export class ServiceWorkerRegistrationAPI {
     #serviceWorkerRegistration: ServiceWorkerRegistration;
@@ -55,7 +56,7 @@ export class ServiceWorkerRegistrationAPI {
 
     // updatefound event
 
-    #onupdatefoundCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeUpdateFound") : this.#eventTrigger.invokeMethodAsync("InvokeUpdateFound");
+    #onupdatefoundCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeUpdateFound");
 
     activateOnupdatefound() {
         this.#serviceWorkerRegistration.addEventListener("updatefound", this.#onupdatefoundCallback);

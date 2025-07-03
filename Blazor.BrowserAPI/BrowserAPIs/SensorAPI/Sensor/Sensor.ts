@@ -1,3 +1,5 @@
+import { blazorInvokeMethod } from "../../../Extensions/blazorExtensions";
+
 export abstract class SensorAPI {
     protected sensor: Sensor;
 
@@ -42,7 +44,7 @@ export abstract class SensorAPI {
 
     // error event
 
-    #onerrorCallback = (event: Event) => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeError", event) : this.#eventTrigger.invokeMethodAsync("InvokeError", event);
+    #onerrorCallback = (event: Event) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeError", event);
 
     activateOnerror() {
         this.sensor.addEventListener("error", this.#onerrorCallback);
@@ -55,7 +57,7 @@ export abstract class SensorAPI {
 
     // activate event
 
-    #onactivateCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeActivate") : this.#eventTrigger.invokeMethodAsync("InvokeActivate");
+    #onactivateCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeActivate");
 
     activateOnactivate() {
         this.sensor.addEventListener("activate", this.#onactivateCallback);
@@ -68,7 +70,7 @@ export abstract class SensorAPI {
 
     // reading event
 
-    #onreadingCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeReading") : this.#eventTrigger.invokeMethodAsync("InvokeReading");
+    #onreadingCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeReading");
 
     activateOnreading() {
         this.sensor.addEventListener("reading", this.#onreadingCallback);

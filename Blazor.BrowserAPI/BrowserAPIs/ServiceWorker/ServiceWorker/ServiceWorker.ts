@@ -1,3 +1,5 @@
+import { blazorInvokeMethod } from "../../../Extensions/blazorExtensions";
+
 export class ServiceWorkerAPI {
     #serviceWorker: ServiceWorker;
 
@@ -40,9 +42,7 @@ export class ServiceWorkerAPI {
 
     // statechange event
 
-    #onstatechangeCallback = (event: Event) => this.#isEventTriggerSync
-        ? this.#eventTrigger.invokeMethod("InvokeStateChange", (event.target as ServiceWorker).state)
-        : this.#eventTrigger.invokeMethodAsync("InvokeStateChange", (event.target as ServiceWorker).state);
+    #onstatechangeCallback = (event: Event) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeStateChange", (event.target as ServiceWorker).state);
 
     activateOnstatechange() {
         this.#serviceWorker.addEventListener("statechange", this.#onstatechangeCallback);
@@ -55,7 +55,7 @@ export class ServiceWorkerAPI {
 
     // error event
 
-    #onerrorCallback = (event: ErrorEvent) => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeError", event) : this.#eventTrigger.invokeMethodAsync("InvokeError", event);
+    #onerrorCallback = (event: ErrorEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeError", event);
 
     activateOnerror() {
         this.#serviceWorker.addEventListener("error", this.#onerrorCallback);

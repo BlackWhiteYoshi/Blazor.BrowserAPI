@@ -1,3 +1,5 @@
+import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
+
 export class DialogAPI {
     #dialog: HTMLDialogElement;
 
@@ -56,7 +58,7 @@ export class DialogAPI {
 
     // cancel event
 
-    #oncancelCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeCancel") : this.#eventTrigger.invokeMethodAsync("InvokeCancel");
+    #oncancelCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCancel");
 
     activateOncancel() {
         this.#dialog.addEventListener("cancel", this.#oncancelCallback);
@@ -69,7 +71,7 @@ export class DialogAPI {
 
     // close event
 
-    #oncloseCallback = () => this.#isEventTriggerSync ? this.#eventTrigger.invokeMethod("InvokeClose") : this.#eventTrigger.invokeMethodAsync("InvokeClose");
+    #oncloseCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeClose");
 
     activateOnclose() {
         this.#dialog.addEventListener("close", this.#oncloseCallback);
