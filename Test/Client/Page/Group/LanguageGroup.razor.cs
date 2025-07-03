@@ -24,6 +24,18 @@ public sealed partial class LanguageGroup : ComponentBase {
         labelOutput = await Language.GetBrowserLanguage(default);
     }
 
+
+    public const string BUTTON_GET_BROWSER_LANGUAGES_PROPERTY = "language-get-browser-languages-property";
+    private async Task GetBrowserLanguages_Property() {
+        labelOutput = string.Join("; ", await Language.BrowserLanguages);
+    }
+
+    public const string BUTTON_GET_BROWSER_LANGUAGES_METHOD = "language-get-browser-languages-method";
+    private async Task GetBrowserLanguages_Method() {
+        labelOutput = string.Join("; ", await Language.GetBrowserLanguages(default));
+    }
+
+
     public const string BUTTON_GET_HTML_LANGUAGE_PROPERTY = "language-get-html-language-property";
     private async Task GetHtmlLanguage_Property() {
         labelOutput = await Language.HtmlLanguage;

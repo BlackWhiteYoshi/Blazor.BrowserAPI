@@ -19,6 +19,11 @@ public sealed partial class LanguageInProcessGroup : ComponentBase {
         labelOutput = Language.BrowserLanguage;
     }
 
+    public const string BUTTON_GET_BROWSER_LANGUAGES = "language-inprocess-get-browser-languages";
+    private void GetBrowserLanguages() {
+        labelOutput = string.Join("; ", Language.BrowserLanguages);
+    }
+
     public const string BUTTON_GET_HTML_LANGUAGE = "language-inprocess-get-html-language";
     private void GetHtmlLanguage() {
         labelOutput = Language.HtmlLanguage;

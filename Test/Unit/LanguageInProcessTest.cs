@@ -16,6 +16,16 @@ public sealed class LanguageInProcessTest(PlayWrightFixture playWrightFixture) :
     }
 
     [Test]
+    public async Task GetBrowserLanguages() {
+        string expected = await Page.EvaluateAsync<string>("navigator.languages.join('; ');");
+
+        await Page.GetByTestId(LanguageInProcessGroup.BUTTON_GET_BROWSER_LANGUAGES).ClickAsync();
+
+        string? result = await Page.GetByTestId(LanguageInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(expected);
+    }
+
+    [Test]
     public async Task GetHtmlLanguage() {
         await Page.GetByTestId(LanguageInProcessGroup.BUTTON_GET_HTML_LANGUAGE).ClickAsync();
 

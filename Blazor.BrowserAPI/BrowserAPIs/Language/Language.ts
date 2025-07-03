@@ -3,6 +3,10 @@ export class LanguageAPI {
         return navigator.language;
     }
 
+    static getBrowserLanguages(): readonly string[] {
+        return navigator.languages;
+    }
+
     static getHtmlLanguage(): string {
         return document.documentElement.lang;
     }
