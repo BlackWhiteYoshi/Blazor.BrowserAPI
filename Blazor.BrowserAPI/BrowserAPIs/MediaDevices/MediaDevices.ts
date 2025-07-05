@@ -56,11 +56,13 @@ export class MediaDevicesAPI {
     }
 
     static async getUserMedia(audio: boolean | MediaDevicesTypes.ConstrainMediaTrack, video: boolean | MediaDevicesTypes.ConstrainMediaTrack): Promise<MediaStreamAPI> {
-        return new MediaStreamAPI(await navigator.mediaDevices.getUserMedia({ audio: this.#convertToMediaTrackConstraintSet(audio), video: this.#convertToMediaTrackConstraintSet(video) }));
+        const mediaStream = await navigator.mediaDevices.getUserMedia({ audio: this.#convertToMediaTrackConstraintSet(audio), video: this.#convertToMediaTrackConstraintSet(video) });
+        return new MediaStreamAPI(mediaStream);
     }
 
     static async getDisplayMedia(audio: boolean | MediaDevicesTypes.ConstrainMediaTrack, video: boolean | MediaDevicesTypes.ConstrainMediaTrack): Promise<MediaStreamAPI> {
-        return new MediaStreamAPI(await navigator.mediaDevices.getDisplayMedia({ audio: this.#convertToMediaTrackConstraintSet(audio), video: this.#convertToMediaTrackConstraintSet(video) }));
+        const mediaStream = await navigator.mediaDevices.getDisplayMedia({ audio: this.#convertToMediaTrackConstraintSet(audio), video: this.#convertToMediaTrackConstraintSet(video) });
+        return new MediaStreamAPI(mediaStream);
     }
 
 

@@ -89,7 +89,7 @@ public sealed partial class HistoryGroup : ComponentBase {
     }
 
 
-    public const string BUTTON_REGISTER_ON_POP_STATE = "history-register-on-pop-state";
+    public const string BUTTON_REGISTER_ON_POP_STATE = "history-pop-state-event";
     public void RegisterOnPopState() {
         History.OnPopState += (JsonElement? data) => {
             labelOutput = data?.ToString() ?? "(null)";

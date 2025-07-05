@@ -40,7 +40,7 @@ export class ServiceWorkerContainerAPI {
 
     static async getRegistrations(): Promise<ServiceWorkerRegistrationAPI[]> {
         const serviceWorkerRegistrations = await navigator.serviceWorker.getRegistrations();
-        return serviceWorkerRegistrations.map((serviceWorkerRegistration) => DotNet.createJSObjectReference(new ServiceWorkerRegistrationAPI(serviceWorkerRegistration)));
+        return serviceWorkerRegistrations.map(serviceWorkerRegistration => DotNet.createJSObjectReference(new ServiceWorkerRegistrationAPI(serviceWorkerRegistration)));
     }
 
     static startMessages() {
