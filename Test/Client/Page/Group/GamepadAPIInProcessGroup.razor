@@ -1,0 +1,24 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>GamepadAPI InProcess</h2>
+    <div>
+        <button data-testid="@BUTTON_GET_GAMEPADS" @onclick="GetGamepads">GetGamepads</button>
+        <button data-testid="@BUTTON_REGISTER_ON_GAMEPAD_CONNECTED" @onclick="RegisterOnGamepadConnected">RegisterOnGamepadConnected</button>
+        <button data-testid="@BUTTON_REGISTER_ON_GAMEPAD_DISCONNECTED" @onclick="RegisterOnGamepadDisconnected">RegisterOnGamepadDisconnected</button>
+
+        <button data-testid="@BUTTON_GET_AXES" @onclick="GetAxes">GetAxes</button>
+        <button data-testid="@BUTTON_GET_BUTTONS" @onclick="GetButtons">GetButtons</button>
+
+        <button data-testid="@BUTTON_GET_CONNECTED" @onclick="GetConnected">GetConnected</button>
+        <button data-testid="@BUTTON_GET_ID" @onclick="GetId">GetId</button>
+        <button data-testid="@BUTTON_GET_INDEX" @onclick="GetIndex">GetIndex</button>
+        <button data-testid="@BUTTON_GET_MAPPING" @onclick="GetMapping">GetMapping</button>
+        <button data-testid="@BUTTON_GET_TIMESTAMP" @onclick="GetTimestamp">GetTimestamp</button>
+
+        <button data-testid="@BUTTON_GET_VIBRATION_ACTUATOR_EFFECTS" @onclick="GetVibrationActuatorEffects">GetVibrationActuatorEffects</button>
+        <button data-testid="@BUTTON_PLAY_VIBRATION_ACTUATOR_EFFECT" @onclick="PlayVibrationActuatorEffect">PlayVibrationActuatorEffect</button>
+        <button data-testid="@BUTTON_RESET_VIBRATION_ACTUATOR" @onclick="ResetVibrationActuator">ResetVibrationActuator</button>
+    </div>
+    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+</div>

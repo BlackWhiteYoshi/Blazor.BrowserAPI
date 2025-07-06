@@ -15,6 +15,7 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - [Dialog](Blazor.BrowserAPI/BrowserAPIs/Dialog/Dialog.md)
 - [Download](Blazor.BrowserAPI/BrowserAPIs/Download/Download.md)
 - [File System](Blazor.BrowserAPI/BrowserAPIs/FileSystem/FileSystem.md)
+- [GamepadAPI](Blazor.BrowserAPI/BrowserAPIs/GamepadAPI/GamepadAPI.md)
 - [Geolocation](Blazor.BrowserAPI/BrowserAPIs/Geolocation/Geolocation.md)
 - [History](Blazor.BrowserAPI/BrowserAPIs/History/History.md)
 - [HTMLElement](Blazor.BrowserAPI/BrowserAPIs/HTMLElement/HTMLElement.md)

@@ -16,6 +16,9 @@ export { DownloadAPI };
 import { FileSystemAPI } from "./BrowserAPIs/FileSystem/FileSystem";
 export { FileSystemAPI };
 
+import { GamepadInterfaceAPI } from "./BrowserAPIs/GamepadAPI/GamepadAPI";
+export { GamepadInterfaceAPI };
+
 import { GeolocationAPI } from "./BrowserAPIs/Geolocation/Geolocation";
 export { GeolocationAPI };
 

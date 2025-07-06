@@ -29,6 +29,8 @@ public static class AddBrowserAPIExtension {
             .AddScoped<IElementFactoryInProcess, Implementation.ElementFactoryInProcess>()
             .AddScoped<IFileSystem, Implementation.FileSystem>()
             .AddScoped<IFileSystemInProcess, Implementation.FileSystemInProcess>()
+            .AddScoped<IGamepadAPI, Implementation.GamepadAPI>()
+            .AddScoped<IGamepadAPIInProcess, Implementation.GamepadAPIInProcess>()
             .AddScoped<IGeolocation, Implementation.Geolocation>()
             .AddScoped<IGeolocationInProcess, Implementation.GeolocationInProcess>()
             .AddScoped<IHistory,  Implementation.History>()

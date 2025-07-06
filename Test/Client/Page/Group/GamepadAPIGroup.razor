@@ -1,0 +1,32 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>GamepadAPI</h2>
+    <div>
+        <button data-testid="@BUTTON_GET_GAMEPADS" @onclick="GetGamepads">GetGamepads</button>
+        <button data-testid="@BUTTON_REGISTER_ON_GAMEPAD_CONNECTED" @onclick="RegisterOnGamepadConnected">RegisterOnGamepadConnected</button>
+        <button data-testid="@BUTTON_REGISTER_ON_GAMEPAD_DISCONNECTED" @onclick="RegisterOnGamepadDisconnected">RegisterOnGamepadDisconnected</button>
+
+        <button data-testid="@BUTTON_GET_AXES_PROPERTY" @onclick="GetAxes_Property">GetAxes_Property</button>
+        <button data-testid="@BUTTON_GET_AXES_METHOD" @onclick="GetAxes_Method">GetAxes_Method</button>
+        <button data-testid="@BUTTON_GET_BUTTONS_PROPERTY" @onclick="GetButtons_Property">GetButtons_Property</button>
+        <button data-testid="@BUTTON_GET_BUTTONS_METHOD" @onclick="GetButtons_Method">GetButtons_Method</button>
+
+        <button data-testid="@BUTTON_GET_CONNECTED_PROPERTY" @onclick="GetConnected_Property">GetConnected_Property</button>
+        <button data-testid="@BUTTON_GET_CONNECTED_METHOD" @onclick="GetConnected_Method">GetConnected_Method</button>
+        <button data-testid="@BUTTON_GET_ID_PROPERTY" @onclick="GetId_Property">GetId_Property</button>
+        <button data-testid="@BUTTON_GET_ID_METHOD" @onclick="GetId_Method">GetId_Method</button>
+        <button data-testid="@BUTTON_GET_INDEX_PROPERTY" @onclick="GetIndex_Property">GetIndex_Property</button>
+        <button data-testid="@BUTTON_GET_INDEX_METHOD" @onclick="GetIndex_Method">GetIndex_Method</button>
+        <button data-testid="@BUTTON_GET_MAPPING_PROPERTY" @onclick="GetMapping_Property">GetMapping_Property</button>
+        <button data-testid="@BUTTON_GET_MAPPING_METHOD" @onclick="GetMapping_Method">GetMapping_Method</button>
+        <button data-testid="@BUTTON_GET_TIMESTAMP_PROPERTY" @onclick="GetTimestamp_Property">GetTimestamp_Property</button>
+        <button data-testid="@BUTTON_GET_TIMESTAMP_METHOD" @onclick="GetTimestamp_Method">GetTimestamp_Method</button>
+
+        <button data-testid="@BUTTON_GET_VIBRATION_ACTUATOR_EFFECTS_PROPERTY" @onclick="GetVibrationActuatorEffects_Property">GetVibrationActuatorEffects_Property</button>
+        <button data-testid="@BUTTON_GET_VIBRATION_ACTUATOR_EFFECTS_METHOD" @onclick="GetVibrationActuatorEffects_Method">GetVibrationActuatorEffects_Method</button>
+        <button data-testid="@BUTTON_PLAY_VIBRATION_ACTUATOR_EFFECT" @onclick="PlayVibrationActuatorEffect">PlayVibrationActuatorEffect</button>
+        <button data-testid="@BUTTON_RESET_VIBRATION_ACTUATOR" @onclick="ResetVibrationActuator">ResetVibrationActuator</button>
+    </div>
+    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+</div>
