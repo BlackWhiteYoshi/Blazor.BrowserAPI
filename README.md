@@ -111,5 +111,5 @@ There are more interfaces coming.
   - added History (16 BrowserAPIs)
   - small breaking change: *OnError* in MediaRecorder, Sensor and ServiceWorker has as parameter a JsonElement instead of a string. To get the previous value, just use *ToString()* on it.
 - 0.10.0
-  - TODO
+  - added GamepadAPI (17 BrowserAPIs)
   - added navigator.languages to the Language API
