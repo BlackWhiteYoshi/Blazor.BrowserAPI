@@ -126,3 +126,5 @@ There are more interfaces coming.
 - 0.10.0
   - added GamepadAPI (17 BrowserAPIs)
   - added navigator.languages to the Language API
+- 0.11.0
+  - added NetworkInformation (18 BrowserAPIs)
