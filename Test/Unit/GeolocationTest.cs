@@ -7,7 +7,7 @@ namespace BrowserAPI.UnitTest;
 public sealed class GeolocationTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     public override async Task InitializeAsync() {
         await base.InitializeAsync();
-        await Context.GrantPermissionsAsync(["geolocation"]);
+        await BrowserContext.GrantPermissionsAsync(["geolocation"]);
     }
 
 
@@ -16,7 +16,7 @@ public sealed class GeolocationTest(PlayWrightFixture playWrightFixture) : PlayW
         const float LONGITUDE = 10.0f;
         const float LATITUDE = 12.0f;
         const float ACCURACY = 2.0f;
-        await Context.SetGeolocationAsync(new Geolocation() {
+        await BrowserContext.SetGeolocationAsync(new Geolocation() {
             Longitude = LONGITUDE,
             Latitude = LATITUDE,
             Accuracy = ACCURACY,
@@ -38,7 +38,7 @@ public sealed class GeolocationTest(PlayWrightFixture playWrightFixture) : PlayW
         const float LONGITUDE = 10.0f;
         const float LATITUDE = 12.0f;
         const float ACCURACY = 2.0f;
-        await Context.SetGeolocationAsync(new Geolocation() {
+        await BrowserContext.SetGeolocationAsync(new Geolocation() {
             Longitude = LONGITUDE,
             Latitude = LATITUDE,
             Accuracy = ACCURACY,
@@ -64,7 +64,7 @@ public sealed class GeolocationTest(PlayWrightFixture playWrightFixture) : PlayW
         await ExecuteTest(GeolocationGroup.BUTTON_WATCH_POSITION);
 
         for (int i = 0; i < 5; i++) {
-            await Context.SetGeolocationAsync(new Geolocation() {
+            await BrowserContext.SetGeolocationAsync(new Geolocation() {
                 Longitude = LONGITUDE * i,
                 Latitude = LATITUDE * i,
                 Accuracy = ACCURACY * i,
@@ -84,7 +84,7 @@ public sealed class GeolocationTest(PlayWrightFixture playWrightFixture) : PlayW
     public async Task ClearWatch() {
         await ExecuteTest(GeolocationGroup.BUTTON_WATCH_POSITION);
 
-        await Context.SetGeolocationAsync(new Geolocation() {
+        await BrowserContext.SetGeolocationAsync(new Geolocation() {
             Longitude = 1,
             Latitude = 1,
             Accuracy = 1,
@@ -93,7 +93,7 @@ public sealed class GeolocationTest(PlayWrightFixture playWrightFixture) : PlayW
 
         await ExecuteTest(GeolocationGroup.BUTTON_CLEAR_WATCH);
 
-        await Context.SetGeolocationAsync(new Geolocation() {
+        await BrowserContext.SetGeolocationAsync(new Geolocation() {
             Longitude = 2,
             Latitude = 2,
             Accuracy = 2,

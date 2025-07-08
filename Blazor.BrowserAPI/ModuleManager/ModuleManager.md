@@ -1,6 +1,6 @@
 # ModuleManager
 
-The ModuleManager is responsible for the access of the JS-module at "_content/Blazor.BrowserAPI/BrowserAPI.js".  
+The ModuleManager is responsible for the access of the JS-module at *"_content/Blazor.BrowserAPI/BrowserAPI.js"*.  
 The necessary module is lazy loaded the first time when it is needed,
 but it also contains a method to start the module download manually.
 

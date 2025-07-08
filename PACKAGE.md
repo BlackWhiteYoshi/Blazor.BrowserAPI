@@ -16,7 +16,8 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - CookieStorage
 - Dialog
 - Download
-- File System
+- FileSystem
+- GamepadAPI
 - Geolocation
 - History
 - HTMLElement

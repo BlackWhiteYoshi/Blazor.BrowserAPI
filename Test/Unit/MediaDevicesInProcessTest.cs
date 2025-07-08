@@ -6,7 +6,7 @@ namespace BrowserAPI.UnitTest;
 public sealed class MediaDevicesInProcessTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     public override async Task InitializeAsync() {
         await base.InitializeAsync();
-        await Context.GrantPermissionsAsync(["camera", "microphone"]);
+        await BrowserContext.GrantPermissionsAsync(["camera", "microphone"]);
     }
 
 

@@ -6,7 +6,7 @@ namespace BrowserAPI.UnitTest;
 public sealed class ClipboardTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     public override async Task InitializeAsync() {
         await base.InitializeAsync();
-        await Context.GrantPermissionsAsync(["clipboard-read", "clipboard-write"]);
+        await BrowserContext.GrantPermissionsAsync(["clipboard-read", "clipboard-write"]);
     }
 
 

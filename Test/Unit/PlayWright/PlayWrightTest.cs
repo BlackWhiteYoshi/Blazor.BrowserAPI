@@ -8,7 +8,7 @@ public abstract class PlayWrightTest(PlayWrightFixture playWrightFixture) : IAsy
     /// <summary>
     /// BrowserContext
     /// </summary>
-    protected IBrowserContext Context { get; private set; } = null!;
+    protected IBrowserContext BrowserContext { get; private set; } = null!;
 
     /// <summary>
     /// BrowserPage
@@ -17,8 +17,8 @@ public abstract class PlayWrightTest(PlayWrightFixture playWrightFixture) : IAsy
 
 
     public virtual async Task InitializeAsync() {
-        Context = await playWrightFixture.NewBrowserContext();
-        Page = await Context.NewPageAsync();
+        BrowserContext = await playWrightFixture.NewBrowserContext();
+        Page = await BrowserContext.NewPageAsync();
         await Page.GotoAsync("/");
     }
 
@@ -29,7 +29,7 @@ public abstract class PlayWrightTest(PlayWrightFixture playWrightFixture) : IAsy
         }
         finally {
             await Page.CloseAsync();
-            await Context.DisposeAsync();
+            await BrowserContext.DisposeAsync();
         }
     }
 

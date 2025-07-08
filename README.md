@@ -14,7 +14,7 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - [CookieStorage](Blazor.BrowserAPI/BrowserAPIs/CookieStorage/CookieStorage.md)
 - [Dialog](Blazor.BrowserAPI/BrowserAPIs/Dialog/Dialog.md)
 - [Download](Blazor.BrowserAPI/BrowserAPIs/Download/Download.md)
-- [File System](Blazor.BrowserAPI/BrowserAPIs/FileSystem/FileSystem.md)
+- [FileSystem](Blazor.BrowserAPI/BrowserAPIs/FileSystem/FileSystem.md)
 - [GamepadAPI](Blazor.BrowserAPI/BrowserAPIs/GamepadAPI/GamepadAPI.md)
 - [Geolocation](Blazor.BrowserAPI/BrowserAPIs/Geolocation/Geolocation.md)
 - [History](Blazor.BrowserAPI/BrowserAPIs/History/History.md)
@@ -64,11 +64,23 @@ To ensure the download has finished, you can use the [*IModuleManager*](Blazor.B
 
 
 <br></br>
-## Namespace BrowserAPI.Implementation
+## Browser Support
+
+Not all APIs are supported in all Browsers.
+This Library does no extra checks if an API is supported and calling an unsupported API may throw an exception.
+It is your responsibility to check Browser support and handle the results appropriately.
+
+Note:  
+Blazor-server and Blazor-webassembly act different when mapping JS null/undefined to C# value types:
+While Blazor-webassembly just maps to default, Blazor-server throws an exception instead.
+
+
+<br></br>
+## Namespace *BrowserAPI.Implementation*
 
 There exists 2 namespaces in this Library: *BrowserAPI* and *BrowserAPI.Implementation*.
 Members inside the *BrowserAPI.Implementation* namespace should not be used directly and there is no guarantee that the members of a class will be stable.
-However, the class names inside *BrowserAPI.Implementation* will be stable, so using them for service provider registration is fine.
+However, the class names itself will be stable, so using them for service provider registration is fine.
 
 
 <br></br>
