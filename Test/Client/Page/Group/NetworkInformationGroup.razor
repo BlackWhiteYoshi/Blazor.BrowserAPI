@@ -1,0 +1,27 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Network Information</h2>
+    <div>
+        <button data-testid="@BUTTON_GET_ON_LINE_PROPERTY" @onclick="GetOnLine_Property">GetOnLine_Property</button>
+        <button data-testid="@BUTTON_GET_ON_LINE_METHOD" @onclick="GetOnLine_Method">GetOnLine_Method</button>
+
+        <button data-testid="@BUTTON_GET_DOWNLINK_PROPERTY" @onclick="GetDownlink_Property">GetDownlink_Property</button>
+        <button data-testid="@BUTTON_GET_DOWNLINK_METHOD" @onclick="GetDownlink_Method">GetDownlink_Method</button>
+        <button data-testid="@BUTTON_GET_DOWNLINK_MAX_PROPERTY" @onclick="GetDownlinkMax_Property">GetDownlinkMax_Property</button>
+        <button data-testid="@BUTTON_GET_DOWNLINK_MAX_METHOD" @onclick="GetDownlinkMax_Method">GetDownlinkMax_Method</button>
+        <button data-testid="@BUTTON_GET_EFFECTIVE_TYPE_PROPERTY" @onclick="GetEffectiveType_Property">GetEffectiveType_Property</button>
+        <button data-testid="@BUTTON_GET_EFFECTIVE_TYPE_METHOD" @onclick="GetEffectiveType_Method">GetEffectiveType_Method</button>
+        <button data-testid="@BUTTON_GET_TYPE_PROPERTY" @onclick="GetType_Property">GetType_Property</button>
+        <button data-testid="@BUTTON_GET_TYPE_METHOD" @onclick="GetType_Method">GetType_Method</button>
+        <button data-testid="@BUTTON_GET_RTT_PROPERTY" @onclick="GetRTT_Property">GetRTT_Property</button>
+        <button data-testid="@BUTTON_GET_RTT_METHOD" @onclick="GetRTT_Method">GetRTT_Method</button>
+        <button data-testid="@BUTTON_GET_SAVE_DATA_PROPERTY" @onclick="GetSaveData_Property">GetSaveData_Property</button>
+        <button data-testid="@BUTTON_GET_SAVE_DATA_METHOD" @onclick="GetSaveData_Method">GetSaveData_Method</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_ONLINE" @onclick="RegisterOnOnline">RegisterOnOnline</button>
+        <button data-testid="@BUTTON_REGISTER_ON_OFFLINE" @onclick="RegisterOnOffline">RegisterOnOffline</button>
+        <button data-testid="@BUTTON_REGISTER_ON_CHANGE" @onclick="RegisterOnChange">RegisterOnChange</button>
+    </div>
+    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+</div>

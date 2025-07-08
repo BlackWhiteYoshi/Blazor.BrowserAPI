@@ -6504,6 +6504,227 @@
             <param name="bitsPerSecond">The chosen bitrate for the audio and video components of the media. This can be specified instead of the above two properties. If this is specified along with one or the other of the above properties, this will be used for the one that isn't specified.</param>
             <returns></returns>
         </member>
+        <member name="T:BrowserAPI.Implementation.NetworkInformation">
+            <summary>
+            The NetworkInformation interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
+            The NetworkInformation interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NetworkInformation.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            The NetworkInformation interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
+            The NetworkInformation interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NetworkInformation.OnLine">
+            <summary>
+            <para>
+            The onLine property of the Navigator interface returns whether the device is connected to the network, with true meaning online and false meaning offline.
+            The property's value changes after the browser checks its network connection, usually when the user follows links or when a script requests a remote page.
+            For example, the property should return false when users click links soon after they lose internet connection.
+            When its value changes, an online or offline event is fired on the window.
+            </para>
+            <para>
+            Browsers and operating systems leverage different heuristics to determine whether the device is online.
+            In general, connection to LAN is considered online, even though the LAN may not have Internet access.
+            For example, the computer may be running a virtualization software that has virtual ethernet adapters that are always "connected".
+            On Windows, the online status is determined by whether it can reach a Microsoft home server, which may be blocked by firewalls or VPNs, even if the computer has Internet access.
+            Therefore, this property is inherently unreliable, and you should not disable features based on the online status, only provide hints when the user may seem offline.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NetworkInformation.GetOnLine(System.Threading.CancellationToken)">
+            <summary>
+            <para>
+            The onLine property of the Navigator interface returns whether the device is connected to the network, with true meaning online and false meaning offline.
+            The property's value changes after the browser checks its network connection, usually when the user follows links or when a script requests a remote page.
+            For example, the property should return false when users click links soon after they lose internet connection.
+            When its value changes, an online or offline event is fired on the window.
+            </para>
+            <para>
+            Browsers and operating systems leverage different heuristics to determine whether the device is online.
+            In general, connection to LAN is considered online, even though the LAN may not have Internet access.
+            For example, the computer may be running a virtualization software that has virtual ethernet adapters that are always "connected".
+            On Windows, the online status is determined by whether it can reach a Microsoft home server, which may be blocked by firewalls or VPNs, even if the computer has Internet access.
+            Therefore, this property is inherently unreliable, and you should not disable features based on the online status, only provide hints when the user may seem offline.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NetworkInformation.Downlink">
+            <summary>
+            Returns the effective bandwidth estimate in megabits per second, rounded to the nearest multiple of 25 kilobits per seconds.
+            This value is based on recently observed application layer throughput across recently active connections, excluding connections made to a private address space.
+            In the absence of recent bandwidth measurement data, the attribute value is determined by the properties of the underlying connection technology.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NetworkInformation.GetDownlink(System.Threading.CancellationToken)">
+            <summary>
+            Returns the effective bandwidth estimate in megabits per second, rounded to the nearest multiple of 25 kilobits per seconds.
+            This value is based on recently observed application layer throughput across recently active connections, excluding connections made to a private address space.
+            In the absence of recent bandwidth measurement data, the attribute value is determined by the properties of the underlying connection technology.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NetworkInformation.DownlinkMax">
+            <summary>
+            Returns the maximum downlink speed, in megabits per second (Mbps), for the underlying connection technology.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NetworkInformation.GetDownlinkMax(System.Threading.CancellationToken)">
+            <summary>
+            Returns the maximum downlink speed, in megabits per second (Mbps), for the underlying connection technology.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NetworkInformation.EffectiveType">
+            <summary>
+            Returns the effective type of the connection meaning one of 'slow-2g', '2g', '3g', or '4g'.
+            This value is determined using a combination of recently observed round-trip time and downlink values.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NetworkInformation.GetEffectiveType(System.Threading.CancellationToken)">
+            <summary>
+            Returns the effective type of the connection meaning one of 'slow-2g', '2g', '3g', or '4g'.
+            This value is determined using a combination of recently observed round-trip time and downlink values.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NetworkInformation.Type">
+            <summary>
+            Returns the type of connection a device is using to communicate with the network. It will be one of the following values:<br />
+            "bluetooth", "cellular", "ethernet", "none", "wifi", "wimax", "other", "unknown"
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NetworkInformation.GetType(System.Threading.CancellationToken)">
+            <summary>
+            Returns the type of connection a device is using to communicate with the network. It will be one of the following values:<br />
+            "bluetooth", "cellular", "ethernet", "none", "wifi", "wimax", "other", "unknown"
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NetworkInformation.RTT">
+            <summary>
+            Returns the estimated effective round-trip time of the current connection, rounded to the nearest multiple of 25 milliseconds.
+            This value is based on recently observed application-layer RTT measurements across recently active connections.
+            It excludes connections made to a private address space.
+            If no recent measurement data is available, the value is based on the properties of the underlying connection technology.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NetworkInformation.GetRTT(System.Threading.CancellationToken)">
+            <summary>
+            Returns the estimated effective round-trip time of the current connection, rounded to the nearest multiple of 25 milliseconds.
+            This value is based on recently observed application-layer RTT measurements across recently active connections.
+            It excludes connections made to a private address space.
+            If no recent measurement data is available, the value is based on the properties of the underlying connection technology.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NetworkInformation.SaveData">
+            <summary>
+            Returns true if the user has set a reduced data usage option on the user agent.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NetworkInformation.GetSaveData(System.Threading.CancellationToken)">
+            <summary>
+            Returns true if the user has set a reduced data usage option on the user agent.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NetworkInformationBase.Dispose">
+            <summary>
+            Releases the <see cref="T:BrowserAPI.Implementation.NetworkInformationBase.EventTrigger"/> object used to trigger the events.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.NetworkInformationBase.OnOnline">
+            <summary>
+            Fired when the browser has gained access to the network and the value of <i>navigator.onLine</i> has switched to true.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.NetworkInformationBase.OnOffline">
+            <summary>
+            Fired when the browser has lost access to the network and the value of <i>navigator.onLine</i> has switched to false.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.NetworkInformationBase.OnChange">
+            <summary>
+            The event that's fired when connection information changes, and the event is received by the NetworkInformation object.
+            </summary>
+            <remarks>That does not include the property <i>navigator.onLine</i>, for tracking changes of that property use the <see cref="E:BrowserAPI.Implementation.NetworkInformationBase.OnOnline"/>/<see cref="E:BrowserAPI.Implementation.NetworkInformationBase.OnOffline"/> events.</remarks>
+        </member>
+        <member name="T:BrowserAPI.Implementation.NetworkInformationInProcess">
+            <summary>
+            The NetworkInformation interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
+            The NetworkInformation interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NetworkInformationInProcess.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            The NetworkInformation interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
+            The NetworkInformation interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NetworkInformationInProcess.OnLine">
+            <summary>
+            <para>
+            The onLine property of the Navigator interface returns whether the device is connected to the network, with true meaning online and false meaning offline.
+            The property's value changes after the browser checks its network connection, usually when the user follows links or when a script requests a remote page.
+            For example, the property should return false when users click links soon after they lose internet connection.
+            When its value changes, an online or offline event is fired on the window.
+            </para>
+            <para>
+            Browsers and operating systems leverage different heuristics to determine whether the device is online.
+            In general, connection to LAN is considered online, even though the LAN may not have Internet access.
+            For example, the computer may be running a virtualization software that has virtual ethernet adapters that are always "connected".
+            On Windows, the online status is determined by whether it can reach a Microsoft home server, which may be blocked by firewalls or VPNs, even if the computer has Internet access.
+            Therefore, this property is inherently unreliable, and you should not disable features based on the online status, only provide hints when the user may seem offline.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NetworkInformationInProcess.Downlink">
+            <summary>
+            Returns the effective bandwidth estimate in megabits per second, rounded to the nearest multiple of 25 kilobits per seconds.
+            This value is based on recently observed application layer throughput across recently active connections, excluding connections made to a private address space.
+            In the absence of recent bandwidth measurement data, the attribute value is determined by the properties of the underlying connection technology.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NetworkInformationInProcess.DownlinkMax">
+            <summary>
+            Returns the maximum downlink speed, in megabits per second (Mbps), for the underlying connection technology.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NetworkInformationInProcess.EffectiveType">
+            <summary>
+            Returns the effective type of the connection meaning one of 'slow-2g', '2g', '3g', or '4g'.
+            This value is determined using a combination of recently observed round-trip time and downlink values.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NetworkInformationInProcess.Type">
+            <summary>
+            Returns the type of connection a device is using to communicate with the network. It will be one of the following values:<br />
+            "bluetooth", "cellular", "ethernet", "none", "wifi", "wimax", "other", "unknown"
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NetworkInformationInProcess.RTT">
+            <summary>
+            Returns the estimated effective round-trip time of the current connection, rounded to the nearest multiple of 25 milliseconds.
+            This value is based on recently observed application-layer RTT measurements across recently active connections.
+            It excludes connections made to a private address space.
+            If no recent measurement data is available, the value is based on the properties of the underlying connection technology.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NetworkInformationInProcess.SaveData">
+            <summary>
+            Returns true if the user has set a reduced data usage option on the user agent.
+            </summary>
+        </member>
         <member name="T:BrowserAPI.Implementation.SensorAPI">
             <summary>
             The Sensor APIs are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
@@ -7619,11 +7840,6 @@
             <param name="scriptURL">relative file path to the service worker script (e.g. "/sw.js")</param>
             <param name="cancellationToken"></param>
             <returns>true, if service worker is supported, otherwise false</returns>
-        </member>
-        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerBase.DisposeEventTrigger">
-            <summary>
-            Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call this method.
-            </summary>
         </member>
         <member name="E:BrowserAPI.Implementation.ServiceWorkerContainerBase.OnControllerChange">
             <summary>
@@ -15550,6 +15766,236 @@
             <param name="videoBitsPerSecond">The chosen bitrate for the video component of the media.</param>
             <param name="bitsPerSecond">The chosen bitrate for the audio and video components of the media. This can be specified instead of the above two properties. If this is specified along with one or the other of the above properties, this will be used for the one that isn't specified.</param>
             <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.INetworkInformation">
+            <summary>
+            The NetworkInformation interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
+            The NetworkInformation interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INetworkInformation.OnLine">
+            <summary>
+            <para>
+            The onLine property of the Navigator interface returns whether the device is connected to the network, with true meaning online and false meaning offline.
+            The property's value changes after the browser checks its network connection, usually when the user follows links or when a script requests a remote page.
+            For example, the property should return false when users click links soon after they lose internet connection.
+            When its value changes, an online or offline event is fired on the window.
+            </para>
+            <para>
+            Browsers and operating systems leverage different heuristics to determine whether the device is online.
+            In general, connection to LAN is considered online, even though the LAN may not have Internet access.
+            For example, the computer may be running a virtualization software that has virtual ethernet adapters that are always "connected".
+            On Windows, the online status is determined by whether it can reach a Microsoft home server, which may be blocked by firewalls or VPNs, even if the computer has Internet access.
+            Therefore, this property is inherently unreliable, and you should not disable features based on the online status, only provide hints when the user may seem offline.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INetworkInformation.GetOnLine(System.Threading.CancellationToken)">
+            <summary>
+            <para>
+            The onLine property of the Navigator interface returns whether the device is connected to the network, with true meaning online and false meaning offline.
+            The property's value changes after the browser checks its network connection, usually when the user follows links or when a script requests a remote page.
+            For example, the property should return false when users click links soon after they lose internet connection.
+            When its value changes, an online or offline event is fired on the window.
+            </para>
+            <para>
+            Browsers and operating systems leverage different heuristics to determine whether the device is online.
+            In general, connection to LAN is considered online, even though the LAN may not have Internet access.
+            For example, the computer may be running a virtualization software that has virtual ethernet adapters that are always "connected".
+            On Windows, the online status is determined by whether it can reach a Microsoft home server, which may be blocked by firewalls or VPNs, even if the computer has Internet access.
+            Therefore, this property is inherently unreliable, and you should not disable features based on the online status, only provide hints when the user may seem offline.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INetworkInformation.Downlink">
+            <summary>
+            Returns the effective bandwidth estimate in megabits per second, rounded to the nearest multiple of 25 kilobits per seconds.
+            This value is based on recently observed application layer throughput across recently active connections, excluding connections made to a private address space.
+            In the absence of recent bandwidth measurement data, the attribute value is determined by the properties of the underlying connection technology.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INetworkInformation.GetDownlink(System.Threading.CancellationToken)">
+            <summary>
+            Returns the effective bandwidth estimate in megabits per second, rounded to the nearest multiple of 25 kilobits per seconds.
+            This value is based on recently observed application layer throughput across recently active connections, excluding connections made to a private address space.
+            In the absence of recent bandwidth measurement data, the attribute value is determined by the properties of the underlying connection technology.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INetworkInformation.DownlinkMax">
+            <summary>
+            Returns the maximum downlink speed, in megabits per second (Mbps), for the underlying connection technology.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INetworkInformation.GetDownlinkMax(System.Threading.CancellationToken)">
+            <summary>
+            Returns the maximum downlink speed, in megabits per second (Mbps), for the underlying connection technology.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INetworkInformation.EffectiveType">
+            <summary>
+            Returns the effective type of the connection meaning one of 'slow-2g', '2g', '3g', or '4g'.
+            This value is determined using a combination of recently observed round-trip time and downlink values.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INetworkInformation.GetEffectiveType(System.Threading.CancellationToken)">
+            <summary>
+            Returns the effective type of the connection meaning one of 'slow-2g', '2g', '3g', or '4g'.
+            This value is determined using a combination of recently observed round-trip time and downlink values.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INetworkInformation.Type">
+            <summary>
+            Returns the type of connection a device is using to communicate with the network. It will be one of the following values:<br />
+            "bluetooth", "cellular", "ethernet", "none", "wifi", "wimax", "other", "unknown"
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INetworkInformation.GetType(System.Threading.CancellationToken)">
+            <summary>
+            Returns the type of connection a device is using to communicate with the network. It will be one of the following values:<br />
+            "bluetooth", "cellular", "ethernet", "none", "wifi", "wimax", "other", "unknown"
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INetworkInformation.RTT">
+            <summary>
+            Returns the estimated effective round-trip time of the current connection, rounded to the nearest multiple of 25 milliseconds.
+            This value is based on recently observed application-layer RTT measurements across recently active connections.
+            It excludes connections made to a private address space.
+            If no recent measurement data is available, the value is based on the properties of the underlying connection technology.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INetworkInformation.GetRTT(System.Threading.CancellationToken)">
+            <summary>
+            Returns the estimated effective round-trip time of the current connection, rounded to the nearest multiple of 25 milliseconds.
+            This value is based on recently observed application-layer RTT measurements across recently active connections.
+            It excludes connections made to a private address space.
+            If no recent measurement data is available, the value is based on the properties of the underlying connection technology.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INetworkInformation.SaveData">
+            <summary>
+            Returns true if the user has set a reduced data usage option on the user agent.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INetworkInformation.GetSaveData(System.Threading.CancellationToken)">
+            <summary>
+            Returns true if the user has set a reduced data usage option on the user agent.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.INetworkInformation.Dispose">
+            <summary>
+            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.INetworkInformation.OnOnline">
+            <summary>
+            Fired when the browser has gained access to the network and the value of <i>navigator.onLine</i> has switched to true.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.INetworkInformation.OnOffline">
+            <summary>
+            Fired when the browser has lost access to the network and the value of <i>navigator.onLine</i> has switched to false.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.INetworkInformation.OnChange">
+            <summary>
+            The event that's fired when connection information changes, and the event is received by the NetworkInformation object.
+            </summary>
+            <remarks>That does not include the property <i>navigator.onLine</i>, for tracking changes of that property use the <see cref="E:BrowserAPI.INetworkInformation.OnOnline"/>/<see cref="E:BrowserAPI.INetworkInformation.OnOffline"/> events.</remarks>
+        </member>
+        <member name="T:BrowserAPI.INetworkInformationInProcess">
+            <summary>
+            The NetworkInformation interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
+            The NetworkInformation interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INetworkInformationInProcess.Dispose">
+            <summary>
+            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.INetworkInformationInProcess.OnOnline">
+            <summary>
+            Fired when the browser has gained access to the network and the value of <i>navigator.onLine</i> has switched to true.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.INetworkInformationInProcess.OnOffline">
+            <summary>
+            Fired when the browser has lost access to the network and the value of <i>navigator.onLine</i> has switched to false.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.INetworkInformationInProcess.OnChange">
+            <summary>
+            The event that's fired when connection information changes, and the event is received by the NetworkInformation object.
+            </summary>
+            <remarks>That does not include the property <i>navigator.onLine</i>, for tracking changes of that property use the <see cref="E:BrowserAPI.INetworkInformationInProcess.OnOnline"/>/<see cref="E:BrowserAPI.INetworkInformationInProcess.OnOffline"/> events.</remarks>
+        </member>
+        <member name="P:BrowserAPI.INetworkInformationInProcess.OnLine">
+            <summary>
+            <para>
+            The onLine property of the Navigator interface returns whether the device is connected to the network, with true meaning online and false meaning offline.
+            The property's value changes after the browser checks its network connection, usually when the user follows links or when a script requests a remote page.
+            For example, the property should return false when users click links soon after they lose internet connection.
+            When its value changes, an online or offline event is fired on the window.
+            </para>
+            <para>
+            Browsers and operating systems leverage different heuristics to determine whether the device is online.
+            In general, connection to LAN is considered online, even though the LAN may not have Internet access.
+            For example, the computer may be running a virtualization software that has virtual ethernet adapters that are always "connected".
+            On Windows, the online status is determined by whether it can reach a Microsoft home server, which may be blocked by firewalls or VPNs, even if the computer has Internet access.
+            Therefore, this property is inherently unreliable, and you should not disable features based on the online status, only provide hints when the user may seem offline.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INetworkInformationInProcess.Downlink">
+            <summary>
+            Returns the effective bandwidth estimate in megabits per second, rounded to the nearest multiple of 25 kilobits per seconds.
+            This value is based on recently observed application layer throughput across recently active connections, excluding connections made to a private address space.
+            In the absence of recent bandwidth measurement data, the attribute value is determined by the properties of the underlying connection technology.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INetworkInformationInProcess.DownlinkMax">
+            <summary>
+            Returns the maximum downlink speed, in megabits per second (Mbps), for the underlying connection technology.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INetworkInformationInProcess.EffectiveType">
+            <summary>
+            Returns the effective type of the connection meaning one of 'slow-2g', '2g', '3g', or '4g'.
+            This value is determined using a combination of recently observed round-trip time and downlink values.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INetworkInformationInProcess.Type">
+            <summary>
+            Returns the type of connection a device is using to communicate with the network. It will be one of the following values:<br />
+            "bluetooth", "cellular", "ethernet", "none", "wifi", "wimax", "other", "unknown"
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INetworkInformationInProcess.RTT">
+            <summary>
+            Returns the estimated effective round-trip time of the current connection, rounded to the nearest multiple of 25 milliseconds.
+            This value is based on recently observed application-layer RTT measurements across recently active connections.
+            It excludes connections made to a private address space.
+            If no recent measurement data is available, the value is based on the properties of the underlying connection technology.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INetworkInformationInProcess.SaveData">
+            <summary>
+            Returns true if the user has set a reduced data usage option on the user agent.
+            </summary>
         </member>
         <member name="T:BrowserAPI.ISensorAPI">
             <summary>

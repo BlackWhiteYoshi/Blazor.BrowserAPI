@@ -41,6 +41,8 @@ else {
         @if (isInProcess) { <LocalStorageInProcessGroup /> }
         <MediaDevicesGroup />
         @if (isInProcess) { <MediaDevicesInProcessGroup /> }
+        <NetworkInformationGroup />
+        @if (isInProcess) { <NetworkInformationInProcessGroup /> }
         <SensorAPIGroup />
         @if (isInProcess) { <SensorAPIInProcessGroup /> }
         <ServiceWorkerGroup />

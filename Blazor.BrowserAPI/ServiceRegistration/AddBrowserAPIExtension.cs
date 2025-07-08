@@ -41,6 +41,8 @@ public static class AddBrowserAPIExtension {
             .AddScoped<ILocalStorageInProcess, Implementation.LocalStorageInProcess>()
             .AddScoped<IMediaDevices, Implementation.MediaDevices>()
             .AddScoped<IMediaDevicesInProcess, Implementation.MediaDevicesInProcess>()
+            .AddScoped<INetworkInformation, Implementation.NetworkInformation>()
+            .AddScoped<INetworkInformationInProcess, Implementation.NetworkInformationInProcess>()
             .AddScoped<ISensorAPI, Implementation.SensorAPI>()
             .AddScoped<ISensorAPIInProcess, Implementation.SensorAPIInProcess>()
             .AddScoped<IServiceWorkerContainer, Implementation.ServiceWorkerContainer>()

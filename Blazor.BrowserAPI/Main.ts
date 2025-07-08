@@ -40,6 +40,9 @@ export { LocalStorageAPI };
 import { MediaDevicesAPI } from "./BrowserAPIs/MediaDevices/MediaDevices";
 export { MediaDevicesAPI };
 
+import { NetworkInformationAPI } from "./BrowserAPIs/NetworkInformation/NetworkInformation";
+export { NetworkInformationAPI };
+
 // SensorAPI
 import { AbsoluteOrientationSensorAPI } from "./BrowserAPIs/SensorAPI/Sensor/AbsoluteOrientationSensor/AbsoluteOrientationSensor";
 import { AccelerometerAPI } from "./BrowserAPIs/SensorAPI/Sensor/Accelerometer/Accelerometer";

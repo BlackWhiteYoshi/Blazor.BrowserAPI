@@ -1,0 +1,20 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Network Information InProcess</h2>
+    <div>
+        <button data-testid="@BUTTON_GET_ON_LINE" @onclick="GetOnLine">GetOnLine</button>
+
+        <button data-testid="@BUTTON_GET_DOWNLINK" @onclick="GetDownlink">GetDownlink</button>
+        <button data-testid="@BUTTON_GET_DOWNLINK_MAX" @onclick="GetDownlinkMax">GetDownlinkMax</button>
+        <button data-testid="@BUTTON_GET_EFFECTIVE_TYPE" @onclick="GetEffectiveType">GetEffectiveType</button>
+        <button data-testid="@BUTTON_GET_TYPE" @onclick="GetType">GetType</button>
+        <button data-testid="@BUTTON_GET_RTT" @onclick="GetRTT">GetRTT</button>
+        <button data-testid="@BUTTON_GET_SAVE_DATA" @onclick="GetSaveData">GetSaveData</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_ONLINE" @onclick="RegisterOnOnline">RegisterOnOnline</button>
+        <button data-testid="@BUTTON_REGISTER_ON_OFFLINE" @onclick="RegisterOnOffline">RegisterOnOffline</button>
+        <button data-testid="@BUTTON_REGISTER_ON_CHANGE" @onclick="RegisterOnChange">RegisterOnChange</button>
+    </div>
+    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+</div>
