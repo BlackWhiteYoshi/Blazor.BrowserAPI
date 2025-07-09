@@ -45,8 +45,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Condition="'$(TargetFramework)'=='net8.0'" Include="Microsoft.AspNetCore.Components.Web" Version="8.0.17" />
-    <PackageReference Condition="'$(TargetFramework)'=='net9.0'" Include="Microsoft.AspNetCore.Components.Web" Version="9.0.6" />
+    <PackageReference Condition="'$(TargetFramework)'=='net8.0'" Include="Microsoft.AspNetCore.Components.Web" Version="8.0.18" />
+    <PackageReference Condition="'$(TargetFramework)'=='net9.0'" Include="Microsoft.AspNetCore.Components.Web" Version="9.0.7" />
     <PackageReference Include="AutoInterface" Version="2.4.0" PrivateAssets="all" />
   </ItemGroup>
 
