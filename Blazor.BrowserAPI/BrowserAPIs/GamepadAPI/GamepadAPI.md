@@ -9,54 +9,55 @@ and to access other information about the gamepads themselves, and what buttons 
 ## Example
 
 ```csharp
-public sealed partial class ExampleComponent : ComponentBase, IDisposable {
+public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
     [Inject]
-    public required IGamepadAPIInProcess GamepadAPI { private get; init; }
+    public required IGamepadAPI GamepadAPI { private get; init; }
 
-    private IGamepadInProcess? gamepad = null;
+    private IGamepad? gamepad = null;
 
 
-    protected override void OnInitialized() {
-        IGamepadInProcess[] gamepads = GamepadAPI.GetGamepads();
+    protected override async Task OnInitializedAsync() {
+        IGamepad[] gamepads = await GamepadAPI.GetGamepads();
         if (gamepads.Length > 0) {
             // this example only uses one gamepad
             gamepad = gamepads[0];
             // dispose all other gamepads, if any
             for (int i = 1; i < gamepads.Length; i++)
-                gamepads[i].Dispose();
+                await gamepads[i].DisposeAsync();
         }
 
         GamepadAPI.OnGamepadConnected += OnGamepadConnected;
         GamepadAPI.OnGamepadDisconnected += OnGamepadDisconnected;
     }
 
-    public void OnGamepadConnected(IGamepadInProcess gamepad) {
+    public void OnGamepadConnected(IGamepad gamepad) {
         if (this.gamepad is null)
             this.gamepad = gamepad;
         else
-            gamepad.Dispose();
+            _ = gamepad.DisposeAsync().Preserve();
     }
 
-    public void OnGamepadDisconnected(IGamepadInProcess gamepad) {
-        gamepad.Dispose();
+    public void OnGamepadDisconnected(IGamepad gamepad) {
+        _ = RunAsync().Preserve();
+        async ValueTask RunAsync() {
+            await gamepad.DisposeAsync();
 
-        if (this.gamepad is not null && !this.gamepad.Connected) {
-            this.gamepad.Dispose();
-            this.gamepad = null;
+            if (this.gamepad is not null && await this.gamepad.Connected is false) {
+                await this.gamepad.DisposeAsync();
+                this.gamepad = null;
+            }
         }
     }
 
-    public void Dispose() {
-        gamepad?.Dispose();
-    }
+    public ValueTask DisposeAsync() => gamepad?.DisposeAsync() ?? ValueTask.CompletedTask;
 
-    
-    private void ReadGamepadInput() {
+
+    private async Task ReadGamepadInput() {
         if (gamepad is null)
             return;
 
-        double[] axes = gamepad.Axes;
-        GamepadButton[] buttons = gamepad.Buttons;
+        double[] axes = await gamepad.Axes;
+        GamepadButton[] buttons = await gamepad.Buttons;
 
         Console.WriteLine($"axes: {string.Join(", ", axes)}");
         Console.WriteLine($"buttons: {string.Join(", ", buttons)}");

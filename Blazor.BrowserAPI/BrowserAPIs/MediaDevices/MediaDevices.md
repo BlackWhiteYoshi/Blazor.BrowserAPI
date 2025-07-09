@@ -42,41 +42,46 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
     private readonly List<byte> videoData = [];
     private void SaveChunk(byte[] data) => videoData.AddRange(data);
 
+    private static void OutputToConsole(JsonElement error) => Console.WriteLine(error);
+
+
     private async Task StartRecording() {
         mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
-        
+
         videoData.Clear();
         mediaRecorder = await mediaStream.CreateRecorder(mimeType: "video/mp4");
-        mediaRecorder.OnError += Console.WriteLine;
+        mediaRecorder.OnError += OutputToConsole;
         mediaRecorder.OnDataavailable += SaveChunk;
 
         await mediaRecorder.Start(100);
 
-
         // playback the stream
-        if (video is not null)
+        if (video is not null) {
             await video.SetSrcObject(mediaStream);
+            await video.Play();
+        }
     }
 
     private async Task StopRecording() {
-        if (mediaRecorder is null || mediaStream is null)
+        if (this.mediaRecorder is null || this.mediaStream is null)
             return;
 
+        IMediaStream mediaStream = this.mediaStream;
+        IMediaRecorder mediaRecorder = this.mediaRecorder;
+        this.mediaStream = null;
+        this.mediaRecorder = null;
+
         await mediaRecorder.Stop();
-        await Task.Delay(100); // wait a little bit until last chunk is saved
 
-        mediaRecorder.OnDataavailable -= SaveChunk;
-        mediaRecorder.OnError -= Console.WriteLine;
-
-        await mediaRecorder.DisposeAsync();
-        await mediaStream.DisposeAsync();
-        mediaRecorder = null;
-        mediaStream = null;
-
-
-        // stop playback of the stream
+        // stop playback the stream
         if (video is not null)
             await video.SetSrcObject(null);
+
+        await Task.Delay(5000); // delay cleanup to make sure that the last chunk is saved
+        mediaRecorder.OnDataavailable -= SaveChunk;
+        mediaRecorder.OnError -= OutputToConsole;
+        await mediaRecorder.DisposeAsync();
+        await mediaStream.DisposeAsync();
     }
 
 
