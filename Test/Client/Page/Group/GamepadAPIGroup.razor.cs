@@ -3,8 +3,8 @@
 namespace BrowserAPI.Test.Client;
 
 public sealed partial class GamepadAPIGroup : ComponentBase {
-    public const string GAMEPAD_CONNECTED = "gamepad connected";
-    public const string GAMEPAD_DISCONNECTED = "gamepad disconnected";
+    public const string TEST_GAMEPAD_CONNECTED_EVENT = "gamepad connected";
+    public const string TEST_GAMEPAD_DISCONNECTED_EVENT = "gamepad disconnected";
 
 
     [Inject]
@@ -26,7 +26,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_GAMEPAD_CONNECTED = "gamepad-gamepad-connected-event";
     private void RegisterOnGamepadConnected() {
         GamepadAPI.OnGamepadConnected += (IGamepad gamepad) => {
-            labelOutput = GAMEPAD_CONNECTED;
+            labelOutput = TEST_GAMEPAD_CONNECTED_EVENT;
             StateHasChanged();
 
             _ = gamepad.DisposeAsync().Preserve();
@@ -36,7 +36,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_GAMEPAD_DISCONNECTED = "gamepad-gamepad-disconnected-event";
     private void RegisterOnGamepadDisconnected() {
         GamepadAPI.OnGamepadDisconnected += (IGamepad gamepad) => {
-            labelOutput = GAMEPAD_DISCONNECTED;
+            labelOutput = TEST_GAMEPAD_DISCONNECTED_EVENT;
             StateHasChanged();
 
             _ = gamepad.DisposeAsync().Preserve();
@@ -78,7 +78,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         GamepadButton[] buttons = await gamepad.Buttons;
-        labelOutput = $"({buttons.Length}): {string.Join(", ", buttons)}";
+        labelOutput = $"({buttons.Length}): [{string.Join(", ", buttons)}]";
 
         await gamepads.DisposeAsync();
     }
@@ -91,7 +91,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         GamepadButton[] buttons = await gamepad.GetButtons(default);
-        labelOutput = $"({buttons.Length}): {string.Join(", ", buttons)}";
+        labelOutput = $"({buttons.Length}): [{string.Join(", ", buttons)}]";
 
         await gamepads.DisposeAsync();
     }

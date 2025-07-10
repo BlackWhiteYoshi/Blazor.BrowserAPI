@@ -50,7 +50,7 @@ export class GamepadAPI {
     playVibrationActuatorEffect(type: string, duration: number, startDelay: number, strongMagnitude: number, weakMagnitude: number, leftTrigger: number, rightTrigger: number): Promise<"complete" | "preempted" | "none"> {
         const vibration = this.#gamepad.vibrationActuator;
         if (!vibration)
-            return new Promise(() => "none");
+            return new Promise((resolve) => resolve("none"));
 
         return vibration.playEffect(<"dual-rumble">type, <GamepadEffectParameters>{ duration, startDelay, strongMagnitude, weakMagnitude, leftTrigger, rightTrigger });
     }
@@ -58,7 +58,7 @@ export class GamepadAPI {
     resetVibrationActuator(): Promise<"complete" | "preempted" | "none"> {
         const vibration = this.#gamepad.vibrationActuator;
         if (!vibration)
-            return new Promise(() => "none");
+            return new Promise((resolve) => resolve("none"));
 
         return vibration.reset();
     }
