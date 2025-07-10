@@ -32,6 +32,8 @@
 [Scoped<BrowserAPI.IMediaDevicesInProcess, BrowserAPI.Implementation.MediaDevicesInProcess>]
 [Scoped<BrowserAPI.INetworkInformation, BrowserAPI.Implementation.NetworkInformation>]
 [Scoped<BrowserAPI.INetworkInformationInProcess, BrowserAPI.Implementation.NetworkInformationInProcess>]
+[Scoped<BrowserAPI.IScreen, BrowserAPI.Implementation.Screen>]
+[Scoped<BrowserAPI.IScreenInProcess, BrowserAPI.Implementation.ScreenInProcess>]
 [Scoped<BrowserAPI.ISensorAPI, BrowserAPI.Implementation.SensorAPI>]
 [Scoped<BrowserAPI.ISensorAPIInProcess, BrowserAPI.Implementation.SensorAPIInProcess>]
 [Scoped<BrowserAPI.IServiceWorkerContainer, BrowserAPI.Implementation.ServiceWorkerContainer>]

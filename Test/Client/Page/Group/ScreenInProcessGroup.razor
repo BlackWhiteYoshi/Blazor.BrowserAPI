@@ -1,0 +1,23 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Screen InProcess</h2>
+    <div>
+        <button data-testid="@BUTTON_GET_WIDTH" @onclick="GetWidth">GetWidth</button>
+        <button data-testid="@BUTTON_GET_HEIGHT" @onclick="GetHeight">GetHeight</button>
+        <button data-testid="@BUTTON_GET_AVAIL_WIDTH" @onclick="GetAvailWidth">GetAvailWidth</button>
+        <button data-testid="@BUTTON_GET_AVAIL_HEIGHT" @onclick="GetAvailHeight">GetAvailHeight</button>
+        <button data-testid="@BUTTON_GET_COLOR_DEPTH" @onclick="GetColorDepth">GetColorDepth</button>
+        <button data-testid="@BUTTON_GET_PIXEL_DEPTH" @onclick="GetPixelDepth">GetPixelDepth</button>
+        <button data-testid="@BUTTON_GET_IS_EXTENDED" @onclick="GetIsExtended">GetIsExtended</button>
+
+        <button data-testid="@BUTTON_GET_ORIENTATION_TYPE" @onclick="GetOrientationType">GetOrientationType</button>
+        <button data-testid="@BUTTON_GET_ORIENTATION_ANGLE" @onclick="GetOrientationAngle">GetOrientationAngle</button>
+        <button data-testid="@BUTTON_LOCK_ORIENTATION" @onclick="LockOrientation">LockOrientation</button>
+        <button data-testid="@BUTTON_UNLOCK_ORIENTATION" @onclick="UnlockOrientation">UnlockOrientation</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_CHANGE" @onclick="RegisterOnChange">RegisterOnChange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ORIENTATION_CHANGE" @onclick="RegisterOnOrientationChange">RegisterOnOrientationChange</button>
+    </div>
+    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+</div>
