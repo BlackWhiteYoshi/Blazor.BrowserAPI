@@ -5,8 +5,8 @@ namespace BrowserAPI.UnitTest;
 
 [ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class GeolocationTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
-    public override async Task InitializeAsync() {
-        await base.InitializeAsync();
+    public override async Task SetUp() {
+        await base.SetUp();
         await BrowserContext.GrantPermissionsAsync(["geolocation"]);
     }
 

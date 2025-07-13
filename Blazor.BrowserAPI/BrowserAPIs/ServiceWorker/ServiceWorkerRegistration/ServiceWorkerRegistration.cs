@@ -23,84 +23,89 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
 
 
     /// <summary>
-    /// The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated. This property is initially set to null.
+    /// The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated.
+    /// This property is initially set to null.
     /// </summary>
     public ValueTask<IServiceWorker?> Active => GetActive(default);
 
     /// <summary>
-    /// The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated. This property is initially set to null.
+    /// The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated.
+    /// This property is initially set to null.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IServiceWorker?> GetActive(CancellationToken cancellationToken) {
-        try {
-            IJSObjectReference serviceWorker = await serviceWorkerRegistrationJS.InvokeTrySync<IJSObjectReference>("active", cancellationToken);
+        IJSObjectReference?[] singleReference = await serviceWorkerRegistrationJS.InvokeTrySync<IJSObjectReference?[]>("getActive", cancellationToken);
+        if (singleReference[0] is IJSObjectReference serviceWorker)
             return new ServiceWorker(serviceWorker);
-        }
-        catch (JSException) {
+        else
             return null;
-        }
     }
 
 
     /// <summary>
-    /// The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing. This property is initially set to null.
+    /// The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing.
+    /// This property is initially set to null.
     /// </summary>
     public ValueTask<IServiceWorker?> Installing => GetInstalling(default);
 
     /// <summary>
-    /// The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing. This property is initially set to null.
+    /// The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing.
+    /// This property is initially set to null.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IServiceWorker?> GetInstalling(CancellationToken cancellationToken) {
-        try {
-            IJSObjectReference serviceWorker = await serviceWorkerRegistrationJS.InvokeTrySync<IJSObjectReference>("installing", cancellationToken);
+        IJSObjectReference?[] singleReference = await serviceWorkerRegistrationJS.InvokeTrySync<IJSObjectReference?[]>("getInstalling", cancellationToken);
+        if (singleReference[0] is IJSObjectReference serviceWorker)
             return new ServiceWorker(serviceWorker);
-        }
-        catch (JSException) {
+        else
             return null;
-        }
     }
 
 
     /// <summary>
-    /// The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed. This property is initially set to null.
+    /// The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed.
+    /// This property is initially set to null.
     /// </summary>
     public ValueTask<IServiceWorker?> Waiting => GetWaiting(default);
 
     /// <summary>
-    /// The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed. This property is initially set to null.
+    /// The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed.
+    /// This property is initially set to null.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IServiceWorker?> GetWaiting(CancellationToken cancellationToken) {
-        try {
-            IJSObjectReference serviceWorker = await serviceWorkerRegistrationJS.InvokeTrySync<IJSObjectReference>("waiting", cancellationToken);
+        IJSObjectReference?[] singleReference = await serviceWorkerRegistrationJS.InvokeTrySync<IJSObjectReference?[]>("getWaiting", cancellationToken);
+        if (singleReference[0] is IJSObjectReference serviceWorker)
             return new ServiceWorker(serviceWorker);
-        }
-        catch (JSException) {
+        else
             return null;
-        }
     }
 
 
 
     /// <summary>
-    /// The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration. The service worker must be on the same origin as the document that registers the ServiceWorker.
+    /// The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration.
+    /// The service worker must be on the same origin as the document that registers the ServiceWorker.
     /// </summary>
     public ValueTask<string> Scope => GetScope(default);
 
     /// <summary>
-    /// The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration. The service worker must be on the same origin as the document that registers the ServiceWorker.
+    /// The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration.
+    /// The service worker must be on the same origin as the document that registers the ServiceWorker.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetScope(CancellationToken cancellationToken) => serviceWorkerRegistrationJS.InvokeTrySync<string>("scope", cancellationToken);
+    public ValueTask<string> GetScope(CancellationToken cancellationToken) => serviceWorkerRegistrationJS.InvokeTrySync<string>("getScope", cancellationToken);
 
 
     /// <summary>
-    /// <para>The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register. Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.</para>
+    /// <para>
+    /// The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register.
+    /// Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.
+    /// </para>
     /// <para>
     /// Returns one of the following values:<br />
     /// - <b>imports</b>: meaning the HTTP cache is not consulted for update of the service worker, but is consulted for importScripts.<br />
@@ -111,7 +116,10 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
     public ValueTask<string> UpdateViaCache => GetUpdateViaCache(default);
 
     /// <summary>
-    /// <para>The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register. Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.</para>
+    /// <para>
+    /// The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register.
+    /// Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.
+    /// </para>
     /// <para>
     /// Returns one of the following values:<br />
     /// - <b>imports</b>: meaning the HTTP cache is not consulted for update of the service worker, but is consulted for importScripts.<br />
@@ -121,7 +129,7 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetUpdateViaCache(CancellationToken cancellationToken) => serviceWorkerRegistrationJS.InvokeTrySync<string>("updateViaCache", cancellationToken);
+    public ValueTask<string> GetUpdateViaCache(CancellationToken cancellationToken) => serviceWorkerRegistrationJS.InvokeTrySync<string>("getUpdateViaCache", cancellationToken);
 
 
 
@@ -133,7 +141,7 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IServiceWorkerRegistration> Update(CancellationToken cancellationToken = default) {
-        IJSObjectReference serviceWorkerRegistration = await UpdateBase(cancellationToken);
+        IJSObjectReference serviceWorkerRegistration = await serviceWorkerRegistrationJS.InvokeAsync<IJSObjectReference>("update", cancellationToken);
         return new ServiceWorkerRegistration(serviceWorkerRegistration);
     }
 }

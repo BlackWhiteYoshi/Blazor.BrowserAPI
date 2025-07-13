@@ -7,9 +7,9 @@ export class GyroscopeAPI extends SensorAPI {
         super(gyroscope);
     }
 
-    static create(frequency: number, referenceFrame: "device" | "screen"): GyroscopeAPI | null {
+    static create(frequency: number, referenceFrame: "device" | "screen"): [GyroscopeAPI] | [null] {
         if (!("Gyroscope" in window))
-            return null;
+            return [null];
 
         let options: MotionSensorOptions;
         if (frequency > 0)
@@ -17,7 +17,7 @@ export class GyroscopeAPI extends SensorAPI {
         else
             options = { referenceFrame };
 
-        return new GyroscopeAPI(new Gyroscope(options));
+        return [DotNet.createJSObjectReference(new GyroscopeAPI(new Gyroscope(options)))];
     }
 
 

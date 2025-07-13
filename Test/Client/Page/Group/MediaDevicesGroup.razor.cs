@@ -6,6 +6,10 @@ namespace BrowserAPI.Test.Client;
 
 public sealed partial class MediaDevicesGroup : ComponentBase {
     public const string TEST_MIME_TYPE = "video/mp4";
+    public const string TEST_EVENT_ON_START = "started";
+    public const string TEST_EVENT_ON_STOP = "stopped";
+    public const string TEST_EVENT_ON_RESUME = "resumed";
+    public const string TEST_EVENT_ON_PAUSE = "paused";
 
 
     [Inject]
@@ -51,6 +55,7 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
     public const string BUTTON_GET_USER_MEDIA = "media-devices-get-user-media";
     private async Task GetUserMedia() {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
+        labelOutput = (mediaStream is not null).ToString();
     }
 
     public const string BUTTON_GET_USER_MEDIA_WITH_CONSTRAINT = "media-devices-get-user-media-with-constraint";
@@ -63,12 +68,14 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
             FacingMode = ConstrainDOMString.Exact("user")
         };
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: videoConstraint);
+        labelOutput = (mediaStream is not null).ToString();
     }
 
 
     public const string BUTTON_GET_DISPLAY_MEDIA = "media-devices-get-display-media";
     private async Task GetDisplayMedia() {
         await using IMediaStream mediaStream = await MediaDevices.GetDisplayMedia(audio: true, video: true);
+        labelOutput = (mediaStream is not null).ToString();
     }
 
     public const string BUTTON_GET_DISPLAY_MEDIA_WITH_CONSTRAINT = "media-devices-get-display-media-with-constraint";
@@ -79,6 +86,7 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
             Height = ConstrainULong.Ideal(200)
         };
         await using IMediaStream mediaStream = await MediaDevices.GetDisplayMedia(audio: true, video: videoConstraint);
+        labelOutput = (mediaStream is not null).ToString();
     }
 
 
@@ -289,8 +297,8 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
     // Media Recorder Events
 
     public const string BUTTON_REGISTER_ON_DATAAVAILABLE = "media-recorder-dataavailable-event";
-    private async Task RegisterOnDataavailable() {
-        await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
+    private async Task RegisterOnDataAvailable() {
+        IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
         IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 
         mediaRecorder.OnDataavailable += OnDataavailable;
@@ -303,13 +311,14 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
             labelOutput = data.Length.ToString();
             StateHasChanged();
             mediaRecorder.OnDataavailable -= OnDataavailable;
+            _ = mediaStream.DisposeAsync().Preserve();
             _ = mediaRecorder.DisposeAsync().Preserve();
         }
     }
 
     public const string BUTTON_REGISTER_ON_ERROR = "media-recorder-error-event";
     private async Task RegisterOnError() {
-        await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
+        IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
         IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 
         mediaRecorder.OnError += OnError;
@@ -319,13 +328,14 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
             labelOutput = error.ToString();
             StateHasChanged();
             mediaRecorder.OnError -= OnError;
+            _ = mediaStream.DisposeAsync().Preserve();
             _ = mediaRecorder.DisposeAsync().Preserve();
         }
     }
 
     public const string BUTTON_REGISTER_ON_START = "media-recorder-start-event";
     private async Task RegisterOnStart() {
-        await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
+        IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
         IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 
         mediaRecorder.OnStart += OnStart;
@@ -334,16 +344,17 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
 
 
         void OnStart() {
-            labelOutput = "started";
+            labelOutput = TEST_EVENT_ON_START;
             StateHasChanged();
             mediaRecorder.OnStart -= OnStart;
+            _ = mediaStream.DisposeAsync().Preserve();
             _ = mediaRecorder.DisposeAsync().Preserve();
         }
     }
 
     public const string BUTTON_REGISTER_ON_STOP = "media-recorder-stop-event";
     private async Task RegisterOnStop() {
-        await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
+        IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
         IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 
         mediaRecorder.OnStop += OnStop;
@@ -352,16 +363,17 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
 
 
         void OnStop() {
-            labelOutput = "stopped";
+            labelOutput = TEST_EVENT_ON_STOP;
             StateHasChanged();
             mediaRecorder.OnStop -= OnStop;
+            _ = mediaStream.DisposeAsync().Preserve();
             _ = mediaRecorder.DisposeAsync().Preserve();
         }
     }
 
     public const string BUTTON_REGISTER_ON_RESUME = "media-recorder-resume-event";
     private async Task RegisterOnResume() {
-        await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
+        IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
         IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 
         mediaRecorder.OnResume += OnResume;
@@ -372,16 +384,17 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
 
 
         void OnResume() {
-            labelOutput = "resumed";
+            labelOutput = TEST_EVENT_ON_RESUME;
             StateHasChanged();
             mediaRecorder.OnResume -= OnResume;
+            _ = mediaStream.DisposeAsync().Preserve();
             _ = mediaRecorder.DisposeAsync().Preserve();
         }
     }
 
     public const string BUTTON_REGISTER_ON_PAUSE = "media-recorder-pause-event";
     private async Task RegisterOnPause() {
-        await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
+        IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
         IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 
         mediaRecorder.OnPause += OnPause;
@@ -391,9 +404,10 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
 
 
         void OnPause() {
-            labelOutput = "paused";
+            labelOutput = TEST_EVENT_ON_PAUSE;
             StateHasChanged();
             mediaRecorder.OnPause -= OnPause;
+            _ = mediaStream.DisposeAsync().Preserve();
             _ = mediaRecorder.DisposeAsync().Preserve();
         }
     }

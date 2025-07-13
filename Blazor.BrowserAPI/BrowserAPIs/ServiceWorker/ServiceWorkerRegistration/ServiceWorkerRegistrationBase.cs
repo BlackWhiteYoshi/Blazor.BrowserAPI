@@ -22,8 +22,6 @@ public abstract class ServiceWorkerRegistrationBase(IJSObjectReference serviceWo
     /// <returns>false if no registration was found, otherwise true (irrespective of whether unregistration happened or not)</returns>
     public ValueTask<bool> Unregister(CancellationToken cancellationToken = default) => serviceWorkerRegistrationJS.InvokeAsync<bool>("unregister", cancellationToken);
 
-    private protected ValueTask<IJSObjectReference> UpdateBase(CancellationToken cancellationToken = default) => serviceWorkerRegistrationJS.InvokeAsync<IJSObjectReference>("update", cancellationToken);
-
 
     #region Events
 

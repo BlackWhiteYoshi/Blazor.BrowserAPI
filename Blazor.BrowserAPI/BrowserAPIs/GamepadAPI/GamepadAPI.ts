@@ -1,13 +1,15 @@
 import { GamepadAPI } from "./Gamepad/Gamepad";
 
 export class GamepadInterfaceAPI {
-    static getGamepads(): GamepadAPI[] {
+    static getGamepads(): (Gamepad | null)[] {
         const gamepads = <(Gamepad | null)[]>navigator.getGamepads();
 
-        const result: GamepadAPI[] = [];
-        for (const gamepad of gamepads)
-            if (gamepad)
-                result.push(DotNet.createJSObjectReference(new GamepadAPI(gamepad)));
+        const result: (Gamepad | null)[] = new Array(gamepads.length);
+        for (let i = 0; i < result.length; i++)
+            if (gamepads[i])
+                result[i] = DotNet.createJSObjectReference(new GamepadAPI(<Gamepad>gamepads[i]));
+            else
+                result[i] = null;
 
         return result;
     }

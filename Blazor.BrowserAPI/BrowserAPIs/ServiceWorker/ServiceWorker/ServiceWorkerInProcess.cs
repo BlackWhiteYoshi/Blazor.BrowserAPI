@@ -24,14 +24,16 @@ public sealed class ServiceWorkerInProcess(IJSInProcessObjectReference serviceWo
 
 
     /// <summary>
-    /// Returns the <i>ServiceWorker</i> serialized script URL defined as part of ServiceWorkerRegistration. The URL must be on the same origin as the document that registers the ServiceWorker.
+    /// Returns the <i>ServiceWorker</i> serialized script URL defined as part of ServiceWorkerRegistration.
+    /// The URL must be on the same origin as the document that registers the ServiceWorker.
     /// </summary>
-    public string ScriptUrl => ServiceWorkerJS.Invoke<string>("scriptURL");
+    public string ScriptUrl => ServiceWorkerJS.Invoke<string>("getScriptURL");
 
     /// <summary>
-    /// The state read-only property of the <i>ServiceWorker</i> interface returns a string representing the current state of the service worker. It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.
+    /// The state read-only property of the <i>ServiceWorker</i> interface returns a string representing the current state of the service worker.
+    /// It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.
     /// </summary>
-    public string State => ServiceWorkerJS.Invoke<string>("state");
+    public string State => ServiceWorkerJS.Invoke<string>("getState");
 
     /// <summary>
     /// <para>

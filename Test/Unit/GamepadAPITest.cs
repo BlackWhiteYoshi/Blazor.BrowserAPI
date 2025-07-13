@@ -4,7 +4,14 @@ namespace BrowserAPI.UnitTest;
 
 [ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class GamepadAPITest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
-    private const string JS_GAMEPAD_OBJECT = """
+    private const string GAMEPAD_ID = "fake-controller";
+    private const string GAMEPAD_INDEX = "0";
+    private const string GAMEPAD_MAPPING = "standard";
+    private const string GAMEPAD_TIMESTAMP = "1750000000000";
+    private const string GAMEPAD_VIBRATION_ACTUATOR_EFFECT = "dual-rumble";
+    private const string GAMEPAD_VIBRATION_ACTUATOR_RESULT = "complete";
+
+    private const string JS_GAMEPAD_OBJECT = $$"""
         {
             axes: [0.0, 1.0],
             buttons: [
@@ -13,17 +20,23 @@ public sealed class GamepadAPITest(PlayWrightFixture playWrightFixture) : PlayWr
                 { pressed: false, touched: false, value: 0 }
             ],
             connected: true,
-            id: "fake-controller",
-            index: 0,
-            mapping: "standard",
-            timestamp: 1750000000000,
+            id: "{{GAMEPAD_ID}}",
+            index: {{GAMEPAD_INDEX}},
+            mapping: "{{GAMEPAD_MAPPING}}",
+            timestamp: {{GAMEPAD_TIMESTAMP}},
             vibrationActuator: {
-                effects: ["dual-rumble"],
-                playEffect: (type, params) => new Promise((resolve) => resolve("complete")),
-                reset: () => new Promise((resolve) => resolve("complete"))
+                effects: ["{{GAMEPAD_VIBRATION_ACTUATOR_EFFECT}}"],
+                playEffect: (type, params) => Promise.resolve("{{GAMEPAD_VIBRATION_ACTUATOR_RESULT}}"),
+                reset: () => Promise.resolve("{{GAMEPAD_VIBRATION_ACTUATOR_RESULT}}")
             }
         }
         """;
+
+    public override async Task SetUp() {
+        await base.SetUp();
+        await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
+        await Task.Delay(SMALL_WAIT_TIME);
+    }
 
 
     [Test]
@@ -31,9 +44,7 @@ public sealed class GamepadAPITest(PlayWrightFixture playWrightFixture) : PlayWr
         await ExecuteTest(GamepadAPIGroup.BUTTON_GET_GAMEPADS);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();
-        bool isNumber = int.TryParse(result, out int resultAsNumber);
-        await Assert.That(isNumber).IsTrue();
-        await Assert.That(resultAsNumber).IsGreaterThanOrEqualTo(0);
+        await Assert.That(result).IsEqualTo("Slots = 1, Connected = 1");
     }
 
     [Test]
@@ -67,8 +78,7 @@ public sealed class GamepadAPITest(PlayWrightFixture playWrightFixture) : PlayWr
 
     [Test]
     public async Task GetAxes_Property() {
-        await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
-        await Task.Delay(SMALL_WAIT_TIME);
+        
         await ExecuteTest(GamepadAPIGroup.BUTTON_GET_AXES_PROPERTY);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();
@@ -77,8 +87,6 @@ public sealed class GamepadAPITest(PlayWrightFixture playWrightFixture) : PlayWr
 
     [Test]
     public async Task GetAxes_Method() {
-        await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
-        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(GamepadAPIGroup.BUTTON_GET_AXES_METHOD);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();
@@ -87,8 +95,6 @@ public sealed class GamepadAPITest(PlayWrightFixture playWrightFixture) : PlayWr
 
     [Test]
     public async Task GetButtons_Property() {
-        await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
-        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(GamepadAPIGroup.BUTTON_GET_BUTTONS_PROPERTY);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();
@@ -97,8 +103,6 @@ public sealed class GamepadAPITest(PlayWrightFixture playWrightFixture) : PlayWr
 
     [Test]
     public async Task GetButtons_Method() {
-        await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
-        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(GamepadAPIGroup.BUTTON_GET_BUTTONS_METHOD);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();
@@ -108,8 +112,6 @@ public sealed class GamepadAPITest(PlayWrightFixture playWrightFixture) : PlayWr
 
     [Test]
     public async Task GetConnected_Property() {
-        await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
-        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(GamepadAPIGroup.BUTTON_GET_CONNECTED_PROPERTY);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();
@@ -118,8 +120,6 @@ public sealed class GamepadAPITest(PlayWrightFixture playWrightFixture) : PlayWr
 
     [Test]
     public async Task GetConnected_Method() {
-        await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
-        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(GamepadAPIGroup.BUTTON_GET_CONNECTED_METHOD);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();
@@ -128,122 +128,98 @@ public sealed class GamepadAPITest(PlayWrightFixture playWrightFixture) : PlayWr
 
     [Test]
     public async Task GetId_Property() {
-        await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
-        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(GamepadAPIGroup.BUTTON_GET_ID_PROPERTY);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("fake-controller");
+        await Assert.That(result).IsEqualTo(GAMEPAD_ID);
     }
 
     [Test]
     public async Task GetId_Method() {
-        await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
-        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(GamepadAPIGroup.BUTTON_GET_ID_METHOD);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("fake-controller");
+        await Assert.That(result).IsEqualTo(GAMEPAD_ID);
     }
 
     [Test]
     public async Task GetIndex_Property() {
-        await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
-        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(GamepadAPIGroup.BUTTON_GET_INDEX_PROPERTY);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("0");
+        await Assert.That(result).IsEqualTo(GAMEPAD_INDEX);
     }
 
     [Test]
     public async Task GetIndex_Method() {
-        await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
-        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(GamepadAPIGroup.BUTTON_GET_INDEX_METHOD);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("0");
+        await Assert.That(result).IsEqualTo(GAMEPAD_INDEX);
     }
 
     [Test]
     public async Task GetMapping_Property() {
-        await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
-        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(GamepadAPIGroup.BUTTON_GET_MAPPING_PROPERTY);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("standard");
+        await Assert.That(result).IsEqualTo(GAMEPAD_MAPPING);
     }
 
     [Test]
     public async Task GetMapping_Method() {
-        await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
-        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(GamepadAPIGroup.BUTTON_GET_MAPPING_METHOD);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("standard");
+        await Assert.That(result).IsEqualTo(GAMEPAD_MAPPING);
     }
 
     [Test]
     public async Task GetTimestamp_Property() {
-        await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
-        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(GamepadAPIGroup.BUTTON_GET_TIMESTAMP_PROPERTY);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("1750000000000");
+        await Assert.That(result).IsEqualTo(GAMEPAD_TIMESTAMP);
     }
 
     [Test]
     public async Task GetTimestamp_Method() {
-        await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
-        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(GamepadAPIGroup.BUTTON_GET_TIMESTAMP_METHOD);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("1750000000000");
+        await Assert.That(result).IsEqualTo(GAMEPAD_TIMESTAMP);
     }
 
 
     [Test]
     public async Task GetVibrationActuatorEffects_Property() {
-        await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
-        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(GamepadAPIGroup.BUTTON_GET_VIBRATION_ACTUATOR_EFFECTS_PROPERTY);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("(1): [dual-rumble]");
+        await Assert.That(result).IsEqualTo($"(1): [{GAMEPAD_VIBRATION_ACTUATOR_EFFECT}]");
     }
 
     [Test]
     public async Task GetVibrationActuatorEffects_Method() {
-        await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
-        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(GamepadAPIGroup.BUTTON_GET_VIBRATION_ACTUATOR_EFFECTS_METHOD);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("(1): [dual-rumble]");
+        await Assert.That(result).IsEqualTo($"(1): [{GAMEPAD_VIBRATION_ACTUATOR_EFFECT}]");
     }
 
     [Test]
     public async Task PlayVibrationActuatorEffect() {
-        await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
-        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(GamepadAPIGroup.BUTTON_PLAY_VIBRATION_ACTUATOR_EFFECT);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("complete");
+        await Assert.That(result).IsEqualTo(GAMEPAD_VIBRATION_ACTUATOR_RESULT);
     }
 
     [Test]
     public async Task ResetVibrationActuator() {
-        await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
-        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(GamepadAPIGroup.BUTTON_RESET_VIBRATION_ACTUATOR);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("complete");
+        await Assert.That(result).IsEqualTo(GAMEPAD_VIBRATION_ACTUATOR_RESULT);
     }
 }

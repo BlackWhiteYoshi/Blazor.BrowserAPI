@@ -4,11 +4,9 @@ namespace BrowserAPI.UnitTest;
 
 [ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
-    /* File Picker Dialog not working
-
     [Test]
     public async Task ShowOpenFilePicker() {
-        Page.FileChooser += (object? _, IFileChooser fileChooser) => fileChooser.SetFilesAsync("test.txt");
+        await Page.EvaluateAsync("showOpenFilePicker = (options) => Promise.resolve([{}]);");
         await ExecuteTest(FileSystemInProcessGroup.BUTTON_SHOW_OPEN_FILE_PICKER);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
@@ -17,7 +15,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task ShowOpenFilePickerMultipleFiles() {
-        Page.FileChooser += (object? _, IFileChooser fileChooser) => fileChooser.SetFilesAsync("test.txt");
+        await Page.EvaluateAsync("showOpenFilePicker = (options) => Promise.resolve([{}]);");
         await ExecuteTest(FileSystemInProcessGroup.BUTTON_SHOW_OPEN_FILE_PICKER_MULTIPLE_FILES);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
@@ -26,7 +24,7 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task ShowSaveFilePicker() {
-        Page.FileChooser += (object? _, IFileChooser fileChooser) => fileChooser.SetFilesAsync("test.txt");
+        await Page.EvaluateAsync("showSaveFilePicker = (options) => Promise.resolve({});");
         await ExecuteTest(FileSystemInProcessGroup.BUTTON_SHOW_SAVE_FILE_PICKER);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
@@ -35,14 +33,12 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
 
     [Test]
     public async Task ShowDirectoryPicker() {
-        Page.FileChooser += (object? _, IFileChooser fileChooser) => fileChooser.SetFilesAsync(".");
+        await Page.EvaluateAsync("showDirectoryPicker = (options) => Promise.resolve({});");
         await ExecuteTest(FileSystemInProcessGroup.BUTTON_SHOW_DIRECTORY_PICKER);
 
         string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
-
-    */
 
 
     [Test]
@@ -278,27 +274,31 @@ public sealed class FileSystemInProcessTest(PlayWrightFixture playWrightFixture)
     public async Task WritableFileStream_Seek() {
         await ExecuteTest(FileSystemInProcessGroup.BUTTON_WRITABLE_FILE_STREAM_SEEK);
 
-        // an assertion happens in DisposeAsync()
+        string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(FileSystemInProcessGroup.WRITABLE_FILE_STREAM_SEEK_DONE);
     }
 
     [Test]
     public async Task WritableFileStream_Truncate() {
         await ExecuteTest(FileSystemInProcessGroup.BUTTON_WRITABLE_FILE_STREAM_TRUNCATE);
 
-        // an assertion happens in DisposeAsync()
+        string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(FileSystemInProcessGroup.WRITABLE_FILE_STREAM_TRUNCATE_DONE);
     }
 
     [Test]
     public async Task WritableFileStream_Abort() {
         await ExecuteTest(FileSystemInProcessGroup.BUTTON_WRITABLE_FILE_STREAM_ABORT);
 
-        // an assertion happens in DisposeAsync()
+        string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(FileSystemInProcessGroup.WRITABLE_FILE_STREAM_ABORT_DONE);
     }
 
     [Test]
     public async Task WritableFileStream_Close() {
         await ExecuteTest(FileSystemInProcessGroup.BUTTON_WRITABLE_FILE_STREAM_CLOSE);
 
-        // an assertion happens in DisposeAsync()
+        string? result = await Page.GetByTestId(FileSystemInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(FileSystemInProcessGroup.WRITABLE_FILE_STREAM_CLOSE_DONE);
     }
 }

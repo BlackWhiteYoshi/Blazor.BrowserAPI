@@ -5,6 +5,13 @@ using System.Text.Json;
 namespace BrowserAPI.Test.Client;
 
 public sealed partial class SensorAPIGroup {
+    public const string TEST_SENSOR_START = "sensor started";
+    public const string TEST_SENSOR_STOP = "sensor stopped";
+    public const string TEST_SENSOR_ERROR_EVENT = "error event";
+    public const string TEST_SENSOR_ACTIVATE_EVENT = "activate event";
+    public const string TEST_SENSOR_READING_EVENT = "reading event";
+
+
     [Inject]
     public required ISensorAPI SensorAPI { private get; init; }
 
@@ -101,6 +108,7 @@ public sealed partial class SensorAPIGroup {
         }
 
         await gyroscope.Start();
+        labelOutput = TEST_SENSOR_START;
     }
 
     public const string BUTTON_STOP = "sensor-api-stop";
@@ -112,6 +120,7 @@ public sealed partial class SensorAPIGroup {
         }
 
         await gyroscope.Stop();
+        labelOutput = TEST_SENSOR_STOP;
     }
 
 
@@ -126,12 +135,8 @@ public sealed partial class SensorAPIGroup {
         }
 
         gyroscope.OnError += OnError;
-        await gyroscope.Start();
-        await gyroscope.Stop();
-
-
         void OnError(JsonElement error) {
-            labelOutput = error.ToString();
+            labelOutput = TEST_SENSOR_ERROR_EVENT;
             StateHasChanged();
             gyroscope.OnError -= OnError;
             _ = gyroscope.DisposeAsync().Preserve();
@@ -147,12 +152,8 @@ public sealed partial class SensorAPIGroup {
         }
 
         gyroscope.OnActivate += OnActivate;
-        await gyroscope.Start();
-        await gyroscope.Stop();
-
-
         void OnActivate() {
-            labelOutput = "activate";
+            labelOutput = TEST_SENSOR_ACTIVATE_EVENT;
             StateHasChanged();
             gyroscope.OnActivate -= OnActivate;
             _ = gyroscope.DisposeAsync().Preserve();
@@ -168,13 +169,8 @@ public sealed partial class SensorAPIGroup {
         }
 
         gyroscope.OnReading += OnReading;
-        await gyroscope.Start();
-        await Task.Delay(500);
-        await gyroscope.Stop();
-
-
         void OnReading() {
-            labelOutput = "reading";
+            labelOutput = TEST_SENSOR_READING_EVENT;
             StateHasChanged();
             gyroscope.OnReading -= OnReading;
             _ = gyroscope.DisposeAsync().Preserve();

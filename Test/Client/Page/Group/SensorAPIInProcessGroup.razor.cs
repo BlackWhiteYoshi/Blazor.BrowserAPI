@@ -5,6 +5,13 @@ using System.Text.Json;
 namespace BrowserAPI.Test.Client;
 
 public sealed partial class SensorAPIInProcessGroup {
+    public const string TEST_SENSOR_START = "sensor started";
+    public const string TEST_SENSOR_STOP = "sensor stopped";
+    public const string TEST_SENSOR_ERROR_EVENT = "error event";
+    public const string TEST_SENSOR_ACTIVATE_EVENT = "activate event";
+    public const string TEST_SENSOR_READING_EVENT = "reading event";
+
+
     [Inject]
     public required ISensorAPIInProcess SensorAPI { private get; init; }
 
@@ -63,6 +70,7 @@ public sealed partial class SensorAPIInProcessGroup {
         }
 
         gyroscope.Start();
+        labelOutput = TEST_SENSOR_START;
     }
 
     public const string BUTTON_STOP = "sensor-api-inprocess-stop";
@@ -74,6 +82,7 @@ public sealed partial class SensorAPIInProcessGroup {
         }
 
         gyroscope.Stop();
+        labelOutput = TEST_SENSOR_STOP;
     }
 
 
@@ -88,12 +97,8 @@ public sealed partial class SensorAPIInProcessGroup {
         }
 
         gyroscope.OnError += OnError;
-        gyroscope.Start();
-        gyroscope.Stop();
-
-
         void OnError(JsonElement error) {
-            labelOutput = error.ToString();
+            labelOutput = TEST_SENSOR_ERROR_EVENT;
             StateHasChanged();
             gyroscope.OnError -= OnError;
             gyroscope.Dispose();
@@ -109,12 +114,8 @@ public sealed partial class SensorAPIInProcessGroup {
         }
 
         gyroscope.OnActivate += OnActivate;
-        gyroscope.Start();
-        gyroscope.Stop();
-
-
         void OnActivate() {
-            labelOutput = "activate";
+            labelOutput = TEST_SENSOR_ACTIVATE_EVENT;
             StateHasChanged();
             gyroscope.OnActivate -= OnActivate;
             gyroscope.Dispose();
@@ -122,7 +123,7 @@ public sealed partial class SensorAPIInProcessGroup {
     }
 
     public const string BUTTON_REGISTER_ON_READING = "sensor-api-inprocess-reading-event";
-    private async Task RegisterOnReading() {
+    private void RegisterOnReading() {
         IGyroscopeInProcess? gyroscope = SensorAPI.CreateGyroscope();
         if (gyroscope == null) {
             labelOutput = "not supported";
@@ -130,13 +131,8 @@ public sealed partial class SensorAPIInProcessGroup {
         }
 
         gyroscope.OnReading += OnReading;
-        gyroscope.Start();
-        await Task.Delay(500);
-        gyroscope.Stop();
-
-
         void OnReading() {
-            labelOutput = "reading";
+            labelOutput = TEST_SENSOR_READING_EVENT;
             StateHasChanged();
             gyroscope.OnReading -= OnReading;
             gyroscope.Dispose();

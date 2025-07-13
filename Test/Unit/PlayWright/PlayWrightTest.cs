@@ -1,10 +1,8 @@
-﻿using BrowserAPI.Test.Client;
-using Microsoft.Playwright;
-using TUnit.Core.Interfaces;
+﻿using Microsoft.Playwright;
 
 namespace BrowserAPI.UnitTest;
 
-public abstract class PlayWrightTest(PlayWrightFixture playWrightFixture) : IAsyncInitializer, IAsyncDisposable {
+public abstract class PlayWrightTest(PlayWrightFixture playWrightFixture) {
     /// <summary>
     /// BrowserContext
     /// </summary>
@@ -16,15 +14,24 @@ public abstract class PlayWrightTest(PlayWrightFixture playWrightFixture) : IAsy
     protected IPage Page { get; private set; } = null!;
 
 
-    public virtual async Task InitializeAsync() {
+    /// <summary>
+    /// Creates a new BrowserContext, opens a new Tab and loads the page in that Tab.
+    /// </summary>
+    /// <returns></returns>
+    [Before(HookType.Test)]
+    public virtual async Task SetUp() {
         BrowserContext = await playWrightFixture.NewBrowserContext();
         Page = await BrowserContext.NewPageAsync();
         await Page.GotoAsync("/");
     }
 
-    public virtual async ValueTask DisposeAsync() {
+    /// <summary>
+    /// Asserts that no exception has been occured, closes the Tab and removes the BrowserContext.
+    /// </summary>
+    /// <returns></returns>
+    [After(HookType.Test)]
+    public async Task CleanUp() {
         try {
-            // Asserts that no exception has been occured.
             await Assertions.Expect(Page.Locator("#blazor-error-ui")).ToBeVisibleAsync(new LocatorAssertionsToBeVisibleOptions() { Visible = false });
         }
         finally {

@@ -7,9 +7,9 @@ export class GravitySensorAPI extends SensorAPI {
         super(gravitySensor);
     }
 
-    static create(frequency: number, referenceFrame: "device" | "screen"): GravitySensorAPI | null {
+    static create(frequency: number, referenceFrame: "device" | "screen"): [GravitySensorAPI] | [null] {
         if (!("GravitySensor" in window))
-            return null;
+            return [null];
 
         let options: MotionSensorOptions;
         if (frequency > 0)
@@ -17,7 +17,7 @@ export class GravitySensorAPI extends SensorAPI {
         else
             options = { referenceFrame };
 
-        return new GravitySensorAPI(new GravitySensor(options));
+        return [DotNet.createJSObjectReference(new GravitySensorAPI(new GravitySensor(options)))];
     }
 
 

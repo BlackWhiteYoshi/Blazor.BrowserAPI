@@ -20,15 +20,18 @@ public sealed class GamepadAPIInProcess(IModuleManager moduleManager) : IGamepad
 
     /// <summary>
     /// <para>Returns an array of <see cref="IGamepadInProcess"/> objects, one for each connected gamepad.</para>
-    /// <para>Elements in the array may shift if a gamepad disconnects during a session, so the <see cref="IGamepadInProcess.Index"/> of remaining gamepads may not match.</para>
+    /// <para>Elements in the array may be <i>null</i> if a gamepad disconnects during a session, so that the remaining gamepads retain the same index.</para>
     /// </summary>
     /// <returns></returns>
-    public IGamepadInProcess[] GetGamepads() {
-        IJSInProcessObjectReference[] gamepads = moduleManager.InvokeSync<IJSInProcessObjectReference[]>("GamepadInterfaceAPI.getGamepads");
+    public IGamepadInProcess?[] GetGamepads() {
+        IJSInProcessObjectReference?[] gamepads = moduleManager.InvokeSync<IJSInProcessObjectReference?[]>("GamepadInterfaceAPI.getGamepads");
 
-        GamepadInProcess[] result = new GamepadInProcess[gamepads.Length];
+        GamepadInProcess?[] result = new GamepadInProcess?[gamepads.Length];
         for (int i = 0; i < result.Length; i++)
-            result[i] = new GamepadInProcess(gamepads[i]);
+            if (gamepads[i] != null)
+                result[i] = new GamepadInProcess(gamepads[i]!);
+            else
+                result[i] = null;
         return result;
     }
 

@@ -26,13 +26,17 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
     [Test]
     public async Task GetSrcObject() {
         await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_SRC_OBJECT);
-        // an assertion happens in DisposeAsync()
+
+        string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("False");
     }
 
     [Test]
     public async Task SetSrcObject() {
         await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_SRC_OBJECT);
-        // an assertion happens in DisposeAsync()
+
+        string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_SET_SRC_OBJECT);
     }
 
 
@@ -507,13 +511,11 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
     [Test]
     public async Task RegisterOnStalled() {
         await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_STALLED);
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.load();");
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.dispatchEvent(new Event('stalled'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("");
-        // need proper test setup
-        //await Assert.That(result).IsEqualTo("Stalled");
+        await Assert.That(result).IsEqualTo("Stalled");
     }
 
     [Test]
@@ -529,13 +531,11 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
     [Test]
     public async Task RegisterOnWaiting() {
         await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_WAITING);
-        await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.load();");
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.dispatchEvent(new Event('waiting'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("");
-        // need proper test setup
-        //await Assert.That(result).IsEqualTo("Waiting");
+        await Assert.That(result).IsEqualTo("Waiting");
     }
 
     [Test]

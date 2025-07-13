@@ -259,13 +259,11 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IHTMLElement?> GetOffsetParent(CancellationToken cancellationToken) {
-        try {
-            Task<IJSObjectReference> htmlElementParent = (await htmlElementTask).InvokeTrySync<IJSObjectReference>("getOffsetParent", cancellationToken).AsTask();
-            return new HTMLElement(htmlElementParent);
-        }
-        catch (JSException) {
+        IJSObjectReference?[] singleReference = await (await htmlElementTask).InvokeTrySync<IJSObjectReference?[]>("getOffsetParent", cancellationToken);
+        if (singleReference[0] is IJSObjectReference htmlElementParent)
+            return new HTMLElement(Task.FromResult(htmlElementParent));
+        else
             return null;
-        }
     }
 
 

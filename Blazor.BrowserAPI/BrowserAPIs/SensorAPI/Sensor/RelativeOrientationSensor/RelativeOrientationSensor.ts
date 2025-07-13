@@ -7,9 +7,9 @@ export class RelativeOrientationSensorAPI extends SensorAPI {
         super(relativeOrientationSensor);
     }
 
-    static create(frequency: number, referenceFrame: "device" | "screen"): RelativeOrientationSensorAPI | null {
+    static create(frequency: number, referenceFrame: "device" | "screen"): [RelativeOrientationSensorAPI] | [null] {
         if (!("RelativeOrientationSensor" in window))
-            return null;
+            return [null];
 
         let options: MotionSensorOptions;
         if (frequency > 0)
@@ -17,7 +17,7 @@ export class RelativeOrientationSensorAPI extends SensorAPI {
         else
             options = { referenceFrame };
 
-        return new RelativeOrientationSensorAPI(new RelativeOrientationSensor(options));
+        return [DotNet.createJSObjectReference(new RelativeOrientationSensorAPI(new RelativeOrientationSensor(options)))];
     }
 
 

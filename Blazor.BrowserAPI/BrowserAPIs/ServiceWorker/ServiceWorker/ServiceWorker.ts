@@ -7,19 +7,12 @@ export class ServiceWorkerAPI {
         this.#serviceWorker = serviceWorker;
     }
 
-    static create(serviceWorker: ServiceWorker | null): ServiceWorkerAPI | null {
-        if (serviceWorker === null)
-            return null;
 
-        return new ServiceWorkerAPI(serviceWorker);
-    }
-
-
-    scriptURL(): string {
+    getScriptURL(): string {
         return this.#serviceWorker.scriptURL;
     }
 
-    state(): string {
+    getState(): string {
         return this.#serviceWorker.state;
     }
 

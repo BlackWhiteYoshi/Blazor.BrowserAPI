@@ -129,3 +129,10 @@ There are more interfaces coming.
   - added navigator.languages to the Language API
 - 0.11.0
   - added NetworkInformation (18 BrowserAPIs)
+- 0.12.0
+  - added Screen (19 BrowserAPIs)
+  - small breaking changes:
+    - changed IGamepadAPI.GetGamepads() from returning IGamepad[] to IGamepad?[], so it aligns with the JS array.
+    - changed IServiceWorkerContainer.Register() from returning ValueTask&lt;bool&gt; to ValueTask, an exception is thrown when service workers are not supported.
+    - changed IServiceWorkerContainer.DelayUntilReady() to IServiceWorkerContainer.Ready, so it aligns with the JS property.
+    - changed IServiceWorkerContainer.OnMessage from Action&lt;string&gt; to Action&lt;JsonElement&gt;

@@ -7,9 +7,9 @@ export class UncalibratedMagnetometerAPI extends SensorAPI {
         super(uncalibratedMagnetometer);
     }
 
-    static create(frequency: number, referenceFrame: "device" | "screen"): UncalibratedMagnetometerAPI | null {
+    static create(frequency: number, referenceFrame: "device" | "screen"): [UncalibratedMagnetometerAPI] | [null] {
         if (!("UncalibratedMagnetometer" in window))
-            return null;
+            return [null];
 
         let options: MotionSensorOptions;
         if (frequency > 0)
@@ -17,7 +17,7 @@ export class UncalibratedMagnetometerAPI extends SensorAPI {
         else
             options = { referenceFrame };
 
-        return new UncalibratedMagnetometerAPI(new UncalibratedMagnetometer(options));
+        return [DotNet.createJSObjectReference(new UncalibratedMagnetometerAPI(new UncalibratedMagnetometer(options)))];
     }
 
 

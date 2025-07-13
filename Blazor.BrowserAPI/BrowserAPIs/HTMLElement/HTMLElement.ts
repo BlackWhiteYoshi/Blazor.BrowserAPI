@@ -55,8 +55,11 @@ export class HTMLElementAPI {
         return this.#htmlElement.offsetTop;
     }
 
-    getOffsetParent(): Element | null {
-        return this.#htmlElement.offsetParent;
+    getOffsetParent(): [HTMLElementAPI] | [null] {
+        if (this.#htmlElement.offsetParent instanceof HTMLElement)
+            return [DotNet.createJSObjectReference(new HTMLElementAPI(this.#htmlElement.offsetParent))];
+        else
+            return [null];
     }
 
 

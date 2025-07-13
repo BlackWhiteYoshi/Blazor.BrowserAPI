@@ -29,7 +29,7 @@ export class MediaStreamAPI {
     }
 
 
-    createMediaRecorder(mimeType: string, audioBitsPerSecond: number, videoBitsPerSecond: number, bitsPerSecond: number) {
+    createMediaRecorder(mimeType: string, audioBitsPerSecond: number, videoBitsPerSecond: number, bitsPerSecond: number): MediaRecorderAPI {
         const options: MediaRecorderOptions = {
             mimeType: mimeType !== "" ? mimeType : undefined,
             audioBitsPerSecond: audioBitsPerSecond > 0 ? audioBitsPerSecond : undefined,

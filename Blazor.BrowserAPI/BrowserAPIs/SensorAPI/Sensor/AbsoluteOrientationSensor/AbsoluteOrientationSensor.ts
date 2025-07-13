@@ -7,9 +7,9 @@ export class AbsoluteOrientationSensorAPI extends SensorAPI {
         super(absoluteOrientationSensor);
     }
 
-    static create(frequency: number, referenceFrame: "device" | "screen"): AbsoluteOrientationSensorAPI | null {
+    static create(frequency: number, referenceFrame: "device" | "screen"): [AbsoluteOrientationSensorAPI] | [null] {
         if (!("AbsoluteOrientationSensor" in window))
-            return null;
+            return [null];
 
         let options: MotionSensorOptions;
         if (frequency > 0)
@@ -17,7 +17,7 @@ export class AbsoluteOrientationSensorAPI extends SensorAPI {
         else
             options = { referenceFrame };
 
-        return new AbsoluteOrientationSensorAPI(new AbsoluteOrientationSensor(options));
+        return [DotNet.createJSObjectReference(new AbsoluteOrientationSensorAPI(new AbsoluteOrientationSensor(options)))];
     }
 
 

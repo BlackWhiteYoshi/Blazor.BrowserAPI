@@ -2021,7 +2021,7 @@
         <member name="M:BrowserAPI.Implementation.GamepadAPI.GetGamepads(System.Threading.CancellationToken)">
             <summary>
             <para>Returns an array of <see cref="T:BrowserAPI.IGamepad"/> objects, one for each connected gamepad.</para>
-            <para>Elements in the array may shift if a gamepad disconnects during a session, so the <see cref="P:BrowserAPI.IGamepad.Index"/> of remaining gamepads may not match.</para>
+            <para>Elements in the array may be <i>null</i> if a gamepad disconnects during a session, so that the remaining gamepads retain the same index.</para>
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -2074,7 +2074,7 @@
         <member name="M:BrowserAPI.Implementation.GamepadAPIInProcess.GetGamepads">
             <summary>
             <para>Returns an array of <see cref="T:BrowserAPI.IGamepadInProcess"/> objects, one for each connected gamepad.</para>
-            <para>Elements in the array may shift if a gamepad disconnects during a session, so the <see cref="P:BrowserAPI.IGamepadInProcess.Index"/> of remaining gamepads may not match.</para>
+            <para>Elements in the array may be <i>null</i> if a gamepad disconnects during a session, so that the remaining gamepads retain the same index.</para>
             </summary>
             <returns></returns>
         </member>
@@ -2202,14 +2202,12 @@
             <summary>
             <para>An integer that is auto-incremented to be unique for each device currently connected to the system.</para>
             <para>This can be used to distinguish multiple controllers; a gamepad that is disconnected and reconnected will retain the same index.</para>
-            <para>Note: This index may differ with the index loacation of the <see cref="M:BrowserAPI.IGamepadAPIInProcess.GetGamepads"/> array.</para>
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.Gamepad.GetIndex(System.Threading.CancellationToken)">
             <summary>
             <para>An integer that is auto-incremented to be unique for each device currently connected to the system.</para>
             <para>This can be used to distinguish multiple controllers; a gamepad that is disconnected and reconnected will retain the same index.</para>
-            <para>Note: This index may differ with the index loacation of the <see cref="M:BrowserAPI.IGamepadAPIInProcess.GetGamepads"/> array.</para>
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -2384,7 +2382,6 @@
             <summary>
             <para>An integer that is auto-incremented to be unique for each device currently connected to the system.</para>
             <para>This can be used to distinguish multiple controllers; a gamepad that is disconnected and reconnected will retain the same index.</para>
-            <para>Note: This index may differ with the index loacation of the <see cref="M:BrowserAPI.IGamepadAPIInProcess.GetGamepads"/> array.</para>
             </summary>
         </member>
         <member name="P:BrowserAPI.Implementation.GamepadInProcess.Mapping">
@@ -8061,14 +8058,34 @@
         </member>
         <member name="M:BrowserAPI.Implementation.ServiceWorkerContainer.RegisterWithWorkerRegistration(System.String,System.Threading.CancellationToken)">
             <summary>
-            Registers a service worker and returns a <see cref="T:BrowserAPI.IServiceWorkerRegistration">ServiceWorkerRegistration</see> object, which can be used to track the registration.<br />
-            If service worker is not supported, null is returned.
+            Registers a service worker and returns a <see cref="T:BrowserAPI.IServiceWorkerRegistration">ServiceWorkerRegistration</see> object, which can be used to track the registration.
             </summary>
             <param name="scriptURL">relative file path to the service worker script (e.g. "/sw.js")</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainer.DelayUntilReady(System.Threading.CancellationToken)">
+        <member name="P:BrowserAPI.Implementation.ServiceWorkerContainer.Controller">
+            <summary>
+            Returns a <i>ServiceWorker</i> object if its state is activating or activated (the same object returned by ServiceWorkerRegistration.active).
+            This property returns null during a force-refresh request (Shift + refresh) or if there is no active worker.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainer.GetController(System.Threading.CancellationToken)">
+            <summary>
+            Returns a <i>ServiceWorker</i> object if its state is activating or activated (the same object returned by ServiceWorkerRegistration.active).
+            This property returns null during a force-refresh request (Shift + refresh) or if there is no active worker.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ServiceWorkerContainer.Ready">
+            <summary>
+            Provides a way of delaying code execution until a service worker is active.
+            It returns a Promise that will never reject, and which waits indefinitely until the ServiceWorkerRegistration associated with the current page has an ServiceWorkerRegistration.active worker.
+            Once that condition is met, it resolves with the ServiceWorkerRegistration.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainer.GetReady(System.Threading.CancellationToken)">
             <summary>
             Provides a way of delaying code execution until a service worker is active.
             It returns a Promise that will never reject, and which waits indefinitely until the ServiceWorkerRegistration associated with the current page has an ServiceWorkerRegistration.active worker.
@@ -8090,20 +8107,6 @@
             <summary>
             The <i>getRegistrations()</i> method of the ServiceWorkerContainer interface gets all ServiceWorkerRegistrations associated with a ServiceWorkerContainer, in an array.
             The method returns a Promise that resolves to an array of ServiceWorkerRegistration.
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.Implementation.ServiceWorkerContainer.Controller">
-            <summary>
-            Returns a <i>ServiceWorker</i> object if its state is activating or activated (the same object returned by ServiceWorkerRegistration.active).
-            This property returns null during a force-refresh request (Shift + refresh) or if there is no active worker.
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainer.GetController(System.Threading.CancellationToken)">
-            <summary>
-            Returns a <i>ServiceWorker</i> object if its state is activating or activated (the same object returned by ServiceWorkerRegistration.active).
-            This property returns null during a force-refresh request (Shift + refresh) or if there is no active worker.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -8137,7 +8140,7 @@
         <member name="E:BrowserAPI.Implementation.ServiceWorkerContainerBase.OnMessage">
             <summary>
             <para>The message event is used in a page controlled by a service worker to receive messages from the service worker.</para>
-            <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/message_event">MessageEvent</see> as json.</para>
+            <para>Parameter is <see href="https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent/data">MessageEvent.data</see> as json.</para>
             </summary>
         </member>
         <member name="T:BrowserAPI.Implementation.ServiceWorkerContainerInProcess">
@@ -8160,23 +8163,38 @@
         </member>
         <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerInProcess.RegisterWithWorkerRegistration(System.String,System.Threading.CancellationToken)">
             <summary>
-            Registers a service worker and returns a <see cref="T:BrowserAPI.IServiceWorkerRegistration">ServiceWorkerRegistration</see> object, which can be used to track the registration.<br />
-            If service worker is not supported, null is returned.
+            Registers a service worker and returns a <see cref="T:BrowserAPI.IServiceWorkerRegistration">ServiceWorkerRegistration</see> object, which can be used to track the registration.
             </summary>
             <param name="scriptURL">relative file path to the service worker script (e.g. "/sw.js")</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerInProcess.DelayUntilReady(System.Threading.CancellationToken)">
+        <member name="P:BrowserAPI.Implementation.ServiceWorkerContainerInProcess.Controller">
             <summary>
-            Provides a way of delaying code execution until a service worker is active. It returns a Promise that will never reject, and which waits indefinitely until the ServiceWorkerRegistration associated with the current page has an ServiceWorkerRegistration.active worker. Once that condition is met, it resolves with the ServiceWorkerRegistration.
+            Returns a <i>ServiceWorker</i> object if its state is activating or activated (the same object returned by ServiceWorkerRegistration.active).
+            This property returns null during a force-refresh request (Shift + refresh) or if there is no active worker.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ServiceWorkerContainerInProcess.Ready">
+            <summary>
+            Provides a way of delaying code execution until a service worker is active.
+            It returns a Promise that will never reject, and which waits indefinitely until the ServiceWorkerRegistration associated with the current page has an ServiceWorkerRegistration.active worker.
+            Once that condition is met, it resolves with the ServiceWorkerRegistration.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerInProcess.GetReady(System.Threading.CancellationToken)">
+            <summary>
+            Provides a way of delaying code execution until a service worker is active.
+            It returns a Promise that will never reject, and which waits indefinitely until the ServiceWorkerRegistration associated with the current page has an ServiceWorkerRegistration.active worker.
+            Once that condition is met, it resolves with the ServiceWorkerRegistration.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerInProcess.GetRegistration(System.String,System.Threading.CancellationToken)">
             <summary>
-            The <i>getRegistration()</i> method of the ServiceWorkerContainer interface gets a ServiceWorkerRegistration object whose scope URL matches the provided client URL. The method returns a Promise that resolves to a ServiceWorkerRegistration or undefined.
+            The <i>getRegistration()</i> method of the ServiceWorkerContainer interface gets a ServiceWorkerRegistration object whose scope URL matches the provided client URL.
+            The method returns a Promise that resolves to a ServiceWorkerRegistration or undefined.
             </summary>
             <param name="clientUrl">The registration whose scope matches this URL will be returned. Relative URLs are resolved with the current client as the base.</param>
             <param name="cancellationToken"></param>
@@ -8184,19 +8202,16 @@
         </member>
         <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerInProcess.GetRegistrations(System.Threading.CancellationToken)">
             <summary>
-            The <i>getRegistrations()</i> method of the ServiceWorkerContainer interface gets all ServiceWorkerRegistrations associated with a ServiceWorkerContainer, in an array. The method returns a Promise that resolves to an array of ServiceWorkerRegistration.
+            The <i>getRegistrations()</i> method of the ServiceWorkerContainer interface gets all ServiceWorkerRegistrations associated with a ServiceWorkerContainer, in an array.
+            The method returns a Promise that resolves to an array of ServiceWorkerRegistration.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="P:BrowserAPI.Implementation.ServiceWorkerContainerInProcess.Controller">
-            <summary>
-            Returns a <i>ServiceWorker</i> object if its state is activating or activated (the same object returned by ServiceWorkerRegistration.active). This property returns null during a force-refresh request (Shift + refresh) or if there is no active worker.
-            </summary>
-        </member>
         <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerInProcess.StartMessages">
             <summary>
-            The <i>startMessages()</i> method of the ServiceWorkerContainer interface explicitly starts the flow of messages being dispatched from a service worker to pages under its control (e.g. sent via Client.postMessage()). This can be used to react to sent messages earlier, even before that page's content has finished loading.
+            The <i>startMessages()</i> method of the ServiceWorkerContainer interface explicitly starts the flow of messages being dispatched from a service worker to pages under its control (e.g. sent via Client.postMessage()).
+            This can be used to react to sent messages earlier, even before that page's content has finished loading.
             </summary>
         </member>
         <member name="T:BrowserAPI.Implementation.ServiceWorkerRegistration">
@@ -8221,55 +8236,66 @@
         </member>
         <member name="P:BrowserAPI.Implementation.ServiceWorkerRegistration.Active">
             <summary>
-            The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated. This property is initially set to null.
+            The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated.
+            This property is initially set to null.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.ServiceWorkerRegistration.GetActive(System.Threading.CancellationToken)">
             <summary>
-            The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated. This property is initially set to null.
+            The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated.
+            This property is initially set to null.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.Implementation.ServiceWorkerRegistration.Installing">
             <summary>
-            The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing. This property is initially set to null.
+            The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing.
+            This property is initially set to null.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.ServiceWorkerRegistration.GetInstalling(System.Threading.CancellationToken)">
             <summary>
-            The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing. This property is initially set to null.
+            The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing.
+            This property is initially set to null.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.Implementation.ServiceWorkerRegistration.Waiting">
             <summary>
-            The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed. This property is initially set to null.
+            The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed.
+            This property is initially set to null.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.ServiceWorkerRegistration.GetWaiting(System.Threading.CancellationToken)">
             <summary>
-            The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed. This property is initially set to null.
+            The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed.
+            This property is initially set to null.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.Implementation.ServiceWorkerRegistration.Scope">
             <summary>
-            The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration. The service worker must be on the same origin as the document that registers the ServiceWorker.
+            The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration.
+            The service worker must be on the same origin as the document that registers the ServiceWorker.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.ServiceWorkerRegistration.GetScope(System.Threading.CancellationToken)">
             <summary>
-            The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration. The service worker must be on the same origin as the document that registers the ServiceWorker.
+            The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration.
+            The service worker must be on the same origin as the document that registers the ServiceWorker.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.Implementation.ServiceWorkerRegistration.UpdateViaCache">
             <summary>
-            <para>The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register. Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.</para>
+            <para>
+            The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register.
+            Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.
+            </para>
             <para>
             Returns one of the following values:<br />
             - <b>imports</b>: meaning the HTTP cache is not consulted for update of the service worker, but is consulted for importScripts.<br />
@@ -8280,7 +8306,10 @@
         </member>
         <member name="M:BrowserAPI.Implementation.ServiceWorkerRegistration.GetUpdateViaCache(System.Threading.CancellationToken)">
             <summary>
-            <para>The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register. Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.</para>
+            <para>
+            The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register.
+            Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.
+            </para>
             <para>
             Returns one of the following values:<br />
             - <b>imports</b>: meaning the HTTP cache is not consulted for update of the service worker, but is consulted for importScripts.<br />
@@ -8340,27 +8369,34 @@
         </member>
         <member name="P:BrowserAPI.Implementation.ServiceWorkerRegistrationInProcess.Active">
             <summary>
-            The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated. This property is initially set to null.
+            The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated.
+            This property is initially set to null.
             </summary>
         </member>
         <member name="P:BrowserAPI.Implementation.ServiceWorkerRegistrationInProcess.Installing">
             <summary>
-            The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing. This property is initially set to null.
+            The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing.
+            This property is initially set to null.
             </summary>
         </member>
         <member name="P:BrowserAPI.Implementation.ServiceWorkerRegistrationInProcess.Waiting">
             <summary>
-            The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed. This property is initially set to null.
+            The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed.
+            This property is initially set to null.
             </summary>
         </member>
         <member name="P:BrowserAPI.Implementation.ServiceWorkerRegistrationInProcess.Scope">
             <summary>
-            The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration. The service worker must be on the same origin as the document that registers the ServiceWorker.
+            The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration.
+            The service worker must be on the same origin as the document that registers the ServiceWorker.
             </summary>
         </member>
         <member name="P:BrowserAPI.Implementation.ServiceWorkerRegistrationInProcess.UpdateViaCache">
             <summary>
-            <para>The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register. Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.</para>
+            <para>
+            The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register.
+            Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.
+            </para>
             <para>
             Returns one of the following values:<br />
             - <b>imports</b>: meaning the HTTP cache is not consulted for update of the service worker, but is consulted for importScripts.<br />
@@ -8371,7 +8407,9 @@
         </member>
         <member name="M:BrowserAPI.Implementation.ServiceWorkerRegistrationInProcess.Update(System.Threading.CancellationToken)">
             <summary>
-            The <i>update()</i> method of the ServiceWorkerRegistration interface attempts to update the service worker. It fetches the worker's script URL, and if the new worker is not byte-by-byte identical to the current worker, it installs the new worker. The fetch of the worker bypasses any browser caches if the previous fetch occurred over 24 hours ago.
+            The <i>update()</i> method of the ServiceWorkerRegistration interface attempts to update the service worker.
+            It fetches the worker's script URL, and if the new worker is not byte-by-byte identical to the current worker, it installs the new worker.
+            The fetch of the worker bypasses any browser caches if the previous fetch occurred over 24 hours ago.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -8397,12 +8435,14 @@
         </member>
         <member name="P:BrowserAPI.Implementation.ServiceWorker.ScriptUrl">
             <summary>
-            Returns the <i>ServiceWorker</i> serialized script URL defined as part of ServiceWorkerRegistration. The URL must be on the same origin as the document that registers the ServiceWorker.
+            Returns the <i>ServiceWorker</i> serialized script URL defined as part of ServiceWorkerRegistration.
+            The URL must be on the same origin as the document that registers the ServiceWorker.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.ServiceWorker.GetScriptUrl(System.Threading.CancellationToken)">
             <summary>
-            Returns the <i>ServiceWorker</i> serialized script URL defined as part of ServiceWorkerRegistration. The URL must be on the same origin as the document that registers the ServiceWorker.
+            Returns the <i>ServiceWorker</i> serialized script URL defined as part of ServiceWorkerRegistration.
+            The URL must be on the same origin as the document that registers the ServiceWorker.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -8415,7 +8455,8 @@
         </member>
         <member name="M:BrowserAPI.Implementation.ServiceWorker.GetState(System.Threading.CancellationToken)">
             <summary>
-            The state read-only property of the <i>ServiceWorker</i> interface returns a string representing the current state of the service worker. It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.
+            The state read-only property of the <i>ServiceWorker</i> interface returns a string representing the current state of the service worker.
+            It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -8477,12 +8518,14 @@
         </member>
         <member name="P:BrowserAPI.Implementation.ServiceWorkerInProcess.ScriptUrl">
             <summary>
-            Returns the <i>ServiceWorker</i> serialized script URL defined as part of ServiceWorkerRegistration. The URL must be on the same origin as the document that registers the ServiceWorker.
+            Returns the <i>ServiceWorker</i> serialized script URL defined as part of ServiceWorkerRegistration.
+            The URL must be on the same origin as the document that registers the ServiceWorker.
             </summary>
         </member>
         <member name="P:BrowserAPI.Implementation.ServiceWorkerInProcess.State">
             <summary>
-            The state read-only property of the <i>ServiceWorker</i> interface returns a string representing the current state of the service worker. It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.
+            The state read-only property of the <i>ServiceWorker</i> interface returns a string representing the current state of the service worker.
+            It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.ServiceWorkerInProcess.PostMessage(System.Object)">
@@ -11370,7 +11413,7 @@
         <member name="M:BrowserAPI.IGamepadAPI.GetGamepads(System.Threading.CancellationToken)">
             <summary>
             <para>Returns an array of <see cref="T:BrowserAPI.IGamepad"/> objects, one for each connected gamepad.</para>
-            <para>Elements in the array may shift if a gamepad disconnects during a session, so the <see cref="P:BrowserAPI.IGamepad.Index"/> of remaining gamepads may not match.</para>
+            <para>Elements in the array may be <i>null</i> if a gamepad disconnects during a session, so that the remaining gamepads retain the same index.</para>
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -11416,7 +11459,7 @@
         <member name="M:BrowserAPI.IGamepadAPIInProcess.GetGamepads">
             <summary>
             <para>Returns an array of <see cref="T:BrowserAPI.IGamepadInProcess"/> objects, one for each connected gamepad.</para>
-            <para>Elements in the array may shift if a gamepad disconnects during a session, so the <see cref="P:BrowserAPI.IGamepadInProcess.Index"/> of remaining gamepads may not match.</para>
+            <para>Elements in the array may be <i>null</i> if a gamepad disconnects during a session, so that the remaining gamepads retain the same index.</para>
             </summary>
             <returns></returns>
         </member>
@@ -11528,14 +11571,12 @@
             <summary>
             <para>An integer that is auto-incremented to be unique for each device currently connected to the system.</para>
             <para>This can be used to distinguish multiple controllers; a gamepad that is disconnected and reconnected will retain the same index.</para>
-            <para>Note: This index may differ with the index loacation of the <see cref="M:BrowserAPI.IGamepadAPIInProcess.GetGamepads"/> array.</para>
             </summary>
         </member>
         <member name="M:BrowserAPI.IGamepad.GetIndex(System.Threading.CancellationToken)">
             <summary>
             <para>An integer that is auto-incremented to be unique for each device currently connected to the system.</para>
             <para>This can be used to distinguish multiple controllers; a gamepad that is disconnected and reconnected will retain the same index.</para>
-            <para>Note: This index may differ with the index loacation of the <see cref="M:BrowserAPI.IGamepadAPIInProcess.GetGamepads"/> array.</para>
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -11729,7 +11770,6 @@
             <summary>
             <para>An integer that is auto-incremented to be unique for each device currently connected to the system.</para>
             <para>This can be used to distinguish multiple controllers; a gamepad that is disconnected and reconnected will retain the same index.</para>
-            <para>Note: This index may differ with the index loacation of the <see cref="M:BrowserAPI.IGamepadAPIInProcess.GetGamepads"/> array.</para>
             </summary>
         </member>
         <member name="P:BrowserAPI.IGamepadInProcess.Mapping">
@@ -17492,14 +17532,34 @@
         </member>
         <member name="M:BrowserAPI.IServiceWorkerContainer.RegisterWithWorkerRegistration(System.String,System.Threading.CancellationToken)">
             <summary>
-            Registers a service worker and returns a <see cref="T:BrowserAPI.IServiceWorkerRegistration">ServiceWorkerRegistration</see> object, which can be used to track the registration.<br />
-            If service worker is not supported, null is returned.
+            Registers a service worker and returns a <see cref="T:BrowserAPI.IServiceWorkerRegistration">ServiceWorkerRegistration</see> object, which can be used to track the registration.
             </summary>
             <param name="scriptURL">relative file path to the service worker script (e.g. "/sw.js")</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:BrowserAPI.IServiceWorkerContainer.DelayUntilReady(System.Threading.CancellationToken)">
+        <member name="P:BrowserAPI.IServiceWorkerContainer.Controller">
+            <summary>
+            Returns a <i>ServiceWorker</i> object if its state is activating or activated (the same object returned by ServiceWorkerRegistration.active).
+            This property returns null during a force-refresh request (Shift + refresh) or if there is no active worker.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IServiceWorkerContainer.GetController(System.Threading.CancellationToken)">
+            <summary>
+            Returns a <i>ServiceWorker</i> object if its state is activating or activated (the same object returned by ServiceWorkerRegistration.active).
+            This property returns null during a force-refresh request (Shift + refresh) or if there is no active worker.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IServiceWorkerContainer.Ready">
+            <summary>
+            Provides a way of delaying code execution until a service worker is active.
+            It returns a Promise that will never reject, and which waits indefinitely until the ServiceWorkerRegistration associated with the current page has an ServiceWorkerRegistration.active worker.
+            Once that condition is met, it resolves with the ServiceWorkerRegistration.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IServiceWorkerContainer.GetReady(System.Threading.CancellationToken)">
             <summary>
             Provides a way of delaying code execution until a service worker is active.
             It returns a Promise that will never reject, and which waits indefinitely until the ServiceWorkerRegistration associated with the current page has an ServiceWorkerRegistration.active worker.
@@ -17521,20 +17581,6 @@
             <summary>
             The <i>getRegistrations()</i> method of the ServiceWorkerContainer interface gets all ServiceWorkerRegistrations associated with a ServiceWorkerContainer, in an array.
             The method returns a Promise that resolves to an array of ServiceWorkerRegistration.
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.IServiceWorkerContainer.Controller">
-            <summary>
-            Returns a <i>ServiceWorker</i> object if its state is activating or activated (the same object returned by ServiceWorkerRegistration.active).
-            This property returns null during a force-refresh request (Shift + refresh) or if there is no active worker.
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.IServiceWorkerContainer.GetController(System.Threading.CancellationToken)">
-            <summary>
-            Returns a <i>ServiceWorker</i> object if its state is activating or activated (the same object returned by ServiceWorkerRegistration.active).
-            This property returns null during a force-refresh request (Shift + refresh) or if there is no active worker.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -17568,7 +17614,7 @@
         <member name="E:BrowserAPI.IServiceWorkerContainer.OnMessage">
             <summary>
             <para>The message event is used in a page controlled by a service worker to receive messages from the service worker.</para>
-            <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/message_event">MessageEvent</see> as json.</para>
+            <para>Parameter is <see href="https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent/data">MessageEvent.data</see> as json.</para>
             </summary>
         </member>
         <member name="T:BrowserAPI.IServiceWorkerContainerInProcess">
@@ -17601,28 +17647,43 @@
         <member name="E:BrowserAPI.IServiceWorkerContainerInProcess.OnMessage">
             <summary>
             <para>The message event is used in a page controlled by a service worker to receive messages from the service worker.</para>
-            <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/message_event">MessageEvent</see> as json.</para>
+            <para>Parameter is <see href="https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent/data">MessageEvent.data</see> as json.</para>
             </summary>
         </member>
         <member name="M:BrowserAPI.IServiceWorkerContainerInProcess.RegisterWithWorkerRegistration(System.String,System.Threading.CancellationToken)">
             <summary>
-            Registers a service worker and returns a <see cref="T:BrowserAPI.IServiceWorkerRegistration">ServiceWorkerRegistration</see> object, which can be used to track the registration.<br />
-            If service worker is not supported, null is returned.
+            Registers a service worker and returns a <see cref="T:BrowserAPI.IServiceWorkerRegistration">ServiceWorkerRegistration</see> object, which can be used to track the registration.
             </summary>
             <param name="scriptURL">relative file path to the service worker script (e.g. "/sw.js")</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:BrowserAPI.IServiceWorkerContainerInProcess.DelayUntilReady(System.Threading.CancellationToken)">
+        <member name="P:BrowserAPI.IServiceWorkerContainerInProcess.Controller">
             <summary>
-            Provides a way of delaying code execution until a service worker is active. It returns a Promise that will never reject, and which waits indefinitely until the ServiceWorkerRegistration associated with the current page has an ServiceWorkerRegistration.active worker. Once that condition is met, it resolves with the ServiceWorkerRegistration.
+            Returns a <i>ServiceWorker</i> object if its state is activating or activated (the same object returned by ServiceWorkerRegistration.active).
+            This property returns null during a force-refresh request (Shift + refresh) or if there is no active worker.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IServiceWorkerContainerInProcess.Ready">
+            <summary>
+            Provides a way of delaying code execution until a service worker is active.
+            It returns a Promise that will never reject, and which waits indefinitely until the ServiceWorkerRegistration associated with the current page has an ServiceWorkerRegistration.active worker.
+            Once that condition is met, it resolves with the ServiceWorkerRegistration.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IServiceWorkerContainerInProcess.GetReady(System.Threading.CancellationToken)">
+            <summary>
+            Provides a way of delaying code execution until a service worker is active.
+            It returns a Promise that will never reject, and which waits indefinitely until the ServiceWorkerRegistration associated with the current page has an ServiceWorkerRegistration.active worker.
+            Once that condition is met, it resolves with the ServiceWorkerRegistration.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="M:BrowserAPI.IServiceWorkerContainerInProcess.GetRegistration(System.String,System.Threading.CancellationToken)">
             <summary>
-            The <i>getRegistration()</i> method of the ServiceWorkerContainer interface gets a ServiceWorkerRegistration object whose scope URL matches the provided client URL. The method returns a Promise that resolves to a ServiceWorkerRegistration or undefined.
+            The <i>getRegistration()</i> method of the ServiceWorkerContainer interface gets a ServiceWorkerRegistration object whose scope URL matches the provided client URL.
+            The method returns a Promise that resolves to a ServiceWorkerRegistration or undefined.
             </summary>
             <param name="clientUrl">The registration whose scope matches this URL will be returned. Relative URLs are resolved with the current client as the base.</param>
             <param name="cancellationToken"></param>
@@ -17630,19 +17691,16 @@
         </member>
         <member name="M:BrowserAPI.IServiceWorkerContainerInProcess.GetRegistrations(System.Threading.CancellationToken)">
             <summary>
-            The <i>getRegistrations()</i> method of the ServiceWorkerContainer interface gets all ServiceWorkerRegistrations associated with a ServiceWorkerContainer, in an array. The method returns a Promise that resolves to an array of ServiceWorkerRegistration.
+            The <i>getRegistrations()</i> method of the ServiceWorkerContainer interface gets all ServiceWorkerRegistrations associated with a ServiceWorkerContainer, in an array.
+            The method returns a Promise that resolves to an array of ServiceWorkerRegistration.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="P:BrowserAPI.IServiceWorkerContainerInProcess.Controller">
-            <summary>
-            Returns a <i>ServiceWorker</i> object if its state is activating or activated (the same object returned by ServiceWorkerRegistration.active). This property returns null during a force-refresh request (Shift + refresh) or if there is no active worker.
-            </summary>
-        </member>
         <member name="M:BrowserAPI.IServiceWorkerContainerInProcess.StartMessages">
             <summary>
-            The <i>startMessages()</i> method of the ServiceWorkerContainer interface explicitly starts the flow of messages being dispatched from a service worker to pages under its control (e.g. sent via Client.postMessage()). This can be used to react to sent messages earlier, even before that page's content has finished loading.
+            The <i>startMessages()</i> method of the ServiceWorkerContainer interface explicitly starts the flow of messages being dispatched from a service worker to pages under its control (e.g. sent via Client.postMessage()).
+            This can be used to react to sent messages earlier, even before that page's content has finished loading.
             </summary>
         </member>
         <member name="T:BrowserAPI.IServiceWorkerRegistration">
@@ -17654,55 +17712,66 @@
         </member>
         <member name="P:BrowserAPI.IServiceWorkerRegistration.Active">
             <summary>
-            The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated. This property is initially set to null.
+            The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated.
+            This property is initially set to null.
             </summary>
         </member>
         <member name="M:BrowserAPI.IServiceWorkerRegistration.GetActive(System.Threading.CancellationToken)">
             <summary>
-            The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated. This property is initially set to null.
+            The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated.
+            This property is initially set to null.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.IServiceWorkerRegistration.Installing">
             <summary>
-            The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing. This property is initially set to null.
+            The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing.
+            This property is initially set to null.
             </summary>
         </member>
         <member name="M:BrowserAPI.IServiceWorkerRegistration.GetInstalling(System.Threading.CancellationToken)">
             <summary>
-            The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing. This property is initially set to null.
+            The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing.
+            This property is initially set to null.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.IServiceWorkerRegistration.Waiting">
             <summary>
-            The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed. This property is initially set to null.
+            The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed.
+            This property is initially set to null.
             </summary>
         </member>
         <member name="M:BrowserAPI.IServiceWorkerRegistration.GetWaiting(System.Threading.CancellationToken)">
             <summary>
-            The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed. This property is initially set to null.
+            The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed.
+            This property is initially set to null.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.IServiceWorkerRegistration.Scope">
             <summary>
-            The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration. The service worker must be on the same origin as the document that registers the ServiceWorker.
+            The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration.
+            The service worker must be on the same origin as the document that registers the ServiceWorker.
             </summary>
         </member>
         <member name="M:BrowserAPI.IServiceWorkerRegistration.GetScope(System.Threading.CancellationToken)">
             <summary>
-            The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration. The service worker must be on the same origin as the document that registers the ServiceWorker.
+            The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration.
+            The service worker must be on the same origin as the document that registers the ServiceWorker.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.IServiceWorkerRegistration.UpdateViaCache">
             <summary>
-            <para>The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register. Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.</para>
+            <para>
+            The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register.
+            Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.
+            </para>
             <para>
             Returns one of the following values:<br />
             - <b>imports</b>: meaning the HTTP cache is not consulted for update of the service worker, but is consulted for importScripts.<br />
@@ -17713,7 +17782,10 @@
         </member>
         <member name="M:BrowserAPI.IServiceWorkerRegistration.GetUpdateViaCache(System.Threading.CancellationToken)">
             <summary>
-            <para>The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register. Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.</para>
+            <para>
+            The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register.
+            Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.
+            </para>
             <para>
             Returns one of the following values:<br />
             - <b>imports</b>: meaning the HTTP cache is not consulted for update of the service worker, but is consulted for importScripts.<br />
@@ -17770,27 +17842,34 @@
         </member>
         <member name="P:BrowserAPI.IServiceWorkerRegistrationInProcess.Active">
             <summary>
-            The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated. This property is initially set to null.
+            The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated.
+            This property is initially set to null.
             </summary>
         </member>
         <member name="P:BrowserAPI.IServiceWorkerRegistrationInProcess.Installing">
             <summary>
-            The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing. This property is initially set to null.
+            The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing.
+            This property is initially set to null.
             </summary>
         </member>
         <member name="P:BrowserAPI.IServiceWorkerRegistrationInProcess.Waiting">
             <summary>
-            The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed. This property is initially set to null.
+            The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed.
+            This property is initially set to null.
             </summary>
         </member>
         <member name="P:BrowserAPI.IServiceWorkerRegistrationInProcess.Scope">
             <summary>
-            The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration. The service worker must be on the same origin as the document that registers the ServiceWorker.
+            The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration.
+            The service worker must be on the same origin as the document that registers the ServiceWorker.
             </summary>
         </member>
         <member name="P:BrowserAPI.IServiceWorkerRegistrationInProcess.UpdateViaCache">
             <summary>
-            <para>The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register. Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.</para>
+            <para>
+            The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register.
+            Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.
+            </para>
             <para>
             Returns one of the following values:<br />
             - <b>imports</b>: meaning the HTTP cache is not consulted for update of the service worker, but is consulted for importScripts.<br />
@@ -17801,7 +17880,9 @@
         </member>
         <member name="M:BrowserAPI.IServiceWorkerRegistrationInProcess.Update(System.Threading.CancellationToken)">
             <summary>
-            The <i>update()</i> method of the ServiceWorkerRegistration interface attempts to update the service worker. It fetches the worker's script URL, and if the new worker is not byte-by-byte identical to the current worker, it installs the new worker. The fetch of the worker bypasses any browser caches if the previous fetch occurred over 24 hours ago.
+            The <i>update()</i> method of the ServiceWorkerRegistration interface attempts to update the service worker.
+            It fetches the worker's script URL, and if the new worker is not byte-by-byte identical to the current worker, it installs the new worker.
+            The fetch of the worker bypasses any browser caches if the previous fetch occurred over 24 hours ago.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -17815,12 +17896,14 @@
         </member>
         <member name="P:BrowserAPI.IServiceWorker.ScriptUrl">
             <summary>
-            Returns the <i>ServiceWorker</i> serialized script URL defined as part of ServiceWorkerRegistration. The URL must be on the same origin as the document that registers the ServiceWorker.
+            Returns the <i>ServiceWorker</i> serialized script URL defined as part of ServiceWorkerRegistration.
+            The URL must be on the same origin as the document that registers the ServiceWorker.
             </summary>
         </member>
         <member name="M:BrowserAPI.IServiceWorker.GetScriptUrl(System.Threading.CancellationToken)">
             <summary>
-            Returns the <i>ServiceWorker</i> serialized script URL defined as part of ServiceWorkerRegistration. The URL must be on the same origin as the document that registers the ServiceWorker.
+            Returns the <i>ServiceWorker</i> serialized script URL defined as part of ServiceWorkerRegistration.
+            The URL must be on the same origin as the document that registers the ServiceWorker.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -17833,7 +17916,8 @@
         </member>
         <member name="M:BrowserAPI.IServiceWorker.GetState(System.Threading.CancellationToken)">
             <summary>
-            The state read-only property of the <i>ServiceWorker</i> interface returns a string representing the current state of the service worker. It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.
+            The state read-only property of the <i>ServiceWorker</i> interface returns a string representing the current state of the service worker.
+            It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -17890,12 +17974,14 @@
         </member>
         <member name="P:BrowserAPI.IServiceWorkerInProcess.ScriptUrl">
             <summary>
-            Returns the <i>ServiceWorker</i> serialized script URL defined as part of ServiceWorkerRegistration. The URL must be on the same origin as the document that registers the ServiceWorker.
+            Returns the <i>ServiceWorker</i> serialized script URL defined as part of ServiceWorkerRegistration.
+            The URL must be on the same origin as the document that registers the ServiceWorker.
             </summary>
         </member>
         <member name="P:BrowserAPI.IServiceWorkerInProcess.State">
             <summary>
-            The state read-only property of the <i>ServiceWorker</i> interface returns a string representing the current state of the service worker. It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.
+            The state read-only property of the <i>ServiceWorker</i> interface returns a string representing the current state of the service worker.
+            It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.
             </summary>
         </member>
         <member name="M:BrowserAPI.IServiceWorkerInProcess.PostMessage(System.Object)">

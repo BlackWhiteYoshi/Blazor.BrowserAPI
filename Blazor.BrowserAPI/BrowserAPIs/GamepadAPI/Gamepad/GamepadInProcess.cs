@@ -59,7 +59,6 @@ public sealed class GamepadInProcess(IJSInProcessObjectReference gamepadJS) : Ga
     /// <summary>
     /// <para>An integer that is auto-incremented to be unique for each device currently connected to the system.</para>
     /// <para>This can be used to distinguish multiple controllers; a gamepad that is disconnected and reconnected will retain the same index.</para>
-    /// <para>Note: This index may differ with the index loacation of the <see cref="IGamepadAPIInProcess.GetGamepads"/> array.</para>
     /// </summary>
     public int Index => GamepadJS.Invoke<int>("getIndex");
 

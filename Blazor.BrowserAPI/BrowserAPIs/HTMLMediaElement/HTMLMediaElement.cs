@@ -68,13 +68,11 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IMediaStream?> GetSrcObject(CancellationToken cancellationToken) {
-        try {
-            IJSObjectReference mediaStream = await (await htmlMediaElementTask).InvokeTrySync<IJSObjectReference>("getSrcObject", cancellationToken);
+        IJSObjectReference?[] singleReference = await (await htmlMediaElementTask).InvokeTrySync<IJSObjectReference?[]>("getSrcObject", cancellationToken);
+        if (singleReference[0] is IJSObjectReference mediaStream)
             return new MediaStream(mediaStream);
-        }
-        catch (JSException) {
+        else
             return null;
-        }
     }
 
     /// <summary>

@@ -3,39 +3,36 @@ import { ServiceWorkerAPI } from "../ServiceWorker/ServiceWorker";
 import { blazorInvokeMethod } from "../../../Extensions/blazorExtensions";
 
 export class ServiceWorkerContainerAPI {
-    static async register(filePath: string): Promise<boolean> {
-        if (!("serviceWorker" in navigator))
-            return false;
-
+    static async register(filePath: string): Promise<void> {
         await navigator.serviceWorker.register(filePath);
-        return true;
     }
 
     static async registerWithWorkerRegistration(filePath: string): Promise<ServiceWorkerRegistrationAPI> {
-        if (!("serviceWorker" in navigator))
-            return Promise.reject("Service workers are not supported.");
-
         const serviceWorkerRegistration = await navigator.serviceWorker.register(filePath);
         return new ServiceWorkerRegistrationAPI(serviceWorkerRegistration);
     }
 
 
-    static controller(): ServiceWorkerAPI | null {
-        return ServiceWorkerAPI.create(navigator.serviceWorker.controller);
+    static getController(): [ServiceWorkerAPI] | [null] {
+        const serviceWorker = navigator.serviceWorker.controller;
+        if (serviceWorker)
+            return [DotNet.createJSObjectReference(new ServiceWorkerAPI(serviceWorker))];
+        else
+            return [null];
     }
 
-    static async ready(): Promise<ServiceWorkerRegistrationAPI> {
+    static async getReady(): Promise<ServiceWorkerRegistrationAPI> {
         const serviceWorkerRegistration = await navigator.serviceWorker.ready;
         return new ServiceWorkerRegistrationAPI(serviceWorkerRegistration);
     }
 
 
-    static async getRegistration(clientUrl: string | URL): Promise<ServiceWorkerRegistrationAPI | undefined> {
+    static async getRegistration(clientUrl: string): Promise<[ServiceWorkerRegistrationAPI] | [null]> {
         const serviceWorkerRegistration = await navigator.serviceWorker.getRegistration(clientUrl);
-        if (serviceWorkerRegistration === undefined)
-            return undefined;
-
-        return new ServiceWorkerRegistrationAPI(serviceWorkerRegistration);
+        if (serviceWorkerRegistration)
+            return [DotNet.createJSObjectReference(new ServiceWorkerRegistrationAPI(serviceWorkerRegistration))];
+        else
+            return [null];
     }
 
     static async getRegistrations(): Promise<ServiceWorkerRegistrationAPI[]> {
@@ -63,7 +60,7 @@ export class ServiceWorkerContainerAPI {
     // controllerchange event
 
     static #oncontrollerchangeCallback() {
-        blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeControllerChange");
+        blazorInvokeMethod(ServiceWorkerContainerAPI.#eventTrigger, ServiceWorkerContainerAPI.#isEventTriggerSync, "InvokeControllerChange");
     }
 
     static activateOncontrollerchange() {
@@ -77,8 +74,8 @@ export class ServiceWorkerContainerAPI {
 
     // message event
 
-    static #onmessageCallback() {
-        blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeMessage");
+    static #onmessageCallback(event: MessageEvent) {
+        blazorInvokeMethod(ServiceWorkerContainerAPI.#eventTrigger, ServiceWorkerContainerAPI.#isEventTriggerSync, "InvokeMessage", event.data);
     }
 
     static activateOnMessage() {

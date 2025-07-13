@@ -7,9 +7,9 @@ export class AccelerometerAPI extends SensorAPI {
         super(accelerometer);
     }
 
-    static create(frequency: number, referenceFrame: "device" | "screen"): AccelerometerAPI | null {
+    static create(frequency: number, referenceFrame: "device" | "screen"): [AccelerometerAPI] | [null] {
         if (!("Accelerometer" in window))
-            return null;
+            return [null];
 
         let options: MotionSensorOptions;
         if (frequency > 0)
@@ -17,7 +17,7 @@ export class AccelerometerAPI extends SensorAPI {
         else
             options = { referenceFrame };
 
-        return new AccelerometerAPI(new Accelerometer(options));
+        return [DotNet.createJSObjectReference(new AccelerometerAPI(new Accelerometer(options)))];
     }
 
 

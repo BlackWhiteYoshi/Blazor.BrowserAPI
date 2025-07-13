@@ -7,9 +7,9 @@ export class AmbientLightSensorAPI extends SensorAPI {
         super(ambientLightSensor);
     }
 
-    static create(frequency: number): AmbientLightSensorAPI | null {
+    static create(frequency: number): [AmbientLightSensorAPI] | [null] {
         if (!("AmbientLightSensor" in window))
-            return null;
+            return [null];
 
         let options: SensorOptions;
         if (frequency > 0)
@@ -17,7 +17,7 @@ export class AmbientLightSensorAPI extends SensorAPI {
         else
             options = {};
 
-        return new AmbientLightSensorAPI(new AmbientLightSensor(options));
+        return [DotNet.createJSObjectReference(new AmbientLightSensorAPI(new AmbientLightSensor(options)))];
     }
 
 

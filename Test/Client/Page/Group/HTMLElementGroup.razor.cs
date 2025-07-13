@@ -174,13 +174,13 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     public const string BUTTON_GET_OFFSETPARENT_PROPERTY = "htmlelement-get-offsetparent-property";
     private async Task GetOffsetParent_Property() {
         await using IHTMLElement? offsetParent = await HTMLElement.OffsetParent;
-        labelOutput = (offsetParent != null).ToString();
+        labelOutput = (offsetParent is not null).ToString();
     }
 
     public const string BUTTON_GET_OFFSETPARENT_METHOD = "htmlelement-get-offsetparent-method";
     private async Task GetOffsetParent_Method() {
         await using IHTMLElement? offsetParent = await HTMLElement.GetOffsetParent(default);
-        labelOutput = (offsetParent != null).ToString();
+        labelOutput = (offsetParent is not null).ToString();
     }
 
 

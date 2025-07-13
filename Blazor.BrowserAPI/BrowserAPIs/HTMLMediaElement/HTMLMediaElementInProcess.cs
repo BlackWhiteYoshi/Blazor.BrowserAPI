@@ -40,13 +40,11 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// </summary>
     public IMediaStreamInProcess? SrcObject {
         get {
-            try {
-                IJSInProcessObjectReference mediaStream = htmlMediaElementJS.Invoke<IJSInProcessObjectReference>("getSrcObject");
+            IJSInProcessObjectReference?[] singleReference = htmlMediaElementJS.Invoke<IJSInProcessObjectReference?[]>("getSrcObject");
+            if (singleReference[0] is IJSInProcessObjectReference mediaStream)
                 return new MediaStreamInProcess(mediaStream);
-            }
-            catch (JSException) {
+            else
                 return null;
-            }
         }
         set => htmlMediaElementJS.InvokeVoid("setSrcObject", [value?.MediaStreamJS]);
     }

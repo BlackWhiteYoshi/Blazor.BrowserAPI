@@ -20,16 +20,19 @@ public sealed class GamepadAPI(IModuleManager moduleManager) : IGamepadAPI, IDis
 
     /// <summary>
     /// <para>Returns an array of <see cref="IGamepad"/> objects, one for each connected gamepad.</para>
-    /// <para>Elements in the array may shift if a gamepad disconnects during a session, so the <see cref="IGamepad.Index"/> of remaining gamepads may not match.</para>
+    /// <para>Elements in the array may be <i>null</i> if a gamepad disconnects during a session, so that the remaining gamepads retain the same index.</para>
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<IGamepad[]> GetGamepads(CancellationToken cancellationToken = default) {
-        IJSObjectReference[] gamepads = await moduleManager.InvokeTrySync<IJSObjectReference[]>("GamepadInterfaceAPI.getGamepads", cancellationToken);
+    public async ValueTask<IGamepad?[]> GetGamepads(CancellationToken cancellationToken = default) {
+        IJSObjectReference?[] gamepads = await moduleManager.InvokeTrySync<IJSObjectReference?[]>("GamepadInterfaceAPI.getGamepads", cancellationToken);
 
-        Gamepad[] result = new Gamepad[gamepads.Length];
+        Gamepad?[] result = new Gamepad?[gamepads.Length];
         for (int i = 0; i < result.Length; i++)
-            result[i] = new Gamepad(gamepads[i]);
+            if (gamepads[i] != null)
+                result[i] = new Gamepad(gamepads[i]!);
+            else
+                result[i] = null;
         return result;
     }
 

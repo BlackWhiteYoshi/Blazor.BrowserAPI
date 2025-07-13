@@ -16,13 +16,11 @@ public sealed class SensorAPIInProcess(IModuleManager moduleManager) : ISensorAP
     /// <param name="frequency">The desired number of times per second a sample should be taken, meaning the number of times per second the reading event will be called.</param>
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public IAmbientLightSensorInProcess? CreateAmbientLightSensor(double frequency = 0) {
-        try {
-            IJSInProcessObjectReference ambientLightSensorJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("AmbientLightSensorAPI.create", [frequency]);
+        IJSInProcessObjectReference?[] singleReference = moduleManager.InvokeSync<IJSInProcessObjectReference?[]>("AmbientLightSensorAPI.create", [frequency]);
+        if (singleReference[0] is IJSInProcessObjectReference ambientLightSensorJS)
             return new AmbientLightSensorInProcess(ambientLightSensorJS);
-        }
-        catch (JSException) {
+        else
             return null;
-        }
     }
 
 
@@ -33,13 +31,11 @@ public sealed class SensorAPIInProcess(IModuleManager moduleManager) : ISensorAP
     /// <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public IGyroscopeInProcess? CreateGyroscope(double frequency = 0, string referenceFrame = "device") {
-        try {
-            IJSInProcessObjectReference gyroscopeJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("GyroscopeAPI.create", [frequency, referenceFrame]);
+        IJSInProcessObjectReference?[] singleReference = moduleManager.InvokeSync<IJSInProcessObjectReference?[]>("GyroscopeAPI.create", [frequency, referenceFrame]);
+        if (singleReference[0] is IJSInProcessObjectReference gyroscopeJS)
             return new GyroscopeInProcess(gyroscopeJS);
-        }
-        catch (JSException) {
+        else
             return null;
-        }
     }
 
 
@@ -50,13 +46,11 @@ public sealed class SensorAPIInProcess(IModuleManager moduleManager) : ISensorAP
     /// <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public IAccelerometerInProcess? CreateAccelerometer(double frequency = 0, string referenceFrame = "device") {
-        try {
-            IJSInProcessObjectReference accelerometerJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("AccelerometerAPI.create", [frequency, referenceFrame]);
+        IJSInProcessObjectReference?[] singleReference = moduleManager.InvokeSync<IJSInProcessObjectReference?[]>("AccelerometerAPI.create", [frequency, referenceFrame]);
+        if (singleReference[0] is IJSInProcessObjectReference accelerometerJS)
             return new AccelerometerInProcess(accelerometerJS);
-        }
-        catch (JSException) {
+        else
             return null;
-        }
     }
 
     /// <summary>
@@ -66,13 +60,11 @@ public sealed class SensorAPIInProcess(IModuleManager moduleManager) : ISensorAP
     /// <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public ILinearAccelerationSensorInProcess? CreateLinearAccelerationSensor(double frequency = 0, string referenceFrame = "device") {
-        try {
-            IJSInProcessObjectReference linearAccelerationSensorJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("LinearAccelerationSensorAPI.create", [frequency, referenceFrame]);
+        IJSInProcessObjectReference?[] singleReference = moduleManager.InvokeSync<IJSInProcessObjectReference?[]>("LinearAccelerationSensorAPI.create", [frequency, referenceFrame]);
+        if (singleReference[0] is IJSInProcessObjectReference linearAccelerationSensorJS)
             return new LinearAccelerationSensorInProcess(linearAccelerationSensorJS);
-        }
-        catch (JSException) {
+        else
             return null;
-        }
     }
 
     /// <summary>
@@ -82,13 +74,11 @@ public sealed class SensorAPIInProcess(IModuleManager moduleManager) : ISensorAP
     /// <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public IGravitySensorInProcess? CreateGravitySensor(double frequency = 0, string referenceFrame = "device") {
-        try {
-            IJSInProcessObjectReference gravitySensorJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("GravitySensorAPI.create", [frequency, referenceFrame]);
+        IJSInProcessObjectReference?[] singleReference = moduleManager.InvokeSync<IJSInProcessObjectReference?[]>("GravitySensorAPI.create", [frequency, referenceFrame]);
+        if (singleReference[0] is IJSInProcessObjectReference gravitySensorJS)
             return new GravitySensorInProcess(gravitySensorJS);
-        }
-        catch (JSException) {
+        else
             return null;
-        }
     }
 
 
@@ -99,13 +89,11 @@ public sealed class SensorAPIInProcess(IModuleManager moduleManager) : ISensorAP
     /// <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public IAbsoluteOrientationSensorInProcess? CreateAbsoluteOrientationSensor(double frequency = 0, string referenceFrame = "device") {
-        try {
-            IJSInProcessObjectReference absoluteOrientationSensorJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("AbsoluteOrientationSensorAPI.create", [frequency, referenceFrame]);
+        IJSInProcessObjectReference?[] singleReference = moduleManager.InvokeSync<IJSInProcessObjectReference?[]>("AbsoluteOrientationSensorAPI.create", [frequency, referenceFrame]);
+        if (singleReference[0] is IJSInProcessObjectReference absoluteOrientationSensorJS)
             return new AbsoluteOrientationSensorInProcess(absoluteOrientationSensorJS);
-        }
-        catch (JSException) {
+        else
             return null;
-        }
     }
 
     /// <summary>
@@ -115,13 +103,11 @@ public sealed class SensorAPIInProcess(IModuleManager moduleManager) : ISensorAP
     /// <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public IRelativeOrientationSensorInProcess? CreateRelativeOrientationSensor(double frequency = 0, string referenceFrame = "device") {
-        try {
-            IJSInProcessObjectReference relativeOrientationSensorJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("RelativeOrientationSensorAPI.create", [frequency, referenceFrame]);
+        IJSInProcessObjectReference?[] singleReference = moduleManager.InvokeSync<IJSInProcessObjectReference?[]>("RelativeOrientationSensorAPI.create", [frequency, referenceFrame]);
+        if (singleReference[0] is IJSInProcessObjectReference relativeOrientationSensorJS)
             return new RelativeOrientationSensorInProcess(relativeOrientationSensorJS);
-        }
-        catch (JSException) {
+        else
             return null;
-        }
     }
 
 
@@ -132,13 +118,11 @@ public sealed class SensorAPIInProcess(IModuleManager moduleManager) : ISensorAP
     /// <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public IMagnetometerInProcess? CreateMagnetometer(double frequency = 0, string referenceFrame = "device") {
-        try {
-            IJSInProcessObjectReference magnetometerJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("MagnetometerAPI.create", [frequency, referenceFrame]);
+        IJSInProcessObjectReference?[] singleReference = moduleManager.InvokeSync<IJSInProcessObjectReference?[]>("MagnetometerAPI.create", [frequency, referenceFrame]);
+        if (singleReference[0] is IJSInProcessObjectReference magnetometerJS)
             return new MagnetometerInProcess(magnetometerJS);
-        }
-        catch (JSException) {
+        else
             return null;
-        }
     }
 
     /// <summary>
@@ -154,12 +138,10 @@ public sealed class SensorAPIInProcess(IModuleManager moduleManager) : ISensorAP
     /// <param name="referenceFrame">Either 'device' or 'screen'. The default is 'device'.</param>
     /// <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
     public IUncalibratedMagnetometerInProcess? CreateUncalibratedMagnetometer(double frequency = 0, string referenceFrame = "device") {
-        try {
-            IJSInProcessObjectReference uncalibratedMagnetometerJS = moduleManager.InvokeSync<IJSInProcessObjectReference>("UncalibratedMagnetometerAPI.create", [frequency, referenceFrame]);
+        IJSInProcessObjectReference?[] singleReference = moduleManager.InvokeSync<IJSInProcessObjectReference?[]>("UncalibratedMagnetometerAPI.create", [frequency, referenceFrame]);
+        if (singleReference[0] is IJSInProcessObjectReference uncalibratedMagnetometerJS)
             return new UncalibratedMagnetometerInProcess(uncalibratedMagnetometerJS);
-        }
-        catch (JSException) {
+        else
             return null;
-        }
     }
 }

@@ -9,24 +9,36 @@ export class ServiceWorkerRegistrationAPI {
     }
 
 
-    active(): ServiceWorkerAPI | null {
-        return ServiceWorkerAPI.create(this.#serviceWorkerRegistration.active);
+    getActive(): [ServiceWorkerAPI] | [null] {
+        const serviceWorker = this.#serviceWorkerRegistration.active;
+        if (serviceWorker)
+            return [DotNet.createJSObjectReference(new ServiceWorkerAPI(serviceWorker))];
+        else
+            return [null];
     }
 
-    installing(): ServiceWorkerAPI | null {
-        return ServiceWorkerAPI.create(this.#serviceWorkerRegistration.installing);
+    getInstalling(): [ServiceWorkerAPI] | [null] {
+        const serviceWorker = this.#serviceWorkerRegistration.installing;
+        if (serviceWorker)
+            return [DotNet.createJSObjectReference(new ServiceWorkerAPI(serviceWorker))];
+        else
+            return [null];
     }
 
-    waiting(): ServiceWorkerAPI | null {
-        return ServiceWorkerAPI.create(this.#serviceWorkerRegistration.waiting);
+    getWaiting(): [ServiceWorkerAPI] | [null] {
+        const serviceWorker = this.#serviceWorkerRegistration.waiting;
+        if (serviceWorker)
+            return [DotNet.createJSObjectReference(new ServiceWorkerAPI(serviceWorker))];
+        else
+            return [null];
     }
 
 
-    scope(): string {
+    getScope(): string {
         return this.#serviceWorkerRegistration.scope;
     }
 
-    updateViaCache(): string {
+    getUpdateViaCache(): string {
         return this.#serviceWorkerRegistration.updateViaCache;
     }
 
@@ -37,7 +49,7 @@ export class ServiceWorkerRegistrationAPI {
 
     async update(): Promise<ServiceWorkerRegistrationAPI> {
         // wrong return type definition for update(): expected ServiceWorkerRegistration, actually void
-        const updatedServiceWorkerRegistration = await this.#serviceWorkerRegistration.update() as unknown as ServiceWorkerRegistration;
+        const updatedServiceWorkerRegistration = <ServiceWorkerRegistration><unknown>await this.#serviceWorkerRegistration.update();
         return new ServiceWorkerRegistrationAPI(updatedServiceWorkerRegistration);
     }
 

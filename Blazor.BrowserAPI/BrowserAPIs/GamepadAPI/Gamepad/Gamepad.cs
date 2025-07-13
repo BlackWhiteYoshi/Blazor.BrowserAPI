@@ -98,14 +98,12 @@ public sealed class Gamepad(IJSObjectReference gamepadJS) : GamepadBase(gamepadJ
     /// <summary>
     /// <para>An integer that is auto-incremented to be unique for each device currently connected to the system.</para>
     /// <para>This can be used to distinguish multiple controllers; a gamepad that is disconnected and reconnected will retain the same index.</para>
-    /// <para>Note: This index may differ with the index loacation of the <see cref="IGamepadAPIInProcess.GetGamepads"/> array.</para>
     /// </summary>
     public ValueTask<int> Index => GetIndex(default);
 
     /// <summary>
     /// <para>An integer that is auto-incremented to be unique for each device currently connected to the system.</para>
     /// <para>This can be used to distinguish multiple controllers; a gamepad that is disconnected and reconnected will retain the same index.</para>
-    /// <para>Note: This index may differ with the index loacation of the <see cref="IGamepadAPIInProcess.GetGamepads"/> array.</para>
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>

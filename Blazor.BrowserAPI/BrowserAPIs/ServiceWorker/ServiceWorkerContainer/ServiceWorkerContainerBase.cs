@@ -1,6 +1,7 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 
 namespace BrowserAPI.Implementation;
 
@@ -23,31 +24,7 @@ public abstract class ServiceWorkerContainerBase(IModuleManager moduleManager) :
     /// <param name="scriptURL">relative file path to the service worker script (e.g. "/sw.js")</param>
     /// <param name="cancellationToken"></param>
     /// <returns>true, if service worker is supported, otherwise false</returns>
-    public ValueTask<bool> Register(string scriptURL, CancellationToken cancellationToken = default) => moduleManager.InvokeAsync<bool>("ServiceWorkerContainerAPI.register", cancellationToken, [scriptURL]);
-
-    private protected async ValueTask<IJSObjectReference?> RegisterWithWorkerRegistrationBase(string scriptURL, CancellationToken cancellationToken) {
-        try {
-            return await moduleManager.InvokeAsync<IJSObjectReference>("ServiceWorkerContainerAPI.registerWithWorkerRegistration", cancellationToken, [scriptURL]);
-        }
-        catch (JSException) {
-            return null;
-        }
-    }
-
-
-    private protected ValueTask<IJSObjectReference> DelayUntilReadyBase(CancellationToken cancellationToken) => moduleManager.InvokeAsync<IJSObjectReference>("ServiceWorkerContainerAPI.ready", cancellationToken);
-
-
-    private protected async ValueTask<IJSObjectReference?> GetRegistrationBase(string clientUrl, CancellationToken cancellationToken) {
-        try {
-            return await moduleManager.InvokeAsync<IJSObjectReference>("ServiceWorkerContainerAPI.getRegistration", cancellationToken, [clientUrl]);
-        }
-        catch (JSException) {
-            return null;
-        }
-    }
-
-    private protected ValueTask<IJSObjectReference[]> GetRegistrationsBase(CancellationToken cancellationToken) => moduleManager.InvokeAsync<IJSObjectReference[]>("ServiceWorkerContainerAPI.getRegistrations", cancellationToken);
+    public ValueTask Register(string scriptURL, CancellationToken cancellationToken = default) => moduleManager.InvokeAsync("ServiceWorkerContainerAPI.register", cancellationToken, [scriptURL]);
 
 
     #region Events
@@ -56,7 +33,7 @@ public abstract class ServiceWorkerContainerBase(IModuleManager moduleManager) :
     [method: DynamicDependency(nameof(InvokeMessage))]
     private sealed class EventTrigger(ServiceWorkerContainerBase serviceWorkerContainer) {
         [JSInvokable] public void InvokeControllerChange() => serviceWorkerContainer._onControllerChange?.Invoke();
-        [JSInvokable] public void InvokeMessage(object message) => serviceWorkerContainer._onMessage?.Invoke(message.ToString()!);
+        [JSInvokable] public void InvokeMessage(JsonElement message) => serviceWorkerContainer._onMessage?.Invoke(message);
     }
 
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
@@ -95,12 +72,12 @@ public abstract class ServiceWorkerContainerBase(IModuleManager moduleManager) :
         }
     }
 
-    private Action<string>? _onMessage;
+    private Action<JsonElement>? _onMessage;
     /// <summary>
     /// <para>The message event is used in a page controlled by a service worker to receive messages from the service worker.</para>
-    /// <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/message_event">MessageEvent</see> as json.</para>
+    /// <para>Parameter is <see href="https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent/data">MessageEvent.data</see> as json.</para>
     /// </summary>
-    public event Action<string> OnMessage {
+    public event Action<JsonElement> OnMessage {
         add {
             if (_onMessage == null)
                 _ = ActivateJSEvent("ServiceWorkerContainerAPI.activateOnMessage").Preserve();

@@ -27,12 +27,12 @@ export class HTMLMediaElementAPI {
         this.#htmlMediaElement.src = value;
     }
 
-    getSrcObject(): MediaStreamAPI | null {
+    getSrcObject(): [MediaStreamAPI] | [null] {
         const result = this.#htmlMediaElement.srcObject;
         if (result instanceof MediaStream)
-            return new MediaStreamAPI(result);
+            return [DotNet.createJSObjectReference(new MediaStreamAPI(result))];
         else
-            return null;
+            return [null];
     }
 
     setSrcObject(value: MediaStreamAPI | null) {

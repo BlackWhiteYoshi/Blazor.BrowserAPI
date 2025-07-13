@@ -4,8 +4,8 @@ namespace BrowserAPI.UnitTest;
 
 [ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class SensorAPITest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
-    public override async Task InitializeAsync() {
-        await base.InitializeAsync();
+    public override async Task SetUp() {
+        await base.SetUp();
         await BrowserContext.GrantPermissionsAsync(["ambient-light-sensor", "gyroscope", "accelerometer", "magnetometer"]);
     }
 
@@ -70,7 +70,7 @@ public sealed class SensorAPITest(PlayWrightFixture playWrightFixture) : PlayWri
         await ExecuteTest(SensorAPIGroup.BUTTON_START);
 
         string? result = await Page.GetByTestId(SensorAPIGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result!).IsEmpty();
+        await Assert.That(result).IsEqualTo(SensorAPIGroup.TEST_SENSOR_START);
     }
 
     [Test]
@@ -78,7 +78,7 @@ public sealed class SensorAPITest(PlayWrightFixture playWrightFixture) : PlayWri
         await ExecuteTest(SensorAPIGroup.BUTTON_STOP);
 
         string? result = await Page.GetByTestId(SensorAPIGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result!).IsEmpty();
+        await Assert.That(result).IsEqualTo(SensorAPIGroup.TEST_SENSOR_STOP);
     }
 
 
@@ -86,26 +86,71 @@ public sealed class SensorAPITest(PlayWrightFixture playWrightFixture) : PlayWri
 
     [Test]
     public async Task RegisterOnError() {
+        await Page.EvaluateAsync("""
+            var sensor;
+
+            const OriginalGyroscope = Gyroscope;
+            window.Gyroscope = function (options) {
+                const instance = new OriginalGyroscope(options);
+                sensor = instance;
+                return instance;
+            };
+            Gyroscope.prototype = OriginalGyroscope.prototype;
+            Object.setPrototypeOf(Gyroscope, OriginalGyroscope);
+            """);
+        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(SensorAPIGroup.BUTTON_REGISTER_ON_ERROR);
+        await Page.EvaluateAsync("sensor.dispatchEvent(new Event('error'));");
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(SensorAPIGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result!).IsEmpty();
+        await Assert.That(result).IsEqualTo(SensorAPIGroup.TEST_SENSOR_ERROR_EVENT);
     }
 
     [Test]
     public async Task RegisterOnActivate() {
+        await Page.EvaluateAsync("""
+            var sensor;
+
+            const OriginalGyroscope = Gyroscope;
+            window.Gyroscope = function (options) {
+                const instance = new OriginalGyroscope(options);
+                sensor = instance;
+                return instance;
+            };
+            Gyroscope.prototype = OriginalGyroscope.prototype;
+            Object.setPrototypeOf(Gyroscope, OriginalGyroscope);
+            """);
+        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(SensorAPIGroup.BUTTON_REGISTER_ON_ACTIVATE);
+        await Page.EvaluateAsync("sensor.dispatchEvent(new Event('activate'));");
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(SensorAPIGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result!).IsEmpty();
+        await Assert.That(result).IsEqualTo(SensorAPIGroup.TEST_SENSOR_ACTIVATE_EVENT);
     }
 
     [Test]
     public async Task RegisterOnReading() {
+        await Page.EvaluateAsync("""
+            var sensor;
+
+            const OriginalGyroscope = Gyroscope;
+            window.Gyroscope = function (options) {
+                const instance = new OriginalGyroscope(options);
+                sensor = instance;
+                return instance;
+            };
+            Gyroscope.prototype = OriginalGyroscope.prototype;
+            Object.setPrototypeOf(Gyroscope, OriginalGyroscope);
+            """);
+        await Task.Delay(SMALL_WAIT_TIME);
         await ExecuteTest(SensorAPIGroup.BUTTON_REGISTER_ON_READING);
+        await Page.EvaluateAsync("sensor.dispatchEvent(new Event('reading'));");
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(SensorAPIGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result!).IsEmpty();
+        await Assert.That(result).IsEqualTo(SensorAPIGroup.TEST_SENSOR_READING_EVENT);
     }
 
 

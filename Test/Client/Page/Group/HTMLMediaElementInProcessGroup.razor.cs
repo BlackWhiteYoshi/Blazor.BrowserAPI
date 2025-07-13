@@ -4,6 +4,7 @@ namespace BrowserAPI.Test.Client;
 
 public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDisposable {
     public const string TEST_SRC = "<src>-test-inprocess";
+    public const string TEST_SET_SRC_OBJECT = "set src object done";
     public const string TEST_PRELOAD = "none";
     public const double TEST_CURRENT_TIME = 11.0;
     public const double TEST_VOLUME = 0.7;
@@ -48,12 +49,14 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_SRC_OBJECT = "htmlmediaelement-inprocess-get-src-object";
     private void GetSrcObject() {
         IMediaStreamInProcess? value = AudioElement.SrcObject;
+        labelOutput = (value is not null).ToString();
         value?.Dispose();
     }
 
     public const string BUTTON_SET_SRC_OBJECT = "htmlmediaelement-inprocess-set-src-object";
     private void SetSrcObject() {
         AudioElement.SrcObject = null;
+        labelOutput = TEST_SET_SRC_OBJECT;
     }
 
 

@@ -17,8 +17,9 @@ public sealed partial class GamepadAPIInProcessGroup : ComponentBase {
 
     public const string BUTTON_GET_GAMEPADS = "gamepad-inprocess-get-gamepads";
     private void GetGamepads() {
-        IGamepadInProcess[] gamepads = GamepadAPI.GetGamepads();
-        labelOutput = gamepads.Length.ToString();
+        IGamepadInProcess?[] gamepadSlots = GamepadAPI.GetGamepads();
+        IGamepadInProcess[] gamepads = [.. gamepadSlots.OfType<IGamepadInProcess>()];
+        labelOutput = $"Slots = {gamepadSlots.Length}, Connected = {gamepads.Length}";
 
         gamepads.Dispose();
     }
@@ -46,7 +47,8 @@ public sealed partial class GamepadAPIInProcessGroup : ComponentBase {
 
     public const string BUTTON_GET_AXES = "gamepad-inprocess-get-axes";
     private void GetAxes() {
-        IGamepadInProcess[] gamepads = GamepadAPI.GetGamepads();
+        IGamepadInProcess?[] gamepadSlots = GamepadAPI.GetGamepads();
+        IGamepadInProcess[] gamepads = [.. gamepadSlots.OfType<IGamepadInProcess>()];
         if (gamepads.Length == 0)
             return;
         IGamepadInProcess gamepad = gamepads[0];
@@ -59,7 +61,8 @@ public sealed partial class GamepadAPIInProcessGroup : ComponentBase {
 
     public const string BUTTON_GET_BUTTONS = "gamepad-inprocess-get-buttons";
     private void GetButtons() {
-        IGamepadInProcess[] gamepads = GamepadAPI.GetGamepads();
+        IGamepadInProcess?[] gamepadSlots = GamepadAPI.GetGamepads();
+        IGamepadInProcess[] gamepads = [.. gamepadSlots.OfType<IGamepadInProcess>()];
         if (gamepads.Length == 0)
             return;
         IGamepadInProcess gamepad = gamepads[0];
@@ -73,7 +76,8 @@ public sealed partial class GamepadAPIInProcessGroup : ComponentBase {
 
     public const string BUTTON_GET_CONNECTED = "gamepad-inprocess-get-connected";
     public void GetConnected() {
-        IGamepadInProcess[] gamepads = GamepadAPI.GetGamepads();
+        IGamepadInProcess?[] gamepadSlots = GamepadAPI.GetGamepads();
+        IGamepadInProcess[] gamepads = [.. gamepadSlots.OfType<IGamepadInProcess>()];
         if (gamepads.Length == 0)
             return;
         IGamepadInProcess gamepad = gamepads[0];
@@ -86,7 +90,8 @@ public sealed partial class GamepadAPIInProcessGroup : ComponentBase {
 
     public const string BUTTON_GET_ID = "gamepad-inprocess-get-id";
     public void GetId() {
-        IGamepadInProcess[] gamepads = GamepadAPI.GetGamepads();
+        IGamepadInProcess?[] gamepadSlots = GamepadAPI.GetGamepads();
+        IGamepadInProcess[] gamepads = [.. gamepadSlots.OfType<IGamepadInProcess>()];
         if (gamepads.Length == 0)
             return;
         IGamepadInProcess gamepad = gamepads[0];
@@ -99,7 +104,8 @@ public sealed partial class GamepadAPIInProcessGroup : ComponentBase {
 
     public const string BUTTON_GET_INDEX = "gamepad-inprocess-get-index";
     public void GetIndex() {
-        IGamepadInProcess[] gamepads = GamepadAPI.GetGamepads();
+        IGamepadInProcess?[] gamepadSlots = GamepadAPI.GetGamepads();
+        IGamepadInProcess[] gamepads = [.. gamepadSlots.OfType<IGamepadInProcess>()];
         if (gamepads.Length == 0)
             return;
         IGamepadInProcess gamepad = gamepads[0];
@@ -112,7 +118,8 @@ public sealed partial class GamepadAPIInProcessGroup : ComponentBase {
 
     public const string BUTTON_GET_MAPPING = "gamepad-inprocess-get-mapping";
     public void GetMapping() {
-        IGamepadInProcess[] gamepads = GamepadAPI.GetGamepads();
+        IGamepadInProcess?[] gamepadSlots = GamepadAPI.GetGamepads();
+        IGamepadInProcess[] gamepads = [.. gamepadSlots.OfType<IGamepadInProcess>()];
         if (gamepads.Length == 0)
             return;
         IGamepadInProcess gamepad = gamepads[0];
@@ -125,7 +132,8 @@ public sealed partial class GamepadAPIInProcessGroup : ComponentBase {
 
     public const string BUTTON_GET_TIMESTAMP = "gamepad-inprocess-get-timestamp";
     public void GetTimestamp() {
-        IGamepadInProcess[] gamepads = GamepadAPI.GetGamepads();
+        IGamepadInProcess?[] gamepadSlots = GamepadAPI.GetGamepads();
+        IGamepadInProcess[] gamepads = [.. gamepadSlots.OfType<IGamepadInProcess>()];
         if (gamepads.Length == 0)
             return;
         IGamepadInProcess gamepad = gamepads[0];
@@ -139,7 +147,8 @@ public sealed partial class GamepadAPIInProcessGroup : ComponentBase {
 
     public const string BUTTON_GET_VIBRATION_ACTUATOR_EFFECTS = "gamepad-inprocess-get-vibration-actuator-effects";
     public void GetVibrationActuatorEffects() {
-        IGamepadInProcess[] gamepads = GamepadAPI.GetGamepads();
+        IGamepadInProcess?[] gamepadSlots = GamepadAPI.GetGamepads();
+        IGamepadInProcess[] gamepads = [.. gamepadSlots.OfType<IGamepadInProcess>()];
         if (gamepads.Length == 0)
             return;
         IGamepadInProcess gamepad = gamepads[0];
@@ -152,7 +161,8 @@ public sealed partial class GamepadAPIInProcessGroup : ComponentBase {
 
     public const string BUTTON_PLAY_VIBRATION_ACTUATOR_EFFECT = "gamepad-inprocess-play-vibration-actuator-effect";
     public async Task PlayVibrationActuatorEffect() {
-        IGamepadInProcess[] gamepads = GamepadAPI.GetGamepads();
+        IGamepadInProcess?[] gamepadSlots = GamepadAPI.GetGamepads();
+        IGamepadInProcess[] gamepads = [.. gamepadSlots.OfType<IGamepadInProcess>()];
         if (gamepads.Length == 0)
             return;
         IGamepadInProcess gamepad = gamepads[0];
@@ -165,7 +175,8 @@ public sealed partial class GamepadAPIInProcessGroup : ComponentBase {
 
     public const string BUTTON_RESET_VIBRATION_ACTUATOR = "gamepad-inprocess-reset-vibration-actuator";
     public async Task ResetVibrationActuator() {
-        IGamepadInProcess[] gamepads = GamepadAPI.GetGamepads();
+        IGamepadInProcess?[] gamepadSlots = GamepadAPI.GetGamepads();
+        IGamepadInProcess[] gamepads = [.. gamepadSlots.OfType<IGamepadInProcess>()];
         if (gamepads.Length == 0)
             return;
         IGamepadInProcess gamepad = gamepads[0];

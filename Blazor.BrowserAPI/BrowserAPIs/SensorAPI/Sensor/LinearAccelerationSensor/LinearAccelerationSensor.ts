@@ -7,9 +7,9 @@ export class LinearAccelerationSensorAPI extends SensorAPI {
         super(linearAccelerationSensor);
     }
 
-    static create(frequency: number, referenceFrame: "device" | "screen"): LinearAccelerationSensorAPI | null {
+    static create(frequency: number, referenceFrame: "device" | "screen"): [LinearAccelerationSensorAPI] | [null] {
         if (!("LinearAccelerationSensor" in window))
-            return null;
+            return [null];
 
         let options: MotionSensorOptions;
         if (frequency > 0)
@@ -17,7 +17,7 @@ export class LinearAccelerationSensorAPI extends SensorAPI {
         else
             options = { referenceFrame };
 
-        return new LinearAccelerationSensorAPI(new LinearAccelerationSensor(options));
+        return [DotNet.createJSObjectReference(new LinearAccelerationSensorAPI(new LinearAccelerationSensor(options)))];
     }
 
 

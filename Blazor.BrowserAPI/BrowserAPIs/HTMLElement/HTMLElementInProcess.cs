@@ -119,13 +119,11 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     public IHTMLElementInProcess? OffsetParent {
         get {
-            try {
-                IJSInProcessObjectReference htmlElement = htmlElementJS.Invoke<IJSInProcessObjectReference>("getOffsetParent");
+            IJSInProcessObjectReference?[] singleReference = htmlElementJS.Invoke<IJSInProcessObjectReference?[]>("getOffsetParent");
+            if (singleReference[0] is IJSInProcessObjectReference htmlElement)
                 return new HTMLElementInProcess(htmlElement);
-            }
-            catch (JSException) {
+            else
                 return null;
-            }
         }
     }
 

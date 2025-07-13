@@ -4,6 +4,7 @@ namespace BrowserAPI.Test.Client;
 
 public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposable {
     public const string TEST_SRC = "<src>-test";
+    public const string TEST_SET_SRC_OBJECT = "set src object done";
     public const string TEST_PRELOAD = "none";
     public const double TEST_CURRENT_TIME = 10.0;
     public const double TEST_VOLUME = 0.6;
@@ -54,6 +55,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_GET_SRC_OBJECT_PROPERTY = "htmlmediaelement-get-src-object-property";
     private async Task GetSrcObject_Property() {
         IMediaStream? value = await AudioElement.SrcObject;
+        labelOutput = (value is not null).ToString();
         if (value != null)
             await value.DisposeAsync();
     }
@@ -61,6 +63,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_GET_SRC_OBJECT_METHOD = "htmlmediaelement-get-src-object-method";
     private async Task GetSrcObject_Method() {
         IMediaStream? value = await AudioElement.GetSrcObject(default);
+        labelOutput = (value is not null).ToString();
         if (value != null)
             await value.DisposeAsync();
     }
@@ -68,6 +71,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_SET_SRC_OBJECT = "htmlmediaelement-set-src-object";
     private async Task SetSrcObject() {
         await AudioElement.SetSrcObject(null);
+        labelOutput = TEST_SET_SRC_OBJECT;
     }
 
 

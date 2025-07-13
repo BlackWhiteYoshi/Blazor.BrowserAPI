@@ -7,9 +7,9 @@ export class MagnetometerAPI extends SensorAPI {
         super(magnetometer);
     }
 
-    static create(frequency: number, referenceFrame: "device" | "screen"): MagnetometerAPI | null {
+    static create(frequency: number, referenceFrame: "device" | "screen"): [MagnetometerAPI] | [null] {
         if (!("Magnetometer" in window))
-            return null;
+            return [null];
 
         let options: MotionSensorOptions;
         if (frequency > 0)
@@ -17,7 +17,7 @@ export class MagnetometerAPI extends SensorAPI {
         else
             options = { referenceFrame };
 
-        return new MagnetometerAPI(new Magnetometer(options));
+        return [DotNet.createJSObjectReference(new MagnetometerAPI(new Magnetometer(options)))];
     }
 
 

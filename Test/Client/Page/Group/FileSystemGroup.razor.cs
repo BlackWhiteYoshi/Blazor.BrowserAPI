@@ -7,6 +7,10 @@ public sealed partial class FileSystemGroup : ComponentBase {
     public const string TEMP_FILE_NAME = "TempFile.txt";
     public const string FILE_TEXT_RESULT = "(empty)";
     public const string WRITABLE_FILE_STREAM_WRITE_TEXT = "some example text";
+    public const string WRITABLE_FILE_STREAM_SEEK_DONE = "stream seeked";
+    public const string WRITABLE_FILE_STREAM_TRUNCATE_DONE = "stream truncated";
+    public const string WRITABLE_FILE_STREAM_ABORT_DONE = "stream aborted";
+    public const string WRITABLE_FILE_STREAM_CLOSE_DONE = "stream closed";
 
 
     private readonly struct TempFile : IAsyncDisposable {
@@ -359,6 +363,8 @@ public sealed partial class FileSystemGroup : ComponentBase {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         await using IWritableFileStream stream = await tempFile.FileHandle.CreateWritable();
         await stream.Seek(1);
+
+        labelOutput = WRITABLE_FILE_STREAM_SEEK_DONE;
         await stream.Close();
     }
 
@@ -367,6 +373,8 @@ public sealed partial class FileSystemGroup : ComponentBase {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         await using IWritableFileStream stream = await tempFile.FileHandle.CreateWritable();
         await stream.Truncate(1);
+
+        labelOutput = WRITABLE_FILE_STREAM_TRUNCATE_DONE;
         await stream.Close();
     }
 
@@ -375,6 +383,8 @@ public sealed partial class FileSystemGroup : ComponentBase {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         await using IWritableFileStream stream = await tempFile.FileHandle.CreateWritable();
         await stream.Abort("test reason");
+
+        labelOutput = WRITABLE_FILE_STREAM_ABORT_DONE;
     }
 
     public const string BUTTON_WRITABLE_FILE_STREAM_CLOSE = "filesystem-writable-file-stream-close";
@@ -382,5 +392,7 @@ public sealed partial class FileSystemGroup : ComponentBase {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         await using IWritableFileStream stream = await tempFile.FileHandle.CreateWritable();
         await stream.Close();
+
+        labelOutput = WRITABLE_FILE_STREAM_CLOSE_DONE;
     }
 }
