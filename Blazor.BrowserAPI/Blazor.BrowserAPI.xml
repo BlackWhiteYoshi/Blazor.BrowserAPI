@@ -6722,294 +6722,6 @@
             Returns true if the user has set a reduced data usage option on the user agent.
             </summary>
         </member>
-        <member name="T:BrowserAPI.Implementation.Screen">
-            <summary>
-            <para>The <i>Screen</i> interface represents a screen, usually the one on which the current window is being rendered, and is obtained using window.screen.</para>
-            <para>Note that browsers determine which screen to report as current by detecting which screen has the center of the browser window.</para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.Screen.#ctor(BrowserAPI.IModuleManager)">
-            <summary>
-            <para>The <i>Screen</i> interface represents a screen, usually the one on which the current window is being rendered, and is obtained using window.screen.</para>
-            <para>Note that browsers determine which screen to report as current by detecting which screen has the center of the browser window.</para>
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.Implementation.Screen.Width">
-            <summary>
-            Returns the width of the screen in CSS pixels.
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.Screen.GetWidth(System.Threading.CancellationToken)">
-            <summary>
-            Returns the width of the screen in CSS pixels.
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.Implementation.Screen.Height">
-            <summary>
-            Returns the height of the screen in CSS pixels.
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.Screen.GetHeight(System.Threading.CancellationToken)">
-            <summary>
-            Returns the height of the screen in CSS pixels.
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.Implementation.Screen.AvailWidth">
-            <summary>
-            Returns the amount of horizontal space (in CSS pixels) available to the window.
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.Screen.GetAvailWidth(System.Threading.CancellationToken)">
-            <summary>
-            Returns the amount of horizontal space (in CSS pixels) available to the window.
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.Implementation.Screen.AvailHeight">
-            <summary>
-            <para>
-            Returns the height, in CSS pixels, of the space available for Web content on the screen.
-            Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
-            </para>
-            <para>You can similarly use <see cref="P:BrowserAPI.Implementation.Screen.AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.Screen.GetAvailHeight(System.Threading.CancellationToken)">
-            <summary>
-            <para>
-            Returns the height, in CSS pixels, of the space available for Web content on the screen.
-            Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
-            </para>
-            <para>You can similarly use <see cref="P:BrowserAPI.Implementation.Screen.AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.Implementation.Screen.ColorDepth">
-            <summary>
-            Returns the color depth of the screen.
-            Per the CSSOM, some implementations return 24 for compatibility reasons.
-            See the browser compatibility section for those that don't.
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.Screen.GetColorDepth(System.Threading.CancellationToken)">
-            <summary>
-            Returns the color depth of the screen.
-            Per the CSSOM, some implementations return 24 for compatibility reasons.
-            See the browser compatibility section for those that don't.
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.Implementation.Screen.PixelDepth">
-            <summary>
-            Returns the bit depth of the screen.
-            Per the CSSOM, some implementations return 24 for compatibility reasons.
-            See the browser compatibility section for those that don't.
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.Screen.GetPixelDepth(System.Threading.CancellationToken)">
-            <summary>
-            Returns the bit depth of the screen.
-            Per the CSSOM, some implementations return 24 for compatibility reasons.
-            See the browser compatibility section for those that don't.
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.Implementation.Screen.IsExtended">
-            <summary>
-            <para>Returns true if the user's device has multiple screens, and false if not.</para>
-            <para>
-            This property is typically accessed via window.screen.isExtended,
-            and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
-            </para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.Screen.GetIsExtended(System.Threading.CancellationToken)">
-            <summary>
-            <para>Returns true if the user's device has multiple screens, and false if not.</para>
-            <para>
-            This property is typically accessed via window.screen.isExtended,
-            and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
-            </para>
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.Implementation.Screen.OrientationType">
-            <summary>
-            Returns the document's current orientation type, one of:<br />
-            - "portrait-primary"<br />
-            - "portrait-secondary"<br />
-            - "landscape-primary"<br />
-            - "landscape-secondary"
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.Screen.GetOrientationType(System.Threading.CancellationToken)">
-            <summary>
-            Returns the document's current orientation type, one of:<br />
-            - "portrait-primary"<br />
-            - "portrait-secondary"<br />
-            - "landscape-primary"<br />
-            - "landscape-secondary"
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.Implementation.Screen.OrientationAngle">
-            <summary>
-            Returns the document's current orientation angle.
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.Screen.GetOrientationAngle(System.Threading.CancellationToken)">
-            <summary>
-            Returns the document's current orientation angle.
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:BrowserAPI.Implementation.Screen.UnlockOrientation(System.Threading.CancellationToken)">
-            <summary>
-            Unlocks the orientation of the containing document from its default orientation.
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:BrowserAPI.Implementation.ScreenBase.Dispose">
-            <summary>
-            Releases the <see cref="T:BrowserAPI.Implementation.ScreenBase.EventTrigger"/> object used to trigger the events.
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.ScreenBase.LockOrientation(System.String,System.Threading.CancellationToken)">
-            <summary>
-            <para>Locks the orientation of the containing document to the specified orientation.</para>
-            <para>
-            Typically orientation locking is only enabled on mobile devices, and when the browser context is full screen. If locking is supported, then it must work for all the parameter values listed as follows:<br />
-            - "any"<br />
-            - "natural"<br />
-            - "landscape"<br />
-            - "landscape-primary"<br />
-            - "landscape-secondary"<br />
-            - "portrait"<br />
-            - "portrait-primary"<br />
-            - "portrait-secondary"
-            </para>
-            </summary>
-            <param name="orientation">
-            An orientation lock type. One of the following:<br />
-            - "any": Any of "portrait-primary", "portrait-secondary", "landscape-primary" or "landscape-secondary".<br />
-            - "natural": The natural orientation of the screen from the underlying operating system: either "portrait-primary" or "landscape-primary".<br />
-            - "landscape": An orientation where screen width is greater than the screen height. Depending on the platform convention, this may be "landscape-primary", "landscape-secondary", or both.<br />
-            - "landscape-primary": The "primary" landscape mode. If the natural orientation is a landscape mode (screen width is greater than height), this will be the same as the natural orientation, and correspond to an angle of 0 degrees. If the natural orientation is a portrait mode, then the user agent can choose either landscape orientation as the "landscape-primary" with an angle of either 90 or 270 degrees ("landscape-secondary" will be the other orientation and angle).<br />
-            - "landscape-secondary": The secondary landscape mode. If the natural orientation is a landscape mode, this orientation is upside down relative to the natural orientation, and will have an angle of 180 degrees. If the natural orientation is a portrait mode, this can be either orientation as selected by the user agent: whichever was not selected for "landscape-primary".<br />
-            - "portrait": An orientation where screen height is greater than the screen width. Depending on the platform convention, this may be "portrait-primary", "portrait-secondary", or both.<br />
-            - "portrait-primary": The "primary" portrait mode. If the natural orientation is a portrait mode (screen height is greater than width), this will be the same as the natural orientation, and correspond to an angle of 0 degrees. If the natural orientation is a landscape mode, then the user agent can choose either portrait orientation as the "portrait-primary" and "portrait-secondary"; one of those will be assigned the angle of 90 degrees and the other will have an angle of 270 degrees.<br />
-            - "portrait-secondary": The secondary portrait orientation. If the natural orientation is a portrait mode, this will have an angle of 180 degrees (in other words, the device is upside down relative to its natural orientation). If the natural orientation is a landscape mode, this can be either orientation as selected by the user agent: whichever was not selected for "portrait-primary".<br />
-            </param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="E:BrowserAPI.Implementation.ScreenBase.OnChange">
-            <summary>
-            Fired on a specific screen when one or more of the following properties change on it:<br />
-            - width<br />
-            - height<br />
-            - availWidth<br />
-            - availHeight<br />
-            - colorDepth<br />
-            - orientation
-            </summary>
-        </member>
-        <member name="E:BrowserAPI.Implementation.ScreenBase.OnOrientationChange">
-            <summary>
-            Fired whenever the screen changes orientation, for example when a user rotates their mobile phone.
-            </summary>
-        </member>
-        <member name="T:BrowserAPI.Implementation.ScreenInProcess">
-            <summary>
-            <para>The <i>Screen</i> interface represents a screen, usually the one on which the current window is being rendered, and is obtained using window.screen.</para>
-            <para>Note that browsers determine which screen to report as current by detecting which screen has the center of the browser window.</para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.ScreenInProcess.#ctor(BrowserAPI.IModuleManager)">
-            <summary>
-            <para>The <i>Screen</i> interface represents a screen, usually the one on which the current window is being rendered, and is obtained using window.screen.</para>
-            <para>Note that browsers determine which screen to report as current by detecting which screen has the center of the browser window.</para>
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.Implementation.ScreenInProcess.Width">
-            <summary>
-            Returns the width of the screen in CSS pixels.
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.Implementation.ScreenInProcess.Height">
-            <summary>
-            Returns the height of the screen in CSS pixels.
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.Implementation.ScreenInProcess.AvailWidth">
-            <summary>
-            Returns the amount of horizontal space (in CSS pixels) available to the window.
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.Implementation.ScreenInProcess.AvailHeight">
-            <summary>
-            <para>
-            Returns the height, in CSS pixels, of the space available for Web content on the screen.
-            Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
-            </para>
-            <para>You can similarly use <see cref="P:BrowserAPI.Implementation.ScreenInProcess.AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.Implementation.ScreenInProcess.ColorDepth">
-            <summary>
-            Returns the color depth of the screen.
-            Per the CSSOM, some implementations return 24 for compatibility reasons.
-            See the browser compatibility section for those that don't.
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.Implementation.ScreenInProcess.PixelDepth">
-            <summary>
-            Returns the bit depth of the screen.
-            Per the CSSOM, some implementations return 24 for compatibility reasons.
-            See the browser compatibility section for those that don't.
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.Implementation.ScreenInProcess.IsExtended">
-            <summary>
-            <para>Returns true if the user's device has multiple screens, and false if not.</para>
-            <para>
-            This property is typically accessed via window.screen.isExtended,
-            and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
-            </para>
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.Implementation.ScreenInProcess.OrientationType">
-            <summary>
-            Returns the document's current orientation type, one of:<br />
-            - "portrait-primary"<br />
-            - "portrait-secondary"<br />
-            - "landscape-primary"<br />
-            - "landscape-secondary"
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.Implementation.ScreenInProcess.OrientationAngle">
-            <summary>
-            Returns the document's current orientation angle.
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.ScreenInProcess.UnlockOrientation">
-            <summary>
-            Unlocks the orientation of the containing document from its default orientation.
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:BrowserAPI.Implementation.SensorAPI">
             <summary>
             The Sensor APIs are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
@@ -8657,6 +8369,1036 @@
             <summary>
             When invoked, will empty all keys out of sessionStorage.
             </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.ScreenDetailed">
+            <summary>
+            <para>The <i>ScreenDetailed</i> interface of the Window Management API represents detailed information about one specific screen available to the user's device.</para>
+            <para><i>ScreenDetailed</i> objects can be accessed via the <see cref="P:BrowserAPI.IScreenDetails.Screens">ScreenDetails.screens</see> and <see cref="P:BrowserAPI.IScreenDetails.CurrentScreen">ScreenDetails.currentScreen</see> properties.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.#ctor(Microsoft.JSInterop.IJSObjectReference)">
+            <summary>
+            <para>The <i>ScreenDetailed</i> interface of the Window Management API represents detailed information about one specific screen available to the user's device.</para>
+            <para><i>ScreenDetailed</i> objects can be accessed via the <see cref="P:BrowserAPI.IScreenDetails.Screens">ScreenDetails.screens</see> and <see cref="P:BrowserAPI.IScreenDetails.CurrentScreen">ScreenDetails.currentScreen</see> properties.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.DisposeAsync">
+            <summary>
+            Releases the JS instance for this ScreenDetails.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailed.Left">
+            <summary>
+            <para>A number representing the x-coordinate (left-hand edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the true left-hand edge, ignoring any OS UI element drawn at the left of the screen.
+            Windows cannot be placed in those areas; to get the left-hand coordinate of the screen area that windows can be placed in, use <see cref="P:BrowserAPI.Implementation.ScreenDetailed.AvailLeft"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.GetLeft(System.Threading.CancellationToken)">
+            <summary>
+            <para>A number representing the x-coordinate (left-hand edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the true left-hand edge, ignoring any OS UI element drawn at the left of the screen.
+            Windows cannot be placed in those areas; to get the left-hand coordinate of the screen area that windows can be placed in, use <see cref="P:BrowserAPI.Implementation.ScreenDetailed.AvailLeft"/>.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailed.Top">
+            <summary>
+            <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the true top edge, ignoring any OS UI element drawn at the top of the screen.
+            Windows cannot be placed in those areas; to get the top coordinate of the screen area that windows can be placed in, use <see cref="P:BrowserAPI.Implementation.ScreenDetailed.AvailTop"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.GetTop(System.Threading.CancellationToken)">
+            <summary>
+            <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the true top edge, ignoring any OS UI element drawn at the top of the screen.
+            Windows cannot be placed in those areas; to get the top coordinate of the screen area that windows can be placed in, use <see cref="P:BrowserAPI.Implementation.ScreenDetailed.AvailTop"/>.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailed.AvailLeft">
+            <summary>
+            <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the <see cref="P:BrowserAPI.Implementation.ScreenDetailed.Left"/> property, plus the width of any OS UI element drawn on the left of the screen.
+            Windows cannot be placed in those areas, so availLeft is useful for giving you the left boundary of the actual area available to open or place windows.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.GetAvailLeft(System.Threading.CancellationToken)">
+            <summary>
+            <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the <see cref="P:BrowserAPI.Implementation.ScreenDetailed.Left"/> property, plus the width of any OS UI element drawn on the left of the screen.
+            Windows cannot be placed in those areas, so availLeft is useful for giving you the left boundary of the actual area available to open or place windows.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailed.AvailTop">
+            <summary>
+            <para>A number representing the y-coordinate (top edge) of the available screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the <see cref="P:BrowserAPI.Implementation.ScreenDetailed.Top"/> property, plus the height of any OS UI element drawn at the top of the screen.
+            Windows cannot be placed in those areas, so availTop is useful for giving you the top boundary of the actual area available to open or place windows.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.GetAvailTop(System.Threading.CancellationToken)">
+            <summary>
+            <para>A number representing the y-coordinate (top edge) of the available screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the <see cref="P:BrowserAPI.Implementation.ScreenDetailed.Top"/> property, plus the height of any OS UI element drawn at the top of the screen.
+            Windows cannot be placed in those areas, so availTop is useful for giving you the top boundary of the actual area available to open or place windows.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailed.Label">
+            <summary>
+            <para>A descriptive label for the screen, for example "Built-in Retina Display".</para>
+            <para>This is useful for constructing a list of options to display to the user if you want them to choose a screen to display content on.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.GetLabel(System.Threading.CancellationToken)">
+            <summary>
+            <para>A descriptive label for the screen, for example "Built-in Retina Display".</para>
+            <para>This is useful for constructing a list of options to display to the user if you want them to choose a screen to display content on.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailed.DevicePixelRatio">
+            <summary>
+            <para>A number representing the screen's device pixel ratio.</para>
+            <para>
+            This is the same as the value returned by <i>Window.devicePixelRatio</i>, except that <i>Window.devicePixelRatio</i>:<br />
+            - always returns the device pixel ratio for the current screen.<br />
+            - also includes scaling of the window itself, i.e., page zoom (at least on some browser implementations).
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.GetDevicePixelRatio(System.Threading.CancellationToken)">
+            <summary>
+            <para>A number representing the screen's device pixel ratio.</para>
+            <para>
+            This is the same as the value returned by <i>Window.devicePixelRatio</i>, except that <i>Window.devicePixelRatio</i>:<br />
+            - always returns the device pixel ratio for the current screen.<br />
+            - also includes scaling of the window itself, i.e., page zoom (at least on some browser implementations).
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailed.IsPrimary">
+            <summary>
+            <para>A boolean indicating whether the screen is set as the operating system (OS) primary screen or not.</para>
+            <para>
+            The OS hosting the browser will have one primary screen, and one or more secondary screens.
+            The primary screen can usually be specified by the user via OS settings, and generally contains OS UI features such as the taskbar/icon dock.
+            The primary screen may change for a number of reasons, such as a screen being unplugged.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.GetIsPrimary(System.Threading.CancellationToken)">
+            <summary>
+            <para>A boolean indicating whether the screen is set as the operating system (OS) primary screen or not.</para>
+            <para>
+            The OS hosting the browser will have one primary screen, and one or more secondary screens.
+            The primary screen can usually be specified by the user via OS settings, and generally contains OS UI features such as the taskbar/icon dock.
+            The primary screen may change for a number of reasons, such as a screen being unplugged.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailed.IsInternal">
+            <summary>
+            A boolean indicating whether the screen is internal to the device or external.
+            External devices are generally manufactured separately from the device they are attached to and can be connected and disconnected as needed,
+            whereas internal screens are part of the device and not intended to be disconnected.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.GetIsInternal(System.Threading.CancellationToken)">
+            <summary>
+            A boolean indicating whether the screen is internal to the device or external.
+            External devices are generally manufactured separately from the device they are attached to and can be connected and disconnected as needed,
+            whereas internal screens are part of the device and not intended to be disconnected.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailed.Width">
+            <summary>
+            Returns the width of the screen in CSS pixels.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.GetWidth(System.Threading.CancellationToken)">
+            <summary>
+            Returns the width of the screen in CSS pixels.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailed.Height">
+            <summary>
+            Returns the height of the screen in CSS pixels.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.GetHeight(System.Threading.CancellationToken)">
+            <summary>
+            Returns the height of the screen in CSS pixels.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailed.AvailWidth">
+            <summary>
+            Returns the amount of horizontal space (in CSS pixels) available to the window.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.GetAvailWidth(System.Threading.CancellationToken)">
+            <summary>
+            Returns the amount of horizontal space (in CSS pixels) available to the window.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailed.AvailHeight">
+            <summary>
+            <para>
+            Returns the height, in CSS pixels, of the space available for Web content on the screen.
+            Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
+            </para>
+            <para>You can similarly use <see cref="P:BrowserAPI.Implementation.ScreenDetailed.AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.GetAvailHeight(System.Threading.CancellationToken)">
+            <summary>
+            <para>
+            Returns the height, in CSS pixels, of the space available for Web content on the screen.
+            Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
+            </para>
+            <para>You can similarly use <see cref="P:BrowserAPI.Implementation.ScreenDetailed.AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailed.ColorDepth">
+            <summary>
+            Returns the color depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.GetColorDepth(System.Threading.CancellationToken)">
+            <summary>
+            Returns the color depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailed.PixelDepth">
+            <summary>
+            Returns the bit depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.GetPixelDepth(System.Threading.CancellationToken)">
+            <summary>
+            Returns the bit depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailed.IsExtended">
+            <summary>
+            <para>Returns true if the user's device has multiple screens, and false if not.</para>
+            <para>
+            This property is typically accessed via window.screen.isExtended,
+            and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.GetIsExtended(System.Threading.CancellationToken)">
+            <summary>
+            <para>Returns true if the user's device has multiple screens, and false if not.</para>
+            <para>
+            This property is typically accessed via window.screen.isExtended,
+            and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailed.OrientationType">
+            <summary>
+            Returns the document's current orientation type, one of:<br />
+            - "portrait-primary"<br />
+            - "portrait-secondary"<br />
+            - "landscape-primary"<br />
+            - "landscape-secondary"
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.GetOrientationType(System.Threading.CancellationToken)">
+            <summary>
+            Returns the document's current orientation type, one of:<br />
+            - "portrait-primary"<br />
+            - "portrait-secondary"<br />
+            - "landscape-primary"<br />
+            - "landscape-secondary"
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailed.OrientationAngle">
+            <summary>
+            Returns the document's current orientation angle.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.GetOrientationAngle(System.Threading.CancellationToken)">
+            <summary>
+            Returns the document's current orientation angle.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailed.UnlockOrientation(System.Threading.CancellationToken)">
+            <summary>
+            Unlocks the orientation of the containing document from its default orientation.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailedBase.LockOrientation(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>Locks the orientation of the containing document to the specified orientation.</para>
+            <para>
+            Typically orientation locking is only enabled on mobile devices, and when the browser context is full screen. If locking is supported, then it must work for all the parameter values listed as follows:<br />
+            - "any"<br />
+            - "natural"<br />
+            - "landscape"<br />
+            - "landscape-primary"<br />
+            - "landscape-secondary"<br />
+            - "portrait"<br />
+            - "portrait-primary"<br />
+            - "portrait-secondary"
+            </para>
+            </summary>
+            <param name="orientation">
+            An orientation lock type. One of the following:<br />
+            - "any": Any of "portrait-primary", "portrait-secondary", "landscape-primary" or "landscape-secondary".<br />
+            - "natural": The natural orientation of the screen from the underlying operating system: either "portrait-primary" or "landscape-primary".<br />
+            - "landscape": An orientation where screen width is greater than the screen height. Depending on the platform convention, this may be "landscape-primary", "landscape-secondary", or both.<br />
+            - "landscape-primary": The "primary" landscape mode. If the natural orientation is a landscape mode (screen width is greater than height), this will be the same as the natural orientation, and correspond to an angle of 0 degrees. If the natural orientation is a portrait mode, then the user agent can choose either landscape orientation as the "landscape-primary" with an angle of either 90 or 270 degrees ("landscape-secondary" will be the other orientation and angle).<br />
+            - "landscape-secondary": The secondary landscape mode. If the natural orientation is a landscape mode, this orientation is upside down relative to the natural orientation, and will have an angle of 180 degrees. If the natural orientation is a portrait mode, this can be either orientation as selected by the user agent: whichever was not selected for "landscape-primary".<br />
+            - "portrait": An orientation where screen height is greater than the screen width. Depending on the platform convention, this may be "portrait-primary", "portrait-secondary", or both.<br />
+            - "portrait-primary": The "primary" portrait mode. If the natural orientation is a portrait mode (screen height is greater than width), this will be the same as the natural orientation, and correspond to an angle of 0 degrees. If the natural orientation is a landscape mode, then the user agent can choose either portrait orientation as the "portrait-primary" and "portrait-secondary"; one of those will be assigned the angle of 90 degrees and the other will have an angle of 270 degrees.<br />
+            - "portrait-secondary": The secondary portrait orientation. If the natural orientation is a portrait mode, this will have an angle of 180 degrees (in other words, the device is upside down relative to its natural orientation). If the natural orientation is a landscape mode, this can be either orientation as selected by the user agent: whichever was not selected for "portrait-primary".<br />
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailedBase.DisposeEventTrigger">
+            <summary>
+            Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call this method.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.ScreenDetailedBase.OnChange">
+            <summary>
+            Fired on a specific screen when one or more of the following properties change on it:<br />
+            - width<br />
+            - height<br />
+            - availWidth<br />
+            - availHeight<br />
+            - colorDepth<br />
+            - orientation
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.ScreenDetailedBase.OnOrientationChange">
+            <summary>
+            Fired whenever the screen changes orientation, for example when a user rotates their mobile phone.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.ScreenDetailedInProcess">
+            <summary>
+            <para>The <i>ScreenDetailed</i> interface of the Window Management API represents detailed information about one specific screen available to the user's device.</para>
+            <para><i>ScreenDetailed</i> objects can be accessed via the <see cref="P:BrowserAPI.IScreenDetailsInProcess.Screens">ScreenDetails.screens</see> and <see cref="P:BrowserAPI.IScreenDetailsInProcess.CurrentScreen">ScreenDetails.currentScreen</see> properties.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailedInProcess.#ctor(Microsoft.JSInterop.IJSInProcessObjectReference)">
+            <summary>
+            <para>The <i>ScreenDetailed</i> interface of the Window Management API represents detailed information about one specific screen available to the user's device.</para>
+            <para><i>ScreenDetailed</i> objects can be accessed via the <see cref="P:BrowserAPI.IScreenDetailsInProcess.Screens">ScreenDetails.screens</see> and <see cref="P:BrowserAPI.IScreenDetailsInProcess.CurrentScreen">ScreenDetails.currentScreen</see> properties.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailedInProcess.Dispose">
+            <summary>
+            Releases the JS instance for this ScreenDetails.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailedInProcess.Left">
+            <summary>
+            <para>A number representing the x-coordinate (left-hand edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the true left-hand edge, ignoring any OS UI element drawn at the left of the screen.
+            Windows cannot be placed in those areas; to get the left-hand coordinate of the screen area that windows can be placed in, use <see cref="P:BrowserAPI.Implementation.ScreenDetailedInProcess.AvailLeft"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailedInProcess.Top">
+            <summary>
+            <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the true top edge, ignoring any OS UI element drawn at the top of the screen.
+            Windows cannot be placed in those areas; to get the top coordinate of the screen area that windows can be placed in, use <see cref="P:BrowserAPI.Implementation.ScreenDetailedInProcess.AvailTop"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailedInProcess.AvailLeft">
+            <summary>
+            <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the <see cref="P:BrowserAPI.Implementation.ScreenDetailedInProcess.Left"/> property, plus the width of any OS UI element drawn on the left of the screen.
+            Windows cannot be placed in those areas, so availLeft is useful for giving you the left boundary of the actual area available to open or place windows.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailedInProcess.AvailTop">
+            <summary>
+            <para>A number representing the y-coordinate (top edge) of the available screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the <see cref="P:BrowserAPI.Implementation.ScreenDetailedInProcess.Top"/> property, plus the height of any OS UI element drawn at the top of the screen.
+            Windows cannot be placed in those areas, so availTop is useful for giving you the top boundary of the actual area available to open or place windows.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailedInProcess.Label">
+            <summary>
+            <para>A descriptive label for the screen, for example "Built-in Retina Display".</para>
+            <para>This is useful for constructing a list of options to display to the user if you want them to choose a screen to display content on.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailedInProcess.DevicePixelRatio">
+            <summary>
+            <para>A number representing the screen's device pixel ratio.</para>
+            <para>
+            This is the same as the value returned by <i>Window.devicePixelRatio</i>, except that <i>Window.devicePixelRatio</i>:<br />
+            - always returns the device pixel ratio for the current screen.<br />
+            - also includes scaling of the window itself, i.e., page zoom (at least on some browser implementations).
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailedInProcess.IsPrimary">
+            <summary>
+            <para>A boolean indicating whether the screen is set as the operating system (OS) primary screen or not.</para>
+            <para>
+            The OS hosting the browser will have one primary screen, and one or more secondary screens.
+            The primary screen can usually be specified by the user via OS settings, and generally contains OS UI features such as the taskbar/icon dock.
+            The primary screen may change for a number of reasons, such as a screen being unplugged.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailedInProcess.IsInternal">
+            <summary>
+            A boolean indicating whether the screen is internal to the device or external.
+            External devices are generally manufactured separately from the device they are attached to and can be connected and disconnected as needed,
+            whereas internal screens are part of the device and not intended to be disconnected.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailedInProcess.Width">
+            <summary>
+            Returns the width of the screen in CSS pixels.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailedInProcess.Height">
+            <summary>
+            Returns the height of the screen in CSS pixels.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailedInProcess.AvailWidth">
+            <summary>
+            Returns the amount of horizontal space (in CSS pixels) available to the window.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailedInProcess.AvailHeight">
+            <summary>
+            <para>
+            Returns the height, in CSS pixels, of the space available for Web content on the screen.
+            Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
+            </para>
+            <para>You can similarly use <see cref="P:BrowserAPI.Implementation.ScreenDetailedInProcess.AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailedInProcess.ColorDepth">
+            <summary>
+            Returns the color depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailedInProcess.PixelDepth">
+            <summary>
+            Returns the bit depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailedInProcess.IsExtended">
+            <summary>
+            <para>Returns true if the user's device has multiple screens, and false if not.</para>
+            <para>
+            This property is typically accessed via window.screen.isExtended,
+            and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailedInProcess.OrientationType">
+            <summary>
+            Returns the document's current orientation type, one of:<br />
+            - "portrait-primary"<br />
+            - "portrait-secondary"<br />
+            - "landscape-primary"<br />
+            - "landscape-secondary"
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailedInProcess.OrientationAngle">
+            <summary>
+            Returns the document's current orientation angle.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailedInProcess.UnlockOrientation">
+            <summary>
+            Unlocks the orientation of the containing document from its default orientation.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.ScreenDetails">
+            <summary>
+            <para>The <i>ScreenDetails</i> interface of the Window Management API represents the details of all the screens available to the user's device.</para>
+            <para>This information is accessed via the <see cref="M:BrowserAPI.IWindowManagement.GetScreenDetails(System.Threading.CancellationToken)">Window.getScreenDetails()</see> method.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetails.#ctor(Microsoft.JSInterop.IJSObjectReference)">
+            <summary>
+            <para>The <i>ScreenDetails</i> interface of the Window Management API represents the details of all the screens available to the user's device.</para>
+            <para>This information is accessed via the <see cref="M:BrowserAPI.IWindowManagement.GetScreenDetails(System.Threading.CancellationToken)">Window.getScreenDetails()</see> method.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetails.DisposeAsync">
+            <summary>
+            Releases the JS instance for this ScreenDetails.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetails.CurrentScreen">
+            <summary>
+            A single ScreenDetailed object representing detailed information about the screen that the current browser window is displayed in.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetails.GetCurrentScreen(System.Threading.CancellationToken)">
+            <summary>
+            A single ScreenDetailed object representing detailed information about the screen that the current browser window is displayed in.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetails.Screens">
+            <summary>
+            An array of ScreenDetailed objects, each one representing detailed information about one specific screen available to the user's device.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetails.GetScreens(System.Threading.CancellationToken)">
+            <summary>
+            An array of ScreenDetailed objects, each one representing detailed information about one specific screen available to the user's device.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailsBase.DisposeEventTrigger">
+            <summary>
+            Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call this method.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.ScreenDetailsBase.OnCurrentScreenChange">
+            <summary>
+            Is fired when the ScreenDetails.currentScreen changes in one of the following ways:<br />
+            - The current screen changes to a different screen, i.e., the current browser window is moved to a different screen.<br />
+            - One or more of the following properties change on the current screen: width, height, availWidth, availHeight, colorDepth, orientation<br />
+            - One or more properties of <see href="https://developer.mozilla.org/en-US/docs/Web/API/ScreenDetailed">ScreenDetailed</see> changes.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.ScreenDetailsBase.OnScreensChange">
+            <summary>
+            Is fired when the set of screens available to the system has changed: that is, a new screen has become available or an existing screen has become unavailable.
+            This will be reflected in a change in the screens array.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.ScreenDetailsInProcess">
+            <summary>
+            <para>The <i>ScreenDetails</i> interface of the Window Management API represents the details of all the screens available to the user's device.</para>
+            <para>This information is accessed via the <see cref="M:BrowserAPI.IWindowManagementInProcess.GetScreenDetails(System.Threading.CancellationToken)">Window.getScreenDetails()</see> method.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailsInProcess.#ctor(Microsoft.JSInterop.IJSInProcessObjectReference)">
+            <summary>
+            <para>The <i>ScreenDetails</i> interface of the Window Management API represents the details of all the screens available to the user's device.</para>
+            <para>This information is accessed via the <see cref="M:BrowserAPI.IWindowManagementInProcess.GetScreenDetails(System.Threading.CancellationToken)">Window.getScreenDetails()</see> method.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenDetailsInProcess.Dispose">
+            <summary>
+            Releases the JS instance for this ScreenDetails.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailsInProcess.CurrentScreen">
+            <summary>
+            A single ScreenDetailed object representing detailed information about the screen that the current browser window is displayed in.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenDetailsInProcess.Screens">
+            <summary>
+            An array of ScreenDetailed objects, each one representing detailed information about one specific screen available to the user's device.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.Screen">
+            <summary>
+            <para>The <i>Screen</i> interface represents a screen, usually the one on which the current window is being rendered, and is obtained using window.screen.</para>
+            <para>Note that browsers determine which screen to report as current by detecting which screen has the center of the browser window.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Screen.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            <para>The <i>Screen</i> interface represents a screen, usually the one on which the current window is being rendered, and is obtained using window.screen.</para>
+            <para>Note that browsers determine which screen to report as current by detecting which screen has the center of the browser window.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Screen.Width">
+            <summary>
+            Returns the width of the screen in CSS pixels.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Screen.GetWidth(System.Threading.CancellationToken)">
+            <summary>
+            Returns the width of the screen in CSS pixels.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Screen.Height">
+            <summary>
+            Returns the height of the screen in CSS pixels.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Screen.GetHeight(System.Threading.CancellationToken)">
+            <summary>
+            Returns the height of the screen in CSS pixels.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Screen.AvailWidth">
+            <summary>
+            Returns the amount of horizontal space (in CSS pixels) available to the window.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Screen.GetAvailWidth(System.Threading.CancellationToken)">
+            <summary>
+            Returns the amount of horizontal space (in CSS pixels) available to the window.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Screen.AvailHeight">
+            <summary>
+            <para>
+            Returns the height, in CSS pixels, of the space available for Web content on the screen.
+            Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
+            </para>
+            <para>You can similarly use <see cref="P:BrowserAPI.Implementation.Screen.AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Screen.GetAvailHeight(System.Threading.CancellationToken)">
+            <summary>
+            <para>
+            Returns the height, in CSS pixels, of the space available for Web content on the screen.
+            Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
+            </para>
+            <para>You can similarly use <see cref="P:BrowserAPI.Implementation.Screen.AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Screen.ColorDepth">
+            <summary>
+            Returns the color depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Screen.GetColorDepth(System.Threading.CancellationToken)">
+            <summary>
+            Returns the color depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Screen.PixelDepth">
+            <summary>
+            Returns the bit depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Screen.GetPixelDepth(System.Threading.CancellationToken)">
+            <summary>
+            Returns the bit depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Screen.IsExtended">
+            <summary>
+            <para>Returns true if the user's device has multiple screens, and false if not.</para>
+            <para>
+            This property is typically accessed via window.screen.isExtended,
+            and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Screen.GetIsExtended(System.Threading.CancellationToken)">
+            <summary>
+            <para>Returns true if the user's device has multiple screens, and false if not.</para>
+            <para>
+            This property is typically accessed via window.screen.isExtended,
+            and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Screen.OrientationType">
+            <summary>
+            Returns the document's current orientation type, one of:<br />
+            - "portrait-primary"<br />
+            - "portrait-secondary"<br />
+            - "landscape-primary"<br />
+            - "landscape-secondary"
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Screen.GetOrientationType(System.Threading.CancellationToken)">
+            <summary>
+            Returns the document's current orientation type, one of:<br />
+            - "portrait-primary"<br />
+            - "portrait-secondary"<br />
+            - "landscape-primary"<br />
+            - "landscape-secondary"
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Screen.OrientationAngle">
+            <summary>
+            Returns the document's current orientation angle.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Screen.GetOrientationAngle(System.Threading.CancellationToken)">
+            <summary>
+            Returns the document's current orientation angle.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Screen.UnlockOrientation(System.Threading.CancellationToken)">
+            <summary>
+            Unlocks the orientation of the containing document from its default orientation.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenBase.Dispose">
+            <summary>
+            Releases the <see cref="T:BrowserAPI.Implementation.ScreenBase.EventTrigger"/> object used to trigger the events.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenBase.LockOrientation(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>Locks the orientation of the containing document to the specified orientation.</para>
+            <para>
+            Typically orientation locking is only enabled on mobile devices, and when the browser context is full screen. If locking is supported, then it must work for all the parameter values listed as follows:<br />
+            - "any"<br />
+            - "natural"<br />
+            - "landscape"<br />
+            - "landscape-primary"<br />
+            - "landscape-secondary"<br />
+            - "portrait"<br />
+            - "portrait-primary"<br />
+            - "portrait-secondary"
+            </para>
+            </summary>
+            <param name="orientation">
+            An orientation lock type. One of the following:<br />
+            - "any": Any of "portrait-primary", "portrait-secondary", "landscape-primary" or "landscape-secondary".<br />
+            - "natural": The natural orientation of the screen from the underlying operating system: either "portrait-primary" or "landscape-primary".<br />
+            - "landscape": An orientation where screen width is greater than the screen height. Depending on the platform convention, this may be "landscape-primary", "landscape-secondary", or both.<br />
+            - "landscape-primary": The "primary" landscape mode. If the natural orientation is a landscape mode (screen width is greater than height), this will be the same as the natural orientation, and correspond to an angle of 0 degrees. If the natural orientation is a portrait mode, then the user agent can choose either landscape orientation as the "landscape-primary" with an angle of either 90 or 270 degrees ("landscape-secondary" will be the other orientation and angle).<br />
+            - "landscape-secondary": The secondary landscape mode. If the natural orientation is a landscape mode, this orientation is upside down relative to the natural orientation, and will have an angle of 180 degrees. If the natural orientation is a portrait mode, this can be either orientation as selected by the user agent: whichever was not selected for "landscape-primary".<br />
+            - "portrait": An orientation where screen height is greater than the screen width. Depending on the platform convention, this may be "portrait-primary", "portrait-secondary", or both.<br />
+            - "portrait-primary": The "primary" portrait mode. If the natural orientation is a portrait mode (screen height is greater than width), this will be the same as the natural orientation, and correspond to an angle of 0 degrees. If the natural orientation is a landscape mode, then the user agent can choose either portrait orientation as the "portrait-primary" and "portrait-secondary"; one of those will be assigned the angle of 90 degrees and the other will have an angle of 270 degrees.<br />
+            - "portrait-secondary": The secondary portrait orientation. If the natural orientation is a portrait mode, this will have an angle of 180 degrees (in other words, the device is upside down relative to its natural orientation). If the natural orientation is a landscape mode, this can be either orientation as selected by the user agent: whichever was not selected for "portrait-primary".<br />
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="E:BrowserAPI.Implementation.ScreenBase.OnChange">
+            <summary>
+            Fired on a specific screen when one or more of the following properties change on it:<br />
+            - width<br />
+            - height<br />
+            - availWidth<br />
+            - availHeight<br />
+            - colorDepth<br />
+            - orientation
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.ScreenBase.OnOrientationChange">
+            <summary>
+            Fired whenever the screen changes orientation, for example when a user rotates their mobile phone.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.ScreenInProcess">
+            <summary>
+            <para>The <i>Screen</i> interface represents a screen, usually the one on which the current window is being rendered, and is obtained using window.screen.</para>
+            <para>Note that browsers determine which screen to report as current by detecting which screen has the center of the browser window.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenInProcess.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            <para>The <i>Screen</i> interface represents a screen, usually the one on which the current window is being rendered, and is obtained using window.screen.</para>
+            <para>Note that browsers determine which screen to report as current by detecting which screen has the center of the browser window.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenInProcess.Width">
+            <summary>
+            Returns the width of the screen in CSS pixels.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenInProcess.Height">
+            <summary>
+            Returns the height of the screen in CSS pixels.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenInProcess.AvailWidth">
+            <summary>
+            Returns the amount of horizontal space (in CSS pixels) available to the window.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenInProcess.AvailHeight">
+            <summary>
+            <para>
+            Returns the height, in CSS pixels, of the space available for Web content on the screen.
+            Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
+            </para>
+            <para>You can similarly use <see cref="P:BrowserAPI.Implementation.ScreenInProcess.AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenInProcess.ColorDepth">
+            <summary>
+            Returns the color depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenInProcess.PixelDepth">
+            <summary>
+            Returns the bit depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenInProcess.IsExtended">
+            <summary>
+            <para>Returns true if the user's device has multiple screens, and false if not.</para>
+            <para>
+            This property is typically accessed via window.screen.isExtended,
+            and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenInProcess.OrientationType">
+            <summary>
+            Returns the document's current orientation type, one of:<br />
+            - "portrait-primary"<br />
+            - "portrait-secondary"<br />
+            - "landscape-primary"<br />
+            - "landscape-secondary"
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.ScreenInProcess.OrientationAngle">
+            <summary>
+            Returns the document's current orientation angle.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ScreenInProcess.UnlockOrientation">
+            <summary>
+            Unlocks the orientation of the containing document from its default orientation.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.WindowManagement">
+            <summary>
+            The <i>Window Management API</i> allows you to get detailed information on the displays connected to your device and more easily place windows on specific screens,
+            paving the way towards more effective multi-screen applications.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowManagement.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            The <i>Window Management API</i> allows you to get detailed information on the displays connected to your device and more easily place windows on specific screens,
+            paving the way towards more effective multi-screen applications.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.WindowManagement.Screen">
+            <summary>
+            The Window property <i>screen</i> returns a reference to the screen object associated with the window.
+            The screen object, implementing the Screen interface, is a special object for inspecting properties of the screen on which the current window is being rendered.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowManagement.GetScreenDetails(System.Threading.CancellationToken)">
+            <summary>
+            The <i>getScreenDetails()</i> method of the Window interface returns a Promise that fulfills with a ScreenDetails object instance representing the details of all the screens available to the user's device.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowManagement.Open(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>open()</i> method of the Window interface loads a specified resource into a new or existing browsing context (that is, a tab, a window, or an iframe) under a specified name.
+            </summary>
+            <param name="url">
+            A string indicating the URL or path of the resource to be loaded.
+            If an empty string ("") is specified or this parameter is omitted, a blank page is opened into the targeted browsing context.
+            </param>
+            <param name="target">
+            <para>
+            A string, without whitespace, specifying the name of the browsing context the resource is being loaded into.<br />
+            If the name doesn't identify an existing context, a new context is created and given the specified name.<br />
+            The special target keywords, "<i>_self</i>", "<i>_blank</i>" (default), "<i>_parent</i>", "<i>_top</i>", and "<i>_unfencedTop</i>" can also be used.<br />
+            "<i>_unfencedTop</i>" is only relevant to fenced frames.
+            </para>
+            <para>This name can be used as the target attribute of &lt;a&gt; or &lt;form&gt; elements.</para>
+            </param>
+            <param name="features">
+            <para>
+            A string containing a comma-separated list of window features in the form <i>name=value</i>.
+            Boolean values can be set to true using one of: <i>name</i>, <i>name=yes</i>, <i>name=true</i>, or <i>name=n</i> where n is any non-zero integer.
+            These features include options such as the window's default size and position, whether or not to open a minimal popup window, and so forth.
+            The following options are supported:</para>
+            <para>
+            - "attributionsrc": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
+            - "popup": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
+            - "width" or "innerWidth": Specifies the width of the content area, including scrollbars. The minimum required value is 100.<br />
+            - "height" or "innerHeight": Specifies the height of the content area, including scrollbars. The minimum required value is 100.<br />
+            - "left" or "screenX": Specifies the distance in pixels from the left side of the work area as defined by the user's operating system where the new window will be generated.<br />
+            - "top" or "screenY": Specifies the distance in pixels from the top side of the work area as defined by the user's operating system where the new window will be generated.<br />
+            - "noopener": If this feature is set, the new window will not have access to the originating window via Window.opener and returns null. When noopener is used, non-empty target names, other than <i>_top</i>, <i>_self</i>, and <i>_parent</i>, are treated like <i>_blank</i> in terms of deciding whether to open a new browsing context.<br />
+            - "noreferrer": If this feature is set, the browser will omit the Referer header, as well as set noopener to true. See rel="noreferrer" for more information.
+            </para>
+            <para>A null value is treated the same as the empty string ("").</para>
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.WindowManagementInProcess">
+            <summary>
+            The <i>Window Management API</i> allows you to get detailed information on the displays connected to your device and more easily place windows on specific screens,
+            paving the way towards more effective multi-screen applications.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowManagementInProcess.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            The <i>Window Management API</i> allows you to get detailed information on the displays connected to your device and more easily place windows on specific screens,
+            paving the way towards more effective multi-screen applications.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.WindowManagementInProcess.Screen">
+            <summary>
+            The Window property <i>screen</i> returns a reference to the screen object associated with the window.
+            The screen object, implementing the Screen interface, is a special object for inspecting properties of the screen on which the current window is being rendered.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowManagementInProcess.GetScreenDetails(System.Threading.CancellationToken)">
+            <summary>
+            The <i>getScreenDetails()</i> method of the Window interface returns a Promise that fulfills with a ScreenDetails object instance representing the details of all the screens available to the user's device.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowManagementInProcess.Open(System.String,System.String,System.String)">
+            <summary>
+            The <i>open()</i> method of the Window interface loads a specified resource into a new or existing browsing context (that is, a tab, a window, or an iframe) under a specified name.
+            </summary>
+            <param name="url">
+            A string indicating the URL or path of the resource to be loaded.
+            If an empty string ("") is specified or this parameter is omitted, a blank page is opened into the targeted browsing context.
+            </param>
+            <param name="target">
+            <para>
+            A string, without whitespace, specifying the name of the browsing context the resource is being loaded into.<br />
+            If the name doesn't identify an existing context, a new context is created and given the specified name.<br />
+            The special target keywords, "<i>_self</i>", "<i>_blank</i>" (default), "<i>_parent</i>", "<i>_top</i>", and "<i>_unfencedTop</i>" can also be used.<br />
+            "<i>_unfencedTop</i>" is only relevant to fenced frames.
+            </para>
+            <para>This name can be used as the target attribute of &lt;a&gt; or &lt;form&gt; elements.</para>
+            </param>
+            <param name="features">
+            <para>
+            A string containing a comma-separated list of window features in the form <i>name=value</i>.
+            Boolean values can be set to true using one of: <i>name</i>, <i>name=yes</i>, <i>name=true</i>, or <i>name=n</i> where n is any non-zero integer.
+            These features include options such as the window's default size and position, whether or not to open a minimal popup window, and so forth.
+            The following options are supported:</para>
+            <para>
+            - "attributionsrc": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
+            - "popup": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
+            - "width" or "innerWidth": Specifies the width of the content area, including scrollbars. The minimum required value is 100.<br />
+            - "height" or "innerHeight": Specifies the height of the content area, including scrollbars. The minimum required value is 100.<br />
+            - "left" or "screenX": Specifies the distance in pixels from the left side of the work area as defined by the user's operating system where the new window will be generated.<br />
+            - "top" or "screenY": Specifies the distance in pixels from the top side of the work area as defined by the user's operating system where the new window will be generated.<br />
+            - "noopener": If this feature is set, the new window will not have access to the originating window via Window.opener and returns null. When noopener is used, non-empty target names, other than <i>_top</i>, <i>_self</i>, and <i>_parent</i>, are treated like <i>_blank</i> in terms of deciding whether to open a new browsing context.<br />
+            - "noreferrer": If this feature is set, the browser will omit the Referer header, as well as set noopener to true. See rel="noreferrer" for more information.
+            </para>
+            <para>A null value is treated the same as the empty string ("").</para>
+            </param>
         </member>
         <member name="T:BrowserAPI.Implementation.ModuleManager">
             <summary>
@@ -16325,332 +17067,6 @@
             Returns true if the user has set a reduced data usage option on the user agent.
             </summary>
         </member>
-        <member name="T:BrowserAPI.IScreen">
-            <summary>
-            <para>The <i>Screen</i> interface represents a screen, usually the one on which the current window is being rendered, and is obtained using window.screen.</para>
-            <para>Note that browsers determine which screen to report as current by detecting which screen has the center of the browser window.</para>
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.IScreen.Width">
-            <summary>
-            Returns the width of the screen in CSS pixels.
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.IScreen.GetWidth(System.Threading.CancellationToken)">
-            <summary>
-            Returns the width of the screen in CSS pixels.
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.IScreen.Height">
-            <summary>
-            Returns the height of the screen in CSS pixels.
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.IScreen.GetHeight(System.Threading.CancellationToken)">
-            <summary>
-            Returns the height of the screen in CSS pixels.
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.IScreen.AvailWidth">
-            <summary>
-            Returns the amount of horizontal space (in CSS pixels) available to the window.
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.IScreen.GetAvailWidth(System.Threading.CancellationToken)">
-            <summary>
-            Returns the amount of horizontal space (in CSS pixels) available to the window.
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.IScreen.AvailHeight">
-            <summary>
-            <para>
-            Returns the height, in CSS pixels, of the space available for Web content on the screen.
-            Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
-            </para>
-            <para>You can similarly use <see cref="P:BrowserAPI.IScreen.AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.IScreen.GetAvailHeight(System.Threading.CancellationToken)">
-            <summary>
-            <para>
-            Returns the height, in CSS pixels, of the space available for Web content on the screen.
-            Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
-            </para>
-            <para>You can similarly use <see cref="P:BrowserAPI.IScreen.AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.IScreen.ColorDepth">
-            <summary>
-            Returns the color depth of the screen.
-            Per the CSSOM, some implementations return 24 for compatibility reasons.
-            See the browser compatibility section for those that don't.
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.IScreen.GetColorDepth(System.Threading.CancellationToken)">
-            <summary>
-            Returns the color depth of the screen.
-            Per the CSSOM, some implementations return 24 for compatibility reasons.
-            See the browser compatibility section for those that don't.
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.IScreen.PixelDepth">
-            <summary>
-            Returns the bit depth of the screen.
-            Per the CSSOM, some implementations return 24 for compatibility reasons.
-            See the browser compatibility section for those that don't.
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.IScreen.GetPixelDepth(System.Threading.CancellationToken)">
-            <summary>
-            Returns the bit depth of the screen.
-            Per the CSSOM, some implementations return 24 for compatibility reasons.
-            See the browser compatibility section for those that don't.
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.IScreen.IsExtended">
-            <summary>
-            <para>Returns true if the user's device has multiple screens, and false if not.</para>
-            <para>
-            This property is typically accessed via window.screen.isExtended,
-            and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
-            </para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.IScreen.GetIsExtended(System.Threading.CancellationToken)">
-            <summary>
-            <para>Returns true if the user's device has multiple screens, and false if not.</para>
-            <para>
-            This property is typically accessed via window.screen.isExtended,
-            and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
-            </para>
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.IScreen.OrientationType">
-            <summary>
-            Returns the document's current orientation type, one of:<br />
-            - "portrait-primary"<br />
-            - "portrait-secondary"<br />
-            - "landscape-primary"<br />
-            - "landscape-secondary"
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.IScreen.GetOrientationType(System.Threading.CancellationToken)">
-            <summary>
-            Returns the document's current orientation type, one of:<br />
-            - "portrait-primary"<br />
-            - "portrait-secondary"<br />
-            - "landscape-primary"<br />
-            - "landscape-secondary"
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.IScreen.OrientationAngle">
-            <summary>
-            Returns the document's current orientation angle.
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.IScreen.GetOrientationAngle(System.Threading.CancellationToken)">
-            <summary>
-            Returns the document's current orientation angle.
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:BrowserAPI.IScreen.UnlockOrientation(System.Threading.CancellationToken)">
-            <summary>
-            Unlocks the orientation of the containing document from its default orientation.
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:BrowserAPI.IScreen.Dispose">
-            <summary>
-            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.IScreen.LockOrientation(System.String,System.Threading.CancellationToken)">
-            <summary>
-            <para>Locks the orientation of the containing document to the specified orientation.</para>
-            <para>
-            Typically orientation locking is only enabled on mobile devices, and when the browser context is full screen. If locking is supported, then it must work for all the parameter values listed as follows:<br />
-            - "any"<br />
-            - "natural"<br />
-            - "landscape"<br />
-            - "landscape-primary"<br />
-            - "landscape-secondary"<br />
-            - "portrait"<br />
-            - "portrait-primary"<br />
-            - "portrait-secondary"
-            </para>
-            </summary>
-            <param name="orientation">
-            An orientation lock type. One of the following:<br />
-            - "any": Any of "portrait-primary", "portrait-secondary", "landscape-primary" or "landscape-secondary".<br />
-            - "natural": The natural orientation of the screen from the underlying operating system: either "portrait-primary" or "landscape-primary".<br />
-            - "landscape": An orientation where screen width is greater than the screen height. Depending on the platform convention, this may be "landscape-primary", "landscape-secondary", or both.<br />
-            - "landscape-primary": The "primary" landscape mode. If the natural orientation is a landscape mode (screen width is greater than height), this will be the same as the natural orientation, and correspond to an angle of 0 degrees. If the natural orientation is a portrait mode, then the user agent can choose either landscape orientation as the "landscape-primary" with an angle of either 90 or 270 degrees ("landscape-secondary" will be the other orientation and angle).<br />
-            - "landscape-secondary": The secondary landscape mode. If the natural orientation is a landscape mode, this orientation is upside down relative to the natural orientation, and will have an angle of 180 degrees. If the natural orientation is a portrait mode, this can be either orientation as selected by the user agent: whichever was not selected for "landscape-primary".<br />
-            - "portrait": An orientation where screen height is greater than the screen width. Depending on the platform convention, this may be "portrait-primary", "portrait-secondary", or both.<br />
-            - "portrait-primary": The "primary" portrait mode. If the natural orientation is a portrait mode (screen height is greater than width), this will be the same as the natural orientation, and correspond to an angle of 0 degrees. If the natural orientation is a landscape mode, then the user agent can choose either portrait orientation as the "portrait-primary" and "portrait-secondary"; one of those will be assigned the angle of 90 degrees and the other will have an angle of 270 degrees.<br />
-            - "portrait-secondary": The secondary portrait orientation. If the natural orientation is a portrait mode, this will have an angle of 180 degrees (in other words, the device is upside down relative to its natural orientation). If the natural orientation is a landscape mode, this can be either orientation as selected by the user agent: whichever was not selected for "portrait-primary".<br />
-            </param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="E:BrowserAPI.IScreen.OnChange">
-            <summary>
-            Fired on a specific screen when one or more of the following properties change on it:<br />
-            - width<br />
-            - height<br />
-            - availWidth<br />
-            - availHeight<br />
-            - colorDepth<br />
-            - orientation
-            </summary>
-        </member>
-        <member name="E:BrowserAPI.IScreen.OnOrientationChange">
-            <summary>
-            Fired whenever the screen changes orientation, for example when a user rotates their mobile phone.
-            </summary>
-        </member>
-        <member name="T:BrowserAPI.IScreenInProcess">
-            <summary>
-            <para>The <i>Screen</i> interface represents a screen, usually the one on which the current window is being rendered, and is obtained using window.screen.</para>
-            <para>Note that browsers determine which screen to report as current by detecting which screen has the center of the browser window.</para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.IScreenInProcess.Dispose">
-            <summary>
-            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.IScreenInProcess.LockOrientation(System.String,System.Threading.CancellationToken)">
-            <summary>
-            <para>Locks the orientation of the containing document to the specified orientation.</para>
-            <para>
-            Typically orientation locking is only enabled on mobile devices, and when the browser context is full screen. If locking is supported, then it must work for all the parameter values listed as follows:<br />
-            - "any"<br />
-            - "natural"<br />
-            - "landscape"<br />
-            - "landscape-primary"<br />
-            - "landscape-secondary"<br />
-            - "portrait"<br />
-            - "portrait-primary"<br />
-            - "portrait-secondary"
-            </para>
-            </summary>
-            <param name="orientation">
-            An orientation lock type. One of the following:<br />
-            - "any": Any of "portrait-primary", "portrait-secondary", "landscape-primary" or "landscape-secondary".<br />
-            - "natural": The natural orientation of the screen from the underlying operating system: either "portrait-primary" or "landscape-primary".<br />
-            - "landscape": An orientation where screen width is greater than the screen height. Depending on the platform convention, this may be "landscape-primary", "landscape-secondary", or both.<br />
-            - "landscape-primary": The "primary" landscape mode. If the natural orientation is a landscape mode (screen width is greater than height), this will be the same as the natural orientation, and correspond to an angle of 0 degrees. If the natural orientation is a portrait mode, then the user agent can choose either landscape orientation as the "landscape-primary" with an angle of either 90 or 270 degrees ("landscape-secondary" will be the other orientation and angle).<br />
-            - "landscape-secondary": The secondary landscape mode. If the natural orientation is a landscape mode, this orientation is upside down relative to the natural orientation, and will have an angle of 180 degrees. If the natural orientation is a portrait mode, this can be either orientation as selected by the user agent: whichever was not selected for "landscape-primary".<br />
-            - "portrait": An orientation where screen height is greater than the screen width. Depending on the platform convention, this may be "portrait-primary", "portrait-secondary", or both.<br />
-            - "portrait-primary": The "primary" portrait mode. If the natural orientation is a portrait mode (screen height is greater than width), this will be the same as the natural orientation, and correspond to an angle of 0 degrees. If the natural orientation is a landscape mode, then the user agent can choose either portrait orientation as the "portrait-primary" and "portrait-secondary"; one of those will be assigned the angle of 90 degrees and the other will have an angle of 270 degrees.<br />
-            - "portrait-secondary": The secondary portrait orientation. If the natural orientation is a portrait mode, this will have an angle of 180 degrees (in other words, the device is upside down relative to its natural orientation). If the natural orientation is a landscape mode, this can be either orientation as selected by the user agent: whichever was not selected for "portrait-primary".<br />
-            </param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="E:BrowserAPI.IScreenInProcess.OnChange">
-            <summary>
-            Fired on a specific screen when one or more of the following properties change on it:<br />
-            - width<br />
-            - height<br />
-            - availWidth<br />
-            - availHeight<br />
-            - colorDepth<br />
-            - orientation
-            </summary>
-        </member>
-        <member name="E:BrowserAPI.IScreenInProcess.OnOrientationChange">
-            <summary>
-            Fired whenever the screen changes orientation, for example when a user rotates their mobile phone.
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.IScreenInProcess.Width">
-            <summary>
-            Returns the width of the screen in CSS pixels.
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.IScreenInProcess.Height">
-            <summary>
-            Returns the height of the screen in CSS pixels.
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.IScreenInProcess.AvailWidth">
-            <summary>
-            Returns the amount of horizontal space (in CSS pixels) available to the window.
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.IScreenInProcess.AvailHeight">
-            <summary>
-            <para>
-            Returns the height, in CSS pixels, of the space available for Web content on the screen.
-            Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
-            </para>
-            <para>You can similarly use <see cref="P:BrowserAPI.IScreenInProcess.AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.IScreenInProcess.ColorDepth">
-            <summary>
-            Returns the color depth of the screen.
-            Per the CSSOM, some implementations return 24 for compatibility reasons.
-            See the browser compatibility section for those that don't.
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.IScreenInProcess.PixelDepth">
-            <summary>
-            Returns the bit depth of the screen.
-            Per the CSSOM, some implementations return 24 for compatibility reasons.
-            See the browser compatibility section for those that don't.
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.IScreenInProcess.IsExtended">
-            <summary>
-            <para>Returns true if the user's device has multiple screens, and false if not.</para>
-            <para>
-            This property is typically accessed via window.screen.isExtended,
-            and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
-            </para>
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.IScreenInProcess.OrientationType">
-            <summary>
-            Returns the document's current orientation type, one of:<br />
-            - "portrait-primary"<br />
-            - "portrait-secondary"<br />
-            - "landscape-primary"<br />
-            - "landscape-secondary"
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.IScreenInProcess.OrientationAngle">
-            <summary>
-            Returns the document's current orientation angle.
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.IScreenInProcess.UnlockOrientation">
-            <summary>
-            Unlocks the orientation of the containing document from its default orientation.
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:BrowserAPI.ISensorAPI">
             <summary>
             The Sensor APIs are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
@@ -18101,6 +18517,1061 @@
             <summary>
             When invoked, will empty all keys out of sessionStorage.
             </summary>
+        </member>
+        <member name="T:BrowserAPI.IScreenDetailed">
+            <summary>
+            <para>The <i>ScreenDetailed</i> interface of the Window Management API represents detailed information about one specific screen available to the user's device.</para>
+            <para><i>ScreenDetailed</i> objects can be accessed via the <see cref="P:BrowserAPI.IScreenDetails.Screens">ScreenDetails.screens</see> and <see cref="P:BrowserAPI.IScreenDetails.CurrentScreen">ScreenDetails.currentScreen</see> properties.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</remarks>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailed.Left">
+            <summary>
+            <para>A number representing the x-coordinate (left-hand edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the true left-hand edge, ignoring any OS UI element drawn at the left of the screen.
+            Windows cannot be placed in those areas; to get the left-hand coordinate of the screen area that windows can be placed in, use <see cref="P:BrowserAPI.IScreenDetailed.AvailLeft"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailed.GetLeft(System.Threading.CancellationToken)">
+            <summary>
+            <para>A number representing the x-coordinate (left-hand edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the true left-hand edge, ignoring any OS UI element drawn at the left of the screen.
+            Windows cannot be placed in those areas; to get the left-hand coordinate of the screen area that windows can be placed in, use <see cref="P:BrowserAPI.IScreenDetailed.AvailLeft"/>.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailed.Top">
+            <summary>
+            <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the true top edge, ignoring any OS UI element drawn at the top of the screen.
+            Windows cannot be placed in those areas; to get the top coordinate of the screen area that windows can be placed in, use <see cref="P:BrowserAPI.IScreenDetailed.AvailTop"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailed.GetTop(System.Threading.CancellationToken)">
+            <summary>
+            <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the true top edge, ignoring any OS UI element drawn at the top of the screen.
+            Windows cannot be placed in those areas; to get the top coordinate of the screen area that windows can be placed in, use <see cref="P:BrowserAPI.IScreenDetailed.AvailTop"/>.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailed.AvailLeft">
+            <summary>
+            <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the <see cref="P:BrowserAPI.IScreenDetailed.Left"/> property, plus the width of any OS UI element drawn on the left of the screen.
+            Windows cannot be placed in those areas, so availLeft is useful for giving you the left boundary of the actual area available to open or place windows.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailed.GetAvailLeft(System.Threading.CancellationToken)">
+            <summary>
+            <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the <see cref="P:BrowserAPI.IScreenDetailed.Left"/> property, plus the width of any OS UI element drawn on the left of the screen.
+            Windows cannot be placed in those areas, so availLeft is useful for giving you the left boundary of the actual area available to open or place windows.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailed.AvailTop">
+            <summary>
+            <para>A number representing the y-coordinate (top edge) of the available screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the <see cref="P:BrowserAPI.IScreenDetailed.Top"/> property, plus the height of any OS UI element drawn at the top of the screen.
+            Windows cannot be placed in those areas, so availTop is useful for giving you the top boundary of the actual area available to open or place windows.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailed.GetAvailTop(System.Threading.CancellationToken)">
+            <summary>
+            <para>A number representing the y-coordinate (top edge) of the available screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the <see cref="P:BrowserAPI.IScreenDetailed.Top"/> property, plus the height of any OS UI element drawn at the top of the screen.
+            Windows cannot be placed in those areas, so availTop is useful for giving you the top boundary of the actual area available to open or place windows.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailed.Label">
+            <summary>
+            <para>A descriptive label for the screen, for example "Built-in Retina Display".</para>
+            <para>This is useful for constructing a list of options to display to the user if you want them to choose a screen to display content on.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailed.GetLabel(System.Threading.CancellationToken)">
+            <summary>
+            <para>A descriptive label for the screen, for example "Built-in Retina Display".</para>
+            <para>This is useful for constructing a list of options to display to the user if you want them to choose a screen to display content on.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailed.DevicePixelRatio">
+            <summary>
+            <para>A number representing the screen's device pixel ratio.</para>
+            <para>
+            This is the same as the value returned by <i>Window.devicePixelRatio</i>, except that <i>Window.devicePixelRatio</i>:<br />
+            - always returns the device pixel ratio for the current screen.<br />
+            - also includes scaling of the window itself, i.e., page zoom (at least on some browser implementations).
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailed.GetDevicePixelRatio(System.Threading.CancellationToken)">
+            <summary>
+            <para>A number representing the screen's device pixel ratio.</para>
+            <para>
+            This is the same as the value returned by <i>Window.devicePixelRatio</i>, except that <i>Window.devicePixelRatio</i>:<br />
+            - always returns the device pixel ratio for the current screen.<br />
+            - also includes scaling of the window itself, i.e., page zoom (at least on some browser implementations).
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailed.IsPrimary">
+            <summary>
+            <para>A boolean indicating whether the screen is set as the operating system (OS) primary screen or not.</para>
+            <para>
+            The OS hosting the browser will have one primary screen, and one or more secondary screens.
+            The primary screen can usually be specified by the user via OS settings, and generally contains OS UI features such as the taskbar/icon dock.
+            The primary screen may change for a number of reasons, such as a screen being unplugged.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailed.GetIsPrimary(System.Threading.CancellationToken)">
+            <summary>
+            <para>A boolean indicating whether the screen is set as the operating system (OS) primary screen or not.</para>
+            <para>
+            The OS hosting the browser will have one primary screen, and one or more secondary screens.
+            The primary screen can usually be specified by the user via OS settings, and generally contains OS UI features such as the taskbar/icon dock.
+            The primary screen may change for a number of reasons, such as a screen being unplugged.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailed.IsInternal">
+            <summary>
+            A boolean indicating whether the screen is internal to the device or external.
+            External devices are generally manufactured separately from the device they are attached to and can be connected and disconnected as needed,
+            whereas internal screens are part of the device and not intended to be disconnected.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailed.GetIsInternal(System.Threading.CancellationToken)">
+            <summary>
+            A boolean indicating whether the screen is internal to the device or external.
+            External devices are generally manufactured separately from the device they are attached to and can be connected and disconnected as needed,
+            whereas internal screens are part of the device and not intended to be disconnected.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailed.Width">
+            <summary>
+            Returns the width of the screen in CSS pixels.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailed.GetWidth(System.Threading.CancellationToken)">
+            <summary>
+            Returns the width of the screen in CSS pixels.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailed.Height">
+            <summary>
+            Returns the height of the screen in CSS pixels.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailed.GetHeight(System.Threading.CancellationToken)">
+            <summary>
+            Returns the height of the screen in CSS pixels.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailed.AvailWidth">
+            <summary>
+            Returns the amount of horizontal space (in CSS pixels) available to the window.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailed.GetAvailWidth(System.Threading.CancellationToken)">
+            <summary>
+            Returns the amount of horizontal space (in CSS pixels) available to the window.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailed.AvailHeight">
+            <summary>
+            <para>
+            Returns the height, in CSS pixels, of the space available for Web content on the screen.
+            Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
+            </para>
+            <para>You can similarly use <see cref="P:BrowserAPI.IScreenDetailed.AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailed.GetAvailHeight(System.Threading.CancellationToken)">
+            <summary>
+            <para>
+            Returns the height, in CSS pixels, of the space available for Web content on the screen.
+            Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
+            </para>
+            <para>You can similarly use <see cref="P:BrowserAPI.IScreenDetailed.AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailed.ColorDepth">
+            <summary>
+            Returns the color depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailed.GetColorDepth(System.Threading.CancellationToken)">
+            <summary>
+            Returns the color depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailed.PixelDepth">
+            <summary>
+            Returns the bit depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailed.GetPixelDepth(System.Threading.CancellationToken)">
+            <summary>
+            Returns the bit depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailed.IsExtended">
+            <summary>
+            <para>Returns true if the user's device has multiple screens, and false if not.</para>
+            <para>
+            This property is typically accessed via window.screen.isExtended,
+            and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailed.GetIsExtended(System.Threading.CancellationToken)">
+            <summary>
+            <para>Returns true if the user's device has multiple screens, and false if not.</para>
+            <para>
+            This property is typically accessed via window.screen.isExtended,
+            and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailed.OrientationType">
+            <summary>
+            Returns the document's current orientation type, one of:<br />
+            - "portrait-primary"<br />
+            - "portrait-secondary"<br />
+            - "landscape-primary"<br />
+            - "landscape-secondary"
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailed.GetOrientationType(System.Threading.CancellationToken)">
+            <summary>
+            Returns the document's current orientation type, one of:<br />
+            - "portrait-primary"<br />
+            - "portrait-secondary"<br />
+            - "landscape-primary"<br />
+            - "landscape-secondary"
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailed.OrientationAngle">
+            <summary>
+            Returns the document's current orientation angle.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailed.GetOrientationAngle(System.Threading.CancellationToken)">
+            <summary>
+            Returns the document's current orientation angle.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailed.UnlockOrientation(System.Threading.CancellationToken)">
+            <summary>
+            Unlocks the orientation of the containing document from its default orientation.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailed.LockOrientation(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>Locks the orientation of the containing document to the specified orientation.</para>
+            <para>
+            Typically orientation locking is only enabled on mobile devices, and when the browser context is full screen. If locking is supported, then it must work for all the parameter values listed as follows:<br />
+            - "any"<br />
+            - "natural"<br />
+            - "landscape"<br />
+            - "landscape-primary"<br />
+            - "landscape-secondary"<br />
+            - "portrait"<br />
+            - "portrait-primary"<br />
+            - "portrait-secondary"
+            </para>
+            </summary>
+            <param name="orientation">
+            An orientation lock type. One of the following:<br />
+            - "any": Any of "portrait-primary", "portrait-secondary", "landscape-primary" or "landscape-secondary".<br />
+            - "natural": The natural orientation of the screen from the underlying operating system: either "portrait-primary" or "landscape-primary".<br />
+            - "landscape": An orientation where screen width is greater than the screen height. Depending on the platform convention, this may be "landscape-primary", "landscape-secondary", or both.<br />
+            - "landscape-primary": The "primary" landscape mode. If the natural orientation is a landscape mode (screen width is greater than height), this will be the same as the natural orientation, and correspond to an angle of 0 degrees. If the natural orientation is a portrait mode, then the user agent can choose either landscape orientation as the "landscape-primary" with an angle of either 90 or 270 degrees ("landscape-secondary" will be the other orientation and angle).<br />
+            - "landscape-secondary": The secondary landscape mode. If the natural orientation is a landscape mode, this orientation is upside down relative to the natural orientation, and will have an angle of 180 degrees. If the natural orientation is a portrait mode, this can be either orientation as selected by the user agent: whichever was not selected for "landscape-primary".<br />
+            - "portrait": An orientation where screen height is greater than the screen width. Depending on the platform convention, this may be "portrait-primary", "portrait-secondary", or both.<br />
+            - "portrait-primary": The "primary" portrait mode. If the natural orientation is a portrait mode (screen height is greater than width), this will be the same as the natural orientation, and correspond to an angle of 0 degrees. If the natural orientation is a landscape mode, then the user agent can choose either portrait orientation as the "portrait-primary" and "portrait-secondary"; one of those will be assigned the angle of 90 degrees and the other will have an angle of 270 degrees.<br />
+            - "portrait-secondary": The secondary portrait orientation. If the natural orientation is a portrait mode, this will have an angle of 180 degrees (in other words, the device is upside down relative to its natural orientation). If the natural orientation is a landscape mode, this can be either orientation as selected by the user agent: whichever was not selected for "portrait-primary".<br />
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="E:BrowserAPI.IScreenDetailed.OnChange">
+            <summary>
+            Fired on a specific screen when one or more of the following properties change on it:<br />
+            - width<br />
+            - height<br />
+            - availWidth<br />
+            - availHeight<br />
+            - colorDepth<br />
+            - orientation
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IScreenDetailed.OnOrientationChange">
+            <summary>
+            Fired whenever the screen changes orientation, for example when a user rotates their mobile phone.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IScreenDetailedInProcess">
+            <summary>
+            <para>The <i>ScreenDetailed</i> interface of the Window Management API represents detailed information about one specific screen available to the user's device.</para>
+            <para><i>ScreenDetailed</i> objects can be accessed via the <see cref="P:BrowserAPI.IScreenDetailsInProcess.Screens">ScreenDetails.screens</see> and <see cref="P:BrowserAPI.IScreenDetailsInProcess.CurrentScreen">ScreenDetails.currentScreen</see> properties.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailedInProcess.LockOrientation(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>Locks the orientation of the containing document to the specified orientation.</para>
+            <para>
+            Typically orientation locking is only enabled on mobile devices, and when the browser context is full screen. If locking is supported, then it must work for all the parameter values listed as follows:<br />
+            - "any"<br />
+            - "natural"<br />
+            - "landscape"<br />
+            - "landscape-primary"<br />
+            - "landscape-secondary"<br />
+            - "portrait"<br />
+            - "portrait-primary"<br />
+            - "portrait-secondary"
+            </para>
+            </summary>
+            <param name="orientation">
+            An orientation lock type. One of the following:<br />
+            - "any": Any of "portrait-primary", "portrait-secondary", "landscape-primary" or "landscape-secondary".<br />
+            - "natural": The natural orientation of the screen from the underlying operating system: either "portrait-primary" or "landscape-primary".<br />
+            - "landscape": An orientation where screen width is greater than the screen height. Depending on the platform convention, this may be "landscape-primary", "landscape-secondary", or both.<br />
+            - "landscape-primary": The "primary" landscape mode. If the natural orientation is a landscape mode (screen width is greater than height), this will be the same as the natural orientation, and correspond to an angle of 0 degrees. If the natural orientation is a portrait mode, then the user agent can choose either landscape orientation as the "landscape-primary" with an angle of either 90 or 270 degrees ("landscape-secondary" will be the other orientation and angle).<br />
+            - "landscape-secondary": The secondary landscape mode. If the natural orientation is a landscape mode, this orientation is upside down relative to the natural orientation, and will have an angle of 180 degrees. If the natural orientation is a portrait mode, this can be either orientation as selected by the user agent: whichever was not selected for "landscape-primary".<br />
+            - "portrait": An orientation where screen height is greater than the screen width. Depending on the platform convention, this may be "portrait-primary", "portrait-secondary", or both.<br />
+            - "portrait-primary": The "primary" portrait mode. If the natural orientation is a portrait mode (screen height is greater than width), this will be the same as the natural orientation, and correspond to an angle of 0 degrees. If the natural orientation is a landscape mode, then the user agent can choose either portrait orientation as the "portrait-primary" and "portrait-secondary"; one of those will be assigned the angle of 90 degrees and the other will have an angle of 270 degrees.<br />
+            - "portrait-secondary": The secondary portrait orientation. If the natural orientation is a portrait mode, this will have an angle of 180 degrees (in other words, the device is upside down relative to its natural orientation). If the natural orientation is a landscape mode, this can be either orientation as selected by the user agent: whichever was not selected for "portrait-primary".<br />
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="E:BrowserAPI.IScreenDetailedInProcess.OnChange">
+            <summary>
+            Fired on a specific screen when one or more of the following properties change on it:<br />
+            - width<br />
+            - height<br />
+            - availWidth<br />
+            - availHeight<br />
+            - colorDepth<br />
+            - orientation
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IScreenDetailedInProcess.OnOrientationChange">
+            <summary>
+            Fired whenever the screen changes orientation, for example when a user rotates their mobile phone.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailedInProcess.Left">
+            <summary>
+            <para>A number representing the x-coordinate (left-hand edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the true left-hand edge, ignoring any OS UI element drawn at the left of the screen.
+            Windows cannot be placed in those areas; to get the left-hand coordinate of the screen area that windows can be placed in, use <see cref="P:BrowserAPI.IScreenDetailedInProcess.AvailLeft"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailedInProcess.Top">
+            <summary>
+            <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the true top edge, ignoring any OS UI element drawn at the top of the screen.
+            Windows cannot be placed in those areas; to get the top coordinate of the screen area that windows can be placed in, use <see cref="P:BrowserAPI.IScreenDetailedInProcess.AvailTop"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailedInProcess.AvailLeft">
+            <summary>
+            <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the <see cref="P:BrowserAPI.IScreenDetailedInProcess.Left"/> property, plus the width of any OS UI element drawn on the left of the screen.
+            Windows cannot be placed in those areas, so availLeft is useful for giving you the left boundary of the actual area available to open or place windows.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailedInProcess.AvailTop">
+            <summary>
+            <para>A number representing the y-coordinate (top edge) of the available screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>
+            This is equal to the <see cref="P:BrowserAPI.IScreenDetailedInProcess.Top"/> property, plus the height of any OS UI element drawn at the top of the screen.
+            Windows cannot be placed in those areas, so availTop is useful for giving you the top boundary of the actual area available to open or place windows.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailedInProcess.Label">
+            <summary>
+            <para>A descriptive label for the screen, for example "Built-in Retina Display".</para>
+            <para>This is useful for constructing a list of options to display to the user if you want them to choose a screen to display content on.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailedInProcess.DevicePixelRatio">
+            <summary>
+            <para>A number representing the screen's device pixel ratio.</para>
+            <para>
+            This is the same as the value returned by <i>Window.devicePixelRatio</i>, except that <i>Window.devicePixelRatio</i>:<br />
+            - always returns the device pixel ratio for the current screen.<br />
+            - also includes scaling of the window itself, i.e., page zoom (at least on some browser implementations).
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailedInProcess.IsPrimary">
+            <summary>
+            <para>A boolean indicating whether the screen is set as the operating system (OS) primary screen or not.</para>
+            <para>
+            The OS hosting the browser will have one primary screen, and one or more secondary screens.
+            The primary screen can usually be specified by the user via OS settings, and generally contains OS UI features such as the taskbar/icon dock.
+            The primary screen may change for a number of reasons, such as a screen being unplugged.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailedInProcess.IsInternal">
+            <summary>
+            A boolean indicating whether the screen is internal to the device or external.
+            External devices are generally manufactured separately from the device they are attached to and can be connected and disconnected as needed,
+            whereas internal screens are part of the device and not intended to be disconnected.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailedInProcess.Width">
+            <summary>
+            Returns the width of the screen in CSS pixels.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailedInProcess.Height">
+            <summary>
+            Returns the height of the screen in CSS pixels.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailedInProcess.AvailWidth">
+            <summary>
+            Returns the amount of horizontal space (in CSS pixels) available to the window.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailedInProcess.AvailHeight">
+            <summary>
+            <para>
+            Returns the height, in CSS pixels, of the space available for Web content on the screen.
+            Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
+            </para>
+            <para>You can similarly use <see cref="P:BrowserAPI.IScreenDetailedInProcess.AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailedInProcess.ColorDepth">
+            <summary>
+            Returns the color depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailedInProcess.PixelDepth">
+            <summary>
+            Returns the bit depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailedInProcess.IsExtended">
+            <summary>
+            <para>Returns true if the user's device has multiple screens, and false if not.</para>
+            <para>
+            This property is typically accessed via window.screen.isExtended,
+            and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailedInProcess.OrientationType">
+            <summary>
+            Returns the document's current orientation type, one of:<br />
+            - "portrait-primary"<br />
+            - "portrait-secondary"<br />
+            - "landscape-primary"<br />
+            - "landscape-secondary"
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailedInProcess.OrientationAngle">
+            <summary>
+            Returns the document's current orientation angle.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetailedInProcess.UnlockOrientation">
+            <summary>
+            Unlocks the orientation of the containing document from its default orientation.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IScreenDetails">
+            <summary>
+            <para>The <i>ScreenDetails</i> interface of the Window Management API represents the details of all the screens available to the user's device.</para>
+            <para>This information is accessed via the <see cref="M:BrowserAPI.IWindowManagement.GetScreenDetails(System.Threading.CancellationToken)">Window.getScreenDetails()</see> method.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</remarks>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetails.CurrentScreen">
+            <summary>
+            A single ScreenDetailed object representing detailed information about the screen that the current browser window is displayed in.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetails.GetCurrentScreen(System.Threading.CancellationToken)">
+            <summary>
+            A single ScreenDetailed object representing detailed information about the screen that the current browser window is displayed in.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetails.Screens">
+            <summary>
+            An array of ScreenDetailed objects, each one representing detailed information about one specific screen available to the user's device.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetails.GetScreens(System.Threading.CancellationToken)">
+            <summary>
+            An array of ScreenDetailed objects, each one representing detailed information about one specific screen available to the user's device.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="E:BrowserAPI.IScreenDetails.OnCurrentScreenChange">
+            <summary>
+            Is fired when the ScreenDetails.currentScreen changes in one of the following ways:<br />
+            - The current screen changes to a different screen, i.e., the current browser window is moved to a different screen.<br />
+            - One or more of the following properties change on the current screen: width, height, availWidth, availHeight, colorDepth, orientation<br />
+            - One or more properties of <see href="https://developer.mozilla.org/en-US/docs/Web/API/ScreenDetailed">ScreenDetailed</see> changes.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IScreenDetails.OnScreensChange">
+            <summary>
+            Is fired when the set of screens available to the system has changed: that is, a new screen has become available or an existing screen has become unavailable.
+            This will be reflected in a change in the screens array.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IScreenDetailsInProcess">
+            <summary>
+            <para>The <i>ScreenDetails</i> interface of the Window Management API represents the details of all the screens available to the user's device.</para>
+            <para>This information is accessed via the <see cref="M:BrowserAPI.IWindowManagementInProcess.GetScreenDetails(System.Threading.CancellationToken)">Window.getScreenDetails()</see> method.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</remarks>
+        </member>
+        <member name="E:BrowserAPI.IScreenDetailsInProcess.OnCurrentScreenChange">
+            <summary>
+            Is fired when the ScreenDetails.currentScreen changes in one of the following ways:<br />
+            - The current screen changes to a different screen, i.e., the current browser window is moved to a different screen.<br />
+            - One or more of the following properties change on the current screen: width, height, availWidth, availHeight, colorDepth, orientation<br />
+            - One or more properties of <see href="https://developer.mozilla.org/en-US/docs/Web/API/ScreenDetailed">ScreenDetailed</see> changes.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IScreenDetailsInProcess.OnScreensChange">
+            <summary>
+            Is fired when the set of screens available to the system has changed: that is, a new screen has become available or an existing screen has become unavailable.
+            This will be reflected in a change in the screens array.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailsInProcess.CurrentScreen">
+            <summary>
+            A single ScreenDetailed object representing detailed information about the screen that the current browser window is displayed in.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailsInProcess.Screens">
+            <summary>
+            An array of ScreenDetailed objects, each one representing detailed information about one specific screen available to the user's device.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IScreen">
+            <summary>
+            <para>The <i>Screen</i> interface represents a screen, usually the one on which the current window is being rendered, and is obtained using window.screen.</para>
+            <para>Note that browsers determine which screen to report as current by detecting which screen has the center of the browser window.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreen.Width">
+            <summary>
+            Returns the width of the screen in CSS pixels.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreen.GetWidth(System.Threading.CancellationToken)">
+            <summary>
+            Returns the width of the screen in CSS pixels.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreen.Height">
+            <summary>
+            Returns the height of the screen in CSS pixels.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreen.GetHeight(System.Threading.CancellationToken)">
+            <summary>
+            Returns the height of the screen in CSS pixels.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreen.AvailWidth">
+            <summary>
+            Returns the amount of horizontal space (in CSS pixels) available to the window.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreen.GetAvailWidth(System.Threading.CancellationToken)">
+            <summary>
+            Returns the amount of horizontal space (in CSS pixels) available to the window.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreen.AvailHeight">
+            <summary>
+            <para>
+            Returns the height, in CSS pixels, of the space available for Web content on the screen.
+            Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
+            </para>
+            <para>You can similarly use <see cref="P:BrowserAPI.IScreen.AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreen.GetAvailHeight(System.Threading.CancellationToken)">
+            <summary>
+            <para>
+            Returns the height, in CSS pixels, of the space available for Web content on the screen.
+            Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
+            </para>
+            <para>You can similarly use <see cref="P:BrowserAPI.IScreen.AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreen.ColorDepth">
+            <summary>
+            Returns the color depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreen.GetColorDepth(System.Threading.CancellationToken)">
+            <summary>
+            Returns the color depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreen.PixelDepth">
+            <summary>
+            Returns the bit depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreen.GetPixelDepth(System.Threading.CancellationToken)">
+            <summary>
+            Returns the bit depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreen.IsExtended">
+            <summary>
+            <para>Returns true if the user's device has multiple screens, and false if not.</para>
+            <para>
+            This property is typically accessed via window.screen.isExtended,
+            and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreen.GetIsExtended(System.Threading.CancellationToken)">
+            <summary>
+            <para>Returns true if the user's device has multiple screens, and false if not.</para>
+            <para>
+            This property is typically accessed via window.screen.isExtended,
+            and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreen.OrientationType">
+            <summary>
+            Returns the document's current orientation type, one of:<br />
+            - "portrait-primary"<br />
+            - "portrait-secondary"<br />
+            - "landscape-primary"<br />
+            - "landscape-secondary"
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreen.GetOrientationType(System.Threading.CancellationToken)">
+            <summary>
+            Returns the document's current orientation type, one of:<br />
+            - "portrait-primary"<br />
+            - "portrait-secondary"<br />
+            - "landscape-primary"<br />
+            - "landscape-secondary"
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreen.OrientationAngle">
+            <summary>
+            Returns the document's current orientation angle.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreen.GetOrientationAngle(System.Threading.CancellationToken)">
+            <summary>
+            Returns the document's current orientation angle.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IScreen.UnlockOrientation(System.Threading.CancellationToken)">
+            <summary>
+            Unlocks the orientation of the containing document from its default orientation.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IScreen.Dispose">
+            <summary>
+            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreen.LockOrientation(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>Locks the orientation of the containing document to the specified orientation.</para>
+            <para>
+            Typically orientation locking is only enabled on mobile devices, and when the browser context is full screen. If locking is supported, then it must work for all the parameter values listed as follows:<br />
+            - "any"<br />
+            - "natural"<br />
+            - "landscape"<br />
+            - "landscape-primary"<br />
+            - "landscape-secondary"<br />
+            - "portrait"<br />
+            - "portrait-primary"<br />
+            - "portrait-secondary"
+            </para>
+            </summary>
+            <param name="orientation">
+            An orientation lock type. One of the following:<br />
+            - "any": Any of "portrait-primary", "portrait-secondary", "landscape-primary" or "landscape-secondary".<br />
+            - "natural": The natural orientation of the screen from the underlying operating system: either "portrait-primary" or "landscape-primary".<br />
+            - "landscape": An orientation where screen width is greater than the screen height. Depending on the platform convention, this may be "landscape-primary", "landscape-secondary", or both.<br />
+            - "landscape-primary": The "primary" landscape mode. If the natural orientation is a landscape mode (screen width is greater than height), this will be the same as the natural orientation, and correspond to an angle of 0 degrees. If the natural orientation is a portrait mode, then the user agent can choose either landscape orientation as the "landscape-primary" with an angle of either 90 or 270 degrees ("landscape-secondary" will be the other orientation and angle).<br />
+            - "landscape-secondary": The secondary landscape mode. If the natural orientation is a landscape mode, this orientation is upside down relative to the natural orientation, and will have an angle of 180 degrees. If the natural orientation is a portrait mode, this can be either orientation as selected by the user agent: whichever was not selected for "landscape-primary".<br />
+            - "portrait": An orientation where screen height is greater than the screen width. Depending on the platform convention, this may be "portrait-primary", "portrait-secondary", or both.<br />
+            - "portrait-primary": The "primary" portrait mode. If the natural orientation is a portrait mode (screen height is greater than width), this will be the same as the natural orientation, and correspond to an angle of 0 degrees. If the natural orientation is a landscape mode, then the user agent can choose either portrait orientation as the "portrait-primary" and "portrait-secondary"; one of those will be assigned the angle of 90 degrees and the other will have an angle of 270 degrees.<br />
+            - "portrait-secondary": The secondary portrait orientation. If the natural orientation is a portrait mode, this will have an angle of 180 degrees (in other words, the device is upside down relative to its natural orientation). If the natural orientation is a landscape mode, this can be either orientation as selected by the user agent: whichever was not selected for "portrait-primary".<br />
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="E:BrowserAPI.IScreen.OnChange">
+            <summary>
+            Fired on a specific screen when one or more of the following properties change on it:<br />
+            - width<br />
+            - height<br />
+            - availWidth<br />
+            - availHeight<br />
+            - colorDepth<br />
+            - orientation
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IScreen.OnOrientationChange">
+            <summary>
+            Fired whenever the screen changes orientation, for example when a user rotates their mobile phone.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IScreenInProcess">
+            <summary>
+            <para>The <i>Screen</i> interface represents a screen, usually the one on which the current window is being rendered, and is obtained using window.screen.</para>
+            <para>Note that browsers determine which screen to report as current by detecting which screen has the center of the browser window.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenInProcess.Dispose">
+            <summary>
+            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenInProcess.LockOrientation(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>Locks the orientation of the containing document to the specified orientation.</para>
+            <para>
+            Typically orientation locking is only enabled on mobile devices, and when the browser context is full screen. If locking is supported, then it must work for all the parameter values listed as follows:<br />
+            - "any"<br />
+            - "natural"<br />
+            - "landscape"<br />
+            - "landscape-primary"<br />
+            - "landscape-secondary"<br />
+            - "portrait"<br />
+            - "portrait-primary"<br />
+            - "portrait-secondary"
+            </para>
+            </summary>
+            <param name="orientation">
+            An orientation lock type. One of the following:<br />
+            - "any": Any of "portrait-primary", "portrait-secondary", "landscape-primary" or "landscape-secondary".<br />
+            - "natural": The natural orientation of the screen from the underlying operating system: either "portrait-primary" or "landscape-primary".<br />
+            - "landscape": An orientation where screen width is greater than the screen height. Depending on the platform convention, this may be "landscape-primary", "landscape-secondary", or both.<br />
+            - "landscape-primary": The "primary" landscape mode. If the natural orientation is a landscape mode (screen width is greater than height), this will be the same as the natural orientation, and correspond to an angle of 0 degrees. If the natural orientation is a portrait mode, then the user agent can choose either landscape orientation as the "landscape-primary" with an angle of either 90 or 270 degrees ("landscape-secondary" will be the other orientation and angle).<br />
+            - "landscape-secondary": The secondary landscape mode. If the natural orientation is a landscape mode, this orientation is upside down relative to the natural orientation, and will have an angle of 180 degrees. If the natural orientation is a portrait mode, this can be either orientation as selected by the user agent: whichever was not selected for "landscape-primary".<br />
+            - "portrait": An orientation where screen height is greater than the screen width. Depending on the platform convention, this may be "portrait-primary", "portrait-secondary", or both.<br />
+            - "portrait-primary": The "primary" portrait mode. If the natural orientation is a portrait mode (screen height is greater than width), this will be the same as the natural orientation, and correspond to an angle of 0 degrees. If the natural orientation is a landscape mode, then the user agent can choose either portrait orientation as the "portrait-primary" and "portrait-secondary"; one of those will be assigned the angle of 90 degrees and the other will have an angle of 270 degrees.<br />
+            - "portrait-secondary": The secondary portrait orientation. If the natural orientation is a portrait mode, this will have an angle of 180 degrees (in other words, the device is upside down relative to its natural orientation). If the natural orientation is a landscape mode, this can be either orientation as selected by the user agent: whichever was not selected for "portrait-primary".<br />
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="E:BrowserAPI.IScreenInProcess.OnChange">
+            <summary>
+            Fired on a specific screen when one or more of the following properties change on it:<br />
+            - width<br />
+            - height<br />
+            - availWidth<br />
+            - availHeight<br />
+            - colorDepth<br />
+            - orientation
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IScreenInProcess.OnOrientationChange">
+            <summary>
+            Fired whenever the screen changes orientation, for example when a user rotates their mobile phone.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenInProcess.Width">
+            <summary>
+            Returns the width of the screen in CSS pixels.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenInProcess.Height">
+            <summary>
+            Returns the height of the screen in CSS pixels.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenInProcess.AvailWidth">
+            <summary>
+            Returns the amount of horizontal space (in CSS pixels) available to the window.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenInProcess.AvailHeight">
+            <summary>
+            <para>
+            Returns the height, in CSS pixels, of the space available for Web content on the screen.
+            Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
+            </para>
+            <para>You can similarly use <see cref="P:BrowserAPI.IScreenInProcess.AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenInProcess.ColorDepth">
+            <summary>
+            Returns the color depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenInProcess.PixelDepth">
+            <summary>
+            Returns the bit depth of the screen.
+            Per the CSSOM, some implementations return 24 for compatibility reasons.
+            See the browser compatibility section for those that don't.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenInProcess.IsExtended">
+            <summary>
+            <para>Returns true if the user's device has multiple screens, and false if not.</para>
+            <para>
+            This property is typically accessed via window.screen.isExtended,
+            and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenInProcess.OrientationType">
+            <summary>
+            Returns the document's current orientation type, one of:<br />
+            - "portrait-primary"<br />
+            - "portrait-secondary"<br />
+            - "landscape-primary"<br />
+            - "landscape-secondary"
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenInProcess.OrientationAngle">
+            <summary>
+            Returns the document's current orientation angle.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenInProcess.UnlockOrientation">
+            <summary>
+            Unlocks the orientation of the containing document from its default orientation.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IWindowManagement">
+            <summary>
+            The <i>Window Management API</i> allows you to get detailed information on the displays connected to your device and more easily place windows on specific screens,
+            paving the way towards more effective multi-screen applications.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IWindowManagement.Screen">
+            <summary>
+            The Window property <i>screen</i> returns a reference to the screen object associated with the window.
+            The screen object, implementing the Screen interface, is a special object for inspecting properties of the screen on which the current window is being rendered.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IWindowManagement.GetScreenDetails(System.Threading.CancellationToken)">
+            <summary>
+            The <i>getScreenDetails()</i> method of the Window interface returns a Promise that fulfills with a ScreenDetails object instance representing the details of all the screens available to the user's device.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowManagement.Open(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>open()</i> method of the Window interface loads a specified resource into a new or existing browsing context (that is, a tab, a window, or an iframe) under a specified name.
+            </summary>
+            <param name="url">
+            A string indicating the URL or path of the resource to be loaded.
+            If an empty string ("") is specified or this parameter is omitted, a blank page is opened into the targeted browsing context.
+            </param>
+            <param name="target">
+            <para>
+            A string, without whitespace, specifying the name of the browsing context the resource is being loaded into.<br />
+            If the name doesn't identify an existing context, a new context is created and given the specified name.<br />
+            The special target keywords, "<i>_self</i>", "<i>_blank</i>" (default), "<i>_parent</i>", "<i>_top</i>", and "<i>_unfencedTop</i>" can also be used.<br />
+            "<i>_unfencedTop</i>" is only relevant to fenced frames.
+            </para>
+            <para>This name can be used as the target attribute of &lt;a&gt; or &lt;form&gt; elements.</para>
+            </param>
+            <param name="features">
+            <para>
+            A string containing a comma-separated list of window features in the form <i>name=value</i>.
+            Boolean values can be set to true using one of: <i>name</i>, <i>name=yes</i>, <i>name=true</i>, or <i>name=n</i> where n is any non-zero integer.
+            These features include options such as the window's default size and position, whether or not to open a minimal popup window, and so forth.
+            The following options are supported:</para>
+            <para>
+            - "attributionsrc": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
+            - "popup": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
+            - "width" or "innerWidth": Specifies the width of the content area, including scrollbars. The minimum required value is 100.<br />
+            - "height" or "innerHeight": Specifies the height of the content area, including scrollbars. The minimum required value is 100.<br />
+            - "left" or "screenX": Specifies the distance in pixels from the left side of the work area as defined by the user's operating system where the new window will be generated.<br />
+            - "top" or "screenY": Specifies the distance in pixels from the top side of the work area as defined by the user's operating system where the new window will be generated.<br />
+            - "noopener": If this feature is set, the new window will not have access to the originating window via Window.opener and returns null. When noopener is used, non-empty target names, other than <i>_top</i>, <i>_self</i>, and <i>_parent</i>, are treated like <i>_blank</i> in terms of deciding whether to open a new browsing context.<br />
+            - "noreferrer": If this feature is set, the browser will omit the Referer header, as well as set noopener to true. See rel="noreferrer" for more information.
+            </para>
+            <para>A null value is treated the same as the empty string ("").</para>
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IWindowManagementInProcess">
+            <summary>
+            The <i>Window Management API</i> allows you to get detailed information on the displays connected to your device and more easily place windows on specific screens,
+            paving the way towards more effective multi-screen applications.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IWindowManagementInProcess.Screen">
+            <summary>
+            The Window property <i>screen</i> returns a reference to the screen object associated with the window.
+            The screen object, implementing the Screen interface, is a special object for inspecting properties of the screen on which the current window is being rendered.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IWindowManagementInProcess.GetScreenDetails(System.Threading.CancellationToken)">
+            <summary>
+            The <i>getScreenDetails()</i> method of the Window interface returns a Promise that fulfills with a ScreenDetails object instance representing the details of all the screens available to the user's device.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowManagementInProcess.Open(System.String,System.String,System.String)">
+            <summary>
+            The <i>open()</i> method of the Window interface loads a specified resource into a new or existing browsing context (that is, a tab, a window, or an iframe) under a specified name.
+            </summary>
+            <param name="url">
+            A string indicating the URL or path of the resource to be loaded.
+            If an empty string ("") is specified or this parameter is omitted, a blank page is opened into the targeted browsing context.
+            </param>
+            <param name="target">
+            <para>
+            A string, without whitespace, specifying the name of the browsing context the resource is being loaded into.<br />
+            If the name doesn't identify an existing context, a new context is created and given the specified name.<br />
+            The special target keywords, "<i>_self</i>", "<i>_blank</i>" (default), "<i>_parent</i>", "<i>_top</i>", and "<i>_unfencedTop</i>" can also be used.<br />
+            "<i>_unfencedTop</i>" is only relevant to fenced frames.
+            </para>
+            <para>This name can be used as the target attribute of &lt;a&gt; or &lt;form&gt; elements.</para>
+            </param>
+            <param name="features">
+            <para>
+            A string containing a comma-separated list of window features in the form <i>name=value</i>.
+            Boolean values can be set to true using one of: <i>name</i>, <i>name=yes</i>, <i>name=true</i>, or <i>name=n</i> where n is any non-zero integer.
+            These features include options such as the window's default size and position, whether or not to open a minimal popup window, and so forth.
+            The following options are supported:</para>
+            <para>
+            - "attributionsrc": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
+            - "popup": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
+            - "width" or "innerWidth": Specifies the width of the content area, including scrollbars. The minimum required value is 100.<br />
+            - "height" or "innerHeight": Specifies the height of the content area, including scrollbars. The minimum required value is 100.<br />
+            - "left" or "screenX": Specifies the distance in pixels from the left side of the work area as defined by the user's operating system where the new window will be generated.<br />
+            - "top" or "screenY": Specifies the distance in pixels from the top side of the work area as defined by the user's operating system where the new window will be generated.<br />
+            - "noopener": If this feature is set, the new window will not have access to the originating window via Window.opener and returns null. When noopener is used, non-empty target names, other than <i>_top</i>, <i>_self</i>, and <i>_parent</i>, are treated like <i>_blank</i> in terms of deciding whether to open a new browsing context.<br />
+            - "noreferrer": If this feature is set, the browser will omit the Referer header, as well as set noopener to true. See rel="noreferrer" for more information.
+            </para>
+            <para>A null value is treated the same as the empty string ("").</para>
+            </param>
         </member>
         <member name="T:CircleDIAttributes.IBrowserAPIModule">
             <summary>

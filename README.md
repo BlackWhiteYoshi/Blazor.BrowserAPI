@@ -24,10 +24,10 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - [LocalStorage](Blazor.BrowserAPI/BrowserAPIs/LocalStorage/LocalStorage.md)
 - [MediaDevices (microphone/camera)](Blazor.BrowserAPI/BrowserAPIs/MediaDevices/MediaDevices.md)
 - [NetworkInformation](Blazor.BrowserAPI/BrowserAPIs/NetworkInformation/NetworkInformation.md)
-- [Screen](Blazor.BrowserAPI/BrowserAPIs/Screen/Screen.md)
 - [SensorAPI](Blazor.BrowserAPI/BrowserAPIs/SensorAPI/SensorAPI.md)
 - [ServiceWorker](Blazor.BrowserAPI/BrowserAPIs/ServiceWorker/ServiceWorker.md)
 - [SessionStorage](Blazor.BrowserAPI/BrowserAPIs/SessionStorage/SessionStorage.md)
+- [WindowManagement (screen)](Blazor.BrowserAPI/BrowserAPIs/WindowManagement/WindowManagement.md)
 
 ## Other APIs
 
@@ -130,7 +130,7 @@ There are more interfaces coming.
 - 0.11.0
   - added NetworkInformation (18 BrowserAPIs)
 - 0.12.0
-  - added Screen (19 BrowserAPIs)
+  - added WindowManagement (19 BrowserAPIs)
   - small breaking changes:
     - changed IGamepadAPI.GetGamepads() from returning IGamepad[] to IGamepad?[], so it aligns with the JS array.
     - changed IServiceWorkerContainer.Register() from returning ValueTask&lt;bool&gt; to ValueTask, an exception is thrown when service workers are not supported.

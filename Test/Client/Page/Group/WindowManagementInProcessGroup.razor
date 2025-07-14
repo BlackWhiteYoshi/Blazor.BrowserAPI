@@ -1,0 +1,66 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Window Management InProcess</h2>
+    <div>
+        @* Screen *@
+
+        <button data-testid="@BUTTON_SCREEN_GET_WIDTH" @onclick="Screen_GetWidth">Screen_GetWidth</button>
+        <button data-testid="@BUTTON_SCREEN_GET_HEIGHT" @onclick="Screen_GetHeight">Screen_GetHeight</button>
+        <button data-testid="@BUTTON_SCREEN_GET_AVAIL_WIDTH" @onclick="Screen_GetAvailWidth">Screen_GetAvailWidth</button>
+        <button data-testid="@BUTTON_SCREEN_GET_AVAIL_HEIGHT" @onclick="Screen_GetAvailHeight">Screen_GetAvailHeight</button>
+        <button data-testid="@BUTTON_SCREEN_GET_COLOR_DEPTH" @onclick="Screen_GetColorDepth">Screen_GetColorDepth</button>
+        <button data-testid="@BUTTON_SCREEN_GET_PIXEL_DEPTH" @onclick="Screen_GetPixelDepth">Screen_GetPixelDepth</button>
+        <button data-testid="@BUTTON_SCREEN_GET_IS_EXTENDED" @onclick="Screen_GetIsExtended">Screen_GetIsExtended</button>
+
+        <button data-testid="@BUTTON_SCREEN_GET_ORIENTATION_TYPE" @onclick="Screen_GetOrientationType">Screen_GetOrientationType</button>
+        <button data-testid="@BUTTON_SCREEN_GET_ORIENTATION_ANGLE" @onclick="Screen_GetOrientationAngle">Screen_GetOrientationAngle</button>
+        <button data-testid="@BUTTON_SCREEN_LOCK_ORIENTATION" @onclick="Screen_LockOrientation">Screen_LockOrientation</button>
+        <button data-testid="@BUTTON_SCREEN_UNLOCK_ORIENTATION" @onclick="Screen_UnlockOrientation">Screen_UnlockOrientation</button>
+
+        <button data-testid="@BUTTON_SCREEN_REGISTER_ON_CHANGE" @onclick="Screen_RegisterOnChange">Screen_RegisterOnChange</button>
+        <button data-testid="@BUTTON_SCREEN_REGISTER_ON_ORIENTATION_CHANGE" @onclick="Screen_RegisterOnOrientationChange">Screen_RegisterOnOrientationChange</button>
+
+
+        @* Window Management API *@
+
+        <button data-testid="@BUTTON_GET_SCREEN_DETAILS" @onclick="GetScreenDetails">GetScreenDetails</button>
+        <button data-testid="@BUTTON_OPEN" @onclick="Open">Open</button>
+
+        <button data-testid="@BUTTON_GET_CURRENT_SCREEN" @onclick="GetCurrentScreen">GetCurrentScreen</button>
+        <button data-testid="@BUTTON_GET_SCREENS" @onclick="GetScreens">GetScreens</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_CURRENT_SCREEN_CHANGE" @onclick="RegisterOnCurrentScreenChange">RegisterOnCurrentScreenChange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_SCREENS_CHANGE" @onclick="RegisterOnScreensChange">RegisterOnScreensChange</button>
+
+
+        @* ScreenDetailed *@
+
+        <button data-testid="@BUTTON_REGISTER_GET_LEFT" @onclick="GetLeft">GetLeft</button>
+        <button data-testid="@BUTTON_REGISTER_GET_TOP" @onclick="GetTop">GetTop</button>
+        <button data-testid="@BUTTON_REGISTER_GET_AVAIL_LEFT" @onclick="GetAvailLeft">GetAvailLeft</button>
+        <button data-testid="@BUTTON_REGISTER_GET_AVAIL_TOP" @onclick="GetAvailTop">GetAvailTop</button>
+        <button data-testid="@BUTTON_REGISTER_GET_LABEL" @onclick="GetLabel">GetLabel</button>
+        <button data-testid="@BUTTON_REGISTER_GET_DEVICE_PIXEL_RATIO" @onclick="GetDevicePixelRatio">GetDevicePixelRatio</button>
+        <button data-testid="@BUTTON_REGISTER_GET_IS_PRIMARY" @onclick="GetIsPrimary">GetIsPrimary</button>
+        <button data-testid="@BUTTON_REGISTER_GET_IS_INTERNAL" @onclick="GetIsInternal">GetIsInternal</button>
+
+        <button data-testid="@BUTTON_GET_WIDTH" @onclick="GetWidth">GetWidth</button>
+        <button data-testid="@BUTTON_GET_HEIGHT" @onclick="GetHeight">GetHeight</button>
+        <button data-testid="@BUTTON_GET_AVAIL_WIDTH" @onclick="GetAvailWidth">GetAvailWidth</button>
+        <button data-testid="@BUTTON_GET_AVAIL_HEIGHT" @onclick="GetAvailHeight">GetAvailHeight</button>
+        <button data-testid="@BUTTON_GET_COLOR_DEPTH" @onclick="GetColorDepth">GetColorDepth</button>
+        <button data-testid="@BUTTON_GET_PIXEL_DEPTH" @onclick="GetPixelDepth">GetPixelDepth</button>
+        <button data-testid="@BUTTON_GET_IS_EXTENDED" @onclick="GetIsExtended">GetIsExtended</button>
+
+        <button data-testid="@BUTTON_GET_ORIENTATION_TYPE" @onclick="GetOrientationType">GetOrientationType</button>
+        <button data-testid="@BUTTON_GET_ORIENTATION_ANGLE" @onclick="GetOrientationAngle">GetOrientationAngle</button>
+
+        <button data-testid="@BUTTON_LOCK_ORIENTATION" @onclick="LockOrientation">LockOrientation</button>
+        <button data-testid="@BUTTON_UNLOCK_ORIENTATION" @onclick="UnlockOrientation">UnlockOrientation</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_CHANGE" @onclick="RegisterOnChange">RegisterOnChange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ORIENTATION_CHANGE" @onclick="RegisterOnOrientationChange">RegisterOnOrientationChange</button>
+    </div>
+    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+</div>

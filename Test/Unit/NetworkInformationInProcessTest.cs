@@ -1,5 +1,4 @@
 ﻿using BrowserAPI.Test.Client;
-using Microsoft.Playwright;
 
 namespace BrowserAPI.UnitTest;
 

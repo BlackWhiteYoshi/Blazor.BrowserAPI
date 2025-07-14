@@ -43,14 +43,14 @@ public static class AddBrowserAPIExtension {
             .AddScoped<IMediaDevicesInProcess, Implementation.MediaDevicesInProcess>()
             .AddScoped<INetworkInformation, Implementation.NetworkInformation>()
             .AddScoped<INetworkInformationInProcess, Implementation.NetworkInformationInProcess>()
-            .AddScoped<IScreen, Implementation.Screen>()
-            .AddScoped<IScreenInProcess, Implementation.ScreenInProcess>()
             .AddScoped<ISensorAPI, Implementation.SensorAPI>()
             .AddScoped<ISensorAPIInProcess, Implementation.SensorAPIInProcess>()
             .AddScoped<IServiceWorkerContainer, Implementation.ServiceWorkerContainer>()
             .AddScoped<IServiceWorkerContainerInProcess, Implementation.ServiceWorkerContainerInProcess>()
             .AddScoped<ISessionStorage, Implementation.SessionStorage>()
-            .AddScoped<ISessionStorageInProcess, Implementation.SessionStorageInProcess>();
+            .AddScoped<ISessionStorageInProcess, Implementation.SessionStorageInProcess>()
+            .AddScoped<IWindowManagement, Implementation.WindowManagement>()
+            .AddScoped<IWindowManagementInProcess, Implementation.WindowManagementInProcess>();
 
         return services;
     }

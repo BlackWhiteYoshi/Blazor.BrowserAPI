@@ -26,10 +26,10 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - LocalStorage
 - MediaDevices (microphone/camera)
 - NetworkInformation
-- Screen
 - SensorAPI
 - ServiceWorker
 - SessionStorage
+- WindowManagement (screen)
 
 
 ## Get Started

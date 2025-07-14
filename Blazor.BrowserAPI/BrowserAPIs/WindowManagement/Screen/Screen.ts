@@ -1,4 +1,4 @@
-import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
+import { blazorInvokeMethod } from "../../../Extensions/blazorExtensions";
 
 export class ScreenAPI {
     static getWidth(): number {
@@ -26,7 +26,7 @@ export class ScreenAPI {
     }
 
     static getIsExtended(): boolean {
-        return (window.screen as Screen & { isExtended: boolean; }).isExtended;
+        return window.screen.isExtended;
     }
 
 
@@ -41,7 +41,7 @@ export class ScreenAPI {
     }
 
     static lockOrientation(orientation: string): Promise<void> {
-        return (window.screen.orientation as ScreenOrientation & { lock(orientation: string): Promise<void>; }).lock(orientation);
+        return window.screen.orientation.lock(orientation);
     }
 
     static unlockOrientation() {
@@ -68,11 +68,11 @@ export class ScreenAPI {
     }
 
     static activateOnchange() {
-        (window.screen as Screen & { addEventListener(type: "change", listener: () => void): void; }).addEventListener("change", ScreenAPI.#onchange);
+        window.screen.addEventListener("change", ScreenAPI.#onchange);
     }
 
     static deactivateOnchange() {
-        (window.screen as Screen & { removeEventListener(type: "change", listener: () => void): void; }).removeEventListener("change", ScreenAPI.#onchange);
+        window.screen.removeEventListener("change", ScreenAPI.#onchange);
     }
 
 

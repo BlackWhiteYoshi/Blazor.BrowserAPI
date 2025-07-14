@@ -32,14 +32,14 @@
 [Scoped<BrowserAPI.IMediaDevicesInProcess, BrowserAPI.Implementation.MediaDevicesInProcess>]
 [Scoped<BrowserAPI.INetworkInformation, BrowserAPI.Implementation.NetworkInformation>]
 [Scoped<BrowserAPI.INetworkInformationInProcess, BrowserAPI.Implementation.NetworkInformationInProcess>]
-[Scoped<BrowserAPI.IScreen, BrowserAPI.Implementation.Screen>]
-[Scoped<BrowserAPI.IScreenInProcess, BrowserAPI.Implementation.ScreenInProcess>]
 [Scoped<BrowserAPI.ISensorAPI, BrowserAPI.Implementation.SensorAPI>]
 [Scoped<BrowserAPI.ISensorAPIInProcess, BrowserAPI.Implementation.SensorAPIInProcess>]
 [Scoped<BrowserAPI.IServiceWorkerContainer, BrowserAPI.Implementation.ServiceWorkerContainer>]
 [Scoped<BrowserAPI.IServiceWorkerContainerInProcess, BrowserAPI.Implementation.ServiceWorkerContainerInProcess>]
 [Scoped<BrowserAPI.ISessionStorage, BrowserAPI.Implementation.SessionStorage>]
 [Scoped<BrowserAPI.ISessionStorageInProcess, BrowserAPI.Implementation.SessionStorageInProcess>]
+[Scoped<BrowserAPI.IWindowManagement, BrowserAPI.Implementation.WindowManagement>]
+[Scoped<BrowserAPI.IWindowManagementInProcess, BrowserAPI.Implementation.WindowManagementInProcess>]
 public interface IBrowserAPIModule;
 
 

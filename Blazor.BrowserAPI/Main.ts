@@ -43,9 +43,6 @@ export { MediaDevicesAPI };
 import { NetworkInformationAPI } from "./BrowserAPIs/NetworkInformation/NetworkInformation";
 export { NetworkInformationAPI };
 
-import { ScreenAPI } from "./BrowserAPIs/Screen/Screen";
-export { ScreenAPI };
-
 // SensorAPI
 import { AbsoluteOrientationSensorAPI } from "./BrowserAPIs/SensorAPI/Sensor/AbsoluteOrientationSensor/AbsoluteOrientationSensor";
 import { AccelerometerAPI } from "./BrowserAPIs/SensorAPI/Sensor/Accelerometer/Accelerometer";
@@ -63,3 +60,7 @@ export { ServiceWorkerContainerAPI };
 
 import { SessionStorageAPI } from "./BrowserAPIs/SessionStorage/SessionStorage";
 export { SessionStorageAPI };
+
+import { WindowManagementAPI } from "./BrowserAPIs/WindowManagement/WindowManagement";
+import { ScreenAPI } from "./BrowserAPIs/WindowManagement/Screen/Screen";
+export { WindowManagementAPI, ScreenAPI };
