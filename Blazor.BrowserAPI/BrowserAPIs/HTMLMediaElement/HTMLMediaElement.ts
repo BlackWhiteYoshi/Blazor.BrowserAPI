@@ -23,7 +23,7 @@ export class HTMLMediaElementAPI {
         return this.#htmlMediaElement.src;
     }
 
-    setSrc(value: string) {
+    setSrc(value: string): void {
         this.#htmlMediaElement.src = value;
     }
 
@@ -35,7 +35,7 @@ export class HTMLMediaElementAPI {
             return [null];
     }
 
-    setSrcObject(value: MediaStreamAPI | null) {
+    setSrcObject(value: MediaStreamAPI | null): void {
         if (value !== null)
             this.#htmlMediaElement.srcObject = value?.getStream();
         else
@@ -46,7 +46,7 @@ export class HTMLMediaElementAPI {
         return this.#htmlMediaElement.controls;
     }
 
-    setControls(value: boolean) {
+    setControls(value: boolean): void {
         this.#htmlMediaElement.controls = value;
     }
 
@@ -54,7 +54,7 @@ export class HTMLMediaElementAPI {
         return this.#htmlMediaElement.autoplay;
     }
 
-    setAutoplay(value: boolean) {
+    setAutoplay(value: boolean): void {
         this.#htmlMediaElement.autoplay = value;
     }
 
@@ -62,7 +62,7 @@ export class HTMLMediaElementAPI {
         return this.#htmlMediaElement.loop;
     }
 
-    setLoop(value: boolean) {
+    setLoop(value: boolean): void {
         this.#htmlMediaElement.loop = value;
     }
 
@@ -70,7 +70,7 @@ export class HTMLMediaElementAPI {
         return this.#htmlMediaElement.defaultMuted;
     }
 
-    setDefaultMuted(value: boolean) {
+    setDefaultMuted(value: boolean): void {
         this.#htmlMediaElement.defaultMuted = value;
     }
 
@@ -79,7 +79,7 @@ export class HTMLMediaElementAPI {
         return this.#htmlMediaElement.preload;
     }
 
-    setPreload(value: "none" | "metadata" | "auto" | "") {
+    setPreload(value: "none" | "metadata" | "auto" | ""): void {
         this.#htmlMediaElement.preload = value;
     }
 
@@ -94,7 +94,7 @@ export class HTMLMediaElementAPI {
         return this.#htmlMediaElement.currentTime;
     }
 
-    setCurrentTime(value: number) {
+    setCurrentTime(value: number): void {
         this.#htmlMediaElement.currentTime = value;
     }
 
@@ -112,7 +112,7 @@ export class HTMLMediaElementAPI {
         return this.#htmlMediaElement.muted;
     }
 
-    setMuted(value: boolean) {
+    setMuted(value: boolean): void {
         this.#htmlMediaElement.muted = value;
     }
 
@@ -120,7 +120,7 @@ export class HTMLMediaElementAPI {
         return this.#htmlMediaElement.volume;
     }
 
-    setVolume(value: number) {
+    setVolume(value: number): void {
         this.#htmlMediaElement.volume = value;
     }
 
@@ -163,7 +163,7 @@ export class HTMLMediaElementAPI {
         return this.#htmlMediaElement.playbackRate;
     }
 
-    setPlaybackRate(value: number) {
+    setPlaybackRate(value: number): void {
         this.#htmlMediaElement.playbackRate = value;
     }
 
@@ -171,7 +171,7 @@ export class HTMLMediaElementAPI {
         return this.#htmlMediaElement.defaultPlaybackRate;
     }
 
-    setDefaultPlaybackRate(value: number) {
+    setDefaultPlaybackRate(value: number): void {
         this.#htmlMediaElement.defaultPlaybackRate = value;
     }
 
@@ -180,7 +180,7 @@ export class HTMLMediaElementAPI {
     }
 
     /** @param value "anonymous" | "use-credentials" */
-    setCrossOrigin(value: string) {
+    setCrossOrigin(value: string): void {
         this.#htmlMediaElement.crossOrigin = value;
     }
 
@@ -188,7 +188,7 @@ export class HTMLMediaElementAPI {
         return this.#htmlMediaElement.preservesPitch;
     }
 
-    setPreservesPitch(value: boolean) {
+    setPreservesPitch(value: boolean): void {
         this.#htmlMediaElement.preservesPitch = value;
     }
 
@@ -196,7 +196,7 @@ export class HTMLMediaElementAPI {
         return this.#htmlMediaElement.disableRemotePlayback;
     }
 
-    setDisableRemotePlayback(value: boolean) {
+    setDisableRemotePlayback(value: boolean): void {
         this.#htmlMediaElement.disableRemotePlayback = value;
     }
 
@@ -208,15 +208,15 @@ export class HTMLMediaElementAPI {
         return this.#htmlMediaElement.play();
     }
 
-    pause() {
+    pause(): void {
         this.#htmlMediaElement.pause();
     }
 
-    load() {
+    load(): void {
         this.#htmlMediaElement.load();
     }
 
-    fastSeek(time: number) {
+    fastSeek(time: number): void {
         this.#htmlMediaElement.fastSeek(time);
     }
 
@@ -232,7 +232,7 @@ export class HTMLMediaElementAPI {
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
 
-    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
     }
@@ -242,55 +242,55 @@ export class HTMLMediaElementAPI {
 
     // error event
 
-    #onerrorCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeError", this.#htmlMediaElement.error!.code, this.#htmlMediaElement.error!.message);
+    #onerror = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeError", this.#htmlMediaElement.error!.code, this.#htmlMediaElement.error!.message);
 
-    activateOnerror() {
-        this.#htmlMediaElement.addEventListener("error", this.#onerrorCallback);
+    activateOnerror(): void {
+        this.#htmlMediaElement.addEventListener("error", this.#onerror);
         if (this.#htmlMediaElement.error !== null)
-            this.#onerrorCallback();
+            this.#onerror();
     }
 
-    deactivateOnerror() {
-        this.#htmlMediaElement.removeEventListener("error", this.#onerrorCallback);
+    deactivateOnerror(): void {
+        this.#htmlMediaElement.removeEventListener("error", this.#onerror);
     }
 
 
     // canplay event
 
-    #oncanplayCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCanplay");
+    #oncanplay = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCanplay");
 
-    activateOncanplay() {
-        this.#htmlMediaElement.addEventListener("canplay", this.#oncanplayCallback);
+    activateOncanplay(): void {
+        this.#htmlMediaElement.addEventListener("canplay", this.#oncanplay);
     }
 
-    deactivateOncanplay() {
-        this.#htmlMediaElement.removeEventListener("canplay", this.#oncanplayCallback);
+    deactivateOncanplay(): void {
+        this.#htmlMediaElement.removeEventListener("canplay", this.#oncanplay);
     }
 
 
     // canplaythrough event
 
-    #oncanplaythroughCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCanplaythrough");
+    #oncanplaythrough = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCanplaythrough");
 
-    activateOncanplaythrough() {
-        this.#htmlMediaElement.addEventListener("canplaythrough", this.#oncanplaythroughCallback);
+    activateOncanplaythrough(): void {
+        this.#htmlMediaElement.addEventListener("canplaythrough", this.#oncanplaythrough);
     }
 
-    deactivateOncanplaythrough() {
-        this.#htmlMediaElement.removeEventListener("canplaythrough", this.#oncanplaythroughCallback);
+    deactivateOncanplaythrough(): void {
+        this.#htmlMediaElement.removeEventListener("canplaythrough", this.#oncanplaythrough);
     }
 
 
     // playing event
 
-    #onplayingCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePlaying");
+    #onplaying = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePlaying");
 
-    activateOnplaying() {
-        this.#htmlMediaElement.addEventListener("playing", this.#onplayingCallback);
+    activateOnplaying(): void {
+        this.#htmlMediaElement.addEventListener("playing", this.#onplaying);
     }
 
-    deactivateOnplaying() {
-        this.#htmlMediaElement.removeEventListener("playing", this.#onplayingCallback);
+    deactivateOnplaying(): void {
+        this.#htmlMediaElement.removeEventListener("playing", this.#onplaying);
     }
 
 
@@ -298,118 +298,118 @@ export class HTMLMediaElementAPI {
 
     // loadstart event
 
-    #onloadstartCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeLoadstart");
+    #onloadstart = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeLoadstart");
 
-    activateOnloadstart() {
-        this.#htmlMediaElement.addEventListener("loadstart", this.#onloadstartCallback);
+    activateOnloadstart(): void {
+        this.#htmlMediaElement.addEventListener("loadstart", this.#onloadstart);
     }
 
-    deactivateOnloadstart() {
-        this.#htmlMediaElement.removeEventListener("loadstart", this.#onloadstartCallback);
+    deactivateOnloadstart(): void {
+        this.#htmlMediaElement.removeEventListener("loadstart", this.#onloadstart);
     }
 
 
     // progress event
 
-    #onprogressCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeProgress");
+    #onprogress = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeProgress");
 
-    activateOnprogress() {
-        this.#htmlMediaElement.addEventListener("progress", this.#onprogressCallback);
+    activateOnprogress(): void {
+        this.#htmlMediaElement.addEventListener("progress", this.#onprogress);
     }
 
-    deactivateOnprogress() {
-        this.#htmlMediaElement.removeEventListener("progress", this.#onprogressCallback);
+    deactivateOnprogress(): void {
+        this.#htmlMediaElement.removeEventListener("progress", this.#onprogress);
     }
 
 
     // loadeddata event
 
-    #onloadeddataCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeLoadeddata");
+    #onloadeddata = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeLoadeddata");
 
-    activateOnloadeddata() {
-        this.#htmlMediaElement.addEventListener("loadeddata", this.#onloadeddataCallback);
+    activateOnloadeddata(): void {
+        this.#htmlMediaElement.addEventListener("loadeddata", this.#onloadeddata);
     }
 
-    deactivateOnloadeddata() {
-        this.#htmlMediaElement.removeEventListener("loadeddata", this.#onloadeddataCallback);
+    deactivateOnloadeddata(): void {
+        this.#htmlMediaElement.removeEventListener("loadeddata", this.#onloadeddata);
     }
 
 
     // loadedmetadata event
 
-    #onloadedmetadataCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeLoadedmetadata");
+    #onloadedmetadata = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeLoadedmetadata");
 
-    activateOnloadedmetadata() {
-        this.#htmlMediaElement.addEventListener("loadedmetadata", this.#onloadedmetadataCallback);
+    activateOnloadedmetadata(): void {
+        this.#htmlMediaElement.addEventListener("loadedmetadata", this.#onloadedmetadata);
     }
 
-    deactivateOnloadedmetadata() {
-        this.#htmlMediaElement.removeEventListener("loadedmetadata", this.#onloadedmetadataCallback);
+    deactivateOnloadedmetadata(): void {
+        this.#htmlMediaElement.removeEventListener("loadedmetadata", this.#onloadedmetadata);
     }
 
 
     // stalled event
 
-    #onstalledCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeStalled");
+    #onstalled = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeStalled");
 
-    activateOnstalled() {
-        this.#htmlMediaElement.addEventListener("stalled", this.#onstalledCallback);
+    activateOnstalled(): void {
+        this.#htmlMediaElement.addEventListener("stalled", this.#onstalled);
     }
 
-    deactivateOnstalled() {
-        this.#htmlMediaElement.removeEventListener("stalled", this.#onstalledCallback);
+    deactivateOnstalled(): void {
+        this.#htmlMediaElement.removeEventListener("stalled", this.#onstalled);
     }
 
 
     // suspend event
 
-    #onsuspendCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeSuspend");
+    #onsuspend = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeSuspend");
 
-    activateOnsuspend() {
-        this.#htmlMediaElement.addEventListener("suspend", this.#onsuspendCallback);
+    activateOnsuspend(): void {
+        this.#htmlMediaElement.addEventListener("suspend", this.#onsuspend);
     }
 
-    deactivateOnsuspend() {
-        this.#htmlMediaElement.removeEventListener("suspend", this.#onsuspendCallback);
+    deactivateOnsuspend(): void {
+        this.#htmlMediaElement.removeEventListener("suspend", this.#onsuspend);
     }
 
 
     // waiting event
 
-    #onwaitingCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeWaiting");
+    #onwaiting = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeWaiting");
 
-    activateOnwaiting() {
-        this.#htmlMediaElement.addEventListener("waiting", this.#onwaitingCallback);
+    activateOnwaiting(): void {
+        this.#htmlMediaElement.addEventListener("waiting", this.#onwaiting);
     }
 
-    deactivateOnwaiting() {
-        this.#htmlMediaElement.removeEventListener("waiting", this.#onwaitingCallback);
+    deactivateOnwaiting(): void {
+        this.#htmlMediaElement.removeEventListener("waiting", this.#onwaiting);
     }
 
 
     // abort event
 
-    #onabortCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAbort");
+    #onabort = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAbort");
 
-    activateOnabort() {
-        this.#htmlMediaElement.addEventListener("abort", this.#onabortCallback);
+    activateOnabort(): void {
+        this.#htmlMediaElement.addEventListener("abort", this.#onabort);
     }
 
-    deactivateOnabort() {
-        this.#htmlMediaElement.removeEventListener("abort", this.#onabortCallback);
+    deactivateOnabort(): void {
+        this.#htmlMediaElement.removeEventListener("abort", this.#onabort);
     }
 
 
     // emptied event
 
-    #onemptiedCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeEmptied");
+    #onemptied = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeEmptied");
 
-    activateOnemptied() {
-        this.#htmlMediaElement.addEventListener("emptied", this.#onemptiedCallback);
+    activateOnemptied(): void {
+        this.#htmlMediaElement.addEventListener("emptied", this.#onemptied);
     }
 
-    deactivateOnemptied() {
-        this.#htmlMediaElement.removeEventListener("emptied", this.#onemptiedCallback);
+    deactivateOnemptied(): void {
+        this.#htmlMediaElement.removeEventListener("emptied", this.#onemptied);
     }
 
 
@@ -417,79 +417,79 @@ export class HTMLMediaElementAPI {
 
     // play event
 
-    #onplayCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePlay");
+    #onplay = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePlay");
 
-    activateOnplay() {
-        this.#htmlMediaElement.addEventListener("play", this.#onplayCallback);
+    activateOnplay(): void {
+        this.#htmlMediaElement.addEventListener("play", this.#onplay);
     }
 
-    deactivateOnplay() {
-        this.#htmlMediaElement.removeEventListener("play", this.#onplayCallback);
+    deactivateOnplay(): void {
+        this.#htmlMediaElement.removeEventListener("play", this.#onplay);
     }
 
 
     // pause event
 
-    #onpauseCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePause");
+    #onpause = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePause");
 
-    activateOnpause() {
-        this.#htmlMediaElement.addEventListener("pause", this.#onpauseCallback);
+    activateOnpause(): void {
+        this.#htmlMediaElement.addEventListener("pause", this.#onpause);
     }
 
-    deactivateOnpause() {
-        this.#htmlMediaElement.removeEventListener("pause", this.#onpauseCallback);
+    deactivateOnpause(): void {
+        this.#htmlMediaElement.removeEventListener("pause", this.#onpause);
     }
 
 
     // ended event
 
-    #onendedCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeEnded");
+    #onended = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeEnded");
 
-    activateOnended() {
-        this.#htmlMediaElement.addEventListener("ended", this.#onendedCallback);
+    activateOnended(): void {
+        this.#htmlMediaElement.addEventListener("ended", this.#onended);
     }
 
-    deactivateOnended() {
-        this.#htmlMediaElement.removeEventListener("ended", this.#onendedCallback);
+    deactivateOnended(): void {
+        this.#htmlMediaElement.removeEventListener("ended", this.#onended);
     }
 
 
     // seeking event
 
-    #onseekingCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeSeeking");
+    #onseeking = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeSeeking");
 
-    activateOnseeking() {
-        this.#htmlMediaElement.addEventListener("seeking", this.#onseekingCallback);
+    activateOnseeking(): void {
+        this.#htmlMediaElement.addEventListener("seeking", this.#onseeking);
     }
 
-    deactivateOnseeking() {
-        this.#htmlMediaElement.removeEventListener("seeking", this.#onseekingCallback);
+    deactivateOnseeking(): void {
+        this.#htmlMediaElement.removeEventListener("seeking", this.#onseeking);
     }
 
 
     // seeked event
 
-    #onseekedCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeSeeked");
+    #onseeked = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeSeeked");
 
-    activateOnseeked() {
-        this.#htmlMediaElement.addEventListener("seeked", this.#onseekedCallback);
+    activateOnseeked(): void {
+        this.#htmlMediaElement.addEventListener("seeked", this.#onseeked);
     }
 
-    deactivateOnseeked() {
-        this.#htmlMediaElement.removeEventListener("seeked", this.#onseekedCallback);
+    deactivateOnseeked(): void {
+        this.#htmlMediaElement.removeEventListener("seeked", this.#onseeked);
     }
 
 
     // timeupdate event
 
-    #ontimeupdateCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTimeupdate");
+    #ontimeupdate = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTimeupdate");
 
-    activateOntimeupdate() {
-        this.#htmlMediaElement.addEventListener("timeupdate", this.#ontimeupdateCallback);
+    activateOntimeupdate(): void {
+        this.#htmlMediaElement.addEventListener("timeupdate", this.#ontimeupdate);
     }
 
-    deactivateOntimeupdate() {
-        this.#htmlMediaElement.removeEventListener("timeupdate", this.#ontimeupdateCallback);
+    deactivateOntimeupdate(): void {
+        this.#htmlMediaElement.removeEventListener("timeupdate", this.#ontimeupdate);
     }
 
 
@@ -497,40 +497,40 @@ export class HTMLMediaElementAPI {
 
     // volumechange event
 
-    #onvolumechangeCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeVolumechange");
+    #onvolumechange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeVolumechange");
 
-    activateOnvolumechange() {
-        this.#htmlMediaElement.addEventListener("volumechange", this.#onvolumechangeCallback);
+    activateOnvolumechange(): void {
+        this.#htmlMediaElement.addEventListener("volumechange", this.#onvolumechange);
     }
 
-    deactivateOnvolumechange() {
-        this.#htmlMediaElement.removeEventListener("volumechange", this.#onvolumechangeCallback);
+    deactivateOnvolumechange(): void {
+        this.#htmlMediaElement.removeEventListener("volumechange", this.#onvolumechange);
     }
 
 
     // ratechange event
 
-    #onratechangeCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeRatechange");
+    #onratechange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeRatechange");
 
-    activateOnratechange() {
-        this.#htmlMediaElement.addEventListener("ratechange", this.#onratechangeCallback);
+    activateOnratechange(): void {
+        this.#htmlMediaElement.addEventListener("ratechange", this.#onratechange);
     }
 
-    deactivateOnratechange() {
-        this.#htmlMediaElement.removeEventListener("ratechange", this.#onratechangeCallback);
+    deactivateOnratechange(): void {
+        this.#htmlMediaElement.removeEventListener("ratechange", this.#onratechange);
     }
 
 
     // durationchange event
 
-    #ondurationchangeCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDurationchange");
+    #ondurationchange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDurationchange");
 
-    activateOndurationchange() {
-        this.#htmlMediaElement.addEventListener("durationchange", this.#ondurationchangeCallback);
+    activateOndurationchange(): void {
+        this.#htmlMediaElement.addEventListener("durationchange", this.#ondurationchange);
     }
 
-    deactivateOndurationchange() {
-        this.#htmlMediaElement.removeEventListener("durationchange", this.#ondurationchangeCallback);
+    deactivateOndurationchange(): void {
+        this.#htmlMediaElement.removeEventListener("durationchange", this.#ondurationchange);
     }
 
 

@@ -18,7 +18,7 @@ export class HTMLElementAPI {
         return this.#htmlElement.innerText;
     }
 
-    setInnerText(value: string) {
+    setInnerText(value: string): void {
         this.#htmlElement.innerText = value;
     }
 
@@ -26,7 +26,7 @@ export class HTMLElementAPI {
         return this.#htmlElement.outerText;
     }
 
-    setOuterText(value: string) {
+    setOuterText(value: string): void {
         this.#htmlElement.outerText = value;
     }
 
@@ -34,7 +34,7 @@ export class HTMLElementAPI {
         return this.#htmlElement.style.cssText;
     }
 
-    setInlineStyle(value: string) {
+    setInlineStyle(value: string): void {
         this.#htmlElement.style.cssText = value;
     }
 
@@ -68,28 +68,28 @@ export class HTMLElementAPI {
     }
 
 
-    click() {
+    click(): void {
         this.#htmlElement.click();
     }
 
-    focus(preventScroll: boolean = false) {
+    focus(preventScroll: boolean = false): void {
         this.#htmlElement.focus({ preventScroll });
     }
 
-    blur() {
+    blur(): void {
         this.#htmlElement.blur();
     }
 
-    showPopover() {
+    showPopover(): void {
         this.#htmlElement.showPopover();
     }
 
-    hidePopover() {
+    hidePopover(): void {
         this.#htmlElement.hidePopover();
     }
 
     togglePopover(force?: boolean): boolean {
-        return this.#htmlElement.togglePopover(force) as unknown as boolean;
+        return <boolean><unknown>this.#htmlElement.togglePopover(force);
     }
 
 
@@ -100,7 +100,7 @@ export class HTMLElementAPI {
         return this.#htmlElement.innerHTML;
     }
 
-    setInnerHTML(value: string) {
+    setInnerHTML(value: string): void {
         this.#htmlElement.innerHTML = value;
     }
 
@@ -108,7 +108,7 @@ export class HTMLElementAPI {
         return this.#htmlElement.outerHTML;
     }
 
-    setOuterHTML(value: string) {
+    setOuterHTML(value: string): void {
         this.#htmlElement.outerHTML = value;
     }
 
@@ -128,7 +128,7 @@ export class HTMLElementAPI {
         return this.#htmlElement.className;
     }
 
-    setClassName(value: string) {
+    setClassName(value: string): void {
         this.#htmlElement.className = value;
     }
 
@@ -166,7 +166,7 @@ export class HTMLElementAPI {
         return this.#htmlElement.scrollLeft;
     }
 
-    setScrollLeft(value: number) {
+    setScrollLeft(value: number): void {
         this.#htmlElement.scrollLeft = value;
     }
 
@@ -174,7 +174,7 @@ export class HTMLElementAPI {
         return this.#htmlElement.scrollTop;
     }
 
-    setScrollTop(value: number) {
+    setScrollTop(value: number): void {
         this.#htmlElement.scrollTop = value;
     }
 
@@ -197,11 +197,11 @@ export class HTMLElementAPI {
     }
 
 
-    setPointerCapture(pointerId: number) {
+    setPointerCapture(pointerId: number): void {
         this.#htmlElement.setPointerCapture(pointerId);
     }
 
-    releasePointerCapture(pointerId: number) {
+    releasePointerCapture(pointerId: number): void {
         this.#htmlElement.releasePointerCapture(pointerId);
     }
 
@@ -210,15 +210,15 @@ export class HTMLElementAPI {
     }
 
 
-    scroll(left: number, top: number) {
+    scroll(left: number, top: number): void {
         this.#htmlElement.scroll(left, top);
     }
 
-    scrollBy(x: number, y: number) {
+    scrollBy(x: number, y: number): void {
         this.#htmlElement.scrollBy(x, y);
     }
 
-    scrollIntoView(block: "start" | "center" | "end" | "nearest" = "start", inline: "start" | "center" | "end" | "nearest" = "nearest", behavior: "instant" | "smooth" | "auto" = "auto") {
+    scrollIntoView(block: "start" | "center" | "end" | "nearest" = "start", inline: "start" | "center" | "end" | "nearest" = "nearest", behavior: "instant" | "smooth" | "auto" = "auto"): void {
         this.#htmlElement.scrollIntoView({ block, inline, behavior });
     }
 
@@ -235,7 +235,7 @@ export class HTMLElementAPI {
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
 
-    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
     }
@@ -243,105 +243,105 @@ export class HTMLElementAPI {
 
     // transitionstart event
 
-    #ontransitionstartCallback = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionstart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
+    #ontransitionstart = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionstart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
-    activateOntransitionstart() {
-        this.#htmlElement.addEventListener("transitionstart", this.#ontransitionstartCallback);
+    activateOntransitionstart(): void {
+        this.#htmlElement.addEventListener("transitionstart", this.#ontransitionstart);
     }
 
-    deactivateOntransitionstart() {
-        this.#htmlElement.removeEventListener("transitionstart", this.#ontransitionstartCallback);
+    deactivateOntransitionstart(): void {
+        this.#htmlElement.removeEventListener("transitionstart", this.#ontransitionstart);
     }
 
 
     // transitionend event
 
-    #ontransitionendCallback = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionend", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
+    #ontransitionend = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionend", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
     
-    activateOntransitionend() {
-        this.#htmlElement.addEventListener("transitionend", this.#ontransitionendCallback);
+    activateOntransitionend(): void {
+        this.#htmlElement.addEventListener("transitionend", this.#ontransitionend);
     }
 
-    deactivateOntransitionend() {
-        this.#htmlElement.removeEventListener("transitionend", this.#ontransitionendCallback);
+    deactivateOntransitionend(): void {
+        this.#htmlElement.removeEventListener("transitionend", this.#ontransitionend);
     }
 
 
     // transitionrun event
 
-    #ontransitionrunCallback = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionrun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
+    #ontransitionrun = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionrun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
     
-    activateOntransitionrun() {
-        this.#htmlElement.addEventListener("transitionrun", this.#ontransitionrunCallback);
+    activateOntransitionrun(): void {
+        this.#htmlElement.addEventListener("transitionrun", this.#ontransitionrun);
     }
 
-    deactivateOntransitionrun() {
-        this.#htmlElement.removeEventListener("transitionrun", this.#ontransitionrunCallback);
+    deactivateOntransitionrun(): void {
+        this.#htmlElement.removeEventListener("transitionrun", this.#ontransitionrun);
     }
 
 
     // transitioncancel event
 
-    #ontransitioncancelCallback = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitioncancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
+    #ontransitioncancel = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitioncancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
     
-    activateOntransitioncancel() {
-        this.#htmlElement.addEventListener("transitioncancel", this.#ontransitioncancelCallback);
+    activateOntransitioncancel(): void {
+        this.#htmlElement.addEventListener("transitioncancel", this.#ontransitioncancel);
     }
 
-    deactivateOntransitioncancel() {
-        this.#htmlElement.removeEventListener("transitioncancel", this.#ontransitioncancelCallback);
+    deactivateOntransitioncancel(): void {
+        this.#htmlElement.removeEventListener("transitioncancel", this.#ontransitioncancel);
     }
 
 
 
     // animationstart event
 
-    #onanimationstartCallback = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationstart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+    #onanimationstart = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationstart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
     
-    activateOnanimationstart() {
-        this.#htmlElement.addEventListener("animationstart", this.#onanimationstartCallback);
+    activateOnanimationstart(): void {
+        this.#htmlElement.addEventListener("animationstart", this.#onanimationstart);
     }
 
-    deactivateOnanimationstart() {
-        this.#htmlElement.removeEventListener("animationstart", this.#onanimationstartCallback);
+    deactivateOnanimationstart(): void {
+        this.#htmlElement.removeEventListener("animationstart", this.#onanimationstart);
     }
 
 
     // animationend event
 
-    #onanimationendCallback = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationend", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+    #onanimationend = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationend", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
     
-    activateOnanimationend() {
-        this.#htmlElement.addEventListener("animationend", this.#onanimationendCallback);
+    activateOnanimationend(): void {
+        this.#htmlElement.addEventListener("animationend", this.#onanimationend);
     }
 
-    deactivateOnanimationend() {
-        this.#htmlElement.removeEventListener("animationend", this.#onanimationendCallback);
+    deactivateOnanimationend(): void {
+        this.#htmlElement.removeEventListener("animationend", this.#onanimationend);
     }
 
 
     // animationiteration event
 
-    #onanimationiterationCallback = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationiteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+    #onanimationiteration = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationiteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
     
-    activateOnanimationiteration() {
-        this.#htmlElement.addEventListener("animationiteration", this.#onanimationiterationCallback);
+    activateOnanimationiteration(): void {
+        this.#htmlElement.addEventListener("animationiteration", this.#onanimationiteration);
     }
 
-    deactivateOnanimationiteration() {
-        this.#htmlElement.removeEventListener("animationiteration", this.#onanimationiterationCallback);
+    deactivateOnanimationiteration(): void {
+        this.#htmlElement.removeEventListener("animationiteration", this.#onanimationiteration);
     }
 
 
     // animationcancel event
 
-    #onanimationcancelCallback = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationcancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+    #onanimationcancel = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationcancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
     
-    activateOnanimationcancel() {
-        this.#htmlElement.addEventListener("animationcancel", this.#onanimationcancelCallback);
+    activateOnanimationcancel(): void {
+        this.#htmlElement.addEventListener("animationcancel", this.#onanimationcancel);
     }
 
-    deactivateOnanimationcancel() {
-        this.#htmlElement.removeEventListener("animationcancel", this.#onanimationcancelCallback);
+    deactivateOnanimationcancel(): void {
+        this.#htmlElement.removeEventListener("animationcancel", this.#onanimationcancel);
     }
 }

@@ -37,7 +37,7 @@ export class NetworkInformationAPI {
     static #eventTrigger: DotNet.DotNetObject;
     static #isEventTriggerSync: boolean;
 
-    static initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+    static initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
         NetworkInformationAPI.#eventTrigger = eventTrigger;
         NetworkInformationAPI.#isEventTriggerSync = isEventTriggerSync;
     }
@@ -46,14 +46,14 @@ export class NetworkInformationAPI {
     // online event
 
     static #ononline() {
-        blazorInvokeMethod(NetworkInformationAPI.#eventTrigger, NetworkInformationAPI.#isEventTriggerSync, "InvokeOnline");
+        return blazorInvokeMethod(NetworkInformationAPI.#eventTrigger, NetworkInformationAPI.#isEventTriggerSync, "InvokeOnline");
     }
 
-    static activateOnonline() {
+    static activateOnonline(): void {
         window.addEventListener("online", NetworkInformationAPI.#ononline);
     }
 
-    static deactivateOnonline() {
+    static deactivateOnonline(): void {
         window.removeEventListener("online", NetworkInformationAPI.#ononline);
     }
 
@@ -61,14 +61,14 @@ export class NetworkInformationAPI {
     // offline event
 
     static #onoffline() {
-        blazorInvokeMethod(NetworkInformationAPI.#eventTrigger, NetworkInformationAPI.#isEventTriggerSync, "InvokeOffline");
+        return blazorInvokeMethod(NetworkInformationAPI.#eventTrigger, NetworkInformationAPI.#isEventTriggerSync, "InvokeOffline");
     }
 
-    static activateOnoffline() {
+    static activateOnoffline(): void {
         window.addEventListener("offline", NetworkInformationAPI.#onoffline);
     }
 
-    static deactivateOnoffline() {
+    static deactivateOnoffline(): void {
         window.removeEventListener("offline", NetworkInformationAPI.#onoffline);
     }
 
@@ -76,14 +76,14 @@ export class NetworkInformationAPI {
     // change event
 
     static #onchange() {
-        blazorInvokeMethod(NetworkInformationAPI.#eventTrigger, NetworkInformationAPI.#isEventTriggerSync, "InvokeChange");
+        return blazorInvokeMethod(NetworkInformationAPI.#eventTrigger, NetworkInformationAPI.#isEventTriggerSync, "InvokeChange");
     }
 
-    static activateOnchange() {
+    static activateOnchange(): void {
         navigator.connection.addEventListener("change", NetworkInformationAPI.#onchange);
     }
 
-    static deactivateOnchange() {
+    static deactivateOnchange(): void {
         navigator.connection.removeEventListener("change", NetworkInformationAPI.#onchange);
     }
 }

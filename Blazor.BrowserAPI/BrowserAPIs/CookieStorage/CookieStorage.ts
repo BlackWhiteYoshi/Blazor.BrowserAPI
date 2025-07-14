@@ -37,7 +37,7 @@ export class CookieStorageAPI {
         return null;
     }
 
-    static setCookie(key: string, value: string, expires: number | null, path: string, sameSite: string, secure: boolean) {
+    static setCookie(key: string, value: string, expires: number | null, path: string, sameSite: string, secure: boolean): void {
         let cookie = `${key}=${value}`;
 
         if (expires !== null)
@@ -50,11 +50,11 @@ export class CookieStorageAPI {
         document.cookie = cookie;
     }
 
-    static removeCookie(key: string) {
+    static removeCookie(key: string): void {
         document.cookie = `${key}=;expires=Thu, 01 Jan 1970 00:00:00 GMT`;
     }
 
-    static clear() {
+    static clear(): void {
         let cookies = document.cookie.split(';');
         for (let i = 0; i < cookies.length; i++) {
             let key = cookies[i].split('=')[0];

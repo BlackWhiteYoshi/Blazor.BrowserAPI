@@ -16,7 +16,7 @@ export class DialogAPI {
         return this.#dialog.open;
     }
 
-    setOpen(value: boolean) {
+    setOpen(value: boolean): void {
         this.#dialog.open = value;
     }
 
@@ -25,21 +25,21 @@ export class DialogAPI {
         return this.#dialog.returnValue;
     }
 
-    setReturnValue(returnValue: string) {
+    setReturnValue(returnValue: string): void {
         this.#dialog.returnValue = returnValue;
     }
 
 
-    close(returnValue: string | undefined) {
+    close(returnValue: string | undefined): void {
         this.#dialog.close(returnValue);
     }
 
 
-    show() {
+    show(): void {
         this.#dialog.show();
     }
 
-    showModal() {
+    showModal(): void {
         this.#dialog.showModal();
     }
 
@@ -50,7 +50,7 @@ export class DialogAPI {
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
 
-    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
     }
@@ -58,26 +58,26 @@ export class DialogAPI {
 
     // cancel event
 
-    #oncancelCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCancel");
+    #oncancel = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCancel");
 
-    activateOncancel() {
-        this.#dialog.addEventListener("cancel", this.#oncancelCallback);
+    activateOncancel(): void {
+        this.#dialog.addEventListener("cancel", this.#oncancel);
     }
 
-    deactivateOncancel() {
-        this.#dialog.removeEventListener("cancel", this.#oncancelCallback);
+    deactivateOncancel(): void {
+        this.#dialog.removeEventListener("cancel", this.#oncancel);
     }
 
 
     // close event
 
-    #oncloseCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeClose");
+    #onclose = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeClose");
 
-    activateOnclose() {
-        this.#dialog.addEventListener("close", this.#oncloseCallback);
+    activateOnclose(): void {
+        this.#dialog.addEventListener("close", this.#onclose);
     }
 
-    deactivateOnclose() {
-        this.#dialog.removeEventListener("close", this.#oncloseCallback);
+    deactivateOnclose(): void {
+        this.#dialog.removeEventListener("close", this.#onclose);
     }
 }

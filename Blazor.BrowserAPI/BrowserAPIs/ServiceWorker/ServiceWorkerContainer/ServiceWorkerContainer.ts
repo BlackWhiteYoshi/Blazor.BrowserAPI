@@ -40,7 +40,7 @@ export class ServiceWorkerContainerAPI {
         return serviceWorkerRegistrations.map(serviceWorkerRegistration => DotNet.createJSObjectReference(new ServiceWorkerRegistrationAPI(serviceWorkerRegistration)));
     }
 
-    static startMessages() {
+    static startMessages(): void {
         navigator.serviceWorker.startMessages();
     }
 
@@ -51,7 +51,7 @@ export class ServiceWorkerContainerAPI {
     static #eventTrigger: DotNet.DotNetObject;
     static #isEventTriggerSync: boolean;
 
-    static initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+    static initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
         ServiceWorkerContainerAPI.#eventTrigger = eventTrigger;
         ServiceWorkerContainerAPI.#isEventTriggerSync = isEventTriggerSync;
     }
@@ -59,30 +59,30 @@ export class ServiceWorkerContainerAPI {
 
     // controllerchange event
 
-    static #oncontrollerchangeCallback() {
-        blazorInvokeMethod(ServiceWorkerContainerAPI.#eventTrigger, ServiceWorkerContainerAPI.#isEventTriggerSync, "InvokeControllerChange");
+    static #oncontrollerchange() {
+        return blazorInvokeMethod(ServiceWorkerContainerAPI.#eventTrigger, ServiceWorkerContainerAPI.#isEventTriggerSync, "InvokeControllerChange");
     }
 
-    static activateOncontrollerchange() {
-        navigator.serviceWorker.addEventListener("controllerchange", ServiceWorkerContainerAPI.#oncontrollerchangeCallback);
+    static activateOncontrollerchange(): void {
+        navigator.serviceWorker.addEventListener("controllerchange", ServiceWorkerContainerAPI.#oncontrollerchange);
     }
 
-    static deactivateOncontrollerchange() {
-        navigator.serviceWorker.removeEventListener("controllerchange", ServiceWorkerContainerAPI.#oncontrollerchangeCallback);
+    static deactivateOncontrollerchange(): void {
+        navigator.serviceWorker.removeEventListener("controllerchange", ServiceWorkerContainerAPI.#oncontrollerchange);
     }
 
 
     // message event
 
-    static #onmessageCallback(event: MessageEvent) {
-        blazorInvokeMethod(ServiceWorkerContainerAPI.#eventTrigger, ServiceWorkerContainerAPI.#isEventTriggerSync, "InvokeMessage", event.data);
+    static #onmessage(event: MessageEvent) {
+        return blazorInvokeMethod(ServiceWorkerContainerAPI.#eventTrigger, ServiceWorkerContainerAPI.#isEventTriggerSync, "InvokeMessage", event.data);
     }
 
-    static activateOnMessage() {
-        navigator.serviceWorker.addEventListener("message", ServiceWorkerContainerAPI.#onmessageCallback);
+    static activateOnMessage(): void {
+        navigator.serviceWorker.addEventListener("message", ServiceWorkerContainerAPI.#onmessage);
     }
 
-    static deactivateOnMessage() {
-        navigator.serviceWorker.removeEventListener("message", ServiceWorkerContainerAPI.#onmessageCallback);
+    static deactivateOnMessage(): void {
+        navigator.serviceWorker.removeEventListener("message", ServiceWorkerContainerAPI.#onmessage);
     }
 }

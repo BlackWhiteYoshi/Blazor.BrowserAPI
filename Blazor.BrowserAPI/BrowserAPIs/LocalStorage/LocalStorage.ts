@@ -11,15 +11,15 @@ export class LocalStorageAPI {
         return localStorage.getItem(key);
     }
 
-    static setItem(key: string, value: string) {
+    static setItem(key: string, value: string): void {
         localStorage.setItem(key, value);
     }
 
-    static removeItem(key: string) {
+    static removeItem(key: string): void {
         localStorage.removeItem(key);
     }
 
-    static clear() {
+    static clear(): void {
         localStorage.clear();
     }
 }

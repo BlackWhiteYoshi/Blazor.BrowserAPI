@@ -1,10 +1,11 @@
 import { GamepadAPI } from "./Gamepad/Gamepad";
+import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
 
 export class GamepadInterfaceAPI {
-    static getGamepads(): (Gamepad | null)[] {
+    static getGamepads(): (GamepadAPI | null)[] {
         const gamepads = <(Gamepad | null)[]>navigator.getGamepads();
 
-        const result: (Gamepad | null)[] = new Array(gamepads.length);
+        const result: (GamepadAPI | null)[] = new Array(gamepads.length);
         for (let i = 0; i < result.length; i++)
             if (gamepads[i])
                 result[i] = DotNet.createJSObjectReference(new GamepadAPI(<Gamepad>gamepads[i]));
@@ -21,7 +22,7 @@ export class GamepadInterfaceAPI {
     static #eventTrigger: DotNet.DotNetObject;
     static #isEventTriggerSync: boolean;
 
-    static initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+    static initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
         GamepadInterfaceAPI.#eventTrigger = eventTrigger;
         GamepadInterfaceAPI.#isEventTriggerSync = isEventTriggerSync;
     }
@@ -30,17 +31,14 @@ export class GamepadInterfaceAPI {
     // gamepadconnected event
 
     static #ongamepadconnected(gamepadEvent: GamepadEvent) {
-        if (GamepadInterfaceAPI.#isEventTriggerSync)
-            GamepadInterfaceAPI.#eventTrigger.invokeMethod("InvokeGamepadConnected", DotNet.createJSObjectReference(new GamepadAPI(gamepadEvent.gamepad)));
-        else
-            GamepadInterfaceAPI.#eventTrigger.invokeMethodAsync("InvokeGamepadConnected", DotNet.createJSObjectReference(new GamepadAPI(gamepadEvent.gamepad)));
+        return blazorInvokeMethod(GamepadInterfaceAPI.#eventTrigger, GamepadInterfaceAPI.#isEventTriggerSync, "InvokeGamepadConnected", DotNet.createJSObjectReference(new GamepadAPI(gamepadEvent.gamepad)));
     }
 
-    static activateOngamepadconnected() {        
+    static activateOngamepadconnected(): void {        
         window.addEventListener("gamepadconnected", GamepadInterfaceAPI.#ongamepadconnected);
     }
 
-    static deactivateOngamepadconnected() {
+    static deactivateOngamepadconnected(): void {
         window.removeEventListener("gamepadconnected", GamepadInterfaceAPI.#ongamepadconnected);
     }
 
@@ -48,17 +46,14 @@ export class GamepadInterfaceAPI {
     // ongamepaddisconnected event
 
     static #ongamepaddisconnected(gamepadEvent: GamepadEvent) {
-        if (GamepadInterfaceAPI.#isEventTriggerSync)
-            GamepadInterfaceAPI.#eventTrigger.invokeMethod("InvokeGamepadDisconnected", DotNet.createJSObjectReference(new GamepadAPI(gamepadEvent.gamepad)));
-        else
-            GamepadInterfaceAPI.#eventTrigger.invokeMethodAsync("InvokeGamepadDisconnected", DotNet.createJSObjectReference(new GamepadAPI(gamepadEvent.gamepad)));
+        return blazorInvokeMethod(GamepadInterfaceAPI.#eventTrigger, GamepadInterfaceAPI.#isEventTriggerSync, "InvokeGamepadDisconnected", DotNet.createJSObjectReference(new GamepadAPI(gamepadEvent.gamepad)));
     }
 
-    static activateOngamepaddisconnected() {
+    static activateOngamepaddisconnected(): void {
         window.addEventListener("gamepaddisconnected", GamepadInterfaceAPI.#ongamepaddisconnected);
     }
 
-    static deactivateOngamepaddisconnected() {
+    static deactivateOngamepaddisconnected(): void {
         window.removeEventListener("gamepaddisconnected", GamepadInterfaceAPI.#ongamepaddisconnected);
     }
 }

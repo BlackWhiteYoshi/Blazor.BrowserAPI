@@ -3,7 +3,7 @@ import { FileHandleAPI } from "../FileHandle/FileHandle";
 export class DirectoryHandleAPI {
     #directoryHandle: FileSystemDirectoryHandle;
 
-    public get handle() {
+    public get handle(): FileSystemDirectoryHandle {
         return this.#directoryHandle;
     }
 

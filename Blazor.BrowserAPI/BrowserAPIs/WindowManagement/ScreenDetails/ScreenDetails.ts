@@ -26,7 +26,7 @@ export class ScreenDetailsAPI {
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
 
-    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
     }
@@ -36,11 +36,11 @@ export class ScreenDetailsAPI {
 
     #oncurrentscreenchange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCurrentScreenChange");
 
-    activateOncurrentscreenchange() {
+    activateOncurrentscreenchange(): void {
         this.#screenDetails.addEventListener("currentscreenchange", this.#oncurrentscreenchange);
     }
 
-    deactivateOncurrentscreenchange() {
+    deactivateOncurrentscreenchange(): void {
         this.#screenDetails.removeEventListener("currentscreenchange", this.#oncurrentscreenchange);
     }
 
@@ -49,11 +49,11 @@ export class ScreenDetailsAPI {
 
     #onscreenschange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeScreensChange"); 
 
-    activateOnscreenschange() {
+    activateOnscreenschange(): void {
         this.#screenDetails.addEventListener("screenschange", this.#onscreenschange);
     }
 
-    deactivateOnscreenschange() {
+    deactivateOnscreenschange(): void {
         this.#screenDetails.removeEventListener("screenschange", this.#onscreenschange);
     }
 }

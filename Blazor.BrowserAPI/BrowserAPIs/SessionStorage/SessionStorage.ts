@@ -11,15 +11,15 @@ export class SessionStorageAPI {
         return sessionStorage.getItem(key);
     }
 
-    static setItem(key: string, value: string) {
+    static setItem(key: string, value: string): void {
         sessionStorage.setItem(key, value);
     }
 
-    static removeItem(key: string) {
+    static removeItem(key: string): void {
         sessionStorage.removeItem(key);
     }
 
-    static clear() {
+    static clear(): void {
         sessionStorage.clear();
     }
 }

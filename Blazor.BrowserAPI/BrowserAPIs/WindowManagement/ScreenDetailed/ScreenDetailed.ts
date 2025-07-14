@@ -87,7 +87,7 @@ export class ScreenDetailedAPI {
         return this.#screenDetailed.orientation.lock(orientation);
     }
 
-    unlockOrientation() {
+    unlockOrientation(): void {
         this.#screenDetailed.orientation.unlock();
     }
 
@@ -98,7 +98,7 @@ export class ScreenDetailedAPI {
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
 
-    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
     }
@@ -108,11 +108,11 @@ export class ScreenDetailedAPI {
 
     #onchange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeChange");
 
-    activateOnchange() {
+    activateOnchange(): void {
         this.#screenDetailed.addEventListener("change", this.#onchange);
     }
 
-    deactivateOnchange() {
+    deactivateOnchange(): void {
         this.#screenDetailed.removeEventListener("change", this.#onchange);
     }
 
@@ -121,11 +121,11 @@ export class ScreenDetailedAPI {
 
     #onorientationchange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeOrientationChange");
 
-    activateOnorientationchange() {
+    activateOnorientationchange(): void {
         this.#screenDetailed.orientation.addEventListener("change", this.#onorientationchange);
     }
 
-    deactivateOnorientationchange() {
+    deactivateOnorientationchange(): void {
         this.#screenDetailed.orientation.removeEventListener("change", this.#onorientationchange);
     }
 }

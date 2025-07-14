@@ -16,7 +16,7 @@ export class ServiceWorkerAPI {
         return this.#serviceWorker.state;
     }
 
-    postMessage(message: any) {
+    postMessage(message: any): void {
         return this.#serviceWorker.postMessage(message);
     }
 
@@ -27,7 +27,7 @@ export class ServiceWorkerAPI {
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
 
-    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
     }
@@ -35,26 +35,26 @@ export class ServiceWorkerAPI {
 
     // statechange event
 
-    #onstatechangeCallback = (event: Event) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeStateChange", (event.target as ServiceWorker).state);
+    #onstatechange = (event: Event) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeStateChange", (event.target as ServiceWorker).state);
 
-    activateOnstatechange() {
-        this.#serviceWorker.addEventListener("statechange", this.#onstatechangeCallback);
+    activateOnstatechange(): void {
+        this.#serviceWorker.addEventListener("statechange", this.#onstatechange);
     }
 
-    deactivateOnstatechange() {
-        this.#serviceWorker.removeEventListener("statechange", this.#onstatechangeCallback);
+    deactivateOnstatechange(): void {
+        this.#serviceWorker.removeEventListener("statechange", this.#onstatechange);
     }
 
 
     // error event
 
-    #onerrorCallback = (event: ErrorEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeError", event);
+    #onerror = (event: ErrorEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeError", event);
 
-    activateOnerror() {
-        this.#serviceWorker.addEventListener("error", this.#onerrorCallback);
+    activateOnerror(): void {
+        this.#serviceWorker.addEventListener("error", this.#onerror);
     }
 
-    deactivateOnerror() {
-        this.#serviceWorker.removeEventListener("error", this.#onerrorCallback);
+    deactivateOnerror(): void {
+        this.#serviceWorker.removeEventListener("error", this.#onerror);
     }
 }

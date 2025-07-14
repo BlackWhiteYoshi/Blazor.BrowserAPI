@@ -4,7 +4,7 @@ import { WritableFileStreamAPI } from "../WritableFileStream/WritableFileStream"
 export class FileHandleAPI {
     #fileHandle: FileSystemFileHandle;
 
-    public get handle() {
+    public get handle(): FileSystemFileHandle {
         return this.#fileHandle;
     }
 

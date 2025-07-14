@@ -21,11 +21,11 @@ export abstract class SensorAPI {
     }
 
 
-    start() {
+    start(): void {
         this.sensor.start();
     }
 
-    stop() {
+    stop(): void {
         this.sensor.stop();
     }
 
@@ -36,7 +36,7 @@ export abstract class SensorAPI {
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
 
-    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
     }
@@ -44,39 +44,39 @@ export abstract class SensorAPI {
 
     // error event
 
-    #onerrorCallback = (event: Event) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeError", event);
+    #onerror = (event: Event) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeError", event);
 
-    activateOnerror() {
-        this.sensor.addEventListener("error", this.#onerrorCallback);
+    activateOnerror(): void {
+        this.sensor.addEventListener("error", this.#onerror);
     }
 
-    deactivateOnerror() {
-        this.sensor.removeEventListener("error", this.#onerrorCallback);
+    deactivateOnerror(): void {
+        this.sensor.removeEventListener("error", this.#onerror);
     }
 
 
     // activate event
 
-    #onactivateCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeActivate");
+    #onactivate = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeActivate");
 
-    activateOnactivate() {
-        this.sensor.addEventListener("activate", this.#onactivateCallback);
+    activateOnactivate(): void {
+        this.sensor.addEventListener("activate", this.#onactivate);
     }
 
-    deactivateOnactivate() {
-        this.sensor.removeEventListener("activate", this.#onactivateCallback);
+    deactivateOnactivate(): void {
+        this.sensor.removeEventListener("activate", this.#onactivate);
     }
 
 
     // reading event
 
-    #onreadingCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeReading");
+    #onreading = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeReading");
 
-    activateOnreading() {
-        this.sensor.addEventListener("reading", this.#onreadingCallback);
+    activateOnreading(): void {
+        this.sensor.addEventListener("reading", this.#onreading);
     }
 
-    deactivateOnreading() {
-        this.sensor.removeEventListener("reading", this.#onreadingCallback);
+    deactivateOnreading(): void {
+        this.sensor.removeEventListener("reading", this.#onreading);
     }
 }

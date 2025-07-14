@@ -9,7 +9,7 @@ export class HistoryAPI {
         return history.scrollRestoration;
     }
 
-    static setScrollRestoration(value: "auto" | "manual") {
+    static setScrollRestoration(value: "auto" | "manual"): void {
         history.scrollRestoration = value;
     }
 
@@ -18,24 +18,24 @@ export class HistoryAPI {
     }
 
 
-    static forward() {
+    static forward(): void {
         history.forward();
     }
 
-    static back() {
+    static back(): void {
         history.back();
     }
 
-    static go(delta: number) {
+    static go(delta: number): void {
         history.go(delta);
     }
 
-    static pushState(data: any, title: string, url: string) {
+    static pushState(data: any, title: string, url: string): void {
         history.pushState(data, title, url ?? undefined);
         
     }
 
-    static replaceState(data: any, title: string, url: string) {
+    static replaceState(data: any, title: string, url: string): void {
         history.replaceState(data, title, url ?? undefined);
     }
 
@@ -46,7 +46,7 @@ export class HistoryAPI {
     static #eventTrigger: DotNet.DotNetObject;
     static #isEventTriggerSync: boolean;
 
-    static initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+    static initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
         HistoryAPI.#eventTrigger = eventTrigger;
         HistoryAPI.#isEventTriggerSync = isEventTriggerSync;
     }
@@ -55,14 +55,14 @@ export class HistoryAPI {
     // popstate event
 
     static #onpopstate(popStateEvent: PopStateEvent) {
-        blazorInvokeMethod(HistoryAPI.#eventTrigger, HistoryAPI.#isEventTriggerSync, "InvokePopState", popStateEvent.state);
+        return blazorInvokeMethod(HistoryAPI.#eventTrigger, HistoryAPI.#isEventTriggerSync, "InvokePopState", popStateEvent.state);
     }
 
-    static activateOnpopstate() {
+    static activateOnpopstate(): void {
         window.addEventListener("popstate", HistoryAPI.#onpopstate);
     }
 
-    static deactivateOnpopstate() {
+    static deactivateOnpopstate(): void {
         window.removeEventListener("popstate", HistoryAPI.#onpopstate);
     }
 }

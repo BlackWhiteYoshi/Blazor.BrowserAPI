@@ -60,7 +60,7 @@ export class ServiceWorkerRegistrationAPI {
     #eventTrigger: DotNet.DotNetObject;
     #isEventTriggerSync: boolean;
 
-    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
         this.#eventTrigger = eventTrigger;
         this.#isEventTriggerSync = isEventTriggerSync;
     }
@@ -68,13 +68,13 @@ export class ServiceWorkerRegistrationAPI {
 
     // updatefound event
 
-    #onupdatefoundCallback = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeUpdateFound");
+    #onupdatefound = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeUpdateFound");
 
-    activateOnupdatefound() {
-        this.#serviceWorkerRegistration.addEventListener("updatefound", this.#onupdatefoundCallback);
+    activateOnupdatefound(): void {
+        this.#serviceWorkerRegistration.addEventListener("updatefound", this.#onupdatefound);
     }
 
-    deactivateOnupdatefound() {
-        this.#serviceWorkerRegistration.removeEventListener("updatefound", this.#onupdatefoundCallback);
+    deactivateOnupdatefound(): void {
+        this.#serviceWorkerRegistration.removeEventListener("updatefound", this.#onupdatefound);
     }
 }

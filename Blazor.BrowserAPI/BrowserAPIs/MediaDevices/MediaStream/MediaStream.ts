@@ -7,7 +7,7 @@ export class MediaStreamAPI {
         this.#mediaStream = mediaStream;
     }
 
-    dispose() {
+    dispose(): void {
         for (const mediaStreamTrack of this.#mediaStream.getTracks()) {
             mediaStreamTrack.stop();
             this.#mediaStream.removeTrack(mediaStreamTrack);

@@ -12,7 +12,7 @@ type GeolocationCoordinateObject = {
 };
 
 export class GeolocationAPI {
-    static getCurrentPosition(callbackGeolocation: DotNet.DotNetObject, isSync: boolean, maximumAge: number, timeout: number, enableHighAccuracy: boolean) {
+    static getCurrentPosition(callbackGeolocation: DotNet.DotNetObject, isSync: boolean, maximumAge: number, timeout: number, enableHighAccuracy: boolean): void {
         navigator.geolocation.getCurrentPosition(
             (geolocationPosition) => blazorInvokeMethod(callbackGeolocation, isSync, "Success", GeolocationAPI.#toGeoCoordsObject(geolocationPosition.coords, geolocationPosition.timestamp)),
             (geolocationPositionError) => blazorInvokeMethod(callbackGeolocation, isSync, "Error", geolocationPositionError.code, geolocationPositionError.message),
@@ -51,7 +51,7 @@ export class GeolocationAPI {
         );
     }
 
-    static clearWatch(watchId: number) {
+    static clearWatch(watchId: number): void {
         navigator.geolocation.clearWatch(watchId)
     }
 

@@ -44,7 +44,7 @@ export class ScreenAPI {
         return window.screen.orientation.lock(orientation);
     }
 
-    static unlockOrientation() {
+    static unlockOrientation(): void {
         window.screen.orientation.unlock();
     }
 
@@ -55,7 +55,7 @@ export class ScreenAPI {
     static #eventTrigger: DotNet.DotNetObject;
     static #isEventTriggerSync: boolean;
 
-    static initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean) {
+    static initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
         ScreenAPI.#eventTrigger = eventTrigger;
         ScreenAPI.#isEventTriggerSync = isEventTriggerSync;
     }
@@ -64,14 +64,14 @@ export class ScreenAPI {
     // change event
 
     static #onchange() {
-        blazorInvokeMethod(ScreenAPI.#eventTrigger, ScreenAPI.#isEventTriggerSync, "InvokeChange");
+        return blazorInvokeMethod(ScreenAPI.#eventTrigger, ScreenAPI.#isEventTriggerSync, "InvokeChange");
     }
 
-    static activateOnchange() {
+    static activateOnchange(): void {
         window.screen.addEventListener("change", ScreenAPI.#onchange);
     }
 
-    static deactivateOnchange() {
+    static deactivateOnchange(): void {
         window.screen.removeEventListener("change", ScreenAPI.#onchange);
     }
 
@@ -79,14 +79,14 @@ export class ScreenAPI {
     // orientationchange event
 
     static #onorientationchange() {
-        blazorInvokeMethod(ScreenAPI.#eventTrigger, ScreenAPI.#isEventTriggerSync, "InvokeOrientationChange");
+        return blazorInvokeMethod(ScreenAPI.#eventTrigger, ScreenAPI.#isEventTriggerSync, "InvokeOrientationChange");
     }
 
-    static activateOnorientationchange() {
+    static activateOnorientationchange(): void {
         window.screen.orientation.addEventListener("change", ScreenAPI.#onorientationchange);
     }
 
-    static deactivateOnorientationchange() {
+    static deactivateOnorientationchange(): void {
         window.screen.orientation.removeEventListener("change", ScreenAPI.#onorientationchange);
     }
 }
