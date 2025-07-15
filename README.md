@@ -137,3 +137,5 @@ There are more interfaces coming.
     - changed IServiceWorkerContainer.Register() from returning ValueTask&lt;bool&gt; to ValueTask, an exception is thrown when service workers are not supported.
     - changed IServiceWorkerContainer.DelayUntilReady() to IServiceWorkerContainer.Ready, so it aligns with the JS property.
     - changed IServiceWorkerContainer.OnMessage from Action&lt;string&gt; to Action&lt;JsonElement&gt;
+- 0.13.0
+  - added Permissions (20 BrowserAPIs)
