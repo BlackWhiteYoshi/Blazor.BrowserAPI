@@ -1,0 +1,14 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Permissions InProcess</h2>
+    <div>
+        <button data-testid="@BUTTON_QUERY" @onclick="Query">Query</button>
+
+        <button data-testid="@BUTTON_GET_NAME" @onclick="GetName">GetName</button>
+        <button data-testid="@BUTTON_GET_STATE" @onclick="GetState">GetState</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_CHANGE" @onclick="RegisterOnChange">RegisterOnChange</button>
+    </div>
+    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+</div>

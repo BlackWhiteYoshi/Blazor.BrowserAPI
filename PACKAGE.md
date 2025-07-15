@@ -26,6 +26,7 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - LocalStorage
 - MediaDevices (microphone/camera)
 - NetworkInformation
+- Permissions
 - SensorAPI
 - ServiceWorker
 - SessionStorage

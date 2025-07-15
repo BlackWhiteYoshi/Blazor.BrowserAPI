@@ -43,6 +43,9 @@ export { MediaDevicesAPI };
 import { NetworkInformationAPI } from "./BrowserAPIs/NetworkInformation/NetworkInformation";
 export { NetworkInformationAPI };
 
+import { PermissionsAPI } from "./BrowserAPIs/Permissions/Permissions";
+export { PermissionsAPI };
+
 // SensorAPI
 import { AbsoluteOrientationSensorAPI } from "./BrowserAPIs/SensorAPI/Sensor/AbsoluteOrientationSensor/AbsoluteOrientationSensor";
 import { AccelerometerAPI } from "./BrowserAPIs/SensorAPI/Sensor/Accelerometer/Accelerometer";

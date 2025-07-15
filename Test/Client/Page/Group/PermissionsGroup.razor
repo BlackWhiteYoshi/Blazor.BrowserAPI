@@ -1,0 +1,16 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Permissions</h2>
+    <div>
+        <button data-testid="@BUTTON_QUERY" @onclick="Query">Query</button>
+
+        <button data-testid="@BUTTON_GET_NAME_PROPERTY" @onclick="GetName_Property">GetName_Property</button>
+        <button data-testid="@BUTTON_GET_NAME_METHOD" @onclick="GetName_Method">GetName_Method</button>
+        <button data-testid="@BUTTON_GET_STATE_PROPERTY" @onclick="GetState_Property">GetState_Property</button>
+        <button data-testid="@BUTTON_GET_STATE_METHOD" @onclick="GetState_Method">GetState_Method</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_CHANGE" @onclick="RegisterOnChange">RegisterOnChange</button>
+    </div>
+    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+</div>

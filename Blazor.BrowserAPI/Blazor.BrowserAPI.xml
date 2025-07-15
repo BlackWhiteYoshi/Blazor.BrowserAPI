@@ -6722,6 +6722,242 @@
             Returns true if the user has set a reduced data usage option on the user agent.
             </summary>
         </member>
+        <member name="T:BrowserAPI.Implementation.Permissions">
+            <summary>
+            <para>
+            The Permissions API provides a consistent programmatic way to query the status of API permissions attributed to the current context, such as a web page or worker.
+            For example, it can be used to determine if permission to access a particular feature or API has been granted, denied, or requires specific user permission.
+            </para>
+            <para>The <i>Permissions</i> interface of the Permissions API provides the core Permission API functionality, such as methods for querying and revoking permissions.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Permissions.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            <para>
+            The Permissions API provides a consistent programmatic way to query the status of API permissions attributed to the current context, such as a web page or worker.
+            For example, it can be used to determine if permission to access a particular feature or API has been granted, denied, or requires specific user permission.
+            </para>
+            <para>The <i>Permissions</i> interface of the Permissions API provides the core Permission API functionality, such as methods for querying and revoking permissions.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Permissions.Query(System.String,System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>Returns the user permission status for a given API.</para>
+            <para>
+            The user permission names are defined in the respective specifications for each feature.
+            The permissions supported by different browser versions are listed in the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Permissions#browser_compatibility">compatibility data of the Permissions interface</see>.
+            </para>
+            </summary>
+            <param name="name">
+            <para>
+            A string containing the name of the API whose permissions you want to query, such as camera, bluetooth, microphone, geolocation.<br />
+            The returned Promise will reject with a TypeError if the permission name is not supported by the browser.
+            </para>
+            <para>
+            The <see href="https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API#permission-aware_apis">Permission-aware APIs</see> are listed below:<br />
+            "background-sync" - Background Synchronization API<br />
+            "clipboard-read" - Clipboard API<br />
+            "clipboard-write" - Clipboard API<br />
+            "compute-pressure" - Compute Pressure API<br />
+            "geolocation" - Geolocation API<br />
+            "local-fonts" - Local Font Access API<br />
+            "camera" - Media Capture and Streams API<br />
+            "microphone" - Media Capture and Streams API<br />
+            "notifications" - Notifications API<br />
+            "payment-handler" - Payment Handler API<br />
+            "push" - Push API<br />
+            "screen-wake-lock" - Screen Wake Lock API<br />
+            "accelerometer" - Sensor APIs<br />
+            "gyroscope" - Sensor APIs<br />
+            "magnetometer" - Sensor APIs<br />
+            "ambient-light-sensor" - Sensor APIs<br />
+            "storage-access" - Storage Access API<br />
+            "top-level-storage-access" - Storage Access API<br />
+            "persistent-storage" - Storage API<br />
+            "bluetooth" - Web Bluetooth API<br />
+            "midi" - Web MIDI API<br />
+            "window-management" - Window Management API
+            </para>
+            </param>
+            <param name="userVisibleOnly">
+            <para>Only relevant for "push" permission.</para>
+            <para>
+            Indicates whether you want to show a notification for every message or be able to send silent push notifications.<br />
+            The default is false.
+            </para>
+            </param>
+            <param name="sysex">
+            <para>Only relevant for "midi" permission.</para>
+            <para>
+            Indicates whether you need and/or receive system exclusive messages.<br />
+            The default is false.
+            </para>
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.PermissionsInProcess">
+            <summary>
+            <para>
+            The Permissions API provides a consistent programmatic way to query the status of API permissions attributed to the current context, such as a web page or worker.
+            For example, it can be used to determine if permission to access a particular feature or API has been granted, denied, or requires specific user permission.
+            </para>
+            <para>The <i>Permissions</i> interface of the Permissions API provides the core Permission API functionality, such as methods for querying and revoking permissions.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.PermissionsInProcess.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            <para>
+            The Permissions API provides a consistent programmatic way to query the status of API permissions attributed to the current context, such as a web page or worker.
+            For example, it can be used to determine if permission to access a particular feature or API has been granted, denied, or requires specific user permission.
+            </para>
+            <para>The <i>Permissions</i> interface of the Permissions API provides the core Permission API functionality, such as methods for querying and revoking permissions.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.PermissionsInProcess.Query(System.String,System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>Returns the user permission status for a given API.</para>
+            <para>
+            The user permission names are defined in the respective specifications for each feature.
+            The permissions supported by different browser versions are listed in the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Permissions#browser_compatibility">compatibility data of the Permissions interface</see>.
+            </para>
+            </summary>
+            <param name="name">
+            <para>
+            A string containing the name of the API whose permissions you want to query, such as camera, bluetooth, microphone, geolocation.<br />
+            The returned Promise will reject with a TypeError if the permission name is not supported by the browser.
+            </para>
+            <para>
+            The <see href="https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API#permission-aware_apis">Permission-aware APIs</see> are listed below:<br />
+            "background-sync" - Background Synchronization API<br />
+            "clipboard-read" - Clipboard API<br />
+            "clipboard-write" - Clipboard API<br />
+            "compute-pressure" - Compute Pressure API<br />
+            "geolocation" - Geolocation API<br />
+            "local-fonts" - Local Font Access API<br />
+            "camera" - Media Capture and Streams API<br />
+            "microphone" - Media Capture and Streams API<br />
+            "notifications" - Notifications API<br />
+            "payment-handler" - Payment Handler API<br />
+            "push" - Push API<br />
+            "screen-wake-lock" - Screen Wake Lock API<br />
+            "accelerometer" - Sensor APIs<br />
+            "gyroscope" - Sensor APIs<br />
+            "magnetometer" - Sensor APIs<br />
+            "ambient-light-sensor" - Sensor APIs<br />
+            "storage-access" - Storage Access API<br />
+            "top-level-storage-access" - Storage Access API<br />
+            "persistent-storage" - Storage API<br />
+            "bluetooth" - Web Bluetooth API<br />
+            "midi" - Web MIDI API<br />
+            "window-management" - Window Management API
+            </para>
+            </param>
+            <param name="userVisibleOnly">
+            <para>Only relevant for "push" permission.</para>
+            <para>
+            Indicates whether you want to show a notification for every message or be able to send silent push notifications.<br />
+            The default is false.
+            </para>
+            </param>
+            <param name="sysex">
+            <para>Only relevant for "midi" permission.</para>
+            <para>
+            Indicates whether you need and/or receive system exclusive messages.<br />
+            The default is false.
+            </para>
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.PermissionStatus">
+            <summary>
+            The <i>PermissionStatus</i> interface of the Permissions API provides the state of an object and an event handler for monitoring changes to said state.
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.PermissionStatus.#ctor(Microsoft.JSInterop.IJSObjectReference)">
+            <summary>
+            The <i>PermissionStatus</i> interface of the Permissions API provides the state of an object and an event handler for monitoring changes to said state.
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.PermissionStatus.DisposeAsync">
+            <summary>
+            Releases the JS instance for this media recorder.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.PermissionStatus.Name">
+            <summary>
+            Returns the name of a requested permission, identical to the <i>name</i> passed to <see cref="M:BrowserAPI.IPermissions.Query(System.String,System.Boolean,System.Boolean,System.Threading.CancellationToken)"/>.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.PermissionStatus.GetName(System.Threading.CancellationToken)">
+            <summary>
+            Returns the name of a requested permission, identical to the <i>name</i> passed to <see cref="M:BrowserAPI.IPermissions.Query(System.String,System.Boolean,System.Boolean,System.Threading.CancellationToken)"/>.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.PermissionStatus.State">
+            <summary>
+            Returns the state of a requested permission. This property returns one of<br />
+            - "granted": The user, or the user agent on the user's behalf, has given express permission to use a powerful feature. The caller can use the feature possibly without having the user agent ask the user's permission.<br />
+            - "denied": The user, or the user agent on the user's behalf, has denied access to this powerful feature. The caller can't use the feature.<br />
+            - "prompt": The user has not given express permission to use the feature (i.e., it's the same as denied). It also means that if a caller attempts to use the feature, the user agent will either be prompting the user for permission or access to the feature will be denied.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.PermissionStatus.GetState(System.Threading.CancellationToken)">
+            <summary>
+            Returns the state of a requested permission. This property returns one of<br />
+            - "granted": The user, or the user agent on the user's behalf, has given express permission to use a powerful feature. The caller can use the feature possibly without having the user agent ask the user's permission.<br />
+            - "denied": The user, or the user agent on the user's behalf, has denied access to this powerful feature. The caller can't use the feature.<br />
+            - "prompt": The user has not given express permission to use the feature (i.e., it's the same as denied). It also means that if a caller attempts to use the feature, the user agent will either be prompting the user for permission or access to the feature will be denied.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.PermissionStatusBase.DisposeEventTrigger">
+            <summary>
+            Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call this method.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.PermissionStatusBase.OnChange">
+            <summary>
+            Fires whenever the <i>State</i> property changes.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.PermissionStatusInProcess">
+            <summary>
+            The <i>PermissionStatus</i> interface of the Permissions API provides the state of an object and an event handler for monitoring changes to said state.
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.PermissionStatusInProcess.#ctor(Microsoft.JSInterop.IJSInProcessObjectReference)">
+            <summary>
+            The <i>PermissionStatus</i> interface of the Permissions API provides the state of an object and an event handler for monitoring changes to said state.
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.PermissionStatusInProcess.Dispose">
+            <summary>
+            Releases the JS instance for this media recorder.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.PermissionStatusInProcess.Name">
+            <summary>
+            Returns the name of a requested permission, identical to the <i>name</i> passed to <see cref="M:BrowserAPI.IPermissionsInProcess.Query(System.String,System.Boolean,System.Boolean,System.Threading.CancellationToken)"/>.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.PermissionStatusInProcess.State">
+            <summary>
+            Returns the state of a requested permission. This property returns one of<br />
+            - "granted": The user, or the user agent on the user's behalf, has given express permission to use a powerful feature. The caller can use the feature possibly without having the user agent ask the user's permission.<br />
+            - "denied": The user, or the user agent on the user's behalf, has denied access to this powerful feature. The caller can't use the feature.<br />
+            - "prompt": The user has not given express permission to use the feature (i.e., it's the same as denied). It also means that if a caller attempts to use the feature, the user agent will either be prompting the user for permission or access to the feature will be denied.
+            </summary>
+        </member>
         <member name="T:BrowserAPI.Implementation.SensorAPI">
             <summary>
             The Sensor APIs are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
@@ -17065,6 +17301,201 @@
         <member name="P:BrowserAPI.INetworkInformationInProcess.SaveData">
             <summary>
             Returns true if the user has set a reduced data usage option on the user agent.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IPermissions">
+            <summary>
+            <para>
+            The Permissions API provides a consistent programmatic way to query the status of API permissions attributed to the current context, such as a web page or worker.
+            For example, it can be used to determine if permission to access a particular feature or API has been granted, denied, or requires specific user permission.
+            </para>
+            <para>The <i>Permissions</i> interface of the Permissions API provides the core Permission API functionality, such as methods for querying and revoking permissions.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IPermissions.Query(System.String,System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>Returns the user permission status for a given API.</para>
+            <para>
+            The user permission names are defined in the respective specifications for each feature.
+            The permissions supported by different browser versions are listed in the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Permissions#browser_compatibility">compatibility data of the Permissions interface</see>.
+            </para>
+            </summary>
+            <param name="name">
+            <para>
+            A string containing the name of the API whose permissions you want to query, such as camera, bluetooth, microphone, geolocation.<br />
+            The returned Promise will reject with a TypeError if the permission name is not supported by the browser.
+            </para>
+            <para>
+            The <see href="https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API#permission-aware_apis">Permission-aware APIs</see> are listed below:<br />
+            "background-sync" - Background Synchronization API<br />
+            "clipboard-read" - Clipboard API<br />
+            "clipboard-write" - Clipboard API<br />
+            "compute-pressure" - Compute Pressure API<br />
+            "geolocation" - Geolocation API<br />
+            "local-fonts" - Local Font Access API<br />
+            "camera" - Media Capture and Streams API<br />
+            "microphone" - Media Capture and Streams API<br />
+            "notifications" - Notifications API<br />
+            "payment-handler" - Payment Handler API<br />
+            "push" - Push API<br />
+            "screen-wake-lock" - Screen Wake Lock API<br />
+            "accelerometer" - Sensor APIs<br />
+            "gyroscope" - Sensor APIs<br />
+            "magnetometer" - Sensor APIs<br />
+            "ambient-light-sensor" - Sensor APIs<br />
+            "storage-access" - Storage Access API<br />
+            "top-level-storage-access" - Storage Access API<br />
+            "persistent-storage" - Storage API<br />
+            "bluetooth" - Web Bluetooth API<br />
+            "midi" - Web MIDI API<br />
+            "window-management" - Window Management API
+            </para>
+            </param>
+            <param name="userVisibleOnly">
+            <para>Only relevant for "push" permission.</para>
+            <para>
+            Indicates whether you want to show a notification for every message or be able to send silent push notifications.<br />
+            The default is false.
+            </para>
+            </param>
+            <param name="sysex">
+            <para>Only relevant for "midi" permission.</para>
+            <para>
+            Indicates whether you need and/or receive system exclusive messages.<br />
+            The default is false.
+            </para>
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IPermissionsInProcess">
+            <summary>
+            <para>
+            The Permissions API provides a consistent programmatic way to query the status of API permissions attributed to the current context, such as a web page or worker.
+            For example, it can be used to determine if permission to access a particular feature or API has been granted, denied, or requires specific user permission.
+            </para>
+            <para>The <i>Permissions</i> interface of the Permissions API provides the core Permission API functionality, such as methods for querying and revoking permissions.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IPermissionsInProcess.Query(System.String,System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            <para>Returns the user permission status for a given API.</para>
+            <para>
+            The user permission names are defined in the respective specifications for each feature.
+            The permissions supported by different browser versions are listed in the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Permissions#browser_compatibility">compatibility data of the Permissions interface</see>.
+            </para>
+            </summary>
+            <param name="name">
+            <para>
+            A string containing the name of the API whose permissions you want to query, such as camera, bluetooth, microphone, geolocation.<br />
+            The returned Promise will reject with a TypeError if the permission name is not supported by the browser.
+            </para>
+            <para>
+            The <see href="https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API#permission-aware_apis">Permission-aware APIs</see> are listed below:<br />
+            "background-sync" - Background Synchronization API<br />
+            "clipboard-read" - Clipboard API<br />
+            "clipboard-write" - Clipboard API<br />
+            "compute-pressure" - Compute Pressure API<br />
+            "geolocation" - Geolocation API<br />
+            "local-fonts" - Local Font Access API<br />
+            "camera" - Media Capture and Streams API<br />
+            "microphone" - Media Capture and Streams API<br />
+            "notifications" - Notifications API<br />
+            "payment-handler" - Payment Handler API<br />
+            "push" - Push API<br />
+            "screen-wake-lock" - Screen Wake Lock API<br />
+            "accelerometer" - Sensor APIs<br />
+            "gyroscope" - Sensor APIs<br />
+            "magnetometer" - Sensor APIs<br />
+            "ambient-light-sensor" - Sensor APIs<br />
+            "storage-access" - Storage Access API<br />
+            "top-level-storage-access" - Storage Access API<br />
+            "persistent-storage" - Storage API<br />
+            "bluetooth" - Web Bluetooth API<br />
+            "midi" - Web MIDI API<br />
+            "window-management" - Window Management API
+            </para>
+            </param>
+            <param name="userVisibleOnly">
+            <para>Only relevant for "push" permission.</para>
+            <para>
+            Indicates whether you want to show a notification for every message or be able to send silent push notifications.<br />
+            The default is false.
+            </para>
+            </param>
+            <param name="sysex">
+            <para>Only relevant for "midi" permission.</para>
+            <para>
+            Indicates whether you need and/or receive system exclusive messages.<br />
+            The default is false.
+            </para>
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IPermissionStatus">
+            <summary>
+            The <i>PermissionStatus</i> interface of the Permissions API provides the state of an object and an event handler for monitoring changes to said state.
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</remarks>
+        </member>
+        <member name="P:BrowserAPI.IPermissionStatus.Name">
+            <summary>
+            Returns the name of a requested permission, identical to the <i>name</i> passed to <see cref="M:BrowserAPI.IPermissions.Query(System.String,System.Boolean,System.Boolean,System.Threading.CancellationToken)"/>.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IPermissionStatus.GetName(System.Threading.CancellationToken)">
+            <summary>
+            Returns the name of a requested permission, identical to the <i>name</i> passed to <see cref="M:BrowserAPI.IPermissions.Query(System.String,System.Boolean,System.Boolean,System.Threading.CancellationToken)"/>.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IPermissionStatus.State">
+            <summary>
+            Returns the state of a requested permission. This property returns one of<br />
+            - "granted": The user, or the user agent on the user's behalf, has given express permission to use a powerful feature. The caller can use the feature possibly without having the user agent ask the user's permission.<br />
+            - "denied": The user, or the user agent on the user's behalf, has denied access to this powerful feature. The caller can't use the feature.<br />
+            - "prompt": The user has not given express permission to use the feature (i.e., it's the same as denied). It also means that if a caller attempts to use the feature, the user agent will either be prompting the user for permission or access to the feature will be denied.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IPermissionStatus.GetState(System.Threading.CancellationToken)">
+            <summary>
+            Returns the state of a requested permission. This property returns one of<br />
+            - "granted": The user, or the user agent on the user's behalf, has given express permission to use a powerful feature. The caller can use the feature possibly without having the user agent ask the user's permission.<br />
+            - "denied": The user, or the user agent on the user's behalf, has denied access to this powerful feature. The caller can't use the feature.<br />
+            - "prompt": The user has not given express permission to use the feature (i.e., it's the same as denied). It also means that if a caller attempts to use the feature, the user agent will either be prompting the user for permission or access to the feature will be denied.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="E:BrowserAPI.IPermissionStatus.OnChange">
+            <summary>
+            Fires whenever the <i>State</i> property changes.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IPermissionStatusInProcess">
+            <summary>
+            The <i>PermissionStatus</i> interface of the Permissions API provides the state of an object and an event handler for monitoring changes to said state.
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</remarks>
+        </member>
+        <member name="E:BrowserAPI.IPermissionStatusInProcess.OnChange">
+            <summary>
+            Fires whenever the <i>State</i> property changes.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IPermissionStatusInProcess.Name">
+            <summary>
+            Returns the name of a requested permission, identical to the <i>name</i> passed to <see cref="M:BrowserAPI.IPermissionsInProcess.Query(System.String,System.Boolean,System.Boolean,System.Threading.CancellationToken)"/>.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IPermissionStatusInProcess.State">
+            <summary>
+            Returns the state of a requested permission. This property returns one of<br />
+            - "granted": The user, or the user agent on the user's behalf, has given express permission to use a powerful feature. The caller can use the feature possibly without having the user agent ask the user's permission.<br />
+            - "denied": The user, or the user agent on the user's behalf, has denied access to this powerful feature. The caller can't use the feature.<br />
+            - "prompt": The user has not given express permission to use the feature (i.e., it's the same as denied). It also means that if a caller attempts to use the feature, the user agent will either be prompting the user for permission or access to the feature will be denied.
             </summary>
         </member>
         <member name="T:BrowserAPI.ISensorAPI">
