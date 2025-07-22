@@ -33,9 +33,7 @@ public sealed class File(IJSObjectReference fileJS) : FileBase(fileJS), IFile {
     /// </summary>
     public ValueTask<string> Name => GetName(default);
 
-    /// <summary>
-    /// Returns the name of the file referenced by the File object.
-    /// </summary>
+    /// <inheritdoc cref="Name" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<string> GetName(CancellationToken cancellationToken) => fileJS.InvokeTrySync<string>("getName", cancellationToken);
@@ -46,9 +44,7 @@ public sealed class File(IJSObjectReference fileJS) : FileBase(fileJS), IFile {
     /// </summary>
     public ValueTask<long> Size => GetSize(default);
 
-    /// <summary>
-    /// The size, in bytes, of the data contained in the Blob object.
-    /// </summary>
+    /// <inheritdoc cref="Size" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<long> GetSize(CancellationToken cancellationToken) => fileJS.InvokeTrySync<long>("getSize", cancellationToken);
@@ -59,9 +55,7 @@ public sealed class File(IJSObjectReference fileJS) : FileBase(fileJS), IFile {
     /// </summary>
     public ValueTask<string> Type => GetType(default);
 
-    /// <summary>
-    /// A string indicating the MIME type of the data contained in the Blob. If the type is unknown, this string is empty.
-    /// </summary>
+    /// <inheritdoc cref="Type" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<string> GetType(CancellationToken cancellationToken) => fileJS.InvokeTrySync<string>("getType", cancellationToken);
@@ -72,9 +66,7 @@ public sealed class File(IJSObjectReference fileJS) : FileBase(fileJS), IFile {
     /// </summary>
     public ValueTask<long> LastModified => GetLastModified(default);
 
-    /// <summary>
-    /// Returns the last modified time of the file, in millisecond since the UNIX epoch (January 1st, 1970 at Midnight).
-    /// </summary>
+    /// <inheritdoc cref="LastModified" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<long> GetLastModified(CancellationToken cancellationToken) => fileJS.InvokeTrySync<long>("getLastModified", cancellationToken);
@@ -85,9 +77,7 @@ public sealed class File(IJSObjectReference fileJS) : FileBase(fileJS), IFile {
     /// </summary>
     public ValueTask<string> WebkitRelativePath => GetWebkitRelativePath(default);
 
-    /// <summary>
-    /// Returns the path the URL of the File is relative to.
-    /// </summary>
+    /// <inheritdoc cref="WebkitRelativePath" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<string> GetWebkitRelativePath(CancellationToken cancellationToken) => fileJS.InvokeTrySync<string>("getWebkitRelativePath", cancellationToken);

@@ -17,9 +17,7 @@ public sealed class Magnetometer(IJSObjectReference magnetometer) : Sensor(magne
     /// </summary>
     public ValueTask<double> X => GetX(default);
 
-    /// <summary>
-    /// Returns a double containing the magnetic field around the device's x axis.
-    /// </summary>
+    /// <inheritdoc cref="X" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<double> GetX(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getX", cancellationToken);
@@ -30,9 +28,7 @@ public sealed class Magnetometer(IJSObjectReference magnetometer) : Sensor(magne
     /// </summary>
     public ValueTask<double> Y => GetY(default);
 
-    /// <summary>
-    /// Returns a double containing the magnetic field around the device's y axis.
-    /// </summary>
+    /// <inheritdoc cref="Y" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<double> GetY(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getY", cancellationToken);
@@ -43,9 +39,7 @@ public sealed class Magnetometer(IJSObjectReference magnetometer) : Sensor(magne
     /// </summary>
     public ValueTask<double> Z => GetZ(default);
 
-    /// <summary>
-    /// Returns a double containing the magnetic field around the device's z axis.
-    /// </summary>
+    /// <inheritdoc cref="Z" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<double> GetZ(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getZ", cancellationToken);

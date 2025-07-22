@@ -33,42 +33,46 @@ public readonly record struct PickerDialogStartIn {
     /// <summary>
     /// Creates a PickerDialogStartIn object with the starting folder of the given fileHandle.
     /// </summary>
+    /// <param name="fileHandle"></param>
     public PickerDialogStartIn(IFileHandle fileHandle) => WellKnownDirectoryOrFileHandle = fileHandle.FileHandleJS;
 
-    /// <summary>
-    /// Creates a PickerDialogStartIn object with the starting folder of the given fileHandle.
-    /// </summary>
+    /// <inheritdoc cref="PickerDialogStartIn(IFileHandle)" />
+    /// <param name="fileHandle"></param>
+    /// <returns></returns>
     public static PickerDialogStartIn FromHandle(IFileHandle fileHandle) => new(fileHandle);
 
     /// <summary>
     /// Creates a PickerDialogStartIn object starting in the directory of the given directoyHandle.
     /// </summary>
+    /// <param name="directoryHandle"></param>
     public PickerDialogStartIn(IDirectoryHandle directoryHandle) => WellKnownDirectoryOrFileHandle = directoryHandle.DirectoryHandleJS;
 
-    /// <summary>
-    /// Creates a PickerDialogStartIn object starting in the directory of the given directoyHandle.
-    /// </summary>
+    /// <inheritdoc cref="PickerDialogStartIn(IDirectoryHandle)" />
+    /// <param name="directoryHandle"></param>
+    /// <returns></returns>
     public static PickerDialogStartIn FromHandle(IDirectoryHandle directoryHandle) => new(directoryHandle);
 
 
     /// <summary>
     /// Creates a PickerDialogStartIn object with the starting folder of the given fileHandle.
     /// </summary>
+    /// <param name="fileHandle"></param>
     public PickerDialogStartIn(IFileHandleInProcess fileHandle) => WellKnownDirectoryOrFileHandle = fileHandle.FileHandleJS;
 
-    /// <summary>
-    /// Creates a PickerDialogStartIn object with the starting folder of the given fileHandle.
-    /// </summary>
+    /// <inheritdoc cref="PickerDialogStartIn(IFileHandleInProcess)" />
+    /// <param name="fileHandle"></param>
+    /// <returns></returns>
     public static PickerDialogStartIn FromHandle(IFileHandleInProcess fileHandle) => new(fileHandle);
 
     /// <summary>
     /// Creates a PickerDialogStartIn object starting in the directory of the given directoyHandle.
     /// </summary>
+    /// <param name="directoryHandle"></param>
     public PickerDialogStartIn(IDirectoryHandleInProcess directoryHandle) => WellKnownDirectoryOrFileHandle = directoryHandle.DirectoryHandleJS;
 
-    /// <summary>
-    /// Creates a PickerDialogStartIn object starting in the directory of the given directoyHandle.
-    /// </summary>
+    /// <inheritdoc cref="PickerDialogStartIn(IDirectoryHandleInProcess)" />
+    /// <param name="directoryHandle"></param>
+    /// <returns></returns>
     public static PickerDialogStartIn FromHandle(IDirectoryHandleInProcess directoryHandle) => new(directoryHandle);
 
 

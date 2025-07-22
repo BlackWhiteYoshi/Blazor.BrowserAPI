@@ -48,7 +48,7 @@ public abstract class FileSystemBase(IModuleManager moduleManager) {
     private readonly record struct Estimate(long? Usage, long? Quota);
 
     /// <summary>
-    /// <para>The <i>estimate()</i> method of the StorageManager interface asks the Storage Manager for how much storage the current origin takes up (usage), and how much space is available (quota).</para>
+    /// <para>Asks the Storage Manager for how much storage the current origin takes up (usage), and how much space is available (quota).</para>
     /// <para>This method operates asynchronously, so it returns a Promise which resolves once the information is available. The promise's fulfillment handler is called with an object containing the usage and quota data.</para>
     /// </summary>
     /// <param name="cancellationToken"></param>
@@ -59,7 +59,7 @@ public abstract class FileSystemBase(IModuleManager moduleManager) {
     }
 
     /// <summary>
-    /// The <i>persist()</i> method of the StorageManager interface requests permission to use persistent storage, and returns a Promise that resolves to true if permission is granted and bucket mode is persistent, and false otherwise.
+    /// Requests permission to use persistent storage, and returns a Promise that resolves to true if permission is granted and bucket mode is persistent, and false otherwise.
     /// The browser may or may not honor the request, depending on browser-specific rules.
     /// (For more details, see the guide to <see href="https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria#does_browser-stored_data_persist">Storage quotas and eviction criteria</see>.)
     /// </summary>
@@ -68,7 +68,7 @@ public abstract class FileSystemBase(IModuleManager moduleManager) {
     public ValueTask<bool> StorageManagerPersist(CancellationToken cancellationToken = default) => moduleManager.InvokeAsync<bool>("FileSystemAPI.storageManagerPersist", cancellationToken);
 
     /// <summary>
-    /// The <i>persisted()</i> method of the StorageManager interface returns a Promise that resolves to true if your site's storage bucket is persistent.
+    /// Returns a Promise that resolves to true if your site's storage bucket is persistent.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>

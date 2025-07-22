@@ -24,7 +24,7 @@ public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReferen
 
 
     /// <summary>
-    /// The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated.
+    /// Returns a service worker whose ServiceWorker.state is activating or activated.
     /// This property is initially set to null.
     /// </summary>
     public IServiceWorkerInProcess? Active {
@@ -38,7 +38,7 @@ public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReferen
     }
 
     /// <summary>
-    /// The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing.
+    /// Returns a service worker whose ServiceWorker.state is installing.
     /// This property is initially set to null.
     /// </summary>
     public IServiceWorkerInProcess? Installing {
@@ -52,7 +52,7 @@ public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReferen
     }
 
     /// <summary>
-    /// The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed.
+    /// Returns a service worker whose ServiceWorker.state is installed.
     /// This property is initially set to null.
     /// </summary>
     public IServiceWorkerInProcess? Waiting {
@@ -67,14 +67,14 @@ public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReferen
 
 
     /// <summary>
-    /// The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration.
+    /// Returns a unique identifier for a service worker registration.
     /// The service worker must be on the same origin as the document that registers the ServiceWorker.
     /// </summary>
     public string Scope => ServiceWorkerRegistrationJS.Invoke<string>("getScope");
 
     /// <summary>
     /// <para>
-    /// The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register.
+    /// Updates the cache using the mode specified in the call to ServiceWorkerContainer.register.
     /// Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.
     /// </para>
     /// <para>
@@ -88,7 +88,7 @@ public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReferen
 
 
     /// <summary>
-    /// The <i>update()</i> method of the ServiceWorkerRegistration interface attempts to update the service worker.
+    /// Attempts to update the service worker.
     /// It fetches the worker's script URL, and if the new worker is not byte-by-byte identical to the current worker, it installs the new worker.
     /// The fetch of the worker bypasses any browser caches if the previous fetch occurred over 24 hours ago.
     /// </summary>

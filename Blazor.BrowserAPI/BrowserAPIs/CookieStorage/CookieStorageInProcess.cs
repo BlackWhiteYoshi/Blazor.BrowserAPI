@@ -5,6 +5,10 @@ namespace BrowserAPI.Implementation;
 /// <summary>
 /// The Document property cookie lets you read and write cookies associated with the document.
 /// </summary>
+/// <remarks>
+/// Note: The CookieStorage interface is more sophisticated than the actual browser cookie interface.<br />
+/// It is structured similar to the <see cref="ILocalStorageInProcess">LocalStorage</see>/<see cref="ISessionStorageInProcess">SessionStorage</see> interface.
+/// </remarks>
 [AutoInterface(Namespace = "BrowserAPI")]
 public sealed class CookieStorageInProcess(IModuleManager moduleManager) : ICookieStorageInProcess {
     /// <summary>
@@ -20,6 +24,7 @@ public sealed class CookieStorageInProcess(IModuleManager moduleManager) : ICook
     /// Returns an integer representing the number of cookies stored in cookieStorage.
     /// </summary>
     public int Length => moduleManager.InvokeSync<int>("CookieStorageAPI.count");
+
 
     /// <summary>
     /// When passed a number <i>n</i>, this method will return the name of the nth key in cookieStorage.

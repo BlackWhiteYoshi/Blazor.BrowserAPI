@@ -69,7 +69,7 @@ public sealed class GamepadAPI(IModuleManager moduleManager) : IGamepadAPI, IDis
     private Action<IGamepad>? _onGamepadConnected;
     /// <summary>
     /// <para>
-    /// The <i>gamepadconnected</i> event is fired when the browser detects that a gamepad has been connected or the first time a button/axis of the gamepad is used.<br />
+    /// Is fired when the browser detects that a gamepad has been connected or the first time a button/axis of the gamepad is used.<br />
     /// The event will not fire if disallowed by the document's gamepad Permissions Policy.<br />
     /// This event is not cancelable and does not bubble.
     /// </para>
@@ -94,7 +94,7 @@ public sealed class GamepadAPI(IModuleManager moduleManager) : IGamepadAPI, IDis
     private Action<IGamepad>? _onGamepadDisconnected;
     /// <summary>
     /// <para>
-    /// The <i>gamepaddisconnected</i> event is fired when the browser detects that a gamepad has been disconnected.<br />
+    /// Is fired when the browser detects that a gamepad has been disconnected.<br />
     /// The event will not fire if disallowed by the document's gamepad Permissions Policy.<br />
     /// This event is not cancelable and does not bubble.
     /// </para>

@@ -18,9 +18,7 @@ public sealed class AbsoluteOrientationSensor(IJSObjectReference absoluteOrienta
     /// </summary>
     public ValueTask<Quaternion> Quaternion => GetQuaternion(default);
 
-    /// <summary>
-    /// Returns a four element Array whose elements contain the components of the unit quaternion representing the device's orientation.
-    /// </summary>
+    /// <inheritdoc cref="Quaternion" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<Quaternion> GetQuaternion(CancellationToken cancellationToken) {

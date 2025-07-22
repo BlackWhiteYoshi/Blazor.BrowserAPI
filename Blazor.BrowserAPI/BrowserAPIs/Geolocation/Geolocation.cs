@@ -9,7 +9,7 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI")]
 public sealed class Geolocation(IModuleManager moduleManager) : GeolocationBase(moduleManager), IGeolocation {
     /// <summary>
-    /// The getCurrentPosition() method of the Geolocation interface is used to get the current position of the device.
+    /// Is used to get the current position of the device.
     /// </summary>
     /// <param name="successCallback">
     /// <para>A callback function that takes a <see cref="GeolocationCoordinates"/> object and a <see cref="long"/> timestamp  as its input parameter.</para>
@@ -77,7 +77,7 @@ public sealed class Geolocation(IModuleManager moduleManager) : GeolocationBase(
     private readonly SortedList<int, DotNetObjectReference<CallbackGeolocation>> watchList = [];
 
     /// <summary>
-    /// The watchPosition() method of the Geolocation interface is used to register a handler function that will be called automatically each time the position of the device changes.
+    /// Is used to register a handler function that will be called automatically each time the position of the device changes.
     /// You can also, optionally, specify an error handling callback function.
     /// </summary>
     /// <param name="successCallback">
@@ -135,7 +135,7 @@ public sealed class Geolocation(IModuleManager moduleManager) : GeolocationBase(
     }
 
     /// <summary>
-    /// The clearWatch() method of the Geolocation interface is used to unregister location/error monitoring handlers previously installed using <see cref="WatchPosition"/>.
+    /// Is used to unregister location/error monitoring handlers previously installed using <see cref="WatchPosition"/>.
     /// </summary>
     /// <param name="watchId">The id of the registration from <see cref="WatchPosition"/></param>
     /// <param name="cancellationToken"></param>

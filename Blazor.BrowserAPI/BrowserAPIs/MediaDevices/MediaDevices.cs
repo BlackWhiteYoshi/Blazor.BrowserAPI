@@ -12,15 +12,12 @@ namespace BrowserAPI.Implementation;
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class MediaDevices(IModuleManager moduleManager) : MediaDevicesBase(moduleManager), IMediaDevices {
     /// <summary>
-    /// The getSupportedConstraints() method of the MediaDevices interface returns an object based on the MediaTrackSupportedConstraints dictionary,
+    /// Returns an object based on the MediaTrackSupportedConstraints dictionary,
     /// whose member fields each specify one of the constrainable properties the user agent understands.
     /// </summary>
     public ValueTask<MediaTrackSupportedConstraints> SupportedConstraints => GetSupportedConstraints(default);
 
-    /// <summary>
-    /// The getSupportedConstraints() method of the MediaDevices interface returns an object based on the MediaTrackSupportedConstraints dictionary,
-    /// whose member fields each specify one of the constrainable properties the user agent understands.
-    /// </summary>
+    /// <inheritdoc cref="SupportedConstraints" />
     /// <param name="cancellationToken"></param>
     /// <returns>
     /// A new object based on the MediaTrackSupportedConstraints dictionary listing the constraints supported by the user agent.
@@ -30,7 +27,7 @@ public sealed class MediaDevices(IModuleManager moduleManager) : MediaDevicesBas
 
 
     /// <summary>
-    /// <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
+    /// <para>Prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
     /// <para>
     /// That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
     /// an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
@@ -50,18 +47,7 @@ public sealed class MediaDevices(IModuleManager moduleManager) : MediaDevicesBas
         return new MediaStream(mediaStreamJS);
     }
 
-    /// <summary>
-    /// <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
-    /// <para>
-    /// That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
-    /// an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
-    /// and possibly other track types.
-    /// </para>
-    /// <para>
-    /// It returns a Promise that resolves to a MediaStream object.
-    /// If the user denies permission, or matching media is not available, then the promise is rejected with NotAllowedError or NotFoundError DOMException respectively.
-    /// </para>
-    /// </summary>
+    /// <inheritdoc cref="GetUserMedia(bool, bool, CancellationToken)" />
     /// <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
     /// <param name="video">A flag that indicates a video track is included to the stream.</param>
     /// <param name="cancellationToken"></param>
@@ -71,18 +57,7 @@ public sealed class MediaDevices(IModuleManager moduleManager) : MediaDevicesBas
         return new MediaStream(mediaStreamJS);
     }
 
-    /// <summary>
-    /// <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
-    /// <para>
-    /// That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
-    /// an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
-    /// and possibly other track types.
-    /// </para>
-    /// <para>
-    /// It returns a Promise that resolves to a MediaStream object.
-    /// If the user denies permission, or matching media is not available, then the promise is rejected with NotAllowedError or NotFoundError DOMException respectively.
-    /// </para>
-    /// </summary>
+    /// <inheritdoc cref="GetUserMedia(bool, bool, CancellationToken)" />
     /// <param name="audio">A flag that indicates an audio track is included to the stream.</param>
     /// <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
     /// <param name="cancellationToken"></param>
@@ -92,18 +67,7 @@ public sealed class MediaDevices(IModuleManager moduleManager) : MediaDevicesBas
         return new MediaStream(mediaStreamJS);
     }
 
-    /// <summary>
-    /// <para>The getUserMedia() method of the MediaDevices interface prompts the user for permission to use a media input which produces a MediaStream with tracks containing the requested types of media.</para>
-    /// <para>
-    /// That stream can include, for example, a video track (produced by either a hardware or virtual video source such as a camera, video recording device, screen sharing service, and so forth),
-    /// an audio track (similarly, produced by a physical or virtual audio source like a microphone, A/D converter, or the like),
-    /// and possibly other track types.
-    /// </para>
-    /// <para>
-    /// It returns a Promise that resolves to a MediaStream object.
-    /// If the user denies permission, or matching media is not available, then the promise is rejected with NotAllowedError or NotFoundError DOMException respectively.
-    /// </para>
-    /// </summary>
+    /// <inheritdoc cref="GetUserMedia(bool, bool, CancellationToken)" />
     /// <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
     /// <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
     /// <param name="cancellationToken"></param>
@@ -126,9 +90,7 @@ public sealed class MediaDevices(IModuleManager moduleManager) : MediaDevicesBas
         return new MediaStream(mediaStreamJS);
     }
 
-    /// <summary>
-    /// With the user's permission through a prompt, turns on a camera and/or a microphone on the system and provides a MediaStream containing a video track and/or an audio track with the input.
-    /// </summary>
+    /// <inheritdoc cref="GetDisplayMedia(bool, bool, CancellationToken)" />
     /// <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
     /// <param name="video">A flag that indicates a video track is included to the stream.</param>
     /// <param name="cancellationToken"></param>
@@ -138,9 +100,7 @@ public sealed class MediaDevices(IModuleManager moduleManager) : MediaDevicesBas
         return new MediaStream(mediaStreamJS);
     }
 
-    /// <summary>
-    /// With the user's permission through a prompt, turns on a camera and/or a microphone on the system and provides a MediaStream containing a video track and/or an audio track with the input.
-    /// </summary>
+    /// <inheritdoc cref="GetDisplayMedia(bool, bool, CancellationToken)" />
     /// <param name="audio">A flag that indicates an audio track is included to the stream.</param>
     /// <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
     /// <param name="cancellationToken"></param>
@@ -150,9 +110,7 @@ public sealed class MediaDevices(IModuleManager moduleManager) : MediaDevicesBas
         return new MediaStream(mediaStreamJS);
     }
 
-    /// <summary>
-    /// With the user's permission through a prompt, turns on a camera and/or a microphone on the system and provides a MediaStream containing a video track and/or an audio track with the input.
-    /// </summary>
+    /// <inheritdoc cref="GetDisplayMedia(bool, bool, CancellationToken)" />
     /// <param name="audio">A constraints object that holds more detailed information about the requirements for the audio.</param>
     /// <param name="video">A constraints object that holds more detailed information about the requirements for the video.</param>
     /// <param name="cancellationToken"></param>

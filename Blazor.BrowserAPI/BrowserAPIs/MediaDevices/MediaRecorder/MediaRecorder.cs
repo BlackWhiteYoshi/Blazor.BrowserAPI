@@ -37,18 +37,7 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     /// </summary>
     public ValueTask<string> MimeType => GetMimeType(default);
 
-    /// <summary>
-    /// <para>
-    /// The <i>mimeType</i> read-only property of the MediaRecorder interface returns the <see href="https://developer.mozilla.org/en-US/docs/Glossary/MIME">MIME</see> media type that was specified when creating the MediaRecorder object,
-    /// or, if none was specified, which was chosen by the browser.
-    /// This is the file format of the file that would result from writing all of the recorded data to disk.
-    /// </para>
-    /// <para>
-    /// Keep in mind that not all codecs are supported by a given container;
-    /// if you write media using a codec that is not supported by a given media container, the resulting file may not work reliably if at all when you try to play it back.
-    /// See our <see href="https://developer.mozilla.org/en-US/docs/Web/Media/Formats">media type and format guide</see> for information about container and codec support across browsers.
-    /// </para>
-    /// </summary>
+    /// <inheritdoc cref="MimeType" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<string> GetMimeType(CancellationToken cancellationToken) => mediaRecorderJS.InvokeTrySync<string>("getMimeType", cancellationToken);
@@ -64,14 +53,7 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     /// </summary>
     public ValueTask<string> State => GetState(default);
 
-    /// <summary>
-    /// <para>The <i>state</i> read-only property of the MediaRecorder interface returns the current state of the current MediaRecorder object:</para>
-    /// <para>
-    /// "inactive" - Recording is not occurring — it has either not been started yet, or it has been started and then stopped.<br />
-    /// "recording" - Recording has been started and the user agent is capturing data.<br />
-    /// "paused" - Recording has been started, then paused, but not yet stopped or resumed.
-    /// </para>
-    /// </summary>
+    /// <inheritdoc cref="State" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<string> GetState(CancellationToken cancellationToken) => mediaRecorderJS.InvokeTrySync<string>("getState", cancellationToken);
@@ -82,9 +64,7 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     /// </summary>
     public ValueTask<IMediaStream> Stream => GetStream(default);
 
-    /// <summary>
-    /// The <i>stream</i> read-only property of the MediaRecorder interface returns the stream that was passed into the <see cref="IMediaStream.CreateRecorder">CreateRecorder() method</see> when the MediaRecorder was created.
-    /// </summary>
+    /// <inheritdoc cref="Stream" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IMediaStream> GetStream(CancellationToken cancellationToken) => new MediaStream(await mediaRecorderJS.InvokeTrySync<IJSObjectReference>("getStream", cancellationToken));
@@ -96,10 +76,7 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     /// </summary>
     public ValueTask<ulong> AudioBitsPerSecond => GetAudioBitsPerSecond(default);
 
-    /// <summary>
-    /// The <i>audioBitsPerSecond</i> read-only property of the MediaRecorder interface returns the audio encoding bit rate in use.<br />
-    /// This may differ from the bit rate specified in the constructor (if it was provided).
-    /// </summary>
+    /// <inheritdoc cref="AudioBitsPerSecond" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<ulong> GetAudioBitsPerSecond(CancellationToken cancellationToken) => mediaRecorderJS.InvokeTrySync<ulong>("getAudioBitsPerSecond", cancellationToken);
@@ -111,10 +88,7 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     /// </summary>
     public ValueTask<ulong> VideoBitsPerSecond => GetVideoBitsPerSecond(default);
 
-    /// <summary>
-    /// The <i>videoBitsPerSecond</i> read-only property of the MediaRecorder interface returns the video encoding bit rate in use.<br />
-    /// This may differ from the bit rate specified in the constructor, if it was provided.
-    /// </summary>
+    /// <inheritdoc cref="VideoBitsPerSecond" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<ulong> GetVideoBitsPerSecond(CancellationToken cancellationToken) => mediaRecorderJS.InvokeTrySync<ulong>("getVideoBitsPerSecond", cancellationToken);

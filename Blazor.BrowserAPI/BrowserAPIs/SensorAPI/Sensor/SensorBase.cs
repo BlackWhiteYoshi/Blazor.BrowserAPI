@@ -52,7 +52,7 @@ public abstract class SensorBase(IJSObjectReference sensorJS) {
     private Action<JsonElement>? _onError;
     /// <summary>
     /// <para>
-    /// The error event is fired when an exception occurs on a sensor.
+    /// Is fired when an exception occurs on a sensor.
     /// After this event has occurred, the Sensor object becomes idle. If the sensor was reading values, it will stop until it restarts.
     /// </para>
     /// <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</see> as JSON.</para>
@@ -72,7 +72,7 @@ public abstract class SensorBase(IJSObjectReference sensorJS) {
 
     private Action? _onActivate;
     /// <summary>
-    /// The activate event is fired when a sensor becomes activated. It means that it will start obtaining readings.
+    /// Is fired when a sensor becomes activated. It means that it will start obtaining readings.
     /// </summary>
     public event Action OnActivate {
         add {
@@ -89,7 +89,7 @@ public abstract class SensorBase(IJSObjectReference sensorJS) {
 
     private Action? _onReading;
     /// <summary>
-    /// The reading event is fired when a new reading is available on a sensor.
+    /// Is fired when a new reading is available on a sensor.
     /// </summary>
     public event Action OnReading {
         add {

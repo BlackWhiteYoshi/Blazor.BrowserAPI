@@ -23,15 +23,12 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
 
 
     /// <summary>
-    /// The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated.
+    /// Returns a service worker whose ServiceWorker.state is activating or activated.
     /// This property is initially set to null.
     /// </summary>
     public ValueTask<IServiceWorker?> Active => GetActive(default);
 
-    /// <summary>
-    /// The <i>active</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is activating or activated.
-    /// This property is initially set to null.
-    /// </summary>
+    /// <inheritdoc cref="Active" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IServiceWorker?> GetActive(CancellationToken cancellationToken) {
@@ -44,15 +41,12 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
 
 
     /// <summary>
-    /// The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing.
+    /// Returns a service worker whose ServiceWorker.state is installing.
     /// This property is initially set to null.
     /// </summary>
     public ValueTask<IServiceWorker?> Installing => GetInstalling(default);
 
-    /// <summary>
-    /// The <i>installing</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installing.
-    /// This property is initially set to null.
-    /// </summary>
+    /// <inheritdoc cref="Installing" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IServiceWorker?> GetInstalling(CancellationToken cancellationToken) {
@@ -65,15 +59,12 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
 
 
     /// <summary>
-    /// The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed.
+    /// Returns a service worker whose ServiceWorker.state is installed.
     /// This property is initially set to null.
     /// </summary>
     public ValueTask<IServiceWorker?> Waiting => GetWaiting(default);
 
-    /// <summary>
-    /// The <i>waiting</i> property of the ServiceWorkerRegistration interface returns a service worker whose ServiceWorker.state is installed.
-    /// This property is initially set to null.
-    /// </summary>
+    /// <inheritdoc cref="Waiting" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IServiceWorker?> GetWaiting(CancellationToken cancellationToken) {
@@ -87,15 +78,12 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
 
 
     /// <summary>
-    /// The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration.
+    /// Returns a unique identifier for a service worker registration.
     /// The service worker must be on the same origin as the document that registers the ServiceWorker.
     /// </summary>
     public ValueTask<string> Scope => GetScope(default);
 
-    /// <summary>
-    /// The <i>scope</i> read-only property of the ServiceWorkerRegistration interface returns a unique identifier for a service worker registration.
-    /// The service worker must be on the same origin as the document that registers the ServiceWorker.
-    /// </summary>
+    /// <inheritdoc cref="Scope" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<string> GetScope(CancellationToken cancellationToken) => serviceWorkerRegistrationJS.InvokeTrySync<string>("getScope", cancellationToken);
@@ -103,7 +91,7 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
 
     /// <summary>
     /// <para>
-    /// The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register.
+    /// Updates the cache using the mode specified in the call to ServiceWorkerContainer.register.
     /// Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.
     /// </para>
     /// <para>
@@ -115,18 +103,7 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
     /// </summary>
     public ValueTask<string> UpdateViaCache => GetUpdateViaCache(default);
 
-    /// <summary>
-    /// <para>
-    /// The <i>updateViaCache</i> read-only property of the ServiceWorkerRegistration interface updates the cache using the mode specified in the call to ServiceWorkerContainer.register.
-    /// Requests for importScripts still go via the HTTP cache. updateViaCache offers control over this behavior.
-    /// </para>
-    /// <para>
-    /// Returns one of the following values:<br />
-    /// - <b>imports</b>: meaning the HTTP cache is not consulted for update of the service worker, but is consulted for importScripts.<br />
-    /// - <b>all</b>: meaning the HTTP cache is consulted in both cases<br />
-    /// - <b>none</b>: meaning the HTTP cache is never consulted.
-    /// </para>
-    /// </summary>
+    /// <inheritdoc cref="UpdateViaCache" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<string> GetUpdateViaCache(CancellationToken cancellationToken) => serviceWorkerRegistrationJS.InvokeTrySync<string>("getUpdateViaCache", cancellationToken);
@@ -134,7 +111,7 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
 
 
     /// <summary>
-    /// The <i>update()</i> method of the ServiceWorkerRegistration interface attempts to update the service worker.
+    /// Attempts to update the service worker.
     /// It fetches the worker's script URL, and if the new worker is not byte-by-byte identical to the current worker, it installs the new worker.
     /// The fetch of the worker bypasses any browser caches if the previous fetch occurred over 24 hours ago.
     /// </summary>

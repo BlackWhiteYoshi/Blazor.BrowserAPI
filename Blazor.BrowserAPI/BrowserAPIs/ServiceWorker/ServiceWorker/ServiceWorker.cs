@@ -27,25 +27,19 @@ public sealed class ServiceWorker(IJSObjectReference serviceWorkerJS) : ServiceW
     /// </summary>
     public ValueTask<string> ScriptUrl => GetScriptUrl(default);
 
-    /// <summary>
-    /// Returns the <i>ServiceWorker</i> serialized script URL defined as part of ServiceWorkerRegistration.
-    /// The URL must be on the same origin as the document that registers the ServiceWorker.
-    /// </summary>
+    /// <inheritdoc cref="ScriptUrl" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<string> GetScriptUrl(CancellationToken cancellationToken) => serviceWorkerJS.InvokeTrySync<string>("getScriptURL", cancellationToken);
 
 
     /// <summary>
-    /// The state read-only property of the <i>ServiceWorker</i> interface returns a string representing the current state of the service worker.
+    /// Returns a string representing the current state of the service worker.
     /// It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.
     /// </summary>
     public ValueTask<string> State => GetState(default);
 
-    /// <summary>
-    /// The state read-only property of the <i>ServiceWorker</i> interface returns a string representing the current state of the service worker.
-    /// It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.
-    /// </summary>
+    /// <inheritdoc cref="State" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<string> GetState(CancellationToken cancellationToken) => serviceWorkerJS.InvokeTrySync<string>("getState", cancellationToken);
@@ -53,7 +47,7 @@ public sealed class ServiceWorker(IJSObjectReference serviceWorkerJS) : ServiceW
 
     /// <summary>
     /// <para>
-    /// The <i>postMessage()</i> method of the ServiceWorker interface sends a message to the worker.
+    /// Sends a message to the worker.
     /// This accepts a single parameter, which is the data to send to the worker.
     /// The data may be any JavaScript object which can be handled by the structured clone algorithm.
     /// </para>

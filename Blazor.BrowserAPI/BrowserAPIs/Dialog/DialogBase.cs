@@ -52,7 +52,7 @@ public abstract class DialogBase(Task<IJSObjectReference> dialogTask) {
 
     private Action? _onCancel;
     /// <summary>
-    /// The <i>cancel</i> event fires on a &lt;dialog&gt; when the user instructs the browser that they wish to dismiss the current open dialog. The browser fires this event when the user presses the Esc key.
+    /// Fires on a &lt;dialog&gt; when the user instructs the browser that they wish to dismiss the current open dialog. The browser fires this event when the user presses the Esc key.
     /// </summary>
     public event Action OnCancel {
         add {
@@ -69,7 +69,7 @@ public abstract class DialogBase(Task<IJSObjectReference> dialogTask) {
 
     private Action? _onClose;
     /// <summary>
-    /// The <i>close</i> event is fired on an HTMLDialogElement object when the &lt;dialog&gt; it represents has been closed.
+    /// Is fired on an HTMLDialogElement object when the &lt;dialog&gt; it represents has been closed.
     /// </summary>
     public event Action OnClose {
         add {

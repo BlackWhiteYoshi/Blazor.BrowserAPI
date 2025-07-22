@@ -32,10 +32,7 @@ public sealed class ServiceWorkerContainer(IModuleManager moduleManager) : Servi
     /// </summary>
     public ValueTask<IServiceWorker?> Controller => GetController(default);
 
-    /// <summary>
-    /// Returns a <i>ServiceWorker</i> object if its state is activating or activated (the same object returned by ServiceWorkerRegistration.active).
-    /// This property returns null during a force-refresh request (Shift + refresh) or if there is no active worker.
-    /// </summary>
+    /// <inheritdoc cref="Controller" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IServiceWorker?> GetController(CancellationToken cancellationToken) {
@@ -53,11 +50,7 @@ public sealed class ServiceWorkerContainer(IModuleManager moduleManager) : Servi
     /// </summary>
     public ValueTask<IServiceWorkerRegistration> Ready => GetReady(default);
 
-    /// <summary>
-    /// Provides a way of delaying code execution until a service worker is active.
-    /// It returns a Promise that will never reject, and which waits indefinitely until the ServiceWorkerRegistration associated with the current page has an ServiceWorkerRegistration.active worker.
-    /// Once that condition is met, it resolves with the ServiceWorkerRegistration.
-    /// </summary>
+    /// <inheritdoc cref="Ready" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IServiceWorkerRegistration> GetReady(CancellationToken cancellationToken) {
@@ -67,7 +60,7 @@ public sealed class ServiceWorkerContainer(IModuleManager moduleManager) : Servi
 
 
     /// <summary>
-    /// The <i>getRegistration()</i> method of the ServiceWorkerContainer interface gets a ServiceWorkerRegistration object whose scope URL matches the provided client URL.
+    /// Gets a ServiceWorkerRegistration object whose scope URL matches the provided client URL.
     /// The method returns a Promise that resolves to a ServiceWorkerRegistration or undefined.
     /// </summary>
     /// <param name="clientUrl">The registration whose scope matches this URL will be returned. Relative URLs are resolved with the current client as the base.</param>
@@ -82,7 +75,7 @@ public sealed class ServiceWorkerContainer(IModuleManager moduleManager) : Servi
     }
 
     /// <summary>
-    /// The <i>getRegistrations()</i> method of the ServiceWorkerContainer interface gets all ServiceWorkerRegistrations associated with a ServiceWorkerContainer, in an array.
+    /// Gets all ServiceWorkerRegistrations associated with a ServiceWorkerContainer, in an array.
     /// The method returns a Promise that resolves to an array of ServiceWorkerRegistration.
     /// </summary>
     /// <param name="cancellationToken"></param>
@@ -98,7 +91,7 @@ public sealed class ServiceWorkerContainer(IModuleManager moduleManager) : Servi
 
 
     /// <summary>
-    /// The <i>startMessages()</i> method of the ServiceWorkerContainer interface explicitly starts the flow of messages being dispatched from a service worker to pages under its control (e.g. sent via Client.postMessage()).
+    /// Explicitly starts the flow of messages being dispatched from a service worker to pages under its control (e.g. sent via Client.postMessage()).
     /// This can be used to react to sent messages earlier, even before that page's content has finished loading.
     /// </summary>
     /// <param name="cancellationToken"></param>

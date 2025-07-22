@@ -14,7 +14,7 @@ public abstract class ServiceWorkerRegistrationBase(IJSObjectReference serviceWo
 
 
     /// <summary>
-    /// The <i>unregister()</i> method of the ServiceWorkerRegistration interface unregisters the service worker registration and returns a Promise.
+    /// Unregisters the service worker registration and returns a Promise.
     /// The promise will resolve to false if no registration was found, otherwise it resolves to true irrespective of whether unregistration happened or not (it may not unregister if someone else just called ServiceWorkerContainer.register() with the same scope.)
     /// The service worker will finish any ongoing operations before it is unregistered.
     /// </summary>
@@ -57,7 +57,7 @@ public abstract class ServiceWorkerRegistrationBase(IJSObjectReference serviceWo
 
     private Action? _onUpdateFound;
     /// <summary>
-    /// The <i>updatefound</i> event of the ServiceWorkerRegistration interface is fired any time the <i>ServiceWorkerRegistration.installing</i> property acquires a new service worker.
+    /// Is fired any time the <i>ServiceWorkerRegistration.installing</i> property acquires a new service worker.
     /// </summary>
     public event Action OnUpdateFound {
         add {

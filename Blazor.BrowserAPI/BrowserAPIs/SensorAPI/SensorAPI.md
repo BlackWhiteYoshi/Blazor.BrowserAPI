@@ -90,21 +90,21 @@ Instead it provides properties, event handlers, and methods accessed by interfac
 
 #### Methods
 
-| **Name**      | **Parameters**                        | **ReturnType**          | **Description**                                                      |
-| ------------- | ------------------------------------- | ----------------------- | -------------------------------------------------------------------- |
-| GetActivated  | CancellationToken cancellationToken   | ValueTask&lt;bool&gt;   | Returns a boolean value indicating whether the sensor is active.     |
-| GetHasReading | CancellationToken cancellationToken   | ValueTask&lt;bool&gt;   | Returns a boolean value indicating whether the sensor has a reading. |
-| GetTimestamp  | CancellationToken cancellationToken   | ValueTask&lt;double&gt; | Returns the timestamp of the latest sensor reading.                  |
-| Start         | [CancellationToken cancellationToken] | ValueTask               | Activates one of the sensors based on Sensor.                        |
-| Stop          | [CancellationToken cancellationToken] | ValueTask               | Deactivates one of the sensors based on Sensor.                      |
+| **Name**      | **Parameters**                        | **ReturnType**          | **Description**                                 |
+| ------------- | ------------------------------------- | ----------------------- | ----------------------------------------------- |
+| GetActivated  | CancellationToken cancellationToken   | ValueTask&lt;bool&gt;   | see Property *Activated*                        |
+| GetHasReading | CancellationToken cancellationToken   | ValueTask&lt;bool&gt;   | see Property *HasReading*                       |
+| GetTimestamp  | CancellationToken cancellationToken   | ValueTask&lt;double&gt; | see Property *Timestamp*                        |
+| Start         | [CancellationToken cancellationToken] | ValueTask               | Activates one of the sensors based on Sensor.   |
+| Stop          | [CancellationToken cancellationToken] | ValueTask               | Deactivates one of the sensors based on Sensor. |
 
 #### Events
 
-| **Name**   | **Type**                  | **Description**                                                                                                                                                                                                                                                                                    |
-| ---------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OnError    | Action&lt;JsonElement&gt; | The error event is fired when an exception occurs on a sensor. After this event has occurred, the Sensor object becomes idle. If the sensor was reading values, it will stop until it restarts.<br />Parameter is of type [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event) as JSON. |
-| OnActivate | Action                    | The activate event is fired when a sensor becomes activated. It means that it will start obtaining readings.                                                                                                                                                                                       |
-| OnReading  | Action                    | The reading event is fired when a new reading is available on a sensor.                                                                                                                                                                                                                            |
+| **Name**   | **Type**                  | **Description**                                                                                                                                                                                                                                                                    |
+| ---------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OnError    | Action&lt;JsonElement&gt; | Is fired when an exception occurs on a sensor. After this event has occurred, the Sensor object becomes idle. If the sensor was reading values, it will stop until it restarts.<br />Parameter is of type [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event) as JSON. |
+| OnActivate | Action                    | Is fired when a sensor becomes activated. It means that it will start obtaining readings.                                                                                                                                                                                          |
+| OnReading  | Action                    | Is fired when a new reading is available on a sensor.                                                                                                                                                                                                                              |
 
 
 <br></br>
@@ -128,9 +128,9 @@ Objects of this class must disposed manually, so do not forget to call DisposeAs
 
 #### Methods
 
-| **Name**       | **Parameters**                      | **ReturnType**          | **Description**                                                                              |
-| -------------- | ----------------------------------- | ----------------------- | -------------------------------------------------------------------------------------------- |
-| GetIlluminance | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns the current light level in lux of the ambient light level around the hosting device. |
+| **Name**       | **Parameters**                      | **ReturnType**          | **Description**            |
+| -------------- | ----------------------------------- | ----------------------- | -------------------------- |
+| GetIlluminance | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *Illuminance* |
 
 
 <br></br>
@@ -156,11 +156,11 @@ Objects of this class must disposed manually, so do not forget to call DisposeAs
 
 #### Methods
 
-| **Name** | **Parameters**                      | **ReturnType**          | **Description**                                                                            |
-| -------- | ----------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------ |
-| GetX     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double, containing the angular velocity of the device along the device's x axis. |
-| GetY     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double, containing the angular velocity of the device along the device's y axis. |
-| GetZ     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double, containing the angular velocity of the device along the device's z axis. |
+| **Name** | **Parameters**                      | **ReturnType**          | **Description**  |
+| -------- | ----------------------------------- | ----------------------- | ---------------- |
+| GetX     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *X* |
+| GetY     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *Y* |
+| GetZ     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *Z* |
 
 
 <br></br>
@@ -186,11 +186,11 @@ Objects of this class must disposed manually, so do not forget to call DisposeAs
 
 #### Methods
 
-| **Name** | **Parameters**                      | **ReturnType**          | **Description**                                                                       |
-| -------- | ----------------------------------- | ----------------------- | ------------------------------------------------------------------------------------- |
-| GetX     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double containing the acceleration of the device along the device's x axis. |
-| GetY     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double containing the acceleration of the device along the device's y axis. |
-| GetZ     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double containing the acceleration of the device along the device's z axis. |
+| **Name** | **Parameters**                      | **ReturnType**          | **Description**  |
+| -------- | ----------------------------------- | ----------------------- | ---------------- |
+| GetX     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *X* |
+| GetY     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *Y* |
+| GetZ     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *Z* |
 
 
 <br></br>
@@ -216,11 +216,11 @@ Objects of this class must disposed manually, so do not forget to call DisposeAs
 
 #### Methods
 
-| **Name** | **Parameters**                      | **ReturnType**          | **Description**                                                                       |
-| -------- | ----------------------------------- | ----------------------- | ------------------------------------------------------------------------------------- |
-| GetX     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double containing the acceleration of the device along the device's x axis. |
-| GetY     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double containing the acceleration of the device along the device's y axis. |
-| GetZ     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double containing the acceleration of the device along the device's z axis. |
+| **Name** | **Parameters**                      | **ReturnType**          | **Description**  |
+| -------- | ----------------------------------- | ----------------------- | ---------------- |
+| GetX     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *X* |
+| GetY     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *Y* |
+| GetZ     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *Z* |
 
 
 <br></br>
@@ -246,11 +246,11 @@ Objects of this class must disposed manually, so do not forget to call DisposeAs
 
 #### Methods
 
-| **Name** | **Parameters**                      | **ReturnType**          | **Description**                                                                       |
-| -------- | ----------------------------------- | ----------------------- | ------------------------------------------------------------------------------------- |
-| GetX     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double containing the acceleration of the device along the device's x axis. |
-| GetY     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double containing the acceleration of the device along the device's y axis. |
-| GetZ     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double containing the acceleration of the device along the device's z axis. |
+| **Name** | **Parameters**                      | **ReturnType**          | **Description**  |
+| -------- | ----------------------------------- | ----------------------- | ---------------- |
+| GetX     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *X* |
+| GetY     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *Y* |
+| GetZ     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *Z* |
 
 
 <br></br>
@@ -276,7 +276,7 @@ Objects of this class must disposed manually, so do not forget to call DisposeAs
 
 | **Name**       | **Parameters**                                  | **ReturnType**                                                                                          | **Description**                                                  |
 | -------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| GetQuaternion  | CancellationToken cancellationToken             | ValueTask&lt;[Quaternion](https://learn.microsoft.com/en-us//dotnet/api/system.numerics.quaternion)&gt; | Returns a unit quaternion representing the device's orientation. |
+| GetQuaternion  | CancellationToken cancellationToken             | ValueTask&lt;[Quaternion](https://learn.microsoft.com/en-us//dotnet/api/system.numerics.quaternion)&gt; | see Property *Quaternion*                                        |
 | PopulateMatrix | [CancellationToken cancellationToken = default] | ValueTask&lt;[Matrix4x4](https://learn.microsoft.com/en-us//dotnet/api/system.numerics.matrix4x4)&gt;   | Returns a rotation matrix based on the latest sensor reading.    |
 
 
@@ -301,10 +301,10 @@ Objects of this class must disposed manually, so do not forget to call DisposeAs
 
 #### Methods
 
-| **Name**       | **Parameters**                                  | **ReturnType**                                                                                          | **Description**                                                  |
-| -------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| GetQuaternion  | CancellationToken cancellationToken             | ValueTask&lt;[Quaternion](https://learn.microsoft.com/en-us//dotnet/api/system.numerics.quaternion)&gt; | Returns a unit quaternion representing the device's orientation. |
-| PopulateMatrix | [CancellationToken cancellationToken = default] | ValueTask&lt;[Matrix4x4](https://learn.microsoft.com/en-us//dotnet/api/system.numerics.matrix4x4)&gt;   | Returns a rotation matrix based on the latest sensor reading.    |
+| **Name**       | **Parameters**                                  | **ReturnType**                                                                                          | **Description**                                               |
+| -------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| GetQuaternion  | CancellationToken cancellationToken             | ValueTask&lt;[Quaternion](https://learn.microsoft.com/en-us//dotnet/api/system.numerics.quaternion)&gt; | see Property *Quaternion*                                     |
+| PopulateMatrix | [CancellationToken cancellationToken = default] | ValueTask&lt;[Matrix4x4](https://learn.microsoft.com/en-us//dotnet/api/system.numerics.matrix4x4)&gt;   | Returns a rotation matrix based on the latest sensor reading. |
 
 
 <br></br>
@@ -330,11 +330,11 @@ Objects of this class must disposed manually, so do not forget to call DisposeAs
 
 #### Methods
 
-| **Name** | **Parameters**                      | **ReturnType**          | **Description**                                                            |
-| -------- | ----------------------------------- | ----------------------- | -------------------------------------------------------------------------- |
-| GetX     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double containing the magnetic field around the device's x axis. |
-| GetY     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double containing the magnetic field around the device's y axis. |
-| GetZ     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double containing the magnetic field around the device's z axis. |
+| **Name** | **Parameters**                      | **ReturnType**          | **Description**  |
+| -------- | ----------------------------------- | ----------------------- | ---------------- |
+| GetX     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *X* |
+| GetY     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *Y* |
+| GetZ     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *Z* |
 
 
 <br></br>
@@ -368,14 +368,14 @@ Objects of this class must disposed manually, so do not forget to call DisposeAs
 
 #### Methods
 
-| **Name** | **Parameters**                      | **ReturnType**          | **Description**                                                                         |
-| -------- | ----------------------------------- | ----------------------- | --------------------------------------------------------------------------------------- |
-| GetX     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double containing the uncalibrated magnetic field around the device's x axis. |
-| GetY     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double containing the uncalibrated magnetic field around the device's y axis. |
-| GetZ     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double containing the uncalibrated magnetic field around the device's z axis. |
-| GetXBias | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double representing the hard iron distortion correction around x axis.        |
-| GetYBias | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double representing the hard iron distortion correction around y axis.        |
-| GetZBias | CancellationToken cancellationToken | ValueTask&lt;double&gt; | Returns a double representing the hard iron distortion correction around z axis.        |
+| **Name** | **Parameters**                      | **ReturnType**          | **Description**      |
+| -------- | ----------------------------------- | ----------------------- | -------------------- |
+| GetX     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *X*     |
+| GetY     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *Y*     |
+| GetZ     | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *Z*     |
+| GetXBias | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *XBias* |
+| GetYBias | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *YBias* |
+| GetZBias | CancellationToken cancellationToken | ValueTask&lt;double&gt; | see Property *ZBias* |
 
 
 
@@ -423,11 +423,11 @@ Instead it provides properties, event handlers, and methods accessed by interfac
 
 #### Events
 
-| **Name**   | **Type**                  | **Description**                                                                                                                                                                                                                                                                                    |
-| ---------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OnError    | Action&lt;JsonElement&gt; | The error event is fired when an exception occurs on a sensor. After this event has occurred, the Sensor object becomes idle. If the sensor was reading values, it will stop until it restarts.<br />Parameter is of type [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event) as JSON. |
-| OnActivate | Action                    | The activate event is fired when a sensor becomes activated. It means that it will start obtaining readings.                                                                                                                                                                                       |
-| OnReading  | Action                    | The reading event is fired when a new reading is available on a sensor.                                                                                                                                                                                                                            |
+| **Name**   | **Type**                  | **Description**                                                                                                                                                                                                                                                                    |
+| ---------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OnError    | Action&lt;JsonElement&gt; | Is fired when an exception occurs on a sensor. After this event has occurred, the Sensor object becomes idle. If the sensor was reading values, it will stop until it restarts.<br />Parameter is of type [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event) as JSON. |
+| OnActivate | Action                    | Is fired when a sensor becomes activated. It means that it will start obtaining readings.                                                                                                                                                                                          |
+| OnReading  | Action                    | Is fired when a new reading is available on a sensor.                                                                                                                                                                                                                              |
 
 
 <br></br>
@@ -441,7 +441,7 @@ Objects of this class must disposed manually, so do not forget to call Dispose()
 
 #### Inheritance
 
-- [ISensor](#isensor)
+- [ISensorInProcess](#isensorinprocess)
 
 #### Properties
 
@@ -461,7 +461,7 @@ Objects of this class must disposed manually, so do not forget to call Dispose()
 
 #### Inheritance
 
-- [ISensor](#isensor)
+- [ISensorInProcess](#isensorinprocess)
 
 #### Properties
 
@@ -483,7 +483,7 @@ Objects of this class must disposed manually, so do not forget to call Dispose()
 
 #### Inheritance
 
-- [ISensor](#isensor)
+- [ISensorInProcess](#isensorinprocess)
 
 #### Properties
 
@@ -505,7 +505,7 @@ Objects of this class must disposed manually, so do not forget to call Dispose()
 
 #### Inheritance
 
-- [ISensor](#isensor)
+- [ISensorInProcess](#isensorinprocess)
 
 #### Properties
 
@@ -527,7 +527,7 @@ Objects of this class must disposed manually, so do not forget to call Dispose()
 
 #### Inheritance
 
-- [ISensor](#isensor)
+- [ISensorInProcess](#isensorinprocess)
 
 #### Properties
 
@@ -549,7 +549,7 @@ Objects of this class must disposed manually, so do not forget to call Dispose()
 
 #### Inheritance
 
-- [ISensor](#isensor)
+- [ISensorInProcess](#isensorinprocess)
 
 #### Properties
 
@@ -559,9 +559,9 @@ Objects of this class must disposed manually, so do not forget to call Dispose()
 
 #### Methods
 
-| **Name**       | **Parameters** | **ReturnType**                                                                       | **Description**                                                  |
-| -------------- | -------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
-| PopulateMatrix | *empty*        | [Matrix4x4](https://learn.microsoft.com/en-us//dotnet/api/system.numerics.matrix4x4) | Returns a rotation matrix based on the latest sensor reading.    |
+| **Name**       | **Parameters** | **ReturnType**                                                                       | **Description**                                               |
+| -------------- | -------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------- |
+| PopulateMatrix | *empty*        | [Matrix4x4](https://learn.microsoft.com/en-us//dotnet/api/system.numerics.matrix4x4) | Returns a rotation matrix based on the latest sensor reading. |
 
 
 <br></br>
@@ -575,7 +575,7 @@ Objects of this class must disposed manually, so do not forget to call Dispose()
 
 #### Inheritance
 
-- [ISensor](#isensor)
+- [ISensorInProcess](#isensorinprocess)
 
 #### Properties
 
@@ -601,7 +601,7 @@ Objects of this class must disposed manually, so do not forget to call Dispose()
 
 #### Inheritance
 
-- [ISensor](#isensor)
+- [ISensorInProcess](#isensorinprocess)
 
 #### Properties
 
@@ -628,7 +628,7 @@ Objects of this class must disposed manually, so do not forget to call Dispose()
 
 #### Inheritance
 
-- [ISensor](#isensor)
+- [ISensorInProcess](#isensorinprocess)
 
 #### Properties
 

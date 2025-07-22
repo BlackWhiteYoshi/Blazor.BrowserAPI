@@ -30,14 +30,14 @@ public sealed class ServiceWorkerInProcess(IJSInProcessObjectReference serviceWo
     public string ScriptUrl => ServiceWorkerJS.Invoke<string>("getScriptURL");
 
     /// <summary>
-    /// The state read-only property of the <i>ServiceWorker</i> interface returns a string representing the current state of the service worker.
+    /// Returns a string representing the current state of the service worker.
     /// It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.
     /// </summary>
     public string State => ServiceWorkerJS.Invoke<string>("getState");
 
     /// <summary>
     /// <para>
-    /// The <i>postMessage()</i> method of the ServiceWorker interface sends a message to the worker.
+    /// Sends a message to the worker.
     /// This accepts a single parameter, which is the data to send to the worker.
     /// The data may be any JavaScript object which can be handled by the structured clone algorithm.
     /// </para>

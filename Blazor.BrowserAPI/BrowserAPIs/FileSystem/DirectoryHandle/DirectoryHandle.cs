@@ -33,9 +33,7 @@ public sealed class DirectoryHandle(IJSObjectReference directoryHandleJS) : Dire
     /// </summary>
     public ValueTask<string> Name => GetName(default);
 
-    /// <summary>
-    /// Returns the name of the associated entry.
-    /// </summary>
+    /// <inheritdoc cref="Name" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<string> GetName(CancellationToken cancellationToken) => directoryHandleJS.InvokeTrySync<string>("getName", cancellationToken);

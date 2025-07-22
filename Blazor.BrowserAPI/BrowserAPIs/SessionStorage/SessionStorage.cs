@@ -13,12 +13,11 @@ public sealed class SessionStorage(IModuleManager moduleManager) : ISessionStora
     /// </summary>
     public ValueTask<int> Length => GetLength(default);
 
-    /// <summary>
-    /// Returns an integer representing the number of data items stored in sessionStorage.
-    /// </summary>
+    /// <inheritdoc cref="Length" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<int> GetLength(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<int>("SessionStorageAPI.count", cancellationToken);
+
 
     /// <summary>
     /// When passed a number <i>n</i>, this method will return the name of the nth key in sessionStorage

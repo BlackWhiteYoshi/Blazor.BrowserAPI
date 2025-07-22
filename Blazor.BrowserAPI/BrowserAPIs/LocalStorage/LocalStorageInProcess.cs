@@ -13,6 +13,7 @@ public sealed class LocalStorageInProcess(IModuleManager moduleManager) : ILocal
     /// </summary>
     public int Length => moduleManager.InvokeSync<int>("LocalStorageAPI.count");
 
+
     /// <summary>
     /// When passed a number <i>n</i>, this method will return the name of the nth key in localStorage.
     /// </summary>

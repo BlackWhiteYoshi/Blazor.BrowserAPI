@@ -20,9 +20,7 @@ public sealed class Download(IModuleManager moduleManager) : IDownload {
     public ValueTask DownloadAsFile(string fileName, string fileContent, CancellationToken cancellationToken = default)
         => DownloadAsFile(fileName, Encoding.UTF8.GetBytes(fileContent), cancellationToken);
 
-    /// <summary>
-    /// Triggers a download by adding an &lt;a&gt;-element to the document and simulate a click on it.
-    /// </summary>
+    /// <inheritdoc cref="DownloadAsFile(string, string, CancellationToken)" />
     /// <param name="fileName">The name of the downloaded file.</param>
     /// <param name="fileContent">Raw data that gets downloaded and saved in a file.</param>
     /// <param name="cancellationToken"></param>
@@ -33,9 +31,7 @@ public sealed class Download(IModuleManager moduleManager) : IDownload {
         await DownloadAsFile(fileName, streamReference, cancellationToken);
     }
 
-    /// <summary>
-    /// Triggers a download by adding an &lt;a&gt;-element to the document and simulate a click on it.
-    /// </summary>
+    /// <inheritdoc cref="DownloadAsFile(string, string, CancellationToken)" />
     /// <param name="fileName">The name of the downloaded file.</param>
     /// <param name="fileContent">Data stream that gets downloaded and saved in a file.</param>
     /// <param name="cancellationToken"></param>

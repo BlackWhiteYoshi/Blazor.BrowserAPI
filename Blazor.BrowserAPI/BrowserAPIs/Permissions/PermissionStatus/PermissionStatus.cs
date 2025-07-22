@@ -26,9 +26,7 @@ public sealed class PermissionStatus(IJSObjectReference permissionStatusJS) : Pe
     /// </summary>
     public ValueTask<string> Name => GetName(default);
 
-    /// <summary>
-    /// Returns the name of a requested permission, identical to the <i>name</i> passed to <see cref="IPermissions.Query"/>.
-    /// </summary>
+    /// <inheritdoc cref="Name" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<string> GetName(CancellationToken cancellationToken) => permissionStatusJS.InvokeTrySync<string>("getName", cancellationToken);
@@ -42,12 +40,7 @@ public sealed class PermissionStatus(IJSObjectReference permissionStatusJS) : Pe
     /// </summary>
     public ValueTask<string> State => GetState(default);
 
-    /// <summary>
-    /// Returns the state of a requested permission. This property returns one of<br />
-    /// - "granted": The user, or the user agent on the user's behalf, has given express permission to use a powerful feature. The caller can use the feature possibly without having the user agent ask the user's permission.<br />
-    /// - "denied": The user, or the user agent on the user's behalf, has denied access to this powerful feature. The caller can't use the feature.<br />
-    /// - "prompt": The user has not given express permission to use the feature (i.e., it's the same as denied). It also means that if a caller attempts to use the feature, the user agent will either be prompting the user for permission or access to the feature will be denied.
-    /// </summary>
+    /// <inheritdoc cref="State" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<string> GetState(CancellationToken cancellationToken) => permissionStatusJS.InvokeTrySync<string>("getState", cancellationToken);

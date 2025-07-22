@@ -11,7 +11,7 @@ public abstract class GeolocationBase(IModuleManager moduleManager) {
 
 
     /// <summary>
-    /// The getCurrentPosition() method of the Geolocation interface is used to get the current position of the device.
+    /// Is used to get the current position of the device.
     /// </summary>
     /// <param name="maximumAge">
     /// A positive long value indicating the maximum age in milliseconds of a possible cached position that is acceptable to return.

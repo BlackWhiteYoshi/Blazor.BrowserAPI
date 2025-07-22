@@ -84,7 +84,7 @@ public abstract class NetworkInformationBase(IModuleManager moduleManager) : IDi
 
     private Action? _onChange;
     /// <summary>
-    /// The event that's fired when connection information changes, and the event is received by the NetworkInformation object.
+    /// Is fired when connection information changes, and the event is received by the NetworkInformation object.
     /// </summary>
     /// <remarks>That does not include the property <i>navigator.onLine</i>, for tracking changes of that property use the <see cref="OnOnline"/>/<see cref="OnOffline"/> events.</remarks>
     public event Action OnChange {

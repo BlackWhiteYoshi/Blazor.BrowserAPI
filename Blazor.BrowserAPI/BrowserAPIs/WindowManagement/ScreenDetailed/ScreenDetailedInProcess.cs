@@ -97,76 +97,39 @@ public sealed class ScreenDetailedInProcess(IJSInProcessObjectReference screenDe
 
     // Screen
 
-    /// <summary>
-    /// Returns the width of the screen in CSS pixels.
-    /// </summary>
+    /// <inheritdoc cref="ScreenInProcess.Width" />
     public int Width => ScreenDetailedJS.Invoke<int>("getWidth");
 
-    /// <summary>
-    /// Returns the height of the screen in CSS pixels.
-    /// </summary>
+    /// <inheritdoc cref="ScreenInProcess.Height" />
     public int Height => ScreenDetailedJS.Invoke<int>("getHeight");
 
-    /// <summary>
-    /// Returns the amount of horizontal space (in CSS pixels) available to the window.
-    /// </summary>
+    /// <inheritdoc cref="ScreenInProcess.AvailWidth" />
     public int AvailWidth => ScreenDetailedJS.Invoke<int>("getAvailWidth");
 
-    /// <summary>
-    /// <para>
-    /// Returns the height, in CSS pixels, of the space available for Web content on the screen.
-    /// Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
-    /// </para>
-    /// <para>You can similarly use <see cref="AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
-    /// </summary>
+    /// <inheritdoc cref="ScreenInProcess.AvailHeight" />
     public int AvailHeight => ScreenDetailedJS.Invoke<int>("getAvailHeight");
 
-    /// <summary>
-    /// Returns the color depth of the screen.
-    /// Per the CSSOM, some implementations return 24 for compatibility reasons.
-    /// See the browser compatibility section for those that don't.
-    /// </summary>
+    /// <inheritdoc cref="ScreenInProcess.ColorDepth" />
     public int ColorDepth => ScreenDetailedJS.Invoke<int>("getColorDepth");
 
-    /// <summary>
-    /// Returns the bit depth of the screen.
-    /// Per the CSSOM, some implementations return 24 for compatibility reasons.
-    /// See the browser compatibility section for those that don't.
-    /// </summary>
+    /// <inheritdoc cref="ScreenInProcess.PixelDepth" />
     public int PixelDepth => ScreenDetailedJS.Invoke<int>("getPixelDepth");
 
-    /// <summary>
-    /// <para>Returns true if the user's device has multiple screens, and false if not.</para>
-    /// <para>
-    /// This property is typically accessed via window.screen.isExtended,
-    /// and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
-    /// </para>
-    /// </summary>
+    /// <inheritdoc cref="ScreenInProcess.IsExtended" />
     public bool IsExtended => ScreenDetailedJS.Invoke<bool>("getIsExtended");
 
 
     // orientation
 
-    /// <summary>
-    /// Returns the document's current orientation type, one of:<br />
-    /// - "portrait-primary"<br />
-    /// - "portrait-secondary"<br />
-    /// - "landscape-primary"<br />
-    /// - "landscape-secondary"
-    /// </summary>
+    /// <inheritdoc cref="ScreenInProcess.OrientationType" />
     public string OrientationType => ScreenDetailedJS.Invoke<string>("getOrientationType");
 
-    /// <summary>
-    /// Returns the document's current orientation angle.
-    /// </summary>
+    /// <inheritdoc cref="ScreenInProcess.OrientationAngle" />
     public double OrientationAngle => ScreenDetailedJS.Invoke<double>("getOrientationAngle");
 
 
     // public ValueTask LockOrientation(...) is in ScreenDetailedBase
 
-    /// <summary>
-    /// Unlocks the orientation of the containing document from its default orientation.
-    /// </summary>
-    /// <returns></returns>
+    /// <inheritdoc cref="ScreenInProcess.UnlockOrientation" />
     public void UnlockOrientation() => ScreenDetailedJS.InvokeVoid("unlockOrientation");
 }

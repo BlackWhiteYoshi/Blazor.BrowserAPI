@@ -47,11 +47,7 @@ public sealed class ServiceWorkerContainerInProcess(IModuleManager moduleManager
     /// </summary>
     public ValueTask<IServiceWorkerRegistrationInProcess> Ready => GetReady(default);
 
-    /// <summary>
-    /// Provides a way of delaying code execution until a service worker is active.
-    /// It returns a Promise that will never reject, and which waits indefinitely until the ServiceWorkerRegistration associated with the current page has an ServiceWorkerRegistration.active worker.
-    /// Once that condition is met, it resolves with the ServiceWorkerRegistration.
-    /// </summary>
+    /// <inheritdoc cref="Ready" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IServiceWorkerRegistrationInProcess> GetReady(CancellationToken cancellationToken) {
@@ -61,7 +57,7 @@ public sealed class ServiceWorkerContainerInProcess(IModuleManager moduleManager
 
 
     /// <summary>
-    /// The <i>getRegistration()</i> method of the ServiceWorkerContainer interface gets a ServiceWorkerRegistration object whose scope URL matches the provided client URL.
+    /// Gets a ServiceWorkerRegistration object whose scope URL matches the provided client URL.
     /// The method returns a Promise that resolves to a ServiceWorkerRegistration or undefined.
     /// </summary>
     /// <param name="clientUrl">The registration whose scope matches this URL will be returned. Relative URLs are resolved with the current client as the base.</param>
@@ -76,7 +72,7 @@ public sealed class ServiceWorkerContainerInProcess(IModuleManager moduleManager
     }
 
     /// <summary>
-    /// The <i>getRegistrations()</i> method of the ServiceWorkerContainer interface gets all ServiceWorkerRegistrations associated with a ServiceWorkerContainer, in an array.
+    /// Gets all ServiceWorkerRegistrations associated with a ServiceWorkerContainer, in an array.
     /// The method returns a Promise that resolves to an array of ServiceWorkerRegistration.
     /// </summary>
     /// <param name="cancellationToken"></param>
@@ -92,7 +88,7 @@ public sealed class ServiceWorkerContainerInProcess(IModuleManager moduleManager
 
 
     /// <summary>
-    /// The <i>startMessages()</i> method of the ServiceWorkerContainer interface explicitly starts the flow of messages being dispatched from a service worker to pages under its control (e.g. sent via Client.postMessage()).
+    /// Explicitly starts the flow of messages being dispatched from a service worker to pages under its control (e.g. sent via Client.postMessage()).
     /// This can be used to react to sent messages earlier, even before that page's content has finished loading.
     /// </summary>
     public void StartMessages() => moduleManager.InvokeSync("ServiceWorkerContainerAPI.startMessages");

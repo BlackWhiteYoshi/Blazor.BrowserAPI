@@ -188,116 +188,64 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
 
     // Screen
 
-    /// <summary>
-    /// Returns the width of the screen in CSS pixels.
-    /// </summary>
+    /// <inheritdoc cref="Screen.Width" />
     public ValueTask<int> Width => GetWidth(default);
 
-    /// <summary>
-    /// Returns the width of the screen in CSS pixels.
-    /// </summary>
+    /// <inheritdoc cref="Width" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<int> GetWidth(CancellationToken cancellationToken) => screenDetailedJS.InvokeTrySync<int>("getWidth", cancellationToken);
 
 
-    /// <summary>
-    /// Returns the height of the screen in CSS pixels.
-    /// </summary>
+    /// <inheritdoc cref="Screen.Height" />
     public ValueTask<int> Height => GetHeight(default);
 
-    /// <summary>
-    /// Returns the height of the screen in CSS pixels.
-    /// </summary>
+    /// <inheritdoc cref="Height" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<int> GetHeight(CancellationToken cancellationToken) => screenDetailedJS.InvokeTrySync<int>("getHeight", cancellationToken);
 
 
-    /// <summary>
-    /// Returns the amount of horizontal space (in CSS pixels) available to the window.
-    /// </summary>
+    /// <inheritdoc cref="Screen.AvailWidth" />
     public ValueTask<int> AvailWidth => GetAvailWidth(default);
 
-    /// <summary>
-    /// Returns the amount of horizontal space (in CSS pixels) available to the window.
-    /// </summary>
+    /// <inheritdoc cref="AvailWidth" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<int> GetAvailWidth(CancellationToken cancellationToken) => screenDetailedJS.InvokeTrySync<int>("getAvailWidth", cancellationToken);
 
 
-    /// <summary>
-    /// <para>
-    /// Returns the height, in CSS pixels, of the space available for Web content on the screen.
-    /// Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
-    /// </para>
-    /// <para>You can similarly use <see cref="AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
-    /// </summary>
+    /// <inheritdoc cref="Screen.AvailHeight" />
     public ValueTask<int> AvailHeight => GetAvailHeight(default);
 
-    /// <summary>
-    /// <para>
-    /// Returns the height, in CSS pixels, of the space available for Web content on the screen.
-    /// Since Screen is exposed on the Window interface's window.screen property, you access <i>availHeight</i> using <i>window.screen.availHeight</i>.
-    /// </para>
-    /// <para>You can similarly use <see cref="AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
-    /// </summary>
+    /// <inheritdoc cref="AvailHeight" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<int> GetAvailHeight(CancellationToken cancellationToken) => screenDetailedJS.InvokeTrySync<int>("getAvailHeight", cancellationToken);
 
 
-    /// <summary>
-    /// Returns the color depth of the screen.
-    /// Per the CSSOM, some implementations return 24 for compatibility reasons.
-    /// See the browser compatibility section for those that don't.
-    /// </summary>
+    /// <inheritdoc cref="Screen.ColorDepth" />
     public ValueTask<int> ColorDepth => GetColorDepth(default);
 
-    /// <summary>
-    /// Returns the color depth of the screen.
-    /// Per the CSSOM, some implementations return 24 for compatibility reasons.
-    /// See the browser compatibility section for those that don't.
-    /// </summary>
+    /// <inheritdoc cref="ColorDepth" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<int> GetColorDepth(CancellationToken cancellationToken) => screenDetailedJS.InvokeTrySync<int>("getColorDepth", cancellationToken);
 
 
-    /// <summary>
-    /// Returns the bit depth of the screen.
-    /// Per the CSSOM, some implementations return 24 for compatibility reasons.
-    /// See the browser compatibility section for those that don't.
-    /// </summary>
+    /// <inheritdoc cref="Screen.PixelDepth" />
     public ValueTask<int> PixelDepth => GetPixelDepth(default);
 
-    /// <summary>
-    /// Returns the bit depth of the screen.
-    /// Per the CSSOM, some implementations return 24 for compatibility reasons.
-    /// See the browser compatibility section for those that don't.
-    /// </summary>
+    /// <inheritdoc cref="PixelDepth" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<int> GetPixelDepth(CancellationToken cancellationToken) => screenDetailedJS.InvokeTrySync<int>("getPixelDepth", cancellationToken);
 
 
-    /// <summary>
-    /// <para>Returns true if the user's device has multiple screens, and false if not.</para>
-    /// <para>
-    /// This property is typically accessed via window.screen.isExtended,
-    /// and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
-    /// </para>
-    /// </summary>
+    /// <inheritdoc cref="Screen.IsExtended" />
     public ValueTask<bool> IsExtended => GetIsExtended(default);
 
-    /// <summary>
-    /// <para>Returns true if the user's device has multiple screens, and false if not.</para>
-    /// <para>
-    /// This property is typically accessed via window.screen.isExtended,
-    /// and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
-    /// </para>
-    /// </summary>
+    /// <inheritdoc cref="IsExtended" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<bool> GetIsExtended(CancellationToken cancellationToken) => screenDetailedJS.InvokeTrySync<bool>("getIsExtended", cancellationToken);
@@ -305,35 +253,19 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
 
     // Screen orientation
 
-    /// <summary>
-    /// Returns the document's current orientation type, one of:<br />
-    /// - "portrait-primary"<br />
-    /// - "portrait-secondary"<br />
-    /// - "landscape-primary"<br />
-    /// - "landscape-secondary"
-    /// </summary>
+    /// <inheritdoc cref="Screen.OrientationType" />
     public ValueTask<string> OrientationType => GetOrientationType(default);
 
-    /// <summary>
-    /// Returns the document's current orientation type, one of:<br />
-    /// - "portrait-primary"<br />
-    /// - "portrait-secondary"<br />
-    /// - "landscape-primary"<br />
-    /// - "landscape-secondary"
-    /// </summary>
+    /// <inheritdoc cref="OrientationType" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<string> GetOrientationType(CancellationToken cancellationToken) => screenDetailedJS.InvokeTrySync<string>("getOrientationType", cancellationToken);
 
 
-    /// <summary>
-    /// Returns the document's current orientation angle.
-    /// </summary>
+    /// <inheritdoc cref="Screen.OrientationAngle" />
     public ValueTask<double> OrientationAngle => GetOrientationAngle(default);
 
-    /// <summary>
-    /// Returns the document's current orientation angle.
-    /// </summary>
+    /// <inheritdoc cref="OrientationAngle" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<double> GetOrientationAngle(CancellationToken cancellationToken) => screenDetailedJS.InvokeTrySync<double>("getOrientationAngle", cancellationToken);
@@ -341,9 +273,7 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
 
     // public ValueTask LockOrientation(...) is in ScreenDetaildBase
 
-    /// <summary>
-    /// Unlocks the orientation of the containing document from its default orientation.
-    /// </summary>
+    /// <inheritdoc cref="Screen.UnlockOrientation" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask UnlockOrientation(CancellationToken cancellationToken = default) => screenDetailedJS.InvokeVoidTrySync("unlockOrientation", cancellationToken);

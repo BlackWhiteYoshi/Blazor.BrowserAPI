@@ -28,7 +28,7 @@ public sealed partial class ExampleComponent : ComponentBase {
 | **Name**       | **Parameters**                                                                                      | **ReturnType** | **Description**                                                                                |
 | -------------- | --------------------------------------------------------------------------------------------------- | ---------------| ---------------------------------------------------------------------------------------------- |
 | DownloadAsFile | string fileName, string fileContent, [CancellationToken cancellationToken = default]                | ValueTask      | Triggers a download by adding an &lt;a&gt;-element to the document and simulate a click on it. |
-| DownloadAsFile | string fileName, byte[] fileContent, [CancellationToken cancellationToken = default]                | ValueTask      | Triggers a download by adding an &lt;a&gt;-element to the document and simulate a click on it. |
-| DownloadAsFile | string fileName, DotNetStreamReference fileContent, [CancellationToken cancellationToken = default] | ValueTask      | Triggers a download by adding an &lt;a&gt;-element to the document and simulate a click on it. |
+| DownloadAsFile | string fileName, byte[] fileContent, [CancellationToken cancellationToken = default]                | ValueTask      | see Method *DownloadAsFile(string, string, CancellationToken)*                                 |
+| DownloadAsFile | string fileName, DotNetStreamReference fileContent, [CancellationToken cancellationToken = default] | ValueTask      | see Method *DownloadAsFile(string, string, CancellationToken)*                                 |
 
 **Note**: *IDownloadInProcess* does not exist, because method *DownloadAsFile* is itself an asynchronous operation.

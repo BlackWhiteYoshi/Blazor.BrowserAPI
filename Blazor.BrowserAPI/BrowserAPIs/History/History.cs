@@ -16,9 +16,7 @@ public sealed class History(IModuleManager moduleManager) : HistoryBase(moduleMa
     /// </summary>
     public ValueTask<int> Length => GetLength(default);
 
-    /// <summary>
-    /// Returns an Integer representing the number of elements in the session history, including the currently loaded page. For example, for a page loaded in a new tab this property returns 1.
-    /// </summary>
+    /// <inheritdoc cref="Length" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<int> GetLength(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<int>("HistoryAPI.getLength", cancellationToken);
@@ -30,18 +28,12 @@ public sealed class History(IModuleManager moduleManager) : HistoryBase(moduleMa
     /// </summary>
     public ValueTask<string> ScrollRestoration => GetScrollRestoration(default);
 
-    /// <summary>
-    /// <para>Allows web applications to explicitly set default scroll restoration behavior on history navigation.</para>
-    /// <para>This property can be either "auto" or "manual".</para>
-    /// </summary>
+    /// <inheritdoc cref="ScrollRestoration" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<string> GetScrollRestoration(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<string>("HistoryAPI.getScrollRestoration", cancellationToken);
 
-    /// <summary>
-    /// <para>Allows web applications to explicitly set default scroll restoration behavior on history navigation.</para>
-    /// <para>This property can be either "auto" or "manual".</para>
-    /// </summary>
+    /// <inheritdoc cref="ScrollRestoration" />
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
@@ -53,9 +45,7 @@ public sealed class History(IModuleManager moduleManager) : HistoryBase(moduleMa
     /// </summary>
     public ValueTask<JsonElement?> State => GetState(default);
 
-    /// <summary>
-    /// Returns an <i>any</i> value representing the state at the top of the history stack. This is a way to look at the state without having to wait for a <i>popstate</i> event.
-    /// </summary>
+    /// <inheritdoc cref="State" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<JsonElement?> GetState(CancellationToken cancellationToken) => (JsonElement?)await moduleManager.InvokeTrySync<object?>("HistoryAPI.getState", cancellationToken);

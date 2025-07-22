@@ -24,14 +24,7 @@ public abstract class WritableFileStreamBase(IJSObjectReference writableFileStre
     /// <returns></returns>
     public ValueTask Write(string data, CancellationToken cancellationToken = default) => writableFileStreamJS.InvokeVoidAsync("write", cancellationToken, [data]);
 
-    /// <summary>
-    /// <para>Writes content into the file the method is called on, at the current file cursor offset.</para>
-    /// <para>
-    /// No changes are written to the actual file on disk until the stream has been closed.
-    /// Changes are typically written to a temporary file instead.
-    /// This method can also be used to seek to a byte point within the stream and truncate to modify the total bytes the file contains.
-    /// </para>
-    /// </summary>
+    /// <inheritdoc cref="Write(string, CancellationToken)" />
     /// <param name="data">The file data to write</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>

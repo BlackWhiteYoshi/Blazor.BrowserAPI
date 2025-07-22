@@ -15,8 +15,7 @@ public abstract class HistoryBase(IModuleManager moduleManager) : IDisposable {
     /// <summary>
     /// Releases the <see cref="EventTrigger"/> object used to trigger the events.
     /// </summary>
-    public void Dispose() => DisposeEventTrigger();
-
+    public void Dispose() => _objectReferenceEventTrigger?.Dispose();
 
     #region Events
 
@@ -35,11 +34,6 @@ public abstract class HistoryBase(IModuleManager moduleManager) : IDisposable {
         return moduleManager.InvokeTrySync("HistoryAPI.initEvents", default, [_objectReferenceEventTrigger, moduleManager.IsInProcess]);
     }
 
-    /// <summary>
-    /// Derived class should implement <see cref="IDisposable"/> or <see cref="IAsyncDisposable"/> and call this method.
-    /// </summary>
-    private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
-
 
     private async ValueTask ActivateJSEvent(string jsMethodName) {
         await InitEventTrigger();
@@ -52,7 +46,7 @@ public abstract class HistoryBase(IModuleManager moduleManager) : IDisposable {
     private Action<JsonElement?>? _onPopState;
     /// <summary>
     /// <para>
-    /// The popstate event of the Window interface is fired when the active history entry changes while the user navigates the session history.
+    /// Is fired when the active history entry changes while the user navigates the session history.
     /// It changes the current history entry to that of the last page the user visited or,
     /// if <i>history.pushState()</i> has been used to add a history entry to the history stack, that history entry is used instead.
     /// </para>

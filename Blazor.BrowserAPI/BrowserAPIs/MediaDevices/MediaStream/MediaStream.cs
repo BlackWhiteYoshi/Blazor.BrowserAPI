@@ -31,9 +31,9 @@ public sealed class MediaStream(IJSObjectReference mediaStreamJS) : IMediaStream
     /// </summary>
     public ValueTask<bool> Active => GetActive(default);
 
-    /// <summary>
-    /// A Boolean value that returns true if the MediaStream is active, or false otherwise.
-    /// </summary>
+    /// <inheritdoc cref="Active" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public ValueTask<bool> GetActive(CancellationToken cancellationToken) => mediaStreamJS.InvokeTrySync<bool>("getActive", cancellationToken);
 
 
@@ -42,9 +42,9 @@ public sealed class MediaStream(IJSObjectReference mediaStreamJS) : IMediaStream
     /// </summary>
     public ValueTask<string> Id => GetId(default);
 
-    /// <summary>
-    /// A string containing a 36-character universally unique identifier (UUID) for the object.
-    /// </summary>
+    /// <inheritdoc cref="Id" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public ValueTask<string> GetId(CancellationToken cancellationToken) => mediaStreamJS.InvokeTrySync<string>("getId", cancellationToken);
 
 

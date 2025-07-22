@@ -26,9 +26,7 @@ public abstract class Sensor(IJSObjectReference sensorJS) : SensorBase(sensorJS)
     /// </summary>
     public ValueTask<bool> Activated => GetActivated(default);
 
-    /// <summary>
-    /// Returns a boolean value indicating whether the sensor is active.
-    /// </summary>
+    /// <inheritdoc cref="Activated" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<bool> GetActivated(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<bool>("getActivated", cancellationToken);
@@ -39,9 +37,7 @@ public abstract class Sensor(IJSObjectReference sensorJS) : SensorBase(sensorJS)
     /// </summary>
     public ValueTask<bool> HasReading => GetHasReading(default);
 
-    /// <summary>
-    /// Returns a boolean value indicating whether the sensor has a reading.
-    /// </summary>
+    /// <inheritdoc cref="HasReading" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<bool> GetHasReading(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<bool>("getHasReading", cancellationToken);
@@ -52,9 +48,7 @@ public abstract class Sensor(IJSObjectReference sensorJS) : SensorBase(sensorJS)
     /// </summary>
     public ValueTask<double> Timestamp => GetTimestamp(default);
 
-    /// <summary>
-    /// Returns the timestamp of the latest sensor reading.
-    /// </summary>
+    /// <inheritdoc cref="Timestamp" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<double> GetTimestamp(CancellationToken cancellationToken) => sensorJS.InvokeTrySync<double>("getTimestamp", cancellationToken);

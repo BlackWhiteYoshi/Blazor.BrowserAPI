@@ -20,7 +20,7 @@ namespace BrowserAPI.Implementation;
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class FileSystem(IModuleManager moduleManager) : FileSystemBase(moduleManager), IFileSystem {
     /// <summary>
-    /// The <i>showOpenFilePicker()</i> method of the Window interface shows a file picker that allows a user to select a file and returns a handle for the file.
+    /// Shows a file picker that allows a user to select a file and returns a handle for the file.
     /// </summary>
     /// <remarks>
     /// <para>When the user clicks on the cancel button or just closes the dialog picker, an Exception is thrown.</para>
@@ -54,7 +54,7 @@ public sealed class FileSystem(IModuleManager moduleManager) : FileSystemBase(mo
     }
 
     /// <summary>
-    /// The <i>showOpenFilePicker()</i> method of the Window interface shows a file picker that allows a user to select a file or multiple files and returns a handle for the file(s).
+    /// Shows a file picker that allows a user to select a file or multiple files and returns a handle for the file(s).
     /// </summary>
     /// <remarks>
     /// <para>When the user clicks on the cancel button or just closes the dialog picker, an Exception is thrown.</para>
@@ -92,7 +92,7 @@ public sealed class FileSystem(IModuleManager moduleManager) : FileSystemBase(mo
     }
 
     /// <summary>
-    /// The <i>showSaveFilePicker()</i> method of the Window interface shows a file picker that allows a user to save a file. Either by selecting an existing file, or entering a name for a new file.
+    /// Shows a file picker that allows a user to save a file. Either by selecting an existing file, or entering a name for a new file.
     /// </summary>
     /// <remarks>When the user clicks on the cancel button or just closes the dialog picker, an Exception is thrown.</remarks>
     /// <exception cref="JSException"></exception>
@@ -121,7 +121,7 @@ public sealed class FileSystem(IModuleManager moduleManager) : FileSystemBase(mo
     }
 
     /// <summary>
-    /// The <i>showDirectoryPicker()</i> method of the Window interface displays a directory picker which allows the user to select a directory.
+    /// Displays a directory picker which allows the user to select a directory.
     /// </summary>
     /// <remarks>When the user clicks on the cancel button or just closes the dialog picker, an Exception is thrown.</remarks>
     /// <exception cref="JSException"></exception>
@@ -137,7 +137,7 @@ public sealed class FileSystem(IModuleManager moduleManager) : FileSystemBase(mo
 
 
     /// <summary>
-    /// The <i>getDirectory()</i> method of the StorageManager interface is used to obtain a reference to a FileSystemDirectoryHandle object allowing access to a directory and its contents, stored in the origin private file system (OPFS).
+    /// Is used to obtain a reference to a FileSystemDirectoryHandle object allowing access to a directory and its contents, stored in the origin private file system (OPFS).
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>

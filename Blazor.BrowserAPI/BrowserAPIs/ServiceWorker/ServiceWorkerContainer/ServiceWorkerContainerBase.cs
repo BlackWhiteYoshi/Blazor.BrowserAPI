@@ -74,7 +74,7 @@ public abstract class ServiceWorkerContainerBase(IModuleManager moduleManager) :
 
     private Action<JsonElement>? _onMessage;
     /// <summary>
-    /// <para>The message event is used in a page controlled by a service worker to receive messages from the service worker.</para>
+    /// <para>Is used in a page controlled by a service worker to receive messages from the service worker.</para>
     /// <para>Parameter is <see href="https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent/data">MessageEvent.data</see> as json.</para>
     /// </summary>
     public event Action<JsonElement> OnMessage {

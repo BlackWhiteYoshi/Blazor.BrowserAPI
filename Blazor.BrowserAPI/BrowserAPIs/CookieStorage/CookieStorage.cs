@@ -3,8 +3,12 @@
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// The Document property cookie lets you read and write cookies associated with the document.
+/// <para>The Document property cookie lets you read and write cookies associated with the document.</para>
 /// </summary>
+/// <remarks>
+/// Note: The CookieStorage interface is more sophisticated than the actual browser cookie interface.<br />
+/// It is structured similar to the <see cref="ILocalStorage">LocalStorage</see>/<see cref="ISessionStorage">SessionStorage</see> interface.
+/// </remarks>
 [AutoInterface(Namespace = "BrowserAPI")]
 public sealed class CookieStorage(IModuleManager moduleManager) : ICookieStorage {
     /// <summary>
@@ -16,28 +20,22 @@ public sealed class CookieStorage(IModuleManager moduleManager) : ICookieStorage
     /// </summary>
     public ValueTask<string> AllCookies => GetAllCookies(default);
 
-    /// <summary>
-    /// <para>document.cookie</para>
-    /// <para>
-    /// Returns a string containing a semicolon-separated list of all cookies (i.e. key=value pairs).<br />
-    /// Note that each key and value may be surrounded by whitespace (space and tab characters).
-    /// </para>
-    /// </summary>
+    /// <inheritdoc cref="AllCookies" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<string> GetAllCookies(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<string>("CookieStorageAPI.getAllCookies", cancellationToken);
+
 
     /// <summary>
     /// Returns an integer representing the number of cookies stored in cookieStorage.
     /// </summary>
     public ValueTask<int> Length => GetLength(default);
 
-    /// <summary>
-    /// Returns an integer representing the number of cookies stored in cookieStorage.
-    /// </summary>
+    /// <inheritdoc cref="Length" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<int> GetLength(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<int>("CookieStorageAPI.count", cancellationToken);
+
 
     /// <summary>
     /// When passed a number <i>n</i>, this method will return the name of the nth key in cookieStorage.

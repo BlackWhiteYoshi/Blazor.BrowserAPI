@@ -13,6 +13,7 @@ public sealed class SessionStorageInProcess(IModuleManager moduleManager) : ISes
     /// </summary>
     public int Length => moduleManager.InvokeSync<int>("SessionStorageAPI.count");
 
+
     /// <summary>
     /// When passed a number <i>n</i>, this method will return the name of the nth key in sessionStorage.
     /// </summary>

@@ -14,7 +14,7 @@ public abstract class MediaDevicesBase(IModuleManager moduleManager) {
 
     /// <summary>
     /// <para>
-    /// The enumerateDevices() method of the MediaDevices interface requests a list of the currently available media input and output devices, such as microphones, cameras, headsets, and so forth.
+    /// Requests a list of the currently available media input and output devices, such as microphones, cameras, headsets, and so forth.
     /// The returned Promise is resolved with an array of MediaDeviceInfo objects describing the devices.
     /// </para>
     /// <para>

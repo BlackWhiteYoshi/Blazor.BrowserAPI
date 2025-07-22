@@ -18,6 +18,9 @@ public abstract class FileHandleBase(IJSObjectReference fileHandleJS) {
     /// This is 'file' if the associated entry is a file or 'directory'.
     /// It is used to distinguish files from directories when iterating over the contents of a directory.
     /// </summary>
+    /// <remarks>
+    /// Note: This API does not have a common <see href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemHandle">FileSystemHandle</see> type, so this property always returns "file".
+    /// </remarks>
     public string Kind => "file";
 
 
