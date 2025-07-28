@@ -14,6 +14,122 @@ export class HTMLElementAPI {
 
     // HTMLElement
 
+    getAccessKey(): string {
+        return this.#htmlElement.accessKey;
+    }
+
+    setAccessKey(value: string): void {
+        this.#htmlElement.accessKey = value;
+    }
+
+    getAccessKeyLabel(): string {
+        return this.#htmlElement.accessKeyLabel;
+    }
+
+
+    getAttributeStyleMap(): { [name: string]: string; } {
+        const attributeStyleMap = this.#htmlElement.attributeStyleMap;
+
+        const result: { [name: string]: string; } = {};
+        for (const [name, value] of attributeStyleMap.entries())
+            result[name] = value.toString();
+        return result;
+    }
+
+    setAttributeStyleMap(name: string, value: string): void {
+        this.#htmlElement.attributeStyleMap.set(name, value);
+    }
+
+    removeAttributeStyleMap(name: string): void {
+        this.#htmlElement.attributeStyleMap.delete(name);
+    }
+
+
+    getAutocapitalize(): string {
+        return this.#htmlElement.autocapitalize;
+    }
+
+    setAutocapitalize(value: string): void {
+        this.#htmlElement.autocapitalize = value;
+    }
+
+
+    getAutofocus(): boolean {
+        return this.#htmlElement.autofocus;
+    }
+
+    setAutofocus(value: boolean): void {
+        this.#htmlElement.autofocus = value;
+    }
+
+
+    getContentEditable(): string {
+        return this.#htmlElement.contentEditable;
+    }
+
+    setContentEditable(value: string): void {
+        this.#htmlElement.contentEditable = value;
+    }
+
+
+    getDataset(): { [name: string]: string; } {
+        return <{ [name: string]: string; }>this.#htmlElement.dataset;
+    }
+
+    setDataset(name: string, value: string): void {
+        this.#htmlElement.dataset[name] = value;
+    }
+
+    removeDataset(name: string): void {
+        delete this.#htmlElement.dataset[name];
+    }
+
+
+    getDir(): string {
+        return this.#htmlElement.dir;
+    }
+
+    setDir(value: string): void {
+        this.#htmlElement.dir = value;
+    }
+
+
+    getDraggable(): boolean {
+        return this.#htmlElement.draggable;
+    }
+
+    setDraggable(value: boolean): void {
+        this.#htmlElement.draggable = value;
+    }
+
+
+    getEnterKeyHint(): string {
+        return this.#htmlElement.enterKeyHint;
+    }
+
+    setEnterKeyHint(value: string): void {
+        this.#htmlElement.enterKeyHint = value;
+    }
+
+
+    getHidden(): boolean {
+        return this.#htmlElement.hidden;
+    }
+
+    setHidden(value: boolean): void {
+        this.#htmlElement.hidden = value;
+    }
+
+
+    getInert(): boolean {
+        return this.#htmlElement.inert;
+    }
+
+    setInert(value: boolean): void {
+        this.#htmlElement.inert = value;
+    }
+
+
     getInnerText(): string {
         return this.#htmlElement.innerText;
     }
@@ -22,20 +138,36 @@ export class HTMLElementAPI {
         this.#htmlElement.innerText = value;
     }
 
-    getOuterText(): string {
-        return this.#htmlElement.outerText;
+
+    getInputMode(): string {
+        return this.#htmlElement.inputMode;
     }
 
-    setOuterText(value: string): void {
-        this.#htmlElement.outerText = value;
+    setInputMode(value: string): void {
+        this.#htmlElement.inputMode = value;
     }
 
-    getInlineStyle(): string {
-        return this.#htmlElement.style.cssText;
+
+    getIsContentEditable(): boolean {
+        return this.#htmlElement.isContentEditable;
     }
 
-    setInlineStyle(value: string): void {
-        this.#htmlElement.style.cssText = value;
+
+    getLang(): string {
+        return this.#htmlElement.lang;
+    }
+
+    setLang(value: string): void {
+        this.#htmlElement.lang = value;
+    }
+
+
+    getNonce(): string {
+        return this.#htmlElement.nonce ?? "";
+    }
+
+    setNonce(value: string): void {
+        this.#htmlElement.nonce = value;
     }
 
 
@@ -63,10 +195,77 @@ export class HTMLElementAPI {
     }
 
 
+    getOuterText(): string {
+        return this.#htmlElement.outerText;
+    }
+
+    setOuterText(value: string): void {
+        this.#htmlElement.outerText = value;
+    }
+
+
+    getPopover(): string | null {
+        return this.#htmlElement.popover;
+    }
+
+    setPopover(value: string | null): void {
+        this.#htmlElement.popover = value;
+    }
+
+
+    getSpellcheck(): boolean {
+        return this.#htmlElement.spellcheck;
+    }
+
+    setSpellcheck(value: boolean): void {
+        this.#htmlElement.spellcheck = value;
+    }
+
+
+    getStyle(): string {
+        return this.#htmlElement.style.cssText;
+    }
+
+    setStyle(value: string): void {
+        this.#htmlElement.style.cssText = value;
+    }
+
+
+    getTabIndex(): number {
+        return this.#htmlElement.tabIndex;
+    }
+
+    setTabIndex(value: number): void {
+        this.#htmlElement.tabIndex = value;
+    }
+
+
+    getTitle(): string {
+        return this.#htmlElement.title;
+    }
+
+    setTitle(value: string): void {
+        this.#htmlElement.title = value;
+    }
+
+
+    getTranslate(): boolean {
+        return this.#htmlElement.translate;
+    }
+
+    setTranslate(value: boolean): void {
+        this.#htmlElement.translate = value;
+    }
+
+
+    // HTMLElement extra
+
     hasFocus(): boolean {
         return this.#htmlElement === document.activeElement;
     }
 
+
+    // HTMLElement methods
 
     click(): void {
         this.#htmlElement.click();
@@ -93,6 +292,7 @@ export class HTMLElementAPI {
     }
 
 
+
     // Element
 
 
@@ -112,6 +312,7 @@ export class HTMLElementAPI {
         this.#htmlElement.outerHTML = value;
     }
 
+
     getAttributes(): Record<string, string> {
         return Object.fromEntries([... this.#htmlElement.attributes].map(attribute => [attribute.name, attribute.value]));
     }
@@ -123,6 +324,7 @@ export class HTMLElementAPI {
     getChildren(): HTMLElementAPI[] {
         return [... this.#htmlElement.children].map((child: HTMLElement) => DotNet.createJSObjectReference(new HTMLElementAPI(child)));
     }
+
 
     getClassName(): string {
         return this.#htmlElement.className;
@@ -178,6 +380,8 @@ export class HTMLElementAPI {
         this.#htmlElement.scrollTop = value;
     }
 
+
+    // Element methods
 
     getBoundingClientRect(): DOMRect {
         return this.#htmlElement.getBoundingClientRect();

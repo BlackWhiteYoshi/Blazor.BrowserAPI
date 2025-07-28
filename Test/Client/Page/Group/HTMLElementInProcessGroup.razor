@@ -3,12 +3,58 @@
 <div class="group">
     <h2>HTML Element InProcess</h2>
     <div>
+        @* HTMLElement *@
+
+        <button data-testid="@BUTTON_GET_ACCESS_KEY" @onclick="GetAccessKey">GetAccessKey</button>
+        <button data-testid="@BUTTON_SET_ACCESS_KEY" @onclick="SetAccessKey">SetAccessKey</button>
+
+        <button data-testid="@BUTTON_GET_ACCESS_KEY_LABEL" @onclick="GetAccessKeyLabel">GetAccessKeyLabel</button>
+
+        <button data-testid="@BUTTON_GET_ATTRIBUTE_STYLE_MAP" @onclick="GetAttributeStyleMap">GetAttributeStyleMap</button>
+        <button data-testid="@BUTTON_SET_ATTRIBUTE_STYLE_MAP" @onclick="SetAttributeStyleMap">SetAttributeStyleMap</button>
+        <button data-testid="@BUTTON_REMOVE_ATTRIBUTE_STYLE_MAP" @onclick="RemoveAttributeStyleMap">RemoveAttributeStyleMap</button>
+
+        <button data-testid="@BUTTON_GET_AUTOCAPITALIZE" @onclick="GetAutocapitalize">GetAutocapitalize</button>
+        <button data-testid="@BUTTON_SET_AUTOCAPITALIZE" @onclick="SetAutocapitalize">SetAutocapitalize</button>
+
+        <button data-testid="@BUTTON_GET_AUTOFOCUS" @onclick="GetAutofocus">GetAutofocus</button>
+        <button data-testid="@BUTTON_SET_AUTOFOCUS" @onclick="SetAutofocus">SetAutofocus</button>
+
+        <button data-testid="@BUTTON_GET_CONTENT_EDITABLE" @onclick="GetContentEditable">GetContentEditable</button>
+        <button data-testid="@BUTTON_SET_CONTENT_EDITABLE" @onclick="SetContentEditable">SetContentEditable</button>
+
+        <button data-testid="@BUTTON_GET_DATASET" @onclick="GetDataset">GetDataset</button>
+        <button data-testid="@BUTTON_SET_DATASET" @onclick="SetDataset">SetDataset</button>
+        <button data-testid="@BUTTON_REMOVE_DATASET" @onclick="RemoveDataset">RemoveDataset</button>
+
+        <button data-testid="@BUTTON_GET_DIR" @onclick="GetDir">GetDir</button>
+        <button data-testid="@BUTTON_SET_DIR" @onclick="SetDir">SetDir</button>
+
+        <button data-testid="@BUTTON_GET_DRAGGABLE" @onclick="GetDraggable">GetDraggable</button>
+        <button data-testid="@BUTTON_SET_DRAGGABLE" @onclick="SetDraggable">SetDraggable</button>
+
+        <button data-testid="@BUTTON_GET_ENTER_KEY_HINT" @onclick="GetEnterKeyHint">GetEnterKeyHint</button>
+        <button data-testid="@BUTTON_SET_ENTER_KEY_HINT" @onclick="SetEnterKeyHint">SetEnterKeyHint</button>
+
+        <button data-testid="@BUTTON_GET_HIDDEN" @onclick="GetHidden">GetHidden</button>
+        <button data-testid="@BUTTON_SET_HIDDEN" @onclick="SetHidden">SetHidden</button>
+
+        <button data-testid="@BUTTON_GET_INERT" @onclick="GetInert">GetInert</button>
+        <button data-testid="@BUTTON_SET_INERT" @onclick="SetInert">SetInert</button>
+
         <button data-testid="@BUTTON_GET_INNERTEXT" @onclick="GetInnerText">GetInnerText</button>
         <button data-testid="@BUTTON_SET_INNERTEXT" @onclick="SetInnerText">SetInnerText</button>
-        <button data-testid="@BUTTON_GET_OUTERTEXT" @onclick="GetOuterText">GetOuterText</button>
-        <button data-testid="@BUTTON_SET_OUTERTEXT" @onclick="SetOuterText">SetOuterText</button>
-        <button data-testid="@BUTTON_GET_STYLE" @onclick="GetStyle">GetStyle</button>
-        <button data-testid="@BUTTON_SET_STYLE" @onclick="SetStyle">SetStyle</button>
+
+        <button data-testid="@BUTTON_GET_INPUT_MODE" @onclick="GetInputMode">GetInputMode</button>
+        <button data-testid="@BUTTON_SET_INPUT_MODE" @onclick="SetInputMode">SetInputMode</button>
+
+        <button data-testid="@BUTTON_GET_IS_CONTENT_EDITABLE" @onclick="GetIsContentEditable">GetIsContentEditable</button>
+
+        <button data-testid="@BUTTON_GET_LANG" @onclick="GetLang">GetLang</button>
+        <button data-testid="@BUTTON_SET_LANG" @onclick="SetLang">SetLang</button>
+
+        <button data-testid="@BUTTON_GET_NONCE" @onclick="GetNonce">GetNonce</button>
+        <button data-testid="@BUTTON_SET_NONCE" @onclick="SetNonce">SetNonce</button>
 
         <button data-testid="@BUTTON_GET_OFFSETWIDTH" @onclick="GetOffsetWidth">GetOffsetWidth</button>
         <button data-testid="@BUTTON_GET_OFFSETHEIGHT" @onclick="GetOffsetHeight">GetOffsetHeight</button>
@@ -16,8 +62,31 @@
         <button data-testid="@BUTTON_GET_OFFSETTOP" @onclick="GetOffsetTop">GetOffsetTop</button>
         <button data-testid="@BUTTON_GET_OFFSETPARENT" @onclick="GetOffsetParent">GetOffsetParent</button>
 
+        <button data-testid="@BUTTON_GET_OUTERTEXT" @onclick="GetOuterText">GetOuterText</button>
+        <button data-testid="@BUTTON_SET_OUTERTEXT" @onclick="SetOuterText">SetOuterText</button>
+
+        <button data-testid="@BUTTON_GET_POPOVER" @onclick="GetPopover">GetPopover</button>
+        <button data-testid="@BUTTON_SET_POPOVER" @onclick="SetPopover">SetPopover</button>
+
+        <button data-testid="@BUTTON_GET_SPELLCHECK" @onclick="GetSpellcheck">GetSpellcheck</button>
+        <button data-testid="@BUTTON_SET_SPELLCHECK" @onclick="SetSpellcheck">SetSpellcheck</button>
+
+        <button data-testid="@BUTTON_GET_STYLE" @onclick="GetStyle">GetStyle</button>
+        <button data-testid="@BUTTON_SET_STYLE" @onclick="SetStyle">SetStyle</button>
+
+        <button data-testid="@BUTTON_GET_TAB_INDEX" @onclick="GetTabIndex">GetTabIndex</button>
+        <button data-testid="@BUTTON_SET_TAB_INDEX" @onclick="SetTabIndex">SetTabIndex</button>
+
+        <button data-testid="@BUTTON_GET_TITLE" @onclick="GetTitle">GetTitle</button>
+        <button data-testid="@BUTTON_SET_TITLE" @onclick="SetTitle">SetTitle</button>
+
+        <button data-testid="@BUTTON_GET_TRANSLATE" @onclick="GetTranslate">GetTranslate</button>
+        <button data-testid="@BUTTON_SET_TRANSLATE" @onclick="SetTranslate">SetTranslate</button>
+
+        @* HTMLElement extra *@
         <button data-testid="@BUTTON_GET_HASFOCUS" @onclick="GetHasFocus" @onpointerenter="GetHasFocus">GetHasFocus</button>
 
+        @* HTMLElement Methods *@
         <button data-testid="@BUTTON_CLICK" @onclick="Click">Click</button>
         <button data-testid="@BUTTON_FOCUS" @onclick="Focus">Focus</button>
         <button data-testid="@BUTTON_BLUR" @onclick="Blur" @onpointerenter="Blur">Blur</button>
@@ -26,6 +95,8 @@
         <button data-testid="@BUTTON_TOGGLE_POPOVER" @onclick="TogglePopover">TogglePopover</button>
         <button data-testid="@BUTTON_TOGGLE_POPOVER_PARAMETER" @onclick="TogglePopoverParameter">TogglePopoverParameter</button>
 
+
+        @* Element *@
 
         <button data-testid="@BUTTON_GET_INNERHTML" @onclick="GetInnerHTML">GetInnerHTML</button>
         <button data-testid="@BUTTON_SET_INNERHTML" @onclick="SetInnerHTML">SetInnerHTML</button>
@@ -50,6 +121,7 @@
         <button data-testid="@BUTTON_GET_SCROLLTOP" @onclick="GetScrollTop">GetScrollTop</button>
         <button data-testid="@BUTTON_SET_SCROLLTOP" @onclick="SetScrollTop">SetScrollTop</button>
 
+        @* Element Methods *@
         <button data-testid="@BUTTON_GET_BOUNDING_CLIENT_RECT" @onclick="GetBoundingClientRect">GetBoundingClientRect</button>
         <button data-testid="@BUTTON_GET_CLIENT_RECTS" @onclick="GetClientRects">GetClientRects</button>
         <button data-testid="@BUTTON_HAS_ATTRIBUTE" @onclick="HasAttribute">HasAttribute</button>
@@ -59,7 +131,7 @@
         <button data-testid="@BUTTON_SCROLL_INTO_VIEW" @onclick="ScrollIntoView">ScrollIntoView</button>
         <button data-testid="@BUTTON_REQUEST_FULLSCREEN" @onclick="RequestFullscreen">RequestFullscreen</button>
 
-
+        @* Element Events *@
         <button data-testid="@BUTTON_REGISTER_ON_TRANSITIONSTART" @onclick="RegisterOnTransitionstart">RegisterOnTransitionstart</button>
         <button data-testid="@BUTTON_REGISTER_ON_TRANSITIONEND" @onclick="RegisterOnTransitionend">RegisterOnTransitionend</button>
         <button data-testid="@BUTTON_REGISTER_ON_TRANSITIONRUN" @onclick="RegisterOnTransitionrun">RegisterOnTransitionrun</button>
@@ -71,8 +143,7 @@
     </div>
     <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
     <div data-testid="@HTML_ELEMENT_CONTAINER" class="html-element-container">
-        <div data-testid="@HTML_ELEMENT" @ref="htmlElement" class="html-element" tabindex="-1" style="visibility: visible;"
-                @onpointerdown="SetPointerCapture" @onpointermove="HasPointerCapture" @onpointerup="ReleasePointerCapture">
+        <div data-testid="@HTML_ELEMENT" class="html-element" @ref="htmlElement" @onpointerdown="SetPointerCapture" @onpointermove="HasPointerCapture" @onpointerup="ReleasePointerCapture">
             test <b>bold</b> <i>italic</i> <u>underlined</u>
         </div>
     </div>

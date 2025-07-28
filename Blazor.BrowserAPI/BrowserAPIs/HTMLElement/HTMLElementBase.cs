@@ -14,7 +14,7 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
 
 
     /// <summary>
-    /// <para>The <i>Element.requestFullscreen()</i> method issues an asynchronous request to make the element be displayed in fullscreen mode.</para>
+    /// <para>Issues an asynchronous request to make the element be displayed in fullscreen mode.</para>
     /// <para>
     /// It's not guaranteed that the element will be put into full screen mode.
     /// If permission to enter full screen mode is granted, the returned Promise will resolve and the element will receive a fullscreenchange event to let it know that it's now in full screen mode.
@@ -90,7 +90,7 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
 
     private Action<string, double, string>? _onTransitionstart;
     /// <summary>
-    /// <para>The <i>transitionstart</i> event is fired when a CSS transition has actually started, i.e., after any transition-delay has ended.</para>
+    /// <para>Is fired when a CSS transition has actually started, i.e., after any transition-delay has ended.</para>
     /// <para>This event is not cancelable.</para>
     /// <para>
     /// <b>Parameters</b><br />
@@ -115,7 +115,7 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     private Action<string, double, string>? _onTransitionend;
     /// <summary>
     /// <para>
-    /// The <i>transitionend</i> event is fired when a CSS transition has completed.
+    /// Is fired when a CSS transition has completed.
     /// In the case where a transition is removed before completion, such as if the transition-property is removed or display is set to none, then the event will not be generated.
     /// </para>
     /// <para>
@@ -146,7 +146,7 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
 
     private Action<string, double, string>? _onTransitionrun;
     /// <summary>
-    /// <para>The <i>transitionrun</i> event is fired when a CSS transition is first created, i.e. before any transition-delay has begun.</para>
+    /// <para>Is fired when a CSS transition is first created, i.e. before any transition-delay has begun.</para>
     /// <para>This event is not cancelable.</para>
     /// <para>
     /// <b>Parameters</b><br />
@@ -170,7 +170,7 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
 
     private Action<string, double, string>? _onTransitioncancel;
     /// <summary>
-    /// <para>The <i>transitioncancel</i> event is fired when a CSS transition is canceled.</para>
+    /// <para>Is fired when a CSS transition is canceled.</para>
     /// <para>
     /// <b>Parameters</b><br />
     /// - string <i>propertyName</i>: A string containing the name CSS property associated with the transition.<br />
@@ -197,7 +197,7 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     private Action<string, double, string>? _onAnimationstart;
     /// <summary>
     /// <para>
-    /// The <i>animationstart</i> event is fired when a CSS Animation has started.
+    /// Is fired when a CSS Animation has started.
     /// If there is an animation-delay, this event will fire once the delay period has expired.
     /// A negative delay will cause the event to fire with an elapsedTime equal to the absolute value of the delay (and, correspondingly, the animation will begin playing at that time index into the sequence).
     /// </para>
@@ -225,7 +225,7 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     private Action<string, double, string>? _onAnimationend;
     /// <summary>
     /// <para>
-    /// The <i>animationend</i> event is fired when a CSS Animation has completed.
+    /// Is fired when a CSS Animation has completed.
     /// If the animation aborts before reaching completion, such as if the element is removed from the DOM or the animation is removed from the element, the animationend event is not fired.
     /// </para>
     /// <para>
@@ -252,7 +252,7 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     private Action<string, double, string>? _onAnimationiteration;
     /// <summary>
     /// <para>
-    /// The <i>animationiteration</i> event is fired when an iteration of a CSS Animation ends, and another one begins.
+    /// Is fired when an iteration of a CSS Animation ends, and another one begins.
     /// This event does not occur at the same time as the animationend event, and therefore does not occur for animations with an animation-iteration-count of one.
     /// </para>
     /// <para>
@@ -279,7 +279,7 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     private Action<string, double, string>? _onAnimationcancel;
     /// <summary>
     /// <para>
-    /// The <i>animationcancel</i> event is fired when a CSS Animation unexpectedly aborts.
+    /// Is fired when a CSS Animation unexpectedly aborts.
     /// In other words, any time it stops running without sending an animationend event.
     /// This might happen when the animation-name is changed such that the animation is removed, or when the animating node is hidden using CSS.
     /// Therefore, either directly or because any of its containing nodes are hidden.

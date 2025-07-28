@@ -24,7 +24,326 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     #region HTMLElement
 
     /// <summary>
-    /// <para>The <i>innerText</i> property of the HTMLElement interface represents the rendered text content of a node and its descendants.</para>
+    /// Sets the keystroke which a user can press to jump to a given element.
+    /// </summary>
+    /// <remarks>
+    /// Note: The HTMLElement.accessKey property is seldom used because of its multiple conflicts with already present key bindings in browsers.
+    /// To work around this, browsers implement accesskey behavior if the keys are pressed with other "qualifying" keys (such as Alt + accesskey).
+    /// </remarks>
+    public ValueTask<string> AccessKey => GetAccessKey(default);
+
+    /// <inheritdoc cref="AccessKey" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetAccessKey(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getAccessKey", cancellationToken);
+
+    /// <inheritdoc cref="AccessKey" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAccessKey(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAccessKey", cancellationToken, [value]);
+
+    /// <summary>
+    /// Returns a string containing the element's browser-assigned access key (if any); otherwise it returns an empty string.
+    /// </summary>
+    public ValueTask<string> AccessKeyLabel => GetAccessKeyLabel(default);
+
+    /// <inheritdoc cref="AccessKeyLabel" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetAccessKeyLabel(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getAccessKeyLabel", cancellationToken);
+
+
+    /// <summary>
+    /// <para>
+    /// Returns a live StylePropertyMap object that contains a list of style properties of the element that are defined in the element's inline style attribute,
+    /// or assigned using the style property of the HTMLElement interface via script.
+    /// </para>
+    /// <para>Shorthand properties are expanded. If you set "border-top: 1px solid black", the longhand properties ("border-top-color", "border-top-style", and "border-top-width") are set instead.</para>
+    /// <para>
+    /// The main difference between <see cref="Style">style</see> property and <i>attributeStyleMap</i> is that, the <see cref="Style">style</see> property gets/sets all styles as a string,
+    /// while <i>attributeStyleMap</i> handles styles in a Dictionary&lt;string, string&gt;.
+    /// </para>
+    /// <para>Though this property itself is not writable, you can write and remove inline styles through <see cref="SetAttributeStyleMap"/> and <see cref="RemoveAttributeStyleMap"/>.</para>
+    /// </summary>
+    public ValueTask<Dictionary<string, string>> AttributeStyleMap => GetAttributeStyleMap(default);
+
+    /// <inheritdoc cref="AttributeStyleMap" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<Dictionary<string, string>> GetAttributeStyleMap(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<Dictionary<string, string>>("getAttributeStyleMap", cancellationToken);
+
+    /// <summary>
+    /// <para>Sets the given css property name to the given value.</para>
+    /// <para>
+    /// If the name does not exist, it will be added.<br />
+    /// If the name does already exist, the value will be updated.<br />
+    /// To remove a css property, use <see cref="RemoveAttributeStyleMap"/>.
+    /// </para>
+    /// </summary>
+    /// <param name="name">name of the css property</param>
+    /// <param name="value">value for the given css property</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAttributeStyleMap(string name, string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAttributeStyleMap", cancellationToken, [name, value]);
+
+    /// <summary>
+    /// Removes the given css property.
+    /// </summary>
+    /// <param name="name">css property name</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask RemoveAttributeStyleMap(string name, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("removeAttributeStyleMap", cancellationToken, [name]);
+
+
+    /// <summary>
+    /// <para>
+    /// Represents the element's capitalization behavior for user input. It is available on all HTML elements, though it doesn't affect all of them, including:<br />
+    /// - &lt;input&lt; and &lt;textarea&lt; elements.<br />
+    /// - Any element with <i>contenteditable</i> set on it.
+    /// </para>
+    /// <para>
+    /// The value is a string that represents the element's capitalization behavior for user input. Valid values are as follows:<br />
+    /// - "none" or "off": No autocapitalization should be applied, that is, all letters should default to lowercase.<br />
+    /// - "sentences" or "on": The first letter of each sentence should default to a capital letter; all other letters should default to lowercase.<br />
+    /// - "words": The first letter of each word should default to a capital letter; all other letters should default to lowercase.<br />
+    /// - "characters": All letters should default to uppercase.
+    /// </para>
+    /// <para>
+    /// <i>autocapitalize</i> doesn't affect behavior when typing on a physical keyboard.
+    /// It affects the behavior of other input mechanisms such as virtual keyboards on mobile devices and voice input.
+    /// This can assist users by making data entry quicker and easier, for example by automatically capitalizing the first letter of each sentence.
+    /// </para>
+    /// <para>It reflects the value of the autocapitalize HTML global attribute.</para>
+    /// </summary>
+    public ValueTask<string> Autocapitalize => GetAutocapitalize(default);
+
+    /// <inheritdoc cref="Autocapitalize" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetAutocapitalize(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getAutocapitalize", cancellationToken);
+
+    /// <inheritdoc cref="Autocapitalize" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAutocapitalize(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAutocapitalize", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>
+    /// Represents a boolean value reflecting the autofocus HTML global attribute, which indicates whether the control should be focused when the page loads,
+    /// or when dialog or popover become shown if specified in an element inside &lt;dialog&gt; elements or elements whose popover attribute is set.
+    /// </para>
+    /// <para>
+    /// Only one form-associated element inside a document, or a &lt;dialog&gt; element, or an element whose popover attribute is set, can have this attribute specified.
+    /// If there are several, the first element with the attribute set inserted, usually the first such element on the page, gets the initial focus.
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// Note: Setting this property doesn't set the focus to the associated element:
+    /// it merely tells the browser to focus to it when the element is inserted in the document.
+    /// Setting it after the insertion, that is most of the time after the document load, has no visible effect.
+    /// </remarks>
+    public ValueTask<bool> Autofocus => GetAutofocus(default);
+
+    /// <inheritdoc cref="Autofocus" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<bool> GetAutofocus(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<bool>("getAutofocus", cancellationToken);
+
+    /// <inheritdoc cref="Autofocus" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAutofocus(bool value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAutofocus", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>
+    /// Specifies whether or not the element is editable. This enumerated attribute can have the following values:<br />
+    /// - "true" indicates that the element is contenteditable.<br />
+    /// - "false" indicates that the element cannot be edited.<br />
+    /// - "plaintext-only" indicates that the element's raw text is editable, but rich text formatting is disabled.
+    /// </para>
+    /// <para>You can use the <see cref="IsContentEditable"/> property to test the computed boolean value of this property.</para>
+    /// <para>If the attribute is missing or its value is invalid, its value is inherited from its parent element: so the element is editable (or not) based on the parent element.</para>
+    /// </summary>
+    public ValueTask<string> ContentEditable => GetContentEditable(default);
+
+    /// <inheritdoc cref="ContentEditable" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetContentEditable(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getContentEditable", cancellationToken);
+
+    /// <inheritdoc cref="ContentEditable" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetContentEditable(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setContentEditable", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Provides read/write access to custom data attributes (data-*) on elements. It exposes a map of strings (DOMStringMap) with an entry for each data-* attribute.</para>
+    /// <para>
+    /// The property name of a custom data attribute is the same as the HTML attribute without the data- prefix.
+    /// Single dashes (-) are removed, and the next ASCII character after a removed dash is capitalized to form the property's camel-cased name.
+    /// </para>
+    /// <para>For writing or removing elements use <see cref="SetDataset"/> or <see cref="RemoveDataset"/>.</para>
+    /// </summary>
+    public ValueTask<Dictionary<string, string>> Dataset => GetDataset(default);
+
+    /// <inheritdoc cref="Dataset" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<Dictionary<string, string>> GetDataset(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<Dictionary<string, string>>("getDataset", cancellationToken);
+
+    /// <summary>
+    /// <para>Sets the given data-attribute to the given value.</para>
+    /// <para>
+    /// If the name does not exist, it will be added.<br />
+    /// If the name does already exist, the value will be updated.<br />
+    /// To remove a data-attribute, use <see cref="RemoveDataset"/>.
+    /// </para>
+    /// </summary>
+    /// <param name="name">name of the data-attribute without data- prefix</param>
+    /// <param name="value">value for the given data-attribute</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetDataset(string name, string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setDataset", cancellationToken, [name, value]);
+
+    /// <summary>
+    /// Removes the given data-attribute.
+    /// </summary>
+    /// <param name="name">data-attribute name</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask RemoveDataset(string name, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("removeDataset", cancellationToken, [name]);
+
+
+    /// <summary>
+    /// <para>
+    /// Indicates the text writing directionality of the content of the current element. Possible values are<br />
+    /// - "ltr": Left-to-right writing direction.<br />
+    /// - "rtl": Right-to-left writing direction.<br />
+    /// - "auto": The direction of the element must be determined based on the contents of the element.<br />
+    /// - "": The default value; the directionality is inherited from the parent element.
+    /// </para>
+    /// <para>
+    /// Note that if the dir attribute is unspecified, the element itself may still inherit directionality from its parent.
+    /// However, that inherited directionality is not reflected by this property's value.
+    /// </para>
+    /// <para>
+    /// The text writing directionality of an element is which direction that text goes (for support of different language systems).
+    /// Arabic languages and Hebrew are typical languages using the RTL directionality.
+    /// </para>
+    /// </summary>
+    public ValueTask<string> Dir => GetDir(default);
+
+    /// <inheritdoc cref="Dir" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetDir(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getDir", cancellationToken);
+
+    /// <inheritdoc cref="Dir" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetDir(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setDir", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// A boolean value indicating if the element can be dragged. It reflects the value of the draggable HTML global attribute.
+    /// </summary>
+    public ValueTask<bool> Draggable => GetDraggable(default);
+
+    /// <inheritdoc cref="Draggable" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<bool> GetDraggable(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<bool>("getDraggable", cancellationToken);
+
+    /// <inheritdoc cref="Draggable" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetDraggable(bool value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setDraggable", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>
+    /// An enumerated property defining what action label (or icon) to present for the enter key on virtual keyboards.
+    /// It reflects the enterkeyhint HTML global attribute and is an enumerated property, only accepting the following values as a string:<br />
+    /// - "enter": Typically indicating inserting a new line.<br />
+    /// - "done": Typically meaning there is nothing more to input and the input method editor (IME) will be closed.<br />
+    /// - "go": Typically meaning to take the user to the target of the text they typed.<br />
+    /// - "next": Typically taking the user to the next field that will accept text.<br />
+    /// - "previous": Typically taking the user to the previous field that will accept text.<br />
+    /// - "search": Typically taking the user to the results of searching for the text they have typed.<br />
+    /// - "send": Typically delivering the text to its target.
+    /// </para>
+    /// <para>If no <i>enterKeyHint</i> value has been specified or if it was set to a different value than the allowed ones, it will return an empty string.</para>
+    /// </summary>
+    public ValueTask<string> EnterKeyHint => GetEnterKeyHint(default);
+
+    /// <inheritdoc cref="EnterKeyHint" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetEnterKeyHint(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getEnterKeyHint", cancellationToken);
+
+    /// <inheritdoc cref="EnterKeyHint" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetEnterKeyHint(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setEnterKeyHint", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// Reflects the value of the element's hidden attribute.<br />
+    /// true - The element is hidden.<br />
+    /// false - The element is not hidden. This is the default value for the attribute.
+    /// </summary>
+    public ValueTask<bool> Hidden => GetHidden(default);
+
+    /// <inheritdoc cref="Hidden" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<bool> GetHidden(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<bool>("getHidden", cancellationToken);
+
+    /// <inheritdoc cref="Hidden" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetHidden(bool value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setHidden", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>
+    /// Reflects the value of the element's inert attribute.
+    /// It is a boolean value that, when present, makes the browser "ignore" user input events for the element, including focus events and events from assistive technologies.
+    /// The browser may also ignore page search and text selection in the element.
+    /// This can be useful when building UIs such as modals where you would want to "trap" the focus inside the modal when it's visible.
+    /// </para>
+    /// <para>
+    /// Note that if the inert attribute is unspecified, the element itself may still inherit inertness from its parent.
+    /// However, that inherited inertness is not reflected by this property's value.
+    /// </para>
+    /// </summary>
+    public ValueTask<bool> Inert => GetInert(default);
+
+    /// <inheritdoc cref="Inert" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<bool> GetInert(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<bool>("getInert", cancellationToken);
+
+    /// <inheritdoc cref="Inert" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetInert(bool value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setInert", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Represents the rendered text content of a node and its descendants.</para>
     /// <para>
     /// As a getter, it approximates the text the user would get if they highlighted the contents of the element with the cursor and then copied it to the clipboard.
     /// As a setter this will replace the element's children with the given value, converting any line breaks into &lt;br&gt; elements.
@@ -36,32 +355,12 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     public ValueTask<string> InnerText => GetInnerText(default);
 
-    /// <summary>
-    /// <para>The <i>innerText</i> property of the HTMLElement interface represents the rendered text content of a node and its descendants.</para>
-    /// <para>
-    /// As a getter, it approximates the text the user would get if they highlighted the contents of the element with the cursor and then copied it to the clipboard.
-    /// As a setter this will replace the element's children with the given value, converting any line breaks into &lt;br&gt; elements.
-    /// </para>
-    /// <para>
-    /// Note: innerText is easily confused with Node.textContent, but there are important differences between the two.
-    /// Basically, innerText is aware of the rendered appearance of text, while textContent is not.
-    /// </para>
-    /// </summary>
+    /// <inheritdoc cref="InnerText" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<string> GetInnerText(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getInnerText", cancellationToken);
 
-    /// <summary>
-    /// <para>The <i>innerText</i> property of the HTMLElement interface represents the rendered text content of a node and its descendants.</para>
-    /// <para>
-    /// As a getter, it approximates the text the user would get if they highlighted the contents of the element with the cursor and then copied it to the clipboard.
-    /// As a setter this will replace the element's children with the given value, converting any line breaks into &lt;br&gt; elements.
-    /// </para>
-    /// <para>
-    /// Note: innerText is easily confused with Node.textContent, but there are important differences between the two.
-    /// Basically, innerText is aware of the rendered appearance of text, while textContent is not.
-    /// </para>
-    /// </summary>
+    /// <inheritdoc cref="InnerText" />
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
@@ -70,70 +369,92 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
 
     /// <summary>
     /// <para>
-    /// The <i>outerText</i> property of the HTMLElement interface returns the same value as HTMLElement.innerText.
-    /// When used as a setter it replaces the whole current node with the given text (this differs from innerText, which replaces the content inside the current node).
+    /// Reflects the value of the element's inputmode attribute.<br />
+    /// It provides a hint about the type of data that might be entered by the user while editing the element or its contents. This allows the browser to display an appropriate virtual keyboard.<br />
+    /// It is used primarily on &lt;input&gt; elements, but is usable on any element in <see cref="ContentEditable">contenteditable</see> mode.
     /// </para>
-    /// <para>See <see cref="InnerText">HTMLElement.innerText</see> for more information and examples showing how both properties are used as getters.</para>
-    /// </summary>
-    public ValueTask<string> OuterText => GetOuterText(default);
-
-    /// <summary>
     /// <para>
-    /// The <i>outerText</i> property of the HTMLElement interface returns the same value as HTMLElement.innerText.
-    /// When used as a setter it replaces the whole current node with the given text (this differs from innerText, which replaces the content inside the current node).
+    /// This attribute may have one of the following values:<br />
+    /// - "decimal": Fractional numeric input keyboard that contains the digits and decimal separator for the user's locale (typically . or ,).<br />
+    /// - "email": A virtual keyboard optimized for entering email addresses. Typically includes the @character as well as other optimizations.<br />
+    /// - "none": No virtual keyboard. This is used when the page implements its own keyboard input control.<br />
+    /// - "numeric": Numeric input keyboard that only requires the digits 0–9. Devices may or may not show a minus key.<br />
+    /// - "search": A virtual keyboard optimized for search input. For instance, the return/submit key may be labeled "Search".<br />
+    /// - "tel": A telephone keypad input that includes the digits 0–9, the asterisk (*), and the pound (#) key.<br />
+    /// - "text": Standard input keyboard for the user's current locale.<br />
+    /// - "url": A keypad optimized for entering URLs. This may have the / key more prominent, for example.
     /// </para>
-    /// <para>See <see cref="InnerText">HTMLElement.innerText</see> for more information and examples showing how both properties are used as getters.</para>
     /// </summary>
+    public ValueTask<string> InputMode => GetInputMode(default);
+
+    /// <inheritdoc cref="InputMode" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<string> GetOuterText(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getOuterText", cancellationToken);
+    public async ValueTask<string> GetInputMode(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getInputMode", cancellationToken);
 
-    /// <summary>
-    /// <para>
-    /// The <i>outerText</i> property of the HTMLElement interface returns the same value as HTMLElement.innerText.
-    /// When used as a setter it replaces the whole current node with the given text (this differs from innerText, which replaces the content inside the current node).
-    /// </para>
-    /// <para>See <see cref="InnerText">HTMLElement.innerText</see> for more information and examples showing how both properties are used as getters.</para>
-    /// </summary>
+    /// <inheritdoc cref="InputMode" />
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetOuterText(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setOuterText", cancellationToken, [value]);
+    public async ValueTask SetInputMode(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setInputMode", cancellationToken, [value]);
 
 
     /// <summary>
-    /// <para>JS-property: style.cssText</para>
-    /// <para>The <i>cssText</i> property of the CSSStyleDeclaration interface returns or sets the text of the element's inline style declaration only.</para>
-    /// <para>To be able to set a stylesheet rule dynamically, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Using_dynamic_styling_information">Using dynamic styling information</see>.</para>
-    /// <para>Not to be confused with stylesheet style-rule <see href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/cssText">CSSRule.cssText</see>.</para>
+    /// It is true if the contents of the element are editable; otherwise it returns false.
     /// </summary>
-    public ValueTask<string> Style => GetStyle(default);
+    public ValueTask<bool> IsContentEditable => GetIsContentEditable(default);
 
-    /// <summary>
-    /// <para>JS-property: style.cssText</para>
-    /// <para>The <i>cssText</i> property of the CSSStyleDeclaration interface returns or sets the text of the element's inline style declaration only.</para>
-    /// <para>To be able to set a stylesheet rule dynamically, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Using_dynamic_styling_information">Using dynamic styling information</see>.</para>
-    /// <para>Not to be confused with stylesheet style-rule <see href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/cssText">CSSRule.cssText</see>.</para>
-    /// </summary>
+    /// <inheritdoc cref="IsContentEditable" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<string> GetStyle(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getInlineStyle", cancellationToken);
+    public async ValueTask<bool> GetIsContentEditable(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<bool>("getIsContentEditable", cancellationToken);
+
 
     /// <summary>
-    /// <para>JS-property: style.cssText</para>
-    /// <para>The <i>cssText</i> property of the CSSStyleDeclaration interface returns or sets the text of the element's inline style declaration only.</para>
-    /// <para>To be able to set a stylesheet rule dynamically, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Using_dynamic_styling_information">Using dynamic styling information</see>.</para>
-    /// <para>Not to be confused with stylesheet style-rule <see href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/cssText">CSSRule.cssText</see>.</para>
+    /// <para>
+    /// Indicates the base language of an element's attribute values and text content, in the form of a RFC 5646: BCP 47 language identifier tag.
+    /// It reflects the element's lang attribute; the xml:lang attribute does not affect this property.
+    /// </para>
+    /// <para>
+    /// Note that if the lang attribute is unspecified, the element itself may still inherit the language from its parent.
+    /// However, that inherited language is not reflected by this property's value.
+    /// </para>
+    /// <para>Common examples include "en" for English, "ja" for Japanese, "es" for Spanish and so on. If unspecified, the value is an empty string.</para>
     /// </summary>
+    public ValueTask<string> Lang => GetLang(default);
+
+    /// <inheritdoc cref="Lang" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetLang(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getLang", cancellationToken);
+
+    /// <inheritdoc cref="Lang" />
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetStyle(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setInlineStyle", cancellationToken, [value]);
-
+    public async ValueTask SetLang(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setLang", cancellationToken, [value]);
 
 
     /// <summary>
-    /// <para>The <i>HTMLElement.offsetWidth</i> read-only property returns the layout width of an element as an integer.</para>
+    /// <para>Returns the cryptographic number used once that is used by Content Security Policy to determine whether a given fetch will be allowed to proceed.</para>
+    /// <para>In later implementations, elements only expose their nonce attribute to scripts (and not to side-channels like CSS attribute selectors).</para>
+    /// </summary>
+    public ValueTask<string> Nonce => GetNonce(default);
+
+    /// <inheritdoc cref="Nonce" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetNonce(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getNonce", cancellationToken);
+
+    /// <inheritdoc cref="Nonce" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetNonce(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setNonce", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Returns the layout width of an element as an integer.</para>
     /// <para>
     /// Typically, offsetWidth is a measurement in pixels of the element's CSS width, including any borders, padding, and vertical scrollbars (if rendered).
     /// It does not include the width of pseudo-elements such as ::before or ::after.
@@ -143,22 +464,14 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     public ValueTask<int> OffsetWidth => GetOffsetWidth(default);
 
-    /// <summary>
-    /// <para>The <i>HTMLElement.offsetWidth</i> read-only property returns the layout width of an element as an integer.</para>
-    /// <para>
-    /// Typically, offsetWidth is a measurement in pixels of the element's CSS width, including any borders, padding, and vertical scrollbars (if rendered).
-    /// It does not include the width of pseudo-elements such as ::before or ::after.
-    /// </para>
-    /// <para>If the element is hidden (for example, by setting style.display on the element or one of its ancestors to "none"), then 0 is returned.</para>
-    /// <para>Note: This property will round the value to an integer. If you need a fractional value, use element.getBoundingClientRect().</para>
-    /// </summary>
+    /// <inheritdoc cref="OffsetWidth" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<int> GetOffsetWidth(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getOffsetWidth", cancellationToken);
 
 
     /// <summary>
-    /// <para>The <i>HTMLElement.offsetHeight</i> read-only property returns the height of an element, including vertical padding and borders, as an integer.</para>
+    /// <para>Returns the height of an element, including vertical padding and borders, as an integer.</para>
     /// <para>
     /// Typically, offsetHeight is a measurement in pixels of the element's CSS height, including any borders, padding, and horizontal scrollbars (if rendered).
     /// It does not include the height of pseudo-elements such as ::before or ::after. For the document body object, the measurement includes total linear content height instead of the element's CSS height.Floated elements extending below other linear content are ignored.
@@ -168,22 +481,14 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     public ValueTask<int> OffsetHeight => GetOffsetHeight(default);
 
-    /// <summary>
-    /// <para>The <i>HTMLElement.offsetHeight</i> read-only property returns the height of an element, including vertical padding and borders, as an integer.</para>
-    /// <para>
-    /// Typically, offsetHeight is a measurement in pixels of the element's CSS height, including any borders, padding, and horizontal scrollbars (if rendered).
-    /// It does not include the height of pseudo-elements such as ::before or ::after. For the document body object, the measurement includes total linear content height instead of the element's CSS height.Floated elements extending below other linear content are ignored.
-    /// </para>
-    /// <para>If the element is hidden(for example, by setting style.display on the element or one of its ancestors to "none"), then 0 is returned.</para>
-    /// <para>Note: This property will round the value to an integer. If you need a fractional value, use element.getBoundingClientRect().</para>
-    /// </summary>
+    /// <inheritdoc cref="OffsetHeight" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<int> GetOffsetHeight(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getOffsetHeight", cancellationToken);
 
 
     /// <summary>
-    /// <para>The <i>HTMLElement.offsetLeft</i> read-only property returns the number of pixels that the upper left corner of the current element is offset to the left within the HTMLElement.offsetParent node.</para>
+    /// <para>Returns the number of pixels that the upper left corner of the current element is offset to the left within the HTMLElement.offsetParent node.</para>
     /// <para>For block-level elements, offsetTop, offsetLeft, offsetWidth, and offsetHeight describe the border box of an element relative to the offsetParent.</para>
     /// <para>
     /// However, for inline-level elements (such as span) that can wrap from one line to the next, offsetTop and offsetLeft describe the positions of the first border box
@@ -193,37 +498,25 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     public ValueTask<int> OffsetLeft => GetOffsetLeft(default);
 
-    /// <summary>
-    /// <para>The <i>HTMLElement.offsetLeft</i> read-only property returns the number of pixels that the upper left corner of the current element is offset to the left within the HTMLElement.offsetParent node.</para>
-    /// <para>For block-level elements, offsetTop, offsetLeft, offsetWidth, and offsetHeight describe the border box of an element relative to the offsetParent.</para>
-    /// <para>
-    /// However, for inline-level elements (such as span) that can wrap from one line to the next, offsetTop and offsetLeft describe the positions of the first border box
-    /// (use Element.getClientRects() to get its width and height), while offsetWidth and offsetHeight describe the dimensions of the bounding border box(use Element.getBoundingClientRect() to get its position).
-    /// Therefore, a box with the left, top, width and height of offsetLeft, offsetTop, offsetWidth and offsetHeight will not be a bounding box for a span with wrapped text.
-    /// </para>
-    /// </summary>
+    /// <inheritdoc cref="OffsetLeft" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<int> GetOffsetLeft(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getOffsetLeft", cancellationToken);
 
 
     /// <summary>
-    /// The <i>HTMLElement.offsetTop</i> read-only property returns the distance from the outer border of the current element (including its margin) to the top padding edge of the offsetParent,
-    /// the closest positioned ancestor element.
+    /// Returns the distance from the outer border of the current element (including its margin) to the top padding edge of the offsetParent, the closest positioned ancestor element.
     /// </summary>
     public ValueTask<int> OffsetTop => GetOffsetTop(default);
 
-    /// <summary>
-    /// The <i>HTMLElement.offsetTop</i> read-only property returns the distance from the outer border of the current element (including its margin) to the top padding edge of the offsetParent,
-    /// the closest positioned ancestor element.
-    /// </summary>
+    /// <inheritdoc cref="OffsetTop" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<int> GetOffsetTop(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getOffsetTop", cancellationToken);
 
 
     /// <summary>
-    /// <para>The <i>HTMLElement.offsetParent</i> read-only property returns a reference to the element which is the closest (nearest in the containment hierarchy) positioned ancestor element.</para>
+    /// <para>Returns a reference to the element which is the closest (nearest in the containment hierarchy) positioned ancestor element.</para>
     /// <para>
     /// A positioned ancestor is either:<br />
     /// - an element with a non-static position, or<br />
@@ -240,22 +533,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     public ValueTask<IHTMLElement?> OffsetParent => GetOffsetParent(default);
 
-    /// <summary>
-    /// <para>The <i>HTMLElement.offsetParent</i> read-only property returns a reference to the element which is the closest (nearest in the containment hierarchy) positioned ancestor element.</para>
-    /// <para>
-    /// A positioned ancestor is either:<br />
-    /// - an element with a non-static position, or<br />
-    /// - td, th, table in case the element itself is static positioned.<br />
-    /// If there is no positioned ancestor element, the body is returned.
-    /// </para>
-    /// <para>
-    /// Note: <i>offsetParent</i> returns null in the following situations:<br />
-    /// - The element or any ancestor has the display property set to none.<br />
-    /// - The element has the position property set to fixed (Firefox returns &lt;body&gt;).<br />
-    /// - The element is &lt;body&gt; or &lt;html&gt;.
-    /// </para>
-    /// <para><i>offsetParent</i> is useful because offsetTop and offsetLeft are relative to its padding edge.</para>
-    /// </summary>
+    /// <inheritdoc cref="OffsetParent" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IHTMLElement?> GetOffsetParent(CancellationToken cancellationToken) {
@@ -267,6 +545,155 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     }
 
 
+    /// <summary>
+    /// <para>
+    /// Returns the same value as HTMLElement.innerText.
+    /// When used as a setter it replaces the whole current node with the given text (this differs from innerText, which replaces the content inside the current node).
+    /// </para>
+    /// <para>See <see cref="InnerText">HTMLElement.innerText</see> for more information and examples showing how both properties are used as getters.</para>
+    /// </summary>
+    public ValueTask<string> OuterText => GetOuterText(default);
+
+    /// <inheritdoc cref="OuterText" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetOuterText(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getOuterText", cancellationToken);
+
+    /// <inheritdoc cref="OuterText" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetOuterText(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setOuterText", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Gets/Sets an element's popover state via JavaScript ("auto", "hint", or "manual"), and can be used for feature detection. It reflects the value of the popover global HTML attribute.</para>
+    /// <para>
+    /// Possible values are:<br />
+    /// - "auto": auto popovers can be "light dismissed" — this means that you can hide the popover by clicking outside it or pressing the Esc key.
+    /// Usually, only one auto popover can be shown at a time — showing a second popover when one is already shown will hide the first one.
+    /// The exception to this rule is when you have nested auto popovers.
+    /// See Nested popovers for more details.<br />
+    /// - "hint": hint popovers do not close auto popovers when they are displayed, but will close other hint popovers.
+    /// They can be light dismissed and will respond to close requests.
+    /// Usually they are shown and hidden in response to non-click JavaScript events such as mouseover/mouseout and focus/blur.
+    /// Clicking a button to open a hint popover would cause an open auto popover to light-dismiss.<br />
+    /// - "manual": manual popovers cannot be "light dismissed" and are not automatically closed.
+    /// Popovers must explicitly be displayed and closed using declarative show/hide/toggle buttons or JavaScript.
+    /// Multiple independent manual popovers can be shown simultaneously.
+    /// </para>
+    /// </summary>
+    public ValueTask<string?> Popover => GetPopover(default);
+
+    /// <inheritdoc cref="Popover" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetPopover(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getPopover", cancellationToken);
+
+    /// <inheritdoc cref="Popover" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetPopover(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setPopover", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// Represents a boolean value that controls the spell-checking hint. It is available on all HTML elements, though it doesn't affect all of them.
+    /// It reflects the value of the spellcheck HTML global attribute.
+    /// </summary>
+    public ValueTask<bool> Spellcheck => GetSpellcheck(default);
+
+    /// <inheritdoc cref="Spellcheck" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<bool> GetSpellcheck(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<bool>("getSpellcheck", cancellationToken);
+
+    /// <inheritdoc cref="Spellcheck" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetSpellcheck(bool value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setSpellcheck", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>JS-property: style.cssText</para>
+    /// <para>Returns or sets the text of the element's inline style declaration only.</para>
+    /// <para>To be able to set a stylesheet rule dynamically, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Using_dynamic_styling_information">Using dynamic styling information</see>.</para>
+    /// <para>Not to be confused with stylesheet style-rule <see href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/cssText">CSSRule.cssText</see>.</para>
+    /// </summary>
+    public ValueTask<string> Style => GetStyle(default);
+
+    /// <inheritdoc cref="Style" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetStyle(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getStyle", cancellationToken);
+
+    /// <inheritdoc cref="Style" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetStyle(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setStyle", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>
+    /// Represents the tab order of the current element. Tab order is as follows:<br />
+    /// 1. Elements with a positive tabIndex. Elements that have identical tabIndex values should be navigated in the order they appear. Navigation proceeds from the lowest tabIndex to the highest tabIndex.<br />
+    /// 2. Elements that do not support the tabIndex attribute or support it and assign tabIndex to 0, in the order they appear.<br />
+    /// Elements that are disabled do not participate in the tabbing order.
+    /// </para>
+    /// <para>Values don't need to be sequential, nor must they begin with any particular value. They may even be negative, though each browser trims very large values.</para>
+    /// </summary>
+    public ValueTask<long> TabIndex => GetTabIndex(default);
+
+    /// <inheritdoc cref="TabIndex" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<long> GetTabIndex(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<long>("getTabIndex", cancellationToken);
+
+    /// <inheritdoc cref="TabIndex" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetTabIndex(long value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setTabIndex", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// Represents the title of the element: the text usually displayed in a 'tooltip' popup when the mouse is over the node.
+    /// </summary>
+    public ValueTask<string> Title => GetTitle(default);
+
+    /// <inheritdoc cref="Title" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetTitle(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getTitle", cancellationToken);
+
+    /// <inheritdoc cref="Title" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetTitle(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setTitle", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// Indicates whether an element's attribute values and the values of its Text node children are to be translated when the page is localized, or whether to leave them unchanged.
+    /// It reflects the value of the translate HTML global attribute.
+    /// </summary>
+    public ValueTask<bool> Translate => GetTranslate(default);
+
+    /// <inheritdoc cref="Translate" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<bool> GetTranslate(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<bool>("getTranslate", cancellationToken);
+
+    /// <inheritdoc cref="Translate" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetTranslate(bool value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setTranslate", cancellationToken, [value]);
+
+
+    // extra
 
     /// <summary>
     /// <para>htmlElement === document.activeElement;</para>
@@ -274,17 +701,16 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     public ValueTask<bool> HasFocus => GetHasFocus(default);
 
-    /// <summary>
-    /// <para>htmlElement === document.activeElement;</para>
-    /// <para>If true, the htmlElement has focus, otherwise false.</para>
-    /// </summary>
+    /// <inheritdoc cref="HasFocus" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<bool> GetHasFocus(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<bool>("hasFocus", cancellationToken);
 
 
+    // methods
+
     /// <summary>
-    /// <para>The <i>HTMLElement.click()</i> method simulates a mouse click on an element.</para>
+    /// <para>Simulates a mouse click on an element.</para>
     /// <para>
     /// When click() is used with supported elements(such as an &lt;input&gt;), it fires the element's click event.
     /// This event then bubbles up to elements higher in the document tree (or event chain) and fires their click events.
@@ -295,10 +721,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     public async ValueTask Click(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("click", cancellationToken);
 
     /// <summary>
-    /// <para>
-    /// The <i>HTMLElement.focus()</i> method sets focus on the specified element, if it can be focused.
-    /// The focused element is the element that will receive keyboard and similar events by default.
-    /// </para>
+    /// <para>Sets focus on the specified element, if it can be focused. The focused element is the element that will receive keyboard and similar events by default.</para>
     /// <para>
     /// By default the browser will scroll the element into view after focusing it, and it may also provide visible indication of the focused element(typically by displaying a "focus ring" around the element).
     /// Parameter options are provided to disable the default scrolling and force visible indication on elements.
@@ -314,14 +737,14 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     public async ValueTask Focus(bool preventScroll = false, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("focus", cancellationToken, [preventScroll]);
 
     /// <summary>
-    /// The <i>HTMLElement.blur()</i> method removes keyboard focus from the current element.
+    /// Removes keyboard focus from the current element.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask Blur(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("blur", cancellationToken);
 
     /// <summary>
-    /// <para>The <i>showPopover()</i> method of the HTMLElement interface shows a popover element (i.e. one that has a valid popover attribute) by adding it to the top layer.</para>
+    /// <para>Shows a popover element (i.e. one that has a valid popover attribute) by adding it to the top layer.</para>
     /// <para>
     /// When <i>showPopover()</i> is called on an element with the popover attribute that is currently hidden, a beforetoggle event will be fired, followed by the popover showing, and then the toggle event firing.
     /// If the element is already showing, an error will be thrown.
@@ -332,7 +755,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     public async ValueTask ShowPopover(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("showPopover", cancellationToken);
 
     /// <summary>
-    /// <para>The <i>hidePopover()</i> method of the HTMLElement interface hides a popover element (i.e. one that has a valid popover attribute) by removing it from the top layer and styling it with display: none.</para>
+    /// <para>Hides a popover element (i.e. one that has a valid popover attribute) by removing it from the top layer and styling it with display: none.</para>
     /// <para>
     /// When <i>hidePopover()</i> is called on a showing element with the popover attribute, a beforetoggle event will be fired, followed by the popover being hidden, and then the toggle event firing.
     /// If the element is already hidden, an error is thrown.
@@ -343,7 +766,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     public async ValueTask HidePopover(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("hidePopover", cancellationToken);
 
     /// <summary>
-    /// <para>The <i>togglePopover()</i> method of the HTMLElement interface toggles a popover element (i.e. one that has a valid popover attribute) between the hidden and showing states.</para>
+    /// <para>Toggles a popover element (i.e. one that has a valid popover attribute) between the hidden and showing states.</para>
     /// <para>
     /// When <i>togglePopover()</i> is called on an element with the popover attribute:<br />
     /// 1. A beforetoggle event is fired.<br />
@@ -360,27 +783,13 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </returns>
     public async ValueTask<bool> TogglePopover(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<bool>("togglePopover", cancellationToken);
 
-    /// <summary>
-    /// <para>The <i>togglePopover()</i> method of the HTMLElement interface toggles a popover element (i.e. one that has a valid popover attribute) between the hidden and showing states.</para>
-    /// <para>
-    /// When <i>togglePopover()</i> is called on an element with the popover attribute:<br />
-    /// 1. A beforetoggle event is fired.<br />
-    /// 2. The popover toggles between hidden and showing:<br />
-    /// - i. If it was initially showing, it toggles to hidden.<br />
-    /// - ii. If it was initially hidden, it toggles to showing.<br />
-    /// 3. A toggle event is fired.
-    /// </para>
-    /// </summary>
+    /// <inheritdoc cref="TogglePopover(CancellationToken)" />
     /// <param name="force">
     /// <para>A boolean, which causes togglePopover() to behave like showPopover() or hidePopover(), except that it doesn't throw an exception if the popover is already in the target state.</para>
     /// <para>- If set to true, the popover is shown if it was initially hidden.If it was initially shown, nothing happens.</para>
     /// <para>- If set to false, the popover is hidden if it was initially shown. If it was initially hidden, nothing happens.</para>
     /// </param>
     /// <param name="cancellationToken"></param>
-    /// <returns>
-    /// <para>true if the popup is open after the call, and false otherwise.</para>
-    /// <para>None(undefined) may be returned in older browser versions(see browser compatibility).</para>
-    /// </returns>
     public async ValueTask<bool> TogglePopover(bool force, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<bool>("togglePopover", cancellationToken, [force]);
 
     #endregion
@@ -389,23 +798,17 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     #region Element
 
     /// <summary>
-    /// <para>The Element property <i>innerHTML</i> gets or sets the HTML or XML markup contained within the element.</para>
+    /// <para>Gets/Sets the HTML or XML markup contained within the element.</para>
     /// <para>To insert the HTML into the document rather than replace the contents of an element, use the method insertAdjacentHTML().</para>
     /// </summary>
     public ValueTask<string> InnerHTML => GetInnerHTML(default);
 
-    /// <summary>
-    /// <para>The Element property <i>innerHTML</i> gets or sets the HTML or XML markup contained within the element.</para>
-    /// <para>To insert the HTML into the document rather than replace the contents of an element, use the method insertAdjacentHTML().</para>
-    /// </summary>
+    /// <inheritdoc cref="InnerHTML" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<string> GetInnerHTML(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getInnerHTML", cancellationToken);
 
-    /// <summary>
-    /// <para>The Element property <i>innerHTML</i> gets or sets the HTML or XML markup contained within the element.</para>
-    /// <para>To insert the HTML into the document rather than replace the contents of an element, use the method insertAdjacentHTML().</para>
-    /// </summary>
+    /// <inheritdoc cref="InnerHTML" />
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
@@ -414,31 +817,19 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
 
     /// <summary>
     /// <para>
-    /// The <i>outerHTML</i> attribute of the Element DOM interface gets the serialized HTML fragment describing the element including its descendants.
+    /// Gets the serialized HTML fragment describing the element including its descendants.
     /// It can also be set to replace the element with nodes parsed from the given string.
     /// </para>
     /// <para>To only obtain the HTML representation of the contents of an element, or to replace the contents of an element, use the innerHTML property instead.</para>
     /// </summary>
     public ValueTask<string> OuterHTML => GetOuterHTML(default);
 
-    /// <summary>
-    /// <para>
-    /// The <i>outerHTML</i> attribute of the Element DOM interface gets the serialized HTML fragment describing the element including its descendants.
-    /// It can also be set to replace the element with nodes parsed from the given string.
-    /// </para>
-    /// <para>To only obtain the HTML representation of the contents of an element, or to replace the contents of an element, use the innerHTML property instead.</para>
-    /// </summary>
+    /// <inheritdoc cref="OuterHTML" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<string> GetOuterHTML(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getOuterHTML", cancellationToken);
 
-    /// <summary>
-    /// <para>
-    /// The <i>outerHTML</i> attribute of the Element DOM interface gets the serialized HTML fragment describing the element including its descendants.
-    /// It can also be set to replace the element with nodes parsed from the given string.
-    /// </para>
-    /// <para>To only obtain the HTML representation of the contents of an element, or to replace the contents of an element, use the innerHTML property instead.</para>
-    /// </summary>
+    /// <inheritdoc cref="OuterHTML" />
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
@@ -446,45 +837,36 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
 
 
     /// <summary>
-    /// The <i>Element.attributes</i> property returns a live collection of all attribute nodes registered to the specified node.
+    /// Returns a live collection of all attribute nodes registered to the specified node.
     /// It is a NamedNodeMap, not an Array, so it has no Array methods and the Attr nodes' indexes may differ among browsers.
     /// To be more specific, attributes is a key/value pair of strings that represents any information regarding that attribute.
     /// </summary>
     public ValueTask<Dictionary<string, string>> Attributes => GetAttributes(default);
 
-    /// <summary>
-    /// The <i>Element.attributes</i> property returns a live collection of all attribute nodes registered to the specified node.
-    /// It is a NamedNodeMap, not an Array, so it has no Array methods and the Attr nodes' indexes may differ among browsers.
-    /// To be more specific, attributes is a key/value pair of strings that represents any information regarding that attribute.
-    /// </summary>
+    /// <inheritdoc cref="Attributes" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<Dictionary<string, string>> GetAttributes(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<Dictionary<string, string>>("getAttributes", cancellationToken);
 
 
     /// <summary>
-    /// The <i>Element.childElementCount</i> read-only property returns the number of child elements of this element.
+    /// Returns the number of child elements of this element.
     /// </summary>
     public ValueTask<int> ChildElementCount => GetChildElementCount(default);
 
-    /// <summary>
-    /// The <i>Element.childElementCount</i> read-only property returns the number of child elements of this element.
-    /// </summary>
+    /// <inheritdoc cref="ChildElementCount" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<int> GetChildElementCount(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getChildElementCount", cancellationToken);
 
 
     /// <summary>
-    /// <para>The read-only <i>children</i> property returns a live HTMLCollection which contains all of the child elements of the element upon which it was called.</para>
+    /// <para>Returns a live HTMLCollection which contains all of the child elements of the element upon which it was called.</para>
     /// <üara>Element.children includes only element nodes.To get all child nodes, including non-element nodes like text and comment nodes, use Node.childNodes.</üara>
     /// </summary>
     public ValueTask<IHTMLElement[]> Children => GetChildren(default);
 
-    /// <summary>
-    /// <para>The read-only <i>children</i> property returns a live HTMLCollection which contains all of the child elements of the element upon which it was called.</para>
-    /// <üara>Element.children includes only element nodes.To get all child nodes, including non-element nodes like text and comment nodes, use Node.childNodes.</üara>
-    /// </summary>
+    /// <inheritdoc cref="Children" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IHTMLElement[]> GetChildren(CancellationToken cancellationToken) {
@@ -498,20 +880,16 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
 
 
     /// <summary>
-    /// The <i>className</i> property of the Element interface gets and sets the value of the class attribute of the specified element.
+    /// Gets/Sets the value of the class attribute of the specified element.
     /// </summary>
     public ValueTask<string> ClassName => GetClassName(default);
 
-    /// <summary>
-    /// The <i>className</i> property of the Element interface gets and sets the value of the class attribute of the specified element.
-    /// </summary>
+    /// <inheritdoc cref="ClassName" />
     /// <param name="cancellationToken"></param>
     /// <returns>A string variable representing the class or space-separated classes of the current element.</returns>
     public async ValueTask<string> GetClassName(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getClassName", cancellationToken);
 
-    /// <summary>
-    /// The <i>className</i> property of the Element interface gets and sets the value of the class attribute of the specified element.
-    /// </summary>
+    /// <inheritdoc cref="ClassName" />
     /// <param name="value">A string variable representing the class or space-separated classes of the current element.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
@@ -519,15 +897,12 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
 
 
     /// <summary>
-    /// <para>The <i>Element.classList</i> is a read-only property that returns a live DOMTokenList collection of the class attributes of the element. This can then be used to manipulate the class list.</para>
+    /// <para>Returns a live DOMTokenList collection of the class attributes of the element. This can then be used to manipulate the class list.</para>
     /// <üara>Using classList is a convenient alternative to accessing an element's list of classes as a space-delimited string via <i>element.className</i>.</üara>
     /// </summary>
     public ValueTask<string[]> ClassList => GetClassList(default);
 
-    /// <summary>
-    /// <para>The <i>Element.classList</i> is a read-only property that returns a live DOMTokenList collection of the class attributes of the element. This can then be used to manipulate the class list.</para>
-    /// <üara>Using classList is a convenient alternative to accessing an element's list of classes as a space-delimited string via <i>element.className</i>.</üara>
-    /// </summary>
+    /// <inheritdoc cref="ClassList" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<string[]> GetClassList(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string[]>("getClassList", cancellationToken);
@@ -536,7 +911,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
 
     /// <summary>
     /// <para>
-    /// The <i>Element.clientWidth</i> property is zero for inline elements and elements with no CSS; otherwise, it's the inner width of an element in pixels.
+    /// Is zero for inline elements and elements with no CSS; otherwise, it's the inner width of an element in pixels.
     /// It includes padding but excludes borders, margins, and vertical scrollbars (if present).
     /// </para>
     /// <para>
@@ -547,17 +922,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     public ValueTask<int> ClientWidth => GetClientWidth(default);
 
-    /// <summary>
-    /// <para>
-    /// The <i>Element.clientWidth</i> property is zero for inline elements and elements with no CSS; otherwise, it's the inner width of an element in pixels.
-    /// It includes padding but excludes borders, margins, and vertical scrollbars (if present).
-    /// </para>
-    /// <para>
-    /// When clientWidth is used on the root element(the &lt;html&gt; element), (or on &lt;body&gt; if the document is in quirks mode), the viewport's width (excluding any scrollbar) is returned.
-    /// <see href="https://www.w3.org/TR/2016/WD-cssom-view-1-20160317/#dom-element-clientwidth">This is a special case of clientWidth</see>.
-    /// </para>
-    /// <para>Note: This property will round the value to an integer. If you need a fractional value, use element.getBoundingClientRect().</para>
-    /// </summary>
+    /// <inheritdoc cref="ClientWidth" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<int> GetClientWidth(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getClientWidth", cancellationToken);
@@ -565,7 +930,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
 
     /// <summary>
     /// <para>
-    /// The <i>Element.clientHeight</i> read-only property is zero for elements with no CSS or inline layout boxes; otherwise, it's the inner height of an element in pixels.
+    /// Is zero for elements with no CSS or inline layout boxes; otherwise, it's the inner height of an element in pixels.
     /// It includes padding but excludes borders, margins, and horizontal scrollbars (if present).
     /// </para>
     /// <para>clientHeight can be calculated as: CSS height + CSS padding - height of horizontal scrollbar(if present).</para>
@@ -577,18 +942,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     public ValueTask<int> ClientHeight => GetClientHeight(default);
 
-    /// <summary>
-    /// <para>
-    /// The <i>Element.clientHeight</i> read-only property is zero for elements with no CSS or inline layout boxes; otherwise, it's the inner height of an element in pixels.
-    /// It includes padding but excludes borders, margins, and horizontal scrollbars (if present).
-    /// </para>
-    /// <para>clientHeight can be calculated as: CSS height + CSS padding - height of horizontal scrollbar(if present).</para>
-    /// <para>
-    /// When clientHeight is used on the root element(the &lt;html&gt; element), (or on &lt;body&gt; if the document is in quirks mode), the viewport's height (excluding any scrollbar) is returned.
-    /// <see href="https://www.w3.org/TR/2016/WD-cssom-view-1-20160317/#dom-element-clientheight">This is a special case of clientHeight</see>.
-    /// </para>
-    /// <para>Note: This property will round the value to an integer. If you need a fractional value, use element.getBoundingClientRect().</para>
-    /// </summary>
+    /// <inheritdoc cref="ClientHeight" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<int> GetClientHeight(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getClientHeight", cancellationToken);
@@ -605,15 +959,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     public ValueTask<int> ClientLeft => GetClientLeft(default);
 
-    /// <summary>
-    /// <para>
-    /// The width of the left border of an element in pixels.
-    /// It includes the width of the vertical scrollbar if the text direction of the element is right-to-left and if there is an overflow causing a left vertical scrollbar to be rendered.
-    /// clientLeft does not include the left margin or the left padding. clientLeft is read-only.
-    /// </para>
-    /// <para>Note: This property will round the value to an integer.If you need a fractional value, use element.getBoundingClientRect().</para>
-    /// <para>Note: When an element has display: inline, clientLeft returns 0 regardless of the element's border.</para>
-    /// </summary>
+    /// <inheritdoc cref="ClientLeft" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<int> GetClientLeft(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getClientLeft", cancellationToken);
@@ -631,16 +977,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     public ValueTask<int> ClientTop => GetClientTop(default);
 
-    /// <summary>
-    /// <para>The width of the top border of an element in pixels. It is a read-only, integer property of element.</para>
-    /// <para>
-    /// As it happens, all that lies between the two locations (offsetTop and client area top) is the element's border.
-    /// This is because the offsetTop indicates the location of the top of the border (not the margin) while the client area starts immediately below the border, (client area includes padding.)
-    /// Therefore, the clientTop value will always equal the integer portion of the .getComputedStyle() value for "border-top-width". (Actually might be Math.round(parseFloat()).)
-    /// For example, if the computed "border-top-width" is zero, then clientTop is also zero.
-    /// </para>
-    /// <para>Note: This property will round the value to an integer.If you need a fractional value, use element.getBoundingClientRect().</para>
-    /// </summary>
+    /// <inheritdoc cref="ClientTop" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<int> GetClientTop(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getClientTop", cancellationToken);
@@ -648,7 +985,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
 
 
     /// <summary>
-    /// <para>The <i>Element.scrollWidth</i> read-only property is a measurement of the width of an element's content, including content not visible on the screen due to overflow.</para>
+    /// <para>Is a measurement of the width of an element's content, including content not visible on the screen due to overflow.</para>
     /// <para>
     /// The scrollWidth value is equal to the minimum width the element would require in order to fit all the content in the viewport without using a horizontal scrollbar.
     /// The width is measured in the same way as clientWidth: it includes the element's padding, but not its border, margin or vertical scrollbar (if present).
@@ -659,23 +996,14 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     public ValueTask<int> ScrollWidth => GetScrollWidth(default);
 
-    /// <summary>
-    /// <para>The <i>Element.scrollWidth</i> read-only property is a measurement of the width of an element's content, including content not visible on the screen due to overflow.</para>
-    /// <para>
-    /// The scrollWidth value is equal to the minimum width the element would require in order to fit all the content in the viewport without using a horizontal scrollbar.
-    /// The width is measured in the same way as clientWidth: it includes the element's padding, but not its border, margin or vertical scrollbar (if present).
-    /// It can also include the width of pseudo-elements such as ::before or ::after.
-    /// If the element's content can fit without a need for horizontal scrollbar, its scrollWidth is equal to clientWidth.
-    /// </para>
-    /// <para>Note: This property will round the value to an integer.If you need a fractional value, use element.getBoundingClientRect().</para>
-    /// </summary>
+    /// <inheritdoc cref="ScrollWidth" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<int> GetScrollWidth(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getScrollWidth", cancellationToken);
 
 
     /// <summary>
-    /// <para>The <i>Element.scrollHeight</i> read-only property is a measurement of the height of an element's content, including content not visible on the screen due to overflow.</para>
+    /// <para>Is a measurement of the height of an element's content, including content not visible on the screen due to overflow.</para>
     /// <para>
     /// The user's viewport is an element with four regions labeled padding-top, border-top, border-bottom, padding-bottom.
     /// The scroll height goes from the container's padding top to the end of the padding bottom, well beyond the top and bottom of the viewport.
@@ -690,27 +1018,14 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     public ValueTask<int> ScrollHeight => GetScrollHeight(default);
 
-    /// <summary>
-    /// <para>The <i>Element.scrollHeight</i> read-only property is a measurement of the height of an element's content, including content not visible on the screen due to overflow.</para>
-    /// <para>
-    /// The user's viewport is an element with four regions labeled padding-top, border-top, border-bottom, padding-bottom.
-    /// The scroll height goes from the container's padding top to the end of the padding bottom, well beyond the top and bottom of the viewport.
-    /// </para>
-    /// <para>
-    /// The scrollHeight value is equal to the minimum height the element would require in order to fit all the content in the viewport without using a vertical scrollbar.
-    /// The height is measured in the same way as clientHeight: it includes the element's padding, but not its border, margin or horizontal scrollbar (if present).
-    /// It can also include the height of pseudo-elements such as ::before or ::after.
-    /// If the element's content can fit without a need for vertical scrollbar, its scrollHeight is equal to clientHeight.
-    /// </para>
-    /// <para>Note: This property will round the value to an integer.If you need a fractional value, use Element.getBoundingClientRect().</para>
-    /// </summary>
+    /// <inheritdoc cref="ScrollHeight" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<int> GetScrollHeight(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getScrollHeight", cancellationToken);
 
 
     /// <summary>
-    /// <para>The <i>Element.scrollLeft</i> property gets or sets the number of pixels that an element's content is scrolled from its left edge.</para>
+    /// <para>Gets/Sets the number of pixels that an element's content is scrolled from its left edge.</para>
     /// <para>
     /// If the element's direction is rtl (right-to-left), then scrollLeft is 0 when the scrollbar is at its rightmost position (at the start of the scrolled content),
     /// and then increasingly negative as you scroll towards the end of the content.
@@ -725,38 +1040,12 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     public ValueTask<int> ScrollLeft => GetScrollLeft(default);
 
-    /// <summary>
-    /// <para>The <i>Element.scrollLeft</i> property gets or sets the number of pixels that an element's content is scrolled from its left edge.</para>
-    /// <para>
-    /// If the element's direction is rtl (right-to-left), then scrollLeft is 0 when the scrollbar is at its rightmost position (at the start of the scrolled content),
-    /// and then increasingly negative as you scroll towards the end of the content.
-    /// </para>
-    /// <para>
-    /// It can be specified as any integer value.However:<br />
-    /// - If the element can't be scrolled (e.g., it has no overflow), scrollLeft is set to 0.<br />
-    /// - If specified as a value less than 0 (greater than 0 for right-to-left elements), scrollLeft is set to 0.<br />
-    /// - If specified as a value greater than the maximum that the content can be scrolled, scrollLeft is set to the maximum.
-    /// </para>
-    /// <para>Warning: On systems using display scaling, scrollLeft may give you a decimal value. (It will be rounded down to the next integer.)</para>
-    /// </summary>
+    /// <inheritdoc cref="ScrollLeft" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<int> GetScrollLeft(CancellationToken cancellationToken) => (int)await (await htmlElementTask).InvokeTrySync<double>("getScrollLeft", cancellationToken);
 
-    /// <summary>
-    /// <para>The <i>Element.scrollLeft</i> property gets or sets the number of pixels that an element's content is scrolled from its left edge.</para>
-    /// <para>
-    /// If the element's direction is rtl (right-to-left), then scrollLeft is 0 when the scrollbar is at its rightmost position (at the start of the scrolled content),
-    /// and then increasingly negative as you scroll towards the end of the content.
-    /// </para>
-    /// <para>
-    /// It can be specified as any integer value.However:<br />
-    /// - If the element can't be scrolled (e.g., it has no overflow), scrollLeft is set to 0.<br />
-    /// - If specified as a value less than 0 (greater than 0 for right-to-left elements), scrollLeft is set to 0.<br />
-    /// - If specified as a value greater than the maximum that the content can be scrolled, scrollLeft is set to the maximum.
-    /// </para>
-    /// <para>Warning: On systems using display scaling, scrollLeft may give you a decimal value. (It will be rounded down to the next integer.)</para>
-    /// </summary>
+    /// <inheritdoc cref="ScrollLeft" />
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
@@ -764,7 +1053,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
 
 
     /// <summary>
-    /// <para>The <i>Element.scrollTop</i> property gets or sets the number of pixels that an element's content is scrolled vertically.</para>
+    /// <para>Gets/Sets the number of pixels that an element's content is scrolled vertically.</para>
     /// <para>
     /// An element's scrollTop value is a measurement of the distance from the element's top to its topmost visible content.
     /// When an element's content does not generate a vertical scrollbar, then its scrollTop value is 0.
@@ -783,55 +1072,22 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     public ValueTask<int> ScrollTop => GetScrollTop(default);
 
-    /// <summary>
-    /// <para>The <i>Element.scrollTop</i> property gets or sets the number of pixels that an element's content is scrolled vertically.</para>
-    /// <para>
-    /// An element's scrollTop value is a measurement of the distance from the element's top to its topmost visible content.
-    /// When an element's content does not generate a vertical scrollbar, then its scrollTop value is 0.
-    /// </para>
-    /// <para>
-    /// scrollTop can be set to any integer value, with certain caveats:<br />
-    /// - If the element can't be scrolled (e.g. it has no overflow or if the element has a property of "non-scrollable"), scrollTop is 0.<br />
-    /// - scrollTop doesn't respond to negative values; instead, it sets itself back to 0.<br />
-    /// - If set to a value greater than the maximum available for the element, scrollTop settles itself to the maximum value.
-    /// </para>
-    /// <para>
-    /// When scrollTop is used on the root element (the &lt;html&gt; element), the scrollY of the window is returned.
-    /// <see href="https://www.w3.org/TR/2016/WD-cssom-view-1-20160317/#dom-element-scrolltop">This is a special case of scrollTop</see>.
-    /// </para>
-    /// <para>Warning: On systems using display scaling, scrollTop may give you a decimal value. (It will be rounded down to the next integer.)</para>
-    /// </summary>
+    /// <inheritdoc cref="ScrollTop" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<int> GetScrollTop(CancellationToken cancellationToken) => (int)await (await htmlElementTask).InvokeTrySync<double>("getScrollTop", cancellationToken);
 
-    /// <summary>
-    /// <para>The <i>Element.scrollTop</i> property gets or sets the number of pixels that an element's content is scrolled vertically.</para>
-    /// <para>
-    /// An element's scrollTop value is a measurement of the distance from the element's top to its topmost visible content.
-    /// When an element's content does not generate a vertical scrollbar, then its scrollTop value is 0.
-    /// </para>
-    /// <para>
-    /// scrollTop can be set to any integer value, with certain caveats:<br />
-    /// - If the element can't be scrolled (e.g. it has no overflow or if the element has a property of "non-scrollable"), scrollTop is 0.<br />
-    /// - scrollTop doesn't respond to negative values; instead, it sets itself back to 0.<br />
-    /// - If set to a value greater than the maximum available for the element, scrollTop settles itself to the maximum value.
-    /// </para>
-    /// <para>
-    /// When scrollTop is used on the root element (the &lt;html&gt; element), the scrollY of the window is returned.
-    /// <see href="https://www.w3.org/TR/2016/WD-cssom-view-1-20160317/#dom-element-scrolltop">This is a special case of scrollTop</see>.
-    /// </para>
-    /// <para>Warning: On systems using display scaling, scrollTop may give you a decimal value. (It will be rounded down to the next integer.)</para>
-    /// </summary>
+    /// <inheritdoc cref="ScrollTop" />
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask SetScrollTop(int value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setScrollTop", cancellationToken, [value]);
 
 
+    // methods
 
     /// <summary>
-    /// The <i>Element.getBoundingClientRect()</i> method returns a DOMRect object providing information about the size of an element and its position relative to the viewport.
+    /// Returns a DOMRect object providing information about the size of an element and its position relative to the viewport.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns>
@@ -863,7 +1119,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     public async ValueTask<DOMRect> GetBoundingClientRect(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<DOMRect>("getBoundingClientRect", cancellationToken);
 
     /// <summary>
-    /// <para>The <i>getClientRects()</i> method of the Element interface returns a collection of DOMRect objects that indicate the bounding rectangles for each CSS border box in a client.</para>
+    /// <para>Returns a collection of DOMRect objects that indicate the bounding rectangles for each CSS border box in a client.</para>
     /// <para>Most elements only have one border box each, but a multiline inline-level element(such as a multiline &lt;span&gt; element, by default) has a border box around each line.</para>
     /// </summary>
     /// <param name="cancellationToken"></param>
@@ -885,7 +1141,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
 
 
     /// <summary>
-    /// The <i>Element.hasAttribute()</i> method returns a Boolean value indicating whether the specified element has the specified attribute or not.
+    /// Returns a Boolean value indicating whether the specified element has the specified attribute or not.
     /// </summary>
     /// <param name="name">A string representing the name of the attribute.</param>
     /// <param name="cancellationToken"></param>
@@ -893,7 +1149,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     public async ValueTask<bool> HasAttribute(string name, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<bool>("hasAttribute", cancellationToken, [name]);
 
     /// <summary>
-    /// The <i>hasAttributes()</i> method of the Element interface returns a boolean value indicating whether the current element has any attributes or not.
+    /// Returns a boolean value indicating whether the current element has any attributes or not.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
@@ -902,7 +1158,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
 
     /// <summary>
     /// <para>
-    /// The <i>setPointerCapture()</i> method of the Element interface is used to designate a specific element as the capture target of future pointer events.
+    /// Is used to designate a specific element as the capture target of future pointer events.
     /// Subsequent events for the pointer will be targeted at the capture element until capture is released (via Element.releasePointerCapture() or the pointerup event is fired).
     /// </para>
     /// <para>
@@ -922,7 +1178,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     public async ValueTask SetPointerCapture(long pointerId, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setPointerCapture", cancellationToken, [pointerId]);
 
     /// <summary>
-    /// <para>The <i>releasePointerCapture()</i> method of the Element interface releases (stops) pointer capture that was previously set for a specific (PointerEvent) pointer.</para>
+    /// <para>Releases (stops) pointer capture that was previously set for a specific (PointerEvent) pointer.</para>
     /// <para>See the <see cref="SetPointerCapture(long, CancellationToken)"/> method for a description of pointer capture and how to set it for a particular element.</para>
     /// </summary>
     /// <param name="pointerId">The pointerId of a PointerEvent object.</param>
@@ -931,7 +1187,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     public async ValueTask ReleasePointerCapture(long pointerId, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("releasePointerCapture", cancellationToken, [pointerId]);
 
     /// <summary>
-    /// The <i>hasPointerCapture()</i> method of the Element interface checks whether the element on which it is invoked has pointer capture for the pointer identified by the given pointer ID.
+    /// Checks whether the element on which it is invoked has pointer capture for the pointer identified by the given pointer ID.
     /// </summary>
     /// <param name="pointerId">The pointerId of a PointerEvent object.</param>
     /// <param name="cancellationToken"></param>
@@ -940,7 +1196,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
 
 
     /// <summary>
-    /// The <i>scroll()</i> method of the Element interface scrolls the element to a particular set of coordinates inside a given element.
+    /// Scrolls the element to a particular set of coordinates inside a given element.
     /// </summary>
     /// <param name="left">Specifies the number of pixels along the X axis to scroll the window or element.</param>
     /// <param name="top">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
@@ -949,7 +1205,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     public async ValueTask Scroll(int left, int top, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("scroll", cancellationToken, [left, top]);
 
     /// <summary>
-    /// The <i>scrollBy()</i> method of the Element interface scrolls an element by the given amount.
+    /// Scrolls an element by the given amount.
     /// </summary>
     /// <param name="x">Specifies the number of pixels along the X axis to scroll the window or element.</param>
     /// <param name="y">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
@@ -958,7 +1214,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     public async ValueTask ScrollBy(int x, int y, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("scrollBy", cancellationToken, [x, y]);
 
     /// <summary>
-    /// The Element interface's <i>scrollIntoView()</i> method scrolls the element's ancestor containers such that the element on which <i>scrollIntoView()</i> is called is visible to the user.
+    /// Scrolls the element's ancestor containers such that the element on which <i>scrollIntoView()</i> is called is visible to the user.
     /// </summary>
     /// <param name="block">Defines vertical alignment. One of "start", "center", "end", or "nearest". Defaults to "start".</param>
     /// <param name="inline">Defines horizontal alignment. One of "start", "center", "end", or "nearest". Defaults to "nearest".</param>
