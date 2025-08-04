@@ -798,6 +798,171 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     #region Element
 
     /// <summary>
+    /// Returns a live collection of all attribute nodes registered to the specified node.
+    /// It is a NamedNodeMap, not an Array, so it has no Array methods and the Attr nodes' indexes may differ among browsers.
+    /// To be more specific, attributes is a key/value pair of strings that represents any information regarding that attribute.
+    /// </summary>
+    public ValueTask<Dictionary<string, string>> Attributes => GetAttributes(default);
+
+    /// <inheritdoc cref="Attributes" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<Dictionary<string, string>> GetAttributes(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<Dictionary<string, string>>("getAttributes", cancellationToken);
+
+
+    /// <summary>
+    /// <para>Returns a live DOMTokenList collection of the class attributes of the element. This can then be used to manipulate the class list.</para>
+    /// <üara>Using classList is a convenient alternative to accessing an element's list of classes as a space-delimited string via <i>element.className</i>.</üara>
+    /// </summary>
+    public ValueTask<string[]> ClassList => GetClassList(default);
+
+    /// <inheritdoc cref="ClassList" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string[]> GetClassList(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string[]>("getClassList", cancellationToken);
+
+
+    /// <summary>
+    /// Gets/Sets the value of the class attribute of the specified element.
+    /// </summary>
+    public ValueTask<string> ClassName => GetClassName(default);
+
+    /// <inheritdoc cref="ClassName" />
+    /// <param name="cancellationToken"></param>
+    /// <returns>A string variable representing the class or space-separated classes of the current element.</returns>
+    public async ValueTask<string> GetClassName(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getClassName", cancellationToken);
+
+    /// <inheritdoc cref="ClassName" />
+    /// <param name="value">A string variable representing the class or space-separated classes of the current element.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetClassName(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setClassName", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>
+    /// Is zero for inline elements and elements with no CSS; otherwise, it's the inner width of an element in pixels.
+    /// It includes padding but excludes borders, margins, and vertical scrollbars (if present).
+    /// </para>
+    /// <para>
+    /// When clientWidth is used on the root element(the &lt;html&gt; element), (or on &lt;body&gt; if the document is in quirks mode), the viewport's width (excluding any scrollbar) is returned.
+    /// <see href="https://www.w3.org/TR/2016/WD-cssom-view-1-20160317/#dom-element-clientwidth">This is a special case of clientWidth</see>.
+    /// </para>
+    /// <para>Note: This property will round the value to an integer. If you need a fractional value, use element.getBoundingClientRect().</para>
+    /// </summary>
+    public ValueTask<int> ClientWidth => GetClientWidth(default);
+
+    /// <inheritdoc cref="ClientWidth" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<int> GetClientWidth(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getClientWidth", cancellationToken);
+
+    /// <summary>
+    /// <para>
+    /// Is zero for elements with no CSS or inline layout boxes; otherwise, it's the inner height of an element in pixels.
+    /// It includes padding but excludes borders, margins, and horizontal scrollbars (if present).
+    /// </para>
+    /// <para>clientHeight can be calculated as: CSS height + CSS padding - height of horizontal scrollbar(if present).</para>
+    /// <para>
+    /// When clientHeight is used on the root element(the &lt;html&gt; element), (or on &lt;body&gt; if the document is in quirks mode), the viewport's height (excluding any scrollbar) is returned.
+    /// <see href="https://www.w3.org/TR/2016/WD-cssom-view-1-20160317/#dom-element-clientheight">This is a special case of clientHeight</see>.
+    /// </para>
+    /// <para>Note: This property will round the value to an integer. If you need a fractional value, use element.getBoundingClientRect().</para>
+    /// </summary>
+    public ValueTask<int> ClientHeight => GetClientHeight(default);
+
+    /// <inheritdoc cref="ClientHeight" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<int> GetClientHeight(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getClientHeight", cancellationToken);
+
+    /// <summary>
+    /// <para>
+    /// The width of the left border of an element in pixels.
+    /// It includes the width of the vertical scrollbar if the text direction of the element is right-to-left and if there is an overflow causing a left vertical scrollbar to be rendered.
+    /// clientLeft does not include the left margin or the left padding. clientLeft is read-only.
+    /// </para>
+    /// <para>Note: This property will round the value to an integer.If you need a fractional value, use element.getBoundingClientRect().</para>
+    /// <para>Note: When an element has display: inline, clientLeft returns 0 regardless of the element's border.</para>
+    /// </summary>
+    public ValueTask<int> ClientLeft => GetClientLeft(default);
+
+    /// <inheritdoc cref="ClientLeft" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<int> GetClientLeft(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getClientLeft", cancellationToken);
+
+    /// <summary>
+    /// <para>The width of the top border of an element in pixels. It is a read-only, integer property of element.</para>
+    /// <para>
+    /// As it happens, all that lies between the two locations (offsetTop and client area top) is the element's border.
+    /// This is because the offsetTop indicates the location of the top of the border (not the margin) while the client area starts immediately below the border, (client area includes padding.)
+    /// Therefore, the clientTop value will always equal the integer portion of the .getComputedStyle() value for "border-top-width". (Actually might be Math.round(parseFloat()).)
+    /// For example, if the computed "border-top-width" is zero, then clientTop is also zero.
+    /// </para>
+    /// <para>Note: This property will round the value to an integer.If you need a fractional value, use element.getBoundingClientRect().</para>
+    /// </summary>
+    public ValueTask<int> ClientTop => GetClientTop(default);
+
+    /// <inheritdoc cref="ClientTop" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<int> GetClientTop(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getClientTop", cancellationToken);
+
+
+    /// <summary>
+    /// <para>Provides the "effective" CSS zoom of an element, taking into account the zoom applied to the element and all its parent elements.</para>
+    /// <para>
+    /// The value calculated by multiplying the CSS zoom values of the element and all of its parents.
+    /// For example, if three elements with zoom values of 2, 1.5, and 3, are nested within each other, the most deeply nested element will have a currentCSSZoom value of 9.
+    /// If the element doesn't have a CSS box, for example because display: none is set on the element or one of its parents, then the currentCSSZoom is set to 1.
+    /// </para>
+    /// <para>
+    /// Note that some methods, such as Element.getBoundingClientRect(), return dimensions and position that are relative to the viewport, and hence include the effects of CSS zoom.
+    /// Other properties and methods return values that are relative to the element itself, and do not include the effects of zooming.
+    /// These include, for example, client* properties such as Element.clientHeight, scroll*() methods like Element.scroll(), and offset* properties such as HTMLElement.offsetHeight.
+    /// The currentCSSZoom property can be used to scale these values to adjust for the effects of zooming.
+    /// </para>
+    /// </summary>
+    public ValueTask<double> CurrentCSSZoom => GetCurrentCSSZoom(default);
+
+    /// <inheritdoc cref="CurrentCSSZoom" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<double> GetCurrentCSSZoom(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<double>("getCurrentCSSZoom", cancellationToken);
+
+
+    /// <summary>
+    /// <para>Represents the element's identifier, reflecting the id global attribute.</para>
+    /// <para>If the id value is not the empty string, it must be unique in a document.</para>
+    /// <para>The id is often used with getElementById() to retrieve a particular element. Another common case is to use an element's ID as a selector when styling the document with CSS.</para>
+    /// </summary>
+    public ValueTask<string> Id => GetId(default);
+
+    /// <inheritdoc cref="Id" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetId(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getId", cancellationToken);
+
+    /// <inheritdoc cref="Id" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetId(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setId", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// A boolean indicating whether the node is connected (directly or indirectly) to a Document object.
+    /// </summary>
+    public ValueTask<bool> IsConnected => GetIsConnected(default);
+
+    /// <inheritdoc cref="IsConnected" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<bool> GetIsConnected(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<bool>("getIsConnected", cancellationToken);
+
+
+    /// <summary>
     /// <para>Gets/Sets the HTML or XML markup contained within the element.</para>
     /// <para>To insert the HTML into the document rather than replace the contents of an element, use the method insertAdjacentHTML().</para>
     /// </summary>
@@ -837,17 +1002,247 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
 
 
     /// <summary>
-    /// Returns a live collection of all attribute nodes registered to the specified node.
-    /// It is a NamedNodeMap, not an Array, so it has no Array methods and the Attr nodes' indexes may differ among browsers.
-    /// To be more specific, attributes is a key/value pair of strings that represents any information regarding that attribute.
+    /// Represents the part identifier(s) of the element (i.e., set using the part attribute), returned as a DOMTokenList. These can be used to style parts of a shadow DOM, via the ::part pseudo-element.
     /// </summary>
-    public ValueTask<Dictionary<string, string>> Attributes => GetAttributes(default);
+    public ValueTask<string[]> Part => GetPart(default);
 
-    /// <inheritdoc cref="Attributes" />
+    /// <inheritdoc cref="Part" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<Dictionary<string, string>> GetAttributes(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<Dictionary<string, string>>("getAttributes", cancellationToken);
+    public async ValueTask<string[]> GetPart(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string[]>("getPart", cancellationToken);
 
+
+    /// <summary>
+    /// <para>Is a measurement of the width of an element's content, including content not visible on the screen due to overflow.</para>
+    /// <para>
+    /// The scrollWidth value is equal to the minimum width the element would require in order to fit all the content in the viewport without using a horizontal scrollbar.
+    /// The width is measured in the same way as clientWidth: it includes the element's padding, but not its border, margin or vertical scrollbar (if present).
+    /// It can also include the width of pseudo-elements such as ::before or ::after.
+    /// If the element's content can fit without a need for horizontal scrollbar, its scrollWidth is equal to clientWidth.
+    /// </para>
+    /// <para>Note: This property will round the value to an integer.If you need a fractional value, use element.getBoundingClientRect().</para>
+    /// </summary>
+    public ValueTask<int> ScrollWidth => GetScrollWidth(default);
+
+    /// <inheritdoc cref="ScrollWidth" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<int> GetScrollWidth(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getScrollWidth", cancellationToken);
+
+    /// <summary>
+    /// <para>Is a measurement of the height of an element's content, including content not visible on the screen due to overflow.</para>
+    /// <para>
+    /// The user's viewport is an element with four regions labeled padding-top, border-top, border-bottom, padding-bottom.
+    /// The scroll height goes from the container's padding top to the end of the padding bottom, well beyond the top and bottom of the viewport.
+    /// </para>
+    /// <para>
+    /// The scrollHeight value is equal to the minimum height the element would require in order to fit all the content in the viewport without using a vertical scrollbar.
+    /// The height is measured in the same way as clientHeight: it includes the element's padding, but not its border, margin or horizontal scrollbar (if present).
+    /// It can also include the height of pseudo-elements such as ::before or ::after.
+    /// If the element's content can fit without a need for vertical scrollbar, its scrollHeight is equal to clientHeight.
+    /// </para>
+    /// <para>Note: This property will round the value to an integer.If you need a fractional value, use Element.getBoundingClientRect().</para>
+    /// </summary>
+    public ValueTask<int> ScrollHeight => GetScrollHeight(default);
+
+    /// <inheritdoc cref="ScrollHeight" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<int> GetScrollHeight(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getScrollHeight", cancellationToken);
+
+    /// <summary>
+    /// <para>Gets/Sets the number of pixels that an element's content is scrolled from its left edge.</para>
+    /// <para>
+    /// If the element's direction is rtl (right-to-left), then scrollLeft is 0 when the scrollbar is at its rightmost position (at the start of the scrolled content),
+    /// and then increasingly negative as you scroll towards the end of the content.
+    /// </para>
+    /// <para>
+    /// It can be specified as any integer value.However:<br />
+    /// - If the element can't be scrolled (e.g., it has no overflow), scrollLeft is set to 0.<br />
+    /// - If specified as a value less than 0 (greater than 0 for right-to-left elements), scrollLeft is set to 0.<br />
+    /// - If specified as a value greater than the maximum that the content can be scrolled, scrollLeft is set to the maximum.
+    /// </para>
+    /// <para>Warning: On systems using display scaling, scrollLeft may give you a decimal value. (It will be rounded down to the next integer.)</para>
+    /// </summary>
+    public ValueTask<int> ScrollLeft => GetScrollLeft(default);
+
+    /// <inheritdoc cref="ScrollLeft" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<int> GetScrollLeft(CancellationToken cancellationToken) => (int)await (await htmlElementTask).InvokeTrySync<double>("getScrollLeft", cancellationToken);
+
+    /// <inheritdoc cref="ScrollLeft" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetScrollLeft(int value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setScrollLeft", cancellationToken, [value]);
+
+    /// <summary>
+    /// <para>Gets/Sets the number of pixels that an element's content is scrolled vertically.</para>
+    /// <para>
+    /// An element's scrollTop value is a measurement of the distance from the element's top to its topmost visible content.
+    /// When an element's content does not generate a vertical scrollbar, then its scrollTop value is 0.
+    /// </para>
+    /// <para>
+    /// scrollTop can be set to any integer value, with certain caveats:<br />
+    /// - If the element can't be scrolled (e.g. it has no overflow or if the element has a property of "non-scrollable"), scrollTop is 0.<br />
+    /// - scrollTop doesn't respond to negative values; instead, it sets itself back to 0.<br />
+    /// - If set to a value greater than the maximum available for the element, scrollTop settles itself to the maximum value.
+    /// </para>
+    /// <para>
+    /// When scrollTop is used on the root element (the &lt;html&gt; element), the scrollY of the window is returned.
+    /// <see href="https://www.w3.org/TR/2016/WD-cssom-view-1-20160317/#dom-element-scrolltop">This is a special case of scrollTop</see>.
+    /// </para>
+    /// <para>Warning: On systems using display scaling, scrollTop may give you a decimal value. (It will be rounded down to the next integer.)</para>
+    /// </summary>
+    public ValueTask<int> ScrollTop => GetScrollTop(default);
+
+    /// <inheritdoc cref="ScrollTop" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<int> GetScrollTop(CancellationToken cancellationToken) => (int)await (await htmlElementTask).InvokeTrySync<double>("getScrollTop", cancellationToken);
+
+    /// <inheritdoc cref="ScrollTop" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetScrollTop(int value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setScrollTop", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// Returns the name of the shadow DOM slot the element is inserted in.<br />
+    /// A slot is a placeholder inside a web component that users can fill with their own markup (see Using templates and slots for more information).
+    /// </summary>
+    public ValueTask<string> Slot => GetSlot(default);
+
+    /// <inheritdoc cref="Slot" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetSlot(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getSlot", cancellationToken);
+
+    /// <inheritdoc cref="Slot" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetSlot(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setSlot", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// The local part of the qualified name of an element.
+    /// </summary>
+    public ValueTask<string> LocalName => GetLocalName(default);
+
+    /// <inheritdoc cref="LocalName" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetLocalName(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getLocalName", cancellationToken);
+
+    /// <summary>
+    /// The namespace URI of the element, or null if the element is not in a namespace.
+    /// </summary>
+    public ValueTask<string?> NamespaceURI => GetNamespaceURI(default);
+
+    /// <inheritdoc cref="NamespaceURI" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetNamespaceURI(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getNamespaceURI", cancellationToken);
+
+    /// <summary>
+    /// The namespace prefix of the specified element, or null if no prefix is specified.
+    /// </summary>
+    public ValueTask<string?> Prefix => GetPrefix(default);
+
+    /// <inheritdoc cref="Prefix" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetPrefix(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getPrefix", cancellationToken);
+
+    /// <summary>
+    /// <para>The absolute base URL of the document containing the node.</para>
+    /// <para>
+    /// The base URL is used to resolve relative URLs when the browser needs to obtain an absolute URL,
+    /// for example when processing the HTML &lt;img&gt; element's src attribute or the xlink:href Deprecated or href attributes in SVG.
+    /// </para>
+    /// <para>Although this property is read-only, its value is determined by an algorithm each time the property is accessed, and may change if the conditions changed.</para>
+    /// <para>
+    /// The base URL is determined as follows:<br />
+    /// 1. By default, the base URL is the location of the document (as determined by window.location).<br />
+    /// 2. If it is an HTML Document and there is a &lt;Base&gt; element in the document, the href value of the first Base element with such an attribute is used instead.
+    /// </para>
+    /// </summary>
+    public ValueTask<string> BaseURI => GetBaseURI(default);
+
+    /// <inheritdoc cref="BaseURI" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetBaseURI(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getBaseURI", cancellationToken);
+
+    /// <summary>
+    /// <para>The tag name of the element on which it's called.</para>
+    /// <para>
+    /// For example, if the element is an &lt;img&gt;, its tagName property is IMG (for HTML documents; it may be cased differently for XML/XHTML documents).
+    /// Note: You can use the localName property to access the Element's local name — which for the case in the example is img (lowercase).
+    /// </para>
+    /// </summary>
+    public ValueTask<string> TagName => GetTagName(default);
+
+    /// <inheritdoc cref="TagName" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetTagName(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getTagName", cancellationToken);
+
+    /// <summary>
+    /// <para>The name of the current node as a string.</para>
+    /// <para>
+    /// Values for the different types of nodes are:<br />
+    /// - Attr: The value of Attr.name, that is the qualified name of the attribute<br />
+    /// - CDATASection: The string "#cdata-section"<br />
+    /// - Comment: The string "#comment"<br />
+    /// - Document: The string "#document"<br />
+    /// - DocumentFragment: The string "#document-fragment"<br />
+    /// - DocumentType: The value of DocumentType.name<br />
+    /// - Element: The value of Element.tagName, that is the uppercase name of the element tag if an HTML element, or the lowercase element tag if an XML element (like a SVG or MathML element)<br />
+    /// - ProcessingInstruction: The value of ProcessingInstruction.target<br />
+    /// - Text: The string "#text"
+    /// </para>
+    /// </summary>
+    public ValueTask<string> NodeName => GetNodeName(default);
+
+    /// <inheritdoc cref="NodeName" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetNodeName(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getNodeName", cancellationToken);
+
+    /// <summary>
+    /// <para>An integer that identifies what the node is. It distinguishes different kind of nodes from each other, such as elements, text and comments.</para>
+    /// <para>
+    /// Possible values are:<br />
+    /// - 1: ELEMENT_NODE - An Element node like &lt;p&gt; or &lt;div&gt;.<br />
+    /// - 2: ATTRIBUTE_NODE - An Attribute of an Element.<br />
+    /// - 3: TEXT_NODE - The actual Text inside an Element or Attr.<br />
+    /// - 4: CDATA_SECTION_NODE - A CDATASection, such as &lt;!CDATA[[ … ]]&gt;<br />
+    /// - 7: PROCESSING_INSTRUCTION_NODE - A ProcessingInstruction of an XML document, such as &lt;?xml-stylesheet … ?&gt;.<br />
+    /// - 8: COMMENT_NODE - A Comment node, such as &lt;!-- … --&gt;.<br />
+    /// - 9: DOCUMENT_NODE - A Document node.<br />
+    /// - 10: DOCUMENT_TYPE_NODE - A DocumentType node, such as &lt;!doctype html&gt;.<br />
+    /// - 11: DOCUMENT_FRAGMENT_NODE - A DocumentFragment node.
+    /// </para>
+    /// <para>
+    /// The following constants have been deprecated and are not in use anymore:<br />
+    /// - 5: ENTITY_REFERENCE_NODE<br />
+    /// - 6: ENTITY_NODE<br />
+    /// - 12: NOTATION_NODE
+    /// </para>
+    /// </summary>
+    public ValueTask<int> NodeType => GetNodeType(default);
+
+    /// <inheritdoc cref="NodeType" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<int> GetNodeType(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getNodeType", cancellationToken);
+
+
+    // properties - Tree-nodes
 
     /// <summary>
     /// Returns the number of child elements of this element.
@@ -880,208 +1275,995 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
 
 
     /// <summary>
-    /// Gets/Sets the value of the class attribute of the specified element.
+    /// <para>Returns an element's first child Element, or null if there are no child elements.</para>
+    /// <para>It includes only element nodes.</para>
     /// </summary>
-    public ValueTask<string> ClassName => GetClassName(default);
+    public ValueTask<IHTMLElement?> FirstElementChild => GetFirstElementChild(default);
 
-    /// <inheritdoc cref="ClassName" />
-    /// <param name="cancellationToken"></param>
-    /// <returns>A string variable representing the class or space-separated classes of the current element.</returns>
-    public async ValueTask<string> GetClassName(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getClassName", cancellationToken);
-
-    /// <inheritdoc cref="ClassName" />
-    /// <param name="value">A string variable representing the class or space-separated classes of the current element.</param>
+    /// <inheritdoc cref="FirstElementChild" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetClassName(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setClassName", cancellationToken, [value]);
+    public async ValueTask<IHTMLElement?> GetFirstElementChild(CancellationToken cancellationToken) {
+        IJSObjectReference?[] singleReference = await (await htmlElementTask).InvokeTrySync<IJSObjectReference?[]>("getFirstElementChild", cancellationToken);
+        if (singleReference[0] is IJSObjectReference child)
+            return new HTMLElement(Task.FromResult(child));
+        else
+            return null;
+    }
 
 
     /// <summary>
-    /// <para>Returns a live DOMTokenList collection of the class attributes of the element. This can then be used to manipulate the class list.</para>
-    /// <üara>Using classList is a convenient alternative to accessing an element's list of classes as a space-delimited string via <i>element.className</i>.</üara>
+    /// <para>Returns an element's last child Element, or null if there are no child elements.</para>
+    /// <para>It includes only element nodes.</para>
     /// </summary>
-    public ValueTask<string[]> ClassList => GetClassList(default);
+    public ValueTask<IHTMLElement?> LastElementChild => GetLastElementChild(default);
 
-    /// <inheritdoc cref="ClassList" />
+    /// <inheritdoc cref="LastElementChild" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<string[]> GetClassList(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string[]>("getClassList", cancellationToken);
-
+    public async ValueTask<IHTMLElement?> GetLastElementChild(CancellationToken cancellationToken) {
+        IJSObjectReference?[] singleReference = await (await htmlElementTask).InvokeTrySync<IJSObjectReference?[]>("getLastElementChild", cancellationToken);
+        if (singleReference[0] is IJSObjectReference child)
+            return new HTMLElement(Task.FromResult(child));
+        else
+            return null;
+    }
 
 
     /// <summary>
-    /// <para>
-    /// Is zero for inline elements and elements with no CSS; otherwise, it's the inner width of an element in pixels.
-    /// It includes padding but excludes borders, margins, and vertical scrollbars (if present).
-    /// </para>
-    /// <para>
-    /// When clientWidth is used on the root element(the &lt;html&gt; element), (or on &lt;body&gt; if the document is in quirks mode), the viewport's width (excluding any scrollbar) is returned.
-    /// <see href="https://www.w3.org/TR/2016/WD-cssom-view-1-20160317/#dom-element-clientwidth">This is a special case of clientWidth</see>.
-    /// </para>
-    /// <para>Note: This property will round the value to an integer. If you need a fractional value, use element.getBoundingClientRect().</para>
+    /// Returns the Element immediately prior to the specified one in its parent's children list, or null if the specified element is the first one in the list.
     /// </summary>
-    public ValueTask<int> ClientWidth => GetClientWidth(default);
+    public ValueTask<IHTMLElement?> PreviousElementSibling => GetPreviousElementSibling(default);
 
-    /// <inheritdoc cref="ClientWidth" />
+    /// <inheritdoc cref="PreviousElementSibling" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetClientWidth(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getClientWidth", cancellationToken);
+    public async ValueTask<IHTMLElement?> GetPreviousElementSibling(CancellationToken cancellationToken) {
+        IJSObjectReference?[] singleReference = await (await htmlElementTask).InvokeTrySync<IJSObjectReference?[]>("getPreviousElementSibling", cancellationToken);
+        if (singleReference[0] is IJSObjectReference sibling)
+            return new HTMLElement(Task.FromResult(sibling));
+        else
+            return null;
+    }
 
 
     /// <summary>
-    /// <para>
-    /// Is zero for elements with no CSS or inline layout boxes; otherwise, it's the inner height of an element in pixels.
-    /// It includes padding but excludes borders, margins, and horizontal scrollbars (if present).
-    /// </para>
-    /// <para>clientHeight can be calculated as: CSS height + CSS padding - height of horizontal scrollbar(if present).</para>
-    /// <para>
-    /// When clientHeight is used on the root element(the &lt;html&gt; element), (or on &lt;body&gt; if the document is in quirks mode), the viewport's height (excluding any scrollbar) is returned.
-    /// <see href="https://www.w3.org/TR/2016/WD-cssom-view-1-20160317/#dom-element-clientheight">This is a special case of clientHeight</see>.
-    /// </para>
-    /// <para>Note: This property will round the value to an integer. If you need a fractional value, use element.getBoundingClientRect().</para>
+    /// Returns the element immediately following the specified one in its parent's children list, or null if the specified element is the last one in the list.
     /// </summary>
-    public ValueTask<int> ClientHeight => GetClientHeight(default);
+    public ValueTask<IHTMLElement?> NextElementSibling => GetNextElementSibling(default);
 
-    /// <inheritdoc cref="ClientHeight" />
+    /// <inheritdoc cref="NextElementSibling" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetClientHeight(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getClientHeight", cancellationToken);
+    public async ValueTask<IHTMLElement?> GetNextElementSibling(CancellationToken cancellationToken) {
+        IJSObjectReference?[] singleReference = await (await htmlElementTask).InvokeTrySync<IJSObjectReference?[]>("getNextElementSibling", cancellationToken);
+        if (singleReference[0] is IJSObjectReference sibling)
+            return new HTMLElement(Task.FromResult(sibling));
+        else
+            return null;
+    }
 
 
     /// <summary>
-    /// <para>
-    /// The width of the left border of an element in pixels.
-    /// It includes the width of the vertical scrollbar if the text direction of the element is right-to-left and if there is an overflow causing a left vertical scrollbar to be rendered.
-    /// clientLeft does not include the left margin or the left padding. clientLeft is read-only.
-    /// </para>
-    /// <para>Note: This property will round the value to an integer.If you need a fractional value, use element.getBoundingClientRect().</para>
-    /// <para>Note: When an element has display: inline, clientLeft returns 0 regardless of the element's border.</para>
+    /// Returns the DOM node's parent Element, or null if the node either has no parent,or its parent isn't a DOM Element.
     /// </summary>
-    public ValueTask<int> ClientLeft => GetClientLeft(default);
+    public ValueTask<IHTMLElement?> ParentElement => GetParentElement(default);
 
-    /// <inheritdoc cref="ClientLeft" />
+    /// <inheritdoc cref="ParentElement" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetClientLeft(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getClientLeft", cancellationToken);
+    public async ValueTask<IHTMLElement?> GetParentElement(CancellationToken cancellationToken) {
+        IJSObjectReference?[] singleReference = await (await htmlElementTask).InvokeTrySync<IJSObjectReference?[]>("getParentElement", cancellationToken);
+        if (singleReference[0] is IJSObjectReference parent)
+            return new HTMLElement(Task.FromResult(parent));
+        else
+            return null;
+    }
 
+
+    // properties - ARIA
 
     /// <summary>
-    /// <para>The width of the top border of an element in pixels. It is a read-only, integer property of element.</para>
+    /// <para>Reflects the value of the aria-atomic attribute, which indicates whether assistive technologies will present all, or only parts of, the changed region based on the change notifications defined by the aria-relevant attribute.</para>
     /// <para>
-    /// As it happens, all that lies between the two locations (offsetTop and client area top) is the element's border.
-    /// This is because the offsetTop indicates the location of the top of the border (not the margin) while the client area starts immediately below the border, (client area includes padding.)
-    /// Therefore, the clientTop value will always equal the integer portion of the .getComputedStyle() value for "border-top-width". (Actually might be Math.round(parseFloat()).)
-    /// For example, if the computed "border-top-width" is zero, then clientTop is also zero.
+    /// Value is one of the following values:<br />
+    /// - "false": Assistive technologies will present only the changed node or nodes.<br />
+    /// - "true": Assistive technologies will present the entire changed region as a whole, including the author-defined label if one exists.
     /// </para>
-    /// <para>Note: This property will round the value to an integer.If you need a fractional value, use element.getBoundingClientRect().</para>
     /// </summary>
-    public ValueTask<int> ClientTop => GetClientTop(default);
+    public ValueTask<string?> AriaAtomic => GetAriaAtomic(default);
 
-    /// <inheritdoc cref="ClientTop" />
+    /// <inheritdoc cref="AriaAtomic" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetClientTop(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getClientTop", cancellationToken);
+    public async ValueTask<string?> GetAriaAtomic(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaAtomic", cancellationToken);
 
-
-
-    /// <summary>
-    /// <para>Is a measurement of the width of an element's content, including content not visible on the screen due to overflow.</para>
-    /// <para>
-    /// The scrollWidth value is equal to the minimum width the element would require in order to fit all the content in the viewport without using a horizontal scrollbar.
-    /// The width is measured in the same way as clientWidth: it includes the element's padding, but not its border, margin or vertical scrollbar (if present).
-    /// It can also include the width of pseudo-elements such as ::before or ::after.
-    /// If the element's content can fit without a need for horizontal scrollbar, its scrollWidth is equal to clientWidth.
-    /// </para>
-    /// <para>Note: This property will round the value to an integer.If you need a fractional value, use element.getBoundingClientRect().</para>
-    /// </summary>
-    public ValueTask<int> ScrollWidth => GetScrollWidth(default);
-
-    /// <inheritdoc cref="ScrollWidth" />
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public async ValueTask<int> GetScrollWidth(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getScrollWidth", cancellationToken);
-
-
-    /// <summary>
-    /// <para>Is a measurement of the height of an element's content, including content not visible on the screen due to overflow.</para>
-    /// <para>
-    /// The user's viewport is an element with four regions labeled padding-top, border-top, border-bottom, padding-bottom.
-    /// The scroll height goes from the container's padding top to the end of the padding bottom, well beyond the top and bottom of the viewport.
-    /// </para>
-    /// <para>
-    /// The scrollHeight value is equal to the minimum height the element would require in order to fit all the content in the viewport without using a vertical scrollbar.
-    /// The height is measured in the same way as clientHeight: it includes the element's padding, but not its border, margin or horizontal scrollbar (if present).
-    /// It can also include the height of pseudo-elements such as ::before or ::after.
-    /// If the element's content can fit without a need for vertical scrollbar, its scrollHeight is equal to clientHeight.
-    /// </para>
-    /// <para>Note: This property will round the value to an integer.If you need a fractional value, use Element.getBoundingClientRect().</para>
-    /// </summary>
-    public ValueTask<int> ScrollHeight => GetScrollHeight(default);
-
-    /// <inheritdoc cref="ScrollHeight" />
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public async ValueTask<int> GetScrollHeight(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<int>("getScrollHeight", cancellationToken);
-
-
-    /// <summary>
-    /// <para>Gets/Sets the number of pixels that an element's content is scrolled from its left edge.</para>
-    /// <para>
-    /// If the element's direction is rtl (right-to-left), then scrollLeft is 0 when the scrollbar is at its rightmost position (at the start of the scrolled content),
-    /// and then increasingly negative as you scroll towards the end of the content.
-    /// </para>
-    /// <para>
-    /// It can be specified as any integer value.However:<br />
-    /// - If the element can't be scrolled (e.g., it has no overflow), scrollLeft is set to 0.<br />
-    /// - If specified as a value less than 0 (greater than 0 for right-to-left elements), scrollLeft is set to 0.<br />
-    /// - If specified as a value greater than the maximum that the content can be scrolled, scrollLeft is set to the maximum.
-    /// </para>
-    /// <para>Warning: On systems using display scaling, scrollLeft may give you a decimal value. (It will be rounded down to the next integer.)</para>
-    /// </summary>
-    public ValueTask<int> ScrollLeft => GetScrollLeft(default);
-
-    /// <inheritdoc cref="ScrollLeft" />
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public async ValueTask<int> GetScrollLeft(CancellationToken cancellationToken) => (int)await (await htmlElementTask).InvokeTrySync<double>("getScrollLeft", cancellationToken);
-
-    /// <inheritdoc cref="ScrollLeft" />
+    /// <inheritdoc cref="AriaAtomic" />
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetScrollLeft(int value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setScrollLeft", cancellationToken, [value]);
+    public async ValueTask SetAriaAtomic(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaAtomic", cancellationToken, [value]);
 
 
     /// <summary>
-    /// <para>Gets/Sets the number of pixels that an element's content is scrolled vertically.</para>
+    /// <para>Reflects the value of the aria-autocomplete attribute, which indicates whether inputting text could trigger display of one or more predictions of the user's intended value for a combobox, searchbox, or textbox and specifies how predictions would be presented if they were made.</para>
     /// <para>
-    /// An element's scrollTop value is a measurement of the distance from the element's top to its topmost visible content.
-    /// When an element's content does not generate a vertical scrollbar, then its scrollTop value is 0.
+    /// Value is one of the following values:<br />
+    /// - "inline": When a user is providing input, text suggesting one way to complete the provided input may be dynamically inserted after the caret.<br />
+    /// - "list": When a user is providing input, an element containing a collection of values that could complete the provided input may be displayed.<br />
+    /// - "both": When a user is providing input, an element containing a collection of values that could complete the provided input may be displayed. If displayed, one value in the collection is automatically selected, and the text needed to complete the automatically selected value appears after the caret in the input.<br />
+    /// - "none": When a user is providing input, there is no display of an automatic suggestion that attempts to predict how the user intends to complete the input.
     /// </para>
-    /// <para>
-    /// scrollTop can be set to any integer value, with certain caveats:<br />
-    /// - If the element can't be scrolled (e.g. it has no overflow or if the element has a property of "non-scrollable"), scrollTop is 0.<br />
-    /// - scrollTop doesn't respond to negative values; instead, it sets itself back to 0.<br />
-    /// - If set to a value greater than the maximum available for the element, scrollTop settles itself to the maximum value.
-    /// </para>
-    /// <para>
-    /// When scrollTop is used on the root element (the &lt;html&gt; element), the scrollY of the window is returned.
-    /// <see href="https://www.w3.org/TR/2016/WD-cssom-view-1-20160317/#dom-element-scrolltop">This is a special case of scrollTop</see>.
-    /// </para>
-    /// <para>Warning: On systems using display scaling, scrollTop may give you a decimal value. (It will be rounded down to the next integer.)</para>
     /// </summary>
-    public ValueTask<int> ScrollTop => GetScrollTop(default);
+    public ValueTask<string?> AriaAutoComplete => GetAriaAutoComplete(default);
 
-    /// <inheritdoc cref="ScrollTop" />
+    /// <inheritdoc cref="AriaAutoComplete" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<int> GetScrollTop(CancellationToken cancellationToken) => (int)await (await htmlElementTask).InvokeTrySync<double>("getScrollTop", cancellationToken);
+    public async ValueTask<string?> GetAriaAutoComplete(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaAutoComplete", cancellationToken);
 
-    /// <inheritdoc cref="ScrollTop" />
+    /// <inheritdoc cref="AriaAutoComplete" />
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetScrollTop(int value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setScrollTop", cancellationToken, [value]);
+    public async ValueTask SetAriaAutoComplete(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaAutoComplete", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// Reflects the value of the aria-braillelabel attribute, which defines the ARIA braille label of the element.
+    /// This element label may be used by assistive technologies that can present content in braille, but should only be set if a braille-specific label would improve the user experience.
+    /// The aria-braillelabel contains additional information about when the property should be set.
+    /// </summary>
+    public ValueTask<string?> AriaBrailleLabel => GetAriaBrailleLabel(default);
+
+    /// <inheritdoc cref="AriaBrailleLabel" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaBrailleLabel(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaBrailleLabel", cancellationToken);
+
+    /// <inheritdoc cref="AriaBrailleLabel" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaBrailleLabel(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaBrailleLabel", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// Reflects the value of the aria-brailleroledescription attribute, which defines the ARIA braille role description of the element.
+    /// This property may be used to provide an abbreviated version of the aria-roledescription value.
+    /// It should only be used if aria-roledescription is present and in the rare case where it is too verbose for braille.
+    /// The aria-brailleroledescription contains additional information about when the property should be set.
+    /// </summary>
+    public ValueTask<string?> AriaBrailleRoleDescription => GetAriaBrailleRoleDescription(default);
+
+    /// <inheritdoc cref="AriaBrailleRoleDescription" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaBrailleRoleDescription(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaBrailleRoleDescription", cancellationToken);
+
+    /// <inheritdoc cref="AriaBrailleRoleDescription" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaBrailleRoleDescription(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaBrailleRoleDescription", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-busy attribute, which indicates whether an element is being modified, as assistive technologies may want to wait until the modifications are complete before exposing them to the user.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The element is being updated.<br />
+    /// - "false": There are no expected updates for the element.
+    /// </para>
+    /// </summary>
+    public ValueTask<string?> AriaBusy => GetAriaBusy(default);
+
+    /// <inheritdoc cref="AriaBusy" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaBusy(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaBusy", cancellationToken);
+
+    /// <inheritdoc cref="AriaBusy" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaBusy(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaBusy", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-checked attribute, which indicates the current "checked" state of checkboxes, radio buttons, and other widgets that have a checked state.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The element is checked.<br />
+    /// - "mixed": Indicates a mixed mode value for a tri-state checkbox or menuitemcheckbox.<br />
+    /// - "false": There are no expected updates for the element.<br />
+    /// - "undefined": The element does not support being checked.
+    /// </para>
+    /// </summary>
+    public ValueTask<string?> AriaChecked => GetAriaChecked(default);
+
+    /// <inheritdoc cref="AriaChecked" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaChecked(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaChecked", cancellationToken);
+
+    /// <inheritdoc cref="AriaChecked" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaChecked(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaChecked", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-colcount attribute, which defines the number of columns in a table, grid, or treegrid.</para>
+    /// <para>Value is a string which contains an integer.</para>
+    /// </summary>
+    public ValueTask<string?> AriaColCount => GetAriaColCount(default);
+
+    /// <inheritdoc cref="AriaColCount" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaColCount(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaColCount", cancellationToken);
+
+    /// <inheritdoc cref="AriaColCount" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaColCount(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaColCount", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-colindex attribute, which defines an element's column index or position with respect to the total number of columns within a table, grid, or treegrid.</para>
+    /// <para>Value is a string which contains an integer.</para>
+    /// </summary>
+    public ValueTask<string?> AriaColIndex => GetAriaColIndex(default);
+
+    /// <inheritdoc cref="AriaColIndex" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaColIndex(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaColIndex", cancellationToken);
+
+    /// <inheritdoc cref="AriaColIndex" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaColIndex(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaColIndex", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// Reflects the value of the aria-colindextext attribute, which defines a human readable text alternative of aria-colindex.
+    /// </summary>
+    public ValueTask<string?> AriaColIndexText => GetAriaColIndexText(default);
+
+    /// <inheritdoc cref="AriaColIndexText" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaColIndexText(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaColIndexText", cancellationToken);
+
+    /// <inheritdoc cref="AriaColIndexText" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaColIndexText(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaColIndexText", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-colspan attribute, which defines the number of columns spanned by a cell or gridcell within a table, grid, or treegrid.</para>
+    /// <para>Value is a string which contains an integer.</para>
+    /// </summary>
+    public ValueTask<string?> AriaColSpan => GetAriaColSpan(default);
+
+    /// <inheritdoc cref="AriaColSpan" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaColSpan(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaColSpan", cancellationToken);
+
+    /// <inheritdoc cref="AriaColSpan" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaColSpan(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaColSpan", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-current attribute, which indicates the element that represents the current item within a container or set of related elements.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "page": Represents the current page within a set of pages.<br />
+    /// - "step": Represents the current step within a process.<br />
+    /// - "location": Represents the current location, for example the current page in a breadcrumbs hierarchy.<br />
+    /// - "date": Represents the current date within a collection of dates.<br />
+    /// - "time": Represents the current time within a set of times.<br />
+    /// - "true": Represents the current item within a set.<br />
+    /// - "false": Does not represent the current item within a set.
+    /// </para>
+    /// </summary>
+    public ValueTask<string?> AriaCurrent => GetAriaCurrent(default);
+
+    /// <inheritdoc cref="AriaCurrent" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaCurrent(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaCurrent", cancellationToken);
+
+    /// <inheritdoc cref="AriaCurrent" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaCurrent(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaCurrent", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// Reflects the value of the aria-description attribute, which defines a string value that describes or annotates the current element.
+    /// </summary>
+    public ValueTask<string?> AriaDescription => GetAriaDescription(default);
+
+    /// <inheritdoc cref="AriaDescription" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaDescription(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaDescription", cancellationToken);
+
+    /// <inheritdoc cref="AriaDescription" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaDescription(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaDescription", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-disabled attribute, which indicates that the element is perceivable but disabled, so it is not editable or otherwise operable.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The element and all focusable descendants are disabled, but perceivable, and their values cannot be changed by the user.<br />
+    /// - "false": The element is enabled.
+    /// </para>
+    /// </summary>
+    public ValueTask<string?> AriaDisabled => GetAriaDisabled(default);
+
+    /// <inheritdoc cref="AriaDisabled" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaDisabled(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaDisabled", cancellationToken);
+
+    /// <inheritdoc cref="AriaDisabled" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaDisabled(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaDisabled", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-expanded attribute, which indicates whether a grouping element owned or controlled by this element is expanded or collapsed.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The grouping element this element owns or controls is expanded.<br />
+    /// - "false": The grouping element this element owns or controls is collapsed.<br />
+    /// - "undefined": The element does not own or control a grouping element that is expandable.
+    /// </para>
+    /// </summary>
+    public ValueTask<string?> AriaExpanded => GetAriaExpanded(default);
+
+    /// <inheritdoc cref="AriaExpanded" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaExpanded(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaExpanded", cancellationToken);
+
+    /// <inheritdoc cref="AriaExpanded" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaExpanded(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaExpanded", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-haspopup attribute, which indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "false": The element does not have a popup.<br />
+    /// - "true": The element has a popup that is a menu.<br />
+    /// - "menu":The element has a popup that is a menu. <br />
+    /// - "listbox": The element has a popup that is a listbox.<br />
+    /// - "tree": The element has a popup that is a tree.<br />
+    /// - "grid": The element has a popup that is a grid.<br />
+    /// - "dialog": The element has a popup that is a dialog.
+    /// </para>
+    /// </summary>
+    public ValueTask<string?> AriaHasPopup => GetAriaHasPopup(default);
+
+    /// <inheritdoc cref="AriaHasPopup" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaHasPopup(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaHasPopup", cancellationToken);
+
+    /// <inheritdoc cref="AriaHasPopup" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaHasPopup(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaHasPopup", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-hidden) attribute, which indicates whether the element is exposed to an accessibility API.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The element is hidden from the accessibility API.<br />
+    /// - "false": The element is exposed to the accessibility API as if it were rendered.<br />
+    /// - "undefined": The element's hidden state is determined by the user agent based on whether it is rendered.
+    /// </para>
+    /// </summary>
+    public ValueTask<string?> AriaHidden => GetAriaHidden(default);
+
+    /// <inheritdoc cref="Hidden" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaHidden(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaHidden", cancellationToken);
+
+    /// <inheritdoc cref="AriaHidden" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaHidden(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaHidden", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>
+    /// Reflects the value of the aria-invalid attribute.
+    /// Relevant for the application, checkbox, combobox, gridcell, listbox, radiogroup, slider, spinbutton, textbox, and tree roles,
+    /// it indicates to the accessibility API whether the entered value does not conform to the format expected by the application.
+    /// </para>
+    /// <para>
+    /// If the attribute is not present, or is set to the empty string, assistive technology will treat the value as if it were set to false.
+    /// If the attribute is present but set to a value other than false, grammar, spelling or the empty string (""), assistive technology treats the value as true.
+    /// The property reflects the attribute value as set, not as handled by assistive technology.
+    /// </para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The element is invalid.<br />
+    /// - "false": The element is not in an invalid state.<br />
+    /// - "grammar": The element is in an invalid state because grammatical error was detected.<br />
+    /// - "spelling": The element is in an invalid state because spelling error was detected.
+    /// </para>
+    /// </summary>
+    public ValueTask<string?> AriaInvalid => GetAriaInvalid(default);
+
+    /// <inheritdoc cref="AriaInvalid" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaInvalid(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaInvalid", cancellationToken);
+
+    /// <inheritdoc cref="AriaInvalid" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaInvalid(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaInvalid", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// Reflects the value of the aria-keyshortcuts attribute, which indicates keyboard shortcuts that an author has implemented to activate or give focus to an element.
+    /// </summary>
+    public ValueTask<string?> AriaKeyShortcuts => GetAriaKeyShortcuts(default);
+
+    /// <inheritdoc cref="AriaKeyShortcuts" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaKeyShortcuts(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaKeyShortcuts", cancellationToken);
+
+    /// <inheritdoc cref="AriaKeyShortcuts" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaKeyShortcuts(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaKeyShortcuts", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// Reflects the value of the aria-label attribute, which defines a string value that labels the current element.
+    /// </summary>
+    public ValueTask<string?> AriaLabel => GetAriaLabel(default);
+
+    /// <inheritdoc cref="AriaLabel" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaLabel(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaLabel", cancellationToken);
+
+    /// <inheritdoc cref="AriaLabel" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaLabel(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaLabel", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-level attribute, which defines the hierarchical level of an element within a structure.</para>
+    /// <para>Note: Where possible use an HTML h1 or other correct heading level as these have built in semantics and do not require ARIA attributes.</para>
+    /// <para>Value is a string containing an integer.</para>
+    /// </summary>
+    public ValueTask<string?> AriaLevel => GetAriaLevel(default);
+
+    /// <inheritdoc cref="AriaLevel" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaLevel(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaLevel", cancellationToken);
+
+    /// <inheritdoc cref="AriaLevel" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaLevel(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaLevel", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>
+    /// Reflects the value of the aria-live attribute, which indicates that an element will be updated,
+    /// and describes the types of updates the user agents, assistive technologies, and user can expect from the live region.
+    /// </para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "assertive": Indicates that updates to the region have the highest priority and should be presented to the user immediately.<br />
+    /// - "off": Indicates that updates to the region should not be presented to the user unless the user is currently focused on that region.<br />
+    /// - "polite": Indicates that updates to the region should be presented at the next graceful opportunity, such as at the end of speaking the current sentence or when the user pauses typing.
+    /// </para>
+    /// </summary>
+    public ValueTask<string?> AriaLive => GetAriaLive(default);
+
+    /// <inheritdoc cref="AriaLive" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaLive(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaLive", cancellationToken);
+
+    /// <inheritdoc cref="AriaLive" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaLive(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaLive", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>
+    /// Reflects the value of the aria-modal attribute, which indicates whether an element is modal when displayed.
+    /// Applying the aria-modal property to an element with role="dialog" replaces the technique of using aria-hidden on the background for informing assistive technologies that content outside a dialog is inert.
+    /// </para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The element is modal.<br />
+    /// - "false": The element is not modal.
+    /// </para>
+    /// </summary>
+    public ValueTask<string?> AriaModal => GetAriaModal(default);
+
+    /// <inheritdoc cref="AriaModal" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaModal(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaModal", cancellationToken);
+
+    /// <inheritdoc cref="AriaModal" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaModal(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaModal", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-multiline attribute, which indicates whether a text box accepts multiple lines of input or only a single line.</para>
+    /// <para>Note: Where possible use an HTML &lt;input&gt; element with type="text" or a &lt;textarea&gt; as these have built in semantics and do not require ARIA attributes.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": This is a multi-line text box.<br />
+    /// - "false": This is a single-line text box.
+    /// </para>
+    /// </summary>
+    public ValueTask<string?> AriaMultiline => GetAriaMultiline(default);
+
+    /// <inheritdoc cref="AriaMultiline" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaMultiline(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaMultiline", cancellationToken);
+
+    /// <inheritdoc cref="AriaMultiline" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaMultiline(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaMultiline", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-multiselectable attribute, which indicates that the user may select more than one item from the current selectable descendants.</para>
+    /// <para>Note: Where possible use an HTML &lt;select&gt; element as this has built in semantics and does not require ARIA attributes.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": More than one item may be selected at a time.<br />
+    /// - "false": Only one item may be selected.
+    /// </para>
+    /// </summary>
+    public ValueTask<string?> AriaMultiSelectable => GetAriaMultiSelectable(default);
+
+    /// <inheritdoc cref="AriaMultiSelectable" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaMultiSelectable(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaMultiSelectable", cancellationToken);
+
+    /// <inheritdoc cref="AriaMultiSelectable" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaMultiSelectable(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaMultiSelectable", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-orientation attribute, which indicates whether the element's orientation is horizontal, vertical, or unknown/ambiguous.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "horizontal": The element is horizontal.<br />
+    /// - "vertical": The element is vertical.<br />
+    /// - "undefined": The element's orientation is unknown.
+    /// </para>
+    /// </summary>
+    public ValueTask<string?> AriaOrientation => GetAriaOrientation(default);
+
+    /// <inheritdoc cref="AriaOrientation" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaOrientation(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaOrientation", cancellationToken);
+
+    /// <inheritdoc cref="AriaOrientation" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaOrientation(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaOrientation", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-placeholder attribute, which defines a short hint intended to aid the user with data entry when the control has no value.</para>
+    /// <para>Note: Where possible use an HTML &lt;input&gt; element with type="text" or a &lt;textarea&gt; as these have built in semantics and do not require ARIA attributes.</para>
+    /// </summary>
+    public ValueTask<string?> AriaPlaceholder => GetAriaPlaceholder(default);
+
+    /// <inheritdoc cref="AriaPlaceholder" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaPlaceholder(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaPlaceholder", cancellationToken);
+
+    /// <inheritdoc cref="AriaPlaceholder" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaPlaceholder(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaPlaceholder", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-posinset attribute, which defines an element's number or position in the current set of listitems or treeitems.</para>
+    /// <para>Value is a string containing an integer.</para>
+    /// </summary>
+    public ValueTask<string?> AriaPosInSet => GetAriaPosInSet(default);
+
+    /// <inheritdoc cref="AriaPosInSet" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaPosInSet(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaPosInSet", cancellationToken);
+
+    /// <inheritdoc cref="AriaPosInSet" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaPosInSet(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaPosInSet", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-pressed attribute, which indicates the current "pressed" state of toggle buttons.</para>
+    /// <para>Note: Where possible use an HTML &lt;input&gt; element with type="button" or the &lt;button&gt; element as these have built in semantics and do not require ARIA attributes.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The element is pressed.<br />
+    /// - "false": The element supports being pressed but is not currently pressed.<br />
+    /// - "mixed": Indicates a mixed mode value for a tri-state toggle button.<br />
+    /// - "undefined": The element does not support being pressed.
+    /// </para>
+    /// </summary>
+    public ValueTask<string?> AriaPressed => GetAriaPressed(default);
+
+    /// <inheritdoc cref="AriaPressed" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaPressed(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaPressed", cancellationToken);
+
+    /// <inheritdoc cref="AriaPressed" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaPressed(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaPressed", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-readonly attribute, which indicates that the element is not editable, but is otherwise operable.</para>
+    /// <para>Note: Where possible use an HTML &lt;input&gt; element with type="text" or a &lt;textarea&gt; as these have built in semantics and do not require ARIA attributes.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The user cannot change the value of the element.<br />
+    /// - "false": The user can set the value of the element.
+    /// </para>
+    /// </summary>
+    public ValueTask<string?> AriaReadOnly => GetAriaReadOnly(default);
+
+    /// <inheritdoc cref="AriaReadOnly" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaReadOnly(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaReadOnly", cancellationToken);
+
+    /// <inheritdoc cref="AriaReadOnly" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaReadOnly(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaReadOnly", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-required attribute, which indicates that user input is required on the element before a form may be submitted.</para>
+    /// <para>Note: Where possible use an HTML &lt;input&gt; element with type="text" or a &lt;textarea&gt; as these have built in semantics and do not require ARIA attributes.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": Users need to provide input on an element before a form is submitted.<br />
+    /// - "false": User input is not necessary to submit the form.
+    /// </para>
+    /// </summary>
+    public ValueTask<string?> AriaRequired => GetAriaRequired(default);
+
+    /// <inheritdoc cref="AriaRequired" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaRequired(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaRequired", cancellationToken);
+
+    /// <inheritdoc cref="AriaRequired" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaRequired(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaRequired", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// Rreflects the value of the aria-roledescription attribute, which defines a human-readable, author-localized description for the role of an element.
+    /// </summary>
+    public ValueTask<string?> AriaRoleDescription => GetAriaRoleDescription(default);
+
+    /// <inheritdoc cref="AriaRoleDescription" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaRoleDescription(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaRoleDescription", cancellationToken);
+
+    /// <inheritdoc cref="AriaRoleDescription" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaRoleDescription(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaRoleDescription", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-rowcount attribute, which defines the total number of rows in a table, grid, or treegrid.</para>
+    /// <para>Value is a string which contains an integer.</para>
+    /// </summary>
+    public ValueTask<string?> AriaRowCount => GetAriaRowCount(default);
+
+    /// <inheritdoc cref="AriaRowCount" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaRowCount(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaRowCount", cancellationToken);
+
+    /// <inheritdoc cref="AriaRowCount" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaRowCount(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaRowCount", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-rowindex attribute, which defines an element's row index or position with respect to the total number of rows within a table, grid, or treegrid.</para>
+    /// <para>Value is a string which contains an integer.</para>
+    /// </summary>
+    public ValueTask<string?> AriaRowIndex => GetAriaRowIndex(default);
+
+    /// <inheritdoc cref="AriaRowIndex" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaRowIndex(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaRowIndex", cancellationToken);
+
+    /// <inheritdoc cref="AriaRowIndex" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaRowIndex(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaRowIndex", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// Reflects the value of the aria-rowindextext attribute, which defines a human readable text alternative of aria-rowindex.
+    /// </summary>
+    public ValueTask<string?> AriaRowIndexText => GetAriaRowIndexText(default);
+
+    /// <inheritdoc cref="AriaRowIndexText" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaRowIndexText(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaRowIndexText", cancellationToken);
+
+    /// <inheritdoc cref="AriaRowIndexText" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaRowIndexText(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaRowIndexText", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-rowspan attribute, which defines the number of rows spanned by a cell or gridcell within a table, grid, or treegrid.</para>
+    /// <para>Value is a string which contains an integer.</para>
+    /// </summary>
+    public ValueTask<string?> AriaRowSpan => GetAriaRowSpan(default);
+
+    /// <inheritdoc cref="AriaRowSpan" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaRowSpan(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaRowSpan", cancellationToken);
+
+    /// <inheritdoc cref="AriaRowSpan" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaRowSpan(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaRowSpan", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-selected attribute, which indicates the current "selected" state of elements that have a selected state.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The item is selected.<br />
+    /// - "false": The item is not selected.<br />
+    /// - "undefined": The item is not selectable.
+    /// </para>
+    /// </summary>
+    public ValueTask<string?> AriaSelected => GetAriaSelected(default);
+
+    /// <inheritdoc cref="AriaSelected" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaSelected(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaSelected", cancellationToken);
+
+    /// <inheritdoc cref="AriaSelected" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaSelected(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaSelected", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-setsize attribute, which defines the number of items in the current set of listitems or treeitems.</para>
+    /// <para>Value is a string containing an integer.</para>
+    /// </summary>
+    public ValueTask<string?> AriaSetSize => GetAriaSetSize(default);
+
+    /// <inheritdoc cref="AriaSetSize" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaSetSize(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaSetSize", cancellationToken);
+
+    /// <inheritdoc cref="AriaSetSize" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaSetSize(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaSetSize", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-sort attribute, which indicates if items in a table or grid are sorted in ascending or descending order.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "ascending": Items are sorted in ascending order by this column.<br />
+    /// - "descending": Items are sorted in descending order by this column.<br />
+    /// - "none": There is no defined sort applied to the column.<br />
+    /// - "other": A sort algorithm other than ascending or descending has been applied.
+    /// </para>
+    /// </summary>
+    public ValueTask<string?> AriaSort => GetAriaSort(default);
+
+    /// <inheritdoc cref="AriaSort" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaSort(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaSort", cancellationToken);
+
+    /// <inheritdoc cref="AriaSort" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaSort(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaSort", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-valuemax attribute, which defines the maximum allowed value for a range widget.</para>
+    /// <para>Value is a string which contains a number.</para>
+    /// </summary>
+    public ValueTask<string?> AriaValueMax => GetAriaValueMax(default);
+
+    /// <inheritdoc cref="AriaValueMax" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaValueMax(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaValueMax", cancellationToken);
+
+    /// <inheritdoc cref="AriaValueMax" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaValueMax(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaValueMax", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-valuemin attribute, which defines the minimum allowed value for a range widget.</para>
+    /// <para>Value is a string which contains a number.</para>
+    /// </summary>
+    public ValueTask<string?> AriaValueMin => GetAriaValueMin(default);
+
+    /// <inheritdoc cref="AriaValueMin" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaValueMin(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaValueMin", cancellationToken);
+
+    /// <inheritdoc cref="AriaValueMin" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaValueMin(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaValueMin", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-valuenow attribute, which defines the current value for a range widget.</para>
+    /// <para>Value is a string which contains a number.</para>
+    /// </summary>
+    public ValueTask<string?> AriaValueNow => GetAriaValueNow(default);
+
+    /// <inheritdoc cref="AriaValueNow" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaValueNow(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaValueNow", cancellationToken);
+
+    /// <inheritdoc cref="AriaValueNow" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaValueNow(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaValueNow", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// Reflects the value of the aria-valuetext attribute, which defines the human-readable text alternative of aria-valuenow for a range widget.
+    /// </summary>
+    public ValueTask<string?> AriaValueText => GetAriaValueText(default);
+
+    /// <inheritdoc cref="AriaValueText" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAriaValueText(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getAriaValueText", cancellationToken);
+
+    /// <inheritdoc cref="AriaValueText" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAriaValueText(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaValueText", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>Returns the explicitly set WAI-ARIA role for the element.</para>
+    /// <para>
+    /// All HTML elements have an implicit ARIA role, even if that role is generic.
+    /// This semantic association allows tools to present and support interaction with the object in a manner that is consistent with user expectations about other objects of that type.
+    /// The role attribute is used to explicitly set the element's ARIA role, overriding the implicit role.
+    /// For example, a &lt;ul&gt;, which has an implicit list role, might have role="treegrid" explicitly set.
+    /// The role property reflects the explicitly set value of the role attribute—in this case treegrid; it does not return the element's implicit list role unless explicitly set.
+    /// </para>
+    /// <para>The full list of defined ARIA roles can be found on the <see href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles">ARIA roles</see> reference page.</para>
+    /// </summary>
+    public ValueTask<string?> Role => GetRole(default);
+
+    /// <inheritdoc cref="Role" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetRole(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string?>("getRole", cancellationToken);
+
+    /// <inheritdoc cref="Role" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetRole(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setRole", cancellationToken, [value]);
 
 
     // methods

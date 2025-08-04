@@ -7,13 +7,10 @@ namespace BrowserAPI.Test.Client;
 public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposable {
     // HTMLElement
     public const string TEST_ACCESS_KEY = "access-key-test";
-
     public const string TEST_STYLE_NAME = "visibility";
     public const string TEST_STYLE_VALUE = "visible";
-
     public const string TEST_DATASET_NAME = "custominfo";
     public const string TEST_DATASET_VALUE = "123";
-
     public const string TEST_AUTOCAPITALIZE = "sentences";
     public const string TEST_DIR = "ltr";
     public const string TEST_ENTER_KEY_HINT = "enter";
@@ -28,17 +25,62 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
     public const string TEST_TITLE = "title-test";
 
     // Element
+    public const string TEST_CLASSNAME = "classname-test";
+    public const string TEST_ID = "some-unique-id";
     public const string TEST_INNERHTML = "<span>innerhtml</span>-test";
     public const string TEST_OUTERHTML = "<span>outerhtml</span>-test";
-    public const string TEST_CLASSNAME = "classname-test";
-
-    public const int TEST_SCROLLLEFT = 16;
-    public const int TEST_SCROLLTOP = 18;
-    public const int TEST_SCROLL_LEFT = 6;
-    public const int TEST_SCROLL_TOP = 8;
-    public const int TEST_SCROLL_BY_X = 10;
-    public const int TEST_SCROLL_BY_Y = 12;
-
+    public const int TEST_SCROLLLEFT = 15;
+    public const int TEST_SCROLLTOP = 17;
+    public const int TEST_SCROLL_LEFT = 5;
+    public const int TEST_SCROLL_TOP = 7;
+    public const int TEST_SCROLL_BY_X = 9;
+    public const int TEST_SCROLL_BY_Y = 11;
+    public const string TEST_SLOT = "ChildContent";
+    // Element - ARIA
+    public const string TEST_ARIA_ATOMIC = "true";
+    public const string TEST_ARIA_AUTO_COMPLETE = "list";
+    public const string TEST_ARIA_BRAILLE_LABEL = "braille label";
+    public const string TEST_ARIA_BRAILLE_ROLE_DESCRIPTION = "braille role description";
+    public const string TEST_ARIA_BUSY = "true";
+    public const string TEST_ARIA_CHECKED = "true";
+    public const string TEST_ARIA_COL_COUNT = "1";
+    public const string TEST_ARIA_COL_INDEX = "0";
+    public const string TEST_ARIA_COL_INDEX_TEXT = "first";
+    public const string TEST_ARIA_COL_SPAN = "1";
+    public const string TEST_ARIA_CURRENT = "true";
+    public const string TEST_ARIA_DESCRIPTION = "description";
+    public const string TEST_ARIA_DISABLED = "true";
+    public const string TEST_ARIA_EXPANDED = "true";
+    public const string TEST_ARIA_HAS_POPUP = "false";
+    public const string TEST_ARIA_HIDDEN = "false";
+    public const string TEST_ARIA_INVALID = "spelling";
+    public const string TEST_ARIA_KEY_SHORTCUTS = "k";
+    public const string TEST_ARIA_LABEL = "some label";
+    public const string TEST_ARIA_LEVEL = "1";
+    public const string TEST_ARIA_LIVE = "polite";
+    public const string TEST_ARIA_MODAL = "true";
+    public const string TEST_ARIA_MULTILINE = "true";
+    public const string TEST_ARIA_MULTI_SELECTABLE = "true";
+    public const string TEST_ARIA_ORIENTATION = "horizontal";
+    public const string TEST_ARIA_PLACEHOLDER = "small hint description";
+    public const string TEST_ARIA_POS_IN_SET = "1";
+    public const string TEST_ARIA_PRESSED = "false";
+    public const string TEST_ARIA_READ_ONLY = "true";
+    public const string TEST_ARIA_REQUIRED = "false";
+    public const string TEST_ARIA_ROLE_DESCRIPTION = "role description";
+    public const string TEST_ARIA_ROW_COUNT = "1";
+    public const string TEST_ARIA_ROW_INDEX = "0";
+    public const string TEST_ARIA_ROW_INDEX_TEXT = "first";
+    public const string TEST_ARIA_ROW_SPAN = "1";
+    public const string TEST_ARIA_SELECTED = "false";
+    public const string TEST_ARIA_SET_SIZE = "1";
+    public const string TEST_ARIA_SORT = "none";
+    public const string TEST_ARIA_VALUE_MAX = "9";
+    public const string TEST_ARIA_VALUE_MIN = "1";
+    public const string TEST_ARIA_VALUE_NOW = "1";
+    public const string TEST_ARIA_VALUE_TEXT = "one";
+    public const string TEST_ROLE = "my role";
+    // Element - Events
     public const string TEST_TRANSITIONSTART_EVENT = "transitionstart-event-test";
     public const string TEST_TRANSITIONEND_EVENT = "transitionend-event-test";
     public const string TEST_TRANSITIONRUN_EVENT = "transitionrun-event-test";
@@ -452,43 +494,209 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
 
     #region Element
 
-    public const string BUTTON_GET_INNERHTML = "htmlelement-inprocess-get-innerhtml";
-    private void GetInnerHTML() {
-        string innerHTML = HTMLElement.InnerHTML;
-        labelOutput = innerHTML;
-    }
-
-    public const string BUTTON_SET_INNERHTML = "htmlelement-inprocess-set-innerhtml";
-    private void SetInnerHTML() {
-        HTMLElement.InnerHTML = TEST_INNERHTML;
-    }
-
-
-    public const string BUTTON_GET_OUTERHTML = "htmlelement-inprocess-get-outerhtml";
-    private void GetOuterHTML() {
-        string outerHTML = HTMLElement.OuterHTML;
-        labelOutput = outerHTML;
-    }
-
-    public const string BUTTON_SET_OUTERHTML = "htmlelement-inprocess-set-outerhtml";
-    private void SetOuterHTML() {
-        HTMLElement.OuterHTML = TEST_OUTERHTML;
-    }
-
-
     public const string BUTTON_GET_ATTRIBUTES = "htmlelement-inprocess-get-attributes";
     private void GetAttributes() {
         Dictionary<string, string> attributes = HTMLElement.Attributes;
         labelOutput = JsonSerializer.Serialize(attributes);
     }
 
+    public const string BUTTON_GET_CLASS_LIST = "htmlelement-inprocess-get-class-list";
+    private void GetClassList() {
+        string[] classList = HTMLElement.ClassList;
+        labelOutput = string.Join(',', classList);
+    }
+
+    public const string BUTTON_GET_CLASS_NAME = "htmlelement-inprocess-get-class-name";
+    private void GetClassName() {
+        string className = HTMLElement.ClassName;
+        labelOutput = className;
+    }
+
+    public const string BUTTON_SET_CLASS_NAME = "htmlelement-inprocess-set-class-name";
+    private void SetClassName() {
+        HTMLElement.ClassName = TEST_CLASSNAME;
+    }
+
+
+    public const string BUTTON_GET_CLIENT_WIDTH = "htmlelement-inprocess-get-client-width";
+    private void GetClientWidth() {
+        int clientWidth = HTMLElement.ClientWidth;
+        labelOutput = clientWidth.ToString();
+    }
+
+    public const string BUTTON_GET_CLIENT_HEIGHT = "htmlelement-inprocess-get-client-height";
+    private void GetClientHeight() {
+        int clientHeight = HTMLElement.ClientHeight;
+        labelOutput = clientHeight.ToString();
+    }
+
+    public const string BUTTON_GET_CLIENT_LEFT = "htmlelement-inprocess-get-client-left";
+    private void GetClientLeft() {
+        int clientLeft = HTMLElement.ClientLeft;
+        labelOutput = clientLeft.ToString();
+    }
+
+    public const string BUTTON_GET_CLIENT_TOP = "htmlelement-inprocess-get-client-top";
+    private void GetClientTop() {
+        int clientTop = HTMLElement.ClientTop;
+        labelOutput = clientTop.ToString();
+    }
+
+
+    public const string BUTTON_GET_CURRENT_CSS_ZOOM = "htmlelement-inprocess-get-current-css-zoom";
+    private void GetCurrentCSSZoom() {
+        double currentCSSZoom = HTMLElement.CurrentCSSZoom;
+        labelOutput = currentCSSZoom.ToString();
+    }
+
+
+    public const string BUTTON_GET_ID = "htmlelement-inprocess-get-id";
+    private void GetId() {
+        string id = HTMLElement.Id;
+        labelOutput = id;
+    }
+
+    public const string BUTTON_SET_ID = "htmlelement-inprocess-set-id";
+    private void SetId() {
+        HTMLElement.Id = TEST_ID;
+    }
+
+
+    public const string BUTTON_GET_IS_CONNECTED = "htmlelement-inprocess-get-is-connected";
+    private void GetIsConnected() {
+        bool isConnected = HTMLElement.IsConnected;
+        labelOutput = isConnected.ToString();
+    }
+
+
+    public const string BUTTON_GET_INNER_HTML = "htmlelement-inprocess-get-inner-html";
+    private void GetInnerHTML() {
+        string innerHTML = HTMLElement.InnerHTML;
+        labelOutput = innerHTML;
+    }
+
+    public const string BUTTON_SET_INNER_HTML = "htmlelement-inprocess-set-inner-html";
+    private void SetInnerHTML() {
+        HTMLElement.InnerHTML = TEST_INNERHTML;
+    }
+
+
+    public const string BUTTON_GET_OUTER_HTML = "htmlelement-inprocess-get-outer-html";
+    private void GetOuterHTML() {
+        string outerHTML = HTMLElement.OuterHTML;
+        labelOutput = outerHTML;
+    }
+
+    public const string BUTTON_SET_OUTER_HTML = "htmlelement-inprocess-set-outer-html";
+    private void SetOuterHTML() {
+        HTMLElement.OuterHTML = TEST_OUTERHTML;
+    }
+
+
+    public const string BUTTON_GET_PART = "htmlelement-inprocess-get-part";
+    private void GetPart() {
+        string[] part = HTMLElement.Part;
+        labelOutput = string.Join(',', part);
+    }
+
+
+    public const string BUTTON_GET_SCROLL_WIDTH = "htmlelement-inprocess-get-scroll-width";
+    private void GetScrollWidth() {
+        int ScrollWidth = HTMLElement.ScrollWidth;
+        labelOutput = ScrollWidth.ToString();
+    }
+
+    public const string BUTTON_GET_SCROLL_HEIGHT = "htmlelement-inprocess-get-scroll-height";
+    private void GetScrollHeight() {
+        int ScrollHeight = HTMLElement.ScrollHeight;
+        labelOutput = ScrollHeight.ToString();
+    }
+
+    public const string BUTTON_GET_SCROLL_LEFT = "htmlelement-inprocess-get-scroll-left";
+    private void GetScrollLeft() {
+        int ScrollLeft = HTMLElement.ScrollLeft;
+        labelOutput = ScrollLeft.ToString();
+    }
+
+    public const string BUTTON_SET_SCROLL_LEFT = "htmlelement-inprocess-set-scroll-left";
+    private void SetScrollLeft() {
+        HTMLElement.ScrollLeft = TEST_SCROLLLEFT;
+    }
+
+    public const string BUTTON_GET_SCROLL_TOP = "htmlelement-inprocess-get-scroll-top";
+    private void GetScrollTop() {
+        int ScrollTop = HTMLElement.ScrollTop;
+        labelOutput = ScrollTop.ToString();
+    }
+
+    public const string BUTTON_SET_SCROLL_TOP = "htmlelement-inprocess-set-scroll-top";
+    private void SetScrollTop() {
+        HTMLElement.ScrollTop = TEST_SCROLLTOP;
+    }
+
+
+    public const string BUTTON_GET_SLOT = "htmlelement-inprocess-get-slot";
+    private void GetSlot() {
+        string slot = HTMLElement.Slot;
+        labelOutput = slot;
+    }
+
+    public const string BUTTON_SET_SLOT = "htmlelement-inprocess-set-slot";
+    private void SetSlot() {
+        HTMLElement.Slot = TEST_SLOT;
+    }
+
+
+    public const string BUTTON_GET_LOCAL_NAME = "htmlelement-inprocess-get-local-name";
+    private void GetLocalName() {
+        string localName = HTMLElement.LocalName;
+        labelOutput = localName;
+    }
+
+    public const string BUTTON_GET_NAMESPACE_URI = "htmlelement-inprocess-get-namespace-uri";
+    private void GetNamespaceURI() {
+        string? namespaceURI = HTMLElement.NamespaceURI;
+        labelOutput = namespaceURI ?? "empty namespace";
+    }
+
+    public const string BUTTON_GET_PREFIX = "htmlelement-inprocess-get-prefix";
+    private void GetPrefix() {
+        string? prefix = HTMLElement.Prefix;
+        labelOutput = prefix ?? "no prefix";
+    }
+
+    public const string BUTTON_GET_BASE_URI = "htmlelement-inprocess-get-base-uri";
+    private void GetBaseURI() {
+        string baseURI = HTMLElement.BaseURI;
+        labelOutput = baseURI;
+    }
+
+    public const string BUTTON_GET_TAG_NAME = "htmlelement-inprocess-get-tag-name";
+    private void GetTagName() {
+        string tagName = HTMLElement.TagName;
+        labelOutput = tagName;
+    }
+
+    public const string BUTTON_GET_NODE_NAME = "htmlelement-inprocess-get-node-name";
+    private void GetNodeName() {
+        string nodeName = HTMLElement.NodeName;
+        labelOutput = nodeName;
+    }
+
+    public const string BUTTON_GET_NODE_TYPE = "htmlelement-inprocess-get-node-type";
+    private void GetNodeType() {
+        int nodeType = HTMLElement.NodeType;
+        labelOutput = nodeType.ToString();
+    }
+
+
+    // properties - Tree nodes
 
     public const string BUTTON_GET_CHILD_ELEMENT_COUNT = "htmlelement-inprocess-get-child-element-count";
     private void GetChildElementCount() {
         int childElementCount = HTMLElement.ChildElementCount;
         labelOutput = childElementCount.ToString();
     }
-
 
     public const string BUTTON_GET_CHILDREN = "htmlelement-inprocess-get-children";
     private void GetChildren() {
@@ -498,92 +706,338 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
         children.Dispose();
     }
 
-
-    public const string BUTTON_GET_CLASSNAME = "htmlelement-inprocess-get-classname";
-    private void GetClassName() {
-        string className = HTMLElement.ClassName;
-        labelOutput = className;
+    public const string BUTTON_GET_FIRST_ELEMENT_CHILD = "htmlelement-inprocess-get-first-element-child";
+    private void GetFirstElementChild() {
+        using IHTMLElementInProcess? child = HTMLElement.FirstElementChild;
+        labelOutput = (child is not null).ToString();
     }
 
-    public const string BUTTON_SET_CLASSNAME = "htmlelement-inprocess-set-classname";
-    private void SetClassName() {
-        HTMLElement.ClassName = TEST_CLASSNAME;
+    public const string BUTTON_GET_LAST_ELEMENT_CHILD = "htmlelement-inprocess-get-last-element-child";
+    private void GetLastElementChild() {
+        using IHTMLElementInProcess? child = HTMLElement.LastElementChild;
+        labelOutput = (child is not null).ToString();
     }
 
-
-    public const string BUTTON_GET_CLASSLIST = "htmlelement-inprocess-get-classlist";
-    private void GetClassList() {
-        string[] classList = HTMLElement.ClassList;
-        labelOutput = string.Join(',', classList);
+    public const string BUTTON_GET_PREVIOUS_ELEMENT_SIBLING = "htmlelement-inprocess-get-previous-element-sibling";
+    private void GetPreviousElementSibling() {
+        using IHTMLElementInProcess? sibling = HTMLElement.PreviousElementSibling;
+        labelOutput = (sibling is not null).ToString();
     }
 
-
-
-    public const string BUTTON_GET_CLIENTWIDTH = "htmlelement-inprocess-get-clientwidth";
-    private void GetClientWidth() {
-        int clientWidth = HTMLElement.ClientWidth;
-        labelOutput = clientWidth.ToString();
+    public const string BUTTON_GET_NEXT_ELEMENT_SIBLING = "htmlelement-inprocess-get-next-element-sibling";
+    private void GetNextElementSibling() {
+        using IHTMLElementInProcess? sibling = HTMLElement.NextElementSibling;
+        labelOutput = (sibling is not null).ToString();
     }
 
-
-    public const string BUTTON_GET_CLIENTHEIGHT = "htmlelement-inprocess-get-clientheight";
-    private void GetClientHeight() {
-        int clientHeight = HTMLElement.ClientHeight;
-        labelOutput = clientHeight.ToString();
+    public const string BUTTON_GET_PARENT_ELEMENT = "htmlelement-inprocess-get-parent-element";
+    private void GetParentElement() {
+        using IHTMLElementInProcess? parent = HTMLElement.ParentElement;
+        labelOutput = (parent is not null).ToString();
     }
 
 
-    public const string BUTTON_GET_CLIENTLEFT = "htmlelement-inprocess-get-clientleft";
-    private void GetClientLeft() {
-        int clientLeft = HTMLElement.ClientLeft;
-        labelOutput = clientLeft.ToString();
-    }
+    // properties - ARIA
+
+    public const string BUTTON_GET_ARIA_ATOMIC = "htmlelement-inprocess-get-aria-atomic";
+    private void GetAriaAtomic() => labelOutput = HTMLElement.AriaAtomic ?? "'aria-atomic' attr not set";
+
+    public const string BUTTON_SET_ARIA_ATOMIC = "htmlelement-inprocess-set-aria-atomic";
+    private void SetAriaAtomic() => HTMLElement.AriaAtomic = TEST_ARIA_ATOMIC;
 
 
-    public const string BUTTON_GET_CLIENTTOP = "htmlelement-inprocess-get-clienttop";
-    private void GetClientTop() {
-        int clientTop = HTMLElement.ClientTop;
-        labelOutput = clientTop.ToString();
-    }
+    public const string BUTTON_GET_ARIA_AUTO_COMPLETE = "htmlelement-inprocess-get-aria-auto-complete";
+    private void GetAriaAutoComplete() => labelOutput = HTMLElement.AriaAutoComplete ?? "'aria-autocomplete' attr not set";
+
+    public const string BUTTON_SET_ARIA_AUTO_COMPLETE = "htmlelement-inprocess-set-aria-auto-complete";
+    private void SetAriaAutoComplete() => HTMLElement.AriaAutoComplete = TEST_ARIA_AUTO_COMPLETE;
 
 
+    public const string BUTTON_GET_ARIA_BRAILLE_LABEL = "htmlelement-inprocess-get-aria-braille-label";
+    private void GetAriaBrailleLabel() => labelOutput = HTMLElement.AriaBrailleLabel ?? "'aria-braillelabel' attr not set";
 
-    public const string BUTTON_GET_SCROLLWIDTH = "htmlelement-inprocess-get-scrollwidth";
-    private void GetScrollWidth() {
-        int ScrollWidth = HTMLElement.ScrollWidth;
-        labelOutput = ScrollWidth.ToString();
-    }
-
-
-    public const string BUTTON_GET_SCROLLHEIGHT = "htmlelement-inprocess-get-scrollheight";
-    private void GetScrollHeight() {
-        int ScrollHeight = HTMLElement.ScrollHeight;
-        labelOutput = ScrollHeight.ToString();
-    }
+    public const string BUTTON_SET_ARIA_BRAILLE_LABEL = "htmlelement-inprocess-set-aria-braille-label";
+    private void SetAriaBrailleLabel() => HTMLElement.AriaBrailleLabel = TEST_ARIA_BRAILLE_LABEL;
 
 
-    public const string BUTTON_GET_SCROLLLEFT = "htmlelement-inprocess-get-scrollleft";
-    private void GetScrollLeft() {
-        int ScrollLeft = HTMLElement.ScrollLeft;
-        labelOutput = ScrollLeft.ToString();
-    }
+    public const string BUTTON_GET_ARIA_BRAILLE_ROLE_DESCRIPTION = "htmlelement-inprocess-get-aria-braille-role-description";
+    private void GetAriaBrailleRoleDescription() => labelOutput = HTMLElement.AriaBrailleRoleDescription ?? "'aria-brailleroledescription' attr not set";
 
-    public const string BUTTON_SET_SCROLLLEFT = "htmlelement-inprocess-set-scrollleft";
-    private void SetScrollLeft() {
-        HTMLElement.ScrollLeft = TEST_SCROLLLEFT;
-    }
+    public const string BUTTON_SET_ARIA_BRAILLE_ROLE_DESCRIPTION = "htmlelement-inprocess-set-aria-braille-role-description";
+    private void SetAriaBrailleRoleDescription() => HTMLElement.AriaBrailleRoleDescription = TEST_ARIA_BRAILLE_ROLE_DESCRIPTION;
 
 
-    public const string BUTTON_GET_SCROLLTOP = "htmlelement-inprocess-get-scrolltop";
-    private void GetScrollTop() {
-        int ScrollTop = HTMLElement.ScrollTop;
-        labelOutput = ScrollTop.ToString();
-    }
+    public const string BUTTON_GET_ARIA_BUSY = "htmlelement-inprocess-get-aria-busy";
+    private void GetAriaBusy() => labelOutput = HTMLElement.AriaBusy ?? "'aria-busy' attr not set";
 
-    public const string BUTTON_SET_SCROLLTOP = "htmlelement-inprocess-set-scrolltop";
-    private void SetScrollTop() {
-        HTMLElement.ScrollTop = TEST_SCROLLTOP;
-    }
+    public const string BUTTON_SET_ARIA_BUSY = "htmlelement-inprocess-set-aria-busy";
+    private void SetAriaBusy() => HTMLElement.AriaBusy = TEST_ARIA_BUSY;
+
+
+    public const string BUTTON_GET_ARIA_CHECKED = "htmlelement-inprocess-get-aria-checked";
+    private void GetAriaChecked() => labelOutput = HTMLElement.AriaChecked ?? "'aria-checked' attr not set";
+
+    public const string BUTTON_SET_ARIA_CHECKED = "htmlelement-inprocess-set-aria-checked";
+    private void SetAriaChecked() => HTMLElement.AriaChecked = TEST_ARIA_CHECKED;
+
+
+    public const string BUTTON_GET_ARIA_COL_COUNT = "htmlelement-inprocess-get-aria-col-count";
+    private void GetAriaColCount() => labelOutput = HTMLElement.AriaColCount ?? "'aria-colcount' attr not set";
+
+    public const string BUTTON_SET_ARIA_COL_COUNT = "htmlelement-inprocess-set-aria-col-count";
+    private void SetAriaColCount() => HTMLElement.AriaColCount = TEST_ARIA_COL_COUNT;
+
+
+    public const string BUTTON_GET_ARIA_COL_INDEX = "htmlelement-inprocess-get-aria-col-index";
+    private void GetAriaColIndex() => labelOutput = HTMLElement.AriaColIndex ?? "'aria-colindex' attr not set";
+
+    public const string BUTTON_SET_ARIA_COL_INDEX = "htmlelement-inprocess-set-aria-col-index";
+    private void SetAriaColIndex() => HTMLElement.AriaColIndex = TEST_ARIA_COL_INDEX;
+
+
+    public const string BUTTON_GET_ARIA_COL_INDEX_TEXT = "htmlelement-inprocess-get-aria-col-index-text";
+    private void GetAriaColIndexText() => labelOutput = HTMLElement.AriaColIndexText ?? "'aria-colindextext' attr not set";
+
+    public const string BUTTON_SET_ARIA_COL_INDEX_TEXT = "htmlelement-inprocess-set-aria-col-index-text";
+    private void SetAriaColIndexText() => HTMLElement.AriaColIndexText = TEST_ARIA_COL_INDEX_TEXT;
+
+
+    public const string BUTTON_GET_ARIA_COL_SPAN = "htmlelement-inprocess-get-aria-col-span";
+    private void GetAriaColSpan() => labelOutput = HTMLElement.AriaColSpan ?? "'aria-colspan' attr not set";
+
+    public const string BUTTON_SET_ARIA_COL_SPAN = "htmlelement-inprocess-set-aria-col-span";
+    private void SetAriaColSpan() => HTMLElement.AriaColSpan = TEST_ARIA_COL_SPAN;
+
+
+    public const string BUTTON_GET_ARIA_CURRENT = "htmlelement-inprocess-get-aria-current";
+    private void GetAriaCurrent() => labelOutput = HTMLElement.AriaCurrent ?? "'aria-current' attr not set";
+
+    public const string BUTTON_SET_ARIA_CURRENT = "htmlelement-inprocess-set-aria-current";
+    private void SetAriaCurrent() => HTMLElement.AriaCurrent = TEST_ARIA_CURRENT;
+
+
+    public const string BUTTON_GET_ARIA_DESCRIPTION = "htmlelement-inprocess-get-aria-description";
+    private void GetAriaDescription() => labelOutput = HTMLElement.AriaDescription ?? "'aria-description' attr not set";
+
+    public const string BUTTON_SET_ARIA_DESCRIPTION = "htmlelement-inprocess-set-aria-description";
+    private void SetAriaDescription() => HTMLElement.AriaDescription = TEST_ARIA_DESCRIPTION;
+
+
+    public const string BUTTON_GET_ARIA_DISABLED = "htmlelement-inprocess-get-aria-disabled";
+    private void GetAriaDisabled() => labelOutput = HTMLElement.AriaDisabled ?? "'aria-disabled' attr not set";
+
+    public const string BUTTON_SET_ARIA_DISABLED = "htmlelement-inprocess-set-aria-disabled";
+    private void SetAriaDisabled() => HTMLElement.AriaDisabled = TEST_ARIA_DISABLED;
+
+
+    public const string BUTTON_GET_ARIA_EXPANDED = "htmlelement-inprocess-get-aria-expanded";
+    private void GetAriaExpanded() => labelOutput = HTMLElement.AriaExpanded ?? "'aria-expanded' attr not set";
+
+    public const string BUTTON_SET_ARIA_EXPANDED = "htmlelement-inprocess-set-aria-expanded";
+    private void SetAriaExpanded() => HTMLElement.AriaExpanded = TEST_ARIA_EXPANDED;
+
+
+    public const string BUTTON_GET_ARIA_HAS_POPUP = "htmlelement-inprocess-get-aria-has-popup";
+    private void GetAriaHasPopup() => labelOutput = HTMLElement.AriaHasPopup ?? "'aria-haspopup' attr not set";
+
+    public const string BUTTON_SET_ARIA_HAS_POPUP = "htmlelement-inprocess-set-aria-has-popup";
+    private void SetAriaHasPopup() => HTMLElement.AriaHasPopup = TEST_ARIA_HAS_POPUP;
+
+
+    public const string BUTTON_GET_ARIA_HIDDEN = "htmlelement-inprocess-get-aria-hidden";
+    private void GetAriaHidden() => labelOutput = HTMLElement.AriaHidden ?? "'aria-hidden' attr not set";
+
+    public const string BUTTON_SET_ARIA_HIDDEN = "htmlelement-inprocess-set-aria-hidden";
+    private void SetAriaHidden() => HTMLElement.AriaHidden = TEST_ARIA_HIDDEN;
+
+
+    public const string BUTTON_GET_ARIA_INVALID = "htmlelement-inprocess-get-aria-invalid";
+    private void GetAriaInvalid() => labelOutput = HTMLElement.AriaInvalid ?? "'aria-invalid' attr not set";
+
+    public const string BUTTON_SET_ARIA_INVALID = "htmlelement-inprocess-set-aria-invalid";
+    private void SetAriaInvalid() => HTMLElement.AriaInvalid = TEST_ARIA_INVALID;
+
+
+    public const string BUTTON_GET_ARIA_KEY_SHORTCUTS = "htmlelement-inprocess-get-aria-key-shortcuts";
+    private void GetAriaKeyShortcuts() => labelOutput = HTMLElement.AriaKeyShortcuts ?? "'aria-keyshortcuts' attr not set";
+
+    public const string BUTTON_SET_ARIA_KEY_SHORTCUTS = "htmlelement-inprocess-set-aria-key-shortcuts";
+    private void SetAriaKeyShortcuts() => HTMLElement.AriaKeyShortcuts = TEST_ARIA_KEY_SHORTCUTS;
+
+
+    public const string BUTTON_GET_ARIA_LABEL = "htmlelement-inprocess-get-aria-label";
+    private void GetAriaLabel() => labelOutput = HTMLElement.AriaLabel ?? "'aria-label' attr not set";
+
+    public const string BUTTON_SET_ARIA_LABEL = "htmlelement-inprocess-set-aria-label";
+    private void SetAriaLabel() => HTMLElement.AriaLabel = TEST_ARIA_LABEL;
+
+
+    public const string BUTTON_GET_ARIA_LEVEL = "htmlelement-inprocess-get-aria-level";
+    private void GetAriaLevel() => labelOutput = HTMLElement.AriaLevel ?? "'aria-level' attr not set";
+
+    public const string BUTTON_SET_ARIA_LEVEL = "htmlelement-inprocess-set-aria-level";
+    private void SetAriaLevel() => HTMLElement.AriaLevel = TEST_ARIA_LEVEL;
+
+
+    public const string BUTTON_GET_ARIA_LIVE = "htmlelement-inprocess-get-aria-live";
+    private void GetAriaLive() => labelOutput = HTMLElement.AriaLive ?? "'aria-live' attr not set";
+
+    public const string BUTTON_SET_ARIA_LIVE = "htmlelement-inprocess-set-aria-live";
+    private void SetAriaLive() => HTMLElement.AriaLive = TEST_ARIA_LIVE;
+
+
+    public const string BUTTON_GET_ARIA_MODAL = "htmlelement-inprocess-get-aria-modal";
+    private void GetAriaModal() => labelOutput = HTMLElement.AriaModal ?? "'aria-modal' attr not set";
+
+    public const string BUTTON_SET_ARIA_MODAL = "htmlelement-inprocess-set-aria-modal";
+    private void SetAriaModal() => HTMLElement.AriaModal = TEST_ARIA_MODAL;
+
+
+    public const string BUTTON_GET_ARIA_MULTILINE = "htmlelement-inprocess-get-aria-multiline";
+    private void GetAriaMultiline() => labelOutput = HTMLElement.AriaMultiline ?? "'aria-multiline' attr not set";
+
+    public const string BUTTON_SET_ARIA_MULTILINE = "htmlelement-inprocess-set-aria-multiline";
+    private void SetAriaMultiline() => HTMLElement.AriaMultiline = TEST_ARIA_MULTILINE;
+
+
+    public const string BUTTON_GET_ARIA_MULTI_SELECTABLE = "htmlelement-inprocess-get-aria-multi-selectable";
+    private void GetAriaMultiSelectable() => labelOutput = HTMLElement.AriaMultiSelectable ?? "'aria-multiselectable' attr not set";
+
+    public const string BUTTON_SET_ARIA_MULTI_SELECTABLE = "htmlelement-inprocess-set-aria-multi-selectable";
+    private void SetAriaMultiSelectable() => HTMLElement.AriaMultiSelectable = TEST_ARIA_MULTI_SELECTABLE;
+
+
+    public const string BUTTON_GET_ARIA_ORIENTATION = "htmlelement-inprocess-get-aria-orientation";
+    private void GetAriaOrientation() => labelOutput = HTMLElement.AriaOrientation ?? "'aria-orientation' attr not set";
+
+    public const string BUTTON_SET_ARIA_ORIENTATION = "htmlelement-inprocess-set-aria-orientation";
+    private void SetAriaOrientation() => HTMLElement.AriaOrientation = TEST_ARIA_ORIENTATION;
+
+
+    public const string BUTTON_GET_ARIA_PLACEHOLDER = "htmlelement-inprocess-get-aria-placeholder";
+    private void GetAriaPlaceholder() => labelOutput = HTMLElement.AriaPlaceholder ?? "'aria-placeholder' attr not set";
+
+    public const string BUTTON_SET_ARIA_PLACEHOLDER = "htmlelement-inprocess-set-aria-placeholder";
+    private void SetAriaPlaceholder() => HTMLElement.AriaPlaceholder = TEST_ARIA_PLACEHOLDER;
+
+
+    public const string BUTTON_GET_ARIA_POS_IN_SET = "htmlelement-inprocess-get-aria-pos-in-set";
+    private void GetAriaPosInSet() => labelOutput = HTMLElement.AriaPosInSet ?? "'aria-posinset' attr not set";
+
+    public const string BUTTON_SET_ARIA_POS_IN_SET = "htmlelement-inprocess-set-aria-pos-in-set";
+    private void SetAriaPosInSet() => HTMLElement.AriaPosInSet = TEST_ARIA_POS_IN_SET;
+
+
+    public const string BUTTON_GET_ARIA_PRESSED = "htmlelement-inprocess-get-aria-pressed";
+    private void GetAriaPressed() => labelOutput = HTMLElement.AriaPressed ?? "'aria-pressed' attr not set";
+
+    public const string BUTTON_SET_ARIA_PRESSED = "htmlelement-inprocess-set-aria-pressed";
+    private void SetAriaPressed() => HTMLElement.AriaPressed = TEST_ARIA_PRESSED;
+
+
+    public const string BUTTON_GET_ARIA_READ_ONLY = "htmlelement-inprocess-get-aria-read-only";
+    private void GetAriaReadOnly() => labelOutput = HTMLElement.AriaReadOnly ?? "'aria-readonly' attr not set";
+
+    public const string BUTTON_SET_ARIA_READ_ONLY = "htmlelement-inprocess-set-aria-read-only";
+    private void SetAriaReadOnly() => HTMLElement.AriaReadOnly = TEST_ARIA_READ_ONLY;
+
+
+    public const string BUTTON_GET_ARIA_REQUIRED = "htmlelement-inprocess-get-aria-required";
+    private void GetAriaRequired() => labelOutput = HTMLElement.AriaRequired ?? "'aria-required' attr not set";
+
+    public const string BUTTON_SET_ARIA_REQUIRED = "htmlelement-inprocess-set-aria-required";
+    private void SetAriaRequired() => HTMLElement.AriaRequired = TEST_ARIA_REQUIRED;
+
+
+    public const string BUTTON_GET_ARIA_ROLE_DESCRIPTION = "htmlelement-inprocess-get-aria-roledescription";
+    private void GetAriaRoleDescription() => labelOutput = HTMLElement.AriaRoleDescription ?? "'aria-roledescription' attr not set";
+
+    public const string BUTTON_SET_ARIA_ROLE_DESCRIPTION = "htmlelement-inprocess-set-aria-roledescription";
+    private void SetAriaRoleDescription() => HTMLElement.AriaRoleDescription = TEST_ARIA_ROLE_DESCRIPTION;
+
+
+    public const string BUTTON_GET_ARIA_ROW_COUNT = "htmlelement-inprocess-get-aria-row-count";
+    private void GetAriaRowCount() => labelOutput = HTMLElement.AriaRowCount ?? "'aria-rowcount' attr not set";
+
+    public const string BUTTON_SET_ARIA_ROW_COUNT = "htmlelement-inprocess-set-aria-row-count";
+    private void SetAriaRowCount() => HTMLElement.AriaRowCount = TEST_ARIA_ROW_COUNT;
+
+
+    public const string BUTTON_GET_ARIA_ROW_INDEX = "htmlelement-inprocess-get-aria-row-index";
+    private void GetAriaRowIndex() => labelOutput = HTMLElement.AriaRowIndex ?? "'aria-rowindex' attr not set";
+
+    public const string BUTTON_SET_ARIA_ROW_INDEX = "htmlelement-inprocess-set-aria-row-index";
+    private void SetAriaRowIndex() => HTMLElement.AriaRowIndex = TEST_ARIA_ROW_INDEX;
+
+
+    public const string BUTTON_GET_ARIA_ROW_INDEX_TEXT = "htmlelement-inprocess-get-aria-row-index-text";
+    private void GetAriaRowIndexText() => labelOutput = HTMLElement.AriaRowIndexText ?? "'aria-rowindextext' attr not set";
+
+    public const string BUTTON_SET_ARIA_ROW_INDEX_TEXT = "htmlelement-inprocess-set-aria-row-index-text";
+    private void SetAriaRowIndexText() => HTMLElement.AriaRowIndexText = TEST_ARIA_ROW_INDEX_TEXT;
+
+
+    public const string BUTTON_GET_ARIA_ROW_SPAN = "htmlelement-inprocess-get-aria-row-span";
+    private void GetAriaRowSpan() => labelOutput = HTMLElement.AriaRowSpan ?? "'aria-rowspan' attr not set";
+
+    public const string BUTTON_SET_ARIA_ROW_SPAN = "htmlelement-inprocess-set-aria-row-span";
+    private void SetAriaRowSpan() => HTMLElement.AriaRowSpan = TEST_ARIA_ROW_SPAN;
+
+
+    public const string BUTTON_GET_ARIA_SELECTED = "htmlelement-inprocess-get-aria-selected";
+    private void GetAriaSelected() => labelOutput = HTMLElement.AriaSelected ?? "'aria-selected' attr not set";
+
+    public const string BUTTON_SET_ARIA_SELECTED = "htmlelement-inprocess-set-aria-selected";
+    private void SetAriaSelected() => HTMLElement.AriaSelected = TEST_ARIA_SELECTED;
+
+
+    public const string BUTTON_GET_ARIA_SET_SIZE = "htmlelement-inprocess-get-aria-set-size";
+    private void GetAriaSetSize() => labelOutput = HTMLElement.AriaSetSize ?? "'aria-setsize' attr not set";
+
+    public const string BUTTON_SET_ARIA_SET_SIZE = "htmlelement-inprocess-set-aria-set-size";
+    private void SetAriaSetSize() => HTMLElement.AriaSetSize = TEST_ARIA_SET_SIZE;
+
+
+    public const string BUTTON_GET_ARIA_SORT = "htmlelement-inprocess-get-aria-sort";
+    private void GetAriaSort() => labelOutput = HTMLElement.AriaSort ?? "'aria-sort' attr not set";
+
+    public const string BUTTON_SET_ARIA_SORT = "htmlelement-inprocess-set-aria-sort";
+    private void SetAriaSort() => HTMLElement.AriaSort = TEST_ARIA_SORT;
+
+
+    public const string BUTTON_GET_ARIA_VALUE_MAX = "htmlelement-inprocess-get-aria-value-max";
+    private void GetAriaValueMax() => labelOutput = HTMLElement.AriaValueMax ?? "'aria-valuemax' attr not set";
+
+    public const string BUTTON_SET_ARIA_VALUE_MAX = "htmlelement-inprocess-set-aria-value-max";
+    private void SetAriaValueMax() => HTMLElement.AriaValueMax = TEST_ARIA_VALUE_MAX;
+
+
+    public const string BUTTON_GET_ARIA_VALUE_MIN = "htmlelement-inprocess-get-aria-value-min";
+    private void GetAriaValueMin() => labelOutput = HTMLElement.AriaValueMin ?? "'aria-valuemin' attr not set";
+
+    public const string BUTTON_SET_ARIA_VALUE_MIN = "htmlelement-inprocess-set-aria-value-min";
+    private void SetAriaValueMin() => HTMLElement.AriaValueMin = TEST_ARIA_VALUE_MIN;
+
+
+    public const string BUTTON_GET_ARIA_VALUE_NOW = "htmlelement-inprocess-get-aria-value-now";
+    private void GetAriaValueNow() => labelOutput = HTMLElement.AriaValueNow ?? "'aria-valuenow' attr not set";
+
+    public const string BUTTON_SET_ARIA_VALUE_NOW = "htmlelement-inprocess-set-aria-value-now";
+    private void SetAriaValueNow() => HTMLElement.AriaValueNow = TEST_ARIA_VALUE_NOW;
+
+
+    public const string BUTTON_GET_ARIA_VALUE_TEXT = "htmlelement-inprocess-get-aria-value-text";
+    private void GetAriaValueText() => labelOutput = HTMLElement.AriaValueText ?? "'aria-valuetext' attr not set";
+
+    public const string BUTTON_SET_ARIA_VALUE_TEXT = "htmlelement-inprocess-set-aria-value-text";
+    private void SetAriaValueText() => HTMLElement.AriaValueText = TEST_ARIA_VALUE_TEXT;
+
+
+    public const string BUTTON_GET_ROLE = "htmlelement-inprocess-get-role";
+    private void GetRole() => labelOutput = HTMLElement.Role ?? "'role' attr not set";
+
+    public const string BUTTON_SET_ROLE = "htmlelement-inprocess-set-role";
+    private void SetRole() => HTMLElement.Role = TEST_ROLE;
 
 
     // methods

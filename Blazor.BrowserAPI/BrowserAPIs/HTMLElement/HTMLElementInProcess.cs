@@ -549,27 +549,6 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     #region Element
 
     /// <summary>
-    /// <para>Gets/Sets the HTML or XML markup contained within the element.</para>
-    /// <para>To insert the HTML into the document rather than replace the contents of an element, use the method insertAdjacentHTML().</para>
-    /// </summary>
-    public string InnerHTML {
-        get => htmlElementJS.Invoke<string>("getInnerHTML");
-        set => htmlElementJS.InvokeVoid("setInnerHTML", [value]);
-    }
-
-    /// <summary>
-    /// <para>
-    /// Gets the serialized HTML fragment describing the element including its descendants.
-    /// It can also be set to replace the element with nodes parsed from the given string.
-    /// </para>
-    /// <para>To only obtain the HTML representation of the contents of an element, or to replace the contents of an element, use the innerHTML property instead.</para>
-    /// </summary>
-    public string OuterHTML {
-        get => htmlElementJS.Invoke<string>("getOuterHTML");
-        set => htmlElementJS.InvokeVoid("setOuterHTML", [value]);
-    }
-
-    /// <summary>
     /// Returns a live collection of all attribute nodes registered to the specified node.
     /// It is a NamedNodeMap, not an Array, so it has no Array methods and the Attr nodes' indexes may differ among browsers.
     /// To be more specific, attributes is a key/value pair of strings that represents any information regarding that attribute.
@@ -577,39 +556,18 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     public Dictionary<string, string> Attributes => htmlElementJS.Invoke<Dictionary<string, string>>("getAttributes");
 
     /// <summary>
-    /// Returns the number of child elements of this element.
+    /// <para>Returns a live DOMTokenList collection of the class attributes of the element. This can then be used to manipulate the class list.</para>
+    /// <üara>Using classList is a convenient alternative to accessing an element's list of classes as a space-delimited string via <i>element.className</i>.</üara>
     /// </summary>
-    public int ChildElementCount => htmlElementJS.Invoke<int>("getChildElementCount");
+    public string[] ClassList => htmlElementJS.Invoke<string[]>("getClassList");
 
     /// <summary>
-    /// <para>Returns a live HTMLCollection which contains all of the child elements of the element upon which it was called.</para>
-    /// <üara>Element.children includes only element nodes.To get all child nodes, including non-element nodes like text and comment nodes, use Node.childNodes.</üara>
-    /// </summary>
-    public IHTMLElementInProcess[] Children {
-        get {
-            IJSInProcessObjectReference[] children = htmlElementJS.Invoke<IJSInProcessObjectReference[]>("getChildren");
-
-            HTMLElementInProcess[] result = new HTMLElementInProcess[children.Length];
-            for (int i = 0; i < result.Length; i++)
-                result[i] = new HTMLElementInProcess(children[i]);
-            return result;
-        }
-    }
-
-    /// <summary>
-    /// <para>Gets/Sets the value of the class attribute of the specified element.</para>
-    /// <para>Returns A string variable representing the class or space-separated classes of the current element.</para>
+    /// Gets/Sets the value of the class attribute of the specified element.
     /// </summary>
     public string ClassName {
         get => htmlElementJS.Invoke<string>("getClassName");
         set => htmlElementJS.InvokeVoid("setClassName", [value]);
     }
-
-    /// <summary>
-    /// <para>Returns a live DOMTokenList collection of the class attributes of the element. This can then be used to manipulate the class list.</para>
-    /// <üara>Using classList is a convenient alternative to accessing an element's list of classes as a space-delimited string via <i>element.className</i>.</üara>
-    /// </summary>
-    public string[] ClassList => htmlElementJS.Invoke<string[]>("getClassList");
 
 
     /// <summary>
@@ -661,6 +619,66 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Note: This property will round the value to an integer.If you need a fractional value, use element.getBoundingClientRect().</para>
     /// </summary>
     public int ClientTop => htmlElementJS.Invoke<int>("getClientTop");
+
+
+    /// <summary>
+    /// <para>Provides the "effective" CSS zoom of an element, taking into account the zoom applied to the element and all its parent elements.</para>
+    /// <para>
+    /// The value calculated by multiplying the CSS zoom values of the element and all of its parents.
+    /// For example, if three elements with zoom values of 2, 1.5, and 3, are nested within each other, the most deeply nested element will have a currentCSSZoom value of 9.
+    /// If the element doesn't have a CSS box, for example because display: none is set on the element or one of its parents, then the currentCSSZoom is set to 1.
+    /// </para>
+    /// <para>
+    /// Note that some methods, such as Element.getBoundingClientRect(), return dimensions and position that are relative to the viewport, and hence include the effects of CSS zoom.
+    /// Other properties and methods return values that are relative to the element itself, and do not include the effects of zooming.
+    /// These include, for example, client* properties such as Element.clientHeight, scroll*() methods like Element.scroll(), and offset* properties such as HTMLElement.offsetHeight.
+    /// The currentCSSZoom property can be used to scale these values to adjust for the effects of zooming.
+    /// </para>
+    /// </summary>
+    public double CurrentCSSZoom => htmlElementJS.Invoke<double>("getCurrentCSSZoom");
+
+    /// <summary>
+    /// <para>Represents the element's identifier, reflecting the id global attribute.</para>
+    /// <para>If the id value is not the empty string, it must be unique in a document.</para>
+    /// <para>The id is often used with getElementById() to retrieve a particular element. Another common case is to use an element's ID as a selector when styling the document with CSS.</para>
+    /// </summary>
+    public string Id {
+        get => htmlElementJS.Invoke<string>("getId");
+        set => htmlElementJS.InvokeVoid("setId", [value]);
+    }
+
+    /// <summary>
+    /// A boolean indicating whether the node is connected (directly or indirectly) to a Document object.
+    /// </summary>
+    public bool IsConnected => htmlElementJS.Invoke<bool>("getIsConnected");
+
+
+    /// <summary>
+    /// <para>Gets/Sets the HTML or XML markup contained within the element.</para>
+    /// <para>To insert the HTML into the document rather than replace the contents of an element, use the method insertAdjacentHTML().</para>
+    /// </summary>
+    public string InnerHTML {
+        get => htmlElementJS.Invoke<string>("getInnerHTML");
+        set => htmlElementJS.InvokeVoid("setInnerHTML", [value]);
+    }
+
+    /// <summary>
+    /// <para>
+    /// Gets the serialized HTML fragment describing the element including its descendants.
+    /// It can also be set to replace the element with nodes parsed from the given string.
+    /// </para>
+    /// <para>To only obtain the HTML representation of the contents of an element, or to replace the contents of an element, use the innerHTML property instead.</para>
+    /// </summary>
+    public string OuterHTML {
+        get => htmlElementJS.Invoke<string>("getOuterHTML");
+        set => htmlElementJS.InvokeVoid("setOuterHTML", [value]);
+    }
+
+
+    /// <summary>
+    /// Represents the part identifier(s) of the element (i.e., set using the part attribute), returned as a DOMTokenList. These can be used to style parts of a shadow DOM, via the ::part pseudo-element.
+    /// </summary>
+    public string[] Part => htmlElementJS.Invoke<string[]>("getPart");
 
 
     /// <summary>
@@ -731,6 +749,705 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     public int ScrollTop {
         get => (int)htmlElementJS.Invoke<double>("getScrollTop");
         set => htmlElementJS.InvokeVoid("setScrollTop", [value]);
+    }
+
+
+    /// <summary>
+    /// Returns the name of the shadow DOM slot the element is inserted in.<br />
+    /// A slot is a placeholder inside a web component that users can fill with their own markup (see Using templates and slots for more information).
+    /// </summary>
+    public string Slot {
+        get => htmlElementJS.Invoke<string>("getSlot");
+        set => htmlElementJS.InvokeVoid("setSlot", [value]);
+    }
+
+
+    /// <summary>
+    /// The local part of the qualified name of an element.
+    /// </summary>
+    public string LocalName => htmlElementJS.Invoke<string>("getLocalName");
+
+    /// <summary>
+    /// The namespace URI of the element, or null if the element is not in a namespace.
+    /// </summary>
+    public string? NamespaceURI => htmlElementJS.Invoke<string?>("getNamespaceURI");
+
+    /// <summary>
+    /// The namespace prefix of the specified element, or null if no prefix is specified.
+    /// </summary>
+    public string? Prefix => htmlElementJS.Invoke<string?>("getPrefix");
+
+    /// <summary>
+    /// <para>The absolute base URL of the document containing the node.</para>
+    /// <para>
+    /// The base URL is used to resolve relative URLs when the browser needs to obtain an absolute URL,
+    /// for example when processing the HTML &lt;img&gt; element's src attribute or the xlink:href Deprecated or href attributes in SVG.
+    /// </para>
+    /// <para>Although this property is read-only, its value is determined by an algorithm each time the property is accessed, and may change if the conditions changed.</para>
+    /// <para>
+    /// The base URL is determined as follows:<br />
+    /// 1. By default, the base URL is the location of the document (as determined by window.location).<br />
+    /// 2. If it is an HTML Document and there is a &lt;Base&gt; element in the document, the href value of the first Base element with such an attribute is used instead.
+    /// </para>
+    /// </summary>
+    public string BaseURI => htmlElementJS.Invoke<string>("getBaseURI");
+
+    /// <summary>
+    /// <para>The tag name of the element on which it's called.</para>
+    /// <para>
+    /// For example, if the element is an &lt;img&gt;, its tagName property is IMG (for HTML documents; it may be cased differently for XML/XHTML documents).
+    /// Note: You can use the localName property to access the Element's local name — which for the case in the example is img (lowercase).
+    /// </para>
+    /// </summary>
+    public string TagName => htmlElementJS.Invoke<string>("getTagName");
+
+    /// <summary>
+    /// <para>The name of the current node as a string.</para>
+    /// <para>
+    /// Values for the different types of nodes are:<br />
+    /// - Attr: The value of Attr.name, that is the qualified name of the attribute<br />
+    /// - CDATASection: The string "#cdata-section"<br />
+    /// - Comment: The string "#comment"<br />
+    /// - Document: The string "#document"<br />
+    /// - DocumentFragment: The string "#document-fragment"<br />
+    /// - DocumentType: The value of DocumentType.name<br />
+    /// - Element: The value of Element.tagName, that is the uppercase name of the element tag if an HTML element, or the lowercase element tag if an XML element (like a SVG or MathML element)<br />
+    /// - ProcessingInstruction: The value of ProcessingInstruction.target<br />
+    /// - Text: The string "#text"
+    /// </para>
+    /// </summary>
+    public string NodeName => htmlElementJS.Invoke<string>("getNodeName");
+
+    /// <summary>
+    /// <para>An integer that identifies what the node is. It distinguishes different kind of nodes from each other, such as elements, text and comments.</para>
+    /// <para>
+    /// Possible values are:<br />
+    /// - 1: ELEMENT_NODE - An Element node like &lt;p&gt; or &lt;div&gt;.<br />
+    /// - 2: ATTRIBUTE_NODE - An Attribute of an Element.<br />
+    /// - 3: TEXT_NODE - The actual Text inside an Element or Attr.<br />
+    /// - 4: CDATA_SECTION_NODE - A CDATASection, such as &lt;!CDATA[[ … ]]&gt;<br />
+    /// - 7: PROCESSING_INSTRUCTION_NODE - A ProcessingInstruction of an XML document, such as &lt;?xml-stylesheet … ?&gt;.<br />
+    /// - 8: COMMENT_NODE - A Comment node, such as &lt;!-- … --&gt;.<br />
+    /// - 9: DOCUMENT_NODE - A Document node.<br />
+    /// - 10: DOCUMENT_TYPE_NODE - A DocumentType node, such as &lt;!doctype html&gt;.<br />
+    /// - 11: DOCUMENT_FRAGMENT_NODE - A DocumentFragment node.
+    /// </para>
+    /// <para>
+    /// The following constants have been deprecated and are not in use anymore:<br />
+    /// - 5: ENTITY_REFERENCE_NODE<br />
+    /// - 6: ENTITY_NODE<br />
+    /// - 12: NOTATION_NODE
+    /// </para>
+    /// </summary>
+    public int NodeType => htmlElementJS.Invoke<int>("getNodeType");
+
+
+    // properties - Tree-nodes
+
+    /// <summary>
+    /// Returns the number of child elements of this element.
+    /// </summary>
+    public int ChildElementCount => htmlElementJS.Invoke<int>("getChildElementCount");
+
+    /// <summary>
+    /// <para>Returns a live HTMLCollection which contains all of the child elements of the element upon which it was called.</para>
+    /// <üara>Element.children includes only element nodes.To get all child nodes, including non-element nodes like text and comment nodes, use Node.childNodes.</üara>
+    /// </summary>
+    public IHTMLElementInProcess[] Children {
+        get {
+            IJSInProcessObjectReference[] children = htmlElementJS.Invoke<IJSInProcessObjectReference[]>("getChildren");
+
+            HTMLElementInProcess[] result = new HTMLElementInProcess[children.Length];
+            for (int i = 0; i < result.Length; i++)
+                result[i] = new HTMLElementInProcess(children[i]);
+            return result;
+        }
+    }
+
+    /// <summary>
+    /// <para>Returns an element's first child Element, or null if there are no child elements.</para>
+    /// <para>It includes only element nodes.</para>
+    /// </summary>
+    public IHTMLElementInProcess? FirstElementChild {
+        get {
+            IJSInProcessObjectReference?[] singleReference = htmlElementJS.Invoke<IJSInProcessObjectReference?[]>("getFirstElementChild");
+            if (singleReference[0] is IJSInProcessObjectReference child)
+                return new HTMLElementInProcess(child);
+            else
+                return null;
+        }
+    }
+
+    /// <summary>
+    /// <para>Returns an element's last child Element, or null if there are no child elements.</para>
+    /// <para>It includes only element nodes.</para>
+    /// </summary>
+    public IHTMLElementInProcess? LastElementChild {
+        get {
+            IJSInProcessObjectReference?[] singleReference = htmlElementJS.Invoke<IJSInProcessObjectReference?[]>("getLastElementChild");
+            if (singleReference[0] is IJSInProcessObjectReference child)
+                return new HTMLElementInProcess(child);
+            else
+                return null;
+        }
+    }
+
+    /// <summary>
+    /// Returns the Element immediately prior to the specified one in its parent's children list, or null if the specified element is the first one in the list.
+    /// </summary>
+    public IHTMLElementInProcess? PreviousElementSibling {
+        get {
+            IJSInProcessObjectReference?[] singleReference = htmlElementJS.Invoke<IJSInProcessObjectReference?[]>("getPreviousElementSibling");
+            if (singleReference[0] is IJSInProcessObjectReference sibling)
+                return new HTMLElementInProcess(sibling);
+            else
+                return null;
+        }
+    }
+
+    /// <summary>
+    /// Returns the element immediately following the specified one in its parent's children list, or null if the specified element is the last one in the list.
+    /// </summary>
+    public IHTMLElementInProcess? NextElementSibling {
+        get {
+            IJSInProcessObjectReference?[] singleReference = htmlElementJS.Invoke<IJSInProcessObjectReference?[]>("getNextElementSibling");
+            if (singleReference[0] is IJSInProcessObjectReference sibling)
+                return new HTMLElementInProcess(sibling);
+            else
+                return null;
+        }
+    }
+
+    /// <summary>
+    /// Returns the DOM node's parent Element, or null if the node either has no parent,or its parent isn't a DOM Element.
+    /// </summary>
+    public IHTMLElementInProcess? ParentElement {
+        get {
+            IJSInProcessObjectReference?[] singleReference = htmlElementJS.Invoke<IJSInProcessObjectReference?[]>("getParentElement");
+            if (singleReference[0] is IJSInProcessObjectReference parent)
+                return new HTMLElementInProcess(parent);
+            else
+                return null;
+        }
+    }
+
+
+    // properties - ARIA
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-atomic attribute, which indicates whether assistive technologies will present all, or only parts of, the changed region based on the change notifications defined by the aria-relevant attribute.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "false": Assistive technologies will present only the changed node or nodes.<br />
+    /// - "true": Assistive technologies will present the entire changed region as a whole, including the author-defined label if one exists.
+    /// </para>
+    /// </summary>
+    public string? AriaAtomic {
+        get => htmlElementJS.Invoke<string>("getAriaAtomic");
+        set => htmlElementJS.InvokeVoid("setAriaAtomic", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-autocomplete attribute, which indicates whether inputting text could trigger display of one or more predictions of the user's intended value for a combobox, searchbox, or textbox and specifies how predictions would be presented if they were made.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "inline": When a user is providing input, text suggesting one way to complete the provided input may be dynamically inserted after the caret.<br />
+    /// - "list": When a user is providing input, an element containing a collection of values that could complete the provided input may be displayed.<br />
+    /// - "both": When a user is providing input, an element containing a collection of values that could complete the provided input may be displayed. If displayed, one value in the collection is automatically selected, and the text needed to complete the automatically selected value appears after the caret in the input.<br />
+    /// - "none": When a user is providing input, there is no display of an automatic suggestion that attempts to predict how the user intends to complete the input.
+    /// </para>
+    /// </summary>
+    public string? AriaAutoComplete {
+        get => htmlElementJS.Invoke<string>("getAriaAutoComplete");
+        set => htmlElementJS.InvokeVoid("setAriaAutoComplete", [value]);
+    }
+
+    /// <summary>
+    /// Reflects the value of the aria-braillelabel attribute, which defines the ARIA braille label of the element.
+    /// This element label may be used by assistive technologies that can present content in braille, but should only be set if a braille-specific label would improve the user experience.
+    /// The aria-braillelabel contains additional information about when the property should be set.
+    /// </summary>
+    public string? AriaBrailleLabel {
+        get => htmlElementJS.Invoke<string>("getAriaBrailleLabel");
+        set => htmlElementJS.InvokeVoid("setAriaBrailleLabel", [value]);
+    }
+
+    /// <summary>
+    /// Reflects the value of the aria-brailleroledescription attribute, which defines the ARIA braille role description of the element.
+    /// This property may be used to provide an abbreviated version of the aria-roledescription value.
+    /// It should only be used if aria-roledescription is present and in the rare case where it is too verbose for braille.
+    /// The aria-brailleroledescription contains additional information about when the property should be set.
+    /// </summary>
+    public string? AriaBrailleRoleDescription {
+        get => htmlElementJS.Invoke<string>("getAriaBrailleRoleDescription");
+        set => htmlElementJS.InvokeVoid("setAriaBrailleRoleDescription", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-busy attribute, which indicates whether an element is being modified, as assistive technologies may want to wait until the modifications are complete before exposing them to the user.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The element is being updated.<br />
+    /// - "false": There are no expected updates for the element.
+    /// </para>
+    /// </summary>
+    public string? AriaBusy {
+        get => htmlElementJS.Invoke<string>("getAriaBusy");
+        set => htmlElementJS.InvokeVoid("setAriaBusy", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-checked attribute, which indicates the current "checked" state of checkboxes, radio buttons, and other widgets that have a checked state.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The element is checked.<br />
+    /// - "mixed": Indicates a mixed mode value for a tri-state checkbox or menuitemcheckbox.<br />
+    /// - "false": There are no expected updates for the element.<br />
+    /// - "undefined": The element does not support being checked.
+    /// </para>
+    /// </summary>
+    public string? AriaChecked {
+        get => htmlElementJS.Invoke<string>("getAriaChecked");
+        set => htmlElementJS.InvokeVoid("setAriaChecked", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-colcount attribute, which defines the number of columns in a table, grid, or treegrid.</para>
+    /// <para>Value is a string which contains an integer.</para>
+    /// </summary>
+    public string? AriaColCount {
+        get => htmlElementJS.Invoke<string>("getAriaColCount");
+        set => htmlElementJS.InvokeVoid("setAriaColCount", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-colindex attribute, which defines an element's column index or position with respect to the total number of columns within a table, grid, or treegrid.</para>
+    /// <para>Value is a string which contains an integer.</para>
+    /// </summary>
+    public string? AriaColIndex {
+        get => htmlElementJS.Invoke<string>("getAriaColIndex");
+        set => htmlElementJS.InvokeVoid("setAriaColIndex", [value]);
+    }
+
+    /// <summary>
+    /// Reflects the value of the aria-colindextext attribute, which defines a human readable text alternative of aria-colindex.
+    /// </summary>
+    public string? AriaColIndexText {
+        get => htmlElementJS.Invoke<string>("getAriaColIndexText");
+        set => htmlElementJS.InvokeVoid("setAriaColIndexText", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-colspan attribute, which defines the number of columns spanned by a cell or gridcell within a table, grid, or treegrid.</para>
+    /// <para>Value is a string which contains an integer.</para>
+    /// </summary>
+    public string? AriaColSpan {
+        get => htmlElementJS.Invoke<string>("getAriaColSpan");
+        set => htmlElementJS.InvokeVoid("setAriaColSpan", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-current attribute, which indicates the element that represents the current item within a container or set of related elements.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "page": Represents the current page within a set of pages.<br />
+    /// - "step": Represents the current step within a process.<br />
+    /// - "location": Represents the current location, for example the current page in a breadcrumbs hierarchy.<br />
+    /// - "date": Represents the current date within a collection of dates.<br />
+    /// - "time": Represents the current time within a set of times.<br />
+    /// - "true": Represents the current item within a set.<br />
+    /// - "false": Does not represent the current item within a set.
+    /// </para>
+    /// </summary>
+    public string? AriaCurrent {
+        get => htmlElementJS.Invoke<string>("getAriaCurrent");
+        set => htmlElementJS.InvokeVoid("setAriaCurrent", [value]);
+    }
+
+    /// <summary>
+    /// Reflects the value of the aria-description attribute, which defines a string value that describes or annotates the current element.
+    /// </summary>
+    public string? AriaDescription {
+        get => htmlElementJS.Invoke<string>("getAriaDescription");
+        set => htmlElementJS.InvokeVoid("setAriaDescription", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-disabled attribute, which indicates that the element is perceivable but disabled, so it is not editable or otherwise operable.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The element and all focusable descendants are disabled, but perceivable, and their values cannot be changed by the user.<br />
+    /// - "false": The element is enabled.
+    /// </para>
+    /// </summary>
+    public string? AriaDisabled {
+        get => htmlElementJS.Invoke<string>("getAriaDisabled");
+        set => htmlElementJS.InvokeVoid("setAriaDisabled", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-expanded attribute, which indicates whether a grouping element owned or controlled by this element is expanded or collapsed.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The grouping element this element owns or controls is expanded.<br />
+    /// - "false": The grouping element this element owns or controls is collapsed.<br />
+    /// - "undefined": The element does not own or control a grouping element that is expandable.
+    /// </para>
+    /// </summary>
+    public string? AriaExpanded {
+        get => htmlElementJS.Invoke<string>("getAriaExpanded");
+        set => htmlElementJS.InvokeVoid("setAriaExpanded", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-haspopup attribute, which indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "false": The element does not have a popup.<br />
+    /// - "true": The element has a popup that is a menu.<br />
+    /// - "menu":The element has a popup that is a menu. <br />
+    /// - "listbox": The element has a popup that is a listbox.<br />
+    /// - "tree": The element has a popup that is a tree.<br />
+    /// - "grid": The element has a popup that is a grid.<br />
+    /// - "dialog": The element has a popup that is a dialog.
+    /// </para>
+    /// </summary>
+    public string? AriaHasPopup {
+        get => htmlElementJS.Invoke<string>("getAriaHasPopup");
+        set => htmlElementJS.InvokeVoid("setAriaHasPopup", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-hidden) attribute, which indicates whether the element is exposed to an accessibility API.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The element is hidden from the accessibility API.<br />
+    /// - "false": The element is exposed to the accessibility API as if it were rendered.<br />
+    /// - "undefined": The element's hidden state is determined by the user agent based on whether it is rendered.
+    /// </para>
+    /// </summary>
+    public string? AriaHidden {
+        get => htmlElementJS.Invoke<string>("getAriaHidden");
+        set => htmlElementJS.InvokeVoid("setAriaHidden", [value]);
+    }
+
+    /// <summary>
+    /// <para>
+    /// Reflects the value of the aria-invalid attribute.
+    /// Relevant for the application, checkbox, combobox, gridcell, listbox, radiogroup, slider, spinbutton, textbox, and tree roles,
+    /// it indicates to the accessibility API whether the entered value does not conform to the format expected by the application.
+    /// </para>
+    /// <para>
+    /// If the attribute is not present, or is set to the empty string, assistive technology will treat the value as if it were set to false.
+    /// If the attribute is present but set to a value other than false, grammar, spelling or the empty string (""), assistive technology treats the value as true.
+    /// The property reflects the attribute value as set, not as handled by assistive technology.
+    /// </para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The element is invalid.<br />
+    /// - "false": The element is not in an invalid state.<br />
+    /// - "grammar": The element is in an invalid state because grammatical error was detected.<br />
+    /// - "spelling": The element is in an invalid state because spelling error was detected.
+    /// </para>
+    /// </summary>
+    public string? AriaInvalid {
+        get => htmlElementJS.Invoke<string>("getAriaInvalid");
+        set => htmlElementJS.InvokeVoid("setAriaInvalid", [value]);
+    }
+
+    /// <summary>
+    /// Reflects the value of the aria-keyshortcuts attribute, which indicates keyboard shortcuts that an author has implemented to activate or give focus to an element.
+    /// </summary>
+    public string? AriaKeyShortcuts {
+        get => htmlElementJS.Invoke<string>("getAriaKeyShortcuts");
+        set => htmlElementJS.InvokeVoid("setAriaKeyShortcuts", [value]);
+    }
+
+    /// <summary>
+    /// Reflects the value of the aria-label attribute, which defines a string value that labels the current element.
+    /// </summary>
+    public string? AriaLabel {
+        get => htmlElementJS.Invoke<string>("getAriaLabel");
+        set => htmlElementJS.InvokeVoid("setAriaLabel", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-level attribute, which defines the hierarchical level of an element within a structure.</para>
+    /// <para>Note: Where possible use an HTML h1 or other correct heading level as these have built in semantics and do not require ARIA attributes.</para>
+    /// <para>Value is a string containing an integer.</para>
+    /// </summary>
+    public string? AriaLevel {
+        get => htmlElementJS.Invoke<string>("getAriaLevel");
+        set => htmlElementJS.InvokeVoid("setAriaLevel", [value]);
+    }
+
+    /// <summary>
+    /// <para>
+    /// Reflects the value of the aria-live attribute, which indicates that an element will be updated,
+    /// and describes the types of updates the user agents, assistive technologies,and user can expect from the live region.
+    /// </para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "assertive": Indicates that updates to the region have the highest priority and should be presented to the user immediately.<br />
+    /// - "off": Indicates that updates to the region should not be presented to the user unless the user is currently focused on that region.<br />
+    /// - "polite": Indicates that updates to the region should be presented at the next graceful opportunity, such as at the end of speaking the current sentence or when the user pauses typing.
+    /// </para>
+    /// </summary>
+    public string? AriaLive {
+        get => htmlElementJS.Invoke<string>("getAriaLive");
+        set => htmlElementJS.InvokeVoid("setAriaLive", [value]);
+    }
+
+    /// <summary>
+    /// <para>
+    /// Reflects the value of the aria-modal attribute, which indicates whether an element is modal when displayed.
+    /// Applying the aria-modal property to an element with role="dialog" replaces the technique of using aria-hidden on the background for informing assistive technologies that content outside a dialog is inert.
+    /// </para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The element is modal.<br />
+    /// - "false": The element is not modal.
+    /// </para>
+    /// </summary>
+    public string? AriaModal {
+        get => htmlElementJS.Invoke<string>("getAriaModal");
+        set => htmlElementJS.InvokeVoid("setAriaModal", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-multiline attribute, which indicates whether a text box accepts multiple lines of input or only a single line.</para>
+    /// <para>Note: Where possible use an HTML &lt;input&gt; element with type="text" or a &lt;textarea&gt; as these have built in semantics and do not require ARIA attributes.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": This is a multi-line text box.<br />
+    /// - "false": This is a single-line text box.
+    /// </para>
+    /// </summary>
+    public string? AriaMultiline {
+        get => htmlElementJS.Invoke<string>("getAriaMultiline");
+        set => htmlElementJS.InvokeVoid("setAriaMultiline", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-multiselectable attribute, which indicates that the user may select more than one item from the current selectable descendants.</para>
+    /// <para>Note: Where possible use an HTML &lt;select&gt; element as this has built in semantics and does not require ARIA attributes.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": More than one item may be selected at a time.<br />
+    /// - "false": Only one item may be selected.
+    /// </para>
+    /// </summary>
+    public string? AriaMultiSelectable {
+        get => htmlElementJS.Invoke<string>("getAriaMultiSelectable");
+        set => htmlElementJS.InvokeVoid("setAriaMultiSelectable", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-orientation attribute, which indicates whether the element's orientation is horizontal, vertical, or unknown/ambiguous.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "horizontal": The element is horizontal.<br />
+    /// - "vertical": The element is vertical.<br />
+    /// - "undefined": The element's orientation is unknown.
+    /// </para>
+    /// </summary>
+    public string? AriaOrientation {
+        get => htmlElementJS.Invoke<string>("getAriaOrientation");
+        set => htmlElementJS.InvokeVoid("setAriaOrientation", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-placeholder attribute, which defines a short hint intended to aid the user with data entry when the control has no value.</para>
+    /// <para>Note: Where possible use an HTML &lt;input&gt; element with type="text" or a &lt;textarea&gt; as these have built in semantics and do not require ARIA attributes.</para>
+    /// </summary>
+    public string? AriaPlaceholder {
+        get => htmlElementJS.Invoke<string>("getAriaPlaceholder");
+        set => htmlElementJS.InvokeVoid("setAriaPlaceholder", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-posinset attribute, which defines an element's number or position in the current set of listitems or treeitems.</para>
+    /// <para>Value is a string containing an integer.</para>
+    /// </summary>
+    public string? AriaPosInSet {
+        get => htmlElementJS.Invoke<string>("getAriaPosInSet");
+        set => htmlElementJS.InvokeVoid("setAriaPosInSet", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-pressed attribute, which indicates the current "pressed" state of toggle buttons.</para>
+    /// <para>Note: Where possible use an HTML &lt;input&gt; element with type="button" or the &lt;button&gt; element as these have built in semantics and do not require ARIA attributes.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The element is pressed.<br />
+    /// - "false": The element supports being pressed but is not currently pressed.<br />
+    /// - "mixed": Indicates a mixed mode value for a tri-state toggle button.<br />
+    /// - "undefined": The element does not support being pressed.
+    /// </para>
+    /// </summary>
+    public string? AriaPressed {
+        get => htmlElementJS.Invoke<string>("getAriaPressed");
+        set => htmlElementJS.InvokeVoid("setAriaPressed", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-readonly attribute, which indicates that the element is not editable, but is otherwise operable.</para>
+    /// <para>Note: Where possible use an HTML &lt;input&gt; element with type="text" or a &lt;textarea&gt; as these have built in semantics and do not require ARIA attributes.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The user cannot change the value of the element.<br />
+    /// - "false": The user can set the value of the element.
+    /// </para>
+    /// </summary>
+    public string? AriaReadOnly {
+        get => htmlElementJS.Invoke<string>("getAriaReadOnly");
+        set => htmlElementJS.InvokeVoid("setAriaReadOnly", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-required attribute, which indicates that user input is required on the element before a form may be submitted.</para>
+    /// <para>Note: Where possible use an HTML &lt;input&gt; element with type="text" or a &lt;textarea&gt; as these have built in semantics and do not require ARIA attributes.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": Users need to provide input on an element before a form is submitted.<br />
+    /// - "false": User input is not necessary to submit the form.
+    /// </para>
+    /// </summary>
+    public string? AriaRequired {
+        get => htmlElementJS.Invoke<string>("getAriaRequired");
+        set => htmlElementJS.InvokeVoid("setAriaRequired", [value]);
+    }
+
+    /// <summary>
+    /// Rreflects the value of the aria-roledescription attribute, which defines a human-readable, author-localized description for the role of an element.
+    /// </summary>
+    public string? AriaRoleDescription {
+        get => htmlElementJS.Invoke<string>("getAriaRoleDescription");
+        set => htmlElementJS.InvokeVoid("setAriaRoleDescription", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-rowcount attribute, which defines the total number of rows in a table, grid, or treegrid.</para>
+    /// <para>Value is a string which contains an integer.</para>
+    /// </summary>
+    public string? AriaRowCount {
+        get => htmlElementJS.Invoke<string>("getAriaRowCount");
+        set => htmlElementJS.InvokeVoid("setAriaRowCount", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-rowindex attribute, which defines an element's row index or position with respect to the total number of rows within a table, grid, or treegrid.</para>
+    /// <para>Value is a string which contains an integer.</para>
+    /// </summary>
+    public string? AriaRowIndex {
+        get => htmlElementJS.Invoke<string>("getAriaRowIndex");
+        set => htmlElementJS.InvokeVoid("setAriaRowIndex", [value]);
+    }
+
+    /// <summary>
+    /// Reflects the value of the aria-rowindextext attribute, which defines a human readable text alternative of aria-rowindex.
+    /// </summary>
+    public string? AriaRowIndexText {
+        get => htmlElementJS.Invoke<string>("getAriaRowIndexText");
+        set => htmlElementJS.InvokeVoid("setAriaRowIndexText", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-rowspan attribute, which defines the number of rows spanned by a cell or gridcell within a table, grid, or treegrid.</para>
+    /// <para>Value is a string which contains an integer.</para>
+    /// </summary>
+    public string? AriaRowSpan {
+        get => htmlElementJS.Invoke<string>("getAriaRowSpan");
+        set => htmlElementJS.InvokeVoid("setAriaRowSpan", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-selected attribute, which indicates the current "selected" state of elements that have a selected state.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "true": The item is selected.<br />
+    /// - "false": The item is not selected.<br />
+    /// - "undefined": The item is not selectable.
+    /// </para>
+    /// </summary>
+    public string? AriaSelected {
+        get => htmlElementJS.Invoke<string>("getAriaSelected");
+        set => htmlElementJS.InvokeVoid("setAriaSelected", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-setsize attribute, which defines the number of items in the current set of listitems or treeitems.</para>
+    /// <para>Value is a string containing an integer.</para>
+    /// </summary>
+    public string? AriaSetSize {
+        get => htmlElementJS.Invoke<string>("getAriaSetSize");
+        set => htmlElementJS.InvokeVoid("setAriaSetSize", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-sort attribute, which indicates if items in a table or grid are sorted in ascending or descending order.</para>
+    /// <para>
+    /// Value is one of the following values:<br />
+    /// - "ascending": Items are sorted in ascending order by this column.<br />
+    /// - "descending": Items are sorted in descending order by this column.<br />
+    /// - "none": There is no defined sort applied to the column.<br />
+    /// - "other": A sort algorithm other than ascending or descending has been applied.
+    /// </para>
+    /// </summary>
+    public string? AriaSort {
+        get => htmlElementJS.Invoke<string>("getAriaSort");
+        set => htmlElementJS.InvokeVoid("setAriaSort", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-valuemax attribute, which defines the maximum allowed value for a range widget.</para>
+    /// <para>Value is a string which contains a number.</para>
+    /// </summary>
+    public string? AriaValueMax {
+        get => htmlElementJS.Invoke<string>("getAriaValueMax");
+        set => htmlElementJS.InvokeVoid("setAriaValueMax", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-valuemin attribute, which defines the minimum allowed value for a range widget.</para>
+    /// <para>Value is a string which contains a number.</para>
+    /// </summary>
+    public string? AriaValueMin {
+        get => htmlElementJS.Invoke<string>("getAriaValueMin");
+        set => htmlElementJS.InvokeVoid("setAriaValueMin", [value]);
+    }
+
+    /// <summary>
+    /// <para>Reflects the value of the aria-valuenow attribute, which defines the current value for a range widget.</para>
+    /// <para>Value is a string which contains a number.</para>
+    /// </summary>
+    public string? AriaValueNow {
+        get => htmlElementJS.Invoke<string>("getAriaValueNow");
+        set => htmlElementJS.InvokeVoid("setAriaValueNow", [value]);
+    }
+
+    /// <summary>
+    /// Reflects the value of the aria-valuetext attribute, which defines the human-readable text alternative of aria-valuenow for a range widget.
+    /// </summary>
+    public string? AriaValueText {
+        get => htmlElementJS.Invoke<string>("getAriaValueText");
+        set => htmlElementJS.InvokeVoid("setAriaValueText", [value]);
+    }
+
+    /// <summary>
+    /// <para>Returns the explicitly set WAI-ARIA role for the element.</para>
+    /// <para>
+    /// All HTML elements have an implicit ARIA role, even if that role is generic.
+    /// This semantic association allows tools to present and support interaction with the object in a manner that is consistent with user expectations about other objects of that type.
+    /// The role attribute is used to explicitly set the element's ARIA role, overriding the implicit role.
+    /// For example, a &lt;ul&gt;, which has an implicit list role, might have role="treegrid" explicitly set.
+    /// The role property reflects the explicitly set value of the role attribute—in this case treegrid; it does not return the element's implicit list role unless explicitly set.
+    /// </para>
+    /// <para>The full list of defined ARIA roles can be found on the <see href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles">ARIA roles</see> reference page.</para>
+    /// </summary>
+    public string? Role {
+        get => htmlElementJS.Invoke<string>("getRole");
+        set => htmlElementJS.InvokeVoid("setRole", [value]);
     }
 
 

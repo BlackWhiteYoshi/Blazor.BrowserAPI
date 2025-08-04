@@ -607,8 +607,120 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     #region Element
 
     [Test]
+    public async Task GetAttributes() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ATTRIBUTES);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("""{"data-testid":"htmlelement-inprocess-html-element","class":"html-element","_bl_6":""}""");
+    }
+
+    [Test]
+    public async Task GetClassList() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_CLASS_LIST);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("html-element");
+    }
+
+    [Test]
+    public async Task GetClassNamey() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_CLASS_NAME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("html-element");
+    }
+
+    [Test]
+    public async Task SetClassName() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_CLASS_NAME);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.className;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_CLASSNAME);
+    }
+
+
+    [Test]
+    public async Task GetClientWidthy() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_CLIENT_WIDTH);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        bool isInteger = int.TryParse(result, out int resultAsNumber);
+        await Assert.That(isInteger).IsTrue();
+        await Assert.That(resultAsNumber).IsGreaterThanOrEqualTo(0);
+    }
+
+    [Test]
+    public async Task GetClientHeight() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_CLIENT_HEIGHT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        bool isInteger = int.TryParse(result, out int resultAsNumber);
+        await Assert.That(isInteger).IsTrue();
+        await Assert.That(resultAsNumber).IsGreaterThanOrEqualTo(0);
+    }
+
+    [Test]
+    public async Task GetClientLeft() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_CLIENT_LEFT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        bool isInteger = int.TryParse(result, out int resultAsNumber);
+        await Assert.That(isInteger).IsTrue();
+        await Assert.That(resultAsNumber).IsGreaterThanOrEqualTo(0);
+    }
+
+    [Test]
+    public async Task GetClientTop() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_CLIENT_TOP);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        bool isInteger = int.TryParse(result, out int resultAsNumber);
+        await Assert.That(isInteger).IsTrue();
+        await Assert.That(resultAsNumber).IsGreaterThanOrEqualTo(0);
+    }
+
+
+    [Test]
+    public async Task GetCurrentCSSZoom() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_CURRENT_CSS_ZOOM);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("1");
+    }
+
+
+    [Test]
+    public async Task GetId() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.id = '{HTMLElementInProcessGroup.TEST_ID}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ID);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ID);
+    }
+
+    [Test]
+    public async Task SetId() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ID);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.id;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ID);
+    }
+
+
+    [Test]
+    public async Task GetIsConnected() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_IS_CONNECTED);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+
+    [Test]
     public async Task GetInnerHtml() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_INNERHTML);
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_INNER_HTML);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("<!--!-->\n            test <!--!--><b>bold</b> <!--!--><i>italic</i> <!--!--><u>underlined</u>");
@@ -616,7 +728,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
     [Test]
     public async Task SetInnerHtml() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_INNERHTML);
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_INNER_HTML);
 
         string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).InnerHTMLAsync();
         string expected = HTMLElementInProcessGroup.TEST_INNERHTML;
@@ -626,7 +738,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
     [Test]
     public async Task GetOuterHtml() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_OUTERHTML);
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_OUTER_HTML);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         const string expected = """
@@ -638,7 +750,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
     [Test]
     public async Task SetOuterHtml() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_OUTERHTML);
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_OUTER_HTML);
 
         string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT_CONTAINER).InnerHTMLAsync();
         string expected = HTMLElementInProcessGroup.TEST_OUTERHTML;
@@ -647,118 +759,30 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
 
     [Test]
-    public async Task GetAttributes() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ATTRIBUTES);
+    public async Task GetPart() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('part', 'header-part body-part');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_PART);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("""{"data-testid":"htmlelement-inprocess-html-element","class":"html-element","_bl_6":""}""");
+        await Assert.That(result).IsEqualTo("header-part,body-part");
     }
-
-
-    [Test]
-    public async Task GetChildElementCount() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_CHILD_ELEMENT_COUNT);
-
-        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("3");
-    }
-
-
-    [Test]
-    public async Task GetChildren() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_CHILDREN);
-
-        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("3");
-    }
-
-
-    [Test]
-    public async Task GetClassNamey() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_CLASSNAME);
-
-        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("html-element");
-    }
-
-    [Test]
-    public async Task SetClassName() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_CLASSNAME);
-
-        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.className;");
-        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_CLASSNAME);
-    }
-
-
-    [Test]
-    public async Task GetClassList() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_CLASSLIST);
-
-        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("html-element");
-    }
-
-
-
-    [Test]
-    public async Task GetClientWidthy() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_CLIENTWIDTH);
-
-        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        bool isInteger = int.TryParse(result, out int resultAsNumber);
-        await Assert.That(isInteger).IsTrue();
-        await Assert.That(resultAsNumber).IsGreaterThanOrEqualTo(0);
-    }
-
-
-    [Test]
-    public async Task GetClientHeight() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_CLIENTHEIGHT);
-
-        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        bool isInteger = int.TryParse(result, out int resultAsNumber);
-        await Assert.That(isInteger).IsTrue();
-        await Assert.That(resultAsNumber).IsGreaterThanOrEqualTo(0);
-    }
-
-
-    [Test]
-    public async Task GetClientLeft() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_CLIENTLEFT);
-
-        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        bool isInteger = int.TryParse(result, out int resultAsNumber);
-        await Assert.That(isInteger).IsTrue();
-        await Assert.That(resultAsNumber).IsGreaterThanOrEqualTo(0);
-    }
-
-
-    [Test]
-    public async Task GetClientTop() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_CLIENTTOP);
-
-        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        bool isInteger = int.TryParse(result, out int resultAsNumber);
-        await Assert.That(isInteger).IsTrue();
-        await Assert.That(resultAsNumber).IsGreaterThanOrEqualTo(0);
-    }
-
 
 
     [Test]
     public async Task GetScrollWidth() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_SCROLLWIDTH);
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_SCROLL_WIDTH);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         bool isInteger = int.TryParse(result, out int resultAsNumber);
         await Assert.That(isInteger).IsTrue();
         await Assert.That(resultAsNumber).IsGreaterThanOrEqualTo(50);
     }
-
 
     [Test]
     public async Task GetScrollHeight() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_SCROLLHEIGHT);
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_SCROLL_HEIGHT);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         bool isInteger = int.TryParse(result, out int resultAsNumber);
@@ -766,10 +790,9 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
         await Assert.That(resultAsNumber).IsGreaterThanOrEqualTo(50);
     }
 
-
     [Test]
     public async Task GetScrollLeft() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_SCROLLLEFT);
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_SCROLL_LEFT);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         bool isInteger = int.TryParse(result, out int resultAsNumber);
@@ -779,16 +802,15 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
     [Test]
     public async Task SetScrollLeft() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_SCROLLLEFT);
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_SCROLL_LEFT);
 
         int result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<int>("node => node.scrollLeft;");
         await Assert.That(result).IsGreaterThan(0);
     }
 
-
     [Test]
     public async Task GetScrollTop() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_SCROLLTOP);
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_SCROLL_TOP);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         bool isInteger = int.TryParse(result, out int resultAsNumber);
@@ -798,10 +820,988 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
     [Test]
     public async Task SetScrollTop() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_SCROLLTOP);
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_SCROLL_TOP);
 
         int result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<int>("node => node.scrollTop;");
         await Assert.That(result).IsGreaterThan(0);
+    }
+
+
+    [Test]
+    public async Task GetSlot() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.slot = '{HTMLElementInProcessGroup.TEST_SLOT}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_SLOT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.slot;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_SLOT);
+    }
+
+    [Test]
+    public async Task SetSlot() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_SLOT);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.slot;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_SLOT);
+    }
+
+
+    [Test]
+    public async Task GetLocalName() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_LOCAL_NAME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("div");
+    }
+
+    [Test]
+    public async Task GetNamespaceURI() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_NAMESPACE_URI);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("http://www.w3.org/1999/xhtml");
+    }
+
+    [Test]
+    public async Task GetPrefix() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_PREFIX);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("no prefix");
+    }
+
+    [Test]
+    public async Task GetBaseURI() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_BASE_URI);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("https://localhost:5000/");
+    }
+
+    [Test]
+    public async Task GetTagName() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_TAG_NAME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("DIV");
+    }
+
+    [Test]
+    public async Task GetNodeName() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_NODE_NAME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("DIV");
+    }
+
+    [Test]
+    public async Task GetNodeType() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_NODE_TYPE);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("1");
+    }
+
+
+    // properties - Tree nodes
+
+    [Test]
+    public async Task GetChildElementCount() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_CHILD_ELEMENT_COUNT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("3");
+    }
+
+    [Test]
+    public async Task GetChildren() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_CHILDREN);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("3");
+    }
+
+    [Test]
+    public async Task GetFirstElementChild() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_FIRST_ELEMENT_CHILD);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
+    public async Task GetLastElementChild() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_LAST_ELEMENT_CHILD);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
+    public async Task GetPreviousElementSibling() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_PREVIOUS_ELEMENT_SIBLING);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("False");
+    }
+
+    [Test]
+    public async Task GetNextElementSibling() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_NEXT_ELEMENT_SIBLING);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("False");
+    }
+
+    [Test]
+    public async Task GetParentElement() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_PARENT_ELEMENT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+
+    // properties - ARIA
+
+    [Test]
+    public async Task GetAriaAtomic() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaAtomic = '{HTMLElementInProcessGroup.TEST_ARIA_ATOMIC}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_ATOMIC);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_ATOMIC);
+    }
+
+    [Test]
+    public async Task SetAriaAtomic() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_ATOMIC);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaAtomic;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_ATOMIC);
+    }
+
+
+    [Test]
+    public async Task GetAriaAutoComplete() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaAutoComplete = '{HTMLElementInProcessGroup.TEST_ARIA_AUTO_COMPLETE}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_AUTO_COMPLETE);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_AUTO_COMPLETE);
+    }
+
+    [Test]
+    public async Task SetAriaAutoComplete() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_AUTO_COMPLETE);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaAutoComplete;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_AUTO_COMPLETE);
+    }
+
+
+    [Test]
+    public async Task GetAriaBrailleLabel() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaBrailleLabel = '{HTMLElementInProcessGroup.TEST_ARIA_BRAILLE_LABEL}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_BRAILLE_LABEL);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_BRAILLE_LABEL);
+    }
+
+    [Test]
+    public async Task SetAriaBrailleLabel() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_BRAILLE_LABEL);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaBrailleLabel;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_BRAILLE_LABEL);
+    }
+
+
+    [Test]
+    public async Task GetAriaBrailleRoleDescription() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaBrailleRoleDescription = '{HTMLElementInProcessGroup.TEST_ARIA_BRAILLE_ROLE_DESCRIPTION}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_BRAILLE_ROLE_DESCRIPTION);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_BRAILLE_ROLE_DESCRIPTION);
+    }
+
+    [Test]
+    public async Task SetAriaBrailleRoleDescription() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_BRAILLE_ROLE_DESCRIPTION);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaBrailleRoleDescription;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_BRAILLE_ROLE_DESCRIPTION);
+    }
+
+
+    [Test]
+    public async Task GetAriaBusy() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaBusy = '{HTMLElementInProcessGroup.TEST_ARIA_BUSY}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_BUSY);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_BUSY);
+    }
+
+    [Test]
+    public async Task SetAriaBusy() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_BUSY);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaBusy;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_BUSY);
+    }
+
+
+    [Test]
+    public async Task GetAriaChecked() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaChecked = '{HTMLElementInProcessGroup.TEST_ARIA_CHECKED}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_CHECKED);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_CHECKED);
+    }
+
+    [Test]
+    public async Task SetAriaChecked() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_CHECKED);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaChecked;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_CHECKED);
+    }
+
+
+    [Test]
+    public async Task GetAriaColCount() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaColCount = '{HTMLElementInProcessGroup.TEST_ARIA_COL_COUNT}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_COL_COUNT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_COL_COUNT);
+    }
+
+    [Test]
+    public async Task SetAriaColCount() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_COL_COUNT);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaColCount;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_COL_COUNT);
+    }
+
+
+    [Test]
+    public async Task GetAriaColIndex() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaColIndex = '{HTMLElementInProcessGroup.TEST_ARIA_COL_INDEX}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_COL_INDEX);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_COL_INDEX);
+    }
+
+    [Test]
+    public async Task SetAriaColIndex() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_COL_INDEX);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaColIndex;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_COL_INDEX);
+    }
+
+
+    [Test]
+    public async Task GetAriaColIndexText() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaColIndexText = '{HTMLElementInProcessGroup.TEST_ARIA_COL_INDEX_TEXT}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_COL_INDEX_TEXT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_COL_INDEX_TEXT);
+    }
+
+    [Test]
+    public async Task SetAriaColIndexText() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_COL_INDEX_TEXT);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaColIndexText;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_COL_INDEX_TEXT);
+    }
+
+
+    [Test]
+    public async Task GetAriaColSpan() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaColSpan = '{HTMLElementInProcessGroup.TEST_ARIA_COL_SPAN}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_COL_SPAN);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_COL_SPAN);
+    }
+
+    [Test]
+    public async Task SetAriaColSpan() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_COL_SPAN);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaColSpan;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_COL_SPAN);
+    }
+
+
+    [Test]
+    public async Task GetAriaCurrent() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaCurrent = '{HTMLElementInProcessGroup.TEST_ARIA_CURRENT}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_CURRENT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_CURRENT);
+    }
+
+    [Test]
+    public async Task SetAriaCurrent() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_CURRENT);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaCurrent;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_CURRENT);
+    }
+
+
+    [Test]
+    public async Task GetAriaDescription() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaDescription = '{HTMLElementInProcessGroup.TEST_ARIA_DESCRIPTION}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_DESCRIPTION);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_DESCRIPTION);
+    }
+
+    [Test]
+    public async Task SetAriaDescription() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_DESCRIPTION);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaDescription;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_DESCRIPTION);
+    }
+
+
+    [Test]
+    public async Task GetAriaDisabled() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaDisabled = '{HTMLElementInProcessGroup.TEST_ARIA_DISABLED}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_DISABLED);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_DISABLED);
+    }
+
+    [Test]
+    public async Task SetAriaDisabled() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_DISABLED);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaDisabled;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_DISABLED);
+    }
+
+
+    [Test]
+    public async Task GetAriaExpanded() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaExpanded = '{HTMLElementInProcessGroup.TEST_ARIA_EXPANDED}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_EXPANDED);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_EXPANDED);
+    }
+
+    [Test]
+    public async Task SetAriaExpanded() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_EXPANDED);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaExpanded;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_EXPANDED);
+    }
+
+
+    [Test]
+    public async Task GetAriaHasPopup() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaHasPopup = '{HTMLElementInProcessGroup.TEST_ARIA_HAS_POPUP}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_HAS_POPUP);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_HAS_POPUP);
+    }
+
+    [Test]
+    public async Task SetAriaHasPopup() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_HAS_POPUP);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaHasPopup;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_HAS_POPUP);
+    }
+
+
+    [Test]
+    public async Task GetAriaHidden() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaHidden = '{HTMLElementInProcessGroup.TEST_ARIA_HIDDEN}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_HIDDEN);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_HIDDEN);
+    }
+
+    [Test]
+    public async Task SetAriaHidden() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_HIDDEN);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaHidden;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_HIDDEN);
+    }
+
+
+    [Test]
+    public async Task GetAriaInvalid() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaInvalid = '{HTMLElementInProcessGroup.TEST_ARIA_INVALID}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_INVALID);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_INVALID);
+    }
+
+    [Test]
+    public async Task SetAriaInvalid() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_INVALID);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaInvalid;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_INVALID);
+    }
+
+
+    [Test]
+    public async Task GetAriaKeyShortcuts() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaKeyShortcuts = '{HTMLElementInProcessGroup.TEST_ARIA_KEY_SHORTCUTS}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_KEY_SHORTCUTS);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_KEY_SHORTCUTS);
+    }
+
+    [Test]
+    public async Task SetAriaKeyShortcuts() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_KEY_SHORTCUTS);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaKeyShortcuts;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_KEY_SHORTCUTS);
+    }
+
+
+    [Test]
+    public async Task GetAriaLabel() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaLabel = '{HTMLElementInProcessGroup.TEST_ARIA_LABEL}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_LABEL);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_LABEL);
+    }
+
+    [Test]
+    public async Task SetAriaLabel() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_LABEL);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaLabel;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_LABEL);
+    }
+
+
+    [Test]
+    public async Task GetAriaLevel() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaLevel = '{HTMLElementInProcessGroup.TEST_ARIA_LEVEL}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_LEVEL);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_LEVEL);
+    }
+
+    [Test]
+    public async Task SetAriaLevel() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_LEVEL);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaLevel;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_LEVEL);
+    }
+
+
+    [Test]
+    public async Task GetAriaLive() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaLive = '{HTMLElementInProcessGroup.TEST_ARIA_LIVE}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_LIVE);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_LIVE);
+    }
+
+    [Test]
+    public async Task SetAriaLive() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_LIVE);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaLive;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_LIVE);
+    }
+
+
+    [Test]
+    public async Task GetAriaModal() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaModal = '{HTMLElementInProcessGroup.TEST_ARIA_MODAL}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_MODAL);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_MODAL);
+    }
+
+    [Test]
+    public async Task SetAriaModal() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_MODAL);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaModal;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_MODAL);
+    }
+
+
+    [Test]
+    public async Task GetAriaMultiline() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaMultiline = '{HTMLElementInProcessGroup.TEST_ARIA_MULTILINE}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_MULTILINE);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_MULTILINE);
+    }
+
+    [Test]
+    public async Task SetAriaMultiline() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_MULTILINE);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaMultiline;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_MULTILINE);
+    }
+
+
+    [Test]
+    public async Task GetAriaMultiSelectable() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaMultiSelectable = '{HTMLElementInProcessGroup.TEST_ARIA_MULTI_SELECTABLE}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_MULTI_SELECTABLE);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_MULTI_SELECTABLE);
+    }
+
+    [Test]
+    public async Task SetAriaMultiSelectable() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_MULTI_SELECTABLE);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaMultiSelectable;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_MULTI_SELECTABLE);
+    }
+
+
+    [Test]
+    public async Task GetAriaOrientation() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaOrientation = '{HTMLElementInProcessGroup.TEST_ARIA_ORIENTATION}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_ORIENTATION);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_ORIENTATION);
+    }
+
+    [Test]
+    public async Task SetAriaOrientation() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_ORIENTATION);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaOrientation;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_ORIENTATION);
+    }
+
+
+    [Test]
+    public async Task GetAriaPlaceholder() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaPlaceholder = '{HTMLElementInProcessGroup.TEST_ARIA_PLACEHOLDER}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_PLACEHOLDER);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_PLACEHOLDER);
+    }
+
+    [Test]
+    public async Task SetAriaPlaceholder() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_PLACEHOLDER);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaPlaceholder;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_PLACEHOLDER);
+    }
+
+
+    [Test]
+    public async Task GetAriaPosInSet() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaPosInSet = '{HTMLElementInProcessGroup.TEST_ARIA_POS_IN_SET}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_POS_IN_SET);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_POS_IN_SET);
+    }
+
+    [Test]
+    public async Task SetAriaPosInSet() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_POS_IN_SET);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaPosInSet;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_POS_IN_SET);
+    }
+
+
+    [Test]
+    public async Task GetAriaPressed() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaPressed = '{HTMLElementInProcessGroup.TEST_ARIA_PRESSED}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_PRESSED);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_PRESSED);
+    }
+
+    [Test]
+    public async Task SetAriaPressed() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_PRESSED);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaPressed;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_PRESSED);
+    }
+
+
+    [Test]
+    public async Task GetAriaReadOnly() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaReadOnly = '{HTMLElementInProcessGroup.TEST_ARIA_READ_ONLY}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_READ_ONLY);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_READ_ONLY);
+    }
+
+    [Test]
+    public async Task SetAriaReadOnly() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_READ_ONLY);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaReadOnly;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_READ_ONLY);
+    }
+
+
+    [Test]
+    public async Task GetAriaRequired() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaRequired = '{HTMLElementInProcessGroup.TEST_ARIA_REQUIRED}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_REQUIRED);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_REQUIRED);
+    }
+
+    [Test]
+    public async Task SetAriaRequired() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_REQUIRED);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaRequired;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_REQUIRED);
+    }
+
+
+    [Test]
+    public async Task GetAriaRoleDescription() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaRoleDescription = '{HTMLElementInProcessGroup.TEST_ARIA_ROLE_DESCRIPTION}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_ROLE_DESCRIPTION);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_ROLE_DESCRIPTION);
+    }
+
+    [Test]
+    public async Task SetAriaRoleDescription() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_ROLE_DESCRIPTION);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaRoleDescription;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_ROLE_DESCRIPTION);
+    }
+
+
+    [Test]
+    public async Task GetAriaRowCount() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaRowCount = '{HTMLElementInProcessGroup.TEST_ARIA_ROW_COUNT}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_ROW_COUNT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_ROW_COUNT);
+    }
+
+    [Test]
+    public async Task SetAriaRowCount() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_ROW_COUNT);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaRowCount;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_ROW_COUNT);
+    }
+
+
+    [Test]
+    public async Task GetAriaRowIndex() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaRowIndex = '{HTMLElementInProcessGroup.TEST_ARIA_ROW_INDEX}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_ROW_INDEX);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_ROW_INDEX);
+    }
+
+    [Test]
+    public async Task SetAriaRowIndex() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_ROW_INDEX);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaRowIndex;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_ROW_INDEX);
+    }
+
+
+    [Test]
+    public async Task GetAriaRowIndexText() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaRowIndexText = '{HTMLElementInProcessGroup.TEST_ARIA_ROW_INDEX_TEXT}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_ROW_INDEX_TEXT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_ROW_INDEX_TEXT);
+    }
+
+    [Test]
+    public async Task SetAriaRowIndexText() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_ROW_INDEX_TEXT);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaRowIndexText;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_ROW_INDEX_TEXT);
+    }
+
+
+    [Test]
+    public async Task GetAriaRowSpan() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaRowSpan = '{HTMLElementInProcessGroup.TEST_ARIA_ROW_SPAN}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_ROW_SPAN);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_ROW_SPAN);
+    }
+
+    [Test]
+    public async Task SetAriaRowSpan() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_ROW_SPAN);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaRowSpan;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_ROW_SPAN);
+    }
+
+
+    [Test]
+    public async Task GetAriaSelected() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaSelected = '{HTMLElementInProcessGroup.TEST_ARIA_SELECTED}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_SELECTED);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_SELECTED);
+    }
+
+    [Test]
+    public async Task SetAriaSelected() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_SELECTED);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaSelected;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_SELECTED);
+    }
+
+
+    [Test]
+    public async Task GetAriaSetSize() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaSetSize = '{HTMLElementInProcessGroup.TEST_ARIA_SET_SIZE}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_SET_SIZE);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_SET_SIZE);
+    }
+
+    [Test]
+    public async Task SetAriaSetSize() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_SET_SIZE);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaSetSize;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_SET_SIZE);
+    }
+
+
+    [Test]
+    public async Task GetAriaSort() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaSort = '{HTMLElementInProcessGroup.TEST_ARIA_SORT}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_SORT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_SORT);
+    }
+
+    [Test]
+    public async Task SetAriaSort() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_SORT);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaSort;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_SORT);
+    }
+
+
+    [Test]
+    public async Task GetAriaValueMax() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaValueMax = '{HTMLElementInProcessGroup.TEST_ARIA_VALUE_MAX}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_VALUE_MAX);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_VALUE_MAX);
+    }
+
+    [Test]
+    public async Task SetAriaValueMax() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_VALUE_MAX);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaValueMax;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_VALUE_MAX);
+    }
+
+
+    [Test]
+    public async Task GetAriaValueMin() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaValueMin = '{HTMLElementInProcessGroup.TEST_ARIA_VALUE_MIN}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_VALUE_MIN);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_VALUE_MIN);
+    }
+
+    [Test]
+    public async Task SetAriaValueMin() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_VALUE_MIN);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaValueMin;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_VALUE_MIN);
+    }
+
+
+    [Test]
+    public async Task GetAriaValueNow() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaValueNow = '{HTMLElementInProcessGroup.TEST_ARIA_VALUE_NOW}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_VALUE_NOW);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_VALUE_NOW);
+    }
+
+    [Test]
+    public async Task SetAriaValueNow() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_VALUE_NOW);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaValueNow;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_VALUE_NOW);
+    }
+
+
+    [Test]
+    public async Task GetAriaValueText() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.ariaValueText = '{HTMLElementInProcessGroup.TEST_ARIA_VALUE_TEXT}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ARIA_VALUE_TEXT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_VALUE_TEXT);
+    }
+
+    [Test]
+    public async Task SetAriaValueText() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ARIA_VALUE_TEXT);
+
+        string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.ariaValueText;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_ARIA_VALUE_TEXT);
     }
 
 

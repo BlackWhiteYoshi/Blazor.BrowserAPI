@@ -111,7 +111,7 @@
         <button data-testid="@BUTTON_GET_TRANSLATE_PROPERTY" @onclick="GetTranslate_Property">GetTranslate_Property</button>
         <button data-testid="@BUTTON_GET_TRANSLATE_METHOD" @onclick="GetTranslate_Method">GetTranslate_Method</button>
         <button data-testid="@BUTTON_SET_TRANSLATE" @onclick="SetTranslate">SetTranslate</button>
-        
+
         @* HTMLElement extra *@
         <button data-testid="@BUTTON_GET_HASFOCUS_PROPERTY" @onclick="GetHasFocus_Property" @onpointerenter="GetHasFocus_Property">GetHasFocus_Property</button>
         <button data-testid="@BUTTON_GET_HASFOCUS_METHOD" @onclick="GetHasFocus_Method" @onpointerenter="GetHasFocus_Method">GetHasFocus_Method</button>
@@ -128,43 +128,272 @@
 
         @* Element *@
 
-        <button data-testid="@BUTTON_GET_INNERHTML_PROPERTY" @onclick="GetInnerHTML_Property">GetInnerHTML_Property</button>
-        <button data-testid="@BUTTON_GET_INNERHTML_METHOD" @onclick="GetInnerHTML_Method">GetInnerHTML_Method</button>
-        <button data-testid="@BUTTON_SET_INNERHTML" @onclick="SetInnerHTML">SetInnerHTML</button>
-        <button data-testid="@BUTTON_GET_OUTERHTML_PROPERTY" @onclick="GetOuterHTML_Property">GetOuterHTML_Property</button>
-        <button data-testid="@BUTTON_GET_OUTERHTML_METHOD" @onclick="GetOuterHTML_Method">GetOuterHTML_Method</button>
-        <button data-testid="@BUTTON_SET_OUTERHTML" @onclick="SetOuterHTML">SetOuterHTML</button>
         <button data-testid="@BUTTON_GET_ATTRIBUTES_PROPERTY" @onclick="GetAttributes_Property">GetAttributes_Property</button>
         <button data-testid="@BUTTON_GET_ATTRIBUTES_METHOD" @onclick="GetAttributes_Method">GetAttributes_Method</button>
+
+        <button data-testid="@BUTTON_GET_CLASS_LIST_PROPERTY" @onclick="GetClassList_Property">GetClassList_Property</button>
+        <button data-testid="@BUTTON_GET_CLASS_LIST_METHOD" @onclick="GetClassList_Method">GetClassList_Method</button>
+
+        <button data-testid="@BUTTON_GET_CLASS_NAME_PROPERTY" @onclick="GetClassName_Property">GetClassName_Property</button>
+        <button data-testid="@BUTTON_GET_CLASS_NAME_METHOD" @onclick="GetClassName_Method">GetClassName_Method</button>
+        <button data-testid="@BUTTON_SET_CLASS_NAME" @onclick="SetClassName">SetClassName</button>
+
+        <button data-testid="@BUTTON_GET_CLIENT_WIDTH_PROPERTY" @onclick="GetClientWidth_Property">GetClientWidth_Property</button>
+        <button data-testid="@BUTTON_GET_CLIENT_WIDTH_METHOD" @onclick="GetClientWidth_Method">GetClientWidth_Method</button>
+        <button data-testid="@BUTTON_GET_CLIENT_HEIGHT_PROPERTY" @onclick="GetClientHeight_Property">GetClientHeight_Property</button>
+        <button data-testid="@BUTTON_GET_CLIENT_HEIGHT_METHOD" @onclick="GetClientHeight_Method">GetClientHeight_Method</button>
+        <button data-testid="@BUTTON_GET_CLIENT_LEFT_PROPERTY" @onclick="GetClientLeft_Property">GetClientLeft_Property</button>
+        <button data-testid="@BUTTON_GET_CLIENT_LEFT_METHOD" @onclick="GetClientLeft_Method">GetClientLeft_Method</button>
+        <button data-testid="@BUTTON_GET_CLIENT_TOP_PROPERTY" @onclick="GetClientTop_Property">GetClientTop_Property</button>
+        <button data-testid="@BUTTON_GET_CLIENT_TOP_METHOD" @onclick="GetClientTop_Method">GetClientTop_Method</button>
+
+        <button data-testid="@BUTTON_GET_CURRENT_CSS_ZOOM_PROPERTY" @onclick="GetCurrentCSSZoom_Property">GetCurrentCSSZoom_Property</button>
+        <button data-testid="@BUTTON_GET_CURRENT_CSS_ZOOM_METHOD" @onclick="GetCurrentCSSZoom_Method">GetCurrentCSSZoom_Method</button>
+
+        <button data-testid="@BUTTON_GET_ID_PROPERTY" @onclick="GetId_Property">GetId_Property</button>
+        <button data-testid="@BUTTON_GET_ID_METHOD" @onclick="GetId_Method">GetId_Method</button>
+        <button data-testid="@BUTTON_SET_ID" @onclick="SetId">SetId</button>
+
+        <button data-testid="@BUTTON_GET_IS_CONNECTED_PROPERTY" @onclick="GetIsConnected_Property">GetIsConnected_Property</button>
+        <button data-testid="@BUTTON_GET_IS_CONNECTED_METHOD" @onclick="GetIsConnected_Method">GetIsConnected_Method</button>
+
+        <button data-testid="@BUTTON_GET_INNER_HTML_PROPERTY" @onclick="GetInnerHTML_Property">GetInnerHTML_Property</button>
+        <button data-testid="@BUTTON_GET_INNER_HTML_METHOD" @onclick="GetInnerHTML_Method">GetInnerHTML_Method</button>
+        <button data-testid="@BUTTON_SET_INNER_HTML" @onclick="SetInnerHTML">SetInnerHTML</button>
+
+        <button data-testid="@BUTTON_GET_OUTER_HTML_PROPERTY" @onclick="GetOuterHTML_Property">GetOuterHTML_Property</button>
+        <button data-testid="@BUTTON_GET_OUTER_HTML_METHOD" @onclick="GetOuterHTML_Method">GetOuterHTML_Method</button>
+        <button data-testid="@BUTTON_SET_OUTER_HTML" @onclick="SetOuterHTML">SetOuterHTML</button>
+
+        <button data-testid="@BUTTON_GET_PART_PROPERTY" @onclick="GetPart_Property">GetPart_Property</button>
+        <button data-testid="@BUTTON_GET_PART_METHOD" @onclick="GetPart_Method">GetPart_Method</button>
+
+        <button data-testid="@BUTTON_GET_SCROLL_WIDTH_PROPERTY" @onclick="GetScrollWidth_Property">GetScrollWidth_Property</button>
+        <button data-testid="@BUTTON_GET_SCROLL_WIDTH_METHOD" @onclick="GetScrollWidth_Method">GetScrollWidth_Method</button>
+        <button data-testid="@BUTTON_GET_SCROLL_HEIGHT_PROPERTY" @onclick="GetScrollHeight_Property">GetScrollHeight_Property</button>
+        <button data-testid="@BUTTON_GET_SCROLL_HEIGHT_METHOD" @onclick="GetScrollHeight_Method">GetScrollHeight_Method</button>
+        <button data-testid="@BUTTON_GET_SCROLL_LEFT_PROPERTY" @onclick="GetScrollLeft_Property">GetScrollLeft_Property</button>
+        <button data-testid="@BUTTON_GET_SCROLL_LEFT_METHOD" @onclick="GetScrollLeft_Method">GetScrollLeft_Method</button>
+        <button data-testid="@BUTTON_SET_SCROLL_LEFT" @onclick="SetScrollLeft">SetScrollLeft</button>
+        <button data-testid="@BUTTON_GET_SCROLL_TOP_PROPERTY" @onclick="GetScrollTop_Property">GetScrollTop_Property</button>
+        <button data-testid="@BUTTON_GET_SCROLL_TOP_METHOD" @onclick="GetScrollTop_Method">GetScrollTop_Method</button>
+        <button data-testid="@BUTTON_SET_SCROLL_TOP" @onclick="SetScrollTop">SetScrollTop</button>
+
+        <button data-testid="@BUTTON_GET_SLOT_PROPERTY" @onclick="GetSlot_Property">GetSlot_Property</button>
+        <button data-testid="@BUTTON_GET_SLOT_METHOD" @onclick="GetSlot_Method">GetSlot_Method</button>
+        <button data-testid="@BUTTON_SET_SLOT" @onclick="SetSlot">SetSlot</button>
+
+        <button data-testid="@BUTTON_GET_LOCAL_NAME_PROPERTY" @onclick="GetLocalName_Property">GetLocalName_Property</button>
+        <button data-testid="@BUTTON_GET_LOCAL_NAME_METHOD" @onclick="GetLocalName_Method">GetLocalName_Method</button>
+        <button data-testid="@BUTTON_GET_NAMESPACE_URI_PROPERTY" @onclick="GetNamespaceURI_Property">GetNamespaceURI_Property</button>
+        <button data-testid="@BUTTON_GET_NAMESPACE_URI_METHOD" @onclick="GetNamespaceURI_Method">GetNamespaceURI_Method</button>
+        <button data-testid="@BUTTON_GET_PREFIX_PROPERTY" @onclick="GetPrefix_Property">GetPrefix_Property</button>
+        <button data-testid="@BUTTON_GET_PREFIX_METHOD" @onclick="GetPrefix_Method">GetPrefix_Method</button>
+        <button data-testid="@BUTTON_GET_BASE_URI_PROPERTY" @onclick="GetBaseURI_Property">GetBaseURI_Property</button>
+        <button data-testid="@BUTTON_GET_BASE_URI_METHOD" @onclick="GetBaseURI_Method">GetBaseURI_Method</button>
+        <button data-testid="@BUTTON_GET_TAG_NAME_PROPERTY" @onclick="GetTagName_Property">GetTagName_Property</button>
+        <button data-testid="@BUTTON_GET_TAG_NAME_METHOD" @onclick="GetTagName_Method">GetTagName_Method</button>
+        <button data-testid="@BUTTON_GET_NODE_NAME_PROPERTY" @onclick="GetNodeName_Property">GetNodeName_Property</button>
+        <button data-testid="@BUTTON_GET_NODE_NAME_METHOD" @onclick="GetNodeName_Method">GetNodeName_Method</button>
+        <button data-testid="@BUTTON_GET_NODE_TYPE_PROPERTY" @onclick="GetNodeType_Property">GetNodeType_Property</button>
+        <button data-testid="@BUTTON_GET_NODE_TYPE_METHOD" @onclick="GetNodeType_Method">GetNodeType_Method</button>
+
+        @* Element Properties - Tree-nodes *@
+
         <button data-testid="@BUTTON_GET_CHILD_ELEMENT_COUNT_PROPERTY" @onclick="GetChildElementCount_Property">GetChildElementCount_Property</button>
         <button data-testid="@BUTTON_GET_CHILD_ELEMENT_COUNT_METHOD" @onclick="GetChildElementCount_Method">GetChildElementCount_Method</button>
+
         <button data-testid="@BUTTON_GET_CHILDREN_PROPERTY" @onclick="GetChildren_Property">GetChildren_Property</button>
         <button data-testid="@BUTTON_GET_CHILDREN_METHOD" @onclick="GetChildren_Method">GetChildren_Method</button>
-        <button data-testid="@BUTTON_GET_CLASSNAME_PROPERTY" @onclick="GetClassName_Property">GetClassName_Property</button>
-        <button data-testid="@BUTTON_GET_CLASSNAME_METHOD" @onclick="GetClassName_Method">GetClassName_Method</button>
-        <button data-testid="@BUTTON_SET_CLASSNAME" @onclick="SetClassName">SetClassName</button>
-        <button data-testid="@BUTTON_GET_CLASSLIST_PROPERTY" @onclick="GetClassList_Property">GetClassList_Property</button>
-        <button data-testid="@BUTTON_GET_CLASSLIST_METHOD" @onclick="GetClassList_Method">GetClassList_Method</button>
 
-        <button data-testid="@BUTTON_GET_CLIENTWIDTH_PROPERTY" @onclick="GetClientWidth_Property">GetClientWidth_Property</button>
-        <button data-testid="@BUTTON_GET_CLIENTWIDTH_METHOD" @onclick="GetClientWidth_Method">GetClientWidth_Method</button>
-        <button data-testid="@BUTTON_GET_CLIENTHEIGHT_PROPERTY" @onclick="GetClientHeight_Property">GetClientHeight_Property</button>
-        <button data-testid="@BUTTON_GET_CLIENTHEIGHT_METHOD" @onclick="GetClientHeight_Method">GetClientHeight_Method</button>
-        <button data-testid="@BUTTON_GET_CLIENTLEFT_PROPERTY" @onclick="GetClientLeft_Property">GetClientLeft_Property</button>
-        <button data-testid="@BUTTON_GET_CLIENTLEFT_METHOD" @onclick="GetClientLeft_Method">GetClientLeft_Method</button>
-        <button data-testid="@BUTTON_GET_CLIENTTOP_PROPERTY" @onclick="GetClientTop_Property">GetClientTop_Property</button>
-        <button data-testid="@BUTTON_GET_CLIENTTOP_METHOD" @onclick="GetClientTop_Method">GetClientTop_Method</button>
+        <button data-testid="@BUTTON_GET_FIRST_ELEMENT_CHILD_PROPERTY" @onclick="GetFirstElementChild_Property">GetFirstElementChild_Property</button>
+        <button data-testid="@BUTTON_GET_FIRST_ELEMENT_CHILD_METHOD" @onclick="GetFirstElementChild_Method">GetFirstElementChild_Method</button>
 
-        <button data-testid="@BUTTON_GET_SCROLLWIDTH_PROPERTY" @onclick="GetScrollWidth_Property">GetClientWidth_Property</button>
-        <button data-testid="@BUTTON_GET_SCROLLWIDTH_METHOD" @onclick="GetScrollWidth_Method">GetScrollWidth_Method</button>
-        <button data-testid="@BUTTON_GET_SCROLLHEIGHT_PROPERTY" @onclick="GetScrollHeight_Property">GetScrollHeight_Property</button>
-        <button data-testid="@BUTTON_GET_SCROLLHEIGHT_METHOD" @onclick="GetScrollHeight_Method">GetScrollHeight_Method</button>
-        <button data-testid="@BUTTON_GET_SCROLLLEFT_PROPERTY" @onclick="GetScrollLeft_Property">GetScrollLeft_Property</button>
-        <button data-testid="@BUTTON_GET_SCROLLLEFT_METHOD" @onclick="GetScrollLeft_Method">GetScrollLeft_Method</button>
-        <button data-testid="@BUTTON_SET_SCROLLLEFT" @onclick="SetScrollLeft">SetScrollLeft</button>
-        <button data-testid="@BUTTON_GET_SCROLLTOP_PROPERTY" @onclick="GetScrollTop_Property">GetScrollTop_Property</button>
-        <button data-testid="@BUTTON_GET_SCROLLTOP_METHOD" @onclick="GetScrollTop_Method">GetScrollTop_Method</button>
-        <button data-testid="@BUTTON_SET_SCROLLTOP" @onclick="SetScrollTop">SetScrollTop</button>
+        <button data-testid="@BUTTON_GET_LAST_ELEMENT_CHILD_PROPERTY" @onclick="GetLastElementChild_Property">GetLastElementChild_Property</button>
+        <button data-testid="@BUTTON_GET_LAST_ELEMENT_CHILD_METHOD" @onclick="GetLastElementChild_Method">GetLastElementChild_Method</button>
+
+        <button data-testid="@BUTTON_GET_PREVIOUS_ELEMENT_SIBLING_PROPERTY" @onclick="GetPreviousElementSibling_Property">GetPreviousElementSibling_Property</button>
+        <button data-testid="@BUTTON_GET_PREVIOUS_ELEMENT_SIBLING_METHOD" @onclick="GetPreviousElementSibling_Method">GetPreviousElementSibling_Method</button>
+
+        <button data-testid="@BUTTON_GET_NEXT_ELEMENT_SIBLING_PROPERTY" @onclick="GetNextElementSibling_Property">GetNextElementSibling_Property</button>
+        <button data-testid="@BUTTON_GET_NEXT_ELEMENT_SIBLING_METHOD" @onclick="GetNextElementSibling_Method">GetNextElementSibling_Method</button>
+
+        <button data-testid="@BUTTON_GET_PARENT_ELEMENT_PROPERTY" @onclick="GetParentElement_Property">GetParentElement_Property</button>
+        <button data-testid="@BUTTON_GET_PARENT_ELEMENT_METHOD" @onclick="GetParentElement_Method">GetParentElement_Method</button>
+
+        @* Element Properties - ARIA *@
+
+        <button data-testid="@BUTTON_GET_ARIA_ATOMIC_PROPERTY" @onclick="GetAriaAtomic_Property">GetAriaAtomic_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_ATOMIC_METHOD" @onclick="GetAriaAtomic_Method">GetAriaAtomic_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_ATOMIC" @onclick="SetAriaAtomic">SetAriaAtomic</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_AUTO_COMPLETE_PROPERTY" @onclick="GetAriaAutoComplete_Property">GetAriaAutoComplete_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_AUTO_COMPLETE_METHOD" @onclick="GetAriaAutoComplete_Method">GetAriaAutoComplete_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_AUTO_COMPLETE" @onclick="SetAriaAutoComplete">SetAriaAutoComplete</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_BRAILLE_LABEL_PROPERTY" @onclick="GetAriaBrailleLabel_Property">GetAriaBrailleLabel_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_BRAILLE_LABEL_METHOD" @onclick="GetAriaBrailleLabel_Method">GetAriaBrailleLabel_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_BRAILLE_LABEL" @onclick="SetAriaBrailleLabel">SetAriaBrailleLabel</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_BRAILLE_ROLE_DESCRIPTION_PROPERTY" @onclick="GetAriaBrailleRoleDescription_Property">GetAriaBrailleRoleDescription_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_BRAILLE_ROLE_DESCRIPTION_METHOD" @onclick="GetAriaBrailleRoleDescription_Method">GetAriaBrailleRoleDescription_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_BRAILLE_ROLE_DESCRIPTION" @onclick="SetAriaBrailleRoleDescription">SetAriaBrailleRoleDescription</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_BUSY_PROPERTY" @onclick="GetAriaBusy_Property">GetAriaBusy_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_BUSY_METHOD" @onclick="GetAriaBusy_Method">GetAriaBusy_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_BUSY" @onclick="SetAriaBusy">SetAriaBusy</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_CHECKED_PROPERTY" @onclick="GetAriaChecked_Property">GetAriaChecked_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_CHECKED_METHOD" @onclick="GetAriaChecked_Method">GetAriaChecked_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_CHECKED" @onclick="SetAriaChecked">SetAriaChecked</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_COL_COUNT_PROPERTY" @onclick="GetAriaColCount_Property">GetAriaColCount_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_COL_COUNT_METHOD" @onclick="GetAriaColCount_Method">GetAriaColCount_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_COL_COUNT" @onclick="SetAriaColCount">SetAriaColCount</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_COL_INDEX_PROPERTY" @onclick="GetAriaColIndex_Property">GetAriaColIndex_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_COL_INDEX_METHOD" @onclick="GetAriaColIndex_Method">GetAriaColIndex_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_COL_INDEX" @onclick="SetAriaColIndex">SetAriaColIndex</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_COL_INDEX_TEXT_PROPERTY" @onclick="GetAriaColIndexText_Property">GetAriaColIndexText_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_COL_INDEX_TEXT_METHOD" @onclick="GetAriaColIndexText_Method">GetAriaColIndexText_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_COL_INDEX_TEXT" @onclick="SetAriaColIndexText">SetAriaColIndexText</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_COL_SPAN_PROPERTY" @onclick="GetAriaColSpan_Property">GetAriaColSpan_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_COL_SPAN_METHOD" @onclick="GetAriaColSpan_Method">GetAriaColSpan_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_COL_SPAN" @onclick="SetAriaColSpan">SetAriaColSpan</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_CURRENT_PROPERTY" @onclick="GetAriaCurrent_Property">GetAriaCurrent_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_CURRENT_METHOD" @onclick="GetAriaCurrent_Method">GetAriaCurrent_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_CURRENT" @onclick="SetAriaCurrent">SetAriaCurrent</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_DESCRIPTION_PROPERTY" @onclick="GetAriaDescription_Property">GetAriaDescription_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_DESCRIPTION_METHOD" @onclick="GetAriaDescription_Method">GetAriaDescription_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_DESCRIPTION" @onclick="SetAriaDescription">SetAriaDescription</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_DISABLED_PROPERTY" @onclick="GetAriaDisabled_Property">GetAriaDisabled_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_DISABLED_METHOD" @onclick="GetAriaDisabled_Method">GetAriaDisabled_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_DISABLED" @onclick="SetAriaDisabled">SetAriaDisabled</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_EXPANDED_PROPERTY" @onclick="GetAriaExpanded_Property">GetAriaExpanded_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_EXPANDED_METHOD" @onclick="GetAriaExpanded_Method">GetAriaExpanded_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_EXPANDED" @onclick="SetAriaExpanded">SetAriaExpanded</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_HAS_POPUP_PROPERTY" @onclick="GetAriaHasPopup_Property">GetAriaHasPopup_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_HAS_POPUP_METHOD" @onclick="GetAriaHasPopup_Method">GetAriaHasPopup_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_HAS_POPUP" @onclick="SetAriaHasPopup">SetAriaHasPopup</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_HIDDEN_PROPERTY" @onclick="GetAriaHidden_Property">GetAriaHidden_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_HIDDEN_METHOD" @onclick="GetAriaHidden_Method">GetAriaHidden_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_HIDDEN" @onclick="SetAriaHidden">SetAriaHidden</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_INVALID_PROPERTY" @onclick="GetAriaInvalid_Property">GetAriaInvalid_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_INVALID_METHOD" @onclick="GetAriaInvalid_Method">GetAriaInvalid_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_INVALID" @onclick="SetAriaInvalid">SetAriaInvalid</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_KEY_SHORTCUTS_PROPERTY" @onclick="GetAriaKeyShortcuts_Property">GetAriaKeyShortcuts_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_KEY_SHORTCUTS_METHOD" @onclick="GetAriaKeyShortcuts_Method">GetAriaKeyShortcuts_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_KEY_SHORTCUTS" @onclick="SetAriaKeyShortcuts">SetAriaKeyShortcuts</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_LABEL_PROPERTY" @onclick="GetAriaLabel_Property">GetAriaLabel_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_LABEL_METHOD" @onclick="GetAriaLabel_Method">GetAriaLabel_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_LABEL" @onclick="SetAriaLabel">SetAriaLabel</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_LEVEL_PROPERTY" @onclick="GetAriaLevel_Property">GetAriaLevel_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_LEVEL_METHOD" @onclick="GetAriaLevel_Method">GetAriaLevel_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_LEVEL" @onclick="SetAriaLevel">SetAriaLevel</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_LIVE_PROPERTY" @onclick="GetAriaLive_Property">GetAriaLive_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_LIVE_METHOD" @onclick="GetAriaLive_Method">GetAriaLive_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_LIVE" @onclick="SetAriaLive">SetAriaLive</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_MODAL_PROPERTY" @onclick="GetAriaModal_Property">GetAriaModal_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_MODAL_METHOD" @onclick="GetAriaModal_Method">GetAriaModal_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_MODAL" @onclick="SetAriaModal">SetAriaModal</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_MULTILINE_PROPERTY" @onclick="GetAriaMultiline_Property">GetAriaMultiline_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_MULTILINE_METHOD" @onclick="GetAriaMultiline_Method">GetAriaMultiline_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_MULTILINE" @onclick="SetAriaMultiline">SetAriaMultiline</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_MULTI_SELECTABLE_PROPERTY" @onclick="GetAriaMultiSelectable_Property">GetAriaMultiSelectable_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_MULTI_SELECTABLE_METHOD" @onclick="GetAriaMultiSelectable_Method">GetAriaMultiSelectable_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_MULTI_SELECTABLE" @onclick="SetAriaMultiSelectable">SetAriaMultiSelectable</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_ORIENTATION_PROPERTY" @onclick="GetAriaOrientation_Property">GetAriaOrientation_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_ORIENTATION_METHOD" @onclick="GetAriaOrientation_Method">GetAriaOrientation_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_ORIENTATION" @onclick="SetAriaOrientation">SetAriaOrientation</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_PLACEHOLDER_PROPERTY" @onclick="GetAriaPlaceholder_Property">GetAriaPlaceholder_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_PLACEHOLDER_METHOD" @onclick="GetAriaPlaceholder_Method">GetAriaPlaceholder_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_PLACEHOLDER" @onclick="SetAriaPlaceholder">SetAriaPlaceholder</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_POS_IN_SET_PROPERTY" @onclick="GetAriaPosInSet_Property">GetAriaPosInSet_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_POS_IN_SET_METHOD" @onclick="GetAriaPosInSet_Method">GetAriaPosInSet_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_POS_IN_SET" @onclick="SetAriaPosInSet">SetAriaPosInSet</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_PRESSED_PROPERTY" @onclick="GetAriaPressed_Property">GetAriaPressed_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_PRESSED_METHOD" @onclick="GetAriaPressed_Method">GetAriaPressed_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_PRESSED" @onclick="SetAriaPressed">SetAriaPressed</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_READ_ONLY_PROPERTY" @onclick="GetAriaReadOnly_Property">GetAriaReadOnly_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_READ_ONLY_METHOD" @onclick="GetAriaReadOnly_Method">GetAriaReadOnly_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_READ_ONLY" @onclick="SetAriaReadOnly">SetAriaReadOnly</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_REQUIRED_PROPERTY" @onclick="GetAriaRequired_Property">GetAriaRequired_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_REQUIRED_METHOD" @onclick="GetAriaRequired_Method">GetAriaRequired_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_REQUIRED" @onclick="SetAriaRequired">SetAriaRequired</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_ROLE_DESCRIPTION_PROPERTY" @onclick="GetAriaRoleDescription_Property">GetAriaRoleDescription_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_ROLE_DESCRIPTION_METHOD" @onclick="GetAriaRoleDescription_Method">GetAriaRoleDescription_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_ROLE_DESCRIPTION" @onclick="SetAriaRoleDescription">SetAriaRoleDescription</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_ROW_COUNT_PROPERTY" @onclick="GetAriaRowCount_Property">GetAriaRowCount_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_ROW_COUNT_METHOD" @onclick="GetAriaRowCount_Method">GetAriaRowCount_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_ROW_COUNT" @onclick="SetAriaRowCount">SetAriaRowCount</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_ROW_INDEX_PROPERTY" @onclick="GetAriaRowIndex_Property">GetAriaRowIndex_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_ROW_INDEX_METHOD" @onclick="GetAriaRowIndex_Method">GetAriaRowIndex_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_ROW_INDEX" @onclick="SetAriaRowIndex">SetAriaRowIndex</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_ROW_INDEX_TEXT_PROPERTY" @onclick="GetAriaRowIndexText_Property">GetAriaRowIndexText_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_ROW_INDEX_TEXT_METHOD" @onclick="GetAriaRowIndexText_Method">GetAriaRowIndexText_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_ROW_INDEX_TEXT" @onclick="SetAriaRowIndexText">SetAriaRowIndexText</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_ROW_SPAN_PROPERTY" @onclick="GetAriaRowSpan_Property">GetAriaRowSpan_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_ROW_SPAN_METHOD" @onclick="GetAriaRowSpan_Method">GetAriaRowSpan_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_ROW_SPAN" @onclick="SetAriaRowSpan">SetAriaRowSpan</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_SELECTED_PROPERTY" @onclick="GetAriaSelected_Property">GetAriaSelected_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_SELECTED_METHOD" @onclick="GetAriaSelected_Method">GetAriaSelected_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_SELECTED" @onclick="SetAriaSelected">SetAriaSelected</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_SET_SIZE_PROPERTY" @onclick="GetAriaSetSize_Property">GetAriaSetSize_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_SET_SIZE_METHOD" @onclick="GetAriaSetSize_Method">GetAriaSetSize_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_SET_SIZE" @onclick="SetAriaSetSize">SetAriaSetSize</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_SORT_PROPERTY" @onclick="GetAriaSort_Property">GetAriaSort_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_SORT_METHOD" @onclick="GetAriaSort_Method">GetAriaSort_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_SORT" @onclick="SetAriaSort">SetAriaSort</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_VALUE_MAX_PROPERTY" @onclick="GetAriaValueMax_Property">GetAriaValueMax_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_VALUE_MAX_METHOD" @onclick="GetAriaValueMax_Method">GetAriaValueMax_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_VALUE_MAX" @onclick="SetAriaValueMax">SetAriaValueMax</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_VALUE_MIN_PROPERTY" @onclick="GetAriaValueMin_Property">GetAriaValueMin_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_VALUE_MIN_METHOD" @onclick="GetAriaValueMin_Method">GetAriaValueMin_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_VALUE_MIN" @onclick="SetAriaValueMin">SetAriaValueMin</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_VALUE_NOW_PROPERTY" @onclick="GetAriaValueNow_Property">GetAriaValueNow_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_VALUE_NOW_METHOD" @onclick="GetAriaValueNow_Method">GetAriaValueNow_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_VALUE_NOW" @onclick="SetAriaValueNow">SetAriaValueNow</button>
+
+        <button data-testid="@BUTTON_GET_ARIA_VALUE_TEXT_PROPERTY" @onclick="GetAriaValueText_Property">GetAriaValueText_Property</button>
+        <button data-testid="@BUTTON_GET_ARIA_VALUE_TEXT_METHOD" @onclick="GetAriaValueText_Method">GetAriaValueText_Method</button>
+        <button data-testid="@BUTTON_SET_ARIA_VALUE_TEXT" @onclick="SetAriaValueText">SetAriaValueText</button>
+
+        <button data-testid="@BUTTON_GET_ROLE_PROPERTY" @onclick="GetRole_Property">GetRole_Property</button>
+        <button data-testid="@BUTTON_GET_ROLE_METHOD" @onclick="GetRole_Method">GetRole_Method</button>
+        <button data-testid="@BUTTON_SET_ROLE" @onclick="SetRole">SetRole</button>
 
         @* Element Methods *@
         <button data-testid="@BUTTON_GET_BOUNDING_CLIENT_RECT" @onclick="GetBoundingClientRect">GetBoundingClientRect</button>

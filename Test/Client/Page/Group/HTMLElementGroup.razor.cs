@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using System.Collections.Generic;
 using System.Data;
 using System.Text.Json;
 
@@ -9,13 +8,10 @@ namespace BrowserAPI.Test.Client;
 public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     // HTMLElement
     public const string TEST_ACCESS_KEY = "access-key-test";
-
     public const string TEST_STYLE_NAME = "visibility";
     public const string TEST_STYLE_VALUE = "visible";
-
     public const string TEST_DATASET_NAME = "custominfo";
     public const string TEST_DATASET_VALUE = "123";
-
     public const string TEST_AUTOCAPITALIZE = "sentences";
     public const string TEST_DIR = "ltr";
     public const string TEST_ENTER_KEY_HINT = "enter";
@@ -30,17 +26,62 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     public const string TEST_TITLE = "title-test";
 
     // Element
+    public const string TEST_CLASSNAME = "classname-test";
+    public const string TEST_ID = "some-unique-id";
     public const string TEST_INNERHTML = "<span>innerhtml</span>-test";
     public const string TEST_OUTERHTML = "<span>outerhtml</span>-test";
-    public const string TEST_CLASSNAME = "classname-test";
-
     public const int TEST_SCROLLLEFT = 15;
     public const int TEST_SCROLLTOP = 17;
     public const int TEST_SCROLL_LEFT = 5;
     public const int TEST_SCROLL_TOP = 7;
     public const int TEST_SCROLL_BY_X = 9;
     public const int TEST_SCROLL_BY_Y = 11;
-
+    public const string TEST_SLOT = "ChildContent";
+    // Element - ARIA
+    public const string TEST_ARIA_ATOMIC = "true";
+    public const string TEST_ARIA_AUTO_COMPLETE = "list";
+    public const string TEST_ARIA_BRAILLE_LABEL = "braille label";
+    public const string TEST_ARIA_BRAILLE_ROLE_DESCRIPTION = "braille role description";
+    public const string TEST_ARIA_BUSY = "true";
+    public const string TEST_ARIA_CHECKED = "true";
+    public const string TEST_ARIA_COL_COUNT = "1";
+    public const string TEST_ARIA_COL_INDEX = "0";
+    public const string TEST_ARIA_COL_INDEX_TEXT = "first";
+    public const string TEST_ARIA_COL_SPAN = "1";
+    public const string TEST_ARIA_CURRENT = "true";
+    public const string TEST_ARIA_DESCRIPTION = "description";
+    public const string TEST_ARIA_DISABLED = "true";
+    public const string TEST_ARIA_EXPANDED = "true";
+    public const string TEST_ARIA_HAS_POPUP = "false";
+    public const string TEST_ARIA_HIDDEN = "false";
+    public const string TEST_ARIA_INVALID = "spelling";
+    public const string TEST_ARIA_KEY_SHORTCUTS = "k";
+    public const string TEST_ARIA_LABEL = "some label";
+    public const string TEST_ARIA_LEVEL = "1";
+    public const string TEST_ARIA_LIVE = "polite";
+    public const string TEST_ARIA_MODAL = "true";
+    public const string TEST_ARIA_MULTILINE = "true";
+    public const string TEST_ARIA_MULTI_SELECTABLE = "true";
+    public const string TEST_ARIA_ORIENTATION = "horizontal";
+    public const string TEST_ARIA_PLACEHOLDER = "small hint description";
+    public const string TEST_ARIA_POS_IN_SET = "1";
+    public const string TEST_ARIA_PRESSED = "false";
+    public const string TEST_ARIA_READ_ONLY = "true";
+    public const string TEST_ARIA_REQUIRED = "false";
+    public const string TEST_ARIA_ROLE_DESCRIPTION = "role description";
+    public const string TEST_ARIA_ROW_COUNT = "1";
+    public const string TEST_ARIA_ROW_INDEX = "0";
+    public const string TEST_ARIA_ROW_INDEX_TEXT = "first";
+    public const string TEST_ARIA_ROW_SPAN = "1";
+    public const string TEST_ARIA_SELECTED = "false";
+    public const string TEST_ARIA_SET_SIZE = "1";
+    public const string TEST_ARIA_SORT = "none";
+    public const string TEST_ARIA_VALUE_MAX = "9";
+    public const string TEST_ARIA_VALUE_MIN = "1";
+    public const string TEST_ARIA_VALUE_NOW = "1";
+    public const string TEST_ARIA_VALUE_TEXT = "one";
+    public const string TEST_ROLE = "my role";
+    // Element - Events
     public const string TEST_TRANSITIONSTART_EVENT = "transitionstart-event-test";
     public const string TEST_TRANSITIONEND_EVENT = "transitionend-event-test";
     public const string TEST_TRANSITIONRUN_EVENT = "transitionrun-event-test";
@@ -141,7 +182,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
         await HTMLElement.RemoveAttributeStyleMap(TEST_STYLE_NAME);
     }
 
-    
+
     public const string BUTTON_GET_AUTOCAPITALIZE_PROPERTY = "htmlelement-get-autocapitalize-property";
     public async Task GetAutocapitalize_Property() {
         string autocapitalize = await HTMLElement.Autocapitalize;
@@ -159,7 +200,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
         await HTMLElement.SetAutocapitalize(TEST_AUTOCAPITALIZE);
     }
 
-    
+
     public const string BUTTON_GET_AUTOFOCUS_PROPERTY = "htmlelement-get-autofocus-property";
     public async Task GetAutofocus_Property() {
         bool autofocus = await HTMLElement.Autofocus;
@@ -177,7 +218,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
         await HTMLElement.SetAutofocus(true);
     }
 
-    
+
     public const string BUTTON_GET_CONTENT_EDITABLE_PROPERTY = "htmlelement-get-content-editable-property";
     public async Task GetContentEditable_Property() {
         string contentEditable = await HTMLElement.ContentEditable;
@@ -195,7 +236,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
         await HTMLElement.SetContentEditable("true");
     }
 
-    
+
     public const string BUTTON_GET_DATASET_PROPERTY = "htmlelement-get-dataset-property";
     public async Task GetDataset_Property() {
         Dictionary<string, string> dataset = await HTMLElement.Dataset;
@@ -218,7 +259,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
         await HTMLElement.RemoveDataset(TEST_DATASET_NAME);
     }
 
-    
+
     public const string BUTTON_GET_DIR_PROPERTY = "htmlelement-get-dir-property";
     public async Task GetDir_Property() {
         string dir = await HTMLElement.Dir;
@@ -254,7 +295,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
         await HTMLElement.SetDraggable(true);
     }
 
-    
+
     public const string BUTTON_GET_ENTER_KEY_HINT_PROPERTY = "htmlelement-get-enter-key-hint-property";
     public async Task GetEnterKeyHint_Property() {
         string enterKeyHint = await HTMLElement.EnterKeyHint;
@@ -357,7 +398,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
         labelOutput = isContentEditable.ToString();
     }
 
-    
+
     public const string BUTTON_GET_LANG_PROPERTY = "htmlelement-get-lang-property";
     public async Task GetLang_Property() {
         string lang = await HTMLElement.Lang;
@@ -641,41 +682,6 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     #region Element
 
-    public const string BUTTON_GET_INNERHTML_PROPERTY = "htmlelement-get-innerhtml-property";
-    private async Task GetInnerHTML_Property() {
-        string innerHTML = await HTMLElement.InnerHTML;
-        labelOutput = innerHTML;
-    }
-
-    public const string BUTTON_GET_INNERHTML_METHOD = "htmlelement-get-innerhtml-method";
-    private async Task GetInnerHTML_Method() {
-        string innerHTML = await HTMLElement.GetInnerHTML(default);
-        labelOutput = innerHTML;
-    }
-
-    public const string BUTTON_SET_INNERHTML = "htmlelement-set-innerhtml";
-    private async Task SetInnerHTML() {
-        await HTMLElement.SetInnerHTML(TEST_INNERHTML);
-    }
-
-
-    public const string BUTTON_GET_OUTERHTML_PROPERTY = "htmlelement-get-outerhtml-property";
-    private async Task GetOuterHTML_Property() {
-        string outerHTML = await HTMLElement.OuterHTML;
-        labelOutput = outerHTML;
-    }
-
-    public const string BUTTON_GET_OUTERHTML_METHOD = "htmlelement-get-outerhtml-method";
-    private async Task GetOuterHTML_Method() {
-        string outerHTML = await HTMLElement.GetOuterHTML(default);
-        labelOutput = outerHTML;
-    }
-
-    public const string BUTTON_SET_OUTERHTML = "htmlelement-set-outerhtml";
-    private async Task SetOuterHTML() {
-        await HTMLElement.SetOuterHTML(TEST_OUTERHTML);
-    }
-
 
     public const string BUTTON_GET_ATTRIBUTES_PROPERTY = "htmlelement-get-attributes-property";
     private async Task GetAttributes_Property() {
@@ -689,6 +695,343 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
         labelOutput = JsonSerializer.Serialize(attributes);
     }
 
+
+    public const string BUTTON_GET_CLASS_LIST_PROPERTY = "htmlelement-get-class-list-property";
+    private async Task GetClassList_Property() {
+        string[] classList = await HTMLElement.ClassList;
+        labelOutput = string.Join(',', classList);
+    }
+
+    public const string BUTTON_GET_CLASS_LIST_METHOD = "htmlelement-get-class-list-method";
+    private async Task GetClassList_Method() {
+        string[] classList = await HTMLElement.GetClassList(default);
+        labelOutput = string.Join(',', classList);
+    }
+
+
+    public const string BUTTON_GET_CLASS_NAME_PROPERTY = "htmlelement-get-class-name-property";
+    private async Task GetClassName_Property() {
+        string className = await HTMLElement.ClassName;
+        labelOutput = className;
+    }
+
+    public const string BUTTON_GET_CLASS_NAME_METHOD = "htmlelement-get-class-name-method";
+    private async Task GetClassName_Method() {
+        string className = await HTMLElement.GetClassName(default);
+        labelOutput = className;
+    }
+
+    public const string BUTTON_SET_CLASS_NAME = "htmlelement-set-class-name";
+    private async Task SetClassName() {
+        await HTMLElement.SetClassName(TEST_CLASSNAME);
+    }
+
+
+    public const string BUTTON_GET_CLIENT_WIDTH_PROPERTY = "htmlelement-get-client-width-property";
+    private async Task GetClientWidth_Property() {
+        int clientWidth = await HTMLElement.ClientWidth;
+        labelOutput = clientWidth.ToString();
+    }
+
+    public const string BUTTON_GET_CLIENT_WIDTH_METHOD = "htmlelement-get-client-width-method";
+    private async Task GetClientWidth_Method() {
+        int clientWidth = await HTMLElement.GetClientWidth(default);
+        labelOutput = clientWidth.ToString();
+    }
+
+    public const string BUTTON_GET_CLIENT_HEIGHT_PROPERTY = "htmlelement-get-client-height-property";
+    private async Task GetClientHeight_Property() {
+        int clientHeight = await HTMLElement.ClientHeight;
+        labelOutput = clientHeight.ToString();
+    }
+
+    public const string BUTTON_GET_CLIENT_HEIGHT_METHOD = "htmlelement-get-client-height-method";
+    private async Task GetClientHeight_Method() {
+        int clientHeight = await HTMLElement.GetClientHeight(default);
+        labelOutput = clientHeight.ToString();
+    }
+
+    public const string BUTTON_GET_CLIENT_LEFT_PROPERTY = "htmlelement-get-client-left-property";
+    private async Task GetClientLeft_Property() {
+        int clientLeft = await HTMLElement.ClientLeft;
+        labelOutput = clientLeft.ToString();
+    }
+
+    public const string BUTTON_GET_CLIENT_LEFT_METHOD = "htmlelement-get-client-left-method";
+    private async Task GetClientLeft_Method() {
+        int clientLeft = await HTMLElement.GetClientLeft(default);
+        labelOutput = clientLeft.ToString();
+    }
+
+    public const string BUTTON_GET_CLIENT_TOP_PROPERTY = "htmlelement-get-client-top-property";
+    private async Task GetClientTop_Property() {
+        int clientTop = await HTMLElement.ClientTop;
+        labelOutput = clientTop.ToString();
+    }
+
+    public const string BUTTON_GET_CLIENT_TOP_METHOD = "htmlelement-get-client-top-method";
+    private async Task GetClientTop_Method() {
+        int clientTop = await HTMLElement.GetClientTop(default);
+        labelOutput = clientTop.ToString();
+    }
+
+
+    public const string BUTTON_GET_CURRENT_CSS_ZOOM_PROPERTY = "htmlelement-get-current-css-zoom-property";
+    private async Task GetCurrentCSSZoom_Property() {
+        double currentCSSZoom = await HTMLElement.CurrentCSSZoom;
+        labelOutput = currentCSSZoom.ToString();
+    }
+
+    public const string BUTTON_GET_CURRENT_CSS_ZOOM_METHOD = "htmlelement-get-current-css-zoom-method";
+    private async Task GetCurrentCSSZoom_Method() {
+        double currentCSSZoom = await HTMLElement.GetCurrentCSSZoom(default);
+        labelOutput = currentCSSZoom.ToString();
+    }
+
+
+    public const string BUTTON_GET_ID_PROPERTY = "htmlelement-get-id-property";
+    private async Task GetId_Property() {
+        string id = await HTMLElement.Id;
+        labelOutput = id;
+    }
+
+    public const string BUTTON_GET_ID_METHOD = "htmlelement-get-id-method";
+    private async Task GetId_Method() {
+        string id = await HTMLElement.GetId(default);
+        labelOutput = id;
+    }
+
+    public const string BUTTON_SET_ID = "htmlelement-set-id";
+    private async Task SetId() {
+        await HTMLElement.SetId(TEST_ID);
+    }
+
+
+    public const string BUTTON_GET_IS_CONNECTED_PROPERTY = "htmlelement-get-is-connected-property";
+    private async Task GetIsConnected_Property() {
+        bool isConnected = await HTMLElement.IsConnected;
+        labelOutput = isConnected.ToString();
+    }
+
+    public const string BUTTON_GET_IS_CONNECTED_METHOD = "htmlelement-get-is-connected-method";
+    private async Task GetIsConnected_Method() {
+        bool isConnected = await HTMLElement.GetIsConnected(default);
+        labelOutput = isConnected.ToString();
+    }
+
+
+    public const string BUTTON_GET_INNER_HTML_PROPERTY = "htmlelement-get-inner-html-property";
+    private async Task GetInnerHTML_Property() {
+        string innerHTML = await HTMLElement.InnerHTML;
+        labelOutput = innerHTML;
+    }
+
+    public const string BUTTON_GET_INNER_HTML_METHOD = "htmlelement-get-inner-html-method";
+    private async Task GetInnerHTML_Method() {
+        string innerHTML = await HTMLElement.GetInnerHTML(default);
+        labelOutput = innerHTML;
+    }
+
+    public const string BUTTON_SET_INNER_HTML = "htmlelement-set-inner-html";
+    private async Task SetInnerHTML() {
+        await HTMLElement.SetInnerHTML(TEST_INNERHTML);
+    }
+
+
+    public const string BUTTON_GET_OUTER_HTML_PROPERTY = "htmlelement-get-outer-html-property";
+    private async Task GetOuterHTML_Property() {
+        string outerHTML = await HTMLElement.OuterHTML;
+        labelOutput = outerHTML;
+    }
+
+    public const string BUTTON_GET_OUTER_HTML_METHOD = "htmlelement-get-outer-html-method";
+    private async Task GetOuterHTML_Method() {
+        string outerHTML = await HTMLElement.GetOuterHTML(default);
+        labelOutput = outerHTML;
+    }
+
+    public const string BUTTON_SET_OUTER_HTML = "htmlelement-set-outer-html";
+    private async Task SetOuterHTML() {
+        await HTMLElement.SetOuterHTML(TEST_OUTERHTML);
+    }
+
+
+    public const string BUTTON_GET_PART_PROPERTY = "htmlelement-get-part-property";
+    private async Task GetPart_Property() {
+        string[] part = await HTMLElement.Part;
+        labelOutput = string.Join(',', part);
+    }
+
+    public const string BUTTON_GET_PART_METHOD = "htmlelement-get-part-method";
+    private async Task GetPart_Method() {
+        string[] part = await HTMLElement.GetPart(default);
+        labelOutput = string.Join(',', part);
+    }
+
+
+    public const string BUTTON_GET_SCROLL_WIDTH_PROPERTY = "htmlelement-get-scroll-width-property";
+    private async Task GetScrollWidth_Property() {
+        int ScrollWidth = await HTMLElement.ScrollWidth;
+        labelOutput = ScrollWidth.ToString();
+    }
+
+    public const string BUTTON_GET_SCROLL_WIDTH_METHOD = "htmlelement-get-scroll-width-method";
+    private async Task GetScrollWidth_Method() {
+        int ScrollWidth = await HTMLElement.GetScrollWidth(default);
+        labelOutput = ScrollWidth.ToString();
+    }
+
+    public const string BUTTON_GET_SCROLL_HEIGHT_PROPERTY = "htmlelement-get-scroll-height-property";
+    private async Task GetScrollHeight_Property() {
+        int ScrollHeight = await HTMLElement.ScrollHeight;
+        labelOutput = ScrollHeight.ToString();
+    }
+
+    public const string BUTTON_GET_SCROLL_HEIGHT_METHOD = "htmlelement-get-scroll-height-method";
+    private async Task GetScrollHeight_Method() {
+        int ScrollHeight = await HTMLElement.GetScrollHeight(default);
+        labelOutput = ScrollHeight.ToString();
+    }
+
+    public const string BUTTON_GET_SCROLL_LEFT_PROPERTY = "htmlelement-get-scroll-left-property";
+    private async Task GetScrollLeft_Property() {
+        int ScrollLeft = await HTMLElement.ScrollLeft;
+        labelOutput = ScrollLeft.ToString();
+    }
+
+    public const string BUTTON_GET_SCROLL_LEFT_METHOD = "htmlelement-get-scroll-left-method";
+    private async Task GetScrollLeft_Method() {
+        int ScrollLeft = await HTMLElement.GetScrollLeft(default);
+        labelOutput = ScrollLeft.ToString();
+    }
+
+    public const string BUTTON_SET_SCROLL_LEFT = "htmlelement-set-scroll-left";
+    private async Task SetScrollLeft() {
+        await HTMLElement.SetScrollLeft(TEST_SCROLLLEFT);
+    }
+
+    public const string BUTTON_GET_SCROLL_TOP_PROPERTY = "htmlelement-get-scroll-top-property";
+    private async Task GetScrollTop_Property() {
+        int ScrollTop = await HTMLElement.ScrollTop;
+        labelOutput = ScrollTop.ToString();
+    }
+
+    public const string BUTTON_GET_SCROLL_TOP_METHOD = "htmlelement-get-scroll-top-method";
+    private async Task GetScrollTop_Method() {
+        int ScrollTop = await HTMLElement.GetScrollTop(default);
+        labelOutput = ScrollTop.ToString();
+    }
+
+    public const string BUTTON_SET_SCROLL_TOP = "htmlelement-set-scroll-top";
+    private async Task SetScrollTop() {
+        await HTMLElement.SetScrollTop(TEST_SCROLLTOP);
+    }
+
+
+    public const string BUTTON_GET_SLOT_PROPERTY = "htmlelement-get-slot-property";
+    private async Task GetSlot_Property() {
+        string slot = await HTMLElement.Slot;
+        labelOutput = slot;
+    }
+
+    public const string BUTTON_GET_SLOT_METHOD = "htmlelement-get-slot-method";
+    private async Task GetSlot_Method() {
+        string slot = await HTMLElement.GetSlot(default);
+        labelOutput = slot;
+    }
+
+    public const string BUTTON_SET_SLOT = "htmlelement-set-slot";
+    private async Task SetSlot() {
+        await HTMLElement.SetSlot(TEST_SLOT);
+    }
+
+
+    public const string BUTTON_GET_LOCAL_NAME_PROPERTY = "htmlelement-get-local-name-property";
+    private async Task GetLocalName_Property() {
+        string localName = await HTMLElement.LocalName;
+        labelOutput = localName;
+    }
+
+    public const string BUTTON_GET_LOCAL_NAME_METHOD = "htmlelement-get-local-name-method";
+    private async Task GetLocalName_Method() {
+        string localName = await HTMLElement.GetLocalName(default);
+        labelOutput = localName;
+    }
+
+    public const string BUTTON_GET_NAMESPACE_URI_PROPERTY = "htmlelement-get-namespace-uri-property";
+    private async Task GetNamespaceURI_Property() {
+        string? namespaceURI = await HTMLElement.NamespaceURI;
+        labelOutput = namespaceURI ?? "empty namespace";
+    }
+
+    public const string BUTTON_GET_NAMESPACE_URI_METHOD = "htmlelement-get-namespace-uri-method";
+    private async Task GetNamespaceURI_Method() {
+        string? namespaceURI = await HTMLElement.GetNamespaceURI(default);
+        labelOutput = namespaceURI ?? "empty namespace";
+    }
+
+    public const string BUTTON_GET_PREFIX_PROPERTY = "htmlelement-get-prefix-property";
+    private async Task GetPrefix_Property() {
+        string? prefix = await HTMLElement.Prefix;
+        labelOutput = prefix ?? "no prefix";
+    }
+
+    public const string BUTTON_GET_PREFIX_METHOD = "htmlelement-get-prefix-method";
+    private async Task GetPrefix_Method() {
+        string? prefix = await HTMLElement.GetPrefix(default);
+        labelOutput = prefix ?? "no prefix";
+    }
+
+    public const string BUTTON_GET_BASE_URI_PROPERTY = "htmlelement-get-base-uri-property";
+    private async Task GetBaseURI_Property() {
+        string baseURI = await HTMLElement.BaseURI;
+        labelOutput = baseURI;
+    }
+
+    public const string BUTTON_GET_BASE_URI_METHOD = "htmlelement-get-base-uri-method";
+    private async Task GetBaseURI_Method() {
+        string baseURI = await HTMLElement.GetBaseURI(default);
+        labelOutput = baseURI;
+    }
+
+    public const string BUTTON_GET_TAG_NAME_PROPERTY = "htmlelement-get-tag-name-property";
+    private async Task GetTagName_Property() {
+        string tagName = await HTMLElement.TagName;
+        labelOutput = tagName;
+    }
+
+    public const string BUTTON_GET_TAG_NAME_METHOD = "htmlelement-get-tag-name-method";
+    private async Task GetTagName_Method() {
+        string tagName = await HTMLElement.GetTagName(default);
+        labelOutput = tagName;
+    }
+
+    public const string BUTTON_GET_NODE_NAME_PROPERTY = "htmlelement-get-node-name-property";
+    private async Task GetNodeName_Property() {
+        string nodeName = await HTMLElement.NodeName;
+        labelOutput = nodeName;
+    }
+
+    public const string BUTTON_GET_NODE_NAME_METHOD = "htmlelement-get-node-name-method";
+    private async Task GetNodeName_Method() {
+        string nodeName = await HTMLElement.GetNodeName(default);
+        labelOutput = nodeName;
+    }
+
+    public const string BUTTON_GET_NODE_TYPE_PROPERTY = "htmlelement-get-node-type-property";
+    private async Task GetNodeType_Property() {
+        int nodeType = await HTMLElement.NodeType;
+        labelOutput = nodeType.ToString();
+    }
+
+    public const string BUTTON_GET_NODE_TYPE_METHOD = "htmlelement-get-node-type-method";
+    private async Task GetNodeType_Method() {
+        int nodeType = await HTMLElement.GetNodeType(default);
+        labelOutput = nodeType.ToString();
+    }
+
+
+    // properties - Tree nodes
 
     public const string BUTTON_GET_CHILD_ELEMENT_COUNT_PROPERTY = "htmlelement-get-child-element-count-property";
     private async Task GetChildElementCount_Property() {
@@ -720,151 +1063,501 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     }
 
 
-    public const string BUTTON_GET_CLASSNAME_PROPERTY = "htmlelement-get-classname-property";
-    private async Task GetClassName_Property() {
-        string className = await HTMLElement.ClassName;
-        labelOutput = className;
+    public const string BUTTON_GET_FIRST_ELEMENT_CHILD_PROPERTY = "htmlelement-get-first-element-child-property";
+    private async Task GetFirstElementChild_Property() {
+        await using IHTMLElement? child = await HTMLElement.FirstElementChild;
+        labelOutput = (child is not null).ToString();
     }
 
-    public const string BUTTON_GET_CLASSNAME_METHOD = "htmlelement-get-classname-method";
-    private async Task GetClassName_Method() {
-        string className = await HTMLElement.GetClassName(default);
-        labelOutput = className;
-    }
-
-    public const string BUTTON_SET_CLASSNAME = "htmlelement-set-classname";
-    private async Task SetClassName() {
-        await HTMLElement.SetClassName(TEST_CLASSNAME);
+    public const string BUTTON_GET_FIRST_ELEMENT_CHILD_METHOD = "htmlelement-get-first-element-child-method";
+    private async Task GetFirstElementChild_Method() {
+        await using IHTMLElement? child = await HTMLElement.GetFirstElementChild(default);
+        labelOutput = (child is not null).ToString();
     }
 
 
-    public const string BUTTON_GET_CLASSLIST_PROPERTY = "htmlelement-get-classlist-property";
-    private async Task GetClassList_Property() {
-        string[] classList = await HTMLElement.ClassList;
-        labelOutput = string.Join(',', classList);
+    public const string BUTTON_GET_LAST_ELEMENT_CHILD_PROPERTY = "htmlelement-get-last-element-child-property";
+    private async Task GetLastElementChild_Property() {
+        await using IHTMLElement? child = await HTMLElement.LastElementChild;
+        labelOutput = (child is not null).ToString();
     }
 
-    public const string BUTTON_GET_CLASSLIST_METHOD = "htmlelement-get-classlist-method";
-    private async Task GetClassList_Method() {
-        string[] classList = await HTMLElement.GetClassList(default);
-        labelOutput = string.Join(',', classList);
-    }
-
-
-
-    public const string BUTTON_GET_CLIENTWIDTH_PROPERTY = "htmlelement-get-clientwidth-property";
-    private async Task GetClientWidth_Property() {
-        int clientWidth = await HTMLElement.ClientWidth;
-        labelOutput = clientWidth.ToString();
-    }
-
-    public const string BUTTON_GET_CLIENTWIDTH_METHOD = "htmlelement-get-clientwidth-method";
-    private async Task GetClientWidth_Method() {
-        int clientWidth = await HTMLElement.GetClientWidth(default);
-        labelOutput = clientWidth.ToString();
+    public const string BUTTON_GET_LAST_ELEMENT_CHILD_METHOD = "htmlelement-get-last-element-child-method";
+    private async Task GetLastElementChild_Method() {
+        await using IHTMLElement? child = await HTMLElement.GetLastElementChild(default);
+        labelOutput = (child is not null).ToString();
     }
 
 
-    public const string BUTTON_GET_CLIENTHEIGHT_PROPERTY = "htmlelement-get-clientheight-property";
-    private async Task GetClientHeight_Property() {
-        int clientHeight = await HTMLElement.ClientHeight;
-        labelOutput = clientHeight.ToString();
+    public const string BUTTON_GET_PREVIOUS_ELEMENT_SIBLING_PROPERTY = "htmlelement-get-previous-element-sibling-property";
+    private async Task GetPreviousElementSibling_Property() {
+        await using IHTMLElement? sibling = await HTMLElement.PreviousElementSibling;
+        labelOutput = (sibling is not null).ToString();
     }
 
-    public const string BUTTON_GET_CLIENTHEIGHT_METHOD = "htmlelement-get-clientheight-method";
-    private async Task GetClientHeight_Method() {
-        int clientHeight = await HTMLElement.GetClientHeight(default);
-        labelOutput = clientHeight.ToString();
-    }
-
-
-    public const string BUTTON_GET_CLIENTLEFT_PROPERTY = "htmlelement-get-clientleft-property";
-    private async Task GetClientLeft_Property() {
-        int clientLeft = await HTMLElement.ClientLeft;
-        labelOutput = clientLeft.ToString();
-    }
-
-    public const string BUTTON_GET_CLIENTLEFT_METHOD = "htmlelement-get-clientleft-method";
-    private async Task GetClientLeft_Method() {
-        int clientLeft = await HTMLElement.GetClientLeft(default);
-        labelOutput = clientLeft.ToString();
+    public const string BUTTON_GET_PREVIOUS_ELEMENT_SIBLING_METHOD = "htmlelement-get-previous-element-sibling-method";
+    private async Task GetPreviousElementSibling_Method() {
+        await using IHTMLElement? sibling = await HTMLElement.GetPreviousElementSibling(default);
+        labelOutput = (sibling is not null).ToString();
     }
 
 
-    public const string BUTTON_GET_CLIENTTOP_PROPERTY = "htmlelement-get-clienttop-property";
-    private async Task GetClientTop_Property() {
-        int clientTop = await HTMLElement.ClientTop;
-        labelOutput = clientTop.ToString();
+    public const string BUTTON_GET_NEXT_ELEMENT_SIBLING_PROPERTY = "htmlelement-get-next-element-sibling-property";
+    private async Task GetNextElementSibling_Property() {
+        await using IHTMLElement? sibling = await HTMLElement.NextElementSibling;
+        labelOutput = (sibling is not null).ToString();
     }
 
-    public const string BUTTON_GET_CLIENTTOP_METHOD = "htmlelement-get-clienttop-method";
-    private async Task GetClientTop_Method() {
-        int clientTop = await HTMLElement.GetClientTop(default);
-        labelOutput = clientTop.ToString();
-    }
-
-
-
-    public const string BUTTON_GET_SCROLLWIDTH_PROPERTY = "htmlelement-get-scrollwidth-property";
-    private async Task GetScrollWidth_Property() {
-        int ScrollWidth = await HTMLElement.ScrollWidth;
-        labelOutput = ScrollWidth.ToString();
-    }
-
-    public const string BUTTON_GET_SCROLLWIDTH_METHOD = "htmlelement-get-scrollwidth-method";
-    private async Task GetScrollWidth_Method() {
-        int ScrollWidth = await HTMLElement.GetScrollWidth(default);
-        labelOutput = ScrollWidth.ToString();
+    public const string BUTTON_GET_NEXT_ELEMENT_SIBLING_METHOD = "htmlelement-get-next-element-sibling-method";
+    private async Task GetNextElementSibling_Method() {
+        await using IHTMLElement? sibling = await HTMLElement.GetNextElementSibling(default);
+        labelOutput = (sibling is not null).ToString();
     }
 
 
-    public const string BUTTON_GET_SCROLLHEIGHT_PROPERTY = "htmlelement-get-scrollheight-property";
-    private async Task GetScrollHeight_Property() {
-        int ScrollHeight = await HTMLElement.ScrollHeight;
-        labelOutput = ScrollHeight.ToString();
+    public const string BUTTON_GET_PARENT_ELEMENT_PROPERTY = "htmlelement-get-parent-element-property";
+    private async Task GetParentElement_Property() {
+        await using IHTMLElement? parent = await HTMLElement.ParentElement;
+        labelOutput = (parent is not null).ToString();
     }
 
-    public const string BUTTON_GET_SCROLLHEIGHT_METHOD = "htmlelement-get-scrollheight-method";
-    private async Task GetScrollHeight_Method() {
-        int ScrollHeight = await HTMLElement.GetScrollHeight(default);
-        labelOutput = ScrollHeight.ToString();
-    }
-
-
-    public const string BUTTON_GET_SCROLLLEFT_PROPERTY = "htmlelement-get-scrollleft-property";
-    private async Task GetScrollLeft_Property() {
-        int ScrollLeft = await HTMLElement.ScrollLeft;
-        labelOutput = ScrollLeft.ToString();
-    }
-
-    public const string BUTTON_GET_SCROLLLEFT_METHOD = "htmlelement-get-scrollleft-method";
-    private async Task GetScrollLeft_Method() {
-        int ScrollLeft = await HTMLElement.GetScrollLeft(default);
-        labelOutput = ScrollLeft.ToString();
-    }
-
-    public const string BUTTON_SET_SCROLLLEFT = "htmlelement-set-scrollleft";
-    private async Task SetScrollLeft() {
-        await HTMLElement.SetScrollLeft(TEST_SCROLLLEFT);
+    public const string BUTTON_GET_PARENT_ELEMENT_METHOD = "htmlelement-get-parent-element-method";
+    private async Task GetParentElement_Method() {
+        await using IHTMLElement? parent = await HTMLElement.GetParentElement(default);
+        labelOutput = (parent is not null).ToString();
     }
 
 
-    public const string BUTTON_GET_SCROLLTOP_PROPERTY = "htmlelement-get-scrolltop-property";
-    private async Task GetScrollTop_Property() {
-        int ScrollTop = await HTMLElement.ScrollTop;
-        labelOutput = ScrollTop.ToString();
-    }
+    // properties - ARIA
 
-    public const string BUTTON_GET_SCROLLTOP_METHOD = "htmlelement-get-scrolltop-method";
-    private async Task GetScrollTop_Method() {
-        int ScrollTop = await HTMLElement.GetScrollTop(default);
-        labelOutput = ScrollTop.ToString();
-    }
+    public const string BUTTON_GET_ARIA_ATOMIC_PROPERTY = "htmlelement-get-aria-atomic-property";
+    private async Task GetAriaAtomic_Property() => labelOutput = await HTMLElement.AriaAtomic ?? "'aria-atomic' attr not set";
 
-    public const string BUTTON_SET_SCROLLTOP = "htmlelement-set-scrolltop";
-    private async Task SetScrollTop() {
-        await HTMLElement.SetScrollTop(TEST_SCROLLTOP);
-    }
+    public const string BUTTON_GET_ARIA_ATOMIC_METHOD = "htmlelement-get-aria-atomic-method";
+    private async Task GetAriaAtomic_Method() => labelOutput = await HTMLElement.GetAriaAtomic(default) ?? "'aria-atomic' attr not set";
+
+    public const string BUTTON_SET_ARIA_ATOMIC = "htmlelement-set-aria-atomic";
+    private async Task SetAriaAtomic() => await HTMLElement.SetAriaAtomic(TEST_ARIA_ATOMIC);
+
+
+    public const string BUTTON_GET_ARIA_AUTO_COMPLETE_PROPERTY = "htmlelement-get-aria-auto-complete-property";
+    private async Task GetAriaAutoComplete_Property() => labelOutput = await HTMLElement.AriaAutoComplete ?? "'aria-autocomplete' attr not set";
+
+    public const string BUTTON_GET_ARIA_AUTO_COMPLETE_METHOD = "htmlelement-get-aria-auto-complete-method";
+    private async Task GetAriaAutoComplete_Method() => labelOutput = await HTMLElement.GetAriaAutoComplete(default) ?? "'aria-autocomplete' attr not set";
+
+    public const string BUTTON_SET_ARIA_AUTO_COMPLETE = "htmlelement-set-aria-auto-complete";
+    private async Task SetAriaAutoComplete() => await HTMLElement.SetAriaAutoComplete(TEST_ARIA_AUTO_COMPLETE);
+
+
+    public const string BUTTON_GET_ARIA_BRAILLE_LABEL_PROPERTY = "htmlelement-get-aria-braille-label-property";
+    private async Task GetAriaBrailleLabel_Property() => labelOutput = await HTMLElement.AriaBrailleLabel ?? "'aria-braillelabel' attr not set";
+
+    public const string BUTTON_GET_ARIA_BRAILLE_LABEL_METHOD = "htmlelement-get-aria-braille-label-method";
+    private async Task GetAriaBrailleLabel_Method() => labelOutput = await HTMLElement.GetAriaBrailleLabel(default) ?? "'aria-braillelabel' attr not set";
+
+    public const string BUTTON_SET_ARIA_BRAILLE_LABEL = "htmlelement-set-aria-braille-label";
+    private async Task SetAriaBrailleLabel() => await HTMLElement.SetAriaBrailleLabel(TEST_ARIA_BRAILLE_LABEL);
+
+
+    public const string BUTTON_GET_ARIA_BRAILLE_ROLE_DESCRIPTION_PROPERTY = "htmlelement-get-aria-braille-role-description-property";
+    private async Task GetAriaBrailleRoleDescription_Property() => labelOutput = await HTMLElement.AriaBrailleRoleDescription ?? "'aria-brailleroledescription' attr not set";
+
+    public const string BUTTON_GET_ARIA_BRAILLE_ROLE_DESCRIPTION_METHOD = "htmlelement-get-aria-braille-role-description-method";
+    private async Task GetAriaBrailleRoleDescription_Method() => labelOutput = await HTMLElement.GetAriaBrailleRoleDescription(default) ?? "'aria-brailleroledescription' attr not set";
+
+    public const string BUTTON_SET_ARIA_BRAILLE_ROLE_DESCRIPTION = "htmlelement-set-aria-braille-role-description";
+    private async Task SetAriaBrailleRoleDescription() => await HTMLElement.SetAriaBrailleRoleDescription(TEST_ARIA_BRAILLE_ROLE_DESCRIPTION);
+
+
+    public const string BUTTON_GET_ARIA_BUSY_PROPERTY = "htmlelement-get-aria-busy-property";
+    private async Task GetAriaBusy_Property() => labelOutput = await HTMLElement.AriaBusy ?? "'aria-busy' attr not set";
+
+    public const string BUTTON_GET_ARIA_BUSY_METHOD = "htmlelement-get-aria-busy-method";
+    private async Task GetAriaBusy_Method() => labelOutput = await HTMLElement.GetAriaBusy(default) ?? "'aria-busy' attr not set";
+
+    public const string BUTTON_SET_ARIA_BUSY = "htmlelement-set-aria-busy";
+    private async Task SetAriaBusy() => await HTMLElement.SetAriaBusy(TEST_ARIA_BUSY);
+
+
+    public const string BUTTON_GET_ARIA_CHECKED_PROPERTY = "htmlelement-get-aria-checked-property";
+    private async Task GetAriaChecked_Property() => labelOutput = await HTMLElement.AriaChecked ?? "'aria-checked' attr not set";
+
+    public const string BUTTON_GET_ARIA_CHECKED_METHOD = "htmlelement-get-aria-checked-method";
+    private async Task GetAriaChecked_Method() => labelOutput = await HTMLElement.GetAriaChecked(default) ?? "'aria-checked' attr not set";
+
+    public const string BUTTON_SET_ARIA_CHECKED = "htmlelement-set-aria-checked";
+    private async Task SetAriaChecked() => await HTMLElement.SetAriaChecked(TEST_ARIA_CHECKED);
+
+
+    public const string BUTTON_GET_ARIA_COL_COUNT_PROPERTY = "htmlelement-get-aria-col-count-property";
+    private async Task GetAriaColCount_Property() => labelOutput = await HTMLElement.AriaColCount ?? "'aria-colcount' attr not set";
+
+    public const string BUTTON_GET_ARIA_COL_COUNT_METHOD = "htmlelement-get-aria-col-count-method";
+    private async Task GetAriaColCount_Method() => labelOutput = await HTMLElement.GetAriaColCount(default) ?? "'aria-colcount' attr not set";
+
+    public const string BUTTON_SET_ARIA_COL_COUNT = "htmlelement-set-aria-col-count";
+    private async Task SetAriaColCount() => await HTMLElement.SetAriaColCount(TEST_ARIA_COL_COUNT);
+
+
+    public const string BUTTON_GET_ARIA_COL_INDEX_PROPERTY = "htmlelement-get-aria-col-index-property";
+    private async Task GetAriaColIndex_Property() => labelOutput = await HTMLElement.AriaColIndex ?? "'aria-colindex' attr not set";
+
+    public const string BUTTON_GET_ARIA_COL_INDEX_METHOD = "htmlelement-get-aria-col-index-method";
+    private async Task GetAriaColIndex_Method() => labelOutput = await HTMLElement.GetAriaColIndex(default) ?? "'aria-colindex' attr not set";
+
+    public const string BUTTON_SET_ARIA_COL_INDEX = "htmlelement-set-aria-col-index";
+    private async Task SetAriaColIndex() => await HTMLElement.SetAriaColIndex(TEST_ARIA_COL_INDEX);
+
+
+    public const string BUTTON_GET_ARIA_COL_INDEX_TEXT_PROPERTY = "htmlelement-get-aria-col-index-text-property";
+    private async Task GetAriaColIndexText_Property() => labelOutput = await HTMLElement.AriaColIndexText ?? "'aria-colindextext' attr not set";
+
+    public const string BUTTON_GET_ARIA_COL_INDEX_TEXT_METHOD = "htmlelement-get-aria-col-index-text-method";
+    private async Task GetAriaColIndexText_Method() => labelOutput = await HTMLElement.GetAriaColIndexText(default) ?? "'aria-colindextext' attr not set";
+
+    public const string BUTTON_SET_ARIA_COL_INDEX_TEXT = "htmlelement-set-aria-col-index-text";
+    private async Task SetAriaColIndexText() => await HTMLElement.SetAriaColIndexText(TEST_ARIA_COL_INDEX_TEXT);
+
+
+    public const string BUTTON_GET_ARIA_COL_SPAN_PROPERTY = "htmlelement-get-aria-col-span-property";
+    private async Task GetAriaColSpan_Property() => labelOutput = await HTMLElement.AriaColSpan ?? "'aria-colspan' attr not set";
+
+    public const string BUTTON_GET_ARIA_COL_SPAN_METHOD = "htmlelement-get-aria-col-span-method";
+    private async Task GetAriaColSpan_Method() => labelOutput = await HTMLElement.GetAriaColSpan(default) ?? "'aria-colspan' attr not set";
+
+    public const string BUTTON_SET_ARIA_COL_SPAN = "htmlelement-set-aria-col-span";
+    private async Task SetAriaColSpan() => await HTMLElement.SetAriaColSpan(TEST_ARIA_COL_SPAN);
+
+
+    public const string BUTTON_GET_ARIA_CURRENT_PROPERTY = "htmlelement-get-aria-current-property";
+    private async Task GetAriaCurrent_Property() => labelOutput = await HTMLElement.AriaCurrent ?? "'aria-current' attr not set";
+
+    public const string BUTTON_GET_ARIA_CURRENT_METHOD = "htmlelement-get-aria-current-method";
+    private async Task GetAriaCurrent_Method() => labelOutput = await HTMLElement.GetAriaCurrent(default) ?? "'aria-current' attr not set";
+
+    public const string BUTTON_SET_ARIA_CURRENT = "htmlelement-set-aria-current";
+    private async Task SetAriaCurrent() => await HTMLElement.SetAriaCurrent(TEST_ARIA_CURRENT);
+
+
+    public const string BUTTON_GET_ARIA_DESCRIPTION_PROPERTY = "htmlelement-get-aria-description-property";
+    private async Task GetAriaDescription_Property() => labelOutput = await HTMLElement.AriaDescription ?? "'aria-description' attr not set";
+
+    public const string BUTTON_GET_ARIA_DESCRIPTION_METHOD = "htmlelement-get-aria-description-method";
+    private async Task GetAriaDescription_Method() => labelOutput = await HTMLElement.GetAriaDescription(default) ?? "'aria-description' attr not set";
+
+    public const string BUTTON_SET_ARIA_DESCRIPTION = "htmlelement-set-aria-description";
+    private async Task SetAriaDescription() => await HTMLElement.SetAriaDescription(TEST_ARIA_DESCRIPTION);
+
+
+    public const string BUTTON_GET_ARIA_DISABLED_PROPERTY = "htmlelement-get-aria-disabled-property";
+    private async Task GetAriaDisabled_Property() => labelOutput = await HTMLElement.AriaDisabled ?? "'aria-disabled' attr not set";
+
+    public const string BUTTON_GET_ARIA_DISABLED_METHOD = "htmlelement-get-aria-disabled-method";
+    private async Task GetAriaDisabled_Method() => labelOutput = await HTMLElement.GetAriaDisabled(default) ?? "'aria-disabled' attr not set";
+
+    public const string BUTTON_SET_ARIA_DISABLED = "htmlelement-set-aria-disabled";
+    private async Task SetAriaDisabled() => await HTMLElement.SetAriaDisabled(TEST_ARIA_DISABLED);
+
+
+    public const string BUTTON_GET_ARIA_EXPANDED_PROPERTY = "htmlelement-get-aria-expanded-property";
+    private async Task GetAriaExpanded_Property() => labelOutput = await HTMLElement.AriaExpanded ?? "'aria-expanded' attr not set";
+
+    public const string BUTTON_GET_ARIA_EXPANDED_METHOD = "htmlelement-get-aria-expanded-method";
+    private async Task GetAriaExpanded_Method() => labelOutput = await HTMLElement.GetAriaExpanded(default) ?? "'aria-expanded' attr not set";
+
+    public const string BUTTON_SET_ARIA_EXPANDED = "htmlelement-set-aria-expanded";
+    private async Task SetAriaExpanded() => await HTMLElement.SetAriaExpanded(TEST_ARIA_EXPANDED);
+
+
+    public const string BUTTON_GET_ARIA_HAS_POPUP_PROPERTY = "htmlelement-get-aria-has-popup-property";
+    private async Task GetAriaHasPopup_Property() => labelOutput = await HTMLElement.AriaHasPopup ?? "'aria-haspopup' attr not set";
+
+    public const string BUTTON_GET_ARIA_HAS_POPUP_METHOD = "htmlelement-get-aria-has-popup-method";
+    private async Task GetAriaHasPopup_Method() => labelOutput = await HTMLElement.GetAriaHasPopup(default) ?? "'aria-haspopup' attr not set";
+
+    public const string BUTTON_SET_ARIA_HAS_POPUP = "htmlelement-set-aria-has-popup";
+    private async Task SetAriaHasPopup() => await HTMLElement.SetAriaHasPopup(TEST_ARIA_HAS_POPUP);
+
+
+    public const string BUTTON_GET_ARIA_HIDDEN_PROPERTY = "htmlelement-get-aria-hidden-property";
+    private async Task GetAriaHidden_Property() => labelOutput = await HTMLElement.AriaHidden ?? "'aria-hidden' attr not set";
+
+    public const string BUTTON_GET_ARIA_HIDDEN_METHOD = "htmlelement-get-aria-hidden-method";
+    private async Task GetAriaHidden_Method() => labelOutput = await HTMLElement.GetAriaHidden(default) ?? "'aria-hidden' attr not set";
+
+    public const string BUTTON_SET_ARIA_HIDDEN = "htmlelement-set-aria-hidden";
+    private async Task SetAriaHidden() => await HTMLElement.SetAriaHidden(TEST_ARIA_HIDDEN);
+
+
+    public const string BUTTON_GET_ARIA_INVALID_PROPERTY = "htmlelement-get-aria-invalid-property";
+    private async Task GetAriaInvalid_Property() => labelOutput = await HTMLElement.AriaInvalid ?? "'aria-invalid' attr not set";
+
+    public const string BUTTON_GET_ARIA_INVALID_METHOD = "htmlelement-get-aria-invalid-method";
+    private async Task GetAriaInvalid_Method() => labelOutput = await HTMLElement.GetAriaInvalid(default) ?? "'aria-invalid' attr not set";
+
+    public const string BUTTON_SET_ARIA_INVALID = "htmlelement-set-aria-invalid";
+    private async Task SetAriaInvalid() => await HTMLElement.SetAriaInvalid(TEST_ARIA_INVALID);
+
+
+    public const string BUTTON_GET_ARIA_KEY_SHORTCUTS_PROPERTY = "htmlelement-get-aria-key-shortcuts-property";
+    private async Task GetAriaKeyShortcuts_Property() => labelOutput = await HTMLElement.AriaKeyShortcuts ?? "'aria-keyshortcuts' attr not set";
+
+    public const string BUTTON_GET_ARIA_KEY_SHORTCUTS_METHOD = "htmlelement-get-aria-key-shortcuts-method";
+    private async Task GetAriaKeyShortcuts_Method() => labelOutput = await HTMLElement.GetAriaKeyShortcuts(default) ?? "'aria-keyshortcuts' attr not set";
+
+    public const string BUTTON_SET_ARIA_KEY_SHORTCUTS = "htmlelement-set-aria-key-shortcuts";
+    private async Task SetAriaKeyShortcuts() => await HTMLElement.SetAriaKeyShortcuts(TEST_ARIA_KEY_SHORTCUTS);
+
+
+    public const string BUTTON_GET_ARIA_LABEL_PROPERTY = "htmlelement-get-aria-label-property";
+    private async Task GetAriaLabel_Property() => labelOutput = await HTMLElement.AriaLabel ?? "'aria-label' attr not set";
+
+    public const string BUTTON_GET_ARIA_LABEL_METHOD = "htmlelement-get-aria-label-method";
+    private async Task GetAriaLabel_Method() => labelOutput = await HTMLElement.GetAriaLabel(default) ?? "'aria-label' attr not set";
+
+    public const string BUTTON_SET_ARIA_LABEL = "htmlelement-set-aria-label";
+    private async Task SetAriaLabel() => await HTMLElement.SetAriaLabel(TEST_ARIA_LABEL);
+
+
+    public const string BUTTON_GET_ARIA_LEVEL_PROPERTY = "htmlelement-get-aria-level-property";
+    private async Task GetAriaLevel_Property() => labelOutput = await HTMLElement.AriaLevel ?? "'aria-level' attr not set";
+
+    public const string BUTTON_GET_ARIA_LEVEL_METHOD = "htmlelement-get-aria-level-method";
+    private async Task GetAriaLevel_Method() => labelOutput = await HTMLElement.GetAriaLevel(default) ?? "'aria-level' attr not set";
+
+    public const string BUTTON_SET_ARIA_LEVEL = "htmlelement-set-aria-level";
+    private async Task SetAriaLevel() => await HTMLElement.SetAriaLevel(TEST_ARIA_LEVEL);
+
+
+    public const string BUTTON_GET_ARIA_LIVE_PROPERTY = "htmlelement-get-aria-live-property";
+    private async Task GetAriaLive_Property() => labelOutput = await HTMLElement.AriaLive ?? "'aria-live' attr not set";
+
+    public const string BUTTON_GET_ARIA_LIVE_METHOD = "htmlelement-get-aria-live-method";
+    private async Task GetAriaLive_Method() => labelOutput = await HTMLElement.GetAriaLive(default) ?? "'aria-live' attr not set";
+
+    public const string BUTTON_SET_ARIA_LIVE = "htmlelement-set-aria-live";
+    private async Task SetAriaLive() => await HTMLElement.SetAriaLive(TEST_ARIA_LIVE);
+
+
+    public const string BUTTON_GET_ARIA_MODAL_PROPERTY = "htmlelement-get-aria-modal-property";
+    private async Task GetAriaModal_Property() => labelOutput = await HTMLElement.AriaModal ?? "'aria-modal' attr not set";
+
+    public const string BUTTON_GET_ARIA_MODAL_METHOD = "htmlelement-get-aria-modal-method";
+    private async Task GetAriaModal_Method() => labelOutput = await HTMLElement.GetAriaModal(default) ?? "'aria-modal' attr not set";
+
+    public const string BUTTON_SET_ARIA_MODAL = "htmlelement-set-aria-modal";
+    private async Task SetAriaModal() => await HTMLElement.SetAriaModal(TEST_ARIA_MODAL);
+
+
+    public const string BUTTON_GET_ARIA_MULTILINE_PROPERTY = "htmlelement-get-aria-multiline-property";
+    private async Task GetAriaMultiline_Property() => labelOutput = await HTMLElement.AriaMultiline ?? "'aria-multiline' attr not set";
+
+    public const string BUTTON_GET_ARIA_MULTILINE_METHOD = "htmlelement-get-aria-multiline-method";
+    private async Task GetAriaMultiline_Method() => labelOutput = await HTMLElement.GetAriaMultiline(default) ?? "'aria-multiline' attr not set";
+
+    public const string BUTTON_SET_ARIA_MULTILINE = "htmlelement-set-aria-multiline";
+    private async Task SetAriaMultiline() => await HTMLElement.SetAriaMultiline(TEST_ARIA_MULTILINE);
+
+
+    public const string BUTTON_GET_ARIA_MULTI_SELECTABLE_PROPERTY = "htmlelement-get-aria-multi-selectable-property";
+    private async Task GetAriaMultiSelectable_Property() => labelOutput = await HTMLElement.AriaMultiSelectable ?? "'aria-multiselectable' attr not set";
+
+    public const string BUTTON_GET_ARIA_MULTI_SELECTABLE_METHOD = "htmlelement-get-aria-multi-selectable-method";
+    private async Task GetAriaMultiSelectable_Method() => labelOutput = await HTMLElement.GetAriaMultiSelectable(default) ?? "'aria-multiselectable' attr not set";
+
+    public const string BUTTON_SET_ARIA_MULTI_SELECTABLE = "htmlelement-set-aria-multi-selectable";
+    private async Task SetAriaMultiSelectable() => await HTMLElement.SetAriaMultiSelectable(TEST_ARIA_MULTI_SELECTABLE);
+
+
+    public const string BUTTON_GET_ARIA_ORIENTATION_PROPERTY = "htmlelement-get-aria-orientation-property";
+    private async Task GetAriaOrientation_Property() => labelOutput = await HTMLElement.AriaOrientation ?? "'aria-orientation' attr not set";
+
+    public const string BUTTON_GET_ARIA_ORIENTATION_METHOD = "htmlelement-get-aria-orientation-method";
+    private async Task GetAriaOrientation_Method() => labelOutput = await HTMLElement.GetAriaOrientation(default) ?? "'aria-orientation' attr not set";
+
+    public const string BUTTON_SET_ARIA_ORIENTATION = "htmlelement-set-aria-orientation";
+    private async Task SetAriaOrientation() => await HTMLElement.SetAriaOrientation(TEST_ARIA_ORIENTATION);
+
+
+    public const string BUTTON_GET_ARIA_PLACEHOLDER_PROPERTY = "htmlelement-get-aria-placeholder-property";
+    private async Task GetAriaPlaceholder_Property() => labelOutput = await HTMLElement.AriaPlaceholder ?? "'aria-placeholder' attr not set";
+
+    public const string BUTTON_GET_ARIA_PLACEHOLDER_METHOD = "htmlelement-get-aria-placeholder-method";
+    private async Task GetAriaPlaceholder_Method() => labelOutput = await HTMLElement.GetAriaPlaceholder(default) ?? "'aria-placeholder' attr not set";
+
+    public const string BUTTON_SET_ARIA_PLACEHOLDER = "htmlelement-set-aria-placeholder";
+    private async Task SetAriaPlaceholder() => await HTMLElement.SetAriaPlaceholder(TEST_ARIA_PLACEHOLDER);
+
+
+    public const string BUTTON_GET_ARIA_POS_IN_SET_PROPERTY = "htmlelement-get-aria-pos-in-set-property";
+    private async Task GetAriaPosInSet_Property() => labelOutput = await HTMLElement.AriaPosInSet ?? "'aria-posinset' attr not set";
+
+    public const string BUTTON_GET_ARIA_POS_IN_SET_METHOD = "htmlelement-get-aria-pos-in-set-method";
+    private async Task GetAriaPosInSet_Method() => labelOutput = await HTMLElement.GetAriaPosInSet(default) ?? "'aria-posinset' attr not set";
+
+    public const string BUTTON_SET_ARIA_POS_IN_SET = "htmlelement-set-aria-pos-in-set";
+    private async Task SetAriaPosInSet() => await HTMLElement.SetAriaPosInSet(TEST_ARIA_POS_IN_SET);
+
+
+    public const string BUTTON_GET_ARIA_PRESSED_PROPERTY = "htmlelement-get-aria-pressed-property";
+    private async Task GetAriaPressed_Property() => labelOutput = await HTMLElement.AriaPressed ?? "'aria-pressed' attr not set";
+
+    public const string BUTTON_GET_ARIA_PRESSED_METHOD = "htmlelement-get-aria-pressed-method";
+    private async Task GetAriaPressed_Method() => labelOutput = await HTMLElement.GetAriaPressed(default) ?? "'aria-pressed' attr not set";
+
+    public const string BUTTON_SET_ARIA_PRESSED = "htmlelement-set-aria-pressed";
+    private async Task SetAriaPressed() => await HTMLElement.SetAriaPressed(TEST_ARIA_PRESSED);
+
+
+    public const string BUTTON_GET_ARIA_READ_ONLY_PROPERTY = "htmlelement-get-aria-read-only-property";
+    private async Task GetAriaReadOnly_Property() => labelOutput = await HTMLElement.AriaReadOnly ?? "'aria-readonly' attr not set";
+
+    public const string BUTTON_GET_ARIA_READ_ONLY_METHOD = "htmlelement-get-aria-read-only-method";
+    private async Task GetAriaReadOnly_Method() => labelOutput = await HTMLElement.GetAriaReadOnly(default) ?? "'aria-readonly' attr not set";
+
+    public const string BUTTON_SET_ARIA_READ_ONLY = "htmlelement-set-aria-read-only";
+    private async Task SetAriaReadOnly() => await HTMLElement.SetAriaReadOnly(TEST_ARIA_READ_ONLY);
+
+
+    public const string BUTTON_GET_ARIA_REQUIRED_PROPERTY = "htmlelement-get-aria-required-property";
+    private async Task GetAriaRequired_Property() => labelOutput = await HTMLElement.AriaRequired ?? "'aria-required' attr not set";
+
+    public const string BUTTON_GET_ARIA_REQUIRED_METHOD = "htmlelement-get-aria-required-method";
+    private async Task GetAriaRequired_Method() => labelOutput = await HTMLElement.GetAriaRequired(default) ?? "'aria-required' attr not set";
+
+    public const string BUTTON_SET_ARIA_REQUIRED = "htmlelement-set-aria-required";
+    private async Task SetAriaRequired() => await HTMLElement.SetAriaRequired(TEST_ARIA_REQUIRED);
+
+
+    public const string BUTTON_GET_ARIA_ROLE_DESCRIPTION_PROPERTY = "htmlelement-get-aria-roledescription-property";
+    private async Task GetAriaRoleDescription_Property() => labelOutput = await HTMLElement.AriaRoleDescription ?? "'aria-roledescription' attr not set";
+
+    public const string BUTTON_GET_ARIA_ROLE_DESCRIPTION_METHOD = "htmlelement-get-aria-roledescription-method";
+    private async Task GetAriaRoleDescription_Method() => labelOutput = await HTMLElement.GetAriaRoleDescription(default) ?? "'aria-roledescription' attr not set";
+
+    public const string BUTTON_SET_ARIA_ROLE_DESCRIPTION = "htmlelement-set-aria-roledescription";
+    private async Task SetAriaRoleDescription() => await HTMLElement.SetAriaRoleDescription(TEST_ARIA_ROLE_DESCRIPTION);
+
+
+    public const string BUTTON_GET_ARIA_ROW_COUNT_PROPERTY = "htmlelement-get-aria-row-count-property";
+    private async Task GetAriaRowCount_Property() => labelOutput = await HTMLElement.AriaRowCount ?? "'aria-rowcount' attr not set";
+
+    public const string BUTTON_GET_ARIA_ROW_COUNT_METHOD = "htmlelement-get-aria-row-count-method";
+    private async Task GetAriaRowCount_Method() => labelOutput = await HTMLElement.GetAriaRowCount(default) ?? "'aria-rowcount' attr not set";
+
+    public const string BUTTON_SET_ARIA_ROW_COUNT = "htmlelement-set-aria-row-count";
+    private async Task SetAriaRowCount() => await HTMLElement.SetAriaRowCount(TEST_ARIA_ROW_COUNT);
+
+
+    public const string BUTTON_GET_ARIA_ROW_INDEX_PROPERTY = "htmlelement-get-aria-row-index-property";
+    private async Task GetAriaRowIndex_Property() => labelOutput = await HTMLElement.AriaRowIndex ?? "'aria-rowindex' attr not set";
+
+    public const string BUTTON_GET_ARIA_ROW_INDEX_METHOD = "htmlelement-get-aria-row-index-method";
+    private async Task GetAriaRowIndex_Method() => labelOutput = await HTMLElement.GetAriaRowIndex(default) ?? "'aria-rowindex' attr not set";
+
+    public const string BUTTON_SET_ARIA_ROW_INDEX = "htmlelement-set-aria-row-index";
+    private async Task SetAriaRowIndex() => await HTMLElement.SetAriaRowIndex(TEST_ARIA_ROW_INDEX);
+
+
+    public const string BUTTON_GET_ARIA_ROW_INDEX_TEXT_PROPERTY = "htmlelement-get-aria-row-index-text-property";
+    private async Task GetAriaRowIndexText_Property() => labelOutput = await HTMLElement.AriaRowIndexText ?? "'aria-rowindextext' attr not set";
+
+    public const string BUTTON_GET_ARIA_ROW_INDEX_TEXT_METHOD = "htmlelement-get-aria-row-index-text-method";
+    private async Task GetAriaRowIndexText_Method() => labelOutput = await HTMLElement.GetAriaRowIndexText(default) ?? "'aria-rowindextext' attr not set";
+
+    public const string BUTTON_SET_ARIA_ROW_INDEX_TEXT = "htmlelement-set-aria-row-index-text";
+    private async Task SetAriaRowIndexText() => await HTMLElement.SetAriaRowIndexText(TEST_ARIA_ROW_INDEX_TEXT);
+
+
+    public const string BUTTON_GET_ARIA_ROW_SPAN_PROPERTY = "htmlelement-get-aria-row-span-property";
+    private async Task GetAriaRowSpan_Property() => labelOutput = await HTMLElement.AriaRowSpan ?? "'aria-rowspan' attr not set";
+
+    public const string BUTTON_GET_ARIA_ROW_SPAN_METHOD = "htmlelement-get-aria-row-span-method";
+    private async Task GetAriaRowSpan_Method() => labelOutput = await HTMLElement.GetAriaRowSpan(default) ?? "'aria-rowspan' attr not set";
+
+    public const string BUTTON_SET_ARIA_ROW_SPAN = "htmlelement-set-aria-row-span";
+    private async Task SetAriaRowSpan() => await HTMLElement.SetAriaRowSpan(TEST_ARIA_ROW_SPAN);
+
+
+    public const string BUTTON_GET_ARIA_SELECTED_PROPERTY = "htmlelement-get-aria-selected-property";
+    private async Task GetAriaSelected_Property() => labelOutput = await HTMLElement.AriaSelected ?? "'aria-selected' attr not set";
+
+    public const string BUTTON_GET_ARIA_SELECTED_METHOD = "htmlelement-get-aria-selected-method";
+    private async Task GetAriaSelected_Method() => labelOutput = await HTMLElement.GetAriaSelected(default) ?? "'aria-selected' attr not set";
+
+    public const string BUTTON_SET_ARIA_SELECTED = "htmlelement-set-aria-selected";
+    private async Task SetAriaSelected() => await HTMLElement.SetAriaSelected(TEST_ARIA_SELECTED);
+
+
+    public const string BUTTON_GET_ARIA_SET_SIZE_PROPERTY = "htmlelement-get-aria-set-size-property";
+    private async Task GetAriaSetSize_Property() => labelOutput = await HTMLElement.AriaSetSize ?? "'aria-setsize' attr not set";
+
+    public const string BUTTON_GET_ARIA_SET_SIZE_METHOD = "htmlelement-get-aria-set-size-method";
+    private async Task GetAriaSetSize_Method() => labelOutput = await HTMLElement.GetAriaSetSize(default) ?? "'aria-setsize' attr not set";
+
+    public const string BUTTON_SET_ARIA_SET_SIZE = "htmlelement-set-aria-set-size";
+    private async Task SetAriaSetSize() => await HTMLElement.SetAriaSetSize(TEST_ARIA_SET_SIZE);
+
+
+    public const string BUTTON_GET_ARIA_SORT_PROPERTY = "htmlelement-get-aria-sort-property";
+    private async Task GetAriaSort_Property() => labelOutput = await HTMLElement.AriaSort ?? "'aria-sort' attr not set";
+
+    public const string BUTTON_GET_ARIA_SORT_METHOD = "htmlelement-get-aria-sort-method";
+    private async Task GetAriaSort_Method() => labelOutput = await HTMLElement.GetAriaSort(default) ?? "'aria-sort' attr not set";
+
+    public const string BUTTON_SET_ARIA_SORT = "htmlelement-set-aria-sort";
+    private async Task SetAriaSort() => await HTMLElement.SetAriaSort(TEST_ARIA_SORT);
+
+
+    public const string BUTTON_GET_ARIA_VALUE_MAX_PROPERTY = "htmlelement-get-aria-value-max-property";
+    private async Task GetAriaValueMax_Property() => labelOutput = await HTMLElement.AriaValueMax ?? "'aria-valuemax' attr not set";
+
+    public const string BUTTON_GET_ARIA_VALUE_MAX_METHOD = "htmlelement-get-aria-value-max-method";
+    private async Task GetAriaValueMax_Method() => labelOutput = await HTMLElement.GetAriaValueMax(default) ?? "'aria-valuemax' attr not set";
+
+    public const string BUTTON_SET_ARIA_VALUE_MAX = "htmlelement-set-aria-value-max";
+    private async Task SetAriaValueMax() => await HTMLElement.SetAriaValueMax(TEST_ARIA_VALUE_MAX);
+
+
+    public const string BUTTON_GET_ARIA_VALUE_MIN_PROPERTY = "htmlelement-get-aria-value-min-property";
+    private async Task GetAriaValueMin_Property() => labelOutput = await HTMLElement.AriaValueMin ?? "'aria-valuemin' attr not set";
+
+    public const string BUTTON_GET_ARIA_VALUE_MIN_METHOD = "htmlelement-get-aria-value-min-method";
+    private async Task GetAriaValueMin_Method() => labelOutput = await HTMLElement.GetAriaValueMin(default) ?? "'aria-valuemin' attr not set";
+
+    public const string BUTTON_SET_ARIA_VALUE_MIN = "htmlelement-set-aria-value-min";
+    private async Task SetAriaValueMin() => await HTMLElement.SetAriaValueMin(TEST_ARIA_VALUE_MIN);
+
+
+    public const string BUTTON_GET_ARIA_VALUE_NOW_PROPERTY = "htmlelement-get-aria-value-now-property";
+    private async Task GetAriaValueNow_Property() => labelOutput = await HTMLElement.AriaValueNow ?? "'aria-valuenow' attr not set";
+
+    public const string BUTTON_GET_ARIA_VALUE_NOW_METHOD = "htmlelement-get-aria-value-now-method";
+    private async Task GetAriaValueNow_Method() => labelOutput = await HTMLElement.GetAriaValueNow(default) ?? "'aria-valuenow' attr not set";
+
+    public const string BUTTON_SET_ARIA_VALUE_NOW = "htmlelement-set-aria-value-now";
+    private async Task SetAriaValueNow() => await HTMLElement.SetAriaValueNow(TEST_ARIA_VALUE_NOW);
+
+
+    public const string BUTTON_GET_ARIA_VALUE_TEXT_PROPERTY = "htmlelement-get-aria-value-text-property";
+    private async Task GetAriaValueText_Property() => labelOutput = await HTMLElement.AriaValueText ?? "'aria-valuetext' attr not set";
+
+    public const string BUTTON_GET_ARIA_VALUE_TEXT_METHOD = "htmlelement-get-aria-value-text-method";
+    private async Task GetAriaValueText_Method() => labelOutput = await HTMLElement.GetAriaValueText(default) ?? "'aria-valuetext' attr not set";
+
+    public const string BUTTON_SET_ARIA_VALUE_TEXT = "htmlelement-set-aria-value-text";
+    private async Task SetAriaValueText() => await HTMLElement.SetAriaValueText(TEST_ARIA_VALUE_TEXT);
+
+
+    public const string BUTTON_GET_ROLE_PROPERTY = "htmlelement-get-role-property";
+    private async Task GetRole_Property() => labelOutput = await HTMLElement.Role ?? "'role' attr not set";
+
+    public const string BUTTON_GET_ROLE_METHOD = "htmlelement-get-role-method";
+    private async Task GetRole_Method() => labelOutput = await HTMLElement.GetRole(default) ?? "'role' attr not set";
+
+    public const string BUTTON_SET_ROLE = "htmlelement-set-role";
+    private async Task SetRole() => await HTMLElement.SetRole(TEST_ROLE);
 
 
     // methods
