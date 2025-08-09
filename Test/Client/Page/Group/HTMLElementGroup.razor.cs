@@ -81,6 +81,10 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     public const string TEST_ARIA_VALUE_NOW = "1";
     public const string TEST_ARIA_VALUE_TEXT = "one";
     public const string TEST_ROLE = "my role";
+    // Element - Methods
+    public const string TEST_CUSTOM_NAME = "custom-name";
+    public const string TEST_CUSTOM_VALUE = "my-value";
+    public const string TEST_INSERT_HTML = $"<label>{TEST_CUSTOM_VALUE}</label>";
     // Element - Events
     public const string TEST_TRANSITIONSTART_EVENT = "transitionstart-event-test";
     public const string TEST_TRANSITIONEND_EVENT = "transitionend-event-test";
@@ -103,6 +107,9 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     private IHTMLElement? _popoverElement;
     private IHTMLElement PopoverElement => _popoverElement ??= ElementFactory.CreateHTMLElement(popoverElement);
 
+    private IHTMLElement? _hiddenElement;
+    private IHTMLElement HiddenElement => _hiddenElement ??= ElementFactory.CreateHTMLElement(hiddenElement);
+
 
     public const string LABEL_OUTPUT = "htmlelement-output";
     private string labelOutput = string.Empty;
@@ -114,16 +121,17 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     public const string POPOVER_ELEMENT = "htmlelement-popover-element";
     private ElementReference popoverElement;
 
-    public ValueTask DisposeAsync() {
+    public const string HIDDEN_ELEMENT = "htmlelement-hidden-element";
+    private ElementReference hiddenElement;
+
+    public async ValueTask DisposeAsync() {
         ValueTask htmlDisposing = _htmlElement?.DisposeAsync() ?? ValueTask.CompletedTask;
         ValueTask popoverDisposing = _popoverElement?.DisposeAsync() ?? ValueTask.CompletedTask;
+        ValueTask hiddenDisposing = _hiddenElement?.DisposeAsync() ?? ValueTask.CompletedTask;
 
-        return (htmlDisposing.IsCompleted, popoverDisposing.IsCompleted) switch {
-            (true, true) => ValueTask.CompletedTask,
-            (false, true) => htmlDisposing,
-            (true, false) => popoverDisposing,
-            (false, false) => new ValueTask(Task.WhenAll([htmlDisposing.AsTask(), popoverDisposing.AsTask()]))
-        };
+        await htmlDisposing;
+        await popoverDisposing;
+        await hiddenDisposing;
     }
 
 
@@ -680,7 +688,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     #endregion
 
 
-    #region Element
+    #region Node/Element
 
 
     public const string BUTTON_GET_ATTRIBUTES_PROPERTY = "htmlelement-get-attributes-property";
@@ -1562,6 +1570,18 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     // methods
 
+    public const string BUTTON_CHECK_VISIBILITY = "htmlelement-check-visibility";
+    private async Task CheckVisibility() {
+        bool visibility = await HTMLElement.CheckVisibility();
+        labelOutput = visibility.ToString();
+    }
+
+    public const string BUTTON_COMPUTED_STYLE_MAP = "htmlelement-computed-style-map";
+    private async Task ComputedStyleMap() {
+        Dictionary<string, string> computedStyleMap = await HTMLElement.ComputedStyleMap();
+        labelOutput = JsonSerializer.Serialize(computedStyleMap);
+    }
+
     public const string BUTTON_GET_BOUNDING_CLIENT_RECT = "htmlelement-get-bounding-client-rect";
     private async Task GetBoundingClientRect() {
         DOMRect boundingClientRect = await HTMLElement.GetBoundingClientRect();
@@ -1574,19 +1594,47 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
         labelOutput = string.Join(';', boundingClientRect.Select(rect => JsonSerializer.Serialize(rect)));
     }
 
-
-    public const string BUTTON_HAS_ATTRIBUTE = "htmlelement-has-attribute";
-    private async Task HasAttribute() {
-        bool hasAttribute = await HTMLElement.HasAttribute("data-testid");
-        labelOutput = hasAttribute.ToString();
+    public const string BUTTON_MATCHES = "htmlelement-matches";
+    public async Task Matches() {
+        bool matches = await HTMLElement.Matches($"[data-testid={HTML_ELEMENT}]");
+        labelOutput = matches.ToString();
     }
 
-    public const string BUTTON_HAS_ATTRIBUTES = "htmlelement-has-attributes";
-    private async Task HasAttributes() {
-        bool hasAttributes = await HTMLElement.HasAttributes();
-        labelOutput = hasAttributes.ToString();
+    public const string BUTTON_REQUEST_FULLSCREEN = "htmlelement-request-fullscreen";
+    private async Task RequestFullscreen() {
+        await HTMLElement.RequestFullscreen();
     }
 
+    public const string BUTTON_REQUEST_POINTER_LOCK = "htmlelement-request-pointer-lock";
+    private async Task RequestPointerLock() {
+        await HTMLElement.RequestPointerLock();
+    }
+
+    public const string BUTTON_IS_DEFAULT_NAMESPACE = "htmlelement-is-default-namespace";
+    private async Task IsDefaultNamespace() {
+        bool isDefaultNamespace = await HTMLElement.IsDefaultNamespace("http://www.w3.org/1999/xhtml");
+        labelOutput = isDefaultNamespace.ToString();
+    }
+
+    public const string BUTTON_LOOKUP_PREFIX = "htmlelement-lookup-prefix";
+    private async Task LookupPrefix() {
+        string? prefix = await HTMLElement.LookupPrefix("http://www.w3.org/1999/xhtml");
+        labelOutput = prefix ?? "(no prefix)";
+    }
+
+    public const string BUTTON_LOOKUP_NAMESPACE_URI = "htmlelement-lookup-namespace-uri";
+    private async Task LookupNamespaceURI() {
+        string? namespaceURI = await HTMLElement.LookupNamespaceURI(null);
+        labelOutput = namespaceURI ?? "(no namespace uri)";
+    }
+
+    public const string BUTTON_NORMALIZE = "htmlelement-normalize";
+    private async Task Normalize() {
+        await HTMLElement.Normalize();
+    }
+
+
+    // methods - Pointer Capture
 
     private async Task SetPointerCapture(PointerEventArgs e) {
         await HTMLElement.SetPointerCapture(e.PointerId);
@@ -1602,9 +1650,16 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     }
 
 
+    // methods - Scroll
+
     public const string BUTTON_SCROLL = "htmlelement-scroll";
     private async Task Scroll() {
         await HTMLElement.Scroll(TEST_SCROLL_LEFT, TEST_SCROLL_TOP);
+    }
+
+    public const string BUTTON_SCROLL_TO = "htmlelement-scroll-to";
+    private async Task ScrollTo() {
+        await HTMLElement.ScrollTo(TEST_SCROLL_LEFT, TEST_SCROLL_TOP);
     }
 
     public const string BUTTON_SCROLL_BY = "htmlelement-scroll-by";
@@ -1618,9 +1673,249 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     }
 
 
-    public const string BUTTON_REQUEST_FULLSCREEN = "htmlelement-request-fullscreen";
-    private async Task RequestFullscreen() {
-        await HTMLElement.RequestFullscreen();
+    // methods - Attribute
+
+    public const string BUTTON_GET_ATTRIBUTE = "htmlelement-get-attribute";
+    private async Task GetAttribute() {
+        string? attribute = await HTMLElement.GetAttribute("data-testid");
+        labelOutput = attribute ?? "'data-testid' attr not found";
+    }
+
+    public const string BUTTON_GET_ATTRIBUTE_NS = "htmlelement-get-attribute-ns";
+    private async Task GetAttributeNS() {
+        string? attribute = await HTMLElement.GetAttributeNS("", "data-testid");
+        labelOutput = attribute ?? "'data-testid' attr not found";
+    }
+
+    public const string BUTTON_GET_ATTRIBUTE_NAMES = "htmlelement-get-attribute-names";
+    private async Task GetAttributeNames() {
+        string[] attributeNames = await HTMLElement.GetAttributeNames();
+        labelOutput = $"({attributeNames.Length}): {string.Join(',', attributeNames)}";
+    }
+
+    public const string BUTTON_SET_ATTRIBUTE = "htmlelement-set-attribute";
+    private async Task SetAttribute() {
+        await HTMLElement.SetAttribute(TEST_CUSTOM_NAME, TEST_CUSTOM_VALUE);
+    }
+
+    public const string BUTTON_SET_ATTRIBUTE_NS = "htmlelement-set-attribute-ns";
+    private async Task SetAttributeNS() {
+        await HTMLElement.SetAttributeNS("http://www.w3.org/1999/xhtml", TEST_CUSTOM_NAME, TEST_CUSTOM_VALUE);
+    }
+
+    public const string BUTTON_TOGGLE_ATTRIBUTE = "htmlelement-toggle-attribute";
+    private async Task ToggleAttribute() {
+        await HTMLElement.ToggleAttribute(TEST_CUSTOM_NAME);
+    }
+
+    public const string BUTTON_REMOVE_ATTRIBUTE = "htmlelement-remove-attribute";
+    private async Task RemoveAttribute() {
+        await HTMLElement.RemoveAttribute(TEST_CUSTOM_NAME);
+    }
+
+    public const string BUTTON_REMOVE_ATTRIBUTE_NS = "htmlelement-remove-attribute-ns";
+    private async Task RemoveAttributeNS() {
+        await HTMLElement.RemoveAttributeNS("", TEST_CUSTOM_NAME);
+    }
+
+    public const string BUTTON_HAS_ATTRIBUTE = "htmlelement-has-attribute";
+    private async Task HasAttribute() {
+        bool hasAttribute = await HTMLElement.HasAttribute("data-testid");
+        labelOutput = hasAttribute.ToString();
+    }
+
+    public const string BUTTON_HAS_ATTRIBUTE_NS = "htmlelement-has-attribute-ns";
+    private async Task HasAttributeNS() {
+        bool hasAttribute = await HTMLElement.HasAttributeNS("", "data-testid");
+        labelOutput = hasAttribute.ToString();
+    }
+
+    public const string BUTTON_HAS_ATTRIBUTES = "htmlelement-has-attributes";
+    private async Task HasAttributes() {
+        bool hasAttributes = await HTMLElement.HasAttributes();
+        labelOutput = hasAttributes.ToString();
+    }
+
+
+    // methods - Tree-nodes
+
+    public const string BUTTON_GET_ELEMENTS_BY_CLASS_NAME = "htmlelement-get-elements-by-class-name";
+    private async Task GetElementsByClassName() {
+        IHTMLElement[] elements = await HTMLElement.GetElementsByClassName(TEST_CUSTOM_NAME);
+        labelOutput = elements.Length.ToString();
+
+        await elements.DisposeAsync();
+    }
+
+    public const string BUTTON_GET_ELEMENTS_BY_TAG_NAME = "htmlelement-get-elements-by-tag-name";
+    private async Task GetElementsByTagName() {
+        IHTMLElement[] elements = await HTMLElement.GetElementsByTagName("b");
+        labelOutput = elements.Length.ToString();
+
+        await elements.DisposeAsync();
+    }
+
+    public const string BUTTON_GET_ELEMENTS_BY_TAG_NAME_NS = "htmlelement-get-elements-by-tag-name-ns";
+    private async Task GetElementsByTagNameNS() {
+        IHTMLElement[] elements = await HTMLElement.GetElementsByTagNameNS("http://www.w3.org/1999/xhtml", "b");
+        labelOutput = elements.Length.ToString();
+
+        await elements.DisposeAsync();
+    }
+
+    public const string BUTTON_QUERY_SELECTOR = "htmlelement-query-selector";
+    private async Task QuerySelector() {
+        await using IHTMLElement? element = await HTMLElement.QuerySelector("b");
+        labelOutput = (element is not null).ToString();
+    }
+
+    public const string BUTTON_QUERY_SELECTOR_ALL = "htmlelement-query-selector-all";
+    private async Task QuerySelectorAll() {
+        IHTMLElement[] elements = await HTMLElement.QuerySelectorAll("b");
+        labelOutput = elements.Length.ToString();
+
+        await elements.DisposeAsync();
+    }
+
+    public const string BUTTON_CLOSEST = "htmlelement-closest";
+    private async Task Closest() {
+        await using IHTMLElement? element = await HTMLElement.Closest(".group");
+        labelOutput = (element is not null).ToString();
+    }
+
+
+    public const string BUTTON_BEFORE_STRING = "htmlelement-before-string";
+    private async Task Before_String() {
+        await HTMLElement.Before([TEST_CUSTOM_VALUE]);
+    }
+
+    public const string BUTTON_BEFORE_HTML_ELEMENT = "htmlelement-before-html-element";
+    private async Task Before_HtmlElement() {
+        await HTMLElement.Before([HiddenElement]);
+    }
+
+    public const string BUTTON_AFTER_STRING = "htmlelement-after-string";
+    private async Task After_String() {
+        await HTMLElement.After([TEST_CUSTOM_VALUE]);
+    }
+
+    public const string BUTTON_AFTER_HTML_ELEMENT = "htmlelement-after-html-element";
+    private async Task After_HtmlElement() {
+        await HTMLElement.After([HiddenElement]);
+    }
+
+
+    public const string BUTTON_PREPEND_STRING = "htmlelement-prepend-string";
+    private async Task Prepend_String() {
+        await HTMLElement.Prepend([TEST_CUSTOM_VALUE]);
+    }
+
+    public const string BUTTON_PREPEND_HTML_ELEMENT = "htmlelement-prepend-html-element";
+    private async Task Prepend_HtmlElement() {
+        await HTMLElement.Prepend([HiddenElement]);
+    }
+
+    public const string BUTTON_APPEND_CHILD = "htmlelement-append-child";
+    private async Task AppendChild() {
+        await HTMLElement.AppendChild(HiddenElement);
+    }
+
+    public const string BUTTON_APPEND_STRING = "htmlelement-append-string";
+    private async Task Append_String() {
+        await HTMLElement.Append([TEST_CUSTOM_VALUE]);
+    }
+
+    public const string BUTTON_APPEND_HTML_ELEMENT = "htmlelement-append-html-element";
+    private async Task Append_HtmlElement() {
+        await HTMLElement.Append([HiddenElement]);
+    }
+
+    public const string BUTTON_INSERT_ADJACENT_ELEMENT = "htmlelement-insert-adjacent-element";
+    private async Task InsertAdjacentElement() {
+        bool success = await HTMLElement.InsertAdjacentElement("afterbegin", HiddenElement);
+        labelOutput = success.ToString();
+    }
+
+    public const string BUTTON_INSERT_ADJACENT_HTML = "htmlelement-insert-adjacent-html";
+    private async Task InsertAdjacentHTML() {
+        await HTMLElement.InsertAdjacentHTML("afterbegin", TEST_INSERT_HTML);
+    }
+
+    public const string BUTTON_INSERT_ADJACENT_TEXT = "htmlelement-insert-adjacent-text";
+    private async Task InsertAdjacentText() {
+        await HTMLElement.InsertAdjacentText("afterbegin", TEST_CUSTOM_VALUE);
+    }
+
+
+    public const string BUTTON_REMOVE_CHILD = "htmlelement-remove-child";
+    private async Task RemoveChild() {
+        await HTMLElement.RemoveChild(HiddenElement);
+    }
+
+    public const string BUTTON_REMOVE = "htmlelement-remove";
+    private async Task Remove() {
+        await HTMLElement.Remove();
+    }
+
+    public const string BUTTON_REPLACE_CHILD = "htmlelement-replace-child";
+    private async Task ReplaceChild() {
+        await HTMLElement.ReplaceChild(PopoverElement, HiddenElement);
+    }
+
+    public const string BUTTON_REPLACE_CHILD_INDEX = "htmlelement-replace-child-index";
+    private async Task ReplaceChild_Index() {
+        await HTMLElement.ReplaceChild(PopoverElement, 0);
+    }
+
+    public const string BUTTON_REPLACE_WITH_STRING = "htmlelement-replace-with-string";
+    private async Task ReplaceWith_String() {
+        await HTMLElement.ReplaceWith([TEST_CUSTOM_VALUE]);
+    }
+
+    public const string BUTTON_REPLACE_WITH_HTML_ELEMENT = "htmlelement-replace-with-html-element";
+    private async Task ReplaceWith_HtmlElement() {
+        await HTMLElement.ReplaceWith([HiddenElement]);
+    }
+
+    public const string BUTTON_REPLACE_CHILDREN_STRING = "htmlelement-replace-children-string";
+    private async Task ReplaceChildren_String() {
+        await HTMLElement.ReplaceChildren([TEST_CUSTOM_VALUE]);
+    }
+
+    public const string BUTTON_REPLACE_CHILDREN_HTML_ELEMENT = "htmlelement-replace-children-html-element";
+    private async Task ReplaceChildren_HtmlElement() {
+        await HTMLElement.ReplaceChildren([HiddenElement]);
+    }
+
+
+    public const string BUTTON_CLONE_NODE = "htmlelement-clone-node";
+    private async Task CloneNode() {
+        await using IHTMLElement clonedElement = await HTMLElement.CloneNode();
+        labelOutput = (clonedElement is not null).ToString();
+    }
+
+    public const string BUTTON_IS_SAME_NODE = "htmlelement-is-same-node";
+    private async Task IsSameNode() {
+        bool isSameNode = await HTMLElement.IsSameNode(HTMLElement);
+        labelOutput = isSameNode.ToString();
+    }
+
+    public const string BUTTON_IS_EQUAL_NODE = "htmlelement-is-equal-node";
+    private async Task IsEqualNode() {
+        bool isEqualNode = await HTMLElement.IsEqualNode(HTMLElement);
+        labelOutput = isEqualNode.ToString();
+    }
+
+    public const string BUTTON_CONTAINS = "htmlelement-contains";
+    private async Task Contains() {
+        bool contains = await HTMLElement.Contains(HiddenElement);
+        labelOutput = contains.ToString();
+    }
+
+    public const string BUTTON_COMPARE_DOCUMENT_POSITION = "htmlelement-compare-document-position";
+    private async Task CompareDocumentPosition() {
+        int comparison = await HTMLElement.CompareDocumentPosition(HiddenElement);
+        labelOutput = comparison.ToString();
     }
 
 

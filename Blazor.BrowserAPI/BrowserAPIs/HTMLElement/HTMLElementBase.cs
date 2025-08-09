@@ -32,7 +32,18 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask RequestFullscreen(string navigationUI = "auto", CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidAsync("requestFullscreen", cancellationToken, [navigationUI]);
+    public async ValueTask RequestFullscreen(string navigationUI = "auto", CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeVoidAsync("requestFullscreen", cancellationToken, [navigationUI]);
+
+    /// <summary>
+    /// Lets you asynchronously ask for the pointer to be locked on the given element.
+    /// To track the success or failure of the request, it is necessary to listen for the pointerlockchange and pointerlockerror events at the Document level.
+    /// </summary>
+    /// <param name="unadjustedMovement">Disables OS-level adjustment for mouse acceleration, and accesses raw mouse input instead. The default value is false; setting it to true will disable mouse acceleration.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask RequestPointerLock(bool unadjustedMovement = false, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeVoidAsync("requestPointerLock", cancellationToken, [unadjustedMovement]);
 
 
     #region Events

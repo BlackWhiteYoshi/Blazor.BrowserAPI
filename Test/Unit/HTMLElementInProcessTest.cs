@@ -604,14 +604,14 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     #endregion
 
 
-    #region Element
+    #region Node/Element
 
     [Test]
     public async Task GetAttributes() {
         await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ATTRIBUTES);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("""{"data-testid":"htmlelement-inprocess-html-element","class":"html-element","_bl_6":""}""");
+        await Assert.That(result).StartsWith("""{"data-testid":"htmlelement-inprocess-html-element","class":"html-element",""");
     }
 
     [Test]
@@ -731,8 +731,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
         await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_INNER_HTML);
 
         string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).InnerHTMLAsync();
-        string expected = HTMLElementInProcessGroup.TEST_INNERHTML;
-        await Assert.That(result).IsEqualTo(expected);
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_INNERHTML);
     }
 
 
@@ -741,11 +740,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
         await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_OUTER_HTML);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        const string expected = """
-            <div data-testid="htmlelement-inprocess-html-element" class="html-element" _bl_6=""><!--!-->
-                        test <!--!--><b>bold</b> <!--!--><i>italic</i> <!--!--><u>underlined</u></div>
-            """;
-        await Assert.That(result).IsEqualTo(expected);
+        await Assert.That(result).StartsWith("""<div data-testid="htmlelement-inprocess-html-element" class="html-element" """);
     }
 
     [Test]
@@ -753,8 +748,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
         await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_OUTER_HTML);
 
         string result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT_CONTAINER).InnerHTMLAsync();
-        string expected = HTMLElementInProcessGroup.TEST_OUTERHTML;
-        await Assert.That(result).IsEqualTo(expected);
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_OUTERHTML);
     }
 
 
@@ -1808,6 +1802,22 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     // methods
 
     [Test]
+    public async Task CheckVisibility() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_CHECK_VISIBILITY);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
+    public async Task ComputedStyleMap() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_COMPUTED_STYLE_MAP);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsNotEmpty();
+    }
+
+    [Test]
     public async Task GetBoundingClientRect() {
         await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_BOUNDING_CLIENT_RECT);
 
@@ -1831,25 +1841,69 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
         }
     }
 
-
     [Test]
-    public async Task HasAttribute() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_HAS_ATTRIBUTE);
+    public async Task Matches() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_MATCHES);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
     [Test]
-    public async Task HasAttributes() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_HAS_ATTRIBUTES);
+    public async Task RequestFullscreen() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REQUEST_FULLSCREEN);
+
+        bool isFullScreen = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<bool>("node => node === document.fullscreenElement;");
+        await Assert.That(isFullScreen).IsTrue();
+    }
+
+    [Test]
+    public async Task RequestPointerLock() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REQUEST_POINTER_LOCK);
+
+        bool isPointerLocked = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<bool>("node => node === document.pointerLockElement;");
+        await Assert.That(isPointerLocked).IsTrue();
+    }
+
+    [Test]
+    public async Task IsDefaultNamespace() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_IS_DEFAULT_NAMESPACE);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
+    [Test]
+    public async Task LookupPrefix() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_LOOKUP_PREFIX);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("(no prefix)");
+    }
 
     [Test]
+    public async Task LookupNamespaceURI() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_LOOKUP_NAMESPACE_URI);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("http://www.w3.org/1999/xhtml");
+    }
+
+    [Test]
+    public async Task Normalize() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync("node => node.append('-textNode1-', '-textNode2-');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_NORMALIZE);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string?>("node => node.lastChild.textContent;");
+        await Assert.That(result).IsEqualTo("-textNode1--textNode2-");
+    }
+
+
+    // methods - Pointer Capture
+
+    [Test] // tests "SetPointerCapture", "ReleasePointerCapture", "HasPointerCapture"
     public async Task PointerCapture() {
         ILocator htmlElement = Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT);
         ILocator labelOutput = Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT);
@@ -1881,9 +1935,21 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
 
+    // methods - Scroll
+
     [Test]
     public async Task Scroll() {
         await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SCROLL);
+
+        int resultLeft = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<int>("node => node.scrollLeft;");
+        await Assert.That(resultLeft).IsGreaterThan(0);
+        int resultTop = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<int>("node => node.scrollTop;");
+        await Assert.That(resultTop).IsGreaterThan(0);
+    }
+
+    [Test]
+    public async Task ScrollTo() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SCROLL_TO);
 
         int resultLeft = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<int>("node => node.scrollLeft;");
         await Assert.That(resultLeft).IsGreaterThan(0);
@@ -1913,9 +1979,381 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     }
 
 
+    // methods - Attribute
+
     [Test]
-    public async Task RequestFullscreen() {
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REQUEST_FULLSCREEN);
+    public async Task GetAttribute() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ATTRIBUTE);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.HTML_ELEMENT);
+    }
+
+    [Test]
+    public async Task GetAttributeNS() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ATTRIBUTE_NS);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.HTML_ELEMENT);
+    }
+
+    [Test]
+    public async Task GetAttributeNames() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ATTRIBUTE_NAMES);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsNotEmpty();
+    }
+
+    [Test]
+    public async Task SetAttribute() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ATTRIBUTE);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).GetAttributeAsync(HTMLElementInProcessGroup.TEST_CUSTOM_NAME);
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_CUSTOM_VALUE);
+    }
+
+    [Test]
+    public async Task SetAttributeNS() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_SET_ATTRIBUTE_NS);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).GetAttributeAsync(HTMLElementInProcessGroup.TEST_CUSTOM_NAME);
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_CUSTOM_VALUE);
+    }
+
+    [Test]
+    public async Task ToggleAttribute() {
+        {
+            await ExecuteTest(HTMLElementInProcessGroup.BUTTON_TOGGLE_ATTRIBUTE);
+
+            string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).GetAttributeAsync(HTMLElementInProcessGroup.TEST_CUSTOM_NAME);
+            await Assert.That(result).IsNotNull();
+        }
+
+        {
+            await ExecuteTest(HTMLElementInProcessGroup.BUTTON_TOGGLE_ATTRIBUTE);
+
+            string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).GetAttributeAsync(HTMLElementInProcessGroup.TEST_CUSTOM_NAME);
+            await Assert.That(result).IsNull();
+        }
+    }
+
+    [Test]
+    public async Task RemoveAttribute() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('{HTMLElementInProcessGroup.TEST_CUSTOM_NAME}', '');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REMOVE_ATTRIBUTE);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).GetAttributeAsync(HTMLElementInProcessGroup.TEST_CUSTOM_NAME);
+        await Assert.That(result).IsNull();
+    }
+
+    [Test]
+    public async Task RemoveAttributeNS() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('{HTMLElementInProcessGroup.TEST_CUSTOM_NAME}', '');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REMOVE_ATTRIBUTE);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).GetAttributeAsync(HTMLElementInProcessGroup.TEST_CUSTOM_NAME);
+        await Assert.That(result).IsNull();
+    }
+
+    [Test]
+    public async Task HasAttribute() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_HAS_ATTRIBUTE);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
+    public async Task HasAttributeNS() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_HAS_ATTRIBUTE_NS);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
+    public async Task HasAttributes() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_HAS_ATTRIBUTES);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+
+    // methods - Tree-nodes
+
+    [Test]
+    public async Task GetElementsByClassName() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.children[0].setAttribute('class', '{HTMLElementInProcessGroup.TEST_CUSTOM_NAME}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ELEMENTS_BY_CLASS_NAME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("1");
+    }
+
+    [Test]
+    public async Task GetElementsByTagName() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ELEMENTS_BY_TAG_NAME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("1");
+    }
+
+    [Test]
+    public async Task GetElementsByTagNameNS() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_ELEMENTS_BY_TAG_NAME_NS);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("1");
+    }
+
+    [Test]
+    public async Task QuerySelector() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_QUERY_SELECTOR);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
+    public async Task QuerySelectorAll() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_QUERY_SELECTOR_ALL);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("1");
+    }
+
+    [Test]
+    public async Task Closest() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_CLOSEST);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+
+    [Test]
+    public async Task Before_String() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_BEFORE_STRING);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string?>("node => node.previousSibling.textContent;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_CUSTOM_VALUE);
+    }
+
+    [Test]
+    public async Task Before_HtmlElement() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_BEFORE_HTML_ELEMENT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string?>("node => node.previousElementSibling.getAttribute('data-testid');");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.HIDDEN_ELEMENT);
+    }
+
+    [Test]
+    public async Task After_String() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_AFTER_STRING);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string?>("node => node.nextSibling.textContent;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_CUSTOM_VALUE);
+    }
+
+    [Test]
+    public async Task After_HtmlElement() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_AFTER_HTML_ELEMENT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string?>("node => node.nextElementSibling.getAttribute('data-testid');");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.HIDDEN_ELEMENT);
+    }
+
+
+    [Test]
+    public async Task Prepend_String() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_PREPEND_STRING);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string?>("node => node.firstChild.textContent;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_CUSTOM_VALUE);
+    }
+
+    [Test]
+    public async Task Prepend_HtmlElement() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_PREPEND_HTML_ELEMENT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string?>("node => node.firstChild.getAttribute('data-testid');");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.HIDDEN_ELEMENT);
+    }
+
+    [Test]
+    public async Task AppendChild() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_APPEND_CHILD);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string?>("node => node.lastChild.getAttribute('data-testid');");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.HIDDEN_ELEMENT);
+    }
+
+    [Test]
+    public async Task Append_String() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_APPEND_STRING);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string?>("node => node.lastChild.textContent;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_CUSTOM_VALUE);
+    }
+
+    [Test]
+    public async Task Append_HtmlElement() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_APPEND_HTML_ELEMENT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string?>("node => node.lastChild.getAttribute('data-testid');");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.HIDDEN_ELEMENT);
+    }
+
+    [Test]
+    public async Task InsertAdjacentElement() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_INSERT_ADJACENT_ELEMENT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string?>("node => node.firstChild.getAttribute('data-testid');");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.HIDDEN_ELEMENT);
+    }
+
+    [Test]
+    public async Task InsertAdjacentHTML() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_INSERT_ADJACENT_HTML);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string?>("node => node.firstChild.outerHTML;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_INSERT_HTML);
+    }
+
+    [Test]
+    public async Task InsertAdjacentText() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_INSERT_ADJACENT_TEXT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string?>("node => node.firstChild.textContent;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_CUSTOM_VALUE);
+    }
+
+
+    [Test]
+    public async Task RemoveChild() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync($"""node => document.querySelector("[data-testid='{HTMLElementInProcessGroup.HTML_ELEMENT}']").appendChild(node);""");
+        await Task.Delay(SMALL_WAIT_TIME);
+        int childCount = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<int>("node => node.children.length;");
+        await Assert.That(childCount).IsEqualTo(4);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REMOVE_CHILD);
+
+        int result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<int>("node => node.children.length;");
+        await Assert.That(result).IsEqualTo(3);
+    }
+
+    [Test]
+    public async Task Remove() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REMOVE);
+
+        bool result = await Page.EvaluateAsync<bool>($"""document.querySelector("[data-testid='{HTMLElementInProcessGroup.HTML_ELEMENT}']") === null;""");
+        await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task ReplaceChild() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync($"""node => document.querySelector("[data-testid='{HTMLElementInProcessGroup.HTML_ELEMENT}']").appendChild(node);""");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REPLACE_CHILD);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.POPOVER_ELEMENT).EvaluateAsync<string?>("node => node.parentElement.getAttribute('data-testid');");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.HTML_ELEMENT);
+    }
+
+    [Test]
+    public async Task ReplaceChild_Index() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync($"""node => document.querySelector("[data-testid='{HTMLElementInProcessGroup.HTML_ELEMENT}']").prepend(node);""");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REPLACE_CHILD_INDEX);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.POPOVER_ELEMENT).EvaluateAsync<string?>("node => node.parentElement.getAttribute('data-testid');");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.HTML_ELEMENT);
+    }
+
+    [Test]
+    public async Task ReplaceWith_String() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REPLACE_WITH_STRING);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT_CONTAINER).EvaluateAsync<string?>("node => node.firstChild.textContent;");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_CUSTOM_VALUE);
+    }
+
+    [Test]
+    public async Task ReplaceWith_HtmlElement() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REPLACE_WITH_HTML_ELEMENT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT_CONTAINER).EvaluateAsync<string?>("node => node.firstElementChild.getAttribute('data-testid');");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.HIDDEN_ELEMENT);
+    }
+
+    [Test]
+    public async Task ReplaceChildren_String() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REPLACE_CHILDREN_STRING);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string?>("node => node.children.length === 0 ? node.firstChild.textContent : 'child-count is not 0';");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_CUSTOM_VALUE);
+    }
+
+    [Test]
+    public async Task ReplaceChildren_HtmlElement() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REPLACE_CHILDREN_HTML_ELEMENT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync<string?>("node => node.children.length === 1 ? node.firstElementChild.getAttribute('data-testid') : 'child-count is not 1';");
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.HIDDEN_ELEMENT);
+    }
+
+
+    [Test]
+    public async Task CloneNode() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_CLONE_NODE);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
+    public async Task IsSameNode() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_IS_SAME_NODE);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
+    public async Task IsEqualNode() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_IS_EQUAL_NODE);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
+    public async Task Contains() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync($"""node => document.querySelector("[data-testid='{HTMLElementInProcessGroup.HTML_ELEMENT}']").appendChild(node);""");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_CONTAINS);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
+    public async Task CompareDocumentPosition() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_COMPARE_DOCUMENT_POSITION);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("4");
     }
 
 

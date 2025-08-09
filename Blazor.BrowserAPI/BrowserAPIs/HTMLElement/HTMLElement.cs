@@ -11,6 +11,9 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTMLElementBase(htmlElementTask), IHTMLElement {
+    [AutoInterfaceVisibilityInternal]
+    Task<IJSObjectReference> IHTMLElement.HTMLElementTask => htmlElementTask;
+
     /// <summary>
     /// Releases the JS instance for this HTML element.
     /// </summary>
@@ -795,7 +798,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     #endregion
 
 
-    #region Element
+    #region Node/Element
 
     /// <summary>
     /// Returns a live collection of all attribute nodes registered to the specified node.
@@ -1445,7 +1448,8 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetAriaBrailleRoleDescription(string? value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setAriaBrailleRoleDescription", cancellationToken, [value]);
+    public async ValueTask SetAriaBrailleRoleDescription(string? value, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeVoidTrySync("setAriaBrailleRoleDescription", cancellationToken, [value]);
 
 
     /// <summary>
@@ -2269,6 +2273,34 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     // methods
 
     /// <summary>
+    /// <para>
+    /// Checks whether the element is visible. The method returns false in either of the following situations:<br />
+    /// - The element doesn't have an associated box, for example because the CSS display property is set to 'none' or 'contents'.<br />
+    /// - The element is not being rendered because the element or an ancestor element sets the 'content-visibility' property to 'hidden'.
+    /// </para>
+    /// <para>
+    /// The optional parameter enables additional checks to test for other interpretations of what "visible" means.
+    /// For example, you can further check whether an element has an opacity of 0, if the value of the element visibility property makes it invisible,
+    /// or if the element content-visibility property has a value of auto and its rendering is currently being skipped.
+    /// </para>
+    /// </summary>
+    /// <param name="contentVisibilityAuto">true to check if the element content-visibility property has (or inherits) the value auto, and it is currently skipping its rendering. false by default.</param>
+    /// <param name="opacityProperty">true to check if the element opacity property has (or inherits) a value of 0. false by default.</param>
+    /// <param name="visibilityProperty">true to check if the element is invisible due to the value of its visibility property. false by default.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<bool> CheckVisibility(bool contentVisibilityAuto = false, bool opacityProperty = false, bool visibilityProperty = false, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeTrySync<bool>("checkVisibility", cancellationToken, [contentVisibilityAuto, opacityProperty, visibilityProperty]);
+
+    /// <summary>
+    /// Returns a StylePropertyMapReadOnly interface which provides a read-only representation of a CSS declaration block that is an alternative to CSSStyleDeclaration.
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<Dictionary<string, string>> ComputedStyleMap(CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeTrySync<Dictionary<string, string>>("computedStyleMap", cancellationToken);
+
+    /// <summary>
     /// Returns a DOMRect object providing information about the size of an element and its position relative to the viewport.
     /// </summary>
     /// <param name="cancellationToken"></param>
@@ -2321,22 +2353,66 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </returns>
     public async ValueTask<DOMRect[]> GetClientRects(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<DOMRect[]>("getClientRects", cancellationToken);
 
-
     /// <summary>
-    /// Returns a Boolean value indicating whether the specified element has the specified attribute or not.
+    /// Tests whether the element would be selected by the specified CSS selector.
     /// </summary>
-    /// <param name="name">A string representing the name of the attribute.</param>
+    /// <param name="selectors">A string containing valid CSS selectors to test the Element against.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<bool> HasAttribute(string name, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<bool>("hasAttribute", cancellationToken, [name]);
+    public async ValueTask<bool> Matches(string selectors, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<bool>("matches", cancellationToken, [selectors]);
+
+    // public async ValueTask RequestFullscreen(...)  is in HTMLElementBase
+
+    // public async ValueTask RequestPointerLock(...)  is in HTMLElementBase
 
     /// <summary>
-    /// Returns a boolean value indicating whether the current element has any attributes or not.
+    /// Accepts a namespace URI as an argument. It returns a boolean value that is true if the namespace is the default namespace on the given node and false if not.
+    /// </summary>
+    /// <param name="namespaceURI">A string representing the namespace against which the element will be checked.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<bool> IsDefaultNamespace(string? namespaceURI, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeTrySync<bool>("isDefaultNamespace", cancellationToken, [namespaceURI]);
+
+    /// <summary>
+    /// <para>Returns a string containing the prefix for a given namespace URI, if present, and null if not. When multiple prefixes are possible, the first prefix is returned.</para>
+    /// <para>If the node is a <i>DocumentType</i> or a <i>DocumentFragment</i>, it returns null.</para>
+    /// </summary>
+    /// <param name="namespace">A string containing the namespace to look the prefix up.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> LookupPrefix(string? @namespace, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeTrySync<string?>("lookupPrefix", cancellationToken, [@namespace]);
+
+    /// <summary>
+    /// <para>
+    /// Takes a prefix as parameter and returns the namespace URI associated with it on the given node if found (and null if not).
+    /// This method's existence allows Node objects to be passed as a namespace resolver to <i>XPathEvaluator.createExpression()</i> and <i>XPathEvaluator.evaluate()</i>.
+    /// </para>
+    /// <para>
+    /// It returns a string containing the namespace URI corresponding to the prefix.<br />
+    /// - Always returns null if the node is a DocumentFragment, DocumentType, Document with no documentElement, or Attr with no associated element.<br />
+    /// - If prefix is "xml", the return value is always "http://www.w3.org/XML/1998/namespace".<br />
+    /// - If prefix is "xmlns", the return value is always "http://www.w3.org/2000/xmlns/".<br />
+    /// - If the prefix is null, the return value is the default namespace URI.<br />
+    /// - If the prefix is not found, the return value is null.
+    /// </para>
+    /// </summary>
+    /// <param name="prefix">The prefix to look for.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> LookupNamespaceURI(string? prefix, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeTrySync<string?>("lookupNamespaceURI", cancellationToken, [prefix]);
+
+    /// <summary>
+    /// Puts the specified node and all of its sub-tree into a normalized form. In a normalized sub-tree, no text nodes in the sub-tree are empty and there are no adjacent text nodes.
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<bool> HasAttributes(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<bool>("hasAttributes", cancellationToken);
+    public async ValueTask Normalize(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("normalize", cancellationToken);
 
+
+    // methods - Pointer Capture
 
     /// <summary>
     /// <para>
@@ -2377,6 +2453,8 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     public async ValueTask<bool> HasPointerCapture(long pointerId, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<bool>("hasPointerCapture", cancellationToken, [pointerId]);
 
 
+    // methods - Scroll
+
     /// <summary>
     /// Scrolls the element to a particular set of coordinates inside a given element.
     /// </summary>
@@ -2385,6 +2463,22 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask Scroll(int left, int top, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("scroll", cancellationToken, [left, top]);
+
+    /// <summary>
+    /// Scrolls to a particular set of coordinates inside a given element.
+    /// </summary>
+    /// <param name="x">The pixel along the horizontal axis of the element that you want displayed in the upper left.</param>
+    /// <param name="y">The pixel along the vertical axis of the element that you want displayed in the upper left.</param>
+    /// <param name="behavior">
+    /// Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+    /// - "smooth": scrolling should animate smoothly<br />
+    /// - "instant": scrolling should happen instantly in a single jump<br />
+    /// - "auto": scroll behavior is determined by the computed value of scroll-behavior
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask ScrollTo(int x, int y, string? behavior = null, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeVoidTrySync("scrollTo", cancellationToken, [x, y, behavior]);
 
     /// <summary>
     /// Scrolls an element by the given amount.
@@ -2411,6 +2505,595 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <returns></returns>
     public async ValueTask ScrollIntoView(string block = "start", string inline = "nearest", string behavior = "auto", CancellationToken cancellationToken = default)
         => await (await htmlElementTask).InvokeVoidTrySync("scrollIntoView", cancellationToken, [block, inline, behavior]);
+
+
+    // methods - Attribute
+
+    /// <summary>
+    /// Returns the value of a specified attribute on the element. If the given attribute does not exist, the value returned will be null.
+    /// </summary>
+    /// <param name="qualifiedName">The name of the attribute whose value you want to get.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAttribute(string qualifiedName, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeTrySync<string?>("getAttribute", cancellationToken, [qualifiedName]);
+
+    /// <summary>
+    /// <para>
+    /// Returns the string value of the attribute with the specified namespace and name.
+    /// If the named attribute does not exist, the value returned will either be null or "" (the empty string); see Notes for details.
+    /// </para>
+    /// <para>If you are working with HTML documents and you don't need to specify the requested attribute as being part of a specific namespace, use the <see cref="GetAttribute"/> method instead.</para>
+    /// </summary>
+    /// <remarks>
+    /// Note: Earlier versions of the DOM specification had this method described as returning an empty string for non-existent attributes, but it was not typically implemented this way since null makes more sense.
+    /// The DOM4 specification now says this method should return null for non-existent attributes.
+    /// </remarks>
+    /// <param name="namespace">The namespace in which to look for the specified attribute.</param>
+    /// <param name="qualifiedName">The name of the attribute to look for.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string?> GetAttributeNS(string @namespace, string qualifiedName, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeTrySync<string?>("getAttributeNS", cancellationToken, [@namespace, qualifiedName]);
+
+    /// <summary>
+    /// <para>Returns the attribute names of the element as an Array of strings. If the element has no attributes it returns an empty array.</para>
+    /// <para>Using <i>getAttributeNames()</i> along with <see cref="GetAttribute"/>, is a memory-efficient and performant alternative to <see cref="Attributes"/>.</para>
+    /// <para>
+    /// The names returned by <i>getAttributeNames()</i> are qualified attribute names,
+    /// meaning that attributes with a namespace prefix have their names returned with that namespace prefix (not the actual namespace), followed by a colon, followed by the attribute name (for example, xlink:href),
+    /// while any attributes which have no namespace prefix have their names returned as-is (for example, href).
+    /// </para>
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string[]> GetAttributeNames(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<string[]>("getAttributeNames", cancellationToken);
+
+    /// <summary>
+    /// <para>Sets the value of an attribute on the specified element. If the attribute already exists, the value is updated; otherwise a new attribute is added with the specified name and value.</para>
+    /// <para>To get the current value of an attribute, use <see cref="GetAttribute"/>; to remove an attribute, call <see cref="RemoveAttribute"/>.</para>
+    /// <para>Boolean attributes are considered to be true if they're present on the element at all. You should set value to the empty string ("") or the attribute's name, with no leading or trailing whitespace.</para>
+    /// <para>
+    /// Since the specified value gets converted into a string, specifying null doesn't necessarily do what you expect.
+    /// Instead of removing the attribute or setting its value to be null, it instead sets the attribute's value to the string "null".
+    /// If you wish to remove an attribute, call <see cref="RemoveAttribute"/>.
+    /// </para>
+    /// </summary>
+    /// <param name="qualifiedName">
+    /// A string specifying the name of the attribute whose value is to be set.
+    /// The attribute name is automatically converted to all lower-case when setAttribute() is called on an HTML element in an HTML document.
+    /// </param>
+    /// <param name="value">A string containing the value to assign to the attribute. Any non-string value specified is converted automatically into a string.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAttribute(string qualifiedName, string value, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeVoidTrySync("setAttribute", cancellationToken, [qualifiedName, value]);
+
+    /// <summary>
+    /// <para>Adds a new attribute or changes the value of an attribute with the given namespace and name.</para>
+    /// <para>f you are working with HTML documents and you don't need to specify the requested attribute as being part of a specific namespace, use the <see cref="SetAttribute"/> method instead.</para>
+    /// </summary>
+    /// <param name="namespace">A string specifying the namespace of the attribute.</param>
+    /// <param name="qualifiedName">A string identifying the attribute by its qualified name; that is, a namespace prefix followed by a colon followed by a local name.</param>
+    /// <param name="value">The desired string value of the new attribute.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetAttributeNS(string @namespace, string qualifiedName, string value, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeVoidTrySync("setAttributeNS", cancellationToken, [@namespace, qualifiedName, value]);
+
+    /// <summary>
+    /// Toggles a Boolean attribute (removing it if it is present and adding it if it is not present) on the given element.
+    /// </summary>
+    /// <param name="qualifiedName">
+    /// A string specifying the name of the attribute to be toggled.
+    /// The attribute name is automatically converted to all lower-case when toggleAttribute() is called on an HTML element in an HTML document.
+    /// </param>
+    /// <param name="force">
+    /// A boolean value which has the following effects:<br />
+    /// - if not specified at all, the toggleAttribute method "toggles" the attribute named name — removing it if it is present, or else adding it if it is not present<br />
+    /// - if true, the toggleAttribute method adds an attribute named name<br />
+    /// - if false, the toggleAttribute method removes the attribute named name
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<bool> ToggleAttribute(string qualifiedName, bool? force = null, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeTrySync<bool>("toggleAttribute", cancellationToken, [qualifiedName, force]);
+
+    /// <summary>
+    /// Removes the attribute with the specified name from the element.
+    /// </summary>
+    /// <param name="qualifiedName">A string specifying the name of the attribute to remove from the element. If the specified attribute does not exist, removeAttribute() returns without generating an error.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask RemoveAttribute(string qualifiedName, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("removeAttribute", cancellationToken, [qualifiedName]);
+
+    /// <summary>
+    /// <para>Removes the specified attribute with the specified namespace from an element.</para>
+    /// <para>If you are working with HTML and you don't need to specify the requested attribute as being part of a specific namespace, use the <see cref="RemoveAttribute"/> method instead.</para>
+    /// </summary>
+    /// <param name="namespace">A string that contains the namespace of the attribute.</param>
+    /// <param name="qualifiedName">A string that names the attribute to be removed from the current node.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask RemoveAttributeNS(string @namespace, string qualifiedName, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeVoidTrySync("removeAttributeNS", cancellationToken, [@namespace, qualifiedName]);
+
+    /// <summary>
+    /// Returns a Boolean value indicating whether the specified element has the specified attribute or not.
+    /// </summary>
+    /// <param name="qualifiedName">A string representing the name of the attribute.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<bool> HasAttribute(string qualifiedName, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<bool>("hasAttribute", cancellationToken, [qualifiedName]);
+
+    /// <summary>
+    /// <para>Returns a boolean value indicating whether the current element has the specified attribute with the specified namespace.</para>
+    /// <para>If you are working with HTML documents and you don't need to specify the requested attribute as being part of a specific namespace, use the <see cref="HasAttribute"/> method instead.</para>
+    /// </summary>
+    /// <param name="namespace">A string specifying the namespace of the attribute.</param>
+    /// <param name="qualifiedName">The name of the attribute.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<bool> HasAttributeNS(string @namespace, string qualifiedName, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeTrySync<bool>("hasAttributeNS", cancellationToken, [@namespace, qualifiedName]);
+
+    /// <summary>
+    /// Returns a boolean value indicating whether the current element has any attributes or not.
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<bool> HasAttributes(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<bool>("hasAttributes", cancellationToken);
+
+
+    // methods - Tree-nodes
+
+    /// <summary>
+    /// <para>Returns an array which contains every descendant element which has the specified class name or names.</para>
+    /// <para>The method getElementsByClassName() on the Document interface works essentially the same way, except it acts on the entire document, starting at the document root.</para>
+    /// </summary>
+    /// <param name="className">A string containing one or more class names to match on, separated by whitespace.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IHTMLElement[]> GetElementsByClassName(string className, CancellationToken cancellationToken = default) {
+        IJSObjectReference[] htmlElements = await (await htmlElementTask).InvokeTrySync<IJSObjectReference[]>("getElementsByClassName", cancellationToken, [className]);
+
+        HTMLElement[] result = new HTMLElement[htmlElements.Length];
+        for (int i = 0; i < result.Length; i++)
+            result[i] = new HTMLElement(Task.FromResult(htmlElements[i]));
+        return result;
+    }
+
+    /// <summary>
+    /// <para>Returns an array of elements with the given tag name. All descendants of the specified element are searched, but not the element itself.</para>
+    /// <para>
+    /// When called on an HTML element in an HTML document, getElementsByTagName lower-cases the argument before searching for it.
+    /// This is undesirable when trying to match camel-cased SVG elements (such as &lt;linearGradient&gt;) in an HTML document.
+    /// Instead, use <see cref="GetElementsByTagNameNS"/>, which preserves the capitalization of the tag name.
+    /// </para>
+    /// <para>Element.getElementsByTagName is similar to Document.getElementsByTagName(), except that it only searches for elements that are descendants of the specified element.</para>
+    /// </summary>
+    /// <param name="qualifiedName">The qualified name to look for. The special string "*" represents all elements. For compatibility with XHTML, lower-case should be used.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IHTMLElement[]> GetElementsByTagName(string qualifiedName, CancellationToken cancellationToken = default) {
+        IJSObjectReference[] htmlElements = await (await htmlElementTask).InvokeTrySync<IJSObjectReference[]>("getElementsByTagName", cancellationToken, [qualifiedName]);
+
+        HTMLElement[] result = new HTMLElement[htmlElements.Length];
+        for (int i = 0; i < result.Length; i++)
+            result[i] = new HTMLElement(Task.FromResult(htmlElements[i]));
+        return result;
+    }
+
+    /// <summary>
+    /// Returns an array of elements with the given tag name belonging to the given namespace.
+    /// It is similar to Document.getElementsByTagNameNS, except that its search is restricted to descendants of the specified element.
+    /// </summary>
+    /// <param name="namespace">
+    /// The namespace URI of elements to look for (see Element.namespaceURI and Attr.namespaceURI).
+    /// For example, if you need to look for XHTML elements, use the XHTML namespace URI, http://www.w3.org/1999/xhtml.
+    /// </param>
+    /// <param name="qualifiedName">Either the local name of elements to look for or the special value "*", which matches all elements (see Element.localName and Attr.localName).</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IHTMLElement[]> GetElementsByTagNameNS(string @namespace, string qualifiedName, CancellationToken cancellationToken = default) {
+        IJSObjectReference[] htmlElements = await (await htmlElementTask).InvokeTrySync<IJSObjectReference[]>("getElementsByTagNameNS", cancellationToken, [@namespace, qualifiedName]);
+
+        HTMLElement[] result = new HTMLElement[htmlElements.Length];
+        for (int i = 0; i < result.Length; i++)
+            result[i] = new HTMLElement(Task.FromResult(htmlElements[i]));
+        return result;
+    }
+
+    /// <summary>
+    /// Returns the first element that is a descendant of the element on which it is invoked that matches the specified group of selectors.
+    /// </summary>
+    /// <param name="selectors">
+    /// <para>A string containing one or more selectors to match. This string must be a valid CSS selector string; if it isn't, a SyntaxError exception is thrown.</para>
+    /// <para>
+    /// Note that the HTML specification does not require attribute values to be valid CSS identifiers.
+    /// If a class or id attribute value is not a valid CSS identifier, then you must escape it before using it in a selector,
+    /// either by calling CSS.escape() on the value, or using one of the techniques described in Escaping characters.
+    /// </para>
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IHTMLElement?> QuerySelector(string selectors, CancellationToken cancellationToken = default) {
+        IJSObjectReference?[] singleReference = await (await htmlElementTask).InvokeTrySync<IJSObjectReference[]>("querySelector", cancellationToken, [selectors]);
+        if (singleReference[0] is IJSObjectReference htmlElement)
+            return new HTMLElement(Task.FromResult(htmlElement));
+        else
+            return null;
+    }
+
+    /// <summary>
+    /// Returns an array representing a list of elements matching the specified group of selectors which are descendants of the element on which the method was called.
+    /// </summary>
+    /// <param name="selectors">
+    /// <para>A string containing one or more selectors to match. This string must be a valid CSS selector string; if it isn't, a SyntaxError exception is thrown.</para>
+    /// <para>
+    /// Note that the HTML specification does not require attribute values to be valid CSS identifiers.
+    /// If a class or id attribute value is not a valid CSS identifier, then you must escape it before using it in a selector,
+    /// either by calling CSS.escape() on the value, or using one of the techniques described in Escaping characters.
+    /// See <see href="https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelector#escaping_attribute_values">Escaping attribute values</see> for an example.
+    /// </para>
+    /// <para>
+    /// The selectors are applied to the entire document, not just the particular element on which querySelectorAll() is called.
+    /// To restrict the selector to the element on which querySelectorAll() is called, include the :scope pseudo-class at the start of the selector.
+    /// See the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelectorAll#selector_scope">selector scope</see> example.
+    /// </para>
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IHTMLElement[]> QuerySelectorAll(string selectors, CancellationToken cancellationToken = default) {
+        IJSObjectReference[] htmlElements = await (await htmlElementTask).InvokeTrySync<IJSObjectReference[]>("querySelectorAll", cancellationToken, [selectors]);
+
+        HTMLElement[] result = new HTMLElement[htmlElements.Length];
+        for (int i = 0; i < result.Length; i++)
+            result[i] = new HTMLElement(Task.FromResult(htmlElements[i]));
+        return result;
+    }
+
+    /// <summary>
+    /// Traverses the element and its parents (heading toward the document root) until it finds a node that matches the specified CSS selector.
+    /// </summary>
+    /// <param name="selectors">A string of valid CSS selectors to match the Element and its ancestors against.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IHTMLElement?> Closest(string selectors, CancellationToken cancellationToken = default) {
+        IJSObjectReference?[] singleReference = await (await htmlElementTask).InvokeTrySync<IJSObjectReference?[]>("closest", cancellationToken, [selectors]);
+        if (singleReference[0] is IJSObjectReference closest)
+            return new HTMLElement(Task.FromResult(closest));
+        else
+            return null;
+    }
+
+
+    /// <summary>
+    /// Inserts a set of strings in the children list of this Element's parent, just before this Element. Strings are inserted as equivalent Text nodes.
+    /// </summary>
+    /// <param name="nodes">A set of strings to insert.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask Before(string[] nodes, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("before_string", cancellationToken, [nodes]);
+
+    /// <summary>
+    /// Inserts a set of Node objects in the children list of this Element's parent, just before this Element.
+    /// </summary>
+    /// <param name="nodes">A set of Node objects to insert.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask Before(IHTMLElement[] nodes, CancellationToken cancellationToken = default) {
+        IJSObjectReference[] nodesJS = new IJSObjectReference[nodes.Length];
+        for (int i = 0; i < nodesJS.Length; i++)
+            nodesJS[i] = await nodes[i].HTMLElementTask;
+
+        await (await htmlElementTask).InvokeVoidTrySync("before_htmlElement", cancellationToken, [nodesJS]);
+    }
+
+    /// <summary>
+    /// Inserts a set of strings in the children list of the Element's parent, just after the Element. Strings are inserted as equivalent Text nodes.
+    /// </summary>
+    /// <param name="nodes">A set of strings to insert.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask After(string[] nodes, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("after_string", cancellationToken, [nodes]);
+
+    /// <summary>
+    /// Inserts a set of Node objects in the children list of the Element's parent, just after the Element.
+    /// </summary>
+    /// <param name="nodes">A set of Node objects to insert.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask After(IHTMLElement[] nodes, CancellationToken cancellationToken = default) {
+        IJSObjectReference[] nodesJS = new IJSObjectReference[nodes.Length];
+        for (int i = 0; i < nodesJS.Length; i++)
+            nodesJS[i] = await nodes[i].HTMLElementTask;
+
+        await (await htmlElementTask).InvokeVoidTrySync("after_htmlElement", cancellationToken, [nodesJS]);
+    }
+
+
+    /// <summary>
+    /// Inserts a set of strings before the first child of the Element. Strings are inserted as equivalent Text nodes.
+    /// </summary>
+    /// <param name="nodes">A set of strings to insert.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask Prepend(string[] nodes, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("prepend_string", cancellationToken, [nodes]);
+
+    /// <summary>
+    /// Inserts a set of Node objects before the first child of the Element.
+    /// </summary>
+    /// <param name="nodes">A set of Node objects to insert.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask Prepend(IHTMLElement[] nodes, CancellationToken cancellationToken = default) {
+        IJSObjectReference[] nodesJS = new IJSObjectReference[nodes.Length];
+        for (int i = 0; i < nodesJS.Length; i++)
+            nodesJS[i] = await nodes[i].HTMLElementTask;
+
+        await (await htmlElementTask).InvokeVoidTrySync("prepend_htmlElement", cancellationToken, [nodesJS]);
+    }
+
+    /// <summary>
+    /// <para>Adds a node to the end of the list of children of a specified parent node.</para>
+    /// <para>Note: If the given child is a reference to an existing node in the document, appendChild() moves it from its current position to the new position.</para>
+    /// <para>If the given child is a DocumentFragment, the entire contents of the DocumentFragment are moved into the child list of the specified parent node.</para>
+    /// <para>appendChild() returns the newly appended node, or if the child is a DocumentFragment, the emptied fragment.</para>
+    /// <para>Note: Unlike this method, the Element.append() method supports multiple arguments and appending strings. You can prefer using it if your node is an element.</para>
+    /// </summary>
+    /// <param name="node">The node to append to the given parent node</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask AppendChild(IHTMLElement node, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("appendChild", cancellationToken, [await node.HTMLElementTask]);
+
+    /// <summary>
+    /// Inserts a set of strings after the last child of the Element. Strings are inserted as equivalent Text nodes.
+    /// </summary>
+    /// <param name="nodes">A set of strings to insert.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask Append(string[] nodes, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("append_string", cancellationToken, [nodes]);
+
+    /// <summary>
+    /// Inserts a set of Node objects after the last child of the Element.
+    /// </summary>
+    /// <param name="nodes">A set of Node objects to insert.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask Append(IHTMLElement[] nodes, CancellationToken cancellationToken = default) {
+        IJSObjectReference[] nodesJS = new IJSObjectReference[nodes.Length];
+        for (int i = 0; i < nodesJS.Length; i++)
+            nodesJS[i] = await nodes[i].HTMLElementTask;
+
+        await (await htmlElementTask).InvokeVoidTrySync("append_htmlElement", cancellationToken, [nodesJS]);
+    }
+
+    /// <summary>
+    /// Inserts a given element node at a given position relative to the element it is invoked upon.
+    /// </summary>
+    /// <param name="position">
+    /// A string representing the position relative to the targetElement; must match (case-insensitively) one of the following strings:<br />
+    /// - "beforebegin": Before the targetElement itself.<br />
+    /// - "afterbegin": Just inside the targetElement, before its first child.<br />
+    /// - "beforeend": Just inside the targetElement, after its last child.<br />
+    /// - "afterend": After the targetElement itself.
+    /// </param>
+    /// <param name="htmlElement">The element to be inserted into the tree.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>true if element was inserted, false if the insertion failed.</returns>
+    public async ValueTask<bool> InsertAdjacentElement(string position, IHTMLElement htmlElement, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeTrySync<bool>("insertAdjacentElement", cancellationToken, [position, await htmlElement.HTMLElementTask]);
+
+    /// <summary>
+    /// Parses the specified input as HTML or XML and inserts the resulting nodes into the DOM tree at a specified position.
+    /// </summary>
+    /// <remarks>
+    /// Warning: This method parses its input as HTML or XML, writing the result into the DOM.
+    /// APIs like this are known as injection sinks, and are potentially a vector for cross-site-scripting (XSS) attacks, if the input originally came from an attacker.
+    /// </remarks>
+    /// <param name="position">
+    /// A string representing the position relative to the element. Must be one of the following strings:<br />
+    /// - "beforebegin": Before the element. Only valid if the element is in the DOM tree and has a parent element.<br />
+    /// - "afterbegin": Just inside the element, before its first child.<br />
+    /// - "beforeend": Just inside the element, after its last child.<br />
+    /// - "afterend": After the element. Only valid if the element is in the DOM tree and has a parent element.
+    /// </param>
+    /// <param name="html">A TrustedHTML instance or string defining the HTML or XML to be parsed.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask InsertAdjacentHTML(string position, string html, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeVoidTrySync("insertAdjacentHTML", cancellationToken, [position, html]);
+
+    /// <summary>
+    /// Given a relative position and a string, inserts a new text node at the given position relative to the element it is called from.
+    /// </summary>
+    /// <param name="position">
+    /// A string representing the position relative to the element the method is called from; must be one of the following strings:<br />
+    /// - "beforebegin": Before the element itself.<br />
+    /// - "afterbegin": Just inside the element, before its first child.<br />
+    /// - "beforeend": Just inside the element, after its last child.<br />
+    /// - "afterend": After the element itself.
+    /// </param>
+    /// <param name="data">A string from which to create a new text node to insert at the given position where relative to the element the method is called from.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask InsertAdjacentText(string position, string data, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeVoidTrySync("insertAdjacentText", cancellationToken, [position, data]);
+
+
+    /// <summary>
+    /// Removes a child node from the DOM.
+    /// </summary>
+    /// <remarks>
+    /// Note: As long as a reference is kept on the removed child, it still exists in memory, but is no longer part of the DOM. It can still be reused later in the code.
+    /// If the return value of removeChild() is not stored, and no other reference is kept, it will be automatically deleted from memory after a short time.
+    /// </remarks>
+    /// <param name="node">A Node that is the child node to be removed from the DOM.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask RemoveChild(IHTMLElement node, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("removeChild", cancellationToken, [await node.HTMLElementTask]);
+
+    /// <summary>
+    /// Removes the element from its parent node.
+    /// If it has no parent node, calling remove() does nothing.
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask Remove(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("remove", cancellationToken);
+
+    /// <summary>
+    /// Replaces a child node within the given (parent) node.
+    /// </summary>
+    /// <remarks>
+    /// Note: The parameter order, new before old, is unusual. <see cref="ReplaceWith(IHTMLElement[], CancellationToken)"/>, applying only to nodes that are elements, may be easier to read and use.
+    /// </remarks>
+    /// <param name="newChild">
+    /// <para>The new node to replace oldChild.</para>
+    /// <para>Warning: If the new node is already present somewhere else in the DOM, it is first removed from that position.</para>
+    /// </param>
+    /// <param name="oldChild">The child to be replaced.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask ReplaceChild(IHTMLElement newChild, IHTMLElement oldChild, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeVoidTrySync("replaceChild", cancellationToken, [await newChild.HTMLElementTask, await oldChild.HTMLElementTask]);
+
+    /// <summary>
+    /// Replaces a child node within the given (parent) node.
+    /// </summary>
+    /// <param name="newChild">
+    /// <para>The new node to replace oldChild.</para>
+    /// <para>Warning: If the new node is already present somewhere else in the DOM, it is first removed from that position.</para>
+    /// </param>
+    /// <param name="oldChildIndex">The zero based index of the child to be replaced.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask ReplaceChild(IHTMLElement newChild, int oldChildIndex, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeVoidTrySync("replaceChildIndex", cancellationToken, [await newChild.HTMLElementTask, oldChildIndex]);
+
+    /// <summary>
+    /// Replaces this Element in the children list of its parent with a set of strings. Strings are inserted as equivalent Text nodes.
+    /// </summary>
+    /// <param name="nodes">A set of strings to replace.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask ReplaceWith(string[] nodes, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("replaceWith_string", cancellationToken, [nodes]);
+
+    /// <summary>
+    /// Replaces this Element in the children list of its parent with a set of Node objects.
+    /// </summary>
+    /// <param name="nodes">A set of Node objects to replace.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask ReplaceWith(IHTMLElement[] nodes, CancellationToken cancellationToken = default) {
+        IJSObjectReference[] nodesJS = new IJSObjectReference[nodes.Length];
+        for (int i = 0; i < nodesJS.Length; i++)
+            nodesJS[i] = await nodes[i].HTMLElementTask;
+
+        await (await htmlElementTask).InvokeVoidTrySync("replaceWith_htmlElement", cancellationToken, [nodesJS]);
+    }
+
+    /// <summary>
+    /// Replaces the existing children of a Node with a specified new set of children.
+    /// </summary>
+    /// <remarks>It also provides a very convenient mechanism for emptying a node of all its children. You call it on the parent node with an empty array.</remarks>
+    /// <param name="nodes">A set of strings to replace the Element's existing children with.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask ReplaceChildren(string[] nodes, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("replaceChildren_string", cancellationToken, [nodes]);
+
+    /// <summary>
+    /// Replaces the existing children of a Node with a specified new set of children.
+    /// </summary>
+    /// <remarks>It also provides a very convenient mechanism for emptying a node of all its children. You call it on the parent node with an empty array.</remarks>
+    /// <param name="nodes">A set of Node objects to replace the Element's existing children with.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask ReplaceChildren(IHTMLElement[] nodes, CancellationToken cancellationToken = default) {
+        IJSObjectReference[] nodesJS = new IJSObjectReference[nodes.Length];
+        for (int i = 0; i < nodesJS.Length; i++)
+            nodesJS[i] = await nodes[i].HTMLElementTask;
+
+        await (await htmlElementTask).InvokeVoidTrySync("replaceChildren_htmlElement", cancellationToken, [nodesJS]);
+    }
+
+
+    /// <summary>
+    /// <para>Returns a duplicate of the node on which this method was called. Its parameter controls if the subtree contained in a node is also cloned or not.</para>
+    /// <para>
+    /// Cloning a node copies all of its attributes and their values, including intrinsic (inline) listeners.
+    /// It does not copy event listeners added using addEventListener() or those assigned to element properties (e.g., node.onclick = someFunction).
+    /// Additionally, for a &lt;canvas&gt; element, the painted image is not copied.
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// Warning: cloneNode() may lead to duplicate element IDs in a document!
+    /// If the original node has an id attribute, and the clone will be placed in the same document, then you should modify the clone's ID to be unique.
+    /// Also, name attributes may need to be modified, depending on whether duplicate names are expected.</remarks>
+    /// <param name="deep">
+    /// <para>If true, then the node and its whole subtree, including text that may be in child Text nodes, is also copied.</para>
+    /// <para>If false, only the node will be cloned. The subtree, including any text that the node contains, is not cloned.</para>
+    /// <para>Note that deep has no effect on void elements, such as the &lt;img&gt; and &lt;input&gt; elements.</para>
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IHTMLElement> CloneNode(bool deep = false, CancellationToken cancellationToken = default) {
+        Task<IJSObjectReference> clonedElement = (await htmlElementTask).InvokeTrySync<IJSObjectReference>("cloneNode", cancellationToken, [deep]).AsTask();
+        return new HTMLElement(clonedElement);
+    }
+
+    /// <summary>
+    /// Is a legacy alias the for the === strict equality operator. That is, it tests whether two nodes are the same (in other words, whether they reference the same object).
+    /// </summary>
+    /// <param name="other">The Node to test against.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<bool> IsSameNode(IHTMLElement other, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeTrySync<bool>("isSameNode", cancellationToken, [await other.HTMLElementTask]);
+
+    /// <summary>
+    /// Tests whether two nodes are equal.
+    /// Two nodes are equal when they have the same type, defining characteristics (for elements, this would be their ID, number of children, and so forth), its attributes match, and so on.
+    /// The specific set of data points that must match varies depending on the types of the nodes.
+    /// </summary>
+    /// <param name="other">The Node to compare equality with.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<bool> IsEqualNode(IHTMLElement other, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeTrySync<bool>("isEqualNode", cancellationToken, [await other.HTMLElementTask]);
+
+    /// <summary>
+    /// Returns a boolean value indicating whether a node is a descendant of a given node, that is the node itself, one of its direct children (childNodes), one of the children's direct children, and so on.
+    /// </summary>
+    /// <remarks>Note: A node is contained inside itself.</remarks>
+    /// <param name="other">The Node to test with.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<bool> Contains(IHTMLElement other, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeTrySync<bool>("contains", cancellationToken, [await other.HTMLElementTask]);
+
+    /// <summary>
+    /// <para>Reports the position of its argument node relative to the node on which it is called.</para>
+    /// <para>
+    /// It returns an integer value representing otherNode's position relative to node as a bitmask combining the following constant properties of Node:<br />
+    /// - 1 (Node.DOCUMENT_POSITION_DISCONNECTED): Both nodes are in different documents or different trees in the same document.<br />
+    /// - 2 (Node.DOCUMENT_POSITION_PRECEDING): otherNode precedes the node in either a pre-order depth-first traversal of a tree containing both (e.g., as an ancestor or previous sibling or a descendant of a previous sibling or previous sibling of an ancestor) or (if they are disconnected) in an arbitrary but consistent ordering.<br />
+    /// - 4 (Node.DOCUMENT_POSITION_FOLLOWING): otherNode follows the node in either a pre-order depth-first traversal of a tree containing both (e.g., as a descendant or following sibling or a descendant of a following sibling or following sibling of an ancestor) or (if they are disconnected) in an arbitrary but consistent ordering.<br />
+    /// - 8 (Node.DOCUMENT_POSITION_CONTAINS): otherNode is an ancestor of the node.<br />
+    /// - 16 (Node.DOCUMENT_POSITION_CONTAINED_BY): otherNode is a descendant of the node.<br />
+    /// - 32 (Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC): The result relies upon arbitrary and/or implementation-specific behavior and is not guaranteed to be portable.
+    /// </para>
+    /// <para>
+    /// Zero or more bits can be set, depending on which scenarios apply.
+    /// For example, if otherNode is located earlier in the document and contains the node on which compareDocumentPosition() was called,
+    /// then both the DOCUMENT_POSITION_CONTAINS and DOCUMENT_POSITION_PRECEDING bits would be set, producing a value of 10 (0x0A).
+    /// </para>
+    /// </summary>
+    /// <param name="other">The Node for which position should be reported, relative to the node.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<int> CompareDocumentPosition(IHTMLElement other, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeTrySync<int>("compareDocumentPosition", cancellationToken, [await other.HTMLElementTask]);
 
     #endregion
 }

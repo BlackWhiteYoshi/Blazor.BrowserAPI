@@ -96,7 +96,7 @@
         <button data-testid="@BUTTON_TOGGLE_POPOVER_PARAMETER" @onclick="TogglePopoverParameter">TogglePopoverParameter</button>
 
 
-        @* Element *@
+        @* Node/Element *@
 
         <button data-testid="@BUTTON_GET_ATTRIBUTES" @onclick="GetAttributes">GetAttributes</button>
         <button data-testid="@BUTTON_GET_CLASS_LIST" @onclick="GetClassList">GetClassList</button>
@@ -141,7 +141,7 @@
         <button data-testid="@BUTTON_GET_NODE_NAME" @onclick="GetNodeName">GetNodeName</button>
         <button data-testid="@BUTTON_GET_NODE_TYPE" @onclick="GetNodeType">GetNodeType</button>
 
-        @* Element Properties - Tree-nodes *@
+        @* Node/Element Properties - Tree-nodes *@
         <button data-testid="@BUTTON_GET_CHILD_ELEMENT_COUNT" @onclick="GetChildElementCount">GetChildElementCount</button>
         <button data-testid="@BUTTON_GET_CHILDREN" @onclick="GetChildren">GetChildren</button>
         <button data-testid="@BUTTON_GET_FIRST_ELEMENT_CHILD" @onclick="GetFirstElementChild">GetFirstElementChild</button>
@@ -150,7 +150,7 @@
         <button data-testid="@BUTTON_GET_NEXT_ELEMENT_SIBLING" @onclick="GetNextElementSibling">GetNextElementSibling</button>
         <button data-testid="@BUTTON_GET_PARENT_ELEMENT" @onclick="GetParentElement">GetParentElement</button>
 
-        @* Element Properties - ARIA *@
+        @* Node/Element Properties - ARIA *@
 
         <button data-testid="@BUTTON_GET_ARIA_ATOMIC" @onclick="GetAriaAtomic">GetAriaAtomic</button>
         <button data-testid="@BUTTON_SET_ARIA_ATOMIC" @onclick="SetAriaAtomic">SetAriaAtomic</button>
@@ -281,21 +281,82 @@
         <button data-testid="@BUTTON_GET_ROLE" @onclick="GetRole">GetRole</button>
         <button data-testid="@BUTTON_SET_ROLE" @onclick="SetRole">SetRole</button>
 
-        @* Element Methods *@
+        @* Node/Element Methods *@
+
+        <button data-testid="@BUTTON_CHECK_VISIBILITY" @onclick="CheckVisibility">CheckVisibility</button>
+        <button data-testid="@BUTTON_COMPUTED_STYLE_MAP" @onclick="ComputedStyleMap">ComputedStyleMap</button>
         <button data-testid="@BUTTON_GET_BOUNDING_CLIENT_RECT" @onclick="GetBoundingClientRect">GetBoundingClientRect</button>
         <button data-testid="@BUTTON_GET_CLIENT_RECTS" @onclick="GetClientRects">GetClientRects</button>
-        <button data-testid="@BUTTON_HAS_ATTRIBUTE" @onclick="HasAttribute">HasAttribute</button>
-        <button data-testid="@BUTTON_HAS_ATTRIBUTES" @onclick="HasAttributes">HasAttributes</button>
+        <button data-testid="@BUTTON_MATCHES" @onclick="Matches">Matches</button>
+        <button data-testid="@BUTTON_REQUEST_FULLSCREEN" @onclick="RequestFullscreen">RequestFullscreen</button>
+        <button data-testid="@BUTTON_REQUEST_POINTER_LOCK" @onclick="RequestPointerLock">RequestPointerLock</button>
+        <button data-testid="@BUTTON_IS_DEFAULT_NAMESPACE" @onclick="IsDefaultNamespace">IsDefaultNamespace</button>
+        <button data-testid="@BUTTON_LOOKUP_PREFIX" @onclick="LookupPrefix">LookupPrefix</button>
+        <button data-testid="@BUTTON_LOOKUP_NAMESPACE_URI" @onclick="LookupNamespaceURI">LookupNamespaceURI</button>
+        <button data-testid="@BUTTON_NORMALIZE" @onclick="Normalize">Normalize</button>
+
+        @* Node/Element Methods - Scroll *@
         <button data-testid="@BUTTON_SCROLL" @onclick="Scroll">Scroll</button>
+        <button data-testid="@BUTTON_SCROLL_TO" @onclick="ScrollTo">ScrollTo</button>
         <button data-testid="@BUTTON_SCROLL_BY" @onclick="ScrollBy">ScrollBy</button>
         <button data-testid="@BUTTON_SCROLL_INTO_VIEW" @onclick="ScrollIntoView">ScrollIntoView</button>
-        <button data-testid="@BUTTON_REQUEST_FULLSCREEN" @onclick="RequestFullscreen">RequestFullscreen</button>
 
-        @* Element Events *@
+        @* Node/Element Methods - Attribute *@
+        <button data-testid="@BUTTON_GET_ATTRIBUTE" @onclick="GetAttribute">GetAttribute</button>
+        <button data-testid="@BUTTON_GET_ATTRIBUTE_NS" @onclick="GetAttributeNS">GetAttributeNS</button>
+        <button data-testid="@BUTTON_GET_ATTRIBUTE_NAMES" @onclick="GetAttributeNames">GetAttributeNames</button>
+        <button data-testid="@BUTTON_SET_ATTRIBUTE" @onclick="SetAttribute">SetAttribute</button>
+        <button data-testid="@BUTTON_SET_ATTRIBUTE_NS" @onclick="SetAttributeNS">SetAttributeNS</button>
+        <button data-testid="@BUTTON_TOGGLE_ATTRIBUTE" @onclick="ToggleAttribute">ToggleAttribute</button>
+        <button data-testid="@BUTTON_REMOVE_ATTRIBUTE" @onclick="RemoveAttribute">RemoveAttribute</button>
+        <button data-testid="@BUTTON_REMOVE_ATTRIBUTE_NS" @onclick="RemoveAttributeNS">RemoveAttributeNS</button>
+        <button data-testid="@BUTTON_HAS_ATTRIBUTE" @onclick="HasAttribute">HasAttribute</button>
+        <button data-testid="@BUTTON_HAS_ATTRIBUTE_NS" @onclick="HasAttributeNS">HasAttributeNS</button>
+        <button data-testid="@BUTTON_HAS_ATTRIBUTES" @onclick="HasAttributes">HasAttributes</button>
+
+        @* Node/Element Methods - Tree-nodes *@
+        <button data-testid="@BUTTON_GET_ELEMENTS_BY_CLASS_NAME" @onclick="GetElementsByClassName">GetElementsByClassName</button>
+        <button data-testid="@BUTTON_GET_ELEMENTS_BY_TAG_NAME" @onclick="GetElementsByTagName">GetElementsByTagName</button>
+        <button data-testid="@BUTTON_GET_ELEMENTS_BY_TAG_NAME_NS" @onclick="GetElementsByTagNameNS">GetElementsByTagNameNS</button>
+        <button data-testid="@BUTTON_QUERY_SELECTOR" @onclick="QuerySelector">QuerySelector</button>
+        <button data-testid="@BUTTON_QUERY_SELECTOR_ALL" @onclick="QuerySelectorAll">QuerySelectorAll</button>
+        <button data-testid="@BUTTON_CLOSEST" @onclick="Closest">Closest</button>
+
+        <button data-testid="@BUTTON_BEFORE_STRING" @onclick="Before_String">Before_String</button>
+        <button data-testid="@BUTTON_BEFORE_HTML_ELEMENT" @onclick="Before_HtmlElement">Before_HtmlElement</button>
+        <button data-testid="@BUTTON_AFTER_STRING" @onclick="After_String">After_String</button>
+        <button data-testid="@BUTTON_AFTER_HTML_ELEMENT" @onclick="After_HtmlElement">After_HtmlElement</button>
+
+        <button data-testid="@BUTTON_PREPEND_STRING" @onclick="Prepend_String">Prepend_String</button>
+        <button data-testid="@BUTTON_PREPEND_HTML_ELEMENT" @onclick="Prepend_HtmlElement">Prepend_HtmlElement</button>
+        <button data-testid="@BUTTON_APPEND_CHILD" @onclick="AppendChild">AppendChild</button>
+        <button data-testid="@BUTTON_APPEND_STRING" @onclick="Append_String">Append_String</button>
+        <button data-testid="@BUTTON_APPEND_HTML_ELEMENT" @onclick="Append_HtmlElement">Append_HtmlElement</button>
+        <button data-testid="@BUTTON_INSERT_ADJACENT_ELEMENT" @onclick="InsertAdjacentElement">InsertAdjacentElement</button>
+        <button data-testid="@BUTTON_INSERT_ADJACENT_HTML" @onclick="InsertAdjacentHTML">InsertAdjacentHTML</button>
+        <button data-testid="@BUTTON_INSERT_ADJACENT_TEXT" @onclick="InsertAdjacentText">InsertAdjacentText</button>
+
+        <button data-testid="@BUTTON_REMOVE_CHILD" @onclick="RemoveChild">RemoveChild</button>
+        <button data-testid="@BUTTON_REMOVE" @onclick="Remove">Remove</button>
+        <button data-testid="@BUTTON_REPLACE_CHILD" @onclick="ReplaceChild">ReplaceChild</button>
+        <button data-testid="@BUTTON_REPLACE_CHILD_INDEX" @onclick="ReplaceChild_Index">ReplaceChild_Index</button>
+        <button data-testid="@BUTTON_REPLACE_WITH_STRING" @onclick="ReplaceWith_String">ReplaceWith_String</button>
+        <button data-testid="@BUTTON_REPLACE_WITH_HTML_ELEMENT" @onclick="ReplaceWith_HtmlElement">ReplaceWith_HtmlElement</button>
+        <button data-testid="@BUTTON_REPLACE_CHILDREN_STRING" @onclick="ReplaceChildren_String">ReplaceChildren_String</button>
+        <button data-testid="@BUTTON_REPLACE_CHILDREN_HTML_ELEMENT" @onclick="ReplaceChildren_HtmlElement">ReplaceChildren_HtmlElement</button>
+
+        <button data-testid="@BUTTON_CLONE_NODE" @onclick="CloneNode">CloneNode</button>
+        <button data-testid="@BUTTON_IS_SAME_NODE" @onclick="IsSameNode">IsSameNode</button>
+        <button data-testid="@BUTTON_IS_EQUAL_NODE" @onclick="IsEqualNode">IsEqualNode</button>
+        <button data-testid="@BUTTON_CONTAINS" @onclick="Contains">Contains</button>
+        <button data-testid="@BUTTON_COMPARE_DOCUMENT_POSITION" @onclick="CompareDocumentPosition">CompareDocumentPosition</button>
+
+        @* Events *@
         <button data-testid="@BUTTON_REGISTER_ON_TRANSITIONSTART" @onclick="RegisterOnTransitionstart">RegisterOnTransitionstart</button>
         <button data-testid="@BUTTON_REGISTER_ON_TRANSITIONEND" @onclick="RegisterOnTransitionend">RegisterOnTransitionend</button>
         <button data-testid="@BUTTON_REGISTER_ON_TRANSITIONRUN" @onclick="RegisterOnTransitionrun">RegisterOnTransitionrun</button>
         <button data-testid="@BUTTON_REGISTER_ON_TRANSITIONCANCEL" @onclick="RegisterOnTransitioncancel">RegisterOnTransitioncancel</button>
+
         <button data-testid="@BUTTON_REGISTER_ON_ANIMATIONSTART" @onclick="RegisterOnAnimationstart">RegisterOnAnimationstart</button>
         <button data-testid="@BUTTON_REGISTER_ON_ANIMATIONEND" @onclick="RegisterOnAnimationend">RegisterOnAnimationend</button>
         <button data-testid="@BUTTON_REGISTER_ON_ANIMATIONITERATION" @onclick="RegisterOnAnimationiteration">RegisterOnAnimationiteration</button>
@@ -308,4 +369,5 @@
         </div>
     </div>
     <p data-testid="@POPOVER_ELEMENT" @ref="popoverElement" class="html-element-popover" popover>Popover</p>
+    <label data-testid="@HIDDEN_ELEMENT" hidden @ref="hiddenElement">hidden</label>
 </div>

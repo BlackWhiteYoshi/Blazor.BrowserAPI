@@ -80,6 +80,10 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
     public const string TEST_ARIA_VALUE_NOW = "1";
     public const string TEST_ARIA_VALUE_TEXT = "one";
     public const string TEST_ROLE = "my role";
+    // Element - Methods
+    public const string TEST_CUSTOM_NAME = "custom-name";
+    public const string TEST_CUSTOM_VALUE = "my-value";
+    public const string TEST_INSERT_HTML = $"<label>{TEST_CUSTOM_VALUE}</label>";
     // Element - Events
     public const string TEST_TRANSITIONSTART_EVENT = "transitionstart-event-test";
     public const string TEST_TRANSITIONEND_EVENT = "transitionend-event-test";
@@ -102,6 +106,9 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
     private IHTMLElementInProcess? _popoverElement;
     private IHTMLElementInProcess PopoverElement => _popoverElement ??= ElementFactory.CreateHTMLElement(popoverElement);
 
+    private IHTMLElementInProcess? _hiddenElement;
+    private IHTMLElementInProcess HiddenElement => _hiddenElement ??= ElementFactory.CreateHTMLElement(hiddenElement);
+
 
     public const string LABEL_OUTPUT = "htmlelement-inprocess-output";
     private string labelOutput = string.Empty;
@@ -113,9 +120,13 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
     public const string POPOVER_ELEMENT = "htmlelement-inprocess-popover-element";
     private ElementReference popoverElement;
 
+    public const string HIDDEN_ELEMENT = "htmlelement-inprocess-hidden-element";
+    private ElementReference hiddenElement;
+
     public void Dispose() {
         _htmlElement?.Dispose();
         _popoverElement?.Dispose();
+        _hiddenElement?.Dispose();
     }
 
 
@@ -492,7 +503,7 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
     #endregion
 
 
-    #region Element
+    #region Node/Element
 
     public const string BUTTON_GET_ATTRIBUTES = "htmlelement-inprocess-get-attributes";
     private void GetAttributes() {
@@ -1042,6 +1053,18 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
 
     // methods
 
+    public const string BUTTON_CHECK_VISIBILITY = "htmlelement-inprocess-check-visibility";
+    private void CheckVisibility() {
+        bool visibility = HTMLElement.CheckVisibility();
+        labelOutput = visibility.ToString();
+    }
+
+    public const string BUTTON_COMPUTED_STYLE_MAP = "htmlelement-inprocess-computed-style-map";
+    private void ComputedStyleMap() {
+        Dictionary<string, string> computedStyleMap = HTMLElement.ComputedStyleMap();
+        labelOutput = JsonSerializer.Serialize(computedStyleMap);
+    }
+
     public const string BUTTON_GET_BOUNDING_CLIENT_RECT = "htmlelement-inprocess-get-bounding-client-rect";
     private void GetBoundingClientRect() {
         DOMRect boundingClientRect = HTMLElement.GetBoundingClientRect();
@@ -1054,19 +1077,47 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
         labelOutput = string.Join(';', boundingClientRect.Select(rect => JsonSerializer.Serialize(rect)));
     }
 
-
-    public const string BUTTON_HAS_ATTRIBUTE = "htmlelement-inprocess-has-attribute";
-    private void HasAttribute() {
-        bool hasAttribute = HTMLElement.HasAttribute("data-testid");
-        labelOutput = hasAttribute.ToString();
+    public const string BUTTON_MATCHES = "htmlelement-inprocess-matches";
+    public void Matches() {
+        bool matches = HTMLElement.Matches($"[data-testid={HTML_ELEMENT}]");
+        labelOutput = matches.ToString();
     }
 
-    public const string BUTTON_HAS_ATTRIBUTES = "htmlelement-inprocess-has-attributes";
-    private void HasAttributes() {
-        bool hasAttributes = HTMLElement.HasAttributes();
-        labelOutput = hasAttributes.ToString();
+    public const string BUTTON_REQUEST_FULLSCREEN = "htmlelement-inprocess-request-fullscreen";
+    private async Task RequestFullscreen() {
+        await HTMLElement.RequestFullscreen();
     }
 
+    public const string BUTTON_REQUEST_POINTER_LOCK = "htmlelement-inprocess-request-pointer-lock";
+    private async Task RequestPointerLock() {
+        await HTMLElement.RequestPointerLock();
+    }
+
+    public const string BUTTON_IS_DEFAULT_NAMESPACE = "htmlelement-inprocess-is-default-namespace";
+    private void IsDefaultNamespace() {
+        bool isDefaultNamespace = HTMLElement.IsDefaultNamespace("http://www.w3.org/1999/xhtml");
+        labelOutput = isDefaultNamespace.ToString();
+    }
+
+    public const string BUTTON_LOOKUP_PREFIX = "htmlelement-inprocess-lookup-prefix";
+    private void LookupPrefix() {
+        string? prefix = HTMLElement.LookupPrefix("http://www.w3.org/1999/xhtml");
+        labelOutput = prefix ?? "(no prefix)";
+    }
+
+    public const string BUTTON_LOOKUP_NAMESPACE_URI = "htmlelement-inprocess-lookup-namespace-uri";
+    private void LookupNamespaceURI() {
+        string? namespaceURI = HTMLElement.LookupNamespaceURI(null);
+        labelOutput = namespaceURI ?? "(no namespace uri)";
+    }
+
+    public const string BUTTON_NORMALIZE = "htmlelement-inprocess-normalize";
+    private void Normalize() {
+        HTMLElement.Normalize();
+    }
+
+
+    // methods - Pointer Capture
 
     private void SetPointerCapture(PointerEventArgs e) {
         HTMLElement.SetPointerCapture(e.PointerId);
@@ -1082,9 +1133,16 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
     }
 
 
+    // methods - Scroll
+
     public const string BUTTON_SCROLL = "htmlelement-inprocess-scroll";
     private void Scroll() {
         HTMLElement.Scroll(TEST_SCROLL_LEFT, TEST_SCROLL_TOP);
+    }
+
+    public const string BUTTON_SCROLL_TO = "htmlelement-inprocess-scroll-to";
+    private void ScrollTo() {
+        HTMLElement.ScrollTo(TEST_SCROLL_LEFT, TEST_SCROLL_TOP);
     }
 
     public const string BUTTON_SCROLL_BY = "htmlelement-inprocess-scroll-by";
@@ -1098,9 +1156,249 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
     }
 
 
-    public const string BUTTON_REQUEST_FULLSCREEN = "htmlelement-inprocess-request-fullscreen";
-    private async Task RequestFullscreen() {
-        await HTMLElement.RequestFullscreen();
+    // methods - Attribute
+
+    public const string BUTTON_GET_ATTRIBUTE = "htmlelement-inprocess-get-attribute";
+    private void GetAttribute() {
+        string? attribute = HTMLElement.GetAttribute("data-testid");
+        labelOutput = attribute ?? "'data-testid' attr not found";
+    }
+
+    public const string BUTTON_GET_ATTRIBUTE_NS = "htmlelement-inprocess-get-attribute-ns";
+    private void GetAttributeNS() {
+        string? attribute = HTMLElement.GetAttributeNS("", "data-testid");
+        labelOutput = attribute ?? "'data-testid' attr not found";
+    }
+
+    public const string BUTTON_GET_ATTRIBUTE_NAMES = "htmlelement-inprocess-get-attribute-names";
+    private void GetAttributeNames() {
+        string[] attributeNames = HTMLElement.GetAttributeNames();
+        labelOutput = $"({attributeNames.Length}): {string.Join(',', attributeNames)}";
+    }
+
+    public const string BUTTON_SET_ATTRIBUTE = "htmlelement-inprocess-set-attribute";
+    private void SetAttribute() {
+        HTMLElement.SetAttribute(TEST_CUSTOM_NAME, TEST_CUSTOM_VALUE);
+    }
+
+    public const string BUTTON_SET_ATTRIBUTE_NS = "htmlelement-inprocess-set-attribute-ns";
+    private void SetAttributeNS() {
+        HTMLElement.SetAttributeNS("http://www.w3.org/1999/xhtml", TEST_CUSTOM_NAME, TEST_CUSTOM_VALUE);
+    }
+
+    public const string BUTTON_TOGGLE_ATTRIBUTE = "htmlelement-inprocess-toggle-attribute";
+    private void ToggleAttribute() {
+        HTMLElement.ToggleAttribute(TEST_CUSTOM_NAME);
+    }
+
+    public const string BUTTON_REMOVE_ATTRIBUTE = "htmlelement-inprocess-remove-attribute";
+    private void RemoveAttribute() {
+        HTMLElement.RemoveAttribute(TEST_CUSTOM_NAME);
+    }
+
+    public const string BUTTON_REMOVE_ATTRIBUTE_NS = "htmlelement-inprocess-remove-attribute-ns";
+    private void RemoveAttributeNS() {
+        HTMLElement.RemoveAttributeNS("", TEST_CUSTOM_NAME);
+    }
+
+    public const string BUTTON_HAS_ATTRIBUTE = "htmlelement-inprocess-has-attribute";
+    private void HasAttribute() {
+        bool hasAttribute = HTMLElement.HasAttribute("data-testid");
+        labelOutput = hasAttribute.ToString();
+    }
+
+    public const string BUTTON_HAS_ATTRIBUTE_NS = "htmlelement-inprocess-has-attribute-ns";
+    private void HasAttributeNS() {
+        bool hasAttribute = HTMLElement.HasAttributeNS("", "data-testid");
+        labelOutput = hasAttribute.ToString();
+    }
+
+    public const string BUTTON_HAS_ATTRIBUTES = "htmlelement-inprocess-has-attributes";
+    private void HasAttributes() {
+        bool hasAttributes = HTMLElement.HasAttributes();
+        labelOutput = hasAttributes.ToString();
+    }
+
+
+    // methods - Tree-nodes
+
+    public const string BUTTON_GET_ELEMENTS_BY_CLASS_NAME = "htmlelement-inprocess-get-elements-by-class-name";
+    private void GetElementsByClassName() {
+        IHTMLElementInProcess[] elements = HTMLElement.GetElementsByClassName(TEST_CUSTOM_NAME);
+        labelOutput = elements.Length.ToString();
+
+        elements.Dispose();
+    }
+
+    public const string BUTTON_GET_ELEMENTS_BY_TAG_NAME = "htmlelement-inprocess-get-elements-by-tag-name";
+    private void GetElementsByTagName() {
+        IHTMLElementInProcess[] elements = HTMLElement.GetElementsByTagName("b");
+        labelOutput = elements.Length.ToString();
+
+        elements.Dispose();
+    }
+
+    public const string BUTTON_GET_ELEMENTS_BY_TAG_NAME_NS = "htmlelement-inprocess-get-elements-by-tag-name-ns";
+    private void GetElementsByTagNameNS() {
+        IHTMLElementInProcess[] elements = HTMLElement.GetElementsByTagNameNS("http://www.w3.org/1999/xhtml", "b");
+        labelOutput = elements.Length.ToString();
+
+        elements.Dispose();
+    }
+
+    public const string BUTTON_QUERY_SELECTOR = "htmlelement-inprocess-query-selector";
+    private void QuerySelector() {
+        using IHTMLElementInProcess? element = HTMLElement.QuerySelector("b");
+        labelOutput = (element is not null).ToString();
+    }
+
+    public const string BUTTON_QUERY_SELECTOR_ALL = "htmlelement-inprocess-query-selector-all";
+    private void QuerySelectorAll() {
+        IHTMLElementInProcess[] elements = HTMLElement.QuerySelectorAll("b");
+        labelOutput = elements.Length.ToString();
+
+        elements.Dispose();
+    }
+
+    public const string BUTTON_CLOSEST = "htmlelement-inprocess-closest";
+    private void Closest() {
+        using IHTMLElementInProcess? element = HTMLElement.Closest(".group");
+        labelOutput = (element is not null).ToString();
+    }
+
+
+    public const string BUTTON_BEFORE_STRING = "htmlelement-inprocess-before-string";
+    private void Before_String() {
+        HTMLElement.Before([TEST_CUSTOM_VALUE]);
+    }
+
+    public const string BUTTON_BEFORE_HTML_ELEMENT = "htmlelement-inprocess-before-html-element";
+    private void Before_HtmlElement() {
+        HTMLElement.Before([HiddenElement]);
+    }
+
+    public const string BUTTON_AFTER_STRING = "htmlelement-inprocess-after-string";
+    private void After_String() {
+        HTMLElement.After([TEST_CUSTOM_VALUE]);
+    }
+
+    public const string BUTTON_AFTER_HTML_ELEMENT = "htmlelement-inprocess-after-html-element";
+    private void After_HtmlElement() {
+        HTMLElement.After([HiddenElement]);
+    }
+
+
+    public const string BUTTON_PREPEND_STRING = "htmlelement-inprocess-prepend-string";
+    private void Prepend_String() {
+        HTMLElement.Prepend([TEST_CUSTOM_VALUE]);
+    }
+
+    public const string BUTTON_PREPEND_HTML_ELEMENT = "htmlelement-inprocess-prepend-html-element";
+    private void Prepend_HtmlElement() {
+        HTMLElement.Prepend([HiddenElement]);
+    }
+
+    public const string BUTTON_APPEND_CHILD = "htmlelement-inprocess-append-child";
+    private void AppendChild() {
+        HTMLElement.AppendChild(HiddenElement);
+    }
+
+    public const string BUTTON_APPEND_STRING = "htmlelement-inprocess-append-string";
+    private void Append_String() {
+        HTMLElement.Append([TEST_CUSTOM_VALUE]);
+    }
+
+    public const string BUTTON_APPEND_HTML_ELEMENT = "htmlelement-inprocess-append-html-element";
+    private void Append_HtmlElement() {
+        HTMLElement.Append([HiddenElement]);
+    }
+
+    public const string BUTTON_INSERT_ADJACENT_ELEMENT = "htmlelement-inprocess-insert-adjacent-element";
+    private void InsertAdjacentElement() {
+        bool success = HTMLElement.InsertAdjacentElement("afterbegin", HiddenElement);
+        labelOutput = success.ToString();
+    }
+
+    public const string BUTTON_INSERT_ADJACENT_HTML = "htmlelement-inprocess-insert-adjacent-html";
+    private void InsertAdjacentHTML() {
+        HTMLElement.InsertAdjacentHTML("afterbegin", TEST_INSERT_HTML);
+    }
+
+    public const string BUTTON_INSERT_ADJACENT_TEXT = "htmlelement-inprocess-insert-adjacent-text";
+    private void InsertAdjacentText() {
+        HTMLElement.InsertAdjacentText("afterbegin", TEST_CUSTOM_VALUE);
+    }
+
+
+    public const string BUTTON_REMOVE_CHILD = "htmlelement-inprocess-remove-child";
+    private void RemoveChild() {
+        HTMLElement.RemoveChild(HiddenElement);
+    }
+
+    public const string BUTTON_REMOVE = "htmlelement-inprocess-remove";
+    private void Remove() {
+        HTMLElement.Remove();
+    }
+
+    public const string BUTTON_REPLACE_CHILD = "htmlelement-inprocess-replace-child";
+    private void ReplaceChild() {
+        HTMLElement.ReplaceChild(PopoverElement, HiddenElement);
+    }
+
+    public const string BUTTON_REPLACE_CHILD_INDEX = "htmlelement-inprocess-replace-child-index";
+    private void ReplaceChild_Index() {
+        HTMLElement.ReplaceChild(PopoverElement, 0);
+    }
+
+    public const string BUTTON_REPLACE_WITH_STRING = "htmlelement-inprocess-replace-with-string";
+    private void ReplaceWith_String() {
+        HTMLElement.ReplaceWith([TEST_CUSTOM_VALUE]);
+    }
+
+    public const string BUTTON_REPLACE_WITH_HTML_ELEMENT = "htmlelement-inprocess-replace-with-html-element";
+    private void ReplaceWith_HtmlElement() {
+        HTMLElement.ReplaceWith([HiddenElement]);
+    }
+
+    public const string BUTTON_REPLACE_CHILDREN_STRING = "htmlelement-inprocess-replace-children-string";
+    private void ReplaceChildren_String() {
+        HTMLElement.ReplaceChildren([TEST_CUSTOM_VALUE]);
+    }
+
+    public const string BUTTON_REPLACE_CHILDREN_HTML_ELEMENT = "htmlelement-inprocess-replace-children-html-element";
+    private void ReplaceChildren_HtmlElement() {
+        HTMLElement.ReplaceChildren([HiddenElement]);
+    }
+
+
+    public const string BUTTON_CLONE_NODE = "htmlelement-inprocess-clone-node";
+    private void CloneNode() {
+        using IHTMLElementInProcess clonedElement = HTMLElement.CloneNode();
+        labelOutput = (clonedElement is not null).ToString();
+    }
+
+    public const string BUTTON_IS_SAME_NODE = "htmlelement-inprocess-is-same-node";
+    private void IsSameNode() {
+        bool isSameNode = HTMLElement.IsSameNode(HTMLElement);
+        labelOutput = isSameNode.ToString();
+    }
+
+    public const string BUTTON_IS_EQUAL_NODE = "htmlelement-inprocess-is-equal-node";
+    private void IsEqualNode() {
+        bool isEqualNode = HTMLElement.IsEqualNode(HTMLElement);
+        labelOutput = isEqualNode.ToString();
+    }
+
+    public const string BUTTON_CONTAINS = "htmlelement-inprocess-contains";
+    private void Contains() {
+        bool contains = HTMLElement.Contains(HiddenElement);
+        labelOutput = contains.ToString();
+    }
+
+    public const string BUTTON_COMPARE_DOCUMENT_POSITION = "htmlelement-inprocess-compare-document-position";
+    private void CompareDocumentPosition() {
+        int comparison = HTMLElement.CompareDocumentPosition(HiddenElement);
+        labelOutput = comparison.ToString();
     }
 
 

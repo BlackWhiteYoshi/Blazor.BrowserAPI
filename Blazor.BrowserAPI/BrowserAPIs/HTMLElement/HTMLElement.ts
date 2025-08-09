@@ -424,6 +424,7 @@ export class HTMLElementAPI {
         return this.#htmlElement.prefix;
     }
 
+
     getBaseURI(): string {
         return this.#htmlElement.baseURI;
     }
@@ -486,7 +487,7 @@ export class HTMLElementAPI {
     getParentElement(): [HTMLElementAPI] | [null] {
         const result = this.#htmlElement.parentElement;
         if (result)
-            return [DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>result))];
+            return [DotNet.createJSObjectReference(new HTMLElementAPI(result))];
         else
             return [null];
     }
@@ -887,14 +888,6 @@ export class HTMLElementAPI {
         return this.#htmlElement.checkVisibility(<CheckVisibilityOptions>{ contentVisibilityAuto, opacityProperty, visibilityProperty });
     }
 
-    closest(selectors: string): [HTMLElementAPI] | [null] {
-        const result = this.#htmlElement.closest(selectors);
-        if (result)
-            return [DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>result))];
-        else
-            return [null];
-    }
-
     computedStyleMap(): Record<string, string> {
         const computedStyleMap = this.#htmlElement.computedStyleMap().entries();
 
@@ -924,15 +917,15 @@ export class HTMLElementAPI {
         return (<(options: { unadjustedMovement: boolean; }) => Promise<void>><unknown>this.#htmlElement.requestPointerLock)({ unadjustedMovement });
     }
 
-    isDefaultNamespace(namespace: string): boolean {
+    isDefaultNamespace(namespace: string | null): boolean {
         return this.#htmlElement.isDefaultNamespace(namespace);
     }
 
-    lookupPrefix(namespace: string): string | null {
+    lookupPrefix(namespace: string | null): string | null {
         return this.#htmlElement.lookupPrefix(namespace);
     }
 
-    lookupNamespaceURI(prefix: string): string | null {
+    lookupNamespaceURI(prefix: string | null): string | null {
         return this.#htmlElement.lookupNamespaceURI(prefix);
     }
 
@@ -962,19 +955,19 @@ export class HTMLElementAPI {
         this.#htmlElement.scroll(left, top);
     }
 
+    scrollTo(x: number, y: number, behavior: ScrollBehavior | null): void {
+        if (behavior === null)
+            this.#htmlElement.scrollTo(x, y);
+        else
+            this.#htmlElement.scrollTo({ left: x, top: y, behavior });
+    }
+
     scrollBy(x: number, y: number): void {
         this.#htmlElement.scrollBy(x, y);
     }
 
     scrollIntoView(block: ScrollLogicalPosition = "start", inline: ScrollLogicalPosition = "nearest", behavior: ScrollBehavior = "auto"): void {
         this.#htmlElement.scrollIntoView({ block, inline, behavior });
-    }
-
-    scrollTo(x: number, y: number, behavior: ScrollBehavior | null): void {
-        if (behavior === null)
-            this.#htmlElement.scrollTo(x, y);
-        else
-            this.#htmlElement.scrollTo({ left: x, top: y, behavior })
     }
 
 
@@ -1028,15 +1021,15 @@ export class HTMLElementAPI {
     // Node/Element methods - Tree-nodes
 
     getElementsByClassName(className: string): HTMLElementAPI[] {
-        return [...this.#htmlElement.getElementsByClassName(className)].map(element => new HTMLElementAPI(<HTMLElement>element));
+        return [...this.#htmlElement.getElementsByClassName(className)].map(element => DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>element)));
     }
 
     getElementsByTagName(qualifiedName: string): HTMLElementAPI[] {
-        return [... this.#htmlElement.getElementsByTagName(qualifiedName)].map(element => new HTMLElementAPI(<HTMLElement>element));
+        return [... this.#htmlElement.getElementsByTagName(qualifiedName)].map(element => DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>element)));
     }
 
     getElementsByTagNameNS(namespace: string, qualifiedName: string): HTMLElementAPI[] {
-        return [... this.#htmlElement.getElementsByTagNameNS(namespace, qualifiedName)].map(element => new HTMLElementAPI(<HTMLElement>element));
+        return [... this.#htmlElement.getElementsByTagNameNS(namespace, qualifiedName)].map(element => DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>element)));
     }
 
     querySelector(selectors: string): [HTMLElementAPI] | [null] {
@@ -1048,7 +1041,15 @@ export class HTMLElementAPI {
     }
 
     querySelectorAll(selectors: string): HTMLElementAPI[] {
-        return [... this.#htmlElement.querySelectorAll(selectors)].map(element => new HTMLElementAPI(<HTMLElement>element));
+        return [... this.#htmlElement.querySelectorAll(selectors)].map(element => DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>element)));
+    }
+
+    closest(selectors: string): [HTMLElementAPI] | [null] {
+        const result = this.#htmlElement.closest(selectors);
+        if (result)
+            return [DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>result))];
+        else
+            return [null];
     }
 
 
