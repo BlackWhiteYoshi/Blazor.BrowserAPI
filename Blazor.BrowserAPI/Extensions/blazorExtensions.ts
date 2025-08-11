@@ -1,6 +1,6 @@
 /**
  * Invokes the specified .NET public method synchronously or asynchronously depending on the isSync parameter.
- * 
+ *
  * @param isSync When set to true the invokation is synchronously, otherwise asynchronously.
  * @param assemblyName The short name (without key/version or .dll extension) of the .NET assembly containing the method.
  * @param methodIdentifier The identifier of the method to invoke. The method must have a [JSInvokable] attribute specifying this identifier.
@@ -16,7 +16,7 @@ export function blazorInvokeStaticMethod<T>(isSync: boolean, assemblyName: strin
 
 /**
  * Invokes the specified .NET instance public method synchronously or asynchronously depending on the isSync parameter.
- * 
+ *
  * @param isSync When set to true the invokation is synchronously, otherwise asynchronously.
  * @param dotnetObject The .NET instance passed by reference to JavaScript.
  * @param methodIdentifier The identifier of the method to invoke. The method must have a [JSInvokable] attribute specifying this identifier.

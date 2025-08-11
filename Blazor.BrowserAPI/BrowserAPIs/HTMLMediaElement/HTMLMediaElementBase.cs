@@ -206,7 +206,7 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
         }
     }
 
-    
+
     // Data Events
 
     private Action? _onLoadstart;
@@ -368,7 +368,7 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
         }
     }
 
-    
+
     // Timing Events
 
     private Action? _onPlay;
@@ -486,7 +486,7 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
         }
     }
 
-    
+
     // Setting Events
 
     private Action? _onVolumechange;

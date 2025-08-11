@@ -79,7 +79,7 @@ public sealed class ServiceWorkerContainerInProcess(IModuleManager moduleManager
     /// <returns></returns>
     public async ValueTask<IServiceWorkerRegistrationInProcess[]> GetRegistrations(CancellationToken cancellationToken = default) {
         IJSInProcessObjectReference[] serviceWorkerRegistrations = await moduleManager.InvokeAsync<IJSInProcessObjectReference[]>("ServiceWorkerContainerAPI.getRegistrations", cancellationToken);
-        
+
         ServiceWorkerRegistrationInProcess[] result = new ServiceWorkerRegistrationInProcess[serviceWorkerRegistrations.Length];
         for (int i = 0; i < serviceWorkerRegistrations.Length; i++)
             result[i] = new ServiceWorkerRegistrationInProcess(serviceWorkerRegistrations[i]);

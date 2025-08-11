@@ -93,7 +93,7 @@ public sealed class MediaDevicesInProcessTest(PlayWrightFixture playWrightFixtur
         await Assert.That(result).StartsWith("MediaTrackSupportedConstraint");
     }
 
-    
+
     [Test]
     public async Task GetUserMedia() {
         await ExecuteTest(MediaDevicesInProcessGroup.BUTTON_GET_USER_MEDIA);

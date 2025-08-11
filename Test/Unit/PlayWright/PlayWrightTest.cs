@@ -45,7 +45,7 @@ public abstract class PlayWrightTest(PlayWrightFixture playWrightFixture) {
     /// Small waiting time in ms
     /// </summary>
     protected const int SMALL_WAIT_TIME = 50;
-    
+
     /// <summary>
     /// Standard waiting time in ms
     /// </summary>

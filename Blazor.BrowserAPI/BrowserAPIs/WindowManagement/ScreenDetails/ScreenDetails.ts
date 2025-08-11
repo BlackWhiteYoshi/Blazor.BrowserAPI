@@ -47,7 +47,7 @@ export class ScreenDetailsAPI {
 
     // screenschange event
 
-    #onscreenschange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeScreensChange"); 
+    #onscreenschange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeScreensChange");
 
     activateOnscreenschange(): void {
         this.#screenDetails.addEventListener("screenschange", this.#onscreenschange);

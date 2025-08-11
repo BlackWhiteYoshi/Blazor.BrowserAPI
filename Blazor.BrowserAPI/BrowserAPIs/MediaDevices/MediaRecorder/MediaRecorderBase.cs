@@ -13,7 +13,7 @@ public abstract class MediaRecorderBase(IJSObjectReference mediaRecorderJS) {
 #pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
     private protected IJSObjectReference mediaRecorderJS = mediaRecorderJS;
 
-    
+
     #region Events
 
     [method: DynamicDependency(nameof(InvokeDataavailable))]

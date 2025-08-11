@@ -239,7 +239,7 @@ public sealed class WindowManagementTest(PlayWrightFixture playWrightFixture) : 
 
 
     /* PlayWright does not support permission "window-management"
-    
+
     #region Window Management
 
     [Test]

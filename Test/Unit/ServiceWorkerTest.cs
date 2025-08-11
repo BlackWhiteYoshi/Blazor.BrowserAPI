@@ -21,7 +21,7 @@ public sealed class ServiceWorkerTest(PlayWrightFixture playWrightFixture) : Pla
         navigator.serviceWorker.getRegistrations = () => [];
         navigator.serviceWorker.startMessages = () => { };
         """;
-    
+
     private const string JS_SERVICE_WORKER_REGISTRATION_OBJECT = $$"""
         {
             active: {{JS_SERVICE_WORKER_OBJECT}},
@@ -145,7 +145,7 @@ public sealed class ServiceWorkerTest(PlayWrightFixture playWrightFixture) : Pla
         await Assert.That(result).IsEqualTo(ServiceWorkerGroup.TEST_START_MESSAGES);
     }
 
-    
+
     [Test]
     public async Task RegisterOnControllerChange() {
         await ExecuteTest(ServiceWorkerGroup.BUTTON_REGISTER_ON_CONTROLLER_CHANGE);

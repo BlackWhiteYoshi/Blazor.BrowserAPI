@@ -516,7 +516,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
         };
     }
 
-    
+
     // Data
 
     public const string BUTTON_REGISTER_ON_LOADSTART = "htmlmediaelement-loadstart-event";
@@ -591,7 +591,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
         };
     }
 
-    
+
     // Timing
 
     public const string BUTTON_REGISTER_ON_PLAY = "htmlmediaelement-play-event";
@@ -642,7 +642,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
         };
     }
 
-    
+
     // Setting
 
     public const string BUTTON_REGISTER_ON_VOLUMECHANGE = "htmlmediaelement-volumechange-event";

@@ -78,7 +78,7 @@ public sealed class GamepadAPITest(PlayWrightFixture playWrightFixture) : PlayWr
 
     [Test]
     public async Task GetAxes_Property() {
-        
+
         await ExecuteTest(GamepadAPIGroup.BUTTON_GET_AXES_PROPERTY);
 
         string? result = await Page.GetByTestId(GamepadAPIGroup.LABEL_OUTPUT).TextContentAsync();

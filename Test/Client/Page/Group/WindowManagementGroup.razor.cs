@@ -271,7 +271,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
     private async Task GetLeft_Property() {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
         await using IScreenDetailed screenDetailed = await screenDetails.CurrentScreen;
-        
+
         int left = await screenDetailed.Left;
         labelOutput = left.ToString();
     }

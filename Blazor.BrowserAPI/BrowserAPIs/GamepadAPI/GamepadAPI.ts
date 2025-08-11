@@ -34,7 +34,7 @@ export class GamepadInterfaceAPI {
         return blazorInvokeMethod(GamepadInterfaceAPI.#eventTrigger, GamepadInterfaceAPI.#isEventTriggerSync, "InvokeGamepadConnected", DotNet.createJSObjectReference(new GamepadAPI(gamepadEvent.gamepad)));
     }
 
-    static activateOngamepadconnected(): void {        
+    static activateOngamepadconnected(): void {
         window.addEventListener("gamepadconnected", GamepadInterfaceAPI.#ongamepadconnected);
     }
 

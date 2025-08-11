@@ -17,7 +17,7 @@ public sealed partial class ExampleComponent : ComponentBase {
         int width = await WindowManagement.Screen.AvailWidth;
         int height = await WindowManagement.Screen.AvailHeight;
 
-        
+
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
         await using IScreenDetailed screenDetailed = await screenDetails.CurrentScreen;
 

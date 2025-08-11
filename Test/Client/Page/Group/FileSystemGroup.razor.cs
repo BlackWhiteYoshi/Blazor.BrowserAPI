@@ -94,7 +94,7 @@ public sealed partial class FileSystemGroup : ComponentBase {
     }
 
 
-    
+
     public const string BUTTON_FILEHANDLE_GET_NAME_PROPERTY = "filesystem-filehandle-get-name-property";
     private async Task FileHandle_GetName_Property() {
         await using TempFile tempFile = await TempFile.Create(FileSystem);

@@ -201,7 +201,7 @@ public sealed partial class MediaDevicesInProcessGroup : ComponentBase {
         mediaRecorder.Start();
         await Task.Delay(100);
         mediaRecorder.RequestData();
-        
+
 
         void OnDataavailable(byte[] data) {
             labelOutput = data.Length.ToString();

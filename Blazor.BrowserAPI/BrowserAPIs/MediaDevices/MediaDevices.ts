@@ -66,7 +66,7 @@ export class MediaDevicesAPI {
     }
 
 
-    
+
     static #convertToMediaTrackConstraintSet(constrainMediaTrack: boolean | MediaDevicesTypes.ConstrainMediaTrack): boolean | MediaTrackConstraintSet {
         if (typeof constrainMediaTrack === "boolean")
             return constrainMediaTrack;

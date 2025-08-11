@@ -32,7 +32,6 @@ export class HistoryAPI {
 
     static pushState(data: any, title: string, url: string): void {
         history.pushState(data, title, url ?? undefined);
-        
     }
 
     static replaceState(data: any, title: string, url: string): void {

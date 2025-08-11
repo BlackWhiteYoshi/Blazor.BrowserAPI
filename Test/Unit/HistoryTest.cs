@@ -109,7 +109,7 @@ public sealed class HistoryTest(PlayWrightFixture playWrightFixture) : PlayWrigh
 
         int historyLength = await Page.EvaluateAsync<int>("history.length;");
         await Assert.That(historyLength).IsEqualTo(3);
-        
+
         string url = await Page.EvaluateAsync<string>("window.location.href;");
         await Assert.That(url).EndsWith("/test");
     }

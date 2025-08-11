@@ -14,11 +14,11 @@ public sealed partial class ExampleComponent : ComponentBase {
     public required IHistory History { private get; init; }
 
     private async Task GoForward() => await History.Forward();
-    
+
     private async Task GoBack() => await History.Back();
 
     private async Task RefreshPage() => await History.Go(0);
-    
+
     private async Task AddHistoryEntry() => await History.PushState(data: null, title: "", url: "/siteURL");
 }
 ```

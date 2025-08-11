@@ -670,7 +670,7 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
         await Assert.That(result).IsEqualTo("Playing");
     }
 
-    
+
     // Data
 
     [Test]
@@ -763,7 +763,7 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
         await Assert.That(result).IsEqualTo("Emptied");
     }
 
-    
+
     // Timing
 
     [Test]
@@ -836,7 +836,7 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
         await Assert.That(result).IsEqualTo("Timeupdate");
     }
 
-    
+
     // Setting
 
     [Test]
