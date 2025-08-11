@@ -57,8 +57,8 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
         }
         """;
 
-    public override async Task SetUp() {
-        await base.SetUp();
+    public override async Task InitializeAsync() {
+        await base.InitializeAsync();
         await BrowserContext.GrantPermissionsAsync(["camera", "microphone"]);
 
         await Page.EvaluateAsync($$"""

@@ -62,8 +62,8 @@ public sealed class ServiceWorkerTest(PlayWrightFixture playWrightFixture) : Pla
         }
         """;
 
-    public override async Task SetUp() {
-        await base.SetUp();
+    public override async Task InitializeAsync() {
+        await base.InitializeAsync();
         await Page.EvaluateAsync(JS_SERVICE_WORKER_CONTAINER_METHODS);
         await Task.Delay(SMALL_WAIT_TIME);
     }

@@ -32,8 +32,8 @@ public sealed class GamepadAPIInProcessTest(PlayWrightFixture playWrightFixture)
         }
         """;
 
-    public override async Task SetUp() {
-        await base.SetUp();
+    public override async Task InitializeAsync() {
+        await base.InitializeAsync();
         await Page.EvaluateAsync($"navigator.getGamepads = () => [{JS_GAMEPAD_OBJECT}];");
         await Task.Delay(SMALL_WAIT_TIME);
     }
