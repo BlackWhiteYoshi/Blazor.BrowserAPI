@@ -82,15 +82,15 @@
 
         @* Ready *@
         <button data-testid="@BUTTON_REGISTER_ON_ERROR" @onclick="RegisterOnError">RegisterOnError</button>
-        <button data-testid="@BUTTON_REGISTER_ON_CANPLAY" @onclick="RegisterOnCanplay">RegisterOnCanplay</button>
-        <button data-testid="@BUTTON_REGISTER_ON_CANPLAYTHROUGH" @onclick="RegisterOnCanplaythrough">RegisterOnCanplaythrough</button>
+        <button data-testid="@BUTTON_REGISTER_ON_CAN_PLAY" @onclick="RegisterOnCanPlay">RegisterOnCanPlay</button>
+        <button data-testid="@BUTTON_REGISTER_ON_CAN_PLAY_THROUGH" @onclick="RegisterOnCanPlayThrough">RegisterOnCanPlayThrough</button>
         <button data-testid="@BUTTON_REGISTER_ON_PLAYING" @onclick="RegisterOnPlaying">RegisterOnPlaying</button>
 
         @* Data *@
-        <button data-testid="@BUTTON_REGISTER_ON_LOADSTART" @onclick="RegisterOnLoadstart">RegisterOnLoadstart</button>
+        <button data-testid="@BUTTON_REGISTER_ON_LOAD_START" @onclick="RegisterOnLoadStart">RegisterOnLoadStart</button>
         <button data-testid="@BUTTON_REGISTER_ON_PROGRESS" @onclick="RegisterOnProgress">RegisterOnProgress</button>
-        <button data-testid="@BUTTON_REGISTER_ON_LOADEDDATA" @onclick="RegisterOnLoadeddata">RegisterOnLoadeddata</button>
-        <button data-testid="@BUTTON_REGISTER_ON_LOADEDMETADATA" @onclick="RegisterOnLoadedmetadata">RegisterOnLoadedmetadata</button>
+        <button data-testid="@BUTTON_REGISTER_ON_LOADED_DATA" @onclick="RegisterOnLoadedData">RegisterOnLoadedData</button>
+        <button data-testid="@BUTTON_REGISTER_ON_LOADED_METADATA" @onclick="RegisterOnLoadedMetadata">RegisterOnLoadedMetadata</button>
         <button data-testid="@BUTTON_REGISTER_ON_STALLED" @onclick="RegisterOnStalled">RegisterOnStalled</button>
         <button data-testid="@BUTTON_REGISTER_ON_SUSPEND" @onclick="RegisterOnSuspend">RegisterOnSuspend</button>
         <button data-testid="@BUTTON_REGISTER_ON_WAITING" @onclick="RegisterOnWaiting">RegisterOnWaiting</button>
@@ -103,12 +103,12 @@
         <button data-testid="@BUTTON_REGISTER_ON_ENDED" @onclick="RegisterOnEnded">RegisterOnEnded</button>
         <button data-testid="@BUTTON_REGISTER_ON_SEEKING" @onclick="RegisterOnSeeking">RegisterOnSeeking</button>
         <button data-testid="@BUTTON_REGISTER_ON_SEEKED" @onclick="RegisterOnSeeked">RegisterOnSeeked</button>
-        <button data-testid="@BUTTON_REGISTER_ON_TIMEUPDATE" @onclick="RegisterOnTimeupdate">RegisterOnTimeupdate</button>
+        <button data-testid="@BUTTON_REGISTER_ON_TIME_UPDATE" @onclick="RegisterOnTimeUpdate">RegisterOnTimeUpdate</button>
 
         @* Setting *@
-        <button data-testid="@BUTTON_REGISTER_ON_VOLUMECHANGE" @onclick="RegisterOnVolumechange">RegisterOnVolumechange</button>
-        <button data-testid="@BUTTON_REGISTER_ON_RATECHANGE" @onclick="RegisterOnRatechange">RegisterOnRatechange</button>
-        <button data-testid="@BUTTON_REGISTER_ON_DURATIONCHANGE" @onclick="RegisterOnDurationchange">RegisterOnDurationchange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_VOLUME_CHANGE" @onclick="RegisterOnVolumeChange">RegisterOnVolumeChange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_RATE_CHANGE" @onclick="RegisterOnRateChange">RegisterOnRateChange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_DURATION_CHANGE" @onclick="RegisterOnDurationChange">RegisterOnDurationChange</button>
     </div>
     <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
     <audio data-testid="@AUDIO_ELEMENT" @ref="audioElement" src="HTMLMediaElement_audio.mp3" preload="auto"></audio>

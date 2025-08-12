@@ -339,17 +339,17 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
         };
     }
 
-    public const string BUTTON_REGISTER_ON_CANPLAY = "htmlmediaelement-inprocess-canplay-event";
-    private void RegisterOnCanplay() {
-        AudioElement.OnCanplay += () => {
+    public const string BUTTON_REGISTER_ON_CAN_PLAY = "htmlmediaelement-inprocess-can-play-event";
+    private void RegisterOnCanPlay() {
+        AudioElement.OnCanPlay += () => {
             labelOutput = "Canplay";
             StateHasChanged();
         };
     }
 
-    public const string BUTTON_REGISTER_ON_CANPLAYTHROUGH = "htmlmediaelement-inprocess-canplaythrough-event";
-    private void RegisterOnCanplaythrough() {
-        AudioElement.OnCanplaythrough += () => {
+    public const string BUTTON_REGISTER_ON_CAN_PLAY_THROUGH = "htmlmediaelement-inprocess-can-play-through-event";
+    private void RegisterOnCanPlayThrough() {
+        AudioElement.OnCanPlayThrough += () => {
             labelOutput = "Canplaythrough";
             StateHasChanged();
         };
@@ -366,9 +366,9 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
 
     // Data
 
-    public const string BUTTON_REGISTER_ON_LOADSTART = "htmlmediaelement-inprocess-loadstart-event";
-    private void RegisterOnLoadstart() {
-        AudioElement.OnLoadstart += () => {
+    public const string BUTTON_REGISTER_ON_LOAD_START = "htmlmediaelement-inprocess-load-start-event";
+    private void RegisterOnLoadStart() {
+        AudioElement.OnLoadStart += () => {
             labelOutput = "Loadstart";
             StateHasChanged();
         };
@@ -382,17 +382,17 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
         };
     }
 
-    public const string BUTTON_REGISTER_ON_LOADEDDATA = "htmlmediaelement-inprocess-loadeddata-event";
-    private void RegisterOnLoadeddata() {
-        AudioElement.OnLoadeddata += () => {
+    public const string BUTTON_REGISTER_ON_LOADED_DATA = "htmlmediaelement-inprocess-loaded-data-event";
+    private void RegisterOnLoadedData() {
+        AudioElement.OnLoadedData += () => {
             labelOutput = "Loadeddata";
             StateHasChanged();
         };
     }
 
-    public const string BUTTON_REGISTER_ON_LOADEDMETADATA = "htmlmediaelement-inprocess-loadedmetadata-event";
-    private void RegisterOnLoadedmetadata() {
-        AudioElement.OnLoadedmetadata += () => {
+    public const string BUTTON_REGISTER_ON_LOADED_METADATA = "htmlmediaelement-inprocess-loaded-metadata-event";
+    private void RegisterOnLoadedMetadata() {
+        AudioElement.OnLoadedMetadata += () => {
             labelOutput = "Loadedmetadata";
             StateHasChanged();
         };
@@ -481,9 +481,9 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
         };
     }
 
-    public const string BUTTON_REGISTER_ON_TIMEUPDATE = "htmlmediaelement-inprocess-timeupdate-event";
-    private void RegisterOnTimeupdate() {
-        AudioElement.OnTimeupdate += () => {
+    public const string BUTTON_REGISTER_ON_TIME_UPDATE = "htmlmediaelement-inprocess-time-update-event";
+    private void RegisterOnTimeUpdate() {
+        AudioElement.OnTimeUpdate += () => {
             labelOutput = "Timeupdate";
             StateHasChanged();
         };
@@ -492,25 +492,25 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
 
     // Setting
 
-    public const string BUTTON_REGISTER_ON_VOLUMECHANGE = "htmlmediaelement-inprocess-volumechange-event";
-    private void RegisterOnVolumechange() {
-        AudioElement.OnVolumechange += () => {
+    public const string BUTTON_REGISTER_ON_VOLUME_CHANGE = "htmlmediaelement-inprocess-volume-change-event";
+    private void RegisterOnVolumeChange() {
+        AudioElement.OnVolumeChange += () => {
             labelOutput = "Volumechange";
             StateHasChanged();
         };
     }
 
-    public const string BUTTON_REGISTER_ON_RATECHANGE = "htmlmediaelement-inprocess-ratechange-event";
-    private void RegisterOnRatechange() {
-        AudioElement.OnRatechange += () => {
+    public const string BUTTON_REGISTER_ON_RATE_CHANGE = "htmlmediaelement-inprocess-rate-change-event";
+    private void RegisterOnRateChange() {
+        AudioElement.OnRateChange += () => {
             labelOutput = "Ratechange";
             StateHasChanged();
         };
     }
 
-    public const string BUTTON_REGISTER_ON_DURATIONCHANGE = "htmlmediaelement-inprocess-durationchange-event";
-    private void RegisterOnDurationchange() {
-        AudioElement.OnDurationchange += () => {
+    public const string BUTTON_REGISTER_ON_DURATION_CHANGE = "htmlmediaelement-inprocess-duration-change-event";
+    private void RegisterOnDurationChange() {
+        AudioElement.OnDurationChange += () => {
             labelOutput = "Durationchange";
             StateHasChanged();
         };

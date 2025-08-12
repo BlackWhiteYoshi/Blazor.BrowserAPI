@@ -2676,6 +2676,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     public async Task RegisterOnTransitionCancel() {
         await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_TRANSITION_CANCEL);
         await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#000';");
+        await Task.Delay(SMALL_WAIT_TIME);
         await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#222';");
         await Task.Delay(STANDARD_WAIT_TIME);
 
@@ -2714,9 +2715,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
         await Assert.That(result).StartsWith(HTMLElementInProcessGroup.TEST_ANIMATIONITERATION_EVENT);
     }
 
-
-    // does not work in Chromium Browser. To make this test work, go to PlayWrightFixture.InitializeAsync() and change "Chromium" to "Firefox"
-    [Test, Explicit]
+    [Test]
     public async Task RegisterOnAnimationCancel() {
         await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_ANIMATION_CANCEL);
         await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync("node => node.classList.add('animation-start-infinite');");

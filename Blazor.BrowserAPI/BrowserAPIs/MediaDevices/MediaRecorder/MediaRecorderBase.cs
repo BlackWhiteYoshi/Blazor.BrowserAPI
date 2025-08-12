@@ -16,14 +16,14 @@ public abstract class MediaRecorderBase(IJSObjectReference mediaRecorderJS) {
 
     #region Events
 
-    [method: DynamicDependency(nameof(InvokeDataavailable))]
+    [method: DynamicDependency(nameof(InvokeDataAvailable))]
     [method: DynamicDependency(nameof(InvokeError))]
     [method: DynamicDependency(nameof(InvokeStart))]
     [method: DynamicDependency(nameof(InvokeStop))]
     [method: DynamicDependency(nameof(InvokeResume))]
     [method: DynamicDependency(nameof(InvokePause))]
     private sealed class EventTrigger(MediaRecorderBase mediaRecorder) {
-        [JSInvokable] public void InvokeDataavailable(byte[] data) => mediaRecorder._onDataavailable?.Invoke(data);
+        [JSInvokable] public void InvokeDataAvailable(byte[] data) => mediaRecorder._onDataAvailable?.Invoke(data);
         [JSInvokable] public void InvokeError(JsonElement errorEvent) => mediaRecorder._onError?.Invoke(errorEvent);
         [JSInvokable] public void InvokeStart() => mediaRecorder._onStart?.Invoke();
         [JSInvokable] public void InvokeStop() => mediaRecorder._onStop?.Invoke();
@@ -55,7 +55,7 @@ public abstract class MediaRecorderBase(IJSObjectReference mediaRecorderJS) {
     private ValueTask DeactivateJSEvent(string jsMethodName) => mediaRecorderJS.InvokeVoidTrySync(jsMethodName);
 
 
-    private Action<byte[]>? _onDataavailable;
+    private Action<byte[]>? _onDataAvailable;
     /// <summary>
     /// <para>
     /// Fires periodically each time timeslice milliseconds of media have been recorded (or when the entire media has been recorded, if timeslice wasn't specified).
@@ -63,15 +63,15 @@ public abstract class MediaRecorderBase(IJSObjectReference mediaRecorderJS) {
     /// </para>
     /// <para>Parameter is the recorded binary data.</para>
     /// </summary>
-    public event Action<byte[]> OnDataavailable {
+    public event Action<byte[]> OnDataAvailable {
         add {
-            if (_onDataavailable == null)
+            if (_onDataAvailable == null)
                 _ = ActivateJSEvent("activateOndataavailable").Preserve();
-            _onDataavailable += value;
+            _onDataAvailable += value;
         }
         remove {
-            _onDataavailable -= value;
-            if (_onDataavailable == null)
+            _onDataAvailable -= value;
+            if (_onDataAvailable == null)
                 _ = DeactivateJSEvent("deactivateOndataavailable").Preserve();
         }
     }

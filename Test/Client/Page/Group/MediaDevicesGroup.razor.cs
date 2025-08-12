@@ -270,16 +270,16 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
         IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 
-        mediaRecorder.OnDataavailable += OnDataavailable;
+        mediaRecorder.OnDataAvailable += OnDataAvailable;
         await mediaRecorder.Start();
         await Task.Delay(100);
         await mediaRecorder.RequestData();
 
 
-        void OnDataavailable(byte[] data) {
+        void OnDataAvailable(byte[] data) {
             labelOutput = data.Length.ToString();
             StateHasChanged();
-            mediaRecorder.OnDataavailable -= OnDataavailable;
+            mediaRecorder.OnDataAvailable -= OnDataAvailable;
             _ = mediaRecorder.DisposeAsync().Preserve();
         }
     }
@@ -296,21 +296,21 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
 
     // Media Recorder Events
 
-    public const string BUTTON_REGISTER_ON_DATAAVAILABLE = "media-recorder-dataavailable-event";
+    public const string BUTTON_REGISTER_ON_DATA_AVAILABLE = "media-recorder-data-available-event";
     private async Task RegisterOnDataAvailable() {
         IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
         IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 
-        mediaRecorder.OnDataavailable += OnDataavailable;
+        mediaRecorder.OnDataAvailable += OnDataAvailable;
         await mediaRecorder.Start();
         await Task.Delay(100);
         await mediaRecorder.Stop();
 
 
-        void OnDataavailable(byte[] data) {
+        void OnDataAvailable(byte[] data) {
             labelOutput = data.Length.ToString();
             StateHasChanged();
-            mediaRecorder.OnDataavailable -= OnDataavailable;
+            mediaRecorder.OnDataAvailable -= OnDataAvailable;
             _ = mediaStream.DisposeAsync().Preserve();
             _ = mediaRecorder.DisposeAsync().Preserve();
         }

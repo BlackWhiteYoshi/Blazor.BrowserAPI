@@ -197,16 +197,16 @@ public sealed partial class MediaDevicesInProcessGroup : ComponentBase {
         using IMediaStreamInProcess mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
         IMediaRecorderInProcess mediaRecorder = mediaStream.CreateRecorder(mimeType: TEST_MIME_TYPE);
 
-        mediaRecorder.OnDataavailable += OnDataavailable;
+        mediaRecorder.OnDataAvailable += OnDataAvailable;
         mediaRecorder.Start();
         await Task.Delay(100);
         mediaRecorder.RequestData();
 
 
-        void OnDataavailable(byte[] data) {
+        void OnDataAvailable(byte[] data) {
             labelOutput = data.Length.ToString();
             StateHasChanged();
-            mediaRecorder.OnDataavailable -= OnDataavailable;
+            mediaRecorder.OnDataAvailable -= OnDataAvailable;
             mediaRecorder.Dispose();
         }
     }
@@ -223,21 +223,21 @@ public sealed partial class MediaDevicesInProcessGroup : ComponentBase {
 
     // Media Recorder Events
 
-    public const string BUTTON_REGISTER_ON_DATAAVAILABLE = "media-recorder-inprocess-dataavailable-event";
+    public const string BUTTON_REGISTER_ON_DATA_AVAILABLE = "media-recorder-inprocess-data-available-event";
     private async Task RegisterOnDataAvailable() {
         IMediaStreamInProcess mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
         IMediaRecorderInProcess mediaRecorder = mediaStream.CreateRecorder(mimeType: TEST_MIME_TYPE);
 
-        mediaRecorder.OnDataavailable += OnDataavailable;
+        mediaRecorder.OnDataAvailable += OnDataAvailable;
         mediaRecorder.Start();
         await Task.Delay(100);
         mediaRecorder.Stop();
 
 
-        void OnDataavailable(byte[] data) {
+        void OnDataAvailable(byte[] data) {
             labelOutput = data.Length.ToString();
             StateHasChanged();
-            mediaRecorder.OnDataavailable -= OnDataavailable;
+            mediaRecorder.OnDataAvailable -= OnDataAvailable;
             mediaStream.Dispose();
             mediaRecorder.Dispose();
         }

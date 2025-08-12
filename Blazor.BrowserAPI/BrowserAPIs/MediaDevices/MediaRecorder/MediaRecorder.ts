@@ -70,7 +70,7 @@ export class MediaRecorderAPI {
 
     // dataavailable event
 
-    #ondataavailable = async (event: BlobEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDataavailable", new Uint8Array(await event.data.arrayBuffer()));
+    #ondataavailable = async (event: BlobEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDataAvailable", new Uint8Array(await event.data.arrayBuffer()));
 
     activateOndataavailable(): void {
         this.#mediaRecorder.addEventListener("dataavailable", this.#ondataavailable);

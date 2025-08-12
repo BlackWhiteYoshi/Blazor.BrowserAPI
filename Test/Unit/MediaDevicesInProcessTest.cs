@@ -276,7 +276,7 @@ public sealed class MediaDevicesInProcessTest(PlayWrightFixture playWrightFixtur
 
     [Test]
     public async Task RegisterOnDataAvailable() {
-        await ExecuteTest(MediaDevicesInProcessGroup.BUTTON_REGISTER_ON_DATAAVAILABLE);
+        await ExecuteTest(MediaDevicesInProcessGroup.BUTTON_REGISTER_ON_DATA_AVAILABLE);
 
         string? result = await Page.GetByTestId(MediaDevicesInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("4");

@@ -5871,13 +5871,13 @@
             Fires on a popover or &lt;dialog&gt; element just before it is shown or hidden.<br />
             - If the element is transitioning from hidden to showing, the event.oldState property will be set to closed and the event.newState property will be set to open.<br />
             - If the element is transitioning from showing to hidden, then event.oldState will be open and event.newState will be closed.
+            </para>
             <para>This event is cancelable when an element is toggled to open ("show") but not when the element is closing.</para>
             <para>
             Among other things, this event can be used to:<br />
             - prevent an element from being shown.<br />
             - add or remove classes or properties from the element or associated elements, for example to control the animation behavior of a dialog as it is opened and closed.<br />
             - clear the state of the element before it is opened or after it is hidden, for example to reset a dialog form and return value to an empty state, or hide any nested manual popovers when reopening a popup.
-            </para>
             </para>
             <para>
             <b>Parameters</b><br />
@@ -8433,13 +8433,13 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnCanplay">
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnCanPlay">
             <summary>
             <para>Fired when the user agent can play the media, but estimates that not enough data has been loaded to play the media up to its end without having to stop for further buffering of content.</para>
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnCanplaythrough">
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnCanPlayThrough">
             <summary>
             <para>Fired when the user agent can play the media, and estimates that enough data has been loaded to play the media up to its end without having to stop for further buffering of content.</para>
             <para>This event is not cancelable and does not bubble.</para>
@@ -8451,7 +8451,7 @@
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnLoadstart">
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnLoadStart">
             <summary>
             Fired when the browser has started to load a resource.
             </summary>
@@ -8462,12 +8462,12 @@
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnLoadeddata">
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnLoadedData">
             <summary>
             Fired when the first frame of the media has finished loading; often the first frame.
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnLoadedmetadata">
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnLoadedMetadata">
             <summary>
             Fired when the metadata has been loaded.
             </summary>
@@ -8534,7 +8534,7 @@
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnTimeupdate">
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnTimeUpdate">
             <summary>
             <para>Fired when the time indicated by the currentTime attribute has been updated.</para>
             <para>
@@ -8545,19 +8545,19 @@
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnVolumechange">
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnVolumeChange">
             <summary>
             <para>Fired when either the volume attribute or the muted attribute has changed.</para>
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnRatechange">
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnRateChange">
             <summary>
             <para>Fired when the playback rate has changed.</para>
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnDurationchange">
+        <member name="E:BrowserAPI.Implementation.HTMLMediaElementBase.OnDurationChange">
             <summary>
             Fired when the duration attribute has been updated.
             </summary>
@@ -9360,7 +9360,7 @@
             Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call this method.
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.MediaRecorderBase.OnDataavailable">
+        <member name="E:BrowserAPI.Implementation.MediaRecorderBase.OnDataAvailable">
             <summary>
             <para>
             Fires periodically each time timeslice milliseconds of media have been recorded (or when the entire media has been recorded, if timeslice wasn't specified).
@@ -19019,13 +19019,13 @@
             Fires on a popover or &lt;dialog&gt; element just before it is shown or hidden.<br />
             - If the element is transitioning from hidden to showing, the event.oldState property will be set to closed and the event.newState property will be set to open.<br />
             - If the element is transitioning from showing to hidden, then event.oldState will be open and event.newState will be closed.
+            </para>
             <para>This event is cancelable when an element is toggled to open ("show") but not when the element is closing.</para>
             <para>
             Among other things, this event can be used to:<br />
             - prevent an element from being shown.<br />
             - add or remove classes or properties from the element or associated elements, for example to control the animation behavior of a dialog as it is opened and closed.<br />
             - clear the state of the element before it is opened or after it is hidden, for example to reset a dialog form and return value to an empty state, or hide any nested manual popovers when reopening a popup.
-            </para>
             </para>
             <para>
             <b>Parameters</b><br />
@@ -19246,13 +19246,13 @@
             Fires on a popover or &lt;dialog&gt; element just before it is shown or hidden.<br />
             - If the element is transitioning from hidden to showing, the event.oldState property will be set to closed and the event.newState property will be set to open.<br />
             - If the element is transitioning from showing to hidden, then event.oldState will be open and event.newState will be closed.
+            </para>
             <para>This event is cancelable when an element is toggled to open ("show") but not when the element is closing.</para>
             <para>
             Among other things, this event can be used to:<br />
             - prevent an element from being shown.<br />
             - add or remove classes or properties from the element or associated elements, for example to control the animation behavior of a dialog as it is opened and closed.<br />
             - clear the state of the element before it is opened or after it is hidden, for example to reset a dialog form and return value to an empty state, or hide any nested manual popovers when reopening a popup.
-            </para>
             </para>
             <para>
             <b>Parameters</b><br />
@@ -21767,13 +21767,13 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLMediaElement.OnCanplay">
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnCanPlay">
             <summary>
             <para>Fired when the user agent can play the media, but estimates that not enough data has been loaded to play the media up to its end without having to stop for further buffering of content.</para>
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLMediaElement.OnCanplaythrough">
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnCanPlayThrough">
             <summary>
             <para>Fired when the user agent can play the media, and estimates that enough data has been loaded to play the media up to its end without having to stop for further buffering of content.</para>
             <para>This event is not cancelable and does not bubble.</para>
@@ -21785,7 +21785,7 @@
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLMediaElement.OnLoadstart">
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnLoadStart">
             <summary>
             Fired when the browser has started to load a resource.
             </summary>
@@ -21796,12 +21796,12 @@
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLMediaElement.OnLoadeddata">
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnLoadedData">
             <summary>
             Fired when the first frame of the media has finished loading; often the first frame.
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLMediaElement.OnLoadedmetadata">
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnLoadedMetadata">
             <summary>
             Fired when the metadata has been loaded.
             </summary>
@@ -21868,7 +21868,7 @@
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLMediaElement.OnTimeupdate">
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnTimeUpdate">
             <summary>
             <para>Fired when the time indicated by the currentTime attribute has been updated.</para>
             <para>
@@ -21879,19 +21879,19 @@
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLMediaElement.OnVolumechange">
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnVolumeChange">
             <summary>
             <para>Fired when either the volume attribute or the muted attribute has changed.</para>
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLMediaElement.OnRatechange">
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnRateChange">
             <summary>
             <para>Fired when the playback rate has changed.</para>
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLMediaElement.OnDurationchange">
+        <member name="E:BrowserAPI.IHTMLMediaElement.OnDurationChange">
             <summary>
             Fired when the duration attribute has been updated.
             </summary>
@@ -21936,13 +21936,13 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnCanplay">
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnCanPlay">
             <summary>
             <para>Fired when the user agent can play the media, but estimates that not enough data has been loaded to play the media up to its end without having to stop for further buffering of content.</para>
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnCanplaythrough">
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnCanPlayThrough">
             <summary>
             <para>Fired when the user agent can play the media, and estimates that enough data has been loaded to play the media up to its end without having to stop for further buffering of content.</para>
             <para>This event is not cancelable and does not bubble.</para>
@@ -21954,7 +21954,7 @@
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnLoadstart">
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnLoadStart">
             <summary>
             Fired when the browser has started to load a resource.
             </summary>
@@ -21965,12 +21965,12 @@
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnLoadeddata">
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnLoadedData">
             <summary>
             Fired when the first frame of the media has finished loading; often the first frame.
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnLoadedmetadata">
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnLoadedMetadata">
             <summary>
             Fired when the metadata has been loaded.
             </summary>
@@ -22037,7 +22037,7 @@
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnTimeupdate">
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnTimeUpdate">
             <summary>
             <para>Fired when the time indicated by the currentTime attribute has been updated.</para>
             <para>
@@ -22048,19 +22048,19 @@
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnVolumechange">
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnVolumeChange">
             <summary>
             <para>Fired when either the volume attribute or the muted attribute has changed.</para>
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnRatechange">
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnRateChange">
             <summary>
             <para>Fired when the playback rate has changed.</para>
             <para>This event is not cancelable and does not bubble.</para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnDurationchange">
+        <member name="E:BrowserAPI.IHTMLMediaElementInProcess.OnDurationChange">
             <summary>
             Fired when the duration attribute has been updated.
             </summary>
@@ -22803,7 +22803,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="E:BrowserAPI.IMediaRecorder.OnDataavailable">
+        <member name="E:BrowserAPI.IMediaRecorder.OnDataAvailable">
             <summary>
             <para>
             Fires periodically each time timeslice milliseconds of media have been recorded (or when the entire media has been recorded, if timeslice wasn't specified).
@@ -22848,7 +22848,7 @@
             </summary>
             <remarks>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</remarks>
         </member>
-        <member name="E:BrowserAPI.IMediaRecorderInProcess.OnDataavailable">
+        <member name="E:BrowserAPI.IMediaRecorderInProcess.OnDataAvailable">
             <summary>
             <para>
             Fires periodically each time timeslice milliseconds of media have been recorded (or when the entire media has been recorded, if timeslice wasn't specified).

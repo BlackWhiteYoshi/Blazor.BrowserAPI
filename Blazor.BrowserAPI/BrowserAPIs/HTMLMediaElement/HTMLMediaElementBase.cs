@@ -26,15 +26,15 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
 
     // Ready
     [method: DynamicDependency(nameof(InvokeError))]
-    [method: DynamicDependency(nameof(InvokeCanplay))]
-    [method: DynamicDependency(nameof(InvokeCanplaythrough))]
+    [method: DynamicDependency(nameof(InvokeCanPlay))]
+    [method: DynamicDependency(nameof(InvokeCanPlayThrough))]
     [method: DynamicDependency(nameof(InvokePlaying))]
 
     // Data
-    [method: DynamicDependency(nameof(InvokeLoadstart))]
+    [method: DynamicDependency(nameof(InvokeLoadStart))]
     [method: DynamicDependency(nameof(InvokeProgress))]
-    [method: DynamicDependency(nameof(InvokeLoadeddata))]
-    [method: DynamicDependency(nameof(InvokeLoadedmetadata))]
+    [method: DynamicDependency(nameof(InvokeLoadedData))]
+    [method: DynamicDependency(nameof(InvokeLoadedMetadata))]
     [method: DynamicDependency(nameof(InvokeStalled))]
     [method: DynamicDependency(nameof(InvokeSuspend))]
     [method: DynamicDependency(nameof(InvokeWaiting))]
@@ -47,24 +47,24 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
     [method: DynamicDependency(nameof(InvokeEnded))]
     [method: DynamicDependency(nameof(InvokeSeeking))]
     [method: DynamicDependency(nameof(InvokeSeeked))]
-    [method: DynamicDependency(nameof(InvokeTimeupdate))]
+    [method: DynamicDependency(nameof(InvokeTimeUpdate))]
 
     // Setting
-    [method: DynamicDependency(nameof(InvokeVolumechange))]
-    [method: DynamicDependency(nameof(InvokeRatechange))]
-    [method: DynamicDependency(nameof(InvokeDurationchange))]
+    [method: DynamicDependency(nameof(InvokeVolumeChange))]
+    [method: DynamicDependency(nameof(InvokeRateChange))]
+    [method: DynamicDependency(nameof(InvokeDurationChange))]
     private sealed class EventTrigger(HTMLMediaElementBase htmlMediaElement) {
         // Ready
         [JSInvokable] public void InvokeError(int code, string message) => htmlMediaElement._onError?.Invoke(code, message);
-        [JSInvokable] public void InvokeCanplay() => htmlMediaElement._onCanplay?.Invoke();
-        [JSInvokable] public void InvokeCanplaythrough() => htmlMediaElement._onCanplaythrough?.Invoke();
+        [JSInvokable] public void InvokeCanPlay() => htmlMediaElement._onCanPlay?.Invoke();
+        [JSInvokable] public void InvokeCanPlayThrough() => htmlMediaElement._onCanPlayThrough?.Invoke();
         [JSInvokable] public void InvokePlaying() => htmlMediaElement._onPlaying?.Invoke();
 
         // Data
-        [JSInvokable] public void InvokeLoadstart() => htmlMediaElement._onLoadstart?.Invoke();
+        [JSInvokable] public void InvokeLoadStart() => htmlMediaElement._onLoadStart?.Invoke();
         [JSInvokable] public void InvokeProgress() => htmlMediaElement._onProgress?.Invoke();
-        [JSInvokable] public void InvokeLoadeddata() => htmlMediaElement._onLoadeddata?.Invoke();
-        [JSInvokable] public void InvokeLoadedmetadata() => htmlMediaElement._onLoadedmetadata?.Invoke();
+        [JSInvokable] public void InvokeLoadedData() => htmlMediaElement._onLoadedData?.Invoke();
+        [JSInvokable] public void InvokeLoadedMetadata() => htmlMediaElement._onLoadedMetadata?.Invoke();
         [JSInvokable] public void InvokeStalled() => htmlMediaElement._onStalled?.Invoke();
         [JSInvokable] public void InvokeSuspend() => htmlMediaElement._onSuspend?.Invoke();
         [JSInvokable] public void InvokeWaiting() => htmlMediaElement._onWaiting?.Invoke();
@@ -77,12 +77,12 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
         [JSInvokable] public void InvokeEnded() => htmlMediaElement._onEnded?.Invoke();
         [JSInvokable] public void InvokeSeeking() => htmlMediaElement._onSeeking?.Invoke();
         [JSInvokable] public void InvokeSeeked() => htmlMediaElement._onSeeked?.Invoke();
-        [JSInvokable] public void InvokeTimeupdate() => htmlMediaElement._onTimeupdate?.Invoke();
+        [JSInvokable] public void InvokeTimeUpdate() => htmlMediaElement._onTimeUpdate?.Invoke();
 
         // Setting
-        [JSInvokable] public void InvokeVolumechange() => htmlMediaElement._onVolumechange?.Invoke();
-        [JSInvokable] public void InvokeRatechange() => htmlMediaElement._onRatechange?.Invoke();
-        [JSInvokable] public void InvokeDurationchange() => htmlMediaElement._onDurationchange?.Invoke();
+        [JSInvokable] public void InvokeVolumeChange() => htmlMediaElement._onVolumeChange?.Invoke();
+        [JSInvokable] public void InvokeRateChange() => htmlMediaElement._onRateChange?.Invoke();
+        [JSInvokable] public void InvokeDurationChange() => htmlMediaElement._onDurationChange?.Invoke();
     }
 
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
@@ -152,38 +152,38 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
         }
     }
 
-    private Action? _onCanplay;
+    private Action? _onCanPlay;
     /// <summary>
     /// <para>Fired when the user agent can play the media, but estimates that not enough data has been loaded to play the media up to its end without having to stop for further buffering of content.</para>
     /// <para>This event is not cancelable and does not bubble.</para>
     /// </summary>
-    public event Action OnCanplay {
+    public event Action OnCanPlay {
         add {
-            if (_onCanplay == null)
+            if (_onCanPlay == null)
                 _ = ActivateJSEvent("activateOncanplay").Preserve();
-            _onCanplay += value;
+            _onCanPlay += value;
         }
         remove {
-            _onCanplay -= value;
-            if (_onCanplay == null)
+            _onCanPlay -= value;
+            if (_onCanPlay == null)
                 _ = DeactivateJSEvent("deactivateOncanplay").Preserve();
         }
     }
 
-    private Action? _onCanplaythrough;
+    private Action? _onCanPlayThrough;
     /// <summary>
     /// <para>Fired when the user agent can play the media, and estimates that enough data has been loaded to play the media up to its end without having to stop for further buffering of content.</para>
     /// <para>This event is not cancelable and does not bubble.</para>
     /// </summary>
-    public event Action OnCanplaythrough {
+    public event Action OnCanPlayThrough {
         add {
-            if (_onCanplaythrough == null)
+            if (_onCanPlayThrough == null)
                 _ = ActivateJSEvent("activateOncanplaythrough").Preserve();
-            _onCanplaythrough += value;
+            _onCanPlayThrough += value;
         }
         remove {
-            _onCanplaythrough -= value;
-            if (_onCanplaythrough == null)
+            _onCanPlayThrough -= value;
+            if (_onCanPlayThrough == null)
                 _ = DeactivateJSEvent("deactivateOncanplaythrough").Preserve();
         }
     }
@@ -209,19 +209,19 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
 
     // Data Events
 
-    private Action? _onLoadstart;
+    private Action? _onLoadStart;
     /// <summary>
     /// Fired when the browser has started to load a resource.
     /// </summary>
-    public event Action OnLoadstart {
+    public event Action OnLoadStart {
         add {
-            if (_onLoadstart == null)
+            if (_onLoadStart == null)
                 _ = ActivateJSEvent("activateOnloadstart").Preserve();
-            _onLoadstart += value;
+            _onLoadStart += value;
         }
         remove {
-            _onLoadstart -= value;
-            if (_onLoadstart == null)
+            _onLoadStart -= value;
+            if (_onLoadStart == null)
                 _ = DeactivateJSEvent("deactivateOnloadstart").Preserve();
         }
     }
@@ -244,36 +244,36 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
         }
     }
 
-    private Action? _onLoadeddata;
+    private Action? _onLoadedData;
     /// <summary>
     /// Fired when the first frame of the media has finished loading; often the first frame.
     /// </summary>
-    public event Action OnLoadeddata {
+    public event Action OnLoadedData {
         add {
-            if (_onLoadeddata == null)
+            if (_onLoadedData == null)
                 _ = ActivateJSEvent("activateOnloadeddata").Preserve();
-            _onLoadeddata += value;
+            _onLoadedData += value;
         }
         remove {
-            _onLoadeddata -= value;
-            if (_onLoadeddata == null)
+            _onLoadedData -= value;
+            if (_onLoadedData == null)
                 _ = DeactivateJSEvent("deactivateOnloadeddata").Preserve();
         }
     }
 
-    private Action? _onLoadedmetadata;
+    private Action? _onLoadedMetadata;
     /// <summary>
     /// Fired when the metadata has been loaded.
     /// </summary>
-    public event Action OnLoadedmetadata {
+    public event Action OnLoadedMetadata {
         add {
-            if (_onLoadedmetadata == null)
+            if (_onLoadedMetadata == null)
                 _ = ActivateJSEvent("activateOnloadedmetadata").Preserve();
-            _onLoadedmetadata += value;
+            _onLoadedMetadata += value;
         }
         remove {
-            _onLoadedmetadata -= value;
-            if (_onLoadedmetadata == null)
+            _onLoadedMetadata -= value;
+            if (_onLoadedMetadata == null)
                 _ = DeactivateJSEvent("deactivateOnloadedmetadata").Preserve();
         }
     }
@@ -463,7 +463,7 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
         }
     }
 
-    private Action? _onTimeupdate;
+    private Action? _onTimeUpdate;
     /// <summary>
     /// <para>Fired when the time indicated by the currentTime attribute has been updated.</para>
     /// <para>
@@ -473,15 +473,15 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
     /// </para>
     /// <para>This event is not cancelable and does not bubble.</para>
     /// </summary>
-    public event Action OnTimeupdate {
+    public event Action OnTimeUpdate {
         add {
-            if (_onTimeupdate == null)
+            if (_onTimeUpdate == null)
                 _ = ActivateJSEvent("activateOntimeupdate").Preserve();
-            _onTimeupdate += value;
+            _onTimeUpdate += value;
         }
         remove {
-            _onTimeupdate -= value;
-            if (_onTimeupdate == null)
+            _onTimeUpdate -= value;
+            if (_onTimeUpdate == null)
                 _ = DeactivateJSEvent("deactivateOntimeupdate").Preserve();
         }
     }
@@ -489,55 +489,55 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
 
     // Setting Events
 
-    private Action? _onVolumechange;
+    private Action? _onVolumeChange;
     /// <summary>
     /// <para>Fired when either the volume attribute or the muted attribute has changed.</para>
     /// <para>This event is not cancelable and does not bubble.</para>
     /// </summary>
-    public event Action OnVolumechange {
+    public event Action OnVolumeChange {
         add {
-            if (_onVolumechange == null)
+            if (_onVolumeChange == null)
                 _ = ActivateJSEvent("activateOnvolumechange").Preserve();
-            _onVolumechange += value;
+            _onVolumeChange += value;
         }
         remove {
-            _onVolumechange -= value;
-            if (_onVolumechange == null)
+            _onVolumeChange -= value;
+            if (_onVolumeChange == null)
                 _ = DeactivateJSEvent("deactivateOnvolumechange").Preserve();
         }
     }
 
-    private Action? _onRatechange;
+    private Action? _onRateChange;
     /// <summary>
     /// <para>Fired when the playback rate has changed.</para>
     /// <para>This event is not cancelable and does not bubble.</para>
     /// </summary>
-    public event Action OnRatechange {
+    public event Action OnRateChange {
         add {
-            if (_onRatechange == null)
+            if (_onRateChange == null)
                 _ = ActivateJSEvent("activateOnratechange").Preserve();
-            _onRatechange += value;
+            _onRateChange += value;
         }
         remove {
-            _onRatechange -= value;
-            if (_onRatechange == null)
+            _onRateChange -= value;
+            if (_onRateChange == null)
                 _ = DeactivateJSEvent("deactivateOnratechange").Preserve();
         }
     }
 
-    private Action? _onDurationchange;
+    private Action? _onDurationChange;
     /// <summary>
     /// Fired when the duration attribute has been updated.
     /// </summary>
-    public event Action OnDurationchange {
+    public event Action OnDurationChange {
         add {
-            if (_onDurationchange == null)
+            if (_onDurationChange == null)
                 _ = ActivateJSEvent("activateOndurationchange").Preserve();
-            _onDurationchange += value;
+            _onDurationChange += value;
         }
         remove {
-            _onDurationchange -= value;
-            if (_onDurationchange == null)
+            _onDurationChange -= value;
+            if (_onDurationChange == null)
                 _ = DeactivateJSEvent("deactivateOndurationchange").Preserve();
         }
     }

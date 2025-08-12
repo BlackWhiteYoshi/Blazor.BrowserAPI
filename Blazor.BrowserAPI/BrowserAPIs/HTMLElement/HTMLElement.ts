@@ -1251,7 +1251,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - dragstart event
 
-    #ondragstart = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragstart", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
+    #ondragstart = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragStart", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
 
     activateOndragstart(): void {
         this.#htmlElement.addEventListener("dragstart", this.#ondragstart);
@@ -1264,7 +1264,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - dragend event
 
-    #ondragend = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragend", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
+    #ondragend = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragEnd", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
 
     activateOndragend(): void {
         this.#htmlElement.addEventListener("dragend", this.#ondragend);
@@ -1277,7 +1277,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - dragenter event
 
-    #ondragenter = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragenter", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
+    #ondragenter = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragEnter", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
 
     activateOndragenter(): void {
         this.#htmlElement.addEventListener("dragenter", this.#ondragenter);
@@ -1290,7 +1290,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - dragleave event
 
-    #ondragleave = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragleave", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
+    #ondragleave = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragLeave", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
 
     activateOndragleave(): void {
         this.#htmlElement.addEventListener("dragleave", this.#ondragleave);
@@ -1303,7 +1303,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - dragover event
 
-    #ondragover = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragover", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
+    #ondragover = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragOver", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
 
     activateOndragover(): void {
         this.#htmlElement.addEventListener("dragover", this.#ondragover);
@@ -1342,7 +1342,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - beforetoggle
 
-    #onbeforetoggle = (toggleEvent: ToggleEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeBeforetoggle", toggleEvent.oldState, toggleEvent.newState);
+    #onbeforetoggle = (toggleEvent: ToggleEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeBeforeToggle", toggleEvent.oldState, toggleEvent.newState);
 
     activateOnbeforetoggle(): void {
         this.#htmlElement.addEventListener("beforetoggle", this.#onbeforetoggle);
@@ -1355,7 +1355,7 @@ export class HTMLElementAPI {
 
     // Element - transitionstart event
 
-    #ontransitionstart = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionstart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
+    #ontransitionstart = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionStart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
     activateOntransitionstart(): void {
         this.#htmlElement.addEventListener("transitionstart", this.#ontransitionstart);
@@ -1368,7 +1368,7 @@ export class HTMLElementAPI {
 
     // Element - transitionend event
 
-    #ontransitionend = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionend", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
+    #ontransitionend = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionEnd", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
 
     activateOntransitionend(): void {
         this.#htmlElement.addEventListener("transitionend", this.#ontransitionend);
@@ -1381,7 +1381,7 @@ export class HTMLElementAPI {
 
     // Element - transitionrun event
 
-    #ontransitionrun = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionrun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
+    #ontransitionrun = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionRun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
 
     activateOntransitionrun(): void {
         this.#htmlElement.addEventListener("transitionrun", this.#ontransitionrun);
@@ -1394,7 +1394,7 @@ export class HTMLElementAPI {
 
     // Element - transitioncancel event
 
-    #ontransitioncancel = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitioncancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
+    #ontransitioncancel = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionCancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
 
     activateOntransitioncancel(): void {
         this.#htmlElement.addEventListener("transitioncancel", this.#ontransitioncancel);
@@ -1408,7 +1408,7 @@ export class HTMLElementAPI {
 
     // Element - animationstart event
 
-    #onanimationstart = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationstart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+    #onanimationstart = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationStart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
 
     activateOnanimationstart(): void {
         this.#htmlElement.addEventListener("animationstart", this.#onanimationstart);
@@ -1421,7 +1421,7 @@ export class HTMLElementAPI {
 
     // Element - animationend event
 
-    #onanimationend = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationend", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+    #onanimationend = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationEnd", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
 
     activateOnanimationend(): void {
         this.#htmlElement.addEventListener("animationend", this.#onanimationend);
@@ -1434,7 +1434,7 @@ export class HTMLElementAPI {
 
     // Element - animationiteration event
 
-    #onanimationiteration = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationiteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+    #onanimationiteration = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationIteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
 
     activateOnanimationiteration(): void {
         this.#htmlElement.addEventListener("animationiteration", this.#onanimationiteration);
@@ -1447,7 +1447,7 @@ export class HTMLElementAPI {
 
     // Element - animationcancel event
 
-    #onanimationcancel = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationcancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+    #onanimationcancel = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationCancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
 
     activateOnanimationcancel(): void {
         this.#htmlElement.addEventListener("animationcancel", this.#onanimationcancel);
