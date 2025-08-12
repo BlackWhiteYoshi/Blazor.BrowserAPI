@@ -1,3 +1,4 @@
+import { FileAPI } from "../FileSystem/File/File";
 import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
 
 export class HTMLElementAPI {
@@ -1174,7 +1175,185 @@ export class HTMLElementAPI {
     }
 
 
-    // transitionstart event
+    /** Util function for drag events. The event parameter is of type "DragEvent" and that has a property "dataTransfer", it gets deconstructed and returned. */
+    #deconstructDataTransfer(data: DataTransfer | null): [string, string, readonly string[], FileAPI[]] {
+        if (data !== null)
+            return [data.dropEffect, data.effectAllowed, data.types, [...data.files].map(file => DotNet.createJSObjectReference(new FileAPI(file)))];
+        else
+            return ["", "", [], []];
+    }
+
+
+    // HTMLElement - change event
+
+    #onchange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeChange");
+
+    activateOnchange(): void {
+        this.#htmlElement.addEventListener("change", this.#onchange);
+    }
+
+    deactivateOnchange(): void {
+        this.#htmlElement.removeEventListener("change", this.#onchange);
+    }
+
+
+    // HTMLElement - command event
+
+    #oncommand = (commandEvent: { source: HTMLButtonElement, command: string }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCommand", DotNet.createJSObjectReference(new HTMLElementAPI(commandEvent.source)), commandEvent.command);
+
+    activateOncommand(): void {
+        this.#htmlElement.addEventListener("command", <(commandEvent: Event) => void><unknown>this.#oncommand);
+    }
+
+    deactivateOncommand(): void {
+        this.#htmlElement.removeEventListener("command", <(commandEvent: Event) => void><unknown>this.#oncommand);
+    }
+
+
+    // HTMLElement - load event
+
+    #onload = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeLoad");
+
+    activateOnload(): void {
+        this.#htmlElement.addEventListener("load", this.#onload);
+    }
+
+    deactivateOnload(): void {
+        this.#htmlElement.removeEventListener("load", this.#onload);
+    }
+
+
+    // HTMLElement - error event
+
+    #onerror = (error: Event) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeError", error);
+
+    activateOnerror(): void {
+        this.#htmlElement.addEventListener("error", this.#onerror);
+    }
+
+    deactivateOnerror(): void {
+        this.#htmlElement.removeEventListener("error", this.#onerror);
+    }
+
+
+    // HTMLElement - drag event
+
+    #ondrag = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDrag", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
+
+    activateOndrag(): void {
+        this.#htmlElement.addEventListener("drag", this.#ondrag);
+    }
+
+    deactivateOndrag(): void {
+        this.#htmlElement.removeEventListener("drag", this.#ondrag);
+    }
+
+
+    // HTMLElement - dragstart event
+
+    #ondragstart = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragstart", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
+
+    activateOndragstart(): void {
+        this.#htmlElement.addEventListener("dragstart", this.#ondragstart);
+    }
+
+    deactivateOndragstart(): void {
+        this.#htmlElement.removeEventListener("dragstart", this.#ondragstart);
+    }
+
+
+    // HTMLElement - dragend event
+
+    #ondragend = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragend", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
+
+    activateOndragend(): void {
+        this.#htmlElement.addEventListener("dragend", this.#ondragend);
+    }
+
+    deactivateOndragend(): void {
+        this.#htmlElement.removeEventListener("dragend", this.#ondragend);
+    }
+
+
+    // HTMLElement - dragenter event
+
+    #ondragenter = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragenter", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
+
+    activateOndragenter(): void {
+        this.#htmlElement.addEventListener("dragenter", this.#ondragenter);
+    }
+
+    deactivateOndragenter(): void {
+        this.#htmlElement.removeEventListener("dragenter", this.#ondragenter);
+    }
+
+
+    // HTMLElement - dragleave event
+
+    #ondragleave = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragleave", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
+
+    activateOndragleave(): void {
+        this.#htmlElement.addEventListener("dragleave", this.#ondragleave);
+    }
+
+    deactivateOndragleave(): void {
+        this.#htmlElement.removeEventListener("dragleave", this.#ondragleave);
+    }
+
+
+    // HTMLElement - dragover event
+
+    #ondragover = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragover", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
+
+    activateOndragover(): void {
+        this.#htmlElement.addEventListener("dragover", this.#ondragover);
+    }
+
+    deactivateOndragover(): void {
+        this.#htmlElement.removeEventListener("dragover", this.#ondragover);
+    }
+
+
+    // HTMLElement - drop event
+
+    #ondrop = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDrop", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
+
+    activateOndrop(): void {
+        this.#htmlElement.addEventListener("drop", this.#ondrop);
+    }
+
+    deactivateOndrop(): void {
+        this.#htmlElement.removeEventListener("drop", this.#ondrop);
+    }
+
+
+    // HTMLElement - toggle
+
+    #ontoggle = (toggleEvent: ToggleEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeToggle", toggleEvent.oldState, toggleEvent.newState);
+
+    activateOntoggle(): void {
+        this.#htmlElement.addEventListener("toggle", this.#ontoggle);
+    }
+
+    deactivateOntoggle(): void {
+        this.#htmlElement.removeEventListener("toggle", this.#ontoggle);
+    }
+
+
+    // HTMLElement - beforetoggle
+
+    #onbeforetoggle = (toggleEvent: ToggleEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeBeforetoggle", toggleEvent.oldState, toggleEvent.newState);
+
+    activateOnbeforetoggle(): void {
+        this.#htmlElement.addEventListener("beforetoggle", this.#onbeforetoggle);
+    }
+
+    deactivateOnbeforetoggle(): void {
+        this.#htmlElement.removeEventListener("beforetoggle", this.#onbeforetoggle);
+    }
+
+
+    // Element - transitionstart event
 
     #ontransitionstart = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionstart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
@@ -1187,7 +1366,7 @@ export class HTMLElementAPI {
     }
 
 
-    // transitionend event
+    // Element - transitionend event
 
     #ontransitionend = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionend", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
 
@@ -1200,7 +1379,7 @@ export class HTMLElementAPI {
     }
 
 
-    // transitionrun event
+    // Element - transitionrun event
 
     #ontransitionrun = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionrun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
 
@@ -1213,7 +1392,7 @@ export class HTMLElementAPI {
     }
 
 
-    // transitioncancel event
+    // Element - transitioncancel event
 
     #ontransitioncancel = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitioncancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
 
@@ -1227,7 +1406,7 @@ export class HTMLElementAPI {
 
 
 
-    // animationstart event
+    // Element - animationstart event
 
     #onanimationstart = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationstart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
 
@@ -1240,7 +1419,7 @@ export class HTMLElementAPI {
     }
 
 
-    // animationend event
+    // Element - animationend event
 
     #onanimationend = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationend", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
 
@@ -1253,7 +1432,7 @@ export class HTMLElementAPI {
     }
 
 
-    // animationiteration event
+    // Element - animationiteration event
 
     #onanimationiteration = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationiteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
 
@@ -1266,7 +1445,7 @@ export class HTMLElementAPI {
     }
 
 
-    // animationcancel event
+    // Element - animationcancel event
 
     #onanimationcancel = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationcancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
 

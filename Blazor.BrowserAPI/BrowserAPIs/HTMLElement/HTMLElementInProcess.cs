@@ -546,6 +546,264 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </param>
     public bool TogglePopover(bool force) => htmlElementJS.Invoke<bool>("togglePopover", [force]);
 
+
+    // events
+
+    private protected override void InvokeCommand(IJSObjectReference source, string command) => _onCommand?.Invoke(new HTMLElementInProcess((IJSInProcessObjectReference)source), command);
+    private Action<IHTMLElementInProcess, string>? _onCommand;
+    /// <summary>
+    /// <para>
+    /// Fires on an element that is controlled via a button with valid commandForElement and command values, whenever the button is interacted with (e.g., it is clicked).
+    /// </para>
+    /// <para>
+    /// <b>Parameters</b><br />
+    /// - IHTMLElementInProcess <i>source</i>: An HTMLButtonElement representing the button that caused this invocation.<br />
+    /// - string <i>command</i>: Representing the command value of the source button.
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// Note: Dispose the given IHTMLElementInProcess object when you are done with it.
+    /// </remarks>
+    public event Action<IHTMLElementInProcess, string> OnCommand {
+        add {
+            if (_onCommand == null)
+                _ = ActivateJSEvent("activateOncommand").Preserve();
+            _onCommand += value;
+        }
+        remove {
+            _onCommand -= value;
+            if (_onCommand == null)
+                _ = DeactivateJSEvent("deactivateOncommand").Preserve();
+        }
+    }
+
+
+    private protected override void InvokeDrag(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDrag?.Invoke(dropEffect, effectAllowed, types, WrapFiles(files));
+    private Action<string, string, string[], IFileInProcess[]>? _onDrag;
+    /// <summary>
+    /// <para>
+    /// Is fired every few hundred milliseconds as an element or text selection is being dragged by the user.<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>
+    /// <b>Parameters</b><br />
+    /// - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+    /// - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+    /// - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+    /// - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+    /// </remarks>
+    public event Action<string, string, string[], IFileInProcess[]> OnDrag {
+        add {
+            if (_onDrag == null)
+                _ = ActivateJSEvent("activateOndrag").Preserve();
+            _onDrag += value;
+        }
+        remove {
+            _onDrag -= value;
+            if (_onDrag == null)
+                _ = DeactivateJSEvent("deactivateOndrag").Preserve();
+        }
+    }
+
+    private protected override void InvokeDragStart(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDragStart?.Invoke(dropEffect, effectAllowed, types, WrapFiles(files));
+    private Action<string, string, string[], IFileInProcess[]>? _onDragStart;
+    /// <summary>
+    /// <para>
+    /// Is fired when the user starts dragging an element or text selection.<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>
+    /// <b>Parameters</b><br />
+    /// - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+    /// - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+    /// - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+    /// - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+    /// </remarks>
+    public event Action<string, string, string[], IFileInProcess[]> OnDragStart {
+        add {
+            if (_onDragStart == null)
+                _ = ActivateJSEvent("activateOndragstart").Preserve();
+            _onDragStart += value;
+        }
+        remove {
+            _onDragStart -= value;
+            if (_onDragStart == null)
+                _ = DeactivateJSEvent("deactivateOndragstart").Preserve();
+        }
+    }
+
+    private protected override void InvokeDragEnd(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDragEnd?.Invoke(dropEffect, effectAllowed, types, WrapFiles(files));
+    private Action<string, string, string[], IFileInProcess[]>? _onDragEnd;
+    /// <summary>
+    /// <para>
+    /// Is fired when a drag operation ends (by releasing a mouse button or hitting the escape key).<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>
+    /// <b>Parameters</b><br />
+    /// - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+    /// - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+    /// - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+    /// - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+    /// </remarks>
+    public event Action<string, string, string[], IFileInProcess[]> OnDragEnd {
+        add {
+            if (_onDragEnd == null)
+                _ = ActivateJSEvent("activateOndragend").Preserve();
+            _onDragEnd += value;
+        }
+        remove {
+            _onDragEnd -= value;
+            if (_onDragEnd == null)
+                _ = DeactivateJSEvent("deactivateOndragend").Preserve();
+        }
+    }
+
+    private protected override void InvokeDragEnter(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDragEnter?.Invoke(dropEffect, effectAllowed, types, WrapFiles(files));
+    private Action<string, string, string[], IFileInProcess[]>? _onDragEnter;
+    /// <summary>
+    /// <para>
+    /// Is fired when a dragged element or text selection enters a valid drop target.
+    /// The target object is the immediate user selection (the element directly indicated by the user as the drop target), or the &lt;body&gt; element.<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>
+    /// <b>Parameters</b><br />
+    /// - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+    /// - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+    /// - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+    /// - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+    /// </remarks>
+    public event Action<string, string, string[], IFileInProcess[]> OnDragEnter {
+        add {
+            if (_onDragEnter == null)
+                _ = ActivateJSEvent("activateOndragenter").Preserve();
+            _onDragEnter += value;
+        }
+        remove {
+            _onDragEnter -= value;
+            if (_onDragEnter == null)
+                _ = DeactivateJSEvent("deactivateOndragenter").Preserve();
+        }
+    }
+
+    private protected override void InvokeDragLeave(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDragLeave?.Invoke(dropEffect, effectAllowed, types, WrapFiles(files));
+    private Action<string, string, string[], IFileInProcess[]>? _onDragLeave;
+    /// <summary>
+    /// <para>
+    /// Is fired when a dragged element or text selection leaves a valid drop target.<br />
+    /// This event is not cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>
+    /// <b>Parameters</b><br />
+    /// - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+    /// - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+    /// - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+    /// - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+    /// </remarks>
+    public event Action<string, string, string[], IFileInProcess[]> OnDragLeave {
+        add {
+            if (_onDragLeave == null)
+                _ = ActivateJSEvent("activateOndragleave").Preserve();
+            _onDragLeave += value;
+        }
+        remove {
+            _onDragLeave -= value;
+            if (_onDragLeave == null)
+                _ = DeactivateJSEvent("deactivateOndragleave").Preserve();
+        }
+    }
+
+    private protected override void InvokeDragOver(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDragOver?.Invoke(dropEffect, effectAllowed, types, WrapFiles(files));
+    private Action<string, string, string[], IFileInProcess[]>? _onDragOver;
+    /// <summary>
+    /// <para>
+    /// Is fired when an element or text selection is being dragged over a valid drop target (every few hundred milliseconds).<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>
+    /// <b>Parameters</b><br />
+    /// - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+    /// - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+    /// - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+    /// - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+    /// </remarks>
+    public event Action<string, string, string[], IFileInProcess[]> OnDragOver {
+        add {
+            if (_onDragOver == null)
+                _ = ActivateJSEvent("activateOndragover").Preserve();
+            _onDragOver += value;
+        }
+        remove {
+            _onDragOver -= value;
+            if (_onDragOver == null)
+                _ = DeactivateJSEvent("deactivateOndragover").Preserve();
+        }
+    }
+
+    private protected override void InvokeDrop(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDrop?.Invoke(dropEffect, effectAllowed, types, WrapFiles(files));
+    private Action<string, string, string[], IFileInProcess[]>? _onDrop;
+    /// <summary>
+    /// <para>
+    /// Is fired when an element or text selection is dropped on a valid drop target.
+    /// To ensure that the drop event always fires as expected, you should always include a preventDefault() call in the part of your code which handles the dragover event.<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>
+    /// <b>Parameters</b><br />
+    /// - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+    /// - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+    /// - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+    /// - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+    /// </remarks>
+    public event Action<string, string, string[], IFileInProcess[]> OnDrop {
+        add {
+            if (_onDrop == null)
+                _ = ActivateJSEvent("activateOndrop").Preserve();
+            _onDrop += value;
+        }
+        remove {
+            _onDrop -= value;
+            if (_onDrop == null)
+                _ = DeactivateJSEvent("deactivateOndrop").Preserve();
+        }
+    }
+
+    private static IFileInProcess[] WrapFiles(IJSObjectReference[] files) {
+        FileInProcess[] result = new FileInProcess[files.Length];
+        for (int i = 0; i < result.Length; i++)
+            result[i] = new FileInProcess(files[i]);
+        return result;
+    }
+
     #endregion
 
 

@@ -1,26 +1,18 @@
 ﻿using BrowserAPI.Test.Client;
 using Microsoft.Playwright;
-using System.Reflection.Metadata;
 using System.Text.Json;
 
 namespace BrowserAPI.UnitTest;
 
 [ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
-    private Task AddAttributeToHtmlElement(string name) => AddAttributeToHtmlElement(name, string.Empty);
-
-    private async Task AddAttributeToHtmlElement(string name, string value) {
-        await Page.WaitForSelectorAsync($"[data-testid='{HTMLElementGroup.HTML_ELEMENT}']");
-        await Page.EvaluateAsync($"""document.querySelector("[data-testid='{HTMLElementGroup.HTML_ELEMENT}']").setAttribute("{name}", "{value}");""");
-        await Task.Delay(SMALL_WAIT_TIME);
-    }
-
-
     #region HTMLElement
 
     [Test]
     public async Task GetAccessKey_Property() {
-        await AddAttributeToHtmlElement("accessKey", HTMLElementGroup.TEST_ACCESS_KEY);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('accessKey', '{HTMLElementGroup.TEST_ACCESS_KEY}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_ACCESS_KEY_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -29,7 +21,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetAccessKey_Method() {
-        await AddAttributeToHtmlElement("accessKey", HTMLElementGroup.TEST_ACCESS_KEY);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('accessKey', '{HTMLElementGroup.TEST_ACCESS_KEY}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_ACCESS_KEY_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -48,7 +42,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
     // does not work in Chromium Browser. To make this test work, go to PlayWrightFixture.InitializeAsync() and change "Chromium" to "Firefox"
     [Test, Explicit]
     public async Task GetAccessKeyLabel_Property() {
-        await AddAttributeToHtmlElement("accessKey", HTMLElementGroup.TEST_ACCESS_KEY);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('accessKey', '{HTMLElementGroup.TEST_ACCESS_KEY}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_ACCESS_KEY_LABEL_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -58,7 +54,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
     // does not work in Chromium Browser. To make this test work, go to PlayWrightFixture.InitializeAsync() and change "Chromium" to "Firefox"
     [Test, Explicit]
     public async Task GetAccessKeyLabel_Method() {
-        await AddAttributeToHtmlElement("accessKey", HTMLElementGroup.TEST_ACCESS_KEY);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('accessKey', '{HTMLElementGroup.TEST_ACCESS_KEY}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_ACCESS_KEY_LABEL_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -68,7 +66,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetAttributeStyleMap_Property() {
-        await AddAttributeToHtmlElement("style", $"{HTMLElementGroup.TEST_STYLE_NAME}: {HTMLElementGroup.TEST_STYLE_VALUE};");
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.style.{HTMLElementGroup.TEST_STYLE_NAME} = '{HTMLElementGroup.TEST_STYLE_VALUE}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_ATTRIBUTE_STYLE_MAP_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -77,7 +77,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetAttributeStyleMap_Method() {
-        await AddAttributeToHtmlElement("style", $"{HTMLElementGroup.TEST_STYLE_NAME}: {HTMLElementGroup.TEST_STYLE_VALUE};");
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.style.{HTMLElementGroup.TEST_STYLE_NAME} = '{HTMLElementGroup.TEST_STYLE_VALUE}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_ATTRIBUTE_STYLE_MAP_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -94,7 +96,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task RemoveAttributeStyleMap() {
-        await AddAttributeToHtmlElement("style", $"{HTMLElementGroup.TEST_STYLE_NAME}: {HTMLElementGroup.TEST_STYLE_VALUE};");
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.style.{HTMLElementGroup.TEST_STYLE_NAME} = '{HTMLElementGroup.TEST_STYLE_VALUE}';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_REMOVE_ATTRIBUTE_STYLE_MAP);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).GetAttributeAsync("style");
@@ -104,7 +108,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetAutocapitalize_Property() {
-        await AddAttributeToHtmlElement("autocapitalize", HTMLElementGroup.TEST_AUTOCAPITALIZE);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('autocapitalize', '{HTMLElementGroup.TEST_AUTOCAPITALIZE}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_AUTOCAPITALIZE_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -113,7 +119,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetAutocapitalize_Method() {
-        await AddAttributeToHtmlElement("autocapitalize", HTMLElementGroup.TEST_AUTOCAPITALIZE);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('autocapitalize', '{HTMLElementGroup.TEST_AUTOCAPITALIZE}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_AUTOCAPITALIZE_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -131,7 +139,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetAutofocus_Property() {
-        await AddAttributeToHtmlElement("autofocus");
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('autofocus', '');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_AUTOFOCUS_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -140,7 +150,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetAutofocus_Method() {
-        await AddAttributeToHtmlElement("autofocus");
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('autofocus', '');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_AUTOFOCUS_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -158,7 +170,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetContentEditable_Property() {
-        await AddAttributeToHtmlElement("contentEditable");
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('contentEditable', '');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_CONTENT_EDITABLE_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -167,7 +181,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetContentEditable_Method() {
-        await AddAttributeToHtmlElement("contentEditable");
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('contentEditable', '');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_CONTENT_EDITABLE_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -185,7 +201,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetDataset_Property() {
-        await AddAttributeToHtmlElement($"data-{HTMLElementGroup.TEST_DATASET_NAME}", HTMLElementGroup.TEST_DATASET_VALUE);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('data-{HTMLElementGroup.TEST_DATASET_NAME}', '{HTMLElementGroup.TEST_DATASET_VALUE}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_DATASET_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -194,7 +212,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetDataset_Method() {
-        await AddAttributeToHtmlElement($"data-{HTMLElementGroup.TEST_DATASET_NAME}", HTMLElementGroup.TEST_DATASET_VALUE);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('data-{HTMLElementGroup.TEST_DATASET_NAME}', '{HTMLElementGroup.TEST_DATASET_VALUE}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_DATASET_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -212,7 +232,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task RemoveDataset() {
-        await AddAttributeToHtmlElement($"data-{HTMLElementGroup.TEST_DATASET_NAME}", HTMLElementGroup.TEST_DATASET_VALUE);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('data-{HTMLElementGroup.TEST_DATASET_NAME}', '{HTMLElementGroup.TEST_DATASET_VALUE}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_REMOVE_DATASET);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).GetAttributeAsync($"data-{HTMLElementGroup.TEST_DATASET_NAME}");
@@ -222,7 +244,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetDir_Property() {
-        await AddAttributeToHtmlElement("dir", HTMLElementGroup.TEST_DIR);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('dir', '{HTMLElementGroup.TEST_DIR}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_DIR_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -231,7 +255,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetDir_Method() {
-        await AddAttributeToHtmlElement("dir", HTMLElementGroup.TEST_DIR);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('dir', '{HTMLElementGroup.TEST_DIR}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_DIR_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -249,7 +275,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetDraggable_Property() {
-        await AddAttributeToHtmlElement("draggable", "true");
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('draggable', 'true');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_DRAGGABLE_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -258,7 +286,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetDraggable_Method() {
-        await AddAttributeToHtmlElement("draggable", "true");
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('draggable', 'true');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_DRAGGABLE_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -276,7 +306,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetEnterKeyHint_Property() {
-        await AddAttributeToHtmlElement("enterKeyHint", HTMLElementGroup.TEST_ENTER_KEY_HINT);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('enterKeyHint', '{HTMLElementGroup.TEST_ENTER_KEY_HINT}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_ENTER_KEY_HINT_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -285,7 +317,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetEnterKeyHint_Method() {
-        await AddAttributeToHtmlElement("enterKeyHint", HTMLElementGroup.TEST_ENTER_KEY_HINT);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('enterKeyHint', '{HTMLElementGroup.TEST_ENTER_KEY_HINT}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_ENTER_KEY_HINT_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -303,7 +337,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetHidden_Property() {
-        await AddAttributeToHtmlElement("hidden");
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('hidden', '');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_HIDDEN_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -312,7 +348,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetHidden_Method() {
-        await AddAttributeToHtmlElement("hidden");
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('hidden', '');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_HIDDEN_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -330,7 +368,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetInert_Property() {
-        await AddAttributeToHtmlElement("inert");
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('inert', '');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_INERT_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -339,7 +379,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetInert_Method() {
-        await AddAttributeToHtmlElement("inert");
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('inert', '');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_INERT_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -383,7 +425,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetInputMode_Property() {
-        await AddAttributeToHtmlElement("inputMode", HTMLElementGroup.TEST_INPUT_MODE);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('inputMode', '{HTMLElementGroup.TEST_INPUT_MODE}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_INPUT_MODE_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -392,7 +436,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetInputMode_Method() {
-        await AddAttributeToHtmlElement("inputMode", HTMLElementGroup.TEST_INPUT_MODE);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('inputMode', '{HTMLElementGroup.TEST_INPUT_MODE}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_INPUT_MODE_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -427,7 +473,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetLang_Property() {
-        await AddAttributeToHtmlElement("lang", HTMLElementGroup.TEST_LANG);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('lang', '{HTMLElementGroup.TEST_LANG}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_LANG_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -436,7 +484,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetLang_Method() {
-        await AddAttributeToHtmlElement("lang", HTMLElementGroup.TEST_LANG);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('lang', '{HTMLElementGroup.TEST_LANG}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_LANG_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -454,7 +504,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetNonce_Property() {
-        await AddAttributeToHtmlElement("nonce", HTMLElementGroup.TEST_NONCE);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('nonce', '{HTMLElementGroup.TEST_NONCE}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_NONCE_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -463,7 +515,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetNonce_Method() {
-        await AddAttributeToHtmlElement("nonce", HTMLElementGroup.TEST_NONCE);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('nonce', '{HTMLElementGroup.TEST_NONCE}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_NONCE_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -604,7 +658,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetPopover_Property() {
-        await AddAttributeToHtmlElement("popover", HTMLElementGroup.TEST_POPOVER);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('popover', '{HTMLElementGroup.TEST_POPOVER}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_POPOVER_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -613,7 +669,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetPopover_Method() {
-        await AddAttributeToHtmlElement("popover", HTMLElementGroup.TEST_POPOVER);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('popover', '{HTMLElementGroup.TEST_POPOVER}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_POPOVER_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -631,7 +689,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetSpellcheck_Property() {
-        await AddAttributeToHtmlElement("spellcheck");
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('spellcheck', '');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_SPELLCHECK_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -640,7 +700,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetSpellcheck_Method() {
-        await AddAttributeToHtmlElement("spellcheck");
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('spellcheck', '');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_SPELLCHECK_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -658,7 +720,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetStyle_Property() {
-        await AddAttributeToHtmlElement("style", "visibility: visible;");
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.style.visibility = 'visible';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_STYLE_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -667,7 +731,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetStyle_Method() {
-        await AddAttributeToHtmlElement("style", "visibility: visible;");
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.style.visibility = 'visible';");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_STYLE_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -685,7 +751,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetTabIndex_Property() {
-        await AddAttributeToHtmlElement("tabIndex", HTMLElementGroup.TEST_TAB_INDEX.ToString());
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('tabIndex', '{HTMLElementGroup.TEST_TAB_INDEX}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_TAB_INDEX_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -694,7 +762,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetTabIndex_Method() {
-        await AddAttributeToHtmlElement("tabIndex", HTMLElementGroup.TEST_TAB_INDEX.ToString());
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('tabIndex', '{HTMLElementGroup.TEST_TAB_INDEX}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_TAB_INDEX_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -712,7 +782,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetTitle_Property() {
-        await AddAttributeToHtmlElement("title", HTMLElementGroup.TEST_TITLE);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('title', '{HTMLElementGroup.TEST_TITLE}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_TITLE_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -721,7 +793,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetTitle_Method() {
-        await AddAttributeToHtmlElement("title", HTMLElementGroup.TEST_TITLE);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('title', '{HTMLElementGroup.TEST_TITLE}');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_TITLE_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -739,7 +813,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetTranslate_Property() {
-        await AddAttributeToHtmlElement("translate");
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('translate', '');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_TRANSLATE_PROPERTY);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -748,7 +824,9 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
     [Test]
     public async Task GetTranslate_Method() {
-        await AddAttributeToHtmlElement("translate");
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('translate', '');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_TRANSLATE_METHOD);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
@@ -869,6 +947,255 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
 
         bool visible = await Page.IsVisibleAsync($"p[data-testid=\"{HTMLElementGroup.POPOVER_ELEMENT}\"]");
         await Assert.That(visible).IsFalse();
+    }
+
+
+    // events
+
+    [Test]
+    public async Task RegisterOnChange() {
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT_CONTAINER).EvaluateAsync("""
+            node => {
+                const tempElement = document.createElement("input");
+                tempElement.setAttribute("data-testid", "temp");
+                node.appendChild(tempElement);
+            }
+            """);
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_CHANGE);
+
+        await Page.GetByTestId("temp").FillAsync("something");
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.GetByTestId("temp").BlurAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementGroup.TEST_EVENT_CHANGE);
+    }
+
+    [Test]
+    public async Task RegisterOnCommand() {
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_COMMAND);
+
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT_CONTAINER).EvaluateAsync("""
+            node => {
+                const popoverElement = node.nextElementSibling;
+
+                const tempButton = document.createElement("button");
+                tempButton.setAttribute("data-testid", "temp");
+                tempButton.commandForElement = popoverElement;
+                tempButton.command = "show-popover";
+                node.appendChild(tempButton);
+                tempButton.click();
+            }
+            """);
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("id='temp', command='show-popover'");
+    }
+
+    [Test]
+    public async Task RegisterOnLoad() {
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT_CONTAINER).EvaluateAsync("""
+            node => {
+                const tempElement = document.createElement("img");
+                tempElement.setAttribute("data-testid", "temp");
+                node.appendChild(tempElement);
+            }
+            """);
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_LOAD);
+
+        await Page.GetByTestId("temp").EvaluateAsync("node => node.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADklEQVR4AWL69//ffwAAAAD//+Rp924AAAAGSURBVAMACf8D/Z3TzWsAAAAASUVORK5CYII=';");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsNotEmpty();
+    }
+
+    [Test]
+    public async Task RegisterOnError() {
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT_CONTAINER).EvaluateAsync("""
+            node => {
+                const tempElement = document.createElement("img");
+                tempElement.setAttribute("data-testid", "temp");
+                node.appendChild(tempElement);
+            };
+            """);
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_ERROR);
+
+        await Page.GetByTestId("temp").EvaluateAsync("node => node.src = 'wrong/path';");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsNotEmpty();
+    }
+
+
+    [Test]
+    public async Task RegisterOnDrag() {
+        await Page.GetByTestId(HTMLElementGroup.POPOVER_ELEMENT).EvaluateAsync("node => node.removeAttribute('popover');");
+        await Page.GetByTestId(HTMLElementGroup.HIDDEN_ELEMENT).EvaluateAsync("""
+            node => {
+                node.removeAttribute("hidden");
+                node.setAttribute("draggable", "true");
+            };
+            """);
+        await Task.Delay(SMALL_WAIT_TIME);
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_DRAG);
+
+        await Page.GetByTestId(HTMLElementGroup.HIDDEN_ELEMENT).DragToAsync(Page.GetByTestId(HTMLElementGroup.POPOVER_ELEMENT));
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='uninitialized', types='[]', files='[]'");
+    }
+
+    [Test]
+    public async Task RegisterOnDragStart() {
+        await Page.GetByTestId(HTMLElementGroup.POPOVER_ELEMENT).EvaluateAsync("node => node.removeAttribute('popover');");
+        await Page.GetByTestId(HTMLElementGroup.HIDDEN_ELEMENT).EvaluateAsync("""
+            node => {
+                node.removeAttribute("hidden");
+                node.setAttribute("draggable", "true");
+            };
+            """);
+        await Task.Delay(SMALL_WAIT_TIME);
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_DRAG_START);
+
+        await Page.GetByTestId(HTMLElementGroup.HIDDEN_ELEMENT).DragToAsync(Page.GetByTestId(HTMLElementGroup.POPOVER_ELEMENT));
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='uninitialized', types='[]', files='[]'");
+    }
+
+    [Test]
+    public async Task RegisterOnDragEnd() {
+        await Page.GetByTestId(HTMLElementGroup.POPOVER_ELEMENT).EvaluateAsync("node => node.removeAttribute('popover');");
+        await Page.GetByTestId(HTMLElementGroup.HIDDEN_ELEMENT).EvaluateAsync("""
+            node => {
+                node.removeAttribute("hidden");
+                node.setAttribute("draggable", "true");
+            };
+            """);
+        await Task.Delay(SMALL_WAIT_TIME);
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_DRAG_END);
+
+        await Page.GetByTestId(HTMLElementGroup.HIDDEN_ELEMENT).DragToAsync(Page.GetByTestId(HTMLElementGroup.POPOVER_ELEMENT));
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='uninitialized', types='[]', files='[]'");
+    }
+
+    [Test]
+    public async Task RegisterOnDragEnter() {
+        await Page.GetByTestId(HTMLElementGroup.POPOVER_ELEMENT).EvaluateAsync("node => node.removeAttribute('popover');");
+        await Page.GetByTestId(HTMLElementGroup.HIDDEN_ELEMENT).EvaluateAsync("""
+            node => {
+                node.removeAttribute("hidden");
+                node.setAttribute("draggable", "true");
+            };
+            """);
+        await Task.Delay(SMALL_WAIT_TIME);
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_DRAG_ENTER);
+
+        await Page.GetByTestId(HTMLElementGroup.HIDDEN_ELEMENT).DragToAsync(Page.GetByTestId(HTMLElementGroup.POPOVER_ELEMENT));
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='all', types='[]', files='[]'");
+    }
+
+    [Test]
+    public async Task RegisterOnDragLeave() {
+        await Page.GetByTestId(HTMLElementGroup.POPOVER_ELEMENT).EvaluateAsync("node => node.removeAttribute('popover');");
+        await Page.GetByTestId(HTMLElementGroup.HIDDEN_ELEMENT).EvaluateAsync("""
+            node => {
+                node.removeAttribute("hidden");
+                node.setAttribute("draggable", "true");
+            };
+            """);
+        await Task.Delay(SMALL_WAIT_TIME);
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_DRAG_LEAVE);
+
+        await Page.GetByTestId(HTMLElementGroup.HIDDEN_ELEMENT).DragToAsync(Page.GetByTestId(HTMLElementGroup.POPOVER_ELEMENT));
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='all', types='[]', files='[]'");
+    }
+
+    [Test]
+    public async Task RegisterOnDragOver() {
+        await Page.GetByTestId(HTMLElementGroup.POPOVER_ELEMENT).EvaluateAsync("node => node.removeAttribute('popover');");
+        await Page.GetByTestId(HTMLElementGroup.HIDDEN_ELEMENT).EvaluateAsync("""
+            node => {
+                node.removeAttribute("hidden");
+                node.setAttribute("draggable", "true");
+            };
+            """);
+        await Task.Delay(SMALL_WAIT_TIME);
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_DRAG_OVER);
+
+        await Page.GetByTestId(HTMLElementGroup.HIDDEN_ELEMENT).DragToAsync(Page.GetByTestId(HTMLElementGroup.POPOVER_ELEMENT));
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='all', types='[]', files='[]'");
+    }
+
+    [Test]
+    public async Task RegisterOnDrop() {
+        await Page.GetByTestId(HTMLElementGroup.POPOVER_ELEMENT).EvaluateAsync("""
+            node => {
+                node.removeAttribute("popover");
+                node.addEventListener("dragover", e => e.preventDefault());
+            }
+            """);
+        await Page.GetByTestId(HTMLElementGroup.HIDDEN_ELEMENT).EvaluateAsync("""
+            node => {
+                node.removeAttribute("hidden");
+                node.setAttribute("draggable", "true");
+            };
+            """);
+        await Task.Delay(SMALL_WAIT_TIME);
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_DROP);
+
+        await Page.GetByTestId(HTMLElementGroup.HIDDEN_ELEMENT).DragToAsync(Page.GetByTestId(HTMLElementGroup.POPOVER_ELEMENT));
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='all', types='[]', files='[]'");
+    }
+
+
+    [Test]
+    public async Task RegisterOnToggle() {
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_TOGGLE);
+
+        await Page.GetByTestId(HTMLElementGroup.POPOVER_ELEMENT).EvaluateAsync("node => node.showPopover();");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("oldState='closed', newState='open'");
+    }
+
+    [Test]
+    public async Task RegisterOnBeforeToggle() {
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_BEFORE_TOGGLE);
+
+        await Page.GetByTestId(HTMLElementGroup.POPOVER_ELEMENT).EvaluateAsync("node => node.showPopover();");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("oldState='closed', newState='open'");
     }
 
     #endregion
@@ -3412,88 +3739,88 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
     // events
 
     [Test]
-    public async Task RegisterOnTransitionstart() {
-        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_TRANSITIONSTART);
+    public async Task RegisterOnTransitionStart() {
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_TRANSITION_START);
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#000';");
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).StartsWith(HTMLElementGroup.TEST_TRANSITIONSTART_EVENT);
+        await Assert.That(result).StartsWith(HTMLElementGroup.TEST_EVENT_TRANSITIONSTART);
     }
 
     [Test]
-    public async Task RegisterOnTransitionend() {
-        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_TRANSITIONEND);
+    public async Task RegisterOnTransitionEnd() {
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_TRANSITION_END);
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#000';");
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).StartsWith(HTMLElementGroup.TEST_TRANSITIONEND_EVENT);
+        await Assert.That(result).StartsWith(HTMLElementGroup.TEST_EVENT_TRANSITIONEND);
     }
 
     [Test]
-    public async Task RegisterOnTransitionrun() {
-        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_TRANSITIONRUN);
+    public async Task RegisterOnTransitionRun() {
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_TRANSITION_RUN);
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#000';");
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).StartsWith(HTMLElementGroup.TEST_TRANSITIONRUN_EVENT);
+        await Assert.That(result).StartsWith(HTMLElementGroup.TEST_EVENT_TRANSITIONRUN);
     }
 
     [Test]
-    public async Task RegisterOnTransitioncancel() {
-        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_TRANSITIONCANCEL);
+    public async Task RegisterOnTransitionCancel() {
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_TRANSITION_CANCEL);
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#000';");
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#222';");
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).StartsWith(HTMLElementGroup.TEST_TRANSITIONCANCEL_EVENT);
+        await Assert.That(result).StartsWith(HTMLElementGroup.TEST_EVENT_TRANSITIONCANCEL);
     }
 
 
     [Test]
-    public async Task RegisterOnAnimationstart() {
-        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_ANIMATIONSTART);
+    public async Task RegisterOnAnimationStart() {
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_ANIMATION_START);
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.classList.add('animation-start');");
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).StartsWith(HTMLElementGroup.TEST_ANIMATIONSTART_EVENT);
+        await Assert.That(result).StartsWith(HTMLElementGroup.TEST_EVENT_ANIMATIONSTART);
     }
 
     [Test]
-    public async Task RegisterOnAnimationnend() {
-        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_ANIMATIONEND);
+    public async Task RegisterOnAnimationnEnd() {
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_ANIMATION_END);
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.classList.add('animation-start');");
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).StartsWith(HTMLElementGroup.TEST_ANIMATIONEND_EVENT);
+        await Assert.That(result).StartsWith(HTMLElementGroup.TEST_EVENT_ANIMATIONEND);
     }
 
     [Test]
-    public async Task RegisterOnAnimationiteration() {
-        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_ANIMATIONITERATION);
+    public async Task RegisterOnAnimationIteration() {
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_ANIMATION_ITERATION);
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.classList.add('animation-start-infinite');");
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).StartsWith(HTMLElementGroup.TEST_ANIMATIONITERATION_EVENT);
+        await Assert.That(result).StartsWith(HTMLElementGroup.TEST_EVENT_ANIMATIONITERATION);
     }
 
     // does not work in Chromium Browser. To make this test work, go to PlayWrightFixture.InitializeAsync() and change "Chromium" to "Firefox"
     [Test, Explicit]
-    public async Task RegisterOnAnimationcancel() {
-        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_ANIMATIONCANCEL);
-        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.classList.add('animation-start');");
-        await Task.Delay(STANDARD_WAIT_TIME);
-        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.classList.remove('animation-start');");
+    public async Task RegisterOnAnimationCancel() {
+        await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_ANIMATION_CANCEL);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.classList.add('animation-start-infinite');");
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.classList.remove('animation-start-infinite');");
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo(HTMLElementGroup.TEST_ANIMATIONCANCEL_EVENT);
+        await Assert.That(result).StartsWith(HTMLElementGroup.TEST_EVENT_ANIMATIONCANCEL);
     }
 
     #endregion

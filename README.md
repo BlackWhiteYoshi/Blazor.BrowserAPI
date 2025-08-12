@@ -139,3 +139,7 @@ There are more interfaces coming.
     - changed IServiceWorkerContainer.OnMessage from Action&lt;string&gt; to Action&lt;JsonElement&gt;
 - 0.13.0
   - added Permissions (20 BrowserAPIs)
+- 0.14.0
+  - TODO added DocumentAPI
+  - TODO added to HTMLElement much more members
+  - small breaking changes: renamed some events to capital letters so it fits more the C# convention naming

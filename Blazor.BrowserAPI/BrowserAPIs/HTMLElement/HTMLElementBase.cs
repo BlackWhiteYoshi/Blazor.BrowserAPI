@@ -1,6 +1,7 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 
 namespace BrowserAPI.Implementation;
 
@@ -48,25 +49,57 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
 
     #region Events
 
-    [method: DynamicDependency(nameof(InvokeTransitionstart))]
-    [method: DynamicDependency(nameof(InvokeTransitionend))]
-    [method: DynamicDependency(nameof(InvokeTransitionrun))]
-    [method: DynamicDependency(nameof(InvokeTransitioncancel))]
+    [method: DynamicDependency(nameof(InvokeChange))]
+    [method: DynamicDependency(nameof(InvokeCommand))]
+    [method: DynamicDependency(nameof(InvokeLoad))]
+    [method: DynamicDependency(nameof(InvokeError))]
 
-    [method: DynamicDependency(nameof(InvokeAnimationstart))]
-    [method: DynamicDependency(nameof(InvokeAnimationend))]
-    [method: DynamicDependency(nameof(InvokeAnimationiteration))]
-    [method: DynamicDependency(nameof(InvokeAnimationcancel))]
+    [method: DynamicDependency(nameof(InvokeDrag))]
+    [method: DynamicDependency(nameof(InvokeDragStart))]
+    [method: DynamicDependency(nameof(InvokeDragEnd))]
+    [method: DynamicDependency(nameof(InvokeDragEnter))]
+    [method: DynamicDependency(nameof(InvokeDragLeave))]
+    [method: DynamicDependency(nameof(InvokeDragOver))]
+    [method: DynamicDependency(nameof(InvokeDrop))]
+
+    [method: DynamicDependency(nameof(InvokeToggle))]
+    [method: DynamicDependency(nameof(InvokeBeforeToggle))]
+
+    [method: DynamicDependency(nameof(InvokeTransitionStart))]
+    [method: DynamicDependency(nameof(InvokeTransitionEnd))]
+    [method: DynamicDependency(nameof(InvokeTransitionRun))]
+    [method: DynamicDependency(nameof(InvokeTransitionCancel))]
+
+    [method: DynamicDependency(nameof(InvokeAnimationStart))]
+    [method: DynamicDependency(nameof(InvokeAnimationEnd))]
+    [method: DynamicDependency(nameof(InvokeAnimationIteration))]
+    [method: DynamicDependency(nameof(InvokeAnimationCancel))]
     private sealed class EventTrigger(HTMLElementBase htmlElement) {
-        [JSInvokable] public void InvokeTransitionstart(string propertyName, double elapsedTime, string pseudoElement) => htmlElement._onTransitionstart?.Invoke(propertyName, elapsedTime, pseudoElement);
-        [JSInvokable] public void InvokeTransitionend(string propertyName, double elapsedTime, string pseudoElement) => htmlElement._onTransitionend?.Invoke(propertyName, elapsedTime, pseudoElement);
-        [JSInvokable] public void InvokeTransitionrun(string propertyName, double elapsedTime, string pseudoElement) => htmlElement._onTransitionrun?.Invoke(propertyName, elapsedTime, pseudoElement);
-        [JSInvokable] public void InvokeTransitioncancel(string propertyName, double elapsedTime, string pseudoElement) => htmlElement._onTransitioncancel?.Invoke(propertyName, elapsedTime, pseudoElement);
+        [JSInvokable] public void InvokeChange() => htmlElement._onChange?.Invoke();
+        [JSInvokable] public void InvokeCommand(IJSObjectReference source, string command) => htmlElement.InvokeCommand(source, command);
+        [JSInvokable] public void InvokeLoad() => htmlElement._onLoad?.Invoke();
+        [JSInvokable] public void InvokeError(JsonElement errorEvent) => htmlElement._onError?.Invoke(errorEvent);
 
-        [JSInvokable] public void InvokeAnimationstart(string animationName, double elapsedTime, string pseudoElement) => htmlElement._onAnimationstart?.Invoke(animationName, elapsedTime, pseudoElement);
-        [JSInvokable] public void InvokeAnimationend(string animationName, double elapsedTime, string pseudoElement) => htmlElement._onAnimationend?.Invoke(animationName, elapsedTime, pseudoElement);
-        [JSInvokable] public void InvokeAnimationiteration(string animationName, double elapsedTime, string pseudoElement) => htmlElement._onAnimationiteration?.Invoke(animationName, elapsedTime, pseudoElement);
-        [JSInvokable] public void InvokeAnimationcancel(string animationName, double elapsedTime, string pseudoElement) => htmlElement._onAnimationcancel?.Invoke(animationName, elapsedTime, pseudoElement);
+        [JSInvokable] public void InvokeDrag(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => htmlElement.InvokeDrag(dropEffect, effectAllowed, types, files);
+        [JSInvokable] public void InvokeDragStart(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => htmlElement.InvokeDragStart(dropEffect, effectAllowed, types, files);
+        [JSInvokable] public void InvokeDragEnd(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => htmlElement.InvokeDragEnd(dropEffect, effectAllowed, types, files);
+        [JSInvokable] public void InvokeDragEnter(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => htmlElement.InvokeDragEnter(dropEffect, effectAllowed, types, files);
+        [JSInvokable] public void InvokeDragLeave(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => htmlElement.InvokeDragLeave(dropEffect, effectAllowed, types, files);
+        [JSInvokable] public void InvokeDragOver(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => htmlElement.InvokeDragOver(dropEffect, effectAllowed, types, files);
+        [JSInvokable] public void InvokeDrop(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => htmlElement.InvokeDrop(dropEffect, effectAllowed, types, files);
+
+        [JSInvokable] public void InvokeToggle(string oldState, string newState) => htmlElement._onToggle?.Invoke(oldState, newState);
+        [JSInvokable] public void InvokeBeforeToggle(string oldState, string newState) => htmlElement._onBeforeToggle?.Invoke(oldState, newState);
+
+        [JSInvokable] public void InvokeTransitionStart(string propertyName, double elapsedTime, string pseudoElement) => htmlElement._onTransitionStart?.Invoke(propertyName, elapsedTime, pseudoElement);
+        [JSInvokable] public void InvokeTransitionEnd(string propertyName, double elapsedTime, string pseudoElement) => htmlElement._onTransitionEnd?.Invoke(propertyName, elapsedTime, pseudoElement);
+        [JSInvokable] public void InvokeTransitionRun(string propertyName, double elapsedTime, string pseudoElement) => htmlElement._onTransitionRun?.Invoke(propertyName, elapsedTime, pseudoElement);
+        [JSInvokable] public void InvokeTransitionCancel(string propertyName, double elapsedTime, string pseudoElement) => htmlElement._onTransitionCancel?.Invoke(propertyName, elapsedTime, pseudoElement);
+
+        [JSInvokable] public void InvokeAnimationStart(string animationName, double elapsedTime, string pseudoElement) => htmlElement._onAnimationStart?.Invoke(animationName, elapsedTime, pseudoElement);
+        [JSInvokable] public void InvokeAnimationEnd(string animationName, double elapsedTime, string pseudoElement) => htmlElement._onAnimationEnd?.Invoke(animationName, elapsedTime, pseudoElement);
+        [JSInvokable] public void InvokeAnimationIteration(string animationName, double elapsedTime, string pseudoElement) => htmlElement._onAnimationIteration?.Invoke(animationName, elapsedTime, pseudoElement);
+        [JSInvokable] public void InvokeAnimationCancel(string animationName, double elapsedTime, string pseudoElement) => htmlElement._onAnimationCancel?.Invoke(animationName, elapsedTime, pseudoElement);
     }
 
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
@@ -85,21 +118,183 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
 
 
-    private async ValueTask ActivateJSEvent(string jsMethodName) {
+    private protected async ValueTask ActivateJSEvent(string jsMethodName) {
         IJSObjectReference htmlElement = await htmlElementTask;
         await InitEventTrigger(htmlElement);
         await htmlElement.InvokeVoidTrySync(jsMethodName);
     }
 
-    private async ValueTask DeactivateJSEvent(string jsMethodName) {
+    private protected async ValueTask DeactivateJSEvent(string jsMethodName) {
         IJSObjectReference htmlElement = await htmlElementTask;
         await htmlElement.InvokeVoidTrySync(jsMethodName);
     }
 
 
-    // Transition Events
+    // HTMLElement - Events
 
-    private Action<string, double, string>? _onTransitionstart;
+    private Action? _onChange;
+    /// <summary>
+    /// <para>
+    /// Is fired for &lt;input&gt;, &lt;select&gt;, and &lt;textarea&gt; elements when the user modifies the element's value.
+    /// Unlike the input event, the change event is not necessarily fired for each alteration to an element's value.
+    /// </para>
+    /// <para>
+    /// Depending on the kind of element being changed and the way the user interacts with the element, the change event fires at a different moment:<br />
+    /// - When a &lt;input type="checkbox"&gt; element is checked or unchecked (by clicking or using the keyboard);<br />
+    /// - When a &lt;input type="radio"&gt; element is checked (but not when unchecked);<br />
+    /// - When the user commits the change explicitly (e.g., by selecting a value from a &lt;select&gt;'s dropdown with a mouse click, by selecting a date from a date picker for &lt;input type="date"&gt;, by selecting a file in the file picker for &lt;input type="file"&gt;, etc.);<br />
+    /// - When the element loses focus after its value was changed: for elements where the user's interaction is typing rather than selection, such as a &lt;textarea&gt; or the text, search, url, tel, email, or password types of the &lt;input&gt; element.
+    /// </para>
+    /// </summary>
+    public event Action OnChange {
+        add {
+            if (_onChange == null)
+                _ = ActivateJSEvent("activateOnchange").Preserve();
+            _onChange += value;
+        }
+        remove {
+            _onChange -= value;
+            if (_onChange == null)
+                _ = DeactivateJSEvent("deactivateOnchange").Preserve();
+        }
+    }
+
+    // (IHTMLElement | IHTMLElementInProcess) source
+    private protected abstract void InvokeCommand(IJSObjectReference source, string command);
+
+    private Action? _onLoad;
+    /// <summary>
+    /// <para>
+    /// Fires for elements containing a resource when the resource has successfully loaded.
+    /// Currently, the list of supported HTML elements are: &lt;body&gt;, &lt;embed&gt;, &lt;iframe&gt;, &lt;img&gt;, &lt;link&gt;, &lt;object&gt;, &lt;script&gt;, &lt;style&gt;, and &lt;track&gt;.
+    /// </para>
+    /// <para>This event is not cancelable and does not bubble.</para>
+    /// </summary>
+    /// <remarks>
+    /// Note: The load event on HTMLBodyElement is actually an alias for the window.onload event.
+    /// Therefore, the load event will only fire on the &lt;body&gt; element once all of the document's resources have loaded or errored.
+    /// However, for the sake of clarity, it is recommended that the event handler is attached to the window object directly rather than on HTMLBodyElement.
+    /// </remarks>
+    public event Action OnLoad {
+        add {
+            if (_onLoad == null)
+                _ = ActivateJSEvent("activateOnload").Preserve();
+            _onLoad += value;
+        }
+        remove {
+            _onLoad -= value;
+            if (_onLoad == null)
+                _ = DeactivateJSEvent("deactivateOnload").Preserve();
+        }
+    }
+
+    private Action<JsonElement>? _onError;
+    /// <summary>
+    /// <para>Is fired on an element when a resource failed to load, or can't be used. For example, if a script has an execution error or an image can't be found or is invalid.</para>
+    /// <para>This event is not cancelable and does not bubble.</para>
+    /// <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</see> as JSON.</para>
+    /// </summary>
+    public event Action<JsonElement> OnError {
+        add {
+            if (_onError == null)
+                _ = ActivateJSEvent("activateOnerror").Preserve();
+            _onError += value;
+        }
+        remove {
+            _onError -= value;
+            if (_onError == null)
+                _ = DeactivateJSEvent("deactivateOnerror").Preserve();
+        }
+    }
+
+
+    // (IFile | IFileInProcess)[] files
+    private protected abstract void InvokeDrag(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+
+    // (IFile | IFileInProcess)[] files
+    private protected abstract void InvokeDragStart(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+
+    // (IFile | IFileInProcess)[] files
+    private protected abstract void InvokeDragEnd(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+
+    // (IFile | IFileInProcess)[] files
+    private protected abstract void InvokeDragEnter(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+
+    // (IFile | IFileInProcess)[] files
+    private protected abstract void InvokeDragLeave(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+
+    // (IFile | IFileInProcess)[] files
+    private protected abstract void InvokeDragOver(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+
+    // (IFile | IFileInProcess)[] files
+    private protected abstract void InvokeDrop(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+
+
+    private Action<string, string>? _onToggle;
+    /// <summary>
+    /// <para>
+    /// Fires on a popover element, &lt;dialog&gt; element, or &lt;details&gt; element just after it is shown or hidden.<br />
+    /// - If the element is transitioning from hidden to showing, the event.oldState property will be set to closed and the event.newState property will be set to open.<br />
+    /// - If the element is transitioning from showing to hidden, then event.oldState will be open and event.newState will be closed.
+    /// </para>
+    /// <para>This event is not cancelable.</para>
+    /// <para>
+    /// <b>Parameters</b><br />
+    /// - string <i>oldState</i>: either "open" or "closed", representing the state the element is transitioning to.<br />
+    /// - string <i>newState</i>: either "open" or "closed", representing the state the element is transitioning from.
+    /// </para>
+    /// </summary>
+    public event Action<string, string> OnToggle {
+        add {
+            if (_onToggle == null)
+                _ = ActivateJSEvent("activateOntoggle").Preserve();
+            _onToggle += value;
+        }
+        remove {
+            _onToggle -= value;
+            if (_onToggle == null)
+                _ = DeactivateJSEvent("deactivateOntoggle").Preserve();
+        }
+    }
+
+    private Action<string, string>? _onBeforeToggle;
+    /// <summary>
+    /// <para>
+    /// Fires on a popover or &lt;dialog&gt; element just before it is shown or hidden.<br />
+    /// - If the element is transitioning from hidden to showing, the event.oldState property will be set to closed and the event.newState property will be set to open.<br />
+    /// - If the element is transitioning from showing to hidden, then event.oldState will be open and event.newState will be closed.
+    /// </para>
+    /// <para>This event is cancelable when an element is toggled to open ("show") but not when the element is closing.</para>
+    /// <para>
+    /// Among other things, this event can be used to:<br />
+    /// - prevent an element from being shown.<br />
+    /// - add or remove classes or properties from the element or associated elements, for example to control the animation behavior of a dialog as it is opened and closed.<br />
+    /// - clear the state of the element before it is opened or after it is hidden, for example to reset a dialog form and return value to an empty state, or hide any nested manual popovers when reopening a popup.
+    /// </para>
+    /// <para>
+    /// <b>Parameters</b><br />
+    /// - string <i>oldState</i>: either "open" or "closed", representing the state the element is transitioning to.<br />
+    /// - string <i>newState</i>: either "open" or "closed", representing the state the element is transitioning from.
+    /// </para>
+    /// </summary>
+    public event Action<string, string> OnBeforeToggle {
+        add {
+            if (_onBeforeToggle == null)
+                _ = ActivateJSEvent("activateOnbeforetoggle").Preserve();
+            _onBeforeToggle += value;
+        }
+        remove {
+            _onBeforeToggle -= value;
+            if (_onBeforeToggle == null)
+                _ = DeactivateJSEvent("deactivateOnbeforetoggle").Preserve();
+        }
+    }
+
+
+
+    // Element - Events
+
+    private Action<string, double, string>? _onTransitionStart;
     /// <summary>
     /// <para>Is fired when a CSS transition has actually started, i.e., after any transition-delay has ended.</para>
     /// <para>This event is not cancelable.</para>
@@ -110,20 +305,20 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     /// - string <i>pseudoElement</i>: A string, starting with '::', containing the name of the pseudo-element the animation runs on. If the transition doesn't run on a pseudo-element but on the element, an empty string.
     /// </para>
     /// </summary>
-    public event Action<string, double, string> OnTransitionstart {
+    public event Action<string, double, string> OnTransitionStart {
         add {
-            if (_onTransitionstart == null)
+            if (_onTransitionStart == null)
                 _ = ActivateJSEvent("activateOntransitionstart").Preserve();
-            _onTransitionstart += value;
+            _onTransitionStart += value;
         }
         remove {
-            _onTransitionstart -= value;
-            if (_onTransitionstart == null)
+            _onTransitionStart -= value;
+            if (_onTransitionStart == null)
                 _ = DeactivateJSEvent("deactivateOntransitionstart").Preserve();
         }
     }
 
-    private Action<string, double, string>? _onTransitionend;
+    private Action<string, double, string>? _onTransitionEnd;
     /// <summary>
     /// <para>
     /// Is fired when a CSS transition has completed.
@@ -142,20 +337,20 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     /// - string <i>pseudoElement</i>: A string, starting with '::', containing the name of the pseudo-element the animation runs on. If the transition doesn't run on a pseudo-element but on the element, an empty string.
     /// </para>
     /// </summary>
-    public event Action<string, double, string> OnTransitionend {
+    public event Action<string, double, string> OnTransitionEnd {
         add {
-            if (_onTransitionend == null)
+            if (_onTransitionEnd == null)
                 _ = ActivateJSEvent("activateOntransitionend").Preserve();
-            _onTransitionend += value;
+            _onTransitionEnd += value;
         }
         remove {
-            _onTransitionend -= value;
-            if (_onTransitionend == null)
+            _onTransitionEnd -= value;
+            if (_onTransitionEnd == null)
                 _ = DeactivateJSEvent("deactivateOntransitionend").Preserve();
         }
     }
 
-    private Action<string, double, string>? _onTransitionrun;
+    private Action<string, double, string>? _onTransitionRun;
     /// <summary>
     /// <para>Is fired when a CSS transition is first created, i.e. before any transition-delay has begun.</para>
     /// <para>This event is not cancelable.</para>
@@ -166,20 +361,20 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     /// - string <i>pseudoElement</i>: A string, starting with '::', containing the name of the pseudo-element the animation runs on. If the transition doesn't run on a pseudo-element but on the element, an empty string.
     /// </para>
     /// </summary>
-    public event Action<string, double, string> OnTransitionrun {
+    public event Action<string, double, string> OnTransitionRun {
         add {
-            if (_onTransitionrun == null)
+            if (_onTransitionRun == null)
                 _ = ActivateJSEvent("activateOntransitionrun").Preserve();
-            _onTransitionrun += value;
+            _onTransitionRun += value;
         }
         remove {
-            _onTransitionrun -= value;
-            if (_onTransitionrun == null)
+            _onTransitionRun -= value;
+            if (_onTransitionRun == null)
                 _ = DeactivateJSEvent("deactivateOntransitionrun").Preserve();
         }
     }
 
-    private Action<string, double, string>? _onTransitioncancel;
+    private Action<string, double, string>? _onTransitionCancel;
     /// <summary>
     /// <para>Is fired when a CSS transition is canceled.</para>
     /// <para>
@@ -189,23 +384,21 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     /// - string <i>pseudoElement</i>: A string, starting with '::', containing the name of the pseudo-element the animation runs on. If the transition doesn't run on a pseudo-element but on the element, an empty string.
     /// </para>
     /// </summary>
-    public event Action<string, double, string> OnTransitioncancel {
+    public event Action<string, double, string> OnTransitionCancel {
         add {
-            if (_onTransitioncancel == null)
+            if (_onTransitionCancel == null)
                 _ = ActivateJSEvent("activateOntransitioncancel").Preserve();
-            _onTransitioncancel += value;
+            _onTransitionCancel += value;
         }
         remove {
-            _onTransitioncancel -= value;
-            if (_onTransitioncancel == null)
+            _onTransitionCancel -= value;
+            if (_onTransitionCancel == null)
                 _ = DeactivateJSEvent("deactivateOntransitioncancel").Preserve();
         }
     }
 
 
-    // Animation Events
-
-    private Action<string, double, string>? _onAnimationstart;
+    private Action<string, double, string>? _onAnimationStart;
     /// <summary>
     /// <para>
     /// Is fired when a CSS Animation has started.
@@ -220,20 +413,20 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     /// - string <i>pseudoElement</i>: A string, starting with '::', containing the name of the pseudo-element the animation runs on. If the transition doesn't run on a pseudo-element but on the element, an empty string.
     /// </para>
     /// </summary>
-    public event Action<string, double, string> OnAnimationstart {
+    public event Action<string, double, string> OnAnimationStart {
         add {
-            if (_onAnimationstart == null)
+            if (_onAnimationStart == null)
                 _ = ActivateJSEvent("activateOnanimationstart").Preserve();
-            _onAnimationstart += value;
+            _onAnimationStart += value;
         }
         remove {
-            _onAnimationstart -= value;
-            if (_onAnimationstart == null)
+            _onAnimationStart -= value;
+            if (_onAnimationStart == null)
                 _ = DeactivateJSEvent("deactivateOnanimationstart").Preserve();
         }
     }
 
-    private Action<string, double, string>? _onAnimationend;
+    private Action<string, double, string>? _onAnimationEnd;
     /// <summary>
     /// <para>
     /// Is fired when a CSS Animation has completed.
@@ -247,20 +440,20 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     /// - string <i>pseudoElement</i>: A string, starting with '::', containing the name of the pseudo-element the animation runs on. If the transition doesn't run on a pseudo-element but on the element, an empty string.
     /// </para>
     /// </summary>
-    public event Action<string, double, string> OnAnimationend {
+    public event Action<string, double, string> OnAnimationEnd {
         add {
-            if (_onAnimationend == null)
+            if (_onAnimationEnd == null)
                 _ = ActivateJSEvent("activateOnanimationend").Preserve();
-            _onAnimationend += value;
+            _onAnimationEnd += value;
         }
         remove {
-            _onAnimationend -= value;
-            if (_onAnimationend == null)
+            _onAnimationEnd -= value;
+            if (_onAnimationEnd == null)
                 _ = DeactivateJSEvent("deactivateOnanimationend").Preserve();
         }
     }
 
-    private Action<string, double, string>? _onAnimationiteration;
+    private Action<string, double, string>? _onAnimationIteration;
     /// <summary>
     /// <para>
     /// Is fired when an iteration of a CSS Animation ends, and another one begins.
@@ -274,20 +467,20 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     /// - string <i>pseudoElement</i>: A string, starting with '::', containing the name of the pseudo-element the animation runs on. If the transition doesn't run on a pseudo-element but on the element, an empty string.
     /// </para>
     /// </summary>
-    public event Action<string, double, string> OnAnimationiteration {
+    public event Action<string, double, string> OnAnimationIteration {
         add {
-            if (_onAnimationiteration == null)
+            if (_onAnimationIteration == null)
                 _ = ActivateJSEvent("activateOnanimationiteration").Preserve();
-            _onAnimationiteration += value;
+            _onAnimationIteration += value;
         }
         remove {
-            _onAnimationiteration -= value;
-            if (_onAnimationiteration == null)
+            _onAnimationIteration -= value;
+            if (_onAnimationIteration == null)
                 _ = DeactivateJSEvent("deactivateOnanimationiteration").Preserve();
         }
     }
 
-    private Action<string, double, string>? _onAnimationcancel;
+    private Action<string, double, string>? _onAnimationCancel;
     /// <summary>
     /// <para>
     /// Is fired when a CSS Animation unexpectedly aborts.
@@ -304,15 +497,15 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     /// - string <i>pseudoElement</i>: A string, starting with '::', containing the name of the pseudo-element the animation runs on. If the transition doesn't run on a pseudo-element but on the element, an empty string.
     /// </para>
     /// </summary>
-    public event Action<string, double, string> OnAnimationcancel {
+    public event Action<string, double, string> OnAnimationCancel {
         add {
-            if (_onAnimationcancel == null)
+            if (_onAnimationCancel == null)
                 _ = ActivateJSEvent("activateOnanimationcancel").Preserve();
-            _onAnimationcancel += value;
+            _onAnimationCancel += value;
         }
         remove {
-            _onAnimationcancel -= value;
-            if (_onAnimationcancel == null)
+            _onAnimationCancel -= value;
+            if (_onAnimationCancel == null)
                 _ = DeactivateJSEvent("deactivateOnanimationcancel").Preserve();
         }
     }

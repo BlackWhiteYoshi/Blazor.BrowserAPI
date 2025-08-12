@@ -3570,6 +3570,149 @@
             </param>
             <param name="cancellationToken"></param>
         </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElement.OnCommand">
+            <summary>
+            <para>
+            Fires on an element that is controlled via a button with valid commandForElement and command values, whenever the button is interacted with (e.g., it is clicked).
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - IHTMLElement <i>source</i>: An HTMLButtonElement representing the button that caused this invocation.<br />
+            - string <i>command</i>: Representing the command value of the source button.
+            </para>
+            </summary>
+            <remarks>
+            Note: Dispose the given IHTMLElement object when you are done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElement.OnDrag">
+            <summary>
+            <para>
+            Is fired every few hundred milliseconds as an element or text selection is being dragged by the user.<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFile[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>DispseAsync()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElement.OnDragStart">
+            <summary>
+            <para>
+            Is fired when the user starts dragging an element or text selection.<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFile[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>DispseAsync()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElement.OnDragEnd">
+            <summary>
+            <para>
+            Is fired when a drag operation ends (by releasing a mouse button or hitting the escape key).<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFile[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>DispseAsync()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElement.OnDragEnter">
+            <summary>
+            <para>
+            Is fired when a dragged element or text selection enters a valid drop target.
+            The target object is the immediate user selection (the element directly indicated by the user as the drop target), or the &lt;body&gt; element.<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFile[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>DispseAsync()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElement.OnDragLeave">
+            <summary>
+            <para>
+            Is fired when a dragged element or text selection leaves a valid drop target.<br />
+            This event is not cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFile[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>DispseAsync()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElement.OnDragOver">
+            <summary>
+            <para>
+            Is fired when an element or text selection is being dragged over a valid drop target (every few hundred milliseconds).<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFile[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>DispseAsync()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElement.OnDrop">
+            <summary>
+            <para>
+            Is fired when an element or text selection is dropped on a valid drop target.
+            To ensure that the drop event always fires as expected, you should always include a preventDefault() call in the part of your code which handles the dragover event.<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFile[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>DispseAsync()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
         <member name="P:BrowserAPI.Implementation.HTMLElement.Attributes">
             <summary>
             Returns a live collection of all attribute nodes registered to the specified node.
@@ -5671,7 +5814,79 @@
             Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call this method.
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnTransitionstart">
+        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnChange">
+            <summary>
+            <para>
+            Is fired for &lt;input&gt;, &lt;select&gt;, and &lt;textarea&gt; elements when the user modifies the element's value.
+            Unlike the input event, the change event is not necessarily fired for each alteration to an element's value.
+            </para>
+            <para>
+            Depending on the kind of element being changed and the way the user interacts with the element, the change event fires at a different moment:<br />
+            - When a &lt;input type="checkbox"&gt; element is checked or unchecked (by clicking or using the keyboard);<br />
+            - When a &lt;input type="radio"&gt; element is checked (but not when unchecked);<br />
+            - When the user commits the change explicitly (e.g., by selecting a value from a &lt;select&gt;'s dropdown with a mouse click, by selecting a date from a date picker for &lt;input type="date"&gt;, by selecting a file in the file picker for &lt;input type="file"&gt;, etc.);<br />
+            - When the element loses focus after its value was changed: for elements where the user's interaction is typing rather than selection, such as a &lt;textarea&gt; or the text, search, url, tel, email, or password types of the &lt;input&gt; element.
+            </para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnLoad">
+            <summary>
+            <para>
+            Fires for elements containing a resource when the resource has successfully loaded.
+            Currently, the list of supported HTML elements are: &lt;body&gt;, &lt;embed&gt;, &lt;iframe&gt;, &lt;img&gt;, &lt;link&gt;, &lt;object&gt;, &lt;script&gt;, &lt;style&gt;, and &lt;track&gt;.
+            </para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+            <remarks>
+            Note: The load event on HTMLBodyElement is actually an alias for the window.onload event.
+            Therefore, the load event will only fire on the &lt;body&gt; element once all of the document's resources have loaded or errored.
+            However, for the sake of clarity, it is recommended that the event handler is attached to the window object directly rather than on HTMLBodyElement.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnError">
+            <summary>
+            <para>Is fired on an element when a resource failed to load, or can't be used. For example, if a script has an execution error or an image can't be found or is invalid.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</see> as JSON.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnToggle">
+            <summary>
+            <para>
+            Fires on a popover element, &lt;dialog&gt; element, or &lt;details&gt; element just after it is shown or hidden.<br />
+            - If the element is transitioning from hidden to showing, the event.oldState property will be set to closed and the event.newState property will be set to open.<br />
+            - If the element is transitioning from showing to hidden, then event.oldState will be open and event.newState will be closed.
+            </para>
+            <para>This event is not cancelable.</para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>oldState</i>: either "open" or "closed", representing the state the element is transitioning to.<br />
+            - string <i>newState</i>: either "open" or "closed", representing the state the element is transitioning from.
+            </para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnBeforeToggle">
+            <summary>
+            <para>
+            Fires on a popover or &lt;dialog&gt; element just before it is shown or hidden.<br />
+            - If the element is transitioning from hidden to showing, the event.oldState property will be set to closed and the event.newState property will be set to open.<br />
+            - If the element is transitioning from showing to hidden, then event.oldState will be open and event.newState will be closed.
+            <para>This event is cancelable when an element is toggled to open ("show") but not when the element is closing.</para>
+            <para>
+            Among other things, this event can be used to:<br />
+            - prevent an element from being shown.<br />
+            - add or remove classes or properties from the element or associated elements, for example to control the animation behavior of a dialog as it is opened and closed.<br />
+            - clear the state of the element before it is opened or after it is hidden, for example to reset a dialog form and return value to an empty state, or hide any nested manual popovers when reopening a popup.
+            </para>
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>oldState</i>: either "open" or "closed", representing the state the element is transitioning to.<br />
+            - string <i>newState</i>: either "open" or "closed", representing the state the element is transitioning from.
+            </para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnTransitionStart">
             <summary>
             <para>Is fired when a CSS transition has actually started, i.e., after any transition-delay has ended.</para>
             <para>This event is not cancelable.</para>
@@ -5683,7 +5898,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnTransitionend">
+        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnTransitionEnd">
             <summary>
             <para>
             Is fired when a CSS transition has completed.
@@ -5703,7 +5918,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnTransitionrun">
+        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnTransitionRun">
             <summary>
             <para>Is fired when a CSS transition is first created, i.e. before any transition-delay has begun.</para>
             <para>This event is not cancelable.</para>
@@ -5715,7 +5930,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnTransitioncancel">
+        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnTransitionCancel">
             <summary>
             <para>Is fired when a CSS transition is canceled.</para>
             <para>
@@ -5726,7 +5941,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnAnimationstart">
+        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnAnimationStart">
             <summary>
             <para>
             Is fired when a CSS Animation has started.
@@ -5742,7 +5957,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnAnimationend">
+        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnAnimationEnd">
             <summary>
             <para>
             Is fired when a CSS Animation has completed.
@@ -5757,7 +5972,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnAnimationiteration">
+        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnAnimationIteration">
             <summary>
             <para>
             Is fired when an iteration of a CSS Animation ends, and another one begins.
@@ -5772,7 +5987,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnAnimationcancel">
+        <member name="E:BrowserAPI.Implementation.HTMLElementBase.OnAnimationCancel">
             <summary>
             <para>
             Is fired when a CSS Animation unexpectedly aborts.
@@ -6247,6 +6462,149 @@
             <para>- If set to true, the popover is shown if it was initially hidden.If it was initially shown, nothing happens.</para>
             <para>- If set to false, the popover is hidden if it was initially shown. If it was initially hidden, nothing happens.</para>
             </param>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElementInProcess.OnCommand">
+            <summary>
+            <para>
+            Fires on an element that is controlled via a button with valid commandForElement and command values, whenever the button is interacted with (e.g., it is clicked).
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - IHTMLElementInProcess <i>source</i>: An HTMLButtonElement representing the button that caused this invocation.<br />
+            - string <i>command</i>: Representing the command value of the source button.
+            </para>
+            </summary>
+            <remarks>
+            Note: Dispose the given IHTMLElementInProcess object when you are done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElementInProcess.OnDrag">
+            <summary>
+            <para>
+            Is fired every few hundred milliseconds as an element or text selection is being dragged by the user.<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElementInProcess.OnDragStart">
+            <summary>
+            <para>
+            Is fired when the user starts dragging an element or text selection.<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElementInProcess.OnDragEnd">
+            <summary>
+            <para>
+            Is fired when a drag operation ends (by releasing a mouse button or hitting the escape key).<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElementInProcess.OnDragEnter">
+            <summary>
+            <para>
+            Is fired when a dragged element or text selection enters a valid drop target.
+            The target object is the immediate user selection (the element directly indicated by the user as the drop target), or the &lt;body&gt; element.<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElementInProcess.OnDragLeave">
+            <summary>
+            <para>
+            Is fired when a dragged element or text selection leaves a valid drop target.<br />
+            This event is not cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElementInProcess.OnDragOver">
+            <summary>
+            <para>
+            Is fired when an element or text selection is being dragged over a valid drop target (every few hundred milliseconds).<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.Implementation.HTMLElementInProcess.OnDrop">
+            <summary>
+            <para>
+            Is fired when an element or text selection is dropped on a valid drop target.
+            To ensure that the drop event always fires as expected, you should always include a preventDefault() call in the part of your code which handles the dragover event.<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+            </remarks>
         </member>
         <member name="P:BrowserAPI.Implementation.HTMLElementInProcess.Attributes">
             <summary>
@@ -16365,6 +16723,149 @@
             </param>
             <param name="cancellationToken"></param>
         </member>
+        <member name="E:BrowserAPI.IHTMLElement.OnCommand">
+            <summary>
+            <para>
+            Fires on an element that is controlled via a button with valid commandForElement and command values, whenever the button is interacted with (e.g., it is clicked).
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - IHTMLElement <i>source</i>: An HTMLButtonElement representing the button that caused this invocation.<br />
+            - string <i>command</i>: Representing the command value of the source button.
+            </para>
+            </summary>
+            <remarks>
+            Note: Dispose the given IHTMLElement object when you are done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElement.OnDrag">
+            <summary>
+            <para>
+            Is fired every few hundred milliseconds as an element or text selection is being dragged by the user.<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFile[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>DispseAsync()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElement.OnDragStart">
+            <summary>
+            <para>
+            Is fired when the user starts dragging an element or text selection.<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFile[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>DispseAsync()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElement.OnDragEnd">
+            <summary>
+            <para>
+            Is fired when a drag operation ends (by releasing a mouse button or hitting the escape key).<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFile[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>DispseAsync()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElement.OnDragEnter">
+            <summary>
+            <para>
+            Is fired when a dragged element or text selection enters a valid drop target.
+            The target object is the immediate user selection (the element directly indicated by the user as the drop target), or the &lt;body&gt; element.<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFile[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>DispseAsync()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElement.OnDragLeave">
+            <summary>
+            <para>
+            Is fired when a dragged element or text selection leaves a valid drop target.<br />
+            This event is not cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFile[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>DispseAsync()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElement.OnDragOver">
+            <summary>
+            <para>
+            Is fired when an element or text selection is being dragged over a valid drop target (every few hundred milliseconds).<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFile[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>DispseAsync()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElement.OnDrop">
+            <summary>
+            <para>
+            Is fired when an element or text selection is dropped on a valid drop target.
+            To ensure that the drop event always fires as expected, you should always include a preventDefault() call in the part of your code which handles the dragover event.<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFile[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>DispseAsync()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
         <member name="P:BrowserAPI.IHTMLElement.Attributes">
             <summary>
             Returns a live collection of all attribute nodes registered to the specified node.
@@ -18461,7 +18962,79 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="E:BrowserAPI.IHTMLElement.OnTransitionstart">
+        <member name="E:BrowserAPI.IHTMLElement.OnChange">
+            <summary>
+            <para>
+            Is fired for &lt;input&gt;, &lt;select&gt;, and &lt;textarea&gt; elements when the user modifies the element's value.
+            Unlike the input event, the change event is not necessarily fired for each alteration to an element's value.
+            </para>
+            <para>
+            Depending on the kind of element being changed and the way the user interacts with the element, the change event fires at a different moment:<br />
+            - When a &lt;input type="checkbox"&gt; element is checked or unchecked (by clicking or using the keyboard);<br />
+            - When a &lt;input type="radio"&gt; element is checked (but not when unchecked);<br />
+            - When the user commits the change explicitly (e.g., by selecting a value from a &lt;select&gt;'s dropdown with a mouse click, by selecting a date from a date picker for &lt;input type="date"&gt;, by selecting a file in the file picker for &lt;input type="file"&gt;, etc.);<br />
+            - When the element loses focus after its value was changed: for elements where the user's interaction is typing rather than selection, such as a &lt;textarea&gt; or the text, search, url, tel, email, or password types of the &lt;input&gt; element.
+            </para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElement.OnLoad">
+            <summary>
+            <para>
+            Fires for elements containing a resource when the resource has successfully loaded.
+            Currently, the list of supported HTML elements are: &lt;body&gt;, &lt;embed&gt;, &lt;iframe&gt;, &lt;img&gt;, &lt;link&gt;, &lt;object&gt;, &lt;script&gt;, &lt;style&gt;, and &lt;track&gt;.
+            </para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+            <remarks>
+            Note: The load event on HTMLBodyElement is actually an alias for the window.onload event.
+            Therefore, the load event will only fire on the &lt;body&gt; element once all of the document's resources have loaded or errored.
+            However, for the sake of clarity, it is recommended that the event handler is attached to the window object directly rather than on HTMLBodyElement.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElement.OnError">
+            <summary>
+            <para>Is fired on an element when a resource failed to load, or can't be used. For example, if a script has an execution error or an image can't be found or is invalid.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</see> as JSON.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElement.OnToggle">
+            <summary>
+            <para>
+            Fires on a popover element, &lt;dialog&gt; element, or &lt;details&gt; element just after it is shown or hidden.<br />
+            - If the element is transitioning from hidden to showing, the event.oldState property will be set to closed and the event.newState property will be set to open.<br />
+            - If the element is transitioning from showing to hidden, then event.oldState will be open and event.newState will be closed.
+            </para>
+            <para>This event is not cancelable.</para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>oldState</i>: either "open" or "closed", representing the state the element is transitioning to.<br />
+            - string <i>newState</i>: either "open" or "closed", representing the state the element is transitioning from.
+            </para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElement.OnBeforeToggle">
+            <summary>
+            <para>
+            Fires on a popover or &lt;dialog&gt; element just before it is shown or hidden.<br />
+            - If the element is transitioning from hidden to showing, the event.oldState property will be set to closed and the event.newState property will be set to open.<br />
+            - If the element is transitioning from showing to hidden, then event.oldState will be open and event.newState will be closed.
+            <para>This event is cancelable when an element is toggled to open ("show") but not when the element is closing.</para>
+            <para>
+            Among other things, this event can be used to:<br />
+            - prevent an element from being shown.<br />
+            - add or remove classes or properties from the element or associated elements, for example to control the animation behavior of a dialog as it is opened and closed.<br />
+            - clear the state of the element before it is opened or after it is hidden, for example to reset a dialog form and return value to an empty state, or hide any nested manual popovers when reopening a popup.
+            </para>
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>oldState</i>: either "open" or "closed", representing the state the element is transitioning to.<br />
+            - string <i>newState</i>: either "open" or "closed", representing the state the element is transitioning from.
+            </para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElement.OnTransitionStart">
             <summary>
             <para>Is fired when a CSS transition has actually started, i.e., after any transition-delay has ended.</para>
             <para>This event is not cancelable.</para>
@@ -18473,7 +19046,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLElement.OnTransitionend">
+        <member name="E:BrowserAPI.IHTMLElement.OnTransitionEnd">
             <summary>
             <para>
             Is fired when a CSS transition has completed.
@@ -18493,7 +19066,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLElement.OnTransitionrun">
+        <member name="E:BrowserAPI.IHTMLElement.OnTransitionRun">
             <summary>
             <para>Is fired when a CSS transition is first created, i.e. before any transition-delay has begun.</para>
             <para>This event is not cancelable.</para>
@@ -18505,7 +19078,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLElement.OnTransitioncancel">
+        <member name="E:BrowserAPI.IHTMLElement.OnTransitionCancel">
             <summary>
             <para>Is fired when a CSS transition is canceled.</para>
             <para>
@@ -18516,7 +19089,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLElement.OnAnimationstart">
+        <member name="E:BrowserAPI.IHTMLElement.OnAnimationStart">
             <summary>
             <para>
             Is fired when a CSS Animation has started.
@@ -18532,7 +19105,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLElement.OnAnimationend">
+        <member name="E:BrowserAPI.IHTMLElement.OnAnimationEnd">
             <summary>
             <para>
             Is fired when a CSS Animation has completed.
@@ -18547,7 +19120,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLElement.OnAnimationiteration">
+        <member name="E:BrowserAPI.IHTMLElement.OnAnimationIteration">
             <summary>
             <para>
             Is fired when an iteration of a CSS Animation ends, and another one begins.
@@ -18562,7 +19135,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLElement.OnAnimationcancel">
+        <member name="E:BrowserAPI.IHTMLElement.OnAnimationCancel">
             <summary>
             <para>
             Is fired when a CSS Animation unexpectedly aborts.
@@ -18616,7 +19189,79 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="E:BrowserAPI.IHTMLElementInProcess.OnTransitionstart">
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnChange">
+            <summary>
+            <para>
+            Is fired for &lt;input&gt;, &lt;select&gt;, and &lt;textarea&gt; elements when the user modifies the element's value.
+            Unlike the input event, the change event is not necessarily fired for each alteration to an element's value.
+            </para>
+            <para>
+            Depending on the kind of element being changed and the way the user interacts with the element, the change event fires at a different moment:<br />
+            - When a &lt;input type="checkbox"&gt; element is checked or unchecked (by clicking or using the keyboard);<br />
+            - When a &lt;input type="radio"&gt; element is checked (but not when unchecked);<br />
+            - When the user commits the change explicitly (e.g., by selecting a value from a &lt;select&gt;'s dropdown with a mouse click, by selecting a date from a date picker for &lt;input type="date"&gt;, by selecting a file in the file picker for &lt;input type="file"&gt;, etc.);<br />
+            - When the element loses focus after its value was changed: for elements where the user's interaction is typing rather than selection, such as a &lt;textarea&gt; or the text, search, url, tel, email, or password types of the &lt;input&gt; element.
+            </para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnLoad">
+            <summary>
+            <para>
+            Fires for elements containing a resource when the resource has successfully loaded.
+            Currently, the list of supported HTML elements are: &lt;body&gt;, &lt;embed&gt;, &lt;iframe&gt;, &lt;img&gt;, &lt;link&gt;, &lt;object&gt;, &lt;script&gt;, &lt;style&gt;, and &lt;track&gt;.
+            </para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+            <remarks>
+            Note: The load event on HTMLBodyElement is actually an alias for the window.onload event.
+            Therefore, the load event will only fire on the &lt;body&gt; element once all of the document's resources have loaded or errored.
+            However, for the sake of clarity, it is recommended that the event handler is attached to the window object directly rather than on HTMLBodyElement.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnError">
+            <summary>
+            <para>Is fired on an element when a resource failed to load, or can't be used. For example, if a script has an execution error or an image can't be found or is invalid.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            <para>Parameter is of type <see href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</see> as JSON.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnToggle">
+            <summary>
+            <para>
+            Fires on a popover element, &lt;dialog&gt; element, or &lt;details&gt; element just after it is shown or hidden.<br />
+            - If the element is transitioning from hidden to showing, the event.oldState property will be set to closed and the event.newState property will be set to open.<br />
+            - If the element is transitioning from showing to hidden, then event.oldState will be open and event.newState will be closed.
+            </para>
+            <para>This event is not cancelable.</para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>oldState</i>: either "open" or "closed", representing the state the element is transitioning to.<br />
+            - string <i>newState</i>: either "open" or "closed", representing the state the element is transitioning from.
+            </para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnBeforeToggle">
+            <summary>
+            <para>
+            Fires on a popover or &lt;dialog&gt; element just before it is shown or hidden.<br />
+            - If the element is transitioning from hidden to showing, the event.oldState property will be set to closed and the event.newState property will be set to open.<br />
+            - If the element is transitioning from showing to hidden, then event.oldState will be open and event.newState will be closed.
+            <para>This event is cancelable when an element is toggled to open ("show") but not when the element is closing.</para>
+            <para>
+            Among other things, this event can be used to:<br />
+            - prevent an element from being shown.<br />
+            - add or remove classes or properties from the element or associated elements, for example to control the animation behavior of a dialog as it is opened and closed.<br />
+            - clear the state of the element before it is opened or after it is hidden, for example to reset a dialog form and return value to an empty state, or hide any nested manual popovers when reopening a popup.
+            </para>
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>oldState</i>: either "open" or "closed", representing the state the element is transitioning to.<br />
+            - string <i>newState</i>: either "open" or "closed", representing the state the element is transitioning from.
+            </para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnTransitionStart">
             <summary>
             <para>Is fired when a CSS transition has actually started, i.e., after any transition-delay has ended.</para>
             <para>This event is not cancelable.</para>
@@ -18628,7 +19273,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLElementInProcess.OnTransitionend">
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnTransitionEnd">
             <summary>
             <para>
             Is fired when a CSS transition has completed.
@@ -18648,7 +19293,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLElementInProcess.OnTransitionrun">
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnTransitionRun">
             <summary>
             <para>Is fired when a CSS transition is first created, i.e. before any transition-delay has begun.</para>
             <para>This event is not cancelable.</para>
@@ -18660,7 +19305,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLElementInProcess.OnTransitioncancel">
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnTransitionCancel">
             <summary>
             <para>Is fired when a CSS transition is canceled.</para>
             <para>
@@ -18671,7 +19316,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLElementInProcess.OnAnimationstart">
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnAnimationStart">
             <summary>
             <para>
             Is fired when a CSS Animation has started.
@@ -18687,7 +19332,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLElementInProcess.OnAnimationend">
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnAnimationEnd">
             <summary>
             <para>
             Is fired when a CSS Animation has completed.
@@ -18702,7 +19347,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLElementInProcess.OnAnimationiteration">
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnAnimationIteration">
             <summary>
             <para>
             Is fired when an iteration of a CSS Animation ends, and another one begins.
@@ -18717,7 +19362,7 @@
             </para>
             </summary>
         </member>
-        <member name="E:BrowserAPI.IHTMLElementInProcess.OnAnimationcancel">
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnAnimationCancel">
             <summary>
             <para>
             Is fired when a CSS Animation unexpectedly aborts.
@@ -19175,6 +19820,149 @@
             <para>- If set to true, the popover is shown if it was initially hidden.If it was initially shown, nothing happens.</para>
             <para>- If set to false, the popover is hidden if it was initially shown. If it was initially hidden, nothing happens.</para>
             </param>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnCommand">
+            <summary>
+            <para>
+            Fires on an element that is controlled via a button with valid commandForElement and command values, whenever the button is interacted with (e.g., it is clicked).
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - IHTMLElementInProcess <i>source</i>: An HTMLButtonElement representing the button that caused this invocation.<br />
+            - string <i>command</i>: Representing the command value of the source button.
+            </para>
+            </summary>
+            <remarks>
+            Note: Dispose the given IHTMLElementInProcess object when you are done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnDrag">
+            <summary>
+            <para>
+            Is fired every few hundred milliseconds as an element or text selection is being dragged by the user.<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnDragStart">
+            <summary>
+            <para>
+            Is fired when the user starts dragging an element or text selection.<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnDragEnd">
+            <summary>
+            <para>
+            Is fired when a drag operation ends (by releasing a mouse button or hitting the escape key).<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnDragEnter">
+            <summary>
+            <para>
+            Is fired when a dragged element or text selection enters a valid drop target.
+            The target object is the immediate user selection (the element directly indicated by the user as the drop target), or the &lt;body&gt; element.<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnDragLeave">
+            <summary>
+            <para>
+            Is fired when a dragged element or text selection leaves a valid drop target.<br />
+            This event is not cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnDragOver">
+            <summary>
+            <para>
+            Is fired when an element or text selection is being dragged over a valid drop target (every few hundred milliseconds).<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+            </remarks>
+        </member>
+        <member name="E:BrowserAPI.IHTMLElementInProcess.OnDrop">
+            <summary>
+            <para>
+            Is fired when an element or text selection is dropped on a valid drop target.
+            To ensure that the drop event always fires as expected, you should always include a preventDefault() call in the part of your code which handles the dragover event.<br />
+            This event is cancelable and may bubble up to the Document and Window objects.
+            </para>
+            <para>
+            <b>Parameters</b><br />
+            - string <i>dropEffect</i>: Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".<br />
+            - string <i>effectAllowed</i>: Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".<br />
+            - string[] <i>types</i>: Giving the formats that were set in the dragstart event.<br />
+            - IFileInProcess[] <i>files</i>: Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.
+            </para>
+            </summary>
+            <remarks>
+            Note: Do not forget to call <i>Dispse()</i> on each single item in files when you done with it.
+            </remarks>
         </member>
         <member name="P:BrowserAPI.IHTMLElementInProcess.Attributes">
             <summary>

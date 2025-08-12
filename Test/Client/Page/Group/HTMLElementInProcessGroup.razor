@@ -95,6 +95,23 @@
         <button data-testid="@BUTTON_TOGGLE_POPOVER" @onclick="TogglePopover">TogglePopover</button>
         <button data-testid="@BUTTON_TOGGLE_POPOVER_PARAMETER" @onclick="TogglePopoverParameter">TogglePopoverParameter</button>
 
+        @* HTMLElement Events *@
+        <button data-testid="@BUTTON_REGISTER_ON_CHANGE" @onclick="RegisterOnChange">RegisterOnChange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_COMMAND" @onclick="RegisterOnCommand">RegisterOnCommand</button>
+        <button data-testid="@BUTTON_REGISTER_ON_LOAD" @onclick="RegisterOnLoad">RegisterOnLoad</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ERROR" @onclick="RegisterOnError">RegisterOnError</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_DRAG" @onclick="RegisterOnDrag">RegisterOnDrag</button>
+        <button data-testid="@BUTTON_REGISTER_ON_DRAG_START" @onclick="RegisterOnDragStart">RegisterOnDragStart</button>
+        <button data-testid="@BUTTON_REGISTER_ON_DRAG_END" @onclick="RegisterOnDragEnd">RegisterOnDragEnd</button>
+        <button data-testid="@BUTTON_REGISTER_ON_DRAG_ENTER" @onclick="RegisterOnDragEnter">RegisterOnDragEnter</button>
+        <button data-testid="@BUTTON_REGISTER_ON_DRAG_LEAVE" @onclick="RegisterOnDragLeave">RegisterOnDragLeave</button>
+        <button data-testid="@BUTTON_REGISTER_ON_DRAG_OVER" @onclick="RegisterOnDragOver">RegisterOnDragOver</button>
+        <button data-testid="@BUTTON_REGISTER_ON_DROP" @onclick="RegisterOnDrop">RegisterOnDrop</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_TOGGLE" @onclick="RegisterOnToggle">RegisterOnToggle</button>
+        <button data-testid="@BUTTON_REGISTER_ON_BEFORE_TOGGLE" @onclick="RegisterOnBeforeToggle">RegisterOnBeforeToggle</button>
+
 
         @* Node/Element *@
 
@@ -352,15 +369,15 @@
         <button data-testid="@BUTTON_COMPARE_DOCUMENT_POSITION" @onclick="CompareDocumentPosition">CompareDocumentPosition</button>
 
         @* Events *@
-        <button data-testid="@BUTTON_REGISTER_ON_TRANSITIONSTART" @onclick="RegisterOnTransitionstart">RegisterOnTransitionstart</button>
-        <button data-testid="@BUTTON_REGISTER_ON_TRANSITIONEND" @onclick="RegisterOnTransitionend">RegisterOnTransitionend</button>
-        <button data-testid="@BUTTON_REGISTER_ON_TRANSITIONRUN" @onclick="RegisterOnTransitionrun">RegisterOnTransitionrun</button>
-        <button data-testid="@BUTTON_REGISTER_ON_TRANSITIONCANCEL" @onclick="RegisterOnTransitioncancel">RegisterOnTransitioncancel</button>
+        <button data-testid="@BUTTON_REGISTER_ON_TRANSITION_START" @onclick="RegisterOnTransitionStart">RegisterOnTransitionStart</button>
+        <button data-testid="@BUTTON_REGISTER_ON_TRANSITION_END" @onclick="RegisterOnTransitionEnd">RegisterOnTransitionEnd</button>
+        <button data-testid="@BUTTON_REGISTER_ON_TRANSITION_RUN" @onclick="RegisterOnTransitionRun">RegisterOnTransitionRun</button>
+        <button data-testid="@BUTTON_REGISTER_ON_TRANSITION_CANCEL" @onclick="RegisterOnTransitionCancel">RegisterOnTransitionCancel</button>
 
-        <button data-testid="@BUTTON_REGISTER_ON_ANIMATIONSTART" @onclick="RegisterOnAnimationstart">RegisterOnAnimationstart</button>
-        <button data-testid="@BUTTON_REGISTER_ON_ANIMATIONEND" @onclick="RegisterOnAnimationend">RegisterOnAnimationend</button>
-        <button data-testid="@BUTTON_REGISTER_ON_ANIMATIONITERATION" @onclick="RegisterOnAnimationiteration">RegisterOnAnimationiteration</button>
-        <button data-testid="@BUTTON_REGISTER_ON_ANIMATIONCANCEL" @onclick="RegisterOnAnimationcancel">RegisterOnAnimationcancel</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ANIMATION_START" @onclick="RegisterOnAnimationStart">RegisterOnAnimationStart</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ANIMATION_END" @onclick="RegisterOnAnimationEnd">RegisterOnAnimationEnd</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ANIMATION_ITERATION" @onclick="RegisterOnAnimationIteration">RegisterOnAnimationIteration</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ANIMATION_CANCEL" @onclick="RegisterOnAnimationCancel">RegisterOnAnimationCancel</button>
     </div>
     <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
     <div data-testid="@HTML_ELEMENT_CONTAINER" class="html-element-container">
