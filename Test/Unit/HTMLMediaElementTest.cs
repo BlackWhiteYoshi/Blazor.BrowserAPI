@@ -4,6 +4,13 @@ namespace BrowserAPI.UnitTest;
 
 [ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
+    public override Task InitializeAsync()
+        => TestContext.Current?.TestName switch {
+            nameof(FastSeek) => NewPage(BrowserId.Firefox),
+            _ => NewPage(BrowserId.Chromium)
+        };
+
+
     #region Attributes
 
     [Test]

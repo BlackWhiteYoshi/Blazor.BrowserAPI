@@ -13,28 +13,32 @@ public sealed class PlayWrightFixture : IAsyncInitializer, IAsyncDisposable {
     }
 
     private const string BASE_URL = "https://localhost:5000";
+#if DEBUG
+    private const bool HEADLESS = false;
+#else
+    private const bool HEADLESS = true;
+#endif
 
+
+    private IPlaywright playWright = null!;
 
     private WebApplicationFactoryWithRenderMode hostFactory = null!;
     private HttpClient httpClient = null!;
 
-    private IPlaywright playWright = null!;
-    private IBrowser browser = null!;
-
     public async Task InitializeAsync() {
         // enusre the right version is installed
         Program.Main(["install"]);
+        playWright = await Playwright.CreateAsync();
 
         hostFactory = new WebApplicationFactoryWithRenderMode("static");
         httpClient = hostFactory.CreateClient(new WebApplicationFactoryClientOptions() { BaseAddress = new Uri(BASE_URL) });
-
-        playWright = await Playwright.CreateAsync();
-        browser = await playWright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions() { Headless = true });
-        //browser = await playWright.Firefox.LaunchAsync(new BrowserTypeLaunchOptions() { Headless = true });
     }
 
     public async ValueTask DisposeAsync() {
-        await browser.DisposeAsync();
+        if (_chromiumBrowser is not null)
+            await (await _chromiumBrowser).DisposeAsync();
+        if (_firefoxBrowser is not null)
+            await (await _firefoxBrowser).DisposeAsync();
         playWright.Dispose();
 
         httpClient.Dispose();
@@ -42,11 +46,27 @@ public sealed class PlayWrightFixture : IAsyncInitializer, IAsyncDisposable {
     }
 
 
+    private Task<IBrowser>? _chromiumBrowser;
+    private Task<IBrowser> ChromiumBrowser => _chromiumBrowser ??= playWright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions() { Headless = HEADLESS });
+
     /// <summary>
-    /// Creates a new browser context wired up with in memory server.
+    /// Creates a new browser context in the chromium Browser wired up with in memory server.
     /// </summary>
     /// <returns></returns>
-    public async Task<IBrowserContext> NewBrowserContext() {
+    public async Task<IBrowserContext> NewChromiumBrowserContext() => await NewBrowserContext(await ChromiumBrowser);
+
+
+    private Task<IBrowser>? _firefoxBrowser;
+    private Task<IBrowser> FirefoxBrowser => _firefoxBrowser ??= playWright.Firefox.LaunchAsync(new BrowserTypeLaunchOptions() { Headless = HEADLESS });
+
+    /// <summary>
+    /// Creates a new browser context in the firefox Browser wired up with in memory server.
+    /// </summary>
+    /// <returns></returns>
+    public async Task<IBrowserContext> NewFirefoxBrowserContext() => await NewBrowserContext(await FirefoxBrowser);
+
+
+    private async Task<IBrowserContext> NewBrowserContext(IBrowser browser) {
         IBrowserContext browserContext = await browser.NewContextAsync(new BrowserNewContextOptions() { BaseURL = BASE_URL });
 
         await browserContext.RouteAsync($"{BASE_URL}/**", async (IRoute route) => {

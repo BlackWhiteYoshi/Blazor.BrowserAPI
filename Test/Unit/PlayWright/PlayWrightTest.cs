@@ -1,29 +1,26 @@
 ﻿using Microsoft.Playwright;
+using System.Diagnostics;
 using TUnit.Core.Interfaces;
 
 namespace BrowserAPI.UnitTest;
 
 public abstract class PlayWrightTest(PlayWrightFixture playWrightFixture) : IAsyncInitializer, IAsyncDisposable {
     /// <summary>
-    /// BrowserContext
+    /// BrowserContext of this test
     /// </summary>
     protected IBrowserContext BrowserContext { get; private set; } = null!;
 
     /// <summary>
-    /// BrowserPage
+    /// BrowserPage of this test
     /// </summary>
     protected IPage Page { get; private set; } = null!;
 
 
     /// <summary>
-    /// Creates a new BrowserContext, opens a new Tab and loads the page in that Tab.
+    /// Executes <see cref="NewPage"/> with <see cref="BrowserId.Chromium"/>.
     /// </summary>
     /// <returns></returns>
-    public virtual async Task InitializeAsync() {
-        BrowserContext = await playWrightFixture.NewBrowserContext();
-        Page = await BrowserContext.NewPageAsync();
-        await Page.GotoAsync("/");
-    }
+    public virtual Task InitializeAsync() => NewPage(BrowserId.Chromium);
 
     /// <summary>
     /// Asserts that no exception has been occured, closes the Tab and removes the BrowserContext.
@@ -37,6 +34,28 @@ public abstract class PlayWrightTest(PlayWrightFixture playWrightFixture) : IAsy
             await Page.CloseAsync();
             await BrowserContext.DisposeAsync();
         }
+    }
+
+
+    protected enum BrowserId {
+        Chromium,
+        Firefox
+    }
+
+    /// <summary>
+    /// Creates a new BrowserContext in the chosen Browser, opens a new Tab and loads the page in that Tab.
+    /// </summary>
+    /// <param name="browserId">Which Browser to choose to create BrowserContext and Tab.</param>
+    /// <returns></returns>
+    protected async Task NewPage(BrowserId browserId) {
+        BrowserContext = browserId switch {
+            BrowserId.Chromium => await playWrightFixture.NewChromiumBrowserContext(),
+            BrowserId.Firefox => await playWrightFixture.NewFirefoxBrowserContext(),
+            _ => throw new UnreachableException($"enum {nameof(BrowserId)} has members that this switch is missing; current missing member is '{browserId}'")
+        };
+
+        Page = await BrowserContext.NewPageAsync();
+        await Page.GotoAsync("/");
     }
 
 

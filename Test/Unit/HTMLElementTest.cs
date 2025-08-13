@@ -6,6 +6,13 @@ namespace BrowserAPI.UnitTest;
 
 [ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
+    public override Task InitializeAsync()
+        => TestContext.Current?.TestName switch {
+            nameof(GetAccessKeyLabel_Property) or nameof(GetAccessKeyLabel_Method) => NewPage(BrowserId.Firefox),
+            _ => NewPage(BrowserId.Chromium)
+        };
+
+
     #region HTMLElement
 
     [Test]
@@ -39,8 +46,7 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
     }
 
 
-    // does not work in Chromium Browser. To make this test work, go to PlayWrightFixture.InitializeAsync() and change "Chromium" to "Firefox"
-    [Test, Explicit]
+    [Test]
     public async Task GetAccessKeyLabel_Property() {
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('accessKey', '{HTMLElementGroup.TEST_ACCESS_KEY}');");
         await Task.Delay(SMALL_WAIT_TIME);
@@ -51,8 +57,7 @@ public sealed class HTMLElement(PlayWrightFixture playWrightFixture) : PlayWrigh
         await Assert.That(result).EndsWith(HTMLElementGroup.TEST_ACCESS_KEY);
     }
 
-    // does not work in Chromium Browser. To make this test work, go to PlayWrightFixture.InitializeAsync() and change "Chromium" to "Firefox"
-    [Test, Explicit]
+    [Test]
     public async Task GetAccessKeyLabel_Method() {
         await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('accessKey', '{HTMLElementGroup.TEST_ACCESS_KEY}');");
         await Task.Delay(SMALL_WAIT_TIME);
