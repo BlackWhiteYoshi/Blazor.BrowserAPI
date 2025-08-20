@@ -368,7 +368,60 @@
         <button data-testid="@BUTTON_CONTAINS" @onclick="Contains">Contains</button>
         <button data-testid="@BUTTON_COMPARE_DOCUMENT_POSITION" @onclick="CompareDocumentPosition">CompareDocumentPosition</button>
 
-        @* Events *@
+        @* Node/Element Events *@
+
+        <button data-testid="@BUTTON_REGISTER_ON_INPUT" @onclick="RegisterOnInput">RegisterOnInput</button>
+        <button data-testid="@BUTTON_REGISTER_ON_BEFORE_INPUT" @onclick="RegisterOnBeforeInput">RegisterOnBeforeInput</button>
+        <button data-testid="@BUTTON_REGISTER_ON_CONTENT_VISIBILITY_AUTO_STATE_CHANGE" @onclick="RegisterOnContentVisibilityAutoStateChange">RegisterOnContentVisibilityAutoStateChange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_BEFORE_MATCH" @onclick="RegisterOnBeforeMatch">RegisterOnBeforeMatch</button>
+        <button data-testid="@BUTTON_REGISTER_ON_SECURITY_POLICY_VIOLATION" @onclick="RegisterOnSecurityPolicyViolation">RegisterOnSecurityPolicyViolation</button>
+        <button data-testid="@BUTTON_REGISTER_ON_SELECT_START" @onclick="RegisterOnSelectStart">RegisterOnSelectStart</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_KEY_DOWN" @onclick="RegisterOnKeyDown">RegisterOnKeyDown</button>
+        <button data-testid="@BUTTON_REGISTER_ON_KEY_UP" @onclick="RegisterOnKeyUp">RegisterOnKeyUp</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_CLICK" @onclick="RegisterOnClick">RegisterOnClick</button>
+        <button data-testid="@BUTTON_REGISTER_ON_DBL_CLICK" @onclick="RegisterOnDblClick">RegisterOnDblClick</button>
+        <button data-testid="@BUTTON_REGISTER_ON_AUX_CLICK" @onclick="RegisterOnAuxClick">RegisterOnAuxClick</button>
+        <button data-testid="@BUTTON_REGISTER_ON_CONTEXT_MENU" @onclick="RegisterOnContextMenu">RegisterOnContextMenu</button>
+        <button data-testid="@BUTTON_REGISTER_ON_MOUSE_DOWN" @onclick="RegisterOnMouseDown">RegisterOnMouseDown</button>
+        <button data-testid="@BUTTON_REGISTER_ON_MOUSE_UP" @onclick="RegisterOnMouseUp">RegisterOnMouseUp</button>
+        <button data-testid="@BUTTON_REGISTER_ON_WHEEL" @onclick="RegisterOnWheel">RegisterOnWheel</button>
+        <button data-testid="@BUTTON_REGISTER_ON_MOUSE_MOVE" @onclick="RegisterOnMouseMove">RegisterOnMouseMove</button>
+        <button data-testid="@BUTTON_REGISTER_ON_MOUSE_OVER" @onclick="RegisterOnMouseOver">RegisterOnMouseOver</button>
+        <button data-testid="@BUTTON_REGISTER_ON_MOUSE_OUT" @onclick="RegisterOnMouseOut">RegisterOnMouseOut</button>
+        <button data-testid="@BUTTON_REGISTER_ON_MOUSE_ENTER" @onclick="RegisterOnMouseEnter">RegisterOnMouseEnter</button>
+        <button data-testid="@BUTTON_REGISTER_ON_MOUSE_LEAVE" @onclick="RegisterOnMouseLeave">RegisterOnMouseLeave</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_TOUCH_START" @onclick="RegisterOnTouchStart">RegisterOnTouchStart</button>
+        <button data-testid="@BUTTON_REGISTER_ON_TOUCH_END" @onclick="RegisterOnTouchEnd">RegisterOnTouchEnd</button>
+        <button data-testid="@BUTTON_REGISTER_ON_TOUCH_MOVE" @onclick="RegisterOnTouchMove">RegisterOnTouchMove</button>
+        <button data-testid="@BUTTON_REGISTER_ON_TOUCH_CANCEL" @onclick="RegisterOnTouchCancel">RegisterOnTouchCancel</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_POINTER_DOWN" @onclick="RegisterOnPointerDown">RegisterOnPointerDown</button>
+        <button data-testid="@BUTTON_REGISTER_ON_POINTER_UP" @onclick="RegisterOnPointerUp">RegisterOnPointerUp</button>
+        <button data-testid="@BUTTON_REGISTER_ON_POINTER_MOVE" @onclick="RegisterOnPointerMove">RegisterOnPointerMove</button>
+        <button data-testid="@BUTTON_REGISTER_ON_POINTER_OVER" @onclick="RegisterOnPointerOver">RegisterOnPointerOver</button>
+        <button data-testid="@BUTTON_REGISTER_ON_POINTER_OUT" @onclick="RegisterOnPointerOut">RegisterOnPointerOut</button>
+        <button data-testid="@BUTTON_REGISTER_ON_POINTER_ENTER" @onclick="RegisterOnPointerEnter">RegisterOnPointerEnter</button>
+        <button data-testid="@BUTTON_REGISTER_ON_POINTER_LEAVE" @onclick="RegisterOnPointerLeave">RegisterOnPointerLeave</button>
+        <button data-testid="@BUTTON_REGISTER_ON_POINTER_CANCEL" @onclick="RegisterOnPointerCancel">RegisterOnPointerCancel</button>
+        <button data-testid="@BUTTON_REGISTER_ON_POINTER_RAW_UPDATE" @onclick="RegisterOnPointerRawUpdate">RegisterOnPointerRawUpdate</button>
+        <button data-testid="@BUTTON_REGISTER_ON_GOT_POINTER_CAPTURE" @onclick="RegisterOnGotPointerCapture">RegisterOnGotPointerCapture</button>
+        <button data-testid="@BUTTON_REGISTER_ON_LOST_POINTER_CAPTURE" @onclick="RegisterOnLostPointerCapture">RegisterOnLostPointerCapture</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_SCROLL" @onclick="RegisterOnScroll">RegisterOnScroll</button>
+        <button data-testid="@BUTTON_REGISTER_ON_SCROLL_END" @onclick="RegisterOnScrollEnd">RegisterOnScrollEnd</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_FOCUS" @onclick="RegisterOnFocus">RegisterOnFocus</button>
+        <button data-testid="@BUTTON_REGISTER_ON_FOCUS_IN" @onclick="RegisterOnFocusIn">RegisterOnFocusIn</button>
+        <button data-testid="@BUTTON_REGISTER_ON_BLUR" @onclick="RegisterOnBlur">RegisterOnBlur</button>
+        <button data-testid="@BUTTON_REGISTER_ON_FOCUS_OUT" @onclick="RegisterOnFocusOut">RegisterOnFocusOut</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_COPY" @onclick="RegisterOnCopy">RegisterOnCopy</button>
+        <button data-testid="@BUTTON_REGISTER_ON_PASTE" @onclick="RegisterOnPaste">RegisterOnPaste</button>
+        <button data-testid="@BUTTON_REGISTER_ON_CUT" @onclick="RegisterOnCut">RegisterOnCut</button>
+
         <button data-testid="@BUTTON_REGISTER_ON_TRANSITION_START" @onclick="RegisterOnTransitionStart">RegisterOnTransitionStart</button>
         <button data-testid="@BUTTON_REGISTER_ON_TRANSITION_END" @onclick="RegisterOnTransitionEnd">RegisterOnTransitionEnd</button>
         <button data-testid="@BUTTON_REGISTER_ON_TRANSITION_RUN" @onclick="RegisterOnTransitionRun">RegisterOnTransitionRun</button>
@@ -378,6 +431,9 @@
         <button data-testid="@BUTTON_REGISTER_ON_ANIMATION_END" @onclick="RegisterOnAnimationEnd">RegisterOnAnimationEnd</button>
         <button data-testid="@BUTTON_REGISTER_ON_ANIMATION_ITERATION" @onclick="RegisterOnAnimationIteration">RegisterOnAnimationIteration</button>
         <button data-testid="@BUTTON_REGISTER_ON_ANIMATION_CANCEL" @onclick="RegisterOnAnimationCancel">RegisterOnAnimationCancel</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_FULLSCREEN_CHANGE" @onclick="RegisterOnFullscreenChange">RegisterOnFullscreenChange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_FULLSCREEN_ERROR" @onclick="RegisterOnFullscreenError">RegisterOnFullscreenError</button>
     </div>
     <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
     <div data-testid="@HTML_ELEMENT_CONTAINER" class="html-element-container">

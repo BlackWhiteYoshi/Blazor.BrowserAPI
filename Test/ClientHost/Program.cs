@@ -63,6 +63,12 @@ public static class Program {
             //app.MapStaticAssets(); // does not serve audio file correctly
             app.UseAntiforgery();
 
+            // CSP (Content Security Policy)
+            app.Use(async (context, next) => {
+                context.Response.Headers.Append("Content-Security-Policy", "base-uri 'self'; object-src 'none'; child-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval'; worker-src 'self';");
+                await next();
+            });
+
             RazorComponentsEndpointConventionBuilder razorComponentsEndpointBuilder = app.MapRazorComponents<Root>().AddAdditionalAssemblies(typeof(Client.App).Assembly);
             if (renderMode.HasFlag(RenderMode.Server))
                 razorComponentsEndpointBuilder.AddInteractiveServerRenderMode();

@@ -89,14 +89,27 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     public const string TEST_CUSTOM_VALUE = "my-value";
     public const string TEST_INSERT_HTML = $"<label>{TEST_CUSTOM_VALUE}</label>";
     // Element - Events
-    public const string TEST_EVENT_TRANSITIONSTART = "transitionstart-event-test";
-    public const string TEST_EVENT_TRANSITIONEND = "transitionend-event-test";
-    public const string TEST_EVENT_TRANSITIONRUN = "transitionrun-event-test";
-    public const string TEST_EVENT_TRANSITIONCANCEL = "transitioncancel-event-test";
-    public const string TEST_EVENT_ANIMATIONSTART = "animationstart-event-test";
-    public const string TEST_EVENT_ANIMATIONEND = "animationend-event-test";
-    public const string TEST_EVENT_ANIMATIONITERATION = "animationiteration-event-test";
-    public const string TEST_EVENT_ANIMATIONCANCEL = "animationcancel-event-test";
+    public const string TEST_EVENT_BEFORE_MATCH = "before-match-event-test";
+    public const string TEST_EVENT_SELECT_START = "select-start-event-test";
+    public const string TEST_EVENT_SCROLL_START = "scroll-start-event-test";
+    public const string TEST_EVENT_SCROLL_END = "scroll-end-event-test";
+    public const string TEST_EVENT_FOCUS = "focus-event-test";
+    public const string TEST_EVENT_FOCUS_IN = "focus-in-event-test";
+    public const string TEST_EVENT_BLUR = "blur-event-test";
+    public const string TEST_EVENT_FOCUS_OUT = "focus-out-event-test";
+    public const string TEST_EVENT_COPY = "copy-event-test";
+    public const string TEST_EVENT_PASTE = "paste-event-test";
+    public const string TEST_EVENT_CUT = "cut-event-test";
+    public const string TEST_EVENT_TRANSITION_START = "transition-start-event-test";
+    public const string TEST_EVENT_TRANSITION_END = "transition-end-event-test";
+    public const string TEST_EVENT_TRANSITION_RUN = "transition-run-event-test";
+    public const string TEST_EVENT_TRANSITION_CANCEL = "transition-cancel-event-test";
+    public const string TEST_EVENT_ANIMATION_START = "animation-start-event-test";
+    public const string TEST_EVENT_ANIMATION_END = "animation-end-event-test";
+    public const string TEST_EVENT_ANIMATION_ITERATION = "animation-iteration-event-test";
+    public const string TEST_EVENT_ANIMATION_CANCEL = "animation-cancel-event-test";
+    public const string TEST_EVENT_FULLSCREEN_CHANGE = "fullscreen-change-event-test";
+    public const string TEST_EVENT_FULLSCREEN_ERROR = "fullscreen-error-event-test";
 
 
     [Inject]
@@ -760,17 +773,17 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     private void RegisterOnDrag() {
         HiddenElement.OnDrag += OnDrag;
 
-        void OnDrag(string dropEffect, string effectAllowed, string[] types, IFile[] files) {
+        void OnDrag(DragEvent dragEvent) {
             _ = DoAsync();
             async Task DoAsync() {
-                string[] content = new string[files.Length];
+                string[] content = new string[dragEvent.Files.Length];
                 for (int i = 0; i < content.Length; i++)
-                    content[i] = await files[i].Text();
+                    content[i] = await dragEvent.Files[i].Text();
 
-                labelOutput = $"dropEffect='{dropEffect}', effectAllowed='{effectAllowed}', types='[{string.Join(';', types)}]', files='[{string.Join(';', content)}]'";
+                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
                 StateHasChanged();
                 HiddenElement.OnDrag -= OnDrag;
-                await files.DisposeAsync();
+                await dragEvent.Files.DisposeAsync();
             }
         }
     }
@@ -779,17 +792,17 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     private void RegisterOnDragStart() {
         HiddenElement.OnDragStart += OnDragStart;
 
-        void OnDragStart(string dropEffect, string effectAllowed, string[] types, IFile[] files) {
+        void OnDragStart(DragEvent dragEvent) {
             _ = DoAsync();
             async Task DoAsync() {
-                string[] content = new string[files.Length];
+                string[] content = new string[dragEvent.Files.Length];
                 for (int i = 0; i < content.Length; i++)
-                    content[i] = await files[i].Text();
+                    content[i] = await dragEvent.Files[i].Text();
 
-                labelOutput = $"dropEffect='{dropEffect}', effectAllowed='{effectAllowed}', types='[{string.Join(';', types)}]', files='[{string.Join(';', content)}]'";
+                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
                 StateHasChanged();
                 HiddenElement.OnDragStart -= OnDragStart;
-                await files.DisposeAsync();
+                await dragEvent.Files.DisposeAsync();
             }
         }
     }
@@ -798,17 +811,17 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     private void RegisterOnDragEnd() {
         HiddenElement.OnDragEnd += OnDragEnd;
 
-        void OnDragEnd(string dropEffect, string effectAllowed, string[] types, IFile[] files) {
+        void OnDragEnd(DragEvent dragEvent) {
             _ = DoAsync();
             async Task DoAsync() {
-                string[] content = new string[files.Length];
+                string[] content = new string[dragEvent.Files.Length];
                 for (int i = 0; i < content.Length; i++)
-                    content[i] = await files[i].Text();
+                    content[i] = await dragEvent.Files[i].Text();
 
-                labelOutput = $"dropEffect='{dropEffect}', effectAllowed='{effectAllowed}', types='[{string.Join(';', types)}]', files='[{string.Join(';', content)}]'";
+                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
                 StateHasChanged();
                 HiddenElement.OnDragEnd -= OnDragEnd;
-                await files.DisposeAsync();
+                await dragEvent.Files.DisposeAsync();
             }
         }
     }
@@ -817,17 +830,17 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     private void RegisterOnDragEnter() {
         PopoverElement.OnDragEnter += OnDragEnter;
 
-        void OnDragEnter(string dropEffect, string effectAllowed, string[] types, IFile[] files) {
+        void OnDragEnter(DragEvent dragEvent) {
             _ = DoAsync();
             async Task DoAsync() {
-                string[] content = new string[files.Length];
+                string[] content = new string[dragEvent.Files.Length];
                 for (int i = 0; i < content.Length; i++)
-                    content[i] = await files[i].Text();
+                    content[i] = await dragEvent.Files[i].Text();
 
-                labelOutput = $"dropEffect='{dropEffect}', effectAllowed='{effectAllowed}', types='[{string.Join(';', types)}]', files='[{string.Join(';', content)}]'";
+                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
                 StateHasChanged();
                 PopoverElement.OnDragEnter -= OnDragEnter;
-                await files.DisposeAsync();
+                await dragEvent.Files.DisposeAsync();
             }
         }
     }
@@ -836,17 +849,17 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     private void RegisterOnDragLeave() {
         PopoverElement.OnDragLeave += OnDragLeave;
 
-        void OnDragLeave(string dropEffect, string effectAllowed, string[] types, IFile[] files) {
+        void OnDragLeave(DragEvent dragEvent) {
             _ = DoAsync();
             async Task DoAsync() {
-                string[] content = new string[files.Length];
+                string[] content = new string[dragEvent.Files.Length];
                 for (int i = 0; i < content.Length; i++)
-                    content[i] = await files[i].Text();
+                    content[i] = await dragEvent.Files[i].Text();
 
-                labelOutput = $"dropEffect='{dropEffect}', effectAllowed='{effectAllowed}', types='[{string.Join(';', types)}]', files='[{string.Join(';', content)}]'";
+                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
                 StateHasChanged();
                 PopoverElement.OnDragLeave -= OnDragLeave;
-                await files.DisposeAsync();
+                await dragEvent.Files.DisposeAsync();
             }
         }
     }
@@ -855,17 +868,17 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     private void RegisterOnDragOver() {
         PopoverElement.OnDragOver += OnDragOver;
 
-        void OnDragOver(string dropEffect, string effectAllowed, string[] types, IFile[] files) {
+        void OnDragOver(DragEvent dragEvent) {
             _ = DoAsync();
             async Task DoAsync() {
-                string[] content = new string[files.Length];
+                string[] content = new string[dragEvent.Files.Length];
                 for (int i = 0; i < content.Length; i++)
-                    content[i] = await files[i].Text();
+                    content[i] = await dragEvent.Files[i].Text();
 
-                labelOutput = $"dropEffect='{dropEffect}', effectAllowed='{effectAllowed}', types='[{string.Join(';', types)}]', files='[{string.Join(';', content)}]'";
+                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
                 StateHasChanged();
                 PopoverElement.OnDragOver -= OnDragOver;
-                await files.DisposeAsync();
+                await dragEvent.Files.DisposeAsync();
             }
         }
     }
@@ -874,17 +887,17 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     private void RegisterOnDrop() {
         PopoverElement.OnDrop += OnDrop;
 
-        void OnDrop(string dropEffect, string effectAllowed, string[] types, IFile[] files) {
+        void OnDrop(DragEvent dragEvent) {
             _ = DoAsync();
             async Task DoAsync() {
-                string[] content = new string[files.Length];
+                string[] content = new string[dragEvent.Files.Length];
                 for (int i = 0; i < content.Length; i++)
-                    content[i] = await files[i].Text();
+                    content[i] = await dragEvent.Files[i].Text();
 
-                labelOutput = $"dropEffect='{dropEffect}', effectAllowed='{effectAllowed}', types='[{string.Join(';', types)}]', files='[{string.Join(';', content)}]'";
+                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
                 StateHasChanged();
                 PopoverElement.OnDrop -= OnDrop;
-                await files.DisposeAsync();
+                await dragEvent.Files.DisposeAsync();
             }
         }
     }
@@ -1811,14 +1824,14 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_BOUNDING_CLIENT_RECT = "htmlelement-get-bounding-client-rect";
     private async Task GetBoundingClientRect() {
-        DOMRect boundingClientRect = await HTMLElement.GetBoundingClientRect();
-        labelOutput = JsonSerializer.Serialize(boundingClientRect);
+        DOMRect domRect = await HTMLElement.GetBoundingClientRect();
+        labelOutput = domRect.ToString();
     }
 
     public const string BUTTON_GET_CLIENT_RECTS = "htmlelement-get-client-rects";
     private async Task GetClientRects() {
-        DOMRect[] boundingClientRect = await HTMLElement.GetClientRects();
-        labelOutput = string.Join(';', boundingClientRect.Select(rect => JsonSerializer.Serialize(rect)));
+        DOMRect[] domRect = await HTMLElement.GetClientRects();
+        labelOutput = string.Join(';', domRect);
     }
 
     public const string BUTTON_MATCHES = "htmlelement-matches";
@@ -1873,7 +1886,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     private async Task HasPointerCapture(PointerEventArgs e) {
         bool hasPointerCapture = await HTMLElement.HasPointerCapture(e.PointerId);
-        labelOutput = hasPointerCapture.ToString();
+        labelOutput = $"HasPointerCapture={hasPointerCapture}";
     }
 
 
@@ -2148,10 +2161,402 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     // events
 
+    public const string BUTTON_REGISTER_ON_INPUT = "htmlelement-input-event";
+    private async Task RegisterOnInput() {
+        IHTMLElement? tempElement = await HTMLElement.NextElementSibling;
+        if (tempElement is null)
+            return;
+
+        tempElement.OnInput += OnInput;
+
+        void OnInput(string? data, string? inputType, bool isComposing) {
+            labelOutput = $"data={data ?? "(null)"}, inputType={inputType ?? "(null)"}, isComposing={isComposing}";
+            StateHasChanged();
+            tempElement.OnInput -= OnInput;
+            _ = tempElement.DisposeAsync().Preserve();
+        }
+    }
+
+    public const string BUTTON_REGISTER_ON_BEFORE_INPUT = "htmlelement-before-input-event";
+    private async Task RegisterOnBeforeInput() {
+        IHTMLElement? tempElement = await HTMLElement.NextElementSibling;
+        if (tempElement is null)
+            return;
+
+        tempElement.OnBeforeInput += OnBeforeInput;
+
+        void OnBeforeInput(string? data, string? inputType, bool isComposing) {
+            labelOutput = $"data={data ?? "(null)"}, inputType={inputType ?? "(null)"}, isComposing={isComposing}";
+            StateHasChanged();
+            tempElement.OnBeforeInput -= OnBeforeInput;
+            _ = tempElement.DisposeAsync().Preserve();
+        }
+    }
+
+    public const string BUTTON_REGISTER_ON_CONTENT_VISIBILITY_AUTO_STATE_CHANGE = "htmlelement-content-visibility-auto-state-change-event";
+    private void RegisterOnContentVisibilityAutoStateChange() {
+        HTMLElement.OnContentVisibilityAutoStateChange += (bool skipped) => {
+            labelOutput = $"skipped={skipped}";
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_BEFORE_MATCH = "htmlelement-before-match-event";
+    private void RegisterOnBeforeMatch() {
+        HTMLElement.OnBeforeMatch += () => {
+            labelOutput = TEST_EVENT_BEFORE_MATCH;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_SECURITY_POLICY_VIOLATION = "htmlelement-security-policy-violation-event";
+    private void RegisterOnSecurityPolicyViolation() {
+        HTMLElement.OnSecurityPolicyViolation += (SecurityPolicyViolationEvent securityPolicyViolationEvent) => {
+            labelOutput = securityPolicyViolationEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_SELECT_START = "htmlelement-select-start-event";
+    private void RegisterOnSelectStart() {
+        HTMLElement.OnSelectStart += () => {
+            labelOutput = TEST_EVENT_SELECT_START;
+            StateHasChanged();
+        };
+    }
+
+
+    public const string BUTTON_REGISTER_ON_KEY_DOWN = "htmlelement-key-down-event";
+    private async Task RegisterOnKeyDown() {
+        IHTMLElement? tempElement = await HTMLElement.NextElementSibling;
+        if (tempElement is null)
+            return;
+
+        tempElement.OnKeyDown += OnKeyDown;
+
+        void OnKeyDown(KeyboardEvent keyboardEvent) {
+            labelOutput = keyboardEvent.ToString();
+            StateHasChanged();
+            tempElement.OnKeyDown -= OnKeyDown;
+            _ = tempElement.DisposeAsync().Preserve();
+        }
+    }
+
+    public const string BUTTON_REGISTER_ON_KEY_UP = "htmlelement-key-up-event";
+    private async Task RegisterOnKeyUp() {
+        IHTMLElement? tempElement = await HTMLElement.NextElementSibling;
+        if (tempElement is null)
+            return;
+
+        tempElement.OnKeyUp += OnKeyUp;
+
+        void OnKeyUp(KeyboardEvent keyboardEvent) {
+            labelOutput = keyboardEvent.ToString();
+            StateHasChanged();
+            tempElement.OnKeyUp -= OnKeyUp;
+            _ = tempElement.DisposeAsync().Preserve();
+        }
+    }
+
+
+    public const string BUTTON_REGISTER_ON_CLICK = "htmlelement-click-event";
+    private void RegisterOnClick() {
+        HiddenElement.OnClick += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_DBL_CLICK = "htmlelement-dbl-click-event";
+    private void RegisterOnDblClick() {
+        HiddenElement.OnDblClick += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_AUX_CLICK = "htmlelement-aux-click-event";
+    private void RegisterOnAuxClick() {
+        HiddenElement.OnAuxClick += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_CONTEXT_MENU = "htmlelement-context-menu-event";
+    private void RegisterOnContextMenu() {
+        HiddenElement.OnContextMenu += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_MOUSE_DOWN = "htmlelement-mouse-down-event";
+    private void RegisterOnMouseDown() {
+        HiddenElement.OnMouseDown += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_MOUSE_UP = "htmlelement-mouse-up-event";
+    private void RegisterOnMouseUp() {
+        HiddenElement.OnMouseUp += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_WHEEL = "htmlelement-wheel-event";
+    private void RegisterOnWheel() {
+        HiddenElement.OnWheel += (WheelEvent wheelEvent) => {
+            labelOutput = wheelEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_MOUSE_MOVE = "htmlelement-mouse-move-event";
+    private void RegisterOnMouseMove() {
+        HiddenElement.OnMouseMove += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_MOUSE_OVER = "htmlelement-mouse-over-event";
+    private void RegisterOnMouseOver() {
+        HiddenElement.OnMouseOver += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_MOUSE_OUT = "htmlelement-mouse-out-event";
+    private void RegisterOnMouseOut() {
+        HiddenElement.OnMouseOut += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_MOUSE_ENTER = "htmlelement-mouse-enter-event";
+    private void RegisterOnMouseEnter() {
+        HiddenElement.OnMouseEnter += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_MOUSE_LEAVE = "htmlelement-mouse-leave-event";
+    private void RegisterOnMouseLeave() {
+        HiddenElement.OnMouseLeave += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+
+    public const string BUTTON_REGISTER_ON_TOUCH_START = "htmlelement-touch-start-event";
+    private void RegisterOnTouchStart() {
+        HiddenElement.OnTouchStart += (TouchEvent touchEvent) => {
+            labelOutput = touchEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_TOUCH_END = "htmlelement-touch-end-event";
+    private void RegisterOnTouchEnd() {
+        HiddenElement.OnTouchEnd += (TouchEvent touchEvent) => {
+            labelOutput = touchEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_TOUCH_MOVE = "htmlelement-touch-move-event";
+    private void RegisterOnTouchMove() {
+        HiddenElement.OnTouchMove += (TouchEvent touchEvent) => {
+            labelOutput = touchEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_TOUCH_CANCEL = "htmlelement-touch-cancel-event";
+    private void RegisterOnTouchCancel() {
+        HiddenElement.OnTouchCancel += (TouchEvent touchEvent) => {
+            labelOutput = touchEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+
+    public const string BUTTON_REGISTER_ON_POINTER_DOWN = "htmlelement-pointer-down-event";
+    private void RegisterOnPointerDown() {
+        HiddenElement.OnPointerDown += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_POINTER_UP = "htmlelement-pointer-up-event";
+    private void RegisterOnPointerUp() {
+        HiddenElement.OnPointerUp += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_POINTER_MOVE = "htmlelement-pointer-move-event";
+    private void RegisterOnPointerMove() {
+        HiddenElement.OnPointerMove += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_POINTER_OVER = "htmlelement-pointer-over-event";
+    private void RegisterOnPointerOver() {
+        HiddenElement.OnPointerOver += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_POINTER_OUT = "htmlelement-pointer-out-event";
+    private void RegisterOnPointerOut() {
+        HiddenElement.OnPointerOut += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_POINTER_ENTER = "htmlelement-pointer-enter-event";
+    private void RegisterOnPointerEnter() {
+        HiddenElement.OnPointerEnter += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_POINTER_LEAVE = "htmlelement-pointer-leave-event";
+    private void RegisterOnPointerLeave() {
+        HiddenElement.OnPointerLeave += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_POINTER_CANCEL = "htmlelement-pointer-cancel-event";
+    private void RegisterOnPointerCancel() {
+        HiddenElement.OnPointerCancel += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_POINTER_RAW_UPDATE = "htmlelement-pointer-raw-update-event";
+    private void RegisterOnPointerRawUpdate() {
+        HiddenElement.OnPointerRawUpdate += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_GOT_POINTER_CAPTURE = "htmlelement-got-pointer-capture-event";
+    private void RegisterOnGotPointerCapture() {
+        HiddenElement.OnGotPointerCapture += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_LOST_POINTER_CAPTURE = "htmlelement-lost-pointer-capture-event";
+    private void RegisterOnLostPointerCapture() {
+        HiddenElement.OnLostPointerCapture += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+
+    public const string BUTTON_REGISTER_ON_SCROLL = "htmlelement-scroll-event";
+    private void RegisterOnScroll() {
+        HTMLElement.OnScroll += () => {
+            labelOutput = TEST_EVENT_SCROLL_START;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_SCROLL_END = "htmlelement-scroll-end-event";
+    private void RegisterOnScrollEnd() {
+        HTMLElement.OnScrollEnd += () => {
+            labelOutput = TEST_EVENT_SCROLL_END;
+            StateHasChanged();
+        };
+    }
+
+
+    public const string BUTTON_REGISTER_ON_FOCUS = "htmlelement-focus-event";
+    private void RegisterOnFocus() {
+        HTMLElement.OnFocus += () => {
+            labelOutput = TEST_EVENT_FOCUS;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_FOCUS_IN = "htmlelement-focus-in-event";
+    private void RegisterOnFocusIn() {
+        HTMLElement.OnFocusIn += () => {
+            labelOutput = TEST_EVENT_FOCUS_IN;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_BLUR = "htmlelement-blur-event";
+    private void RegisterOnBlur() {
+        HTMLElement.OnBlur += () => {
+            labelOutput = TEST_EVENT_BLUR;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_FOCUS_OUT = "htmlelement-focus-out-event";
+    private void RegisterOnFocusOut() {
+        HTMLElement.OnFocusOut += () => {
+            labelOutput = TEST_EVENT_FOCUS_OUT;
+            StateHasChanged();
+        };
+    }
+
+
+    public const string BUTTON_REGISTER_ON_COPY = "htmlelement-copy-event";
+    private void RegisterOnCopy() {
+        HTMLElement.OnCopy += () => {
+            labelOutput = TEST_EVENT_COPY;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_PASTE = "htmlelement-paste-event";
+    private void RegisterOnPaste() {
+        HTMLElement.OnPaste += () => {
+            labelOutput = TEST_EVENT_PASTE;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_CUT = "htmlelement-cut-event";
+    private void RegisterOnCut() {
+        HTMLElement.OnCut += () => {
+            labelOutput = TEST_EVENT_CUT;
+            StateHasChanged();
+        };
+    }
+
+
     public const string BUTTON_REGISTER_ON_TRANSITION_START = "htmlelement-transition-start-event";
     private void RegisterOnTransitionStart() {
         HTMLElement.OnTransitionStart += (string propertyName, double elapsedTime, string pseudoElement) => {
-            labelOutput = $"{TEST_EVENT_TRANSITIONSTART}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            labelOutput = $"{TEST_EVENT_TRANSITION_START}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
             StateHasChanged();
         };
     }
@@ -2159,7 +2564,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     public const string BUTTON_REGISTER_ON_TRANSITION_END = "htmlelement-transition-end-event";
     private void RegisterOnTransitionEnd() {
         HTMLElement.OnTransitionEnd += (string propertyName, double elapsedTime, string pseudoElement) => {
-            labelOutput = $"{TEST_EVENT_TRANSITIONEND}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            labelOutput = $"{TEST_EVENT_TRANSITION_END}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
             StateHasChanged();
         };
     }
@@ -2167,7 +2572,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     public const string BUTTON_REGISTER_ON_TRANSITION_RUN = "htmlelement-transition-run-event";
     private void RegisterOnTransitionRun() {
         HTMLElement.OnTransitionRun += (string propertyName, double elapsedTime, string pseudoElement) => {
-            labelOutput = $"{TEST_EVENT_TRANSITIONRUN}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            labelOutput = $"{TEST_EVENT_TRANSITION_RUN}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
             StateHasChanged();
         };
     }
@@ -2175,7 +2580,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     public const string BUTTON_REGISTER_ON_TRANSITION_CANCEL = "htmlelement-transition-cancel-event";
     private void RegisterOnTransitionCancel() {
         HTMLElement.OnTransitionCancel += (string propertyName, double elapsedTime, string pseudoElement) => {
-            labelOutput = $"{TEST_EVENT_TRANSITIONCANCEL}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            labelOutput = $"{TEST_EVENT_TRANSITION_CANCEL}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
             StateHasChanged();
         };
     }
@@ -2184,7 +2589,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     public const string BUTTON_REGISTER_ON_ANIMATION_START = "htmlelement-animation-start-event";
     private void RegisterOnAnimationStart() {
         HTMLElement.OnAnimationStart += (string animationName, double elapsedTime, string pseudoElement) => {
-            labelOutput = $"{TEST_EVENT_ANIMATIONSTART}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            labelOutput = $"{TEST_EVENT_ANIMATION_START}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
             StateHasChanged();
         };
     }
@@ -2192,7 +2597,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     public const string BUTTON_REGISTER_ON_ANIMATION_END = "htmlelement-animation-end-event";
     private void RegisterOnAnimationEnd() {
         HTMLElement.OnAnimationEnd += (string animationName, double elapsedTime, string pseudoElement) => {
-            labelOutput = $"{TEST_EVENT_ANIMATIONEND}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            labelOutput = $"{TEST_EVENT_ANIMATION_END}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
             StateHasChanged();
         };
     }
@@ -2200,7 +2605,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     public const string BUTTON_REGISTER_ON_ANIMATION_ITERATION = "htmlelement-animation-iteration-event";
     private void RegisterOnAnimationIteration() {
         HTMLElement.OnAnimationIteration += (string animationName, double elapsedTime, string pseudoElement) => {
-            labelOutput = $"{TEST_EVENT_ANIMATIONITERATION}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            labelOutput = $"{TEST_EVENT_ANIMATION_ITERATION}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
             StateHasChanged();
         };
     }
@@ -2208,7 +2613,24 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     public const string BUTTON_REGISTER_ON_ANIMATION_CANCEL = "htmlelement-animation-cancel-event";
     private void RegisterOnAnimationCancel() {
         HTMLElement.OnAnimationCancel += (string animationName, double elapsedTime, string pseudoElement) => {
-            labelOutput = $"{TEST_EVENT_ANIMATIONCANCEL}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            labelOutput = $"{TEST_EVENT_ANIMATION_CANCEL}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            StateHasChanged();
+        };
+    }
+
+
+    public const string BUTTON_REGISTER_ON_FULLSCREEN_CHANGE = "htmlelement-fullscreen-change-event";
+    private void RegisterOnFullscreenChange() {
+        HTMLElement.OnFullscreenChange += () => {
+            labelOutput = TEST_EVENT_FULLSCREEN_CHANGE;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_FULLSCREEN_ERROR = "htmlelement-fullscreen-error-event";
+    private void RegisterOnFullscreenError() {
+        HTMLElement.OnFullscreenError += () => {
+            labelOutput = TEST_EVENT_FULLSCREEN_ERROR;
             StateHasChanged();
         };
     }

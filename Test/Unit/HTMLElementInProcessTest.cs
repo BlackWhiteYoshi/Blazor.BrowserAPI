@@ -2111,10 +2111,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
         await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_BOUNDING_CLIENT_RECT);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsNotNull().IsNotEmpty();
-
-        DOMRect? domRect = JsonSerializer.Deserialize<DOMRect?>(result!);
-        await Assert.That(domRect).IsNotNull();
+        await Assert.That(result).StartsWith(nameof(DOMRect));
     }
 
     [Test]
@@ -2124,10 +2121,8 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsNotNull().IsNotEmpty();
 
-        foreach (string json in result!.Split(';')) {
-            DOMRect? domRect = JsonSerializer.Deserialize<DOMRect?>(json);
-            await Assert.That(domRect).IsNotNull();
-        }
+        foreach (string item in result!.Split(';'))
+            await Assert.That(item).StartsWith(nameof(DOMRect));
     }
 
     [Test]
@@ -2201,7 +2196,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
         {
             await htmlElement.HoverAsync();
             string? result = await labelOutput.TextContentAsync();
-            await Assert.That(result).IsEqualTo("False");
+            await Assert.That(result).IsEqualTo("HasPointerCapture=False");
         }
 
         await Page.Mouse.DownAsync();
@@ -2210,7 +2205,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
         {
             await Page.Mouse.MoveAsync(1, 1);
             string? result = await labelOutput.TextContentAsync();
-            await Assert.That(result).IsEqualTo("True");
+            await Assert.That(result).IsEqualTo("HasPointerCapture=True");
         }
 
         await Page.Mouse.UpAsync();
@@ -2219,7 +2214,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
         {
             await htmlElement.HoverAsync();
             string? result = await labelOutput.TextContentAsync();
-            await Assert.That(result).IsEqualTo("False");
+            await Assert.That(result).IsEqualTo("HasPointerCapture=False");
         }
     }
 
@@ -2649,13 +2644,695 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
     // events
 
     [Test]
+    public async Task RegisterOnInput() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT_CONTAINER).EvaluateAsync("""
+            node => {
+                const tempElement = document.createElement("input");
+                tempElement.setAttribute("data-testid", "temp");
+                node.appendChild(tempElement);
+            }
+            """);
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_INPUT);
+
+        await Page.GetByTestId("temp").FillAsync("something");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("data=something, inputType=insertText, isComposing=False");
+    }
+
+    [Test]
+    public async Task RegisterOnBeforeInput() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT_CONTAINER).EvaluateAsync("""
+            node => {
+                const tempElement = document.createElement("input");
+                tempElement.setAttribute("data-testid", "temp");
+                node.appendChild(tempElement);
+            }
+            """);
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_BEFORE_INPUT);
+
+        await Page.GetByTestId("temp").FillAsync("something");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("data=something, inputType=insertText, isComposing=False");
+    }
+
+    [Test]
+    public async Task RegisterOnContentVisibilityAutoStateChange() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_CONTENT_VISIBILITY_AUTO_STATE_CHANGE);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.contentVisibility = 'auto';");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("skipped=False");
+    }
+
+    [Test]
+    public async Task RegisterOnBeforeMatch() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_BEFORE_MATCH);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT_CONTAINER).EvaluateAsync("""
+            node => {
+                const htmlElement = node.firstElementChild;
+                htmlElement.setAttribute("id", "htmlelement-fragment");
+                htmlElement.setAttribute("hidden", "until-found");
+
+                const a = document.createElement("a");
+                a.href = "#htmlelement-fragment";
+                node.appendChild(a);
+                a.click();
+            }
+            """);
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_EVENT_BEFORE_MATCH);
+    }
+
+    [Test]
+    public async Task RegisterOnSecurityPolicyViolation() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_SECURITY_POLICY_VIOLATION);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync("""
+            node => {
+                //const script = document.createElement("script");
+                //script.innerText = "console.log('inline script');";
+                //node.appendChild(script);
+
+                const event = new Event("securitypolicyviolation");
+                event.blockedURI = "s1";
+                event.effectiveDirective = "s2";
+                event.documentURI = "s3";
+                event.lineNumber = 4;
+                event.columnNumber = 5;
+                event.originalPolicy = "s6";
+                event.referrer = "s7";
+                event.sourceFile = "s8";
+                event.sample = "s9";
+                event.statusCode = 10;
+                event.disposition = "s11";
+                node.dispatchEvent(event);
+            }
+            """);
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("SecurityPolicyViolationEvent { BlockedURI = s1, EffectiveDirective = s2, DocumentURI = s3, LineNumber = 4, ColumnNumber = 5, OriginalPolicy = s6, Referrer = s7, SourceFile = s8, Sample = s9, StatusCode = 10, Disposition = s11 }");
+    }
+
+    [Test]
+    public async Task RegisterOnSelectStart() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_SELECT_START);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).ClickAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_EVENT_SELECT_START);
+    }
+
+
+    [Test]
+    public async Task RegisterOnKeyDown() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT_CONTAINER).EvaluateAsync("""
+            node => {
+                const tempElement = document.createElement("input");
+                tempElement.setAttribute("data-testid", "temp");
+                node.appendChild(tempElement);
+            }
+            """);
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_KEY_DOWN);
+
+        await Page.GetByTestId("temp").PressAsync("a");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("KeyBoardEvent { Key = a, Code = KeyA, Location = 0, CtrlKey = False, ShiftKey = False, AltKey = False, MetaKey = False, Repeat = False, IsComposing = False }");
+    }
+
+    [Test]
+    public async Task RegisterOnKeyUp() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT_CONTAINER).EvaluateAsync("""
+            node => {
+                const tempElement = document.createElement("input");
+                tempElement.setAttribute("data-testid", "temp");
+                node.appendChild(tempElement);
+            }
+            """);
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_KEY_UP);
+
+        await Page.GetByTestId("temp").PressAsync("a");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("KeyBoardEvent { Key = a, Code = KeyA, Location = 0, CtrlKey = False, ShiftKey = False, AltKey = False, MetaKey = False, Repeat = False, IsComposing = False }");
+    }
+
+
+    [Test]
+    public async Task RegisterOnClick() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_CLICK);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).ClickAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("MouseEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnDblClick() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_DBL_CLICK);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).DblClickAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("MouseEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnAuxClick() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_AUX_CLICK);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).ClickAsync(new LocatorClickOptions() { Button = MouseButton.Right });
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("MouseEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnContextMenu() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_CONTEXT_MENU);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).ClickAsync(new LocatorClickOptions() { Button = MouseButton.Right });
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("MouseEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnMouseDown() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_MOUSE_DOWN);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).ClickAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("MouseEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnMouseUp() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_MOUSE_UP);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).ClickAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("MouseEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnWheel() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_WHEEL);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).HoverAsync();
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.Mouse.WheelAsync(0.0f, 1.0f);
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("WheelEvent { DeltaX = 0, DeltaY = 1, DeltaZ = 0, DeltaMode = 0 }");
+    }
+
+    [Test]
+    public async Task RegisterOnMouseMove() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_MOUSE_MOVE);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).HoverAsync();
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.Mouse.MoveAsync(1.0f, 1.0f);
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("MouseEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnMouseOver() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_MOUSE_OVER);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).HoverAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("MouseEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnMouseOut() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_MOUSE_OUT);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).HoverAsync();
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).HoverAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("MouseEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnMouseEnter() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_MOUSE_ENTER);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).HoverAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("MouseEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnMouseLeave() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_MOUSE_LEAVE);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).HoverAsync();
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).HoverAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("MouseEvent");
+    }
+
+
+    [Test]
+    public async Task RegisterOnTouchStart() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_TOUCH_START);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).TapAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("TouchEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnTouchEnd() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_TOUCH_END);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).TapAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("TouchEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnTouchMove() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_TOUCH_MOVE);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("""
+            node => {
+                const event = new Event("touchmove");
+                event.touches = [];
+                event.targetTouches = [];
+                event.changedTouches = [];
+                event.ctrlKey = false;
+                event.shiftKey = false;
+                event.altKey = false;
+                event.metaKey = false;
+                node.dispatchEvent(event);
+            };
+            """);
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("TouchEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnTouchCancel() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_TOUCH_CANCEL);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("""
+            node => {
+                const event = new Event("touchcancel");
+                event.touches = [];
+                event.targetTouches = [];
+                event.changedTouches = [];
+                event.ctrlKey = false;
+                event.shiftKey = false;
+                event.altKey = false;
+                event.metaKey = false;
+                node.dispatchEvent(event);
+            };
+            """);
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("TouchEvent");
+    }
+
+
+    [Test]
+    public async Task RegisterOnPointerDown() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_POINTER_DOWN);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).ClickAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("PointerEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnPointerUp() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_POINTER_UP);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).ClickAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("PointerEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnPointerMove() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_POINTER_MOVE);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).HoverAsync();
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.Mouse.MoveAsync(1.0f, 1.0f);
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("PointerEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnPointerOver() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_POINTER_OVER);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).HoverAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("PointerEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnPointerOut() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_POINTER_OUT);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).HoverAsync();
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).HoverAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("PointerEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnPointerEnter() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_POINTER_ENTER);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).HoverAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("PointerEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnPointerLeave() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_POINTER_LEAVE);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).HoverAsync();
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).HoverAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("PointerEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnPointerCancel() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_POINTER_CANCEL);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("""
+            node => {
+                const event = new Event("pointercancel");
+                event.pointerId = 0;
+                event.persistentDeviceId = 0;
+                event.pointerType = "";
+                event.width = 1;
+                event.height = 1;
+                event.pressure = 1;
+                event.tangentialPressure = 0;
+                event.twist = 0;
+                event.tiltX = 0;
+                event.tiltY = 0;
+                event.altitudeAngle = 0;
+                event.azimuthAngle = 0;
+                event.isPrimary = true;
+                event.button = 0;
+                event.buttons = 0;
+                event.movementX = 0;
+                event.movementY = 0;
+                event.clientX = 0;
+                event.clientY = 0;
+                event.offsetX = 0;
+                event.offsetY = 0;
+                event.pageX = 0;
+                event.pageY = 0;
+                event.screenX = 0;
+                event.screenY = 0;
+                event.ctrlKey = false;
+                event.shiftKey = false;
+                event.altKey = false;
+                event.metaKey = false;
+                node.dispatchEvent(event);
+            };
+            """);
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("PointerEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnPointerRawUpdate() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("node => node.removeAttribute('hidden')");
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_POINTER_RAW_UPDATE);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).HoverAsync();
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.Mouse.MoveAsync(1.0f, 1.0f);
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("PointerEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnGotPointerCapture() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("""
+            node => {
+                node.removeAttribute("hidden");
+                node.addEventListener("pointerdown", event => node.setPointerCapture(event.pointerId));
+            }
+            """);
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_GOT_POINTER_CAPTURE);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).ClickAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("PointerEvent");
+    }
+
+    [Test]
+    public async Task RegisterOnLostPointerCapture() {
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).EvaluateAsync("""
+            node => {
+                node.removeAttribute("hidden");
+                node.addEventListener("pointerdown", event => node.setPointerCapture(event.pointerId));
+                node.addEventListener("pointerup", event => node.releasePointerCapture(event.pointerId));
+            }
+            """);
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_LOST_POINTER_CAPTURE);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HIDDEN_ELEMENT).ClickAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith("PointerEvent");
+    }
+
+
+    [Test]
+    public async Task RegisterOnScroll() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_SCROLL);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).HoverAsync();
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.Mouse.WheelAsync(0.0f, 1.0f);
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_EVENT_SCROLL_START);
+    }
+
+    [Test]
+    public async Task RegisterOnScrollEnd() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_SCROLL_END);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).HoverAsync();
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.Mouse.WheelAsync(0.0f, 1.0f);
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_EVENT_SCROLL_END);
+    }
+
+
+    [Test]
+    public async Task RegisterOnFocus() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_FOCUS);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).FocusAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_EVENT_FOCUS);
+    }
+
+    [Test]
+    public async Task RegisterOnFocusIn() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_FOCUS_IN);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).FocusAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_EVENT_FOCUS_IN);
+    }
+
+    [Test]
+    public async Task RegisterOnBlur() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_BLUR);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).FocusAsync();
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).BlurAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_EVENT_BLUR);
+    }
+
+    [Test]
+    public async Task RegisterOnFocusOut() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_FOCUS_OUT);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).FocusAsync();
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).BlurAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_EVENT_FOCUS_OUT);
+    }
+
+
+    [Test]
+    public async Task RegisterOnCopy() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_COPY);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).FocusAsync();
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.Keyboard.PressAsync("Control+c");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_EVENT_COPY);
+    }
+
+    [Test]
+    public async Task RegisterOnPaste() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_PASTE);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).FocusAsync();
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.Keyboard.PressAsync("Control+v");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_EVENT_PASTE);
+    }
+
+    [Test]
+    public async Task RegisterOnCut() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_CUT);
+
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).FocusAsync();
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.Keyboard.PressAsync("Control+x");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLElementInProcessGroup.TEST_EVENT_CUT);
+    }
+
+
+    [Test]
     public async Task RegisterOnTransitionStart() {
         await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_TRANSITION_START);
         await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#000';");
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).StartsWith(HTMLElementInProcessGroup.TEST_TRANSITIONSTART_EVENT);
+        await Assert.That(result).StartsWith(HTMLElementInProcessGroup.TEST_EVENT_TRANSITION_START);
     }
 
     [Test]
@@ -2665,7 +3342,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).StartsWith(HTMLElementInProcessGroup.TEST_TRANSITIONEND_EVENT);
+        await Assert.That(result).StartsWith(HTMLElementInProcessGroup.TEST_EVENT_TRANSITION_END);
     }
 
     [Test]
@@ -2675,7 +3352,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).StartsWith(HTMLElementInProcessGroup.TEST_TRANSITIONRUN_EVENT);
+        await Assert.That(result).StartsWith(HTMLElementInProcessGroup.TEST_EVENT_TRANSITION_RUN);
     }
 
     [Test]
@@ -2687,7 +3364,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).StartsWith(HTMLElementInProcessGroup.TEST_TRANSITIONCANCEL_EVENT);
+        await Assert.That(result).StartsWith(HTMLElementInProcessGroup.TEST_EVENT_TRANSITION_CANCEL);
     }
 
 
@@ -2698,7 +3375,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).StartsWith(HTMLElementInProcessGroup.TEST_ANIMATIONSTART_EVENT);
+        await Assert.That(result).StartsWith(HTMLElementInProcessGroup.TEST_EVENT_ANIMATION_START);
     }
 
     [Test]
@@ -2708,7 +3385,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).StartsWith(HTMLElementInProcessGroup.TEST_ANIMATIONEND_EVENT);
+        await Assert.That(result).StartsWith(HTMLElementInProcessGroup.TEST_EVENT_ANIMATION_END);
     }
 
     [Test]
@@ -2718,7 +3395,7 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).StartsWith(HTMLElementInProcessGroup.TEST_ANIMATIONITERATION_EVENT);
+        await Assert.That(result).StartsWith(HTMLElementInProcessGroup.TEST_EVENT_ANIMATION_ITERATION);
     }
 
     [Test]
@@ -2730,7 +3407,28 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).StartsWith(HTMLElementInProcessGroup.TEST_ANIMATIONCANCEL_EVENT);
+        await Assert.That(result).StartsWith(HTMLElementInProcessGroup.TEST_EVENT_ANIMATION_CANCEL);
+    }
+
+
+    [Test]
+    public async Task RegisterOnFullscreenChange() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_FULLSCREEN_CHANGE);
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync("node => node.requestFullscreen();");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith(HTMLElementInProcessGroup.TEST_EVENT_FULLSCREEN_CHANGE);
+    }
+
+    [Test]
+    public async Task RegisterOnFullscreenError() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_REGISTER_ON_FULLSCREEN_ERROR);
+        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync("node => node.dispatchEvent(new Event('fullscreenerror'));");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith(HTMLElementInProcessGroup.TEST_EVENT_FULLSCREEN_ERROR);
     }
 
     #endregion

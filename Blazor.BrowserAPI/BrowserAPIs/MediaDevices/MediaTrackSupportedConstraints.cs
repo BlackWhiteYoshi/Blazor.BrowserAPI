@@ -14,74 +14,19 @@
 /// <para>n actual constraint set is described using an object based on the MediaTrackConstraints dictionary.</para>
 /// <para>To learn more about how constraints work, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/Media_Capture_and_Streams_API/Constraints">Capabilities, constraints, and settings</see>.</para>
 /// </summary>
-public readonly record struct MediaTrackSupportedConstraints {
-    /// <summary>
-    /// A Flag whose value is true if this constraint is supported in the current environment.
-    /// </summary>
-    public bool AspectRatio { get; init; }
-
-    /// <summary>
-    /// A Flag whose value is true if this constraint is supported in the current environment.
-    /// </summary>
-    public bool AutoGainControl { get; init; }
-
-    /// <summary>
-    /// A Flag whose value is true if this constraint is supported in the current environment.
-    /// </summary>
-    public bool ChannelCount { get; init; }
-
-    /// <summary>
-    /// A Flag whose value is true if this constraint is supported in the current environment.
-    /// </summary>
-    public bool DeviceId { get; init; }
-
-    /// <summary>
-    /// A Flag whose value is true if this constraint is supported in the current environment.
-    /// </summary>
-    public bool DisplaySurface { get; init; }
-
-    /// <summary>
-    /// A Flag whose value is true if this constraint is supported in the current environment.
-    /// </summary>
-    public bool EchoCancellation { get; init; }
-
-    /// <summary>
-    /// A Flag whose value is true if this constraint is supported in the current environment.
-    /// </summary>
-    public bool FacingMode { get; init; }
-
-    /// <summary>
-    /// A Flag whose value is true if this constraint is supported in the current environment.
-    /// </summary>
-    public bool FrameRate { get; init; }
-
-    /// <summary>
-    /// A Flag whose value is true if this constraint is supported in the current environment.
-    /// </summary>
-    public bool GroupId { get; init; }
-
-    /// <summary>
-    /// A Flag whose value is true if this constraint is supported in the current environment.
-    /// </summary>
-    public bool Height { get; init; }
-
-    /// <summary>
-    /// A Flag whose value is true if this constraint is supported in the current environment.
-    /// </summary>
-    public bool NoiseSuppression { get; init; }
-
-    /// <summary>
-    /// A Flag whose value is true if this constraint is supported in the current environment.
-    /// </summary>
-    public bool SampleRate { get; init; }
-
-    /// <summary>
-    /// A Flag whose value is true if this constraint is supported in the current environment.
-    /// </summary>
-    public bool SampleSize { get; init; }
-
-    /// <summary>
-    /// A Flag whose value is true if this constraint is supported in the current environment.
-    /// </summary>
-    public bool Width { get; init; }
-}
+/// <param name="AspectRatio">A Flag whose value is true if this constraint is supported in the current environment.</param>
+/// <param name="AutoGainControl">A Flag whose value is true if this constraint is supported in the current environment.</param>
+/// <param name="ChannelCoun">A Flag whose value is true if this constraint is supported in the current environment.</param>
+/// <param name="DeviceId">A Flag whose value is true if this constraint is supported in the current environment.</param>
+/// <param name="DisplaySurface">A Flag whose value is true if this constraint is supported in the current environment.</param>
+/// <param name="EchoCancellation">A Flag whose value is true if this constraint is supported in the current environment.</param>
+/// <param name="FacingMode">A Flag whose value is true if this constraint is supported in the current environment.</param>
+/// <param name="FrameRate">A Flag whose value is true if this constraint is supported in the current environment.</param>
+/// <param name="GroupId">A Flag whose value is true if this constraint is supported in the current environment.</param>
+/// <param name="Height">A Flag whose value is true if this constraint is supported in the current environment.</param>
+/// <param name="NoiseSuppression">A Flag whose value is true if this constraint is supported in the current environment.</param>
+/// <param name="SampleRate">A Flag whose value is true if this constraint is supported in the current environment.</param>
+/// <param name="SampleSize">A Flag whose value is true if this constraint is supported in the current environment.</param>
+/// <param name="Width">A Flag whose value is true if this constraint is supported in the current environment.</param>
+public readonly record struct MediaTrackSupportedConstraints(bool AspectRatio, bool AutoGainControl, bool ChannelCoun, bool DeviceId, bool DisplaySurface, bool EchoCancellation, bool FacingMode,
+    bool FrameRate, bool GroupId, bool Height, bool NoiseSuppression, bool SampleRate, bool SampleSize, bool Width);

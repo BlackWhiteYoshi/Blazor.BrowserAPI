@@ -1175,12 +1175,41 @@ export class HTMLElementAPI {
     }
 
 
+    /** Util function for input events. If the parameter is of type "InputEvent", it gets deconstructed. If it is of type "Event", inputType is null. */
+    #deconstructInputEvent(event: InputEvent | Event): [string | null, string | null, boolean] {
+        if (event instanceof InputEvent)
+            return [event.data, event.inputType, event.isComposing];
+        else
+            return [null, null, false];
+    }
+
     /** Util function for drag events. The event parameter is of type "DragEvent" and that has a property "dataTransfer", it gets deconstructed and returned. */
     #deconstructDataTransfer(data: DataTransfer | null): [string, string, readonly string[], FileAPI[]] {
         if (data !== null)
             return [data.dropEffect, data.effectAllowed, data.types, [...data.files].map(file => DotNet.createJSObjectReference(new FileAPI(file)))];
         else
             return ["", "", [], []];
+    }
+
+    /** Util function for touch events. The "TouchEvent" has some properties of type "TouchList", it gets converted to an array with serializable objects. */
+    #deconstructTouchList(touchList: TouchList): { identifier: number, clientX: number, clientY: number, pageX: number, pageY: number, screenX: number, screenY: number, radiusX: number, radiusY: number, rotationAngle: number, force: number }[] {
+        const result = new Array(touchList.length);
+        for (let i = 0; i < result.length; i++)
+            result[i] = {
+                identifier: touchList[i].identifier,
+                clientX: touchList[i].clientX,
+                clientY: touchList[i].clientY,
+                pageX: touchList[i].pageX,
+                pageY: touchList[i].pageY,
+                screenX: touchList[i].screenX,
+                screenY: touchList[i].screenY,
+                radiusX: touchList[i].radiusX,
+                radiusY: touchList[i].radiusY,
+                rotationAngle: touchList[i].rotationAngle,
+                force: touchList[i].force
+            };
+
+        return result;
     }
 
 
@@ -1353,6 +1382,1173 @@ export class HTMLElementAPI {
     }
 
 
+
+    // Element - input event
+
+    #oninput = (inputEvent: InputEvent | Event) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeInput", ... this.#deconstructInputEvent(inputEvent));
+
+    activateOninput(): void {
+        this.#htmlElement.addEventListener("input", this.#oninput);
+    }
+
+    deactivateOninput(): void {
+        this.#htmlElement.removeEventListener("input", this.#oninput);
+    }
+
+
+    // Element - beforeinput event
+
+    #onbeforeinput = (inputEvent: InputEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeBeforeInput", ... this.#deconstructInputEvent(inputEvent));
+
+    activateOnbeforeinput(): void {
+        this.#htmlElement.addEventListener("beforeinput", this.#onbeforeinput);
+    }
+
+    deactivateOnbeforeinput(): void {
+        this.#htmlElement.removeEventListener("beforeinput", this.#onbeforeinput);
+    }
+
+
+    // Element - contentvisibilityautostatechange event
+
+    #oncontentvisibilityautostatechange = (event: { skipped: boolean; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeContentVisibilityAutoStateChange", event.skipped);
+
+    activateOncontentvisibilityautostatechange(): void {
+        this.#htmlElement.addEventListener("contentvisibilityautostatechange", <() => {}>this.#oncontentvisibilityautostatechange);
+    }
+
+    deactivateOncontentvisibilityautostatechange(): void {
+        this.#htmlElement.removeEventListener("contentvisibilityautostatechange", <() => {}>this.#oncontentvisibilityautostatechange);
+    }
+
+
+    // Element - beforematch event
+
+    #onbeforematch = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeBeforeMatch");
+
+    activateOnbeforematch(): void {
+        this.#htmlElement.addEventListener("beforematch", this.#onbeforematch);
+    }
+
+    deactivateOnbeforematch(): void {
+        this.#htmlElement.removeEventListener("beforematch", this.#onbeforematch);
+    }
+
+
+    // Element - securitypolicyviolation event
+
+    #onsecuritypolicyviolation = (violationEvent: SecurityPolicyViolationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeSecurityPolicyViolation", {
+        blockedURI: violationEvent.blockedURI,
+        effectiveDirective: violationEvent.effectiveDirective,
+        documentURI: violationEvent.documentURI,
+        lineNumber: violationEvent.lineNumber,
+        columnNumber: violationEvent.columnNumber,
+        originalPolicy: violationEvent.originalPolicy,
+        referrer: violationEvent.referrer,
+        sourceFile: violationEvent.sourceFile,
+        sample: violationEvent.sample,
+        statusCode: violationEvent.statusCode,
+        disposition: violationEvent.disposition
+    });
+
+    activateOnsecuritypolicyviolation(): void {
+        this.#htmlElement.addEventListener("securitypolicyviolation", this.#onsecuritypolicyviolation);
+    }
+
+    deactivateOnsecuritypolicyviolation(): void {
+        this.#htmlElement.removeEventListener("securitypolicyviolation", this.#onsecuritypolicyviolation);
+    }
+
+
+    // Node - selectstart event
+
+    #onselectstart = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeSelectStart");
+
+    activateOnselectstart(): void {
+        this.#htmlElement.addEventListener("selectstart", this.#onselectstart);
+    }
+
+    deactivateOnselectstart(): void {
+        this.#htmlElement.removeEventListener("selectstart", this.#onselectstart);
+    }
+
+
+
+    // Element - keydown event
+
+    #onkeydown = (keyboardEvent: KeyboardEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeKeyDown", {
+        key: keyboardEvent.key,
+        code: keyboardEvent.code,
+        location: keyboardEvent.location,
+        ctrlKey: keyboardEvent.ctrlKey,
+        shiftKey: keyboardEvent.shiftKey,
+        altKey: keyboardEvent.altKey,
+        metaKey: keyboardEvent.metaKey,
+        repeat: keyboardEvent.repeat,
+        isComposing: keyboardEvent.isComposing
+    });
+
+    activateOnkeydown(): void {
+        this.#htmlElement.addEventListener("keydown", this.#onkeydown);
+    }
+
+    deactivateOnkeydown(): void {
+        this.#htmlElement.removeEventListener("keydown", this.#onkeydown);
+    }
+
+
+    // Element - keyup event
+
+    #onkeyup = (keyboardEvent: KeyboardEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeKeyUp", {
+        key: keyboardEvent.key,
+        code: keyboardEvent.code,
+        location: keyboardEvent.location,
+        ctrlKey: keyboardEvent.ctrlKey,
+        shiftKey: keyboardEvent.shiftKey,
+        altKey: keyboardEvent.altKey,
+        metaKey: keyboardEvent.metaKey,
+        repeat: keyboardEvent.repeat,
+        isComposing: keyboardEvent.isComposing
+    });
+
+    activateOnkeyup(): void {
+        this.#htmlElement.addEventListener("keyup", this.#onkeyup);
+    }
+
+    deactivateOnkeyup(): void {
+        this.#htmlElement.removeEventListener("keyup", this.#onkeyup);
+    }
+
+
+
+    // Element - click event
+
+    #onclick = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeClick", {
+        button: mouseEvent.button,
+        buttons: mouseEvent.buttons,
+        movementX: mouseEvent.movementX,
+        movementY: mouseEvent.movementY,
+        clientX: mouseEvent.clientX,
+        clientY: mouseEvent.clientY,
+        offsetX: mouseEvent.offsetX,
+        offsetY: mouseEvent.offsetY,
+        pageX: mouseEvent.pageX,
+        pageY: mouseEvent.pageY,
+        screenX: mouseEvent.screenX,
+        screenY: mouseEvent.screenY,
+        ctrlKey: mouseEvent.ctrlKey,
+        shiftKey: mouseEvent.shiftKey,
+        altKey: mouseEvent.altKey,
+        metaKey: mouseEvent.metaKey
+    });
+
+    activateOnclick(): void {
+        this.#htmlElement.addEventListener("click", this.#onclick);
+    }
+
+    deactivateOnclick(): void {
+        this.#htmlElement.removeEventListener("click", this.#onclick);
+    }
+
+
+    // Element - dblclick event
+
+    #ondblclick = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDblClick", {
+        button: mouseEvent.button,
+        buttons: mouseEvent.buttons,
+        movementX: mouseEvent.movementX,
+        movementY: mouseEvent.movementY,
+        clientX: mouseEvent.clientX,
+        clientY: mouseEvent.clientY,
+        offsetX: mouseEvent.offsetX,
+        offsetY: mouseEvent.offsetY,
+        pageX: mouseEvent.pageX,
+        pageY: mouseEvent.pageY,
+        screenX: mouseEvent.screenX,
+        screenY: mouseEvent.screenY,
+        ctrlKey: mouseEvent.ctrlKey,
+        shiftKey: mouseEvent.shiftKey,
+        altKey: mouseEvent.altKey,
+        metaKey: mouseEvent.metaKey
+    });
+
+    activateOndblclick(): void {
+        this.#htmlElement.addEventListener("dblclick", this.#ondblclick);
+    }
+
+    deactivateOndblclick(): void {
+        this.#htmlElement.removeEventListener("dblclick", this.#ondblclick);
+    }
+
+
+    // Element - auxclick event
+
+    #onauxclick = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAuxClick", {
+        button: mouseEvent.button,
+        buttons: mouseEvent.buttons,
+        movementX: mouseEvent.movementX,
+        movementY: mouseEvent.movementY,
+        clientX: mouseEvent.clientX,
+        clientY: mouseEvent.clientY,
+        offsetX: mouseEvent.offsetX,
+        offsetY: mouseEvent.offsetY,
+        pageX: mouseEvent.pageX,
+        pageY: mouseEvent.pageY,
+        screenX: mouseEvent.screenX,
+        screenY: mouseEvent.screenY,
+        ctrlKey: mouseEvent.ctrlKey,
+        shiftKey: mouseEvent.shiftKey,
+        altKey: mouseEvent.altKey,
+        metaKey: mouseEvent.metaKey
+    });
+
+    activateOnauxclick(): void {
+        this.#htmlElement.addEventListener("auxclick", this.#onauxclick);
+    }
+
+    deactivateOnauxclick(): void {
+        this.#htmlElement.removeEventListener("auxclick", this.#onauxclick);
+    }
+
+
+    // Element - contextmenu event
+
+    #oncontextmenu = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeContextMenu", {
+        button: mouseEvent.button,
+        buttons: mouseEvent.buttons,
+        movementX: mouseEvent.movementX,
+        movementY: mouseEvent.movementY,
+        clientX: mouseEvent.clientX,
+        clientY: mouseEvent.clientY,
+        offsetX: mouseEvent.offsetX,
+        offsetY: mouseEvent.offsetY,
+        pageX: mouseEvent.pageX,
+        pageY: mouseEvent.pageY,
+        screenX: mouseEvent.screenX,
+        screenY: mouseEvent.screenY,
+        ctrlKey: mouseEvent.ctrlKey,
+        shiftKey: mouseEvent.shiftKey,
+        altKey: mouseEvent.altKey,
+        metaKey: mouseEvent.metaKey
+    });
+
+    activateOncontextmenu(): void {
+        this.#htmlElement.addEventListener("contextmenu", this.#oncontextmenu);
+    }
+
+    deactivateOncontextmenu(): void {
+        this.#htmlElement.removeEventListener("contextmenu", this.#oncontextmenu);
+    }
+
+
+    // Element - mousedown event
+
+    #onmousedown = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeMouseDown", {
+        button: mouseEvent.button,
+        buttons: mouseEvent.buttons,
+        movementX: mouseEvent.movementX,
+        movementY: mouseEvent.movementY,
+        clientX: mouseEvent.clientX,
+        clientY: mouseEvent.clientY,
+        offsetX: mouseEvent.offsetX,
+        offsetY: mouseEvent.offsetY,
+        pageX: mouseEvent.pageX,
+        pageY: mouseEvent.pageY,
+        screenX: mouseEvent.screenX,
+        screenY: mouseEvent.screenY,
+        ctrlKey: mouseEvent.ctrlKey,
+        shiftKey: mouseEvent.shiftKey,
+        altKey: mouseEvent.altKey,
+        metaKey: mouseEvent.metaKey
+    });
+
+    activateOnmousedown(): void {
+        this.#htmlElement.addEventListener("mousedown", this.#onmousedown);
+    }
+
+    deactivateOnmousedown(): void {
+        this.#htmlElement.removeEventListener("mousedown", this.#onmousedown);
+    }
+
+
+    // Element - mouseup event
+
+    #onmouseup = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeMouseUp", {
+        button: mouseEvent.button,
+        buttons: mouseEvent.buttons,
+        movementX: mouseEvent.movementX,
+        movementY: mouseEvent.movementY,
+        clientX: mouseEvent.clientX,
+        clientY: mouseEvent.clientY,
+        offsetX: mouseEvent.offsetX,
+        offsetY: mouseEvent.offsetY,
+        pageX: mouseEvent.pageX,
+        pageY: mouseEvent.pageY,
+        screenX: mouseEvent.screenX,
+        screenY: mouseEvent.screenY,
+        ctrlKey: mouseEvent.ctrlKey,
+        shiftKey: mouseEvent.shiftKey,
+        altKey: mouseEvent.altKey,
+        metaKey: mouseEvent.metaKey
+    });
+
+    activateOnmouseup(): void {
+        this.#htmlElement.addEventListener("mouseup", this.#onmouseup);
+    }
+
+    deactivateOnmouseup(): void {
+        this.#htmlElement.removeEventListener("mouseup", this.#onmouseup);
+    }
+
+
+    // Element - wheel event
+
+    #onwheel = (wheelEvent: WheelEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeWheel", {
+        deltaX: wheelEvent.deltaX,
+        deltaY: wheelEvent.deltaY,
+        deltaZ: wheelEvent.deltaZ,
+        deltaMode: wheelEvent.deltaMode
+    });
+
+    activateOnwheel(): void {
+        this.#htmlElement.addEventListener("wheel", this.#onwheel, { passive: true });
+    }
+
+    deactivateOnwheel(): void {
+        this.#htmlElement.removeEventListener("wheel", this.#onwheel);
+    }
+
+
+    // Element - mousemove event
+
+    #onmousemove = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeMouseMove", {
+        button: mouseEvent.button,
+        buttons: mouseEvent.buttons,
+        movementX: mouseEvent.movementX,
+        movementY: mouseEvent.movementY,
+        clientX: mouseEvent.clientX,
+        clientY: mouseEvent.clientY,
+        offsetX: mouseEvent.offsetX,
+        offsetY: mouseEvent.offsetY,
+        pageX: mouseEvent.pageX,
+        pageY: mouseEvent.pageY,
+        screenX: mouseEvent.screenX,
+        screenY: mouseEvent.screenY,
+        ctrlKey: mouseEvent.ctrlKey,
+        shiftKey: mouseEvent.shiftKey,
+        altKey: mouseEvent.altKey,
+        metaKey: mouseEvent.metaKey
+    });
+
+    activateOnmousemove(): void {
+        this.#htmlElement.addEventListener("mousemove", this.#onmousemove);
+    }
+
+    deactivateOnmousemove(): void {
+        this.#htmlElement.removeEventListener("mousemove", this.#onmousemove);
+    }
+
+
+    // Element - mouseover event
+
+    #onmouseover = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeMouseOver", {
+        button: mouseEvent.button,
+        buttons: mouseEvent.buttons,
+        movementX: mouseEvent.movementX,
+        movementY: mouseEvent.movementY,
+        clientX: mouseEvent.clientX,
+        clientY: mouseEvent.clientY,
+        offsetX: mouseEvent.offsetX,
+        offsetY: mouseEvent.offsetY,
+        pageX: mouseEvent.pageX,
+        pageY: mouseEvent.pageY,
+        screenX: mouseEvent.screenX,
+        screenY: mouseEvent.screenY,
+        ctrlKey: mouseEvent.ctrlKey,
+        shiftKey: mouseEvent.shiftKey,
+        altKey: mouseEvent.altKey,
+        metaKey: mouseEvent.metaKey
+    });
+
+    activateOnmouseover(): void {
+        this.#htmlElement.addEventListener("mouseover", this.#onmouseover);
+    }
+
+    deactivateOnmouseover(): void {
+        this.#htmlElement.removeEventListener("mouseover", this.#onmouseover);
+    }
+
+
+    // Element - mouseout event
+
+    #onmouseout = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeMouseOut", {
+        button: mouseEvent.button,
+        buttons: mouseEvent.buttons,
+        movementX: mouseEvent.movementX,
+        movementY: mouseEvent.movementY,
+        clientX: mouseEvent.clientX,
+        clientY: mouseEvent.clientY,
+        offsetX: mouseEvent.offsetX,
+        offsetY: mouseEvent.offsetY,
+        pageX: mouseEvent.pageX,
+        pageY: mouseEvent.pageY,
+        screenX: mouseEvent.screenX,
+        screenY: mouseEvent.screenY,
+        ctrlKey: mouseEvent.ctrlKey,
+        shiftKey: mouseEvent.shiftKey,
+        altKey: mouseEvent.altKey,
+        metaKey: mouseEvent.metaKey
+    });
+
+    activateOnmouseout(): void {
+        this.#htmlElement.addEventListener("mouseout", this.#onmouseout);
+    }
+
+    deactivateOnmouseout(): void {
+        this.#htmlElement.removeEventListener("mouseout", this.#onmouseout);
+    }
+
+
+    // Element - mouseenter event
+
+    #onmouseenter = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeMouseEnter", {
+        button: mouseEvent.button,
+        buttons: mouseEvent.buttons,
+        movementX: mouseEvent.movementX,
+        movementY: mouseEvent.movementY,
+        clientX: mouseEvent.clientX,
+        clientY: mouseEvent.clientY,
+        offsetX: mouseEvent.offsetX,
+        offsetY: mouseEvent.offsetY,
+        pageX: mouseEvent.pageX,
+        pageY: mouseEvent.pageY,
+        screenX: mouseEvent.screenX,
+        screenY: mouseEvent.screenY,
+        ctrlKey: mouseEvent.ctrlKey,
+        shiftKey: mouseEvent.shiftKey,
+        altKey: mouseEvent.altKey,
+        metaKey: mouseEvent.metaKey
+    });
+
+    activateOnmouseenter(): void {
+        this.#htmlElement.addEventListener("mouseenter", this.#onmouseenter);
+    }
+
+    deactivateOnmouseenter(): void {
+        this.#htmlElement.removeEventListener("mouseenter", this.#onmouseenter);
+    }
+
+
+    // Element - mouseleave event
+
+    #onmouseleave = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeMouseLeave", {
+        button: mouseEvent.button,
+        buttons: mouseEvent.buttons,
+        movementX: mouseEvent.movementX,
+        movementY: mouseEvent.movementY,
+        clientX: mouseEvent.clientX,
+        clientY: mouseEvent.clientY,
+        offsetX: mouseEvent.offsetX,
+        offsetY: mouseEvent.offsetY,
+        pageX: mouseEvent.pageX,
+        pageY: mouseEvent.pageY,
+        screenX: mouseEvent.screenX,
+        screenY: mouseEvent.screenY,
+        ctrlKey: mouseEvent.ctrlKey,
+        shiftKey: mouseEvent.shiftKey,
+        altKey: mouseEvent.altKey,
+        metaKey: mouseEvent.metaKey
+    });
+
+    activateOnmouseleave(): void {
+        this.#htmlElement.addEventListener("mouseleave", this.#onmouseleave);
+    }
+
+    deactivateOnmouseleave(): void {
+        this.#htmlElement.removeEventListener("mouseleave", this.#onmouseleave);
+    }
+
+
+
+    // Element - touchstart event
+
+    #ontouchstart = (touchEvent: TouchEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTouchStart", {
+        touches: this.#deconstructTouchList(touchEvent.touches),
+        targetTouches: this.#deconstructTouchList(touchEvent.targetTouches),
+        changedTouches: this.#deconstructTouchList(touchEvent.changedTouches),
+        ctrlKey: touchEvent.ctrlKey,
+        shiftKey: touchEvent.shiftKey,
+        altKey: touchEvent.altKey,
+        metaKey: touchEvent.metaKey
+    });
+
+    activateOntouchstart(): void {
+        this.#htmlElement.addEventListener("touchstart", this.#ontouchstart);
+    }
+
+    deactivateOntouchstart(): void {
+        this.#htmlElement.removeEventListener("touchstart", this.#ontouchstart);
+    }
+
+
+    // Element - touchend event
+
+    #ontouchend = (touchEvent: TouchEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTouchEnd", {
+        touches: this.#deconstructTouchList(touchEvent.touches),
+        targetTouches: this.#deconstructTouchList(touchEvent.targetTouches),
+        changedTouches: this.#deconstructTouchList(touchEvent.changedTouches),
+        ctrlKey: touchEvent.ctrlKey,
+        shiftKey: touchEvent.shiftKey,
+        altKey: touchEvent.altKey,
+        metaKey: touchEvent.metaKey
+    });
+
+    activateOntouchend(): void {
+        this.#htmlElement.addEventListener("touchend", this.#ontouchend);
+    }
+
+    deactivateOntouchend(): void {
+        this.#htmlElement.removeEventListener("touchend", this.#ontouchend);
+    }
+
+
+    // Element - touchmove event
+
+    #ontouchmove = (touchEvent: TouchEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTouchMove", {
+        touches: this.#deconstructTouchList(touchEvent.touches),
+        targetTouches: this.#deconstructTouchList(touchEvent.targetTouches),
+        changedTouches: this.#deconstructTouchList(touchEvent.changedTouches),
+        ctrlKey: touchEvent.ctrlKey,
+        shiftKey: touchEvent.shiftKey,
+        altKey: touchEvent.altKey,
+        metaKey: touchEvent.metaKey
+    });
+
+    activateOntouchmove(): void {
+        this.#htmlElement.addEventListener("touchmove", this.#ontouchmove);
+    }
+
+    deactivateOntouchmove(): void {
+        this.#htmlElement.removeEventListener("touchmove", this.#ontouchmove);
+    }
+
+
+    // Element - touchcancel event
+
+    #ontouchcancel = (touchEvent: TouchEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTouchCancel", {
+        touches: this.#deconstructTouchList(touchEvent.touches),
+        targetTouches: this.#deconstructTouchList(touchEvent.targetTouches),
+        changedTouches: this.#deconstructTouchList(touchEvent.changedTouches),
+        ctrlKey: touchEvent.ctrlKey,
+        shiftKey: touchEvent.shiftKey,
+        altKey: touchEvent.altKey,
+        metaKey: touchEvent.metaKey
+    });
+
+    activateOntouchcancel(): void {
+        this.#htmlElement.addEventListener("touchcancel", this.#ontouchcancel);
+    }
+
+    deactivateOntouchcancel(): void {
+        this.#htmlElement.removeEventListener("touchcancel", this.#ontouchcancel);
+    }
+
+
+
+    // Element - pointerdown event
+
+    #onpointerdown = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePointerDown", {
+        pointerId: pointerEvent.pointerId,
+        persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
+        pointerType: pointerEvent.pointerType ?? "",
+        width: pointerEvent.width,
+        height: pointerEvent.height,
+        pressure: pointerEvent.pressure,
+        tangentialPressure: pointerEvent.tangentialPressure,
+        twist: pointerEvent.twist,
+        tiltX: pointerEvent.tiltX,
+        tiltY: pointerEvent.tiltY,
+        altitudeAngle: pointerEvent.altitudeAngle,
+        azimuthAngle: pointerEvent.azimuthAngle,
+        isPrimary: pointerEvent.isPrimary,
+        button: pointerEvent.button,
+        buttons: pointerEvent.buttons,
+        movementX: pointerEvent.movementX,
+        movementY: pointerEvent.movementY,
+        clientX: pointerEvent.clientX,
+        clientY: pointerEvent.clientY,
+        offsetX: pointerEvent.offsetX,
+        offsetY: pointerEvent.offsetY,
+        pageX: pointerEvent.pageX,
+        pageY: pointerEvent.pageY,
+        screenX: pointerEvent.screenX,
+        screenY: pointerEvent.screenY,
+        ctrlKey: pointerEvent.ctrlKey,
+        shiftKey: pointerEvent.shiftKey,
+        altKey: pointerEvent.altKey,
+        metaKey: pointerEvent.metaKey
+    });
+
+    activateOnpointerdown(): void {
+        this.#htmlElement.addEventListener("pointerdown", this.#onpointerdown);
+    }
+
+    deactivateOnpointerdown(): void {
+        this.#htmlElement.removeEventListener("pointerdown", this.#onpointerdown);
+    }
+
+
+    // Element - pointerup event
+
+    #onpointerup = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePointerUp", {
+        pointerId: pointerEvent.pointerId,
+        persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
+        pointerType: pointerEvent.pointerType ?? "",
+        width: pointerEvent.width,
+        height: pointerEvent.height,
+        pressure: pointerEvent.pressure,
+        tangentialPressure: pointerEvent.tangentialPressure,
+        twist: pointerEvent.twist,
+        tiltX: pointerEvent.tiltX,
+        tiltY: pointerEvent.tiltY,
+        altitudeAngle: pointerEvent.altitudeAngle,
+        azimuthAngle: pointerEvent.azimuthAngle,
+        isPrimary: pointerEvent.isPrimary,
+        button: pointerEvent.button,
+        buttons: pointerEvent.buttons,
+        movementX: pointerEvent.movementX,
+        movementY: pointerEvent.movementY,
+        clientX: pointerEvent.clientX,
+        clientY: pointerEvent.clientY,
+        offsetX: pointerEvent.offsetX,
+        offsetY: pointerEvent.offsetY,
+        pageX: pointerEvent.pageX,
+        pageY: pointerEvent.pageY,
+        screenX: pointerEvent.screenX,
+        screenY: pointerEvent.screenY,
+        ctrlKey: pointerEvent.ctrlKey,
+        shiftKey: pointerEvent.shiftKey,
+        altKey: pointerEvent.altKey,
+        metaKey: pointerEvent.metaKey
+    });
+
+    activateOnpointerup(): void {
+        this.#htmlElement.addEventListener("pointerup", this.#onpointerup);
+    }
+
+    deactivateOnpointerup(): void {
+        this.#htmlElement.removeEventListener("pointerup", this.#onpointerup);
+    }
+
+
+    // Element - pointermove event
+
+    #onpointermove = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePointerMove", {
+        pointerId: pointerEvent.pointerId,
+        persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
+        pointerType: pointerEvent.pointerType ?? "",
+        width: pointerEvent.width,
+        height: pointerEvent.height,
+        pressure: pointerEvent.pressure,
+        tangentialPressure: pointerEvent.tangentialPressure,
+        twist: pointerEvent.twist,
+        tiltX: pointerEvent.tiltX,
+        tiltY: pointerEvent.tiltY,
+        altitudeAngle: pointerEvent.altitudeAngle,
+        azimuthAngle: pointerEvent.azimuthAngle,
+        isPrimary: pointerEvent.isPrimary,
+        button: pointerEvent.button,
+        buttons: pointerEvent.buttons,
+        movementX: pointerEvent.movementX,
+        movementY: pointerEvent.movementY,
+        clientX: pointerEvent.clientX,
+        clientY: pointerEvent.clientY,
+        offsetX: pointerEvent.offsetX,
+        offsetY: pointerEvent.offsetY,
+        pageX: pointerEvent.pageX,
+        pageY: pointerEvent.pageY,
+        screenX: pointerEvent.screenX,
+        screenY: pointerEvent.screenY,
+        ctrlKey: pointerEvent.ctrlKey,
+        shiftKey: pointerEvent.shiftKey,
+        altKey: pointerEvent.altKey,
+        metaKey: pointerEvent.metaKey
+    });
+
+    activateOnpointermove(): void {
+        this.#htmlElement.addEventListener("pointermove", this.#onpointermove);
+    }
+
+    deactivateOnpointermove(): void {
+        this.#htmlElement.removeEventListener("pointermove", this.#onpointermove);
+    }
+
+
+    // Element - pointerover event
+
+    #onpointerover = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePointerOver", {
+        pointerId: pointerEvent.pointerId,
+        persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
+        pointerType: pointerEvent.pointerType ?? "",
+        width: pointerEvent.width,
+        height: pointerEvent.height,
+        pressure: pointerEvent.pressure,
+        tangentialPressure: pointerEvent.tangentialPressure,
+        twist: pointerEvent.twist,
+        tiltX: pointerEvent.tiltX,
+        tiltY: pointerEvent.tiltY,
+        altitudeAngle: pointerEvent.altitudeAngle,
+        azimuthAngle: pointerEvent.azimuthAngle,
+        isPrimary: pointerEvent.isPrimary,
+        button: pointerEvent.button,
+        buttons: pointerEvent.buttons,
+        movementX: pointerEvent.movementX,
+        movementY: pointerEvent.movementY,
+        clientX: pointerEvent.clientX,
+        clientY: pointerEvent.clientY,
+        offsetX: pointerEvent.offsetX,
+        offsetY: pointerEvent.offsetY,
+        pageX: pointerEvent.pageX,
+        pageY: pointerEvent.pageY,
+        screenX: pointerEvent.screenX,
+        screenY: pointerEvent.screenY,
+        ctrlKey: pointerEvent.ctrlKey,
+        shiftKey: pointerEvent.shiftKey,
+        altKey: pointerEvent.altKey,
+        metaKey: pointerEvent.metaKey
+    });
+
+    activateOnpointerover(): void {
+        this.#htmlElement.addEventListener("pointerover", this.#onpointerover);
+    }
+
+    deactivateOnpointerover(): void {
+        this.#htmlElement.removeEventListener("pointerover", this.#onpointerover);
+    }
+
+
+    // Element - pointerout event
+
+    #onpointerout = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePointerOut", {
+        pointerId: pointerEvent.pointerId,
+        persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
+        pointerType: pointerEvent.pointerType ?? "",
+        width: pointerEvent.width,
+        height: pointerEvent.height,
+        pressure: pointerEvent.pressure,
+        tangentialPressure: pointerEvent.tangentialPressure,
+        twist: pointerEvent.twist,
+        tiltX: pointerEvent.tiltX,
+        tiltY: pointerEvent.tiltY,
+        altitudeAngle: pointerEvent.altitudeAngle,
+        azimuthAngle: pointerEvent.azimuthAngle,
+        isPrimary: pointerEvent.isPrimary,
+        button: pointerEvent.button,
+        buttons: pointerEvent.buttons,
+        movementX: pointerEvent.movementX,
+        movementY: pointerEvent.movementY,
+        clientX: pointerEvent.clientX,
+        clientY: pointerEvent.clientY,
+        offsetX: pointerEvent.offsetX,
+        offsetY: pointerEvent.offsetY,
+        pageX: pointerEvent.pageX,
+        pageY: pointerEvent.pageY,
+        screenX: pointerEvent.screenX,
+        screenY: pointerEvent.screenY,
+        ctrlKey: pointerEvent.ctrlKey,
+        shiftKey: pointerEvent.shiftKey,
+        altKey: pointerEvent.altKey,
+        metaKey: pointerEvent.metaKey
+    });
+
+    activateOnpointerout(): void {
+        this.#htmlElement.addEventListener("pointerout", this.#onpointerout);
+    }
+
+    deactivateOnpointerout(): void {
+        this.#htmlElement.removeEventListener("pointerout", this.#onpointerout);
+    }
+
+
+    // Element - pointerenter event
+
+    #onpointerenter = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePointerEnter", {
+        pointerId: pointerEvent.pointerId,
+        persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
+        pointerType: pointerEvent.pointerType ?? "",
+        width: pointerEvent.width,
+        height: pointerEvent.height,
+        pressure: pointerEvent.pressure,
+        tangentialPressure: pointerEvent.tangentialPressure,
+        twist: pointerEvent.twist,
+        tiltX: pointerEvent.tiltX,
+        tiltY: pointerEvent.tiltY,
+        altitudeAngle: pointerEvent.altitudeAngle,
+        azimuthAngle: pointerEvent.azimuthAngle,
+        isPrimary: pointerEvent.isPrimary,
+        button: pointerEvent.button,
+        buttons: pointerEvent.buttons,
+        movementX: pointerEvent.movementX,
+        movementY: pointerEvent.movementY,
+        clientX: pointerEvent.clientX,
+        clientY: pointerEvent.clientY,
+        offsetX: pointerEvent.offsetX,
+        offsetY: pointerEvent.offsetY,
+        pageX: pointerEvent.pageX,
+        pageY: pointerEvent.pageY,
+        screenX: pointerEvent.screenX,
+        screenY: pointerEvent.screenY,
+        ctrlKey: pointerEvent.ctrlKey,
+        shiftKey: pointerEvent.shiftKey,
+        altKey: pointerEvent.altKey,
+        metaKey: pointerEvent.metaKey
+    });
+
+    activateOnpointerenter(): void {
+        this.#htmlElement.addEventListener("pointerenter", this.#onpointerenter);
+    }
+
+    deactivateOnpointerenter(): void {
+        this.#htmlElement.removeEventListener("pointerenter", this.#onpointerenter);
+    }
+
+
+    // Element - pointerleave event
+
+    #onpointerleave = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePointerLeave", {
+        pointerId: pointerEvent.pointerId,
+        persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
+        pointerType: pointerEvent.pointerType ?? "",
+        width: pointerEvent.width,
+        height: pointerEvent.height,
+        pressure: pointerEvent.pressure,
+        tangentialPressure: pointerEvent.tangentialPressure,
+        twist: pointerEvent.twist,
+        tiltX: pointerEvent.tiltX,
+        tiltY: pointerEvent.tiltY,
+        altitudeAngle: pointerEvent.altitudeAngle,
+        azimuthAngle: pointerEvent.azimuthAngle,
+        isPrimary: pointerEvent.isPrimary,
+        button: pointerEvent.button,
+        buttons: pointerEvent.buttons,
+        movementX: pointerEvent.movementX,
+        movementY: pointerEvent.movementY,
+        clientX: pointerEvent.clientX,
+        clientY: pointerEvent.clientY,
+        offsetX: pointerEvent.offsetX,
+        offsetY: pointerEvent.offsetY,
+        pageX: pointerEvent.pageX,
+        pageY: pointerEvent.pageY,
+        screenX: pointerEvent.screenX,
+        screenY: pointerEvent.screenY,
+        ctrlKey: pointerEvent.ctrlKey,
+        shiftKey: pointerEvent.shiftKey,
+        altKey: pointerEvent.altKey,
+        metaKey: pointerEvent.metaKey
+    });
+
+    activateOnpointerleave(): void {
+        this.#htmlElement.addEventListener("pointerleave", this.#onpointerleave);
+    }
+
+    deactivateOnpointerleave(): void {
+        this.#htmlElement.removeEventListener("pointerleave", this.#onpointerleave);
+    }
+
+
+    // Element - pointercancel event
+
+    #onpointercancel = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePointerCancel", {
+        pointerId: pointerEvent.pointerId,
+        persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
+        pointerType: pointerEvent.pointerType ?? "",
+        width: pointerEvent.width,
+        height: pointerEvent.height,
+        pressure: pointerEvent.pressure,
+        tangentialPressure: pointerEvent.tangentialPressure,
+        twist: pointerEvent.twist,
+        tiltX: pointerEvent.tiltX,
+        tiltY: pointerEvent.tiltY,
+        altitudeAngle: pointerEvent.altitudeAngle,
+        azimuthAngle: pointerEvent.azimuthAngle,
+        isPrimary: pointerEvent.isPrimary,
+        button: pointerEvent.button,
+        buttons: pointerEvent.buttons,
+        movementX: pointerEvent.movementX,
+        movementY: pointerEvent.movementY,
+        clientX: pointerEvent.clientX,
+        clientY: pointerEvent.clientY,
+        offsetX: pointerEvent.offsetX,
+        offsetY: pointerEvent.offsetY,
+        pageX: pointerEvent.pageX,
+        pageY: pointerEvent.pageY,
+        screenX: pointerEvent.screenX,
+        screenY: pointerEvent.screenY,
+        ctrlKey: pointerEvent.ctrlKey,
+        shiftKey: pointerEvent.shiftKey,
+        altKey: pointerEvent.altKey,
+        metaKey: pointerEvent.metaKey
+    });
+
+    activateOnpointercancel(): void {
+        this.#htmlElement.addEventListener("pointercancel", this.#onpointercancel);
+    }
+
+    deactivateOnpointercancel(): void {
+        this.#htmlElement.removeEventListener("pointercancel", this.#onpointercancel);
+    }
+
+
+    // Element - pointerrawupdate event
+
+    #onpointerrawupdate = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePointerRawUpdate", {
+        pointerId: pointerEvent.pointerId,
+        persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
+        pointerType: pointerEvent.pointerType ?? "",
+        width: pointerEvent.width,
+        height: pointerEvent.height,
+        pressure: pointerEvent.pressure,
+        tangentialPressure: pointerEvent.tangentialPressure,
+        twist: pointerEvent.twist,
+        tiltX: pointerEvent.tiltX,
+        tiltY: pointerEvent.tiltY,
+        altitudeAngle: pointerEvent.altitudeAngle,
+        azimuthAngle: pointerEvent.azimuthAngle,
+        isPrimary: pointerEvent.isPrimary,
+        button: pointerEvent.button,
+        buttons: pointerEvent.buttons,
+        movementX: pointerEvent.movementX,
+        movementY: pointerEvent.movementY,
+        clientX: pointerEvent.clientX,
+        clientY: pointerEvent.clientY,
+        offsetX: pointerEvent.offsetX,
+        offsetY: pointerEvent.offsetY,
+        pageX: pointerEvent.pageX,
+        pageY: pointerEvent.pageY,
+        screenX: pointerEvent.screenX,
+        screenY: pointerEvent.screenY,
+        ctrlKey: pointerEvent.ctrlKey,
+        shiftKey: pointerEvent.shiftKey,
+        altKey: pointerEvent.altKey,
+        metaKey: pointerEvent.metaKey
+    });
+
+    activateOnpointerrawupdate(): void {
+        this.#htmlElement.addEventListener("pointerrawupdate", this.#onpointerrawupdate);
+    }
+
+    deactivateOnpointerrawupdate(): void {
+        this.#htmlElement.removeEventListener("pointerrawupdate", this.#onpointerrawupdate);
+    }
+
+
+    // Element - gotpointercapture event
+
+    #ongotpointercapture = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeGotPointerCapture", {
+        pointerId: pointerEvent.pointerId,
+        persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
+        pointerType: pointerEvent.pointerType ?? "",
+        width: pointerEvent.width,
+        height: pointerEvent.height,
+        pressure: pointerEvent.pressure,
+        tangentialPressure: pointerEvent.tangentialPressure,
+        twist: pointerEvent.twist,
+        tiltX: pointerEvent.tiltX,
+        tiltY: pointerEvent.tiltY,
+        altitudeAngle: pointerEvent.altitudeAngle,
+        azimuthAngle: pointerEvent.azimuthAngle,
+        isPrimary: pointerEvent.isPrimary,
+        button: pointerEvent.button,
+        buttons: pointerEvent.buttons,
+        movementX: pointerEvent.movementX,
+        movementY: pointerEvent.movementY,
+        clientX: pointerEvent.clientX,
+        clientY: pointerEvent.clientY,
+        offsetX: pointerEvent.offsetX,
+        offsetY: pointerEvent.offsetY,
+        pageX: pointerEvent.pageX,
+        pageY: pointerEvent.pageY,
+        screenX: pointerEvent.screenX,
+        screenY: pointerEvent.screenY,
+        ctrlKey: pointerEvent.ctrlKey,
+        shiftKey: pointerEvent.shiftKey,
+        altKey: pointerEvent.altKey,
+        metaKey: pointerEvent.metaKey
+    });
+
+    activateOngotpointercapture(): void {
+        this.#htmlElement.addEventListener("gotpointercapture", this.#ongotpointercapture);
+    }
+
+    deactivateOngotpointercapture(): void {
+        this.#htmlElement.removeEventListener("gotpointercapture", this.#ongotpointercapture);
+    }
+
+
+    // Element - lostpointercapture event
+
+    #onlostpointercapture = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeLostPointerCapture", {
+        pointerId: pointerEvent.pointerId,
+        persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
+        pointerType: pointerEvent.pointerType ?? "",
+        width: pointerEvent.width,
+        height: pointerEvent.height,
+        pressure: pointerEvent.pressure,
+        tangentialPressure: pointerEvent.tangentialPressure,
+        twist: pointerEvent.twist,
+        tiltX: pointerEvent.tiltX,
+        tiltY: pointerEvent.tiltY,
+        altitudeAngle: pointerEvent.altitudeAngle,
+        azimuthAngle: pointerEvent.azimuthAngle,
+        isPrimary: pointerEvent.isPrimary,
+        button: pointerEvent.button,
+        buttons: pointerEvent.buttons,
+        movementX: pointerEvent.movementX,
+        movementY: pointerEvent.movementY,
+        clientX: pointerEvent.clientX,
+        clientY: pointerEvent.clientY,
+        offsetX: pointerEvent.offsetX,
+        offsetY: pointerEvent.offsetY,
+        pageX: pointerEvent.pageX,
+        pageY: pointerEvent.pageY,
+        screenX: pointerEvent.screenX,
+        screenY: pointerEvent.screenY,
+        ctrlKey: pointerEvent.ctrlKey,
+        shiftKey: pointerEvent.shiftKey,
+        altKey: pointerEvent.altKey,
+        metaKey: pointerEvent.metaKey
+    });
+
+    activateOnlostpointercapture(): void {
+        this.#htmlElement.addEventListener("lostpointercapture", this.#onlostpointercapture);
+    }
+
+    deactivateOnlostpointercapture(): void {
+        this.#htmlElement.removeEventListener("lostpointercapture", this.#onlostpointercapture);
+    }
+
+
+
+    // Element - scroll event
+
+    #onscroll = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeScroll");
+
+    activateOnscroll(): void {
+        this.#htmlElement.addEventListener("scroll", this.#onscroll);
+    }
+
+    deactivateOnscroll(): void {
+        this.#htmlElement.removeEventListener("scroll", this.#onscroll);
+    }
+
+
+    // Element - scrollend event
+
+    #onscrollend = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeScrollEnd");
+
+    activateOnscrollend(): void {
+        this.#htmlElement.addEventListener("scrollend", this.#onscrollend);
+    }
+
+    deactivateOnscrollend(): void {
+        this.#htmlElement.removeEventListener("scrollend", this.#onscrollend);
+    }
+
+
+
+    // Element - focus event
+
+    #onfocus = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeFocus");
+
+    activateOnfocus(): void {
+        this.#htmlElement.addEventListener("focus", this.#onfocus);
+    }
+
+    deactivateOnfocus(): void {
+        this.#htmlElement.removeEventListener("focus", this.#onfocus);
+    }
+
+
+    // Element - focusin event
+
+    #onfocusin = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeFocusIn");
+
+    activateOnfocusin(): void {
+        this.#htmlElement.addEventListener("focusin", this.#onfocusin);
+    }
+
+    deactivateOnfocusin(): void {
+        this.#htmlElement.removeEventListener("focusin", this.#onfocusin);
+    }
+
+
+    // Element - blur event
+
+    #onblur = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeBlur");
+
+    activateOnblur(): void {
+        this.#htmlElement.addEventListener("blur", this.#onblur);
+    }
+
+    deactivateOnblur(): void {
+        this.#htmlElement.removeEventListener("blur", this.#onblur);
+    }
+
+
+    // Element - focusout event
+
+    #onfocusout = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeFocusOut");
+
+    activateOnfocusout(): void {
+        this.#htmlElement.addEventListener("focusout", this.#onfocusout);
+    }
+
+    deactivateOnfocusout(): void {
+        this.#htmlElement.removeEventListener("focusout", this.#onfocusout);
+    }
+
+
+
+    // Element - copy event
+
+    #oncopy = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCopy");
+
+    activateOncopy(): void {
+        this.#htmlElement.addEventListener("copy", this.#oncopy);
+    }
+
+    deactivateOncopy(): void {
+        this.#htmlElement.removeEventListener("copy", this.#oncopy);
+    }
+
+
+    // Element - paste event
+
+    #onpaste = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePaste");
+
+    activateOnpaste(): void {
+        this.#htmlElement.addEventListener("paste", this.#onpaste);
+    }
+
+    deactivateOnpaste(): void {
+        this.#htmlElement.removeEventListener("paste", this.#onpaste);
+    }
+
+
+    // Element - cut event
+
+    #oncut = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCut");
+
+    activateOncut(): void {
+        this.#htmlElement.addEventListener("cut", this.#oncut);
+    }
+
+    deactivateOncut(): void {
+        this.#htmlElement.removeEventListener("cut", this.#oncut);
+    }
+
+
+
     // Element - transitionstart event
 
     #ontransitionstart = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionStart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
@@ -1455,5 +2651,32 @@ export class HTMLElementAPI {
 
     deactivateOnanimationcancel(): void {
         this.#htmlElement.removeEventListener("animationcancel", this.#onanimationcancel);
+    }
+
+
+
+    // Element - fullscreenchange event
+
+    #onfullscreenchange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeFullscreenChange");
+
+    activateOnfullscreenchange(): void {
+        this.#htmlElement.addEventListener("fullscreenchange", this.#onfullscreenchange);
+    }
+
+    deactivateOnfullscreenchange(): void {
+        this.#htmlElement.removeEventListener("fullscreenchange", this.#onfullscreenchange);
+    }
+
+
+    // Element - fullscreenerror event
+
+    #onfullscreenerror = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeFullscreenError");
+
+    activateOnfullscreenerror(): void {
+        this.#htmlElement.addEventListener("fullscreenerror", this.#onfullscreenerror);
+    }
+
+    deactivateOnfullscreenerror(): void {
+        this.#htmlElement.removeEventListener("fullscreenerror", this.#onfullscreenerror);
     }
 }

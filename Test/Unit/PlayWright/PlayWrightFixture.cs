@@ -67,7 +67,7 @@ public sealed class PlayWrightFixture : IAsyncInitializer, IAsyncDisposable {
 
 
     private async Task<IBrowserContext> NewBrowserContext(IBrowser browser) {
-        IBrowserContext browserContext = await browser.NewContextAsync(new BrowserNewContextOptions() { BaseURL = BASE_URL });
+        IBrowserContext browserContext = await browser.NewContextAsync(new BrowserNewContextOptions() { BaseURL = BASE_URL, HasTouch = true });
 
         await browserContext.RouteAsync($"{BASE_URL}/**", async (IRoute route) => {
             using HttpRequestMessage requestMessage = CreateRequestMessage(route);
