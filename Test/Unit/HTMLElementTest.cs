@@ -1601,7 +1601,7 @@ public sealed class HTMLElementTest(PlayWrightFixture playWrightFixture) : PlayW
 
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_SLOT_METHOD);
 
-        string? result = await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.slot;");
+        string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(HTMLElementGroup.TEST_SLOT);
     }
 
@@ -1611,6 +1611,31 @@ public sealed class HTMLElementTest(PlayWrightFixture playWrightFixture) : PlayW
 
         string result = await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.slot;");
         await Assert.That(result).IsEqualTo(HTMLElementGroup.TEST_SLOT);
+    }
+
+
+    [Test]
+    public async Task GetTextContent_Property() {
+        await ExecuteTest(HTMLElementGroup.BUTTON_GET_TEXT_CONTENT_PROPERTY);
+
+        string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("\n            test bold italic underlined");
+    }
+
+    [Test]
+    public async Task GetTextContent_Method() {
+        await ExecuteTest(HTMLElementGroup.BUTTON_GET_TEXT_CONTENT_METHOD);
+
+        string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("\n            test bold italic underlined");
+    }
+
+    [Test]
+    public async Task SetTextContent() {
+        await ExecuteTest(HTMLElementGroup.BUTTON_SET_TEXT_CONTENT);
+
+        string result = await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync<string>("node => node.textContent;");
+        await Assert.That(result).IsEqualTo(HTMLElementGroup.TEST_TEXT_CONTENT);
     }
 
 

@@ -1326,6 +1326,33 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
 
 
     /// <summary>
+    /// <para>Represents the text content of the node and its descendants.</para>
+    /// <para>
+    /// Its value depends on the situation:<br />
+    /// - If the node is a document or a doctype, textContent returns null. (Note: To get all of the text and CDATA data for the whole document, use document.documentElement.textContent.)<br />
+    /// - If the node is a CDATA section, a comment, a processing instruction, or a text node, textContent returns, or sets, the text inside the node, i.e., the Node.nodeValue.<br />
+    /// - For other node types, textContent returns the concatenation of the textContent of every child node, excluding comments and processing instructions. (This is an empty string if the node has no children.)
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// Note: textContent and HTMLElement.innerText are easily confused, but the two properties are different in important ways.<br />
+    /// Warning: Setting textContent on a node removes all of the node's children and replaces them with a single text node with the given string value.
+    /// </remarks>
+    public ValueTask<string> TextContent => GetTextContent(default);
+
+    /// <inheritdoc cref="TextContent" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetTextContent(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<string>("getTextContent", cancellationToken);
+
+    /// <inheritdoc cref="TextContent" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetTextContent(string value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setTextContent", cancellationToken, [value]);
+
+
+    /// <summary>
     /// The local part of the qualified name of an element.
     /// </summary>
     public ValueTask<string> LocalName => GetLocalName(default);

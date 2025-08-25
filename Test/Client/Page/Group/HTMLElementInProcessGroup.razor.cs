@@ -39,6 +39,7 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
     public const int TEST_SCROLL_BY_X = 9;
     public const int TEST_SCROLL_BY_Y = 11;
     public const string TEST_SLOT = "ChildContent";
+    public const string TEST_TEXT_CONTENT = "text content test";
     // Element - ARIA
     public const string TEST_ARIA_ATOMIC = "true";
     public const string TEST_ARIA_AUTO_COMPLETE = "list";
@@ -892,6 +893,18 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
     public const string BUTTON_SET_SLOT = "htmlelement-inprocess-set-slot";
     private void SetSlot() {
         HTMLElement.Slot = TEST_SLOT;
+    }
+
+
+    public const string BUTTON_GET_TEXT_CONTENT = "htmlelement-inprocess-get-text-content";
+    private void GetTextContent() {
+        string textContent = HTMLElement.TextContent;
+        labelOutput = textContent;
+    }
+
+    public const string BUTTON_SET_TEXT_CONTENT = "htmlelement-inprocess-set-text-content";
+    private void SetTextContent() {
+        HTMLElement.TextContent = TEST_TEXT_CONTENT;
     }
 
 

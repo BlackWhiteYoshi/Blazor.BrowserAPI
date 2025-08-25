@@ -416,6 +416,16 @@ export class HTMLElementAPI {
     }
 
 
+    getTextContent(): string {
+        // textContent of HTMLElements are always not null
+        return <string>this.#htmlElement.textContent;
+    }
+
+    setTextContent(value: string): void {
+        this.#htmlElement.textContent = value;
+    }
+
+
     getLocalName(): string {
         return this.#htmlElement.localName;
     }

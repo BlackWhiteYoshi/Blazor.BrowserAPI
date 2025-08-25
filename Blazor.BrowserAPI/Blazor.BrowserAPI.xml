@@ -4704,6 +4704,32 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="P:BrowserAPI.Implementation.HTMLElement.TextContent">
+            <summary>
+            <para>Represents the text content of the node and its descendants.</para>
+            <para>
+            Its value depends on the situation:<br />
+            - If the node is a document or a doctype, textContent returns null. (Note: To get all of the text and CDATA data for the whole document, use document.documentElement.textContent.)<br />
+            - If the node is a CDATA section, a comment, a processing instruction, or a text node, textContent returns, or sets, the text inside the node, i.e., the Node.nodeValue.<br />
+            - For other node types, textContent returns the concatenation of the textContent of every child node, excluding comments and processing instructions. (This is an empty string if the node has no children.)
+            </para>
+            </summary>
+            <remarks>
+            Note: textContent and HTMLElement.innerText are easily confused, but the two properties are different in important ways.<br />
+            Warning: Setting textContent on a node removes all of the node's children and replaces them with a single text node with the given string value.
+            </remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLElement.GetTextContent(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.HTMLElement.TextContent" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLElement.SetTextContent(System.String,System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.HTMLElement.TextContent" />
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="P:BrowserAPI.Implementation.HTMLElement.LocalName">
             <summary>
             The local part of the qualified name of an element.
@@ -7983,6 +8009,21 @@
             Returns the name of the shadow DOM slot the element is inserted in.<br />
             A slot is a placeholder inside a web component that users can fill with their own markup (see Using templates and slots for more information).
             </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLElementInProcess.TextContent">
+            <summary>
+            <para>Represents the text content of the node and its descendants.</para>
+            <para>
+            Its value depends on the situation:<br />
+            - If the node is a document or a doctype, textContent returns null. (Note: To get all of the text and CDATA data for the whole document, use document.documentElement.textContent.)<br />
+            - If the node is a CDATA section, a comment, a processing instruction, or a text node, textContent returns, or sets, the text inside the node, i.e., the Node.nodeValue.<br />
+            - For other node types, textContent returns the concatenation of the textContent of every child node, excluding comments and processing instructions. (This is an empty string if the node has no children.)
+            </para>
+            </summary>
+            <remarks>
+            Note: textContent and HTMLElement.innerText are easily confused, but the two properties are different in important ways.<br />
+            Warning: Setting textContent on a node removes all of the node's children and replaces them with a single text node with the given string value.
+            </remarks>
         </member>
         <member name="P:BrowserAPI.Implementation.HTMLElementInProcess.LocalName">
             <summary>
@@ -21318,6 +21359,32 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="P:BrowserAPI.IHTMLElement.TextContent">
+            <summary>
+            <para>Represents the text content of the node and its descendants.</para>
+            <para>
+            Its value depends on the situation:<br />
+            - If the node is a document or a doctype, textContent returns null. (Note: To get all of the text and CDATA data for the whole document, use document.documentElement.textContent.)<br />
+            - If the node is a CDATA section, a comment, a processing instruction, or a text node, textContent returns, or sets, the text inside the node, i.e., the Node.nodeValue.<br />
+            - For other node types, textContent returns the concatenation of the textContent of every child node, excluding comments and processing instructions. (This is an empty string if the node has no children.)
+            </para>
+            </summary>
+            <remarks>
+            Note: textContent and HTMLElement.innerText are easily confused, but the two properties are different in important ways.<br />
+            Warning: Setting textContent on a node removes all of the node's children and replaces them with a single text node with the given string value.
+            </remarks>
+        </member>
+        <member name="M:BrowserAPI.IHTMLElement.GetTextContent(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IHTMLElement.TextContent" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLElement.SetTextContent(System.String,System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IHTMLElement.TextContent" />
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="P:BrowserAPI.IHTMLElement.LocalName">
             <summary>
             The local part of the qualified name of an element.
@@ -25384,6 +25451,21 @@
             Returns the name of the shadow DOM slot the element is inserted in.<br />
             A slot is a placeholder inside a web component that users can fill with their own markup (see Using templates and slots for more information).
             </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLElementInProcess.TextContent">
+            <summary>
+            <para>Represents the text content of the node and its descendants.</para>
+            <para>
+            Its value depends on the situation:<br />
+            - If the node is a document or a doctype, textContent returns null. (Note: To get all of the text and CDATA data for the whole document, use document.documentElement.textContent.)<br />
+            - If the node is a CDATA section, a comment, a processing instruction, or a text node, textContent returns, or sets, the text inside the node, i.e., the Node.nodeValue.<br />
+            - For other node types, textContent returns the concatenation of the textContent of every child node, excluding comments and processing instructions. (This is an empty string if the node has no children.)
+            </para>
+            </summary>
+            <remarks>
+            Note: textContent and HTMLElement.innerText are easily confused, but the two properties are different in important ways.<br />
+            Warning: Setting textContent on a node removes all of the node's children and replaces them with a single text node with the given string value.
+            </remarks>
         </member>
         <member name="P:BrowserAPI.IHTMLElementInProcess.LocalName">
             <summary>

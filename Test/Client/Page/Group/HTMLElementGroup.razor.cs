@@ -40,6 +40,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     public const int TEST_SCROLL_BY_X = 9;
     public const int TEST_SCROLL_BY_Y = 11;
     public const string TEST_SLOT = "ChildContent";
+    public const string TEST_TEXT_CONTENT = "text content test";
     // Element - ARIA
     public const string TEST_ARIA_ATOMIC = "true";
     public const string TEST_ARIA_AUTO_COMPLETE = "list";
@@ -1191,6 +1192,24 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     public const string BUTTON_SET_SLOT = "htmlelement-set-slot";
     private async Task SetSlot() {
         await HTMLElement.SetSlot(TEST_SLOT);
+    }
+
+
+    public const string BUTTON_GET_TEXT_CONTENT_PROPERTY = "htmlelement-get-text-content-property";
+    private async Task GetTextContent_Property() {
+        string textContent = await HTMLElement.TextContent;
+        labelOutput = textContent;
+    }
+
+    public const string BUTTON_GET_TEXT_CONTENT_METHOD = "htmlelement-get-text-content-method";
+    private async Task GetTextContent_Method() {
+        string textContent = await HTMLElement.GetTextContent(default);
+        labelOutput = textContent;
+    }
+
+    public const string BUTTON_SET_TEXT_CONTENT = "htmlelement-set-text-content";
+    private async Task SetTextContent() {
+        await HTMLElement.SetTextContent(TEST_TEXT_CONTENT);
     }
 
 
