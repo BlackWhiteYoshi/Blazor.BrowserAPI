@@ -3,6 +3,9 @@ import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
 
 export class HTMLElementAPI {
     #htmlElement: HTMLElement;
+    get htmlElement(): HTMLElement {
+        return this.#htmlElement;
+    }
 
     constructor(htmlElement: HTMLElement) {
         this.#htmlElement = htmlElement;

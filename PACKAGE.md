@@ -15,6 +15,7 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - Console
 - CookieStorage
 - Dialog
+- Document
 - Download
 - FileSystem
 - GamepadAPI

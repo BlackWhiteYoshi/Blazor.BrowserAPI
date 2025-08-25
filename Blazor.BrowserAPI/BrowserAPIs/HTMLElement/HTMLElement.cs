@@ -2913,7 +2913,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IHTMLElement?> QuerySelector(string selectors, CancellationToken cancellationToken = default) {
-        IJSObjectReference?[] singleReference = await (await htmlElementTask).InvokeTrySync<IJSObjectReference[]>("querySelector", cancellationToken, [selectors]);
+        IJSObjectReference?[] singleReference = await (await htmlElementTask).InvokeTrySync<IJSObjectReference?[]>("querySelector", cancellationToken, [selectors]);
         if (singleReference[0] is IJSObjectReference htmlElement)
             return new HTMLElement(Task.FromResult(htmlElement));
         else

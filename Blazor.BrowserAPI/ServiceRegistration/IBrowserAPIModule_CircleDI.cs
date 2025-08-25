@@ -13,6 +13,8 @@
 [Scoped<BrowserAPI.IConsoleInProcess, BrowserAPI.Implementation.ConsoleInProcess>]
 [Scoped<BrowserAPI.ICookieStorage, BrowserAPI.Implementation.CookieStorage>]
 [Scoped<BrowserAPI.ICookieStorageInProcess, BrowserAPI.Implementation.CookieStorageInProcess>]
+[Scoped<BrowserAPI.IDocument, BrowserAPI.Implementation.Document>]
+[Scoped<BrowserAPI.IDocumentInProcess, BrowserAPI.Implementation.DocumentInProcess>]
 [Scoped<BrowserAPI.IDownload, BrowserAPI.Implementation.Download>]
 [Scoped<BrowserAPI.IElementFactory, BrowserAPI.Implementation.ElementFactory>]
 [Scoped<BrowserAPI.IElementFactoryInProcess, BrowserAPI.Implementation.ElementFactoryInProcess>]

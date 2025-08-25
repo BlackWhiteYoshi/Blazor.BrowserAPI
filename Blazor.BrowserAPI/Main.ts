@@ -10,6 +10,9 @@ export { CookieStorageAPI };
 import { DialogAPI } from "./BrowserAPIs/Dialog/Dialog";
 export { DialogAPI };
 
+import { DocumentAPI } from "./BrowserAPIs/Document/Document";
+export { DocumentAPI }
+
 import { DownloadAPI } from "./BrowserAPIs/Download/Download";
 export { DownloadAPI };
 

@@ -13,6 +13,7 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - [Console](Blazor.BrowserAPI/BrowserAPIs/Console/Console.md)
 - [CookieStorage](Blazor.BrowserAPI/BrowserAPIs/CookieStorage/CookieStorage.md)
 - [Dialog](Blazor.BrowserAPI/BrowserAPIs/Dialog/Dialog.md)
+- [Document](Blazor.BrowserAPI/BrowserAPIs/Document/Document.md)
 - [Download](Blazor.BrowserAPI/BrowserAPIs/Download/Download.md)
 - [FileSystem](Blazor.BrowserAPI/BrowserAPIs/FileSystem/FileSystem.md)
 - [GamepadAPI](Blazor.BrowserAPI/BrowserAPIs/GamepadAPI/GamepadAPI.md)

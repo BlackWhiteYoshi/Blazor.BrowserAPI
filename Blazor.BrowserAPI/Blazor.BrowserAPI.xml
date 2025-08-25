@@ -976,6 +976,742 @@
             <param name="htmlMediaElement">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">&lt;video&gt;</see> or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">&lt;audio&gt;</see> html tag.</param>
             <returns>An object that can be used to interact with the given <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">&lt;video&gt;</see> or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">&lt;audio&gt;</see> element.</returns>
         </member>
+        <member name="T:BrowserAPI.Implementation.Document">
+            <summary>
+            <para>Represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
+            <para>
+            The DOM tree includes elements such as &lt;body&gt; and &lt;table&gt;, among many others.
+            It provides functionality globally to the document, like how to obtain the page's URL and create new elements in the document.
+            </para>
+            <para>
+            The Document interface describes the common properties and methods for any kind of document.
+            Depending on the document's type (e.g., HTML, XML, SVG, …), a larger API is available:
+            HTML documents, served with the "text/html" content type, also implement the HTMLDocument interface,
+            whereas XML and SVG documents implement the XMLDocument interface.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            <para>Represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
+            <para>
+            The DOM tree includes elements such as &lt;body&gt; and &lt;table&gt;, among many others.
+            It provides functionality globally to the document, like how to obtain the page's URL and create new elements in the document.
+            </para>
+            <para>
+            The Document interface describes the common properties and methods for any kind of document.
+            Depending on the document's type (e.g., HTML, XML, SVG, …), a larger API is available:
+            HTML documents, served with the "text/html" content type, also implement the HTMLDocument interface,
+            whereas XML and SVG documents implement the XMLDocument interface.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.DocumentElement">
+            <summary>
+            Returns the Element that is the root element of the document (for example, the &lt;html&gt; element for HTML documents).
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.Head">
+            <summary>
+            Returns the &lt;head&gt; element of the current document.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.Body">
+            <summary>
+            Represents the &lt;body&gt; or &lt;frameset&gt; node of the current document, or null if no such element exists.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.SetBody(BrowserAPI.IHTMLElement,System.Threading.CancellationToken)">
+            <summary>
+            Represents the &lt;body&gt; or &lt;frameset&gt; node of the current document, or null if no such element exists.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.ScrollingElement">
+            <summary>
+            <para>Returns a reference to the Element that scrolls the document. In standards mode, this is the root element of the document, <see cref="P:BrowserAPI.Implementation.Document.DocumentElement"/>.</para>
+            <para>
+            When in quirks mode, the scrollingElement attribute returns the HTML body element if it exists and is not potentially scrollable, otherwise it returns null.
+            This may look surprising but is true according to both the specification and browsers.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.Embeds">
+            <summary>
+            Returns a list of the embedded &lt;embed&gt; elements within the current document.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetEmbeds(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.Embeds" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.Forms">
+            <summary>
+            Returns an HTMLCollection listing all the &lt;form&gt; elements contained in the document.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetForms(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.Forms" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.Images">
+            <summary>
+            Returns a collection of the images in the current HTML document.
+            Each entry in the collection is an HTMLImageElement &lt;img&gt; representing a single image element.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetImages(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.Images" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.Links">
+            <summary>
+            Returns a collection of all &lt;area&gt; elements and &lt;a&gt; elements in a document with a value for the href attribute.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetLinks(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.Links" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.Plugins">
+            <summary>
+            Returns an HTMLCollection object containing one or more HTMLEmbedElements representing the &lt;embed&gt; elements in the current document.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetPlugins(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.Plugins" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.Scripts">
+            <summary>
+            Returns a list of the &lt;script&gt; elements in the document.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetScripts(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.Scripts" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.ActiveElement">
+            <summary>
+            <para>Returns the Element within the DOM that is receiving keyboard events such as keydown and keyup. This is usually analogous to the focused element.</para>
+            <para>
+            Which elements are focusable varies depending on the platform and the browser's current configuration.
+            For example, on Safari, following the behavior of macOS, elements that aren't text input elements are not focusable by default, unless the "Full Keyboard Access" setting is enabled in System Preferences.
+            </para>
+            <para>
+            Typically a user can press the Tab key to move the focus around the page among focusable elements,
+            and use keyboard gestures such as Space or Enter to simulate clicks on the focused element.
+            </para>
+            </summary>
+            <remarks>
+            Note: Focus (which element is receiving user input events) is not the same thing as selection (the currently highlighted part of the document).
+            You can get the current selection using window.getSelection().
+            </remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetActiveElement(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.ActiveElement" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.CurrentScript">
+            <summary>
+            <para>Returns the &lt;script&gt; element whose script is currently being processed and isn't a JavaScript module. (For modules use import.meta instead.)</para>
+            <para>
+            It's important to note that this will not reference the &lt;script&gt; element if the code in the script is being called as a callback or event handler;
+            it will only reference the element while it's initially being processed.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetCurrentScript(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.CurrentScript" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.FullscreenElement">
+            <summary>
+            <para>Returns the Element that is currently being presented in fullscreen mode in this document, or null if fullscreen mode is not currently in use.</para>
+            <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and it will be ignored.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetFullscreenElement(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.FullscreenElement" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.PictureInPictureElement">
+            <summary>
+            <para>Returns the Element that is currently being presented in picture-in-picture mode in this document, or null if picture-in-picture mode is not currently in use.</para>
+            <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and will be ignored.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetPictureInPictureElement(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.PictureInPictureElement" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.PointerLockElement">
+            <summary>
+            Provides the element set as the target for mouse events while the pointer is locked.
+            It is null if lock is pending, pointer is unlocked, or the target is in another document.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetPointerLockElement(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.PointerLockElement" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.CharacterSet">
+            <summary>
+            Returns the character encoding of the document that it's currently rendered with.
+            </summary>
+            <remarks>Note: A "character set" and a "character encoding" are related, but different. Despite the name of this property, it returns the encoding.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetCharacterSet(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.CharacterSet" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.CompatMode">
+            <summary>
+            <para>Indicates whether the document is rendered in Quirks mode or Standards mode.</para>
+            <para>
+            The value is a string that is one of the following:<br />
+            - "BackCompat": The document is in quirks mode.<br />
+            - "CSS1Compat": The document is in no-quirks (also known as "standards") mode or limited-quirks (also known as "almost standards") mode.
+            </para>
+            </summary>
+            <remarks>Note: All these modes are now standardized, so the older "standards" and "almost standards" names are nonsensical and no longer used in standards.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetCompatMode(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.CompatMode" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.ContentType">
+            <summary>
+            Returns the MIME type that the document is being rendered as.
+            This may come from HTTP headers or other sources of MIME information, and might be affected by automatic type conversions performed by either the browser or extensions.
+            </summary>
+            <remarks>Note: This property is unaffected by &lt;meta&gt; elements.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetContentType(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.ContentType" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.DesignMode">
+            <summary>
+            Controls whether the entire document is editable.
+            Valid values are "on" and "off".
+            According to the specification, this property is meant to default to "off".
+            Firefox follows this standard.
+            The earlier versions of Chrome and IE default to "inherit".
+            Starting in Chrome 43, the default is "off" and "inherit" is no longer supported.
+            In IE6-10, the value is capitalized.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetDesignMode(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.DesignMode" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.SetDesignMode(System.String,System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.DesignMode" />
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.Dir">
+            <summary>
+            Representing the directionality of the text of the document, whether left to right (default) or right to left.
+            Possible values are "rtl", right to left, and "ltr", left to right.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetDir(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.Dir" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.SetDir(System.String,System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.Dir" />
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.DocumentURI">
+            <summary>
+            Returns the document location as a string.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetDocumentURI(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.DocumentURI" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.FullscreenEnabled">
+            <summary>
+            <para>Indicates whether or not fullscreen mode is available.</para>
+            <para>
+            fullscreen mode is available only for a page that has no windowed plug-ins in any of its documents,
+            and if all &lt;iframe&gt; elements which contain the document have their allowfullscreen attribute set.
+            </para>
+            <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and it will be ignored.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetFullscreenEnabled(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.FullscreenEnabled" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.Hidden">
+            <summary>
+            <para>Indicates if the page is considered hidden or not.</para>
+            <para>The <see cref="P:BrowserAPI.Implementation.Document.VisibilityState"/> property provides an alternative way to determine whether the page is hidden.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetHidden(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.Hidden" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.LastModified">
+            <summary>
+            Contains the date and local time on which the current document was last modified.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetLastModified(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.LastModified" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.PictureInPictureEnabled">
+            <summary>
+            <para>Indicates whether or not picture-in-picture mode is available.</para>
+            <para>Picture-in-Picture mode is available by default unless specified otherwise by a Permissions-Policy.</para>
+            <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and will be ignored.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetPictureInPictureEnabled(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.PictureInPictureEnabled" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.ReadyState">
+            <summary>
+            <para>Describes the loading state of the document. When the value of this property changes, a readystatechange event fires on the document object.</para>
+            <para>
+            The readyState of a document can be one of following:<br />
+            - "loading": The document is still loading.<br />
+            - "interactive": The document has finished loading and the document has been parsed but sub-resources such as scripts, images, stylesheets and frames are still loading.
+            The state indicates that the DOMContentLoaded event is about to fire.<br />
+            - "complete": The document and all sub-resources have finished loading. The state indicates that the load event is about to fire.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetReadyState(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.ReadyState" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.Referrer">
+            <summary>
+            <para>Returns the URI of the page that linked to this page.</para>
+            <para>
+            The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark).
+            Because this property returns only a string, it doesn't give you document object model (DOM) access to the referring page.
+            </para>
+            <para>
+            Inside an &lt;iframe&gt;, the Document.referrer will initially be set to the href of the parent's Window.location in same-origin requests.
+            In cross-origin requests, it's the origin of the parent's Window.location by default.
+            For more information, see the <see href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy#strict-origin-when-cross-origin">Referrer-Policy: strict-origin-when-cross-origin</see> documentation.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetReferrer(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.Referrer" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.Title">
+            <summary>
+            Gets or sets the current title of the document. When present, it defaults to the value of the &lt;title&gt;.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetTitle(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.Title" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.SetTitle(System.String,System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.Title" />
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.URL">
+            <summary>
+            Returns the document location as a string.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetURL(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.URL" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.VisibilityState">
+            <summary>
+            <para>Returns the visibility of the document. It can be used to check whether the document is in the background or in a minimized window, or is otherwise not visible to the user.</para>
+            <para>When the value of this property changes, the visibilitychange event is sent to the Document.</para>
+            <para>The <see cref="P:BrowserAPI.Implementation.Document.Hidden"/> property provides an alternative way to determine whether the page is hidden.</para>
+            <para>
+            The value is a string with one of the following values:<br />
+            - "visible": The page content may be at least partially visible. In practice this means that the page is the foreground tab of a non-minimized window.<br />
+            - "hidden": The page content is not visible to the user. In practice this means that the document is either a background tab or part of a minimized window, or the OS screen lock is active.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetVisibilityState(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.VisibilityState" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Document.BaseURI">
+            <summary>
+            <para>The absolute base URL of the document containing the node.</para>
+            <para>
+            The base URL is used to resolve relative URLs when the browser needs to obtain an absolute URL,
+            for example when processing the HTML &lt;img&gt; element's src attribute or the xlink:href Deprecated or href attributes in SVG.
+            </para>
+            <para>Although this property is read-only, its value is determined by an algorithm each time the property is accessed, and may change if the conditions changed.</para>
+            <para>
+            The base URL is determined as follows:<br />
+            1. By default, the base URL is the location of the document (as determined by window.location).<br />
+            2. If it is an HTML Document and there is a &lt;Base&gt; element in the document, the href value of the first Base element with such an attribute is used instead.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Document.GetBaseURI(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Document.BaseURI" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentBase.NodeName">
+            <summary>
+            <para>The name of the current node as a string.</para>
+            <para>
+            Values for the different types of nodes are:<br />
+            - Attr: The value of Attr.name, that is the qualified name of the attribute<br />
+            - CDATASection: The string "#cdata-section"<br />
+            - Comment: The string "#comment"<br />
+            - Document: The string "#document"<br />
+            - DocumentFragment: The string "#document-fragment"<br />
+            - DocumentType: The value of DocumentType.name<br />
+            - Element: The value of Element.tagName, that is the uppercase name of the element tag if an HTML element, or the lowercase element tag if an XML element (like a SVG or MathML element)<br />
+            - ProcessingInstruction: The value of ProcessingInstruction.target<br />
+            - Text: The string "#text"
+            </para>
+            </summary>
+            <remarks>
+            Note: Since this is a <see href="https://developer.mozilla.org/en-US/docs/Web/API/Document">Document</see>, this property always returns "#document".
+            </remarks>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentBase.NodeType">
+            <summary>
+            <para>An integer that identifies what the node is. It distinguishes different kind of nodes from each other, such as elements, text and comments.</para>
+            <para>
+            Possible values are:<br />
+            - 1: ELEMENT_NODE - An Element node like &lt;p&gt; or &lt;div&gt;.<br />
+            - 2: ATTRIBUTE_NODE - An Attribute of an Element.<br />
+            - 3: TEXT_NODE - The actual Text inside an Element or Attr.<br />
+            - 4: CDATA_SECTION_NODE - A CDATASection, such as &lt;!CDATA[[ … ]]&gt;<br />
+            - 7: PROCESSING_INSTRUCTION_NODE - A ProcessingInstruction of an XML document, such as &lt;?xml-stylesheet … ?&gt;.<br />
+            - 8: COMMENT_NODE - A Comment node, such as &lt;!-- … --&gt;.<br />
+            - 9: DOCUMENT_NODE - A Document node.<br />
+            - 10: DOCUMENT_TYPE_NODE - A DocumentType node, such as &lt;!doctype html&gt;.<br />
+            - 11: DOCUMENT_FRAGMENT_NODE - A DocumentFragment node.
+            </para>
+            <para>
+            The following constants have been deprecated and are not in use anymore:<br />
+            - 5: ENTITY_REFERENCE_NODE<br />
+            - 6: ENTITY_NODE<br />
+            - 12: NOTATION_NODE
+            </para>
+            </summary>
+            <remarks>
+            Note: Since this is a <see href="https://developer.mozilla.org/en-US/docs/Web/API/Document">Document</see>, this property always returns 9.
+            </remarks>
+        </member>
+        <member name="T:BrowserAPI.Implementation.DocumentInProcess">
+            <summary>
+            <para>Represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
+            <para>
+            The DOM tree includes elements such as &lt;body&gt; and &lt;table&gt;, among many others.
+            It provides functionality globally to the document, like how to obtain the page's URL and create new elements in the document.
+            </para>
+            <para>
+            The Document interface describes the common properties and methods for any kind of document.
+            Depending on the document's type (e.g., HTML, XML, SVG, …), a larger API is available:
+            HTML documents, served with the "text/html" content type, also implement the HTMLDocument interface,
+            whereas XML and SVG documents implement the XMLDocument interface.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.DocumentInProcess.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            <para>Represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
+            <para>
+            The DOM tree includes elements such as &lt;body&gt; and &lt;table&gt;, among many others.
+            It provides functionality globally to the document, like how to obtain the page's URL and create new elements in the document.
+            </para>
+            <para>
+            The Document interface describes the common properties and methods for any kind of document.
+            Depending on the document's type (e.g., HTML, XML, SVG, …), a larger API is available:
+            HTML documents, served with the "text/html" content type, also implement the HTMLDocument interface,
+            whereas XML and SVG documents implement the XMLDocument interface.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.DocumentElement">
+            <summary>
+            Returns the Element that is the root element of the document (for example, the &lt;html&gt; element for HTML documents).
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.Head">
+            <summary>
+            Returns the &lt;head&gt; element of the current document.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.Body">
+            <summary>
+            Represents the &lt;body&gt; or &lt;frameset&gt; node of the current document, or null if no such element exists.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.ScrollingElement">
+            <summary>
+            <para>Returns a reference to the Element that scrolls the document. In standards mode, this is the root element of the document, <see cref="P:BrowserAPI.Implementation.DocumentInProcess.DocumentElement"/>.</para>
+            <para>
+            When in quirks mode, the scrollingElement attribute returns the HTML body element if it exists and is not potentially scrollable, otherwise it returns null.
+            This may look surprising but is true according to both the specification and browsers.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.Embeds">
+            <summary>
+            Returns a list of the embedded &lt;embed&gt; elements within the current document.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.Forms">
+            <summary>
+            Returns an HTMLCollection listing all the &lt;form&gt; elements contained in the document.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.Images">
+            <summary>
+            Returns a collection of the images in the current HTML document.
+            Each entry in the collection is an HTMLImageElement &lt;img&gt; representing a single image element.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.Links">
+            <summary>
+            Returns a collection of all &lt;area&gt; elements and &lt;a&gt; elements in a document with a value for the href attribute.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.Plugins">
+            <summary>
+            Returns an HTMLCollection object containing one or more HTMLEmbedElements representing the &lt;embed&gt; elements in the current document.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.Scripts">
+            <summary>
+            Returns a list of the &lt;script&gt; elements in the document.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.ActiveElement">
+            <summary>
+            <para>Returns the Element within the DOM that is receiving keyboard events such as keydown and keyup. This is usually analogous to the focused element.</para>
+            <para>
+            Which elements are focusable varies depending on the platform and the browser's current configuration.
+            For example, on Safari, following the behavior of macOS, elements that aren't text input elements are not focusable by default, unless the "Full Keyboard Access" setting is enabled in System Preferences.
+            </para>
+            <para>
+            Typically a user can press the Tab key to move the focus around the page among focusable elements,
+            and use keyboard gestures such as Space or Enter to simulate clicks on the focused element.
+            </para>
+            </summary>
+            <remarks>
+            Note: Focus (which element is receiving user input events) is not the same thing as selection (the currently highlighted part of the document).
+            You can get the current selection using window.getSelection().
+            </remarks>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.CurrentScript">
+            <summary>
+            <para>Returns the &lt;script&gt; element whose script is currently being processed and isn't a JavaScript module. (For modules use import.meta instead.)</para>
+            <para>
+            It's important to note that this will not reference the &lt;script&gt; element if the code in the script is being called as a callback or event handler;
+            it will only reference the element while it's initially being processed.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.FullscreenElement">
+            <summary>
+            <para>Returns the Element that is currently being presented in fullscreen mode in this document, or null if fullscreen mode is not currently in use.</para>
+            <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and it will be ignored.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.PictureInPictureElement">
+            <summary>
+            <para>Returns the Element that is currently being presented in picture-in-picture mode in this document, or null if picture-in-picture mode is not currently in use.</para>
+            <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and will be ignored.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.PointerLockElement">
+            <summary>
+            Provides the element set as the target for mouse events while the pointer is locked.
+            It is null if lock is pending, pointer is unlocked, or the target is in another document.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.CharacterSet">
+            <summary>
+            Returns the character encoding of the document that it's currently rendered with.
+            </summary>
+            <remarks>Note: A "character set" and a "character encoding" are related, but different. Despite the name of this property, it returns the encoding.</remarks>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.CompatMode">
+            <summary>
+            <para>Indicates whether the document is rendered in Quirks mode or Standards mode.</para>
+            <para>
+            The value is a string that is one of the following:<br />
+            - "BackCompat": The document is in quirks mode.<br />
+            - "CSS1Compat": The document is in no-quirks (also known as "standards") mode or limited-quirks (also known as "almost standards") mode.
+            </para>
+            </summary>
+            <remarks>Note: All these modes are now standardized, so the older "standards" and "almost standards" names are nonsensical and no longer used in standards.</remarks>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.ContentType">
+            <summary>
+            Returns the MIME type that the document is being rendered as.
+            This may come from HTTP headers or other sources of MIME information, and might be affected by automatic type conversions performed by either the browser or extensions.
+            </summary>
+            <remarks>Note: This property is unaffected by &lt;meta&gt; elements.</remarks>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.DesignMode">
+            <summary>
+            Controls whether the entire document is editable.
+            Valid values are "on" and "off".
+            According to the specification, this property is meant to default to "off".
+            Firefox follows this standard.
+            The earlier versions of Chrome and IE default to "inherit".
+            Starting in Chrome 43, the default is "off" and "inherit" is no longer supported.
+            In IE6-10, the value is capitalized.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.Dir">
+            <summary>
+            Representing the directionality of the text of the document, whether left to right (default) or right to left.
+            Possible values are "rtl", right to left, and "ltr", left to right.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.DocumentURI">
+            <summary>
+            Returns the document location as a string.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.FullscreenEnabled">
+            <summary>
+            <para>Indicates whether or not fullscreen mode is available.</para>
+            <para>
+            fullscreen mode is available only for a page that has no windowed plug-ins in any of its documents,
+            and if all &lt;iframe&gt; elements which contain the document have their allowfullscreen attribute set.
+            </para>
+            <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and it will be ignored.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.Hidden">
+            <summary>
+            <para>Indicates if the page is considered hidden or not.</para>
+            <para>The <see cref="P:BrowserAPI.Implementation.DocumentInProcess.VisibilityState"/> property provides an alternative way to determine whether the page is hidden.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.LastModified">
+            <summary>
+            Contains the date and local time on which the current document was last modified.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.PictureInPictureEnabled">
+            <summary>
+            <para>Indicates whether or not picture-in-picture mode is available.</para>
+            <para>Picture-in-Picture mode is available by default unless specified otherwise by a Permissions-Policy.</para>
+            <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and will be ignored.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.ReadyState">
+            <summary>
+            <para>Describes the loading state of the document. When the value of this property changes, a readystatechange event fires on the document object.</para>
+            <para>
+            The readyState of a document can be one of following:<br />
+            - "loading": The document is still loading.<br />
+            - "interactive": The document has finished loading and the document has been parsed but sub-resources such as scripts, images, stylesheets and frames are still loading.
+            The state indicates that the DOMContentLoaded event is about to fire.<br />
+            - "complete": The document and all sub-resources have finished loading. The state indicates that the load event is about to fire.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.Referrer">
+            <summary>
+            <para>Returns the URI of the page that linked to this page.</para>
+            <para>
+            The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark).
+            Because this property returns only a string, it doesn't give you document object model (DOM) access to the referring page.
+            </para>
+            <para>
+            Inside an &lt;iframe&gt;, the Document.referrer will initially be set to the href of the parent's Window.location in same-origin requests.
+            In cross-origin requests, it's the origin of the parent's Window.location by default.
+            For more information, see the <see href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy#strict-origin-when-cross-origin">Referrer-Policy: strict-origin-when-cross-origin</see> documentation.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.Title">
+            <summary>
+            Gets or sets the current title of the document. When present, it defaults to the value of the &lt;title&gt;.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.URL">
+            <summary>
+            Returns the document location as a string.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.VisibilityState">
+            <summary>
+            <para>Returns the visibility of the document. It can be used to check whether the document is in the background or in a minimized window, or is otherwise not visible to the user.</para>
+            <para>When the value of this property changes, the visibilitychange event is sent to the Document.</para>
+            <para>The <see cref="P:BrowserAPI.Implementation.DocumentInProcess.Hidden"/> property provides an alternative way to determine whether the page is hidden.</para>
+            <para>
+            The value is a string with one of the following values:<br />
+            - "visible": The page content may be at least partially visible. In practice this means that the page is the foreground tab of a non-minimized window.<br />
+            - "hidden": The page content is not visible to the user. In practice this means that the document is either a background tab or part of a minimized window, or the OS screen lock is active.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.DocumentInProcess.BaseURI">
+            <summary>
+            <para>The absolute base URL of the document containing the node.</para>
+            <para>
+            The base URL is used to resolve relative URLs when the browser needs to obtain an absolute URL,
+            for example when processing the HTML &lt;img&gt; element's src attribute or the xlink:href Deprecated or href attributes in SVG.
+            </para>
+            <para>Although this property is read-only, its value is determined by an algorithm each time the property is accessed, and may change if the conditions changed.</para>
+            <para>
+            The base URL is determined as follows:<br />
+            1. By default, the base URL is the location of the document (as determined by window.location).<br />
+            2. If it is an HTML Document and there is a &lt;Base&gt; element in the document, the href value of the first Base element with such an attribute is used instead.
+            </para>
+            </summary>
+        </member>
         <member name="T:BrowserAPI.Implementation.Download">
             <summary>
             Save data as a file download on the filesystem.
@@ -16907,6 +17643,758 @@
             </summary>
             <param name="htmlMediaElement">An <see cref="T:Microsoft.AspNetCore.Components.ElementReference"/> referencing a <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">&lt;video&gt;</see> or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">&lt;audio&gt;</see> html tag.</param>
             <returns>An object that can be used to interact with the given <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">&lt;video&gt;</see> or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">&lt;audio&gt;</see> element.</returns>
+        </member>
+        <member name="T:BrowserAPI.IDocument">
+            <summary>
+            <para>Represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
+            <para>
+            The DOM tree includes elements such as &lt;body&gt; and &lt;table&gt;, among many others.
+            It provides functionality globally to the document, like how to obtain the page's URL and create new elements in the document.
+            </para>
+            <para>
+            The Document interface describes the common properties and methods for any kind of document.
+            Depending on the document's type (e.g., HTML, XML, SVG, …), a larger API is available:
+            HTML documents, served with the "text/html" content type, also implement the HTMLDocument interface,
+            whereas XML and SVG documents implement the XMLDocument interface.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocument.DocumentElement">
+            <summary>
+            Returns the Element that is the root element of the document (for example, the &lt;html&gt; element for HTML documents).
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocument.Head">
+            <summary>
+            Returns the &lt;head&gt; element of the current document.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocument.Body">
+            <summary>
+            Represents the &lt;body&gt; or &lt;frameset&gt; node of the current document, or null if no such element exists.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.SetBody(BrowserAPI.IHTMLElement,System.Threading.CancellationToken)">
+            <summary>
+            Represents the &lt;body&gt; or &lt;frameset&gt; node of the current document, or null if no such element exists.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocument.ScrollingElement">
+            <summary>
+            <para>Returns a reference to the Element that scrolls the document. In standards mode, this is the root element of the document, <see cref="P:BrowserAPI.IDocument.DocumentElement"/>.</para>
+            <para>
+            When in quirks mode, the scrollingElement attribute returns the HTML body element if it exists and is not potentially scrollable, otherwise it returns null.
+            This may look surprising but is true according to both the specification and browsers.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocument.Embeds">
+            <summary>
+            Returns a list of the embedded &lt;embed&gt; elements within the current document.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetEmbeds(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.Embeds" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.Forms">
+            <summary>
+            Returns an HTMLCollection listing all the &lt;form&gt; elements contained in the document.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetForms(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.Forms" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.Images">
+            <summary>
+            Returns a collection of the images in the current HTML document.
+            Each entry in the collection is an HTMLImageElement &lt;img&gt; representing a single image element.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetImages(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.Images" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.Links">
+            <summary>
+            Returns a collection of all &lt;area&gt; elements and &lt;a&gt; elements in a document with a value for the href attribute.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetLinks(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.Links" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.Plugins">
+            <summary>
+            Returns an HTMLCollection object containing one or more HTMLEmbedElements representing the &lt;embed&gt; elements in the current document.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetPlugins(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.Plugins" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.Scripts">
+            <summary>
+            Returns a list of the &lt;script&gt; elements in the document.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetScripts(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.Scripts" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.ActiveElement">
+            <summary>
+            <para>Returns the Element within the DOM that is receiving keyboard events such as keydown and keyup. This is usually analogous to the focused element.</para>
+            <para>
+            Which elements are focusable varies depending on the platform and the browser's current configuration.
+            For example, on Safari, following the behavior of macOS, elements that aren't text input elements are not focusable by default, unless the "Full Keyboard Access" setting is enabled in System Preferences.
+            </para>
+            <para>
+            Typically a user can press the Tab key to move the focus around the page among focusable elements,
+            and use keyboard gestures such as Space or Enter to simulate clicks on the focused element.
+            </para>
+            </summary>
+            <remarks>
+            Note: Focus (which element is receiving user input events) is not the same thing as selection (the currently highlighted part of the document).
+            You can get the current selection using window.getSelection().
+            </remarks>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetActiveElement(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.ActiveElement" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.CurrentScript">
+            <summary>
+            <para>Returns the &lt;script&gt; element whose script is currently being processed and isn't a JavaScript module. (For modules use import.meta instead.)</para>
+            <para>
+            It's important to note that this will not reference the &lt;script&gt; element if the code in the script is being called as a callback or event handler;
+            it will only reference the element while it's initially being processed.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetCurrentScript(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.CurrentScript" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.FullscreenElement">
+            <summary>
+            <para>Returns the Element that is currently being presented in fullscreen mode in this document, or null if fullscreen mode is not currently in use.</para>
+            <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and it will be ignored.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetFullscreenElement(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.FullscreenElement" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.PictureInPictureElement">
+            <summary>
+            <para>Returns the Element that is currently being presented in picture-in-picture mode in this document, or null if picture-in-picture mode is not currently in use.</para>
+            <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and will be ignored.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetPictureInPictureElement(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.PictureInPictureElement" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.PointerLockElement">
+            <summary>
+            Provides the element set as the target for mouse events while the pointer is locked.
+            It is null if lock is pending, pointer is unlocked, or the target is in another document.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetPointerLockElement(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.PointerLockElement" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.CharacterSet">
+            <summary>
+            Returns the character encoding of the document that it's currently rendered with.
+            </summary>
+            <remarks>Note: A "character set" and a "character encoding" are related, but different. Despite the name of this property, it returns the encoding.</remarks>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetCharacterSet(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.CharacterSet" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.CompatMode">
+            <summary>
+            <para>Indicates whether the document is rendered in Quirks mode or Standards mode.</para>
+            <para>
+            The value is a string that is one of the following:<br />
+            - "BackCompat": The document is in quirks mode.<br />
+            - "CSS1Compat": The document is in no-quirks (also known as "standards") mode or limited-quirks (also known as "almost standards") mode.
+            </para>
+            </summary>
+            <remarks>Note: All these modes are now standardized, so the older "standards" and "almost standards" names are nonsensical and no longer used in standards.</remarks>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetCompatMode(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.CompatMode" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.ContentType">
+            <summary>
+            Returns the MIME type that the document is being rendered as.
+            This may come from HTTP headers or other sources of MIME information, and might be affected by automatic type conversions performed by either the browser or extensions.
+            </summary>
+            <remarks>Note: This property is unaffected by &lt;meta&gt; elements.</remarks>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetContentType(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.ContentType" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.DesignMode">
+            <summary>
+            Controls whether the entire document is editable.
+            Valid values are "on" and "off".
+            According to the specification, this property is meant to default to "off".
+            Firefox follows this standard.
+            The earlier versions of Chrome and IE default to "inherit".
+            Starting in Chrome 43, the default is "off" and "inherit" is no longer supported.
+            In IE6-10, the value is capitalized.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetDesignMode(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.DesignMode" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IDocument.SetDesignMode(System.String,System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.DesignMode" />
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.Dir">
+            <summary>
+            Representing the directionality of the text of the document, whether left to right (default) or right to left.
+            Possible values are "rtl", right to left, and "ltr", left to right.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetDir(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.Dir" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IDocument.SetDir(System.String,System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.Dir" />
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.DocumentURI">
+            <summary>
+            Returns the document location as a string.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetDocumentURI(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.DocumentURI" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.FullscreenEnabled">
+            <summary>
+            <para>Indicates whether or not fullscreen mode is available.</para>
+            <para>
+            fullscreen mode is available only for a page that has no windowed plug-ins in any of its documents,
+            and if all &lt;iframe&gt; elements which contain the document have their allowfullscreen attribute set.
+            </para>
+            <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and it will be ignored.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetFullscreenEnabled(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.FullscreenEnabled" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.Hidden">
+            <summary>
+            <para>Indicates if the page is considered hidden or not.</para>
+            <para>The <see cref="P:BrowserAPI.IDocument.VisibilityState"/> property provides an alternative way to determine whether the page is hidden.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetHidden(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.Hidden" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.LastModified">
+            <summary>
+            Contains the date and local time on which the current document was last modified.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetLastModified(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.LastModified" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.PictureInPictureEnabled">
+            <summary>
+            <para>Indicates whether or not picture-in-picture mode is available.</para>
+            <para>Picture-in-Picture mode is available by default unless specified otherwise by a Permissions-Policy.</para>
+            <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and will be ignored.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetPictureInPictureEnabled(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.PictureInPictureEnabled" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.ReadyState">
+            <summary>
+            <para>Describes the loading state of the document. When the value of this property changes, a readystatechange event fires on the document object.</para>
+            <para>
+            The readyState of a document can be one of following:<br />
+            - "loading": The document is still loading.<br />
+            - "interactive": The document has finished loading and the document has been parsed but sub-resources such as scripts, images, stylesheets and frames are still loading.
+            The state indicates that the DOMContentLoaded event is about to fire.<br />
+            - "complete": The document and all sub-resources have finished loading. The state indicates that the load event is about to fire.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetReadyState(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.ReadyState" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.Referrer">
+            <summary>
+            <para>Returns the URI of the page that linked to this page.</para>
+            <para>
+            The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark).
+            Because this property returns only a string, it doesn't give you document object model (DOM) access to the referring page.
+            </para>
+            <para>
+            Inside an &lt;iframe&gt;, the Document.referrer will initially be set to the href of the parent's Window.location in same-origin requests.
+            In cross-origin requests, it's the origin of the parent's Window.location by default.
+            For more information, see the <see href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy#strict-origin-when-cross-origin">Referrer-Policy: strict-origin-when-cross-origin</see> documentation.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetReferrer(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.Referrer" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.Title">
+            <summary>
+            Gets or sets the current title of the document. When present, it defaults to the value of the &lt;title&gt;.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetTitle(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.Title" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IDocument.SetTitle(System.String,System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.Title" />
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.URL">
+            <summary>
+            Returns the document location as a string.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetURL(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.URL" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.VisibilityState">
+            <summary>
+            <para>Returns the visibility of the document. It can be used to check whether the document is in the background or in a minimized window, or is otherwise not visible to the user.</para>
+            <para>When the value of this property changes, the visibilitychange event is sent to the Document.</para>
+            <para>The <see cref="P:BrowserAPI.IDocument.Hidden"/> property provides an alternative way to determine whether the page is hidden.</para>
+            <para>
+            The value is a string with one of the following values:<br />
+            - "visible": The page content may be at least partially visible. In practice this means that the page is the foreground tab of a non-minimized window.<br />
+            - "hidden": The page content is not visible to the user. In practice this means that the document is either a background tab or part of a minimized window, or the OS screen lock is active.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetVisibilityState(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.VisibilityState" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.BaseURI">
+            <summary>
+            <para>The absolute base URL of the document containing the node.</para>
+            <para>
+            The base URL is used to resolve relative URLs when the browser needs to obtain an absolute URL,
+            for example when processing the HTML &lt;img&gt; element's src attribute or the xlink:href Deprecated or href attributes in SVG.
+            </para>
+            <para>Although this property is read-only, its value is determined by an algorithm each time the property is accessed, and may change if the conditions changed.</para>
+            <para>
+            The base URL is determined as follows:<br />
+            1. By default, the base URL is the location of the document (as determined by window.location).<br />
+            2. If it is an HTML Document and there is a &lt;Base&gt; element in the document, the href value of the first Base element with such an attribute is used instead.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocument.GetBaseURI(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IDocument.BaseURI" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IDocument.NodeName">
+            <summary>
+            <para>The name of the current node as a string.</para>
+            <para>
+            Values for the different types of nodes are:<br />
+            - Attr: The value of Attr.name, that is the qualified name of the attribute<br />
+            - CDATASection: The string "#cdata-section"<br />
+            - Comment: The string "#comment"<br />
+            - Document: The string "#document"<br />
+            - DocumentFragment: The string "#document-fragment"<br />
+            - DocumentType: The value of DocumentType.name<br />
+            - Element: The value of Element.tagName, that is the uppercase name of the element tag if an HTML element, or the lowercase element tag if an XML element (like a SVG or MathML element)<br />
+            - ProcessingInstruction: The value of ProcessingInstruction.target<br />
+            - Text: The string "#text"
+            </para>
+            </summary>
+            <remarks>
+            Note: Since this is a <see href="https://developer.mozilla.org/en-US/docs/Web/API/Document">Document</see>, this property always returns "#document".
+            </remarks>
+        </member>
+        <member name="P:BrowserAPI.IDocument.NodeType">
+            <summary>
+            <para>An integer that identifies what the node is. It distinguishes different kind of nodes from each other, such as elements, text and comments.</para>
+            <para>
+            Possible values are:<br />
+            - 1: ELEMENT_NODE - An Element node like &lt;p&gt; or &lt;div&gt;.<br />
+            - 2: ATTRIBUTE_NODE - An Attribute of an Element.<br />
+            - 3: TEXT_NODE - The actual Text inside an Element or Attr.<br />
+            - 4: CDATA_SECTION_NODE - A CDATASection, such as &lt;!CDATA[[ … ]]&gt;<br />
+            - 7: PROCESSING_INSTRUCTION_NODE - A ProcessingInstruction of an XML document, such as &lt;?xml-stylesheet … ?&gt;.<br />
+            - 8: COMMENT_NODE - A Comment node, such as &lt;!-- … --&gt;.<br />
+            - 9: DOCUMENT_NODE - A Document node.<br />
+            - 10: DOCUMENT_TYPE_NODE - A DocumentType node, such as &lt;!doctype html&gt;.<br />
+            - 11: DOCUMENT_FRAGMENT_NODE - A DocumentFragment node.
+            </para>
+            <para>
+            The following constants have been deprecated and are not in use anymore:<br />
+            - 5: ENTITY_REFERENCE_NODE<br />
+            - 6: ENTITY_NODE<br />
+            - 12: NOTATION_NODE
+            </para>
+            </summary>
+            <remarks>
+            Note: Since this is a <see href="https://developer.mozilla.org/en-US/docs/Web/API/Document">Document</see>, this property always returns 9.
+            </remarks>
+        </member>
+        <member name="T:BrowserAPI.IDocumentInProcess">
+            <summary>
+            <para>Represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
+            <para>
+            The DOM tree includes elements such as &lt;body&gt; and &lt;table&gt;, among many others.
+            It provides functionality globally to the document, like how to obtain the page's URL and create new elements in the document.
+            </para>
+            <para>
+            The Document interface describes the common properties and methods for any kind of document.
+            Depending on the document's type (e.g., HTML, XML, SVG, …), a larger API is available:
+            HTML documents, served with the "text/html" content type, also implement the HTMLDocument interface,
+            whereas XML and SVG documents implement the XMLDocument interface.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.NodeName">
+            <summary>
+            <para>The name of the current node as a string.</para>
+            <para>
+            Values for the different types of nodes are:<br />
+            - Attr: The value of Attr.name, that is the qualified name of the attribute<br />
+            - CDATASection: The string "#cdata-section"<br />
+            - Comment: The string "#comment"<br />
+            - Document: The string "#document"<br />
+            - DocumentFragment: The string "#document-fragment"<br />
+            - DocumentType: The value of DocumentType.name<br />
+            - Element: The value of Element.tagName, that is the uppercase name of the element tag if an HTML element, or the lowercase element tag if an XML element (like a SVG or MathML element)<br />
+            - ProcessingInstruction: The value of ProcessingInstruction.target<br />
+            - Text: The string "#text"
+            </para>
+            </summary>
+            <remarks>
+            Note: Since this is a <see href="https://developer.mozilla.org/en-US/docs/Web/API/Document">Document</see>, this property always returns "#document".
+            </remarks>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.NodeType">
+            <summary>
+            <para>An integer that identifies what the node is. It distinguishes different kind of nodes from each other, such as elements, text and comments.</para>
+            <para>
+            Possible values are:<br />
+            - 1: ELEMENT_NODE - An Element node like &lt;p&gt; or &lt;div&gt;.<br />
+            - 2: ATTRIBUTE_NODE - An Attribute of an Element.<br />
+            - 3: TEXT_NODE - The actual Text inside an Element or Attr.<br />
+            - 4: CDATA_SECTION_NODE - A CDATASection, such as &lt;!CDATA[[ … ]]&gt;<br />
+            - 7: PROCESSING_INSTRUCTION_NODE - A ProcessingInstruction of an XML document, such as &lt;?xml-stylesheet … ?&gt;.<br />
+            - 8: COMMENT_NODE - A Comment node, such as &lt;!-- … --&gt;.<br />
+            - 9: DOCUMENT_NODE - A Document node.<br />
+            - 10: DOCUMENT_TYPE_NODE - A DocumentType node, such as &lt;!doctype html&gt;.<br />
+            - 11: DOCUMENT_FRAGMENT_NODE - A DocumentFragment node.
+            </para>
+            <para>
+            The following constants have been deprecated and are not in use anymore:<br />
+            - 5: ENTITY_REFERENCE_NODE<br />
+            - 6: ENTITY_NODE<br />
+            - 12: NOTATION_NODE
+            </para>
+            </summary>
+            <remarks>
+            Note: Since this is a <see href="https://developer.mozilla.org/en-US/docs/Web/API/Document">Document</see>, this property always returns 9.
+            </remarks>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.DocumentElement">
+            <summary>
+            Returns the Element that is the root element of the document (for example, the &lt;html&gt; element for HTML documents).
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.Head">
+            <summary>
+            Returns the &lt;head&gt; element of the current document.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.Body">
+            <summary>
+            Represents the &lt;body&gt; or &lt;frameset&gt; node of the current document, or null if no such element exists.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.ScrollingElement">
+            <summary>
+            <para>Returns a reference to the Element that scrolls the document. In standards mode, this is the root element of the document, <see cref="P:BrowserAPI.IDocumentInProcess.DocumentElement"/>.</para>
+            <para>
+            When in quirks mode, the scrollingElement attribute returns the HTML body element if it exists and is not potentially scrollable, otherwise it returns null.
+            This may look surprising but is true according to both the specification and browsers.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.Embeds">
+            <summary>
+            Returns a list of the embedded &lt;embed&gt; elements within the current document.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.Forms">
+            <summary>
+            Returns an HTMLCollection listing all the &lt;form&gt; elements contained in the document.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.Images">
+            <summary>
+            Returns a collection of the images in the current HTML document.
+            Each entry in the collection is an HTMLImageElement &lt;img&gt; representing a single image element.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.Links">
+            <summary>
+            Returns a collection of all &lt;area&gt; elements and &lt;a&gt; elements in a document with a value for the href attribute.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.Plugins">
+            <summary>
+            Returns an HTMLCollection object containing one or more HTMLEmbedElements representing the &lt;embed&gt; elements in the current document.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.Scripts">
+            <summary>
+            Returns a list of the &lt;script&gt; elements in the document.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.ActiveElement">
+            <summary>
+            <para>Returns the Element within the DOM that is receiving keyboard events such as keydown and keyup. This is usually analogous to the focused element.</para>
+            <para>
+            Which elements are focusable varies depending on the platform and the browser's current configuration.
+            For example, on Safari, following the behavior of macOS, elements that aren't text input elements are not focusable by default, unless the "Full Keyboard Access" setting is enabled in System Preferences.
+            </para>
+            <para>
+            Typically a user can press the Tab key to move the focus around the page among focusable elements,
+            and use keyboard gestures such as Space or Enter to simulate clicks on the focused element.
+            </para>
+            </summary>
+            <remarks>
+            Note: Focus (which element is receiving user input events) is not the same thing as selection (the currently highlighted part of the document).
+            You can get the current selection using window.getSelection().
+            </remarks>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.CurrentScript">
+            <summary>
+            <para>Returns the &lt;script&gt; element whose script is currently being processed and isn't a JavaScript module. (For modules use import.meta instead.)</para>
+            <para>
+            It's important to note that this will not reference the &lt;script&gt; element if the code in the script is being called as a callback or event handler;
+            it will only reference the element while it's initially being processed.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.FullscreenElement">
+            <summary>
+            <para>Returns the Element that is currently being presented in fullscreen mode in this document, or null if fullscreen mode is not currently in use.</para>
+            <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and it will be ignored.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.PictureInPictureElement">
+            <summary>
+            <para>Returns the Element that is currently being presented in picture-in-picture mode in this document, or null if picture-in-picture mode is not currently in use.</para>
+            <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and will be ignored.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.PointerLockElement">
+            <summary>
+            Provides the element set as the target for mouse events while the pointer is locked.
+            It is null if lock is pending, pointer is unlocked, or the target is in another document.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.CharacterSet">
+            <summary>
+            Returns the character encoding of the document that it's currently rendered with.
+            </summary>
+            <remarks>Note: A "character set" and a "character encoding" are related, but different. Despite the name of this property, it returns the encoding.</remarks>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.CompatMode">
+            <summary>
+            <para>Indicates whether the document is rendered in Quirks mode or Standards mode.</para>
+            <para>
+            The value is a string that is one of the following:<br />
+            - "BackCompat": The document is in quirks mode.<br />
+            - "CSS1Compat": The document is in no-quirks (also known as "standards") mode or limited-quirks (also known as "almost standards") mode.
+            </para>
+            </summary>
+            <remarks>Note: All these modes are now standardized, so the older "standards" and "almost standards" names are nonsensical and no longer used in standards.</remarks>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.ContentType">
+            <summary>
+            Returns the MIME type that the document is being rendered as.
+            This may come from HTTP headers or other sources of MIME information, and might be affected by automatic type conversions performed by either the browser or extensions.
+            </summary>
+            <remarks>Note: This property is unaffected by &lt;meta&gt; elements.</remarks>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.DesignMode">
+            <summary>
+            Controls whether the entire document is editable.
+            Valid values are "on" and "off".
+            According to the specification, this property is meant to default to "off".
+            Firefox follows this standard.
+            The earlier versions of Chrome and IE default to "inherit".
+            Starting in Chrome 43, the default is "off" and "inherit" is no longer supported.
+            In IE6-10, the value is capitalized.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.Dir">
+            <summary>
+            Representing the directionality of the text of the document, whether left to right (default) or right to left.
+            Possible values are "rtl", right to left, and "ltr", left to right.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.DocumentURI">
+            <summary>
+            Returns the document location as a string.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.FullscreenEnabled">
+            <summary>
+            <para>Indicates whether or not fullscreen mode is available.</para>
+            <para>
+            fullscreen mode is available only for a page that has no windowed plug-ins in any of its documents,
+            and if all &lt;iframe&gt; elements which contain the document have their allowfullscreen attribute set.
+            </para>
+            <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and it will be ignored.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.Hidden">
+            <summary>
+            <para>Indicates if the page is considered hidden or not.</para>
+            <para>The <see cref="P:BrowserAPI.IDocumentInProcess.VisibilityState"/> property provides an alternative way to determine whether the page is hidden.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.LastModified">
+            <summary>
+            Contains the date and local time on which the current document was last modified.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.PictureInPictureEnabled">
+            <summary>
+            <para>Indicates whether or not picture-in-picture mode is available.</para>
+            <para>Picture-in-Picture mode is available by default unless specified otherwise by a Permissions-Policy.</para>
+            <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and will be ignored.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.ReadyState">
+            <summary>
+            <para>Describes the loading state of the document. When the value of this property changes, a readystatechange event fires on the document object.</para>
+            <para>
+            The readyState of a document can be one of following:<br />
+            - "loading": The document is still loading.<br />
+            - "interactive": The document has finished loading and the document has been parsed but sub-resources such as scripts, images, stylesheets and frames are still loading.
+            The state indicates that the DOMContentLoaded event is about to fire.<br />
+            - "complete": The document and all sub-resources have finished loading. The state indicates that the load event is about to fire.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.Referrer">
+            <summary>
+            <para>Returns the URI of the page that linked to this page.</para>
+            <para>
+            The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark).
+            Because this property returns only a string, it doesn't give you document object model (DOM) access to the referring page.
+            </para>
+            <para>
+            Inside an &lt;iframe&gt;, the Document.referrer will initially be set to the href of the parent's Window.location in same-origin requests.
+            In cross-origin requests, it's the origin of the parent's Window.location by default.
+            For more information, see the <see href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy#strict-origin-when-cross-origin">Referrer-Policy: strict-origin-when-cross-origin</see> documentation.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.Title">
+            <summary>
+            Gets or sets the current title of the document. When present, it defaults to the value of the &lt;title&gt;.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.URL">
+            <summary>
+            Returns the document location as a string.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.VisibilityState">
+            <summary>
+            <para>Returns the visibility of the document. It can be used to check whether the document is in the background or in a minimized window, or is otherwise not visible to the user.</para>
+            <para>When the value of this property changes, the visibilitychange event is sent to the Document.</para>
+            <para>The <see cref="P:BrowserAPI.IDocumentInProcess.Hidden"/> property provides an alternative way to determine whether the page is hidden.</para>
+            <para>
+            The value is a string with one of the following values:<br />
+            - "visible": The page content may be at least partially visible. In practice this means that the page is the foreground tab of a non-minimized window.<br />
+            - "hidden": The page content is not visible to the user. In practice this means that the document is either a background tab or part of a minimized window, or the OS screen lock is active.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IDocumentInProcess.BaseURI">
+            <summary>
+            <para>The absolute base URL of the document containing the node.</para>
+            <para>
+            The base URL is used to resolve relative URLs when the browser needs to obtain an absolute URL,
+            for example when processing the HTML &lt;img&gt; element's src attribute or the xlink:href Deprecated or href attributes in SVG.
+            </para>
+            <para>Although this property is read-only, its value is determined by an algorithm each time the property is accessed, and may change if the conditions changed.</para>
+            <para>
+            The base URL is determined as follows:<br />
+            1. By default, the base URL is the location of the document (as determined by window.location).<br />
+            2. If it is an HTML Document and there is a &lt;Base&gt; element in the document, the href value of the first Base element with such an attribute is used instead.
+            </para>
+            </summary>
         </member>
         <member name="T:BrowserAPI.IDownload">
             <summary>

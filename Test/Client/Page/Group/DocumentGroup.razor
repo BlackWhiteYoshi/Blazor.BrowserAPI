@@ -1,0 +1,81 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Document</h2>
+    <div>
+        @* Properties - HTMLElement reference *@
+        <button data-testid="@BUTTON_GET_DOCUMENT_ELEMENT" @onclick="GetDocumentElement">GetDocumentElement</button>
+        <button data-testid="@BUTTON_GET_HEAD" @onclick="GetHead">GetHead</button>
+        <button data-testid="@BUTTON_GET_BODY" @onclick="GetBody">GetBody</button>
+        <button data-testid="@BUTTON_SET_BODY" @onclick="SetBody">SetBody</button>
+        <button data-testid="@BUTTON_GET_SCROLLING_ELEMENT" @onclick="GetScrollingElement">GetScrollingElement</button>
+
+        @* Properties - HTMLElement Collection *@
+        <button data-testid="@BUTTON_GET_EMBEDS_PROPERTY" @onclick="GetEmbeds_Property">GetEmbeds_Property</button>
+        <button data-testid="@BUTTON_GET_EMBEDS_METHOD" @onclick="GetEmbeds_Method">GetEmbeds_Method</button>
+        <button data-testid="@BUTTON_GET_FORMS_PROPERTY" @onclick="GetForms_Property">GetForms_Property</button>
+        <button data-testid="@BUTTON_GET_FORMS_METHOD" @onclick="GetForms_Method">GetForms_Method</button>
+        <button data-testid="@BUTTON_GET_IMAGES_PROPERTY" @onclick="GetImages_Property">GetImages_Property</button>
+        <button data-testid="@BUTTON_GET_IMAGES_METHOD" @onclick="GetImages_Method">GetImages_Method</button>
+        <button data-testid="@BUTTON_GET_LINKS_PROPERTY" @onclick="GetLinks_Property">GetLinks_Property</button>
+        <button data-testid="@BUTTON_GET_LINKS_METHOD" @onclick="GetLinks_Method">GetLinks_Method</button>
+        <button data-testid="@BUTTON_GET_PLUGINS_PROPERTY" @onclick="GetPlugins_Property">GetPlugins_Property</button>
+        <button data-testid="@BUTTON_GET_PLUGINS_METHOD" @onclick="GetPlugins_Method">GetPlugins_Method</button>
+        <button data-testid="@BUTTON_GET_SCRIPTS_PROPERTY" @onclick="GetScripts_Property">GetScripts_Property</button>
+        <button data-testid="@BUTTON_GET_SCRIPTS_METHOD" @onclick="GetScripts_Method">GetScripts_Method</button>
+
+        @* Properties - HTMLElement situational *@
+        <button data-testid="@BUTTON_GET_ACTIVE_ELEMENT_PROPERTY" @onclick="GetActiveElement_Property">GetActiveElement_Property</button>
+        <button data-testid="@BUTTON_GET_ACTIVE_ELEMENT_METHOD" @onclick="GetActiveElement_Method">GetActiveElement_Method</button>
+        <button data-testid="@BUTTON_GET_CURRENT_SCRIPT_PROPERTY" @onclick="GetCurrentScript_Property">GetCurrentScript_Property</button>
+        <button data-testid="@BUTTON_GET_CURRENT_SCRIPT_METHOD" @onclick="GetCurrentScript_Method">GetCurrentScript_Method</button>
+        <button data-testid="@BUTTON_GET_FULLSCREEN_ELEMENT_PROPERTY" @onclick="GetFullscreenElement_Property">GetFullscreenElement_Property</button>
+        <button data-testid="@BUTTON_GET_FULLSCREEN_ELEMENT_METHOD" @onclick="GetFullscreenElement_Method">GetFullscreenElement_Method</button>
+        <button data-testid="@BUTTON_GET_PICTURE_IN_PICTURE_ELEMENT_PROPERTY" @onclick="GetPictureInPictureElement_Property">GetPictureInPictureElement_Property</button>
+        <button data-testid="@BUTTON_GET_PICTURE_IN_PICTURE_ELEMENT_METHOD" @onclick="GetPictureInPictureElement_Method">GetPictureInPictureElement_Method</button>
+        <button data-testid="@BUTTON_GET_POINTER_LOCK_ELEMENT_PROPERTY" @onclick="GetPointerLockElement_Property">GetPointerLockElement_Property</button>
+        <button data-testid="@BUTTON_GET_POINTER_LOCK_ELEMENT_METHOD" @onclick="GetPointerLockElement_Method">GetPointerLockElement_Method</button>
+
+        @* Properties *@
+        <button data-testid="@BUTTON_GET_CHARACTER_SET_PROPERTY" @onclick="GetCharacterSet_Property">GetCharacterSet_Property</button>
+        <button data-testid="@BUTTON_GET_CHARACTER_SET_METHOD" @onclick="GetCharacterSet_Method">GetCharacterSet_Method</button>
+        <button data-testid="@BUTTON_GET_COMPAT_MODE_PROPERTY" @onclick="GetCompatMode_Property">GetCompatMode_Property</button>
+        <button data-testid="@BUTTON_GET_COMPAT_MODE_METHOD" @onclick="GetCompatMode_Method">GetCompatMode_Method</button>
+        <button data-testid="@BUTTON_GET_CONTENT_TYPE_PROPERTY" @onclick="GetContentType_Property">GetContentType_Property</button>
+        <button data-testid="@BUTTON_GET_CONTENT_TYPE_METHOD" @onclick="GetContentType_Method">GetContentType_Method</button>
+        <button data-testid="@BUTTON_GET_DESIGN_MODE_PROPERTY" @onclick="GetDesignMode_Property">GetDesignMode_Property</button>
+        <button data-testid="@BUTTON_GET_DESIGN_MODE_METHOD" @onclick="GetDesignMode_Method">GetDesignMode_Method</button>
+        <button data-testid="@BUTTON_SET_DESIGN_MODE" @onclick="SetDesignMode">SetDesignMode</button>
+        <button data-testid="@BUTTON_GET_DIR_PROPERTY" @onclick="GetDir_Property">GetDir_Property</button>
+        <button data-testid="@BUTTON_GET_DIR_METHOD" @onclick="GetDir_Method">GetDir_Method</button>
+        <button data-testid="@BUTTON_SET_DIR" @onclick="SetDir">SetDir</button>
+        <button data-testid="@BUTTON_GET_DOCUMENT_URI_PROPERTY" @onclick="GetDocumentURI_Property">GetDocumentURI_Property</button>
+        <button data-testid="@BUTTON_GET_DOCUMENT_URI_METHOD" @onclick="GetDocumentURI_Method">GetDocumentURI_Method</button>
+        <button data-testid="@BUTTON_GET_FULLSCREEN_ENABLED_PROPERTY" @onclick="GetFullscreenEnabled_Property">GetFullscreenEnabled_Property</button>
+        <button data-testid="@BUTTON_GET_FULLSCREEN_ENABLED_METHOD" @onclick="GetFullscreenEnabled_Method">GetFullscreenEnabled_Method</button>
+        <button data-testid="@BUTTON_GET_HIDDEN_PROPERTY" @onclick="GetHidden_Property">GetHidden_Property</button>
+        <button data-testid="@BUTTON_GET_HIDDEN_METHOD" @onclick="GetHidden_Method">GetHidden_Method</button>
+        <button data-testid="@BUTTON_GET_LAST_MODIFIED_PROPERTY" @onclick="GetLastModified_Property">GetLastModified_Property</button>
+        <button data-testid="@BUTTON_GET_LAST_MODIFIED_METHOD" @onclick="GetLastModified_Method">GetLastModified_Method</button>
+        <button data-testid="@BUTTON_GET_PICTURE_IN_PICTURE_ENABLED_PROPERTY" @onclick="GetPictureInPictureEnabled_Property">GetPictureInPictureEnabled_Property</button>
+        <button data-testid="@BUTTON_GET_PICTURE_IN_PICTURE_ENABLED_METHOD" @onclick="GetPictureInPictureEnabled_Method">GetPictureInPictureEnabled_Method</button>
+        <button data-testid="@BUTTON_GET_READY_STATE_PROPERTY" @onclick="GetReadyState_Property">GetReadyState_Property</button>
+        <button data-testid="@BUTTON_GET_READY_STATE_METHOD" @onclick="GetReadyState_Method">GetReadyState_Method</button>
+        <button data-testid="@BUTTON_GET_REFERRER_PROPERTY" @onclick="GetReferrer_Property">GetReferrer_Property</button>
+        <button data-testid="@BUTTON_GET_REFERRER_METHOD" @onclick="GetReferrer_Method">GetReferrer_Method</button>
+        <button data-testid="@BUTTON_GET_TITLE_PROPERTY" @onclick="GetTitle_Property">GetTitle_Property</button>
+        <button data-testid="@BUTTON_GET_TITLE_METHOD" @onclick="GetTitle_Method">GetTitle_Method</button>
+        <button data-testid="@BUTTON_SET_TITLE" @onclick="SetTitle">SetTitle</button>
+        <button data-testid="@BUTTON_GET_URL_PROPERTY" @onclick="GetURL_Property">GetURL_Property</button>
+        <button data-testid="@BUTTON_GET_URL_METHOD" @onclick="GetURL_Method">GetURL_Method</button>
+        <button data-testid="@BUTTON_GET_VISIBILITY_STATE_PROPERTY" @onclick="GetVisibilityState_Property">GetVisibilityState_Property</button>
+        <button data-testid="@BUTTON_GET_VISIBILITY_STATE_METHOD" @onclick="GetVisibilityState_Method">GetVisibilityState_Method</button>
+
+        @* Properties - Node *@
+        <button data-testid="@BUTTON_GET_BASE_URI_PROPERTY" @onclick="GetBaseURI_Property">GetBaseURI_Property</button>
+        <button data-testid="@BUTTON_GET_BASE_URI_METHOD" @onclick="GetBaseURI_Method">GetBaseURI_Method</button>
+        <button data-testid="@BUTTON_GET_NODE_NAME" @onclick="GetNodeName">GetNodeName</button>
+        <button data-testid="@BUTTON_GET_NODE_TYPE" @onclick="GetNodeType">GetNodeType</button>
+    </div>
+    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+</div>
