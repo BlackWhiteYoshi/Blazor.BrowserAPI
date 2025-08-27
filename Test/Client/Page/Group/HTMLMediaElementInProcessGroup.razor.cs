@@ -11,6 +11,10 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const double TEST_PLAYBACK_RATE = 0.6;
     public const double TEST_DEFAULT_PLAYBACK_RATE = 0.4;
     public const string TEST_CROSS_ORIGIN = "use-credentials";
+    public const int TEST_VIDEO_WIDTH = 200;
+    public const int TEST_VIDEO_HEIGHT = 100;
+    public const string TEST_VIDEO_POSTER = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle cx='0' cy='0' r='4' fill='%23484' /></svg>";
+    public const string TEST_PICTURE_IN_PICTURE_WINDOW_RESIZE_EVENT = "pictureInPictureWindow resized";
     public const double TEST_FAST_SEEK = 21.0;
 
 
@@ -25,11 +29,21 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     private ElementReference audioElement;
 
 
+    private IHTMLMediaElementInProcess? _videoElement;
+    private IHTMLMediaElementInProcess VideoElement => _videoElement ??= ElementFactory.CreateHTMLMediaElement(videoElement);
+
+    public const string VIDEO_ELEMENT = "htmlmediaelement-inprocess-video-element";
+    private ElementReference videoElement;
+
+
     public const string LABEL_OUTPUT = "htmlmediaelement-inprocess-output";
     private string labelOutput = string.Empty;
 
 
-    public void Dispose() => _audioElement?.Dispose();
+    public void Dispose() {
+        _audioElement?.Dispose();
+        _videoElement?.Dispose();
+    }
 
 
     #region Attributes
@@ -68,7 +82,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
 
     public const string BUTTON_SET_CONTROLS = "htmlmediaelement-inprocess-set-controls";
     private void SetControls() {
-        AudioElement.Controls = true;
+        AudioElement.Controls = false;
     }
 
 
@@ -296,6 +310,104 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     #endregion
 
 
+    #region Video (<video> elements only)
+
+    public const string BUTTON_GET_WIDTH = "htmlmediaelement-inprocess-get-width";
+    private void GetWidth() {
+        int width = VideoElement.Width;
+        labelOutput = width.ToString();
+    }
+
+    public const string BUTTON_SET_WIDTH = "htmlmediaelement-inprocess-set-width";
+    private void SetWidth() {
+        VideoElement.Width = TEST_VIDEO_WIDTH;
+    }
+
+
+    public const string BUTTON_GET_HEIGHT = "htmlmediaelement-inprocess-get-height";
+    private void GetHeight() {
+        int height = VideoElement.Height;
+        labelOutput = height.ToString();
+    }
+
+    public const string BUTTON_SET_HEIGHT = "htmlmediaelement-inprocess-set-height";
+    private void SetHeight() {
+        VideoElement.Height = TEST_VIDEO_HEIGHT;
+    }
+
+
+    public const string BUTTON_GET_VIDEO_WIDTH = "htmlmediaelement-inprocess-get-video-width";
+    private void GetVideoWidth() {
+        int videoWidth = VideoElement.VideoWidth;
+        labelOutput = videoWidth.ToString();
+    }
+
+    public const string BUTTON_GET_VIDEO_HEIGHT = "htmlmediaelement-inprocess-get-video-height";
+    private void GetVideoHeight() {
+        int videoHeight = VideoElement.VideoHeight;
+        labelOutput = videoHeight.ToString();
+    }
+
+
+    public const string BUTTON_GET_POSTER = "htmlmediaelement-inprocess-get-poster";
+    private void GetPoster() {
+        string poster = VideoElement.Poster;
+        labelOutput = poster;
+    }
+
+    public const string BUTTON_SET_POSTER = "htmlmediaelement-inprocess-set-poster";
+    private void SetPoster() {
+        VideoElement.Poster = TEST_VIDEO_POSTER;
+    }
+
+
+    public const string BUTTON_GET_DISABLE_PICTURE_IN_PICTURE = "htmlmediaelement-inprocess-get-disable-picture-in-picture";
+    private void GetDisablePictureInPicture() {
+        bool disablePictureInPicture = VideoElement.DisablePictureInPicture;
+        labelOutput = disablePictureInPicture.ToString();
+    }
+
+    public const string BUTTON_SET_DISABLE_PICTURE_IN_PICTURE = "htmlmediaelement-inprocess-set-disable-picture-in-picture";
+    private void SetDisablePictureInPicture() {
+        VideoElement.DisablePictureInPicture = true;
+    }
+
+    #endregion
+
+
+    #region PictureInPictureWindow
+
+    public const string BUTTON_GET_PICTURE_IN_PICTURE_WINDOW_WIDTH = "htmlmediaelement-inprocess-get-picture-in-picture-window-width";
+    private async Task GetPictureInPictureWindowWidth() {
+        using IPictureInPictureWindowInProcess pictureInPictureWindow = await VideoElement.RequestPictureInPicture();
+        int width = pictureInPictureWindow.Width;
+        labelOutput = width.ToString();
+    }
+
+    public const string BUTTON_GET_PICTURE_IN_PICTURE_WINDOW_HEIGHT = "htmlmediaelement-inprocess-get-picture-in-picture-window-height";
+    private async Task GetPictureInPictureWindowHeight() {
+        using IPictureInPictureWindowInProcess pictureInPictureWindow = await VideoElement.RequestPictureInPicture();
+        int height = pictureInPictureWindow.Height;
+        labelOutput = height.ToString();
+    }
+
+
+    public const string BUTTON_REGISTER_PICTURE_IN_PICTURE_WINDOW_ON_RESIZE = "htmlmediaelement-inprocess-register-picture-in-picture-window-resize-event";
+    private async Task RegisterPictureInPictureWindowOnResize() {
+        IPictureInPictureWindowInProcess pictureInPictureWindow = await VideoElement.RequestPictureInPicture();
+        pictureInPictureWindow.OnResize += OnResize;
+
+        void OnResize() {
+            labelOutput = TEST_PICTURE_IN_PICTURE_WINDOW_RESIZE_EVENT;
+            StateHasChanged();
+            pictureInPictureWindow.OnResize -= OnResize;
+            pictureInPictureWindow.Dispose();
+        }
+    }
+
+    #endregion
+
+
     #region Methods
 
     public const string BUTTON_PLAY = "htmlmediaelement-inprocess-play";
@@ -322,6 +434,13 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     private void CanPlayType() {
         string value = AudioElement.CanPlayType("audio/mpeg");
         labelOutput = value;
+    }
+
+
+    public const string BUTTON_REQUEST_PICTURE_IN_PICTURE = "htmlmediaelement-inprocess-request-picture-in-picture";
+    private async Task RequestPictureInPicture() {
+        using IPictureInPictureWindowInProcess pictureInPictureWindow = await VideoElement.RequestPictureInPicture();
+        labelOutput = (pictureInPictureWindow is not null).ToString();
     }
 
     #endregion
@@ -513,6 +632,35 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
         AudioElement.OnDurationChange += () => {
             labelOutput = "Durationchange";
             StateHasChanged();
+        };
+    }
+
+
+    // Video
+
+    public const string BUTTON_REGISTER_ON_RESIZE = "htmlmediaelement-inprocess-resize-event";
+    private void RegisterOnResize() {
+        VideoElement.OnResize += () => {
+            labelOutput = "Resize";
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_ENTER_PICTURE_IN_PICTURE = "htmlmediaelement-inprocess-enter-picture-in-picture-event";
+    private void RegisterOnEnterPictureInPicture() {
+        VideoElement.OnEnterPictureInPicture += (IPictureInPictureWindowInProcess pictureInPictureWindow) => {
+            labelOutput = "EnterPictureInPicture";
+            StateHasChanged();
+            pictureInPictureWindow.Dispose();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_LEAVE_PICTURE_IN_PICTURE = "htmlmediaelement-inprocess-leave-picture-in-picture-event";
+    private void RegisterOnLeavePictureInPicture() {
+        VideoElement.OnLeavePictureInPicture += (IPictureInPictureWindowInProcess pictureInPictureWindow) => {
+            labelOutput = "LeavePictureInPicture";
+            StateHasChanged();
+            pictureInPictureWindow.Dispose();
         };
     }
 

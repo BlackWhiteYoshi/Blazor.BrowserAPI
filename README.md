@@ -143,4 +143,5 @@ There are more interfaces coming.
 - 0.14.0 (not done yet)
   - TODO added Document (21 BrowserAPIs)
   - added much more members to HTMLElement
+  - added video members to HTMLMediaElement
   - small breaking changes: renamed some events to capital letters so it fits more the C# convention naming

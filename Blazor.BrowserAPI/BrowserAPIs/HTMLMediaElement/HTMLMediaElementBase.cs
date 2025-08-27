@@ -53,6 +53,11 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
     [method: DynamicDependency(nameof(InvokeVolumeChange))]
     [method: DynamicDependency(nameof(InvokeRateChange))]
     [method: DynamicDependency(nameof(InvokeDurationChange))]
+
+    // Video
+    [method: DynamicDependency(nameof(InvokeResize))]
+    [method: DynamicDependency(nameof(InvokeEnterPictureInPicture))]
+    [method: DynamicDependency(nameof(InvokeLeavePictureInPicture))]
     private sealed class EventTrigger(HTMLMediaElementBase htmlMediaElement) {
         // Ready
         [JSInvokable] public void InvokeError(int code, string message) => htmlMediaElement._onError?.Invoke(code, message);
@@ -83,6 +88,11 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
         [JSInvokable] public void InvokeVolumeChange() => htmlMediaElement._onVolumeChange?.Invoke();
         [JSInvokable] public void InvokeRateChange() => htmlMediaElement._onRateChange?.Invoke();
         [JSInvokable] public void InvokeDurationChange() => htmlMediaElement._onDurationChange?.Invoke();
+
+        // Video
+        [JSInvokable] public void InvokeResize() => htmlMediaElement._onResize?.Invoke();
+        [JSInvokable] public void InvokeEnterPictureInPicture(IJSObjectReference pictureInPictureWindow) => htmlMediaElement.InvokeEnterPictureInPicture(pictureInPictureWindow);
+        [JSInvokable] public void InvokeLeavePictureInPicture(IJSObjectReference pictureInPictureWindow) => htmlMediaElement.InvokeLeavePictureInPicture(pictureInPictureWindow);
     }
 
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
@@ -101,13 +111,13 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
     private protected void DisposeEventTrigger() => _objectReferenceEventTrigger?.Dispose();
 
 
-    private async ValueTask ActivateJSEvent(string jsMethodName) {
+    private protected async ValueTask ActivateJSEvent(string jsMethodName) {
         IJSObjectReference htmlMediaElement = await htmlMediaElementTask;
         await InitEventTrigger(htmlMediaElement);
         await htmlMediaElement.InvokeVoidTrySync(jsMethodName);
     }
 
-    private async ValueTask DeactivateJSEvent(string jsMethodName) {
+    private protected async ValueTask DeactivateJSEvent(string jsMethodName) {
         IJSObjectReference htmlMediaElement = await htmlMediaElementTask;
         await htmlMediaElement.InvokeVoidTrySync(jsMethodName);
     }
@@ -541,6 +551,33 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
                 _ = DeactivateJSEvent("deactivateOndurationchange").Preserve();
         }
     }
+
+
+    // Video Events
+
+    private Action? _onResize;
+    /// <summary>
+    /// <para>Fires when one or both of the videoWidth and videoHeight properties have just been updated.</para>
+    /// <para>This event is not cancelable but may bubble.</para>
+    /// </summary>
+    public event Action OnResize {
+        add {
+            if (_onResize == null)
+                _ = ActivateJSEvent("activateOnresize").Preserve();
+            _onResize += value;
+        }
+        remove {
+            _onResize -= value;
+            if (_onResize == null)
+                _ = DeactivateJSEvent("deactivateOnresize").Preserve();
+        }
+    }
+
+    // (IPictureInPictureWindow | IPictureInPictureWindowInProcess) pictureInPictureWindow
+    private protected abstract void InvokeEnterPictureInPicture(IJSObjectReference pictureInPictureWindow);
+
+    // (IPictureInPictureWindow | IPictureInPictureWindowInProcess) pictureInPictureWindow
+    private protected abstract void InvokeLeavePictureInPicture(IJSObjectReference pictureInPictureWindow);
 
     #endregion
 }

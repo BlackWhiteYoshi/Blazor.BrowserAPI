@@ -1,6 +1,7 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 
 namespace BrowserAPI.Implementation;
 
@@ -277,6 +278,68 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     #endregion
 
 
+    #region Video (<video> elements only)
+
+    /// <summary>
+    /// <para>&lt;video&gt; elements only</para>
+    /// <para>Reflects the width attribute of the &lt;video&gt; element, specifying the displayed width of the resource in CSS pixels.</para>
+    /// </summary>
+    public int Width {
+        get => htmlMediaElementJS.Invoke<int>("getWidth");
+        set => htmlMediaElementJS.InvokeVoid("setWidth", [value]);
+    }
+
+    /// <summary>
+    /// <para>&lt;video&gt; elements only</para>
+    /// <para>Reflects the height attribute of the &lt;video&gt; element, specifying the displayed height of the resource in CSS pixels.</para>
+    /// </summary>
+    public int Height {
+        get => htmlMediaElementJS.Invoke<int>("getHeight");
+        set => htmlMediaElementJS.InvokeVoid("setHeight", [value]);
+    }
+
+    /// <summary>
+    /// <para>&lt;video&gt; elements only</para>
+    /// <para>Indicates the intrinsic width of the video, expressed in CSS pixels. In simple terms, this is the width of the media in its natural size.</para>
+    /// <para>If the element's <see cref="ReadyState"/> is HTMLMediaElement.HAVE_NOTHING, then the value of this property is 0, because neither video nor poster frame size information is yet available.</para>
+    /// <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/videoHeight#about_intrinsic_width_and_height">HTMLVideoElement.videoHeight > About intrinsic width and height</see> for more details.</para>
+    /// </summary>
+    public int VideoWidth => htmlMediaElementJS.Invoke<int>("getVideoWidth");
+
+    /// <summary>
+    /// <para>&lt;video&gt; elements only</para>
+    /// <para>Indicates the intrinsic height of the video, expressed in CSS pixels. In simple terms, this is the height of the media in its natural size.</para>
+    /// <para>If the element's <see cref="ReadyState"/> is HTMLMediaElement.HAVE_NOTHING, then the value of this property is 0, because neither video nor poster frame size information is yet available.</para>
+    /// <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/videoHeight#about_intrinsic_width_and_height">HTMLVideoElement.videoHeight > About intrinsic width and height</see> for more details.</para>
+    /// </summary>
+    public int VideoHeight => htmlMediaElementJS.Invoke<int>("getVideoHeight");
+
+    /// <summary>
+    /// <para>&lt;video&gt; elements only</para>
+    /// <para>Reflects the URL for an image to be shown while no video data is available. If the property does not represent a valid URL, no poster frame will be shown.</para>
+    /// <para>It reflects the poster attribute of the &lt;video&gt; element.</para>
+    /// </summary>
+    public string Poster {
+        get => htmlMediaElementJS.Invoke<string>("getPoster");
+        set => htmlMediaElementJS.InvokeVoid("setPoster", [value]);
+    }
+
+    /// <summary>
+    /// <para>&lt;video&gt; elements only</para>
+    /// <para>Reflects the HTML attribute indicating whether the picture-in-picture feature is disabled for the current element.</para>
+    /// <para>
+    /// This value only represents a request from the website to the user agent.
+    /// User configuration may change the eventual behavior—for example, Firefox users can change the media.videocontrols.picture-in-picture.respect-disablePictureInPicture setting to ignore the request to disable PiP.
+    /// </para>
+    /// </summary>
+    public bool DisablePictureInPicture {
+        get => htmlMediaElementJS.Invoke<bool>("getDisablePictureInPicture");
+        set => htmlMediaElementJS.InvokeVoid("setDisablePictureInPicture", [value]);
+    }
+
+    #endregion
+
+
     #region Methods
 
     /// play() is declared in HTMLMediaElementBase
@@ -308,6 +371,73 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// <param name="type">A string specifying the MIME type of the media and (optionally) a codecs parameter containing a comma-separated list of the supported codecs.</param>
     /// <returns>"probably", "maybe" or ""</returns>
     public string CanPlayType(string type) => htmlMediaElementJS.Invoke<string>("canPlayType", [type]);
+
+
+    /// <summary>
+    /// <para>&lt;video&gt; elements only</para>
+    /// <para>Issues an asynchronous request to display the video in picture-in-picture mode.</para>
+    /// <para>
+    /// It's not guaranteed that the video will be put into picture-in-picture.
+    /// If permission to enter that mode is granted, the returned Promise will resolve and the video will receive a enterpictureinpicture event to let it know that it's now in picture-in-picture.
+    /// </para>
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IPictureInPictureWindowInProcess> RequestPictureInPicture(CancellationToken cancellationToken = default) {
+        IJSInProcessObjectReference pictureInPictureWindowJS = await (await htmlMediaElementTask).InvokeAsync<IJSInProcessObjectReference>("requestPictureInPicture", cancellationToken);
+        return new PictureInPictureWindowInProcess(pictureInPictureWindowJS);
+    }
+
+    #endregion
+
+
+    #region Events
+
+    private protected override void InvokeEnterPictureInPicture(IJSObjectReference pictureInPictureWindow) => _onEnterPictureInPicture?.Invoke(new PictureInPictureWindowInProcess((IJSInProcessObjectReference)pictureInPictureWindow));
+    private Action<IPictureInPictureWindowInProcess>? _onEnterPictureInPicture;
+    /// <summary>
+    /// <para>Is fired when the HTMLVideoElement enters picture-in-picture mode successfully.</para>
+    /// <para>This event is not cancelable and does not bubble.</para>
+    /// <para>
+    /// Parameter returns the PictureInPictureWindow the event relates to.<br />
+    /// Note: Dispose the given PictureInPictureWindow object when you are done with it.
+    /// </para>
+    /// </summary>
+    public event Action<IPictureInPictureWindowInProcess> OnEnterPictureInPicture {
+        add {
+            if (_onEnterPictureInPicture == null)
+                _ = ActivateJSEvent("activateOnenterpictureinpicture").Preserve();
+            _onEnterPictureInPicture += value;
+        }
+        remove {
+            _onEnterPictureInPicture -= value;
+            if (_onEnterPictureInPicture == null)
+                _ = DeactivateJSEvent("deactivateOnenterpictureinpicture").Preserve();
+        }
+    }
+
+    private protected override void InvokeLeavePictureInPicture(IJSObjectReference pictureInPictureWindow) => _onLeavePictureInPicture?.Invoke(new PictureInPictureWindowInProcess((IJSInProcessObjectReference)pictureInPictureWindow));
+    private Action<IPictureInPictureWindowInProcess>? _onLeavePictureInPicture;
+    /// <summary>
+    /// <para>Is fired when the HTMLVideoElement leaves picture-in-picture mode successfully.</para>
+    /// <para>This event is not cancelable and does not bubble.</para>
+    /// <para>
+    /// Parameter returns the PictureInPictureWindow the event relates to.<br />
+    /// Note: Dispose the given PictureInPictureWindow object when you are done with it.
+    /// </para>
+    /// </summary>
+    public event Action<IPictureInPictureWindowInProcess> OnLeavePictureInPicture {
+        add {
+            if (_onLeavePictureInPicture == null)
+                _ = ActivateJSEvent("activateOnleavepictureinpicture").Preserve();
+            _onLeavePictureInPicture += value;
+        }
+        remove {
+            _onLeavePictureInPicture -= value;
+            if (_onLeavePictureInPicture == null)
+                _ = DeactivateJSEvent("deactivateOnleavepictureinpicture").Preserve();
+        }
+    }
 
     #endregion
 }

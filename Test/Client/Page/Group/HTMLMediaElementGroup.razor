@@ -97,6 +97,40 @@
         <button data-testid="@BUTTON_GET_DISABLE_REMOTE_PLAYBACK_METHOD" @onclick="GetDisableRemotePlayback_Method">GetDisableRemotePlayback_Method</button>
         <button data-testid="@BUTTON_SET_DISABLE_REMOTE_PLAYBACK" @onclick="SetDisableRemotePlayback">SetDisableRemotePlayback</button>
 
+        @* Video *@
+
+        <button data-testid="@BUTTON_GET_WIDTH_PROPERTY" @onclick="GetWidth_Property">GetWidth_Property</button>
+        <button data-testid="@BUTTON_GET_WIDTH_METHOD" @onclick="GetWidth_Method">GetWidth_Method</button>
+        <button data-testid="@BUTTON_SET_WIDTH" @onclick="SetWidth">SetWidth</button>
+
+        <button data-testid="@BUTTON_GET_HEIGHT_PROPERTY" @onclick="GetHeight_Property">GetHeight_Property</button>
+        <button data-testid="@BUTTON_GET_HEIGHT_METHOD" @onclick="GetHeight_Method">GetHeight_Method</button>
+        <button data-testid="@BUTTON_SET_HEIGHT" @onclick="SetHeight">SetHeight</button>
+
+        <button data-testid="@BUTTON_GET_VIDEO_WIDTH_PROPERTY" @onclick="GetVideoWidth_Property">GetVideoWidth_Property</button>
+        <button data-testid="@BUTTON_GET_VIDEO_WIDTH_METHOD" @onclick="GetVideoWidth_Method">GetVideoWidth_Method</button>
+
+        <button data-testid="@BUTTON_GET_VIDEO_HEIGHT_PROPERTY" @onclick="GetVideoHeight_Property">GetVideoHeight_Property</button>
+        <button data-testid="@BUTTON_GET_VIDEO_HEIGHT_METHOD" @onclick="GetVideoHeight_Method">GetVideoHeight_Method</button>
+
+        <button data-testid="@BUTTON_GET_POSTER_PROPERTY" @onclick="GetPoster_Property">GetPoster_Property</button>
+        <button data-testid="@BUTTON_GET_POSTER_METHOD" @onclick="GetPoster_Method">GetPoster_Method</button>
+        <button data-testid="@BUTTON_SET_POSTER" @onclick="SetPoster">SetPoster</button>
+
+        <button data-testid="@BUTTON_GET_DISABLE_PICTURE_IN_PICTURE_PROPERTY" @onclick="GetDisablePictureInPicture_Property">GetDisablePictureInPicture_Property</button>
+        <button data-testid="@BUTTON_GET_DISABLE_PICTURE_IN_PICTURE_METHOD" @onclick="GetDisablePictureInPicture_Method">GetDisablePictureInPicture_Method</button>
+        <button data-testid="@BUTTON_SET_DISABLE_PICTURE_IN_PICTURE" @onclick="SetDisablePictureInPicture">SetDisablePictureInPicture</button>
+
+        @* PictureInPictureWindow *@
+
+        <button data-testid="@BUTTON_GET_PICTURE_IN_PICTURE_WINDOW_WIDTH_PROPERTY" @onclick="GetPictureInPictureWindowWidth_Property">GetPictureInPictureWindowWidth_Property</button>
+        <button data-testid="@BUTTON_GET_PICTURE_IN_PICTURE_WINDOW_WIDTH_METHOD" @onclick="GetPictureInPictureWindowWidth_Method">GetPictureInPictureWindowWidth_Method</button>
+
+        <button data-testid="@BUTTON_GET_PICTURE_IN_PICTURE_WINDOW_HEIGHT_PROPERTY" @onclick="GetPictureInPictureWindowHeight_Property">GetPictureInPictureWindowHeight_Property</button>
+        <button data-testid="@BUTTON_GET_PICTURE_IN_PICTURE_WINDOW_HEIGHT_METHOD" @onclick="GetPictureInPictureWindowHeight_Method">GetPictureInPictureWindowHeight_Method</button>
+
+        <button data-testid="@BUTTON_REGISTER_PICTURE_IN_PICTURE_WINDOW_ON_RESIZE" @onclick="RegisterPictureInPictureWindowOnResize">RegisterPictureInPictureWindowOnResize</button>
+
         @* Methods *@
 
         <button data-testid="@BUTTON_PLAY" @onclick="Play">Play</button>
@@ -104,6 +138,8 @@
         <button data-testid="@BUTTON_LOAD" @onclick="Load">Load</button>
         <button data-testid="@BUTTON_FAST_SEEK" @onclick="FastSeek">FastSeek</button>
         <button data-testid="@BUTTON_CAN_PLAY_TYPE" @onclick="CanPlayType">CanPlayType</button>
+
+        <button data-testid="@BUTTON_REQUEST_PICTURE_IN_PICTURE" @onclick="RequestPictureInPicture">RequestPictureInPicture</button>
 
         @* Events *@
 
@@ -136,7 +172,13 @@
         <button data-testid="@BUTTON_REGISTER_ON_VOLUME_CHANGE" @onclick="RegisterOnVolumeChange">RegisterOnVolumeChange</button>
         <button data-testid="@BUTTON_REGISTER_ON_RATE_CHANGE" @onclick="RegisterOnRateChange">RegisterOnRateChange</button>
         <button data-testid="@BUTTON_REGISTER_ON_DURATION_CHANGE" @onclick="RegisterOnDurationChange">RegisterOnDurationChange</button>
+
+        @* Video *@
+        <button data-testid="@BUTTON_REGISTER_ON_RESIZE" @onclick="RegisterOnResize">RegisterOnResize</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ENTER_PICTURE_IN_PICTURE" @onclick="RegisterOnEnterPictureInPicture">RegisterOnEnterPictureInPicture</button>
+        <button data-testid="@BUTTON_REGISTER_ON_LEAVE_PICTURE_IN_PICTURE" @onclick="RegisterOnLeavePictureInPicture">RegisterOnLeavePictureInPicture</button>
     </div>
     <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
-    <audio data-testid="@AUDIO_ELEMENT" @ref="audioElement" src="HTMLMediaElement_audio.mp3" preload="auto"></audio>
+    <audio data-testid="@AUDIO_ELEMENT" @ref="audioElement" src="HTMLMediaElement_audio.mp3" preload="metadata" controls></audio>
+    <video data-testid="@VIDEO_ELEMENT" @ref="videoElement" src="HTMLMediaElement_video.mp4" width="160" height="90" preload="metadata" controls></video>
 </div>

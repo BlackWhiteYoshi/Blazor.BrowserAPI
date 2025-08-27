@@ -471,6 +471,115 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     #endregion
 
 
+    #region Video (<video> elements only)
+
+    /// <summary>
+    /// <para>&lt;video&gt; elements only</para>
+    /// <para>Reflects the width attribute of the &lt;video&gt; element, specifying the displayed width of the resource in CSS pixels.</para>
+    /// </summary>
+    public ValueTask<int> Width => GetWidth(default);
+
+    /// <inheritdoc cref="Width" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<int> GetWidth(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<int>("getWidth", cancellationToken);
+
+    /// <inheritdoc cref="Width" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetWidth(int value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setWidth", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>&lt;video&gt; elements only</para>
+    /// <para>Reflects the height attribute of the &lt;video&gt; element, specifying the displayed height of the resource in CSS pixels.</para>
+    /// </summary>
+    public ValueTask<int> Height => GetHeight(default);
+
+    /// <inheritdoc cref="Height" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<int> GetHeight(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<int>("getHeight", cancellationToken);
+
+    /// <inheritdoc cref="Height" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetHeight(int value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setHeight", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>&lt;video&gt; elements only</para>
+    /// <para>Indicates the intrinsic width of the video, expressed in CSS pixels. In simple terms, this is the width of the media in its natural size.</para>
+    /// <para>If the element's <see cref="ReadyState"/> is HTMLMediaElement.HAVE_NOTHING, then the value of this property is 0, because neither video nor poster frame size information is yet available.</para>
+    /// <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/videoHeight#about_intrinsic_width_and_height">HTMLVideoElement.videoHeight > About intrinsic width and height</see> for more details.</para>
+    /// </summary>
+    public ValueTask<int> VideoWidth => GetVideoWidth(default);
+
+    /// <inheritdoc cref="VideoWidth" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<int> GetVideoWidth(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<int>("getVideoWidth", cancellationToken);
+
+
+    /// <summary>
+    /// <para>&lt;video&gt; elements only</para>
+    /// <para>Indicates the intrinsic height of the video, expressed in CSS pixels. In simple terms, this is the height of the media in its natural size.</para>
+    /// <para>If the element's <see cref="ReadyState"/> is HTMLMediaElement.HAVE_NOTHING, then the value of this property is 0, because neither video nor poster frame size information is yet available.</para>
+    /// <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/videoHeight#about_intrinsic_width_and_height">HTMLVideoElement.videoHeight > About intrinsic width and height</see> for more details.</para>
+    /// </summary>
+    public ValueTask<int> VideoHeight => GetVideoHeight(default);
+
+    /// <inheritdoc cref="VideoHeight" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<int> GetVideoHeight(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<int>("getVideoHeight", cancellationToken);
+
+
+    /// <summary>
+    /// <para>&lt;video&gt; elements only</para>
+    /// <para>Reflects the URL for an image to be shown while no video data is available. If the property does not represent a valid URL, no poster frame will be shown.</para>
+    /// <para>It reflects the poster attribute of the &lt;video&gt; element.</para>
+    /// </summary>
+    public ValueTask<string> Poster => GetPoster(default);
+
+    /// <inheritdoc cref="Poster" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetPoster(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<string>("getPoster", cancellationToken);
+
+    /// <inheritdoc cref="Poster" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetPoster(string value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setPoster", cancellationToken, [value]);
+
+
+    /// <summary>
+    /// <para>&lt;video&gt; elements only</para>
+    /// <para>Reflects the HTML attribute indicating whether the picture-in-picture feature is disabled for the current element.</para>
+    /// <para>
+    /// This value only represents a request from the website to the user agent.
+    /// User configuration may change the eventual behavior—for example, Firefox users can change the media.videocontrols.picture-in-picture.respect-disablePictureInPicture setting to ignore the request to disable PiP.
+    /// </para>
+    /// </summary>
+    public ValueTask<bool> DisablePictureInPicture => GetDisablePictureInPicture(default);
+
+    /// <inheritdoc cref="DisablePictureInPicture" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<bool> GetDisablePictureInPicture(CancellationToken cancellationToken) => await (await htmlMediaElementTask).InvokeTrySync<bool>("getDisablePictureInPicture", cancellationToken);
+
+    /// <inheritdoc cref="DisablePictureInPicture" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetDisablePictureInPicture(bool value, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidTrySync("setDisablePictureInPicture", cancellationToken, [value]);
+
+    #endregion
+
+
     #region Methods
 
     /// play() is declared in HTMLMediaElementBase
@@ -509,6 +618,73 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="cancellationToken"></param>
     /// <returns>"probably", "maybe" or ""</returns>
     public async ValueTask<string> CanPlayType(string type, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeTrySync<string>("canPlayType", cancellationToken, [type]);
+
+
+    /// <summary>
+    /// <para>&lt;video&gt; elements only</para>
+    /// <para>Issues an asynchronous request to display the video in picture-in-picture mode.</para>
+    /// <para>
+    /// It's not guaranteed that the video will be put into picture-in-picture.
+    /// If permission to enter that mode is granted, the returned Promise will resolve and the video will receive a enterpictureinpicture event to let it know that it's now in picture-in-picture.
+    /// </para>
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IPictureInPictureWindow> RequestPictureInPicture(CancellationToken cancellationToken = default) {
+        IJSObjectReference pictureInPictureWindowJS = await (await htmlMediaElementTask).InvokeAsync<IJSObjectReference>("requestPictureInPicture", cancellationToken);
+        return new PictureInPictureWindow(pictureInPictureWindowJS);
+    }
+
+    #endregion
+
+
+    #region Events
+
+    private protected override void InvokeEnterPictureInPicture(IJSObjectReference pictureInPictureWindow) => _onEnterPictureInPicture?.Invoke(new PictureInPictureWindow(pictureInPictureWindow));
+    private Action<IPictureInPictureWindow>? _onEnterPictureInPicture;
+    /// <summary>
+    /// <para>Is fired when the HTMLVideoElement enters picture-in-picture mode successfully.</para>
+    /// <para>This event is not cancelable and does not bubble.</para>
+    /// <para>
+    /// Parameter returns the PictureInPictureWindow the event relates to.<br />
+    /// Note: Dispose the given PictureInPictureWindow object when you are done with it.
+    /// </para>
+    /// </summary>
+    public event Action<IPictureInPictureWindow> OnEnterPictureInPicture {
+        add {
+            if (_onEnterPictureInPicture == null)
+                _ = ActivateJSEvent("activateOnenterpictureinpicture").Preserve();
+            _onEnterPictureInPicture += value;
+        }
+        remove {
+            _onEnterPictureInPicture -= value;
+            if (_onEnterPictureInPicture == null)
+                _ = DeactivateJSEvent("deactivateOnenterpictureinpicture").Preserve();
+        }
+    }
+
+    private protected override void InvokeLeavePictureInPicture(IJSObjectReference pictureInPictureWindow) => _onLeavePictureInPicture?.Invoke(new PictureInPictureWindow(pictureInPictureWindow));
+    private Action<IPictureInPictureWindow>? _onLeavePictureInPicture;
+    /// <summary>
+    /// <para>Is fired when the HTMLVideoElement leaves picture-in-picture mode successfully.</para>
+    /// <para>This event is not cancelable and does not bubble.</para>
+    /// <para>
+    /// Parameter returns the PictureInPictureWindow the event relates to.<br />
+    /// Note: Dispose the given PictureInPictureWindow object when you are done with it.
+    /// </para>
+    /// </summary>
+    public event Action<IPictureInPictureWindow> OnLeavePictureInPicture {
+        add {
+            if (_onLeavePictureInPicture == null)
+                _ = ActivateJSEvent("activateOnleavepictureinpicture").Preserve();
+            _onLeavePictureInPicture += value;
+        }
+        remove {
+            _onLeavePictureInPicture -= value;
+            if (_onLeavePictureInPicture == null)
+                _ = DeactivateJSEvent("deactivateOnleavepictureinpicture").Preserve();
+        }
+    }
 
     #endregion
 }

@@ -6,6 +6,9 @@ namespace BrowserAPI.UnitTest;
 public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     public override Task InitializeAsync()
         => TestContext.Current?.TestName switch {
+            nameof(GetVideoWidth)
+            or nameof(GetVideoHeight)
+            or nameof(RegisterOnResize) => NewPage(BrowserId.Firefox),
             nameof(FastSeek) => NewPage(BrowserId.Firefox),
             _ => NewPage(BrowserId.Chromium)
         };
@@ -52,7 +55,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_CONTROLS);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("False");
+        await Assert.That(result).IsEqualTo("True");
     }
 
     [Test]
@@ -60,7 +63,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_CONTROLS);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).GetAttributeAsync("controls");
-        await Assert.That(result).IsEqualTo("");
+        await Assert.That(result).IsNull();
     }
 
 
@@ -120,7 +123,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_PRELOAD);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("auto");
+        await Assert.That(result).IsEqualTo("metadata");
     }
 
     [Test]
@@ -373,6 +376,157 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
     #endregion
 
 
+    #region Video (<video> elements only)
+
+    [Test]
+    public async Task GetWidth() {
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.VIDEO_ELEMENT).EvaluateAsync($"videoElement => videoElement.width = {HTMLMediaElementInProcessGroup.TEST_VIDEO_WIDTH};");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_WIDTH);
+
+        string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_VIDEO_WIDTH.ToString());
+    }
+
+    [Test]
+    public async Task SetWidth() {
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_WIDTH);
+
+        int result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.VIDEO_ELEMENT).EvaluateAsync<int>("videoElement => videoElement.width;");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_VIDEO_WIDTH);
+    }
+
+
+    [Test]
+    public async Task GetHeight() {
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.VIDEO_ELEMENT).EvaluateAsync($"videoElement => videoElement.height = {HTMLMediaElementInProcessGroup.TEST_VIDEO_HEIGHT};");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_HEIGHT);
+
+        string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_VIDEO_HEIGHT.ToString());
+    }
+
+    [Test]
+    public async Task SetHeight() {
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_HEIGHT);
+
+        int result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.VIDEO_ELEMENT).EvaluateAsync<int>("videoElement => videoElement.height;");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_VIDEO_HEIGHT);
+    }
+
+
+    [Test]
+    public async Task GetVideoWidth() {
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.VIDEO_ELEMENT).EvaluateAsync("videoElement => videoElement.load();");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_VIDEO_WIDTH);
+
+        string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("1280");
+    }
+
+    [Test]
+    public async Task GetVideoHeight() {
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.VIDEO_ELEMENT).EvaluateAsync("videoElement => videoElement.load();");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_VIDEO_HEIGHT);
+
+        string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("720");
+    }
+
+
+    [Test]
+    public async Task GetPoster() {
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.VIDEO_ELEMENT).EvaluateAsync($"""videoElement => videoElement.poster = "{HTMLMediaElementInProcessGroup.TEST_VIDEO_POSTER}";""");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_POSTER);
+
+        string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_VIDEO_POSTER);
+    }
+
+    [Test]
+    public async Task SetPoster() {
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_POSTER);
+
+        string result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.VIDEO_ELEMENT).EvaluateAsync<string>("videoElement => videoElement.poster;");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_VIDEO_POSTER);
+    }
+
+
+    [Test]
+    public async Task GetDisablePictureInPicture() {
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_DISABLE_PICTURE_IN_PICTURE);
+
+        string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("False");
+    }
+
+    [Test]
+    public async Task SetDisablePictureInPicture() {
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_SET_DISABLE_PICTURE_IN_PICTURE);
+
+        bool result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.VIDEO_ELEMENT).EvaluateAsync<bool>("videoElement => videoElement.disablePictureInPicture;");
+        await Assert.That(result).IsTrue();
+    }
+
+    #endregion
+
+
+    /* Chromium does not load .mp4 and firefox does not support this feauture
+
+    #region PictureInPictureWindow
+
+    [Test]
+    public async Task GetPictureInPictureWindowWidth() {
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.VIDEO_ELEMENT).EvaluateAsync("videoElement => videoElement.load();");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_PICTURE_IN_PICTURE_WINDOW_WIDTH);
+
+        string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        int.TryParse(result, out int resultNumber);
+        await Assert.That(resultNumber).IsGreaterThan(0);
+    }
+
+    [Test]
+    public async Task GetPictureInPictureWindowHeight() {
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.VIDEO_ELEMENT).EvaluateAsync("videoElement => videoElement.load();");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_PICTURE_IN_PICTURE_WINDOW_HEIGHT);
+
+        string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        int.TryParse(result, out int resultNumber);
+        await Assert.That(resultNumber).IsGreaterThan(0);
+    }
+
+
+    [Test]
+    public async Task RegisterPictureInPictureWindowOnResize() {
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.VIDEO_ELEMENT).EvaluateAsync("videoElement => videoElement.load();");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_PICTURE_IN_PICTURE_WINDOW_ON_RESIZE);
+
+        // ? resize floating video
+
+        string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_PICTURE_IN_PICTURE_WINDOW_RESIZE_EVENT);
+    }
+
+    #endregion
+
+    */
+
+
     #region Methods
 
     [Test]
@@ -407,8 +561,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Assert.That(currentTime).IsEqualTo(0.0);
     }
 
-    // does not work in Chromium Browser. To make this test work, go to PlayWrightFixture.InitializeAsync() and change "Chromium" to "Firefox"
-    [Test, Explicit]
+    [Test]
     public async Task FastSeek() {
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.BUTTON_FAST_SEEK).WaitForAsync(); // minimal delay
         await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_FAST_SEEK);
@@ -424,6 +577,22 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("probably");
     }
+
+
+    /* Chromium does not load .mp4 and firefox does not support this feauture
+
+    [Test]
+    public async Task RequestPictureInPicture() {
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.VIDEO_ELEMENT).EvaluateAsync("videoElement => videoElement.load();");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REQUEST_PICTURE_IN_PICTURE);
+
+        string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    */
 
     #endregion
 
@@ -672,6 +841,50 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Durationchange");
     }
+
+
+    // Video
+
+    [Test]
+    public async Task RegisterOnResize() {
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.VIDEO_ELEMENT).EvaluateAsync("videoElement => videoElement.src = '';");
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_RESIZE);
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.VIDEO_ELEMENT).EvaluateAsync("videoElement => videoElement.src = 'HTMLMediaElement_video.mp4';");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("Resize");
+    }
+
+    /* Chromium does not load .mp4 and firefox does not support PictureInPictureWindow
+
+    [Test]
+    public async Task RegisterOnEnterPictureInPicture() {
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.VIDEO_ELEMENT).EvaluateAsync("videoElement => videoElement.load();");
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_ENTER_PICTURE_IN_PICTURE);
+
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.VIDEO_ELEMENT).EvaluateAsync("videoElement => videoElement.requestPictureInPicture();");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("EnterPictureInPicture");
+    }
+
+    [Test]
+    public async Task RegisterOnLeavePictureInPicture() {
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.VIDEO_ELEMENT).EvaluateAsync("videoElement => videoElement.load();");
+        await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_REGISTER_ON_ENTER_PICTURE_IN_PICTURE);
+
+        await Page.GetByTestId(HTMLMediaElementInProcessGroup.VIDEO_ELEMENT).EvaluateAsync("videoElement => videoElement.requestPictureInPicture();");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        // close window
+
+        string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("LeavePictureInPicture");
+    }
+
+    */
 
     #endregion
 }

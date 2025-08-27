@@ -800,7 +800,6 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
 
     [Test]
     public async Task ExitPictureInPicture() {
-        // TODO ExitPictureInPicture
         await ExecuteTest(DocumentGroup.BUTTON_EXIT_PICTURE_IN_PICTURE);
 
         string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();

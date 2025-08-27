@@ -1,3 +1,4 @@
+import { PictureInPictureWindowAPI } from "./PictureInPictureWindow/PictureInPictureWindow";
 import { MediaStreamAPI } from "../MediaDevices/MediaStream/MediaStream";
 import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
 
@@ -10,6 +11,16 @@ export class HTMLMediaElementAPI {
 
     static create(htmlMediaElement: HTMLMediaElement): HTMLMediaElementAPI {
         return new HTMLMediaElementAPI(htmlMediaElement);
+    }
+
+
+    static #toTimeRangeArray(timeRanges: TimeRanges) {
+        let result = [];
+
+        for (let i = 0; i < timeRanges.length; i++)
+            result.push({ start: timeRanges.start(i), end: timeRanges.end(i) });
+
+        return result;
     }
 
 
@@ -201,6 +212,48 @@ export class HTMLMediaElementAPI {
     }
 
 
+    // Video (HTMLVideoElement only)
+
+    getWidth(): number {
+        return (<HTMLVideoElement>this.#htmlMediaElement).width;
+    }
+
+    setWidth(value: number): void {
+        (<HTMLVideoElement>this.#htmlMediaElement).width = value;
+    }
+
+    getHeight(): number {
+        return (<HTMLVideoElement>this.#htmlMediaElement).height;
+    }
+
+    setHeight(value: number): void {
+        (<HTMLVideoElement>this.#htmlMediaElement).height = value;
+    }
+
+    getVideoWidth(): number {
+        return (<HTMLVideoElement>this.#htmlMediaElement).videoWidth;
+    }
+
+    getVideoHeight(): number {
+        return (<HTMLVideoElement>this.#htmlMediaElement).videoHeight;
+    }
+
+    getPoster(): string {
+        return (<HTMLVideoElement>this.#htmlMediaElement).poster;
+    }
+
+    setPoster(value: string): void {
+        (<HTMLVideoElement>this.#htmlMediaElement).poster = value;
+    }
+
+    getDisablePictureInPicture(): boolean {
+        return (<HTMLVideoElement>this.#htmlMediaElement).disablePictureInPicture;
+    }
+
+    setDisablePictureInPicture(value: boolean): void {
+        (<HTMLVideoElement>this.#htmlMediaElement).disablePictureInPicture = value;
+    }
+
 
     // Methods
 
@@ -224,6 +277,11 @@ export class HTMLMediaElementAPI {
         return this.#htmlMediaElement.canPlayType(type);
     }
 
+    // HTMLVideoElement only
+    async requestPictureInPicture(): Promise<PictureInPictureWindowAPI> {
+        const pictureInPictureWindow = await (<HTMLVideoElement>this.#htmlMediaElement).requestPictureInPicture();
+        return new PictureInPictureWindowAPI(pictureInPictureWindow);
+    }
 
 
     // events
@@ -534,13 +592,43 @@ export class HTMLMediaElementAPI {
     }
 
 
+    // Video
 
-    static #toTimeRangeArray(timeRanges: TimeRanges) {
-        let result = [];
+    // HTMLMediaElement - resize event
 
-        for (let i = 0; i < timeRanges.length; i++)
-            result.push({ start: timeRanges.start(i), end: timeRanges.end(i) });
+    #onresize = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeResize");
 
-        return result;
+    activateOnresize(): void {
+        this.#htmlMediaElement.addEventListener("resize", this.#onresize);
+    }
+
+    deactivateOnresize(): void {
+        this.#htmlMediaElement.removeEventListener("resize", this.#onresize);
+    }
+
+
+    // HTMLMediaElement - enterpictureinpicture event
+
+    #onenterpictureinpicture = (event: PictureInPictureEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeEnterPictureInPicture", DotNet.createJSObjectReference(event.pictureInPictureWindow));
+
+    activateOnenterpictureinpicture(): void {
+        this.#htmlMediaElement.addEventListener("enterpictureinpicture", this.#onenterpictureinpicture);
+    }
+
+    deactivateOnenterpictureinpicture(): void {
+        this.#htmlMediaElement.removeEventListener("enterpictureinpicture", this.#onenterpictureinpicture);
+    }
+
+
+    // HTMLMediaElement - leavepictureinpicture event
+
+    #onleavepictureinpicture = (event: PictureInPictureEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeLeavePictureInPicture", DotNet.createJSObjectReference(event.pictureInPictureWindow));
+
+    activateOnleavepictureinpicture(): void {
+        this.#htmlMediaElement.addEventListener("leavepictureinpicture", this.#onleavepictureinpicture);
+    }
+
+    deactivateOnleavepictureinpicture(): void {
+        this.#htmlMediaElement.removeEventListener("leavepictureinpicture", this.#onleavepictureinpicture);
     }
 }

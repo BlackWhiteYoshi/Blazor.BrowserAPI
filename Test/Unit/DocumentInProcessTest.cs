@@ -519,7 +519,6 @@ public sealed class DocumentInProcessTest(PlayWrightFixture playWrightFixture) :
 
     [Test]
     public async Task ExitPictureInPicture() {
-        // TODO ExitPictureInPicture
         await ExecuteTest(DocumentInProcessGroup.BUTTON_EXIT_PICTURE_IN_PICTURE);
 
         string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();

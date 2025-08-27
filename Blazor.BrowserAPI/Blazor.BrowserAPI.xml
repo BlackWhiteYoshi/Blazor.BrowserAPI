@@ -1775,7 +1775,7 @@
         <member name="M:BrowserAPI.Implementation.DocumentBase.ExitPictureInPicture(System.Threading.CancellationToken)">
             <summary>
             Requests that a video contained in this document, which is currently floating, be taken out of picture-in-picture mode, restoring the previous state of the screen.
-            This usually reverses the effects of a previous call to <see cref="!:IHTMLMediaElement.RequestPictureInPicture"/>.
+            This usually reverses the effects of a previous call to <see cref="M:BrowserAPI.IHTMLMediaElement.RequestPictureInPicture(System.Threading.CancellationToken)"/>.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -10155,6 +10155,105 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.Width">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Reflects the width attribute of the &lt;video&gt; element, specifying the displayed width of the resource in CSS pixels.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetWidth(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.HTMLMediaElement.Width" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.SetWidth(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.HTMLMediaElement.Width" />
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.Height">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Reflects the height attribute of the &lt;video&gt; element, specifying the displayed height of the resource in CSS pixels.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetHeight(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.HTMLMediaElement.Height" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.SetHeight(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.HTMLMediaElement.Height" />
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.VideoWidth">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Indicates the intrinsic width of the video, expressed in CSS pixels. In simple terms, this is the width of the media in its natural size.</para>
+            <para>If the element's <see cref="P:BrowserAPI.Implementation.HTMLMediaElement.ReadyState"/> is HTMLMediaElement.HAVE_NOTHING, then the value of this property is 0, because neither video nor poster frame size information is yet available.</para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/videoHeight#about_intrinsic_width_and_height">HTMLVideoElement.videoHeight > About intrinsic width and height</see> for more details.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetVideoWidth(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.HTMLMediaElement.VideoWidth" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.VideoHeight">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Indicates the intrinsic height of the video, expressed in CSS pixels. In simple terms, this is the height of the media in its natural size.</para>
+            <para>If the element's <see cref="P:BrowserAPI.Implementation.HTMLMediaElement.ReadyState"/> is HTMLMediaElement.HAVE_NOTHING, then the value of this property is 0, because neither video nor poster frame size information is yet available.</para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/videoHeight#about_intrinsic_width_and_height">HTMLVideoElement.videoHeight > About intrinsic width and height</see> for more details.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetVideoHeight(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.HTMLMediaElement.VideoHeight" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.Poster">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Reflects the URL for an image to be shown while no video data is available. If the property does not represent a valid URL, no poster frame will be shown.</para>
+            <para>It reflects the poster attribute of the &lt;video&gt; element.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetPoster(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.HTMLMediaElement.Poster" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.SetPoster(System.String,System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.HTMLMediaElement.Poster" />
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElement.DisablePictureInPicture">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Reflects the HTML attribute indicating whether the picture-in-picture feature is disabled for the current element.</para>
+            <para>
+            This value only represents a request from the website to the user agent.
+            User configuration may change the eventual behavior—for example, Firefox users can change the media.videocontrols.picture-in-picture.respect-disablePictureInPicture setting to ignore the request to disable PiP.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.GetDisablePictureInPicture(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.HTMLMediaElement.DisablePictureInPicture" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.SetDisablePictureInPicture(System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.HTMLMediaElement.DisablePictureInPicture" />
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="M:BrowserAPI.Implementation.HTMLMediaElement.Pause(System.Threading.CancellationToken)">
             play() is declared in HTMLMediaElementBase
             <summary>
@@ -10190,6 +10289,18 @@
             <param name="type">A string specifying the MIME type of the media and (optionally) a codecs parameter containing a comma-separated list of the supported codecs.</param>
             <param name="cancellationToken"></param>
             <returns>"probably", "maybe" or ""</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElement.RequestPictureInPicture(System.Threading.CancellationToken)">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Issues an asynchronous request to display the video in picture-in-picture mode.</para>
+            <para>
+            It's not guaranteed that the video will be put into picture-in-picture.
+            If permission to enter that mode is granted, the returned Promise will resolve and the video will receive a enterpictureinpicture event to let it know that it's now in picture-in-picture.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
         </member>
         <member name="M:BrowserAPI.Implementation.HTMLMediaElementBase.Play(System.Threading.CancellationToken)">
             <summary>
@@ -10567,6 +10678,51 @@
             <para>false means "not disabled", which means "enabled"</para>
             </summary>
         </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.Width">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Reflects the width attribute of the &lt;video&gt; element, specifying the displayed width of the resource in CSS pixels.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.Height">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Reflects the height attribute of the &lt;video&gt; element, specifying the displayed height of the resource in CSS pixels.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.VideoWidth">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Indicates the intrinsic width of the video, expressed in CSS pixels. In simple terms, this is the width of the media in its natural size.</para>
+            <para>If the element's <see cref="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.ReadyState"/> is HTMLMediaElement.HAVE_NOTHING, then the value of this property is 0, because neither video nor poster frame size information is yet available.</para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/videoHeight#about_intrinsic_width_and_height">HTMLVideoElement.videoHeight > About intrinsic width and height</see> for more details.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.VideoHeight">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Indicates the intrinsic height of the video, expressed in CSS pixels. In simple terms, this is the height of the media in its natural size.</para>
+            <para>If the element's <see cref="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.ReadyState"/> is HTMLMediaElement.HAVE_NOTHING, then the value of this property is 0, because neither video nor poster frame size information is yet available.</para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/videoHeight#about_intrinsic_width_and_height">HTMLVideoElement.videoHeight > About intrinsic width and height</see> for more details.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.Poster">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Reflects the URL for an image to be shown while no video data is available. If the property does not represent a valid URL, no poster frame will be shown.</para>
+            <para>It reflects the poster attribute of the &lt;video&gt; element.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.DisablePictureInPicture">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Reflects the HTML attribute indicating whether the picture-in-picture feature is disabled for the current element.</para>
+            <para>
+            This value only represents a request from the website to the user agent.
+            User configuration may change the eventual behavior—for example, Firefox users can change the media.videocontrols.picture-in-picture.respect-disablePictureInPicture setting to ignore the request to disable PiP.
+            </para>
+            </summary>
+        </member>
         <member name="M:BrowserAPI.Implementation.HTMLMediaElementInProcess.Pause">
             play() is declared in HTMLMediaElementBase
             <summary>
@@ -10595,6 +10751,99 @@
             </summary>
             <param name="type">A string specifying the MIME type of the media and (optionally) a codecs parameter containing a comma-separated list of the supported codecs.</param>
             <returns>"probably", "maybe" or ""</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.HTMLMediaElementInProcess.RequestPictureInPicture(System.Threading.CancellationToken)">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Issues an asynchronous request to display the video in picture-in-picture mode.</para>
+            <para>
+            It's not guaranteed that the video will be put into picture-in-picture.
+            If permission to enter that mode is granted, the returned Promise will resolve and the video will receive a enterpictureinpicture event to let it know that it's now in picture-in-picture.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.PictureInPictureWindow">
+            <summary>
+            <para>Represents an object able to programmatically obtain the width and height and resize event of the floating video window.</para>
+            <para>An object with this interface is obtained using the <see cref="M:BrowserAPI.IHTMLMediaElement.RequestPictureInPicture(System.Threading.CancellationToken)"/> return value.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="M:BrowserAPI.Implementation.PictureInPictureWindow.DisposeAsync"/> when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.PictureInPictureWindow.#ctor(Microsoft.JSInterop.IJSObjectReference)">
+            <summary>
+            <para>Represents an object able to programmatically obtain the width and height and resize event of the floating video window.</para>
+            <para>An object with this interface is obtained using the <see cref="M:BrowserAPI.IHTMLMediaElement.RequestPictureInPicture(System.Threading.CancellationToken)"/> return value.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="M:BrowserAPI.Implementation.PictureInPictureWindow.DisposeAsync"/> when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.PictureInPictureWindow.DisposeAsync">
+            <summary>
+            Releases the JS instance for this pictureInPictureWindow.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.PictureInPictureWindow.Width">
+            <summary>
+            Returns the width of the floating video window in pixels if it is open. Otherwise, it returns 0.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.PictureInPictureWindow.GetWidth(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.PictureInPictureWindow.Width" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.PictureInPictureWindow.Height">
+            <summary>
+            Returns the height of the floating video window in pixels if it is open. Otherwise, it returns 0.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.PictureInPictureWindow.GetHeight(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.PictureInPictureWindow.Height" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.PictureInPictureWindowBase.DisposeEventTrigger">
+            <summary>
+            Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call this method.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.PictureInPictureWindowBase.OnResize">
+            <summary>
+            <para>Fires when the floating video window has been resized.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.PictureInPictureWindowInProcess">
+            <summary>
+            <para>Represents an object able to programmatically obtain the width and height and resize event of the floating video window.</para>
+            <para>An object with this interface is obtained using the <see cref="M:BrowserAPI.IHTMLMediaElementInProcess.RequestPictureInPicture(System.Threading.CancellationToken)"/> return value.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="M:BrowserAPI.Implementation.PictureInPictureWindowInProcess.Dispose"/> when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.PictureInPictureWindowInProcess.#ctor(Microsoft.JSInterop.IJSInProcessObjectReference)">
+            <summary>
+            <para>Represents an object able to programmatically obtain the width and height and resize event of the floating video window.</para>
+            <para>An object with this interface is obtained using the <see cref="M:BrowserAPI.IHTMLMediaElementInProcess.RequestPictureInPicture(System.Threading.CancellationToken)"/> return value.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="M:BrowserAPI.Implementation.PictureInPictureWindowInProcess.Dispose"/> when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.PictureInPictureWindowInProcess.Dispose">
+            <summary>
+            Releases the JS instance for this pictureInPictureWindow.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.PictureInPictureWindowInProcess.Width">
+            <summary>
+            Returns the width of the floating video window in pixels if it is open. Otherwise, it returns 0.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.PictureInPictureWindowInProcess.Height">
+            <summary>
+            Returns the height of the floating video window in pixels if it is open. Otherwise, it returns 0.
+            </summary>
         </member>
         <member name="T:BrowserAPI.Implementation.Language">
             <summary>
@@ -19032,7 +19281,7 @@
         <member name="M:BrowserAPI.IDocument.ExitPictureInPicture(System.Threading.CancellationToken)">
             <summary>
             Requests that a video contained in this document, which is currently floating, be taken out of picture-in-picture mode, restoring the previous state of the screen.
-            This usually reverses the effects of a previous call to <see cref="!:IHTMLMediaElement.RequestPictureInPicture"/>.
+            This usually reverses the effects of a previous call to <see cref="M:BrowserAPI.IHTMLMediaElement.RequestPictureInPicture(System.Threading.CancellationToken)"/>.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -19175,7 +19424,7 @@
         <member name="M:BrowserAPI.IDocumentInProcess.ExitPictureInPicture(System.Threading.CancellationToken)">
             <summary>
             Requests that a video contained in this document, which is currently floating, be taken out of picture-in-picture mode, restoring the previous state of the screen.
-            This usually reverses the effects of a previous call to <see cref="!:IHTMLMediaElement.RequestPictureInPicture"/>.
+            This usually reverses the effects of a previous call to <see cref="M:BrowserAPI.IHTMLMediaElement.RequestPictureInPicture(System.Threading.CancellationToken)"/>.
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -28229,6 +28478,105 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.Width">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Reflects the width attribute of the &lt;video&gt; element, specifying the displayed width of the resource in CSS pixels.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetWidth(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IHTMLMediaElement.Width" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.SetWidth(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IHTMLMediaElement.Width" />
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.Height">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Reflects the height attribute of the &lt;video&gt; element, specifying the displayed height of the resource in CSS pixels.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetHeight(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IHTMLMediaElement.Height" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.SetHeight(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IHTMLMediaElement.Height" />
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.VideoWidth">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Indicates the intrinsic width of the video, expressed in CSS pixels. In simple terms, this is the width of the media in its natural size.</para>
+            <para>If the element's <see cref="P:BrowserAPI.IHTMLMediaElement.ReadyState"/> is HTMLMediaElement.HAVE_NOTHING, then the value of this property is 0, because neither video nor poster frame size information is yet available.</para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/videoHeight#about_intrinsic_width_and_height">HTMLVideoElement.videoHeight > About intrinsic width and height</see> for more details.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetVideoWidth(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IHTMLMediaElement.VideoWidth" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.VideoHeight">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Indicates the intrinsic height of the video, expressed in CSS pixels. In simple terms, this is the height of the media in its natural size.</para>
+            <para>If the element's <see cref="P:BrowserAPI.IHTMLMediaElement.ReadyState"/> is HTMLMediaElement.HAVE_NOTHING, then the value of this property is 0, because neither video nor poster frame size information is yet available.</para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/videoHeight#about_intrinsic_width_and_height">HTMLVideoElement.videoHeight > About intrinsic width and height</see> for more details.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetVideoHeight(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IHTMLMediaElement.VideoHeight" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.Poster">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Reflects the URL for an image to be shown while no video data is available. If the property does not represent a valid URL, no poster frame will be shown.</para>
+            <para>It reflects the poster attribute of the &lt;video&gt; element.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetPoster(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IHTMLMediaElement.Poster" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.SetPoster(System.String,System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IHTMLMediaElement.Poster" />
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElement.DisablePictureInPicture">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Reflects the HTML attribute indicating whether the picture-in-picture feature is disabled for the current element.</para>
+            <para>
+            This value only represents a request from the website to the user agent.
+            User configuration may change the eventual behavior—for example, Firefox users can change the media.videocontrols.picture-in-picture.respect-disablePictureInPicture setting to ignore the request to disable PiP.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.GetDisablePictureInPicture(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IHTMLMediaElement.DisablePictureInPicture" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.SetDisablePictureInPicture(System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IHTMLMediaElement.DisablePictureInPicture" />
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="M:BrowserAPI.IHTMLMediaElement.Pause(System.Threading.CancellationToken)">
             play() is declared in HTMLMediaElementBase
         </member>
@@ -28258,6 +28606,18 @@
             <param name="type">A string specifying the MIME type of the media and (optionally) a codecs parameter containing a comma-separated list of the supported codecs.</param>
             <param name="cancellationToken"></param>
             <returns>"probably", "maybe" or ""</returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElement.RequestPictureInPicture(System.Threading.CancellationToken)">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Issues an asynchronous request to display the video in picture-in-picture mode.</para>
+            <para>
+            It's not guaranteed that the video will be put into picture-in-picture.
+            If permission to enter that mode is granted, the returned Promise will resolve and the video will receive a enterpictureinpicture event to let it know that it's now in picture-in-picture.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
         </member>
         <member name="M:BrowserAPI.IHTMLMediaElement.Play(System.Threading.CancellationToken)">
             <summary>
@@ -28780,6 +29140,51 @@
             <para>false means "not disabled", which means "enabled"</para>
             </summary>
         </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.Width">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Reflects the width attribute of the &lt;video&gt; element, specifying the displayed width of the resource in CSS pixels.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.Height">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Reflects the height attribute of the &lt;video&gt; element, specifying the displayed height of the resource in CSS pixels.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.VideoWidth">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Indicates the intrinsic width of the video, expressed in CSS pixels. In simple terms, this is the width of the media in its natural size.</para>
+            <para>If the element's <see cref="P:BrowserAPI.IHTMLMediaElementInProcess.ReadyState"/> is HTMLMediaElement.HAVE_NOTHING, then the value of this property is 0, because neither video nor poster frame size information is yet available.</para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/videoHeight#about_intrinsic_width_and_height">HTMLVideoElement.videoHeight > About intrinsic width and height</see> for more details.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.VideoHeight">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Indicates the intrinsic height of the video, expressed in CSS pixels. In simple terms, this is the height of the media in its natural size.</para>
+            <para>If the element's <see cref="P:BrowserAPI.IHTMLMediaElementInProcess.ReadyState"/> is HTMLMediaElement.HAVE_NOTHING, then the value of this property is 0, because neither video nor poster frame size information is yet available.</para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/videoHeight#about_intrinsic_width_and_height">HTMLVideoElement.videoHeight > About intrinsic width and height</see> for more details.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.Poster">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Reflects the URL for an image to be shown while no video data is available. If the property does not represent a valid URL, no poster frame will be shown.</para>
+            <para>It reflects the poster attribute of the &lt;video&gt; element.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IHTMLMediaElementInProcess.DisablePictureInPicture">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Reflects the HTML attribute indicating whether the picture-in-picture feature is disabled for the current element.</para>
+            <para>
+            This value only represents a request from the website to the user agent.
+            User configuration may change the eventual behavior—for example, Firefox users can change the media.videocontrols.picture-in-picture.respect-disablePictureInPicture setting to ignore the request to disable PiP.
+            </para>
+            </summary>
+        </member>
         <member name="M:BrowserAPI.IHTMLMediaElementInProcess.Pause">
             play() is declared in HTMLMediaElementBase
         </member>
@@ -28804,6 +29209,74 @@
             </summary>
             <param name="type">A string specifying the MIME type of the media and (optionally) a codecs parameter containing a comma-separated list of the supported codecs.</param>
             <returns>"probably", "maybe" or ""</returns>
+        </member>
+        <member name="M:BrowserAPI.IHTMLMediaElementInProcess.RequestPictureInPicture(System.Threading.CancellationToken)">
+            <summary>
+            <para>&lt;video&gt; elements only</para>
+            <para>Issues an asynchronous request to display the video in picture-in-picture mode.</para>
+            <para>
+            It's not guaranteed that the video will be put into picture-in-picture.
+            If permission to enter that mode is granted, the returned Promise will resolve and the video will receive a enterpictureinpicture event to let it know that it's now in picture-in-picture.
+            </para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IPictureInPictureWindow">
+            <summary>
+            <para>Represents an object able to programmatically obtain the width and height and resize event of the floating video window.</para>
+            <para>An object with this interface is obtained using the <see cref="M:BrowserAPI.IHTMLMediaElement.RequestPictureInPicture(System.Threading.CancellationToken)"/> return value.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="!:DisposeAsync"/> when you are done with it.</remarks>
+        </member>
+        <member name="P:BrowserAPI.IPictureInPictureWindow.Width">
+            <summary>
+            Returns the width of the floating video window in pixels if it is open. Otherwise, it returns 0.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IPictureInPictureWindow.GetWidth(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IPictureInPictureWindow.Width" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IPictureInPictureWindow.Height">
+            <summary>
+            Returns the height of the floating video window in pixels if it is open. Otherwise, it returns 0.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IPictureInPictureWindow.GetHeight(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IPictureInPictureWindow.Height" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="E:BrowserAPI.IPictureInPictureWindow.OnResize">
+            <summary>
+            <para>Fires when the floating video window has been resized.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IPictureInPictureWindowInProcess">
+            <summary>
+            <para>Represents an object able to programmatically obtain the width and height and resize event of the floating video window.</para>
+            <para>An object with this interface is obtained using the <see cref="M:BrowserAPI.IHTMLMediaElementInProcess.RequestPictureInPicture(System.Threading.CancellationToken)"/> return value.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="!:Dispose"/> when you are done with it.</remarks>
+        </member>
+        <member name="E:BrowserAPI.IPictureInPictureWindowInProcess.OnResize">
+            <summary>
+            <para>Fires when the floating video window has been resized.</para>
+            <para>This event is not cancelable and does not bubble.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IPictureInPictureWindowInProcess.Width">
+            <summary>
+            Returns the width of the floating video window in pixels if it is open. Otherwise, it returns 0.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IPictureInPictureWindowInProcess.Height">
+            <summary>
+            Returns the height of the floating video window in pixels if it is open. Otherwise, it returns 0.
+            </summary>
         </member>
         <member name="T:BrowserAPI.ILanguage">
             <summary>
