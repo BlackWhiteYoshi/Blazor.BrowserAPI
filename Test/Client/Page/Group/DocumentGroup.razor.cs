@@ -6,6 +6,9 @@ public sealed partial class DocumentGroup : ComponentBase {
     public const string TEST_SET_BODY = "body set";
     public const string TEST_NO_REFFERER = "(no referrer)";
     public const string TEST_SET_TITLE = "new document title";
+    public const string TEST_ELEMENT_NAME = "some element name";
+    public const string TEST_REQUEST_STORAGE_ACCESS = "got storage access";
+    public const string TEST_REQUEST_STORAGE_ACCESS_FOR = "got storage access for localhost";
 
 
     [Inject]
@@ -462,5 +465,184 @@ public sealed partial class DocumentGroup : ComponentBase {
 
 
 
+    // methods - DOM
+
+    public const string BUTTON_CREATE_ELEMENT = "document-create-element";
+    private async Task CreateElement() {
+        await using IHTMLElement htmlElement = Document.CreateElement("label");
+        labelOutput = (htmlElement is not null).ToString();
+    }
+
+    public const string BUTTON_CREATE_ELEMENT_NS = "document-create-element-ns";
+    private async Task CreateElementNS() {
+        await using IHTMLElement htmlElement = Document.CreateElementNS("http://www.w3.org/1999/xhtml", "label");
+        labelOutput = (htmlElement is not null).ToString();
+    }
+
+    public const string BUTTON_GET_ELEMENT_BY_ID = "document-get-element-by-id";
+    private async Task GetElementById() {
+        await using IHTMLElement? htmlElement = await Document.GetElementById("test-page");
+        labelOutput = (htmlElement is not null).ToString();
+    }
+
+    public const string BUTTON_GET_ELEMENTS_BY_CLASS_NAME = "document-get-elements-by-class-name";
+    private async Task GetElementsByClassName() {
+        IHTMLElement[] htmlElements = await Document.GetElementsByClassName("group");
+        labelOutput = htmlElements.Length.ToString();
+
+        await htmlElements.DisposeAsync();
+    }
+
+    public const string BUTTON_GET_ELEMENTS_BY_TAG_NAME = "document-get-elements-by-tag-name";
+    private async Task GetElementsByTagName() {
+        IHTMLElement[] htmlElements = await Document.GetElementsByTagName("label");
+        labelOutput = htmlElements.Length.ToString();
+
+        await htmlElements.DisposeAsync();
+    }
+
+    public const string BUTTON_GET_ELEMENTS_BY_TAG_NAME_NS = "document-get-elements-by-tag-name-ns";
+    private async Task GetElementsByTagNameNS() {
+        IHTMLElement[] htmlElements = await Document.GetElementsByTagNameNS("http://www.w3.org/1999/xhtml", "label");
+        labelOutput = htmlElements.Length.ToString();
+
+        await htmlElements.DisposeAsync();
+    }
+
+    public const string BUTTON_GET_ELEMENTS_BY_NAME = "document-get-elements-by-name";
+    private async Task GetElementsByName() {
+        IHTMLElement[] htmlElements = await Document.GetElementsByName(TEST_ELEMENT_NAME);
+        labelOutput = htmlElements.Length.ToString();
+
+        await htmlElements.DisposeAsync();
+    }
+
+    public const string BUTTON_QUERY_SELECTOR = "document-query-selector";
+    private async Task QuerySelector() {
+        await using IHTMLElement? htmlElement = await Document.QuerySelector(".group");
+        labelOutput = (htmlElement is not null).ToString();
+    }
+
+    public const string BUTTON_QUERY_SELECTOR_ALL = "document-query-selector-all";
+    private async Task QuerySelectorAll() {
+        IHTMLElement[] htmlElements = await Document.QuerySelectorAll(".group");
+        labelOutput = htmlElements.Length.ToString();
+
+        await htmlElements.DisposeAsync();
+    }
+
+    public const string BUTTON_ELEMENT_FROM_POINT = "document-element-from-point";
+    private async Task ElementFromPoint() {
+        await using IHTMLElement? htmlElement = await Document.ElementFromPoint(1, 1);
+        labelOutput = (htmlElement is not null).ToString();
+    }
+
+    public const string BUTTON_ELEMENTS_FROM_POINT = "document-elements-from-point";
+    private async Task ElementsFromPoint() {
+        IHTMLElement[] htmlElements = await Document.ElementsFromPoint(1, 1);
+        labelOutput = htmlElements.Length.ToString();
+
+        await htmlElements.DisposeAsync();
+    }
+
+    public const string BUTTON_REPLACE_CHILDREN = "document-replace-children";
+    private async Task ReplaceChildren() {
+        await using IHTMLElement rootElement = Document.DocumentElement;
+        await Document.ReplaceChildren([]);
+        await Task.Delay(100);
+        await Document.ReplaceChildren([rootElement]);
+        labelOutput = (rootElement is not null).ToString();
+    }
+
+
+    // methods - StorageAccess
+
+    public const string BUTTON_REQUEST_STORAGE_ACCESS = "document-request-storage-access";
+    private async Task RequestStorageAccess() {
+        await Document.RequestStorageAccess(all: true);
+        labelOutput = TEST_REQUEST_STORAGE_ACCESS;
+    }
+
+    public const string BUTTON_REQUEST_STORAGE_ACCESS_FOR = "document-request-storage-access-for";
+    private async Task RequestStorageAccessFor() {
+        await Document.RequestStorageAccessFor("https://localhost");
+        labelOutput = TEST_REQUEST_STORAGE_ACCESS_FOR;
+    }
+
+    public const string BUTTON_HAS_STORAGE_ACCESS = "document-has-storage-access";
+    private async Task HasStorageAccess() {
+        bool storageAccess = await Document.HasStorageAccess();
+        labelOutput = storageAccess.ToString();
+    }
+
+
+    // methods - exit
+
+    public const string BUTTON_EXIT_FULLSCREEN = "document-exit-fullscreen";
+    private async Task ExitFullscreen() {
+        await Document.ExitFullscreen();
+    }
+
+    public const string BUTTON_EXIT_PICTURE_IN_PICTURE = "document-exit-picture-in-picture";
+    private async Task ExitPictureInPicture() {
+        try {
+            await Document.ExitPictureInPicture();
+            labelOutput = "picture in picture exit";
+        }
+        catch (Microsoft.JSInterop.JSException exception) {
+            labelOutput = exception.Message.Substring(0, exception.Message.IndexOf('\n'));
+        }
+    }
+
+    public const string BUTTON_EXIT_POINTER_LOCK = "document-exit-pointer-lock";
+    private async Task ExitPointerLock() {
+        await Document.ExitPointerLock();
+    }
+
+
     // methods
+
+    public const string BUTTON_HAS_FOCUS = "document-has-focus";
+    private async Task HasFocus() {
+        bool focus = await Document.HasFocus();
+        labelOutput = focus.ToString();
+    }
+
+
+    // methods - Node
+
+    public const string BUTTON_COMPARE_DOCUMENT_POSITION = "document-compare-document-position";
+    private async Task CompareDocumentPosition() {
+        int comparison = await Document.CompareDocumentPosition(Document.Body);
+        labelOutput = comparison.ToString();
+    }
+
+    public const string BUTTON_CONTAINS = "document-contains";
+    private async Task Contains() {
+        bool contains = await Document.Contains(Document.Body);
+        labelOutput = contains.ToString();
+    }
+
+    public const string BUTTON_IS_DEFAULT_NAMESPACE = "document-is-default-namespace";
+    private async Task IsDefaultNamespace() {
+        bool isDefaultNamespace = await Document.IsDefaultNamespace("http://www.w3.org/1999/xhtml");
+        labelOutput = isDefaultNamespace.ToString();
+    }
+
+    public const string BUTTON_LOOKUP_PREFIX = "document-lookup-prefix";
+    private async Task LookupPrefix() {
+        string? prefix = await Document.LookupPrefix("http://www.w3.org/1999/xhtml");
+        labelOutput = prefix ?? "(no prefix)";
+    }
+
+    public const string BUTTON_LOOKUP_NAMESPACE_URI = "document-lookup-namespace-uri";
+    private async Task LookupNamespaceURI() {
+        string? namespaceURI = await Document.LookupNamespaceURI(null);
+        labelOutput = namespaceURI ?? "(no namespace uri)";
+    }
+
+    public const string BUTTON_NORMALIZE = "document-normalize";
+    private async Task Normalize() {
+        await Document.Normalize();
+    }
 }

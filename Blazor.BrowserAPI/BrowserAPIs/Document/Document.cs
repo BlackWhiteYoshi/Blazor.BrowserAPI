@@ -1,6 +1,7 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
+using System.Xml.Linq;
 
 namespace BrowserAPI.Implementation;
 
@@ -522,4 +523,337 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<string> GetBaseURI(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<string>("DocumentAPI.getBaseURI", cancellationToken);
+
+
+
+    // methods - DOM
+
+    /// <summary>
+    /// Creates the HTML element specified by tagName, or an HTMLUnknownElement if tagName isn't recognized.
+    /// </summary>
+    /// <param name="tagName">
+    /// <para>Specifies the type of element to be created.</para>
+    /// <para>
+    /// Don't use qualified names (like "html:a") with this method.<br />
+    /// When called on an HTML document, createElement() converts tagName to lower case before creating the element.<br />
+    /// In Firefox, Opera, and Chrome, createElement(null) works like createElement("null").
+    /// </para>
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public IHTMLElement CreateElement(string tagName, CancellationToken cancellationToken = default)
+        => new HTMLElement(moduleManager.InvokeTrySync<IJSObjectReference>("DocumentAPI.createElement", cancellationToken, [tagName]).AsTask());
+
+    /// <summary>
+    /// <para>Creates an element with the specified namespace URI and qualified name.</para>
+    /// <para>To create an element without specifying a namespace URI, use the <see cref="CreateElement"/> method.</para>
+    /// </summary>
+    /// <param name="namespaceURI">
+    /// <para>Specifies the namespaceURI to associate with the element.</para>
+    /// <para>
+    /// Some important namespace URIs are:<br />
+    /// - HTML. "http://www.w3.org/1999/xhtml"<br />
+    /// - SVG: "http://www.w3.org/2000/svg"<br />
+    /// - MathML: "http://www.w3.org/1998/Math/MathML"
+    /// </para>
+    /// </param>
+    /// <param name="qualifiedName">Specifies the type of element to be created. The nodeName property of the created element is initialized with the value of qualifiedName.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public IHTMLElement CreateElementNS(string namespaceURI, string qualifiedName, CancellationToken cancellationToken = default)
+        => new HTMLElement(moduleManager.InvokeTrySync<IJSObjectReference>("DocumentAPI.createElementNS", cancellationToken, [namespaceURI, qualifiedName]).AsTask());
+
+    /// <summary>
+    /// <para>
+    /// Returns an Element object representing the element whose id property matches the specified string.
+    /// Since element IDs are required to be unique if specified, they're a useful way to get access to a specific element quickly.
+    /// </para>
+    /// <para>If you need to get access to an element which doesn't have an ID, you can use <see cref="QuerySelector"/> to find the element using any selector.</para>
+    /// </summary>
+    /// <remarks>Note: IDs should be unique inside a document. If two or more elements in a document have the same ID, this method returns the first element found.</remarks>
+    /// <param name="elementId">The ID of the element to locate. The ID is a case-sensitive string which is unique within the document; only one element should have any given ID.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IHTMLElement?> GetElementById(string elementId, CancellationToken cancellationToken = default) {
+        IJSObjectReference?[] singleReference = await moduleManager.InvokeTrySync<IJSObjectReference?[]>("DocumentAPI.getElementById", cancellationToken, [elementId]);
+        if (singleReference[0] is IJSObjectReference element)
+            return new HTMLElement(Task.FromResult(element));
+        else
+            return null;
+    }
+
+    /// <summary>
+    /// <para>Returns all child elements which have all of the given class name(s).</para>
+    /// <para>
+    /// When called on the document object, the complete document is searched, including the root node.
+    /// You may also call getElementsByClassName() on any element; it will return only elements which are descendants of the specified root element with the given class name(s).
+    /// </para>
+    /// </summary>
+    /// <param name="classNames">Representing the class name(s) to match; multiple class names are separated by whitespace.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IHTMLElement[]> GetElementsByClassName(string classNames, CancellationToken cancellationToken = default) {
+        IJSObjectReference[] elements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getElementsByClassName", cancellationToken, [classNames]);
+
+        HTMLElement[] result = new HTMLElement[elements.Length];
+        for (int i = 0; i < result.Length; i++)
+            result[i] = new HTMLElement(Task.FromResult(elements[i]));
+        return result;
+    }
+
+    /// <summary>
+    /// Returns an HTMLCollection of elements with the given tag name. The complete document is searched, including the root node.
+    /// </summary>
+    /// <param name="qualifiedName">Representing the name of the elements. The special string * represents all elements.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IHTMLElement[]> GetElementsByTagName(string qualifiedName, CancellationToken cancellationToken = default) {
+        IJSObjectReference[] elements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getElementsByTagName", cancellationToken, [qualifiedName]);
+
+        HTMLElement[] result = new HTMLElement[elements.Length];
+        for (int i = 0; i < result.Length; i++)
+            result[i] = new HTMLElement(Task.FromResult(elements[i]));
+        return result;
+    }
+
+    /// <summary>
+    /// Returns a list of elements with the given tag name belonging to the given namespace. The complete document is searched, including the root node.
+    /// </summary>
+    /// <param name="namespaceURL">The namespace URI of elements to look for.</param>
+    /// <param name="localName">Either the local name of elements to look for or the special value *, which matches all elements.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IHTMLElement[]> GetElementsByTagNameNS(string namespaceURL, string localName, CancellationToken cancellationToken = default) {
+        IJSObjectReference[] elements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getElementsByTagNameNS", cancellationToken, [namespaceURL, localName]);
+
+        HTMLElement[] result = new HTMLElement[elements.Length];
+        for (int i = 0; i < result.Length; i++)
+            result[i] = new HTMLElement(Task.FromResult(elements[i]));
+        return result;
+    }
+
+    /// <summary>
+    /// Returns elements with a given name attribute in the document.
+    /// </summary>
+    /// <param name="elementName">The value of the name attribute of the element(s) we are looking for.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IHTMLElement[]> GetElementsByName(string elementName, CancellationToken cancellationToken = default) {
+        IJSObjectReference[] elements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getElementsByName", cancellationToken, [elementName]);
+
+        HTMLElement[] result = new HTMLElement[elements.Length];
+        for (int i = 0; i < result.Length; i++)
+            result[i] = new HTMLElement(Task.FromResult(elements[i]));
+        return result;
+    }
+
+    /// <summary>
+    /// <para>Returns the first Element within the document that matches the specified CSS selector, or group of CSS selectors. If no matches are found, null is returned.</para>
+    /// <para>
+    /// The matching is done using depth-first pre-order traversal of the document's nodes starting with the first element in the document's markup
+    /// and iterating through sequential nodes by order of the number of child nodes.
+    /// </para>
+    /// <para>If the specified selector matches an ID that is incorrectly used more than once in the document, the first element with that ID is returned.</para>
+    /// <para>CSS pseudo-elements will never return any elements.</para>
+    /// </summary>
+    /// <param name="selectors">
+    /// <para>One or more selectors to match. This string must be a valid CSS selector string; if it isn't, a SyntaxError exception is thrown.</para>
+    /// <para>
+    /// Note that the HTML specification does not require attribute values to be valid CSS identifiers.
+    /// If a class or id attribute value is not a valid CSS identifier, then you must escape it before using it in a selector,
+    /// either by calling CSS.escape() on the value, or using one of the techniques described in Escaping characters.
+    /// See <see href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector#escaping_attribute_values">Escaping attribute values</see> for an example.
+    /// </para>
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IHTMLElement?> QuerySelector(string selectors, CancellationToken cancellationToken = default) {
+        IJSObjectReference?[] singleReference = await moduleManager.InvokeTrySync<IJSObjectReference?[]>("DocumentAPI.querySelector", cancellationToken, [selectors]);
+        if (singleReference[0] is IJSObjectReference element)
+            return new HTMLElement(Task.FromResult(element));
+        else
+            return null;
+    }
+
+    /// <summary>
+    /// Returns a list of the document's elements that match the specified group of selectors.
+    /// </summary>
+    /// <param name="selectors">
+    /// <para>One or more selectors to match. This string must be a valid CSS selector string; if it isn't, a SyntaxError exception is thrown.</para>
+    /// <para>
+    /// Note that the HTML specification does not require attribute values to be valid CSS identifiers.
+    /// If a class or id attribute value is not a valid CSS identifier, then you must escape it before using it in a selector,
+    /// either by calling CSS.escape() on the value, or using one of the techniques described in Escaping characters.
+    /// See <see href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll#escaping_attribute_values">Escaping attribute values</see> for an example.
+    /// </para>
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IHTMLElement[]> QuerySelectorAll(string selectors, CancellationToken cancellationToken = default) {
+        IJSObjectReference[] elements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.querySelectorAll", cancellationToken, [selectors]);
+
+        HTMLElement[] result = new HTMLElement[elements.Length];
+        for (int i = 0; i < result.Length; i++)
+            result[i] = new HTMLElement(Task.FromResult(elements[i]));
+        return result;
+    }
+
+    /// <summary>
+    /// <para>Returns the topmost Element at the specified coordinates (relative to the viewport).</para>
+    /// <para>
+    /// If the element at the specified point belongs to another document (for example, the document of an &lt;iframe&gt;), that document's parent element is returned (the &lt;iframe&gt; itself).
+    /// If the element at the given point is anonymous or XBL generated content, such as a textbox's scroll bars, then the first non-anonymous ancestor element (for example, the textbox) is returned.
+    /// </para>
+    /// <para>Elements with pointer-events set to none will be ignored, and the element below it will be returned.</para>
+    /// <para>If the method is run on another document (like an &lt;iframe&gt;'s subdocument), the coordinates are relative to the document where the method is being called.</para>
+    /// <para>If the specified point is outside the visible bounds of the document or either coordinate is negative, the result is null.</para>
+    /// </summary>
+    /// <param name="x">The horizontal coordinate of a point, relative to the left edge of the current viewport.</param>
+    /// <param name="y">The vertical coordinate of a point, relative to the top edge of the current viewport.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IHTMLElement?> ElementFromPoint(int x, int y, CancellationToken cancellationToken = default) {
+        IJSObjectReference?[] singleReference = await moduleManager.InvokeTrySync<IJSObjectReference?[]>("DocumentAPI.elementFromPoint", cancellationToken, [x, y]);
+        if (singleReference[0] is IJSObjectReference element)
+            return new HTMLElement(Task.FromResult(element));
+        else
+            return null;
+    }
+
+    /// <summary>
+    /// <para>Returns all elements at the specified coordinates (relative to the viewport). The elements are ordered from the topmost to the bottommost box of the viewport.</para>
+    /// <para>It operates in a similar way to the <see cref="ElementFromPoint"/> method.</para>
+    /// </summary>
+    /// <param name="x">The horizontal coordinate of a point.</param>
+    /// <param name="y">The vertical coordinate of a point.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IHTMLElement[]> ElementsFromPoint(int x, int y, CancellationToken cancellationToken = default) {
+        IJSObjectReference[] elements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.elementsFromPoint", cancellationToken, [x, y]);
+
+        HTMLElement[] result = new HTMLElement[elements.Length];
+        for (int i = 0; i < result.Length; i++)
+            result[i] = new HTMLElement(Task.FromResult(elements[i]));
+        return result;
+    }
+
+    /// <summary>
+    /// Replaces the existing children of a Document with a specified new set of children.
+    /// </summary>
+    /// <remarks>It provides a very convenient mechanism for emptying a document of all its children. You call it with an empty array.</remarks>
+    /// <param name="children">
+    /// A set of Node objects to replace the Document's existing children with.
+    /// If no replacement objects are specified, then the Document is emptied of all child nodes.
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask ReplaceChildren(IHTMLElement[] children, CancellationToken cancellationToken = default) {
+        IJSObjectReference[] childrenJS = new IJSObjectReference[children.Length];
+        for (int i = 0; i < childrenJS.Length; i++)
+            childrenJS[i] = await children[i].HTMLElementTask;
+
+        await moduleManager.InvokeTrySync("DocumentAPI.replaceChildren", cancellationToken, [childrenJS]);
+    }
+
+
+    // methods - exit (ExitFullscreen() and ExitPictureInPicture() are in base class)
+
+    /// <summary>
+    /// <para>Asynchronously releases a pointer lock previously requested through <see cref="IHTMLElement.RequestPointerLock"/>.</para>
+    /// <para>To track the success or failure of the request, it is necessary to listen for the <see cref="IDocument.PointerLockChange"/> and <see cref="IDocument.PointerLockError"/> events.</para>
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask ExitPointerLock(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("DocumentAPI.exitPointerLock", cancellationToken);
+
+
+    // methods
+
+    /// <summary>
+    /// Indicates whether the document or any element inside the document has focus.
+    /// This method can be used to determine whether the active element in a document has focus.
+    /// </summary>
+    /// <remarks>
+    /// Note: When viewing a document, an element with focus is always the active element in the document, but an active element does not necessarily have focus.
+    /// For example, an active element within a popup window that is not the foreground doesn't have focus.
+    /// </remarks>
+    /// <returns></returns>
+    public ValueTask<bool> HasFocus(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync<bool>("DocumentAPI.hasFocus", cancellationToken);
+
+
+    // methods - Node
+
+    /// <summary>
+    /// <para>Reports the position of its argument node relative to the node on which it is called.</para>
+    /// <para>
+    /// It returns an integer value representing otherNode's position relative to node as a bitmask combining the following constant properties of Node:<br />
+    /// - 1 (Node.DOCUMENT_POSITION_DISCONNECTED): Both nodes are in different documents or different trees in the same document.<br />
+    /// - 2 (Node.DOCUMENT_POSITION_PRECEDING): otherNode precedes the node in either a pre-order depth-first traversal of a tree containing both (e.g., as an ancestor or previous sibling or a descendant of a previous sibling or previous sibling of an ancestor) or (if they are disconnected) in an arbitrary but consistent ordering.<br />
+    /// - 4 (Node.DOCUMENT_POSITION_FOLLOWING): otherNode follows the node in either a pre-order depth-first traversal of a tree containing both (e.g., as a descendant or following sibling or a descendant of a following sibling or following sibling of an ancestor) or (if they are disconnected) in an arbitrary but consistent ordering.<br />
+    /// - 8 (Node.DOCUMENT_POSITION_CONTAINS): otherNode is an ancestor of the node.<br />
+    /// - 16 (Node.DOCUMENT_POSITION_CONTAINED_BY): otherNode is a descendant of the node.<br />
+    /// - 32 (Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC): The result relies upon arbitrary and/or implementation-specific behavior and is not guaranteed to be portable.
+    /// </para>
+    /// <para>
+    /// Zero or more bits can be set, depending on which scenarios apply.
+    /// For example, if otherNode is located earlier in the document and contains the node on which compareDocumentPosition() was called,
+    /// then both the DOCUMENT_POSITION_CONTAINS and DOCUMENT_POSITION_PRECEDING bits would be set, producing a value of 10 (0x0A).
+    /// </para>
+    /// </summary>
+    /// <param name="other">The Node for which position should be reported, relative to the node.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<int> CompareDocumentPosition(IHTMLElement other, CancellationToken cancellationToken = default) => await moduleManager.InvokeTrySync<int>("DocumentAPI.compareDocumentPosition", cancellationToken, [await other.HTMLElementTask]);
+
+    /// <summary>
+    /// Returns a boolean value indicating whether a node is a descendant of a given node, that is the node itself, one of its direct children (childNodes), one of the children's direct children, and so on.
+    /// </summary>
+    /// <remarks>Note: A node is contained inside itself.</remarks>
+    /// <param name="other">The Node to test with.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<bool> Contains(IHTMLElement other, CancellationToken cancellationToken = default) => await moduleManager.InvokeTrySync<bool>("DocumentAPI.contains", cancellationToken, [await other.HTMLElementTask]);
+
+    /// <summary>
+    /// Accepts a namespace URI as an argument. It returns a boolean value that is true if the namespace is the default namespace on the given node and false if not.
+    /// </summary>
+    /// <param name="namespaceURI">A string representing the namespace against which the element will be checked.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask<bool> IsDefaultNamespace(string? namespaceURI, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync<bool>("DocumentAPI.isDefaultNamespace", cancellationToken, [namespaceURI]);
+
+    /// <summary>
+    /// <para>Returns a string containing the prefix for a given namespace URI, if present, and null if not. When multiple prefixes are possible, the first prefix is returned.</para>
+    /// <para>If the node is a <i>DocumentType</i> or a <i>DocumentFragment</i>, it returns null.</para>
+    /// </summary>
+    /// <param name="namespace">A string containing the namespace to look the prefix up.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask<string?> LookupPrefix(string? @namespace, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync<string?>("DocumentAPI.lookupPrefix", cancellationToken, [@namespace]);
+
+    /// <summary>
+    /// <para>
+    /// Takes a prefix as parameter and returns the namespace URI associated with it on the given node if found (and null if not).
+    /// This method's existence allows Node objects to be passed as a namespace resolver to <i>XPathEvaluator.createExpression()</i> and <i>XPathEvaluator.evaluate()</i>.
+    /// </para>
+    /// <para>
+    /// It returns a string containing the namespace URI corresponding to the prefix.<br />
+    /// - Always returns null if the node is a DocumentFragment, DocumentType, Document with no documentElement, or Attr with no associated element.<br />
+    /// - If prefix is "xml", the return value is always "http://www.w3.org/XML/1998/namespace".<br />
+    /// - If prefix is "xmlns", the return value is always "http://www.w3.org/2000/xmlns/".<br />
+    /// - If the prefix is null, the return value is the default namespace URI.<br />
+    /// - If the prefix is not found, the return value is null.
+    /// </para>
+    /// </summary>
+    /// <param name="prefix">The prefix to look for.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask<string?> LookupNamespaceURI(string? prefix, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync<string?>("DocumentAPI.lookupNamespaceURI", cancellationToken, [prefix]);
+
+    /// <summary>
+    /// Puts the specified node and all of its sub-tree into a normalized form. In a normalized sub-tree, no text nodes in the sub-tree are empty and there are no adjacent text nodes.
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask Normalize(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("DocumentAPI.normalize", cancellationToken);
 }

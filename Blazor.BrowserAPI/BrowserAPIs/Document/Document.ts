@@ -176,9 +176,102 @@ export class DocumentAPI {
     }
 
 
+    // methods - DOM
+
+    static createElement(tagName: string): HTMLElementAPI {
+        return new HTMLElementAPI(document.createElement(tagName));
+    }
+
+    static createElementNS(namespaceURI: string, qualifiedName: string): HTMLElementAPI {
+        return new HTMLElementAPI(<HTMLElement>document.createElementNS(namespaceURI, qualifiedName));
+    }
+
+    static getElementById(elementId: string): [HTMLElementAPI] | [null] {
+        const result = document.getElementById(elementId);
+        if (result)
+            return [DotNet.createJSObjectReference(new HTMLElementAPI(result))];
+        else
+            return [null];
+    }
+
+    static getElementsByClassName(classNames: string): HTMLElementAPI[] {
+        return [...document.getElementsByClassName(classNames)].map(element => DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>element)));
+    }
+
+    static getElementsByTagName(qualifiedName: string): HTMLElementAPI[] {
+        return [...document.getElementsByTagName(qualifiedName)].map(element => DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>element)));
+    }
+
+    static getElementsByTagNameNS(namespaceURL: string, localName: string): HTMLElementAPI[] {
+        return [...document.getElementsByTagNameNS(namespaceURL, localName)].map(element => DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>element)));
+    }
+
+    static getElementsByName(elementName: string): HTMLElementAPI[] {
+        return [...document.getElementsByName(elementName)].map(element => DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>element)));
+    }
+
+    static querySelector(selectors: string): [HTMLElementAPI] | [null] {
+        const result = document.querySelector(selectors);
+        if (result)
+            return [DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>result))];
+        else
+            return [null];
+    }
+
+    static querySelectorAll(selectors: string): HTMLElementAPI[] {
+        return [...document.querySelectorAll(selectors)].map(element => DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>element)));
+    }
+
+    static elementFromPoint(x: number, y: number): [HTMLElementAPI] | [null] {
+        const result = document.elementFromPoint(x, y);
+        if (result)
+            return [DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>result))];
+        else
+            return [null];
+    }
+
+    static elementsFromPoint(x: number, y: number): HTMLElementAPI[] {
+        return [...document.elementsFromPoint(x, y)].map(element => DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>element)));
+    }
+
+    static replaceChildren(children: HTMLElementAPI[]): void {
+        document.replaceChildren(...children.map(wrapper => wrapper.htmlElement));
+    }
+
+    // methods - StorageAccess
+
+    static requestStorageAccess(all: boolean, cookies: boolean, sessionStorage: boolean, localStorage: boolean, indexedDB: boolean, locks: boolean, caches: boolean, getDirectory: boolean, estimate: boolean, createObjectURL: boolean, revokeObjectURL: boolean, BroadcastChannel: boolean, SharedWorker: boolean): Promise<void> {
+        return (<Document & { requestStorageAccess(types: { all: boolean, cookies: boolean, sessionStorage: boolean, localStorage: boolean, indexedDB: boolean, locks: boolean, caches: boolean, getDirectory: boolean, estimate: boolean, createObjectURL: boolean, revokeObjectURL: boolean, BroadcastChannel: boolean, SharedWorker: boolean; }): Promise<void>; }>
+            document).requestStorageAccess({ all, cookies, sessionStorage, localStorage, indexedDB, locks, caches, getDirectory, estimate, createObjectURL, revokeObjectURL, BroadcastChannel, SharedWorker });
+    }
+
+    static requestStorageAccessFor(requestedOrigin: string): Promise<void> {
+        return (<Document & { requestStorageAccessFor(requestedOrigin: string): Promise<void>; }>document).requestStorageAccessFor(requestedOrigin);
+    }
+
+    static hasStorageAccess(): Promise<boolean> {
+        return document.hasStorageAccess();
+    }
+
+    // methods - exit
+
+    static exitFullscreen(): Promise<void> {
+        return document.exitFullscreen();
+    }
+
+    static exitPictureInPicture(): Promise<void> {
+        return document.exitPictureInPicture();
+    }
+
+    static exitPointerLock(): void {
+        document.exitPointerLock();
+    }
+
     // methods
 
-
+    static hasFocus(): boolean {
+        return document.hasFocus();
+    }
 
     // methods - Node
 
@@ -207,8 +300,10 @@ export class DocumentAPI {
     }
 
 
+    // events
 
 
+    // events - Node
 
-    // TODO event selectstart
+    // TODO selectstart
 }

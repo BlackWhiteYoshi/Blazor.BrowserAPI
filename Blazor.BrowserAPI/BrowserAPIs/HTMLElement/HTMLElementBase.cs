@@ -1326,7 +1326,7 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     /// User gestures like touch panning or trackpad scrolling aren't complete until pointers or keys have released.
     /// If the scroll position did not change, then no scrollend event fires.
     /// </para>
-    /// <para>For detecting when scrolling inside a Document is complete, see TODO the scrollend event of Document.</para>
+    /// <para>For detecting when scrolling inside a Document is complete, see <see cref="ScrollEnd">the scrollend event of Document</see>.</para>
     /// </summary>
     public event Action OnScrollEnd {
         add {
@@ -1723,7 +1723,7 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     /// <para>Is fired immediately after an Element switches into or out of fullscreen mode.</para>
     /// <para>This event is sent to the Element which is transitioning into or out of fullscreen mode.</para>
     /// <para>
-    /// To find out whether the Element is entering or exiting fullscreen mode, check the value of TODO Document.fullscreenElement:
+    /// To find out whether the Element is entering or exiting fullscreen mode, check the value of <see cref="IDocument.FullscreenElement"/>:
     /// if this value is null then the element is exiting fullscreen mode, otherwise it is entering fullscreen mode.
     /// </para>
     /// <para>This event is not cancelable.</para>

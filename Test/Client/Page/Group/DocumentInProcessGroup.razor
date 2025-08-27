@@ -49,6 +49,42 @@
         <button data-testid="@BUTTON_GET_BASE_URI" @onclick="GetBaseURI">GetBaseURI</button>
         <button data-testid="@BUTTON_GET_NODE_NAME" @onclick="GetNodeName">GetNodeName</button>
         <button data-testid="@BUTTON_GET_NODE_TYPE" @onclick="GetNodeType">GetNodeType</button>
+
+
+        @* methods - DOM *@
+        <button data-testid="@BUTTON_CREATE_ELEMENT" @onclick="CreateElement">CreateElement</button>
+        <button data-testid="@BUTTON_CREATE_ELEMENT_NS" @onclick="CreateElementNS">CreateElementNS</button>
+        <button data-testid="@BUTTON_GET_ELEMENT_BY_ID" @onclick="GetElementById">GetElementById</button>
+        <button data-testid="@BUTTON_GET_ELEMENTS_BY_CLASS_NAME" @onclick="GetElementsByClassName">GetElementsByClassName</button>
+        <button data-testid="@BUTTON_GET_ELEMENTS_BY_TAG_NAME" @onclick="GetElementsByTagName">GetElementsByTagName</button>
+        <button data-testid="@BUTTON_GET_ELEMENTS_BY_TAG_NAME_NS" @onclick="GetElementsByTagNameNS">GetElementsByTagNameNS</button>
+        <button data-testid="@BUTTON_GET_ELEMENTS_BY_NAME" @onclick="GetElementsByName">GetElementsByName</button>
+        <button data-testid="@BUTTON_QUERY_SELECTOR" @onclick="QuerySelector">QuerySelector</button>
+        <button data-testid="@BUTTON_QUERY_SELECTOR_ALL" @onclick="QuerySelectorAll">QuerySelectorAll</button>
+        <button data-testid="@BUTTON_ELEMENT_FROM_POINT" @onclick="ElementFromPoint">ElementFromPoint</button>
+        <button data-testid="@BUTTON_ELEMENTS_FROM_POINT" @onclick="ElementsFromPoint">ElementsFromPoint</button>
+        <button data-testid="@BUTTON_REPLACE_CHILDREN" @onclick="ReplaceChildren">ReplaceChildren</button>
+
+        @* methods - StorageAccess *@
+        <button data-testid="@BUTTON_REQUEST_STORAGE_ACCESS" @onclick="RequestStorageAccess">RequestStorageAccess</button>
+        <button data-testid="@BUTTON_REQUEST_STORAGE_ACCESS_FOR" @onclick="RequestStorageAccessFor">RequestStorageAccessFor</button>
+        <button data-testid="@BUTTON_HAS_STORAGE_ACCESS" @onclick="HasStorageAccess">HasStorageAccess</button>
+
+        @* methods - exit *@
+        <button data-testid="@BUTTON_EXIT_FULLSCREEN" @onclick="ExitFullscreen">ExitFullscreen</button>
+        <button data-testid="@BUTTON_EXIT_PICTURE_IN_PICTURE" @onclick="ExitPictureInPicture">ExitPictureInPicture</button>
+        <button data-testid="@BUTTON_EXIT_POINTER_LOCK" @onclick="ExitPointerLock">ExitPointerLock</button>
+
+        @* methods *@
+        <button data-testid="@BUTTON_HAS_FOCUS" @onclick="HasFocus">HasFocus</button>
+
+        @* methods - Node *@
+        <button data-testid="@BUTTON_COMPARE_DOCUMENT_POSITION" @onclick="CompareDocumentPosition">CompareDocumentPosition</button>
+        <button data-testid="@BUTTON_CONTAINS" @onclick="Contains">Contains</button>
+        <button data-testid="@BUTTON_IS_DEFAULT_NAMESPACE" @onclick="IsDefaultNamespace">IsDefaultNamespace</button>
+        <button data-testid="@BUTTON_LOOKUP_PREFIX" @onclick="LookupPrefix">LookupPrefix</button>
+        <button data-testid="@BUTTON_LOOKUP_NAMESPACE_URI" @onclick="LookupNamespaceURI">LookupNamespaceURI</button>
+        <button data-testid="@BUTTON_NORMALIZE" @onclick="Normalize">Normalize</button>
     </div>
     <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
 </div>

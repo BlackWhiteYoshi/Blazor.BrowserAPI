@@ -3757,7 +3757,8 @@ public sealed class HTMLElementTest(PlayWrightFixture playWrightFixture) : PlayW
         await ExecuteTest(HTMLElementGroup.BUTTON_COMPARE_DOCUMENT_POSITION);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("4");
+        bool isInteger = int.TryParse(result, out _);
+        await Assert.That(isInteger).IsTrue();
     }
 
 

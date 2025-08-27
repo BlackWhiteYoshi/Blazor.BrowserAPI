@@ -355,4 +355,253 @@ public sealed class DocumentInProcessTest(PlayWrightFixture playWrightFixture) :
         string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("9");
     }
+
+
+
+    // methods - DOM
+
+    [Test]
+    public async Task CreateElement() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_CREATE_ELEMENT);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
+    public async Task CreateElementNS() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_CREATE_ELEMENT_NS);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
+    public async Task GetElementById() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_GET_ELEMENT_BY_ID);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
+    public async Task GetElementsByClassName() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_GET_ELEMENTS_BY_CLASS_NAME);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        int.TryParse(result, out int resultNumber);
+        await Assert.That(resultNumber).IsGreaterThanOrEqualTo(1);
+    }
+
+    [Test]
+    public async Task GetElementsByTagName() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_GET_ELEMENTS_BY_TAG_NAME);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        int.TryParse(result, out int resultNumber);
+        await Assert.That(resultNumber).IsGreaterThanOrEqualTo(1);
+    }
+
+    [Test]
+    public async Task GetElementsByTagNameNS() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_GET_ELEMENTS_BY_TAG_NAME_NS);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        int.TryParse(result, out int resultNumber);
+        await Assert.That(resultNumber).IsGreaterThanOrEqualTo(1);
+    }
+
+    [Test]
+    public async Task GetElementsByName() {
+        await Page.GetByTestId(DocumentInProcessGroup.BUTTON_GET_ELEMENTS_BY_NAME).WaitForAsync();
+        await Page.EvaluateAsync($"""
+            const divs = document.querySelectorAll(".group");
+            for (let i = 0; i < divs.length; i++)
+                divs[i].setAttribute("name", "{DocumentInProcessGroup.TEST_ELEMENT_NAME}");
+            """);
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_GET_ELEMENTS_BY_NAME);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        int.TryParse(result, out int resultNumber);
+        await Assert.That(resultNumber).IsGreaterThanOrEqualTo(1);
+    }
+
+    [Test]
+    public async Task QuerySelector() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_QUERY_SELECTOR);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
+    public async Task QuerySelectorAll() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_QUERY_SELECTOR_ALL);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        int.TryParse(result, out int resultNumber);
+        await Assert.That(resultNumber).IsGreaterThanOrEqualTo(1);
+    }
+
+    [Test]
+    public async Task ElementFromPoint() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_ELEMENT_FROM_POINT);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
+    public async Task ElementsFromPoint() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_ELEMENTS_FROM_POINT);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        int.TryParse(result, out int resultNumber);
+        await Assert.That(resultNumber).IsGreaterThanOrEqualTo(1);
+    }
+
+    [Test]
+    public async Task ReplaceChildren() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_REPLACE_CHILDREN);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+
+    // methods - StorageAccess
+
+    [Test]
+    public async Task RequestStorageAccess() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_REQUEST_STORAGE_ACCESS);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(DocumentInProcessGroup.TEST_REQUEST_STORAGE_ACCESS);
+    }
+
+    [Test]
+    public async Task RequestStorageAccessFor() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_REQUEST_STORAGE_ACCESS_FOR);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(DocumentInProcessGroup.TEST_REQUEST_STORAGE_ACCESS_FOR);
+    }
+
+    [Test]
+    public async Task HasStorageAccess() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_HAS_STORAGE_ACCESS);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+
+    // methods - exit
+
+    [Test]
+    public async Task ExitFullscreen() {
+        await Page.GetByTestId(DocumentInProcessGroup.BUTTON_EXIT_FULLSCREEN).EvaluateAsync("""
+            node => {
+                window.counter = 0;
+                document.onfullscreenchange = () => counter++;
+                node.requestFullscreen();
+            };
+            """);
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_EXIT_FULLSCREEN);
+
+        int counter = await Page.EvaluateAsync<int>("window.counter;");
+        await Assert.That(counter).IsEqualTo(2);
+    }
+
+    [Test]
+    public async Task ExitPictureInPicture() {
+        // TODO ExitPictureInPicture
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_EXIT_PICTURE_IN_PICTURE);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("Failed to execute 'exitPictureInPicture' on 'Document': There is no Picture-in-Picture element in this document.");
+    }
+
+    [Test]
+    public async Task ExitPointerLock() {
+        await Page.GetByTestId(DocumentInProcessGroup.BUTTON_EXIT_POINTER_LOCK).EvaluateAsync("node => node.requestPointerLock();");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        await Page.Mouse.DownAsync();
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.Mouse.UpAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).ClickAsync();
+    }
+
+
+    // methods
+
+    [Test]
+    public async Task HasFocus() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_HAS_FOCUS);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+
+    // methods - Node
+
+    [Test]
+    public async Task CompareDocumentPosition() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_COMPARE_DOCUMENT_POSITION);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        bool isInteger = int.TryParse(result, out _);
+        await Assert.That(isInteger).IsTrue();
+    }
+
+    [Test]
+    public async Task Contains() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_CONTAINS);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
+    public async Task IsDefaultNamespace() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_IS_DEFAULT_NAMESPACE);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
+    public async Task LookupPrefix() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_LOOKUP_PREFIX);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("(no prefix)");
+    }
+
+    [Test]
+    public async Task LookupNamespaceURI() {
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_LOOKUP_NAMESPACE_URI);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("http://www.w3.org/1999/xhtml");
+    }
+
+    [Test]
+    public async Task Normalize() {
+        await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).EvaluateAsync("node => node.append('-textNode1-', '-textNode2-');");
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        await ExecuteTest(DocumentInProcessGroup.BUTTON_NORMALIZE);
+
+        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).EvaluateAsync<string?>("node => node.lastChild.textContent;");
+        await Assert.That(result).IsEqualTo("-textNode1--textNode2-");
+    }
 }
