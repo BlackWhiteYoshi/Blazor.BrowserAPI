@@ -88,9 +88,30 @@ However, the class names itself will be stable, so using them for service provid
 
 
 <br></br>
+## Contribution
+
+Adding a member to an existing BrowserAPI normally includes 5 steps:
+1. Adding a function to the corresponding *.ts* file (in case of a event -> 3 functions)
+2. Adding methods to the corresponding *.cs* and *Inprocess.cs* files (in case of a event -> *Base.cs* file)
+3. Adding a button to the test page
+4. Adding a unit test
+5. Adding an entry to .md file
+
+When creating a new BrowserAPI, a new folder at *Blazor.BrowserAPI/BrowserAPIs/* should be created
+and the following files contain a list of all BrowserAPIs and the new BrowserAPI must be added accordingly:
+- README.md
+- PACKAGE.md
+- Main.ts
+- AddBrowserAPIExtansion.cs
+- IBrowserAPIModule_CircleDI.cs
+- IBrowserAPIModule_Jab.cs
+- App.razor
+
+
+<br></br>
 ## Preview
 
-This package is in preview and breaking changes may occur.  
+This package is in preview and breaking changes may occur (breaking changes are always mentioned in the [Release Notes](#release-notes)).  
 There are more interfaces coming.
 
 
