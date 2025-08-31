@@ -87,8 +87,8 @@ Objects of this class must disposed manually, so do not forget to call DisposeAs
 
 | **Name** | **Type** | **Description**                                                                                                                                                                  |
 | -------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OnCancel | Action   | Fires on a &lt;dialog&gt; when the user instructs the browser that they wish to dismiss the current open dialog. The browser fires this event when the user presses the Esc key. |
 | OnClose  | Action   | Is fired on an HTMLDialogElement object when the &lt;dialog&gt; it represents has been closed.                                                                                   |
+| OnCancel | Action   | Fires on a &lt;dialog&gt; when the user instructs the browser that they wish to dismiss the current open dialog. The browser fires this event when the user presses the Esc key. |
 
 
 
@@ -134,5 +134,5 @@ Objects of this class must disposed manually, so do not forget to call Dispose()
 
 | **Name** | **Type** | **Description**                                                                                                                                                                  |
 | -------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OnCancel | Action   | Fires on a &lt;dialog&gt; when the user instructs the browser that they wish to dismiss the current open dialog. The browser fires this event when the user presses the Esc key. |
 | OnClose  | Action   | Is fired on an HTMLDialogElement object when the &lt;dialog&gt; it represents has been closed.                                                                                   |
+| OnCancel | Action   | Fires on a &lt;dialog&gt; when the user instructs the browser that they wish to dismiss the current open dialog. The browser fires this event when the user presses the Esc key. |

@@ -106,18 +106,6 @@ public sealed class DialogTest(PlayWrightFixture playWrightFixture) : PlayWright
 
 
     [Test]
-    public async Task RegisterOnCancel() {
-        await ExecuteTest(DialogGroup.BUTTON_REGISTER_ON_CANCEL);
-        ILocator dialog = Page.GetByTestId(DialogGroup.DIALOG_ELEMENT);
-        await dialog.EvaluateAsync("dialog => dialog.showModal();");
-        await dialog.PressAsync("Escape");
-        await Task.Delay(STANDARD_WAIT_TIME);
-
-        string? result = await Page.GetByTestId(DialogGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo(DialogGroup.TEST_CANCEL_EVENT);
-    }
-
-    [Test]
     public async Task RegisterOnClose() {
         await ExecuteTest(DialogGroup.BUTTON_REGISTER_ON_CLOSE);
         ILocator dialog = Page.GetByTestId(DialogGroup.DIALOG_ELEMENT);
@@ -127,5 +115,17 @@ public sealed class DialogTest(PlayWrightFixture playWrightFixture) : PlayWright
 
         string? result = await Page.GetByTestId(DialogGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DialogGroup.TEST_CLOSE_EVENT);
+    }
+
+    [Test]
+    public async Task RegisterOnCancel() {
+        await ExecuteTest(DialogGroup.BUTTON_REGISTER_ON_CANCEL);
+        ILocator dialog = Page.GetByTestId(DialogGroup.DIALOG_ELEMENT);
+        await dialog.EvaluateAsync("dialog => dialog.showModal();");
+        await dialog.PressAsync("Escape");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(DialogGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(DialogGroup.TEST_CANCEL_EVENT);
     }
 }

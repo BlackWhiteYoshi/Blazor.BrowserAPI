@@ -1189,7 +1189,7 @@ export class HTMLElementAPI {
 
 
     /** Util function for input events. If the parameter is of type "InputEvent", it gets deconstructed. If it is of type "Event", inputType is null. */
-    #deconstructInputEvent(event: InputEvent | Event): [string | null, string | null, boolean] {
+    static #deconstructInputEvent(event: InputEvent | Event): [string | null, string | null, boolean] {
         if (event instanceof InputEvent)
             return [event.data, event.inputType, event.isComposing];
         else
@@ -1197,7 +1197,7 @@ export class HTMLElementAPI {
     }
 
     /** Util function for drag events. The event parameter is of type "DragEvent" and that has a property "dataTransfer", it gets deconstructed and returned. */
-    #deconstructDataTransfer(data: DataTransfer | null): [string, string, readonly string[], FileAPI[]] {
+    static #deconstructDataTransfer(data: DataTransfer | null): [string, string, readonly string[], FileAPI[]] {
         if (data !== null)
             return [data.dropEffect, data.effectAllowed, data.types, [...data.files].map(file => DotNet.createJSObjectReference(new FileAPI(file)))];
         else
@@ -1205,7 +1205,7 @@ export class HTMLElementAPI {
     }
 
     /** Util function for touch events. The "TouchEvent" has some properties of type "TouchList", it gets converted to an array with serializable objects. */
-    #deconstructTouchList(touchList: TouchList): { identifier: number, clientX: number, clientY: number, pageX: number, pageY: number, screenX: number, screenY: number, radiusX: number, radiusY: number, rotationAngle: number, force: number }[] {
+    static #deconstructTouchList(touchList: TouchList): { identifier: number, clientX: number, clientY: number, pageX: number, pageY: number, screenX: number, screenY: number, radiusX: number, radiusY: number, rotationAngle: number, force: number }[] {
         const result = new Array(touchList.length);
         for (let i = 0; i < result.length; i++)
             result[i] = {
@@ -1280,7 +1280,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - drag event
 
-    #ondrag = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDrag", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
+    #ondrag = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDrag", ... HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
 
     activateOndrag(): void {
         this.#htmlElement.addEventListener("drag", this.#ondrag);
@@ -1293,7 +1293,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - dragstart event
 
-    #ondragstart = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragStart", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
+    #ondragstart = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragStart", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
 
     activateOndragstart(): void {
         this.#htmlElement.addEventListener("dragstart", this.#ondragstart);
@@ -1306,7 +1306,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - dragend event
 
-    #ondragend = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragEnd", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
+    #ondragend = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragEnd", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
 
     activateOndragend(): void {
         this.#htmlElement.addEventListener("dragend", this.#ondragend);
@@ -1319,7 +1319,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - dragenter event
 
-    #ondragenter = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragEnter", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
+    #ondragenter = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragEnter", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
 
     activateOndragenter(): void {
         this.#htmlElement.addEventListener("dragenter", this.#ondragenter);
@@ -1332,7 +1332,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - dragleave event
 
-    #ondragleave = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragLeave", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
+    #ondragleave = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragLeave", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
 
     activateOndragleave(): void {
         this.#htmlElement.addEventListener("dragleave", this.#ondragleave);
@@ -1345,7 +1345,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - dragover event
 
-    #ondragover = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragOver", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
+    #ondragover = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragOver", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
 
     activateOndragover(): void {
         this.#htmlElement.addEventListener("dragover", this.#ondragover);
@@ -1358,7 +1358,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - drop event
 
-    #ondrop = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDrop", ... this.#deconstructDataTransfer(dragEvent.dataTransfer));
+    #ondrop = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDrop", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
 
     activateOndrop(): void {
         this.#htmlElement.addEventListener("drop", this.#ondrop);
@@ -1398,7 +1398,7 @@ export class HTMLElementAPI {
 
     // Element - input event
 
-    #oninput = (inputEvent: InputEvent | Event) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeInput", ... this.#deconstructInputEvent(inputEvent));
+    #oninput = (inputEvent: InputEvent | Event) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeInput", ...HTMLElementAPI.#deconstructInputEvent(inputEvent));
 
     activateOninput(): void {
         this.#htmlElement.addEventListener("input", this.#oninput);
@@ -1411,7 +1411,7 @@ export class HTMLElementAPI {
 
     // Element - beforeinput event
 
-    #onbeforeinput = (inputEvent: InputEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeBeforeInput", ... this.#deconstructInputEvent(inputEvent));
+    #onbeforeinput = (inputEvent: InputEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeBeforeInput", ...HTMLElementAPI.#deconstructInputEvent(inputEvent));
 
     activateOnbeforeinput(): void {
         this.#htmlElement.addEventListener("beforeinput", this.#onbeforeinput);
@@ -1886,9 +1886,9 @@ export class HTMLElementAPI {
     // Element - touchstart event
 
     #ontouchstart = (touchEvent: TouchEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTouchStart", {
-        touches: this.#deconstructTouchList(touchEvent.touches),
-        targetTouches: this.#deconstructTouchList(touchEvent.targetTouches),
-        changedTouches: this.#deconstructTouchList(touchEvent.changedTouches),
+        touches: HTMLElementAPI.#deconstructTouchList(touchEvent.touches),
+        targetTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.targetTouches),
+        changedTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.changedTouches),
         ctrlKey: touchEvent.ctrlKey,
         shiftKey: touchEvent.shiftKey,
         altKey: touchEvent.altKey,
@@ -1907,9 +1907,9 @@ export class HTMLElementAPI {
     // Element - touchend event
 
     #ontouchend = (touchEvent: TouchEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTouchEnd", {
-        touches: this.#deconstructTouchList(touchEvent.touches),
-        targetTouches: this.#deconstructTouchList(touchEvent.targetTouches),
-        changedTouches: this.#deconstructTouchList(touchEvent.changedTouches),
+        touches: HTMLElementAPI.#deconstructTouchList(touchEvent.touches),
+        targetTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.targetTouches),
+        changedTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.changedTouches),
         ctrlKey: touchEvent.ctrlKey,
         shiftKey: touchEvent.shiftKey,
         altKey: touchEvent.altKey,
@@ -1928,9 +1928,9 @@ export class HTMLElementAPI {
     // Element - touchmove event
 
     #ontouchmove = (touchEvent: TouchEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTouchMove", {
-        touches: this.#deconstructTouchList(touchEvent.touches),
-        targetTouches: this.#deconstructTouchList(touchEvent.targetTouches),
-        changedTouches: this.#deconstructTouchList(touchEvent.changedTouches),
+        touches: HTMLElementAPI.#deconstructTouchList(touchEvent.touches),
+        targetTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.targetTouches),
+        changedTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.changedTouches),
         ctrlKey: touchEvent.ctrlKey,
         shiftKey: touchEvent.shiftKey,
         altKey: touchEvent.altKey,
@@ -1949,9 +1949,9 @@ export class HTMLElementAPI {
     // Element - touchcancel event
 
     #ontouchcancel = (touchEvent: TouchEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTouchCancel", {
-        touches: this.#deconstructTouchList(touchEvent.touches),
-        targetTouches: this.#deconstructTouchList(touchEvent.targetTouches),
-        changedTouches: this.#deconstructTouchList(touchEvent.changedTouches),
+        touches: HTMLElementAPI.#deconstructTouchList(touchEvent.touches),
+        targetTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.targetTouches),
+        changedTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.changedTouches),
         ctrlKey: touchEvent.ctrlKey,
         shiftKey: touchEvent.shiftKey,
         altKey: touchEvent.altKey,

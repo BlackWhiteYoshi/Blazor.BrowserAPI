@@ -14,8 +14,33 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const int TEST_VIDEO_WIDTH = 200;
     public const int TEST_VIDEO_HEIGHT = 100;
     public const string TEST_VIDEO_POSTER = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle cx='0' cy='0' r='4' fill='%23484' /></svg>";
-    public const string TEST_PICTURE_IN_PICTURE_WINDOW_RESIZE_EVENT = "pictureInPictureWindow resized";
+    public const string TEST_EVENT_PICTURE_IN_PICTURE_WINDOW_RESIZE = "pictureInPictureWindow resized";
     public const double TEST_FAST_SEEK = 20.0;
+    public const string TEST_EVENT_ERROR = "Error";
+    public const string TEST_EVENT_CAN_PLAY = "CanPlay event";
+    public const string TEST_EVENT_CAN_PLAY_THROUGH = "CanPlayThrough event";
+    public const string TEST_EVENT_PLAYING = "Playing event";
+    public const string TEST_EVENT_LOAD_START = "LoadStart event";
+    public const string TEST_EVENT_PROGRESS = "Progress event";
+    public const string TEST_EVENT_LOADED_DATA = "LoadedData event";
+    public const string TEST_EVENT_LOADED_METADATA = "LoadedMetadata event";
+    public const string TEST_EVENT_STALLED = "stalled event";
+    public const string TEST_EVENT_SUSPEND = "Suspend event";
+    public const string TEST_EVENT_WAITING = "Waiting event";
+    public const string TEST_EVENT_ABORT = "Abort event";
+    public const string TEST_EVENT_EMPTIED = "Emptied event";
+    public const string TEST_EVENT_PLAY = "Play event";
+    public const string TEST_EVENT_PAUSE = "Pause event";
+    public const string TEST_EVENT_ENDED = "Ended event";
+    public const string TEST_EVENT_SEEKING = "Seeking event";
+    public const string TEST_EVENT_SEEKED = "Seeked event";
+    public const string TEST_EVENT_TIME_UPDATE = "TimeUpdate event";
+    public const string TEST_EVENT_VOLUME_CHANGE = "VolumeChange event";
+    public const string TEST_EVENT_RATE_CHANGE = "RateChange event";
+    public const string TEST_EVENT_DURATION_CHANGE = "DurationChange event";
+    public const string TEST_EVENT_RESIZE = "Resize event";
+    public const string TEST_EVENT_ENTER_PICTURE_IN_PICTURE = "EnterPictureInPicture event";
+    public const string TEST_EVENT_LEAVE_PICTURE_IN_PICTURE = "LeavePictureInPicture event";
 
 
     [Inject]
@@ -605,7 +630,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
         pictureInPictureWindow.OnResize += OnResize;
 
         void OnResize() {
-            labelOutput = TEST_PICTURE_IN_PICTURE_WINDOW_RESIZE_EVENT;
+            labelOutput = TEST_EVENT_PICTURE_IN_PICTURE_WINDOW_RESIZE;
             StateHasChanged();
             pictureInPictureWindow.OnResize -= OnResize;
             _ = pictureInPictureWindow.DisposeAsync().Preserve();
@@ -660,7 +685,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_ERROR = "htmlmediaelement-error-event";
     private void RegisterOnError() {
         AudioElement.OnError += (int code, string message) => {
-            labelOutput = $"Error: errorCode = {code}, {message}";
+            labelOutput = $"{TEST_EVENT_ERROR}: errorCode = {code}, {message}";
             StateHasChanged();
         };
     }
@@ -668,7 +693,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_CAN_PLAY = "htmlmediaelement-can-play-event";
     private void RegisterOnCanPlay() {
         AudioElement.OnCanPlay += () => {
-            labelOutput = "Canplay";
+            labelOutput = TEST_EVENT_CAN_PLAY;
             StateHasChanged();
         };
     }
@@ -676,7 +701,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_CAN_PLAY_THROUGH = "htmlmediaelement-can-play-through-event";
     private void RegisterOnCanPlayThrough() {
         AudioElement.OnCanPlayThrough += () => {
-            labelOutput = "Canplaythrough";
+            labelOutput = TEST_EVENT_CAN_PLAY_THROUGH;
             StateHasChanged();
         };
     }
@@ -684,7 +709,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_PLAYING = "htmlmediaelement-playing-event";
     private void RegisterOnPlaying() {
         AudioElement.OnPlaying += () => {
-            labelOutput = "Playing";
+            labelOutput = TEST_EVENT_PLAYING;
             StateHasChanged();
         };
     }
@@ -695,7 +720,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_LOAD_START = "htmlmediaelement-load-start-event";
     private void RegisterOnLoadStart() {
         AudioElement.OnLoadStart += () => {
-            labelOutput = "Loadstart";
+            labelOutput = TEST_EVENT_LOAD_START;
             StateHasChanged();
         };
     }
@@ -703,7 +728,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_PROGRESS = "htmlmediaelement-progress-event";
     private void RegisterOnProgress() {
         AudioElement.OnProgress += () => {
-            labelOutput = "Progress";
+            labelOutput = TEST_EVENT_PROGRESS;
             StateHasChanged();
         };
     }
@@ -711,7 +736,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_LOADED_DATA = "htmlmediaelement-loaded-data-event";
     private void RegisterOnLoadedData() {
         AudioElement.OnLoadedData += () => {
-            labelOutput = "Loadeddata";
+            labelOutput = TEST_EVENT_LOADED_DATA;
             StateHasChanged();
         };
     }
@@ -719,7 +744,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_LOADED_METADATA = "htmlmediaelement-loaded-metadata-event";
     private void RegisterOnLoadedMetadata() {
         AudioElement.OnLoadedMetadata += () => {
-            labelOutput = "Loadedmetadata";
+            labelOutput = TEST_EVENT_LOADED_METADATA;
             StateHasChanged();
         };
     }
@@ -727,7 +752,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_STALLED = "htmlmediaelement-stalled-event";
     private void RegisterOnStalled() {
         AudioElement.OnStalled += () => {
-            labelOutput = "Stalled";
+            labelOutput = TEST_EVENT_STALLED;
             StateHasChanged();
         };
     }
@@ -735,7 +760,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_SUSPEND = "htmlmediaelement-suspend-event";
     private void RegisterOnSuspend() {
         AudioElement.OnSuspend += () => {
-            labelOutput = "Suspend";
+            labelOutput = TEST_EVENT_SUSPEND;
             StateHasChanged();
         };
     }
@@ -743,7 +768,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_WAITING = "htmlmediaelement-waiting-event";
     private void RegisterOnWaiting() {
         AudioElement.OnWaiting += () => {
-            labelOutput = "Waiting";
+            labelOutput = TEST_EVENT_WAITING;
             StateHasChanged();
         };
     }
@@ -751,7 +776,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_ABORT = "htmlmediaelement-abort-event";
     private void RegisterOnAbort() {
         AudioElement.OnAbort += () => {
-            labelOutput = "Abort";
+            labelOutput = TEST_EVENT_ABORT;
             StateHasChanged();
         };
     }
@@ -759,7 +784,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_EMPTIED = "htmlmediaelement-emptied-event";
     private void RegisterOnEmptied() {
         AudioElement.OnEmptied += () => {
-            labelOutput = "Emptied";
+            labelOutput = TEST_EVENT_EMPTIED;
             StateHasChanged();
         };
     }
@@ -770,7 +795,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_PLAY = "htmlmediaelement-play-event";
     private void RegisterOnPlay() {
         AudioElement.OnPlay += () => {
-            labelOutput = "Play";
+            labelOutput = TEST_EVENT_PLAY;
             StateHasChanged();
         };
     }
@@ -778,7 +803,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_PAUSE = "htmlmediaelement-pause-event";
     private void RegisterOnPause() {
         AudioElement.OnPause += () => {
-            labelOutput = "Pause";
+            labelOutput = TEST_EVENT_PAUSE;
             StateHasChanged();
         };
     }
@@ -786,7 +811,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_ENDED = "htmlmediaelement-ended-event";
     private void RegisterOnEnded() {
         AudioElement.OnEnded += () => {
-            labelOutput = "Ended";
+            labelOutput = TEST_EVENT_ENDED;
             StateHasChanged();
         };
     }
@@ -794,7 +819,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_SEEKING = "htmlmediaelement-seeking-event";
     private void RegisterOnSeeking() {
         AudioElement.OnSeeking += () => {
-            labelOutput = "Seeking";
+            labelOutput = TEST_EVENT_SEEKING;
             StateHasChanged();
         };
     }
@@ -802,7 +827,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_SEEKED = "htmlmediaelement-seeked-event";
     private void RegisterOnSeeked() {
         AudioElement.OnSeeked += () => {
-            labelOutput = "Seeked";
+            labelOutput = TEST_EVENT_SEEKED;
             StateHasChanged();
         };
     }
@@ -810,7 +835,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_TIME_UPDATE = "htmlmediaelement-time-update-event";
     private void RegisterOnTimeUpdate() {
         AudioElement.OnTimeUpdate += () => {
-            labelOutput = "Timeupdate";
+            labelOutput = TEST_EVENT_TIME_UPDATE;
             StateHasChanged();
         };
     }
@@ -821,7 +846,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_VOLUME_CHANGE = "htmlmediaelement-volume-change-event";
     private void RegisterOnVolumeChange() {
         AudioElement.OnVolumeChange += () => {
-            labelOutput = "Volumechange";
+            labelOutput = TEST_EVENT_VOLUME_CHANGE;
             StateHasChanged();
         };
     }
@@ -829,7 +854,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_RATE_CHANGE = "htmlmediaelement-rate-change-event";
     private void RegisterOnRateChange() {
         AudioElement.OnRateChange += () => {
-            labelOutput = "Ratechange";
+            labelOutput = TEST_EVENT_RATE_CHANGE;
             StateHasChanged();
         };
     }
@@ -837,7 +862,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_DURATION_CHANGE = "htmlmediaelement-duration-change-event";
     private void RegisterOnDurationChange() {
         AudioElement.OnDurationChange += () => {
-            labelOutput = "Durationchange";
+            labelOutput = TEST_EVENT_DURATION_CHANGE;
             StateHasChanged();
         };
     }
@@ -848,7 +873,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_RESIZE = "htmlmediaelement-resize-event";
     private void RegisterOnResize() {
         VideoElement.OnResize += () => {
-            labelOutput = "Resize";
+            labelOutput = TEST_EVENT_RESIZE;
             StateHasChanged();
         };
     }
@@ -856,7 +881,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_ENTER_PICTURE_IN_PICTURE = "htmlmediaelement-enter-picture-in-picture-event";
     private void RegisterOnEnterPictureInPicture() {
         VideoElement.OnEnterPictureInPicture += (IPictureInPictureWindow pictureInPictureWindow) => {
-            labelOutput = "EnterPictureInPicture";
+            labelOutput = TEST_EVENT_ENTER_PICTURE_IN_PICTURE;
             StateHasChanged();
             _ = pictureInPictureWindow.DisposeAsync().Preserve();
         };
@@ -865,7 +890,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_REGISTER_ON_LEAVE_PICTURE_IN_PICTURE = "htmlmediaelement-leave-picture-in-picture-event";
     private void RegisterOnLeavePictureInPicture() {
         VideoElement.OnLeavePictureInPicture += (IPictureInPictureWindow pictureInPictureWindow) => {
-            labelOutput = "LeavePictureInPicture";
+            labelOutput = TEST_EVENT_LEAVE_PICTURE_IN_PICTURE;
             StateHasChanged();
             _ = pictureInPictureWindow.DisposeAsync().Preserve();
         };

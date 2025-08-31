@@ -1326,7 +1326,7 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     /// User gestures like touch panning or trackpad scrolling aren't complete until pointers or keys have released.
     /// If the scroll position did not change, then no scrollend event fires.
     /// </para>
-    /// <para>For detecting when scrolling inside a Document is complete, see <see cref="ScrollEnd">the scrollend event of Document</see>.</para>
+    /// <para>For detecting when scrolling inside a Document is complete, see <see cref="IDocument.OnScrollEnd">the scrollend event of Document</see>.</para>
     /// </summary>
     public event Action OnScrollEnd {
         add {

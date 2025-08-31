@@ -56,19 +56,6 @@ export class DialogAPI {
     }
 
 
-    // cancel event
-
-    #oncancel = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCancel");
-
-    activateOncancel(): void {
-        this.#dialog.addEventListener("cancel", this.#oncancel);
-    }
-
-    deactivateOncancel(): void {
-        this.#dialog.removeEventListener("cancel", this.#oncancel);
-    }
-
-
     // close event
 
     #onclose = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeClose");
@@ -79,5 +66,18 @@ export class DialogAPI {
 
     deactivateOnclose(): void {
         this.#dialog.removeEventListener("close", this.#onclose);
+    }
+
+
+    // cancel event
+
+    #oncancel = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCancel");
+
+    activateOncancel(): void {
+        this.#dialog.addEventListener("cancel", this.#oncancel);
+    }
+
+    deactivateOncancel(): void {
+        this.#dialog.removeEventListener("cancel", this.#oncancel);
     }
 }

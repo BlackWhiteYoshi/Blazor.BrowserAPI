@@ -80,18 +80,18 @@ public sealed partial class DialogGroup : ComponentBase, IAsyncDisposable {
     }
 
 
-    public const string BUTTON_REGISTER_ON_CANCEL = "dialog-cancel-event";
-    private void RegisterOnCancel() {
-        Dialog.OnCancel += () => {
-            labelOutput = TEST_CANCEL_EVENT;
-            StateHasChanged();
-        };
-    }
-
     public const string BUTTON_REGISTER_ON_CLOSE = "dialog-close-event";
     private void RegisterOnClose() {
         Dialog.OnClose += () => {
             labelOutput = TEST_CLOSE_EVENT;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_CANCEL = "dialog-cancel-event";
+    private void RegisterOnCancel() {
+        Dialog.OnCancel += () => {
+            labelOutput = TEST_CANCEL_EVENT;
             StateHasChanged();
         };
     }

@@ -15,11 +15,11 @@ public abstract class DialogBase(Task<IJSObjectReference> dialogTask) {
 
     #region Events
 
-    [method: DynamicDependency(nameof(InvokeCancel))]
     [method: DynamicDependency(nameof(InvokeClose))]
+    [method: DynamicDependency(nameof(InvokeCancel))]
     private sealed class EventTrigger(DialogBase dialog) {
-        [JSInvokable] public void InvokeCancel() => dialog._onCancel?.Invoke();
         [JSInvokable] public void InvokeClose() => dialog._onClose?.Invoke();
+        [JSInvokable] public void InvokeCancel() => dialog._onCancel?.Invoke();
     }
 
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
@@ -50,23 +50,6 @@ public abstract class DialogBase(Task<IJSObjectReference> dialogTask) {
     }
 
 
-    private Action? _onCancel;
-    /// <summary>
-    /// Fires on a &lt;dialog&gt; when the user instructs the browser that they wish to dismiss the current open dialog. The browser fires this event when the user presses the Esc key.
-    /// </summary>
-    public event Action OnCancel {
-        add {
-            if (_onCancel == null)
-                _ = ActivateJSEvent("activateOncancel").Preserve();
-            _onCancel += value;
-        }
-        remove {
-            _onCancel -= value;
-            if (_onCancel == null)
-                _ = DeactivateJSEvent("deactivateOncancel").Preserve();
-        }
-    }
-
     private Action? _onClose;
     /// <summary>
     /// Is fired on an HTMLDialogElement object when the &lt;dialog&gt; it represents has been closed.
@@ -81,6 +64,23 @@ public abstract class DialogBase(Task<IJSObjectReference> dialogTask) {
             _onClose -= value;
             if (_onClose == null)
                 _ = DeactivateJSEvent("deactivateOnclose").Preserve();
+        }
+    }
+
+    private Action? _onCancel;
+    /// <summary>
+    /// Fires on a &lt;dialog&gt; when the user instructs the browser that they wish to dismiss the current open dialog. The browser fires this event when the user presses the Esc key.
+    /// </summary>
+    public event Action OnCancel {
+        add {
+            if (_onCancel == null)
+                _ = ActivateJSEvent("activateOncancel").Preserve();
+            _onCancel += value;
+        }
+        remove {
+            _onCancel -= value;
+            if (_onCancel == null)
+                _ = DeactivateJSEvent("deactivateOncancel").Preserve();
         }
     }
 

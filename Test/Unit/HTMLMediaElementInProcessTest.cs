@@ -519,7 +519,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         // ? resize floating video
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_PICTURE_IN_PICTURE_WINDOW_RESIZE_EVENT);
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_PICTURE_IN_PICTURE_WINDOW_RESIZE);
     }
 
     #endregion
@@ -540,13 +540,13 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
     [Test]
     public async Task Pause() {
         await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync("audioElement => audioElement.play();");
-        await Task.Delay(SMALL_WAIT_TIME);
+        await Task.Delay(4 * STANDARD_WAIT_TIME);
         await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_PAUSE);
 
         bool result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync<bool>("audioElement => audioElement.paused;");
         await Assert.That(result).IsTrue();
         double currentTime = await Page.GetByTestId(HTMLMediaElementInProcessGroup.AUDIO_ELEMENT).EvaluateAsync<double>("audioElement => audioElement.currentTime;");
-        await Assert.That(currentTime > 0.0).IsTrue();
+        await Assert.That(currentTime).IsGreaterThan(0.0);
     }
 
     [Test]
@@ -608,7 +608,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Error: errorCode = 4, MEDIA_ELEMENT_ERROR: Format error");
+        await Assert.That(result).IsEqualTo($"{HTMLMediaElementInProcessGroup.TEST_EVENT_ERROR}: errorCode = 4, MEDIA_ELEMENT_ERROR: Format error");
     }
 
     [Test]
@@ -618,7 +618,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Canplay");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_CAN_PLAY);
     }
 
     [Test]
@@ -628,7 +628,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Canplaythrough");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_CAN_PLAY_THROUGH);
     }
 
     [Test]
@@ -638,7 +638,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Playing");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_PLAYING);
     }
 
 
@@ -651,7 +651,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Loadstart");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_LOAD_START);
     }
 
     [Test]
@@ -661,7 +661,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Progress");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_PROGRESS);
     }
 
     [Test]
@@ -671,7 +671,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Loadeddata");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_LOADED_DATA);
     }
 
     [Test]
@@ -681,7 +681,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Loadedmetadata");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_LOADED_METADATA);
     }
 
     [Test]
@@ -691,7 +691,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Stalled");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_STALLED);
     }
 
     [Test]
@@ -701,7 +701,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Suspend");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_SUSPEND);
     }
 
     [Test]
@@ -711,7 +711,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Waiting");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_WAITING);
     }
 
     [Test]
@@ -721,7 +721,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Abort");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_ABORT);
     }
 
     [Test]
@@ -731,7 +731,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Emptied");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_EMPTIED);
     }
 
 
@@ -744,7 +744,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Play");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_PLAY);
     }
 
     [Test]
@@ -759,7 +759,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Pause");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_PAUSE);
     }
 
     [Test]
@@ -774,7 +774,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Ended");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_ENDED);
     }
 
     [Test]
@@ -784,7 +784,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Seeking");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_SEEKING);
     }
 
     [Test]
@@ -794,7 +794,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Seeked");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_SEEKED);
     }
 
     [Test]
@@ -804,7 +804,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Timeupdate");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_TIME_UPDATE);
     }
 
 
@@ -817,7 +817,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Volumechange");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_VOLUME_CHANGE);
     }
 
     [Test]
@@ -827,7 +827,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Ratechange");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_RATE_CHANGE);
     }
 
     [Test]
@@ -839,7 +839,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Durationchange");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_DURATION_CHANGE);
     }
 
 
@@ -853,7 +853,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("Resize");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_RESIZE);
     }
 
     /* Chromium does not load .mp4 and firefox does not support PictureInPictureWindow
@@ -867,7 +867,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("EnterPictureInPicture");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_ENTER_PICTURE_IN_PICTURE);
     }
 
     [Test]
@@ -881,7 +881,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         // close window
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("LeavePictureInPicture");
+        await Assert.That(result).IsEqualTo(HTMLMediaElementInProcessGroup.TEST_EVENT_LEAVE_PICTURE_IN_PICTURE);
     }
 
     */
