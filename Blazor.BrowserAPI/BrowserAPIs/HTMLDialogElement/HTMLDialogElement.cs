@@ -33,6 +33,32 @@ public sealed class HTMLDialogElement(Task<IJSObjectReference> dialogTask) : HTM
 
 
     /// <summary>
+    /// <para>
+    /// Indicates the types of user actions that can be used to close the associated &lt;dialog&gt; element.
+    /// It sets or returns the dialog's closedby attribute value.
+    /// </para>
+    /// <para>
+    /// Possible values are:<br />
+    /// - "any": The dialog can be dismissed with a light dismiss user action, a platform-specific user action, or a developer-specified mechanism.<br />
+    /// - "closerequest": The dialog can be dismissed with a platform-specific user action or a developer-specified mechanism.<br />
+    /// - "none": The dialog can only be dismissed with a developer-specified mechanism.
+    /// </para>
+    /// </summary>
+    public ValueTask<string> ClosedBy => GetClosedBy(default);
+
+    /// <inheritdoc cref="ClosedBy" />
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<string> GetClosedBy(CancellationToken cancellationToken) => await (await dialogTask).InvokeTrySync<string>("getClosedBy", cancellationToken);
+
+    /// <inheritdoc cref="ClosedBy" />
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask SetClosedBy(string value, CancellationToken cancellationToken = default) => await (await dialogTask).InvokeVoidTrySync("setClosedBy", cancellationToken, [value]);
+
+
+    /// <summary>
     /// Reflecting the open HTML attribute, indicating whether the &lt;dialog&gt; is available for interaction.
     /// </summary>
     public ValueTask<bool> Open => GetOpen(default);
@@ -60,10 +86,10 @@ public sealed class HTMLDialogElement(Task<IJSObjectReference> dialogTask) : HTM
     public async ValueTask<string> GetReturnValue(CancellationToken cancellationToken) => await (await dialogTask).InvokeTrySync<string>("getReturnValue", cancellationToken);
 
     /// <inheritdoc cref="ReturnValue" />
-    /// <param name="returnValue">A string representing the updated value of the dialog.</param>
+    /// <param name="value">A string representing the updated value of the dialog.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetReturnValue(string returnValue, CancellationToken cancellationToken = default) => await (await dialogTask).InvokeVoidTrySync("setReturnValue", cancellationToken, [returnValue]);
+    public async ValueTask SetReturnValue(string value, CancellationToken cancellationToken = default) => await (await dialogTask).InvokeVoidTrySync("setReturnValue", cancellationToken, [value]);
 
 
     /// <summary>
@@ -90,4 +116,20 @@ public sealed class HTMLDialogElement(Task<IJSObjectReference> dialogTask) : HTM
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask Close(string? returnValue = null, CancellationToken cancellationToken = default) => await (await dialogTask).InvokeVoidTrySync("close", cancellationToken, [returnValue]);
+
+    /// <summary>
+    /// <para>
+    /// Requests to close the &lt;dialog&gt;.<br />
+    /// An optional string may be passed as an argument, updating the returnValue of the dialog.
+    /// </para>
+    /// <para>
+    /// This method differs from the <see cref="Close"/> method in that it fires a cancel event before firing the close event.
+    /// Authors can call Event.preventDefault() in the handler for the cancel event to prevent the dialog from closing.
+    /// </para>
+    /// <para>This method exposes the same behavior as the dialog's internal close watcher.</para>
+    /// </summary>
+    /// <param name="returnValue">A string representing an updated value for the <see cref="ReturnValue"/> of the dialog.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask RequestClose(string? returnValue = null, CancellationToken cancellationToken = default) => await (await dialogTask).InvokeVoidTrySync("requestClose", cancellationToken, [returnValue]);
 }

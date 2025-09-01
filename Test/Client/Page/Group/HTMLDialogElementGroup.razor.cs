@@ -3,9 +3,10 @@
 namespace BrowserAPI.Test.Client;
 
 public sealed partial class HTMLDialogElementGroup : ComponentBase, IAsyncDisposable {
+    public const string TEST_CLOSED_BY = "any";
     public const string TEST_RETURN_VALUE = "return-value-test";
-    public const string TEST_CANCEL_EVENT = "cancel-event-test";
-    public const string TEST_CLOSE_EVENT = "close-event-test";
+    public const string TEST_EVENT_CLOSE = "close-event-test";
+    public const string TEST_EVENT_CANCEL = "cancel-event-test";
 
 
     [Inject]
@@ -32,6 +33,22 @@ public sealed partial class HTMLDialogElementGroup : ComponentBase, IAsyncDispos
     private async Task ToHTMLElement() {
         await using IHTMLElement htmlElement = await Dialog.ToHTMLElement();
         labelOutput = (htmlElement is not null).ToString();
+    }
+
+
+    public const string BUTTON_GET_CLOSED_BY_PROPERTY = "htmldialogelement-get-closed-by-property";
+    private async Task GetClosedBy_Property() {
+        labelOutput = await Dialog.ClosedBy;
+    }
+
+    public const string BUTTON_GET_CLOSED_BY_METHOD = "htmldialogelement-get-closed-by-method";
+    private async Task GetClosedBy_Method() {
+        labelOutput = await Dialog.GetClosedBy(default);
+    }
+
+    public const string BUTTON_SET_CLOSED_BY = "htmldialogelement-set-closed-by";
+    private async Task SetClosedBy() {
+        await Dialog.SetClosedBy(TEST_CLOSED_BY);
     }
 
 
@@ -89,11 +106,16 @@ public sealed partial class HTMLDialogElementGroup : ComponentBase, IAsyncDispos
         await Dialog.Close(TEST_RETURN_VALUE);
     }
 
+    public const string BUTTON_REQUEST_CLOSE = "htmldialogelement-request-close";
+    private async Task RequestClose() {
+        await Dialog.RequestClose();
+    }
+
 
     public const string BUTTON_REGISTER_ON_CLOSE = "htmldialogelement-close-event";
     private void RegisterOnClose() {
         Dialog.OnClose += () => {
-            labelOutput = TEST_CLOSE_EVENT;
+            labelOutput = TEST_EVENT_CLOSE;
             StateHasChanged();
         };
     }
@@ -101,7 +123,7 @@ public sealed partial class HTMLDialogElementGroup : ComponentBase, IAsyncDispos
     public const string BUTTON_REGISTER_ON_CANCEL = "htmldialogelement-cancel-event";
     private void RegisterOnCancel() {
         Dialog.OnCancel += () => {
-            labelOutput = TEST_CANCEL_EVENT;
+            labelOutput = TEST_EVENT_CANCEL;
             StateHasChanged();
         };
     }

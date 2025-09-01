@@ -32,6 +32,23 @@ public sealed class HTMLDialogElementInProcess(IJSInProcessObjectReference dialo
 
 
     /// <summary>
+    /// <para>
+    /// Indicates the types of user actions that can be used to close the associated &lt;dialog&gt; element.
+    /// It sets or returns the dialog's closedby attribute value.
+    /// </para>
+    /// <para>
+    /// Possible values are:<br />
+    /// - "any": The dialog can be dismissed with a light dismiss user action, a platform-specific user action, or a developer-specified mechanism.<br />
+    /// - "closerequest": The dialog can be dismissed with a platform-specific user action or a developer-specified mechanism.<br/>
+    /// - "none": The dialog can only be dismissed with a developer-specified mechanism.
+    /// </para>
+    /// </summary>
+    public string ClosedBy {
+        get => dialogJS.Invoke<string>("getClosedBy");
+        set => dialogJS.InvokeVoid("setClosedBy", [value]);
+    }
+
+    /// <summary>
     /// Reflecting the open HTML attribute, indicating whether the &lt;dialog&gt; is available for interaction.
     /// </summary>
     public bool Open {
@@ -66,4 +83,18 @@ public sealed class HTMLDialogElementInProcess(IJSInProcessObjectReference dialo
     /// </summary>
     /// <param name="returnValue">A string representing an updated value for the <see cref="ReturnValue"/> of the dialog.</param>
     public void Close(string? returnValue = null) => dialogJS.InvokeVoid("close", [returnValue]);
+
+    /// <summary>
+    /// <para>
+    /// Requests to close the &lt;dialog&gt;.<br />
+    /// An optional string may be passed as an argument, updating the returnValue of the dialog.
+    /// </para>
+    /// <para>
+    /// This method differs from the <see cref="Close"/> method in that it fires a cancel event before firing the close event.
+    /// Authors can call Event.preventDefault() in the handler for the cancel event to prevent the dialog from closing.
+    /// </para>
+    /// <para>This method exposes the same behavior as the dialog's internal close watcher.</para>
+    /// </summary>
+    /// <param name="returnValue">A string representing an updated value for the <see cref="ReturnValue"/> of the dialog.</param>
+    public void RequestClose(string? returnValue = null) => dialogJS.InvokeVoid("requestClose", [returnValue]);
 }

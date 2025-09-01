@@ -3,9 +3,10 @@
 namespace BrowserAPI.Test.Client;
 
 public sealed partial class HTMLDialogElementInProcessGroup : ComponentBase, IDisposable {
+    public const string TEST_CLOSED_BY = "any";
     public const string TEST_RETURN_VALUE = "return-value-test-inprocess";
-    public const string TEST_CANCEL_EVENT = "cancel-event-test-inprocess";
-    public const string TEST_CLOSE_EVENT = "close-event-test-inprocess";
+    public const string TEST_EVENT_CLOSE = "close-event-test-inprocess";
+    public const string TEST_EVENT_CANCEL = "cancel-event-test-inprocess";
 
 
     [Inject]
@@ -29,6 +30,17 @@ public sealed partial class HTMLDialogElementInProcessGroup : ComponentBase, IDi
     private void ToHTMLElement() {
         using IHTMLElementInProcess htmlElement = Dialog.ToHTMLElement();
         labelOutput = (htmlElement is not null).ToString();
+    }
+
+
+    public const string BUTTON_GET_CLOSED_BY = "htmldialogelement-inprocess-get-closed-by";
+    private void GetClosedBy() {
+        labelOutput = Dialog.ClosedBy;
+    }
+
+    public const string BUTTON_SET_CLOSED_BY = "htmldialogelement-inprocess-set-closed-by";
+    private void SetClosedBy() {
+        Dialog.ClosedBy = TEST_CLOSED_BY;
     }
 
 
@@ -75,11 +87,16 @@ public sealed partial class HTMLDialogElementInProcessGroup : ComponentBase, IDi
         Dialog.Close(TEST_RETURN_VALUE);
     }
 
+    public const string BUTTON_REQUEST_CLOSE = "htmldialogelement-inprocess-request-close";
+    private void RequestClose() {
+        Dialog.RequestClose();
+    }
+
 
     public const string BUTTON_REGISTER_ON_CLOSE = "htmldialogelement-inprocess-close-event";
     private void RegisterOnClose() {
         Dialog.OnClose += () => {
-            labelOutput = TEST_CLOSE_EVENT;
+            labelOutput = TEST_EVENT_CLOSE;
             StateHasChanged();
         };
     }
@@ -87,7 +104,7 @@ public sealed partial class HTMLDialogElementInProcessGroup : ComponentBase, IDi
     public const string BUTTON_REGISTER_ON_CANCEL = "htmldialogelement-inprocess-cancel-event";
     private void RegisterOnCancel() {
         Dialog.OnCancel += () => {
-            labelOutput = TEST_CANCEL_EVENT;
+            labelOutput = TEST_EVENT_CANCEL;
             StateHasChanged();
         };
     }

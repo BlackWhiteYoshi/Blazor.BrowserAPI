@@ -18,6 +18,15 @@ export class HTMLDialogElementAPI {
     }
 
 
+    getClosedBy(): string {
+        return (<HTMLDialogElement & { closedBy: string }>this.#dialog).closedBy;
+    }
+
+    setClosedBy(value: string): void {
+        (<HTMLDialogElement & { closedBy: string; }>this.#dialog).closedBy = value;
+    }
+
+
     getOpen(): boolean {
         return this.#dialog.open;
     }
@@ -31,13 +40,17 @@ export class HTMLDialogElementAPI {
         return this.#dialog.returnValue;
     }
 
-    setReturnValue(returnValue: string): void {
-        this.#dialog.returnValue = returnValue;
+    setReturnValue(value: string): void {
+        this.#dialog.returnValue = value;
     }
 
 
     close(returnValue: string | null): void {
         this.#dialog.close(returnValue ?? undefined);
+    }
+
+    requestClose(returnValue: string | null): void {
+        (<HTMLDialogElement & { requestClose(returnValue?: string): void }>this.#dialog).requestClose(returnValue ?? undefined);
     }
 
 

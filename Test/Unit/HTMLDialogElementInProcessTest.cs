@@ -1,5 +1,4 @@
 ﻿using BrowserAPI.Test.Client;
-using Microsoft.Playwright;
 
 namespace BrowserAPI.UnitTest;
 
@@ -11,6 +10,25 @@ public sealed class HTMLDialogElementInProcessTest(PlayWrightFixture playWrightF
 
         string? result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
+    }
+
+
+    [Test]
+    public async Task GetClosedBy() {
+        await Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT).EvaluateAsync($"dialog => dialog.closedBy = '{HTMLDialogElementInProcessGroup.TEST_CLOSED_BY}';");
+
+        await ExecuteTest(HTMLDialogElementInProcessGroup.BUTTON_GET_CLOSED_BY);
+
+        string? result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HTMLDialogElementInProcessGroup.TEST_CLOSED_BY);
+    }
+
+    [Test]
+    public async Task SetClosedBy() {
+        await ExecuteTest(HTMLDialogElementInProcessGroup.BUTTON_SET_RETURN_VALUE);
+
+        string result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT).EvaluateAsync<string>("dialog => dialog.returnValue;");
+        await Assert.That(result).IsEqualTo(HTMLDialogElementInProcessGroup.TEST_RETURN_VALUE);
     }
 
 
@@ -33,22 +51,19 @@ public sealed class HTMLDialogElementInProcessTest(PlayWrightFixture playWrightF
 
     [Test]
     public async Task GetReturnValue() {
-        const string RESULT = "return value result";
-        ILocator dialog = Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT);
-        await dialog.EvaluateAsync($"dialog => dialog.returnValue = '{RESULT}';");
+        await Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT).EvaluateAsync($"dialog => dialog.returnValue = '{HTMLDialogElementInProcessGroup.TEST_RETURN_VALUE}';");
 
         await ExecuteTest(HTMLDialogElementInProcessGroup.BUTTON_GET_RETURN_VALUE);
 
         string? result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo(RESULT);
+        await Assert.That(result).IsEqualTo(HTMLDialogElementInProcessGroup.TEST_RETURN_VALUE);
     }
 
     [Test]
     public async Task SetReturnValue() {
         await ExecuteTest(HTMLDialogElementInProcessGroup.BUTTON_SET_RETURN_VALUE);
 
-        ILocator dialog = Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT);
-        string result = await dialog.EvaluateAsync<string>("dialog => dialog.returnValue;");
+        string result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT).EvaluateAsync<string>("dialog => dialog.returnValue;");
         await Assert.That(result).IsEqualTo(HTMLDialogElementInProcessGroup.TEST_RETURN_VALUE);
     }
 
@@ -71,8 +86,7 @@ public sealed class HTMLDialogElementInProcessTest(PlayWrightFixture playWrightF
 
     [Test]
     public async Task Close() {
-        ILocator dialog = Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT);
-        await dialog.EvaluateAsync("dialog => dialog.show();");
+        await Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT).EvaluateAsync("dialog => dialog.show();");
 
         await ExecuteTest(HTMLDialogElementInProcessGroup.BUTTON_CLOSE);
 
@@ -82,39 +96,50 @@ public sealed class HTMLDialogElementInProcessTest(PlayWrightFixture playWrightF
 
     [Test]
     public async Task CloseReturnValue() {
-        ILocator dialog = Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT);
-        await dialog.EvaluateAsync("dialog => dialog.show();");
+        await Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT).EvaluateAsync("dialog => dialog.show();");
 
         await ExecuteTest(HTMLDialogElementInProcessGroup.BUTTON_CLOSE_RETURN_VALUE);
 
         string? open = await Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT).GetAttributeAsync("open");
         await Assert.That(open).IsNull();
-        string result = await dialog.EvaluateAsync<string>("dialog => dialog.returnValue;");
+        string result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT).EvaluateAsync<string>("dialog => dialog.returnValue;");
         await Assert.That(result).IsEqualTo(HTMLDialogElementInProcessGroup.TEST_RETURN_VALUE);
+    }
+
+    [Test]
+    public async Task RequestClose() {
+        await Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT).EvaluateAsync("dialog => dialog.show();");
+
+        await ExecuteTest(HTMLDialogElementInProcessGroup.BUTTON_REQUEST_CLOSE);
+
+        string? open = await Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT).GetAttributeAsync("open");
+        await Assert.That(open).IsNull();
     }
 
 
     [Test]
     public async Task RegisterOnClose() {
         await ExecuteTest(HTMLDialogElementInProcessGroup.BUTTON_REGISTER_ON_CLOSE);
-        ILocator dialog = Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT);
-        await dialog.EvaluateAsync("dialog => dialog.show();");
-        await dialog.EvaluateAsync("dialog => dialog.close();");
+
+        await Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT).EvaluateAsync("dialog => dialog.show();");
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT).EvaluateAsync("dialog => dialog.close();");
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo(HTMLDialogElementInProcessGroup.TEST_CLOSE_EVENT);
+        await Assert.That(result).IsEqualTo(HTMLDialogElementInProcessGroup.TEST_EVENT_CLOSE);
     }
 
     [Test]
     public async Task RegisterOnCancel() {
         await ExecuteTest(HTMLDialogElementInProcessGroup.BUTTON_REGISTER_ON_CANCEL);
-        ILocator dialog = Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT);
-        await dialog.EvaluateAsync("dialog => dialog.showModal();");
-        await dialog.PressAsync("Escape");
+
+        await Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT).EvaluateAsync("dialog => dialog.showModal();");
+        await Task.Delay(SMALL_WAIT_TIME);
+        await Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT).PressAsync("Escape");
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo(HTMLDialogElementInProcessGroup.TEST_CANCEL_EVENT);
+        await Assert.That(result).IsEqualTo(HTMLDialogElementInProcessGroup.TEST_EVENT_CANCEL);
     }
 }
