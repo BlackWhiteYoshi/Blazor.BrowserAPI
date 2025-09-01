@@ -71,6 +71,13 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     }
 
 
+    public const string BUTTON_TO_HTML_ELEMENT = "htmlmediaelement-inprocess-to-html-element";
+    private void ToHTMLElement() {
+        using IHTMLElementInProcess htmlElement = AudioElement.ToHTMLElement();
+        labelOutput = (htmlElement is not null).ToString();
+    }
+
+
     #region Attributes
 
     public const string BUTTON_GET_SRC = "htmlmediaelement-inprocess-get-src";

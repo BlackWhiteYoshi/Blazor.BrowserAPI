@@ -1,6 +1,5 @@
 ﻿using BrowserAPI.Test.Client;
 using Microsoft.Playwright;
-using System.Text.Json;
 
 namespace BrowserAPI.UnitTest;
 
@@ -11,6 +10,23 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
             nameof(GetAccessKeyLabel) => NewPage(BrowserId.Firefox),
             _ => NewPage(BrowserId.Chromium)
         };
+
+
+    [Test]
+    public async Task ToHTMLDialogElement() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_TO_HTML_DIALOG_ELEMENT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
+    public async Task ToHTMLMediaElement() {
+        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_TO_HTML_MEDIA_ELEMENT);
+
+        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
 
 
     #region HTMLElement

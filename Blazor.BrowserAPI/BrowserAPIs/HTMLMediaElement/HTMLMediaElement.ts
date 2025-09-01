@@ -1,3 +1,4 @@
+import { HTMLElementAPI } from "../HTMLElement/HTMLElement";
 import { PictureInPictureWindowAPI } from "./PictureInPictureWindow/PictureInPictureWindow";
 import { MediaStreamAPI } from "../MediaDevices/MediaStream/MediaStream";
 import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
@@ -11,6 +12,11 @@ export class HTMLMediaElementAPI {
 
     static create(htmlMediaElement: HTMLMediaElement): HTMLMediaElementAPI {
         return new HTMLMediaElementAPI(htmlMediaElement);
+    }
+
+
+    toHTMLElement(): HTMLElementAPI {
+        return new HTMLElementAPI(this.#htmlMediaElement);
     }
 
 

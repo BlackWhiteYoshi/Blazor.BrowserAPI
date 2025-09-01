@@ -21,6 +21,17 @@ public sealed class HTMLDialogElementInProcess(IJSInProcessObjectReference dialo
 
 
     /// <summary>
+    /// Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">HTMLElement</see>.
+    /// </summary>
+    /// <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+    /// <returns></returns>
+    public IHTMLElementInProcess ToHTMLElement() {
+        IJSInProcessObjectReference htmlElementJS = dialogJS.Invoke<IJSInProcessObjectReference>("toHTMLElement");
+        return new HTMLElementInProcess(htmlElementJS);
+    }
+
+
+    /// <summary>
     /// Reflecting the open HTML attribute, indicating whether the &lt;dialog&gt; is available for interaction.
     /// </summary>
     public bool Open {
@@ -50,13 +61,9 @@ public sealed class HTMLDialogElementInProcess(IJSInProcessObjectReference dialo
 
 
     /// <summary>
-    /// Closes the &lt;dialog&gt;.
-    /// </summary>
-    public void Close() => dialogJS.InvokeVoid("close");
-
-    /// <summary>
-    /// Closes the &lt;dialog&gt; and updates the returnValue of the dialog.
+    /// Closes the &lt;dialog&gt;.<br />
+    /// An optional string may be passed as an argument, updating the returnValue of the dialog.
     /// </summary>
     /// <param name="returnValue">A string representing an updated value for the <see cref="ReturnValue"/> of the dialog.</param>
-    public void Close(string returnValue) => dialogJS.InvokeVoid("close", [returnValue]);
+    public void Close(string? returnValue = null) => dialogJS.InvokeVoid("close", [returnValue]);
 }

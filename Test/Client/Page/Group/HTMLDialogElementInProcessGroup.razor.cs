@@ -25,6 +25,13 @@ public sealed partial class HTMLDialogElementInProcessGroup : ComponentBase, IDi
     public void Dispose() => _dialog?.Dispose();
 
 
+    public const string BUTTON_TO_HTML_ELEMENT = "htmldialogelement-inprocess-to-html-element";
+    private void ToHTMLElement() {
+        using IHTMLElementInProcess htmlElement = Dialog.ToHTMLElement();
+        labelOutput = (htmlElement is not null).ToString();
+    }
+
+
     public const string BUTTON_GET_OPEN = "htmldialogelement-inprocess-get-open";
     private void GetOpen() {
         bool state = Dialog.Open;

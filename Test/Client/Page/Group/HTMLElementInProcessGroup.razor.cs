@@ -147,10 +147,23 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
     }
 
 
+    public const string BUTTON_TO_HTML_DIALOG_ELEMENT = "htmlelement-inprocess-to-html-dialog-element";
+    private void ToHTMLDialogElement() {
+        using IHTMLDialogElementInProcess dialog = HTMLElement.ToHTMLDialogElement();
+        labelOutput = (dialog is not null).ToString();
+    }
+
+    public const string BUTTON_TO_HTML_MEDIA_ELEMENT = "htmlelement-inprocess-to-html-media-element";
+    private void ToHTMLMediaElement() {
+        using IHTMLMediaElementInProcess mediaElement = HTMLElement.ToHTMLMediaElement();
+        labelOutput = (mediaElement is not null).ToString();
+    }
+
+
     #region HTMLElement
 
     public const string BUTTON_GET_ACCESS_KEY = "htmlelement-inprocess-get-access-key";
-    public void GetAccessKey() {
+    private void GetAccessKey() {
         string accessKey = HTMLElement.AccessKey;
         labelOutput = accessKey;
     }
@@ -162,31 +175,31 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
 
 
     public const string BUTTON_GET_ACCESS_KEY_LABEL = "htmlelement-inprocess-get-access-key-label";
-    public void GetAccessKeyLabel() {
+    private void GetAccessKeyLabel() {
         string accessKeyLabel = HTMLElement.AccessKeyLabel;
         labelOutput = accessKeyLabel;
     }
 
 
     public const string BUTTON_GET_ATTRIBUTE_STYLE_MAP = "htmlelement-inprocess-get-attribute-style-map";
-    public void GetAttributeStyleMap() {
+    private void GetAttributeStyleMap() {
         Dictionary<string, string> attributeStyleMap = HTMLElement.AttributeStyleMap;
         labelOutput = string.Join(", ", attributeStyleMap.Select(pair => $"{pair.Key} = {pair.Value}"));
     }
 
     public const string BUTTON_SET_ATTRIBUTE_STYLE_MAP = "htmlelement-inprocess-set-attribute-style-map";
-    public void SetAttributeStyleMap() {
+    private void SetAttributeStyleMap() {
         HTMLElement.SetAttributeStyleMap(TEST_STYLE_NAME, TEST_STYLE_VALUE);
     }
 
     public const string BUTTON_REMOVE_ATTRIBUTE_STYLE_MAP = "htmlelement-inprocess-remove-attribute-style-map";
-    public void RemoveAttributeStyleMap() {
+    private void RemoveAttributeStyleMap() {
         HTMLElement.RemoveAttributeStyleMap(TEST_STYLE_NAME);
     }
 
 
     public const string BUTTON_GET_AUTOCAPITALIZE = "htmlelement-inprocess-get-autocapitalize";
-    public void GetAutocapitalize() {
+    private void GetAutocapitalize() {
         string autocapitalize = HTMLElement.Autocapitalize;
         labelOutput = autocapitalize;
     }
@@ -198,7 +211,7 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
 
 
     public const string BUTTON_GET_AUTOFOCUS = "htmlelement-inprocess-get-autofocus";
-    public void GetAutofocus() {
+    private void GetAutofocus() {
         bool autofocus = HTMLElement.Autofocus;
         labelOutput = autofocus.ToString();
     }
@@ -210,7 +223,7 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
 
 
     public const string BUTTON_GET_CONTENT_EDITABLE = "htmlelement-inprocess-get-content-editable";
-    public void GetContentEditable() {
+    private void GetContentEditable() {
         string contentEditable = HTMLElement.ContentEditable;
         labelOutput = contentEditable;
     }
@@ -222,24 +235,24 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
 
 
     public const string BUTTON_GET_DATASET = "htmlelement-inprocess-get-dataset";
-    public void GetDataset() {
+    private void GetDataset() {
         Dictionary<string, string> dataset = HTMLElement.Dataset;
         labelOutput = string.Join(", ", dataset.Select(pair => $"{pair.Key} = {pair.Value}"));
     }
 
     public const string BUTTON_SET_DATASET = "htmlelement-inprocess-set-dataset";
-    public void SetDataset() {
+    private void SetDataset() {
         HTMLElement.SetDataset(TEST_DATASET_NAME, TEST_DATASET_VALUE);
     }
 
     public const string BUTTON_REMOVE_DATASET = "htmlelement-inprocess-remove-dataset";
-    public void RemoveDataset() {
+    private void RemoveDataset() {
         HTMLElement.RemoveDataset(TEST_DATASET_NAME);
     }
 
 
     public const string BUTTON_GET_DIR = "htmlelement-inprocess-get-dir";
-    public void GetDir() {
+    private void GetDir() {
         string dir = HTMLElement.Dir;
         labelOutput = dir;
     }
@@ -251,7 +264,7 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
 
 
     public const string BUTTON_GET_DRAGGABLE = "htmlelement-inprocess-get-draggable";
-    public void GetDraggable() {
+    private void GetDraggable() {
         bool draggable = HTMLElement.Draggable;
         labelOutput = draggable.ToString();
     }
@@ -263,7 +276,7 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
 
 
     public const string BUTTON_GET_ENTER_KEY_HINT = "htmlelement-inprocess-get-enter-key-hint";
-    public void GetEnterKeyHint() {
+    private void GetEnterKeyHint() {
         string enterKeyHint = HTMLElement.EnterKeyHint;
         labelOutput = enterKeyHint;
     }
@@ -275,7 +288,7 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
 
 
     public const string BUTTON_GET_HIDDEN = "htmlelement-inprocess-get-hidden";
-    public void GetHidden() {
+    private void GetHidden() {
         bool hidden = HTMLElement.Hidden;
         labelOutput = hidden.ToString();
     }
@@ -287,7 +300,7 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
 
 
     public const string BUTTON_GET_INERT = "htmlelement-inprocess-get-inert";
-    public void GetInert() {
+    private void GetInert() {
         bool inert = HTMLElement.Inert;
         labelOutput = inert.ToString();
     }
@@ -311,7 +324,7 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
 
 
     public const string BUTTON_GET_INPUT_MODE = "htmlelement-inprocess-get-input-mode";
-    public void GetInputMode() {
+    private void GetInputMode() {
         string inputMode = HTMLElement.InputMode;
         labelOutput = inputMode;
     }
@@ -323,14 +336,14 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
 
 
     public const string BUTTON_GET_IS_CONTENT_EDITABLE = "htmlelement-inprocess-get-is-content-editable";
-    public void GetIsContentEditable() {
+    private void GetIsContentEditable() {
         bool isContentEditable = HTMLElement.IsContentEditable;
         labelOutput = isContentEditable.ToString();
     }
 
 
     public const string BUTTON_GET_LANG = "htmlelement-inprocess-get-lang";
-    public void GetLang() {
+    private void GetLang() {
         string lang = HTMLElement.Lang;
         labelOutput = lang;
     }
@@ -342,7 +355,7 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
 
 
     public const string BUTTON_GET_NONCE = "htmlelement-inprocess-get-nonce";
-    public void GetNonce() {
+    private void GetNonce() {
         string nonce = HTMLElement.Nonce;
         labelOutput = nonce;
     }
@@ -397,7 +410,7 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
 
 
     public const string BUTTON_GET_POPOVER = "htmlelement-inprocess-get-popover";
-    public void GetPopover() {
+    private void GetPopover() {
         string? popover = HTMLElement.Popover;
         labelOutput = popover ?? "(empty)";
     }
@@ -409,7 +422,7 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
 
 
     public const string BUTTON_GET_SPELLCHECK = "htmlelement-inprocess-get-spellcheck";
-    public void GetSpellcheck() {
+    private void GetSpellcheck() {
         bool spellcheck = HTMLElement.Spellcheck;
         labelOutput = spellcheck.ToString();
     }
@@ -433,7 +446,7 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
 
 
     public const string BUTTON_GET_TAB_INDEX = "htmlelement-inprocess-get-tab-index";
-    public void GetTabIndex() {
+    private void GetTabIndex() {
         long tabIndex = HTMLElement.TabIndex;
         labelOutput = tabIndex.ToString();
     }
@@ -445,7 +458,7 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
 
 
     public const string BUTTON_GET_TITLE = "htmlelement-inprocess-get-title";
-    public void GetTitle() {
+    private void GetTitle() {
         string title = HTMLElement.Title;
         labelOutput = title;
     }
@@ -457,7 +470,7 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
 
 
     public const string BUTTON_GET_TRANSLATE = "htmlelement-inprocess-get-translate";
-    public void GetTranslate() {
+    private void GetTranslate() {
         bool translate = HTMLElement.Translate;
         labelOutput = translate.ToString();
     }
@@ -1328,7 +1341,7 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
     }
 
     public const string BUTTON_MATCHES = "htmlelement-inprocess-matches";
-    public void Matches() {
+    private void Matches() {
         bool matches = HTMLElement.Matches($"[data-testid={HTML_ELEMENT}]");
         labelOutput = matches.ToString();
     }

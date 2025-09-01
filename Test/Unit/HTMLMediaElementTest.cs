@@ -16,6 +16,15 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
         };
 
 
+    [Test]
+    public async Task ToHTMLElement() {
+        await ExecuteTest(HTMLMediaElementGroup.BUTTON_TO_HTML_ELEMENT);
+
+        string? result = await Page.GetByTestId(HTMLMediaElementGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+
     #region Attributes
 
     [Test]

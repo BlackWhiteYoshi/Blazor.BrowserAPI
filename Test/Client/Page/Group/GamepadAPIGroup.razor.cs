@@ -103,7 +103,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
 
 
     public const string BUTTON_GET_CONNECTED_PROPERTY = "gamepad-get-connected-property";
-    public async Task GetConnected_Property() {
+    private async Task GetConnected_Property() {
         IGamepad?[] gamepadSlots = await GamepadAPI.GetGamepads();
         IGamepad[] gamepads = [.. gamepadSlots.OfType<IGamepad>()];
         if (gamepads.Length == 0)
@@ -117,7 +117,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
     }
 
     public const string BUTTON_GET_CONNECTED_METHOD = "gamepad-get-connected-method";
-    public async Task GetConnected_Method() {
+    private async Task GetConnected_Method() {
         IGamepad?[] gamepadSlots = await GamepadAPI.GetGamepads();
         IGamepad[] gamepads = [.. gamepadSlots.OfType<IGamepad>()];
         if (gamepads.Length == 0)
@@ -131,7 +131,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
     }
 
     public const string BUTTON_GET_ID_PROPERTY = "gamepad-get-id-property";
-    public async Task GetId_Property() {
+    private async Task GetId_Property() {
         IGamepad?[] gamepadSlots = await GamepadAPI.GetGamepads();
         IGamepad[] gamepads = [.. gamepadSlots.OfType<IGamepad>()];
         if (gamepads.Length == 0)
@@ -145,7 +145,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
     }
 
     public const string BUTTON_GET_ID_METHOD = "gamepad-get-id-method";
-    public async Task GetId_Method() {
+    private async Task GetId_Method() {
         IGamepad?[] gamepadSlots = await GamepadAPI.GetGamepads();
         IGamepad[] gamepads = [.. gamepadSlots.OfType<IGamepad>()];
         if (gamepads.Length == 0)
@@ -159,7 +159,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
     }
 
     public const string BUTTON_GET_INDEX_PROPERTY = "gamepad-get-index-property";
-    public async Task GetIndex_Property() {
+    private async Task GetIndex_Property() {
         IGamepad?[] gamepadSlots = await GamepadAPI.GetGamepads();
         IGamepad[] gamepads = [.. gamepadSlots.OfType<IGamepad>()];
         if (gamepads.Length == 0)
@@ -173,7 +173,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
     }
 
     public const string BUTTON_GET_INDEX_METHOD = "gamepad-get-index-method";
-    public async Task GetIndex_Method() {
+    private async Task GetIndex_Method() {
         IGamepad?[] gamepadSlots = await GamepadAPI.GetGamepads();
         IGamepad[] gamepads = [.. gamepadSlots.OfType<IGamepad>()];
         if (gamepads.Length == 0)
@@ -187,7 +187,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
     }
 
     public const string BUTTON_GET_MAPPING_PROPERTY = "gamepad-get-mapping-property";
-    public async Task GetMapping_Property() {
+    private async Task GetMapping_Property() {
         IGamepad?[] gamepadSlots = await GamepadAPI.GetGamepads();
         IGamepad[] gamepads = [.. gamepadSlots.OfType<IGamepad>()];
         if (gamepads.Length == 0)
@@ -201,7 +201,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
     }
 
     public const string BUTTON_GET_MAPPING_METHOD = "gamepad-get-mapping-method";
-    public async Task GetMapping_Method() {
+    private async Task GetMapping_Method() {
         IGamepad?[] gamepadSlots = await GamepadAPI.GetGamepads();
         IGamepad[] gamepads = [.. gamepadSlots.OfType<IGamepad>()];
         if (gamepads.Length == 0)
@@ -215,7 +215,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
     }
 
     public const string BUTTON_GET_TIMESTAMP_PROPERTY = "gamepad-get-timestamp-property";
-    public async Task GetTimestamp_Property() {
+    private async Task GetTimestamp_Property() {
         IGamepad?[] gamepadSlots = await GamepadAPI.GetGamepads();
         IGamepad[] gamepads = [.. gamepadSlots.OfType<IGamepad>()];
         if (gamepads.Length == 0)
@@ -229,7 +229,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
     }
 
     public const string BUTTON_GET_TIMESTAMP_METHOD = "gamepad-get-timestamp-method";
-    public async Task GetTimestamp_Method() {
+    private async Task GetTimestamp_Method() {
         IGamepad?[] gamepadSlots = await GamepadAPI.GetGamepads();
         IGamepad[] gamepads = [.. gamepadSlots.OfType<IGamepad>()];
         if (gamepads.Length == 0)
@@ -244,7 +244,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
 
 
     public const string BUTTON_GET_VIBRATION_ACTUATOR_EFFECTS_PROPERTY = "gamepad-get-vibration-actuator-effects-property";
-    public async Task GetVibrationActuatorEffects_Property() {
+    private async Task GetVibrationActuatorEffects_Property() {
         IGamepad?[] gamepadSlots = await GamepadAPI.GetGamepads();
         IGamepad[] gamepads = [.. gamepadSlots.OfType<IGamepad>()];
         if (gamepads.Length == 0)
@@ -258,7 +258,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
     }
 
     public const string BUTTON_GET_VIBRATION_ACTUATOR_EFFECTS_METHOD = "gamepad-get-vibration-actuator-effects-method";
-    public async Task GetVibrationActuatorEffects_Method() {
+    private async Task GetVibrationActuatorEffects_Method() {
         IGamepad?[] gamepadSlots = await GamepadAPI.GetGamepads();
         IGamepad[] gamepads = [.. gamepadSlots.OfType<IGamepad>()];
         if (gamepads.Length == 0)
@@ -272,7 +272,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
     }
 
     public const string BUTTON_PLAY_VIBRATION_ACTUATOR_EFFECT = "gamepad-play-vibration-actuator-effect";
-    public async Task PlayVibrationActuatorEffect() {
+    private async Task PlayVibrationActuatorEffect() {
         IGamepad?[] gamepadSlots = await GamepadAPI.GetGamepads();
         IGamepad[] gamepads = [.. gamepadSlots.OfType<IGamepad>()];
         if (gamepads.Length == 0)
@@ -286,7 +286,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
     }
 
     public const string BUTTON_RESET_VIBRATION_ACTUATOR = "gamepad-reset-vibration-actuator";
-    public async Task ResetVibrationActuator() {
+    private async Task ResetVibrationActuator() {
         IGamepad?[] gamepadSlots = await GamepadAPI.GetGamepads();
         IGamepad[] gamepads = [.. gamepadSlots.OfType<IGamepad>()];
         if (gamepads.Length == 0)

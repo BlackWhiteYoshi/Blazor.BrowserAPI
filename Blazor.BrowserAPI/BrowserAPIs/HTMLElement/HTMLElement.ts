@@ -1,3 +1,5 @@
+import { HTMLDialogElementAPI } from "../HTMLDialogElement/HTMLDialogElement";
+import { HTMLMediaElementAPI } from "../HTMLMediaElement/HTMLMediaElement";
 import { FileAPI } from "../FileSystem/File/File";
 import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
 
@@ -13,6 +15,15 @@ export class HTMLElementAPI {
 
     static create(htmlElement: HTMLElement): HTMLElementAPI {
         return new HTMLElementAPI(htmlElement);
+    }
+
+
+    toHTMLDialogElement(): HTMLDialogElementAPI {
+        return new HTMLDialogElementAPI(<HTMLDialogElement>this.#htmlElement);
+    }
+
+    toHTMLMediaElement(): HTMLMediaElementAPI {
+        return new HTMLMediaElementAPI(<HTMLMediaElement>this.#htmlElement);
     }
 
 

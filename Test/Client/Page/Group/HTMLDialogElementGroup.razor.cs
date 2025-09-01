@@ -22,7 +22,17 @@ public sealed partial class HTMLDialogElementGroup : ComponentBase, IAsyncDispos
     public const string DIALOG_ELEMENT = "htmldialogelement-dialog-element";
     private ElementReference dialogElement;
 
-    public ValueTask DisposeAsync() => _dialog?.DisposeAsync() ?? ValueTask.CompletedTask;
+    public async ValueTask DisposeAsync() {
+        if (_dialog is not null)
+            await _dialog.DisposeAsync();
+    }
+
+
+    public const string BUTTON_TO_HTML_ELEMENT = "htmldialogelement-to-html-element";
+    private async Task ToHTMLElement() {
+        await using IHTMLElement htmlElement = await Dialog.ToHTMLElement();
+        labelOutput = (htmlElement is not null).ToString();
+    }
 
 
     public const string BUTTON_GET_OPEN_PROPERTY = "htmldialogelement-get-open-property";

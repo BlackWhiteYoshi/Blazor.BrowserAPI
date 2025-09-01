@@ -24,6 +24,26 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     }
 
 
+    /// <summary>
+    /// Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement">HTMLDialogElement</see>.
+    /// </summary>
+    /// <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+    /// <returns></returns>
+    public async ValueTask<IHTMLDialogElement> ToHTMLDialogElement(CancellationToken cancellationToken = default) {
+        Task<IJSObjectReference> dialogTask = (await htmlElementTask).InvokeTrySync<IJSObjectReference>("toHTMLDialogElement", cancellationToken).AsTask();
+        return new HTMLDialogElement(dialogTask);
+    }
+
+    /// <summary>
+    /// Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement">HTMLMediaElement</see>.
+    /// </summary>
+    /// <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+    /// <returns></returns>
+    public async ValueTask<IHTMLMediaElement> ToHTMLMediaElement(CancellationToken cancellationToken = default) {
+        Task<IJSObjectReference> htmlMediaElementTask = (await htmlElementTask).InvokeTrySync<IJSObjectReference>("toHTMLMediaElement", cancellationToken).AsTask();
+        return new HTMLMediaElement(htmlMediaElementTask);
+    }
+
     #region HTMLElement
 
     /// <summary>

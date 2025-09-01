@@ -6,6 +6,15 @@ namespace BrowserAPI.UnitTest;
 [ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class HTMLDialogElementTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     [Test]
+    public async Task ToHTMLElement() {
+        await ExecuteTest(HTMLDialogElementGroup.BUTTON_TO_HTML_ELEMENT);
+
+        string? result = await Page.GetByTestId(HTMLDialogElementGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+
+    [Test]
     public async Task GetOpen_Property() {
         await ExecuteTest(HTMLDialogElementGroup.BUTTON_GET_OPEN_PROPERTY);
 

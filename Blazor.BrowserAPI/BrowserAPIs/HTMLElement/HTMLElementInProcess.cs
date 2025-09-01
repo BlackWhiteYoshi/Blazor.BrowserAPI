@@ -23,6 +23,27 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     }
 
 
+    /// <summary>
+    /// Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement">HTMLDialogElement</see>.
+    /// </summary>
+    /// <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+    /// <returns></returns>
+    public IHTMLDialogElementInProcess ToHTMLDialogElement() {
+        IJSInProcessObjectReference dialogJS = htmlElementJS.Invoke<IJSInProcessObjectReference>("toHTMLDialogElement");
+        return new HTMLDialogElementInProcess(dialogJS);
+    }
+
+    /// <summary>
+    /// Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement">HTMLMediaElement</see>.
+    /// </summary>
+    /// <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+    /// <returns></returns>
+    public IHTMLMediaElementInProcess ToHTMLMediaElement() {
+        IJSInProcessObjectReference htmlMediaElementJS = htmlElementJS.Invoke<IJSInProcessObjectReference>("toHTMLMediaElement");
+        return new HTMLMediaElementInProcess(htmlMediaElementJS);
+    }
+
+
     #region HTMLElement
 
     /// <summary>

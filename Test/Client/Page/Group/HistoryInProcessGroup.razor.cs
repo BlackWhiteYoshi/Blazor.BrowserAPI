@@ -13,47 +13,47 @@ public sealed partial class HistoryInProcessGroup : ComponentBase {
 
 
     public const string BUTTON_GET_LENGTH = "history-inprocess-get-length";
-    public void GetLength() {
+    private void GetLength() {
         int length = History.Length;
         labelOutput = length.ToString();
     }
 
     public const string BUTTON_GET_SCROLL_RESTORATION = "history-inprocess-get-scroll-restoration";
-    public void GetScrollRestoration() {
+    private void GetScrollRestoration() {
         labelOutput = History.ScrollRestoration;
     }
 
     public const string BUTTON_SET_SCROLL_RESTORATION = "history-inprocess-set-scroll-restoration";
-    public void SetScrollRestoration() {
+    private void SetScrollRestoration() {
         History.ScrollRestoration = "manual";
         labelOutput = History.ScrollRestoration;
         History.ScrollRestoration = "auto";
     }
 
     public const string BUTTON_GET_STATE = "history-inprocess-get-state";
-    public void GetState() {
+    private void GetState() {
         object? state = History.State;
         labelOutput = state?.ToString() ?? "(null)";
     }
 
 
     public const string BUTTON_FORWARD = "history-inprocess-forward";
-    public void Forward() {
+    private void Forward() {
         History.Forward();
     }
 
     public const string BUTTON_BACK = "history-inprocess-back";
-    public void Back() {
+    private void Back() {
         History.Back();
     }
 
     public const string BUTTON_GO = "history-inprocess-go";
-    public void Go() {
+    private void Go() {
         History.Go(0);
     }
 
     public const string BUTTON_PUSH_STATE = "history-inprocess-push-state";
-    public void PushState() {
+    private void PushState() {
         History.PushState(null, "", "test");
 
         int length = History.Length;
@@ -61,7 +61,7 @@ public sealed partial class HistoryInProcessGroup : ComponentBase {
     }
 
     public const string BUTTON_REPLACE_STATE = "history-inprocess-replace-state";
-    public void ReplaceState() {
+    private void ReplaceState() {
         History.ReplaceState(null, "", "test");
 
         int length = History.Length;
@@ -70,7 +70,7 @@ public sealed partial class HistoryInProcessGroup : ComponentBase {
 
 
     public const string BUTTON_REGISTER_ON_POP_STATE = "history-inprocess-pop-state-event";
-    public void RegisterOnPopState() {
+    private void RegisterOnPopState() {
         History.OnPopState += (JsonElement? data) => {
             labelOutput = data?.ToString() ?? "(null)";
             StateHasChanged();

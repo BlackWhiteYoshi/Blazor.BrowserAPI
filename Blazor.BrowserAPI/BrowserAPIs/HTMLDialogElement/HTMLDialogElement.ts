@@ -1,3 +1,4 @@
+import { HTMLElementAPI } from "../HTMLElement/HTMLElement";
 import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
 
 export class HTMLDialogElementAPI {
@@ -9,6 +10,11 @@ export class HTMLDialogElementAPI {
 
     static create(dialog: HTMLDialogElement): HTMLDialogElementAPI {
         return new HTMLDialogElementAPI(dialog);
+    }
+
+
+    toHTMLElement(): HTMLElementAPI {
+        return new HTMLElementAPI(this.#dialog);
     }
 
 
@@ -30,8 +36,8 @@ export class HTMLDialogElementAPI {
     }
 
 
-    close(returnValue: string | undefined): void {
-        this.#dialog.close(returnValue);
+    close(returnValue: string | null): void {
+        this.#dialog.close(returnValue ?? undefined);
     }
 
 

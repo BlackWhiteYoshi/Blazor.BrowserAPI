@@ -73,6 +73,13 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     }
 
 
+    public const string BUTTON_TO_HTML_ELEMENT = "htmlmediaelement-to-html-element";
+    private async Task ToHTMLElement() {
+        await using IHTMLElement htmlElement = await AudioElement.ToHTMLElement();
+        labelOutput = (htmlElement is not null).ToString();
+    }
+
+
     #region Attributes
 
     public const string BUTTON_GET_SRC_PROPERTY = "htmlmediaelement-get-src-property";

@@ -152,16 +152,29 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     }
 
 
+    public const string BUTTON_TO_HTML_DIALOG_ELEMENT = "htmlelement-to-html-dialog-element";
+    private async Task ToHTMLDialogElement() {
+        await using IHTMLDialogElement dialog = await HTMLElement.ToHTMLDialogElement();
+        labelOutput = (dialog is not null).ToString();
+    }
+
+    public const string BUTTON_TO_HTML_MEDIA_ELEMENT = "htmlelement-to-html-media-element";
+    private async Task ToHTMLMediaElement() {
+        await using IHTMLMediaElement mediaElement = await HTMLElement.ToHTMLMediaElement();
+        labelOutput = (mediaElement is not null).ToString();
+    }
+
+
     #region HTMLElement
 
     public const string BUTTON_GET_ACCESS_KEY_PROPERTY = "htmlelement-get-access-key-property";
-    public async Task GetAccessKey_Property() {
+    private async Task GetAccessKey_Property() {
         string accessKey = await HTMLElement.AccessKey;
         labelOutput = accessKey;
     }
 
     public const string BUTTON_GET_ACCESS_KEY_METHOD = "htmlelement-get-access-key-method";
-    public async Task GetAccessKey_Method() {
+    private async Task GetAccessKey_Method() {
         string accessKey = await HTMLElement.GetAccessKey(default);
         labelOutput = accessKey;
     }
@@ -173,49 +186,49 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
 
     public const string BUTTON_GET_ACCESS_KEY_LABEL_PROPERTY = "htmlelement-get-access-key-label-property";
-    public async Task GetAccessKeyLabel_Property() {
+    private async Task GetAccessKeyLabel_Property() {
         string accessKeyLabel = await HTMLElement.AccessKeyLabel;
         labelOutput = accessKeyLabel;
     }
 
     public const string BUTTON_GET_ACCESS_KEY_LABEL_METHOD = "htmlelement-get-access-key-label-method";
-    public async Task GetAccessKeyLabel_Method() {
+    private async Task GetAccessKeyLabel_Method() {
         string accessKeyLabel = await HTMLElement.GetAccessKeyLabel(default);
         labelOutput = accessKeyLabel;
     }
 
 
     public const string BUTTON_GET_ATTRIBUTE_STYLE_MAP_PROPERTY = "htmlelement-get-attribute-style-map-property";
-    public async Task GetAttributeStyleMap_Property() {
+    private async Task GetAttributeStyleMap_Property() {
         Dictionary<string, string> attributeStyleMap = await HTMLElement.AttributeStyleMap;
         labelOutput = string.Join(", ", attributeStyleMap.Select(pair => $"{pair.Key} = {pair.Value}"));
     }
 
     public const string BUTTON_GET_ATTRIBUTE_STYLE_MAP_METHOD = "htmlelement-get-attribute-style-map-method";
-    public async Task GetAttributeStyleMap_Method() {
+    private async Task GetAttributeStyleMap_Method() {
         Dictionary<string, string> attributeStyleMap = await HTMLElement.GetAttributeStyleMap(default);
         labelOutput = string.Join(", ", attributeStyleMap.Select(pair => $"{pair.Key} = {pair.Value}"));
     }
 
     public const string BUTTON_SET_ATTRIBUTE_STYLE_MAP = "htmlelement-set-attribute-style-map";
-    public async Task SetAttributeStyleMap() {
+    private async Task SetAttributeStyleMap() {
         await HTMLElement.SetAttributeStyleMap(TEST_STYLE_NAME, TEST_STYLE_VALUE);
     }
 
     public const string BUTTON_REMOVE_ATTRIBUTE_STYLE_MAP = "htmlelement-remove-attribute-style-map";
-    public async Task RemoveAttributeStyleMap() {
+    private async Task RemoveAttributeStyleMap() {
         await HTMLElement.RemoveAttributeStyleMap(TEST_STYLE_NAME);
     }
 
 
     public const string BUTTON_GET_AUTOCAPITALIZE_PROPERTY = "htmlelement-get-autocapitalize-property";
-    public async Task GetAutocapitalize_Property() {
+    private async Task GetAutocapitalize_Property() {
         string autocapitalize = await HTMLElement.Autocapitalize;
         labelOutput = autocapitalize;
     }
 
     public const string BUTTON_GET_AUTOCAPITALIZE_METHOD = "htmlelement-get-autocapitalize-method";
-    public async Task GetAutocapitalize_Method() {
+    private async Task GetAutocapitalize_Method() {
         string autocapitalize = await HTMLElement.GetAutocapitalize(default);
         labelOutput = autocapitalize;
     }
@@ -227,13 +240,13 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
 
     public const string BUTTON_GET_AUTOFOCUS_PROPERTY = "htmlelement-get-autofocus-property";
-    public async Task GetAutofocus_Property() {
+    private async Task GetAutofocus_Property() {
         bool autofocus = await HTMLElement.Autofocus;
         labelOutput = autofocus.ToString();
     }
 
     public const string BUTTON_GET_AUTOFOCUS_METHOD = "htmlelement-get-autofocus-method";
-    public async Task GetAutofocus_Method() {
+    private async Task GetAutofocus_Method() {
         bool autofocus = await HTMLElement.GetAutofocus(default);
         labelOutput = autofocus.ToString();
     }
@@ -245,13 +258,13 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
 
     public const string BUTTON_GET_CONTENT_EDITABLE_PROPERTY = "htmlelement-get-content-editable-property";
-    public async Task GetContentEditable_Property() {
+    private async Task GetContentEditable_Property() {
         string contentEditable = await HTMLElement.ContentEditable;
         labelOutput = contentEditable;
     }
 
     public const string BUTTON_GET_CONTENT_EDITABLE_METHOD = "htmlelement-get-content-editable-method";
-    public async Task GetContentEditable_Method() {
+    private async Task GetContentEditable_Method() {
         string contentEditable = await HTMLElement.GetContentEditable(default);
         labelOutput = contentEditable;
     }
@@ -263,36 +276,36 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
 
     public const string BUTTON_GET_DATASET_PROPERTY = "htmlelement-get-dataset-property";
-    public async Task GetDataset_Property() {
+    private async Task GetDataset_Property() {
         Dictionary<string, string> dataset = await HTMLElement.Dataset;
         labelOutput = string.Join(", ", dataset.Select(pair => $"{pair.Key} = {pair.Value}"));
     }
 
     public const string BUTTON_GET_DATASET_METHOD = "htmlelement-get-dataset-method";
-    public async Task GetDataset_Method() {
+    private async Task GetDataset_Method() {
         Dictionary<string, string> dataset = await HTMLElement.GetDataset(default);
         labelOutput = string.Join(", ", dataset.Select(pair => $"{pair.Key} = {pair.Value}"));
     }
 
     public const string BUTTON_SET_DATASET = "htmlelement-set-dataset";
-    public async Task SetDataset() {
+    private async Task SetDataset() {
         await HTMLElement.SetDataset(TEST_DATASET_NAME, TEST_DATASET_VALUE);
     }
 
     public const string BUTTON_REMOVE_DATASET = "htmlelement-remove-dataset";
-    public async Task RemoveDataset() {
+    private async Task RemoveDataset() {
         await HTMLElement.RemoveDataset(TEST_DATASET_NAME);
     }
 
 
     public const string BUTTON_GET_DIR_PROPERTY = "htmlelement-get-dir-property";
-    public async Task GetDir_Property() {
+    private async Task GetDir_Property() {
         string dir = await HTMLElement.Dir;
         labelOutput = dir;
     }
 
     public const string BUTTON_GET_DIR_METHOD = "htmlelement-get-dir-method";
-    public async Task GetDir_Method() {
+    private async Task GetDir_Method() {
         string dir = await HTMLElement.GetDir(default);
         labelOutput = dir;
     }
@@ -304,13 +317,13 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
 
     public const string BUTTON_GET_DRAGGABLE_PROPERTY = "htmlelement-get-draggable-property";
-    public async Task GetDraggable_Property() {
+    private async Task GetDraggable_Property() {
         bool draggable = await HTMLElement.Draggable;
         labelOutput = draggable.ToString();
     }
 
     public const string BUTTON_GET_DRAGGABLE_METHOD = "htmlelement-get-draggable-method";
-    public async Task GetDraggable_Method() {
+    private async Task GetDraggable_Method() {
         bool draggable = await HTMLElement.GetDraggable(default);
         labelOutput = draggable.ToString();
     }
@@ -322,13 +335,13 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
 
     public const string BUTTON_GET_ENTER_KEY_HINT_PROPERTY = "htmlelement-get-enter-key-hint-property";
-    public async Task GetEnterKeyHint_Property() {
+    private async Task GetEnterKeyHint_Property() {
         string enterKeyHint = await HTMLElement.EnterKeyHint;
         labelOutput = enterKeyHint;
     }
 
     public const string BUTTON_GET_ENTER_KEY_HINT_METHOD = "htmlelement-get-enter-key-hint-method";
-    public async Task GetEnterKeyHint_Method() {
+    private async Task GetEnterKeyHint_Method() {
         string enterKeyHint = await HTMLElement.GetEnterKeyHint(default);
         labelOutput = enterKeyHint;
     }
@@ -340,13 +353,13 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
 
     public const string BUTTON_GET_HIDDEN_PROPERTY = "htmlelement-get-hidden-property";
-    public async Task GetHidden_Property() {
+    private async Task GetHidden_Property() {
         bool hidden = await HTMLElement.Hidden;
         labelOutput = hidden.ToString();
     }
 
     public const string BUTTON_GET_HIDDEN_METHOD = "htmlelement-get-hidden-method";
-    public async Task GetHidden_Method() {
+    private async Task GetHidden_Method() {
         bool hidden = await HTMLElement.GetHidden(default);
         labelOutput = hidden.ToString();
     }
@@ -358,13 +371,13 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
 
     public const string BUTTON_GET_INERT_PROPERTY = "htmlelement-get-inert-property";
-    public async Task GetInert_Property() {
+    private async Task GetInert_Property() {
         bool inert = await HTMLElement.Inert;
         labelOutput = inert.ToString();
     }
 
     public const string BUTTON_GET_INERT_METHOD = "htmlelement-get-inert-method";
-    public async Task GetInert_Method() {
+    private async Task GetInert_Method() {
         bool inert = await HTMLElement.GetInert(default);
         labelOutput = inert.ToString();
     }
@@ -394,13 +407,13 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
 
     public const string BUTTON_GET_INPUT_MODE_PROPERTY = "htmlelement-get-input-mode-property";
-    public async Task GetInputMode_Property() {
+    private async Task GetInputMode_Property() {
         string inputMode = await HTMLElement.InputMode;
         labelOutput = inputMode;
     }
 
     public const string BUTTON_GET_INPUT_MODE_METHOD = "htmlelement-get-input-mode-method";
-    public async Task GetInputMode_Method() {
+    private async Task GetInputMode_Method() {
         string inputMode = await HTMLElement.GetInputMode(default);
         labelOutput = inputMode;
     }
@@ -412,26 +425,26 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
 
     public const string BUTTON_GET_IS_CONTENT_EDITABLE_PROPERTY = "htmlelement-get-is-content-editable-property";
-    public async Task GetIsContentEditable_Property() {
+    private async Task GetIsContentEditable_Property() {
         bool isContentEditable = await HTMLElement.IsContentEditable;
         labelOutput = isContentEditable.ToString();
     }
 
     public const string BUTTON_GET_IS_CONTENT_EDITABLE_METHOD = "htmlelement-get-is-content-editable-method";
-    public async Task GetIsContentEditable_Method() {
+    private async Task GetIsContentEditable_Method() {
         bool isContentEditable = await HTMLElement.GetIsContentEditable(default);
         labelOutput = isContentEditable.ToString();
     }
 
 
     public const string BUTTON_GET_LANG_PROPERTY = "htmlelement-get-lang-property";
-    public async Task GetLang_Property() {
+    private async Task GetLang_Property() {
         string lang = await HTMLElement.Lang;
         labelOutput = lang;
     }
 
     public const string BUTTON_GET_LANG_METHOD = "htmlelement-get-lang-method";
-    public async Task GetLang_Method() {
+    private async Task GetLang_Method() {
         string lang = await HTMLElement.GetLang(default);
         labelOutput = lang;
     }
@@ -443,13 +456,13 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
 
     public const string BUTTON_GET_NONCE_PROPERTY = "htmlelement-get-nonce-property";
-    public async Task GetNonce_Property() {
+    private async Task GetNonce_Property() {
         string nonce = await HTMLElement.Nonce;
         labelOutput = nonce;
     }
 
     public const string BUTTON_GET_NONCE_METHOD = "htmlelement-get-nonce-method";
-    public async Task GetNonce_Method() {
+    private async Task GetNonce_Method() {
         string nonce = await HTMLElement.GetNonce(default);
         labelOutput = nonce;
     }
@@ -540,13 +553,13 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
 
     public const string BUTTON_GET_POPOVER_PROPERTY = "htmlelement-get-popover-property";
-    public async Task GetPopover_Property() {
+    private async Task GetPopover_Property() {
         string? popover = await HTMLElement.Popover;
         labelOutput = popover ?? "(empty)";
     }
 
     public const string BUTTON_GET_POPOVER_METHOD = "htmlelement-get-popover-method";
-    public async Task GetPopover_Method() {
+    private async Task GetPopover_Method() {
         string? popover = await HTMLElement.GetPopover(default);
         labelOutput = popover ?? "(empty)";
     }
@@ -558,13 +571,13 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
 
     public const string BUTTON_GET_SPELLCHECK_PROPERTY = "htmlelement-get-spellcheck-property";
-    public async Task GetSpellcheck_Property() {
+    private async Task GetSpellcheck_Property() {
         bool spellcheck = await HTMLElement.Spellcheck;
         labelOutput = spellcheck.ToString();
     }
 
     public const string BUTTON_GET_SPELLCHECK_METHOD = "htmlelement-get-spellcheck-method";
-    public async Task GetSpellcheck_Method() {
+    private async Task GetSpellcheck_Method() {
         bool spellcheck = await HTMLElement.GetSpellcheck(default);
         labelOutput = spellcheck.ToString();
     }
@@ -594,13 +607,13 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
 
     public const string BUTTON_GET_TAB_INDEX_PROPERTY = "htmlelement-get-tab-index-property";
-    public async Task GetTabIndex_Property() {
+    private async Task GetTabIndex_Property() {
         long tabIndex = await HTMLElement.TabIndex;
         labelOutput = tabIndex.ToString();
     }
 
     public const string BUTTON_GET_TAB_INDEX_METHOD = "htmlelement-get-tab-index-method";
-    public async Task GetTabIndex_Method() {
+    private async Task GetTabIndex_Method() {
         long tabIndex = await HTMLElement.GetTabIndex(default);
         labelOutput = tabIndex.ToString();
     }
@@ -612,13 +625,13 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
 
     public const string BUTTON_GET_TITLE_PROPERTY = "htmlelement-get-title-property";
-    public async Task GetTitle_Property() {
+    private async Task GetTitle_Property() {
         string title = await HTMLElement.Title;
         labelOutput = title;
     }
 
     public const string BUTTON_GET_TITLE_METHOD = "htmlelement-get-title-method";
-    public async Task GetTitle_Method() {
+    private async Task GetTitle_Method() {
         string title = await HTMLElement.GetTitle(default);
         labelOutput = title;
     }
@@ -630,13 +643,13 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
 
     public const string BUTTON_GET_TRANSLATE_PROPERTY = "htmlelement-get-translate-property";
-    public async Task GetTranslate_Property() {
+    private async Task GetTranslate_Property() {
         bool translate = await HTMLElement.Translate;
         labelOutput = translate.ToString();
     }
 
     public const string BUTTON_GET_TRANSLATE_METHOD = "htmlelement-get-translate-method";
-    public async Task GetTranslate_Method() {
+    private async Task GetTranslate_Method() {
         bool translate = await HTMLElement.GetTranslate(default);
         labelOutput = translate.ToString();
     }
@@ -1854,7 +1867,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
     }
 
     public const string BUTTON_MATCHES = "htmlelement-matches";
-    public async Task Matches() {
+    private async Task Matches() {
         bool matches = await HTMLElement.Matches($"[data-testid={HTML_ELEMENT}]");
         labelOutput = matches.ToString();
     }

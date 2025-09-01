@@ -1,7 +1,6 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
-using System.Threading;
 
 namespace BrowserAPI.Implementation;
 
@@ -19,6 +18,17 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     public void Dispose() {
         DisposeEventTrigger();
         htmlMediaElementJS.Dispose();
+    }
+
+
+    /// <summary>
+    /// Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">HTMLElement</see>.
+    /// </summary>
+    /// <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+    /// <returns></returns>
+    public IHTMLElementInProcess ToHTMLElement() {
+        IJSInProcessObjectReference htmlElementJS = htmlMediaElementJS.Invoke<IJSInProcessObjectReference>("toHTMLElement");
+        return new HTMLElementInProcess(htmlElementJS);
     }
 
 
