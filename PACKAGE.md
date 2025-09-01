@@ -14,13 +14,13 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - Clipboard
 - Console
 - CookieStorage
-- Dialog
 - Document
 - Download
 - FileSystem
 - GamepadAPI
 - Geolocation
 - History
+- HTMLDialogElement
 - HTMLElement
 - HTMLMediaElement (audio/video)
 - Language

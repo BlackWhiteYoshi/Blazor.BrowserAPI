@@ -4,11 +4,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
-[AutoInterface(Namespace = "BrowserAPI", Name = "IDialog")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IDialogInProcess")]
+[AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLDialogElement")]
+[AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLDialogElementInProcess")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 #pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class DialogBase(Task<IJSObjectReference> dialogTask) {
+public abstract class HTMLDialogElementBase(Task<IJSObjectReference> dialogTask) {
 #pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
     private protected Task<IJSObjectReference> dialogTask = dialogTask;
 
@@ -17,7 +17,7 @@ public abstract class DialogBase(Task<IJSObjectReference> dialogTask) {
 
     [method: DynamicDependency(nameof(InvokeClose))]
     [method: DynamicDependency(nameof(InvokeCancel))]
-    private sealed class EventTrigger(DialogBase dialog) {
+    private sealed class EventTrigger(HTMLDialogElementBase dialog) {
         [JSInvokable] public void InvokeClose() => dialog._onClose?.Invoke();
         [JSInvokable] public void InvokeCancel() => dialog._onCancel?.Invoke();
     }

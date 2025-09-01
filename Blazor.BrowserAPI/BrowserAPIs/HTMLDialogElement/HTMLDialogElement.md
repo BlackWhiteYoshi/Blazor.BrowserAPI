@@ -1,4 +1,4 @@
-# Dialog
+# HTMLDialogElement
 
 The *HTMLDialogElement* interface provides methods to manipulate &lt;dialog&gt; elements.
 It inherits properties and methods from the HTMLElement interface.
@@ -19,11 +19,11 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
     public required IElementFactory ElementFactory { private get; init; }
 
     private ElementReference dialogElement;
-    private IDialog? dialog;
+    private IHTMLDialogElement? dialog;
 
     protected override void OnAfterRender(bool firstRender) {
         if (firstRender)
-            dialog = ElementFactory.CreateDialog(dialogElement);
+            dialog = ElementFactory.CreateHTMLDialogElement(dialogElement);
     }
 
     public ValueTask DisposeAsync() => dialog?.DisposeAsync() ?? ValueTask.CompletedTask;
@@ -51,13 +51,13 @@ So do not forget to call DisposeAsync() on a dialog-object when you are done wit
 
 #### Methods
 
-| **Name**     | **Parameters**          | **ReturnType** | **Description**                                                                                                          |
-| ------------ | ----------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| CreateDialog | ElementReference dialog | IDialog        | Takes a *ElementReference* of &lt;dialog&gt; and returns *IDialog"* interface to interact with the given &lt;dialog&gt;. |
+| **Name**                | **Parameters**          | **ReturnType**     | **Description**                                                                                                                    |
+| ----------------------- | ----------------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
+| CreateHTMLDialogElement | ElementReference dialog | IHTMLDialogElement | Takes a *ElementReference* of &lt;dialog&gt; and returns *IHTMLDialogElement* interface to interact with the given &lt;dialog&gt;. |
 
 
 <br></br>
-### IDialog
+### IHTMLDialogElement
 
 The *HTMLDialogElement* interface provides methods to manipulate &lt;dialog&gt; elements. It inherits properties and methods from the HTMLElement interface.
 
@@ -102,13 +102,13 @@ So do not forget to call Dispose() on a dialog-object when you are done with it.
 
 #### Methods
 
-| **Name**     | **Parameters**          | **ReturnType**   | **Description**                                                                                                                   |
-| ------------ | ----------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| CreateDialog | ElementReference dialog | IDialogInProcess | Takes a *ElementReference* of &lt;dialog&gt; and returns *IDialogInProcess"* interface to interact with the given &lt;dialog&gt;. |
+| **Name**                | **Parameters**          | **ReturnType**              | **Description**                                                                                                                             |
+| ----------------------- | ----------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| CreateHTMLDialogElement | ElementReference dialog | IHTMLDialogElementInProcess | Takes a *ElementReference* of &lt;dialog&gt; and returns *IHTMLDialogElementInProcess* interface to interact with the given &lt;dialog&gt;. |
 
 
 <br></br>
-### IDialogInProcess
+### IHTMLDialogElementInProcess
 
 The *HTMLDialogElement* interface provides methods to manipulate &lt;dialog&gt; elements. It inherits properties and methods from the HTMLElement interface.
 

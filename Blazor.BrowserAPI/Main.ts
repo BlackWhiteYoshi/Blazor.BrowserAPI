@@ -7,9 +7,6 @@ export { ConsoleAPI };
 import { CookieStorageAPI } from "./BrowserAPIs/CookieStorage/CookieStorage";
 export { CookieStorageAPI };
 
-import { DialogAPI } from "./BrowserAPIs/Dialog/Dialog";
-export { DialogAPI };
-
 import { DocumentAPI } from "./BrowserAPIs/Document/Document";
 export { DocumentAPI }
 
@@ -27,6 +24,9 @@ export { GeolocationAPI };
 
 import { HistoryAPI } from "./BrowserAPIs/History/History";
 export { HistoryAPI };
+
+import { HTMLDialogElementAPI } from "./BrowserAPIs/HTMLDialogElement/HTMLDialogElement";
+export { HTMLDialogElementAPI };
 
 import { HTMLElementAPI } from "./BrowserAPIs/HTMLElement/HTMLElement";
 export { HTMLElementAPI };

@@ -1,14 +1,14 @@
 import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
 
-export class DialogAPI {
+export class HTMLDialogElementAPI {
     #dialog: HTMLDialogElement;
 
     constructor(dialog: HTMLDialogElement) {
         this.#dialog = dialog;
     }
 
-    static create(dialog: HTMLDialogElement): DialogAPI {
-        return new DialogAPI(dialog);
+    static create(dialog: HTMLDialogElement): HTMLDialogElementAPI {
+        return new HTMLDialogElementAPI(dialog);
     }
 
 

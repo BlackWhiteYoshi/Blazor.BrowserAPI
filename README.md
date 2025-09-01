@@ -12,13 +12,13 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - [Clipboard](Blazor.BrowserAPI/BrowserAPIs/Clipboard/Clipboard.md)
 - [Console](Blazor.BrowserAPI/BrowserAPIs/Console/Console.md)
 - [CookieStorage](Blazor.BrowserAPI/BrowserAPIs/CookieStorage/CookieStorage.md)
-- [Dialog](Blazor.BrowserAPI/BrowserAPIs/Dialog/Dialog.md)
 - [Document](Blazor.BrowserAPI/BrowserAPIs/Document/Document.md)
 - [Download](Blazor.BrowserAPI/BrowserAPIs/Download/Download.md)
 - [FileSystem](Blazor.BrowserAPI/BrowserAPIs/FileSystem/FileSystem.md)
 - [GamepadAPI](Blazor.BrowserAPI/BrowserAPIs/GamepadAPI/GamepadAPI.md)
 - [Geolocation](Blazor.BrowserAPI/BrowserAPIs/Geolocation/Geolocation.md)
 - [History](Blazor.BrowserAPI/BrowserAPIs/History/History.md)
+- [HTMLDialogElement](Blazor.BrowserAPI/BrowserAPIs/HTMLDialogElement/HTMLDialogElement.md)
 - [HTMLElement](Blazor.BrowserAPI/BrowserAPIs/HTMLElement/HTMLElement.md)
 - [HTMLMediaElement (audio/video)](Blazor.BrowserAPI/BrowserAPIs/HTMLMediaElement/HTMLMediaElement.md)
 - [Language](Blazor.BrowserAPI/BrowserAPIs/Language/Language.md)
@@ -165,4 +165,5 @@ There are more interfaces coming.
   - TODO added Document (21 BrowserAPIs)
   - added much more members to HTMLElement
   - added video members to HTMLMediaElement
+  - small breaking change: renamed IDialog to IHTMLDialogElement
   - small breaking changes: renamed some events to capital letters so it fits more the C# convention naming

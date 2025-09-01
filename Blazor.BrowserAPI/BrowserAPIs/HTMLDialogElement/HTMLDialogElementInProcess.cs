@@ -10,7 +10,7 @@ namespace BrowserAPI.Implementation;
 /// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="Dispose"/> when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class DialogInProcess(IJSInProcessObjectReference dialogJS) : DialogBase(Task.FromResult<IJSObjectReference>(dialogJS)), IDialogInProcess {
+public sealed class HTMLDialogElementInProcess(IJSInProcessObjectReference dialogJS) : HTMLDialogElementBase(Task.FromResult<IJSObjectReference>(dialogJS)), IHTMLDialogElementInProcess {
     /// <summary>
     /// Releases the JS instance for this dialog.
     /// </summary>
