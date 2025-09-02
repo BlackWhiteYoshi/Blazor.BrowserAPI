@@ -3913,7 +3913,7 @@ public sealed class HTMLElementTest(PlayWrightFixture playWrightFixture) : PlayW
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("KeyBoardEvent { Key = a, Code = KeyA, Location = 0, CtrlKey = False, ShiftKey = False, AltKey = False, MetaKey = False, Repeat = False, IsComposing = False }");
+        await Assert.That(result).IsEqualTo("KeyboardEvent { Key = a, Code = KeyA, Location = 0, CtrlKey = False, ShiftKey = False, AltKey = False, MetaKey = False, Repeat = False, IsComposing = False }");
     }
 
     [Test]
@@ -3933,7 +3933,7 @@ public sealed class HTMLElementTest(PlayWrightFixture playWrightFixture) : PlayW
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("KeyBoardEvent { Key = a, Code = KeyA, Location = 0, CtrlKey = False, ShiftKey = False, AltKey = False, MetaKey = False, Repeat = False, IsComposing = False }");
+        await Assert.That(result).IsEqualTo("KeyboardEvent { Key = a, Code = KeyA, Location = 0, CtrlKey = False, ShiftKey = False, AltKey = False, MetaKey = False, Repeat = False, IsComposing = False }");
     }
 
 

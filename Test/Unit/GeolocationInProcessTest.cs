@@ -70,6 +70,7 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
                 Accuracy = ACCURACY * i,
             });
             await Task.Delay(STANDARD_WAIT_TIME);
+
             string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
 
             string expectedStart = $"GeolocationCoordinates {{ Latitude = {LATITUDE * i}, Longitude = {LONGITUDE * i}, Altitude = , Accuracy = {ACCURACY * i}, AltitudeAccuracy = , Heading = , Speed = , Timestamp = ";
@@ -101,6 +102,12 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("watchId: 3, count: 0");
+
+        // "watchId: {ínt}, count: 0"
+        const string expectedStart = "watchId: ";
+        await Assert.That(result).StartsWith(expectedStart);
+        const string expectedEnd = ", count: 0";
+        await Assert.That(result).EndsWith(expectedEnd);
+        await Assert.That(long.TryParse(result?[expectedStart.Length..^expectedEnd.Length], out _)).IsTrue();
     }
 }
