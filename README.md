@@ -161,8 +161,8 @@ There are more interfaces coming.
     - changed IServiceWorkerContainer.OnMessage from Action&lt;string&gt; to Action&lt;JsonElement&gt;
 - 0.13.0
   - added Permissions (20 BrowserAPIs)
-- 0.14.0 (not done yet)
-  - TODO added Document (21 BrowserAPIs)
+- 0.14.0
+  - added Document (21 BrowserAPIs)
   - added much more members to HTMLElement
   - added video members to HTMLMediaElement
   - small breaking change: renamed IDialog to IHTMLDialogElement
