@@ -1,7 +1,6 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
-using System.Xml.Linq;
 
 namespace BrowserAPI.Implementation;
 
@@ -760,7 +759,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
 
     /// <summary>
     /// <para>Asynchronously releases a pointer lock previously requested through <see cref="IHTMLElement.RequestPointerLock"/>.</para>
-    /// <para>To track the success or failure of the request, it is necessary to listen for the <see cref="IDocument.PointerLockChange"/> and <see cref="IDocument.PointerLockError"/> events.</para>
+    /// <para>To track the success or failure of the request, it is necessary to listen for the <see cref="IDocument.OnPointerLockChange"/> and <see cref="IDocument.OnPointerLockError"/> events.</para>
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
@@ -856,4 +855,177 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask Normalize(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("DocumentAPI.normalize", cancellationToken);
+
+
+    // events
+
+    private protected override void InvokeDrag(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDrag?.Invoke(new DragEvent(dropEffect, effectAllowed, types, WrapFiles(files)));
+    private Action<DragEvent>? _onDrag;
+    /// <summary>
+    /// <para>Bubbled event invoked from child elements.</para>
+    /// <para>
+    /// Is fired every few hundred milliseconds as an element or text selection is being dragged by the user.<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<DragEvent> OnDrag {
+        add {
+            if (_onDrag == null)
+                _ = ActivateJSEvent("DocumentAPI.activateOndrag").Preserve();
+            _onDrag += value;
+        }
+        remove {
+            _onDrag -= value;
+            if (_onDrag == null)
+                _ = DeactivateJSEvent("DocumentAPI.deactivateOndrag").Preserve();
+        }
+    }
+
+    private protected override void InvokeDragStart(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDragStart?.Invoke(new DragEvent(dropEffect, effectAllowed, types, WrapFiles(files)));
+    private Action<DragEvent>? _onDragStart;
+    /// <summary>
+    /// <para>Bubbled event invoked from child elements.</para>
+    /// <para>
+    /// Is fired when the user starts dragging an element or text selection.<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<DragEvent> OnDragStart {
+        add {
+            if (_onDragStart == null)
+                _ = ActivateJSEvent("DocumentAPI.activateOndragstart").Preserve();
+            _onDragStart += value;
+        }
+        remove {
+            _onDragStart -= value;
+            if (_onDragStart == null)
+                _ = DeactivateJSEvent("DocumentAPI.deactivateOndragstart").Preserve();
+        }
+    }
+
+    private protected override void InvokeDragEnd(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDragEnd?.Invoke(new DragEvent(dropEffect, effectAllowed, types, WrapFiles(files)));
+    private Action<DragEvent>? _onDragEnd;
+    /// <summary>
+    /// <para>Bubbled event invoked from child elements.</para>
+    /// <para>
+    /// Is fired when a drag operation ends (by releasing a mouse button or hitting the escape key).<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<DragEvent> OnDragEnd {
+        add {
+            if (_onDragEnd == null)
+                _ = ActivateJSEvent("DocumentAPI.activateOndragend").Preserve();
+            _onDragEnd += value;
+        }
+        remove {
+            _onDragEnd -= value;
+            if (_onDragEnd == null)
+                _ = DeactivateJSEvent("DocumentAPI.deactivateOndragend").Preserve();
+        }
+    }
+
+    private protected override void InvokeDragEnter(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDragEnter?.Invoke(new DragEvent(dropEffect, effectAllowed, types, WrapFiles(files)));
+    private Action<DragEvent>? _onDragEnter;
+    /// <summary>
+    /// <para>Bubbled event invoked from child elements.</para>
+    /// <para>
+    /// Is fired when a dragged element or text selection enters a valid drop target.
+    /// The target object is the immediate user selection (the element directly indicated by the user as the drop target), or the &lt;body&gt; element.<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<DragEvent> OnDragEnter {
+        add {
+            if (_onDragEnter == null)
+                _ = ActivateJSEvent("DocumentAPI.activateOndragenter").Preserve();
+            _onDragEnter += value;
+        }
+        remove {
+            _onDragEnter -= value;
+            if (_onDragEnter == null)
+                _ = DeactivateJSEvent("DocumentAPI.deactivateOndragenter").Preserve();
+        }
+    }
+
+    private protected override void InvokeDragLeave(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDragLeave?.Invoke(new DragEvent(dropEffect, effectAllowed, types, WrapFiles(files)));
+    private Action<DragEvent>? _onDragLeave;
+    /// <summary>
+    /// <para>Bubbled event invoked from child elements.</para>
+    /// <para>
+    /// Is fired when a dragged element or text selection leaves a valid drop target.<br />
+    /// This event is not cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<DragEvent> OnDragLeave {
+        add {
+            if (_onDragLeave == null)
+                _ = ActivateJSEvent("DocumentAPI.activateOndragleave").Preserve();
+            _onDragLeave += value;
+        }
+        remove {
+            _onDragLeave -= value;
+            if (_onDragLeave == null)
+                _ = DeactivateJSEvent("DocumentAPI.deactivateOndragleave").Preserve();
+        }
+    }
+
+    private protected override void InvokeDragOver(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDragOver?.Invoke(new DragEvent(dropEffect, effectAllowed, types, WrapFiles(files)));
+    private Action<DragEvent>? _onDragOver;
+    /// <summary>
+    /// <para>Bubbled event invoked from child elements.</para>
+    /// <para>
+    /// Is fired when an element or text selection is being dragged over a valid drop target (every few hundred milliseconds).<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<DragEvent> OnDragOver {
+        add {
+            if (_onDragOver == null)
+                _ = ActivateJSEvent("DocumentAPI.activateOndragover").Preserve();
+            _onDragOver += value;
+        }
+        remove {
+            _onDragOver -= value;
+            if (_onDragOver == null)
+                _ = DeactivateJSEvent("DocumentAPI.deactivateOndragover").Preserve();
+        }
+    }
+
+    private protected override void InvokeDrop(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDrop?.Invoke(new DragEvent(dropEffect, effectAllowed, types, WrapFiles(files)));
+    private Action<DragEvent>? _onDrop;
+    /// <summary>
+    /// <para>Bubbled event invoked from child elements.</para>
+    /// <para>
+    /// Is fired when an element or text selection is dropped on a valid drop target.
+    /// To ensure that the drop event always fires as expected, you should always include a preventDefault() call in the part of your code which handles the dragover event.<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<DragEvent> OnDrop {
+        add {
+            if (_onDrop == null)
+                _ = ActivateJSEvent("DocumentAPI.activateOndrop").Preserve();
+            _onDrop += value;
+        }
+        remove {
+            _onDrop -= value;
+            if (_onDrop == null)
+                _ = DeactivateJSEvent("DocumentAPI.deactivateOndrop").Preserve();
+        }
+    }
+
+    private static IFile[] WrapFiles(IJSObjectReference[] files) {
+        File[] result = new File[files.Length];
+        for (int i = 0; i < result.Length; i++)
+            result[i] = new File(files[i]);
+        return result;
+    }
 }
