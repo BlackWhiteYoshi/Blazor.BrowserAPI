@@ -21,7 +21,6 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - [HTMLDialogElement](Blazor.BrowserAPI/BrowserAPIs/HTMLDialogElement/HTMLDialogElement.md)
 - [HTMLElement](Blazor.BrowserAPI/BrowserAPIs/HTMLElement/HTMLElement.md)
 - [HTMLMediaElement (audio/video)](Blazor.BrowserAPI/BrowserAPIs/HTMLMediaElement/HTMLMediaElement.md)
-- [Language](Blazor.BrowserAPI/BrowserAPIs/Language/Language.md)
 - [LocalStorage](Blazor.BrowserAPI/BrowserAPIs/LocalStorage/LocalStorage.md)
 - [MediaDevices (microphone/camera)](Blazor.BrowserAPI/BrowserAPIs/MediaDevices/MediaDevices.md)
 - [NetworkInformation](Blazor.BrowserAPI/BrowserAPIs/NetworkInformation/NetworkInformation.md)

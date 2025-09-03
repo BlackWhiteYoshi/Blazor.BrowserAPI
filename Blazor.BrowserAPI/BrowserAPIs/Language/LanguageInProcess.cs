@@ -3,35 +3,60 @@
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// This interface is a collection of language related functionalities,
-/// for example <see href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/language">navigator.language</see>
-/// or <see href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/lang">document.documentElement.lang</see> attribute.<br />
-/// It is not an official API.
+/// <para>This interface is obsolete and will be removed in the future.</para>
+/// <para>
+/// The following functionalities are available in other interfaces:<br />
+/// - <see cref="ILanguageInProcess.BrowserLanguage"/> (navigator.language) -> <see cref="INavigatorInProcess.Language"/><br />
+/// - <see cref="ILanguageInProcess.BrowserLanguages"/> (navigator.languages) -> <see cref="INavigatorInProcess.Languages"/><br />
+/// - <see cref="ILanguageInProcess.HtmlLanguage"/> (document.documentElement.lang) -> <see cref="IDocumentInProcess.DocumentElement"/>.<see cref="IHTMLElementInProcess.Lang">Lang</see>
+/// </para>
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI")]
 public sealed class LanguageInProcess(IModuleManager moduleManager) : ILanguageInProcess {
     /// <summary>
     /// <para>navigator.language</para>
-    /// <para>Returns a string representing the preferred language of the user, usually the language of the browser UI. Examples of valid language codes include "en", "en-US", "fr", "fr-FR", "es-ES", etc.</para>
+    /// <para>
+    /// Deprecated, use <see cref="INavigatorInProcess.Language"/> instead:
+    /// <code>
+    /// [Inject]
+    /// public required INavigatorInProcess Navigator { private get; init; }
+    /// ...
+    /// string value = Navigator.Language;
+    /// </code>
+    /// </para>
     /// </summary>
+    [Obsolete("Will be removed at Release. Use INavigator.Language instead.")]
     public string BrowserLanguage => moduleManager.InvokeSync<string>("LanguageAPI.getBrowserLanguage");
 
     /// <summary>
     /// <para>navigator.languages</para>
     /// <para>
-    /// Returns an array of strings representing the languages known to the user, by order of preference.
-    /// The language is described using language tags according to RFC 5646: Tags for Identifying Languages (also known as BCP 47).
-    /// In the returned array they are ordered by preference with the most preferred language first.
+    /// Deprecated, use <see cref="INavigatorInProcess.Languages"/> instead:
+    /// <code>
+    /// [Inject]
+    /// public required INavigatorInProcess Navigator { private get; init; }
+    /// ...
+    /// string[] value = Navigator.Languages;
+    /// </code>
     /// </para>
-    /// <para>The value of navigator.language is the first element of the returned array.</para>
     /// </summary>
+    [Obsolete("Will be removed at Release. Use INavigator.Languages instead.")]
     public string[] BrowserLanguages => moduleManager.InvokeSync<string[]>("LanguageAPI.getBrowserLanguages");
 
     /// <summary>
     /// <para>document.documentElement.lang</para>
-    /// <para>The content of the "lang" attribute on the html tag.</para>
-    /// <para>language abbreviation: e.g. "en", "fr", "es", "de"</para>
+    /// <para>
+    /// Deprecated, use <see cref="IDocumentInProcess.DocumentElement"/>.<see cref="IHTMLElementInProcess.Lang">Lang</see> instead:
+    /// <code>
+    /// [Inject]
+    /// public required IDocumentInProcess Document { private get; init; }
+    /// ...
+    /// string value = Document.DocumentElement.Lang;
+    /// Document.DocumentElement.Lang = newValue;
+    /// </code>
+    /// </para>
     /// </summary>
+    [Obsolete("Will be removed at Release. Use IDocument.DocumentElement.Lang instead.")]
     public string HtmlLanguage {
         get => moduleManager.InvokeSync<string>("LanguageAPI.getHtmlLanguage");
         set => moduleManager.InvokeSync("LanguageAPI.setHtmlLanguage", [value]);

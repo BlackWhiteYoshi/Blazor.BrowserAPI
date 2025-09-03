@@ -23,7 +23,6 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - HTMLDialogElement
 - HTMLElement
 - HTMLMediaElement (audio/video)
-- Language
 - LocalStorage
 - MediaDevices (microphone/camera)
 - NetworkInformation

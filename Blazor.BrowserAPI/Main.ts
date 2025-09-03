@@ -34,8 +34,8 @@ export { HTMLElementAPI };
 import { HTMLMediaElementAPI } from "./BrowserAPIs/HTMLMediaElement/HTMLMediaElement";
 export { HTMLMediaElementAPI };
 
-import { LanguageAPI } from "./BrowserAPIs/Language/Language";
-export { LanguageAPI };
+import { LanguageAPI } from "./BrowserAPIs/Language/Language"; // Obsolete
+export { LanguageAPI }; // Obsolete
 
 import { LocalStorageAPI } from "./BrowserAPIs/LocalStorage/LocalStorage";
 export { LocalStorageAPI };
