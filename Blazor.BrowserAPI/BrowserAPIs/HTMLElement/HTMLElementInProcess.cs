@@ -553,19 +553,16 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// 3. A toggle event is fired.
     /// </para>
     /// </summary>
-    /// <returns>
-    /// <para>true if the popup is open after the call, and false otherwise.</para>
-    /// <para>None(undefined) may be returned in older browser versions(see browser compatibility).</para>
-    /// </returns>
-    public bool TogglePopover() => htmlElementJS.Invoke<bool>("togglePopover");
-
-    /// <inheritdoc cref="TogglePopover()" />
     /// <param name="force">
     /// <para>A boolean, which causes togglePopover() to behave like showPopover() or hidePopover(), except that it doesn't throw an exception if the popover is already in the target state.</para>
     /// <para>- If set to true, the popover is shown if it was initially hidden.If it was initially shown, nothing happens.</para>
     /// <para>- If set to false, the popover is hidden if it was initially shown. If it was initially hidden, nothing happens.</para>
     /// </param>
-    public bool TogglePopover(bool force) => htmlElementJS.Invoke<bool>("togglePopover", [force]);
+    /// <returns>
+    /// <para>true if the popup is open after the call, and false otherwise.</para>
+    /// <para>None(undefined) may be returned in older browser versions(see browser compatibility).</para>
+    /// </returns>
+    public bool TogglePopover(bool? force = null) => htmlElementJS.Invoke<bool>("togglePopover", [force]);
 
 
     // events

@@ -302,8 +302,8 @@ export class HTMLElementAPI {
         this.#htmlElement.hidePopover();
     }
 
-    togglePopover(force?: boolean): boolean {
-        return <boolean><unknown>this.#htmlElement.togglePopover(force);
+    togglePopover(force: boolean | null): boolean {
+        return <boolean><unknown>this.#htmlElement.togglePopover(force ?? undefined);
     }
 
 

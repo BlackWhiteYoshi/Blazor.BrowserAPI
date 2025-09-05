@@ -799,21 +799,17 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// 3. A toggle event is fired.
     /// </para>
     /// </summary>
-    /// <param name="cancellationToken"></param>
-    /// <returns>
-    /// <para>true if the popup is open after the call, and false otherwise.</para>
-    /// <para>None(undefined) may be returned in older browser versions(see browser compatibility).</para>
-    /// </returns>
-    public async ValueTask<bool> TogglePopover(CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<bool>("togglePopover", cancellationToken);
-
-    /// <inheritdoc cref="TogglePopover(CancellationToken)" />
     /// <param name="force">
     /// <para>A boolean, which causes togglePopover() to behave like showPopover() or hidePopover(), except that it doesn't throw an exception if the popover is already in the target state.</para>
     /// <para>- If set to true, the popover is shown if it was initially hidden.If it was initially shown, nothing happens.</para>
     /// <para>- If set to false, the popover is hidden if it was initially shown. If it was initially hidden, nothing happens.</para>
     /// </param>
     /// <param name="cancellationToken"></param>
-    public async ValueTask<bool> TogglePopover(bool force, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<bool>("togglePopover", cancellationToken, [force]);
+    /// <returns>
+    /// <para>true if the popup is open after the call, and false otherwise.</para>
+    /// <para>None(undefined) may be returned in older browser versions(see browser compatibility).</para>
+    /// </returns>
+    public async ValueTask<bool> TogglePopover(bool? force = null, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeTrySync<bool>("togglePopover", cancellationToken, [force]);
 
 
     // events
