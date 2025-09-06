@@ -21,6 +21,9 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class File(IJSObjectReference fileJS) : FileBase(fileJS), IFile {
+    [AutoInterfaceVisibilityInternal]
+    IJSObjectReference IFile.FileJS => fileJS;
+
     /// <summary>
     /// Releases the JS instance for this file.
     /// </summary>

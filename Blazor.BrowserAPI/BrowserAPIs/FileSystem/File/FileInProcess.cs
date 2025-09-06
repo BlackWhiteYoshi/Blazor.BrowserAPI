@@ -23,6 +23,9 @@ namespace BrowserAPI.Implementation;
 public sealed class FileInProcess(IJSObjectReference fileJS) : FileBase(fileJS), IFileInProcess {
     private IJSInProcessObjectReference FileJS => (IJSInProcessObjectReference)base.fileJS;
 
+    [AutoInterfaceVisibilityInternal]
+    IJSInProcessObjectReference IFileInProcess.FileJS => FileJS;
+
     /// <summary>
     /// Releases the JS instance for this file.
     /// </summary>

@@ -43,6 +43,9 @@ export { LocalStorageAPI };
 import { MediaDevicesAPI } from "./BrowserAPIs/MediaDevices/MediaDevices";
 export { MediaDevicesAPI };
 
+import { NavigatorAPI } from "./BrowserAPIs/Navigator/Navigator";
+export { NavigatorAPI };
+
 import { NetworkInformationAPI } from "./BrowserAPIs/NetworkInformation/NetworkInformation";
 export { NetworkInformationAPI };
 

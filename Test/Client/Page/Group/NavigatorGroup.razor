@@ -1,0 +1,53 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Navigator</h2>
+    <div>
+        <button data-testid="@BUTTON_GET_LANGUAGE_PROPERTY" @onclick="GetLanguage_Property">GetLanguage_Property</button>
+        <button data-testid="@BUTTON_GET_LANGUAGE_METHOD" @onclick="GetLanguage_Method">GetLanguage_Method</button>
+        <button data-testid="@BUTTON_GET_LANGUAGES_PROPERTY" @onclick="GetLanguages_Property">GetLanguages_Property</button>
+        <button data-testid="@BUTTON_GET_LANGUAGES_METHOD" @onclick="GetLanguages_Method">GetLanguages_Method</button>
+
+        <button data-testid="@BUTTON_GET_USER_AGENT_PROPERTY" @onclick="GetUserAgent_Property">GetUserAgent_Property</button>
+        <button data-testid="@BUTTON_GET_USER_AGENT_METHOD" @onclick="GetUserAgent_Method">GetUserAgent_Method</button>
+        <button data-testid="@BUTTON_GET_WEBDRIVER_PROPERTY" @onclick="GetWebdriver_Property">GetWebdriver_Property</button>
+        <button data-testid="@BUTTON_GET_WEBDRIVER_METHOD" @onclick="GetWebdriver_Method">GetWebdriver_Method</button>
+
+        <button data-testid="@BUTTON_GET_USER_ACTIVATION_IS_ACTIVE_PROPERTY" @onclick="GetUserActivationIsActive_Property">GetUserActivationIsActive_Property</button>
+        <button data-testid="@BUTTON_GET_USER_ACTIVATION_IS_ACTIVE_METHOD" @onclick="GetUserActivationIsActive_Method">GetUserActivationIsActive_Method</button>
+        <button data-testid="@BUTTON_GET_USER_ACTIVATION_HAS_BEEN_ACTIVE_PROPERTY" @onclick="GetUserActivationHasBeenActive_Property">GetUserActivationHasBeenActive_Property</button>
+        <button data-testid="@BUTTON_GET_USER_ACTIVATION_HAS_BEEN_ACTIVE_METHOD" @onclick="GetUserActivationHasBeenActive_Method">GetUserActivationHasBeenActive_Method</button>
+
+        <button data-testid="@BUTTON_GET_COOKIE_ENABLED_PROPERTY" @onclick="GetCookieEnabled_Property">GetCookieEnabled_Property</button>
+        <button data-testid="@BUTTON_GET_COOKIE_ENABLED_METHOD" @onclick="GetCookieEnabled_Method">GetCookieEnabled_Method</button>
+        <button data-testid="@BUTTON_GET_PDF_VIEWER_ENABLED_PROPERTY" @onclick="GetPdfViewerEnabled_Property">GetPdfViewerEnabled_Property</button>
+        <button data-testid="@BUTTON_GET_PDF_VIEWER_ENABLED_METHOD" @onclick="GetPdfViewerEnabled_Method">GetPdfViewerEnabled_Method</button>
+
+        <button data-testid="@BUTTON_GET_MAX_TOUCH_POINTS_PROPERTY" @onclick="GetMaxTouchPoints_Property">GetMaxTouchPoints_Property</button>
+        <button data-testid="@BUTTON_GET_MAX_TOUCH_POINTS_METHOD" @onclick="GetMaxTouchPoints_Method">GetMaxTouchPoints_Method</button>
+        <button data-testid="@BUTTON_GET_HARDWARE_CONCURRENCY_PROPERTY" @onclick="GetHardwareConcurrency_Property">GetHardwareConcurrency_Property</button>
+        <button data-testid="@BUTTON_GET_HARDWARE_CONCURRENCY_METHOD" @onclick="GetHardwareConcurrency_Method">GetHardwareConcurrency_Method</button>
+        <button data-testid="@BUTTON_GET_DEVICE_MEMORY_PROPERTY" @onclick="GetDeviceMemory_Property">GetDeviceMemory_Property</button>
+        <button data-testid="@BUTTON_GET_DEVICE_MEMORY_METHOD" @onclick="GetDeviceMemory_Method">GetDeviceMemory_Method</button>
+
+
+        <button data-testid="@BUTTON_CAN_SHARE" @onclick="CanShare">CanShare</button>
+        <button data-testid="@BUTTON_SHARE" @onclick="Share">Share</button>
+
+        <button data-testid="@BUTTON_SET_APP_BADGE" @onclick="SetAppBadge">SetAppBadge</button>
+        <button data-testid="@BUTTON_CLEAR_APP_BADGE" @onclick="ClearAppBadge">ClearAppBadge</button>
+
+        <button data-testid="@BUTTON_REGISTER_PROTOCOL_HANDLER" @onclick="RegisterProtocolHandler">RegisterProtocolHandler</button>
+        <button data-testid="@BUTTON_UNREGISTER_PROTOCOL_HANDLER" @onclick="UnregisterProtocolHandler">UnregisterProtocolHandler</button>
+
+        <button data-testid="@BUTTON_SEND_BEACON_STRING" @onclick="SendBeacon_String">SendBeacon_String</button>
+        <button data-testid="@BUTTON_SEND_BEACON_BYTES" @onclick="SendBeacon_Bytes">SendBeacon_Bytes</button>
+        <button data-testid="@BUTTON_VIBRATE" @onclick="Vibrate">Vibrate</button>
+
+        <button data-testid="@BUTTON_GET_AUTOPLAY_POLICY_STRING" @onclick="GetAutoplayPolicy_String">GetAutoplayPolicy_String</button>
+        <button data-testid="@BUTTON_GET_AUTOPLAY_POLICY_ELEMENT" @onclick="GetAutoplayPolicy_Element">GetAutoplayPolicy_Element</button>
+        <button data-testid="@BUTTON_GET_INSTALLED_RELATED_APPS" @onclick="GetInstalledRelatedApps">GetInstalledRelatedApps</button>
+    </div>
+    <audio @ref="audioElement" src="HTMLMediaElement_audio.mp3"></audio>
+    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+</div>

@@ -1,5 +1,8 @@
 export class FileAPI {
     #file: File;
+    get file() {
+        return this.#file;
+    }
 
     constructor(file: File) {
         this.#file = file;

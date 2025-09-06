@@ -23,6 +23,7 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - [HTMLMediaElement (audio/video)](Blazor.BrowserAPI/BrowserAPIs/HTMLMediaElement/HTMLMediaElement.md)
 - [LocalStorage](Blazor.BrowserAPI/BrowserAPIs/LocalStorage/LocalStorage.md)
 - [MediaDevices (microphone/camera)](Blazor.BrowserAPI/BrowserAPIs/MediaDevices/MediaDevices.md)
+- [Navigator](Blazor.BrowserAPI/BrowserAPIs/Navigator/Navigator.md)
 - [NetworkInformation](Blazor.BrowserAPI/BrowserAPIs/NetworkInformation/NetworkInformation.md)
 - [Permissions](Blazor.BrowserAPI/BrowserAPIs/Permissions/Permissions.md)
 - [SensorAPI](Blazor.BrowserAPI/BrowserAPIs/SensorAPI/SensorAPI.md)
@@ -87,7 +88,7 @@ However, the class names itself will be stable, so using them for service provid
 
 
 <br></br>
-## Contribution
+## Contributions
 
 Adding a member to an existing BrowserAPI normally includes 5 steps:
 1. Adding a function to the corresponding *.ts* file (in case of a event -> 3 functions)

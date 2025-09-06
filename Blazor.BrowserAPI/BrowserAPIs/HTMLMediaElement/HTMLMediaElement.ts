@@ -5,6 +5,9 @@ import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
 
 export class HTMLMediaElementAPI {
     #htmlMediaElement: HTMLMediaElement;
+    get htmlMediaElement(): HTMLMediaElement {
+        return this.#htmlMediaElement;
+    }
 
     constructor(htmlMediaElement: HTMLMediaElement) {
         this.#htmlMediaElement = htmlMediaElement;

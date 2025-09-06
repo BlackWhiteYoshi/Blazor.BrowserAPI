@@ -12,6 +12,9 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTask) : HTMLMediaElementBase(htmlMediaElementTask), IHTMLMediaElement {
+    [AutoInterfaceVisibilityInternal]
+    Task<IJSObjectReference> IHTMLMediaElement.HTMLMediaElementTask => htmlMediaElementTask;
+
     /// <summary>
     /// Releases the JS instance for this htmlMediaElement.
     /// </summary>

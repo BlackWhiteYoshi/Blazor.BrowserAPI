@@ -1,0 +1,42 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Navigator InProcess</h2>
+    <div>
+        <button data-testid="@BUTTON_GET_LANGUAGE" @onclick="GetLanguage">GetLanguage</button>
+        <button data-testid="@BUTTON_GET_LANGUAGES" @onclick="GetLanguages">GetLanguages</button>
+
+        <button data-testid="@BUTTON_GET_USER_AGENT" @onclick="GetUserAgent">GetUserAgent</button>
+        <button data-testid="@BUTTON_GET_WEBDRIVER" @onclick="GetWebdriver">GetWebdriver</button>
+
+        <button data-testid="@BUTTON_GET_USER_ACTIVATION_IS_ACTIVE" @onclick="GetUserActivationIsActive">GetUserActivationIsActive</button>
+        <button data-testid="@BUTTON_GET_USER_ACTIVATION_HAS_BEEN_ACTIVE" @onclick="GetUserActivationHasBeenActive">GetUserActivationHasBeenActive</button>
+
+        <button data-testid="@BUTTON_GET_COOKIE_ENABLED" @onclick="GetCookieEnabled">GetCookieEnabled</button>
+        <button data-testid="@BUTTON_GET_PDF_VIEWER_ENABLED" @onclick="GetPdfViewerEnabled">GetPdfViewerEnabled</button>
+
+        <button data-testid="@BUTTON_GET_MAX_TOUCH_POINTS" @onclick="GetMaxTouchPoints">GetMaxTouchPoints</button>
+        <button data-testid="@BUTTON_GET_HARDWARE_CONCURRENCY" @onclick="GetHardwareConcurrency">GetHardwareConcurrency</button>
+        <button data-testid="@BUTTON_GET_DEVICE_MEMORY" @onclick="GetDeviceMemory">GetDeviceMemory</button>
+
+
+        <button data-testid="@BUTTON_CAN_SHARE" @onclick="CanShare">CanShare</button>
+        <button data-testid="@BUTTON_SHARE" @onclick="Share">Share</button>
+
+        <button data-testid="@BUTTON_SET_APP_BADGE" @onclick="SetAppBadge">SetAppBadge</button>
+        <button data-testid="@BUTTON_CLEAR_APP_BADGE" @onclick="ClearAppBadge">ClearAppBadge</button>
+
+        <button data-testid="@BUTTON_REGISTER_PROTOCOL_HANDLER" @onclick="RegisterProtocolHandler">RegisterProtocolHandler</button>
+        <button data-testid="@BUTTON_UNREGISTER_PROTOCOL_HANDLER" @onclick="UnregisterProtocolHandler">UnregisterProtocolHandler</button>
+
+        <button data-testid="@BUTTON_SEND_BEACON_STRING" @onclick="SendBeacon_String">SendBeacon_String</button>
+        <button data-testid="@BUTTON_SEND_BEACON_BYTES" @onclick="SendBeacon_Bytes">SendBeacon_Bytes</button>
+        <button data-testid="@BUTTON_VIBRATE" @onclick="Vibrate">Vibrate</button>
+
+        <button data-testid="@BUTTON_GET_AUTOPLAY_POLICY_STRING" @onclick="GetAutoplayPolicy_String">GetAutoplayPolicy_String</button>
+        <button data-testid="@BUTTON_GET_AUTOPLAY_POLICY_ELEMENT" @onclick="GetAutoplayPolicy_Element">GetAutoplayPolicy_Element</button>
+        <button data-testid="@BUTTON_GET_INSTALLED_RELATED_APPS" @onclick="GetInstalledRelatedApps">GetInstalledRelatedApps</button>
+    </div>
+    <audio @ref="audioElement" src="HTMLMediaElement_audio.mp3"></audio>
+    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+</div>
