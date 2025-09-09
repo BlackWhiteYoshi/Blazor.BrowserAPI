@@ -1858,21 +1858,26 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     /// <param name="left">Specifies the number of pixels along the X axis to scroll the window or element.</param>
     /// <param name="top">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
-    public void Scroll(int left, int top) => htmlElementJS.InvokeVoid("scroll", [left, top]);
-
-    /// <summary>
-    /// Scrolls to a particular set of coordinates inside a given element.
-    /// </summary>
-    /// <param name="x">The pixel along the horizontal axis of the element that you want displayed in the upper left.</param>
-    /// <param name="y">The pixel along the vertical axis of the element that you want displayed in the upper left.</param>
     /// <param name="behavior">
     /// Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
     /// - "smooth": scrolling should animate smoothly<br />
     /// - "instant": scrolling should happen instantly in a single jump<br />
     /// - "auto": scroll behavior is determined by the computed value of scroll-behavior
     /// </param>
-    /// <returns></returns>
-    public void ScrollTo(int x, int y, string? behavior = null) => htmlElementJS.InvokeVoid("scrollTo", [x, y, behavior]);
+    public void Scroll(int left, int top, string? behavior = null) => htmlElementJS.InvokeVoid("scroll", [left, top, behavior]);
+
+    /// <summary>
+    /// Scrolls to a particular set of coordinates inside a given element.
+    /// </summary>
+    /// <param name="left">The pixel along the horizontal axis of the element that you want displayed in the upper left.</param>
+    /// <param name="top">The pixel along the vertical axis of the element that you want displayed in the upper left.</param>
+    /// <param name="behavior">
+    /// Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+    /// - "smooth": scrolling should animate smoothly<br />
+    /// - "instant": scrolling should happen instantly in a single jump<br />
+    /// - "auto": scroll behavior is determined by the computed value of scroll-behavior
+    /// </param>
+    public void ScrollTo(int left, int top, string? behavior = null) => htmlElementJS.InvokeVoid("scrollTo", [left, top, behavior]);
 
     /// <summary>
     /// Scrolls an element by the given amount.

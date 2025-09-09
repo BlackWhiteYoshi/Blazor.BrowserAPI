@@ -976,15 +976,15 @@ export class HTMLElementAPI {
 
     // Node/Element methods - Scroll
 
-    scroll(left: number, top: number): void {
-        this.#htmlElement.scroll(left, top);
+    scroll(left: number, top: number, behavior: ScrollBehavior | null): void {
+        if (behavior === null)
+            this.#htmlElement.scroll(left, top);
+        else
+            this.#htmlElement.scroll({ left, top, behavior });
     }
 
-    scrollTo(x: number, y: number, behavior: ScrollBehavior | null): void {
-        if (behavior === null)
-            this.#htmlElement.scrollTo(x, y);
-        else
-            this.#htmlElement.scrollTo({ left: x, top: y, behavior });
+    scrollTo(left: number, top: number, behavior: ScrollBehavior | null): void {
+        this.scroll(left, top, behavior);
     }
 
     scrollBy(x: number, y: number): void {

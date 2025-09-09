@@ -2698,15 +2698,6 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </summary>
     /// <param name="left">Specifies the number of pixels along the X axis to scroll the window or element.</param>
     /// <param name="top">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public async ValueTask Scroll(int left, int top, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("scroll", cancellationToken, [left, top]);
-
-    /// <summary>
-    /// Scrolls to a particular set of coordinates inside a given element.
-    /// </summary>
-    /// <param name="x">The pixel along the horizontal axis of the element that you want displayed in the upper left.</param>
-    /// <param name="y">The pixel along the vertical axis of the element that you want displayed in the upper left.</param>
     /// <param name="behavior">
     /// Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
     /// - "smooth": scrolling should animate smoothly<br />
@@ -2715,8 +2706,24 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask ScrollTo(int x, int y, string? behavior = null, CancellationToken cancellationToken = default)
-        => await (await htmlElementTask).InvokeVoidTrySync("scrollTo", cancellationToken, [x, y, behavior]);
+    public async ValueTask Scroll(int left, int top, string? behavior = null, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeVoidTrySync("scroll", cancellationToken, [left, top, behavior]);
+
+    /// <summary>
+    /// Scrolls to a particular set of coordinates inside a given element.
+    /// </summary>
+    /// <param name="left">The pixel along the horizontal axis of the element that you want displayed in the upper left.</param>
+    /// <param name="top">The pixel along the vertical axis of the element that you want displayed in the upper left.</param>
+    /// <param name="behavior">
+    /// Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+    /// - "smooth": scrolling should animate smoothly<br />
+    /// - "instant": scrolling should happen instantly in a single jump<br />
+    /// - "auto": scroll behavior is determined by the computed value of scroll-behavior
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask ScrollTo(int left, int top, string? behavior = null, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeVoidTrySync("scrollTo", cancellationToken, [left, top, behavior]);
 
     /// <summary>
     /// Scrolls an element by the given amount.
