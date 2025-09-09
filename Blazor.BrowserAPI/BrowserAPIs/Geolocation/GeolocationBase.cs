@@ -1,4 +1,6 @@
 ﻿using AutoInterfaceAttributes;
+using Microsoft.JSInterop;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
@@ -8,6 +10,27 @@ namespace BrowserAPI.Implementation;
 public abstract class GeolocationBase(IModuleManager moduleManager) {
 #pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
     private protected IModuleManager moduleManager = moduleManager;
+
+
+    /// <summary>
+    /// <para>Callback class for <see cref="Geolocation.GetCurrentPosition"/> and <see cref="Geolocation.WatchPosition"/>.</para>
+    /// <para>It contains 2 callbacks: <see cref="Success"/> and <see cref="Error"/>.</para>
+    /// </summary>
+    /// <param name="successhanlder">callback with parameters GeolocationCoordinates geolocationCoordinates, long timestamp</param>
+    /// <param name="errorhandler">callback with parameters int errorCode, string message</param>
+    [method: DynamicDependency(nameof(Success))]
+    [method: DynamicDependency(nameof(Error))]
+    private protected sealed class Callback(Action<GeolocationCoordinates> successhanlder, Action<int, string>? errorhandler = null) {
+        public Action<GeolocationCoordinates> SuccessHandler { get; set; } = successhanlder;
+        public Action<int, string>? ErrorHandler { get; set; } = errorhandler;
+
+
+        [JSInvokable]
+        public void Success(GeolocationCoordinates geolocationCoordinates) => SuccessHandler(geolocationCoordinates);
+
+        [JSInvokable]
+        public void Error(int errorCode, string message) => ErrorHandler?.Invoke(errorCode, message);
+    }
 
 
     /// <summary>
