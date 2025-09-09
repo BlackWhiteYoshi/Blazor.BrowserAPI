@@ -1,0 +1,34 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Window InProcess</h2>
+    <div>
+        @* Properties *@
+
+        <button data-testid="@BUTTON_GET_INNER_WIDTH" @onclick="GetInnerWidth">GetInnerWidth</button>
+        <button data-testid="@BUTTON_GET_INNER_HEIGHT" @onclick="GetInnerHeight">GetInnerHeight</button>
+        <button data-testid="@BUTTON_GET_OUTER_WIDTH" @onclick="GetOuterWidth">GetOuterWidth</button>
+        <button data-testid="@BUTTON_GET_OUTER_HEIGHT" @onclick="GetOuterHeight">GetOuterHeight</button>
+        <button data-testid="@BUTTON_GET_DEVICE_PIXEL_RATIO" @onclick="GetDevicePixelRatio">GetDevicePixelRatio</button>
+
+        <button data-testid="@BUTTON_GET_SCROLL_X" @onclick="GetScrollX">GetScrollX</button>
+        <button data-testid="@BUTTON_GET_SCROLL_Y" @onclick="GetScrollY">GetScrollY</button>
+        <button data-testid="@BUTTON_GET_SCREEN_X" @onclick="GetScreenX">GetScreenX</button>
+        <button data-testid="@BUTTON_GET_SCREEN_Y" @onclick="GetScreenY">GetScreenY</button>
+
+        <button data-testid="@BUTTON_GET_ORIGIN" @onclick="GetOrigin">GetOrigin</button>
+        <button data-testid="@BUTTON_GET_NAME" @onclick="GetName">GetName</button>
+        <button data-testid="@BUTTON_SET_NAME" @onclick="SetName">SetName</button>
+
+        <button data-testid="@BUTTON_GET_CLOSED" @onclick="GetClosed">GetClosed</button>
+        <button data-testid="@BUTTON_GET_CREDENTIALLESS" @onclick="GetCredentialless">GetCredentialless</button>
+        <button data-testid="@BUTTON_GET_CROSS_ORIGIN_ISOLATED" @onclick="GetCrossOriginIsolated">GetCrossOriginIsolated</button>
+        <button data-testid="@BUTTON_GET_IS_SECURE_CONTEXT" @onclick="GetIsSecureContext">GetIsSecureContext</button>
+        <button data-testid="@BUTTON_GET_ORIGIN_AGENT_CLUSTER" @onclick="GetOriginAgentCluster">GetOriginAgentCluster</button>
+        <button data-testid="@BUTTON_GET_MENUBAR" @onclick="GetMenubar">GetMenubar</button>
+
+        <button data-testid="@BUTTON_GET_FRAME_ELEMENT" @onclick="GetFrameElement">GetFrameElement</button>
+    </div>
+    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+</div>
+

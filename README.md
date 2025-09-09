@@ -29,6 +29,7 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - [SensorAPI](Blazor.BrowserAPI/BrowserAPIs/SensorAPI/SensorAPI.md)
 - [ServiceWorker](Blazor.BrowserAPI/BrowserAPIs/ServiceWorker/ServiceWorker.md)
 - [SessionStorage](Blazor.BrowserAPI/BrowserAPIs/SessionStorage/SessionStorage.md)
+- [Window](Blazor.BrowserAPI/BrowserAPIs/Window/Window.md)
 - [WindowManagement (screen)](Blazor.BrowserAPI/BrowserAPIs/WindowManagement/WindowManagement.md)
 
 ## Other APIs

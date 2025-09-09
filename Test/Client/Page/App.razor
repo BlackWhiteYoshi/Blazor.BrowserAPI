@@ -73,6 +73,9 @@ else {
         <SessionStorageGroup />
         @if (isInProcess) { <SessionStorageInProcessGroup /> }
 
+        <WindowGroup />
+        @if (isInProcess) { <WindowInProcessGroup /> }
+
         <WindowManagementGroup />
         @if (isInProcess) { <WindowManagementInProcessGroup /> }
     </div>

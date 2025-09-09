@@ -70,6 +70,9 @@ export { ServiceWorkerContainerAPI };
 import { SessionStorageAPI } from "./BrowserAPIs/SessionStorage/SessionStorage";
 export { SessionStorageAPI };
 
+import { WindowAPI } from "./BrowserAPIs/Window/Window";
+export { WindowAPI };
+
 import { WindowManagementAPI } from "./BrowserAPIs/WindowManagement/WindowManagement";
 import { ScreenAPI } from "./BrowserAPIs/WindowManagement/Screen/Screen";
 export { WindowManagementAPI, ScreenAPI };
