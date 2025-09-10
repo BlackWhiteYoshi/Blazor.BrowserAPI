@@ -221,7 +221,7 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return htmlElement.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, htmlElement is IJSInProcessObjectReference]);
+        return htmlElement.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger]);
     }
 
     /// <summary>

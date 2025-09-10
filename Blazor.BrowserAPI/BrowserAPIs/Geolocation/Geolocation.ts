@@ -1,4 +1,4 @@
-import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
+import { BlazorInvoke } from "../../Extensions/blazorExtensions";
 
 type GeolocationCoordinateObject = {
     latitude: number,
@@ -12,10 +12,10 @@ type GeolocationCoordinateObject = {
 };
 
 export class GeolocationAPI {
-    static getCurrentPosition(callbackGeolocation: DotNet.DotNetObject, isSync: boolean, maximumAge: number, timeout: number, enableHighAccuracy: boolean): void {
+    static getCurrentPosition(callbackGeolocation: DotNet.DotNetObject, maximumAge: number, timeout: number, enableHighAccuracy: boolean): void {
         navigator.geolocation.getCurrentPosition(
-            (geolocationPosition) => blazorInvokeMethod(callbackGeolocation, isSync, "Success", GeolocationAPI.#toGeoCoordsObject(geolocationPosition.coords, geolocationPosition.timestamp)),
-            (geolocationPositionError) => blazorInvokeMethod(callbackGeolocation, isSync, "Error", geolocationPositionError.code, geolocationPositionError.message),
+            (geolocationPosition) => BlazorInvoke.method(callbackGeolocation, "Success", GeolocationAPI.#toGeoCoordsObject(geolocationPosition.coords, geolocationPosition.timestamp)),
+            (geolocationPositionError) => BlazorInvoke.method(callbackGeolocation, "Error", geolocationPositionError.code, geolocationPositionError.message),
             {
                 maximumAge: maximumAge >= 0 ? maximumAge : Infinity,
                 timeout: timeout >= 0 ? timeout : undefined,
@@ -39,10 +39,10 @@ export class GeolocationAPI {
     }
 
     /** @returns watchId */
-    static watchPosition(callbackGeolocation: DotNet.DotNetObject, isSync: boolean, maximumAge: number, timeout: number, enableHighAccuracy: boolean): number {
+    static watchPosition(callbackGeolocation: DotNet.DotNetObject, maximumAge: number, timeout: number, enableHighAccuracy: boolean): number {
         return navigator.geolocation.watchPosition(
-            (geolocationPosition) => blazorInvokeMethod(callbackGeolocation, isSync, "Success", GeolocationAPI.#toGeoCoordsObject(geolocationPosition.coords, geolocationPosition.timestamp)),
-            (geolocationPositionError) => blazorInvokeMethod(callbackGeolocation, isSync, "Error", geolocationPositionError.code, geolocationPositionError.message),
+            (geolocationPosition) => BlazorInvoke.method(callbackGeolocation, "Success", GeolocationAPI.#toGeoCoordsObject(geolocationPosition.coords, geolocationPosition.timestamp)),
+            (geolocationPositionError) => BlazorInvoke.method(callbackGeolocation, "Error", geolocationPositionError.code, geolocationPositionError.message),
             {
                 maximumAge: maximumAge >= 0 ? maximumAge : Infinity,
                 timeout: timeout >= 0 ? timeout : undefined,

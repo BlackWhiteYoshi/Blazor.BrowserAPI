@@ -20194,7 +20194,7 @@
             </summary>
             <returns>A Task that represents the download of the module. If this tasks finishes, the download finishes.</returns>
         </member>
-        <member name="P:BrowserAPI.IModuleManager.IsInProcess">
+        <member name="M:BrowserAPI.IModuleManager.InvokeSync(System.String,System.Object[])">
             <summary>
             Checks if IJSRuntime object is IJSInProcessRuntime.
             </summary>

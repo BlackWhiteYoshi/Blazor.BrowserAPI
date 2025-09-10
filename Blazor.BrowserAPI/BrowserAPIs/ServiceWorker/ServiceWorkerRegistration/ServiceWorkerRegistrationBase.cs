@@ -38,7 +38,7 @@ public abstract class ServiceWorkerRegistrationBase(IJSObjectReference serviceWo
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return serviceWorkerRegistrationJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, serviceWorkerRegistrationJS is IJSInProcessObjectReference]);
+        return serviceWorkerRegistrationJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger]);
     }
 
     /// <summary>

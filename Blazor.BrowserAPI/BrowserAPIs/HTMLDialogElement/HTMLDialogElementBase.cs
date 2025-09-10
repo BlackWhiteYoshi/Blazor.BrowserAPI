@@ -29,7 +29,7 @@ public abstract class HTMLDialogElementBase(Task<IJSObjectReference> dialogTask)
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return dialog.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, dialog is IJSInProcessObjectReference]);
+        return dialog.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger]);
     }
 
     /// <summary>

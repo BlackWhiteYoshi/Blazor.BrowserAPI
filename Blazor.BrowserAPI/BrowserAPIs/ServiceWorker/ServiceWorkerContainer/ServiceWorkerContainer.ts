@@ -1,6 +1,6 @@
 import { ServiceWorkerRegistrationAPI } from "../ServiceWorkerRegistration/ServiceWorkerRegistration";
 import { ServiceWorkerAPI } from "../ServiceWorker/ServiceWorker";
-import { blazorInvokeMethod } from "../../../Extensions/blazorExtensions";
+import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
 
 export class ServiceWorkerContainerAPI {
     static async register(filePath: string): Promise<void> {
@@ -49,18 +49,16 @@ export class ServiceWorkerContainerAPI {
 
 
     static #eventTrigger: DotNet.DotNetObject;
-    static #isEventTriggerSync: boolean;
 
-    static initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
+    static initEvents(eventTrigger: DotNet.DotNetObject): void {
         ServiceWorkerContainerAPI.#eventTrigger = eventTrigger;
-        ServiceWorkerContainerAPI.#isEventTriggerSync = isEventTriggerSync;
     }
 
 
     // controllerchange event
 
     static #oncontrollerchange() {
-        return blazorInvokeMethod(ServiceWorkerContainerAPI.#eventTrigger, ServiceWorkerContainerAPI.#isEventTriggerSync, "InvokeControllerChange");
+        return BlazorInvoke.method(ServiceWorkerContainerAPI.#eventTrigger, "InvokeControllerChange");
     }
 
     static activateOncontrollerchange(): void {
@@ -75,7 +73,7 @@ export class ServiceWorkerContainerAPI {
     // message event
 
     static #onmessage(event: MessageEvent) {
-        return blazorInvokeMethod(ServiceWorkerContainerAPI.#eventTrigger, ServiceWorkerContainerAPI.#isEventTriggerSync, "InvokeMessage", event.data);
+        return BlazorInvoke.method(ServiceWorkerContainerAPI.#eventTrigger, "InvokeMessage", event.data);
     }
 
     static activateOnMessage(): void {

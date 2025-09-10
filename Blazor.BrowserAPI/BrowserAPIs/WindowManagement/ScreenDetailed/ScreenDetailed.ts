@@ -1,4 +1,4 @@
-import { blazorInvokeMethod } from "../../../Extensions/blazorExtensions";
+import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
 
 export class ScreenDetailedAPI {
     #screenDetailed: ScreenDetailed;
@@ -96,17 +96,15 @@ export class ScreenDetailedAPI {
 
 
     #eventTrigger: DotNet.DotNetObject;
-    #isEventTriggerSync: boolean;
 
-    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
+    initEvents(eventTrigger: DotNet.DotNetObject): void {
         this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
     }
 
 
     // change event
 
-    #onchange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeChange");
+    #onchange = () => BlazorInvoke.method(this.#eventTrigger, "InvokeChange");
 
     activateOnchange(): void {
         this.#screenDetailed.addEventListener("change", this.#onchange);
@@ -119,7 +117,7 @@ export class ScreenDetailedAPI {
 
     // orientationchange event
 
-    #onorientationchange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeOrientationChange");
+    #onorientationchange = () => BlazorInvoke.method(this.#eventTrigger, "InvokeOrientationChange");
 
     activateOnorientationchange(): void {
         this.#screenDetailed.orientation.addEventListener("change", this.#onorientationchange);

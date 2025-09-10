@@ -30,7 +30,7 @@ public abstract class ServiceWorkerBase(IJSObjectReference serviceWorkerJS) {
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return serviceWorkerJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, serviceWorkerJS is IJSInProcessObjectReference]);
+        return serviceWorkerJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger]);
     }
 
     /// <summary>

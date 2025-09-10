@@ -36,7 +36,7 @@ public abstract class NetworkInformationBase(IModuleManager moduleManager) : IDi
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return moduleManager.InvokeTrySync("NetworkInformationAPI.initEvents", default, [_objectReferenceEventTrigger, moduleManager.IsInProcess]);
+        return moduleManager.InvokeTrySync("NetworkInformationAPI.initEvents", default, [_objectReferenceEventTrigger]);
     }
 
 

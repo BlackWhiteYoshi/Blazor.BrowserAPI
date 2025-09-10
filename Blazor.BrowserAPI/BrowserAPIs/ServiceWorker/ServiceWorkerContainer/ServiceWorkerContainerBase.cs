@@ -43,7 +43,7 @@ public abstract class ServiceWorkerContainerBase(IModuleManager moduleManager) :
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return moduleManager.InvokeTrySync("ServiceWorkerContainerAPI.initEvents", default, [_objectReferenceEventTrigger, moduleManager.IsInProcess]);
+        return moduleManager.InvokeTrySync("ServiceWorkerContainerAPI.initEvents", default, [_objectReferenceEventTrigger]);
     }
 
 

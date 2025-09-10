@@ -31,7 +31,7 @@ public abstract class HistoryBase(IModuleManager moduleManager) : IDisposable {
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return moduleManager.InvokeTrySync("HistoryAPI.initEvents", default, [_objectReferenceEventTrigger, moduleManager.IsInProcess]);
+        return moduleManager.InvokeTrySync("HistoryAPI.initEvents", default, [_objectReferenceEventTrigger]);
     }
 
 

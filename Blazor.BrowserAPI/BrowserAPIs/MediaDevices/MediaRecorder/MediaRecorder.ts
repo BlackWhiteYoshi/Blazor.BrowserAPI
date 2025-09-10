@@ -1,5 +1,5 @@
 import { MediaStreamAPI } from "../MediaStream/MediaStream";
-import { blazorInvokeMethod } from "../../../Extensions/blazorExtensions";
+import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
 
 export class MediaRecorderAPI {
     #mediaRecorder: MediaRecorder;
@@ -60,17 +60,15 @@ export class MediaRecorderAPI {
 
 
     #eventTrigger: DotNet.DotNetObject;
-    #isEventTriggerSync: boolean;
 
-    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
+    initEvents(eventTrigger: DotNet.DotNetObject): void {
         this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
     }
 
 
     // dataavailable event
 
-    #ondataavailable = async (event: BlobEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDataAvailable", new Uint8Array(await event.data.arrayBuffer()));
+    #ondataavailable = async (event: BlobEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeDataAvailable", new Uint8Array(await event.data.arrayBuffer()));
 
     activateOndataavailable(): void {
         this.#mediaRecorder.addEventListener("dataavailable", this.#ondataavailable);
@@ -83,7 +81,7 @@ export class MediaRecorderAPI {
 
     // error event
 
-    #onerror = (event: Event) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeError", event);
+    #onerror = (event: Event) => BlazorInvoke.method(this.#eventTrigger, "InvokeError", event);
 
     activateOnerror(): void {
         this.#mediaRecorder.addEventListener("error", this.#onerror);
@@ -96,7 +94,7 @@ export class MediaRecorderAPI {
 
     // start event
 
-    #onstart = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeStart");
+    #onstart = () => BlazorInvoke.method(this.#eventTrigger, "InvokeStart");
 
     activateOnstart(): void {
         this.#mediaRecorder.addEventListener("start", this.#onstart);
@@ -109,7 +107,7 @@ export class MediaRecorderAPI {
 
     // stop event
 
-    #onstop = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeStop");
+    #onstop = () => BlazorInvoke.method(this.#eventTrigger, "InvokeStop");
 
     activateOnstop(): void {
         this.#mediaRecorder.addEventListener("stop", this.#onstop);
@@ -122,7 +120,7 @@ export class MediaRecorderAPI {
 
     // resume event
 
-    #onresume = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeResume");
+    #onresume = () => BlazorInvoke.method(this.#eventTrigger, "InvokeResume");
 
     activateOnresume(): void {
         this.#mediaRecorder.addEventListener("resume", this.#onresume);
@@ -135,7 +133,7 @@ export class MediaRecorderAPI {
 
     // pause event
 
-    #onpause = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePause");
+    #onpause = () => BlazorInvoke.method(this.#eventTrigger, "InvokePause");
 
     activateOnpause(): void {
         this.#mediaRecorder.addEventListener("pause", this.#onpause);

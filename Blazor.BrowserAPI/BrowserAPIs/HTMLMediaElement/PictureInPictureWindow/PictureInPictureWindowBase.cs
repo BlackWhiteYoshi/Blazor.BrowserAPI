@@ -27,7 +27,7 @@ public abstract class PictureInPictureWindowBase(IJSObjectReference pictureInPic
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return pictureInPictureWindowJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, pictureInPictureWindowJS is IJSInProcessObjectReference]);
+        return pictureInPictureWindowJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger]);
     }
 
     /// <summary>

@@ -1,4 +1,4 @@
-import { blazorInvokeMethod } from "../../../Extensions/blazorExtensions";
+import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
 
 export class ScreenAPI {
     static getWidth(): number {
@@ -53,18 +53,16 @@ export class ScreenAPI {
 
 
     static #eventTrigger: DotNet.DotNetObject;
-    static #isEventTriggerSync: boolean;
 
-    static initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
+    static initEvents(eventTrigger: DotNet.DotNetObject): void {
         ScreenAPI.#eventTrigger = eventTrigger;
-        ScreenAPI.#isEventTriggerSync = isEventTriggerSync;
     }
 
 
     // change event
 
     static #onchange() {
-        return blazorInvokeMethod(ScreenAPI.#eventTrigger, ScreenAPI.#isEventTriggerSync, "InvokeChange");
+        return BlazorInvoke.method(ScreenAPI.#eventTrigger, "InvokeChange");
     }
 
     static activateOnchange(): void {
@@ -79,7 +77,7 @@ export class ScreenAPI {
     // orientationchange event
 
     static #onorientationchange() {
-        return blazorInvokeMethod(ScreenAPI.#eventTrigger, ScreenAPI.#isEventTriggerSync, "InvokeOrientationChange");
+        return BlazorInvoke.method(ScreenAPI.#eventTrigger, "InvokeOrientationChange");
     }
 
     static activateOnorientationchange(): void {

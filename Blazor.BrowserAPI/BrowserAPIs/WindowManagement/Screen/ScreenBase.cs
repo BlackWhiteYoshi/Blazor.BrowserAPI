@@ -64,7 +64,7 @@ public abstract class ScreenBase(IModuleManager moduleManager) : IDisposable {
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return moduleManager.InvokeTrySync("ScreenAPI.initEvents", default, [_objectReferenceEventTrigger, moduleManager.IsInProcess]);
+        return moduleManager.InvokeTrySync("ScreenAPI.initEvents", default, [_objectReferenceEventTrigger]);
     }
 
 

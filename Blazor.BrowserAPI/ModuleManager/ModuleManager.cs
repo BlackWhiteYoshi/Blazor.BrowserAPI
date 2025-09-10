@@ -52,9 +52,6 @@ public sealed class ModuleManager(IJSRuntime jsRuntime) : IModuleManager, IDispo
     public Task<IJSObjectReference> LoadModule() => moduleDownload ??= jsRuntime.InvokeAsync<IJSObjectReference>("import", cancellationTokenSource.Token, "/_content/Blazor.BrowserAPI/BrowserAPI.js").AsTask();
 
 
-    bool IModuleManager.IsInProcess => jsRuntime is IJSInProcessRuntime;
-
-
     TResult IModuleManager.InvokeSync<TResult>(string identifier, object?[]? args = null) {
         Task<IJSObjectReference> moduleTask = LoadModule();
         if (!moduleTask.IsCompletedSuccessfully)

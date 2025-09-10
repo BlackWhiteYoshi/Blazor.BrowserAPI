@@ -1,5 +1,5 @@
 import { ScreenDetailedAPI } from "../ScreenDetailed/ScreenDetailed";
-import { blazorInvokeMethod } from "../../../Extensions/blazorExtensions";
+import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
 
 export class ScreenDetailsAPI {
     #screenDetails: ScreenDetails;
@@ -24,17 +24,15 @@ export class ScreenDetailsAPI {
 
 
     #eventTrigger: DotNet.DotNetObject;
-    #isEventTriggerSync: boolean;
 
-    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
+    initEvents(eventTrigger: DotNet.DotNetObject): void {
         this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
     }
 
 
     // currentscreenchange event
 
-    #oncurrentscreenchange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCurrentScreenChange");
+    #oncurrentscreenchange = () => BlazorInvoke.method(this.#eventTrigger, "InvokeCurrentScreenChange");
 
     activateOncurrentscreenchange(): void {
         this.#screenDetails.addEventListener("currentscreenchange", this.#oncurrentscreenchange);
@@ -47,7 +45,7 @@ export class ScreenDetailsAPI {
 
     // screenschange event
 
-    #onscreenschange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeScreensChange");
+    #onscreenschange = () => BlazorInvoke.method(this.#eventTrigger, "InvokeScreensChange");
 
     activateOnscreenschange(): void {
         this.#screenDetails.addEventListener("screenschange", this.#onscreenschange);

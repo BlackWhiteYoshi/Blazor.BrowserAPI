@@ -54,7 +54,7 @@ public sealed class GamepadAPI(IModuleManager moduleManager) : IGamepadAPI, IDis
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return moduleManager.InvokeTrySync("GamepadInterfaceAPI.initEvents", default, [_objectReferenceEventTrigger, moduleManager.IsInProcess]);
+        return moduleManager.InvokeTrySync("GamepadInterfaceAPI.initEvents", default, [_objectReferenceEventTrigger]);
     }
 
 

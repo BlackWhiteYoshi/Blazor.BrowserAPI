@@ -1,4 +1,4 @@
-import { blazorInvokeMethod } from "../../../Extensions/blazorExtensions";
+import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
 
 export class PermissionStatusAPI {
     #permissionStatus: PermissionStatus;
@@ -20,17 +20,15 @@ export class PermissionStatusAPI {
 
 
     #eventTrigger: DotNet.DotNetObject;
-    #isEventTriggerSync: boolean;
 
-    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
+    initEvents(eventTrigger: DotNet.DotNetObject): void {
         this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
     }
 
 
     // change event
 
-    #onchange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeChange");
+    #onchange = () => BlazorInvoke.method(this.#eventTrigger, "InvokeChange");
 
     activateOnchange(): void {
         this.#permissionStatus.addEventListener("change", this.#onchange);

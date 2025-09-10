@@ -1,7 +1,7 @@
 import { HTMLElementAPI } from "../HTMLElement/HTMLElement";
 import { PictureInPictureWindowAPI } from "./PictureInPictureWindow/PictureInPictureWindow";
 import { MediaStreamAPI } from "../MediaDevices/MediaStream/MediaStream";
-import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
+import { BlazorInvoke } from "../../Extensions/blazorExtensions";
 
 export class HTMLMediaElementAPI {
     #htmlMediaElement: HTMLMediaElement;
@@ -297,11 +297,9 @@ export class HTMLMediaElementAPI {
 
 
     #eventTrigger: DotNet.DotNetObject;
-    #isEventTriggerSync: boolean;
 
-    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
+    initEvents(eventTrigger: DotNet.DotNetObject): void {
         this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
     }
 
 
@@ -309,7 +307,7 @@ export class HTMLMediaElementAPI {
 
     // error event
 
-    #onerror = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeError", this.#htmlMediaElement.error!.code, this.#htmlMediaElement.error!.message);
+    #onerror = () => BlazorInvoke.method(this.#eventTrigger, "InvokeError", this.#htmlMediaElement.error!.code, this.#htmlMediaElement.error!.message);
 
     activateOnerror(): void {
         this.#htmlMediaElement.addEventListener("error", this.#onerror);
@@ -324,7 +322,7 @@ export class HTMLMediaElementAPI {
 
     // canplay event
 
-    #oncanplay = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCanPlay");
+    #oncanplay = () => BlazorInvoke.method(this.#eventTrigger, "InvokeCanPlay");
 
     activateOncanplay(): void {
         this.#htmlMediaElement.addEventListener("canplay", this.#oncanplay);
@@ -337,7 +335,7 @@ export class HTMLMediaElementAPI {
 
     // canplaythrough event
 
-    #oncanplaythrough = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCanPlayThrough");
+    #oncanplaythrough = () => BlazorInvoke.method(this.#eventTrigger, "InvokeCanPlayThrough");
 
     activateOncanplaythrough(): void {
         this.#htmlMediaElement.addEventListener("canplaythrough", this.#oncanplaythrough);
@@ -350,7 +348,7 @@ export class HTMLMediaElementAPI {
 
     // playing event
 
-    #onplaying = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePlaying");
+    #onplaying = () => BlazorInvoke.method(this.#eventTrigger, "InvokePlaying");
 
     activateOnplaying(): void {
         this.#htmlMediaElement.addEventListener("playing", this.#onplaying);
@@ -365,7 +363,7 @@ export class HTMLMediaElementAPI {
 
     // loadstart event
 
-    #onloadstart = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeLoadStart");
+    #onloadstart = () => BlazorInvoke.method(this.#eventTrigger, "InvokeLoadStart");
 
     activateOnloadstart(): void {
         this.#htmlMediaElement.addEventListener("loadstart", this.#onloadstart);
@@ -378,7 +376,7 @@ export class HTMLMediaElementAPI {
 
     // progress event
 
-    #onprogress = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeProgress");
+    #onprogress = () => BlazorInvoke.method(this.#eventTrigger, "InvokeProgress");
 
     activateOnprogress(): void {
         this.#htmlMediaElement.addEventListener("progress", this.#onprogress);
@@ -391,7 +389,7 @@ export class HTMLMediaElementAPI {
 
     // loadeddata event
 
-    #onloadeddata = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeLoadedData");
+    #onloadeddata = () => BlazorInvoke.method(this.#eventTrigger, "InvokeLoadedData");
 
     activateOnloadeddata(): void {
         this.#htmlMediaElement.addEventListener("loadeddata", this.#onloadeddata);
@@ -404,7 +402,7 @@ export class HTMLMediaElementAPI {
 
     // loadedmetadata event
 
-    #onloadedmetadata = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeLoadedMetadata");
+    #onloadedmetadata = () => BlazorInvoke.method(this.#eventTrigger, "InvokeLoadedMetadata");
 
     activateOnloadedmetadata(): void {
         this.#htmlMediaElement.addEventListener("loadedmetadata", this.#onloadedmetadata);
@@ -417,7 +415,7 @@ export class HTMLMediaElementAPI {
 
     // stalled event
 
-    #onstalled = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeStalled");
+    #onstalled = () => BlazorInvoke.method(this.#eventTrigger, "InvokeStalled");
 
     activateOnstalled(): void {
         this.#htmlMediaElement.addEventListener("stalled", this.#onstalled);
@@ -430,7 +428,7 @@ export class HTMLMediaElementAPI {
 
     // suspend event
 
-    #onsuspend = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeSuspend");
+    #onsuspend = () => BlazorInvoke.method(this.#eventTrigger, "InvokeSuspend");
 
     activateOnsuspend(): void {
         this.#htmlMediaElement.addEventListener("suspend", this.#onsuspend);
@@ -443,7 +441,7 @@ export class HTMLMediaElementAPI {
 
     // waiting event
 
-    #onwaiting = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeWaiting");
+    #onwaiting = () => BlazorInvoke.method(this.#eventTrigger, "InvokeWaiting");
 
     activateOnwaiting(): void {
         this.#htmlMediaElement.addEventListener("waiting", this.#onwaiting);
@@ -456,7 +454,7 @@ export class HTMLMediaElementAPI {
 
     // abort event
 
-    #onabort = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAbort");
+    #onabort = () => BlazorInvoke.method(this.#eventTrigger, "InvokeAbort");
 
     activateOnabort(): void {
         this.#htmlMediaElement.addEventListener("abort", this.#onabort);
@@ -469,7 +467,7 @@ export class HTMLMediaElementAPI {
 
     // emptied event
 
-    #onemptied = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeEmptied");
+    #onemptied = () => BlazorInvoke.method(this.#eventTrigger, "InvokeEmptied");
 
     activateOnemptied(): void {
         this.#htmlMediaElement.addEventListener("emptied", this.#onemptied);
@@ -484,7 +482,7 @@ export class HTMLMediaElementAPI {
 
     // play event
 
-    #onplay = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePlay");
+    #onplay = () => BlazorInvoke.method(this.#eventTrigger, "InvokePlay");
 
     activateOnplay(): void {
         this.#htmlMediaElement.addEventListener("play", this.#onplay);
@@ -497,7 +495,7 @@ export class HTMLMediaElementAPI {
 
     // pause event
 
-    #onpause = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePause");
+    #onpause = () => BlazorInvoke.method(this.#eventTrigger, "InvokePause");
 
     activateOnpause(): void {
         this.#htmlMediaElement.addEventListener("pause", this.#onpause);
@@ -510,7 +508,7 @@ export class HTMLMediaElementAPI {
 
     // ended event
 
-    #onended = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeEnded");
+    #onended = () => BlazorInvoke.method(this.#eventTrigger, "InvokeEnded");
 
     activateOnended(): void {
         this.#htmlMediaElement.addEventListener("ended", this.#onended);
@@ -523,7 +521,7 @@ export class HTMLMediaElementAPI {
 
     // seeking event
 
-    #onseeking = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeSeeking");
+    #onseeking = () => BlazorInvoke.method(this.#eventTrigger, "InvokeSeeking");
 
     activateOnseeking(): void {
         this.#htmlMediaElement.addEventListener("seeking", this.#onseeking);
@@ -536,7 +534,7 @@ export class HTMLMediaElementAPI {
 
     // seeked event
 
-    #onseeked = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeSeeked");
+    #onseeked = () => BlazorInvoke.method(this.#eventTrigger, "InvokeSeeked");
 
     activateOnseeked(): void {
         this.#htmlMediaElement.addEventListener("seeked", this.#onseeked);
@@ -549,7 +547,7 @@ export class HTMLMediaElementAPI {
 
     // timeupdate event
 
-    #ontimeupdate = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTimeUpdate");
+    #ontimeupdate = () => BlazorInvoke.method(this.#eventTrigger, "InvokeTimeUpdate");
 
     activateOntimeupdate(): void {
         this.#htmlMediaElement.addEventListener("timeupdate", this.#ontimeupdate);
@@ -564,7 +562,7 @@ export class HTMLMediaElementAPI {
 
     // volumechange event
 
-    #onvolumechange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeVolumeChange");
+    #onvolumechange = () => BlazorInvoke.method(this.#eventTrigger, "InvokeVolumeChange");
 
     activateOnvolumechange(): void {
         this.#htmlMediaElement.addEventListener("volumechange", this.#onvolumechange);
@@ -577,7 +575,7 @@ export class HTMLMediaElementAPI {
 
     // ratechange event
 
-    #onratechange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeRateChange");
+    #onratechange = () => BlazorInvoke.method(this.#eventTrigger, "InvokeRateChange");
 
     activateOnratechange(): void {
         this.#htmlMediaElement.addEventListener("ratechange", this.#onratechange);
@@ -590,7 +588,7 @@ export class HTMLMediaElementAPI {
 
     // durationchange event
 
-    #ondurationchange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDurationChange");
+    #ondurationchange = () => BlazorInvoke.method(this.#eventTrigger, "InvokeDurationChange");
 
     activateOndurationchange(): void {
         this.#htmlMediaElement.addEventListener("durationchange", this.#ondurationchange);
@@ -605,7 +603,7 @@ export class HTMLMediaElementAPI {
 
     // HTMLMediaElement - resize event
 
-    #onresize = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeResize");
+    #onresize = () => BlazorInvoke.method(this.#eventTrigger, "InvokeResize");
 
     activateOnresize(): void {
         this.#htmlMediaElement.addEventListener("resize", this.#onresize);
@@ -618,7 +616,7 @@ export class HTMLMediaElementAPI {
 
     // HTMLMediaElement - enterpictureinpicture event
 
-    #onenterpictureinpicture = (event: PictureInPictureEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeEnterPictureInPicture", DotNet.createJSObjectReference(event.pictureInPictureWindow));
+    #onenterpictureinpicture = (event: PictureInPictureEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeEnterPictureInPicture", DotNet.createJSObjectReference(event.pictureInPictureWindow));
 
     activateOnenterpictureinpicture(): void {
         this.#htmlMediaElement.addEventListener("enterpictureinpicture", this.#onenterpictureinpicture);
@@ -631,7 +629,7 @@ export class HTMLMediaElementAPI {
 
     // HTMLMediaElement - leavepictureinpicture event
 
-    #onleavepictureinpicture = (event: PictureInPictureEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeLeavePictureInPicture", DotNet.createJSObjectReference(event.pictureInPictureWindow));
+    #onleavepictureinpicture = (event: PictureInPictureEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeLeavePictureInPicture", DotNet.createJSObjectReference(event.pictureInPictureWindow));
 
     activateOnleavepictureinpicture(): void {
         this.#htmlMediaElement.addEventListener("leavepictureinpicture", this.#onleavepictureinpicture);

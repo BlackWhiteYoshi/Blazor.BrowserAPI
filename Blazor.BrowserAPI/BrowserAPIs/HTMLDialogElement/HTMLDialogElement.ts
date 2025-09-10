@@ -1,5 +1,5 @@
 import { HTMLElementAPI } from "../HTMLElement/HTMLElement";
-import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
+import { BlazorInvoke } from "../../Extensions/blazorExtensions";
 
 export class HTMLDialogElementAPI {
     #dialog: HTMLDialogElement;
@@ -67,17 +67,15 @@ export class HTMLDialogElementAPI {
 
 
     #eventTrigger: DotNet.DotNetObject;
-    #isEventTriggerSync: boolean;
 
-    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
+    initEvents(eventTrigger: DotNet.DotNetObject): void {
         this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
     }
 
 
     // close event
 
-    #onclose = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeClose");
+    #onclose = () => BlazorInvoke.method(this.#eventTrigger, "InvokeClose");
 
     activateOnclose(): void {
         this.#dialog.addEventListener("close", this.#onclose);
@@ -90,7 +88,7 @@ export class HTMLDialogElementAPI {
 
     // cancel event
 
-    #oncancel = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCancel");
+    #oncancel = () => BlazorInvoke.method(this.#eventTrigger, "InvokeCancel");
 
     activateOncancel(): void {
         this.#dialog.addEventListener("cancel", this.#oncancel);

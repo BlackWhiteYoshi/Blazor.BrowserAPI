@@ -66,7 +66,7 @@ public sealed class Geolocation(IModuleManager moduleManager) : GeolocationBase(
             callbackGeolocation.Dispose();
         };
 
-        return moduleManager.InvokeTrySync("GeolocationAPI.getCurrentPosition", cancellationToken, [callbackGeolocation, false,  maximumAge, timeout, enableHighAccuracy]);
+        return moduleManager.InvokeTrySync("GeolocationAPI.getCurrentPosition", cancellationToken, [callbackGeolocation,  maximumAge, timeout, enableHighAccuracy]);
     }
 
 
@@ -129,7 +129,7 @@ public sealed class Geolocation(IModuleManager moduleManager) : GeolocationBase(
     /// <returns>WatchId - can be used to <see cref="ClearWatch">clear</see> this registration.</returns>
     public async ValueTask<int> WatchPosition(Action<GeolocationCoordinates> successCallback, Action<int, string>? errorCallback = null, long maximumAge = 0, long timeout = -1, bool enableHighAccuracy = false, CancellationToken cancellationToken = default) {
         DotNetObjectReference<Callback> callbackGeolocation = DotNetObjectReference.Create(new Callback(successCallback, errorCallback));
-        int watchId = await moduleManager.InvokeTrySync<int>("GeolocationAPI.watchPosition", cancellationToken, [callbackGeolocation, false, maximumAge, timeout, enableHighAccuracy]);
+        int watchId = await moduleManager.InvokeTrySync<int>("GeolocationAPI.watchPosition", cancellationToken, [callbackGeolocation, maximumAge, timeout, enableHighAccuracy]);
         watchList.Add(watchId, callbackGeolocation);
         return watchId;
     }

@@ -32,7 +32,7 @@ public abstract class SensorBase(IJSObjectReference sensorJS) {
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return sensorJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, sensorJS is IJSInProcessObjectReference]);
+        return sensorJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger]);
     }
 
     /// <summary>

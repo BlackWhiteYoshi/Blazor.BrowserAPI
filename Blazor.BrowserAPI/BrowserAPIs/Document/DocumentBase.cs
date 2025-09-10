@@ -405,7 +405,7 @@ public abstract class DocumentBase(IModuleManager moduleManager) {
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return moduleManager.InvokeTrySync("DocumentAPI.initEvents", default, [_objectReferenceEventTrigger, moduleManager.IsInProcess]);
+        return moduleManager.InvokeTrySync("DocumentAPI.initEvents", default, [_objectReferenceEventTrigger]);
     }
 
 

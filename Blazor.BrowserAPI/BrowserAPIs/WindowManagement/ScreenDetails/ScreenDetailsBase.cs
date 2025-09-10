@@ -29,7 +29,7 @@ public abstract class ScreenDetailsBase(IJSObjectReference screenDetailsJS) {
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return screenDetailsJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, screenDetailsJS is IJSInProcessObjectReference]);
+        return screenDetailsJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger]);
     }
 
     /// <summary>

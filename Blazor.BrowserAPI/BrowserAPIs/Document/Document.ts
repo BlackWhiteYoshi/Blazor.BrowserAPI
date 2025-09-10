@@ -1,6 +1,6 @@
 import { HTMLElementAPI } from "../HTMLElement/HTMLElement";
 import { FileAPI } from "../FileSystem/File/File";
-import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
+import { BlazorInvoke } from "../../Extensions/blazorExtensions";
 
 export class DocumentAPI {
     // properties - HTMLElement reference
@@ -306,11 +306,9 @@ export class DocumentAPI {
 
 
     static #eventTrigger: DotNet.DotNetObject;
-    static #isEventTriggerSync: boolean;
 
-    static initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
+    static initEvents(eventTrigger: DotNet.DotNetObject): void {
         DocumentAPI.#eventTrigger = eventTrigger;
-        DocumentAPI.#isEventTriggerSync = isEventTriggerSync;
     }
 
 
@@ -355,7 +353,7 @@ export class DocumentAPI {
     // securitypolicyviolation event
 
     static #onsecuritypolicyviolation(violationEvent: SecurityPolicyViolationEvent) {
-        blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeSecurityPolicyViolation", {
+        BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeSecurityPolicyViolation", {
             blockedURI: violationEvent.blockedURI,
             effectiveDirective: violationEvent.effectiveDirective,
             documentURI: violationEvent.documentURI,
@@ -382,7 +380,7 @@ export class DocumentAPI {
     // visibilitychange event
 
     static #onvisibilitychange() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeVisibilityChange");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeVisibilityChange");
     }
 
     static activateOnvisibilitychange(): void {
@@ -397,7 +395,7 @@ export class DocumentAPI {
     // fullscreenchange event
 
     static #onfullscreenchange() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeFullscreenChange");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeFullscreenChange");
     }
 
     static activateOnfullscreenchange(): void {
@@ -412,7 +410,7 @@ export class DocumentAPI {
     // fullscreenerror event
 
     static #onfullscreenerror() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeFullscreenError");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeFullscreenError");
     }
 
     static activateOnfullscreenerror(): void {
@@ -427,7 +425,7 @@ export class DocumentAPI {
     // DOMContentLoaded event
 
     static #onDOMContentLoaded() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeDOMContentLoaded");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeDOMContentLoaded");
     }
 
     static activateOnDOMContentLoaded(): void {
@@ -442,7 +440,7 @@ export class DocumentAPI {
     // readystatechange event
 
     static #onreadystatechange() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeReadyStateChange");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeReadyStateChange");
     }
 
     static activateOnreadystatechange(): void {
@@ -457,7 +455,7 @@ export class DocumentAPI {
     // pointerlockchange event
 
     static #onpointerlockchange() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokePointerLockChange");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokePointerLockChange");
     }
 
     static activateOnpointerlockchange(): void {
@@ -472,7 +470,7 @@ export class DocumentAPI {
     // pointerlockerror event
 
     static #onpointerlockerror() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokePointerLockError");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokePointerLockError");
     }
 
     static activateOnpointerlockerror(): void {
@@ -487,7 +485,7 @@ export class DocumentAPI {
     // scroll event
 
     static #onscroll() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeScroll");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeScroll");
     }
 
     static activateOnscroll(): void {
@@ -502,7 +500,7 @@ export class DocumentAPI {
     // scrollend event
 
     static #onscrollend() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeScrollEnd");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeScrollEnd");
     }
 
     static activateOnscrollend(): void {
@@ -517,7 +515,7 @@ export class DocumentAPI {
     // selectionchange event
 
     static #onselectionchange() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeSelectionChange");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeSelectionChange");
     }
 
     static activateOnselectionchange(): void {
@@ -532,7 +530,7 @@ export class DocumentAPI {
     // Node - selectstart event
 
     static #onselectstart() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeSelectStart");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeSelectStart");
     }
 
     static activateOnselectstart(): void {
@@ -549,7 +547,7 @@ export class DocumentAPI {
     // HTMLElement - change event
 
     static #onchange() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeChange");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeChange");
     }
 
     static activateOnchange(): void {
@@ -564,7 +562,7 @@ export class DocumentAPI {
     // HTMLElement - load event
 
     static #onload() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeLoad");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeLoad");
     }
 
     static activateOnload(): void {
@@ -579,7 +577,7 @@ export class DocumentAPI {
     // HTMLElement - error event
 
     static #onerror(error: Event) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeError", error);
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeError", error);
     }
 
     static activateOnerror(): void {
@@ -594,7 +592,7 @@ export class DocumentAPI {
     // HTMLElement - drag event
 
     static #ondrag(dragEvent: DragEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeDrag", ...DocumentAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeDrag", ...DocumentAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
     }
 
     static activateOndrag(): void {
@@ -609,7 +607,7 @@ export class DocumentAPI {
     // HTMLElement - dragstart event
 
     static #ondragstart(dragEvent: DragEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeDragStart", ...DocumentAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeDragStart", ...DocumentAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
     }
 
     static activateOndragstart(): void {
@@ -624,7 +622,7 @@ export class DocumentAPI {
     // HTMLElement - dragend event
 
     static #ondragend(dragEvent: DragEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeDragEnd", ...DocumentAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeDragEnd", ...DocumentAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
     }
 
     static activateOndragend(): void {
@@ -639,7 +637,7 @@ export class DocumentAPI {
     // HTMLElement - dragenter event
 
     static #ondragenter(dragEvent: DragEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeDragEnter", ...DocumentAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeDragEnter", ...DocumentAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
     }
 
     static activateOndragenter(): void {
@@ -654,7 +652,7 @@ export class DocumentAPI {
     // HTMLElement - dragleave event
 
     static #ondragleave(dragEvent: DragEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeDragLeave", ...DocumentAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeDragLeave", ...DocumentAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
     }
 
     static activateOndragleave(): void {
@@ -669,7 +667,7 @@ export class DocumentAPI {
     // HTMLElement - dragover event
 
     static #ondragover(dragEvent: DragEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeDragOver", ...DocumentAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeDragOver", ...DocumentAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
     }
 
     static activateOndragover(): void {
@@ -684,7 +682,7 @@ export class DocumentAPI {
     // HTMLElement - drop event
 
     static #ondrop(dragEvent: DragEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeDrop", ...DocumentAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeDrop", ...DocumentAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
     }
 
     static activateOndrop(): void {
@@ -699,7 +697,7 @@ export class DocumentAPI {
     // HTMLElement - toggle
 
     static #ontoggle(toggleEvent: ToggleEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeToggle", toggleEvent.oldState, toggleEvent.newState);
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeToggle", toggleEvent.oldState, toggleEvent.newState);
     }
 
     static activateOntoggle(): void {
@@ -714,7 +712,7 @@ export class DocumentAPI {
     // HTMLElement - beforetoggle
 
     static #onbeforetoggle(toggleEvent: ToggleEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeBeforeToggle", toggleEvent.oldState, toggleEvent.newState);
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeBeforeToggle", toggleEvent.oldState, toggleEvent.newState);
     }
 
     static activateOnbeforetoggle(): void {
@@ -730,7 +728,7 @@ export class DocumentAPI {
     // Element - input event
 
     static #oninput(inputEvent: InputEvent | Event) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeInput", ...DocumentAPI.#deconstructInputEvent(inputEvent));
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeInput", ...DocumentAPI.#deconstructInputEvent(inputEvent));
     }
 
     static activateOninput(): void {
@@ -745,7 +743,7 @@ export class DocumentAPI {
     // Element - beforeinput event
 
     static #onbeforeinput(inputEvent: InputEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeBeforeInput", ...DocumentAPI.#deconstructInputEvent(inputEvent));
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeBeforeInput", ...DocumentAPI.#deconstructInputEvent(inputEvent));
     }
 
     static activateOnbeforeinput(): void {
@@ -760,7 +758,7 @@ export class DocumentAPI {
     // Element - beforematch event
 
     static #onbeforematch() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeBeforeMatch");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeBeforeMatch");
     }
 
     static activateOnbeforematch(): void {
@@ -776,7 +774,7 @@ export class DocumentAPI {
     // Element - keydown event
 
     static #onkeydown(keyboardEvent: KeyboardEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeKeyDown", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeKeyDown", {
             key: keyboardEvent.key,
             code: keyboardEvent.code,
             location: keyboardEvent.location,
@@ -801,7 +799,7 @@ export class DocumentAPI {
     // Element - keyup event
 
     static #onkeyup(keyboardEvent: KeyboardEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeKeyUp", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeKeyUp", {
             key: keyboardEvent.key,
             code: keyboardEvent.code,
             location: keyboardEvent.location,
@@ -827,7 +825,7 @@ export class DocumentAPI {
     // Element - click event
 
     static #onclick(mouseEvent: MouseEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeClick", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeClick", {
             button: mouseEvent.button,
             buttons: mouseEvent.buttons,
             movementX: mouseEvent.movementX,
@@ -859,7 +857,7 @@ export class DocumentAPI {
     // Element - dblclick event
 
     static #ondblclick(mouseEvent: MouseEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeDblClick", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeDblClick", {
             button: mouseEvent.button,
             buttons: mouseEvent.buttons,
             movementX: mouseEvent.movementX,
@@ -891,7 +889,7 @@ export class DocumentAPI {
     // Element - auxclick event
 
     static #onauxclick(mouseEvent: MouseEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeAuxClick", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeAuxClick", {
             button: mouseEvent.button,
             buttons: mouseEvent.buttons,
             movementX: mouseEvent.movementX,
@@ -923,7 +921,7 @@ export class DocumentAPI {
     // Element - contextmenu event
 
     static #oncontextmenu(mouseEvent: MouseEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeContextMenu", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeContextMenu", {
             button: mouseEvent.button,
             buttons: mouseEvent.buttons,
             movementX: mouseEvent.movementX,
@@ -955,7 +953,7 @@ export class DocumentAPI {
     // Element - mousedown event
 
     static #onmousedown(mouseEvent: MouseEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeMouseDown", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeMouseDown", {
             button: mouseEvent.button,
             buttons: mouseEvent.buttons,
             movementX: mouseEvent.movementX,
@@ -987,7 +985,7 @@ export class DocumentAPI {
     // Element - mouseup event
 
     static #onmouseup(mouseEvent: MouseEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeMouseUp", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeMouseUp", {
             button: mouseEvent.button,
             buttons: mouseEvent.buttons,
             movementX: mouseEvent.movementX,
@@ -1019,7 +1017,7 @@ export class DocumentAPI {
     // Element - wheel event
 
     static #onwheel(wheelEvent: WheelEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeWheel", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeWheel", {
             deltaX: wheelEvent.deltaX,
             deltaY: wheelEvent.deltaY,
             deltaZ: wheelEvent.deltaZ,
@@ -1039,7 +1037,7 @@ export class DocumentAPI {
     // Element - mousemove event
 
     static #onmousemove(mouseEvent: MouseEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeMouseMove", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeMouseMove", {
             button: mouseEvent.button,
             buttons: mouseEvent.buttons,
             movementX: mouseEvent.movementX,
@@ -1071,7 +1069,7 @@ export class DocumentAPI {
     // Element - mouseover event
 
     static #onmouseover(mouseEvent: MouseEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeMouseOver", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeMouseOver", {
             button: mouseEvent.button,
             buttons: mouseEvent.buttons,
             movementX: mouseEvent.movementX,
@@ -1103,7 +1101,7 @@ export class DocumentAPI {
     // Element - mouseout event
 
     static #onmouseout(mouseEvent: MouseEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeMouseOut", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeMouseOut", {
             button: mouseEvent.button,
             buttons: mouseEvent.buttons,
             movementX: mouseEvent.movementX,
@@ -1135,7 +1133,7 @@ export class DocumentAPI {
     // Element - mouseenter event
 
     static #onmouseenter(mouseEvent: MouseEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeMouseEnter", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeMouseEnter", {
             button: mouseEvent.button,
             buttons: mouseEvent.buttons,
             movementX: mouseEvent.movementX,
@@ -1167,7 +1165,7 @@ export class DocumentAPI {
     // Element - mouseleave event
 
     static #onmouseleave(mouseEvent: MouseEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeMouseLeave", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeMouseLeave", {
             button: mouseEvent.button,
             buttons: mouseEvent.buttons,
             movementX: mouseEvent.movementX,
@@ -1200,7 +1198,7 @@ export class DocumentAPI {
     // Element - touchstart event
 
     static #ontouchstart(touchEvent: TouchEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeTouchStart", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeTouchStart", {
             touches: DocumentAPI.#deconstructTouchList(touchEvent.touches),
             targetTouches: DocumentAPI.#deconstructTouchList(touchEvent.targetTouches),
             changedTouches: DocumentAPI.#deconstructTouchList(touchEvent.changedTouches),
@@ -1223,7 +1221,7 @@ export class DocumentAPI {
     // Element - touchend event
 
     static #ontouchend(touchEvent: TouchEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeTouchEnd", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeTouchEnd", {
             touches: DocumentAPI.#deconstructTouchList(touchEvent.touches),
             targetTouches: DocumentAPI.#deconstructTouchList(touchEvent.targetTouches),
             changedTouches: DocumentAPI.#deconstructTouchList(touchEvent.changedTouches),
@@ -1246,7 +1244,7 @@ export class DocumentAPI {
     // Element - touchmove event
 
     static #ontouchmove(touchEvent: TouchEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeTouchMove", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeTouchMove", {
             touches: DocumentAPI.#deconstructTouchList(touchEvent.touches),
             targetTouches: DocumentAPI.#deconstructTouchList(touchEvent.targetTouches),
             changedTouches: DocumentAPI.#deconstructTouchList(touchEvent.changedTouches),
@@ -1269,7 +1267,7 @@ export class DocumentAPI {
     // Element - touchcancel event
 
     static #ontouchcancel(touchEvent: TouchEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeTouchCancel", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeTouchCancel", {
             touches: DocumentAPI.#deconstructTouchList(touchEvent.touches),
             targetTouches: DocumentAPI.#deconstructTouchList(touchEvent.targetTouches),
             changedTouches: DocumentAPI.#deconstructTouchList(touchEvent.changedTouches),
@@ -1293,7 +1291,7 @@ export class DocumentAPI {
     // Element - pointerdown event
 
     static #onpointerdown(pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokePointerDown", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokePointerDown", {
             pointerId: pointerEvent.pointerId,
             persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
             pointerType: pointerEvent.pointerType ?? "",
@@ -1338,7 +1336,7 @@ export class DocumentAPI {
     // Element - pointerup event
 
     static #onpointerup(pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokePointerUp", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokePointerUp", {
             pointerId: pointerEvent.pointerId,
             persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
             pointerType: pointerEvent.pointerType ?? "",
@@ -1383,7 +1381,7 @@ export class DocumentAPI {
     // Element - pointermove event
 
     static #onpointermove(pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokePointerMove", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokePointerMove", {
             pointerId: pointerEvent.pointerId,
             persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
             pointerType: pointerEvent.pointerType ?? "",
@@ -1428,7 +1426,7 @@ export class DocumentAPI {
     // Element - pointerover event
 
     static #onpointerover(pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokePointerOver", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokePointerOver", {
             pointerId: pointerEvent.pointerId,
             persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
             pointerType: pointerEvent.pointerType ?? "",
@@ -1473,7 +1471,7 @@ export class DocumentAPI {
     // Element - pointerout event
 
     static #onpointerout(pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokePointerOut", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokePointerOut", {
             pointerId: pointerEvent.pointerId,
             persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
             pointerType: pointerEvent.pointerType ?? "",
@@ -1518,7 +1516,7 @@ export class DocumentAPI {
     // Element - pointerenter event
 
     static #onpointerenter(pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokePointerEnter", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokePointerEnter", {
             pointerId: pointerEvent.pointerId,
             persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
             pointerType: pointerEvent.pointerType ?? "",
@@ -1563,7 +1561,7 @@ export class DocumentAPI {
     // Element - pointerleave event
 
     static #onpointerleave(pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokePointerLeave", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokePointerLeave", {
             pointerId: pointerEvent.pointerId,
             persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
             pointerType: pointerEvent.pointerType ?? "",
@@ -1608,7 +1606,7 @@ export class DocumentAPI {
     // Element - pointercancel event
 
     static #onpointercancel(pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokePointerCancel", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokePointerCancel", {
             pointerId: pointerEvent.pointerId,
             persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
             pointerType: pointerEvent.pointerType ?? "",
@@ -1653,7 +1651,7 @@ export class DocumentAPI {
     // Element - pointerrawupdate event
 
     static #onpointerrawupdate(pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokePointerRawUpdate", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokePointerRawUpdate", {
             pointerId: pointerEvent.pointerId,
             persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
             pointerType: pointerEvent.pointerType ?? "",
@@ -1698,7 +1696,7 @@ export class DocumentAPI {
     // Element - gotpointercapture event
 
     static #ongotpointercapture(pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeGotPointerCapture", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeGotPointerCapture", {
             pointerId: pointerEvent.pointerId,
             persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
             pointerType: pointerEvent.pointerType ?? "",
@@ -1743,7 +1741,7 @@ export class DocumentAPI {
     // Element - lostpointercapture event
 
     static #onlostpointercapture(pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeLostPointerCapture", {
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeLostPointerCapture", {
             pointerId: pointerEvent.pointerId,
             persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
             pointerType: pointerEvent.pointerType ?? "",
@@ -1789,7 +1787,7 @@ export class DocumentAPI {
     // Element - focus event
 
     static #onfocus() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeFocus");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeFocus");
     }
 
     static activateOnfocus(): void {
@@ -1804,7 +1802,7 @@ export class DocumentAPI {
     // Element - focusin event
 
     static #onfocusin() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeFocusIn");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeFocusIn");
     }
 
     static activateOnfocusin(): void {
@@ -1819,7 +1817,7 @@ export class DocumentAPI {
     // Element - blur event
 
     static #onblur() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeBlur");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeBlur");
     }
 
     static activateOnblur(): void {
@@ -1834,7 +1832,7 @@ export class DocumentAPI {
     // Element - focusout event
 
     static #onfocusout() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeFocusOut");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeFocusOut");
     }
 
     static activateOnfocusout(): void {
@@ -1850,7 +1848,7 @@ export class DocumentAPI {
     // Element - copy event
 
     static #oncopy() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeCopy");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeCopy");
     }
 
     static activateOncopy(): void {
@@ -1865,7 +1863,7 @@ export class DocumentAPI {
     // Element - paste event
 
     static #onpaste() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokePaste");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokePaste");
     }
 
     static activateOnpaste(): void {
@@ -1880,7 +1878,7 @@ export class DocumentAPI {
     // Element - cut event
 
     static #oncut() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeCut");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeCut");
     }
 
     static activateOncut(): void {
@@ -1896,7 +1894,7 @@ export class DocumentAPI {
     // Element - transitionstart event
 
     static #ontransitionstart(transitionEvent: TransitionEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeTransitionStart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeTransitionStart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
     }
 
     static activateOntransitionstart(): void {
@@ -1911,7 +1909,7 @@ export class DocumentAPI {
     // Element - transitionend event
 
     static #ontransitionend(transitionEvent: TransitionEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeTransitionEnd", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeTransitionEnd", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
     }
 
     static activateOntransitionend(): void {
@@ -1926,7 +1924,7 @@ export class DocumentAPI {
     // Element - transitionrun event
 
     static #ontransitionrun(transitionEvent: TransitionEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeTransitionRun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeTransitionRun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
     }
 
     static activateOntransitionrun(): void {
@@ -1941,7 +1939,7 @@ export class DocumentAPI {
     // Element - transitioncancel event
 
     static #ontransitioncancel(transitionEvent: TransitionEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeTransitionCancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeTransitionCancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
     }
 
     static activateOntransitioncancel(): void {
@@ -1957,7 +1955,7 @@ export class DocumentAPI {
     // Element - animationstart event
 
     static #onanimationstart(animationEvent: AnimationEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeAnimationStart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeAnimationStart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
     }
 
     static activateOnanimationstart(): void {
@@ -1972,7 +1970,7 @@ export class DocumentAPI {
     // Element - animationend event
 
     static #onanimationend(animationEvent: AnimationEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeAnimationEnd", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeAnimationEnd", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
     }
 
     static activateOnanimationend(): void {
@@ -1987,7 +1985,7 @@ export class DocumentAPI {
     // Element - animationiteration event
 
     static #onanimationiteration(animationEvent: AnimationEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeAnimationIteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeAnimationIteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
     }
 
     static activateOnanimationiteration(): void {
@@ -2002,7 +2000,7 @@ export class DocumentAPI {
     // Element - animationcancel event
 
     static #onanimationcancel(animationEvent: AnimationEvent) {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeAnimationCancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeAnimationCancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement);
     }
 
     static activateOnanimationcancel(): void {
@@ -2018,7 +2016,7 @@ export class DocumentAPI {
     // HTMLMediaElement - canplay event
 
     static #oncanplay() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeCanPlay");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeCanPlay");
     }
 
     static activateOncanplay(): void {
@@ -2033,7 +2031,7 @@ export class DocumentAPI {
     // HTMLMediaElement - canplaythrough event
 
     static #oncanplaythrough() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeCanPlayThrough");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeCanPlayThrough");
     }
 
     static activateOncanplaythrough(): void {
@@ -2048,7 +2046,7 @@ export class DocumentAPI {
     // HTMLMediaElement - playing event
 
     static #onplaying() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokePlaying");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokePlaying");
     }
 
     static activateOnplaying(): void {
@@ -2065,7 +2063,7 @@ export class DocumentAPI {
     // HTMLMediaElement - loadstart event
 
     static #onloadstart() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeLoadStart");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeLoadStart");
     }
 
     static activateOnloadstart(): void {
@@ -2080,7 +2078,7 @@ export class DocumentAPI {
     // HTMLMediaElement - progress event
 
     static #onprogress() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeProgress");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeProgress");
     }
 
     static activateOnprogress(): void {
@@ -2095,7 +2093,7 @@ export class DocumentAPI {
     // HTMLMediaElement - loadeddata event
 
     static #onloadeddata() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeLoadedData");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeLoadedData");
     }
 
     static activateOnloadeddata(): void {
@@ -2110,7 +2108,7 @@ export class DocumentAPI {
     // HTMLMediaElement - loadedmetadata event
 
     static #onloadedmetadata() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeLoadedMetadata");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeLoadedMetadata");
     }
 
     static activateOnloadedmetadata(): void {
@@ -2125,7 +2123,7 @@ export class DocumentAPI {
     // HTMLMediaElement - stalled event
 
     static #onstalled() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeStalled");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeStalled");
     }
 
     static activateOnstalled(): void {
@@ -2140,7 +2138,7 @@ export class DocumentAPI {
     // HTMLMediaElement - suspend event
 
     static #onsuspend() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeSuspend");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeSuspend");
     }
 
     static activateOnsuspend(): void {
@@ -2155,7 +2153,7 @@ export class DocumentAPI {
     // HTMLMediaElement - waiting event
 
     static #onwaiting() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeWaiting");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeWaiting");
     }
 
     static activateOnwaiting(): void {
@@ -2170,7 +2168,7 @@ export class DocumentAPI {
     // HTMLMediaElement - abort event
 
     static #onabort() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeAbort");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeAbort");
     }
 
     static activateOnabort(): void {
@@ -2185,7 +2183,7 @@ export class DocumentAPI {
     // HTMLMediaElement - emptied event
 
     static #onemptied() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeEmptied");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeEmptied");
     }
 
     static activateOnemptied(): void {
@@ -2202,7 +2200,7 @@ export class DocumentAPI {
     // HTMLMediaElement - play event
 
     static #onplay() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokePlay");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokePlay");
     }
 
     static activateOnplay(): void {
@@ -2217,7 +2215,7 @@ export class DocumentAPI {
     // HTMLMediaElement - pause event
 
     static #onpause() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokePause");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokePause");
     }
 
     static activateOnpause(): void {
@@ -2232,7 +2230,7 @@ export class DocumentAPI {
     // HTMLMediaElement - ended event
 
     static #onended() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeEnded");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeEnded");
     }
 
     static activateOnended(): void {
@@ -2247,7 +2245,7 @@ export class DocumentAPI {
     // HTMLMediaElement - seeking event
 
     static #onseeking() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeSeeking");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeSeeking");
     }
 
     static activateOnseeking(): void {
@@ -2262,7 +2260,7 @@ export class DocumentAPI {
     // HTMLMediaElement - seeked event
 
     static #onseeked() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeSeeked");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeSeeked");
     }
 
     static activateOnseeked(): void {
@@ -2277,7 +2275,7 @@ export class DocumentAPI {
     // HTMLMediaElement - timeupdate event
 
     static #ontimeupdate() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeTimeUpdate");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeTimeUpdate");
     }
 
     static activateOntimeupdate(): void {
@@ -2294,7 +2292,7 @@ export class DocumentAPI {
     // HTMLMediaElement - volumechange event
 
     static #onvolumechange() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeVolumeChange");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeVolumeChange");
     }
 
     static activateOnvolumechange(): void {
@@ -2309,7 +2307,7 @@ export class DocumentAPI {
     // HTMLMediaElement - ratechange event
 
     static #onratechange() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeRateChange");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeRateChange");
     }
 
     static activateOnratechange(): void {
@@ -2324,7 +2322,7 @@ export class DocumentAPI {
     // HTMLMediaElement - durationchange event
 
     static #ondurationchange() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeDurationChange");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeDurationChange");
     }
 
     static activateOndurationchange(): void {
@@ -2341,7 +2339,7 @@ export class DocumentAPI {
     // HTMLMediaElement - resize event
 
     static #onresize() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeResize");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeResize");
     }
 
     static activateOnresize(): void {
@@ -2357,7 +2355,7 @@ export class DocumentAPI {
     // HTMLDialogElement - close event
 
     static #onclose() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeClose");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeClose");
     }
 
     static activateOnclose(): void {
@@ -2372,7 +2370,7 @@ export class DocumentAPI {
     // HTMLDialogElement - cancel event
 
     static #oncancel() {
-        return blazorInvokeMethod(DocumentAPI.#eventTrigger, DocumentAPI.#isEventTriggerSync, "InvokeCancel");
+        return BlazorInvoke.method(DocumentAPI.#eventTrigger, "InvokeCancel");
     }
 
     static activateOncancel(): void {

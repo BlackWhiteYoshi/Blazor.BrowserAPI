@@ -1,7 +1,7 @@
 import { HTMLDialogElementAPI } from "../HTMLDialogElement/HTMLDialogElement";
 import { HTMLMediaElementAPI } from "../HTMLMediaElement/HTMLMediaElement";
 import { FileAPI } from "../FileSystem/File/File";
-import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
+import { BlazorInvoke } from "../../Extensions/blazorExtensions";
 
 export class HTMLElementAPI {
     #htmlElement: HTMLElement;
@@ -1191,11 +1191,9 @@ export class HTMLElementAPI {
 
 
     #eventTrigger: DotNet.DotNetObject;
-    #isEventTriggerSync: boolean;
 
-    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
+    initEvents(eventTrigger: DotNet.DotNetObject): void {
         this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
     }
 
 
@@ -1239,7 +1237,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - change event
 
-    #onchange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeChange");
+    #onchange = () => BlazorInvoke.method(this.#eventTrigger, "InvokeChange");
 
     activateOnchange(): void {
         this.#htmlElement.addEventListener("change", this.#onchange);
@@ -1252,7 +1250,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - command event
 
-    #oncommand = (commandEvent: { source: HTMLButtonElement, command: string }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCommand", DotNet.createJSObjectReference(new HTMLElementAPI(commandEvent.source)), commandEvent.command);
+    #oncommand = (commandEvent: { source: HTMLButtonElement, command: string }) => BlazorInvoke.method(this.#eventTrigger, "InvokeCommand", DotNet.createJSObjectReference(new HTMLElementAPI(commandEvent.source)), commandEvent.command);
 
     activateOncommand(): void {
         this.#htmlElement.addEventListener("command", <(commandEvent: Event) => void><unknown>this.#oncommand);
@@ -1265,7 +1263,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - load event
 
-    #onload = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeLoad");
+    #onload = () => BlazorInvoke.method(this.#eventTrigger, "InvokeLoad");
 
     activateOnload(): void {
         this.#htmlElement.addEventListener("load", this.#onload);
@@ -1278,7 +1276,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - error event
 
-    #onerror = (error: Event) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeError", error);
+    #onerror = (error: Event) => BlazorInvoke.method(this.#eventTrigger, "InvokeError", error);
 
     activateOnerror(): void {
         this.#htmlElement.addEventListener("error", this.#onerror);
@@ -1291,7 +1289,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - drag event
 
-    #ondrag = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDrag", ... HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+    #ondrag = (dragEvent: DragEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeDrag", ... HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
 
     activateOndrag(): void {
         this.#htmlElement.addEventListener("drag", this.#ondrag);
@@ -1304,7 +1302,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - dragstart event
 
-    #ondragstart = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragStart", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+    #ondragstart = (dragEvent: DragEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeDragStart", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
 
     activateOndragstart(): void {
         this.#htmlElement.addEventListener("dragstart", this.#ondragstart);
@@ -1317,7 +1315,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - dragend event
 
-    #ondragend = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragEnd", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+    #ondragend = (dragEvent: DragEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeDragEnd", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
 
     activateOndragend(): void {
         this.#htmlElement.addEventListener("dragend", this.#ondragend);
@@ -1330,7 +1328,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - dragenter event
 
-    #ondragenter = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragEnter", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+    #ondragenter = (dragEvent: DragEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeDragEnter", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
 
     activateOndragenter(): void {
         this.#htmlElement.addEventListener("dragenter", this.#ondragenter);
@@ -1343,7 +1341,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - dragleave event
 
-    #ondragleave = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragLeave", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+    #ondragleave = (dragEvent: DragEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeDragLeave", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
 
     activateOndragleave(): void {
         this.#htmlElement.addEventListener("dragleave", this.#ondragleave);
@@ -1356,7 +1354,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - dragover event
 
-    #ondragover = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDragOver", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+    #ondragover = (dragEvent: DragEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeDragOver", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
 
     activateOndragover(): void {
         this.#htmlElement.addEventListener("dragover", this.#ondragover);
@@ -1369,7 +1367,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - drop event
 
-    #ondrop = (dragEvent: DragEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDrop", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+    #ondrop = (dragEvent: DragEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeDrop", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
 
     activateOndrop(): void {
         this.#htmlElement.addEventListener("drop", this.#ondrop);
@@ -1382,7 +1380,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - toggle
 
-    #ontoggle = (toggleEvent: ToggleEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeToggle", toggleEvent.oldState, toggleEvent.newState);
+    #ontoggle = (toggleEvent: ToggleEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeToggle", toggleEvent.oldState, toggleEvent.newState);
 
     activateOntoggle(): void {
         this.#htmlElement.addEventListener("toggle", this.#ontoggle);
@@ -1395,7 +1393,7 @@ export class HTMLElementAPI {
 
     // HTMLElement - beforetoggle
 
-    #onbeforetoggle = (toggleEvent: ToggleEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeBeforeToggle", toggleEvent.oldState, toggleEvent.newState);
+    #onbeforetoggle = (toggleEvent: ToggleEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeBeforeToggle", toggleEvent.oldState, toggleEvent.newState);
 
     activateOnbeforetoggle(): void {
         this.#htmlElement.addEventListener("beforetoggle", this.#onbeforetoggle);
@@ -1409,7 +1407,7 @@ export class HTMLElementAPI {
 
     // Element - input event
 
-    #oninput = (inputEvent: InputEvent | Event) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeInput", ...HTMLElementAPI.#deconstructInputEvent(inputEvent));
+    #oninput = (inputEvent: InputEvent | Event) => BlazorInvoke.method(this.#eventTrigger, "InvokeInput", ...HTMLElementAPI.#deconstructInputEvent(inputEvent));
 
     activateOninput(): void {
         this.#htmlElement.addEventListener("input", this.#oninput);
@@ -1422,7 +1420,7 @@ export class HTMLElementAPI {
 
     // Element - beforeinput event
 
-    #onbeforeinput = (inputEvent: InputEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeBeforeInput", ...HTMLElementAPI.#deconstructInputEvent(inputEvent));
+    #onbeforeinput = (inputEvent: InputEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeBeforeInput", ...HTMLElementAPI.#deconstructInputEvent(inputEvent));
 
     activateOnbeforeinput(): void {
         this.#htmlElement.addEventListener("beforeinput", this.#onbeforeinput);
@@ -1435,7 +1433,7 @@ export class HTMLElementAPI {
 
     // Element - contentvisibilityautostatechange event
 
-    #oncontentvisibilityautostatechange = (event: { skipped: boolean; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeContentVisibilityAutoStateChange", event.skipped);
+    #oncontentvisibilityautostatechange = (event: { skipped: boolean; }) => BlazorInvoke.method(this.#eventTrigger, "InvokeContentVisibilityAutoStateChange", event.skipped);
 
     activateOncontentvisibilityautostatechange(): void {
         this.#htmlElement.addEventListener("contentvisibilityautostatechange", <() => {}>this.#oncontentvisibilityautostatechange);
@@ -1448,7 +1446,7 @@ export class HTMLElementAPI {
 
     // Element - beforematch event
 
-    #onbeforematch = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeBeforeMatch");
+    #onbeforematch = () => BlazorInvoke.method(this.#eventTrigger, "InvokeBeforeMatch");
 
     activateOnbeforematch(): void {
         this.#htmlElement.addEventListener("beforematch", this.#onbeforematch);
@@ -1461,7 +1459,7 @@ export class HTMLElementAPI {
 
     // Element - securitypolicyviolation event
 
-    #onsecuritypolicyviolation = (violationEvent: SecurityPolicyViolationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeSecurityPolicyViolation", {
+    #onsecuritypolicyviolation = (violationEvent: SecurityPolicyViolationEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeSecurityPolicyViolation", {
         blockedURI: violationEvent.blockedURI,
         effectiveDirective: violationEvent.effectiveDirective,
         documentURI: violationEvent.documentURI,
@@ -1486,7 +1484,7 @@ export class HTMLElementAPI {
 
     // Node - selectstart event
 
-    #onselectstart = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeSelectStart");
+    #onselectstart = () => BlazorInvoke.method(this.#eventTrigger, "InvokeSelectStart");
 
     activateOnselectstart(): void {
         this.#htmlElement.addEventListener("selectstart", this.#onselectstart);
@@ -1500,7 +1498,7 @@ export class HTMLElementAPI {
 
     // Element - keydown event
 
-    #onkeydown = (keyboardEvent: KeyboardEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeKeyDown", {
+    #onkeydown = (keyboardEvent: KeyboardEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeKeyDown", {
         key: keyboardEvent.key,
         code: keyboardEvent.code,
         location: keyboardEvent.location,
@@ -1523,7 +1521,7 @@ export class HTMLElementAPI {
 
     // Element - keyup event
 
-    #onkeyup = (keyboardEvent: KeyboardEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeKeyUp", {
+    #onkeyup = (keyboardEvent: KeyboardEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeKeyUp", {
         key: keyboardEvent.key,
         code: keyboardEvent.code,
         location: keyboardEvent.location,
@@ -1547,7 +1545,7 @@ export class HTMLElementAPI {
 
     // Element - click event
 
-    #onclick = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeClick", {
+    #onclick = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeClick", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1577,7 +1575,7 @@ export class HTMLElementAPI {
 
     // Element - dblclick event
 
-    #ondblclick = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeDblClick", {
+    #ondblclick = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeDblClick", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1607,7 +1605,7 @@ export class HTMLElementAPI {
 
     // Element - auxclick event
 
-    #onauxclick = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAuxClick", {
+    #onauxclick = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeAuxClick", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1637,7 +1635,7 @@ export class HTMLElementAPI {
 
     // Element - contextmenu event
 
-    #oncontextmenu = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeContextMenu", {
+    #oncontextmenu = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeContextMenu", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1667,7 +1665,7 @@ export class HTMLElementAPI {
 
     // Element - mousedown event
 
-    #onmousedown = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeMouseDown", {
+    #onmousedown = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeMouseDown", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1697,7 +1695,7 @@ export class HTMLElementAPI {
 
     // Element - mouseup event
 
-    #onmouseup = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeMouseUp", {
+    #onmouseup = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeMouseUp", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1727,7 +1725,7 @@ export class HTMLElementAPI {
 
     // Element - wheel event
 
-    #onwheel = (wheelEvent: WheelEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeWheel", {
+    #onwheel = (wheelEvent: WheelEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeWheel", {
         deltaX: wheelEvent.deltaX,
         deltaY: wheelEvent.deltaY,
         deltaZ: wheelEvent.deltaZ,
@@ -1745,7 +1743,7 @@ export class HTMLElementAPI {
 
     // Element - mousemove event
 
-    #onmousemove = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeMouseMove", {
+    #onmousemove = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeMouseMove", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1775,7 +1773,7 @@ export class HTMLElementAPI {
 
     // Element - mouseover event
 
-    #onmouseover = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeMouseOver", {
+    #onmouseover = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeMouseOver", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1805,7 +1803,7 @@ export class HTMLElementAPI {
 
     // Element - mouseout event
 
-    #onmouseout = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeMouseOut", {
+    #onmouseout = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeMouseOut", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1835,7 +1833,7 @@ export class HTMLElementAPI {
 
     // Element - mouseenter event
 
-    #onmouseenter = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeMouseEnter", {
+    #onmouseenter = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeMouseEnter", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1865,7 +1863,7 @@ export class HTMLElementAPI {
 
     // Element - mouseleave event
 
-    #onmouseleave = (mouseEvent: MouseEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeMouseLeave", {
+    #onmouseleave = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeMouseLeave", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1896,7 +1894,7 @@ export class HTMLElementAPI {
 
     // Element - touchstart event
 
-    #ontouchstart = (touchEvent: TouchEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTouchStart", {
+    #ontouchstart = (touchEvent: TouchEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeTouchStart", {
         touches: HTMLElementAPI.#deconstructTouchList(touchEvent.touches),
         targetTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.targetTouches),
         changedTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.changedTouches),
@@ -1917,7 +1915,7 @@ export class HTMLElementAPI {
 
     // Element - touchend event
 
-    #ontouchend = (touchEvent: TouchEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTouchEnd", {
+    #ontouchend = (touchEvent: TouchEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeTouchEnd", {
         touches: HTMLElementAPI.#deconstructTouchList(touchEvent.touches),
         targetTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.targetTouches),
         changedTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.changedTouches),
@@ -1938,7 +1936,7 @@ export class HTMLElementAPI {
 
     // Element - touchmove event
 
-    #ontouchmove = (touchEvent: TouchEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTouchMove", {
+    #ontouchmove = (touchEvent: TouchEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeTouchMove", {
         touches: HTMLElementAPI.#deconstructTouchList(touchEvent.touches),
         targetTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.targetTouches),
         changedTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.changedTouches),
@@ -1959,7 +1957,7 @@ export class HTMLElementAPI {
 
     // Element - touchcancel event
 
-    #ontouchcancel = (touchEvent: TouchEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTouchCancel", {
+    #ontouchcancel = (touchEvent: TouchEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeTouchCancel", {
         touches: HTMLElementAPI.#deconstructTouchList(touchEvent.touches),
         targetTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.targetTouches),
         changedTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.changedTouches),
@@ -1981,7 +1979,7 @@ export class HTMLElementAPI {
 
     // Element - pointerdown event
 
-    #onpointerdown = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePointerDown", {
+    #onpointerdown = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number }) => BlazorInvoke.method(this.#eventTrigger, "InvokePointerDown", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2024,7 +2022,7 @@ export class HTMLElementAPI {
 
     // Element - pointerup event
 
-    #onpointerup = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePointerUp", {
+    #onpointerup = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokePointerUp", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2067,7 +2065,7 @@ export class HTMLElementAPI {
 
     // Element - pointermove event
 
-    #onpointermove = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePointerMove", {
+    #onpointermove = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokePointerMove", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2110,7 +2108,7 @@ export class HTMLElementAPI {
 
     // Element - pointerover event
 
-    #onpointerover = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePointerOver", {
+    #onpointerover = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokePointerOver", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2153,7 +2151,7 @@ export class HTMLElementAPI {
 
     // Element - pointerout event
 
-    #onpointerout = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePointerOut", {
+    #onpointerout = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokePointerOut", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2196,7 +2194,7 @@ export class HTMLElementAPI {
 
     // Element - pointerenter event
 
-    #onpointerenter = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePointerEnter", {
+    #onpointerenter = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokePointerEnter", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2239,7 +2237,7 @@ export class HTMLElementAPI {
 
     // Element - pointerleave event
 
-    #onpointerleave = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePointerLeave", {
+    #onpointerleave = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokePointerLeave", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2282,7 +2280,7 @@ export class HTMLElementAPI {
 
     // Element - pointercancel event
 
-    #onpointercancel = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePointerCancel", {
+    #onpointercancel = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokePointerCancel", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2325,7 +2323,7 @@ export class HTMLElementAPI {
 
     // Element - pointerrawupdate event
 
-    #onpointerrawupdate = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePointerRawUpdate", {
+    #onpointerrawupdate = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokePointerRawUpdate", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2368,7 +2366,7 @@ export class HTMLElementAPI {
 
     // Element - gotpointercapture event
 
-    #ongotpointercapture = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeGotPointerCapture", {
+    #ongotpointercapture = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokeGotPointerCapture", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2411,7 +2409,7 @@ export class HTMLElementAPI {
 
     // Element - lostpointercapture event
 
-    #onlostpointercapture = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeLostPointerCapture", {
+    #onlostpointercapture = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokeLostPointerCapture", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2455,7 +2453,7 @@ export class HTMLElementAPI {
 
     // Element - scroll event
 
-    #onscroll = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeScroll");
+    #onscroll = () => BlazorInvoke.method(this.#eventTrigger, "InvokeScroll");
 
     activateOnscroll(): void {
         this.#htmlElement.addEventListener("scroll", this.#onscroll);
@@ -2468,7 +2466,7 @@ export class HTMLElementAPI {
 
     // Element - scrollend event
 
-    #onscrollend = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeScrollEnd");
+    #onscrollend = () => BlazorInvoke.method(this.#eventTrigger, "InvokeScrollEnd");
 
     activateOnscrollend(): void {
         this.#htmlElement.addEventListener("scrollend", this.#onscrollend);
@@ -2482,7 +2480,7 @@ export class HTMLElementAPI {
 
     // Element - focus event
 
-    #onfocus = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeFocus");
+    #onfocus = () => BlazorInvoke.method(this.#eventTrigger, "InvokeFocus");
 
     activateOnfocus(): void {
         this.#htmlElement.addEventListener("focus", this.#onfocus);
@@ -2495,7 +2493,7 @@ export class HTMLElementAPI {
 
     // Element - focusin event
 
-    #onfocusin = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeFocusIn");
+    #onfocusin = () => BlazorInvoke.method(this.#eventTrigger, "InvokeFocusIn");
 
     activateOnfocusin(): void {
         this.#htmlElement.addEventListener("focusin", this.#onfocusin);
@@ -2508,7 +2506,7 @@ export class HTMLElementAPI {
 
     // Element - blur event
 
-    #onblur = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeBlur");
+    #onblur = () => BlazorInvoke.method(this.#eventTrigger, "InvokeBlur");
 
     activateOnblur(): void {
         this.#htmlElement.addEventListener("blur", this.#onblur);
@@ -2521,7 +2519,7 @@ export class HTMLElementAPI {
 
     // Element - focusout event
 
-    #onfocusout = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeFocusOut");
+    #onfocusout = () => BlazorInvoke.method(this.#eventTrigger, "InvokeFocusOut");
 
     activateOnfocusout(): void {
         this.#htmlElement.addEventListener("focusout", this.#onfocusout);
@@ -2535,7 +2533,7 @@ export class HTMLElementAPI {
 
     // Element - copy event
 
-    #oncopy = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCopy");
+    #oncopy = () => BlazorInvoke.method(this.#eventTrigger, "InvokeCopy");
 
     activateOncopy(): void {
         this.#htmlElement.addEventListener("copy", this.#oncopy);
@@ -2548,7 +2546,7 @@ export class HTMLElementAPI {
 
     // Element - paste event
 
-    #onpaste = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokePaste");
+    #onpaste = () => BlazorInvoke.method(this.#eventTrigger, "InvokePaste");
 
     activateOnpaste(): void {
         this.#htmlElement.addEventListener("paste", this.#onpaste);
@@ -2561,7 +2559,7 @@ export class HTMLElementAPI {
 
     // Element - cut event
 
-    #oncut = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeCut");
+    #oncut = () => BlazorInvoke.method(this.#eventTrigger, "InvokeCut");
 
     activateOncut(): void {
         this.#htmlElement.addEventListener("cut", this.#oncut);
@@ -2575,7 +2573,7 @@ export class HTMLElementAPI {
 
     // Element - transitionstart event
 
-    #ontransitionstart = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionStart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
+    #ontransitionstart = (transitionEvent: TransitionEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeTransitionStart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
     activateOntransitionstart(): void {
         this.#htmlElement.addEventListener("transitionstart", this.#ontransitionstart);
@@ -2588,7 +2586,7 @@ export class HTMLElementAPI {
 
     // Element - transitionend event
 
-    #ontransitionend = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionEnd", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
+    #ontransitionend = (transitionEvent: TransitionEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeTransitionEnd", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
 
     activateOntransitionend(): void {
         this.#htmlElement.addEventListener("transitionend", this.#ontransitionend);
@@ -2601,7 +2599,7 @@ export class HTMLElementAPI {
 
     // Element - transitionrun event
 
-    #ontransitionrun = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionRun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
+    #ontransitionrun = (transitionEvent: TransitionEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeTransitionRun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
 
     activateOntransitionrun(): void {
         this.#htmlElement.addEventListener("transitionrun", this.#ontransitionrun);
@@ -2614,7 +2612,7 @@ export class HTMLElementAPI {
 
     // Element - transitioncancel event
 
-    #ontransitioncancel = (transitionEvent: TransitionEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeTransitionCancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
+    #ontransitioncancel = (transitionEvent: TransitionEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeTransitionCancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
 
     activateOntransitioncancel(): void {
         this.#htmlElement.addEventListener("transitioncancel", this.#ontransitioncancel);
@@ -2628,7 +2626,7 @@ export class HTMLElementAPI {
 
     // Element - animationstart event
 
-    #onanimationstart = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationStart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+    #onanimationstart = (animationEvent: AnimationEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeAnimationStart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
 
     activateOnanimationstart(): void {
         this.#htmlElement.addEventListener("animationstart", this.#onanimationstart);
@@ -2641,7 +2639,7 @@ export class HTMLElementAPI {
 
     // Element - animationend event
 
-    #onanimationend = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationEnd", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+    #onanimationend = (animationEvent: AnimationEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeAnimationEnd", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
 
     activateOnanimationend(): void {
         this.#htmlElement.addEventListener("animationend", this.#onanimationend);
@@ -2654,7 +2652,7 @@ export class HTMLElementAPI {
 
     // Element - animationiteration event
 
-    #onanimationiteration = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationIteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+    #onanimationiteration = (animationEvent: AnimationEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeAnimationIteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
 
     activateOnanimationiteration(): void {
         this.#htmlElement.addEventListener("animationiteration", this.#onanimationiteration);
@@ -2667,7 +2665,7 @@ export class HTMLElementAPI {
 
     // Element - animationcancel event
 
-    #onanimationcancel = (animationEvent: AnimationEvent) => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeAnimationCancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+    #onanimationcancel = (animationEvent: AnimationEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeAnimationCancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
 
     activateOnanimationcancel(): void {
         this.#htmlElement.addEventListener("animationcancel", this.#onanimationcancel);
@@ -2681,7 +2679,7 @@ export class HTMLElementAPI {
 
     // Element - fullscreenchange event
 
-    #onfullscreenchange = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeFullscreenChange");
+    #onfullscreenchange = () => BlazorInvoke.method(this.#eventTrigger, "InvokeFullscreenChange");
 
     activateOnfullscreenchange(): void {
         this.#htmlElement.addEventListener("fullscreenchange", this.#onfullscreenchange);
@@ -2694,7 +2692,7 @@ export class HTMLElementAPI {
 
     // Element - fullscreenerror event
 
-    #onfullscreenerror = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeFullscreenError");
+    #onfullscreenerror = () => BlazorInvoke.method(this.#eventTrigger, "InvokeFullscreenError");
 
     activateOnfullscreenerror(): void {
         this.#htmlElement.addEventListener("fullscreenerror", this.#onfullscreenerror);

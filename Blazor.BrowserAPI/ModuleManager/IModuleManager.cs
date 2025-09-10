@@ -19,12 +19,6 @@ public interface IModuleManager {
     public Task<IJSObjectReference> LoadModule();
 
 
-    /// <summary>
-    /// Checks if IJSRuntime object is IJSInProcessRuntime.
-    /// </summary>
-    internal bool IsInProcess { get; }
-
-
     internal void InvokeSync(string identifier, object?[]? args = null) => InvokeSync<IJSVoidResult>(identifier, args);
 
     internal TResult InvokeSync<TResult>(string identifier, object?[]? args = null);

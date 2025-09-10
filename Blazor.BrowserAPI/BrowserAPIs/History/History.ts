@@ -1,4 +1,4 @@
-import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
+import { BlazorInvoke } from "../../Extensions/blazorExtensions";
 
 export class HistoryAPI {
     static getLength(): number {
@@ -43,18 +43,16 @@ export class HistoryAPI {
 
 
     static #eventTrigger: DotNet.DotNetObject;
-    static #isEventTriggerSync: boolean;
 
-    static initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
+    static initEvents(eventTrigger: DotNet.DotNetObject): void {
         HistoryAPI.#eventTrigger = eventTrigger;
-        HistoryAPI.#isEventTriggerSync = isEventTriggerSync;
     }
 
 
     // popstate event
 
     static #onpopstate(popStateEvent: PopStateEvent) {
-        return blazorInvokeMethod(HistoryAPI.#eventTrigger, HistoryAPI.#isEventTriggerSync, "InvokePopState", popStateEvent.state);
+        return BlazorInvoke.method(HistoryAPI.#eventTrigger, "InvokePopState", popStateEvent.state);
     }
 
     static activateOnpopstate(): void {

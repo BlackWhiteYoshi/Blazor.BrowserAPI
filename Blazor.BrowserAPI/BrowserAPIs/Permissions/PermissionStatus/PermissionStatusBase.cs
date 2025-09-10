@@ -27,7 +27,7 @@ public abstract class PermissionStatusBase(IJSObjectReference permissionStatusJS
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return permissionStatusJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, permissionStatusJS is IJSInProcessObjectReference]);
+        return permissionStatusJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger]);
     }
 
     /// <summary>

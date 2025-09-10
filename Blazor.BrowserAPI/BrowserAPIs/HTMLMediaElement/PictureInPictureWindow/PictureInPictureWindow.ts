@@ -1,4 +1,4 @@
-import { blazorInvokeMethod } from "../../../Extensions/blazorExtensions";
+import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
 
 export class PictureInPictureWindowAPI {
     #pictureInPictureWindow: PictureInPictureWindow;
@@ -20,17 +20,15 @@ export class PictureInPictureWindowAPI {
     // events
 
     #eventTrigger: DotNet.DotNetObject;
-    #isEventTriggerSync: boolean;
 
-    initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
+    initEvents(eventTrigger: DotNet.DotNetObject): void {
         this.#eventTrigger = eventTrigger;
-        this.#isEventTriggerSync = isEventTriggerSync;
     }
 
 
     // resize event
 
-    #onresize = () => blazorInvokeMethod(this.#eventTrigger, this.#isEventTriggerSync, "InvokeResize");
+    #onresize = () => BlazorInvoke.method(this.#eventTrigger, "InvokeResize");
 
     activateOnresize(): void {
         this.#pictureInPictureWindow.addEventListener("resize", this.#onresize);

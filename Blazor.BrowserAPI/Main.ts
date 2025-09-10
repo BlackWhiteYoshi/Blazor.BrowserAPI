@@ -76,3 +76,7 @@ export { WindowAPI };
 import { WindowManagementAPI } from "./BrowserAPIs/WindowManagement/WindowManagement";
 import { ScreenAPI } from "./BrowserAPIs/WindowManagement/Screen/Screen";
 export { WindowManagementAPI, ScreenAPI };
+
+
+import { BlazorInvoke } from "./Extensions/blazorExtensions";
+BlazorInvoke.init();

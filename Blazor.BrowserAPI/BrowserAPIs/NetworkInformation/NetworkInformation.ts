@@ -1,4 +1,4 @@
-import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
+import { BlazorInvoke } from "../../Extensions/blazorExtensions";
 
 export class NetworkInformationAPI {
     static getOnLine(): boolean {
@@ -35,18 +35,16 @@ export class NetworkInformationAPI {
 
 
     static #eventTrigger: DotNet.DotNetObject;
-    static #isEventTriggerSync: boolean;
 
-    static initEvents(eventTrigger: DotNet.DotNetObject, isEventTriggerSync: boolean): void {
+    static initEvents(eventTrigger: DotNet.DotNetObject): void {
         NetworkInformationAPI.#eventTrigger = eventTrigger;
-        NetworkInformationAPI.#isEventTriggerSync = isEventTriggerSync;
     }
 
 
     // online event
 
     static #ononline() {
-        return blazorInvokeMethod(NetworkInformationAPI.#eventTrigger, NetworkInformationAPI.#isEventTriggerSync, "InvokeOnline");
+        return BlazorInvoke.method(NetworkInformationAPI.#eventTrigger, "InvokeOnline");
     }
 
     static activateOnonline(): void {
@@ -61,7 +59,7 @@ export class NetworkInformationAPI {
     // offline event
 
     static #onoffline() {
-        return blazorInvokeMethod(NetworkInformationAPI.#eventTrigger, NetworkInformationAPI.#isEventTriggerSync, "InvokeOffline");
+        return BlazorInvoke.method(NetworkInformationAPI.#eventTrigger, "InvokeOffline");
     }
 
     static activateOnoffline(): void {
@@ -76,7 +74,7 @@ export class NetworkInformationAPI {
     // change event
 
     static #onchange() {
-        return blazorInvokeMethod(NetworkInformationAPI.#eventTrigger, NetworkInformationAPI.#isEventTriggerSync, "InvokeChange");
+        return BlazorInvoke.method(NetworkInformationAPI.#eventTrigger, "InvokeChange");
     }
 
     static activateOnchange(): void {

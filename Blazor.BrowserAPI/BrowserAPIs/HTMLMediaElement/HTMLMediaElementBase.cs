@@ -102,7 +102,7 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return htmlMediaElement.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, htmlMediaElement is IJSInProcessObjectReference]);
+        return htmlMediaElement.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger]);
     }
 
     /// <summary>

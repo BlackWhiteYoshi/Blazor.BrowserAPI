@@ -1,5 +1,5 @@
 import { HTMLElementAPI } from "../HTMLElement/HTMLElement";
-import { blazorInvokeMethod } from "../../Extensions/blazorExtensions";
+import { BlazorInvoke } from "../../Extensions/blazorExtensions";
 
 export class WindowAPI {
     // Properties

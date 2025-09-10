@@ -38,7 +38,7 @@ public abstract class MediaRecorderBase(IJSObjectReference mediaRecorderJS) {
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return mediaRecorderJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger, mediaRecorderJS is IJSInProcessObjectReference]);
+        return mediaRecorderJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger]);
     }
 
     /// <summary>
