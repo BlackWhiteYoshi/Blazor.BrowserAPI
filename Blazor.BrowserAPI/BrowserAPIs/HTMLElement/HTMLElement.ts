@@ -977,7 +977,7 @@ export class HTMLElementAPI {
     // Node/Element methods - Scroll
 
     scroll(left: number, top: number, behavior: ScrollBehavior | null): void {
-        if (behavior === null)
+        if (!behavior)
             this.#htmlElement.scroll(left, top);
         else
             this.#htmlElement.scroll({ left, top, behavior });
@@ -987,8 +987,11 @@ export class HTMLElementAPI {
         this.scroll(left, top, behavior);
     }
 
-    scrollBy(x: number, y: number): void {
-        this.#htmlElement.scrollBy(x, y);
+    scrollBy(deltaX: number, deltaY: number, behavior: ScrollBehavior | null): void {
+        if (!behavior)
+            this.#htmlElement.scrollBy(deltaX, deltaY);
+        else
+            this.#htmlElement.scrollBy({ left: deltaX, top: deltaY, behavior });
     }
 
     scrollIntoView(block: ScrollLogicalPosition = "start", inline: ScrollLogicalPosition = "nearest", behavior: ScrollBehavior = "auto"): void {

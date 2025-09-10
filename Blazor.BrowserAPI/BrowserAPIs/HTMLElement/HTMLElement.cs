@@ -2728,11 +2728,18 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// Scrolls an element by the given amount.
     /// </summary>
-    /// <param name="x">Specifies the number of pixels along the X axis to scroll the window or element.</param>
-    /// <param name="y">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+    /// <param name="deltaX">Specifies the number of pixels along the X axis to scroll the window or element.</param>
+    /// <param name="deltaY">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+    /// <param name="behavior">
+    /// Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+    /// - "smooth": scrolling should animate smoothly<br />
+    /// - "instant": scrolling should happen instantly in a single jump<br />
+    /// - "auto": scroll behavior is determined by the computed value of scroll-behavior
+    /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask ScrollBy(int x, int y, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("scrollBy", cancellationToken, [x, y]);
+    public async ValueTask ScrollBy(int deltaX, int deltaY, string? behavior = null, CancellationToken cancellationToken = default)
+        => await (await htmlElementTask).InvokeVoidTrySync("scrollBy", cancellationToken, [deltaX, deltaY, behavior]);
 
     /// <summary>
     /// Scrolls the element's ancestor containers such that the element on which <i>scrollIntoView()</i> is called is visible to the user.
