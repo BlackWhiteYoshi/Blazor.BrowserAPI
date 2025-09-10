@@ -163,15 +163,6 @@ public sealed class WindowManagementInProcessTest(PlayWrightFixture playWrightFi
         await Assert.That(result).IsEqualTo("True");
     }
 
-    [Test]
-    public async Task Open() {
-        await ExecuteTest(WindowManagementInProcessGroup.BUTTON_OPEN);
-
-        IPage page = BrowserContext.Pages.First((IPage page) => page.Url.EndsWith("/null"));
-        await Assert.That(page).IsNotNull();
-        await page.CloseAsync();
-    }
-
 
     [Test]
     public async Task GetCurrentScreen() {

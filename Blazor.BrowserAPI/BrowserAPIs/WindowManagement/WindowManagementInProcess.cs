@@ -62,5 +62,6 @@ public sealed class WindowManagementInProcess(IModuleManager moduleManager) : IW
     /// </para>
     /// <para>A null value is treated the same as the empty string ("").</para>
     /// </param>
+    [Obsolete("Will be removed at Release. Use IWindowInProcess.Open() instead.")]
     public void Open(string? url = null, string? target = null, string? features = null) => moduleManager.InvokeSync("WindowManagementAPI.open", [url, target, features]);
 }

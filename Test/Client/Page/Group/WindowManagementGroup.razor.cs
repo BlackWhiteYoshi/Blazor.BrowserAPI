@@ -197,11 +197,6 @@ public sealed partial class WindowManagementGroup : ComponentBase {
         labelOutput = (screenDetails is not null).ToString();
     }
 
-    public const string BUTTON_OPEN = "window-management-open";
-    private async Task Open() {
-        await WindowManagement.Open();
-    }
-
 
     public const string BUTTON_GET_CURRENT_SCREEN_PROPERTY = "window-management-get-current-screen-property";
     private async Task GetCurrentScreen_Property() {

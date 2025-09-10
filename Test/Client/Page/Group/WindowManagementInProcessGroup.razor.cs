@@ -143,11 +143,6 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         labelOutput = (screenDetails is not null).ToString();
     }
 
-    public const string BUTTON_OPEN = "window-management-inprocess-open";
-    private void Open() {
-        WindowManagement.Open();
-    }
-
 
     public const string BUTTON_GET_CURRENT_SCREEN = "window-management-inprocess-get-current-screen";
     private async Task GetCurrentScreen() {

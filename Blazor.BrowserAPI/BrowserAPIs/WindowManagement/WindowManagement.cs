@@ -64,6 +64,7 @@ public sealed class WindowManagement(IModuleManager moduleManager) : IWindowMana
     /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
+    [Obsolete("Will be removed at Release. Use IWindow.Open() instead.")]
     public ValueTask Open(string? url = null, string? target = null, string? features = null, CancellationToken cancellationToken = default)
         => moduleManager.InvokeTrySync("WindowManagementAPI.open", cancellationToken, [url, target, features]);
 }

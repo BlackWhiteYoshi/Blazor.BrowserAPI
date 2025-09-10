@@ -250,15 +250,6 @@ public sealed class WindowManagementTest(PlayWrightFixture playWrightFixture) : 
         await Assert.That(result).IsEqualTo("True");
     }
 
-    [Test]
-    public async Task Open() {
-        await ExecuteTest(WindowManagementGroup.BUTTON_OPEN);
-
-        IPage page = BrowserContext.Pages.First((IPage page) => page.Url.EndsWith("/null"));
-        await Assert.That(page).IsNotNull();
-        await page.CloseAsync();
-    }
-
 
     [Test]
     public async Task GetCurrentScreen_Property() {
