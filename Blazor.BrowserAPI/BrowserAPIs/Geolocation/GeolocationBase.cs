@@ -20,7 +20,7 @@ public abstract class GeolocationBase(IModuleManager moduleManager) {
     /// <param name="errorhandler">callback with parameters int errorCode, string message</param>
     [method: DynamicDependency(nameof(Success))]
     [method: DynamicDependency(nameof(Error))]
-    private protected sealed class Callback(Action<GeolocationCoordinates> successhanlder, Action<int, string>? errorhandler = null) {
+    internal sealed class Callback(Action<GeolocationCoordinates> successhanlder, Action<int, string>? errorhandler = null) {
         public Action<GeolocationCoordinates> SuccessHandler { get; set; } = successhanlder;
         public Action<int, string>? ErrorHandler { get; set; } = errorhandler;
 

@@ -11,7 +11,7 @@ public sealed partial class GeolocationInProcessGroup : ComponentBase {
     private string labelOutput = string.Empty;
 
 
-    private readonly List<int> watchRegistrations = [];
+    private readonly List<GeolocationWatchHandle> watchRegistrations = [];
 
     public const string BUTTON_GET_CURRENT_POSITION = "geolocation-inprocess-get-current-position";
     private void GetCurrentPosition() {
@@ -29,19 +29,19 @@ public sealed partial class GeolocationInProcessGroup : ComponentBase {
 
     public const string BUTTON_WATCH_POSITION = "geolocation-inprocess-watch-position";
     private void WatchPosition() {
-        int watchId = Geolocation.WatchPosition((GeolocationCoordinates geolocationCoordinates) => {
+        GeolocationWatchHandle watchId = Geolocation.WatchPosition((GeolocationCoordinates geolocationCoordinates) => {
             labelOutput = geolocationCoordinates.ToString();
             StateHasChanged();
         });
         watchRegistrations.Add(watchId);
-        labelOutput = $"{watchId}, {watchRegistrations.Count}";
+        labelOutput = $"{watchId.Id}, {watchRegistrations.Count}";
     }
 
     public const string BUTTON_CLEAR_WATCH = "geolocation-inprocess-clear-watch";
     private void ClearWatch() {
-        int watchId = watchRegistrations[^1];
+        GeolocationWatchHandle watchId = watchRegistrations[^1];
         Geolocation.ClearWatch(watchId);
         watchRegistrations.RemoveAt(watchRegistrations.Count - 1);
-        labelOutput = $"watchId: {watchId}, count: {watchRegistrations.Count}";
+        labelOutput = $"watchId: {watchId.Id}, count: {watchRegistrations.Count}";
     }
 }

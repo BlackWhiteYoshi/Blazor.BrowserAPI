@@ -70,12 +70,6 @@ public sealed class GeolocationInProcess(IModuleManager moduleManager) : Geoloca
 
 
     /// <summary>
-    /// Key = int watchId<br />
-    /// Value = DotNetObjectReference&lt;CallbackGeolocation&gt; callbackGeolocation
-    /// </summary>
-    private readonly SortedList<int, DotNetObjectReference<Callback>> watchList = [];
-
-    /// <summary>
     /// Is used to register a handler function that will be called automatically each time the position of the device changes.
     /// You can also, optionally, specify an error handling callback function.
     /// </summary>
@@ -125,11 +119,10 @@ public sealed class GeolocationInProcess(IModuleManager moduleManager) : Geoloca
     /// Default: false.
     /// </param>
     /// <returns>WatchId - can be used to <see cref="ClearWatch">clear</see> this registration.</returns>
-    public int WatchPosition(Action<GeolocationCoordinates> successCallback, Action<int, string>? errorCallback = null, long maximumAge = 0, long timeout = -1, bool enableHighAccuracy = false) {
+    public GeolocationWatchHandle WatchPosition(Action<GeolocationCoordinates> successCallback, Action<int, string>? errorCallback = null, long maximumAge = 0, long timeout = -1, bool enableHighAccuracy = false) {
         DotNetObjectReference<Callback> callbackGeolocation = DotNetObjectReference.Create(new Callback(successCallback, errorCallback));
         int watchId = moduleManager.InvokeSync<int>("GeolocationAPI.watchPosition", [callbackGeolocation, maximumAge, timeout, enableHighAccuracy]);
-        watchList.Add(watchId, callbackGeolocation);
-        return watchId;
+        return new GeolocationWatchHandle(watchId, callbackGeolocation);
     }
 
     /// <summary>
@@ -137,12 +130,8 @@ public sealed class GeolocationInProcess(IModuleManager moduleManager) : Geoloca
     /// </summary>
     /// <param name="watchId">The id of the registration from <see cref="WatchPosition"/></param>
     /// <returns></returns>
-    public void ClearWatch(int watchId) {
-        moduleManager.InvokeSync("GeolocationAPI.clearWatch", [watchId]);
-
-        if (watchList.TryGetValue(watchId, out DotNetObjectReference<Callback>? callbackGeolocation)) {
-            callbackGeolocation.Dispose();
-            watchList.Remove(watchId);
-        }
+    public void ClearWatch(GeolocationWatchHandle geolocationWatchHandle) {
+        moduleManager.InvokeSync("GeolocationAPI.clearWatch", [geolocationWatchHandle.id]);
+        geolocationWatchHandle.callback.Dispose();
     }
 }

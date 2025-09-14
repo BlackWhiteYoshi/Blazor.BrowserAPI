@@ -11,7 +11,7 @@ public sealed partial class GeolocationGroup : ComponentBase {
     private string labelOutput = string.Empty;
 
 
-    private readonly List<int> watchRegistrations = [];
+    private readonly List<GeolocationWatchHandle> watchRegistrations = [];
 
     public const string BUTTON_GET_CURRENT_POSITION = "geolocation-get-current-position";
     private async Task GetCurrentPosition() {
@@ -29,19 +29,19 @@ public sealed partial class GeolocationGroup : ComponentBase {
 
     public const string BUTTON_WATCH_POSITION = "geolocation-watch-position";
     private async Task WatchPosition() {
-        int watchId = await Geolocation.WatchPosition((GeolocationCoordinates geolocationCoordinates) => {
+        GeolocationWatchHandle watchHandle = await Geolocation.WatchPosition((GeolocationCoordinates geolocationCoordinates) => {
             labelOutput = geolocationCoordinates.ToString();
             StateHasChanged();
         });
-        watchRegistrations.Add(watchId);
-        labelOutput = $"{watchId}, {watchRegistrations.Count}";
+        watchRegistrations.Add(watchHandle);
+        labelOutput = $"{watchHandle.Id}, {watchRegistrations.Count}";
     }
 
     public const string BUTTON_CLEAR_WATCH = "geolocation-clear-watch";
     private async Task ClearWatch() {
-        int watchId = watchRegistrations[^1];
+        GeolocationWatchHandle watchId = watchRegistrations[^1];
         await Geolocation.ClearWatch(watchId);
         watchRegistrations.RemoveAt(watchRegistrations.Count - 1);
-        labelOutput = $"watchId: {watchId}, count: {watchRegistrations.Count}";
+        labelOutput = $"watchId: {watchId.Id}, count: {watchRegistrations.Count}";
     }
 }
