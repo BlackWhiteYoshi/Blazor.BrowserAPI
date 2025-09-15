@@ -128,7 +128,7 @@ public sealed class GeolocationInProcess(IModuleManager moduleManager) : Geoloca
     /// <summary>
     /// Is used to unregister location/error monitoring handlers previously installed using <see cref="WatchPosition"/>.
     /// </summary>
-    /// <param name="watchId">The id of the registration from <see cref="WatchPosition"/></param>
+    /// <param name="geolocationWatchHandle">The id of the registration from <see cref="WatchPosition"/></param>
     /// <returns></returns>
     public void ClearWatch(GeolocationWatchHandle geolocationWatchHandle) {
         moduleManager.InvokeSync("GeolocationAPI.clearWatch", [geolocationWatchHandle.id]);

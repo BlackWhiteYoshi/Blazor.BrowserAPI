@@ -1026,7 +1026,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
 
     /// <summary>
     /// <para>Returns a live DOMTokenList collection of the class attributes of the element. This can then be used to manipulate the class list.</para>
-    /// <üara>Using classList is a convenient alternative to accessing an element's list of classes as a space-delimited string via <i>element.className</i>.</üara>
+    /// <para>Using classList is a convenient alternative to accessing an element's list of classes as a space-delimited string via <i>element.className</i>.</para>
     /// </summary>
     public ValueTask<string[]> ClassList => GetClassList(default);
 
@@ -1498,7 +1498,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
 
     /// <summary>
     /// <para>Returns a live HTMLCollection which contains all of the child elements of the element upon which it was called.</para>
-    /// <üara>Element.children includes only element nodes.To get all child nodes, including non-element nodes like text and comment nodes, use Node.childNodes.</üara>
+    /// <para>Element.children includes only element nodes.To get all child nodes, including non-element nodes like text and comment nodes, use Node.childNodes.</para>
     /// </summary>
     public ValueTask<IHTMLElement[]> Children => GetChildren(default);
 

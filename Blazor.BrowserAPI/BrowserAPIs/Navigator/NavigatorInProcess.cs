@@ -255,7 +255,7 @@ public sealed class NavigatorInProcess(IModuleManager moduleManager) : Navigator
     /// </summary>
     /// <remarks>
     /// Note: For use cases that need the ability to send requests with methods other than POST, or to change any request properties, or that need access to the server response,
-    /// instead use the <see cref="IWindowInProcess.Fetch"/> method with <i>keepalive</i> set to true.
+    /// instead use the <see cref="HttpClient"/>.
     /// </remarks>
     /// <param name="url">The URL that will receive the data. Can be relative or absolute.</param>
     /// <param name="data">Contais the data to send.</param>

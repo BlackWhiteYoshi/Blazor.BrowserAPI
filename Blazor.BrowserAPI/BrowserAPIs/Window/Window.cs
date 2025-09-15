@@ -40,7 +40,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <inheritdoc cref="InnerWidth" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<int> GetInnerWidth(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<int>("WindowAPI.getInnerWidth", cancellationToken);
+    public ValueTask<int> GetInnerWidth(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<int>("WindowAPI.getInnerWidth", cancellationToken, [windowJS]);
 
 
     /// <summary>
@@ -52,7 +52,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <inheritdoc cref="InnerHeight" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<int> GetInnerHeight(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<int>("WindowAPI.getInnerHeight", cancellationToken);
+    public ValueTask<int> GetInnerHeight(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<int>("WindowAPI.getInnerHeight", cancellationToken, [windowJS]);
 
 
     /// <summary>
@@ -64,7 +64,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <inheritdoc cref="OuterWidth" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<int> GetOuterWidth(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<int>("WindowAPI.getOuterWidth", cancellationToken);
+    public ValueTask<int> GetOuterWidth(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<int>("WindowAPI.getOuterWidth", cancellationToken, [windowJS]);
 
 
     /// <summary>
@@ -75,7 +75,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <inheritdoc cref="OuterHeight" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<int> GetOuterHeight(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<int>("WindowAPI.getOuterHeight", cancellationToken);
+    public ValueTask<int> GetOuterHeight(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<int>("WindowAPI.getOuterHeight", cancellationToken, [windowJS]);
 
 
     /// <summary>
@@ -93,17 +93,13 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// This is useful when dealing with the difference between rendering on a standard display versus a HiDPI or Retina display,
     /// which use more screen pixels to draw the same objects, resulting in a sharper image.
     /// </para>
-    /// <para>
-    /// You can use <see cref="MatchMedia"/> to check if the value of devicePixelRatio changes (which can happen, for example, if the user drags the window to a display with a different pixel density).
-    /// See <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio#monitoring_screen_resolution_or_zoom_level_changes">the example below</see>.
-    /// </para>
     /// </summary>
     public ValueTask<double> DevicePixelRatio => GetDevicePixelRatio(default);
 
     /// <inheritdoc cref="DevicePixelRatio" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetDevicePixelRatio(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<double>("WindowAPI.getDevicePixelRatio", cancellationToken);
+    public ValueTask<double> GetDevicePixelRatio(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<double>("WindowAPI.getDevicePixelRatio", cancellationToken, [windowJS]);
 
 
 
@@ -117,7 +113,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <inheritdoc cref="ScrollX" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetScrollX(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<double>("WindowAPI.getScrollX", cancellationToken);
+    public ValueTask<double> GetScrollX(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<double>("WindowAPI.getScrollX", cancellationToken, [windowJS]);
 
 
     /// <summary>
@@ -130,7 +126,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <inheritdoc cref="ScrollY" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<double> GetScrollY(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<double>("WindowAPI.getScrollY", cancellationToken);
+    public ValueTask<double> GetScrollY(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<double>("WindowAPI.getScrollY", cancellationToken, [windowJS]);
 
 
     /// <summary>
@@ -141,7 +137,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <inheritdoc cref="ScreenX" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<int> GetScreenX(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<int>("WindowAPI.getScreenX", cancellationToken);
+    public ValueTask<int> GetScreenX(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<int>("WindowAPI.getScreenX", cancellationToken, [windowJS]);
 
 
     /// <summary>
@@ -152,7 +148,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <inheritdoc cref="ScreenY" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<int> GetScreenY(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<int>("WindowAPI.getScreenY", cancellationToken);
+    public ValueTask<int> GetScreenY(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<int>("WindowAPI.getScreenY", cancellationToken, [windowJS]);
 
 
 
@@ -164,7 +160,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <inheritdoc cref="Origin" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetOrigin(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<string>("WindowAPI.getOrigin", cancellationToken);
+    public ValueTask<string> GetOrigin(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<string>("WindowAPI.getOrigin", cancellationToken, [windowJS]);
 
 
     /// <summary>
@@ -182,13 +178,13 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <inheritdoc cref="Name" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<string> GetName(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<string>("WindowAPI.getName", cancellationToken);
+    public ValueTask<string> GetName(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<string>("WindowAPI.getName", cancellationToken, [windowJS]);
 
     /// <inheritdoc cref="Name" />
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask SetName(string value, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("WindowAPI.setName", cancellationToken, [value]);
+    public ValueTask SetName(string value, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("WindowAPI.setName", cancellationToken, [windowJS, value]);
 
 
 
@@ -200,7 +196,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <inheritdoc cref="Closed" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<bool> GetClosed(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<bool>("WindowAPI.getClosed", cancellationToken);
+    public ValueTask<bool> GetClosed(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<bool>("WindowAPI.getClosed", cancellationToken, [windowJS]);
 
 
     /// <summary>
@@ -217,7 +213,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <inheritdoc cref="Credentialless" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<bool> GetCredentialless(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<bool>("WindowAPI.getCredentialless", cancellationToken);
+    public ValueTask<bool> GetCredentialless(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<bool>("WindowAPI.getCredentialless", cancellationToken, [windowJS]);
 
 
     /// <summary>
@@ -235,7 +231,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <inheritdoc cref="CrossOriginIsolated" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<bool> GetCrossOriginIsolated(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<bool>("WindowAPI.getCrossOriginIsolated", cancellationToken);
+    public ValueTask<bool> GetCrossOriginIsolated(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<bool>("WindowAPI.getCrossOriginIsolated", cancellationToken, [windowJS]);
 
 
     /// <summary>
@@ -246,7 +242,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <inheritdoc cref="IsSecureContext" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<bool> GetIsSecureContext(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<bool>("WindowAPI.getIsSecureContext", cancellationToken);
+    public ValueTask<bool> GetIsSecureContext(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<bool>("WindowAPI.getIsSecureContext", cancellationToken, [windowJS]);
 
 
     /// <summary>
@@ -261,7 +257,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <inheritdoc cref="OriginAgentCluster" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<bool> GetOriginAgentCluster(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<bool>("WindowAPI.getOriginAgentCluster", cancellationToken);
+    public ValueTask<bool> GetOriginAgentCluster(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<bool>("WindowAPI.getOriginAgentCluster", cancellationToken, [windowJS]);
 
 
     /// <summary>
@@ -274,7 +270,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <inheritdoc cref="Menubar" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<bool> GetMenubar(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<bool>("WindowAPI.getMenubar", cancellationToken);
+    public ValueTask<bool> GetMenubar(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<bool>("WindowAPI.getMenubar", cancellationToken, [windowJS]);
 
 
 
@@ -287,10 +283,532 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IHTMLElement?> GetFrameElement(CancellationToken cancellationToken) {
-        IJSObjectReference?[] singleReference = await moduleManager.InvokeTrySync<IJSObjectReference?[]>("WindowAPI.getFrameElement", cancellationToken);
+        IJSObjectReference?[] singleReference = await moduleManager.InvokeTrySync<IJSObjectReference?[]>("WindowAPI.getFrameElement", cancellationToken, [windowJS]);
         if (singleReference[0] is IJSObjectReference element)
             return new HTMLElement(Task.FromResult(element));
         else
             return null;
     }
+
+
+
+    // Methods
+
+    /// <summary>
+    /// Loads a specified resource into a new or existing browsing context (that is, a tab, a window, or an iframe) under a specified name.
+    /// </summary>
+    /// <param name="url">
+    /// A string indicating the URL or path of the resource to be loaded.
+    /// If an empty string ("") is specified or this parameter is omitted, a blank page is opened into the targeted browsing context.
+    /// </param>
+    /// <param name="target">
+    /// <para>
+    /// A string, without whitespace, specifying the name of the browsing context the resource is being loaded into.<br />
+    /// If the name doesn't identify an existing context, a new context is created and given the specified name.<br />
+    /// The special target keywords, "<i>_self</i>", "<i>_blank</i>" (default), "<i>_parent</i>", "<i>_top</i>", and "<i>_unfencedTop</i>" can also be used.<br />
+    /// "<i>_unfencedTop</i>" is only relevant to fenced frames.
+    /// </para>
+    /// <para>This name can be used as the target attribute of &lt;a&gt; or &lt;form&gt; elements.</para>
+    /// </param>
+    /// <param name="features">
+    /// <para>
+    /// A string containing a comma-separated list of window features in the form <i>name=value</i>.
+    /// Boolean values can be set to true using one of: <i>name</i>, <i>name=yes</i>, <i>name=true</i>, or <i>name=n</i> where n is any non-zero integer.
+    /// These features include options such as the window's default size and position, whether or not to open a minimal popup window, and so forth.
+    /// The following options are supported:</para>
+    /// <para>
+    /// - "attributionsrc": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
+    /// - "popup": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
+    /// - "width" or "innerWidth": Specifies the width of the content area, including scrollbars. The minimum required value is 100.<br />
+    /// - "height" or "innerHeight": Specifies the height of the content area, including scrollbars. The minimum required value is 100.<br />
+    /// - "left" or "screenX": Specifies the distance in pixels from the left side of the work area as defined by the user's operating system where the new window will be generated.<br />
+    /// - "top" or "screenY": Specifies the distance in pixels from the top side of the work area as defined by the user's operating system where the new window will be generated.<br />
+    /// - "noopener": If this feature is set, the new window will not have access to the originating window via Window.opener and returns null. When noopener is used, non-empty target names, other than <i>_top</i>, <i>_self</i>, and <i>_parent</i>, are treated like <i>_blank</i> in terms of deciding whether to open a new browsing context.<br />
+    /// - "noreferrer": If this feature is set, the browser will omit the Referer header, as well as set noopener to true. See rel="noreferrer" for more information.
+    /// </para>
+    /// <para>A null value is treated the same as the empty string ("").</para>
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<IWindow?> Open(string? url = null, string? target = null, string? features = null, CancellationToken cancellationToken = default) {
+        IJSObjectReference?[] singleReference = await moduleManager.InvokeTrySync<IJSObjectReference?[]>("WindowAPI.open", cancellationToken, [windowJS, url, target, features]);
+        if (singleReference[0] is IJSObjectReference window)
+            return new Window(moduleManager) { windowJS = window };
+        else
+            return null;
+    }
+
+    /// <summary>
+    /// <para>Closes the current window, or the window on which it was called.</para>
+    /// <para>
+    /// Windows are script-closable if they were created by web content. This generally includes:<br/>
+    /// - Windows opened using <see cref="Open"/><br/>
+    /// - Windows opened via web content, such as links (&lt;a target="_blank"&gt;) or forms (&lt;form target="_blank"&gt;), without user modifier actions
+    /// </para>
+    /// <para>
+    /// Windows opened by browser UI actions — such as right-click → Open in new tab, Ctrl+Click, Shift+Click, or middle-click — are often not script-closable.
+    /// They may only be closed if they have not been navigated (history length remains 1).
+    /// Calling close() otherwise typically shows a console warning: Scripts may not close windows that were not opened by script.
+    /// </para>
+    /// <para>Note also that close() has no effect when called on Window objects returned by <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/contentWindow">HTMLIFrameElement.contentWindow</see>.</para>
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask Close(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("WindowAPI.close", cancellationToken, [windowJS]);
+
+    /// <summary>
+    /// <para>Stops further resource loading in the current browsing context, equivalent to the stop button in the browser.</para>
+    /// <para>Because of how scripts are executed, this method cannot interrupt its parent document's loading, but it will stop its images, new windows, and other still-loading objects.</para>
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask Stop(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("WindowAPI.stop", cancellationToken, [windowJS]);
+
+    /// <summary>
+    /// Makes a request to bring the window to the front. It may fail due to user settings and the window isn't guaranteed to be frontmost before this method returns.
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask Focus(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("WindowAPI.focus", cancellationToken, [windowJS]);
+
+    /// <summary>
+    /// <para>Opens the print dialog to print the current document.</para>
+    /// <para>If the document is still loading when this function is called, then the document will finish loading before opening the print dialog.</para>
+    /// <para>This method will block while the print dialog is open.</para>
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask Print(CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("WindowAPI.print", cancellationToken, [windowJS]);
+
+    /// <summary>
+    /// <para>May be used to report errors to the console or event handlers of global scopes, emulating an uncaught JavaScript exception.</para>
+    /// <para>
+    /// This feature is primarily intended for custom event-dispatching or callback-manipulating libraries.
+    /// Libraries can use this feature to catch errors in callback code and re-throw them to the top level handler.
+    /// This ensures that an exception in one callback will not prevent others from being handled,
+    /// while at the same time ensuring that stack trace information is still readily available for debugging at the top level.
+    /// </para>
+    /// </summary>
+    /// <param name="error">An error object such as a TypeError.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask ReportError(object error, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("WindowAPI.reportError", cancellationToken, [windowJS, error]);
+
+    /// <summary>
+    /// <para>Instructs the browser to display a dialog with an optional message prompting the user to input some text, and to wait until the user either submits the text or cancels the dialog.</para>
+    /// <para>Under some conditions (when the user switches tabs, for example) the browser may not display a dialog, or may not wait for the user to submit text or to cancel the dialog.</para>
+    /// </summary>
+    /// <param name="message">A string of text to display to the user. Can be omitted if there is nothing to show in the prompt window.</param>
+    /// <param name="defaultValue">A string containing the default value displayed in the text input field.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>A string containing the text entered by the user, or null.</returns>
+    public ValueTask<string?> Prompt(string? message = null, string? defaultValue = null, CancellationToken cancellationToken = default)
+        => moduleManager.InvokeTrySync<string?>("WindowAPI.prompt", cancellationToken, [windowJS, message, defaultValue]);
+
+    /// <summary>
+    /// <para>Instructs the browser to display a dialog with an optional message, and to wait until the user either confirms or cancels the dialog.</para>
+    /// <para>Under some conditions — for example, when the user switches tabs — the browser may not actually display a dialog, or may not wait for the user to confirm or cancel the dialog.</para>
+    /// </summary>
+    /// <param name="message">A string you want to display in the confirmation dialog.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Whether OK (true) or Cancel (false) was selected. If a browser is ignoring in-page dialogs, then the returned value is always false.</returns>
+    public ValueTask<bool> Confirm(string? message = null, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync<bool>("WindowAPI.confirm", cancellationToken, [windowJS, message]);
+
+    /// <summary>
+    /// <para>Instructs the browser to display a dialog with an optional message, and to wait until the user dismisses the dialog.</para>
+    /// <para>Under some conditions — for example, when the user switches tabs — the browser may not actually display a dialog, or may not wait for the user to dismiss the dialog.</para>
+    /// </summary>
+    /// <param name="message">A string you want to display in the alert dialog, or, alternatively, an object that is converted into a string and displayed.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask Alert(string? message = null, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("WindowAPI.alert", cancellationToken, [windowJS, message]);
+
+
+    /// <summary>
+    /// Moves the current window by a specified amount.
+    /// </summary>
+    /// <remarks>Note: This function moves the window relative to its current location. In contrast, <see cref="MoveTo"/> moves the window to an absolute location.</remarks>
+    /// <param name="deltaX">The amount of pixels to move the window horizontally. Positive values are to the right, while negative values are to the left.</param>
+    /// <param name="deltaY">The amount of pixels to move the window vertically. Positive values are down, while negative values are up.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask MoveBy(int deltaX, int deltaY, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("WindowAPI.moveBy", cancellationToken, [windowJS, deltaX, deltaY]);
+
+    /// <summary>
+    /// Moves the current window to the specified coordinates.
+    /// </summary>
+    /// <remarks>Note: This function moves the window to an absolute location. In contrast, <see cref="MoveBy"/> moves the window relative to its current location.</remarks>
+    /// <param name="x">The horizontal coordinate to be moved to.</param>
+    /// <param name="y">The vertical coordinate to be moved to.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask MoveTo(int x, int y, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("WindowAPI.moveTo", cancellationToken, [windowJS, x, y]);
+
+    /// <summary>
+    /// Resizes the current window by a specified amount.
+    /// </summary>
+    /// <param name="xDelta">The number of pixels to grow/shrink the window horizontally.</param>
+    /// <param name="yDelta">The number of pixels to grow/shrink the window vertically.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask ResizeBy(int xDelta, int yDelta, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("WindowAPI.resizeBy", cancellationToken, [windowJS, xDelta, yDelta]);
+
+    /// <summary>
+    /// Dynamically resizes the window.
+    /// </summary>
+    /// <param name="width">An integer representing the new <see cref="OuterWidth"/> in pixels (including scroll bars, title bars, etc.).</param>
+    /// <param name="height">An integer value representing the new <see cref="OuterHeight"/> in pixels (including scroll bars, title bars, etc.).</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask ResizeTo(int width, int height, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("WindowAPI.resizeTo", cancellationToken, [windowJS, width, height]);
+
+    /// <summary>
+    /// Scrolls the window to a particular place in the document.
+    /// </summary>
+    /// <param name="left">Specifies the number of pixels along the X axis to scroll the window or element.</param>
+    /// <param name="top">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+    /// <param name="behavior">
+    /// Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+    /// - "smooth": scrolling should animate smoothly<br />
+    /// - "instant": scrolling should happen instantly in a single jump<br />
+    /// - "auto": scroll behavior is determined by the computed value of scroll-behavior
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask Scroll(int left, int top, string? behavior = null, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("WindowAPI.scroll", cancellationToken, [windowJS, left, top, behavior]);
+
+    /// <summary>
+    /// Scrolls to a particular set of coordinates in the document.
+    /// </summary>
+    /// <param name="left">Specifies the number of pixels along the X axis to scroll the window or element.</param>
+    /// <param name="top">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+    /// <param name="behavior">
+    /// Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+    /// - "smooth": scrolling should animate smoothly<br />
+    /// - "instant": scrolling should happen instantly in a single jump<br />
+    /// - "auto": scroll behavior is determined by the computed value of scroll-behavior
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask ScrollTo(int left, int top, string? behavior = null, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("WindowAPI.scrollTo", cancellationToken, [windowJS, left, top, behavior]);
+
+    /// <summary>
+    /// Scrolls the document in the window by the given amount.
+    /// </summary>
+    /// <param name="deltaX">The horizontal pixel value that you want to scroll by.</param>
+    /// <param name="deltaY">The vertical pixel value that you want to scroll by.</param>
+    /// <param name="behavior">
+    /// Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+    /// - "smooth": scrolling should animate smoothly<br />
+    /// - "instant": scrolling should happen instantly in a single jump<br />
+    /// - "auto": scroll behavior is determined by the computed value of scroll-behavior
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask ScrollBy(int deltaX, int deltaY, string? behavior = null, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("WindowAPI.scrollBy", cancellationToken, [windowJS, deltaX, deltaY, behavior]);
+
+
+    /// <summary>
+    /// Sets a timer which executes a function or specified piece of code once the timer expires.
+    /// </summary>
+    /// <param name="handler">A function to be executed after the timer expires.</param>
+    /// <param name="delay">
+    /// <para>
+    /// The time, in milliseconds that the timer should wait before the specified function or code is executed.
+    /// If this parameter is omitted, a value of 0 is used, meaning execute "immediately", or more accurately, the next event cycle.
+    /// </para>
+    /// <para>Note that in either case, the actual delay may be longer than intended; see Reasons for delays longer than specified below.</para>
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>
+    /// <para>
+    /// A value that uniquely identifies the timer created by the call.
+    /// This identifier, often referred to as a "timeout ID", can be passed to <see cref="ClearTimeout"/> to cancel the timer.
+    /// </para>
+    /// <para>
+    /// Within the same global environment (e.g., a specific window or worker) the timeout ID is guaranteed not to be reused for any new timer as long as the original timer remains active.
+    /// However, separate global environments maintain their own independent pools of timer IDs.
+    /// </para>
+    /// </returns>
+    public async ValueTask<TimeoutHandle> SetTimeout(Action handler, int delay, CancellationToken cancellationToken = default) {
+        DotNetObjectReference<VoidCallback> voidCallback = DotNetObjectReference.Create(new VoidCallback(null!));
+        voidCallback.Value.HandlerValue = () => {
+            handler();
+            voidCallback.Dispose();
+        };
+
+        int id = await moduleManager.InvokeTrySync<int>("WindowAPI.setTimeout", cancellationToken, [windowJS, voidCallback, delay]);
+        return new TimeoutHandle(id, voidCallback);
+    }
+
+    /// <summary>
+    /// <para>Cancels a timeout previously established by calling <see cref="SetTimeout"/>.</para>
+    /// <para>If the parameter provided does not identify a previously established action, this method does nothing.</para>
+    /// </summary>
+    /// <remarks>
+    /// It's worth noting that the pool of IDs used by <see cref="SetTimeout"/> and <see cref="SetInterval"/> are shared,
+    /// which means you can technically use <see cref="ClearTimeout"/> and <see cref="ClearInterval"/> interchangeably.
+    /// However, for clarity, you should avoid doing so.
+    /// </remarks>
+    /// <param name="timeoutHandle">The identifier of the timeout you want to cancel. This ID was returned by the corresponding call to <see cref="SetTimeout"/>.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask ClearTimeout(TimeoutHandle timeoutHandle, CancellationToken cancellationToken = default) {
+        await moduleManager.InvokeTrySync("WindowAPI.clearTimeout", cancellationToken, [windowJS, timeoutHandle.id]);
+        timeoutHandle.callback.Dispose();
+    }
+
+    /// <summary>
+    /// Repeatedly calls a function or executes a code snippet, with a fixed time delay between each call.
+    /// </summary>
+    /// <param name="handler">A function to be executed every delay milliseconds. The first execution happens after delay milliseconds.</param>
+    /// <param name="delay">
+    /// The time, in milliseconds (thousandths of a second), the timer should delay in between executions of the specified function or code.
+    /// Defaults to 0 if not specified.
+    /// See <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval#delay_restrictions">Delay restrictions</see> below for details on the permitted range of delay values.
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>
+    /// <para>
+    /// A value that uniquely identifies the interval timer created by the call.
+    /// This identifier, often referred to as an "interval ID", can be passed to <see cref="ClearInterval"/> to stop the repeated execution of the specified function.
+    /// </para>
+    /// <para>
+    /// Within the same global environment (e.g., a particular window or worker), the interval ID is ensured to remain unique and is not reused for any new interval timer as long as the original timer is still active.
+    /// However, different global environments maintain their own independent pools of interval IDs.
+    /// </para>
+    /// </returns>
+    public async ValueTask<IntervalHandle> SetInterval(Action handler, int delay, CancellationToken cancellationToken = default) {
+        DotNetObjectReference<VoidCallback> voidCallback = DotNetObjectReference.Create(new VoidCallback(handler));
+        int id = await moduleManager.InvokeTrySync<int>("WindowAPI.setInterval", cancellationToken, [windowJS, voidCallback, delay]);
+        return new IntervalHandle(id, voidCallback);
+    }
+
+    /// <summary>
+    /// Cancels a timed, repeating action which was previously established by a call to <see cref="SetInterval"/>.
+    /// If the parameter provided does not identify a previously established action, this method does nothing.
+    /// </summary>
+    /// <remarks>
+    /// It's worth noting that the pool of IDs used by <see cref="SetInterval"/> and <see cref="SetTimeout"/> are shared,
+    /// which means you can technically use <see cref="ClearInterval"/> and <see cref="ClearTimeout"/> interchangeably.
+    /// However, for clarity, you should avoid doing so.
+    /// </remarks>
+    /// <param name="intervalHandle">The identifier of the repeated action you want to cancel. This ID was returned by the corresponding call to <see cref="SetInterval"/>.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask ClearInterval(IntervalHandle intervalHandle, CancellationToken cancellationToken = default) {
+        await moduleManager.InvokeTrySync("WindowAPI.clearInterval", cancellationToken, [windowJS, intervalHandle.id]);
+        intervalHandle.callback.Dispose();
+    }
+
+    /// <summary>
+    /// <para>Tells the browser you wish to perform an animation. It requests the browser to call a user-supplied callback function before the next repaint.</para>
+    /// <para>
+    /// The frequency of calls to the callback function will generally match the display refresh rate.
+    /// The most common refresh rate is 60hz, (60 cycles/frames per second), though 75hz, 120hz, and 144hz are also widely used.
+    /// requestAnimationFrame() calls are paused in most browsers when running in background tabs or hidden &lt;iframe&gt;s, in order to improve performance and battery life.
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// <para>Note: Your callback function must call requestAnimationFrame() again if you want to animate another frame. requestAnimationFrame() is one-shot.</para>
+    /// <para>
+    /// Warning: Be sure always to use the first argument (or some other method for getting the current time) to calculate how much the animation will progress in a frame
+    /// — otherwise, the animation will run faster on high refresh-rate screens.
+    /// For ways to do that, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame#examples">the examples below</see>.
+    /// </para>
+    /// </remarks>
+    /// <param name="handler">
+    /// <para>
+    /// The function to call when it's time to update your animation for the next repaint. This callback function is passed a single argument:
+    /// </para>
+    /// - timestamp:<br />
+    /// A DOMHighResTimeStamp indicating the end time of the previous frame's rendering (based on the number of milliseconds since time origin).
+    /// The timestamp is a decimal number, in milliseconds, but with a minimal precision of 1 millisecond.
+    /// For Window objects (not Workers), it is equal to document.timeline.currentTime.
+    /// This timestamp is shared between all windows that run on the same agent (all same-origin windows and, more importantly, same-origin iframes)
+    /// — which allows synchronizing animations across multiple requestAnimationFrame callbacks.
+    /// The timestamp value is also similar to calling performance.now() at the start of the callback function, but it is never the same value.<br />
+    /// When multiple callbacks queued by requestAnimationFrame() begin to fire in a single frame,
+    /// each receives the same timestamp even though time has passed during the computation of every previous callback's workload.
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>
+    /// The request ID, that uniquely identifies the entry in the callback list.
+    /// You should not make any assumptions about its value.
+    /// You can pass this value to <see cref="CancelAnimationFrame"/> to cancel the refresh callback request.
+    /// </returns>
+    public async ValueTask<AnimationFrameHandle> RequestAnimationFrame(Action<double> handler, CancellationToken cancellationToken = default) {
+        DotNetObjectReference<AnimationFrameCallback> animationFrameCallback = DotNetObjectReference.Create(new AnimationFrameCallback(null!));
+        animationFrameCallback.Value.HandlerValue = (double timeStamp) => {
+            handler(timeStamp);
+            animationFrameCallback.Dispose();
+        };
+
+        ulong id = await moduleManager.InvokeTrySync<ulong>("WindowAPI.requestAnimationFrame", cancellationToken, [windowJS, animationFrameCallback]);
+        return new AnimationFrameHandle(id, animationFrameCallback);
+    }
+
+    /// <summary>
+    /// Cancels an animation frame request previously scheduled through a call to <see cref="RequestAnimationFrame"/>.
+    /// </summary>
+    /// <param name="animationFrameHandle">The ID value returned by the call to <see cref="RequestAnimationFrame"/> that requested the callback.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask CancelAnimationFrame(AnimationFrameHandle animationFrameHandle, CancellationToken cancellationToken = default) {
+        await moduleManager.InvokeTrySync("WindowAPI.cancelAnimationFrame", cancellationToken, [windowJS, animationFrameHandle.id]);
+        animationFrameHandle.callback.Dispose();
+    }
+
+    /// <summary>
+    /// <para>
+    /// Queues a function to be called during a browser's idle periods.
+    /// This enables developers to perform background and low priority work on the main thread, without impacting latency-critical events such as animation and input response.
+    /// Functions are generally called in first-in-first-out order;
+    /// however, callbacks which have a timeout specified may be called out-of-order if necessary in order to run them before the timeout elapses.
+    /// </para>
+    /// <para>You can call <see cref="RequestIdleCallback"/> within an idle callback function to schedule another callback to take place no sooner than the next pass through the event loop.</para>
+    /// </summary>
+    /// <param name="handler">
+    /// A reference to a function that should be called in the near future, when the event loop is idle.
+    /// The callback function is passed an IdleDeadline object describing the amount of time available and whether or not the callback has been run because the timeout period expired.
+    /// </param>
+    /// <param name="timeout">
+    /// <para>
+    /// If the number of milliseconds represented by this parameter has elapsed and the callback has not already been called,
+    /// then a task to execute the callback is queued in the event loop (even if doing so risks causing a negative performance impact).
+    /// timeout must be a positive value or it is ignored.
+    /// </para>
+    /// <para>Note: A timeout option is strongly recommended for required work, as otherwise it's possible multiple seconds will elapse before the callback is fired.</para>
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>An ID which can be used to cancel the callback by passing it into the <see cref="CancelIdleCallback"/> method.</returns>
+    public async ValueTask<IdleCallbackHandle> RequestIdleCallback(Action handler, int? timeout = null, CancellationToken cancellationToken = default) {
+        DotNetObjectReference<VoidCallback> voidCallback = DotNetObjectReference.Create(new VoidCallback(null!));
+        voidCallback.Value.HandlerValue = () => {
+            handler();
+            voidCallback.Dispose();
+        };
+
+        ulong id = await moduleManager.InvokeTrySync<ulong>("WindowAPI.requestIdleCallback", cancellationToken, [windowJS, voidCallback, timeout]);
+        return new IdleCallbackHandle(id, voidCallback);
+    }
+
+    /// <summary>
+    /// Cancels a callback previously scheduled with <see cref="RequestIdleCallback"/>.
+    /// </summary>
+    /// <param name="idleCallbackHandle">The ID value returned by <see cref="RequestIdleCallback"/> when the callback was established.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask CancelIdleCallback(IdleCallbackHandle idleCallbackHandle, CancellationToken cancellationToken = default) {
+        await moduleManager.InvokeTrySync("WindowAPI.cancelIdleCallback", cancellationToken, [windowJS, idleCallbackHandle.Id]);
+        idleCallbackHandle.callback.Dispose();
+    }
+
+    /// <summary>
+    /// <para>Queues a microtask to be executed at a safe time prior to control returning to the browser's event loop.</para>
+    /// <para>
+    /// The microtask is a short function which will run after the current task has completed its work
+    /// and when there is no other code waiting to be run before control of the execution context is returned to the browser's event loop.
+    /// </para>
+    /// <para>
+    /// This lets your code run without interfering with any other, potentially higher priority, code that is pending,
+    /// but before the browser regains control over the execution context, potentially depending on work you need to complete.
+    /// You can learn more about how to use microtasks and why you might choose to do so in our <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide">microtask guide</see>.
+    /// </para>
+    /// <para>
+    /// The importance of microtasks comes in its ability to perform tasks asynchronously but in a specific order.
+    /// See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide">Using microtasks in JavaScript with queueMicrotask()</see> for more details.
+    /// </para>
+    /// <para>Microtasks are especially useful for libraries and frameworks that need to perform final cleanup or other just-before-rendering tasks.</para>
+    /// </summary>
+    /// <param name="handler">
+    /// A function to be executed when the browser engine determines it is safe to call your code.
+    /// Enqueued microtasks are executed after all pending tasks have completed but before yielding control to the browser's event loop.
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask QueueMicrotask(Action handler, CancellationToken cancellationToken = default) {
+        DotNetObjectReference<VoidCallback> voidCallback = DotNetObjectReference.Create(new VoidCallback(null!));
+        voidCallback.Value.HandlerValue = () => {
+            handler();
+            voidCallback.Dispose();
+        };
+
+        return moduleManager.InvokeTrySync("WindowAPI.queueMicrotask", cancellationToken, [windowJS, voidCallback]);
+    }
+
+
+    /// <summary>
+    /// Decodes a string of data which has been encoded using Base64 encoding.
+    /// You can use the <see cref="Btoa"/> to encode and transmit data which may otherwise cause communication problems, then transmit it and use this method to decode the data again.
+    /// For example, you can encode, transmit, and decode control characters such as ASCII values 0 through 31.
+    /// </summary>
+    /// <param name="base64">A base64-encoded string, using the alphabet produced by <see cref="Btoa"/>.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>
+    /// A binary string containing raw bytes decoded from the input.
+    /// Strings in JavaScript are encoded as UTF-16, so this means each character must have a code point less than 256, representing one byte of data.
+    /// </returns>
+    public ValueTask<string> Atob(string base64, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync<string>("WindowAPI.atob", cancellationToken, [windowJS, base64]);
+
+    /// <summary>
+    /// <para>Creates a Base64-encoded ASCII string from a binary string (i.e., a string in which each character in the string is treated as a byte of binary data).</para>
+    /// <para>
+    /// You can use this method to encode data which may otherwise cause communication problems, transmit it, then use the <see cref="Atob"/> method to decode the data again.
+    /// For example, you can encode control characters such as ASCII values 0 through 31.
+    /// </para>
+    /// </summary>
+    /// <param name="ascii">The binary string to encode. Strings in JavaScript are encoded as UTF-16, so this means each character must have a code point less than 256, representing one byte of data.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>An ASCII string containing the Base64 representation of the input.</returns>
+    public ValueTask<string> Btoa(string ascii, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync<string>("WindowAPI.btoa", cancellationToken, [windowJS, ascii]);
+
+    /// <summary>
+    /// <para>
+    /// Safely enables cross-origin communication between Window objects;
+    /// e.g., between a page and a pop-up that it spawned, or between a page and an iframe embedded within it.
+    /// </para>
+    /// <para>
+    /// Normally, scripts on different pages are allowed to access each other if and only if the pages they originate from share the same origin (also known as the "same-origin policy").
+    /// window.postMessage() provides a controlled mechanism to securely circumvent this restriction (if used properly).
+    /// </para>
+    /// <para>
+    /// Furthermore, an accessing script must have obtained the window object of the accessed document beforehand.
+    /// This can occur through methods such as <see cref="Open"/> for popups or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/contentWindow">iframe.contentWindow</see> for iframes.
+    /// </para>
+    /// <para>
+    /// Broadly, one window may obtain a reference to another (e.g., via targetWindow = window.opener), and then dispatch a MessageEvent on it with targetWindow.postMessage().
+    /// The receiving window is then free to handle this event as needed.
+    /// The arguments passed to window.postMessage() (i.e., the "message") are exposed to the receiving window through the <see cref="OnMessage">event object</see>.
+    /// </para>
+    /// </summary>
+    /// <param name="message">
+    /// Data to be dispatched to the other window.
+    /// The data is serialized using the <see cref="StructuredClone">structured clone algorithm</see>.
+    /// This means you can pass a broad variety of data objects safely to the destination window without having to serialize them yourself.
+    /// </param>
+    /// <param name="targetOrigin">
+    /// <para>
+    /// Specifies the origin the recipient window must have in order to receive the event.
+    /// In order for the event to be dispatched, the origin must match exactly (including scheme, hostname, and port).
+    /// If omitted, it defaults to "/", which is the origin that is calling the method.
+    /// This mechanism provides control over where messages are sent;
+    /// for example, if postMessage() was used to transmit a password,
+    /// it would be absolutely critical that this argument be a URI whose origin is the same as the intended receiver of the message containing the password,
+    /// to prevent interception of the password by a malicious third party.
+    /// </para>
+    /// <para>"*" may also be provided, which means the message can be dispatched to a listener with any origin.</para>
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask PostMessage(object message, string targetOrigin, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("WindowAPI.postMessage", cancellationToken, [windowJS, message, targetOrigin]);
+
+    /// <summary>
+    /// Creates a deep clone of a given value using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm">structured clone algorithm</see>.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="value">The object to be cloned. This can be any structured-cloneable type.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask<T> StructuredClone<T>(T value, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync<T>("WindowAPI.structuredClone", cancellationToken, [windowJS, value]);
 }

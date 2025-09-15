@@ -130,7 +130,7 @@ public sealed class Geolocation(IModuleManager moduleManager) : GeolocationBase(
     /// <summary>
     /// Is used to unregister location/error monitoring handlers previously installed using <see cref="WatchPosition"/>.
     /// </summary>
-    /// <param name="watchId">The id of the registration from <see cref="WatchPosition"/></param>
+    /// <param name="geolocationWatchHandle">The id of the registration from <see cref="WatchPosition"/></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask ClearWatch(GeolocationWatchHandle geolocationWatchHandle, CancellationToken cancellationToken = default) {

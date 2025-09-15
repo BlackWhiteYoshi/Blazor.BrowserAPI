@@ -4598,12 +4598,6 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="F:BrowserAPI.Implementation.Geolocation.watchList">
-            <summary>
-            Key = int watchId<br />
-            Value = DotNetObjectReference&lt;CallbackGeolocation&gt; callbackGeolocation
-            </summary>
-        </member>
         <member name="M:BrowserAPI.Implementation.Geolocation.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Is used to register a handler function that will be called automatically each time the position of the device changes.
@@ -4655,9 +4649,9 @@
             Default: false.
             </param>
             <param name="cancellationToken"></param>
-            <returns>WatchId - can be used to <see cref="M:BrowserAPI.Implementation.Geolocation.ClearWatch(System.Int32,System.Threading.CancellationToken)">clear</see> this registration.</returns>
+            <returns>WatchId - can be used to <see cref="M:BrowserAPI.Implementation.Geolocation.ClearWatch(BrowserAPI.GeolocationWatchHandle,System.Threading.CancellationToken)">clear</see> this registration.</returns>
         </member>
-        <member name="M:BrowserAPI.Implementation.Geolocation.ClearWatch(System.Int32,System.Threading.CancellationToken)">
+        <member name="M:BrowserAPI.Implementation.Geolocation.ClearWatch(BrowserAPI.GeolocationWatchHandle,System.Threading.CancellationToken)">
             <summary>
             Is used to unregister location/error monitoring handlers previously installed using <see cref="M:BrowserAPI.Implementation.Geolocation.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)"/>.
             </summary>
@@ -4788,12 +4782,6 @@
             </param>
             <returns></returns>
         </member>
-        <member name="F:BrowserAPI.Implementation.GeolocationInProcess.watchList">
-            <summary>
-            Key = int watchId<br />
-            Value = DotNetObjectReference&lt;CallbackGeolocation&gt; callbackGeolocation
-            </summary>
-        </member>
         <member name="M:BrowserAPI.Implementation.GeolocationInProcess.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean)">
             <summary>
             Is used to register a handler function that will be called automatically each time the position of the device changes.
@@ -4844,9 +4832,9 @@
             On the other hand, if false, the device can take the liberty to save resources by responding more quickly and/or using less power.
             Default: false.
             </param>
-            <returns>WatchId - can be used to <see cref="M:BrowserAPI.Implementation.GeolocationInProcess.ClearWatch(System.Int32)">clear</see> this registration.</returns>
+            <returns>WatchId - can be used to <see cref="M:BrowserAPI.Implementation.GeolocationInProcess.ClearWatch(BrowserAPI.GeolocationWatchHandle)">clear</see> this registration.</returns>
         </member>
-        <member name="M:BrowserAPI.Implementation.GeolocationInProcess.ClearWatch(System.Int32)">
+        <member name="M:BrowserAPI.Implementation.GeolocationInProcess.ClearWatch(BrowserAPI.GeolocationWatchHandle)">
             <summary>
             Is used to unregister location/error monitoring handlers previously installed using <see cref="M:BrowserAPI.Implementation.GeolocationInProcess.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean)"/>.
             </summary>
@@ -7798,12 +7786,18 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:BrowserAPI.Implementation.HTMLElement.ScrollBy(System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:BrowserAPI.Implementation.HTMLElement.ScrollBy(System.Int32,System.Int32,System.String,System.Threading.CancellationToken)">
             <summary>
             Scrolls an element by the given amount.
             </summary>
-            <param name="x">Specifies the number of pixels along the X axis to scroll the window or element.</param>
-            <param name="y">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+            <param name="deltaX">Specifies the number of pixels along the X axis to scroll the window or element.</param>
+            <param name="deltaY">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+            <param name="behavior">
+            Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+            - "smooth": scrolling should animate smoothly<br />
+            - "instant": scrolling should happen instantly in a single jump<br />
+            - "auto": scroll behavior is determined by the computed value of scroll-behavior
+            </param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -10549,12 +10543,18 @@
             - "auto": scroll behavior is determined by the computed value of scroll-behavior
             </param>
         </member>
-        <member name="M:BrowserAPI.Implementation.HTMLElementInProcess.ScrollBy(System.Int32,System.Int32)">
+        <member name="M:BrowserAPI.Implementation.HTMLElementInProcess.ScrollBy(System.Int32,System.Int32,System.String)">
             <summary>
             Scrolls an element by the given amount.
             </summary>
-            <param name="x">Specifies the number of pixels along the X axis to scroll the window or element.</param>
-            <param name="y">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+            <param name="deltaX">Specifies the number of pixels along the X axis to scroll the window or element.</param>
+            <param name="deltaY">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+            <param name="behavior">
+            Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+            - "smooth": scrolling should animate smoothly<br />
+            - "instant": scrolling should happen instantly in a single jump<br />
+            - "auto": scroll behavior is determined by the computed value of scroll-behavior
+            </param>
         </member>
         <member name="M:BrowserAPI.Implementation.HTMLElementInProcess.ScrollIntoView(System.String,System.String,System.String)">
             <summary>
@@ -13335,7 +13335,7 @@
             </summary>
             <remarks>
             Note: For use cases that need the ability to send requests with methods other than POST, or to change any request properties, or that need access to the server response,
-            instead use the <see cref="!:IWindow.Fetch"/> method with <i>keepalive</i> set to true.
+            instead use the <see cref="T:System.Net.Http.HttpClient"/>.
             </remarks>
             <param name="url">The URL that will receive the data. Can be relative or absolute.</param>
             <param name="data">Contais the data to send.</param>
@@ -13683,7 +13683,7 @@
             </summary>
             <remarks>
             Note: For use cases that need the ability to send requests with methods other than POST, or to change any request properties, or that need access to the server response,
-            instead use the <see cref="!:IWindowInProcess.Fetch"/> method with <i>keepalive</i> set to true.
+            instead use the <see cref="T:System.Net.Http.HttpClient"/>.
             </remarks>
             <param name="url">The URL that will receive the data. Can be relative or absolute.</param>
             <param name="data">Contais the data to send.</param>
@@ -16586,7 +16586,7 @@
             </para>
             <para>
             In a tabbed browser, each tab is represented by its own Window object; the global window seen by JavaScript code running within a given tab always represents the tab in which the code is running.
-            That said, even in a tabbed browser, some properties and methods still apply to the overall window that contains the tab, such as <see cref="!:ResizeTo"/> and <see cref="P:BrowserAPI.Implementation.Window.InnerHeight"/>.
+            That said, even in a tabbed browser, some properties and methods still apply to the overall window that contains the tab, such as <see cref="M:BrowserAPI.Implementation.Window.ResizeTo(System.Int32,System.Int32,System.Threading.CancellationToken)"/> and <see cref="P:BrowserAPI.Implementation.Window.InnerHeight"/>.
             Generally, anything that can't reasonably pertain to a tab pertains to the window instead.
             </para>
             </summary>
@@ -16604,7 +16604,7 @@
             </para>
             <para>
             In a tabbed browser, each tab is represented by its own Window object; the global window seen by JavaScript code running within a given tab always represents the tab in which the code is running.
-            That said, even in a tabbed browser, some properties and methods still apply to the overall window that contains the tab, such as <see cref="!:ResizeTo"/> and <see cref="P:BrowserAPI.Implementation.Window.InnerHeight"/>.
+            That said, even in a tabbed browser, some properties and methods still apply to the overall window that contains the tab, such as <see cref="M:BrowserAPI.Implementation.Window.ResizeTo(System.Int32,System.Int32,System.Threading.CancellationToken)"/> and <see cref="P:BrowserAPI.Implementation.Window.InnerHeight"/>.
             Generally, anything that can't reasonably pertain to a tab pertains to the window instead.
             </para>
             </summary>
@@ -16673,10 +16673,6 @@
             <para>
             This is useful when dealing with the difference between rendering on a standard display versus a HiDPI or Retina display,
             which use more screen pixels to draw the same objects, resulting in a sharper image.
-            </para>
-            <para>
-            You can use <see cref="!:MatchMedia"/> to check if the value of devicePixelRatio changes (which can happen, for example, if the user drags the window to a display with a different pixel density).
-            See <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio#monitoring_screen_resolution_or_zoom_level_changes">the example below</see>.
             </para>
             </summary>
         </member>
@@ -16851,6 +16847,491 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:BrowserAPI.Implementation.Window.Open(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Loads a specified resource into a new or existing browsing context (that is, a tab, a window, or an iframe) under a specified name.
+            </summary>
+            <param name="url">
+            A string indicating the URL or path of the resource to be loaded.
+            If an empty string ("") is specified or this parameter is omitted, a blank page is opened into the targeted browsing context.
+            </param>
+            <param name="target">
+            <para>
+            A string, without whitespace, specifying the name of the browsing context the resource is being loaded into.<br />
+            If the name doesn't identify an existing context, a new context is created and given the specified name.<br />
+            The special target keywords, "<i>_self</i>", "<i>_blank</i>" (default), "<i>_parent</i>", "<i>_top</i>", and "<i>_unfencedTop</i>" can also be used.<br />
+            "<i>_unfencedTop</i>" is only relevant to fenced frames.
+            </para>
+            <para>This name can be used as the target attribute of &lt;a&gt; or &lt;form&gt; elements.</para>
+            </param>
+            <param name="features">
+            <para>
+            A string containing a comma-separated list of window features in the form <i>name=value</i>.
+            Boolean values can be set to true using one of: <i>name</i>, <i>name=yes</i>, <i>name=true</i>, or <i>name=n</i> where n is any non-zero integer.
+            These features include options such as the window's default size and position, whether or not to open a minimal popup window, and so forth.
+            The following options are supported:</para>
+            <para>
+            - "attributionsrc": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
+            - "popup": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
+            - "width" or "innerWidth": Specifies the width of the content area, including scrollbars. The minimum required value is 100.<br />
+            - "height" or "innerHeight": Specifies the height of the content area, including scrollbars. The minimum required value is 100.<br />
+            - "left" or "screenX": Specifies the distance in pixels from the left side of the work area as defined by the user's operating system where the new window will be generated.<br />
+            - "top" or "screenY": Specifies the distance in pixels from the top side of the work area as defined by the user's operating system where the new window will be generated.<br />
+            - "noopener": If this feature is set, the new window will not have access to the originating window via Window.opener and returns null. When noopener is used, non-empty target names, other than <i>_top</i>, <i>_self</i>, and <i>_parent</i>, are treated like <i>_blank</i> in terms of deciding whether to open a new browsing context.<br />
+            - "noreferrer": If this feature is set, the browser will omit the Referer header, as well as set noopener to true. See rel="noreferrer" for more information.
+            </para>
+            <para>A null value is treated the same as the empty string ("").</para>
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.Close(System.Threading.CancellationToken)">
+            <summary>
+            <para>Closes the current window, or the window on which it was called.</para>
+            <para>
+            Windows are script-closable if they were created by web content. This generally includes:<br/>
+            - Windows opened using <see cref="M:BrowserAPI.Implementation.Window.Open(System.String,System.String,System.String,System.Threading.CancellationToken)"/><br/>
+            - Windows opened via web content, such as links (&lt;a target="_blank"&gt;) or forms (&lt;form target="_blank"&gt;), without user modifier actions
+            </para>
+            <para>
+            Windows opened by browser UI actions — such as right-click → Open in new tab, Ctrl+Click, Shift+Click, or middle-click — are often not script-closable.
+            They may only be closed if they have not been navigated (history length remains 1).
+            Calling close() otherwise typically shows a console warning: Scripts may not close windows that were not opened by script.
+            </para>
+            <para>Note also that close() has no effect when called on Window objects returned by <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/contentWindow">HTMLIFrameElement.contentWindow</see>.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.Stop(System.Threading.CancellationToken)">
+            <summary>
+            <para>Stops further resource loading in the current browsing context, equivalent to the stop button in the browser.</para>
+            <para>Because of how scripts are executed, this method cannot interrupt its parent document's loading, but it will stop its images, new windows, and other still-loading objects.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.Focus(System.Threading.CancellationToken)">
+            <summary>
+            Makes a request to bring the window to the front. It may fail due to user settings and the window isn't guaranteed to be frontmost before this method returns.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.Print(System.Threading.CancellationToken)">
+            <summary>
+            <para>Opens the print dialog to print the current document.</para>
+            <para>If the document is still loading when this function is called, then the document will finish loading before opening the print dialog.</para>
+            <para>This method will block while the print dialog is open.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.ReportError(System.Object,System.Threading.CancellationToken)">
+            <summary>
+            <para>May be used to report errors to the console or event handlers of global scopes, emulating an uncaught JavaScript exception.</para>
+            <para>
+            This feature is primarily intended for custom event-dispatching or callback-manipulating libraries.
+            Libraries can use this feature to catch errors in callback code and re-throw them to the top level handler.
+            This ensures that an exception in one callback will not prevent others from being handled,
+            while at the same time ensuring that stack trace information is still readily available for debugging at the top level.
+            </para>
+            </summary>
+            <param name="error">An error object such as a TypeError.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.Prompt(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>Instructs the browser to display a dialog with an optional message prompting the user to input some text, and to wait until the user either submits the text or cancels the dialog.</para>
+            <para>Under some conditions (when the user switches tabs, for example) the browser may not display a dialog, or may not wait for the user to submit text or to cancel the dialog.</para>
+            </summary>
+            <param name="message">A string of text to display to the user. Can be omitted if there is nothing to show in the prompt window.</param>
+            <param name="defaultValue">A string containing the default value displayed in the text input field.</param>
+            <param name="cancellationToken"></param>
+            <returns>A string containing the text entered by the user, or null.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.Confirm(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>Instructs the browser to display a dialog with an optional message, and to wait until the user either confirms or cancels the dialog.</para>
+            <para>Under some conditions — for example, when the user switches tabs — the browser may not actually display a dialog, or may not wait for the user to confirm or cancel the dialog.</para>
+            </summary>
+            <param name="message">A string you want to display in the confirmation dialog.</param>
+            <param name="cancellationToken"></param>
+            <returns>Whether OK (true) or Cancel (false) was selected. If a browser is ignoring in-page dialogs, then the returned value is always false.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.Alert(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>Instructs the browser to display a dialog with an optional message, and to wait until the user dismisses the dialog.</para>
+            <para>Under some conditions — for example, when the user switches tabs — the browser may not actually display a dialog, or may not wait for the user to dismiss the dialog.</para>
+            </summary>
+            <param name="message">A string you want to display in the alert dialog, or, alternatively, an object that is converted into a string and displayed.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.MoveBy(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Moves the current window by a specified amount.
+            </summary>
+            <remarks>Note: This function moves the window relative to its current location. In contrast, <see cref="M:BrowserAPI.Implementation.Window.MoveTo(System.Int32,System.Int32,System.Threading.CancellationToken)"/> moves the window to an absolute location.</remarks>
+            <param name="deltaX">The amount of pixels to move the window horizontally. Positive values are to the right, while negative values are to the left.</param>
+            <param name="deltaY">The amount of pixels to move the window vertically. Positive values are down, while negative values are up.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.MoveTo(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Moves the current window to the specified coordinates.
+            </summary>
+            <remarks>Note: This function moves the window to an absolute location. In contrast, <see cref="M:BrowserAPI.Implementation.Window.MoveBy(System.Int32,System.Int32,System.Threading.CancellationToken)"/> moves the window relative to its current location.</remarks>
+            <param name="x">The horizontal coordinate to be moved to.</param>
+            <param name="y">The vertical coordinate to be moved to.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.ResizeBy(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Resizes the current window by a specified amount.
+            </summary>
+            <param name="xDelta">The number of pixels to grow/shrink the window horizontally.</param>
+            <param name="yDelta">The number of pixels to grow/shrink the window vertically.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.ResizeTo(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Dynamically resizes the window.
+            </summary>
+            <param name="width">An integer representing the new <see cref="P:BrowserAPI.Implementation.Window.OuterWidth"/> in pixels (including scroll bars, title bars, etc.).</param>
+            <param name="height">An integer value representing the new <see cref="P:BrowserAPI.Implementation.Window.OuterHeight"/> in pixels (including scroll bars, title bars, etc.).</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.Scroll(System.Int32,System.Int32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Scrolls the window to a particular place in the document.
+            </summary>
+            <param name="left">Specifies the number of pixels along the X axis to scroll the window or element.</param>
+            <param name="top">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+            <param name="behavior">
+            Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+            - "smooth": scrolling should animate smoothly<br />
+            - "instant": scrolling should happen instantly in a single jump<br />
+            - "auto": scroll behavior is determined by the computed value of scroll-behavior
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.ScrollTo(System.Int32,System.Int32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Scrolls to a particular set of coordinates in the document.
+            </summary>
+            <param name="left">Specifies the number of pixels along the X axis to scroll the window or element.</param>
+            <param name="top">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+            <param name="behavior">
+            Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+            - "smooth": scrolling should animate smoothly<br />
+            - "instant": scrolling should happen instantly in a single jump<br />
+            - "auto": scroll behavior is determined by the computed value of scroll-behavior
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.ScrollBy(System.Int32,System.Int32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Scrolls the document in the window by the given amount.
+            </summary>
+            <param name="deltaX">The horizontal pixel value that you want to scroll by.</param>
+            <param name="deltaY">The vertical pixel value that you want to scroll by.</param>
+            <param name="behavior">
+            Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+            - "smooth": scrolling should animate smoothly<br />
+            - "instant": scrolling should happen instantly in a single jump<br />
+            - "auto": scroll behavior is determined by the computed value of scroll-behavior
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.SetTimeout(System.Action,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Sets a timer which executes a function or specified piece of code once the timer expires.
+            </summary>
+            <param name="handler">A function to be executed after the timer expires.</param>
+            <param name="delay">
+            <para>
+            The time, in milliseconds that the timer should wait before the specified function or code is executed.
+            If this parameter is omitted, a value of 0 is used, meaning execute "immediately", or more accurately, the next event cycle.
+            </para>
+            <para>Note that in either case, the actual delay may be longer than intended; see Reasons for delays longer than specified below.</para>
+            </param>
+            <param name="cancellationToken"></param>
+            <returns>
+            <para>
+            A value that uniquely identifies the timer created by the call.
+            This identifier, often referred to as a "timeout ID", can be passed to <see cref="M:BrowserAPI.Implementation.Window.ClearTimeout(BrowserAPI.TimeoutHandle,System.Threading.CancellationToken)"/> to cancel the timer.
+            </para>
+            <para>
+            Within the same global environment (e.g., a specific window or worker) the timeout ID is guaranteed not to be reused for any new timer as long as the original timer remains active.
+            However, separate global environments maintain their own independent pools of timer IDs.
+            </para>
+            </returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.ClearTimeout(BrowserAPI.TimeoutHandle,System.Threading.CancellationToken)">
+            <summary>
+            <para>Cancels a timeout previously established by calling <see cref="M:BrowserAPI.Implementation.Window.SetTimeout(System.Action,System.Int32,System.Threading.CancellationToken)"/>.</para>
+            <para>If the parameter provided does not identify a previously established action, this method does nothing.</para>
+            </summary>
+            <remarks>
+            It's worth noting that the pool of IDs used by <see cref="M:BrowserAPI.Implementation.Window.SetTimeout(System.Action,System.Int32,System.Threading.CancellationToken)"/> and <see cref="M:BrowserAPI.Implementation.Window.SetInterval(System.Action,System.Int32,System.Threading.CancellationToken)"/> are shared,
+            which means you can technically use <see cref="M:BrowserAPI.Implementation.Window.ClearTimeout(BrowserAPI.TimeoutHandle,System.Threading.CancellationToken)"/> and <see cref="M:BrowserAPI.Implementation.Window.ClearInterval(BrowserAPI.IntervalHandle,System.Threading.CancellationToken)"/> interchangeably.
+            However, for clarity, you should avoid doing so.
+            </remarks>
+            <param name="timeoutHandle">The identifier of the timeout you want to cancel. This ID was returned by the corresponding call to <see cref="M:BrowserAPI.Implementation.Window.SetTimeout(System.Action,System.Int32,System.Threading.CancellationToken)"/>.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.SetInterval(System.Action,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Repeatedly calls a function or executes a code snippet, with a fixed time delay between each call.
+            </summary>
+            <param name="handler">A function to be executed every delay milliseconds. The first execution happens after delay milliseconds.</param>
+            <param name="delay">
+            The time, in milliseconds (thousandths of a second), the timer should delay in between executions of the specified function or code.
+            Defaults to 0 if not specified.
+            See <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval#delay_restrictions">Delay restrictions</see> below for details on the permitted range of delay values.
+            </param>
+            <param name="cancellationToken"></param>
+            <returns>
+            <para>
+            A value that uniquely identifies the interval timer created by the call.
+            This identifier, often referred to as an "interval ID", can be passed to <see cref="M:BrowserAPI.Implementation.Window.ClearInterval(BrowserAPI.IntervalHandle,System.Threading.CancellationToken)"/> to stop the repeated execution of the specified function.
+            </para>
+            <para>
+            Within the same global environment (e.g., a particular window or worker), the interval ID is ensured to remain unique and is not reused for any new interval timer as long as the original timer is still active.
+            However, different global environments maintain their own independent pools of interval IDs.
+            </para>
+            </returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.ClearInterval(BrowserAPI.IntervalHandle,System.Threading.CancellationToken)">
+            <summary>
+            Cancels a timed, repeating action which was previously established by a call to <see cref="M:BrowserAPI.Implementation.Window.SetInterval(System.Action,System.Int32,System.Threading.CancellationToken)"/>.
+            If the parameter provided does not identify a previously established action, this method does nothing.
+            </summary>
+            <remarks>
+            It's worth noting that the pool of IDs used by <see cref="M:BrowserAPI.Implementation.Window.SetInterval(System.Action,System.Int32,System.Threading.CancellationToken)"/> and <see cref="M:BrowserAPI.Implementation.Window.SetTimeout(System.Action,System.Int32,System.Threading.CancellationToken)"/> are shared,
+            which means you can technically use <see cref="M:BrowserAPI.Implementation.Window.ClearInterval(BrowserAPI.IntervalHandle,System.Threading.CancellationToken)"/> and <see cref="M:BrowserAPI.Implementation.Window.ClearTimeout(BrowserAPI.TimeoutHandle,System.Threading.CancellationToken)"/> interchangeably.
+            However, for clarity, you should avoid doing so.
+            </remarks>
+            <param name="intervalHandle">The identifier of the repeated action you want to cancel. This ID was returned by the corresponding call to <see cref="M:BrowserAPI.Implementation.Window.SetInterval(System.Action,System.Int32,System.Threading.CancellationToken)"/>.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.RequestAnimationFrame(System.Action{System.Double},System.Threading.CancellationToken)">
+            <summary>
+            <para>Tells the browser you wish to perform an animation. It requests the browser to call a user-supplied callback function before the next repaint.</para>
+            <para>
+            The frequency of calls to the callback function will generally match the display refresh rate.
+            The most common refresh rate is 60hz, (60 cycles/frames per second), though 75hz, 120hz, and 144hz are also widely used.
+            requestAnimationFrame() calls are paused in most browsers when running in background tabs or hidden &lt;iframe&gt;s, in order to improve performance and battery life.
+            </para>
+            </summary>
+            <remarks>
+            <para>Note: Your callback function must call requestAnimationFrame() again if you want to animate another frame. requestAnimationFrame() is one-shot.</para>
+            <para>
+            Warning: Be sure always to use the first argument (or some other method for getting the current time) to calculate how much the animation will progress in a frame
+            — otherwise, the animation will run faster on high refresh-rate screens.
+            For ways to do that, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame#examples">the examples below</see>.
+            </para>
+            </remarks>
+            <param name="handler">
+            <para>
+            The function to call when it's time to update your animation for the next repaint. This callback function is passed a single argument:
+            </para>
+            - timestamp:<br />
+            A DOMHighResTimeStamp indicating the end time of the previous frame's rendering (based on the number of milliseconds since time origin).
+            The timestamp is a decimal number, in milliseconds, but with a minimal precision of 1 millisecond.
+            For Window objects (not Workers), it is equal to document.timeline.currentTime.
+            This timestamp is shared between all windows that run on the same agent (all same-origin windows and, more importantly, same-origin iframes)
+            — which allows synchronizing animations across multiple requestAnimationFrame callbacks.
+            The timestamp value is also similar to calling performance.now() at the start of the callback function, but it is never the same value.<br />
+            When multiple callbacks queued by requestAnimationFrame() begin to fire in a single frame,
+            each receives the same timestamp even though time has passed during the computation of every previous callback's workload.
+            </param>
+            <param name="cancellationToken"></param>
+            <returns>
+            The request ID, that uniquely identifies the entry in the callback list.
+            You should not make any assumptions about its value.
+            You can pass this value to <see cref="M:BrowserAPI.Implementation.Window.CancelAnimationFrame(BrowserAPI.AnimationFrameHandle,System.Threading.CancellationToken)"/> to cancel the refresh callback request.
+            </returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.CancelAnimationFrame(BrowserAPI.AnimationFrameHandle,System.Threading.CancellationToken)">
+            <summary>
+            Cancels an animation frame request previously scheduled through a call to <see cref="M:BrowserAPI.Implementation.Window.RequestAnimationFrame(System.Action{System.Double},System.Threading.CancellationToken)"/>.
+            </summary>
+            <param name="animationFrameHandle">The ID value returned by the call to <see cref="M:BrowserAPI.Implementation.Window.RequestAnimationFrame(System.Action{System.Double},System.Threading.CancellationToken)"/> that requested the callback.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.RequestIdleCallback(System.Action,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            <para>
+            Queues a function to be called during a browser's idle periods.
+            This enables developers to perform background and low priority work on the main thread, without impacting latency-critical events such as animation and input response.
+            Functions are generally called in first-in-first-out order;
+            however, callbacks which have a timeout specified may be called out-of-order if necessary in order to run them before the timeout elapses.
+            </para>
+            <para>You can call <see cref="M:BrowserAPI.Implementation.Window.RequestIdleCallback(System.Action,System.Nullable{System.Int32},System.Threading.CancellationToken)"/> within an idle callback function to schedule another callback to take place no sooner than the next pass through the event loop.</para>
+            </summary>
+            <param name="handler">
+            A reference to a function that should be called in the near future, when the event loop is idle.
+            The callback function is passed an IdleDeadline object describing the amount of time available and whether or not the callback has been run because the timeout period expired.
+            </param>
+            <param name="timeout">
+            <para>
+            If the number of milliseconds represented by this parameter has elapsed and the callback has not already been called,
+            then a task to execute the callback is queued in the event loop (even if doing so risks causing a negative performance impact).
+            timeout must be a positive value or it is ignored.
+            </para>
+            <para>Note: A timeout option is strongly recommended for required work, as otherwise it's possible multiple seconds will elapse before the callback is fired.</para>
+            </param>
+            <param name="cancellationToken"></param>
+            <returns>An ID which can be used to cancel the callback by passing it into the <see cref="M:BrowserAPI.Implementation.Window.CancelIdleCallback(BrowserAPI.IdleCallbackHandle,System.Threading.CancellationToken)"/> method.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.CancelIdleCallback(BrowserAPI.IdleCallbackHandle,System.Threading.CancellationToken)">
+            <summary>
+            Cancels a callback previously scheduled with <see cref="M:BrowserAPI.Implementation.Window.RequestIdleCallback(System.Action,System.Nullable{System.Int32},System.Threading.CancellationToken)"/>.
+            </summary>
+            <param name="idleCallbackHandle">The ID value returned by <see cref="M:BrowserAPI.Implementation.Window.RequestIdleCallback(System.Action,System.Nullable{System.Int32},System.Threading.CancellationToken)"/> when the callback was established.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.QueueMicrotask(System.Action,System.Threading.CancellationToken)">
+            <summary>
+            <para>Queues a microtask to be executed at a safe time prior to control returning to the browser's event loop.</para>
+            <para>
+            The microtask is a short function which will run after the current task has completed its work
+            and when there is no other code waiting to be run before control of the execution context is returned to the browser's event loop.
+            </para>
+            <para>
+            This lets your code run without interfering with any other, potentially higher priority, code that is pending,
+            but before the browser regains control over the execution context, potentially depending on work you need to complete.
+            You can learn more about how to use microtasks and why you might choose to do so in our <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide">microtask guide</see>.
+            </para>
+            <para>
+            The importance of microtasks comes in its ability to perform tasks asynchronously but in a specific order.
+            See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide">Using microtasks in JavaScript with queueMicrotask()</see> for more details.
+            </para>
+            <para>Microtasks are especially useful for libraries and frameworks that need to perform final cleanup or other just-before-rendering tasks.</para>
+            </summary>
+            <param name="handler">
+            A function to be executed when the browser engine determines it is safe to call your code.
+            Enqueued microtasks are executed after all pending tasks have completed but before yielding control to the browser's event loop.
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.Atob(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Decodes a string of data which has been encoded using Base64 encoding.
+            You can use the <see cref="M:BrowserAPI.Implementation.Window.Btoa(System.String,System.Threading.CancellationToken)"/> to encode and transmit data which may otherwise cause communication problems, then transmit it and use this method to decode the data again.
+            For example, you can encode, transmit, and decode control characters such as ASCII values 0 through 31.
+            </summary>
+            <param name="base64">A base64-encoded string, using the alphabet produced by <see cref="M:BrowserAPI.Implementation.Window.Btoa(System.String,System.Threading.CancellationToken)"/>.</param>
+            <param name="cancellationToken"></param>
+            <returns>
+            A binary string containing raw bytes decoded from the input.
+            Strings in JavaScript are encoded as UTF-16, so this means each character must have a code point less than 256, representing one byte of data.
+            </returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.Btoa(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>Creates a Base64-encoded ASCII string from a binary string (i.e., a string in which each character in the string is treated as a byte of binary data).</para>
+            <para>
+            You can use this method to encode data which may otherwise cause communication problems, transmit it, then use the <see cref="M:BrowserAPI.Implementation.Window.Atob(System.String,System.Threading.CancellationToken)"/> method to decode the data again.
+            For example, you can encode control characters such as ASCII values 0 through 31.
+            </para>
+            </summary>
+            <param name="ascii">The binary string to encode. Strings in JavaScript are encoded as UTF-16, so this means each character must have a code point less than 256, representing one byte of data.</param>
+            <param name="cancellationToken"></param>
+            <returns>An ASCII string containing the Base64 representation of the input.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.PostMessage(System.Object,System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>
+            Safely enables cross-origin communication between Window objects;
+            e.g., between a page and a pop-up that it spawned, or between a page and an iframe embedded within it.
+            </para>
+            <para>
+            Normally, scripts on different pages are allowed to access each other if and only if the pages they originate from share the same origin (also known as the "same-origin policy").
+            window.postMessage() provides a controlled mechanism to securely circumvent this restriction (if used properly).
+            </para>
+            <para>
+            Furthermore, an accessing script must have obtained the window object of the accessed document beforehand.
+            This can occur through methods such as <see cref="M:BrowserAPI.Implementation.Window.Open(System.String,System.String,System.String,System.Threading.CancellationToken)"/> for popups or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/contentWindow">iframe.contentWindow</see> for iframes.
+            </para>
+            <para>
+            Broadly, one window may obtain a reference to another (e.g., via targetWindow = window.opener), and then dispatch a MessageEvent on it with targetWindow.postMessage().
+            The receiving window is then free to handle this event as needed.
+            The arguments passed to window.postMessage() (i.e., the "message") are exposed to the receiving window through the <see cref="!:OnMessage">event object</see>.
+            </para>
+            </summary>
+            <param name="message">
+            Data to be dispatched to the other window.
+            The data is serialized using the <see cref="M:BrowserAPI.Implementation.Window.StructuredClone``1(``0,System.Threading.CancellationToken)">structured clone algorithm</see>.
+            This means you can pass a broad variety of data objects safely to the destination window without having to serialize them yourself.
+            </param>
+            <param name="targetOrigin">
+            <para>
+            Specifies the origin the recipient window must have in order to receive the event.
+            In order for the event to be dispatched, the origin must match exactly (including scheme, hostname, and port).
+            If omitted, it defaults to "/", which is the origin that is calling the method.
+            This mechanism provides control over where messages are sent;
+            for example, if postMessage() was used to transmit a password,
+            it would be absolutely critical that this argument be a URI whose origin is the same as the intended receiver of the message containing the password,
+            to prevent interception of the password by a malicious third party.
+            </para>
+            <para>"*" may also be provided, which means the message can be dispatched to a listener with any origin.</para>
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Window.StructuredClone``1(``0,System.Threading.CancellationToken)">
+            <summary>
+            Creates a deep clone of a given value using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm">structured clone algorithm</see>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value">The object to be cloned. This can be any structured-cloneable type.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.WindowBase.VoidCallback">
+            <summary>
+            <para>Contains a callback with no parameter and no return value.</para>
+            <para>Used for <see cref="M:BrowserAPI.Implementation.Window.SetTimeout(System.Action,System.Int32,System.Threading.CancellationToken)"/>, <see cref="M:BrowserAPI.Implementation.Window.SetInterval(System.Action,System.Int32,System.Threading.CancellationToken)"/>, <see cref="M:BrowserAPI.Implementation.Window.RequestIdleCallback(System.Action,System.Nullable{System.Int32},System.Threading.CancellationToken)"/> and <see cref="M:BrowserAPI.Implementation.Window.QueueMicrotask(System.Action,System.Threading.CancellationToken)"/>.</para>
+            </summary>
+            <param name="handler">callback function given as argument.</param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowBase.VoidCallback.#ctor(System.Action)">
+            <summary>
+            <para>Contains a callback with no parameter and no return value.</para>
+            <para>Used for <see cref="M:BrowserAPI.Implementation.Window.SetTimeout(System.Action,System.Int32,System.Threading.CancellationToken)"/>, <see cref="M:BrowserAPI.Implementation.Window.SetInterval(System.Action,System.Int32,System.Threading.CancellationToken)"/>, <see cref="M:BrowserAPI.Implementation.Window.RequestIdleCallback(System.Action,System.Nullable{System.Int32},System.Threading.CancellationToken)"/> and <see cref="M:BrowserAPI.Implementation.Window.QueueMicrotask(System.Action,System.Threading.CancellationToken)"/>.</para>
+            </summary>
+            <param name="handler">callback function given as argument.</param>
+        </member>
+        <member name="T:BrowserAPI.Implementation.WindowBase.AnimationFrameCallback">
+            <summary>
+            <para>Contains a callback with a timestamp parameter and no return value.</para>
+            <para>Used for <see cref="M:BrowserAPI.Implementation.Window.RequestAnimationFrame(System.Action{System.Double},System.Threading.CancellationToken)"/>.</para>
+            </summary>
+            <param name="handler">callback function given as argument. The parameter is the timeStamp.</param>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowBase.AnimationFrameCallback.#ctor(System.Action{System.Double})">
+            <summary>
+            <para>Contains a callback with a timestamp parameter and no return value.</para>
+            <para>Used for <see cref="M:BrowserAPI.Implementation.Window.RequestAnimationFrame(System.Action{System.Double},System.Threading.CancellationToken)"/>.</para>
+            </summary>
+            <param name="handler">callback function given as argument. The parameter is the timeStamp.</param>
+        </member>
         <member name="T:BrowserAPI.Implementation.WindowInProcess">
             <summary>
             <para>The Window interface represents a window containing a DOM document; the document property points to the DOM document loaded in that window.</para>
@@ -16864,7 +17345,7 @@
             </para>
             <para>
             In a tabbed browser, each tab is represented by its own Window object; the global window seen by JavaScript code running within a given tab always represents the tab in which the code is running.
-            That said, even in a tabbed browser, some properties and methods still apply to the overall window that contains the tab, such as <see cref="!:ResizeTo"/> and <see cref="P:BrowserAPI.Implementation.WindowInProcess.InnerHeight"/>.
+            That said, even in a tabbed browser, some properties and methods still apply to the overall window that contains the tab, such as <see cref="M:BrowserAPI.Implementation.WindowInProcess.ResizeTo(System.Int32,System.Int32)"/> and <see cref="P:BrowserAPI.Implementation.WindowInProcess.InnerHeight"/>.
             Generally, anything that can't reasonably pertain to a tab pertains to the window instead.
             </para>
             </summary>
@@ -16882,7 +17363,7 @@
             </para>
             <para>
             In a tabbed browser, each tab is represented by its own Window object; the global window seen by JavaScript code running within a given tab always represents the tab in which the code is running.
-            That said, even in a tabbed browser, some properties and methods still apply to the overall window that contains the tab, such as <see cref="!:ResizeTo"/> and <see cref="P:BrowserAPI.Implementation.WindowInProcess.InnerHeight"/>.
+            That said, even in a tabbed browser, some properties and methods still apply to the overall window that contains the tab, such as <see cref="M:BrowserAPI.Implementation.WindowInProcess.ResizeTo(System.Int32,System.Int32)"/> and <see cref="P:BrowserAPI.Implementation.WindowInProcess.InnerHeight"/>.
             Generally, anything that can't reasonably pertain to a tab pertains to the window instead.
             </para>
             </summary>
@@ -16931,10 +17412,6 @@
             <para>
             This is useful when dealing with the difference between rendering on a standard display versus a HiDPI or Retina display,
             which use more screen pixels to draw the same objects, resulting in a sharper image.
-            </para>
-            <para>
-            You can use <see cref="!:MatchMedia"/> to check if the value of devicePixelRatio changes (which can happen, for example, if the user drags the window to a display with a different pixel density).
-            See <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio#monitoring_screen_resolution_or_zoom_level_changes">the example below</see>.
             </para>
             </summary>
         </member>
@@ -17032,6 +17509,434 @@
             <summary>
             Returns the element (such as &lt;iframe&gt; or &lt;object&gt;) in which the window is embedded.
             </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.Open(System.String,System.String,System.String)">
+            <summary>
+            Loads a specified resource into a new or existing browsing context (that is, a tab, a window, or an iframe) under a specified name.
+            </summary>
+            <param name="url">
+            A string indicating the URL or path of the resource to be loaded.
+            If an empty string ("") is specified or this parameter is omitted, a blank page is opened into the targeted browsing context.
+            </param>
+            <param name="target">
+            <para>
+            A string, without whitespace, specifying the name of the browsing context the resource is being loaded into.<br />
+            If the name doesn't identify an existing context, a new context is created and given the specified name.<br />
+            The special target keywords, "<i>_self</i>", "<i>_blank</i>" (default), "<i>_parent</i>", "<i>_top</i>", and "<i>_unfencedTop</i>" can also be used.<br />
+            "<i>_unfencedTop</i>" is only relevant to fenced frames.
+            </para>
+            <para>This name can be used as the target attribute of &lt;a&gt; or &lt;form&gt; elements.</para>
+            </param>
+            <param name="features">
+            <para>
+            A string containing a comma-separated list of window features in the form <i>name=value</i>.
+            Boolean values can be set to true using one of: <i>name</i>, <i>name=yes</i>, <i>name=true</i>, or <i>name=n</i> where n is any non-zero integer.
+            These features include options such as the window's default size and position, whether or not to open a minimal popup window, and so forth.
+            The following options are supported:</para>
+            <para>
+            - "attributionsrc": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
+            - "popup": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
+            - "width" or "innerWidth": Specifies the width of the content area, including scrollbars. The minimum required value is 100.<br />
+            - "height" or "innerHeight": Specifies the height of the content area, including scrollbars. The minimum required value is 100.<br />
+            - "left" or "screenX": Specifies the distance in pixels from the left side of the work area as defined by the user's operating system where the new window will be generated.<br />
+            - "top" or "screenY": Specifies the distance in pixels from the top side of the work area as defined by the user's operating system where the new window will be generated.<br />
+            - "noopener": If this feature is set, the new window will not have access to the originating window via Window.opener and returns null. When noopener is used, non-empty target names, other than <i>_top</i>, <i>_self</i>, and <i>_parent</i>, are treated like <i>_blank</i> in terms of deciding whether to open a new browsing context.<br />
+            - "noreferrer": If this feature is set, the browser will omit the Referer header, as well as set noopener to true. See rel="noreferrer" for more information.
+            </para>
+            <para>A null value is treated the same as the empty string ("").</para>
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.Close">
+            <summary>
+            <para>Closes the current window, or the window on which it was called.</para>
+            <para>
+            Windows are script-closable if they were created by web content. This generally includes:<br/>
+            - Windows opened using <see cref="M:BrowserAPI.Implementation.WindowInProcess.Open(System.String,System.String,System.String)"/><br/>
+            - Windows opened via web content, such as links (&lt;a target="_blank"&gt;) or forms (&lt;form target="_blank"&gt;), without user modifier actions
+            </para>
+            <para>
+            Windows opened by browser UI actions — such as right-click → Open in new tab, Ctrl+Click, Shift+Click, or middle-click — are often not script-closable.
+            They may only be closed if they have not been navigated (history length remains 1).
+            Calling close() otherwise typically shows a console warning: Scripts may not close windows that were not opened by script.
+            </para>
+            <para>Note also that close() has no effect when called on Window objects returned by <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/contentWindow">HTMLIFrameElement.contentWindow</see>.</para>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.Stop">
+            <summary>
+            <para>Stops further resource loading in the current browsing context, equivalent to the stop button in the browser.</para>
+            <para>Because of how scripts are executed, this method cannot interrupt its parent document's loading, but it will stop its images, new windows, and other still-loading objects.</para>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.Focus">
+            <summary>
+            Makes a request to bring the window to the front. It may fail due to user settings and the window isn't guaranteed to be frontmost before this method returns.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.Print">
+            <summary>
+            <para>Opens the print dialog to print the current document.</para>
+            <para>If the document is still loading when this function is called, then the document will finish loading before opening the print dialog.</para>
+            <para>This method will block while the print dialog is open.</para>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.ReportError(System.Object)">
+            <summary>
+            <para>May be used to report errors to the console or event handlers of global scopes, emulating an uncaught JavaScript exception.</para>
+            <para>
+            This feature is primarily intended for custom event-dispatching or callback-manipulating libraries.
+            Libraries can use this feature to catch errors in callback code and re-throw them to the top level handler.
+            This ensures that an exception in one callback will not prevent others from being handled,
+            while at the same time ensuring that stack trace information is still readily available for debugging at the top level.
+            </para>
+            </summary>
+            <param name="error">An error object such as a TypeError.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.Prompt(System.String,System.String)">
+            <summary>
+            <para>Instructs the browser to display a dialog with an optional message prompting the user to input some text, and to wait until the user either submits the text or cancels the dialog.</para>
+            <para>Under some conditions (when the user switches tabs, for example) the browser may not display a dialog, or may not wait for the user to submit text or to cancel the dialog.</para>
+            </summary>
+            <param name="message">A string of text to display to the user. Can be omitted if there is nothing to show in the prompt window.</param>
+            <param name="defaultValue">A string containing the default value displayed in the text input field.</param>
+            <returns>A string containing the text entered by the user, or null.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.Confirm(System.String)">
+            <summary>
+            <para>Instructs the browser to display a dialog with an optional message, and to wait until the user either confirms or cancels the dialog.</para>
+            <para>Under some conditions — for example, when the user switches tabs — the browser may not actually display a dialog, or may not wait for the user to confirm or cancel the dialog.</para>
+            </summary>
+            <param name="message">A string you want to display in the confirmation dialog.</param>
+            <returns>Whether OK (true) or Cancel (false) was selected. If a browser is ignoring in-page dialogs, then the returned value is always false.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.Alert(System.String)">
+            <summary>
+            <para>Instructs the browser to display a dialog with an optional message, and to wait until the user dismisses the dialog.</para>
+            <para>Under some conditions — for example, when the user switches tabs — the browser may not actually display a dialog, or may not wait for the user to dismiss the dialog.</para>
+            </summary>
+            <param name="message">A string you want to display in the alert dialog, or, alternatively, an object that is converted into a string and displayed.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.MoveBy(System.Int32,System.Int32)">
+            <summary>
+            Moves the current window by a specified amount.
+            </summary>
+            <remarks>Note: This function moves the window relative to its current location. In contrast, <see cref="M:BrowserAPI.Implementation.WindowInProcess.MoveTo(System.Int32,System.Int32)"/> moves the window to an absolute location.</remarks>
+            <param name="deltaX">The amount of pixels to move the window horizontally. Positive values are to the right, while negative values are to the left.</param>
+            <param name="deltaY">The amount of pixels to move the window vertically. Positive values are down, while negative values are up.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.MoveTo(System.Int32,System.Int32)">
+            <summary>
+            Moves the current window to the specified coordinates.
+            </summary>
+            <remarks>Note: This function moves the window to an absolute location. In contrast, <see cref="M:BrowserAPI.Implementation.WindowInProcess.MoveBy(System.Int32,System.Int32)"/> moves the window relative to its current location.</remarks>
+            <param name="x">The horizontal coordinate to be moved to.</param>
+            <param name="y">The vertical coordinate to be moved to.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.ResizeBy(System.Int32,System.Int32)">
+            <summary>
+            Resizes the current window by a specified amount.
+            </summary>
+            <param name="xDelta">The number of pixels to grow/shrink the window horizontally.</param>
+            <param name="yDelta">The number of pixels to grow/shrink the window vertically.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.ResizeTo(System.Int32,System.Int32)">
+            <summary>
+            Dynamically resizes the window.
+            </summary>
+            <param name="width">An integer representing the new <see cref="P:BrowserAPI.Implementation.WindowInProcess.OuterWidth"/> in pixels (including scroll bars, title bars, etc.).</param>
+            <param name="height">An integer value representing the new <see cref="P:BrowserAPI.Implementation.WindowInProcess.OuterHeight"/> in pixels (including scroll bars, title bars, etc.).</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.Scroll(System.Int32,System.Int32,System.String)">
+            <summary>
+            Scrolls the window to a particular place in the document.
+            </summary>
+            <param name="left">Specifies the number of pixels along the X axis to scroll the window or element.</param>
+            <param name="top">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+            <param name="behavior">
+            Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+            - "smooth": scrolling should animate smoothly<br />
+            - "instant": scrolling should happen instantly in a single jump<br />
+            - "auto": scroll behavior is determined by the computed value of scroll-behavior
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.ScrollTo(System.Int32,System.Int32,System.String)">
+            <summary>
+            Scrolls to a particular set of coordinates in the document.
+            </summary>
+            <param name="left">Specifies the number of pixels along the X axis to scroll the window or element.</param>
+            <param name="top">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+            <param name="behavior">
+            Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+            - "smooth": scrolling should animate smoothly<br />
+            - "instant": scrolling should happen instantly in a single jump<br />
+            - "auto": scroll behavior is determined by the computed value of scroll-behavior
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.ScrollBy(System.Int32,System.Int32,System.String)">
+            <summary>
+            Scrolls the document in the window by the given amount.
+            </summary>
+            <param name="deltaX">The horizontal pixel value that you want to scroll by.</param>
+            <param name="deltaY">The vertical pixel value that you want to scroll by.</param>
+            <param name="behavior">
+            Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+            - "smooth": scrolling should animate smoothly<br />
+            - "instant": scrolling should happen instantly in a single jump<br />
+            - "auto": scroll behavior is determined by the computed value of scroll-behavior
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.SetTimeout(System.Action,System.Int32)">
+            <summary>
+            Sets a timer which executes a function or specified piece of code once the timer expires.
+            </summary>
+            <param name="handler">A function to be executed after the timer expires.</param>
+            <param name="delay">
+            <para>
+            The time, in milliseconds that the timer should wait before the specified function or code is executed.
+            If this parameter is omitted, a value of 0 is used, meaning execute "immediately", or more accurately, the next event cycle.
+            </para>
+            <para>Note that in either case, the actual delay may be longer than intended; see Reasons for delays longer than specified below.</para>
+            </param>
+            <returns>
+            <para>
+            A value that uniquely identifies the timer created by the call.
+            This identifier, often referred to as a "timeout ID", can be passed to <see cref="M:BrowserAPI.Implementation.WindowInProcess.ClearTimeout(BrowserAPI.TimeoutHandle)"/> to cancel the timer.
+            </para>
+            <para>
+            Within the same global environment (e.g., a specific window or worker) the timeout ID is guaranteed not to be reused for any new timer as long as the original timer remains active.
+            However, separate global environments maintain their own independent pools of timer IDs.
+            </para>
+            </returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.ClearTimeout(BrowserAPI.TimeoutHandle)">
+            <summary>
+            <para>Cancels a timeout previously established by calling <see cref="M:BrowserAPI.Implementation.WindowInProcess.SetTimeout(System.Action,System.Int32)"/>.</para>
+            <para>If the parameter provided does not identify a previously established action, this method does nothing.</para>
+            </summary>
+            <remarks>
+            It's worth noting that the pool of IDs used by <see cref="M:BrowserAPI.Implementation.WindowInProcess.SetTimeout(System.Action,System.Int32)"/> and <see cref="M:BrowserAPI.Implementation.WindowInProcess.SetInterval(System.Action,System.Int32)"/> are shared,
+            which means you can technically use <see cref="M:BrowserAPI.Implementation.WindowInProcess.ClearTimeout(BrowserAPI.TimeoutHandle)"/> and <see cref="M:BrowserAPI.Implementation.WindowInProcess.ClearInterval(BrowserAPI.IntervalHandle)"/> interchangeably.
+            However, for clarity, you should avoid doing so.
+            </remarks>
+            <param name="timeoutHandle">The identifier of the timeout you want to cancel. This ID was returned by the corresponding call to <see cref="M:BrowserAPI.Implementation.WindowInProcess.SetTimeout(System.Action,System.Int32)"/>.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.SetInterval(System.Action,System.Int32)">
+            <summary>
+            Repeatedly calls a function or executes a code snippet, with a fixed time delay between each call.
+            </summary>
+            <param name="handler">A function to be executed every delay milliseconds. The first execution happens after delay milliseconds.</param>
+            <param name="delay">
+            The time, in milliseconds (thousandths of a second), the timer should delay in between executions of the specified function or code.
+            Defaults to 0 if not specified.
+            See <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval#delay_restrictions">Delay restrictions</see> below for details on the permitted range of delay values.
+            </param>
+            <returns>
+            <para>
+            A value that uniquely identifies the interval timer created by the call.
+            This identifier, often referred to as an "interval ID", can be passed to <see cref="M:BrowserAPI.Implementation.WindowInProcess.ClearInterval(BrowserAPI.IntervalHandle)"/> to stop the repeated execution of the specified function.
+            </para>
+            <para>
+            Within the same global environment (e.g., a particular window or worker), the interval ID is ensured to remain unique and is not reused for any new interval timer as long as the original timer is still active.
+            However, different global environments maintain their own independent pools of interval IDs.
+            </para>
+            </returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.ClearInterval(BrowserAPI.IntervalHandle)">
+            <summary>
+            Cancels a timed, repeating action which was previously established by a call to <see cref="M:BrowserAPI.Implementation.WindowInProcess.SetInterval(System.Action,System.Int32)"/>.
+            If the parameter provided does not identify a previously established action, this method does nothing.
+            </summary>
+            <remarks>
+            It's worth noting that the pool of IDs used by <see cref="M:BrowserAPI.Implementation.WindowInProcess.SetInterval(System.Action,System.Int32)"/> and <see cref="M:BrowserAPI.Implementation.WindowInProcess.SetTimeout(System.Action,System.Int32)"/> are shared,
+            which means you can technically use <see cref="M:BrowserAPI.Implementation.WindowInProcess.ClearInterval(BrowserAPI.IntervalHandle)"/> and <see cref="M:BrowserAPI.Implementation.WindowInProcess.ClearTimeout(BrowserAPI.TimeoutHandle)"/> interchangeably.
+            However, for clarity, you should avoid doing so.
+            </remarks>
+            <param name="intervalHandle">The identifier of the repeated action you want to cancel. This ID was returned by the corresponding call to <see cref="M:BrowserAPI.Implementation.WindowInProcess.SetInterval(System.Action,System.Int32)"/>.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.RequestAnimationFrame(System.Action{System.Double})">
+            <summary>
+            <para>Tells the browser you wish to perform an animation. It requests the browser to call a user-supplied callback function before the next repaint.</para>
+            <para>
+            The frequency of calls to the callback function will generally match the display refresh rate.
+            The most common refresh rate is 60hz, (60 cycles/frames per second), though 75hz, 120hz, and 144hz are also widely used.
+            requestAnimationFrame() calls are paused in most browsers when running in background tabs or hidden &lt;iframe&gt;s, in order to improve performance and battery life.
+            </para>
+            </summary>
+            <remarks>
+            <para>Note: Your callback function must call requestAnimationFrame() again if you want to animate another frame. requestAnimationFrame() is one-shot.</para>
+            <para>
+            Warning: Be sure always to use the first argument (or some other method for getting the current time) to calculate how much the animation will progress in a frame
+            — otherwise, the animation will run faster on high refresh-rate screens.
+            For ways to do that, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame#examples">the examples below</see>.
+            </para>
+            </remarks>
+            <param name="handler">
+            <para>
+            The function to call when it's time to update your animation for the next repaint. This callback function is passed a single argument:
+            </para>
+            - timestamp:<br />
+            A DOMHighResTimeStamp indicating the end time of the previous frame's rendering (based on the number of milliseconds since time origin).
+            The timestamp is a decimal number, in milliseconds, but with a minimal precision of 1 millisecond.
+            For Window objects (not Workers), it is equal to document.timeline.currentTime.
+            This timestamp is shared between all windows that run on the same agent (all same-origin windows and, more importantly, same-origin iframes)
+            — which allows synchronizing animations across multiple requestAnimationFrame callbacks.
+            The timestamp value is also similar to calling performance.now() at the start of the callback function, but it is never the same value.<br />
+            When multiple callbacks queued by requestAnimationFrame() begin to fire in a single frame,
+            each receives the same timestamp even though time has passed during the computation of every previous callback's workload.
+            </param>
+            <returns>
+            The request ID, that uniquely identifies the entry in the callback list.
+            You should not make any assumptions about its value.
+            You can pass this value to <see cref="M:BrowserAPI.Implementation.WindowInProcess.CancelAnimationFrame(BrowserAPI.AnimationFrameHandle)"/> to cancel the refresh callback request.
+            </returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.CancelAnimationFrame(BrowserAPI.AnimationFrameHandle)">
+            <summary>
+            Cancels an animation frame request previously scheduled through a call to <see cref="M:BrowserAPI.Implementation.WindowInProcess.RequestAnimationFrame(System.Action{System.Double})"/>.
+            </summary>
+            <param name="animationFrameHandle">The ID value returned by the call to <see cref="M:BrowserAPI.Implementation.WindowInProcess.RequestAnimationFrame(System.Action{System.Double})"/> that requested the callback.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.RequestIdleCallback(System.Action,System.Nullable{System.Int32})">
+            <summary>
+            <para>
+            Queues a function to be called during a browser's idle periods.
+            This enables developers to perform background and low priority work on the main thread, without impacting latency-critical events such as animation and input response.
+            Functions are generally called in first-in-first-out order;
+            however, callbacks which have a timeout specified may be called out-of-order if necessary in order to run them before the timeout elapses.
+            </para>
+            <para>You can call <see cref="M:BrowserAPI.Implementation.WindowInProcess.RequestIdleCallback(System.Action,System.Nullable{System.Int32})"/> within an idle callback function to schedule another callback to take place no sooner than the next pass through the event loop.</para>
+            </summary>
+            <param name="handler">
+            A reference to a function that should be called in the near future, when the event loop is idle.
+            The callback function is passed an IdleDeadline object describing the amount of time available and whether or not the callback has been run because the timeout period expired.
+            </param>
+            <param name="timeout">
+            <para>
+            If the number of milliseconds represented by this parameter has elapsed and the callback has not already been called,
+            then a task to execute the callback is queued in the event loop (even if doing so risks causing a negative performance impact).
+            timeout must be a positive value or it is ignored.
+            </para>
+            <para>Note: A timeout option is strongly recommended for required work, as otherwise it's possible multiple seconds will elapse before the callback is fired.</para>
+            </param>
+            <returns>An ID which can be used to cancel the callback by passing it into the <see cref="M:BrowserAPI.Implementation.WindowInProcess.CancelIdleCallback(BrowserAPI.IdleCallbackHandle)"/> method.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.CancelIdleCallback(BrowserAPI.IdleCallbackHandle)">
+            <summary>
+            Cancels a callback previously scheduled with <see cref="M:BrowserAPI.Implementation.WindowInProcess.RequestIdleCallback(System.Action,System.Nullable{System.Int32})"/>.
+            </summary>
+            <param name="idleCallbackHandle">The ID value returned by <see cref="M:BrowserAPI.Implementation.WindowInProcess.RequestIdleCallback(System.Action,System.Nullable{System.Int32})"/> when the callback was established.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.QueueMicrotask(System.Action)">
+            <summary>
+            <para>Queues a microtask to be executed at a safe time prior to control returning to the browser's event loop.</para>
+            <para>
+            The microtask is a short function which will run after the current task has completed its work
+            and when there is no other code waiting to be run before control of the execution context is returned to the browser's event loop.
+            </para>
+            <para>
+            This lets your code run without interfering with any other, potentially higher priority, code that is pending,
+            but before the browser regains control over the execution context, potentially depending on work you need to complete.
+            You can learn more about how to use microtasks and why you might choose to do so in our <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide">microtask guide</see>.
+            </para>
+            <para>
+            The importance of microtasks comes in its ability to perform tasks asynchronously but in a specific order.
+            See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide">Using microtasks in JavaScript with queueMicrotask()</see> for more details.
+            </para>
+            <para>Microtasks are especially useful for libraries and frameworks that need to perform final cleanup or other just-before-rendering tasks.</para>
+            </summary>
+            <param name="handler">
+            A function to be executed when the browser engine determines it is safe to call your code.
+            Enqueued microtasks are executed after all pending tasks have completed but before yielding control to the browser's event loop.
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.Atob(System.String)">
+            <summary>
+            Decodes a string of data which has been encoded using Base64 encoding.
+            You can use the <see cref="M:BrowserAPI.Implementation.WindowInProcess.Btoa(System.String)"/> to encode and transmit data which may otherwise cause communication problems, then transmit it and use this method to decode the data again.
+            For example, you can encode, transmit, and decode control characters such as ASCII values 0 through 31.
+            </summary>
+            <param name="base64">A base64-encoded string, using the alphabet produced by <see cref="M:BrowserAPI.Implementation.WindowInProcess.Btoa(System.String)"/>.</param>
+            <returns>
+            A binary string containing raw bytes decoded from the input.
+            Strings in JavaScript are encoded as UTF-16, so this means each character must have a code point less than 256, representing one byte of data.
+            </returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.Btoa(System.String)">
+            <summary>
+            <para>Creates a Base64-encoded ASCII string from a binary string (i.e., a string in which each character in the string is treated as a byte of binary data).</para>
+            <para>
+            You can use this method to encode data which may otherwise cause communication problems, transmit it, then use the <see cref="M:BrowserAPI.Implementation.WindowInProcess.Atob(System.String)"/> method to decode the data again.
+            For example, you can encode control characters such as ASCII values 0 through 31.
+            </para>
+            </summary>
+            <param name="ascii">The binary string to encode. Strings in JavaScript are encoded as UTF-16, so this means each character must have a code point less than 256, representing one byte of data.</param>
+            <returns>An ASCII string containing the Base64 representation of the input.</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.PostMessage(System.Object,System.String)">
+            <summary>
+            <para>
+            Safely enables cross-origin communication between Window objects;
+            e.g., between a page and a pop-up that it spawned, or between a page and an iframe embedded within it.
+            </para>
+            <para>
+            Normally, scripts on different pages are allowed to access each other if and only if the pages they originate from share the same origin (also known as the "same-origin policy").
+            window.postMessage() provides a controlled mechanism to securely circumvent this restriction (if used properly).
+            </para>
+            <para>
+            Furthermore, an accessing script must have obtained the window object of the accessed document beforehand.
+            This can occur through methods such as <see cref="M:BrowserAPI.Implementation.WindowInProcess.Open(System.String,System.String,System.String)"/> for popups or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/contentWindow">iframe.contentWindow</see> for iframes.
+            </para>
+            <para>
+            Broadly, one window may obtain a reference to another (e.g., via targetWindow = window.opener), and then dispatch a MessageEvent on it with targetWindow.postMessage().
+            The receiving window is then free to handle this event as needed.
+            The arguments passed to window.postMessage() (i.e., the "message") are exposed to the receiving window through the <see cref="!:OnMessage">event object</see>.
+            </para>
+            </summary>
+            <param name="message">
+            Data to be dispatched to the other window.
+            The data is serialized using the <see cref="M:BrowserAPI.Implementation.WindowInProcess.StructuredClone``1(``0)">structured clone algorithm</see>.
+            This means you can pass a broad variety of data objects safely to the destination window without having to serialize them yourself.
+            </param>
+            <param name="targetOrigin">
+            <para>
+            Specifies the origin the recipient window must have in order to receive the event.
+            In order for the event to be dispatched, the origin must match exactly (including scheme, hostname, and port).
+            If omitted, it defaults to "/", which is the origin that is calling the method.
+            This mechanism provides control over where messages are sent;
+            for example, if postMessage() was used to transmit a password,
+            it would be absolutely critical that this argument be a URI whose origin is the same as the intended receiver of the message containing the password,
+            to prevent interception of the password by a malicious third party.
+            </para>
+            <para>"*" may also be provided, which means the message can be dispatched to a listener with any origin.</para>
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowInProcess.StructuredClone``1(``0)">
+            <summary>
+            Creates a deep clone of a given value using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm">structured clone algorithm</see>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value">The object to be cloned. This can be any structured-cloneable type.</param>
+            <returns></returns>
         </member>
         <member name="T:BrowserAPI.Implementation.ModuleManager">
             <summary>
@@ -17284,6 +18189,30 @@
         </member>
         <member name="P:BrowserAPI.GeolocationCoordinates.Timestamp">
             <summary>A timestamp, given as Unix time in milliseconds, representing the time at which the location was retrieved.</summary>
+        </member>
+        <member name="T:BrowserAPI.GeolocationWatchHandle">
+            <summary>
+            <para>
+            The return value of <see cref="M:BrowserAPI.IGeolocation.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)"/> or <see cref="M:BrowserAPI.IGeolocationInProcess.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean)"/>.<br />
+            It can be used to call <see cref="M:BrowserAPI.IGeolocation.ClearWatch(BrowserAPI.GeolocationWatchHandle,System.Threading.CancellationToken)"/> / <see cref="M:BrowserAPI.IGeolocationInProcess.ClearWatch(BrowserAPI.GeolocationWatchHandle)"/>.
+            </para>
+            <para>It contains the watch id as well as the function handler.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.GeolocationWatchHandle.Id">
+            <summary>
+            An integer ID that identifies the registered handler. The ID can be passed to the clearWatch() to unregister the handler.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.GeolocationWatchHandle.SuccessCallback">
+            <summary>
+            The callback handler that was used as parameter for the success case on the <see cref="M:BrowserAPI.IGeolocation.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)"/> / <see cref="M:BrowserAPI.IGeolocationInProcess.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean)"/> call.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.GeolocationWatchHandle.ErrorCallback">
+            <summary>
+            The callback handler that was used as parameter for the error case on the <see cref="M:BrowserAPI.IGeolocation.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)"/> / <see cref="M:BrowserAPI.IGeolocationInProcess.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean)"/> call.
+            </summary>
         </member>
         <member name="T:BrowserAPI.DOMRect">
             <summary>
@@ -20046,6 +20975,98 @@
         <member name="P:BrowserAPI.InstalledRelatedApps.Version">
             <summary>Represents the related app's version.</summary>
         </member>
+        <member name="T:BrowserAPI.TimeoutHandle">
+            <summary>
+            <para>
+            The return value of <see cref="M:BrowserAPI.IWindow.SetTimeout(System.Action,System.Int32,System.Threading.CancellationToken)"/> or <see cref="M:BrowserAPI.IWindowInProcess.SetTimeout(System.Action,System.Int32)"/>.<br />
+            It can be used to call <see cref="M:BrowserAPI.IWindow.ClearTimeout(BrowserAPI.TimeoutHandle,System.Threading.CancellationToken)"/> / <see cref="M:BrowserAPI.IWindowInProcess.ClearTimeout(BrowserAPI.TimeoutHandle)"/>.
+            </para>
+            <para>It contains the timeout id as well as the function handler.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.TimeoutHandle.Id">
+            <summary>
+            <para>
+            The setTimeout() method returns a positive integer (typically within the range of 1 to 2,147,483,647) that uniquely identifies the timer created by the call.
+            This identifier, often referred to as a "timeout ID", can be passed to clearTimeout() to cancel the timer.
+            </para>
+            <para>
+            Within the same global environment (e.g., a specific window or worker) the timeout ID is guaranteed not to be reused for any new timer as long as the original timer remains active.
+            However, separate global environments maintain their own independent pools of timer IDs.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.TimeoutHandle.Callback">
+            <summary>
+            The callback handler that was used as parameter on the <see cref="M:BrowserAPI.IWindow.SetTimeout(System.Action,System.Int32,System.Threading.CancellationToken)"/> / <see cref="M:BrowserAPI.IWindowInProcess.SetTimeout(System.Action,System.Int32)"/> call.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IntervalHandle">
+            <summary>
+            <para>
+            The return value of <see cref="M:BrowserAPI.IWindow.SetInterval(System.Action,System.Int32,System.Threading.CancellationToken)"/> or <see cref="M:BrowserAPI.IWindowInProcess.SetInterval(System.Action,System.Int32)"/>.<br />
+            It can be used to call <see cref="M:BrowserAPI.IWindow.ClearInterval(BrowserAPI.IntervalHandle,System.Threading.CancellationToken)"/> / <see cref="M:BrowserAPI.IWindowInProcess.ClearInterval(BrowserAPI.IntervalHandle)"/>.
+            </para>
+            <para>It contains the interval id as well as the function handler.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IntervalHandle.Id">
+            <summary>
+            <para>
+            The setInterval() method returns a positive integer (typically within the range of 1 to 2,147,483,647) that uniquely identifies the interval timer created by the call.
+            This identifier, often referred to as an "interval ID", can be passed to clearInterval() to stop the repeated execution of the specified function.
+            </para>
+            <para>
+            Within the same global environment (e.g., a particular window or worker), the interval ID is ensured to remain unique and is not reused for any new interval timer as long as the original timer is still active.
+            However, different global environments maintain their own independent pools of interval IDs.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IntervalHandle.Callback">
+            <summary>
+            The callback handler that was used as parameter on the <see cref="M:BrowserAPI.IWindow.SetInterval(System.Action,System.Int32,System.Threading.CancellationToken)"/> / <see cref="M:BrowserAPI.IWindowInProcess.SetInterval(System.Action,System.Int32)"/> call.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.AnimationFrameHandle">
+            <summary>
+            <para>
+            The return value of <see cref="M:BrowserAPI.IWindow.RequestAnimationFrame(System.Action{System.Double},System.Threading.CancellationToken)"/> or <see cref="M:BrowserAPI.IWindowInProcess.RequestAnimationFrame(System.Action{System.Double})"/>.<br />
+            It can be used to call <see cref="M:BrowserAPI.IWindow.CancelAnimationFrame(BrowserAPI.AnimationFrameHandle,System.Threading.CancellationToken)"/> / <see cref="M:BrowserAPI.IWindowInProcess.CancelAnimationFrame(BrowserAPI.AnimationFrameHandle)"/>.
+            </para>
+            <para>It contains the request id as well as the function handler.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.AnimationFrameHandle.Id">
+            <summary>
+            The request ID that uniquely identifies the entry in the callback list.
+            You should not make any assumptions about its value.
+            You can pass this value to cancelAnimationFrame() to cancel the refresh callback request.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.AnimationFrameHandle.Callback">
+            <summary>
+            The callback handler that was used as parameter on the <see cref="M:BrowserAPI.IWindow.RequestAnimationFrame(System.Action{System.Double},System.Threading.CancellationToken)"/> / <see cref="M:BrowserAPI.IWindowInProcess.RequestAnimationFrame(System.Action{System.Double})"/> call.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IdleCallbackHandle">
+            <summary>
+            <para>
+            The return value of <see cref="M:BrowserAPI.IWindow.RequestIdleCallback(System.Action,System.Nullable{System.Int32},System.Threading.CancellationToken)"/> or <see cref="M:BrowserAPI.IWindowInProcess.RequestIdleCallback(System.Action,System.Nullable{System.Int32})"/>.<br />
+            It can be used to call <see cref="M:BrowserAPI.IWindow.CancelIdleCallback(BrowserAPI.IdleCallbackHandle,System.Threading.CancellationToken)"/> / <see cref="M:BrowserAPI.IWindowInProcess.CancelIdleCallback(BrowserAPI.IdleCallbackHandle)"/>.
+            </para>
+            <para>It contains the request id as well as the function handler.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IdleCallbackHandle.Id">
+            <summary>
+            An ID which can be used to cancel the callback by passing it into the cancelIdleCallback() method.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IdleCallbackHandle.Callback">
+            <summary>
+            The callback handler that was used as parameter on the <see cref="M:BrowserAPI.IWindow.RequestIdleCallback(System.Action,System.Nullable{System.Int32},System.Threading.CancellationToken)"/> / <see cref="M:BrowserAPI.IWindowInProcess.RequestIdleCallback(System.Action,System.Nullable{System.Int32})"/> call.
+            </summary>
+        </member>
         <member name="T:BrowserAPI.EnumerableDisposeExtensions">
             <summary>
             Extensions for collections of <see cref="T:System.IDisposable">Disposable</see> objects, including Arrays, Enumerables or tuple of Enumerables.
@@ -20193,11 +21214,6 @@
             Starts the download of the JS module. Returns a Task that represents the download of the module. If this tasks finishes, the download finishes.
             </summary>
             <returns>A Task that represents the download of the module. If this tasks finishes, the download finishes.</returns>
-        </member>
-        <member name="M:BrowserAPI.IModuleManager.InvokeSync(System.String,System.Object[])">
-            <summary>
-            Checks if IJSRuntime object is IJSInProcessRuntime.
-            </summary>
         </member>
         <member name="T:BrowserAPI.AddBrowserAPIExtension">
             <summary>
@@ -25879,9 +26895,9 @@
             Default: false.
             </param>
             <param name="cancellationToken"></param>
-            <returns>WatchId - can be used to <see cref="M:BrowserAPI.IGeolocation.ClearWatch(System.Int32,System.Threading.CancellationToken)">clear</see> this registration.</returns>
+            <returns>WatchId - can be used to <see cref="M:BrowserAPI.IGeolocation.ClearWatch(BrowserAPI.GeolocationWatchHandle,System.Threading.CancellationToken)">clear</see> this registration.</returns>
         </member>
-        <member name="M:BrowserAPI.IGeolocation.ClearWatch(System.Int32,System.Threading.CancellationToken)">
+        <member name="M:BrowserAPI.IGeolocation.ClearWatch(BrowserAPI.GeolocationWatchHandle,System.Threading.CancellationToken)">
             <summary>
             Is used to unregister location/error monitoring handlers previously installed using <see cref="M:BrowserAPI.IGeolocation.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)"/>.
             </summary>
@@ -26090,9 +27106,9 @@
             On the other hand, if false, the device can take the liberty to save resources by responding more quickly and/or using less power.
             Default: false.
             </param>
-            <returns>WatchId - can be used to <see cref="M:BrowserAPI.IGeolocationInProcess.ClearWatch(System.Int32)">clear</see> this registration.</returns>
+            <returns>WatchId - can be used to <see cref="M:BrowserAPI.IGeolocationInProcess.ClearWatch(BrowserAPI.GeolocationWatchHandle)">clear</see> this registration.</returns>
         </member>
-        <member name="M:BrowserAPI.IGeolocationInProcess.ClearWatch(System.Int32)">
+        <member name="M:BrowserAPI.IGeolocationInProcess.ClearWatch(BrowserAPI.GeolocationWatchHandle)">
             <summary>
             Is used to unregister location/error monitoring handlers previously installed using <see cref="M:BrowserAPI.IGeolocationInProcess.WatchPosition(System.Action{BrowserAPI.GeolocationCoordinates},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean)"/>.
             </summary>
@@ -28999,12 +30015,18 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:BrowserAPI.IHTMLElement.ScrollBy(System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:BrowserAPI.IHTMLElement.ScrollBy(System.Int32,System.Int32,System.String,System.Threading.CancellationToken)">
             <summary>
             Scrolls an element by the given amount.
             </summary>
-            <param name="x">Specifies the number of pixels along the X axis to scroll the window or element.</param>
-            <param name="y">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+            <param name="deltaX">Specifies the number of pixels along the X axis to scroll the window or element.</param>
+            <param name="deltaY">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+            <param name="behavior">
+            Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+            - "smooth": scrolling should animate smoothly<br />
+            - "instant": scrolling should happen instantly in a single jump<br />
+            - "auto": scroll behavior is determined by the computed value of scroll-behavior
+            </param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -32537,12 +33559,18 @@
             - "auto": scroll behavior is determined by the computed value of scroll-behavior
             </param>
         </member>
-        <member name="M:BrowserAPI.IHTMLElementInProcess.ScrollBy(System.Int32,System.Int32)">
+        <member name="M:BrowserAPI.IHTMLElementInProcess.ScrollBy(System.Int32,System.Int32,System.String)">
             <summary>
             Scrolls an element by the given amount.
             </summary>
-            <param name="x">Specifies the number of pixels along the X axis to scroll the window or element.</param>
-            <param name="y">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+            <param name="deltaX">Specifies the number of pixels along the X axis to scroll the window or element.</param>
+            <param name="deltaY">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+            <param name="behavior">
+            Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+            - "smooth": scrolling should animate smoothly<br />
+            - "instant": scrolling should happen instantly in a single jump<br />
+            - "auto": scroll behavior is determined by the computed value of scroll-behavior
+            </param>
         </member>
         <member name="M:BrowserAPI.IHTMLElementInProcess.ScrollIntoView(System.String,System.String,System.String)">
             <summary>
@@ -35377,7 +36405,7 @@
             </summary>
             <remarks>
             Note: For use cases that need the ability to send requests with methods other than POST, or to change any request properties, or that need access to the server response,
-            instead use the <see cref="!:IWindow.Fetch"/> method with <i>keepalive</i> set to true.
+            instead use the <see cref="T:System.Net.Http.HttpClient"/>.
             </remarks>
             <param name="url">The URL that will receive the data. Can be relative or absolute.</param>
             <param name="data">Contais the data to send.</param>
@@ -35763,7 +36791,7 @@
             </summary>
             <remarks>
             Note: For use cases that need the ability to send requests with methods other than POST, or to change any request properties, or that need access to the server response,
-            instead use the <see cref="!:IWindowInProcess.Fetch"/> method with <i>keepalive</i> set to true.
+            instead use the <see cref="T:System.Net.Http.HttpClient"/>.
             </remarks>
             <param name="url">The URL that will receive the data. Can be relative or absolute.</param>
             <param name="data">Contais the data to send.</param>
@@ -38429,7 +39457,7 @@
             </para>
             <para>
             In a tabbed browser, each tab is represented by its own Window object; the global window seen by JavaScript code running within a given tab always represents the tab in which the code is running.
-            That said, even in a tabbed browser, some properties and methods still apply to the overall window that contains the tab, such as <see cref="!:ResizeTo"/> and <see cref="P:BrowserAPI.IWindow.InnerHeight"/>.
+            That said, even in a tabbed browser, some properties and methods still apply to the overall window that contains the tab, such as <see cref="M:BrowserAPI.IWindow.ResizeTo(System.Int32,System.Int32,System.Threading.CancellationToken)"/> and <see cref="P:BrowserAPI.IWindow.InnerHeight"/>.
             Generally, anything that can't reasonably pertain to a tab pertains to the window instead.
             </para>
             </summary>
@@ -38498,10 +39526,6 @@
             <para>
             This is useful when dealing with the difference between rendering on a standard display versus a HiDPI or Retina display,
             which use more screen pixels to draw the same objects, resulting in a sharper image.
-            </para>
-            <para>
-            You can use <see cref="!:MatchMedia"/> to check if the value of devicePixelRatio changes (which can happen, for example, if the user drags the window to a display with a different pixel density).
-            See <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio#monitoring_screen_resolution_or_zoom_level_changes">the example below</see>.
             </para>
             </summary>
         </member>
@@ -38676,6 +39700,463 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:BrowserAPI.IWindow.Open(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Loads a specified resource into a new or existing browsing context (that is, a tab, a window, or an iframe) under a specified name.
+            </summary>
+            <param name="url">
+            A string indicating the URL or path of the resource to be loaded.
+            If an empty string ("") is specified or this parameter is omitted, a blank page is opened into the targeted browsing context.
+            </param>
+            <param name="target">
+            <para>
+            A string, without whitespace, specifying the name of the browsing context the resource is being loaded into.<br />
+            If the name doesn't identify an existing context, a new context is created and given the specified name.<br />
+            The special target keywords, "<i>_self</i>", "<i>_blank</i>" (default), "<i>_parent</i>", "<i>_top</i>", and "<i>_unfencedTop</i>" can also be used.<br />
+            "<i>_unfencedTop</i>" is only relevant to fenced frames.
+            </para>
+            <para>This name can be used as the target attribute of &lt;a&gt; or &lt;form&gt; elements.</para>
+            </param>
+            <param name="features">
+            <para>
+            A string containing a comma-separated list of window features in the form <i>name=value</i>.
+            Boolean values can be set to true using one of: <i>name</i>, <i>name=yes</i>, <i>name=true</i>, or <i>name=n</i> where n is any non-zero integer.
+            These features include options such as the window's default size and position, whether or not to open a minimal popup window, and so forth.
+            The following options are supported:</para>
+            <para>
+            - "attributionsrc": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
+            - "popup": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
+            - "width" or "innerWidth": Specifies the width of the content area, including scrollbars. The minimum required value is 100.<br />
+            - "height" or "innerHeight": Specifies the height of the content area, including scrollbars. The minimum required value is 100.<br />
+            - "left" or "screenX": Specifies the distance in pixels from the left side of the work area as defined by the user's operating system where the new window will be generated.<br />
+            - "top" or "screenY": Specifies the distance in pixels from the top side of the work area as defined by the user's operating system where the new window will be generated.<br />
+            - "noopener": If this feature is set, the new window will not have access to the originating window via Window.opener and returns null. When noopener is used, non-empty target names, other than <i>_top</i>, <i>_self</i>, and <i>_parent</i>, are treated like <i>_blank</i> in terms of deciding whether to open a new browsing context.<br />
+            - "noreferrer": If this feature is set, the browser will omit the Referer header, as well as set noopener to true. See rel="noreferrer" for more information.
+            </para>
+            <para>A null value is treated the same as the empty string ("").</para>
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.Close(System.Threading.CancellationToken)">
+            <summary>
+            <para>Closes the current window, or the window on which it was called.</para>
+            <para>
+            Windows are script-closable if they were created by web content. This generally includes:<br/>
+            - Windows opened using <see cref="M:BrowserAPI.IWindow.Open(System.String,System.String,System.String,System.Threading.CancellationToken)"/><br/>
+            - Windows opened via web content, such as links (&lt;a target="_blank"&gt;) or forms (&lt;form target="_blank"&gt;), without user modifier actions
+            </para>
+            <para>
+            Windows opened by browser UI actions — such as right-click → Open in new tab, Ctrl+Click, Shift+Click, or middle-click — are often not script-closable.
+            They may only be closed if they have not been navigated (history length remains 1).
+            Calling close() otherwise typically shows a console warning: Scripts may not close windows that were not opened by script.
+            </para>
+            <para>Note also that close() has no effect when called on Window objects returned by <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/contentWindow">HTMLIFrameElement.contentWindow</see>.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.Stop(System.Threading.CancellationToken)">
+            <summary>
+            <para>Stops further resource loading in the current browsing context, equivalent to the stop button in the browser.</para>
+            <para>Because of how scripts are executed, this method cannot interrupt its parent document's loading, but it will stop its images, new windows, and other still-loading objects.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.Focus(System.Threading.CancellationToken)">
+            <summary>
+            Makes a request to bring the window to the front. It may fail due to user settings and the window isn't guaranteed to be frontmost before this method returns.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.Print(System.Threading.CancellationToken)">
+            <summary>
+            <para>Opens the print dialog to print the current document.</para>
+            <para>If the document is still loading when this function is called, then the document will finish loading before opening the print dialog.</para>
+            <para>This method will block while the print dialog is open.</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.ReportError(System.Object,System.Threading.CancellationToken)">
+            <summary>
+            <para>May be used to report errors to the console or event handlers of global scopes, emulating an uncaught JavaScript exception.</para>
+            <para>
+            This feature is primarily intended for custom event-dispatching or callback-manipulating libraries.
+            Libraries can use this feature to catch errors in callback code and re-throw them to the top level handler.
+            This ensures that an exception in one callback will not prevent others from being handled,
+            while at the same time ensuring that stack trace information is still readily available for debugging at the top level.
+            </para>
+            </summary>
+            <param name="error">An error object such as a TypeError.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.Prompt(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>Instructs the browser to display a dialog with an optional message prompting the user to input some text, and to wait until the user either submits the text or cancels the dialog.</para>
+            <para>Under some conditions (when the user switches tabs, for example) the browser may not display a dialog, or may not wait for the user to submit text or to cancel the dialog.</para>
+            </summary>
+            <param name="message">A string of text to display to the user. Can be omitted if there is nothing to show in the prompt window.</param>
+            <param name="defaultValue">A string containing the default value displayed in the text input field.</param>
+            <param name="cancellationToken"></param>
+            <returns>A string containing the text entered by the user, or null.</returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.Confirm(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>Instructs the browser to display a dialog with an optional message, and to wait until the user either confirms or cancels the dialog.</para>
+            <para>Under some conditions — for example, when the user switches tabs — the browser may not actually display a dialog, or may not wait for the user to confirm or cancel the dialog.</para>
+            </summary>
+            <param name="message">A string you want to display in the confirmation dialog.</param>
+            <param name="cancellationToken"></param>
+            <returns>Whether OK (true) or Cancel (false) was selected. If a browser is ignoring in-page dialogs, then the returned value is always false.</returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.Alert(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>Instructs the browser to display a dialog with an optional message, and to wait until the user dismisses the dialog.</para>
+            <para>Under some conditions — for example, when the user switches tabs — the browser may not actually display a dialog, or may not wait for the user to dismiss the dialog.</para>
+            </summary>
+            <param name="message">A string you want to display in the alert dialog, or, alternatively, an object that is converted into a string and displayed.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.MoveBy(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Moves the current window by a specified amount.
+            </summary>
+            <remarks>Note: This function moves the window relative to its current location. In contrast, <see cref="M:BrowserAPI.IWindow.MoveTo(System.Int32,System.Int32,System.Threading.CancellationToken)"/> moves the window to an absolute location.</remarks>
+            <param name="deltaX">The amount of pixels to move the window horizontally. Positive values are to the right, while negative values are to the left.</param>
+            <param name="deltaY">The amount of pixels to move the window vertically. Positive values are down, while negative values are up.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.MoveTo(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Moves the current window to the specified coordinates.
+            </summary>
+            <remarks>Note: This function moves the window to an absolute location. In contrast, <see cref="M:BrowserAPI.IWindow.MoveBy(System.Int32,System.Int32,System.Threading.CancellationToken)"/> moves the window relative to its current location.</remarks>
+            <param name="x">The horizontal coordinate to be moved to.</param>
+            <param name="y">The vertical coordinate to be moved to.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.ResizeBy(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Resizes the current window by a specified amount.
+            </summary>
+            <param name="xDelta">The number of pixels to grow/shrink the window horizontally.</param>
+            <param name="yDelta">The number of pixels to grow/shrink the window vertically.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.ResizeTo(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Dynamically resizes the window.
+            </summary>
+            <param name="width">An integer representing the new <see cref="P:BrowserAPI.IWindow.OuterWidth"/> in pixels (including scroll bars, title bars, etc.).</param>
+            <param name="height">An integer value representing the new <see cref="P:BrowserAPI.IWindow.OuterHeight"/> in pixels (including scroll bars, title bars, etc.).</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.Scroll(System.Int32,System.Int32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Scrolls the window to a particular place in the document.
+            </summary>
+            <param name="left">Specifies the number of pixels along the X axis to scroll the window or element.</param>
+            <param name="top">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+            <param name="behavior">
+            Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+            - "smooth": scrolling should animate smoothly<br />
+            - "instant": scrolling should happen instantly in a single jump<br />
+            - "auto": scroll behavior is determined by the computed value of scroll-behavior
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.ScrollTo(System.Int32,System.Int32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Scrolls to a particular set of coordinates in the document.
+            </summary>
+            <param name="left">Specifies the number of pixels along the X axis to scroll the window or element.</param>
+            <param name="top">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+            <param name="behavior">
+            Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+            - "smooth": scrolling should animate smoothly<br />
+            - "instant": scrolling should happen instantly in a single jump<br />
+            - "auto": scroll behavior is determined by the computed value of scroll-behavior
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.ScrollBy(System.Int32,System.Int32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Scrolls the document in the window by the given amount.
+            </summary>
+            <param name="deltaX">The horizontal pixel value that you want to scroll by.</param>
+            <param name="deltaY">The vertical pixel value that you want to scroll by.</param>
+            <param name="behavior">
+            Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+            - "smooth": scrolling should animate smoothly<br />
+            - "instant": scrolling should happen instantly in a single jump<br />
+            - "auto": scroll behavior is determined by the computed value of scroll-behavior
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.SetTimeout(System.Action,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Sets a timer which executes a function or specified piece of code once the timer expires.
+            </summary>
+            <param name="handler">A function to be executed after the timer expires.</param>
+            <param name="delay">
+            <para>
+            The time, in milliseconds that the timer should wait before the specified function or code is executed.
+            If this parameter is omitted, a value of 0 is used, meaning execute "immediately", or more accurately, the next event cycle.
+            </para>
+            <para>Note that in either case, the actual delay may be longer than intended; see Reasons for delays longer than specified below.</para>
+            </param>
+            <param name="cancellationToken"></param>
+            <returns>
+            <para>
+            A value that uniquely identifies the timer created by the call.
+            This identifier, often referred to as a "timeout ID", can be passed to <see cref="M:BrowserAPI.IWindow.ClearTimeout(BrowserAPI.TimeoutHandle,System.Threading.CancellationToken)"/> to cancel the timer.
+            </para>
+            <para>
+            Within the same global environment (e.g., a specific window or worker) the timeout ID is guaranteed not to be reused for any new timer as long as the original timer remains active.
+            However, separate global environments maintain their own independent pools of timer IDs.
+            </para>
+            </returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.ClearTimeout(BrowserAPI.TimeoutHandle,System.Threading.CancellationToken)">
+            <summary>
+            <para>Cancels a timeout previously established by calling <see cref="M:BrowserAPI.IWindow.SetTimeout(System.Action,System.Int32,System.Threading.CancellationToken)"/>.</para>
+            <para>If the parameter provided does not identify a previously established action, this method does nothing.</para>
+            </summary>
+            <remarks>
+            It's worth noting that the pool of IDs used by <see cref="M:BrowserAPI.IWindow.SetTimeout(System.Action,System.Int32,System.Threading.CancellationToken)"/> and <see cref="M:BrowserAPI.IWindow.SetInterval(System.Action,System.Int32,System.Threading.CancellationToken)"/> are shared,
+            which means you can technically use <see cref="M:BrowserAPI.IWindow.ClearTimeout(BrowserAPI.TimeoutHandle,System.Threading.CancellationToken)"/> and <see cref="M:BrowserAPI.IWindow.ClearInterval(BrowserAPI.IntervalHandle,System.Threading.CancellationToken)"/> interchangeably.
+            However, for clarity, you should avoid doing so.
+            </remarks>
+            <param name="timeoutHandle">The identifier of the timeout you want to cancel. This ID was returned by the corresponding call to <see cref="M:BrowserAPI.IWindow.SetTimeout(System.Action,System.Int32,System.Threading.CancellationToken)"/>.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.SetInterval(System.Action,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Repeatedly calls a function or executes a code snippet, with a fixed time delay between each call.
+            </summary>
+            <param name="handler">A function to be executed every delay milliseconds. The first execution happens after delay milliseconds.</param>
+            <param name="delay">
+            The time, in milliseconds (thousandths of a second), the timer should delay in between executions of the specified function or code.
+            Defaults to 0 if not specified.
+            See <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval#delay_restrictions">Delay restrictions</see> below for details on the permitted range of delay values.
+            </param>
+            <param name="cancellationToken"></param>
+            <returns>
+            <para>
+            A value that uniquely identifies the interval timer created by the call.
+            This identifier, often referred to as an "interval ID", can be passed to <see cref="M:BrowserAPI.IWindow.ClearInterval(BrowserAPI.IntervalHandle,System.Threading.CancellationToken)"/> to stop the repeated execution of the specified function.
+            </para>
+            <para>
+            Within the same global environment (e.g., a particular window or worker), the interval ID is ensured to remain unique and is not reused for any new interval timer as long as the original timer is still active.
+            However, different global environments maintain their own independent pools of interval IDs.
+            </para>
+            </returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.ClearInterval(BrowserAPI.IntervalHandle,System.Threading.CancellationToken)">
+            <summary>
+            Cancels a timed, repeating action which was previously established by a call to <see cref="M:BrowserAPI.IWindow.SetInterval(System.Action,System.Int32,System.Threading.CancellationToken)"/>.
+            If the parameter provided does not identify a previously established action, this method does nothing.
+            </summary>
+            <remarks>
+            It's worth noting that the pool of IDs used by <see cref="M:BrowserAPI.IWindow.SetInterval(System.Action,System.Int32,System.Threading.CancellationToken)"/> and <see cref="M:BrowserAPI.IWindow.SetTimeout(System.Action,System.Int32,System.Threading.CancellationToken)"/> are shared,
+            which means you can technically use <see cref="M:BrowserAPI.IWindow.ClearInterval(BrowserAPI.IntervalHandle,System.Threading.CancellationToken)"/> and <see cref="M:BrowserAPI.IWindow.ClearTimeout(BrowserAPI.TimeoutHandle,System.Threading.CancellationToken)"/> interchangeably.
+            However, for clarity, you should avoid doing so.
+            </remarks>
+            <param name="intervalHandle">The identifier of the repeated action you want to cancel. This ID was returned by the corresponding call to <see cref="M:BrowserAPI.IWindow.SetInterval(System.Action,System.Int32,System.Threading.CancellationToken)"/>.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.RequestAnimationFrame(System.Action{System.Double},System.Threading.CancellationToken)">
+            <summary>
+            <para>Tells the browser you wish to perform an animation. It requests the browser to call a user-supplied callback function before the next repaint.</para>
+            <para>
+            The frequency of calls to the callback function will generally match the display refresh rate.
+            The most common refresh rate is 60hz, (60 cycles/frames per second), though 75hz, 120hz, and 144hz are also widely used.
+            requestAnimationFrame() calls are paused in most browsers when running in background tabs or hidden &lt;iframe&gt;s, in order to improve performance and battery life.
+            </para>
+            </summary>
+            <remarks>
+            <para>Note: Your callback function must call requestAnimationFrame() again if you want to animate another frame. requestAnimationFrame() is one-shot.</para>
+            <para>
+            Warning: Be sure always to use the first argument (or some other method for getting the current time) to calculate how much the animation will progress in a frame
+            — otherwise, the animation will run faster on high refresh-rate screens.
+            For ways to do that, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame#examples">the examples below</see>.
+            </para>
+            </remarks>
+            <param name="handler">
+            <para>
+            The function to call when it's time to update your animation for the next repaint. This callback function is passed a single argument:
+            </para>
+            - timestamp:<br />
+            A DOMHighResTimeStamp indicating the end time of the previous frame's rendering (based on the number of milliseconds since time origin).
+            The timestamp is a decimal number, in milliseconds, but with a minimal precision of 1 millisecond.
+            For Window objects (not Workers), it is equal to document.timeline.currentTime.
+            This timestamp is shared between all windows that run on the same agent (all same-origin windows and, more importantly, same-origin iframes)
+            — which allows synchronizing animations across multiple requestAnimationFrame callbacks.
+            The timestamp value is also similar to calling performance.now() at the start of the callback function, but it is never the same value.<br />
+            When multiple callbacks queued by requestAnimationFrame() begin to fire in a single frame,
+            each receives the same timestamp even though time has passed during the computation of every previous callback's workload.
+            </param>
+            <param name="cancellationToken"></param>
+            <returns>
+            The request ID, that uniquely identifies the entry in the callback list.
+            You should not make any assumptions about its value.
+            You can pass this value to <see cref="M:BrowserAPI.IWindow.CancelAnimationFrame(BrowserAPI.AnimationFrameHandle,System.Threading.CancellationToken)"/> to cancel the refresh callback request.
+            </returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.CancelAnimationFrame(BrowserAPI.AnimationFrameHandle,System.Threading.CancellationToken)">
+            <summary>
+            Cancels an animation frame request previously scheduled through a call to <see cref="M:BrowserAPI.IWindow.RequestAnimationFrame(System.Action{System.Double},System.Threading.CancellationToken)"/>.
+            </summary>
+            <param name="animationFrameHandle">The ID value returned by the call to <see cref="M:BrowserAPI.IWindow.RequestAnimationFrame(System.Action{System.Double},System.Threading.CancellationToken)"/> that requested the callback.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.RequestIdleCallback(System.Action,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            <para>
+            Queues a function to be called during a browser's idle periods.
+            This enables developers to perform background and low priority work on the main thread, without impacting latency-critical events such as animation and input response.
+            Functions are generally called in first-in-first-out order;
+            however, callbacks which have a timeout specified may be called out-of-order if necessary in order to run them before the timeout elapses.
+            </para>
+            <para>You can call <see cref="M:BrowserAPI.IWindow.RequestIdleCallback(System.Action,System.Nullable{System.Int32},System.Threading.CancellationToken)"/> within an idle callback function to schedule another callback to take place no sooner than the next pass through the event loop.</para>
+            </summary>
+            <param name="handler">
+            A reference to a function that should be called in the near future, when the event loop is idle.
+            The callback function is passed an IdleDeadline object describing the amount of time available and whether or not the callback has been run because the timeout period expired.
+            </param>
+            <param name="timeout">
+            <para>
+            If the number of milliseconds represented by this parameter has elapsed and the callback has not already been called,
+            then a task to execute the callback is queued in the event loop (even if doing so risks causing a negative performance impact).
+            timeout must be a positive value or it is ignored.
+            </para>
+            <para>Note: A timeout option is strongly recommended for required work, as otherwise it's possible multiple seconds will elapse before the callback is fired.</para>
+            </param>
+            <param name="cancellationToken"></param>
+            <returns>An ID which can be used to cancel the callback by passing it into the <see cref="M:BrowserAPI.IWindow.CancelIdleCallback(BrowserAPI.IdleCallbackHandle,System.Threading.CancellationToken)"/> method.</returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.CancelIdleCallback(BrowserAPI.IdleCallbackHandle,System.Threading.CancellationToken)">
+            <summary>
+            Cancels a callback previously scheduled with <see cref="M:BrowserAPI.IWindow.RequestIdleCallback(System.Action,System.Nullable{System.Int32},System.Threading.CancellationToken)"/>.
+            </summary>
+            <param name="idleCallbackHandle">The ID value returned by <see cref="M:BrowserAPI.IWindow.RequestIdleCallback(System.Action,System.Nullable{System.Int32},System.Threading.CancellationToken)"/> when the callback was established.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.QueueMicrotask(System.Action,System.Threading.CancellationToken)">
+            <summary>
+            <para>Queues a microtask to be executed at a safe time prior to control returning to the browser's event loop.</para>
+            <para>
+            The microtask is a short function which will run after the current task has completed its work
+            and when there is no other code waiting to be run before control of the execution context is returned to the browser's event loop.
+            </para>
+            <para>
+            This lets your code run without interfering with any other, potentially higher priority, code that is pending,
+            but before the browser regains control over the execution context, potentially depending on work you need to complete.
+            You can learn more about how to use microtasks and why you might choose to do so in our <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide">microtask guide</see>.
+            </para>
+            <para>
+            The importance of microtasks comes in its ability to perform tasks asynchronously but in a specific order.
+            See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide">Using microtasks in JavaScript with queueMicrotask()</see> for more details.
+            </para>
+            <para>Microtasks are especially useful for libraries and frameworks that need to perform final cleanup or other just-before-rendering tasks.</para>
+            </summary>
+            <param name="handler">
+            A function to be executed when the browser engine determines it is safe to call your code.
+            Enqueued microtasks are executed after all pending tasks have completed but before yielding control to the browser's event loop.
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.Atob(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Decodes a string of data which has been encoded using Base64 encoding.
+            You can use the <see cref="M:BrowserAPI.IWindow.Btoa(System.String,System.Threading.CancellationToken)"/> to encode and transmit data which may otherwise cause communication problems, then transmit it and use this method to decode the data again.
+            For example, you can encode, transmit, and decode control characters such as ASCII values 0 through 31.
+            </summary>
+            <param name="base64">A base64-encoded string, using the alphabet produced by <see cref="M:BrowserAPI.IWindow.Btoa(System.String,System.Threading.CancellationToken)"/>.</param>
+            <param name="cancellationToken"></param>
+            <returns>
+            A binary string containing raw bytes decoded from the input.
+            Strings in JavaScript are encoded as UTF-16, so this means each character must have a code point less than 256, representing one byte of data.
+            </returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.Btoa(System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>Creates a Base64-encoded ASCII string from a binary string (i.e., a string in which each character in the string is treated as a byte of binary data).</para>
+            <para>
+            You can use this method to encode data which may otherwise cause communication problems, transmit it, then use the <see cref="M:BrowserAPI.IWindow.Atob(System.String,System.Threading.CancellationToken)"/> method to decode the data again.
+            For example, you can encode control characters such as ASCII values 0 through 31.
+            </para>
+            </summary>
+            <param name="ascii">The binary string to encode. Strings in JavaScript are encoded as UTF-16, so this means each character must have a code point less than 256, representing one byte of data.</param>
+            <param name="cancellationToken"></param>
+            <returns>An ASCII string containing the Base64 representation of the input.</returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.PostMessage(System.Object,System.String,System.Threading.CancellationToken)">
+            <summary>
+            <para>
+            Safely enables cross-origin communication between Window objects;
+            e.g., between a page and a pop-up that it spawned, or between a page and an iframe embedded within it.
+            </para>
+            <para>
+            Normally, scripts on different pages are allowed to access each other if and only if the pages they originate from share the same origin (also known as the "same-origin policy").
+            window.postMessage() provides a controlled mechanism to securely circumvent this restriction (if used properly).
+            </para>
+            <para>
+            Furthermore, an accessing script must have obtained the window object of the accessed document beforehand.
+            This can occur through methods such as <see cref="M:BrowserAPI.IWindow.Open(System.String,System.String,System.String,System.Threading.CancellationToken)"/> for popups or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/contentWindow">iframe.contentWindow</see> for iframes.
+            </para>
+            <para>
+            Broadly, one window may obtain a reference to another (e.g., via targetWindow = window.opener), and then dispatch a MessageEvent on it with targetWindow.postMessage().
+            The receiving window is then free to handle this event as needed.
+            The arguments passed to window.postMessage() (i.e., the "message") are exposed to the receiving window through the <see cref="!:OnMessage">event object</see>.
+            </para>
+            </summary>
+            <param name="message">
+            Data to be dispatched to the other window.
+            The data is serialized using the <see cref="M:BrowserAPI.IWindow.StructuredClone``1(``0,System.Threading.CancellationToken)">structured clone algorithm</see>.
+            This means you can pass a broad variety of data objects safely to the destination window without having to serialize them yourself.
+            </param>
+            <param name="targetOrigin">
+            <para>
+            Specifies the origin the recipient window must have in order to receive the event.
+            In order for the event to be dispatched, the origin must match exactly (including scheme, hostname, and port).
+            If omitted, it defaults to "/", which is the origin that is calling the method.
+            This mechanism provides control over where messages are sent;
+            for example, if postMessage() was used to transmit a password,
+            it would be absolutely critical that this argument be a URI whose origin is the same as the intended receiver of the message containing the password,
+            to prevent interception of the password by a malicious third party.
+            </para>
+            <para>"*" may also be provided, which means the message can be dispatched to a listener with any origin.</para>
+            </param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindow.StructuredClone``1(``0,System.Threading.CancellationToken)">
+            <summary>
+            Creates a deep clone of a given value using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm">structured clone algorithm</see>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value">The object to be cloned. This can be any structured-cloneable type.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="T:BrowserAPI.IWindowInProcess">
             <summary>
             <para>The Window interface represents a window containing a DOM document; the document property points to the DOM document loaded in that window.</para>
@@ -38689,7 +40170,7 @@
             </para>
             <para>
             In a tabbed browser, each tab is represented by its own Window object; the global window seen by JavaScript code running within a given tab always represents the tab in which the code is running.
-            That said, even in a tabbed browser, some properties and methods still apply to the overall window that contains the tab, such as <see cref="!:ResizeTo"/> and <see cref="P:BrowserAPI.IWindowInProcess.InnerHeight"/>.
+            That said, even in a tabbed browser, some properties and methods still apply to the overall window that contains the tab, such as <see cref="M:BrowserAPI.IWindowInProcess.ResizeTo(System.Int32,System.Int32)"/> and <see cref="P:BrowserAPI.IWindowInProcess.InnerHeight"/>.
             Generally, anything that can't reasonably pertain to a tab pertains to the window instead.
             </para>
             </summary>
@@ -38738,10 +40219,6 @@
             <para>
             This is useful when dealing with the difference between rendering on a standard display versus a HiDPI or Retina display,
             which use more screen pixels to draw the same objects, resulting in a sharper image.
-            </para>
-            <para>
-            You can use <see cref="!:MatchMedia"/> to check if the value of devicePixelRatio changes (which can happen, for example, if the user drags the window to a display with a different pixel density).
-            See <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio#monitoring_screen_resolution_or_zoom_level_changes">the example below</see>.
             </para>
             </summary>
         </member>
@@ -38839,6 +40316,434 @@
             <summary>
             Returns the element (such as &lt;iframe&gt; or &lt;object&gt;) in which the window is embedded.
             </summary>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.Open(System.String,System.String,System.String)">
+            <summary>
+            Loads a specified resource into a new or existing browsing context (that is, a tab, a window, or an iframe) under a specified name.
+            </summary>
+            <param name="url">
+            A string indicating the URL or path of the resource to be loaded.
+            If an empty string ("") is specified or this parameter is omitted, a blank page is opened into the targeted browsing context.
+            </param>
+            <param name="target">
+            <para>
+            A string, without whitespace, specifying the name of the browsing context the resource is being loaded into.<br />
+            If the name doesn't identify an existing context, a new context is created and given the specified name.<br />
+            The special target keywords, "<i>_self</i>", "<i>_blank</i>" (default), "<i>_parent</i>", "<i>_top</i>", and "<i>_unfencedTop</i>" can also be used.<br />
+            "<i>_unfencedTop</i>" is only relevant to fenced frames.
+            </para>
+            <para>This name can be used as the target attribute of &lt;a&gt; or &lt;form&gt; elements.</para>
+            </param>
+            <param name="features">
+            <para>
+            A string containing a comma-separated list of window features in the form <i>name=value</i>.
+            Boolean values can be set to true using one of: <i>name</i>, <i>name=yes</i>, <i>name=true</i>, or <i>name=n</i> where n is any non-zero integer.
+            These features include options such as the window's default size and position, whether or not to open a minimal popup window, and so forth.
+            The following options are supported:</para>
+            <para>
+            - "attributionsrc": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
+            - "popup": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
+            - "width" or "innerWidth": Specifies the width of the content area, including scrollbars. The minimum required value is 100.<br />
+            - "height" or "innerHeight": Specifies the height of the content area, including scrollbars. The minimum required value is 100.<br />
+            - "left" or "screenX": Specifies the distance in pixels from the left side of the work area as defined by the user's operating system where the new window will be generated.<br />
+            - "top" or "screenY": Specifies the distance in pixels from the top side of the work area as defined by the user's operating system where the new window will be generated.<br />
+            - "noopener": If this feature is set, the new window will not have access to the originating window via Window.opener and returns null. When noopener is used, non-empty target names, other than <i>_top</i>, <i>_self</i>, and <i>_parent</i>, are treated like <i>_blank</i> in terms of deciding whether to open a new browsing context.<br />
+            - "noreferrer": If this feature is set, the browser will omit the Referer header, as well as set noopener to true. See rel="noreferrer" for more information.
+            </para>
+            <para>A null value is treated the same as the empty string ("").</para>
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.Close">
+            <summary>
+            <para>Closes the current window, or the window on which it was called.</para>
+            <para>
+            Windows are script-closable if they were created by web content. This generally includes:<br/>
+            - Windows opened using <see cref="M:BrowserAPI.IWindowInProcess.Open(System.String,System.String,System.String)"/><br/>
+            - Windows opened via web content, such as links (&lt;a target="_blank"&gt;) or forms (&lt;form target="_blank"&gt;), without user modifier actions
+            </para>
+            <para>
+            Windows opened by browser UI actions — such as right-click → Open in new tab, Ctrl+Click, Shift+Click, or middle-click — are often not script-closable.
+            They may only be closed if they have not been navigated (history length remains 1).
+            Calling close() otherwise typically shows a console warning: Scripts may not close windows that were not opened by script.
+            </para>
+            <para>Note also that close() has no effect when called on Window objects returned by <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/contentWindow">HTMLIFrameElement.contentWindow</see>.</para>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.Stop">
+            <summary>
+            <para>Stops further resource loading in the current browsing context, equivalent to the stop button in the browser.</para>
+            <para>Because of how scripts are executed, this method cannot interrupt its parent document's loading, but it will stop its images, new windows, and other still-loading objects.</para>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.Focus">
+            <summary>
+            Makes a request to bring the window to the front. It may fail due to user settings and the window isn't guaranteed to be frontmost before this method returns.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.Print">
+            <summary>
+            <para>Opens the print dialog to print the current document.</para>
+            <para>If the document is still loading when this function is called, then the document will finish loading before opening the print dialog.</para>
+            <para>This method will block while the print dialog is open.</para>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.ReportError(System.Object)">
+            <summary>
+            <para>May be used to report errors to the console or event handlers of global scopes, emulating an uncaught JavaScript exception.</para>
+            <para>
+            This feature is primarily intended for custom event-dispatching or callback-manipulating libraries.
+            Libraries can use this feature to catch errors in callback code and re-throw them to the top level handler.
+            This ensures that an exception in one callback will not prevent others from being handled,
+            while at the same time ensuring that stack trace information is still readily available for debugging at the top level.
+            </para>
+            </summary>
+            <param name="error">An error object such as a TypeError.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.Prompt(System.String,System.String)">
+            <summary>
+            <para>Instructs the browser to display a dialog with an optional message prompting the user to input some text, and to wait until the user either submits the text or cancels the dialog.</para>
+            <para>Under some conditions (when the user switches tabs, for example) the browser may not display a dialog, or may not wait for the user to submit text or to cancel the dialog.</para>
+            </summary>
+            <param name="message">A string of text to display to the user. Can be omitted if there is nothing to show in the prompt window.</param>
+            <param name="defaultValue">A string containing the default value displayed in the text input field.</param>
+            <returns>A string containing the text entered by the user, or null.</returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.Confirm(System.String)">
+            <summary>
+            <para>Instructs the browser to display a dialog with an optional message, and to wait until the user either confirms or cancels the dialog.</para>
+            <para>Under some conditions — for example, when the user switches tabs — the browser may not actually display a dialog, or may not wait for the user to confirm or cancel the dialog.</para>
+            </summary>
+            <param name="message">A string you want to display in the confirmation dialog.</param>
+            <returns>Whether OK (true) or Cancel (false) was selected. If a browser is ignoring in-page dialogs, then the returned value is always false.</returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.Alert(System.String)">
+            <summary>
+            <para>Instructs the browser to display a dialog with an optional message, and to wait until the user dismisses the dialog.</para>
+            <para>Under some conditions — for example, when the user switches tabs — the browser may not actually display a dialog, or may not wait for the user to dismiss the dialog.</para>
+            </summary>
+            <param name="message">A string you want to display in the alert dialog, or, alternatively, an object that is converted into a string and displayed.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.MoveBy(System.Int32,System.Int32)">
+            <summary>
+            Moves the current window by a specified amount.
+            </summary>
+            <remarks>Note: This function moves the window relative to its current location. In contrast, <see cref="M:BrowserAPI.IWindowInProcess.MoveTo(System.Int32,System.Int32)"/> moves the window to an absolute location.</remarks>
+            <param name="deltaX">The amount of pixels to move the window horizontally. Positive values are to the right, while negative values are to the left.</param>
+            <param name="deltaY">The amount of pixels to move the window vertically. Positive values are down, while negative values are up.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.MoveTo(System.Int32,System.Int32)">
+            <summary>
+            Moves the current window to the specified coordinates.
+            </summary>
+            <remarks>Note: This function moves the window to an absolute location. In contrast, <see cref="M:BrowserAPI.IWindowInProcess.MoveBy(System.Int32,System.Int32)"/> moves the window relative to its current location.</remarks>
+            <param name="x">The horizontal coordinate to be moved to.</param>
+            <param name="y">The vertical coordinate to be moved to.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.ResizeBy(System.Int32,System.Int32)">
+            <summary>
+            Resizes the current window by a specified amount.
+            </summary>
+            <param name="xDelta">The number of pixels to grow/shrink the window horizontally.</param>
+            <param name="yDelta">The number of pixels to grow/shrink the window vertically.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.ResizeTo(System.Int32,System.Int32)">
+            <summary>
+            Dynamically resizes the window.
+            </summary>
+            <param name="width">An integer representing the new <see cref="P:BrowserAPI.IWindowInProcess.OuterWidth"/> in pixels (including scroll bars, title bars, etc.).</param>
+            <param name="height">An integer value representing the new <see cref="P:BrowserAPI.IWindowInProcess.OuterHeight"/> in pixels (including scroll bars, title bars, etc.).</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.Scroll(System.Int32,System.Int32,System.String)">
+            <summary>
+            Scrolls the window to a particular place in the document.
+            </summary>
+            <param name="left">Specifies the number of pixels along the X axis to scroll the window or element.</param>
+            <param name="top">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+            <param name="behavior">
+            Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+            - "smooth": scrolling should animate smoothly<br />
+            - "instant": scrolling should happen instantly in a single jump<br />
+            - "auto": scroll behavior is determined by the computed value of scroll-behavior
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.ScrollTo(System.Int32,System.Int32,System.String)">
+            <summary>
+            Scrolls to a particular set of coordinates in the document.
+            </summary>
+            <param name="left">Specifies the number of pixels along the X axis to scroll the window or element.</param>
+            <param name="top">Specifies the number of pixels along the Y axis to scroll the window or element.</param>
+            <param name="behavior">
+            Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+            - "smooth": scrolling should animate smoothly<br />
+            - "instant": scrolling should happen instantly in a single jump<br />
+            - "auto": scroll behavior is determined by the computed value of scroll-behavior
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.ScrollBy(System.Int32,System.Int32,System.String)">
+            <summary>
+            Scrolls the document in the window by the given amount.
+            </summary>
+            <param name="deltaX">The horizontal pixel value that you want to scroll by.</param>
+            <param name="deltaY">The vertical pixel value that you want to scroll by.</param>
+            <param name="behavior">
+            Determines whether scrolling is instant or animates smoothly. This option is a string which must take one of the following values:<br />
+            - "smooth": scrolling should animate smoothly<br />
+            - "instant": scrolling should happen instantly in a single jump<br />
+            - "auto": scroll behavior is determined by the computed value of scroll-behavior
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.SetTimeout(System.Action,System.Int32)">
+            <summary>
+            Sets a timer which executes a function or specified piece of code once the timer expires.
+            </summary>
+            <param name="handler">A function to be executed after the timer expires.</param>
+            <param name="delay">
+            <para>
+            The time, in milliseconds that the timer should wait before the specified function or code is executed.
+            If this parameter is omitted, a value of 0 is used, meaning execute "immediately", or more accurately, the next event cycle.
+            </para>
+            <para>Note that in either case, the actual delay may be longer than intended; see Reasons for delays longer than specified below.</para>
+            </param>
+            <returns>
+            <para>
+            A value that uniquely identifies the timer created by the call.
+            This identifier, often referred to as a "timeout ID", can be passed to <see cref="M:BrowserAPI.IWindowInProcess.ClearTimeout(BrowserAPI.TimeoutHandle)"/> to cancel the timer.
+            </para>
+            <para>
+            Within the same global environment (e.g., a specific window or worker) the timeout ID is guaranteed not to be reused for any new timer as long as the original timer remains active.
+            However, separate global environments maintain their own independent pools of timer IDs.
+            </para>
+            </returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.ClearTimeout(BrowserAPI.TimeoutHandle)">
+            <summary>
+            <para>Cancels a timeout previously established by calling <see cref="M:BrowserAPI.IWindowInProcess.SetTimeout(System.Action,System.Int32)"/>.</para>
+            <para>If the parameter provided does not identify a previously established action, this method does nothing.</para>
+            </summary>
+            <remarks>
+            It's worth noting that the pool of IDs used by <see cref="M:BrowserAPI.IWindowInProcess.SetTimeout(System.Action,System.Int32)"/> and <see cref="M:BrowserAPI.IWindowInProcess.SetInterval(System.Action,System.Int32)"/> are shared,
+            which means you can technically use <see cref="M:BrowserAPI.IWindowInProcess.ClearTimeout(BrowserAPI.TimeoutHandle)"/> and <see cref="M:BrowserAPI.IWindowInProcess.ClearInterval(BrowserAPI.IntervalHandle)"/> interchangeably.
+            However, for clarity, you should avoid doing so.
+            </remarks>
+            <param name="timeoutHandle">The identifier of the timeout you want to cancel. This ID was returned by the corresponding call to <see cref="M:BrowserAPI.IWindowInProcess.SetTimeout(System.Action,System.Int32)"/>.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.SetInterval(System.Action,System.Int32)">
+            <summary>
+            Repeatedly calls a function or executes a code snippet, with a fixed time delay between each call.
+            </summary>
+            <param name="handler">A function to be executed every delay milliseconds. The first execution happens after delay milliseconds.</param>
+            <param name="delay">
+            The time, in milliseconds (thousandths of a second), the timer should delay in between executions of the specified function or code.
+            Defaults to 0 if not specified.
+            See <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval#delay_restrictions">Delay restrictions</see> below for details on the permitted range of delay values.
+            </param>
+            <returns>
+            <para>
+            A value that uniquely identifies the interval timer created by the call.
+            This identifier, often referred to as an "interval ID", can be passed to <see cref="M:BrowserAPI.IWindowInProcess.ClearInterval(BrowserAPI.IntervalHandle)"/> to stop the repeated execution of the specified function.
+            </para>
+            <para>
+            Within the same global environment (e.g., a particular window or worker), the interval ID is ensured to remain unique and is not reused for any new interval timer as long as the original timer is still active.
+            However, different global environments maintain their own independent pools of interval IDs.
+            </para>
+            </returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.ClearInterval(BrowserAPI.IntervalHandle)">
+            <summary>
+            Cancels a timed, repeating action which was previously established by a call to <see cref="M:BrowserAPI.IWindowInProcess.SetInterval(System.Action,System.Int32)"/>.
+            If the parameter provided does not identify a previously established action, this method does nothing.
+            </summary>
+            <remarks>
+            It's worth noting that the pool of IDs used by <see cref="M:BrowserAPI.IWindowInProcess.SetInterval(System.Action,System.Int32)"/> and <see cref="M:BrowserAPI.IWindowInProcess.SetTimeout(System.Action,System.Int32)"/> are shared,
+            which means you can technically use <see cref="M:BrowserAPI.IWindowInProcess.ClearInterval(BrowserAPI.IntervalHandle)"/> and <see cref="M:BrowserAPI.IWindowInProcess.ClearTimeout(BrowserAPI.TimeoutHandle)"/> interchangeably.
+            However, for clarity, you should avoid doing so.
+            </remarks>
+            <param name="intervalHandle">The identifier of the repeated action you want to cancel. This ID was returned by the corresponding call to <see cref="M:BrowserAPI.IWindowInProcess.SetInterval(System.Action,System.Int32)"/>.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.RequestAnimationFrame(System.Action{System.Double})">
+            <summary>
+            <para>Tells the browser you wish to perform an animation. It requests the browser to call a user-supplied callback function before the next repaint.</para>
+            <para>
+            The frequency of calls to the callback function will generally match the display refresh rate.
+            The most common refresh rate is 60hz, (60 cycles/frames per second), though 75hz, 120hz, and 144hz are also widely used.
+            requestAnimationFrame() calls are paused in most browsers when running in background tabs or hidden &lt;iframe&gt;s, in order to improve performance and battery life.
+            </para>
+            </summary>
+            <remarks>
+            <para>Note: Your callback function must call requestAnimationFrame() again if you want to animate another frame. requestAnimationFrame() is one-shot.</para>
+            <para>
+            Warning: Be sure always to use the first argument (or some other method for getting the current time) to calculate how much the animation will progress in a frame
+            — otherwise, the animation will run faster on high refresh-rate screens.
+            For ways to do that, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame#examples">the examples below</see>.
+            </para>
+            </remarks>
+            <param name="handler">
+            <para>
+            The function to call when it's time to update your animation for the next repaint. This callback function is passed a single argument:
+            </para>
+            - timestamp:<br />
+            A DOMHighResTimeStamp indicating the end time of the previous frame's rendering (based on the number of milliseconds since time origin).
+            The timestamp is a decimal number, in milliseconds, but with a minimal precision of 1 millisecond.
+            For Window objects (not Workers), it is equal to document.timeline.currentTime.
+            This timestamp is shared between all windows that run on the same agent (all same-origin windows and, more importantly, same-origin iframes)
+            — which allows synchronizing animations across multiple requestAnimationFrame callbacks.
+            The timestamp value is also similar to calling performance.now() at the start of the callback function, but it is never the same value.<br />
+            When multiple callbacks queued by requestAnimationFrame() begin to fire in a single frame,
+            each receives the same timestamp even though time has passed during the computation of every previous callback's workload.
+            </param>
+            <returns>
+            The request ID, that uniquely identifies the entry in the callback list.
+            You should not make any assumptions about its value.
+            You can pass this value to <see cref="M:BrowserAPI.IWindowInProcess.CancelAnimationFrame(BrowserAPI.AnimationFrameHandle)"/> to cancel the refresh callback request.
+            </returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.CancelAnimationFrame(BrowserAPI.AnimationFrameHandle)">
+            <summary>
+            Cancels an animation frame request previously scheduled through a call to <see cref="M:BrowserAPI.IWindowInProcess.RequestAnimationFrame(System.Action{System.Double})"/>.
+            </summary>
+            <param name="animationFrameHandle">The ID value returned by the call to <see cref="M:BrowserAPI.IWindowInProcess.RequestAnimationFrame(System.Action{System.Double})"/> that requested the callback.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.RequestIdleCallback(System.Action,System.Nullable{System.Int32})">
+            <summary>
+            <para>
+            Queues a function to be called during a browser's idle periods.
+            This enables developers to perform background and low priority work on the main thread, without impacting latency-critical events such as animation and input response.
+            Functions are generally called in first-in-first-out order;
+            however, callbacks which have a timeout specified may be called out-of-order if necessary in order to run them before the timeout elapses.
+            </para>
+            <para>You can call <see cref="M:BrowserAPI.IWindowInProcess.RequestIdleCallback(System.Action,System.Nullable{System.Int32})"/> within an idle callback function to schedule another callback to take place no sooner than the next pass through the event loop.</para>
+            </summary>
+            <param name="handler">
+            A reference to a function that should be called in the near future, when the event loop is idle.
+            The callback function is passed an IdleDeadline object describing the amount of time available and whether or not the callback has been run because the timeout period expired.
+            </param>
+            <param name="timeout">
+            <para>
+            If the number of milliseconds represented by this parameter has elapsed and the callback has not already been called,
+            then a task to execute the callback is queued in the event loop (even if doing so risks causing a negative performance impact).
+            timeout must be a positive value or it is ignored.
+            </para>
+            <para>Note: A timeout option is strongly recommended for required work, as otherwise it's possible multiple seconds will elapse before the callback is fired.</para>
+            </param>
+            <returns>An ID which can be used to cancel the callback by passing it into the <see cref="M:BrowserAPI.IWindowInProcess.CancelIdleCallback(BrowserAPI.IdleCallbackHandle)"/> method.</returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.CancelIdleCallback(BrowserAPI.IdleCallbackHandle)">
+            <summary>
+            Cancels a callback previously scheduled with <see cref="M:BrowserAPI.IWindowInProcess.RequestIdleCallback(System.Action,System.Nullable{System.Int32})"/>.
+            </summary>
+            <param name="idleCallbackHandle">The ID value returned by <see cref="M:BrowserAPI.IWindowInProcess.RequestIdleCallback(System.Action,System.Nullable{System.Int32})"/> when the callback was established.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.QueueMicrotask(System.Action)">
+            <summary>
+            <para>Queues a microtask to be executed at a safe time prior to control returning to the browser's event loop.</para>
+            <para>
+            The microtask is a short function which will run after the current task has completed its work
+            and when there is no other code waiting to be run before control of the execution context is returned to the browser's event loop.
+            </para>
+            <para>
+            This lets your code run without interfering with any other, potentially higher priority, code that is pending,
+            but before the browser regains control over the execution context, potentially depending on work you need to complete.
+            You can learn more about how to use microtasks and why you might choose to do so in our <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide">microtask guide</see>.
+            </para>
+            <para>
+            The importance of microtasks comes in its ability to perform tasks asynchronously but in a specific order.
+            See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide">Using microtasks in JavaScript with queueMicrotask()</see> for more details.
+            </para>
+            <para>Microtasks are especially useful for libraries and frameworks that need to perform final cleanup or other just-before-rendering tasks.</para>
+            </summary>
+            <param name="handler">
+            A function to be executed when the browser engine determines it is safe to call your code.
+            Enqueued microtasks are executed after all pending tasks have completed but before yielding control to the browser's event loop.
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.Atob(System.String)">
+            <summary>
+            Decodes a string of data which has been encoded using Base64 encoding.
+            You can use the <see cref="M:BrowserAPI.IWindowInProcess.Btoa(System.String)"/> to encode and transmit data which may otherwise cause communication problems, then transmit it and use this method to decode the data again.
+            For example, you can encode, transmit, and decode control characters such as ASCII values 0 through 31.
+            </summary>
+            <param name="base64">A base64-encoded string, using the alphabet produced by <see cref="M:BrowserAPI.IWindowInProcess.Btoa(System.String)"/>.</param>
+            <returns>
+            A binary string containing raw bytes decoded from the input.
+            Strings in JavaScript are encoded as UTF-16, so this means each character must have a code point less than 256, representing one byte of data.
+            </returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.Btoa(System.String)">
+            <summary>
+            <para>Creates a Base64-encoded ASCII string from a binary string (i.e., a string in which each character in the string is treated as a byte of binary data).</para>
+            <para>
+            You can use this method to encode data which may otherwise cause communication problems, transmit it, then use the <see cref="M:BrowserAPI.IWindowInProcess.Atob(System.String)"/> method to decode the data again.
+            For example, you can encode control characters such as ASCII values 0 through 31.
+            </para>
+            </summary>
+            <param name="ascii">The binary string to encode. Strings in JavaScript are encoded as UTF-16, so this means each character must have a code point less than 256, representing one byte of data.</param>
+            <returns>An ASCII string containing the Base64 representation of the input.</returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.PostMessage(System.Object,System.String)">
+            <summary>
+            <para>
+            Safely enables cross-origin communication between Window objects;
+            e.g., between a page and a pop-up that it spawned, or between a page and an iframe embedded within it.
+            </para>
+            <para>
+            Normally, scripts on different pages are allowed to access each other if and only if the pages they originate from share the same origin (also known as the "same-origin policy").
+            window.postMessage() provides a controlled mechanism to securely circumvent this restriction (if used properly).
+            </para>
+            <para>
+            Furthermore, an accessing script must have obtained the window object of the accessed document beforehand.
+            This can occur through methods such as <see cref="M:BrowserAPI.IWindowInProcess.Open(System.String,System.String,System.String)"/> for popups or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/contentWindow">iframe.contentWindow</see> for iframes.
+            </para>
+            <para>
+            Broadly, one window may obtain a reference to another (e.g., via targetWindow = window.opener), and then dispatch a MessageEvent on it with targetWindow.postMessage().
+            The receiving window is then free to handle this event as needed.
+            The arguments passed to window.postMessage() (i.e., the "message") are exposed to the receiving window through the <see cref="!:OnMessage">event object</see>.
+            </para>
+            </summary>
+            <param name="message">
+            Data to be dispatched to the other window.
+            The data is serialized using the <see cref="M:BrowserAPI.IWindowInProcess.StructuredClone``1(``0)">structured clone algorithm</see>.
+            This means you can pass a broad variety of data objects safely to the destination window without having to serialize them yourself.
+            </param>
+            <param name="targetOrigin">
+            <para>
+            Specifies the origin the recipient window must have in order to receive the event.
+            In order for the event to be dispatched, the origin must match exactly (including scheme, hostname, and port).
+            If omitted, it defaults to "/", which is the origin that is calling the method.
+            This mechanism provides control over where messages are sent;
+            for example, if postMessage() was used to transmit a password,
+            it would be absolutely critical that this argument be a URI whose origin is the same as the intended receiver of the message containing the password,
+            to prevent interception of the password by a malicious third party.
+            </para>
+            <para>"*" may also be provided, which means the message can be dispatched to a listener with any origin.</para>
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.StructuredClone``1(``0)">
+            <summary>
+            Creates a deep clone of a given value using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm">structured clone algorithm</see>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value">The object to be cloned. This can be any structured-cloneable type.</param>
+            <returns></returns>
         </member>
         <member name="T:CircleDIAttributes.IBrowserAPIModule">
             <summary>

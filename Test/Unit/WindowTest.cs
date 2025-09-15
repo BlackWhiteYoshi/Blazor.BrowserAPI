@@ -1,4 +1,5 @@
 ﻿using BrowserAPI.Test.Client;
+using Microsoft.Playwright;
 
 namespace BrowserAPI.UnitTest;
 
@@ -327,5 +328,267 @@ public sealed class WindowTest(PlayWrightFixture playWrightFixture) : PlayWright
 
         string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
+    }
+
+
+    // Methods
+
+    [Test]
+    public async Task Open() {
+        await ExecuteTest(WindowGroup.BUTTON_OPEN);
+
+        IPage page = BrowserContext.Pages.First((IPage page) => page.Url.EndsWith("/null"));
+        await Assert.That(page).IsNotNull();
+        await page.CloseAsync();
+    }
+
+    [Test]
+    public async Task Close() {
+        string result = "no warning output in console";
+        void OnConsoleMessage(object? sender, IConsoleMessage message) {
+            if (message.Type is "warning")
+                result = message.Text;
+        }
+
+        Page.Console += OnConsoleMessage;
+        await ExecuteTest(WindowGroup.BUTTON_CLOSE);
+        Page.Console -= OnConsoleMessage;
+
+        await Assert.That(result).IsEqualTo("Scripts may close only the windows that were opened by them.");
+    }
+
+    [Test]
+    public async Task Stop() {
+        await ExecuteTest(WindowGroup.BUTTON_STOP);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_STOP);
+    }
+
+    [Test]
+    public async Task Focus() {
+        await ExecuteTest(WindowGroup.BUTTON_FOCUS);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_FOCUS);
+    }
+
+    [Test]
+    public async Task Print() {
+        await ExecuteTest(WindowGroup.BUTTON_PRINT);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_PRINT);
+    }
+
+    [Test]
+    public async Task ReportError() {
+        await ExecuteTest(WindowGroup.BUTTON_REPORT_ERROR);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_REPORT_ERROR);
+    }
+
+    [Test]
+    public async Task Prompt() {
+        await ExecuteTest(WindowGroup.BUTTON_PROMPT);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_PROMPT_RESULT);
+    }
+
+    [Test]
+    public async Task Confirm() {
+        await ExecuteTest(WindowGroup.BUTTON_CONFIRM);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("False");
+    }
+
+    [Test]
+    public async Task Alert() {
+        await ExecuteTest(WindowGroup.BUTTON_ALERT);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_ALERT);
+    }
+
+
+    [Test]
+    public async Task MoveBy() {
+        await ExecuteTest(WindowGroup.BUTTON_MOVE_BY);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_MOVE_BY);
+    }
+
+    [Test]
+    public async Task MoveTo() {
+        await ExecuteTest(WindowGroup.BUTTON_MOVE_TO);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_MOVE_TO);
+    }
+
+    [Test]
+    public async Task ResizeBy() {
+        await ExecuteTest(WindowGroup.BUTTON_RESIZE_BY);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_RESIZE_BY);
+    }
+
+    [Test]
+    public async Task ResizeTo() {
+        await ExecuteTest(WindowGroup.BUTTON_RESIZE_TO);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_RESIZE_TO);
+    }
+
+    [Test]
+    public async Task Scroll() {
+        await ExecuteTest(WindowGroup.BUTTON_SCROLL);
+
+        int result = await Page.EvaluateAsync<int>("window.scrollY");
+        await Assert.That(result).IsEqualTo(10);
+    }
+
+    [Test]
+    public async Task ScrollTo() {
+        await ExecuteTest(WindowGroup.BUTTON_SCROLL_TO);
+
+        int result = await Page.EvaluateAsync<int>("window.scrollY");
+        await Assert.That(result).IsEqualTo(10);
+    }
+
+    [Test]
+    public async Task ScrollBy() {
+        await Page.GetByTestId(WindowGroup.BUTTON_SCROLL_BY).HoverAsync();
+        await Task.Delay(STANDARD_WAIT_TIME);
+        int startPosition = await Page.EvaluateAsync<int>("window.scrollY");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        await ExecuteTest(WindowGroup.BUTTON_SCROLL_BY);
+
+        int endPosition = await Page.EvaluateAsync<int>("window.scrollY");
+        int result = endPosition - startPosition;
+        await Assert.That(result).IsEqualTo(10);
+    }
+
+
+    [Test]
+    public async Task SetTimeout() {
+        await ExecuteTest(WindowGroup.BUTTON_SET_TIMEOUT);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_SET_TIMEOUT);
+    }
+
+    [Test]
+    public async Task ClearTimeout() {
+        await ExecuteTest(WindowGroup.BUTTON_CLEAR_TIMEOUT);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_CLEAR_TIMEOUT);
+    }
+
+    [Test]
+    public async Task SetInterval() {
+        await ExecuteTest(WindowGroup.BUTTON_SET_INTERVAL);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_SET_INTERVAL);
+    }
+
+    [Test]
+    public async Task ClearInterval() {
+        await ExecuteTest(WindowGroup.BUTTON_CLEAR_INTERVAL);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_CLEAR_INTERVAL);
+    }
+
+    [Test]
+    public async Task RequestAnimationFrame() {
+        await ExecuteTest(WindowGroup.BUTTON_REQUEST_ANIMATION_FRAME);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_REQUEST_ANIMATION_FRAME);
+    }
+
+    [Test]
+    public async Task CancelAnimationFrame() {
+        await ExecuteTest(WindowGroup.BUTTON_CANCEL_ANIMATION_FRAME);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_CANCEL_ANIMATION_FRAME);
+    }
+
+    [Test]
+    public async Task RequestIdleCallback() {
+        await ExecuteTest(WindowGroup.BUTTON_REQUEST_IDLE_CALLBACK);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_REQUEST_IDLE_CALLBACK);
+    }
+
+    [Test]
+    public async Task CancelIdleCallback() {
+        await ExecuteTest(WindowGroup.BUTTON_CANCEL_IDLE_CALLBACK);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_CANCEL_IDLE_CALLBACK);
+    }
+
+    [Test]
+    public async Task QueueMicrotask() {
+        await ExecuteTest(WindowGroup.BUTTON_QUEUE_MICROTASK);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_QUEUE_MICROTASK);
+    }
+
+
+    [Test]
+    public async Task Atob() {
+        await ExecuteTest(WindowGroup.BUTTON_ATOB);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_BASE64);
+    }
+
+    [Test]
+    public async Task Btoa() {
+        await ExecuteTest(WindowGroup.BUTTON_BTOA);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(WindowGroup.TEST_BASE64)));
+    }
+
+    [Test]
+    public async Task PostMessage() {
+        string result = "no info output in console";
+        void OnConsoleMessage(object? sender, IConsoleMessage message) {
+            if (message.Type is "warning")
+                result = message.Text;
+        }
+
+        await Page.EvaluateAsync("window.onmessage = (event) => console.warn(event?.data);");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        Page.Console += OnConsoleMessage;
+        await ExecuteTest(WindowGroup.BUTTON_POST_MESSAGE);
+        Page.Console -= OnConsoleMessage;
+
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_POST_MESSAGE);
+    }
+
+    [Test]
+    public async Task StructuredClone() {
+        await ExecuteTest(WindowGroup.BUTTON_STRUCTURED_CLONE);
+
+        string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(WindowGroup.TEST_STRUCTURED_CLONE);
     }
 }

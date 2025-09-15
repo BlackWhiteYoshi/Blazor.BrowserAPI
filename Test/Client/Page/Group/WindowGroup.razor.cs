@@ -4,6 +4,28 @@ namespace BrowserAPI.Test.Client;
 
 public sealed partial class WindowGroup : ComponentBase {
     public const string TEST_NAME = "somw window name";
+    public const string TEST_STOP = "stop test";
+    public const string TEST_FOCUS = "focus test";
+    public const string TEST_PRINT = "print test";
+    public const string TEST_REPORT_ERROR = "error test";
+    public const string TEST_PROMPT_RESULT = "prompt canceled";
+    public const string TEST_ALERT = "alert test";
+    public const string TEST_MOVE_BY = "move by test";
+    public const string TEST_MOVE_TO = "move to test";
+    public const string TEST_RESIZE_BY = "resize by test";
+    public const string TEST_RESIZE_TO = "resize to test";
+    public const string TEST_SET_TIMEOUT = "set timeout test";
+    public const string TEST_CLEAR_TIMEOUT = "clear timeout test";
+    public const string TEST_SET_INTERVAL = "set interval test";
+    public const string TEST_CLEAR_INTERVAL = "clear interval test";
+    public const string TEST_REQUEST_ANIMATION_FRAME = "request animation frame test";
+    public const string TEST_CANCEL_ANIMATION_FRAME = "cancel animation frame test";
+    public const string TEST_REQUEST_IDLE_CALLBACK = "request idle callback test";
+    public const string TEST_CANCEL_IDLE_CALLBACK = "cancel idle callback test";
+    public const string TEST_QUEUE_MICROTASK = "queue microtask test";
+    public const string TEST_BASE64 = "base64 test";
+    public const string TEST_POST_MESSAGE = "window message test";
+    public const string TEST_STRUCTURED_CLONE = "cloned message";
 
 
     [Inject]
@@ -239,5 +261,207 @@ public sealed partial class WindowGroup : ComponentBase {
     private async Task GetFrameElement_Method() {
         await using IHTMLElement? frameElement = await Window.GetFrameElement(default);
         labelOutput = (frameElement is not null).ToString();
+    }
+
+
+    // Methods
+
+    public const string BUTTON_OPEN = "window-open";
+    private async Task Open() {
+        IWindow? window = await Window.Open();
+        labelOutput = (window is not null).ToString();
+    }
+
+    public const string BUTTON_CLOSE = "window-close";
+    private async Task Close() {
+        await Window.Close();
+    }
+
+    public const string BUTTON_STOP = "window-stop";
+    private async Task Stop() {
+        await Window.Stop();
+        labelOutput = TEST_STOP;
+    }
+
+    public const string BUTTON_FOCUS = "window-focus";
+    private async Task Focus() {
+        await Window.Focus();
+        labelOutput = TEST_FOCUS;
+    }
+
+    public const string BUTTON_PRINT = "window-print";
+    private async Task Print() {
+        await Window.Print();
+        labelOutput = TEST_PRINT;
+    }
+
+    public const string BUTTON_REPORT_ERROR = "window-report-error";
+    private async Task ReportError() {
+        await Window.ReportError(TEST_REPORT_ERROR);
+        labelOutput = TEST_REPORT_ERROR;
+    }
+
+    public const string BUTTON_PROMPT = "window-prompt";
+    private async Task Prompt() {
+        string? result = await Window.Prompt("P message", "answer");
+        labelOutput = result ?? TEST_PROMPT_RESULT;
+    }
+
+    public const string BUTTON_CONFIRM = "window-confirm";
+    private async Task Confirm() {
+        bool result = await Window.Confirm("C message");
+        labelOutput = result.ToString();
+    }
+
+    public const string BUTTON_ALERT = "window-alert";
+    private async Task Alert() {
+        await Window.Alert("A message");
+        labelOutput = TEST_ALERT;
+    }
+
+
+    public const string BUTTON_MOVE_BY = "window-move-by";
+    private async Task MoveBy() {
+        await Window.MoveBy(10, 10);
+        labelOutput = TEST_MOVE_BY;
+    }
+
+    public const string BUTTON_MOVE_TO = "window-move-to";
+    private async Task MoveTo() {
+        await Window.MoveTo(10, 10);
+        labelOutput = TEST_MOVE_TO;
+    }
+
+    public const string BUTTON_RESIZE_BY = "window-resize-by";
+    private async Task ResizeBy() {
+        await Window.ResizeBy(10, 10);
+        labelOutput = TEST_RESIZE_BY;
+    }
+
+    public const string BUTTON_RESIZE_TO = "window-resize-to";
+    private async Task ResizeTo() {
+        await Window.ResizeTo(10, 10);
+        labelOutput = TEST_RESIZE_TO;
+    }
+
+    public const string BUTTON_SCROLL = "window-scroll";
+    private async Task Scroll() {
+        await Window.Scroll(0, 10, "instant");
+    }
+
+    public const string BUTTON_SCROLL_TO = "window-scroll-to";
+    private async Task ScrollTo() {
+        await Window.ScrollTo(0, 10, "instant");
+    }
+
+    public const string BUTTON_SCROLL_BY = "window-scroll-by";
+    private async Task ScrollBy() {
+        await Window.ScrollBy(0, 10, "instant");
+    }
+
+
+    public const string BUTTON_SET_TIMEOUT = "window-set-timeout";
+    private async Task SetTimeout() {
+        await Window.SetTimeout(() => {
+            labelOutput = TEST_SET_TIMEOUT;
+            StateHasChanged();
+        }, 100);
+    }
+
+    public const string BUTTON_CLEAR_TIMEOUT = "window-clear-timeout";
+    private async Task ClearTimeout() {
+        labelOutput = TEST_CLEAR_TIMEOUT;
+        TimeoutHandle timeoutHandle = await Window.SetTimeout(() => {
+            labelOutput = TEST_SET_TIMEOUT;
+            StateHasChanged();
+        }, 100);
+        await Window.ClearTimeout(timeoutHandle);
+    }
+
+    public const string BUTTON_SET_INTERVAL = "window-set-interval";
+    private async Task SetInterval() {
+        await Window.SetInterval(() => {
+            labelOutput = TEST_SET_INTERVAL;
+            StateHasChanged();
+        }, 100);
+    }
+
+    public const string BUTTON_CLEAR_INTERVAL = "window-clear-interval";
+    private async Task ClearInterval() {
+        labelOutput = TEST_CLEAR_INTERVAL;
+        IntervalHandle intervalHandle = await Window.SetInterval(() => {
+            labelOutput = TEST_SET_INTERVAL;
+            StateHasChanged();
+        }, 100);
+        await Window.ClearInterval(intervalHandle);
+    }
+
+    public const string BUTTON_REQUEST_ANIMATION_FRAME = "window-request-animation-frame";
+    private async Task RequestAnimationFrame() {
+        await Window.RequestAnimationFrame((double timestamp) => {
+            labelOutput = TEST_REQUEST_ANIMATION_FRAME;
+            StateHasChanged();
+        });
+    }
+
+    public const string BUTTON_CANCEL_ANIMATION_FRAME = "window-cancel-animation-frame";
+    private async Task CancelAnimationFrame() {
+        labelOutput = TEST_CANCEL_ANIMATION_FRAME;
+        AnimationFrameHandle animationFrameHandle = await Window.RequestAnimationFrame((double timestamp) => {
+            labelOutput = TEST_REQUEST_ANIMATION_FRAME;
+            StateHasChanged();
+        });
+        await Window.CancelAnimationFrame(animationFrameHandle);
+    }
+
+    public const string BUTTON_REQUEST_IDLE_CALLBACK = "window-request-idle-callback";
+    private async Task RequestIdleCallback() {
+        await Window.RequestIdleCallback(() => {
+            labelOutput = TEST_REQUEST_IDLE_CALLBACK;
+            StateHasChanged();
+        });
+    }
+
+    public const string BUTTON_CANCEL_IDLE_CALLBACK = "window-cancel-idle-callback";
+    private async Task CancelIdleCallback() {
+        IdleCallbackHandle idleCallbackHandle = await Window.RequestIdleCallback(() => {
+            labelOutput = TEST_REQUEST_IDLE_CALLBACK;
+            StateHasChanged();
+        });
+        await Window.CancelIdleCallback(idleCallbackHandle);
+        labelOutput = TEST_CANCEL_IDLE_CALLBACK; // test is actually not really correct, but more consistent
+    }
+
+    public const string BUTTON_QUEUE_MICROTASK = "window-queue-microtask";
+    private async Task QueueMicrotask() {
+        await Window.QueueMicrotask(() => {
+            labelOutput = TEST_QUEUE_MICROTASK;
+            StateHasChanged();
+        });
+    }
+
+
+    public const string BUTTON_ATOB = "window-atob";
+    private async Task Atob() {
+        string base64 = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(TEST_BASE64));
+        string text = await Window.Atob(base64);
+        labelOutput = text;
+    }
+
+    public const string BUTTON_BTOA = "window-btoa";
+    private async Task Btoa() {
+        string base64 = await Window.Btoa(TEST_BASE64);
+        labelOutput = base64;
+    }
+
+    public const string BUTTON_POST_MESSAGE = "window-post-message";
+    private async Task PostMessage() {
+        await Window.PostMessage(TEST_POST_MESSAGE, "*");
+    }
+
+    public const string BUTTON_STRUCTURED_CLONE = "window-structured-clone";
+    private async Task StructuredClone() {
+        string clonedMessage = await Window.StructuredClone(TEST_STRUCTURED_CLONE);
+        labelOutput = clonedMessage;
     }
 }
