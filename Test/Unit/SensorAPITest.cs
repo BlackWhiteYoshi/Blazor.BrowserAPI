@@ -154,6 +154,60 @@ public sealed class SensorAPITest(PlayWrightFixture playWrightFixture) : PlayWri
     }
 
 
+    // Window Events
+
+    [Test]
+    public async Task RegisterOnDeviceMotion() {
+        await ExecuteTest(SensorAPIGroup.BUTTON_REGISTER_ON_DEVICE_MOTION);
+        await Page.EvaluateAsync("""
+            const event = new Event("devicemotion");
+            event.acceleration = { x: 1, y: 2, z: 3 };
+            event.accelerationIncludingGravity = { x: 4, y: 5, z: 6 };
+            event.rotationRate = { alpha: 7, beta: 8, gamma: 9 };
+            event.interval = 10;
+            window.dispatchEvent(event);
+            """);
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(SensorAPIGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith(nameof(DeviceMotionEvent));
+    }
+
+    [Test]
+    public async Task RegisterOnDeviceOrientation() {
+        await ExecuteTest(SensorAPIGroup.BUTTON_REGISTER_ON_DEVICE_ORIENTATION);
+        await Page.EvaluateAsync("""
+            const event = new Event("deviceorientation");
+            event.absolute = false;
+            event.alpha = 1;
+            event.beta = 2;
+            event.gamma = 3;
+            window.dispatchEvent(event);
+            """);
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(SensorAPIGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith(nameof(DeviceOrientationEvent));
+    }
+
+    [Test]
+    public async Task RegisterOnDeviceOrientationAbsolute() {
+        await ExecuteTest(SensorAPIGroup.BUTTON_REGISTER_ON_DEVICE_ORIENTATION_ABSOLUTE);
+        await Page.EvaluateAsync("""
+            const event = new Event("deviceorientationabsolute");
+            event.absolute = true;
+            event.alpha = 1;
+            event.beta = 2;
+            event.gamma = 3;
+            window.dispatchEvent(event);
+            """);
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(SensorAPIGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).StartsWith(nameof(DeviceOrientationEvent));
+    }
+
+
     // AmbientLightSensor
 
     [Test]

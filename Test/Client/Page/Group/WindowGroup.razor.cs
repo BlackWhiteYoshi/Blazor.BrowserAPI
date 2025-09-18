@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System.Text.Json;
 
 namespace BrowserAPI.Test.Client;
 
 public sealed partial class WindowGroup : ComponentBase {
     public const string TEST_NAME = "somw window name";
+    // methods
     public const string TEST_STOP = "stop test";
     public const string TEST_FOCUS = "focus test";
     public const string TEST_PRINT = "print test";
@@ -26,6 +28,62 @@ public sealed partial class WindowGroup : ComponentBase {
     public const string TEST_BASE64 = "base64 test";
     public const string TEST_POST_MESSAGE = "window message test";
     public const string TEST_STRUCTURED_CLONE = "cloned message";
+    // events
+    public const string TEST_EVENT_LANGUAGE_CHANGE = "language changed test";
+    public const string TEST_EVENT_RESIZE = "resize test";
+    public const string TEST_EVENT_FOCUS = "focus test";
+    public const string TEST_EVENT_BLUR = "blur test";
+    public const string TEST_EVENT_LOAD = "load test";
+    public const string TEST_EVENT_BEFORE_UNLOAD = "before unload test";
+    public const string TEST_EVENT_APP_INSTALLED = "app installed test";
+    public const string TEST_EVENT_BEFORE_INSTALL_PROMPT = "before install prompt test";
+    public const string TEST_EVENT_AFTER_PRINT = "after print test";
+    public const string TEST_EVENT_BEFORE_PRINT = "before print test";
+    // events - HTMLElement
+    public const string TEST_EVENT_SCROLL = "scroll event";
+    public const string TEST_EVENT_SCROLL_END = "scroll end event";
+    public const string TEST_EVENT_CHANGE = "change event";
+    // events - Element
+    public const string TEST_EVENT_BEFORE_MATCH = "before-match-event-test";
+    public const string TEST_EVENT_SCROLL_START = "scroll-start-event-test";
+    public const string TEST_EVENT_FOCUS_IN = "focus-in-event-test";
+    public const string TEST_EVENT_FOCUS_OUT = "focus-out-event-test";
+    public const string TEST_EVENT_COPY = "copy-event-test";
+    public const string TEST_EVENT_PASTE = "paste-event-test";
+    public const string TEST_EVENT_CUT = "cut-event-test";
+    public const string TEST_EVENT_TRANSITION_START = "transition-start-event-test";
+    public const string TEST_EVENT_TRANSITION_END = "transition-end-event-test";
+    public const string TEST_EVENT_TRANSITION_RUN = "transition-run-event-test";
+    public const string TEST_EVENT_TRANSITION_CANCEL = "transition-cancel-event-test";
+    public const string TEST_EVENT_ANIMATION_START = "animation-start-event-test";
+    public const string TEST_EVENT_ANIMATION_END = "animation-end-event-test";
+    public const string TEST_EVENT_ANIMATION_ITERATION = "animation-iteration-event-test";
+    public const string TEST_EVENT_ANIMATION_CANCEL = "animation-cancel-event-test";
+    // events - HTMLMediaElement
+    public const string TEST_EVENT_CAN_PLAY = "CanPlay event";
+    public const string TEST_EVENT_CAN_PLAY_THROUGH = "CanPlayThrough event";
+    public const string TEST_EVENT_PLAYING = "Playing event";
+    public const string TEST_EVENT_LOAD_START = "LoadStart event";
+    public const string TEST_EVENT_PROGRESS = "Progress event";
+    public const string TEST_EVENT_LOADED_DATA = "LoadedData event";
+    public const string TEST_EVENT_LOADED_METADATA = "LoadedMetadata event";
+    public const string TEST_EVENT_STALLED = "stalled event";
+    public const string TEST_EVENT_SUSPEND = "Suspend event";
+    public const string TEST_EVENT_WAITING = "Waiting event";
+    public const string TEST_EVENT_ABORT = "Abort event";
+    public const string TEST_EVENT_EMPTIED = "Emptied event";
+    public const string TEST_EVENT_PLAY = "Play event";
+    public const string TEST_EVENT_PAUSE = "Pause event";
+    public const string TEST_EVENT_ENDED = "Ended event";
+    public const string TEST_EVENT_SEEKING = "Seeking event";
+    public const string TEST_EVENT_SEEKED = "Seeked event";
+    public const string TEST_EVENT_TIME_UPDATE = "TimeUpdate event";
+    public const string TEST_EVENT_VOLUME_CHANGE = "VolumeChange event";
+    public const string TEST_EVENT_RATE_CHANGE = "RateChange event";
+    public const string TEST_EVENT_DURATION_CHANGE = "DurationChange event";
+    // events - HTMLDialogElement
+    public const string TEST_EVENT_CLOSE = "close-event-test";
+    public const string TEST_EVENT_CANCEL = "cancel-event-test";
 
 
     [Inject]
@@ -463,5 +521,873 @@ public sealed partial class WindowGroup : ComponentBase {
     private async Task StructuredClone() {
         string clonedMessage = await Window.StructuredClone(TEST_STRUCTURED_CLONE);
         labelOutput = clonedMessage;
+    }
+
+
+    // Events
+
+    public const string BUTTON_REGISTER_ON_ERROR = "window-error-event";
+    private void RegisterOnError() {
+        Window.OnError += (JsonElement error) => {
+            labelOutput = error.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_LANGUAGE_CHANGE = "window-language-change-event";
+    private void RegisterOnLanguageChange() {
+        Window.OnLanguageChange += () => {
+            labelOutput = TEST_EVENT_LANGUAGE_CHANGE;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_RESIZE = "window-resize-event";
+    private void RegisterOnResize() {
+        Window.OnResize += () => {
+            labelOutput = TEST_EVENT_RESIZE;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_STORAGE = "window-storage-event";
+    private void RegisterOnStorage() {
+        Window.OnStorage += (StorageEvent storageEvent) => {
+            labelOutput = storageEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+
+    public const string BUTTON_REGISTER_ON_FOCUS = "window-focus-event";
+    private void RegisterOnFocus() {
+        Window.OnFocus += () => {
+            labelOutput = TEST_EVENT_FOCUS;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_BLUR = "window-blur-event";
+    private void RegisterOnBlur() {
+        Window.OnBlur += () => {
+            labelOutput = TEST_EVENT_BLUR;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_LOAD = "window-load-event";
+    private void RegisterOnLoad() {
+        Window.OnLoad += () => {
+            labelOutput = TEST_EVENT_LOAD;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_BEFORE_UNLOAD = "window-before-unload-event";
+    private void RegisterOnBeforeUnload() {
+        Window.OnBeforeUnload += () => {
+            labelOutput = TEST_EVENT_BEFORE_UNLOAD;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_APP_INSTALLED = "window-app-installed-event";
+    private void RegisterOnAppInstalled() {
+        Window.OnAppInstalled += () => {
+            labelOutput = TEST_EVENT_APP_INSTALLED;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_BEFORE_INSTALL_PROMPT = "window-before-install-prompt-event";
+    private void RegisterOnBeforeInstallPrompt() {
+        Window.OnBeforeInstallPrompt += () => {
+            labelOutput = TEST_EVENT_BEFORE_INSTALL_PROMPT;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_MESSAGE = "window-message-event";
+    private void RegisterOnMessage() {
+        Window.OnMessage += (JsonElement data, string origin, string lastEventId) => {
+            labelOutput = $"data = {data}, origin = {origin}, lastEventId = {lastEventId}";
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_MESSAGE_ERROR = "window-message-error-event";
+    private void RegisterOnMessageError() {
+        Window.OnMessageError += (JsonElement data, string origin, string lastEventId) => {
+            labelOutput = $"data = {data}, origin = {origin}, lastEventId = {lastEventId}";
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_AFTER_PRINT = "window-after-print-event";
+    private void RegisterOnAfterPrint() {
+        Window.OnAfterPrint += () => {
+            labelOutput = TEST_EVENT_AFTER_PRINT;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_BEFORE_PRINT = "window-before-print-event";
+    private void RegisterOnBeforePrint() {
+        Window.OnBeforePrint += () => {
+            labelOutput = TEST_EVENT_BEFORE_PRINT;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_REJECTION_HANDLED = "window-rejection-handled-event";
+    private void RegisterOnRejectionHandled() {
+        Window.OnRejectionHandled += (JsonElement? reason) => {
+            labelOutput = reason switch {
+                JsonElement => reason.ToString() switch {
+                    string str => str,
+                    _ => "(text representation of reason is null)"
+                },
+                _ => "(no reason)"
+            };
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_UNHANDLED_REJECTION = "window-unhandled-rejection-event";
+    private void RegisterOnUnhandledRejection() {
+        Window.OnUnhandledRejection += (JsonElement? reason) => {
+            labelOutput = reason switch {
+                JsonElement => reason.ToString() switch {
+                    string str => str,
+                    _ => "(text representation of reason is null)"
+                },
+                _ => "(no reason)"
+            };
+            StateHasChanged();
+        };
+    }
+
+
+    // events - HTMLElement
+
+    public const string BUTTON_REGISTER_ON_SCROLL = "window-scroll-event";
+    private void RegisterOnScroll() {
+        Window.OnScroll += () => {
+            labelOutput = TEST_EVENT_SCROLL;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_SCROLL_END = "window-scroll-end-event";
+    private void RegisterOnScrollEnd() {
+        Window.OnScrollEnd += () => {
+            labelOutput = TEST_EVENT_SCROLL_END;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_CHANGE = "window-change-event";
+    private void RegisterOnChange() {
+        Window.OnChange += () => {
+            labelOutput = TEST_EVENT_CHANGE;
+            StateHasChanged();
+        };
+    }
+
+
+    public const string BUTTON_REGISTER_ON_DRAG = "window-drag-event";
+    private void RegisterOnDrag() {
+        Window.OnDrag += (DragEvent dragEvent) => {
+            _ = DoAsync();
+            async Task DoAsync() {
+                string[] content = new string[dragEvent.Files.Length];
+                for (int i = 0; i < content.Length; i++)
+                    content[i] = await dragEvent.Files[i].Text();
+
+                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
+                StateHasChanged();
+                await dragEvent.Files.DisposeAsync();
+            }
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_DRAG_START = "window-drag-start-event";
+    private void RegisterOnDragStart() {
+        Window.OnDragStart += (DragEvent dragEvent) => {
+            _ = DoAsync();
+            async Task DoAsync() {
+                string[] content = new string[dragEvent.Files.Length];
+                for (int i = 0; i < content.Length; i++)
+                    content[i] = await dragEvent.Files[i].Text();
+
+                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
+                StateHasChanged();
+                await dragEvent.Files.DisposeAsync();
+            }
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_DRAG_END = "window-drag-end-event";
+    private void RegisterOnDragEnd() {
+        Window.OnDragEnd += (DragEvent dragEvent) => {
+            _ = DoAsync();
+            async Task DoAsync() {
+                string[] content = new string[dragEvent.Files.Length];
+                for (int i = 0; i < content.Length; i++)
+                    content[i] = await dragEvent.Files[i].Text();
+
+                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
+                StateHasChanged();
+                await dragEvent.Files.DisposeAsync();
+            }
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_DRAG_ENTER = "window-drag-enter-event";
+    private void RegisterOnDragEnter() {
+        Window.OnDragEnter += (DragEvent dragEvent) => {
+            _ = DoAsync();
+            async Task DoAsync() {
+                string[] content = new string[dragEvent.Files.Length];
+                for (int i = 0; i < content.Length; i++)
+                    content[i] = await dragEvent.Files[i].Text();
+
+                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
+                StateHasChanged();
+                await dragEvent.Files.DisposeAsync();
+            }
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_DRAG_LEAVE = "window-drag-leave-event";
+    private void RegisterOnDragLeave() {
+        Window.OnDragLeave += (DragEvent dragEvent) => {
+            _ = DoAsync();
+            async Task DoAsync() {
+                string[] content = new string[dragEvent.Files.Length];
+                for (int i = 0; i < content.Length; i++)
+                    content[i] = await dragEvent.Files[i].Text();
+
+                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
+                StateHasChanged();
+                await dragEvent.Files.DisposeAsync();
+            }
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_DRAG_OVER = "window-drag-over-event";
+    private void RegisterOnDragOver() {
+        Window.OnDragOver += (DragEvent dragEvent) => {
+            _ = DoAsync();
+            async Task DoAsync() {
+                string[] content = new string[dragEvent.Files.Length];
+                for (int i = 0; i < content.Length; i++)
+                    content[i] = await dragEvent.Files[i].Text();
+
+                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
+                StateHasChanged();
+                await dragEvent.Files.DisposeAsync();
+            }
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_DROP = "window-drop-event";
+    private void RegisterOnDrop() {
+        Window.OnDrop += (DragEvent dragEvent) => {
+            _ = DoAsync();
+            async Task DoAsync() {
+                string[] content = new string[dragEvent.Files.Length];
+                for (int i = 0; i < content.Length; i++)
+                    content[i] = await dragEvent.Files[i].Text();
+
+                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
+                StateHasChanged();
+                await dragEvent.Files.DisposeAsync();
+            }
+        };
+    }
+
+
+    public const string BUTTON_REGISTER_ON_TOGGLE = "window-toggle-event";
+    private void RegisterOnToggle() {
+        Window.OnToggle += (string oldState, string newState) => {
+            labelOutput = $"oldState='{oldState}', newState='{newState}'";
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_BEFORE_TOGGLE = "window-before-toggle-event";
+    private void RegisterOnBeforeToggle() {
+        Window.OnBeforeToggle += (string oldState, string newState) => {
+            labelOutput = $"oldState='{oldState}', newState='{newState}'";
+            StateHasChanged();
+        };
+    }
+
+
+    // events - Element
+
+    public const string BUTTON_REGISTER_ON_INPUT = "window-input-event";
+    private void RegisterOnInput() {
+        Window.OnInput += (string? data, string? inputType, bool isComposing) => {
+            labelOutput = $"data={data ?? "(null)"}, inputType={inputType ?? "(null)"}, isComposing={isComposing}";
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_BEFORE_INPUT = "window-before-input-event";
+    private void RegisterOnBeforeInput() {
+        Window.OnBeforeInput += (string? data, string? inputType, bool isComposing) => {
+            labelOutput = $"data={data ?? "(null)"}, inputType={inputType ?? "(null)"}, isComposing={isComposing}";
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_BEFORE_MATCH = "window-before-match-event";
+    private void RegisterOnBeforeMatch() {
+        Window.OnBeforeMatch += () => {
+            labelOutput = TEST_EVENT_BEFORE_MATCH;
+            StateHasChanged();
+        };
+    }
+
+
+    public const string BUTTON_REGISTER_ON_KEY_DOWN = "window-key-down-event";
+    private void RegisterOnKeyDown() {
+        Window.OnKeyDown += (KeyboardEvent keyboardEvent) => {
+            labelOutput = keyboardEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_KEY_UP = "window-key-up-event";
+    private void RegisterOnKeyUp() {
+        Window.OnKeyUp += (KeyboardEvent keyboardEvent) => {
+            labelOutput = keyboardEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+
+    public const string BUTTON_REGISTER_ON_CLICK = "window-click-event";
+    private void RegisterOnClick() {
+        Window.OnClick += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_DBL_CLICK = "window-dbl-click-event";
+    private void RegisterOnDblClick() {
+        Window.OnDblClick += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_AUX_CLICK = "window-aux-click-event";
+    private void RegisterOnAuxClick() {
+        Window.OnAuxClick += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_CONTEXT_MENU = "window-context-menu-event";
+    private void RegisterOnContextMenu() {
+        Window.OnContextMenu += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_MOUSE_DOWN = "window-mouse-down-event";
+    private void RegisterOnMouseDown() {
+        Window.OnMouseDown += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_MOUSE_UP = "window-mouse-up-event";
+    private void RegisterOnMouseUp() {
+        Window.OnMouseUp += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_WHEEL = "window-wheel-event";
+    private void RegisterOnWheel() {
+        Window.OnWheel += (WheelEvent wheelEvent) => {
+            labelOutput = wheelEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_MOUSE_MOVE = "window-mouse-move-event";
+    private void RegisterOnMouseMove() {
+        Window.OnMouseMove += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_MOUSE_OVER = "window-mouse-over-event";
+    private void RegisterOnMouseOver() {
+        Window.OnMouseOver += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_MOUSE_OUT = "window-mouse-out-event";
+    private void RegisterOnMouseOut() {
+        Window.OnMouseOut += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_MOUSE_ENTER = "window-mouse-enter-event";
+    private void RegisterOnMouseEnter() {
+        Window.OnMouseEnter += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_MOUSE_LEAVE = "window-mouse-leave-event";
+    private void RegisterOnMouseLeave() {
+        Window.OnMouseLeave += (MouseEvent mouseEvent) => {
+            labelOutput = mouseEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+
+    public const string BUTTON_REGISTER_ON_TOUCH_START = "window-touch-start-event";
+    private void RegisterOnTouchStart() {
+        Window.OnTouchStart += (TouchEvent touchEvent) => {
+            labelOutput = touchEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_TOUCH_END = "window-touch-end-event";
+    private void RegisterOnTouchEnd() {
+        Window.OnTouchEnd += (TouchEvent touchEvent) => {
+            labelOutput = touchEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_TOUCH_MOVE = "window-touch-move-event";
+    private void RegisterOnTouchMove() {
+        Window.OnTouchMove += (TouchEvent touchEvent) => {
+            labelOutput = touchEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_TOUCH_CANCEL = "window-touch-cancel-event";
+    private void RegisterOnTouchCancel() {
+        Window.OnTouchCancel += (TouchEvent touchEvent) => {
+            labelOutput = touchEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+
+    public const string BUTTON_REGISTER_ON_POINTER_DOWN = "window-pointer-down-event";
+    private void RegisterOnPointerDown() {
+        Window.OnPointerDown += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_POINTER_UP = "window-pointer-up-event";
+    private void RegisterOnPointerUp() {
+        Window.OnPointerUp += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_POINTER_MOVE = "window-pointer-move-event";
+    private void RegisterOnPointerMove() {
+        Window.OnPointerMove += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_POINTER_OVER = "window-pointer-over-event";
+    private void RegisterOnPointerOver() {
+        Window.OnPointerOver += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_POINTER_OUT = "window-pointer-out-event";
+    private void RegisterOnPointerOut() {
+        Window.OnPointerOut += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_POINTER_ENTER = "window-pointer-enter-event";
+    private void RegisterOnPointerEnter() {
+        Window.OnPointerEnter += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_POINTER_LEAVE = "window-pointer-leave-event";
+    private void RegisterOnPointerLeave() {
+        Window.OnPointerLeave += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_POINTER_CANCEL = "window-pointer-cancel-event";
+    private void RegisterOnPointerCancel() {
+        Window.OnPointerCancel += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_POINTER_RAW_UPDATE = "window-pointer-raw-update-event";
+    private void RegisterOnPointerRawUpdate() {
+        Window.OnPointerRawUpdate += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_GOT_POINTER_CAPTURE = "window-got-pointer-capture-event";
+    private void RegisterOnGotPointerCapture() {
+        Window.OnGotPointerCapture += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_LOST_POINTER_CAPTURE = "window-lost-pointer-capture-event";
+    private void RegisterOnLostPointerCapture() {
+        Window.OnLostPointerCapture += (PointerEvent pointerEvent) => {
+            labelOutput = pointerEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+
+    public const string BUTTON_REGISTER_ON_FOCUS_IN = "window-focus-in-event";
+    private void RegisterOnFocusIn() {
+        Window.OnFocusIn += () => {
+            labelOutput = TEST_EVENT_FOCUS_IN;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_FOCUS_OUT = "window-focus-out-event";
+    private void RegisterOnFocusOut() {
+        Window.OnFocusOut += () => {
+            labelOutput = TEST_EVENT_FOCUS_OUT;
+            StateHasChanged();
+        };
+    }
+
+
+    public const string BUTTON_REGISTER_ON_COPY = "window-copy-event";
+    private void RegisterOnCopy() {
+        Window.OnCopy += () => {
+            labelOutput = TEST_EVENT_COPY;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_PASTE = "window-paste-event";
+    private void RegisterOnPaste() {
+        Window.OnPaste += () => {
+            labelOutput = TEST_EVENT_PASTE;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_CUT = "window-cut-event";
+    private void RegisterOnCut() {
+        Window.OnCut += () => {
+            labelOutput = TEST_EVENT_CUT;
+            StateHasChanged();
+        };
+    }
+
+
+    public const string BUTTON_REGISTER_ON_TRANSITION_START = "window-transition-start-event";
+    private void RegisterOnTransitionStart() {
+        Window.OnTransitionStart += (string propertyName, double elapsedTime, string pseudoElement) => {
+            labelOutput = $"{TEST_EVENT_TRANSITION_START}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_TRANSITION_END = "window-transition-end-event";
+    private void RegisterOnTransitionEnd() {
+        Window.OnTransitionEnd += (string propertyName, double elapsedTime, string pseudoElement) => {
+            labelOutput = $"{TEST_EVENT_TRANSITION_END}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_TRANSITION_RUN = "window-transition-run-event";
+    private void RegisterOnTransitionRun() {
+        Window.OnTransitionRun += (string propertyName, double elapsedTime, string pseudoElement) => {
+            labelOutput = $"{TEST_EVENT_TRANSITION_RUN}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_TRANSITION_CANCEL = "window-transition-cancel-event";
+    private void RegisterOnTransitionCancel() {
+        Window.OnTransitionCancel += (string propertyName, double elapsedTime, string pseudoElement) => {
+            labelOutput = $"{TEST_EVENT_TRANSITION_CANCEL}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            StateHasChanged();
+        };
+    }
+
+
+    public const string BUTTON_REGISTER_ON_ANIMATION_START = "window-animation-start-event";
+    private void RegisterOnAnimationStart() {
+        Window.OnAnimationStart += (string animationName, double elapsedTime, string pseudoElement) => {
+            labelOutput = $"{TEST_EVENT_ANIMATION_START}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_ANIMATION_END = "window-animation-end-event";
+    private void RegisterOnAnimationEnd() {
+        Window.OnAnimationEnd += (string animationName, double elapsedTime, string pseudoElement) => {
+            labelOutput = $"{TEST_EVENT_ANIMATION_END}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_ANIMATION_ITERATION = "window-animation-iteration-event";
+    private void RegisterOnAnimationIteration() {
+        Window.OnAnimationIteration += (string animationName, double elapsedTime, string pseudoElement) => {
+            labelOutput = $"{TEST_EVENT_ANIMATION_ITERATION}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_ANIMATION_CANCEL = "window-animation-cancel-event";
+    private void RegisterOnAnimationCancel() {
+        Window.OnAnimationCancel += (string animationName, double elapsedTime, string pseudoElement) => {
+            labelOutput = $"{TEST_EVENT_ANIMATION_CANCEL}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            StateHasChanged();
+        };
+    }
+
+
+    // events - HTMLMediaElement Ready
+
+    public const string BUTTON_REGISTER_ON_CAN_PLAY = "window-can-play-event";
+    private void RegisterOnCanPlay() {
+        Window.OnCanPlay += () => {
+            labelOutput = TEST_EVENT_CAN_PLAY;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_CAN_PLAY_THROUGH = "window-can-play-through-event";
+    private void RegisterOnCanPlayThrough() {
+        Window.OnCanPlayThrough += () => {
+            labelOutput = TEST_EVENT_CAN_PLAY_THROUGH;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_PLAYING = "window-playing-event";
+    private void RegisterOnPlaying() {
+        Window.OnPlaying += () => {
+            labelOutput = TEST_EVENT_PLAYING;
+            StateHasChanged();
+        };
+    }
+
+    // events - HTMLMediaElement Data
+
+    public const string BUTTON_REGISTER_ON_LOAD_START = "window-load-start-event";
+    private void RegisterOnLoadStart() {
+        Window.OnLoadStart += () => {
+            labelOutput = TEST_EVENT_LOAD_START;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_PROGRESS = "window-progress-event";
+    private void RegisterOnProgress() {
+        Window.OnProgress += () => {
+            labelOutput = TEST_EVENT_PROGRESS;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_LOADED_DATA = "window-loaded-data-event";
+    private void RegisterOnLoadedData() {
+        Window.OnLoadedData += () => {
+            labelOutput = TEST_EVENT_LOADED_DATA;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_LOADED_METADATA = "window-loaded-metadata-event";
+    private void RegisterOnLoadedMetadata() {
+        Window.OnLoadedMetadata += () => {
+            labelOutput = TEST_EVENT_LOADED_METADATA;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_STALLED = "window-stalled-event";
+    private void RegisterOnStalled() {
+        Window.OnStalled += () => {
+            labelOutput = TEST_EVENT_STALLED;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_SUSPEND = "window-suspend-event";
+    private void RegisterOnSuspend() {
+        Window.OnSuspend += () => {
+            labelOutput = TEST_EVENT_SUSPEND;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_WAITING = "window-waiting-event";
+    private void RegisterOnWaiting() {
+        Window.OnWaiting += () => {
+            labelOutput = TEST_EVENT_WAITING;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_ABORT = "window-abort-event";
+    private void RegisterOnAbort() {
+        Window.OnAbort += () => {
+            labelOutput = TEST_EVENT_ABORT;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_EMPTIED = "window-emptied-event";
+    private void RegisterOnEmptied() {
+        Window.OnEmptied += () => {
+            labelOutput = TEST_EVENT_EMPTIED;
+            StateHasChanged();
+        };
+    }
+
+    // events - HTMLMediaElement Timing
+
+    public const string BUTTON_REGISTER_ON_PLAY = "window-play-event";
+    private void RegisterOnPlay() {
+        Window.OnPlay += () => {
+            labelOutput = TEST_EVENT_PLAY;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_PAUSE = "window-pause-event";
+    private void RegisterOnPause() {
+        Window.OnPause += () => {
+            labelOutput = TEST_EVENT_PAUSE;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_ENDED = "window-ended-event";
+    private void RegisterOnEnded() {
+        Window.OnEnded += () => {
+            labelOutput = TEST_EVENT_ENDED;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_SEEKING = "window-seeking-event";
+    private void RegisterOnSeeking() {
+        Window.OnSeeking += () => {
+            labelOutput = TEST_EVENT_SEEKING;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_SEEKED = "window-seeked-event";
+    private void RegisterOnSeeked() {
+        Window.OnSeeked += () => {
+            labelOutput = TEST_EVENT_SEEKED;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_TIME_UPDATE = "window-time-update-event";
+    private void RegisterOnTimeUpdate() {
+        Window.OnTimeUpdate += () => {
+            labelOutput = TEST_EVENT_TIME_UPDATE;
+            StateHasChanged();
+        };
+    }
+
+    // events - HTMLMediaElement Setting
+
+    public const string BUTTON_REGISTER_ON_VOLUME_CHANGE = "window-volume-change-event";
+    private void RegisterOnVolumeChange() {
+        Window.OnVolumeChange += () => {
+            labelOutput = TEST_EVENT_VOLUME_CHANGE;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_RATE_CHANGE = "window-rate-change-event";
+    private void RegisterOnRateChange() {
+        Window.OnRateChange += () => {
+            labelOutput = TEST_EVENT_RATE_CHANGE;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_DURATION_CHANGE = "window-duration-change-event";
+    private void RegisterOnDurationChange() {
+        Window.OnDurationChange += () => {
+            labelOutput = TEST_EVENT_DURATION_CHANGE;
+            StateHasChanged();
+        };
+    }
+
+
+    // events - HTMLDialogElement
+
+    public const string BUTTON_REGISTER_ON_CLOSE = "window-close-event";
+    private void RegisterOnClose() {
+        Window.OnClose += () => {
+            labelOutput = TEST_EVENT_CLOSE;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_CANCEL = "window-cancel-event";
+    private void RegisterOnCancel() {
+        Window.OnCancel += () => {
+            labelOutput = TEST_EVENT_CANCEL;
+            StateHasChanged();
+        };
     }
 }

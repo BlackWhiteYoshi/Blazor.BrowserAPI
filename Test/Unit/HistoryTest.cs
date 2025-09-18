@@ -127,11 +127,70 @@ public sealed class HistoryTest(PlayWrightFixture playWrightFixture) : PlayWrigh
 
 
     [Test]
+    public async Task RegisterOnPageReveal() {
+        await ExecuteTest(HistoryGroup.BUTTON_REGISTER_ON_PAGE_REVEAL);
+        await Page.EvaluateAsync("window.dispatchEvent(new Event('pagereveal'));");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HistoryGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HistoryGroup.TEST_EVENT_PAGE_REVEAL);
+    }
+
+    [Test]
+    public async Task RegisterOnPageSwap() {
+        await ExecuteTest(HistoryGroup.BUTTON_REGISTER_ON_PAGE_SWAP);
+        await Page.EvaluateAsync("window.dispatchEvent(new Event('pageswap'));");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HistoryGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(HistoryGroup.TEST_EVENT_PAGE_SWAP);
+    }
+
+    [Test]
+    public async Task RegisterOnPageShow() {
+        await ExecuteTest(HistoryGroup.BUTTON_REGISTER_ON_PAGE_SHOW);
+        await Page.EvaluateAsync("""
+            const event = new Event("pageshow");
+            event.persisted = true;
+            window.dispatchEvent(event);
+            """);
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HistoryGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
+    public async Task RegisterOnPageHide() {
+        await ExecuteTest(HistoryGroup.BUTTON_REGISTER_ON_PAGE_HIDE);
+        await Page.EvaluateAsync("""
+            const event = new Event("pagehide");
+            event.persisted = true;
+            window.dispatchEvent(event);
+            """);
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HistoryGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
+    [Test]
     public async Task RegisterOnPopState() {
         await ExecuteTest(HistoryGroup.BUTTON_REGISTER_ON_POP_STATE);
         await Page.EvaluateAsync("history.pushState(null, '', '/test'); history.back();");
+        await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HistoryGroup.LABEL_OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("(null)");
+    }
+
+    [Test]
+    public async Task RegisterOnHashChange() {
+        await ExecuteTest(HistoryGroup.BUTTON_REGISTER_ON_HASH_CHANGE);
+        await Page.EvaluateAsync("window.location.href = 'https://localhost:5000/#anchor';");
+        await Task.Delay(STANDARD_WAIT_TIME);
+
+        string? result = await Page.GetByTestId(HistoryGroup.LABEL_OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("new = https://localhost:5000/#anchor, old = https://localhost:5000/");
     }
 }

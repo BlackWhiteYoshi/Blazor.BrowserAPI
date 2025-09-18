@@ -178,6 +178,33 @@ public sealed partial class SensorAPIGroup {
     }
 
 
+    // Window Events
+
+    public const string BUTTON_REGISTER_ON_DEVICE_MOTION = "sensor-api-device-motion-event";
+    private void RegisterOnDeviceMotion() {
+        SensorAPI.OnDeviceMotion += (DeviceMotionEvent deviceMotionEvent) => {
+            labelOutput = deviceMotionEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_DEVICE_ORIENTATION = "sensor-api-device-orientation-event";
+    private void RegisterOnDeviceOrientation() {
+        SensorAPI.OnDeviceOrientation += (DeviceOrientationEvent deviceOrientationEvent) => {
+            labelOutput = deviceOrientationEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_DEVICE_ORIENTATION_ABSOLUTE = "sensor-api-device-orientation-absolute-event";
+    private void RegisterOnDeviceOrientationAbsolute() {
+        SensorAPI.OnDeviceOrientationAbsolute += (DeviceOrientationEvent deviceOrientationEvent) => {
+            labelOutput = deviceOrientationEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+
     // AmbientLightSensor
 
     public const string BUTTON_AMBIENT_LIGHT_SENSOR_GET_ILLUMINANCE_PROPERTY = "sensor-api-ambient-light-sensor-get-illuminance-property";

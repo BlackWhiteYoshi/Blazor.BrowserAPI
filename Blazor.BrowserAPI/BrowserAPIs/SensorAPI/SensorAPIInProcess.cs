@@ -9,7 +9,7 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class SensorAPIInProcess(IModuleManager moduleManager) : ISensorAPIInProcess {
+public sealed class SensorAPIInProcess(IModuleManager moduleManager) : SensorAPIBase(moduleManager), ISensorAPIInProcess {
     /// <summary>
     /// The <i>AmbientLightSensor()</i> constructor creates a new AmbientLightSensor object, which returns the current light level or illuminance of the ambient light around the hosting device.
     /// </summary>

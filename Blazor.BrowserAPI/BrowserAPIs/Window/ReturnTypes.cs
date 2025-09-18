@@ -110,3 +110,19 @@ public readonly struct IdleCallbackHandle {
     /// </summary>
     public Action Callback => callback.Value.HandlerValue;
 }
+
+
+/// <summary>
+/// Represetnts the event when a storage area (localStorage or sessionStorage) has been modified in the context of another document.
+/// </summary>
+/// <param name="Url">Returns the URL of the document whose storage changed.</param>
+/// <param name="Key">Returns the key for the storage item that was changed.</param>
+/// <param name="NewValue">
+/// Returns the new value of the storage item whose value was changed.
+/// This value is null when the change has been invoked by storage clear() method, or the storage item has been removed from the storage.
+/// </param>
+/// <param name="OldValue">
+/// Returns the original value of the storage item whose value changed.
+/// This value is null when the storage item has been newly added and therefore doesn't have any previous value.
+/// </param>
+public readonly record struct StorageEvent(string Url, string Key, string? NewValue, string? OldValue);

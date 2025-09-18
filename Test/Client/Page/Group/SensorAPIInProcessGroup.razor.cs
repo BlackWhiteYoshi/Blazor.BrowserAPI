@@ -20,7 +20,7 @@ public sealed partial class SensorAPIInProcessGroup {
     private string labelOutput = string.Empty;
 
 
-    // Sensor API Sensor Properties
+    // Sensor Properties
 
     public const string BUTTON_GET_ACTIVATED = "sensor-api-inprocess-get-activated-property";
     private void GetActivated() {
@@ -59,7 +59,7 @@ public sealed partial class SensorAPIInProcessGroup {
     }
 
 
-    // Sensor API Sensor Methods
+    // Sensor Methods
 
     public const string BUTTON_START = "sensor-api-inprocess-start";
     private void Start() {
@@ -86,7 +86,7 @@ public sealed partial class SensorAPIInProcessGroup {
     }
 
 
-    // Sensor API Sensor Events
+    // Sensor Events
 
     public const string BUTTON_REGISTER_ON_ERROR = "sensor-api-inprocess-error-event";
     private void RegisterOnError() {
@@ -140,7 +140,34 @@ public sealed partial class SensorAPIInProcessGroup {
     }
 
 
-    // Sensor API AmbientLightSensor
+    // Window Events
+
+    public const string BUTTON_REGISTER_ON_DEVICE_MOTION = "sensor-api-inprocess-device-motion-event";
+    private void RegisterOnDeviceMotion() {
+        SensorAPI.OnDeviceMotion += (DeviceMotionEvent deviceMotionEvent) => {
+            labelOutput = deviceMotionEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_DEVICE_ORIENTATION = "sensor-api-inprocess-device-orientation-event";
+    private void RegisterOnDeviceOrientation() {
+        SensorAPI.OnDeviceOrientation += (DeviceOrientationEvent deviceOrientationEvent) => {
+            labelOutput = deviceOrientationEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_DEVICE_ORIENTATION_ABSOLUTE = "sensor-api-inprocess-device-orientation-absolute-event";
+    private void RegisterOnDeviceOrientationAbsolute() {
+        SensorAPI.OnDeviceOrientationAbsolute += (DeviceOrientationEvent deviceOrientationEvent) => {
+            labelOutput = deviceOrientationEvent.ToString();
+            StateHasChanged();
+        };
+    }
+
+
+    // AmbientLightSensor
 
     public const string BUTTON_AMBIENT_LIGHT_SENSOR_GET_ILLUMINANCE = "sensor-api-inprocess-ambient-light-sensor-get-illuminance-property";
     private void AmbientLightSensorGetIlluminance() {
@@ -155,7 +182,7 @@ public sealed partial class SensorAPIInProcessGroup {
     }
 
 
-    // Sensor API Gyroscope
+    // Gyroscope
 
     public const string BUTTON_GYROSCOPE_GET_X = "sensor-api-inprocess-gyroscope-get-x-property";
     private void GyroscopeGetX() {
@@ -193,7 +220,7 @@ public sealed partial class SensorAPIInProcessGroup {
         labelOutput = z.ToString();
     }
 
-    // Sensor API Accelerometer
+    // Accelerometer
 
     public const string BUTTON_ACCELEROMETER_GET_X = "sensor-api-inprocess-accelerometer-get-x-property";
     private void AccelerometerGetX() {
@@ -232,7 +259,7 @@ public sealed partial class SensorAPIInProcessGroup {
     }
 
 
-    // Sensor API LinearAccelerationSensor
+    // LinearAccelerationSensor
 
     public const string BUTTON_LINEAR_ACCELERATION_SENSOR_GET_X = "sensor-api-inprocess-linear-acceleration-sensor-get-x-property";
     private void LinearAccelerationSensorGetX() {
@@ -271,7 +298,7 @@ public sealed partial class SensorAPIInProcessGroup {
     }
 
 
-    // Sensor API GravitySensor
+    // GravitySensor
 
     public const string BUTTON_GRAVITY_SENSOR_GET_X = "sensor-api-inprocess-gravity-sensor-get-x-property";
     private void GravitySensorGetX() {
@@ -310,7 +337,7 @@ public sealed partial class SensorAPIInProcessGroup {
     }
 
 
-    // Sensor API AbsoluteOrientationSensor
+    // AbsoluteOrientationSensor
 
     public const string BUTTON_ABSOLUTE_ORIENTATION_SENSOR_GET_QUATERNION = "sensor-api-inprocess-absolute-orientation-sensor-get-quaternion-property";
     private void AbsoluteOrientationSensorGetQuaternion() {
@@ -337,7 +364,7 @@ public sealed partial class SensorAPIInProcessGroup {
     }
 
 
-    // Sensor API RelativeOrientationSensor
+    // RelativeOrientationSensor
 
     public const string BUTTON_RELATIVE_ORIENTATION_SENSOR_GET_QUATERNION = "sensor-api-inprocess-relative-orientation-sensor-get-quaternion-property";
     private void RelativeOrientationSensorGetQuaternion() {
@@ -364,7 +391,7 @@ public sealed partial class SensorAPIInProcessGroup {
     }
 
 
-    // Sensor API Magnetometer
+    // Magnetometer
 
     public const string BUTTON_MAGNETOMETER_GET_X = "sensor-api-inprocess-magnetometer-get-x-property";
     private void MagnetometerGetX() {
@@ -403,7 +430,7 @@ public sealed partial class SensorAPIInProcessGroup {
     }
 
 
-    // Sensor API UncalibratedMagnetometer
+    // UncalibratedMagnetometer
 
     public const string BUTTON_UNCALIBRATED_MAGNETOMETER_GET_X = "sensor-api-inprocess-uncalibrated-magnetometer-get-x-property";
     private void UncalibratedMagnetometerGetX() {

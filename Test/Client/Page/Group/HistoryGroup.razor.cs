@@ -4,6 +4,10 @@ using System.Text.Json;
 namespace BrowserAPI.Test.Client;
 
 public sealed partial class HistoryGroup : ComponentBase {
+    public const string TEST_EVENT_PAGE_REVEAL = "page reveal test";
+    public const string TEST_EVENT_PAGE_SWAP = "page swap test";
+
+
     [Inject]
     public required IHistory History { private get; init; }
 
@@ -89,10 +93,51 @@ public sealed partial class HistoryGroup : ComponentBase {
     }
 
 
+
+    public const string BUTTON_REGISTER_ON_PAGE_REVEAL = "history-page-reveal-event";
+    private void RegisterOnPageReveal() {
+        History.OnPageReveal += () => {
+            labelOutput = TEST_EVENT_PAGE_REVEAL;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_PAGE_SWAP = "history-page-swap-event";
+    private void RegisterOnPageSwap() {
+        History.OnPageSwap += () => {
+            labelOutput = TEST_EVENT_PAGE_SWAP;
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_PAGE_SHOW = "history-page-show-event";
+    private void RegisterOnPageShow() {
+        History.OnPageShow += (bool persisted) => {
+            labelOutput = persisted.ToString();
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_PAGE_HIDE = "history-page-hide-event";
+    private void RegisterOnPageHide() {
+        History.OnPageHide += (bool persisted) => {
+            labelOutput = persisted.ToString();
+            StateHasChanged();
+        };
+    }
+
     public const string BUTTON_REGISTER_ON_POP_STATE = "history-pop-state-event";
     private void RegisterOnPopState() {
         History.OnPopState += (JsonElement? data) => {
             labelOutput = data?.ToString() ?? "(null)";
+            StateHasChanged();
+        };
+    }
+
+    public const string BUTTON_REGISTER_ON_HASH_CHANGE = "history-hash-change-event";
+    private void RegisterOnHashChange() {
+        History.OnHashChange += (string newURL, string oldURL) => {
+            labelOutput = $"new = {newURL}, old = {oldURL}";
             StateHasChanged();
         };
     }

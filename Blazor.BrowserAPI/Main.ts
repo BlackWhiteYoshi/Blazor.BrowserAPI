@@ -53,6 +53,7 @@ import { PermissionsAPI } from "./BrowserAPIs/Permissions/Permissions";
 export { PermissionsAPI };
 
 // SensorAPI
+import { SensorAPI } from "./BrowserAPIs/SensorAPI/Sensor/Sensor";
 import { AbsoluteOrientationSensorAPI } from "./BrowserAPIs/SensorAPI/Sensor/AbsoluteOrientationSensor/AbsoluteOrientationSensor";
 import { AccelerometerAPI } from "./BrowserAPIs/SensorAPI/Sensor/Accelerometer/Accelerometer";
 import { AmbientLightSensorAPI } from "./BrowserAPIs/SensorAPI/Sensor/AmbientLightSensor/AmbientLightSensor";
@@ -62,7 +63,7 @@ import { LinearAccelerationSensorAPI } from "./BrowserAPIs/SensorAPI/Sensor/Line
 import { MagnetometerAPI } from "./BrowserAPIs/SensorAPI/Sensor/Magnetometer/Magnetometer";
 import { RelativeOrientationSensorAPI } from "./BrowserAPIs/SensorAPI/Sensor/RelativeOrientationSensor/RelativeOrientationSensor";
 import { UncalibratedMagnetometerAPI } from "./BrowserAPIs/SensorAPI/Sensor/UncalibratedMagnetometer/UncalibratedMagnetometer";
-export { AbsoluteOrientationSensorAPI, AccelerometerAPI, AmbientLightSensorAPI, GravitySensorAPI, GyroscopeAPI, LinearAccelerationSensorAPI, MagnetometerAPI, RelativeOrientationSensorAPI, UncalibratedMagnetometerAPI };
+export { SensorAPI, AbsoluteOrientationSensorAPI, AccelerometerAPI, AmbientLightSensorAPI, GravitySensorAPI, GyroscopeAPI, LinearAccelerationSensorAPI, MagnetometerAPI, RelativeOrientationSensorAPI, UncalibratedMagnetometerAPI };
 
 import { ServiceWorkerContainerAPI } from "./BrowserAPIs/ServiceWorker/ServiceWorkerContainer/ServiceWorkerContainer";
 export { ServiceWorkerContainerAPI };
