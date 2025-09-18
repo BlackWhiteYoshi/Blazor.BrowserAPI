@@ -168,3 +168,8 @@ There are more interfaces coming.
   - added video members to HTMLMediaElement
   - small breaking change: renamed IDialog to IHTMLDialogElement
   - small breaking changes: renamed some events to capital letters so it fits more the C# convention naming
+- 0.15.0
+  - added Window and Navigator, marked BrowserAPI Language as obsolete (22 BrowserAPIs)
+  - marked WindowManagement.Open() as obsolete
+  - added more events to History and SensorAPI
+  - small breaking change: Geolocation.WatchPosition()/Geolocation.ClearWatch() returns/takes a handle that contains the id instead of just the id.
