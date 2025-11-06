@@ -1,40 +1,40 @@
-import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
+﻿import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
 
 export class PermissionStatusAPI {
-    #permissionStatus: PermissionStatus;
+    private permissionStatus: PermissionStatus;
 
-    constructor(permissionStatus: PermissionStatus) {
-        this.#permissionStatus = permissionStatus;
+    public constructor(permissionStatus: PermissionStatus) {
+        this.permissionStatus = permissionStatus;
     }
 
-    getName(): string {
-        return this.#permissionStatus.name;
+    public getName(): string {
+        return this.permissionStatus.name;
     }
 
-    getState(): "denied" | "granted" | "prompt" {
-        return this.#permissionStatus.state;
+    public getState(): "denied" | "granted" | "prompt" {
+        return this.permissionStatus.state;
     }
 
 
     // events
 
 
-    #eventTrigger: DotNet.DotNetObject;
+    private eventTrigger: DotNet.DotNetObject;
 
-    initEvents(eventTrigger: DotNet.DotNetObject): void {
-        this.#eventTrigger = eventTrigger;
+    public initEvents(eventTrigger: DotNet.DotNetObject): void {
+        this.eventTrigger = eventTrigger;
     }
 
 
     // change event
 
-    #onchange = () => BlazorInvoke.method(this.#eventTrigger, "InvokeChange");
+    private onchange = () => BlazorInvoke.method(this.eventTrigger, "InvokeChange");
 
-    activateOnchange(): void {
-        this.#permissionStatus.addEventListener("change", this.#onchange);
+    public activateOnchange(): void {
+        this.permissionStatus.addEventListener("change", this.onchange);
     }
 
-    deactivateOnstatechange(): void {
-        this.#permissionStatus.removeEventListener("change", this.#onchange);
+    public deactivateOnstatechange(): void {
+        this.permissionStatus.removeEventListener("change", this.onchange);
     }
 }

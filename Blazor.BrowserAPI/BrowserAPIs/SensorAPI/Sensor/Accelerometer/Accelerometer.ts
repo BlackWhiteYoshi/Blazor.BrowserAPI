@@ -1,13 +1,13 @@
-import { SensorAPI } from "../Sensor";
+﻿import { SensorAPI } from "../Sensor";
 
 export class AccelerometerAPI extends SensorAPI {
-    declare sensor: Accelerometer;
+    declare protected sensor: Accelerometer;
 
-    constructor(accelerometer: Accelerometer) {
+    private constructor(accelerometer: Accelerometer) {
         super(accelerometer);
     }
 
-    static create(frequency: number, referenceFrame: "device" | "screen"): [AccelerometerAPI] | [null] {
+    public static create(frequency: number, referenceFrame: "device" | "screen"): [AccelerometerAPI] | [null] {
         if (!("Accelerometer" in window))
             return [null];
 
@@ -21,15 +21,15 @@ export class AccelerometerAPI extends SensorAPI {
     }
 
 
-    getX(): number {
+    public getX(): number {
         return this.sensor.x ?? 0;
     }
 
-    getY(): number {
+    public getY(): number {
         return this.sensor.y ?? 0;
     }
 
-    getZ(): number {
+    public getZ(): number {
         return this.sensor.z ?? 0;
     }
 }

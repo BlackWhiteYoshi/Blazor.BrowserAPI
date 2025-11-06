@@ -1,13 +1,13 @@
-import { SensorAPI } from "../Sensor";
+﻿import { SensorAPI } from "../Sensor";
 
 export class LinearAccelerationSensorAPI extends SensorAPI {
-    declare sensor: LinearAccelerationSensor;
+    declare protected sensor: LinearAccelerationSensor;
 
-    constructor(linearAccelerationSensor: LinearAccelerationSensor) {
+    private constructor(linearAccelerationSensor: LinearAccelerationSensor) {
         super(linearAccelerationSensor);
     }
 
-    static create(frequency: number, referenceFrame: "device" | "screen"): [LinearAccelerationSensorAPI] | [null] {
+    public static create(frequency: number, referenceFrame: "device" | "screen"): [LinearAccelerationSensorAPI] | [null] {
         if (!("LinearAccelerationSensor" in window))
             return [null];
 
@@ -21,15 +21,15 @@ export class LinearAccelerationSensorAPI extends SensorAPI {
     }
 
 
-    getX(): number {
+    public getX(): number {
         return this.sensor.x ?? 0;
     }
 
-    getY(): number {
+    public getY(): number {
         return this.sensor.y ?? 0;
     }
 
-    getZ(): number {
+    public getZ(): number {
         return this.sensor.z ?? 0;
     }
 }

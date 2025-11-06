@@ -1,25 +1,25 @@
-export class LocalStorageAPI {
-    static count(): number {
+﻿export class LocalStorageAPI {
+    public static count(): number {
         return localStorage.length;
     }
 
-    static key(index: number): string | null {
+    public static key(index: number): string | null {
         return localStorage.key(index);
     }
 
-    static getItem(key: string): string | null {
+    public static getItem(key: string): string | null {
         return localStorage.getItem(key);
     }
 
-    static setItem(key: string, value: string): void {
+    public static setItem(key: string, value: string): void {
         localStorage.setItem(key, value);
     }
 
-    static removeItem(key: string): void {
+    public static removeItem(key: string): void {
         localStorage.removeItem(key);
     }
 
-    static clear(): void {
+    public static clear(): void {
         localStorage.clear();
     }
 }

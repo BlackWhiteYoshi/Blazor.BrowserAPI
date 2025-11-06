@@ -1,13 +1,13 @@
-import { SensorAPI } from "../Sensor";
+﻿import { SensorAPI } from "../Sensor";
 
 export class UncalibratedMagnetometerAPI extends SensorAPI {
-    declare sensor: UncalibratedMagnetometer;
+    declare protected sensor: UncalibratedMagnetometer;
 
-    constructor(uncalibratedMagnetometer: UncalibratedMagnetometer) {
+    private constructor(uncalibratedMagnetometer: UncalibratedMagnetometer) {
         super(uncalibratedMagnetometer);
     }
 
-    static create(frequency: number, referenceFrame: "device" | "screen"): [UncalibratedMagnetometerAPI] | [null] {
+    public static create(frequency: number, referenceFrame: "device" | "screen"): [UncalibratedMagnetometerAPI] | [null] {
         if (!("UncalibratedMagnetometer" in window))
             return [null];
 
@@ -21,28 +21,28 @@ export class UncalibratedMagnetometerAPI extends SensorAPI {
     }
 
 
-    getX(): number {
+    public getX(): number {
         return this.sensor.x ?? 0;
     }
 
-    getY(): number {
+    public getY(): number {
         return this.sensor.y ?? 0;
     }
 
-    getZ(): number {
+    public getZ(): number {
         return this.sensor.z ?? 0;
     }
 
 
-    getXBias(): number {
+    public getXBias(): number {
         return this.sensor.xBias ?? 0;
     }
 
-    getYBias(): number {
+    public getYBias(): number {
         return this.sensor.yBias ?? 0;
     }
 
-    getZBias(): number {
+    public getZBias(): number {
         return this.sensor.zBias ?? 0;
     }
 }

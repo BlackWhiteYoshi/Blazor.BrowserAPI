@@ -1,76 +1,76 @@
-export class ConsoleAPI {
-    static assert(condition: boolean, data: any[]): void {
+﻿export class ConsoleAPI {
+    public static assert(condition: boolean, data: any[]): void {
         console.assert(condition, data);
     }
 
-    static clear(): void {
+    public static clear(): void {
         console.clear();
     }
 
 
-    static count(label?: string): void {
+    public static count(label?: string): void {
         console.count(label);
     }
 
-    static countReset(label?: string): void {
+    public static countReset(label?: string): void {
         console.countReset(label);
     }
 
 
-    static debug(data: any[]): void {
+    public static debug(data: any[]): void {
         console.debug(data);
     }
 
 
-    static dir(item: any): void {
+    public static dir(item: any): void {
         console.dir(item);
     }
 
-    static dirxml(item: any): void {
+    public static dirxml(item: any): void {
         console.dirxml(item);
     }
 
 
-    static error(data: any[]): void {
+    public static error(data: any[]): void {
         console.error(data);
     }
 
 
-    static group(label?: string): void {
+    public static group(label?: string): void {
         console.group(label);
     }
 
-    static groupCollapsed(label?: string): void {
+    public static groupCollapsed(label?: string): void {
         console.groupCollapsed(label);
     }
 
-    static groupEnd(): void {
+    public static groupEnd(): void {
         console.groupEnd();
     }
 
 
-    static info(data: any[]): void {
+    public static info(data: any[]): void {
         console.info(data);
     }
 
-    static log(data: any[]): void {
+    public static log(data: any[]): void {
         console.log(data);
     }
 
-    static table(data: any, columns?: string[]): void {
+    public static table(data: any, columns?: string[]): void {
         console.table(data, columns);
     }
 
 
-    static time(label?: string): void {
+    public static time(label?: string): void {
         console.time(label);
     }
 
-    static timeEnd(label?: string): void {
+    public static timeEnd(label?: string): void {
         console.timeEnd(label);
     }
 
-    static timeLog(label?: string, data?: any[]): void {
+    public static timeLog(label?: string, data?: any[]): void {
         if (data === undefined)
             console.timeLog(label);
         else
@@ -78,11 +78,11 @@ export class ConsoleAPI {
     }
 
 
-    static trace(objects: any[]): void {
+    public static trace(objects: any[]): void {
         console.trace(objects);
     }
 
-    static warn(data: any[]): void {
+    public static warn(data: any[]): void {
         console.warn(data);
     }
 }

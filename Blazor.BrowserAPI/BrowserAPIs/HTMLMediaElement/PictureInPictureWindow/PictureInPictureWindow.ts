@@ -1,40 +1,40 @@
-import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
+﻿import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
 
 export class PictureInPictureWindowAPI {
-    #pictureInPictureWindow: PictureInPictureWindow;
+    private pictureInPictureWindow: PictureInPictureWindow;
 
-    constructor(pictureInPictureWindow: PictureInPictureWindow) {
-        this.#pictureInPictureWindow = pictureInPictureWindow;
+    public constructor(pictureInPictureWindow: PictureInPictureWindow) {
+        this.pictureInPictureWindow = pictureInPictureWindow;
     }
 
 
-    getWidth(): number {
-        return this.#pictureInPictureWindow.width;
+    public getWidth(): number {
+        return this.pictureInPictureWindow.width;
     }
 
-    getHeight(): number {
-        return this.#pictureInPictureWindow.height;
+    public getHeight(): number {
+        return this.pictureInPictureWindow.height;
     }
 
 
     // events
 
-    #eventTrigger: DotNet.DotNetObject;
+    private eventTrigger: DotNet.DotNetObject;
 
-    initEvents(eventTrigger: DotNet.DotNetObject): void {
-        this.#eventTrigger = eventTrigger;
+    public initEvents(eventTrigger: DotNet.DotNetObject): void {
+        this.eventTrigger = eventTrigger;
     }
 
 
     // resize event
 
-    #onresize = () => BlazorInvoke.method(this.#eventTrigger, "InvokeResize");
+    private onresize = () => BlazorInvoke.method(this.eventTrigger, "InvokeResize");
 
-    activateOnresize(): void {
-        this.#pictureInPictureWindow.addEventListener("resize", this.#onresize);
+    public activateOnresize(): void {
+        this.pictureInPictureWindow.addEventListener("resize", this.onresize);
     }
 
-    deactivateOnresize(): void {
-        this.#pictureInPictureWindow.removeEventListener("resize", this.#onresize);
+    public deactivateOnresize(): void {
+        this.pictureInPictureWindow.removeEventListener("resize", this.onresize);
     }
 }

@@ -1,12 +1,12 @@
-export class BlazorInvoke {
-    static #isSync: boolean;
+﻿export class BlazorInvoke {
+    private static isSync: boolean;
 
     /**
      * Sets the IsSync property that decides if sync calls or async calls are used.
      * It checks if the Blazor runtime is available by checking if the Blazor.runtime.config property is present.
      */
-    static init() {
-        BlazorInvoke.#isSync = (<Window & typeof globalThis & { Blazor: any; }>window).Blazor.runtime.hasOwnProperty("config");
+    public static init() {
+        BlazorInvoke.isSync = (<Window & typeof globalThis & { Blazor: any; }>window).Blazor.runtime.hasOwnProperty("config");
     }
 
 
@@ -19,8 +19,8 @@ export class BlazorInvoke {
      * @param args Arguments to pass to the method, each of which must be JSON-serializable.
      * @returns A promise representing the result of the operation.
      */
-    static staticMethod<T>(assemblyName: string, methodIdentifier: string, ...args: any[]): T | Promise<T> {
-        if (BlazorInvoke.#isSync)
+    public static staticMethod<T>(assemblyName: string, methodIdentifier: string, ...args: any[]): T | Promise<T> {
+        if (BlazorInvoke.isSync)
             return DotNet.invokeMethod(assemblyName, methodIdentifier, ...args);
         else
             return DotNet.invokeMethodAsync(assemblyName, methodIdentifier, ...args);
@@ -35,8 +35,8 @@ export class BlazorInvoke {
      * @param args Arguments to pass to the method, each of which must be JSON-serializable.
      * @returns A promise representing the result of the operation.
      */
-    static method<T>(dotnetObject: DotNet.DotNetObject, methodIdentifier: string, ...args: any[]): T | Promise<T> {
-        if (BlazorInvoke.#isSync)
+    public static method<T>(dotnetObject: DotNet.DotNetObject, methodIdentifier: string, ...args: any[]): T | Promise<T> {
+        if (BlazorInvoke.isSync)
             return dotnetObject.invokeMethod(methodIdentifier, ...args);
         else
             return dotnetObject.invokeMethodAsync(methodIdentifier, ...args);

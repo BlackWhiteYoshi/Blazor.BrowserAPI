@@ -3,6 +3,7 @@
     "target": "es2022",
     "strictNullChecks": true,
     "noImplicitAny": true,
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "noEmit": true
   }
 }

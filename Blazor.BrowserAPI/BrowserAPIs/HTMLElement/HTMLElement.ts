@@ -1,49 +1,49 @@
-import { HTMLDialogElementAPI } from "../HTMLDialogElement/HTMLDialogElement";
+﻿import { HTMLDialogElementAPI } from "../HTMLDialogElement/HTMLDialogElement";
 import { HTMLMediaElementAPI } from "../HTMLMediaElement/HTMLMediaElement";
 import { FileAPI } from "../FileSystem/File/File";
 import { BlazorInvoke } from "../../Extensions/blazorExtensions";
 
 export class HTMLElementAPI {
-    #htmlElement: HTMLElement;
-    get htmlElement(): HTMLElement {
-        return this.#htmlElement;
+    private _htmlElement: HTMLElement;
+    public get htmlElement(): HTMLElement {
+        return this._htmlElement;
     }
 
-    constructor(htmlElement: HTMLElement) {
-        this.#htmlElement = htmlElement;
+    public constructor(htmlElement: HTMLElement) {
+        this._htmlElement = htmlElement;
     }
 
-    static create(htmlElement: HTMLElement): HTMLElementAPI {
+    public static create(htmlElement: HTMLElement): HTMLElementAPI {
         return new HTMLElementAPI(htmlElement);
     }
 
 
-    toHTMLDialogElement(): HTMLDialogElementAPI {
-        return new HTMLDialogElementAPI(<HTMLDialogElement>this.#htmlElement);
+    public toHTMLDialogElement(): HTMLDialogElementAPI {
+        return new HTMLDialogElementAPI(<HTMLDialogElement>this.htmlElement);
     }
 
-    toHTMLMediaElement(): HTMLMediaElementAPI {
-        return new HTMLMediaElementAPI(<HTMLMediaElement>this.#htmlElement);
+    public toHTMLMediaElement(): HTMLMediaElementAPI {
+        return new HTMLMediaElementAPI(<HTMLMediaElement>this.htmlElement);
     }
 
 
     // HTMLElement
 
-    getAccessKey(): string {
-        return this.#htmlElement.accessKey;
+    public getAccessKey(): string {
+        return this.htmlElement.accessKey;
     }
 
-    setAccessKey(value: string): void {
-        this.#htmlElement.accessKey = value;
+    public setAccessKey(value: string): void {
+        this.htmlElement.accessKey = value;
     }
 
-    getAccessKeyLabel(): string {
-        return this.#htmlElement.accessKeyLabel;
+    public getAccessKeyLabel(): string {
+        return this.htmlElement.accessKeyLabel;
     }
 
 
-    getAttributeStyleMap(): Record<string, string> {
-        const attributeStyleMap = this.#htmlElement.attributeStyleMap;
+    public getAttributeStyleMap(): Record<string, string> {
+        const attributeStyleMap = this.htmlElement.attributeStyleMap;
 
         const result: Record<string, string> = {};
         for (const [name, value] of attributeStyleMap.entries())
@@ -51,267 +51,267 @@ export class HTMLElementAPI {
         return result;
     }
 
-    setAttributeStyleMap(name: string, value: string): void {
-        this.#htmlElement.attributeStyleMap.set(name, value);
+    public setAttributeStyleMap(name: string, value: string): void {
+        this.htmlElement.attributeStyleMap.set(name, value);
     }
 
-    removeAttributeStyleMap(name: string): void {
-        this.#htmlElement.attributeStyleMap.delete(name);
-    }
-
-
-    getAutocapitalize(): string {
-        return this.#htmlElement.autocapitalize;
-    }
-
-    setAutocapitalize(value: string): void {
-        this.#htmlElement.autocapitalize = value;
+    public removeAttributeStyleMap(name: string): void {
+        this.htmlElement.attributeStyleMap.delete(name);
     }
 
 
-    getAutofocus(): boolean {
-        return this.#htmlElement.autofocus;
+    public getAutocapitalize(): string {
+        return this.htmlElement.autocapitalize;
     }
 
-    setAutofocus(value: boolean): void {
-        this.#htmlElement.autofocus = value;
-    }
-
-
-    getContentEditable(): string {
-        return this.#htmlElement.contentEditable;
-    }
-
-    setContentEditable(value: string): void {
-        this.#htmlElement.contentEditable = value;
+    public setAutocapitalize(value: string): void {
+        this.htmlElement.autocapitalize = value;
     }
 
 
-    getDataset(): Record<string, string> {
-        return <Record<string, string>>this.#htmlElement.dataset;
+    public getAutofocus(): boolean {
+        return this.htmlElement.autofocus;
     }
 
-    setDataset(name: string, value: string): void {
-        this.#htmlElement.dataset[name] = value;
-    }
-
-    removeDataset(name: string): void {
-        delete this.#htmlElement.dataset[name];
+    public setAutofocus(value: boolean): void {
+        this.htmlElement.autofocus = value;
     }
 
 
-    getDir(): string {
-        return this.#htmlElement.dir;
+    public getContentEditable(): string {
+        return this.htmlElement.contentEditable;
     }
 
-    setDir(value: string): void {
-        this.#htmlElement.dir = value;
-    }
-
-
-    getDraggable(): boolean {
-        return this.#htmlElement.draggable;
-    }
-
-    setDraggable(value: boolean): void {
-        this.#htmlElement.draggable = value;
+    public setContentEditable(value: string): void {
+        this.htmlElement.contentEditable = value;
     }
 
 
-    getEnterKeyHint(): string {
-        return this.#htmlElement.enterKeyHint;
+    public getDataset(): Record<string, string> {
+        return <Record<string, string>>this.htmlElement.dataset;
     }
 
-    setEnterKeyHint(value: string): void {
-        this.#htmlElement.enterKeyHint = value;
+    public setDataset(name: string, value: string): void {
+        this.htmlElement.dataset[name] = value;
     }
 
-
-    getHidden(): boolean {
-        return this.#htmlElement.hidden;
-    }
-
-    setHidden(value: boolean): void {
-        this.#htmlElement.hidden = value;
+    public removeDataset(name: string): void {
+        delete this.htmlElement.dataset[name];
     }
 
 
-    getInert(): boolean {
-        return this.#htmlElement.inert;
+    public getDir(): string {
+        return this.htmlElement.dir;
     }
 
-    setInert(value: boolean): void {
-        this.#htmlElement.inert = value;
-    }
-
-
-    getInnerText(): string {
-        return this.#htmlElement.innerText;
-    }
-
-    setInnerText(value: string): void {
-        this.#htmlElement.innerText = value;
+    public setDir(value: string): void {
+        this.htmlElement.dir = value;
     }
 
 
-    getInputMode(): string {
-        return this.#htmlElement.inputMode;
+    public getDraggable(): boolean {
+        return this.htmlElement.draggable;
     }
 
-    setInputMode(value: string): void {
-        this.#htmlElement.inputMode = value;
-    }
-
-
-    getIsContentEditable(): boolean {
-        return this.#htmlElement.isContentEditable;
+    public setDraggable(value: boolean): void {
+        this.htmlElement.draggable = value;
     }
 
 
-    getLang(): string {
-        return this.#htmlElement.lang;
+    public getEnterKeyHint(): string {
+        return this.htmlElement.enterKeyHint;
     }
 
-    setLang(value: string): void {
-        this.#htmlElement.lang = value;
-    }
-
-
-    getNonce(): string {
-        return this.#htmlElement.nonce ?? "";
-    }
-
-    setNonce(value: string): void {
-        this.#htmlElement.nonce = value;
+    public setEnterKeyHint(value: string): void {
+        this.htmlElement.enterKeyHint = value;
     }
 
 
-    getOffsetWidth(): number {
-        return this.#htmlElement.offsetWidth;
+    public getHidden(): boolean {
+        return this.htmlElement.hidden;
     }
 
-    getOffsetHeight(): number {
-        return this.#htmlElement.offsetHeight;
+    public setHidden(value: boolean): void {
+        this.htmlElement.hidden = value;
     }
 
-    getOffsetLeft(): number {
-        return this.#htmlElement.offsetLeft;
+
+    public getInert(): boolean {
+        return this.htmlElement.inert;
     }
 
-    getOffsetTop(): number {
-        return this.#htmlElement.offsetTop;
+    public setInert(value: boolean): void {
+        this.htmlElement.inert = value;
     }
 
-    getOffsetParent(): [HTMLElementAPI] | [null] {
-        if (this.#htmlElement.offsetParent instanceof HTMLElement)
-            return [DotNet.createJSObjectReference(new HTMLElementAPI(this.#htmlElement.offsetParent))];
+
+    public getInnerText(): string {
+        return this.htmlElement.innerText;
+    }
+
+    public setInnerText(value: string): void {
+        this.htmlElement.innerText = value;
+    }
+
+
+    public getInputMode(): string {
+        return this.htmlElement.inputMode;
+    }
+
+    public setInputMode(value: string): void {
+        this.htmlElement.inputMode = value;
+    }
+
+
+    public getIsContentEditable(): boolean {
+        return this.htmlElement.isContentEditable;
+    }
+
+
+    public getLang(): string {
+        return this.htmlElement.lang;
+    }
+
+    public setLang(value: string): void {
+        this.htmlElement.lang = value;
+    }
+
+
+    public getNonce(): string {
+        return this.htmlElement.nonce ?? "";
+    }
+
+    public setNonce(value: string): void {
+        this.htmlElement.nonce = value;
+    }
+
+
+    public getOffsetWidth(): number {
+        return this.htmlElement.offsetWidth;
+    }
+
+    public getOffsetHeight(): number {
+        return this.htmlElement.offsetHeight;
+    }
+
+    public getOffsetLeft(): number {
+        return this.htmlElement.offsetLeft;
+    }
+
+    public getOffsetTop(): number {
+        return this.htmlElement.offsetTop;
+    }
+
+    public getOffsetParent(): [HTMLElementAPI] | [null] {
+        if (this.htmlElement.offsetParent instanceof HTMLElement)
+            return [DotNet.createJSObjectReference(new HTMLElementAPI(this.htmlElement.offsetParent))];
         else
             return [null];
     }
 
 
-    getOuterText(): string {
-        return this.#htmlElement.outerText;
+    public getOuterText(): string {
+        return this.htmlElement.outerText;
     }
 
-    setOuterText(value: string): void {
-        this.#htmlElement.outerText = value;
-    }
-
-
-    getPopover(): string | null {
-        return this.#htmlElement.popover;
-    }
-
-    setPopover(value: string | null): void {
-        this.#htmlElement.popover = value;
+    public setOuterText(value: string): void {
+        this.htmlElement.outerText = value;
     }
 
 
-    getSpellcheck(): boolean {
-        return this.#htmlElement.spellcheck;
+    public getPopover(): string | null {
+        return this.htmlElement.popover;
     }
 
-    setSpellcheck(value: boolean): void {
-        this.#htmlElement.spellcheck = value;
-    }
-
-
-    getStyle(): string {
-        return this.#htmlElement.style.cssText;
-    }
-
-    setStyle(value: string): void {
-        this.#htmlElement.style.cssText = value;
+    public setPopover(value: string | null): void {
+        this.htmlElement.popover = value;
     }
 
 
-    getTabIndex(): number {
-        return this.#htmlElement.tabIndex;
+    public getSpellcheck(): boolean {
+        return this.htmlElement.spellcheck;
     }
 
-    setTabIndex(value: number): void {
-        this.#htmlElement.tabIndex = value;
-    }
-
-
-    getTitle(): string {
-        return this.#htmlElement.title;
-    }
-
-    setTitle(value: string): void {
-        this.#htmlElement.title = value;
+    public setSpellcheck(value: boolean): void {
+        this.htmlElement.spellcheck = value;
     }
 
 
-    getTranslate(): boolean {
-        return this.#htmlElement.translate;
+    public getStyle(): string {
+        return this.htmlElement.style.cssText;
     }
 
-    setTranslate(value: boolean): void {
-        this.#htmlElement.translate = value;
+    public setStyle(value: string): void {
+        this.htmlElement.style.cssText = value;
+    }
+
+
+    public getTabIndex(): number {
+        return this.htmlElement.tabIndex;
+    }
+
+    public setTabIndex(value: number): void {
+        this.htmlElement.tabIndex = value;
+    }
+
+
+    public getTitle(): string {
+        return this.htmlElement.title;
+    }
+
+    public setTitle(value: string): void {
+        this.htmlElement.title = value;
+    }
+
+
+    public getTranslate(): boolean {
+        return this.htmlElement.translate;
+    }
+
+    public setTranslate(value: boolean): void {
+        this.htmlElement.translate = value;
     }
 
 
     // HTMLElement extra
 
-    hasFocus(): boolean {
-        return this.#htmlElement === document.activeElement;
+    public hasFocus(): boolean {
+        return this.htmlElement === document.activeElement;
     }
 
 
     // HTMLElement methods
 
-    click(): void {
-        this.#htmlElement.click();
+    public click(): void {
+        this.htmlElement.click();
     }
 
-    focus(preventScroll: boolean = false): void {
-        this.#htmlElement.focus({ preventScroll });
+    public focus(preventScroll: boolean = false): void {
+        this.htmlElement.focus({ preventScroll });
     }
 
-    blur(): void {
-        this.#htmlElement.blur();
+    public blur(): void {
+        this.htmlElement.blur();
     }
 
-    showPopover(): void {
-        this.#htmlElement.showPopover();
+    public showPopover(): void {
+        this.htmlElement.showPopover();
     }
 
-    hidePopover(): void {
-        this.#htmlElement.hidePopover();
+    public hidePopover(): void {
+        this.htmlElement.hidePopover();
     }
 
-    togglePopover(force: boolean | null): boolean {
-        return <boolean><unknown>this.#htmlElement.togglePopover(force ?? undefined);
+    public togglePopover(force: boolean | null): boolean {
+        return <boolean><unknown>this.htmlElement.togglePopover(force ?? undefined);
     }
 
 
 
     // Node/Element
 
-    getAttributes(): Record<string, string> {
-        const attributes = this.#htmlElement.attributes;
+    public getAttributes(): Record<string, string> {
+        const attributes = this.htmlElement.attributes;
 
         const result: Record<string, string> = {};
         for (const attribute of attributes)
@@ -320,197 +320,197 @@ export class HTMLElementAPI {
     }
 
 
-    getClassList(): string[] {
-        return [... this.#htmlElement.classList];
+    public getClassList(): string[] {
+        return [... this.htmlElement.classList];
     }
 
 
-    getClassName(): string {
-        return this.#htmlElement.className;
+    public getClassName(): string {
+        return this.htmlElement.className;
     }
 
-    setClassName(value: string): void {
-        this.#htmlElement.className = value;
-    }
-
-
-    getClientWidth(): number {
-        return this.#htmlElement.clientWidth;
-    }
-
-    getClientHeight(): number {
-        return this.#htmlElement.clientHeight;
-    }
-
-    getClientLeft(): number {
-        return this.#htmlElement.clientLeft;
-    }
-
-    getClientTop(): number {
-        return this.#htmlElement.clientTop;
+    public setClassName(value: string): void {
+        this.htmlElement.className = value;
     }
 
 
-    getCurrentCSSZoom(): number {
-        return (<HTMLElement & { currentCSSZoom: number; }>this.#htmlElement).currentCSSZoom;
+    public getClientWidth(): number {
+        return this.htmlElement.clientWidth;
+    }
+
+    public getClientHeight(): number {
+        return this.htmlElement.clientHeight;
+    }
+
+    public getClientLeft(): number {
+        return this.htmlElement.clientLeft;
+    }
+
+    public getClientTop(): number {
+        return this.htmlElement.clientTop;
     }
 
 
-    getId(): string {
-        return this.#htmlElement.id;
-    }
-
-    setId(value: string): void {
-        this.#htmlElement.id = value;
+    public getCurrentCSSZoom(): number {
+        return (<HTMLElement & { currentCSSZoom: number; }>this.htmlElement).currentCSSZoom;
     }
 
 
-    getIsConnected(): boolean {
-        return this.#htmlElement.isConnected;
+    public getId(): string {
+        return this.htmlElement.id;
+    }
+
+    public setId(value: string): void {
+        this.htmlElement.id = value;
     }
 
 
-    getInnerHTML(): string {
-        return this.#htmlElement.innerHTML;
-    }
-
-    setInnerHTML(value: string): void {
-        this.#htmlElement.innerHTML = value;
+    public getIsConnected(): boolean {
+        return this.htmlElement.isConnected;
     }
 
 
-    getOuterHTML(): string {
-        return this.#htmlElement.outerHTML;
+    public getInnerHTML(): string {
+        return this.htmlElement.innerHTML;
     }
 
-    setOuterHTML(value: string): void {
-        this.#htmlElement.outerHTML = value;
-    }
-
-
-    getPart(): string[] {
-        return [... this.#htmlElement.part];
+    public setInnerHTML(value: string): void {
+        this.htmlElement.innerHTML = value;
     }
 
 
-    getScrollWidth(): number {
-        return this.#htmlElement.scrollWidth;
+    public getOuterHTML(): string {
+        return this.htmlElement.outerHTML;
     }
 
-    getScrollHeight(): number {
-        return this.#htmlElement.scrollHeight;
-    }
-
-    getScrollLeft(): number {
-        return this.#htmlElement.scrollLeft;
-    }
-
-    setScrollLeft(value: number): void {
-        this.#htmlElement.scrollLeft = value;
-    }
-
-    getScrollTop(): number {
-        return this.#htmlElement.scrollTop;
-    }
-
-    setScrollTop(value: number): void {
-        this.#htmlElement.scrollTop = value;
+    public setOuterHTML(value: string): void {
+        this.htmlElement.outerHTML = value;
     }
 
 
-    getSlot(): string {
-        return this.#htmlElement.slot;
-    }
-
-    setSlot(value: string): void {
-        this.#htmlElement.slot = value;
+    public getPart(): string[] {
+        return [... this.htmlElement.part];
     }
 
 
-    getTextContent(): string {
+    public getScrollWidth(): number {
+        return this.htmlElement.scrollWidth;
+    }
+
+    public getScrollHeight(): number {
+        return this.htmlElement.scrollHeight;
+    }
+
+    public getScrollLeft(): number {
+        return this.htmlElement.scrollLeft;
+    }
+
+    public setScrollLeft(value: number): void {
+        this.htmlElement.scrollLeft = value;
+    }
+
+    public getScrollTop(): number {
+        return this.htmlElement.scrollTop;
+    }
+
+    public setScrollTop(value: number): void {
+        this.htmlElement.scrollTop = value;
+    }
+
+
+    public getSlot(): string {
+        return this.htmlElement.slot;
+    }
+
+    public setSlot(value: string): void {
+        this.htmlElement.slot = value;
+    }
+
+
+    public getTextContent(): string {
         // textContent of HTMLElements are always not null
-        return <string>this.#htmlElement.textContent;
+        return <string>this.htmlElement.textContent;
     }
 
-    setTextContent(value: string): void {
-        this.#htmlElement.textContent = value;
-    }
-
-
-    getLocalName(): string {
-        return this.#htmlElement.localName;
-    }
-
-    getNamespaceURI(): string | null {
-        return this.#htmlElement.namespaceURI;
-    }
-
-    getPrefix(): string | null {
-        return this.#htmlElement.prefix;
+    public setTextContent(value: string): void {
+        this.htmlElement.textContent = value;
     }
 
 
-    getBaseURI(): string {
-        return this.#htmlElement.baseURI;
+    public getLocalName(): string {
+        return this.htmlElement.localName;
     }
 
-    getTagName(): string {
-        return this.#htmlElement.tagName;
+    public getNamespaceURI(): string | null {
+        return this.htmlElement.namespaceURI;
     }
 
-    getNodeName(): string {
-        return this.#htmlElement.nodeName;
+    public getPrefix(): string | null {
+        return this.htmlElement.prefix;
     }
 
-    getNodeType(): number {
-        return this.#htmlElement.nodeType;
+
+    public getBaseURI(): string {
+        return this.htmlElement.baseURI;
+    }
+
+    public getTagName(): string {
+        return this.htmlElement.tagName;
+    }
+
+    public getNodeName(): string {
+        return this.htmlElement.nodeName;
+    }
+
+    public getNodeType(): number {
+        return this.htmlElement.nodeType;
     }
 
 
     // Node/Element properties - Tree-nodes
 
-    getChildElementCount(): number {
-        return this.#htmlElement.childElementCount;
+    public getChildElementCount(): number {
+        return this.htmlElement.childElementCount;
     }
 
-    getChildren(): HTMLElementAPI[] {
-        return [... this.#htmlElement.children].map((child: HTMLElement) => DotNet.createJSObjectReference(new HTMLElementAPI(child)));
+    public getChildren(): HTMLElementAPI[] {
+        return [... this.htmlElement.children].map((child: HTMLElement) => DotNet.createJSObjectReference(new HTMLElementAPI(child)));
     }
 
-    getFirstElementChild(): [HTMLElementAPI] | [null] {
-        const result = this.#htmlElement.firstElementChild;
+    public getFirstElementChild(): [HTMLElementAPI] | [null] {
+        const result = this.htmlElement.firstElementChild;
         if (result)
             return [DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>result))];
         else
             return [null];
     }
 
-    getLastElementChild(): [HTMLElementAPI] | [null] {
-        const result = this.#htmlElement.lastElementChild;
+    public getLastElementChild(): [HTMLElementAPI] | [null] {
+        const result = this.htmlElement.lastElementChild;
         if (result)
             return [DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>result))];
         else
             return [null];
     }
 
-    getPreviousElementSibling(): [HTMLElementAPI] | [null] {
-        const result = this.#htmlElement.previousElementSibling;
+    public getPreviousElementSibling(): [HTMLElementAPI] | [null] {
+        const result = this.htmlElement.previousElementSibling;
         if (result)
             return [DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>result))];
         else
             return [null];
     }
 
-    getNextElementSibling(): [HTMLElementAPI] | [null] {
-        const result = this.#htmlElement.nextElementSibling;
+    public getNextElementSibling(): [HTMLElementAPI] | [null] {
+        const result = this.htmlElement.nextElementSibling;
         if (result)
             return [DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>result))];
         else
             return [null];
     }
 
-    getParentElement(): [HTMLElementAPI] | [null] {
-        const result = this.#htmlElement.parentElement;
+    public getParentElement(): [HTMLElementAPI] | [null] {
+        const result = this.htmlElement.parentElement;
         if (result)
             return [DotNet.createJSObjectReference(new HTMLElementAPI(result))];
         else
@@ -520,401 +520,401 @@ export class HTMLElementAPI {
 
     // Node/Element properties - ARIA
 
-    getAriaAtomic(): string | null {
-        return this.#htmlElement.ariaAtomic;
+    public getAriaAtomic(): string | null {
+        return this.htmlElement.ariaAtomic;
     }
 
-    setAriaAtomic(value: string | null): void {
-        this.#htmlElement.ariaAtomic = value;
+    public setAriaAtomic(value: string | null): void {
+        this.htmlElement.ariaAtomic = value;
     }
 
 
-    getAriaAutoComplete(): string | null {
-        return this.#htmlElement.ariaAutoComplete;
+    public getAriaAutoComplete(): string | null {
+        return this.htmlElement.ariaAutoComplete;
     }
 
-    setAriaAutoComplete(value: string | null): void {
-        this.#htmlElement.ariaAutoComplete = value;
+    public setAriaAutoComplete(value: string | null): void {
+        this.htmlElement.ariaAutoComplete = value;
     }
 
 
-    getAriaBrailleLabel(): string | null {
-        return (<HTMLElement & { ariaBrailleLabel: string | null; }>this.#htmlElement).ariaBrailleLabel;
+    public getAriaBrailleLabel(): string | null {
+        return (<HTMLElement & { ariaBrailleLabel: string | null; }>this.htmlElement).ariaBrailleLabel;
     }
 
-    setAriaBrailleLabel(value: string | null): void {
-        (<HTMLElement & { ariaBrailleLabel: string | null; }>this.#htmlElement).ariaBrailleLabel = value;
+    public setAriaBrailleLabel(value: string | null): void {
+        (<HTMLElement & { ariaBrailleLabel: string | null; }>this.htmlElement).ariaBrailleLabel = value;
     }
 
 
-    getAriaBrailleRoleDescription(): string | null {
-        return (<HTMLElement & { ariaBrailleRoleDescription: string | null; }>this.#htmlElement).ariaBrailleRoleDescription;
+    public getAriaBrailleRoleDescription(): string | null {
+        return (<HTMLElement & { ariaBrailleRoleDescription: string | null; }>this.htmlElement).ariaBrailleRoleDescription;
     }
 
-    setAriaBrailleRoleDescription(value: string | null): void {
-        (<HTMLElement & { ariaBrailleRoleDescription: string | null; }>this.#htmlElement).ariaBrailleRoleDescription = value;
+    public setAriaBrailleRoleDescription(value: string | null): void {
+        (<HTMLElement & { ariaBrailleRoleDescription: string | null; }>this.htmlElement).ariaBrailleRoleDescription = value;
     }
 
 
-    getAriaBusy(): string | null {
-        return this.#htmlElement.ariaBusy;
+    public getAriaBusy(): string | null {
+        return this.htmlElement.ariaBusy;
     }
 
-    setAriaBusy(value: string | null): void {
-        this.#htmlElement.ariaBusy = value;
+    public setAriaBusy(value: string | null): void {
+        this.htmlElement.ariaBusy = value;
     }
 
 
-    getAriaChecked(): string | null {
-        return this.#htmlElement.ariaChecked;
+    public getAriaChecked(): string | null {
+        return this.htmlElement.ariaChecked;
     }
 
-    setAriaChecked(value: string | null): void {
-        this.#htmlElement.ariaChecked = value;
+    public setAriaChecked(value: string | null): void {
+        this.htmlElement.ariaChecked = value;
     }
 
 
-    getAriaColCount(): string | null {
-        return this.#htmlElement.ariaColCount;
+    public getAriaColCount(): string | null {
+        return this.htmlElement.ariaColCount;
     }
 
-    setAriaColCount(value: string | null): void {
-        this.#htmlElement.ariaColCount = value;
+    public setAriaColCount(value: string | null): void {
+        this.htmlElement.ariaColCount = value;
     }
 
 
-    getAriaColIndex(): string | null {
-        return this.#htmlElement.ariaColIndex;
+    public getAriaColIndex(): string | null {
+        return this.htmlElement.ariaColIndex;
     }
 
-    setAriaColIndex(value: string | null): void {
-        this.#htmlElement.ariaColIndex = value;
+    public setAriaColIndex(value: string | null): void {
+        this.htmlElement.ariaColIndex = value;
     }
 
 
-    getAriaColIndexText(): string | null {
-        return (<HTMLElement & { ariaColIndexText: string | null; }>this.#htmlElement).ariaColIndexText;
+    public getAriaColIndexText(): string | null {
+        return (<HTMLElement & { ariaColIndexText: string | null; }>this.htmlElement).ariaColIndexText;
     }
 
-    setAriaColIndexText(value: string | null): void {
-        (<HTMLElement & { ariaColIndexText: string | null; }>this.#htmlElement).ariaColIndexText = value;
+    public setAriaColIndexText(value: string | null): void {
+        (<HTMLElement & { ariaColIndexText: string | null; }>this.htmlElement).ariaColIndexText = value;
     }
 
 
-    getAriaColSpan(): string | null {
-        return this.#htmlElement.ariaColSpan;
+    public getAriaColSpan(): string | null {
+        return this.htmlElement.ariaColSpan;
     }
 
-    setAriaColSpan(value: string | null): void {
-        this.#htmlElement.ariaColSpan = value;
+    public setAriaColSpan(value: string | null): void {
+        this.htmlElement.ariaColSpan = value;
     }
 
 
-    getAriaCurrent(): string | null {
-        return this.#htmlElement.ariaCurrent;
+    public getAriaCurrent(): string | null {
+        return this.htmlElement.ariaCurrent;
     }
 
-    setAriaCurrent(value: string | null): void {
-        this.#htmlElement.ariaCurrent = value;
+    public setAriaCurrent(value: string | null): void {
+        this.htmlElement.ariaCurrent = value;
     }
 
 
-    getAriaDescription(): string | null {
-        return (<HTMLElement & { ariaDescription: string | null; }>this.#htmlElement).ariaDescription;
+    public getAriaDescription(): string | null {
+        return (<HTMLElement & { ariaDescription: string | null; }>this.htmlElement).ariaDescription;
     }
 
-    setAriaDescription(value: string | null): void {
-        (<HTMLElement & { ariaDescription: string | null; }>this.#htmlElement).ariaDescription = value;
+    public setAriaDescription(value: string | null): void {
+        (<HTMLElement & { ariaDescription: string | null; }>this.htmlElement).ariaDescription = value;
     }
 
 
-    getAriaDisabled(): string | null {
-        return this.#htmlElement.ariaDisabled;
+    public getAriaDisabled(): string | null {
+        return this.htmlElement.ariaDisabled;
     }
 
-    setAriaDisabled(value: string | null): void {
-        this.#htmlElement.ariaDisabled = value;
+    public setAriaDisabled(value: string | null): void {
+        this.htmlElement.ariaDisabled = value;
     }
 
 
-    getAriaExpanded(): string | null {
-        return this.#htmlElement.ariaExpanded;
+    public getAriaExpanded(): string | null {
+        return this.htmlElement.ariaExpanded;
     }
 
-    setAriaExpanded(value: string | null): void {
-        this.#htmlElement.ariaExpanded = value;
+    public setAriaExpanded(value: string | null): void {
+        this.htmlElement.ariaExpanded = value;
     }
 
 
-    getAriaHasPopup(): string | null {
-        return this.#htmlElement.ariaHasPopup;
+    public getAriaHasPopup(): string | null {
+        return this.htmlElement.ariaHasPopup;
     }
 
-    setAriaHasPopup(value: string | null): void {
-        this.#htmlElement.ariaHasPopup = value;
+    public setAriaHasPopup(value: string | null): void {
+        this.htmlElement.ariaHasPopup = value;
     }
 
 
-    getAriaHidden(): string | null {
-        return this.#htmlElement.ariaHidden;
+    public getAriaHidden(): string | null {
+        return this.htmlElement.ariaHidden;
     }
 
-    setAriaHidden(value: string | null): void {
-        this.#htmlElement.ariaHidden = value;
+    public setAriaHidden(value: string | null): void {
+        this.htmlElement.ariaHidden = value;
     }
 
 
-    getAriaInvalid(): string | null {
-        return this.#htmlElement.ariaInvalid;
+    public getAriaInvalid(): string | null {
+        return this.htmlElement.ariaInvalid;
     }
 
-    setAriaInvalid(value: string | null): void {
-        this.#htmlElement.ariaInvalid = value;
+    public setAriaInvalid(value: string | null): void {
+        this.htmlElement.ariaInvalid = value;
     }
 
 
-    getAriaKeyShortcuts(): string | null {
-        return this.#htmlElement.ariaKeyShortcuts;
+    public getAriaKeyShortcuts(): string | null {
+        return this.htmlElement.ariaKeyShortcuts;
     }
 
-    setAriaKeyShortcuts(value: string | null): void {
-        this.#htmlElement.ariaKeyShortcuts = value;
+    public setAriaKeyShortcuts(value: string | null): void {
+        this.htmlElement.ariaKeyShortcuts = value;
     }
 
 
-    getAriaLabel(): string | null {
-        return this.#htmlElement.ariaLabel;
+    public getAriaLabel(): string | null {
+        return this.htmlElement.ariaLabel;
     }
 
-    setAriaLabel(value: string | null): void {
-        this.#htmlElement.ariaLabel = value;
+    public setAriaLabel(value: string | null): void {
+        this.htmlElement.ariaLabel = value;
     }
 
 
-    getAriaLevel(): string | null {
-        return this.#htmlElement.ariaLevel;
+    public getAriaLevel(): string | null {
+        return this.htmlElement.ariaLevel;
     }
 
-    setAriaLevel(value: string | null): void {
-        this.#htmlElement.ariaLevel = value;
+    public setAriaLevel(value: string | null): void {
+        this.htmlElement.ariaLevel = value;
     }
 
 
-    getAriaLive(): string | null {
-        return this.#htmlElement.ariaLive;
+    public getAriaLive(): string | null {
+        return this.htmlElement.ariaLive;
     }
 
-    setAriaLive(value: string | null): void {
-        this.#htmlElement.ariaLive = value;
+    public setAriaLive(value: string | null): void {
+        this.htmlElement.ariaLive = value;
     }
 
 
-    getAriaModal(): string | null {
-        return this.#htmlElement.ariaModal;
+    public getAriaModal(): string | null {
+        return this.htmlElement.ariaModal;
     }
 
-    setAriaModal(value: string | null): void {
-        this.#htmlElement.ariaModal = value;
+    public setAriaModal(value: string | null): void {
+        this.htmlElement.ariaModal = value;
     }
 
 
-    getAriaMultiline(): string | null {
-        return (<HTMLElement & { ariaMultiline: string | null; }>this.#htmlElement).ariaMultiline;
+    public getAriaMultiline(): string | null {
+        return (<HTMLElement & { ariaMultiline: string | null; }>this.htmlElement).ariaMultiline;
     }
 
-    setAriaMultiline(value: string | null): void {
-        (<HTMLElement & { ariaMultiline: string | null; }>this.#htmlElement).ariaMultiline = value;
+    public setAriaMultiline(value: string | null): void {
+        (<HTMLElement & { ariaMultiline: string | null; }>this.htmlElement).ariaMultiline = value;
     }
 
 
-    getAriaMultiSelectable(): string | null {
-        return this.#htmlElement.ariaMultiSelectable;
+    public getAriaMultiSelectable(): string | null {
+        return this.htmlElement.ariaMultiSelectable;
     }
 
-    setAriaMultiSelectable(value: string | null): void {
-        this.#htmlElement.ariaMultiSelectable = value;
+    public setAriaMultiSelectable(value: string | null): void {
+        this.htmlElement.ariaMultiSelectable = value;
     }
 
 
-    getAriaOrientation(): string | null {
-        return this.#htmlElement.ariaOrientation;
+    public getAriaOrientation(): string | null {
+        return this.htmlElement.ariaOrientation;
     }
 
-    setAriaOrientation(value: string | null): void {
-        this.#htmlElement.ariaOrientation = value;
+    public setAriaOrientation(value: string | null): void {
+        this.htmlElement.ariaOrientation = value;
     }
 
 
-    getAriaPlaceholder(): string | null {
-        return this.#htmlElement.ariaPlaceholder;
+    public getAriaPlaceholder(): string | null {
+        return this.htmlElement.ariaPlaceholder;
     }
 
-    setAriaPlaceholder(value: string | null): void {
-        this.#htmlElement.ariaPlaceholder = value;
+    public setAriaPlaceholder(value: string | null): void {
+        this.htmlElement.ariaPlaceholder = value;
     }
 
 
-    getAriaPosInSet(): string | null {
-        return this.#htmlElement.ariaPosInSet;
+    public getAriaPosInSet(): string | null {
+        return this.htmlElement.ariaPosInSet;
     }
 
-    setAriaPosInSet(value: string | null): void {
-        this.#htmlElement.ariaPosInSet = value;
+    public setAriaPosInSet(value: string | null): void {
+        this.htmlElement.ariaPosInSet = value;
     }
 
 
-    getAriaPressed(): string | null {
-        return this.#htmlElement.ariaPressed;
+    public getAriaPressed(): string | null {
+        return this.htmlElement.ariaPressed;
     }
 
-    setAriaPressed(value: string | null): void {
-        this.#htmlElement.ariaPressed = value;
+    public setAriaPressed(value: string | null): void {
+        this.htmlElement.ariaPressed = value;
     }
 
 
-    getAriaReadOnly(): string | null {
-        return this.#htmlElement.ariaReadOnly;
+    public getAriaReadOnly(): string | null {
+        return this.htmlElement.ariaReadOnly;
     }
 
-    setAriaReadOnly(value: string | null): void {
-        this.#htmlElement.ariaReadOnly = value;
+    public setAriaReadOnly(value: string | null): void {
+        this.htmlElement.ariaReadOnly = value;
     }
 
 
-    getAriaRequired(): string | null {
-        return this.#htmlElement.ariaRequired;
+    public getAriaRequired(): string | null {
+        return this.htmlElement.ariaRequired;
     }
 
-    setAriaRequired(value: string | null): void {
-        this.#htmlElement.ariaRequired = value;
+    public setAriaRequired(value: string | null): void {
+        this.htmlElement.ariaRequired = value;
     }
 
 
-    getAriaRoleDescription(): string | null {
-        return this.#htmlElement.ariaRoleDescription;
+    public getAriaRoleDescription(): string | null {
+        return this.htmlElement.ariaRoleDescription;
     }
 
-    setAriaRoleDescription(value: string | null): void {
-        this.#htmlElement.ariaRoleDescription = value;
+    public setAriaRoleDescription(value: string | null): void {
+        this.htmlElement.ariaRoleDescription = value;
     }
 
 
-    getAriaRowCount(): string | null {
-        return this.#htmlElement.ariaRowCount;
+    public getAriaRowCount(): string | null {
+        return this.htmlElement.ariaRowCount;
     }
 
-    setAriaRowCount(value: string | null): void {
-        this.#htmlElement.ariaRowCount = value;
+    public setAriaRowCount(value: string | null): void {
+        this.htmlElement.ariaRowCount = value;
     }
 
 
-    getAriaRowIndex(): string | null {
-        return this.#htmlElement.ariaRowIndex;
+    public getAriaRowIndex(): string | null {
+        return this.htmlElement.ariaRowIndex;
     }
 
-    setAriaRowIndex(value: string | null): void {
-        this.#htmlElement.ariaRowIndex = value;
+    public setAriaRowIndex(value: string | null): void {
+        this.htmlElement.ariaRowIndex = value;
     }
 
 
-    getAriaRowIndexText(): string | null {
-        return (<HTMLElement & { ariaRowIndexText: string | null; }>this.#htmlElement).ariaRowIndexText;
+    public getAriaRowIndexText(): string | null {
+        return (<HTMLElement & { ariaRowIndexText: string | null; }>this.htmlElement).ariaRowIndexText;
     }
 
-    setAriaRowIndexText(value: string | null): void {
-        (<HTMLElement & { ariaRowIndexText: string | null; }>this.#htmlElement).ariaRowIndexText = value;
+    public setAriaRowIndexText(value: string | null): void {
+        (<HTMLElement & { ariaRowIndexText: string | null; }>this.htmlElement).ariaRowIndexText = value;
     }
 
 
-    getAriaRowSpan(): string | null {
-        return this.#htmlElement.ariaRowSpan;
+    public getAriaRowSpan(): string | null {
+        return this.htmlElement.ariaRowSpan;
     }
 
-    setAriaRowSpan(value: string | null): void {
-        this.#htmlElement.ariaRowSpan = value;
+    public setAriaRowSpan(value: string | null): void {
+        this.htmlElement.ariaRowSpan = value;
     }
 
 
-    getAriaSelected(): string | null {
-        return this.#htmlElement.ariaSelected;
+    public getAriaSelected(): string | null {
+        return this.htmlElement.ariaSelected;
     }
 
-    setAriaSelected(value: string | null): void {
-        this.#htmlElement.ariaSelected = value;
+    public setAriaSelected(value: string | null): void {
+        this.htmlElement.ariaSelected = value;
     }
 
 
-    getAriaSetSize(): string | null {
-        return this.#htmlElement.ariaSetSize;
+    public getAriaSetSize(): string | null {
+        return this.htmlElement.ariaSetSize;
     }
 
-    setAriaSetSize(value: string | null): void {
-        this.#htmlElement.ariaSetSize = value;
+    public setAriaSetSize(value: string | null): void {
+        this.htmlElement.ariaSetSize = value;
     }
 
 
-    getAriaSort(): string | null {
-        return this.#htmlElement.ariaSort;
+    public getAriaSort(): string | null {
+        return this.htmlElement.ariaSort;
     }
 
-    setAriaSort(value: string | null): void {
-        this.#htmlElement.ariaSort = value;
+    public setAriaSort(value: string | null): void {
+        this.htmlElement.ariaSort = value;
     }
 
 
-    getAriaValueMax(): string | null {
-        return this.#htmlElement.ariaValueMax;
+    public getAriaValueMax(): string | null {
+        return this.htmlElement.ariaValueMax;
     }
 
-    setAriaValueMax(value: string | null): void {
-        this.#htmlElement.ariaValueMax = value;
+    public setAriaValueMax(value: string | null): void {
+        this.htmlElement.ariaValueMax = value;
     }
 
 
-    getAriaValueMin(): string | null {
-        return this.#htmlElement.ariaValueMin;
+    public getAriaValueMin(): string | null {
+        return this.htmlElement.ariaValueMin;
     }
 
-    setAriaValueMin(value: string | null): void {
-        this.#htmlElement.ariaValueMin = value;
+    public setAriaValueMin(value: string | null): void {
+        this.htmlElement.ariaValueMin = value;
     }
 
 
-    getAriaValueNow(): string | null {
-        return this.#htmlElement.ariaValueNow;
+    public getAriaValueNow(): string | null {
+        return this.htmlElement.ariaValueNow;
     }
 
-    setAriaValueNow(value: string | null): void {
-        this.#htmlElement.ariaValueNow = value;
+    public setAriaValueNow(value: string | null): void {
+        this.htmlElement.ariaValueNow = value;
     }
 
 
-    getAriaValueText(): string | null {
-        return this.#htmlElement.ariaValueText;
+    public getAriaValueText(): string | null {
+        return this.htmlElement.ariaValueText;
     }
 
-    setAriaValueText(value: string | null): void {
-        this.#htmlElement.ariaValueText = value;
+    public setAriaValueText(value: string | null): void {
+        this.htmlElement.ariaValueText = value;
     }
 
 
-    getRole(): string | null {
-        return this.#htmlElement.role;
+    public getRole(): string | null {
+        return this.htmlElement.role;
     }
 
-    setRole(value: string | null): void {
-        this.#htmlElement.role = value;
+    public setRole(value: string | null): void {
+        this.htmlElement.role = value;
     }
 
 
     // Node/Element methods
 
-    checkVisibility(contentVisibilityAuto: boolean, opacityProperty: boolean, visibilityProperty: boolean): boolean {
-        return this.#htmlElement.checkVisibility(<CheckVisibilityOptions>{ contentVisibilityAuto, opacityProperty, visibilityProperty });
+    public checkVisibility(contentVisibilityAuto: boolean, opacityProperty: boolean, visibilityProperty: boolean): boolean {
+        return this.htmlElement.checkVisibility(<CheckVisibilityOptions>{ contentVisibilityAuto, opacityProperty, visibilityProperty });
     }
 
-    computedStyleMap(): Record<string, string> {
-        const computedStyleMap = this.#htmlElement.computedStyleMap().entries();
+    public computedStyleMap(): Record<string, string> {
+        const computedStyleMap = this.htmlElement.computedStyleMap().entries();
 
         const result: Record<string, string> = {};
         for (const [name, value] of computedStyleMap)
@@ -922,158 +922,158 @@ export class HTMLElementAPI {
         return result;
     }
 
-    getBoundingClientRect(): DOMRect {
-        return this.#htmlElement.getBoundingClientRect();
+    public getBoundingClientRect(): DOMRect {
+        return this.htmlElement.getBoundingClientRect();
     }
 
-    getClientRects(): DOMRect[] {
-        return [... this.#htmlElement.getClientRects()];
+    public getClientRects(): DOMRect[] {
+        return [... this.htmlElement.getClientRects()];
     }
 
-    matches(selectors: string): boolean {
-        return this.#htmlElement.matches(selectors);
+    public matches(selectors: string): boolean {
+        return this.htmlElement.matches(selectors);
     }
 
-    requestFullscreen(navigationUI: "hide" | "show" | "auto" = "auto"): Promise<void> {
-        return this.#htmlElement.requestFullscreen({ navigationUI });
+    public requestFullscreen(navigationUI: "hide" | "show" | "auto" = "auto"): Promise<void> {
+        return this.htmlElement.requestFullscreen({ navigationUI });
     }
 
-    requestPointerLock(unadjustedMovement: boolean): Promise<void> {
-        return (<(options: { unadjustedMovement: boolean; }) => Promise<void>><unknown>this.#htmlElement.requestPointerLock)({ unadjustedMovement });
+    public requestPointerLock(unadjustedMovement: boolean): Promise<void> {
+        return (<(options: { unadjustedMovement: boolean; }) => Promise<void>><unknown>this.htmlElement.requestPointerLock)({ unadjustedMovement });
     }
 
-    isDefaultNamespace(namespace: string | null): boolean {
-        return this.#htmlElement.isDefaultNamespace(namespace);
+    public isDefaultNamespace(namespace: string | null): boolean {
+        return this.htmlElement.isDefaultNamespace(namespace);
     }
 
-    lookupPrefix(namespace: string | null): string | null {
-        return this.#htmlElement.lookupPrefix(namespace);
+    public lookupPrefix(namespace: string | null): string | null {
+        return this.htmlElement.lookupPrefix(namespace);
     }
 
-    lookupNamespaceURI(prefix: string | null): string | null {
-        return this.#htmlElement.lookupNamespaceURI(prefix);
+    public lookupNamespaceURI(prefix: string | null): string | null {
+        return this.htmlElement.lookupNamespaceURI(prefix);
     }
 
-    normalize(): void {
-        this.#htmlElement.normalize();
+    public normalize(): void {
+        this.htmlElement.normalize();
     }
 
 
     // Node/Element methods - Pointer Capture
 
-    setPointerCapture(pointerId: number): void {
-        this.#htmlElement.setPointerCapture(pointerId);
+    public setPointerCapture(pointerId: number): void {
+        this.htmlElement.setPointerCapture(pointerId);
     }
 
-    releasePointerCapture(pointerId: number): void {
-        this.#htmlElement.releasePointerCapture(pointerId);
+    public releasePointerCapture(pointerId: number): void {
+        this.htmlElement.releasePointerCapture(pointerId);
     }
 
-    hasPointerCapture(pointerId: number): boolean {
-        return this.#htmlElement.hasPointerCapture(pointerId);
+    public hasPointerCapture(pointerId: number): boolean {
+        return this.htmlElement.hasPointerCapture(pointerId);
     }
 
 
     // Node/Element methods - Scroll
 
-    scroll(left: number, top: number, behavior: ScrollBehavior | null): void {
+    public scroll(left: number, top: number, behavior: ScrollBehavior | null): void {
         if (!behavior)
-            this.#htmlElement.scroll(left, top);
+            this.htmlElement.scroll(left, top);
         else
-            this.#htmlElement.scroll({ left, top, behavior });
+            this.htmlElement.scroll({ left, top, behavior });
     }
 
-    scrollTo(left: number, top: number, behavior: ScrollBehavior | null): void {
+    public scrollTo(left: number, top: number, behavior: ScrollBehavior | null): void {
         this.scroll(left, top, behavior);
     }
 
-    scrollBy(deltaX: number, deltaY: number, behavior: ScrollBehavior | null): void {
+    public scrollBy(deltaX: number, deltaY: number, behavior: ScrollBehavior | null): void {
         if (!behavior)
-            this.#htmlElement.scrollBy(deltaX, deltaY);
+            this.htmlElement.scrollBy(deltaX, deltaY);
         else
-            this.#htmlElement.scrollBy({ left: deltaX, top: deltaY, behavior });
+            this.htmlElement.scrollBy({ left: deltaX, top: deltaY, behavior });
     }
 
-    scrollIntoView(block: ScrollLogicalPosition = "start", inline: ScrollLogicalPosition = "nearest", behavior: ScrollBehavior = "auto"): void {
-        this.#htmlElement.scrollIntoView({ block, inline, behavior });
+    public scrollIntoView(block: ScrollLogicalPosition = "start", inline: ScrollLogicalPosition = "nearest", behavior: ScrollBehavior = "auto"): void {
+        this.htmlElement.scrollIntoView({ block, inline, behavior });
     }
 
 
     // Node/Element methods - Attribute
 
-    getAttribute(qualifiedName: string): string | null {
-        return this.#htmlElement.getAttribute(qualifiedName);
+    public getAttribute(qualifiedName: string): string | null {
+        return this.htmlElement.getAttribute(qualifiedName);
     }
 
-    getAttributeNS(namespace: string, qualifiedName: string): string | null {
-        return this.#htmlElement.getAttributeNS(namespace, qualifiedName);
+    public getAttributeNS(namespace: string, qualifiedName: string): string | null {
+        return this.htmlElement.getAttributeNS(namespace, qualifiedName);
     }
 
-    getAttributeNames(): string[] {
-        return this.#htmlElement.getAttributeNames();
+    public getAttributeNames(): string[] {
+        return this.htmlElement.getAttributeNames();
     }
 
-    setAttribute(qualifiedName: string, value: string): void {
-        this.#htmlElement.setAttribute(qualifiedName, value);
+    public setAttribute(qualifiedName: string, value: string): void {
+        this.htmlElement.setAttribute(qualifiedName, value);
     }
 
-    setAttributeNS(namespace: string, qualifiedName: string, value: string): void {
-        this.#htmlElement.setAttributeNS(namespace, qualifiedName, value);
+    public setAttributeNS(namespace: string, qualifiedName: string, value: string): void {
+        this.htmlElement.setAttributeNS(namespace, qualifiedName, value);
     }
 
-    toggleAttribute(qualifiedName: string, force: boolean | null): boolean {
-        return this.#htmlElement.toggleAttribute(qualifiedName, force ?? undefined);
+    public toggleAttribute(qualifiedName: string, force: boolean | null): boolean {
+        return this.htmlElement.toggleAttribute(qualifiedName, force ?? undefined);
     }
 
-    removeAttribute(qualifiedName: string): void {
-        this.#htmlElement.removeAttribute(qualifiedName);
+    public removeAttribute(qualifiedName: string): void {
+        this.htmlElement.removeAttribute(qualifiedName);
     }
 
-    removeAttributeNS(namespace: string, qualifiedName: string): void {
-        this.#htmlElement.removeAttributeNS(namespace, qualifiedName);
+    public removeAttributeNS(namespace: string, qualifiedName: string): void {
+        this.htmlElement.removeAttributeNS(namespace, qualifiedName);
     }
 
-    hasAttribute(qualifiedName: string): boolean {
-        return this.#htmlElement.hasAttribute(qualifiedName);
+    public hasAttribute(qualifiedName: string): boolean {
+        return this.htmlElement.hasAttribute(qualifiedName);
     }
 
-    hasAttributeNS(namespace: string, qualifiedName: string): boolean {
-        return this.#htmlElement.hasAttributeNS(namespace, qualifiedName);
+    public hasAttributeNS(namespace: string, qualifiedName: string): boolean {
+        return this.htmlElement.hasAttributeNS(namespace, qualifiedName);
     }
 
-    hasAttributes(): boolean {
-        return this.#htmlElement.hasAttributes();
+    public hasAttributes(): boolean {
+        return this.htmlElement.hasAttributes();
     }
 
 
     // Node/Element methods - Tree-nodes
 
-    getElementsByClassName(className: string): HTMLElementAPI[] {
-        return [...this.#htmlElement.getElementsByClassName(className)].map(element => DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>element)));
+    public getElementsByClassName(className: string): HTMLElementAPI[] {
+        return [...this.htmlElement.getElementsByClassName(className)].map(element => DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>element)));
     }
 
-    getElementsByTagName(qualifiedName: string): HTMLElementAPI[] {
-        return [... this.#htmlElement.getElementsByTagName(qualifiedName)].map(element => DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>element)));
+    public getElementsByTagName(qualifiedName: string): HTMLElementAPI[] {
+        return [... this.htmlElement.getElementsByTagName(qualifiedName)].map(element => DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>element)));
     }
 
-    getElementsByTagNameNS(namespace: string, qualifiedName: string): HTMLElementAPI[] {
-        return [... this.#htmlElement.getElementsByTagNameNS(namespace, qualifiedName)].map(element => DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>element)));
+    public getElementsByTagNameNS(namespace: string, qualifiedName: string): HTMLElementAPI[] {
+        return [... this.htmlElement.getElementsByTagNameNS(namespace, qualifiedName)].map(element => DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>element)));
     }
 
-    querySelector(selectors: string): [HTMLElementAPI] | [null] {
-        const result = this.#htmlElement.querySelector(selectors);
+    public querySelector(selectors: string): [HTMLElementAPI] | [null] {
+        const result = this.htmlElement.querySelector(selectors);
         if (result)
             return [DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>result))];
         else
             return [null];
     }
 
-    querySelectorAll(selectors: string): HTMLElementAPI[] {
-        return [... this.#htmlElement.querySelectorAll(selectors)].map(element => DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>element)));
+    public querySelectorAll(selectors: string): HTMLElementAPI[] {
+        return [... this.htmlElement.querySelectorAll(selectors)].map(element => DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>element)));
     }
 
-    closest(selectors: string): [HTMLElementAPI] | [null] {
-        const result = this.#htmlElement.closest(selectors);
+    public closest(selectors: string): [HTMLElementAPI] | [null] {
+        const result = this.htmlElement.closest(selectors);
         if (result)
             return [DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>result))];
         else
@@ -1081,127 +1081,127 @@ export class HTMLElementAPI {
     }
 
 
-    before_string(nodes: string[]): void {
-        this.#htmlElement.before(...nodes);
+    public before_string(nodes: string[]): void {
+        this.htmlElement.before(...nodes);
     }
 
-    before_htmlElement(nodes: HTMLElementAPI[]): void {
-        this.#htmlElement.before(...nodes.map(htmlElementAPI => htmlElementAPI.#htmlElement));
+    public before_htmlElement(nodes: HTMLElementAPI[]): void {
+        this.htmlElement.before(...nodes.map(htmlElementAPI => htmlElementAPI.htmlElement));
     }
 
-    after_string(nodes: string[]): void {
-        this.#htmlElement.after(...nodes);
+    public after_string(nodes: string[]): void {
+        this.htmlElement.after(...nodes);
     }
 
-    after_htmlElement(nodes: HTMLElementAPI[]): void {
-        this.#htmlElement.after(...nodes.map(htmlElementAPI => htmlElementAPI.#htmlElement));
+    public after_htmlElement(nodes: HTMLElementAPI[]): void {
+        this.htmlElement.after(...nodes.map(htmlElementAPI => htmlElementAPI.htmlElement));
     }
 
 
-    prepend_string(nodes: string[]): void {
-        this.#htmlElement.prepend(...nodes);
+    public prepend_string(nodes: string[]): void {
+        this.htmlElement.prepend(...nodes);
     }
 
-    prepend_htmlElement(nodes: HTMLElementAPI[]): void {
-        this.#htmlElement.prepend(...nodes.map(htmlElementAPI => htmlElementAPI.#htmlElement));
+    public prepend_htmlElement(nodes: HTMLElementAPI[]): void {
+        this.htmlElement.prepend(...nodes.map(htmlElementAPI => htmlElementAPI.htmlElement));
     }
 
-    appendChild(node: HTMLElementAPI): void {
-        this.#htmlElement.appendChild(node.#htmlElement);
+    public appendChild(node: HTMLElementAPI): void {
+        this.htmlElement.appendChild(node.htmlElement);
     }
 
-    append_string(nodes: string[]): void {
-        this.#htmlElement.append(...nodes);
+    public append_string(nodes: string[]): void {
+        this.htmlElement.append(...nodes);
     }
 
-    append_htmlElement(nodes: HTMLElementAPI[]): void {
-        this.#htmlElement.append(...nodes.map(htmlElementAPI => htmlElementAPI.#htmlElement));
+    public append_htmlElement(nodes: HTMLElementAPI[]): void {
+        this.htmlElement.append(...nodes.map(htmlElementAPI => htmlElementAPI.htmlElement));
     }
 
-    insertAdjacentElement(position: InsertPosition, htmlElement: HTMLElementAPI): boolean {
-        const result = this.#htmlElement.insertAdjacentElement(position, htmlElement.#htmlElement);
+    public insertAdjacentElement(position: InsertPosition, htmlElement: HTMLElementAPI): boolean {
+        const result = this.htmlElement.insertAdjacentElement(position, htmlElement.htmlElement);
         if (result)
             return true;
         else
             return false;
     }
 
-    insertAdjacentHTML(position: InsertPosition, html: string): void {
-        this.#htmlElement.insertAdjacentHTML(position, html);
+    public insertAdjacentHTML(position: InsertPosition, html: string): void {
+        this.htmlElement.insertAdjacentHTML(position, html);
     }
 
-    insertAdjacentText(position: InsertPosition, data: string): void {
-        this.#htmlElement.insertAdjacentText(position, data);
-    }
-
-
-    removeChild(node: HTMLElementAPI): void {
-        this.#htmlElement.removeChild(node.#htmlElement);
-    }
-
-    remove(): void {
-        this.#htmlElement.remove();
-    }
-
-    replaceChild(newChild: HTMLElementAPI, oldChild: HTMLElementAPI): void {
-        this.#htmlElement.replaceChild(newChild.#htmlElement, oldChild.#htmlElement);
-    }
-
-    replaceChildIndex(newChild: HTMLElementAPI, oldChildIndex: number): void {
-        this.#htmlElement.replaceChild(newChild.#htmlElement, this.#htmlElement.children[oldChildIndex]);
-    }
-
-    replaceWith_string(nodes: string[]): void {
-        this.#htmlElement.replaceWith(...nodes);
-    }
-
-    replaceWith_htmlElement(nodes: HTMLElementAPI[]): void {
-        this.#htmlElement.replaceWith(...nodes.map(htmlElementAPI => htmlElementAPI.#htmlElement));
-    }
-
-    replaceChildren_string(nodes: string[]): void {
-        this.#htmlElement.replaceChildren(...nodes);
-    }
-
-    replaceChildren_htmlElement(nodes: HTMLElementAPI[]): void {
-        this.#htmlElement.replaceChildren(...nodes.map(htmlElementAPI => htmlElementAPI.#htmlElement));
+    public insertAdjacentText(position: InsertPosition, data: string): void {
+        this.htmlElement.insertAdjacentText(position, data);
     }
 
 
-    cloneNode(deep: boolean): HTMLElementAPI {
-        const result = this.#htmlElement.cloneNode(deep);
+    public removeChild(node: HTMLElementAPI): void {
+        this.htmlElement.removeChild(node.htmlElement);
+    }
+
+    public remove(): void {
+        this.htmlElement.remove();
+    }
+
+    public replaceChild(newChild: HTMLElementAPI, oldChild: HTMLElementAPI): void {
+        this.htmlElement.replaceChild(newChild.htmlElement, oldChild.htmlElement);
+    }
+
+    public replaceChildIndex(newChild: HTMLElementAPI, oldChildIndex: number): void {
+        this.htmlElement.replaceChild(newChild.htmlElement, this.htmlElement.children[oldChildIndex]);
+    }
+
+    public replaceWith_string(nodes: string[]): void {
+        this.htmlElement.replaceWith(...nodes);
+    }
+
+    public replaceWith_htmlElement(nodes: HTMLElementAPI[]): void {
+        this.htmlElement.replaceWith(...nodes.map(htmlElementAPI => htmlElementAPI.htmlElement));
+    }
+
+    public replaceChildren_string(nodes: string[]): void {
+        this.htmlElement.replaceChildren(...nodes);
+    }
+
+    public replaceChildren_htmlElement(nodes: HTMLElementAPI[]): void {
+        this.htmlElement.replaceChildren(...nodes.map(htmlElementAPI => htmlElementAPI.htmlElement));
+    }
+
+
+    public cloneNode(deep: boolean): HTMLElementAPI {
+        const result = this.htmlElement.cloneNode(deep);
         return new HTMLElementAPI(<HTMLElement>result);
     }
 
-    isSameNode(other: HTMLElementAPI): boolean {
-        return this.#htmlElement.isSameNode(other.#htmlElement);
+    public isSameNode(other: HTMLElementAPI): boolean {
+        return this.htmlElement.isSameNode(other.htmlElement);
     }
 
-    isEqualNode(other: HTMLElementAPI): boolean {
-        return this.#htmlElement.isEqualNode(other.#htmlElement);
+    public isEqualNode(other: HTMLElementAPI): boolean {
+        return this.htmlElement.isEqualNode(other.htmlElement);
     }
 
-    contains(other: HTMLElementAPI): boolean {
-        return this.#htmlElement.contains(other.#htmlElement);
+    public contains(other: HTMLElementAPI): boolean {
+        return this.htmlElement.contains(other.htmlElement);
     }
 
-    compareDocumentPosition(other: HTMLElementAPI): number {
-        return this.#htmlElement.compareDocumentPosition(other.#htmlElement);
+    public compareDocumentPosition(other: HTMLElementAPI): number {
+        return this.htmlElement.compareDocumentPosition(other.htmlElement);
     }
 
 
     // events
 
 
-    #eventTrigger: DotNet.DotNetObject;
+    private eventTrigger: DotNet.DotNetObject;
 
-    initEvents(eventTrigger: DotNet.DotNetObject): void {
-        this.#eventTrigger = eventTrigger;
+    public initEvents(eventTrigger: DotNet.DotNetObject): void {
+        this.eventTrigger = eventTrigger;
     }
 
 
     /** Util function for input events. If the parameter is of type "InputEvent", it gets deconstructed. If it is of type "Event", inputType is null. */
-    static #deconstructInputEvent(event: InputEvent | Event): [string | null, string | null, boolean] {
+    private static deconstructInputEvent(event: InputEvent | Event): [string | null, string | null, boolean] {
         if (event instanceof InputEvent)
             return [event.data, event.inputType, event.isComposing];
         else
@@ -1209,7 +1209,7 @@ export class HTMLElementAPI {
     }
 
     /** Util function for drag events. The event parameter is of type "DragEvent" and that has a property "dataTransfer", it gets deconstructed and returned. */
-    static #deconstructDataTransfer(data: DataTransfer | null): [string, string, readonly string[], FileAPI[]] {
+    private static deconstructDataTransfer(data: DataTransfer | null): [string, string, readonly string[], FileAPI[]] {
         if (data !== null)
             return [data.dropEffect, data.effectAllowed, data.types, [...data.files].map(file => DotNet.createJSObjectReference(new FileAPI(file)))];
         else
@@ -1217,7 +1217,7 @@ export class HTMLElementAPI {
     }
 
     /** Util function for touch events. The "TouchEvent" has some properties of type "TouchList", it gets converted to an array with serializable objects. */
-    static #deconstructTouchList(touchList: TouchList): { identifier: number, clientX: number, clientY: number, pageX: number, pageY: number, screenX: number, screenY: number, radiusX: number, radiusY: number, rotationAngle: number, force: number }[] {
+    private static deconstructTouchList(touchList: TouchList): { identifier: number, clientX: number, clientY: number, pageX: number, pageY: number, screenX: number, screenY: number, radiusX: number, radiusY: number, rotationAngle: number, force: number }[] {
         const result = new Array(touchList.length);
         for (let i = 0; i < result.length; i++)
             result[i] = {
@@ -1240,229 +1240,229 @@ export class HTMLElementAPI {
 
     // HTMLElement - change event
 
-    #onchange = () => BlazorInvoke.method(this.#eventTrigger, "InvokeChange");
+    private onchange = () => BlazorInvoke.method(this.eventTrigger, "InvokeChange");
 
-    activateOnchange(): void {
-        this.#htmlElement.addEventListener("change", this.#onchange);
+    public activateOnchange(): void {
+        this.htmlElement.addEventListener("change", this.onchange);
     }
 
-    deactivateOnchange(): void {
-        this.#htmlElement.removeEventListener("change", this.#onchange);
+    public deactivateOnchange(): void {
+        this.htmlElement.removeEventListener("change", this.onchange);
     }
 
 
     // HTMLElement - command event
 
-    #oncommand = (commandEvent: { source: HTMLButtonElement, command: string }) => BlazorInvoke.method(this.#eventTrigger, "InvokeCommand", DotNet.createJSObjectReference(new HTMLElementAPI(commandEvent.source)), commandEvent.command);
+    private oncommand = (commandEvent: { source: HTMLButtonElement, command: string }) => BlazorInvoke.method(this.eventTrigger, "InvokeCommand", DotNet.createJSObjectReference(new HTMLElementAPI(commandEvent.source)), commandEvent.command);
 
-    activateOncommand(): void {
-        this.#htmlElement.addEventListener("command", <(commandEvent: Event) => void><unknown>this.#oncommand);
+    public activateOncommand(): void {
+        this.htmlElement.addEventListener("command", <(commandEvent: Event) => void><unknown>this.oncommand);
     }
 
-    deactivateOncommand(): void {
-        this.#htmlElement.removeEventListener("command", <(commandEvent: Event) => void><unknown>this.#oncommand);
+    public deactivateOncommand(): void {
+        this.htmlElement.removeEventListener("command", <(commandEvent: Event) => void><unknown>this.oncommand);
     }
 
 
     // HTMLElement - load event
 
-    #onload = () => BlazorInvoke.method(this.#eventTrigger, "InvokeLoad");
+    private onload = () => BlazorInvoke.method(this.eventTrigger, "InvokeLoad");
 
-    activateOnload(): void {
-        this.#htmlElement.addEventListener("load", this.#onload);
+    public activateOnload(): void {
+        this.htmlElement.addEventListener("load", this.onload);
     }
 
-    deactivateOnload(): void {
-        this.#htmlElement.removeEventListener("load", this.#onload);
+    public deactivateOnload(): void {
+        this.htmlElement.removeEventListener("load", this.onload);
     }
 
 
     // HTMLElement - error event
 
-    #onerror = (error: Event) => BlazorInvoke.method(this.#eventTrigger, "InvokeError", error);
+    private onerror = (error: Event) => BlazorInvoke.method(this.eventTrigger, "InvokeError", error);
 
-    activateOnerror(): void {
-        this.#htmlElement.addEventListener("error", this.#onerror);
+    public activateOnerror(): void {
+        this.htmlElement.addEventListener("error", this.onerror);
     }
 
-    deactivateOnerror(): void {
-        this.#htmlElement.removeEventListener("error", this.#onerror);
+    public deactivateOnerror(): void {
+        this.htmlElement.removeEventListener("error", this.onerror);
     }
 
 
     // HTMLElement - drag event
 
-    #ondrag = (dragEvent: DragEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeDrag", ... HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+    private ondrag = (dragEvent: DragEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeDrag", ... HTMLElementAPI.deconstructDataTransfer(dragEvent.dataTransfer));
 
-    activateOndrag(): void {
-        this.#htmlElement.addEventListener("drag", this.#ondrag);
+    public activateOndrag(): void {
+        this.htmlElement.addEventListener("drag", this.ondrag);
     }
 
-    deactivateOndrag(): void {
-        this.#htmlElement.removeEventListener("drag", this.#ondrag);
+    public deactivateOndrag(): void {
+        this.htmlElement.removeEventListener("drag", this.ondrag);
     }
 
 
     // HTMLElement - dragstart event
 
-    #ondragstart = (dragEvent: DragEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeDragStart", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+    private ondragstart = (dragEvent: DragEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeDragStart", ...HTMLElementAPI.deconstructDataTransfer(dragEvent.dataTransfer));
 
-    activateOndragstart(): void {
-        this.#htmlElement.addEventListener("dragstart", this.#ondragstart);
+    public activateOndragstart(): void {
+        this.htmlElement.addEventListener("dragstart", this.ondragstart);
     }
 
-    deactivateOndragstart(): void {
-        this.#htmlElement.removeEventListener("dragstart", this.#ondragstart);
+    public deactivateOndragstart(): void {
+        this.htmlElement.removeEventListener("dragstart", this.ondragstart);
     }
 
 
     // HTMLElement - dragend event
 
-    #ondragend = (dragEvent: DragEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeDragEnd", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+    private ondragend = (dragEvent: DragEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeDragEnd", ...HTMLElementAPI.deconstructDataTransfer(dragEvent.dataTransfer));
 
-    activateOndragend(): void {
-        this.#htmlElement.addEventListener("dragend", this.#ondragend);
+    public activateOndragend(): void {
+        this.htmlElement.addEventListener("dragend", this.ondragend);
     }
 
-    deactivateOndragend(): void {
-        this.#htmlElement.removeEventListener("dragend", this.#ondragend);
+    public deactivateOndragend(): void {
+        this.htmlElement.removeEventListener("dragend", this.ondragend);
     }
 
 
     // HTMLElement - dragenter event
 
-    #ondragenter = (dragEvent: DragEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeDragEnter", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+    private ondragenter = (dragEvent: DragEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeDragEnter", ...HTMLElementAPI.deconstructDataTransfer(dragEvent.dataTransfer));
 
-    activateOndragenter(): void {
-        this.#htmlElement.addEventListener("dragenter", this.#ondragenter);
+    public activateOndragenter(): void {
+        this.htmlElement.addEventListener("dragenter", this.ondragenter);
     }
 
-    deactivateOndragenter(): void {
-        this.#htmlElement.removeEventListener("dragenter", this.#ondragenter);
+    public deactivateOndragenter(): void {
+        this.htmlElement.removeEventListener("dragenter", this.ondragenter);
     }
 
 
     // HTMLElement - dragleave event
 
-    #ondragleave = (dragEvent: DragEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeDragLeave", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+    private ondragleave = (dragEvent: DragEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeDragLeave", ...HTMLElementAPI.deconstructDataTransfer(dragEvent.dataTransfer));
 
-    activateOndragleave(): void {
-        this.#htmlElement.addEventListener("dragleave", this.#ondragleave);
+    public activateOndragleave(): void {
+        this.htmlElement.addEventListener("dragleave", this.ondragleave);
     }
 
-    deactivateOndragleave(): void {
-        this.#htmlElement.removeEventListener("dragleave", this.#ondragleave);
+    public deactivateOndragleave(): void {
+        this.htmlElement.removeEventListener("dragleave", this.ondragleave);
     }
 
 
     // HTMLElement - dragover event
 
-    #ondragover = (dragEvent: DragEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeDragOver", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+    private ondragover = (dragEvent: DragEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeDragOver", ...HTMLElementAPI.deconstructDataTransfer(dragEvent.dataTransfer));
 
-    activateOndragover(): void {
-        this.#htmlElement.addEventListener("dragover", this.#ondragover);
+    public activateOndragover(): void {
+        this.htmlElement.addEventListener("dragover", this.ondragover);
     }
 
-    deactivateOndragover(): void {
-        this.#htmlElement.removeEventListener("dragover", this.#ondragover);
+    public deactivateOndragover(): void {
+        this.htmlElement.removeEventListener("dragover", this.ondragover);
     }
 
 
     // HTMLElement - drop event
 
-    #ondrop = (dragEvent: DragEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeDrop", ...HTMLElementAPI.#deconstructDataTransfer(dragEvent.dataTransfer));
+    private ondrop = (dragEvent: DragEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeDrop", ...HTMLElementAPI.deconstructDataTransfer(dragEvent.dataTransfer));
 
-    activateOndrop(): void {
-        this.#htmlElement.addEventListener("drop", this.#ondrop);
+    public activateOndrop(): void {
+        this.htmlElement.addEventListener("drop", this.ondrop);
     }
 
-    deactivateOndrop(): void {
-        this.#htmlElement.removeEventListener("drop", this.#ondrop);
+    public deactivateOndrop(): void {
+        this.htmlElement.removeEventListener("drop", this.ondrop);
     }
 
 
     // HTMLElement - toggle
 
-    #ontoggle = (toggleEvent: ToggleEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeToggle", toggleEvent.oldState, toggleEvent.newState);
+    private ontoggle = (toggleEvent: ToggleEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeToggle", toggleEvent.oldState, toggleEvent.newState);
 
-    activateOntoggle(): void {
-        this.#htmlElement.addEventListener("toggle", this.#ontoggle);
+    public activateOntoggle(): void {
+        this.htmlElement.addEventListener("toggle", this.ontoggle);
     }
 
-    deactivateOntoggle(): void {
-        this.#htmlElement.removeEventListener("toggle", this.#ontoggle);
+    public deactivateOntoggle(): void {
+        this.htmlElement.removeEventListener("toggle", this.ontoggle);
     }
 
 
     // HTMLElement - beforetoggle
 
-    #onbeforetoggle = (toggleEvent: ToggleEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeBeforeToggle", toggleEvent.oldState, toggleEvent.newState);
+    private onbeforetoggle = (toggleEvent: ToggleEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeBeforeToggle", toggleEvent.oldState, toggleEvent.newState);
 
-    activateOnbeforetoggle(): void {
-        this.#htmlElement.addEventListener("beforetoggle", this.#onbeforetoggle);
+    public activateOnbeforetoggle(): void {
+        this.htmlElement.addEventListener("beforetoggle", this.onbeforetoggle);
     }
 
-    deactivateOnbeforetoggle(): void {
-        this.#htmlElement.removeEventListener("beforetoggle", this.#onbeforetoggle);
+    public deactivateOnbeforetoggle(): void {
+        this.htmlElement.removeEventListener("beforetoggle", this.onbeforetoggle);
     }
 
 
 
     // Element - input event
 
-    #oninput = (inputEvent: InputEvent | Event) => BlazorInvoke.method(this.#eventTrigger, "InvokeInput", ...HTMLElementAPI.#deconstructInputEvent(inputEvent));
+    private oninput = (inputEvent: InputEvent | Event) => BlazorInvoke.method(this.eventTrigger, "InvokeInput", ...HTMLElementAPI.deconstructInputEvent(inputEvent));
 
-    activateOninput(): void {
-        this.#htmlElement.addEventListener("input", this.#oninput);
+    public activateOninput(): void {
+        this.htmlElement.addEventListener("input", this.oninput);
     }
 
-    deactivateOninput(): void {
-        this.#htmlElement.removeEventListener("input", this.#oninput);
+    public deactivateOninput(): void {
+        this.htmlElement.removeEventListener("input", this.oninput);
     }
 
 
     // Element - beforeinput event
 
-    #onbeforeinput = (inputEvent: InputEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeBeforeInput", ...HTMLElementAPI.#deconstructInputEvent(inputEvent));
+    private onbeforeinput = (inputEvent: InputEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeBeforeInput", ...HTMLElementAPI.deconstructInputEvent(inputEvent));
 
-    activateOnbeforeinput(): void {
-        this.#htmlElement.addEventListener("beforeinput", this.#onbeforeinput);
+    public activateOnbeforeinput(): void {
+        this.htmlElement.addEventListener("beforeinput", this.onbeforeinput);
     }
 
-    deactivateOnbeforeinput(): void {
-        this.#htmlElement.removeEventListener("beforeinput", this.#onbeforeinput);
+    public deactivateOnbeforeinput(): void {
+        this.htmlElement.removeEventListener("beforeinput", this.onbeforeinput);
     }
 
 
     // Element - contentvisibilityautostatechange event
 
-    #oncontentvisibilityautostatechange = (event: { skipped: boolean; }) => BlazorInvoke.method(this.#eventTrigger, "InvokeContentVisibilityAutoStateChange", event.skipped);
+    private oncontentvisibilityautostatechange = (event: { skipped: boolean; }) => BlazorInvoke.method(this.eventTrigger, "InvokeContentVisibilityAutoStateChange", event.skipped);
 
-    activateOncontentvisibilityautostatechange(): void {
-        this.#htmlElement.addEventListener("contentvisibilityautostatechange", <() => {}>this.#oncontentvisibilityautostatechange);
+    public activateOncontentvisibilityautostatechange(): void {
+        this.htmlElement.addEventListener("contentvisibilityautostatechange", <() => {}>this.oncontentvisibilityautostatechange);
     }
 
-    deactivateOncontentvisibilityautostatechange(): void {
-        this.#htmlElement.removeEventListener("contentvisibilityautostatechange", <() => {}>this.#oncontentvisibilityautostatechange);
+    public deactivateOncontentvisibilityautostatechange(): void {
+        this.htmlElement.removeEventListener("contentvisibilityautostatechange", <() => {}>this.oncontentvisibilityautostatechange);
     }
 
 
     // Element - beforematch event
 
-    #onbeforematch = () => BlazorInvoke.method(this.#eventTrigger, "InvokeBeforeMatch");
+    private onbeforematch = () => BlazorInvoke.method(this.eventTrigger, "InvokeBeforeMatch");
 
-    activateOnbeforematch(): void {
-        this.#htmlElement.addEventListener("beforematch", this.#onbeforematch);
+    public activateOnbeforematch(): void {
+        this.htmlElement.addEventListener("beforematch", this.onbeforematch);
     }
 
-    deactivateOnbeforematch(): void {
-        this.#htmlElement.removeEventListener("beforematch", this.#onbeforematch);
+    public deactivateOnbeforematch(): void {
+        this.htmlElement.removeEventListener("beforematch", this.onbeforematch);
     }
 
 
     // Element - securitypolicyviolation event
 
-    #onsecuritypolicyviolation = (violationEvent: SecurityPolicyViolationEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeSecurityPolicyViolation", {
+    private onsecuritypolicyviolation = (violationEvent: SecurityPolicyViolationEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeSecurityPolicyViolation", {
         blockedURI: violationEvent.blockedURI,
         effectiveDirective: violationEvent.effectiveDirective,
         documentURI: violationEvent.documentURI,
@@ -1476,32 +1476,32 @@ export class HTMLElementAPI {
         disposition: violationEvent.disposition
     });
 
-    activateOnsecuritypolicyviolation(): void {
-        this.#htmlElement.addEventListener("securitypolicyviolation", this.#onsecuritypolicyviolation);
+    public activateOnsecuritypolicyviolation(): void {
+        this.htmlElement.addEventListener("securitypolicyviolation", this.onsecuritypolicyviolation);
     }
 
-    deactivateOnsecuritypolicyviolation(): void {
-        this.#htmlElement.removeEventListener("securitypolicyviolation", this.#onsecuritypolicyviolation);
+    public deactivateOnsecuritypolicyviolation(): void {
+        this.htmlElement.removeEventListener("securitypolicyviolation", this.onsecuritypolicyviolation);
     }
 
 
     // Node - selectstart event
 
-    #onselectstart = () => BlazorInvoke.method(this.#eventTrigger, "InvokeSelectStart");
+    private onselectstart = () => BlazorInvoke.method(this.eventTrigger, "InvokeSelectStart");
 
-    activateOnselectstart(): void {
-        this.#htmlElement.addEventListener("selectstart", this.#onselectstart);
+    public activateOnselectstart(): void {
+        this.htmlElement.addEventListener("selectstart", this.onselectstart);
     }
 
-    deactivateOnselectstart(): void {
-        this.#htmlElement.removeEventListener("selectstart", this.#onselectstart);
+    public deactivateOnselectstart(): void {
+        this.htmlElement.removeEventListener("selectstart", this.onselectstart);
     }
 
 
 
     // Element - keydown event
 
-    #onkeydown = (keyboardEvent: KeyboardEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeKeyDown", {
+    private onkeydown = (keyboardEvent: KeyboardEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeKeyDown", {
         key: keyboardEvent.key,
         code: keyboardEvent.code,
         location: keyboardEvent.location,
@@ -1513,18 +1513,18 @@ export class HTMLElementAPI {
         isComposing: keyboardEvent.isComposing
     });
 
-    activateOnkeydown(): void {
-        this.#htmlElement.addEventListener("keydown", this.#onkeydown);
+    public activateOnkeydown(): void {
+        this.htmlElement.addEventListener("keydown", this.onkeydown);
     }
 
-    deactivateOnkeydown(): void {
-        this.#htmlElement.removeEventListener("keydown", this.#onkeydown);
+    public deactivateOnkeydown(): void {
+        this.htmlElement.removeEventListener("keydown", this.onkeydown);
     }
 
 
     // Element - keyup event
 
-    #onkeyup = (keyboardEvent: KeyboardEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeKeyUp", {
+    private onkeyup = (keyboardEvent: KeyboardEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeKeyUp", {
         key: keyboardEvent.key,
         code: keyboardEvent.code,
         location: keyboardEvent.location,
@@ -1536,19 +1536,19 @@ export class HTMLElementAPI {
         isComposing: keyboardEvent.isComposing
     });
 
-    activateOnkeyup(): void {
-        this.#htmlElement.addEventListener("keyup", this.#onkeyup);
+    public activateOnkeyup(): void {
+        this.htmlElement.addEventListener("keyup", this.onkeyup);
     }
 
-    deactivateOnkeyup(): void {
-        this.#htmlElement.removeEventListener("keyup", this.#onkeyup);
+    public deactivateOnkeyup(): void {
+        this.htmlElement.removeEventListener("keyup", this.onkeyup);
     }
 
 
 
     // Element - click event
 
-    #onclick = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeClick", {
+    private onclick = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeClick", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1567,18 +1567,18 @@ export class HTMLElementAPI {
         metaKey: mouseEvent.metaKey
     });
 
-    activateOnclick(): void {
-        this.#htmlElement.addEventListener("click", this.#onclick);
+    public activateOnclick(): void {
+        this.htmlElement.addEventListener("click", this.onclick);
     }
 
-    deactivateOnclick(): void {
-        this.#htmlElement.removeEventListener("click", this.#onclick);
+    public deactivateOnclick(): void {
+        this.htmlElement.removeEventListener("click", this.onclick);
     }
 
 
     // Element - dblclick event
 
-    #ondblclick = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeDblClick", {
+    private ondblclick = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeDblClick", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1597,18 +1597,18 @@ export class HTMLElementAPI {
         metaKey: mouseEvent.metaKey
     });
 
-    activateOndblclick(): void {
-        this.#htmlElement.addEventListener("dblclick", this.#ondblclick);
+    public activateOndblclick(): void {
+        this.htmlElement.addEventListener("dblclick", this.ondblclick);
     }
 
-    deactivateOndblclick(): void {
-        this.#htmlElement.removeEventListener("dblclick", this.#ondblclick);
+    public deactivateOndblclick(): void {
+        this.htmlElement.removeEventListener("dblclick", this.ondblclick);
     }
 
 
     // Element - auxclick event
 
-    #onauxclick = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeAuxClick", {
+    private onauxclick = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeAuxClick", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1627,18 +1627,18 @@ export class HTMLElementAPI {
         metaKey: mouseEvent.metaKey
     });
 
-    activateOnauxclick(): void {
-        this.#htmlElement.addEventListener("auxclick", this.#onauxclick);
+    public activateOnauxclick(): void {
+        this.htmlElement.addEventListener("auxclick", this.onauxclick);
     }
 
-    deactivateOnauxclick(): void {
-        this.#htmlElement.removeEventListener("auxclick", this.#onauxclick);
+    public deactivateOnauxclick(): void {
+        this.htmlElement.removeEventListener("auxclick", this.onauxclick);
     }
 
 
     // Element - contextmenu event
 
-    #oncontextmenu = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeContextMenu", {
+    private oncontextmenu = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeContextMenu", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1657,18 +1657,18 @@ export class HTMLElementAPI {
         metaKey: mouseEvent.metaKey
     });
 
-    activateOncontextmenu(): void {
-        this.#htmlElement.addEventListener("contextmenu", this.#oncontextmenu);
+    public activateOncontextmenu(): void {
+        this.htmlElement.addEventListener("contextmenu", this.oncontextmenu);
     }
 
-    deactivateOncontextmenu(): void {
-        this.#htmlElement.removeEventListener("contextmenu", this.#oncontextmenu);
+    public deactivateOncontextmenu(): void {
+        this.htmlElement.removeEventListener("contextmenu", this.oncontextmenu);
     }
 
 
     // Element - mousedown event
 
-    #onmousedown = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeMouseDown", {
+    private onmousedown = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeMouseDown", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1687,18 +1687,18 @@ export class HTMLElementAPI {
         metaKey: mouseEvent.metaKey
     });
 
-    activateOnmousedown(): void {
-        this.#htmlElement.addEventListener("mousedown", this.#onmousedown);
+    public activateOnmousedown(): void {
+        this.htmlElement.addEventListener("mousedown", this.onmousedown);
     }
 
-    deactivateOnmousedown(): void {
-        this.#htmlElement.removeEventListener("mousedown", this.#onmousedown);
+    public deactivateOnmousedown(): void {
+        this.htmlElement.removeEventListener("mousedown", this.onmousedown);
     }
 
 
     // Element - mouseup event
 
-    #onmouseup = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeMouseUp", {
+    private onmouseup = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeMouseUp", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1717,36 +1717,36 @@ export class HTMLElementAPI {
         metaKey: mouseEvent.metaKey
     });
 
-    activateOnmouseup(): void {
-        this.#htmlElement.addEventListener("mouseup", this.#onmouseup);
+    public activateOnmouseup(): void {
+        this.htmlElement.addEventListener("mouseup", this.onmouseup);
     }
 
-    deactivateOnmouseup(): void {
-        this.#htmlElement.removeEventListener("mouseup", this.#onmouseup);
+    public deactivateOnmouseup(): void {
+        this.htmlElement.removeEventListener("mouseup", this.onmouseup);
     }
 
 
     // Element - wheel event
 
-    #onwheel = (wheelEvent: WheelEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeWheel", {
+    private onwheel = (wheelEvent: WheelEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeWheel", {
         deltaX: wheelEvent.deltaX,
         deltaY: wheelEvent.deltaY,
         deltaZ: wheelEvent.deltaZ,
         deltaMode: wheelEvent.deltaMode
     });
 
-    activateOnwheel(): void {
-        this.#htmlElement.addEventListener("wheel", this.#onwheel, { passive: true });
+    public activateOnwheel(): void {
+        this.htmlElement.addEventListener("wheel", this.onwheel, { passive: true });
     }
 
-    deactivateOnwheel(): void {
-        this.#htmlElement.removeEventListener("wheel", this.#onwheel);
+    public deactivateOnwheel(): void {
+        this.htmlElement.removeEventListener("wheel", this.onwheel);
     }
 
 
     // Element - mousemove event
 
-    #onmousemove = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeMouseMove", {
+    private onmousemove = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeMouseMove", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1765,18 +1765,18 @@ export class HTMLElementAPI {
         metaKey: mouseEvent.metaKey
     });
 
-    activateOnmousemove(): void {
-        this.#htmlElement.addEventListener("mousemove", this.#onmousemove);
+    public activateOnmousemove(): void {
+        this.htmlElement.addEventListener("mousemove", this.onmousemove);
     }
 
-    deactivateOnmousemove(): void {
-        this.#htmlElement.removeEventListener("mousemove", this.#onmousemove);
+    public deactivateOnmousemove(): void {
+        this.htmlElement.removeEventListener("mousemove", this.onmousemove);
     }
 
 
     // Element - mouseover event
 
-    #onmouseover = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeMouseOver", {
+    private onmouseover = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeMouseOver", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1795,18 +1795,18 @@ export class HTMLElementAPI {
         metaKey: mouseEvent.metaKey
     });
 
-    activateOnmouseover(): void {
-        this.#htmlElement.addEventListener("mouseover", this.#onmouseover);
+    public activateOnmouseover(): void {
+        this.htmlElement.addEventListener("mouseover", this.onmouseover);
     }
 
-    deactivateOnmouseover(): void {
-        this.#htmlElement.removeEventListener("mouseover", this.#onmouseover);
+    public deactivateOnmouseover(): void {
+        this.htmlElement.removeEventListener("mouseover", this.onmouseover);
     }
 
 
     // Element - mouseout event
 
-    #onmouseout = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeMouseOut", {
+    private onmouseout = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeMouseOut", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1825,18 +1825,18 @@ export class HTMLElementAPI {
         metaKey: mouseEvent.metaKey
     });
 
-    activateOnmouseout(): void {
-        this.#htmlElement.addEventListener("mouseout", this.#onmouseout);
+    public activateOnmouseout(): void {
+        this.htmlElement.addEventListener("mouseout", this.onmouseout);
     }
 
-    deactivateOnmouseout(): void {
-        this.#htmlElement.removeEventListener("mouseout", this.#onmouseout);
+    public deactivateOnmouseout(): void {
+        this.htmlElement.removeEventListener("mouseout", this.onmouseout);
     }
 
 
     // Element - mouseenter event
 
-    #onmouseenter = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeMouseEnter", {
+    private onmouseenter = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeMouseEnter", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1855,18 +1855,18 @@ export class HTMLElementAPI {
         metaKey: mouseEvent.metaKey
     });
 
-    activateOnmouseenter(): void {
-        this.#htmlElement.addEventListener("mouseenter", this.#onmouseenter);
+    public activateOnmouseenter(): void {
+        this.htmlElement.addEventListener("mouseenter", this.onmouseenter);
     }
 
-    deactivateOnmouseenter(): void {
-        this.#htmlElement.removeEventListener("mouseenter", this.#onmouseenter);
+    public deactivateOnmouseenter(): void {
+        this.htmlElement.removeEventListener("mouseenter", this.onmouseenter);
     }
 
 
     // Element - mouseleave event
 
-    #onmouseleave = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeMouseLeave", {
+    private onmouseleave = (mouseEvent: MouseEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeMouseLeave", {
         button: mouseEvent.button,
         buttons: mouseEvent.buttons,
         movementX: mouseEvent.movementX,
@@ -1885,104 +1885,104 @@ export class HTMLElementAPI {
         metaKey: mouseEvent.metaKey
     });
 
-    activateOnmouseleave(): void {
-        this.#htmlElement.addEventListener("mouseleave", this.#onmouseleave);
+    public activateOnmouseleave(): void {
+        this.htmlElement.addEventListener("mouseleave", this.onmouseleave);
     }
 
-    deactivateOnmouseleave(): void {
-        this.#htmlElement.removeEventListener("mouseleave", this.#onmouseleave);
+    public deactivateOnmouseleave(): void {
+        this.htmlElement.removeEventListener("mouseleave", this.onmouseleave);
     }
 
 
 
     // Element - touchstart event
 
-    #ontouchstart = (touchEvent: TouchEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeTouchStart", {
-        touches: HTMLElementAPI.#deconstructTouchList(touchEvent.touches),
-        targetTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.targetTouches),
-        changedTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.changedTouches),
+    private ontouchstart = (touchEvent: TouchEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeTouchStart", {
+        touches: HTMLElementAPI.deconstructTouchList(touchEvent.touches),
+        targetTouches: HTMLElementAPI.deconstructTouchList(touchEvent.targetTouches),
+        changedTouches: HTMLElementAPI.deconstructTouchList(touchEvent.changedTouches),
         ctrlKey: touchEvent.ctrlKey,
         shiftKey: touchEvent.shiftKey,
         altKey: touchEvent.altKey,
         metaKey: touchEvent.metaKey
     });
 
-    activateOntouchstart(): void {
-        this.#htmlElement.addEventListener("touchstart", this.#ontouchstart);
+    public activateOntouchstart(): void {
+        this.htmlElement.addEventListener("touchstart", this.ontouchstart);
     }
 
-    deactivateOntouchstart(): void {
-        this.#htmlElement.removeEventListener("touchstart", this.#ontouchstart);
+    public deactivateOntouchstart(): void {
+        this.htmlElement.removeEventListener("touchstart", this.ontouchstart);
     }
 
 
     // Element - touchend event
 
-    #ontouchend = (touchEvent: TouchEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeTouchEnd", {
-        touches: HTMLElementAPI.#deconstructTouchList(touchEvent.touches),
-        targetTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.targetTouches),
-        changedTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.changedTouches),
+    private ontouchend = (touchEvent: TouchEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeTouchEnd", {
+        touches: HTMLElementAPI.deconstructTouchList(touchEvent.touches),
+        targetTouches: HTMLElementAPI.deconstructTouchList(touchEvent.targetTouches),
+        changedTouches: HTMLElementAPI.deconstructTouchList(touchEvent.changedTouches),
         ctrlKey: touchEvent.ctrlKey,
         shiftKey: touchEvent.shiftKey,
         altKey: touchEvent.altKey,
         metaKey: touchEvent.metaKey
     });
 
-    activateOntouchend(): void {
-        this.#htmlElement.addEventListener("touchend", this.#ontouchend);
+    public activateOntouchend(): void {
+        this.htmlElement.addEventListener("touchend", this.ontouchend);
     }
 
-    deactivateOntouchend(): void {
-        this.#htmlElement.removeEventListener("touchend", this.#ontouchend);
+    public deactivateOntouchend(): void {
+        this.htmlElement.removeEventListener("touchend", this.ontouchend);
     }
 
 
     // Element - touchmove event
 
-    #ontouchmove = (touchEvent: TouchEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeTouchMove", {
-        touches: HTMLElementAPI.#deconstructTouchList(touchEvent.touches),
-        targetTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.targetTouches),
-        changedTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.changedTouches),
+    private ontouchmove = (touchEvent: TouchEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeTouchMove", {
+        touches: HTMLElementAPI.deconstructTouchList(touchEvent.touches),
+        targetTouches: HTMLElementAPI.deconstructTouchList(touchEvent.targetTouches),
+        changedTouches: HTMLElementAPI.deconstructTouchList(touchEvent.changedTouches),
         ctrlKey: touchEvent.ctrlKey,
         shiftKey: touchEvent.shiftKey,
         altKey: touchEvent.altKey,
         metaKey: touchEvent.metaKey
     });
 
-    activateOntouchmove(): void {
-        this.#htmlElement.addEventListener("touchmove", this.#ontouchmove);
+    public activateOntouchmove(): void {
+        this.htmlElement.addEventListener("touchmove", this.ontouchmove);
     }
 
-    deactivateOntouchmove(): void {
-        this.#htmlElement.removeEventListener("touchmove", this.#ontouchmove);
+    public deactivateOntouchmove(): void {
+        this.htmlElement.removeEventListener("touchmove", this.ontouchmove);
     }
 
 
     // Element - touchcancel event
 
-    #ontouchcancel = (touchEvent: TouchEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeTouchCancel", {
-        touches: HTMLElementAPI.#deconstructTouchList(touchEvent.touches),
-        targetTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.targetTouches),
-        changedTouches: HTMLElementAPI.#deconstructTouchList(touchEvent.changedTouches),
+    private ontouchcancel = (touchEvent: TouchEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeTouchCancel", {
+        touches: HTMLElementAPI.deconstructTouchList(touchEvent.touches),
+        targetTouches: HTMLElementAPI.deconstructTouchList(touchEvent.targetTouches),
+        changedTouches: HTMLElementAPI.deconstructTouchList(touchEvent.changedTouches),
         ctrlKey: touchEvent.ctrlKey,
         shiftKey: touchEvent.shiftKey,
         altKey: touchEvent.altKey,
         metaKey: touchEvent.metaKey
     });
 
-    activateOntouchcancel(): void {
-        this.#htmlElement.addEventListener("touchcancel", this.#ontouchcancel);
+    public activateOntouchcancel(): void {
+        this.htmlElement.addEventListener("touchcancel", this.ontouchcancel);
     }
 
-    deactivateOntouchcancel(): void {
-        this.#htmlElement.removeEventListener("touchcancel", this.#ontouchcancel);
+    public deactivateOntouchcancel(): void {
+        this.htmlElement.removeEventListener("touchcancel", this.ontouchcancel);
     }
 
 
 
     // Element - pointerdown event
 
-    #onpointerdown = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number }) => BlazorInvoke.method(this.#eventTrigger, "InvokePointerDown", {
+    private onpointerdown = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number }) => BlazorInvoke.method(this.eventTrigger, "InvokePointerDown", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2014,18 +2014,18 @@ export class HTMLElementAPI {
         metaKey: pointerEvent.metaKey
     });
 
-    activateOnpointerdown(): void {
-        this.#htmlElement.addEventListener("pointerdown", this.#onpointerdown);
+    public activateOnpointerdown(): void {
+        this.htmlElement.addEventListener("pointerdown", this.onpointerdown);
     }
 
-    deactivateOnpointerdown(): void {
-        this.#htmlElement.removeEventListener("pointerdown", this.#onpointerdown);
+    public deactivateOnpointerdown(): void {
+        this.htmlElement.removeEventListener("pointerdown", this.onpointerdown);
     }
 
 
     // Element - pointerup event
 
-    #onpointerup = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokePointerUp", {
+    private onpointerup = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.eventTrigger, "InvokePointerUp", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2057,18 +2057,18 @@ export class HTMLElementAPI {
         metaKey: pointerEvent.metaKey
     });
 
-    activateOnpointerup(): void {
-        this.#htmlElement.addEventListener("pointerup", this.#onpointerup);
+    public activateOnpointerup(): void {
+        this.htmlElement.addEventListener("pointerup", this.onpointerup);
     }
 
-    deactivateOnpointerup(): void {
-        this.#htmlElement.removeEventListener("pointerup", this.#onpointerup);
+    public deactivateOnpointerup(): void {
+        this.htmlElement.removeEventListener("pointerup", this.onpointerup);
     }
 
 
     // Element - pointermove event
 
-    #onpointermove = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokePointerMove", {
+    private onpointermove = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.eventTrigger, "InvokePointerMove", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2100,18 +2100,18 @@ export class HTMLElementAPI {
         metaKey: pointerEvent.metaKey
     });
 
-    activateOnpointermove(): void {
-        this.#htmlElement.addEventListener("pointermove", this.#onpointermove);
+    public activateOnpointermove(): void {
+        this.htmlElement.addEventListener("pointermove", this.onpointermove);
     }
 
-    deactivateOnpointermove(): void {
-        this.#htmlElement.removeEventListener("pointermove", this.#onpointermove);
+    public deactivateOnpointermove(): void {
+        this.htmlElement.removeEventListener("pointermove", this.onpointermove);
     }
 
 
     // Element - pointerover event
 
-    #onpointerover = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokePointerOver", {
+    private onpointerover = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.eventTrigger, "InvokePointerOver", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2143,18 +2143,18 @@ export class HTMLElementAPI {
         metaKey: pointerEvent.metaKey
     });
 
-    activateOnpointerover(): void {
-        this.#htmlElement.addEventListener("pointerover", this.#onpointerover);
+    public activateOnpointerover(): void {
+        this.htmlElement.addEventListener("pointerover", this.onpointerover);
     }
 
-    deactivateOnpointerover(): void {
-        this.#htmlElement.removeEventListener("pointerover", this.#onpointerover);
+    public deactivateOnpointerover(): void {
+        this.htmlElement.removeEventListener("pointerover", this.onpointerover);
     }
 
 
     // Element - pointerout event
 
-    #onpointerout = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokePointerOut", {
+    private onpointerout = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.eventTrigger, "InvokePointerOut", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2186,18 +2186,18 @@ export class HTMLElementAPI {
         metaKey: pointerEvent.metaKey
     });
 
-    activateOnpointerout(): void {
-        this.#htmlElement.addEventListener("pointerout", this.#onpointerout);
+    public activateOnpointerout(): void {
+        this.htmlElement.addEventListener("pointerout", this.onpointerout);
     }
 
-    deactivateOnpointerout(): void {
-        this.#htmlElement.removeEventListener("pointerout", this.#onpointerout);
+    public deactivateOnpointerout(): void {
+        this.htmlElement.removeEventListener("pointerout", this.onpointerout);
     }
 
 
     // Element - pointerenter event
 
-    #onpointerenter = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokePointerEnter", {
+    private onpointerenter = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.eventTrigger, "InvokePointerEnter", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2229,18 +2229,18 @@ export class HTMLElementAPI {
         metaKey: pointerEvent.metaKey
     });
 
-    activateOnpointerenter(): void {
-        this.#htmlElement.addEventListener("pointerenter", this.#onpointerenter);
+    public activateOnpointerenter(): void {
+        this.htmlElement.addEventListener("pointerenter", this.onpointerenter);
     }
 
-    deactivateOnpointerenter(): void {
-        this.#htmlElement.removeEventListener("pointerenter", this.#onpointerenter);
+    public deactivateOnpointerenter(): void {
+        this.htmlElement.removeEventListener("pointerenter", this.onpointerenter);
     }
 
 
     // Element - pointerleave event
 
-    #onpointerleave = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokePointerLeave", {
+    private onpointerleave = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.eventTrigger, "InvokePointerLeave", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2272,18 +2272,18 @@ export class HTMLElementAPI {
         metaKey: pointerEvent.metaKey
     });
 
-    activateOnpointerleave(): void {
-        this.#htmlElement.addEventListener("pointerleave", this.#onpointerleave);
+    public activateOnpointerleave(): void {
+        this.htmlElement.addEventListener("pointerleave", this.onpointerleave);
     }
 
-    deactivateOnpointerleave(): void {
-        this.#htmlElement.removeEventListener("pointerleave", this.#onpointerleave);
+    public deactivateOnpointerleave(): void {
+        this.htmlElement.removeEventListener("pointerleave", this.onpointerleave);
     }
 
 
     // Element - pointercancel event
 
-    #onpointercancel = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokePointerCancel", {
+    private onpointercancel = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.eventTrigger, "InvokePointerCancel", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2315,18 +2315,18 @@ export class HTMLElementAPI {
         metaKey: pointerEvent.metaKey
     });
 
-    activateOnpointercancel(): void {
-        this.#htmlElement.addEventListener("pointercancel", this.#onpointercancel);
+    public activateOnpointercancel(): void {
+        this.htmlElement.addEventListener("pointercancel", this.onpointercancel);
     }
 
-    deactivateOnpointercancel(): void {
-        this.#htmlElement.removeEventListener("pointercancel", this.#onpointercancel);
+    public deactivateOnpointercancel(): void {
+        this.htmlElement.removeEventListener("pointercancel", this.onpointercancel);
     }
 
 
     // Element - pointerrawupdate event
 
-    #onpointerrawupdate = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokePointerRawUpdate", {
+    private onpointerrawupdate = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.eventTrigger, "InvokePointerRawUpdate", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2358,18 +2358,18 @@ export class HTMLElementAPI {
         metaKey: pointerEvent.metaKey
     });
 
-    activateOnpointerrawupdate(): void {
-        this.#htmlElement.addEventListener("pointerrawupdate", this.#onpointerrawupdate);
+    public activateOnpointerrawupdate(): void {
+        this.htmlElement.addEventListener("pointerrawupdate", this.onpointerrawupdate);
     }
 
-    deactivateOnpointerrawupdate(): void {
-        this.#htmlElement.removeEventListener("pointerrawupdate", this.#onpointerrawupdate);
+    public deactivateOnpointerrawupdate(): void {
+        this.htmlElement.removeEventListener("pointerrawupdate", this.onpointerrawupdate);
     }
 
 
     // Element - gotpointercapture event
 
-    #ongotpointercapture = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokeGotPointerCapture", {
+    private ongotpointercapture = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.eventTrigger, "InvokeGotPointerCapture", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2401,18 +2401,18 @@ export class HTMLElementAPI {
         metaKey: pointerEvent.metaKey
     });
 
-    activateOngotpointercapture(): void {
-        this.#htmlElement.addEventListener("gotpointercapture", this.#ongotpointercapture);
+    public activateOngotpointercapture(): void {
+        this.htmlElement.addEventListener("gotpointercapture", this.ongotpointercapture);
     }
 
-    deactivateOngotpointercapture(): void {
-        this.#htmlElement.removeEventListener("gotpointercapture", this.#ongotpointercapture);
+    public deactivateOngotpointercapture(): void {
+        this.htmlElement.removeEventListener("gotpointercapture", this.ongotpointercapture);
     }
 
 
     // Element - lostpointercapture event
 
-    #onlostpointercapture = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.#eventTrigger, "InvokeLostPointerCapture", {
+    private onlostpointercapture = (pointerEvent: PointerEvent & { persistentDeviceId: number | undefined, altitudeAngle: number, azimuthAngle: number; }) => BlazorInvoke.method(this.eventTrigger, "InvokeLostPointerCapture", {
         pointerId: pointerEvent.pointerId,
         persistentDeviceId: pointerEvent.persistentDeviceId ?? 0,
         pointerType: pointerEvent.pointerType ?? "",
@@ -2444,264 +2444,264 @@ export class HTMLElementAPI {
         metaKey: pointerEvent.metaKey
     });
 
-    activateOnlostpointercapture(): void {
-        this.#htmlElement.addEventListener("lostpointercapture", this.#onlostpointercapture);
+    public activateOnlostpointercapture(): void {
+        this.htmlElement.addEventListener("lostpointercapture", this.onlostpointercapture);
     }
 
-    deactivateOnlostpointercapture(): void {
-        this.#htmlElement.removeEventListener("lostpointercapture", this.#onlostpointercapture);
+    public deactivateOnlostpointercapture(): void {
+        this.htmlElement.removeEventListener("lostpointercapture", this.onlostpointercapture);
     }
 
 
 
     // Element - scroll event
 
-    #onscroll = () => BlazorInvoke.method(this.#eventTrigger, "InvokeScroll");
+    private onscroll = () => BlazorInvoke.method(this.eventTrigger, "InvokeScroll");
 
-    activateOnscroll(): void {
-        this.#htmlElement.addEventListener("scroll", this.#onscroll);
+    public activateOnscroll(): void {
+        this.htmlElement.addEventListener("scroll", this.onscroll);
     }
 
-    deactivateOnscroll(): void {
-        this.#htmlElement.removeEventListener("scroll", this.#onscroll);
+    public deactivateOnscroll(): void {
+        this.htmlElement.removeEventListener("scroll", this.onscroll);
     }
 
 
     // Element - scrollend event
 
-    #onscrollend = () => BlazorInvoke.method(this.#eventTrigger, "InvokeScrollEnd");
+    private onscrollend = () => BlazorInvoke.method(this.eventTrigger, "InvokeScrollEnd");
 
-    activateOnscrollend(): void {
-        this.#htmlElement.addEventListener("scrollend", this.#onscrollend);
+    public activateOnscrollend(): void {
+        this.htmlElement.addEventListener("scrollend", this.onscrollend);
     }
 
-    deactivateOnscrollend(): void {
-        this.#htmlElement.removeEventListener("scrollend", this.#onscrollend);
+    public deactivateOnscrollend(): void {
+        this.htmlElement.removeEventListener("scrollend", this.onscrollend);
     }
 
 
 
     // Element - focus event
 
-    #onfocus = () => BlazorInvoke.method(this.#eventTrigger, "InvokeFocus");
+    private onfocus = () => BlazorInvoke.method(this.eventTrigger, "InvokeFocus");
 
-    activateOnfocus(): void {
-        this.#htmlElement.addEventListener("focus", this.#onfocus);
+    public activateOnfocus(): void {
+        this.htmlElement.addEventListener("focus", this.onfocus);
     }
 
-    deactivateOnfocus(): void {
-        this.#htmlElement.removeEventListener("focus", this.#onfocus);
+    public deactivateOnfocus(): void {
+        this.htmlElement.removeEventListener("focus", this.onfocus);
     }
 
 
     // Element - focusin event
 
-    #onfocusin = () => BlazorInvoke.method(this.#eventTrigger, "InvokeFocusIn");
+    private onfocusin = () => BlazorInvoke.method(this.eventTrigger, "InvokeFocusIn");
 
-    activateOnfocusin(): void {
-        this.#htmlElement.addEventListener("focusin", this.#onfocusin);
+    public activateOnfocusin(): void {
+        this.htmlElement.addEventListener("focusin", this.onfocusin);
     }
 
-    deactivateOnfocusin(): void {
-        this.#htmlElement.removeEventListener("focusin", this.#onfocusin);
+    public deactivateOnfocusin(): void {
+        this.htmlElement.removeEventListener("focusin", this.onfocusin);
     }
 
 
     // Element - blur event
 
-    #onblur = () => BlazorInvoke.method(this.#eventTrigger, "InvokeBlur");
+    private onblur = () => BlazorInvoke.method(this.eventTrigger, "InvokeBlur");
 
-    activateOnblur(): void {
-        this.#htmlElement.addEventListener("blur", this.#onblur);
+    public activateOnblur(): void {
+        this.htmlElement.addEventListener("blur", this.onblur);
     }
 
-    deactivateOnblur(): void {
-        this.#htmlElement.removeEventListener("blur", this.#onblur);
+    public deactivateOnblur(): void {
+        this.htmlElement.removeEventListener("blur", this.onblur);
     }
 
 
     // Element - focusout event
 
-    #onfocusout = () => BlazorInvoke.method(this.#eventTrigger, "InvokeFocusOut");
+    private onfocusout = () => BlazorInvoke.method(this.eventTrigger, "InvokeFocusOut");
 
-    activateOnfocusout(): void {
-        this.#htmlElement.addEventListener("focusout", this.#onfocusout);
+    public activateOnfocusout(): void {
+        this.htmlElement.addEventListener("focusout", this.onfocusout);
     }
 
-    deactivateOnfocusout(): void {
-        this.#htmlElement.removeEventListener("focusout", this.#onfocusout);
+    public deactivateOnfocusout(): void {
+        this.htmlElement.removeEventListener("focusout", this.onfocusout);
     }
 
 
 
     // Element - copy event
 
-    #oncopy = () => BlazorInvoke.method(this.#eventTrigger, "InvokeCopy");
+    private oncopy = () => BlazorInvoke.method(this.eventTrigger, "InvokeCopy");
 
-    activateOncopy(): void {
-        this.#htmlElement.addEventListener("copy", this.#oncopy);
+    public activateOncopy(): void {
+        this.htmlElement.addEventListener("copy", this.oncopy);
     }
 
-    deactivateOncopy(): void {
-        this.#htmlElement.removeEventListener("copy", this.#oncopy);
+    public deactivateOncopy(): void {
+        this.htmlElement.removeEventListener("copy", this.oncopy);
     }
 
 
     // Element - paste event
 
-    #onpaste = () => BlazorInvoke.method(this.#eventTrigger, "InvokePaste");
+    private onpaste = () => BlazorInvoke.method(this.eventTrigger, "InvokePaste");
 
-    activateOnpaste(): void {
-        this.#htmlElement.addEventListener("paste", this.#onpaste);
+    public activateOnpaste(): void {
+        this.htmlElement.addEventListener("paste", this.onpaste);
     }
 
-    deactivateOnpaste(): void {
-        this.#htmlElement.removeEventListener("paste", this.#onpaste);
+    public deactivateOnpaste(): void {
+        this.htmlElement.removeEventListener("paste", this.onpaste);
     }
 
 
     // Element - cut event
 
-    #oncut = () => BlazorInvoke.method(this.#eventTrigger, "InvokeCut");
+    private oncut = () => BlazorInvoke.method(this.eventTrigger, "InvokeCut");
 
-    activateOncut(): void {
-        this.#htmlElement.addEventListener("cut", this.#oncut);
+    public activateOncut(): void {
+        this.htmlElement.addEventListener("cut", this.oncut);
     }
 
-    deactivateOncut(): void {
-        this.#htmlElement.removeEventListener("cut", this.#oncut);
+    public deactivateOncut(): void {
+        this.htmlElement.removeEventListener("cut", this.oncut);
     }
 
 
 
     // Element - transitionstart event
 
-    #ontransitionstart = (transitionEvent: TransitionEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeTransitionStart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
+    private ontransitionstart = (transitionEvent: TransitionEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeTransitionStart", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement);
 
-    activateOntransitionstart(): void {
-        this.#htmlElement.addEventListener("transitionstart", this.#ontransitionstart);
+    public activateOntransitionstart(): void {
+        this.htmlElement.addEventListener("transitionstart", this.ontransitionstart);
     }
 
-    deactivateOntransitionstart(): void {
-        this.#htmlElement.removeEventListener("transitionstart", this.#ontransitionstart);
+    public deactivateOntransitionstart(): void {
+        this.htmlElement.removeEventListener("transitionstart", this.ontransitionstart);
     }
 
 
     // Element - transitionend event
 
-    #ontransitionend = (transitionEvent: TransitionEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeTransitionEnd", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
+    private ontransitionend = (transitionEvent: TransitionEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeTransitionEnd", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
 
-    activateOntransitionend(): void {
-        this.#htmlElement.addEventListener("transitionend", this.#ontransitionend);
+    public activateOntransitionend(): void {
+        this.htmlElement.addEventListener("transitionend", this.ontransitionend);
     }
 
-    deactivateOntransitionend(): void {
-        this.#htmlElement.removeEventListener("transitionend", this.#ontransitionend);
+    public deactivateOntransitionend(): void {
+        this.htmlElement.removeEventListener("transitionend", this.ontransitionend);
     }
 
 
     // Element - transitionrun event
 
-    #ontransitionrun = (transitionEvent: TransitionEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeTransitionRun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
+    private ontransitionrun = (transitionEvent: TransitionEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeTransitionRun", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
 
-    activateOntransitionrun(): void {
-        this.#htmlElement.addEventListener("transitionrun", this.#ontransitionrun);
+    public activateOntransitionrun(): void {
+        this.htmlElement.addEventListener("transitionrun", this.ontransitionrun);
     }
 
-    deactivateOntransitionrun(): void {
-        this.#htmlElement.removeEventListener("transitionrun", this.#ontransitionrun);
+    public deactivateOntransitionrun(): void {
+        this.htmlElement.removeEventListener("transitionrun", this.ontransitionrun);
     }
 
 
     // Element - transitioncancel event
 
-    #ontransitioncancel = (transitionEvent: TransitionEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeTransitionCancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
+    private ontransitioncancel = (transitionEvent: TransitionEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeTransitionCancel", transitionEvent.propertyName, transitionEvent.elapsedTime, transitionEvent.pseudoElement)
 
-    activateOntransitioncancel(): void {
-        this.#htmlElement.addEventListener("transitioncancel", this.#ontransitioncancel);
+    public activateOntransitioncancel(): void {
+        this.htmlElement.addEventListener("transitioncancel", this.ontransitioncancel);
     }
 
-    deactivateOntransitioncancel(): void {
-        this.#htmlElement.removeEventListener("transitioncancel", this.#ontransitioncancel);
+    public deactivateOntransitioncancel(): void {
+        this.htmlElement.removeEventListener("transitioncancel", this.ontransitioncancel);
     }
 
 
 
     // Element - animationstart event
 
-    #onanimationstart = (animationEvent: AnimationEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeAnimationStart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+    private onanimationstart = (animationEvent: AnimationEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeAnimationStart", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
 
-    activateOnanimationstart(): void {
-        this.#htmlElement.addEventListener("animationstart", this.#onanimationstart);
+    public activateOnanimationstart(): void {
+        this.htmlElement.addEventListener("animationstart", this.onanimationstart);
     }
 
-    deactivateOnanimationstart(): void {
-        this.#htmlElement.removeEventListener("animationstart", this.#onanimationstart);
+    public deactivateOnanimationstart(): void {
+        this.htmlElement.removeEventListener("animationstart", this.onanimationstart);
     }
 
 
     // Element - animationend event
 
-    #onanimationend = (animationEvent: AnimationEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeAnimationEnd", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+    private onanimationend = (animationEvent: AnimationEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeAnimationEnd", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
 
-    activateOnanimationend(): void {
-        this.#htmlElement.addEventListener("animationend", this.#onanimationend);
+    public activateOnanimationend(): void {
+        this.htmlElement.addEventListener("animationend", this.onanimationend);
     }
 
-    deactivateOnanimationend(): void {
-        this.#htmlElement.removeEventListener("animationend", this.#onanimationend);
+    public deactivateOnanimationend(): void {
+        this.htmlElement.removeEventListener("animationend", this.onanimationend);
     }
 
 
     // Element - animationiteration event
 
-    #onanimationiteration = (animationEvent: AnimationEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeAnimationIteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+    private onanimationiteration = (animationEvent: AnimationEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeAnimationIteration", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
 
-    activateOnanimationiteration(): void {
-        this.#htmlElement.addEventListener("animationiteration", this.#onanimationiteration);
+    public activateOnanimationiteration(): void {
+        this.htmlElement.addEventListener("animationiteration", this.onanimationiteration);
     }
 
-    deactivateOnanimationiteration(): void {
-        this.#htmlElement.removeEventListener("animationiteration", this.#onanimationiteration);
+    public deactivateOnanimationiteration(): void {
+        this.htmlElement.removeEventListener("animationiteration", this.onanimationiteration);
     }
 
 
     // Element - animationcancel event
 
-    #onanimationcancel = (animationEvent: AnimationEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeAnimationCancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
+    private onanimationcancel = (animationEvent: AnimationEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeAnimationCancel", animationEvent.animationName, animationEvent.elapsedTime, animationEvent.pseudoElement)
 
-    activateOnanimationcancel(): void {
-        this.#htmlElement.addEventListener("animationcancel", this.#onanimationcancel);
+    public activateOnanimationcancel(): void {
+        this.htmlElement.addEventListener("animationcancel", this.onanimationcancel);
     }
 
-    deactivateOnanimationcancel(): void {
-        this.#htmlElement.removeEventListener("animationcancel", this.#onanimationcancel);
+    public deactivateOnanimationcancel(): void {
+        this.htmlElement.removeEventListener("animationcancel", this.onanimationcancel);
     }
 
 
 
     // Element - fullscreenchange event
 
-    #onfullscreenchange = () => BlazorInvoke.method(this.#eventTrigger, "InvokeFullscreenChange");
+    private onfullscreenchange = () => BlazorInvoke.method(this.eventTrigger, "InvokeFullscreenChange");
 
-    activateOnfullscreenchange(): void {
-        this.#htmlElement.addEventListener("fullscreenchange", this.#onfullscreenchange);
+    public activateOnfullscreenchange(): void {
+        this.htmlElement.addEventListener("fullscreenchange", this.onfullscreenchange);
     }
 
-    deactivateOnfullscreenchange(): void {
-        this.#htmlElement.removeEventListener("fullscreenchange", this.#onfullscreenchange);
+    public deactivateOnfullscreenchange(): void {
+        this.htmlElement.removeEventListener("fullscreenchange", this.onfullscreenchange);
     }
 
 
     // Element - fullscreenerror event
 
-    #onfullscreenerror = () => BlazorInvoke.method(this.#eventTrigger, "InvokeFullscreenError");
+    private onfullscreenerror = () => BlazorInvoke.method(this.eventTrigger, "InvokeFullscreenError");
 
-    activateOnfullscreenerror(): void {
-        this.#htmlElement.addEventListener("fullscreenerror", this.#onfullscreenerror);
+    public activateOnfullscreenerror(): void {
+        this.htmlElement.addEventListener("fullscreenerror", this.onfullscreenerror);
     }
 
-    deactivateOnfullscreenerror(): void {
-        this.#htmlElement.removeEventListener("fullscreenerror", this.#onfullscreenerror);
+    public deactivateOnfullscreenerror(): void {
+        this.htmlElement.removeEventListener("fullscreenerror", this.onfullscreenerror);
     }
 }

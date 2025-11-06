@@ -1,50 +1,50 @@
-import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
+﻿import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
 
 export class ScreenAPI {
-    static getWidth(): number {
+    public static getWidth(): number {
         return window.screen.width;
     }
 
-    static getHeight(): number {
+    public static getHeight(): number {
         return window.screen.height;
     }
 
-    static getAvailWidth(): number {
+    public static getAvailWidth(): number {
         return window.screen.availWidth;
     }
 
-    static getAvailHeight(): number {
+    public static getAvailHeight(): number {
         return window.screen.availHeight;
     }
 
-    static getColorDepth(): number {
+    public static getColorDepth(): number {
         return window.screen.colorDepth;
     }
 
-    static getPixelDepth(): number {
+    public static getPixelDepth(): number {
         return window.screen.pixelDepth;
     }
 
-    static getIsExtended(): boolean {
+    public static getIsExtended(): boolean {
         return window.screen.isExtended;
     }
 
 
     // orientation
 
-    static getOrientationType(): string {
+    public static getOrientationType(): string {
         return window.screen.orientation.type;
     }
 
-    static getOrientationAngle(): number {
+    public static getOrientationAngle(): number {
         return window.screen.orientation.angle;
     }
 
-    static lockOrientation(orientation: string): Promise<void> {
+    public static lockOrientation(orientation: string): Promise<void> {
         return window.screen.orientation.lock(orientation);
     }
 
-    static unlockOrientation(): void {
+    public static unlockOrientation(): void {
         window.screen.orientation.unlock();
     }
 
@@ -52,39 +52,39 @@ export class ScreenAPI {
     // events
 
 
-    static #eventTrigger: DotNet.DotNetObject;
+    private static eventTrigger: DotNet.DotNetObject;
 
-    static initEvents(eventTrigger: DotNet.DotNetObject): void {
-        ScreenAPI.#eventTrigger = eventTrigger;
+    public static initEvents(eventTrigger: DotNet.DotNetObject): void {
+        ScreenAPI.eventTrigger = eventTrigger;
     }
 
 
     // change event
 
-    static #onchange() {
-        return BlazorInvoke.method(ScreenAPI.#eventTrigger, "InvokeChange");
+    private static onchange() {
+        return BlazorInvoke.method(ScreenAPI.eventTrigger, "InvokeChange");
     }
 
-    static activateOnchange(): void {
-        window.screen.addEventListener("change", ScreenAPI.#onchange);
+    public static activateOnchange(): void {
+        window.screen.addEventListener("change", ScreenAPI.onchange);
     }
 
-    static deactivateOnchange(): void {
-        window.screen.removeEventListener("change", ScreenAPI.#onchange);
+    public static deactivateOnchange(): void {
+        window.screen.removeEventListener("change", ScreenAPI.onchange);
     }
 
 
     // orientationchange event
 
-    static #onorientationchange() {
-        return BlazorInvoke.method(ScreenAPI.#eventTrigger, "InvokeOrientationChange");
+    private static onorientationchange() {
+        return BlazorInvoke.method(ScreenAPI.eventTrigger, "InvokeOrientationChange");
     }
 
-    static activateOnorientationchange(): void {
-        window.screen.orientation.addEventListener("change", ScreenAPI.#onorientationchange);
+    public static activateOnorientationchange(): void {
+        window.screen.orientation.addEventListener("change", ScreenAPI.onorientationchange);
     }
 
-    static deactivateOnorientationchange(): void {
-        window.screen.orientation.removeEventListener("change", ScreenAPI.#onorientationchange);
+    public static deactivateOnorientationchange(): void {
+        window.screen.orientation.removeEventListener("change", ScreenAPI.onorientationchange);
     }
 }

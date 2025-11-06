@@ -1,32 +1,32 @@
-import { ServiceWorkerAPI } from "../ServiceWorker/ServiceWorker";
+﻿import { ServiceWorkerAPI } from "../ServiceWorker/ServiceWorker";
 import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
 
 export class ServiceWorkerRegistrationAPI {
-    #serviceWorkerRegistration: ServiceWorkerRegistration;
+    private serviceWorkerRegistration: ServiceWorkerRegistration;
 
-    constructor(serviceWorkerRegistration: ServiceWorkerRegistration) {
-        this.#serviceWorkerRegistration = serviceWorkerRegistration;
+    public constructor(serviceWorkerRegistration: ServiceWorkerRegistration) {
+        this.serviceWorkerRegistration = serviceWorkerRegistration;
     }
 
 
-    getActive(): [ServiceWorkerAPI] | [null] {
-        const serviceWorker = this.#serviceWorkerRegistration.active;
+    public getActive(): [ServiceWorkerAPI] | [null] {
+        const serviceWorker = this.serviceWorkerRegistration.active;
         if (serviceWorker)
             return [DotNet.createJSObjectReference(new ServiceWorkerAPI(serviceWorker))];
         else
             return [null];
     }
 
-    getInstalling(): [ServiceWorkerAPI] | [null] {
-        const serviceWorker = this.#serviceWorkerRegistration.installing;
+    public getInstalling(): [ServiceWorkerAPI] | [null] {
+        const serviceWorker = this.serviceWorkerRegistration.installing;
         if (serviceWorker)
             return [DotNet.createJSObjectReference(new ServiceWorkerAPI(serviceWorker))];
         else
             return [null];
     }
 
-    getWaiting(): [ServiceWorkerAPI] | [null] {
-        const serviceWorker = this.#serviceWorkerRegistration.waiting;
+    public getWaiting(): [ServiceWorkerAPI] | [null] {
+        const serviceWorker = this.serviceWorkerRegistration.waiting;
         if (serviceWorker)
             return [DotNet.createJSObjectReference(new ServiceWorkerAPI(serviceWorker))];
         else
@@ -34,22 +34,22 @@ export class ServiceWorkerRegistrationAPI {
     }
 
 
-    getScope(): string {
-        return this.#serviceWorkerRegistration.scope;
+    public getScope(): string {
+        return this.serviceWorkerRegistration.scope;
     }
 
-    getUpdateViaCache(): string {
-        return this.#serviceWorkerRegistration.updateViaCache;
+    public getUpdateViaCache(): string {
+        return this.serviceWorkerRegistration.updateViaCache;
     }
 
 
-    unregister(): Promise<boolean> {
-        return this.#serviceWorkerRegistration.unregister();
+    public unregister(): Promise<boolean> {
+        return this.serviceWorkerRegistration.unregister();
     }
 
-    async update(): Promise<ServiceWorkerRegistrationAPI> {
+    public async update(): Promise<ServiceWorkerRegistrationAPI> {
         // wrong return type definition for update(): expected ServiceWorkerRegistration, actually void
-        const updatedServiceWorkerRegistration = <ServiceWorkerRegistration><unknown>await this.#serviceWorkerRegistration.update();
+        const updatedServiceWorkerRegistration = <ServiceWorkerRegistration><unknown>await this.serviceWorkerRegistration.update();
         return new ServiceWorkerRegistrationAPI(updatedServiceWorkerRegistration);
     }
 
@@ -57,22 +57,22 @@ export class ServiceWorkerRegistrationAPI {
     // events
 
 
-    #eventTrigger: DotNet.DotNetObject;
+    private eventTrigger: DotNet.DotNetObject;
 
-    initEvents(eventTrigger: DotNet.DotNetObject): void {
-        this.#eventTrigger = eventTrigger;
+    public initEvents(eventTrigger: DotNet.DotNetObject): void {
+        this.eventTrigger = eventTrigger;
     }
 
 
     // updatefound event
 
-    #onupdatefound = () => BlazorInvoke.method(this.#eventTrigger, "InvokeUpdateFound");
+    private onupdatefound = () => BlazorInvoke.method(this.eventTrigger, "InvokeUpdateFound");
 
-    activateOnupdatefound(): void {
-        this.#serviceWorkerRegistration.addEventListener("updatefound", this.#onupdatefound);
+    public activateOnupdatefound(): void {
+        this.serviceWorkerRegistration.addEventListener("updatefound", this.onupdatefound);
     }
 
-    deactivateOnupdatefound(): void {
-        this.#serviceWorkerRegistration.removeEventListener("updatefound", this.#onupdatefound);
+    public deactivateOnupdatefound(): void {
+        this.serviceWorkerRegistration.removeEventListener("updatefound", this.onupdatefound);
     }
 }

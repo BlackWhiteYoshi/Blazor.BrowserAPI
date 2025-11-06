@@ -1,13 +1,13 @@
-import { SensorAPI } from "../Sensor";
+﻿import { SensorAPI } from "../Sensor";
 
 export class MagnetometerAPI extends SensorAPI {
-    declare sensor: Magnetometer;
+    declare protected sensor: Magnetometer;
 
-    constructor(magnetometer: Magnetometer) {
+    private constructor(magnetometer: Magnetometer) {
         super(magnetometer);
     }
 
-    static create(frequency: number, referenceFrame: "device" | "screen"): [MagnetometerAPI] | [null] {
+    public static create(frequency: number, referenceFrame: "device" | "screen"): [MagnetometerAPI] | [null] {
         if (!("Magnetometer" in window))
             return [null];
 
@@ -21,15 +21,15 @@ export class MagnetometerAPI extends SensorAPI {
     }
 
 
-    getX(): number {
+    public getX(): number {
         return this.sensor.x ?? 0;
     }
 
-    getY(): number {
+    public getY(): number {
         return this.sensor.y ?? 0;
     }
 
-    getZ(): number {
+    public getZ(): number {
         return this.sensor.z ?? 0;
     }
 }

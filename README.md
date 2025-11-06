@@ -89,7 +89,7 @@ However, the class names itself will be stable, so using them for service provid
 
 
 <br></br>
-## Contributions
+## How to contribute
 
 Adding a member to an existing BrowserAPI normally includes 5 steps:
 1. Adding a function to the corresponding *.ts* file (in case of a event -> 3 functions)

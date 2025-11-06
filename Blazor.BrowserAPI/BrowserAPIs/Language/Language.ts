@@ -1,17 +1,17 @@
-export class LanguageAPI {
-    static getBrowserLanguage(): string {
+﻿export class LanguageAPI {
+    public static getBrowserLanguage(): string {
         return navigator.language;
     }
 
-    static getBrowserLanguages(): readonly string[] {
+    public static getBrowserLanguages(): readonly string[] {
         return navigator.languages;
     }
 
-    static getHtmlLanguage(): string {
+    public static getHtmlLanguage(): string {
         return document.documentElement.lang;
     }
 
-    static setHtmlLanguage(language: string): string {
+    public static setHtmlLanguage(language: string): string {
         return document.documentElement.lang = language;
     }
 }

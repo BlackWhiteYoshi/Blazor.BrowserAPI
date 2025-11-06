@@ -1,13 +1,13 @@
-import { SensorAPI } from "../Sensor";
+﻿import { SensorAPI } from "../Sensor";
 
 export class GyroscopeAPI extends SensorAPI {
-    declare sensor: Gyroscope;
+    declare protected sensor: Gyroscope;
 
-    constructor(gyroscope: Gyroscope) {
+    private constructor(gyroscope: Gyroscope) {
         super(gyroscope);
     }
 
-    static create(frequency: number, referenceFrame: "device" | "screen"): [GyroscopeAPI] | [null] {
+    public static create(frequency: number, referenceFrame: "device" | "screen"): [GyroscopeAPI] | [null] {
         if (!("Gyroscope" in window))
             return [null];
 
@@ -21,15 +21,15 @@ export class GyroscopeAPI extends SensorAPI {
     }
 
 
-    getX(): number {
+    public getX(): number {
         return this.sensor.x ?? 0;
     }
 
-    getY(): number {
+    public getY(): number {
         return this.sensor.y ?? 0;
     }
 
-    getZ(): number {
+    public getZ(): number {
         return this.sensor.z ?? 0;
     }
 }

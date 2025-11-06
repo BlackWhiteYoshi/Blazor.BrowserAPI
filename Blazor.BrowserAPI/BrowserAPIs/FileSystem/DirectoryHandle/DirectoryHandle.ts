@@ -1,46 +1,46 @@
-import { FileHandleAPI } from "../FileHandle/FileHandle";
+﻿import { FileHandleAPI } from "../FileHandle/FileHandle";
 
 export class DirectoryHandleAPI {
-    #directoryHandle: FileSystemDirectoryHandle;
-    get handle(): FileSystemDirectoryHandle {
-        return this.#directoryHandle;
+    private _handle: FileSystemDirectoryHandle;
+    public get handle(): FileSystemDirectoryHandle {
+        return this._handle;
     }
 
-    constructor(directoryHandle: FileSystemDirectoryHandle) {
-        this.#directoryHandle = directoryHandle;
-    }
-
-
-    //getKind(): "directory"; // result is always "directory", no need to retrieve this property
-
-    getName(): string {
-        return this.#directoryHandle.name;
+    public constructor(directoryHandle: FileSystemDirectoryHandle) {
+        this._handle = directoryHandle;
     }
 
 
-    isSameEntry(other: DirectoryHandleAPI): Promise<boolean> {
-        return this.#directoryHandle.isSameEntry(other.#directoryHandle);
+    //public getKind(): "directory"; // result is always "directory", no need to retrieve this property
+
+    public getName(): string {
+        return this.handle.name;
     }
 
-    async getDirectoryHandle(name: string, create: boolean): Promise<DirectoryHandleAPI> {
-        const directoryHandle: FileSystemDirectoryHandle = await this.#directoryHandle.getDirectoryHandle(name, { create });
+
+    public isSameEntry(other: DirectoryHandleAPI): Promise<boolean> {
+        return this.handle.isSameEntry(other.handle);
+    }
+
+    public async getDirectoryHandle(name: string, create: boolean): Promise<DirectoryHandleAPI> {
+        const directoryHandle: FileSystemDirectoryHandle = await this.handle.getDirectoryHandle(name, { create });
         return new DirectoryHandleAPI(directoryHandle);
     }
 
-    async getFileHandle(name: string, create: boolean): Promise<FileHandleAPI> {
-        const fileHandle: FileSystemFileHandle = await this.#directoryHandle.getFileHandle(name, { create });
+    public async getFileHandle(name: string, create: boolean): Promise<FileHandleAPI> {
+        const fileHandle: FileSystemFileHandle = await this.handle.getFileHandle(name, { create });
         return new FileHandleAPI(fileHandle);
     }
 
-    removeEntry(name: string, recursive: boolean): Promise<void> {
-        return this.#directoryHandle.removeEntry(name, { recursive });
+    public removeEntry(name: string, recursive: boolean): Promise<void> {
+        return this.handle.removeEntry(name, { recursive });
     }
 
-    async values(): Promise<{ fileList: FileHandleAPI[], directoryList: DirectoryHandleAPI[] }> {
+    public async values(): Promise<{ fileList: FileHandleAPI[], directoryList: DirectoryHandleAPI[] }> {
         const fileList: FileHandleAPI[] = [];
         const directoryList: DirectoryHandleAPI[] = [];
 
-        for await (const entry of this.#directoryHandle.values())
+        for await (const entry of this.handle.values())
             if (entry instanceof FileSystemFileHandle)
                 fileList.push(DotNet.createJSObjectReference(new FileHandleAPI(entry)));
             else

@@ -1,62 +1,62 @@
-export class GamepadAPI {
-    #gamepad: Gamepad;
+﻿export class GamepadAPI {
+    private gamepad: Gamepad;
 
-    constructor(gamepad: Gamepad) {
-        this.#gamepad = gamepad;
+    public constructor(gamepad: Gamepad) {
+        this.gamepad = gamepad;
     }
 
 
-    getAxes(): readonly number[] {
-        return this.#gamepad.axes;
+    public getAxes(): readonly number[] {
+        return this.gamepad.axes;
     }
 
 
-    getButtons(): GamepadButton[] {
-        return this.#gamepad.buttons.map(gamepadButton => ({ pressed: gamepadButton.pressed, touched: gamepadButton.touched, value: gamepadButton.value }));
+    public getButtons(): GamepadButton[] {
+        return this.gamepad.buttons.map(gamepadButton => ({ pressed: gamepadButton.pressed, touched: gamepadButton.touched, value: gamepadButton.value }));
     }
 
 
-    getConnected(): boolean {
-        return this.#gamepad.connected;
+    public getConnected(): boolean {
+        return this.gamepad.connected;
     }
 
-    getId(): string {
-        return this.#gamepad.id;
+    public getId(): string {
+        return this.gamepad.id;
     }
 
-    getIndex(): number {
-        return this.#gamepad.index;
+    public getIndex(): number {
+        return this.gamepad.index;
     }
 
-    getMapping(): string {
-        return this.#gamepad.mapping;
+    public getMapping(): string {
+        return this.gamepad.mapping;
     }
 
-    getTimestamp(): number {
-        return this.#gamepad.timestamp;
+    public getTimestamp(): number {
+        return this.gamepad.timestamp;
     }
 
 
     // vibrationActuator
 
-    getVibrationActuatorEffects(): ("vibration" | "dual-rumble" | "trigger-rumble")[] {
-        const vibration = <GamepadHapticActuator & { effects: ("dual-rumble" | "trigger-rumble")[]; }>this.#gamepad.vibrationActuator;
+    public getVibrationActuatorEffects(): ("vibration" | "dual-rumble" | "trigger-rumble")[] {
+        const vibration = <GamepadHapticActuator & { effects: ("dual-rumble" | "trigger-rumble")[]; }>this.gamepad.vibrationActuator;
         if (!vibration)
             return [];
 
         return vibration.effects || [vibration.type];
     }
 
-    playVibrationActuatorEffect(type: string, duration: number, startDelay: number, strongMagnitude: number, weakMagnitude: number, leftTrigger: number, rightTrigger: number): Promise<"complete" | "preempted" | "none"> {
-        const vibration = this.#gamepad.vibrationActuator;
+    public playVibrationActuatorEffect(type: string, duration: number, startDelay: number, strongMagnitude: number, weakMagnitude: number, leftTrigger: number, rightTrigger: number): Promise<"complete" | "preempted" | "none"> {
+        const vibration = this.gamepad.vibrationActuator;
         if (!vibration)
             return Promise.resolve("none");
 
         return vibration.playEffect(<"dual-rumble">type, <GamepadEffectParameters>{ duration, startDelay, strongMagnitude, weakMagnitude, leftTrigger, rightTrigger });
     }
 
-    resetVibrationActuator(): Promise<"complete" | "preempted" | "none"> {
-        const vibration = this.#gamepad.vibrationActuator;
+    public resetVibrationActuator(): Promise<"complete" | "preempted" | "none"> {
+        const vibration = this.gamepad.vibrationActuator;
         if (!vibration)
             return Promise.resolve("none");
 

@@ -1,13 +1,13 @@
-import { SensorAPI } from "../Sensor";
+﻿import { SensorAPI } from "../Sensor";
 
 export class AmbientLightSensorAPI extends SensorAPI {
-    declare sensor: AmbientLightSensor;
+    declare protected sensor: AmbientLightSensor;
 
-    constructor(ambientLightSensor: AmbientLightSensor) {
+    private constructor(ambientLightSensor: AmbientLightSensor) {
         super(ambientLightSensor);
     }
 
-    static create(frequency: number): [AmbientLightSensorAPI] | [null] {
+    public static create(frequency: number): [AmbientLightSensorAPI] | [null] {
         if (!("AmbientLightSensor" in window))
             return [null];
 
@@ -21,7 +21,7 @@ export class AmbientLightSensorAPI extends SensorAPI {
     }
 
 
-    getIlluminance(): number {
+    public getIlluminance(): number {
         return this.sensor.illuminance ?? 0;
     }
 }

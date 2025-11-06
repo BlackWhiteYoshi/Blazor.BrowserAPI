@@ -1,129 +1,129 @@
-import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
+﻿import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
 
 export class ScreenDetailedAPI {
-    #screenDetailed: ScreenDetailed;
+    private screenDetailed: ScreenDetailed;
 
-    constructor(screenDetailed: ScreenDetailed) {
-        this.#screenDetailed = screenDetailed;
+    public constructor(screenDetailed: ScreenDetailed) {
+        this.screenDetailed = screenDetailed;
     }
 
 
-    getLeft(): number {
-        return this.#screenDetailed.left;
+    public getLeft(): number {
+        return this.screenDetailed.left;
     }
 
-    getTop(): number {
-        return this.#screenDetailed.top;
+    public getTop(): number {
+        return this.screenDetailed.top;
     }
 
-    getAvailLeft(): number {
-        return this.#screenDetailed.availLeft;
+    public getAvailLeft(): number {
+        return this.screenDetailed.availLeft;
     }
 
-    getAvailTop(): number {
-        return this.#screenDetailed.availTop;
+    public getAvailTop(): number {
+        return this.screenDetailed.availTop;
     }
 
 
-    getLabel(): string {
-        return this.#screenDetailed.label;
+    public getLabel(): string {
+        return this.screenDetailed.label;
     }
 
-    getDevicePixelRatio(): number {
-        return this.#screenDetailed.devicePixelRatio;
+    public getDevicePixelRatio(): number {
+        return this.screenDetailed.devicePixelRatio;
     }
 
-    getIsPrimary(): boolean {
-        return this.#screenDetailed.isPrimary;
+    public getIsPrimary(): boolean {
+        return this.screenDetailed.isPrimary;
     }
 
-    getIsInternal(): boolean {
-        return this.#screenDetailed.isInternal;
+    public getIsInternal(): boolean {
+        return this.screenDetailed.isInternal;
     }
 
 
     // Screen
 
-    getWidth(): number {
-        return this.#screenDetailed.width;
+    public getWidth(): number {
+        return this.screenDetailed.width;
     }
 
-    getHeight(): number {
-        return this.#screenDetailed.height;
+    public getHeight(): number {
+        return this.screenDetailed.height;
     }
 
-    getAvailWidth(): number {
-        return this.#screenDetailed.availWidth;
+    public getAvailWidth(): number {
+        return this.screenDetailed.availWidth;
     }
 
-    getAvailHeight(): number {
-        return this.#screenDetailed.availHeight;
+    public getAvailHeight(): number {
+        return this.screenDetailed.availHeight;
     }
 
-    getColorDepth(): number {
-        return this.#screenDetailed.colorDepth;
+    public getColorDepth(): number {
+        return this.screenDetailed.colorDepth;
     }
 
-    getPixelDepth(): number {
-        return this.#screenDetailed.pixelDepth;
+    public getPixelDepth(): number {
+        return this.screenDetailed.pixelDepth;
     }
 
-    getIsExtended(): boolean {
-        return this.#screenDetailed.isExtended;
+    public getIsExtended(): boolean {
+        return this.screenDetailed.isExtended;
     }
 
 
     // Screen orientation
 
-    getOrientationType(): string {
-        return this.#screenDetailed.orientation.type;
+    public getOrientationType(): string {
+        return this.screenDetailed.orientation.type;
     }
 
-    getOrientationAngle(): number {
-        return this.#screenDetailed.orientation.angle;
+    public getOrientationAngle(): number {
+        return this.screenDetailed.orientation.angle;
     }
 
-    lockOrientation(orientation: string): Promise<void> {
-        return this.#screenDetailed.orientation.lock(orientation);
+    public lockOrientation(orientation: string): Promise<void> {
+        return this.screenDetailed.orientation.lock(orientation);
     }
 
-    unlockOrientation(): void {
-        this.#screenDetailed.orientation.unlock();
+    public unlockOrientation(): void {
+        this.screenDetailed.orientation.unlock();
     }
 
 
     // Screen events
 
 
-    #eventTrigger: DotNet.DotNetObject;
+    private eventTrigger: DotNet.DotNetObject;
 
-    initEvents(eventTrigger: DotNet.DotNetObject): void {
-        this.#eventTrigger = eventTrigger;
+    public initEvents(eventTrigger: DotNet.DotNetObject): void {
+        this.eventTrigger = eventTrigger;
     }
 
 
     // change event
 
-    #onchange = () => BlazorInvoke.method(this.#eventTrigger, "InvokeChange");
+    private onchange = () => BlazorInvoke.method(this.eventTrigger, "InvokeChange");
 
-    activateOnchange(): void {
-        this.#screenDetailed.addEventListener("change", this.#onchange);
+    public activateOnchange(): void {
+        this.screenDetailed.addEventListener("change", this.onchange);
     }
 
-    deactivateOnchange(): void {
-        this.#screenDetailed.removeEventListener("change", this.#onchange);
+    public deactivateOnchange(): void {
+        this.screenDetailed.removeEventListener("change", this.onchange);
     }
 
 
     // orientationchange event
 
-    #onorientationchange = () => BlazorInvoke.method(this.#eventTrigger, "InvokeOrientationChange");
+    private onorientationchange = () => BlazorInvoke.method(this.eventTrigger, "InvokeOrientationChange");
 
-    activateOnorientationchange(): void {
-        this.#screenDetailed.orientation.addEventListener("change", this.#onorientationchange);
+    public activateOnorientationchange(): void {
+        this.screenDetailed.orientation.addEventListener("change", this.onorientationchange);
     }
 
-    deactivateOnorientationchange(): void {
-        this.#screenDetailed.orientation.removeEventListener("change", this.#onorientationchange);
+    public deactivateOnorientationchange(): void {
+        this.screenDetailed.orientation.removeEventListener("change", this.onorientationchange);
     }
 }

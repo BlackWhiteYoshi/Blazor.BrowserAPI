@@ -1,57 +1,57 @@
-import { MediaStreamAPI } from "../MediaStream/MediaStream";
+﻿import { MediaStreamAPI } from "../MediaStream/MediaStream";
 import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
 
 export class MediaRecorderAPI {
-    #mediaRecorder: MediaRecorder;
+    private mediaRecorder: MediaRecorder;
 
-    constructor(mediaStream: MediaStream, options: MediaRecorderOptions) {
-        this.#mediaRecorder = new MediaRecorder(mediaStream, options);
+    public constructor(mediaStream: MediaStream, options: MediaRecorderOptions) {
+        this.mediaRecorder = new MediaRecorder(mediaStream, options);
     }
 
 
-    getMimeType(): string {
-        return this.#mediaRecorder.mimeType;
+    public getMimeType(): string {
+        return this.mediaRecorder.mimeType;
     }
 
-    getState(): "inactive" | "paused" | "recording" {
-        return this.#mediaRecorder.state;
+    public getState(): "inactive" | "paused" | "recording" {
+        return this.mediaRecorder.state;
     }
 
-    getStream(): MediaStreamAPI {
-        return new MediaStreamAPI(this.#mediaRecorder.stream);
+    public getStream(): MediaStreamAPI {
+        return new MediaStreamAPI(this.mediaRecorder.stream);
     }
 
-    getAudioBitsPerSecond(): number {
-        return this.#mediaRecorder.audioBitsPerSecond;
+    public getAudioBitsPerSecond(): number {
+        return this.mediaRecorder.audioBitsPerSecond;
     }
 
-    getVideoBitsPerSecond(): number {
-        return this.#mediaRecorder.videoBitsPerSecond;
-    }
-
-
-    start(timeslice: number): void {
-        this.#mediaRecorder.start(timeslice > 0 ? timeslice : undefined);
-    }
-
-    stop(): void {
-        this.#mediaRecorder.stop();
-    }
-
-    resume(): void {
-        this.#mediaRecorder.resume();
-    }
-
-    pause(): void {
-        this.#mediaRecorder.pause();
-    }
-
-    requestData(): void {
-        this.#mediaRecorder.requestData();
+    public getVideoBitsPerSecond(): number {
+        return this.mediaRecorder.videoBitsPerSecond;
     }
 
 
-    isTypeSupported(mimeType: string): boolean {
+    public start(timeslice: number): void {
+        this.mediaRecorder.start(timeslice > 0 ? timeslice : undefined);
+    }
+
+    public stop(): void {
+        this.mediaRecorder.stop();
+    }
+
+    public resume(): void {
+        this.mediaRecorder.resume();
+    }
+
+    public pause(): void {
+        this.mediaRecorder.pause();
+    }
+
+    public requestData(): void {
+        this.mediaRecorder.requestData();
+    }
+
+
+    public isTypeSupported(mimeType: string): boolean {
         return MediaRecorder.isTypeSupported(mimeType);
     }
 
@@ -59,87 +59,87 @@ export class MediaRecorderAPI {
     // events
 
 
-    #eventTrigger: DotNet.DotNetObject;
+    private eventTrigger: DotNet.DotNetObject;
 
-    initEvents(eventTrigger: DotNet.DotNetObject): void {
-        this.#eventTrigger = eventTrigger;
+    public initEvents(eventTrigger: DotNet.DotNetObject): void {
+        this.eventTrigger = eventTrigger;
     }
 
 
     // dataavailable event
 
-    #ondataavailable = async (event: BlobEvent) => BlazorInvoke.method(this.#eventTrigger, "InvokeDataAvailable", new Uint8Array(await event.data.arrayBuffer()));
+    private ondataavailable = async (event: BlobEvent) => BlazorInvoke.method(this.eventTrigger, "InvokeDataAvailable", new Uint8Array(await event.data.arrayBuffer()));
 
-    activateOndataavailable(): void {
-        this.#mediaRecorder.addEventListener("dataavailable", this.#ondataavailable);
+    public activateOndataavailable(): void {
+        this.mediaRecorder.addEventListener("dataavailable", this.ondataavailable);
     }
 
-    deactivateOndataavailable(): void {
-        this.#mediaRecorder.removeEventListener("dataavailable", this.#ondataavailable);
+    public deactivateOndataavailable(): void {
+        this.mediaRecorder.removeEventListener("dataavailable", this.ondataavailable);
     }
 
 
     // error event
 
-    #onerror = (event: Event) => BlazorInvoke.method(this.#eventTrigger, "InvokeError", event);
+    private onerror = (event: Event) => BlazorInvoke.method(this.eventTrigger, "InvokeError", event);
 
-    activateOnerror(): void {
-        this.#mediaRecorder.addEventListener("error", this.#onerror);
+    public activateOnerror(): void {
+        this.mediaRecorder.addEventListener("error", this.onerror);
     }
 
-    deactivateOnerror(): void {
-        this.#mediaRecorder.removeEventListener("error", this.#onerror);
+    public deactivateOnerror(): void {
+        this.mediaRecorder.removeEventListener("error", this.onerror);
     }
 
 
     // start event
 
-    #onstart = () => BlazorInvoke.method(this.#eventTrigger, "InvokeStart");
+    private onstart = () => BlazorInvoke.method(this.eventTrigger, "InvokeStart");
 
-    activateOnstart(): void {
-        this.#mediaRecorder.addEventListener("start", this.#onstart);
+    public activateOnstart(): void {
+        this.mediaRecorder.addEventListener("start", this.onstart);
     }
 
-    deactivateOnstart(): void {
-        this.#mediaRecorder.removeEventListener("start", this.#onstart);
+    public deactivateOnstart(): void {
+        this.mediaRecorder.removeEventListener("start", this.onstart);
     }
 
 
     // stop event
 
-    #onstop = () => BlazorInvoke.method(this.#eventTrigger, "InvokeStop");
+    private onstop = () => BlazorInvoke.method(this.eventTrigger, "InvokeStop");
 
-    activateOnstop(): void {
-        this.#mediaRecorder.addEventListener("stop", this.#onstop);
+    public activateOnstop(): void {
+        this.mediaRecorder.addEventListener("stop", this.onstop);
     }
 
-    deactivateOnstop(): void {
-        this.#mediaRecorder.removeEventListener("stop", this.#onstop);
+    public deactivateOnstop(): void {
+        this.mediaRecorder.removeEventListener("stop", this.onstop);
     }
 
 
     // resume event
 
-    #onresume = () => BlazorInvoke.method(this.#eventTrigger, "InvokeResume");
+    private onresume = () => BlazorInvoke.method(this.eventTrigger, "InvokeResume");
 
-    activateOnresume(): void {
-        this.#mediaRecorder.addEventListener("resume", this.#onresume);
+    public activateOnresume(): void {
+        this.mediaRecorder.addEventListener("resume", this.onresume);
     }
 
-    deactivateOnresume(): void {
-        this.#mediaRecorder.removeEventListener("resume", this.#onresume);
+    public deactivateOnresume(): void {
+        this.mediaRecorder.removeEventListener("resume", this.onresume);
     }
 
 
     // pause event
 
-    #onpause = () => BlazorInvoke.method(this.#eventTrigger, "InvokePause");
+    private onpause = () => BlazorInvoke.method(this.eventTrigger, "InvokePause");
 
-    activateOnpause(): void {
-        this.#mediaRecorder.addEventListener("pause", this.#onpause);
+    public activateOnpause(): void {
+        this.mediaRecorder.addEventListener("pause", this.onpause);
     }
 
-    deactivateOnpause(): void {
-        this.#mediaRecorder.removeEventListener("pause", this.#onpause);
+    public deactivateOnpause(): void {
+        this.mediaRecorder.removeEventListener("pause", this.onpause);
     }
 }

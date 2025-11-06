@@ -1,4 +1,4 @@
-import { BlazorInvoke } from "../../Extensions/blazorExtensions";
+﻿import { BlazorInvoke } from "../../Extensions/blazorExtensions";
 
 type GeolocationCoordinateObject = {
     latitude: number,
@@ -12,9 +12,9 @@ type GeolocationCoordinateObject = {
 };
 
 export class GeolocationAPI {
-    static getCurrentPosition(callbackGeolocation: DotNet.DotNetObject, maximumAge: number, timeout: number, enableHighAccuracy: boolean): void {
+    public static getCurrentPosition(callbackGeolocation: DotNet.DotNetObject, maximumAge: number, timeout: number, enableHighAccuracy: boolean): void {
         navigator.geolocation.getCurrentPosition(
-            (geolocationPosition) => BlazorInvoke.method(callbackGeolocation, "Success", GeolocationAPI.#toGeoCoordsObject(geolocationPosition.coords, geolocationPosition.timestamp)),
+            (geolocationPosition) => BlazorInvoke.method(callbackGeolocation, "Success", GeolocationAPI.toGeoCoordsObject(geolocationPosition.coords, geolocationPosition.timestamp)),
             (geolocationPositionError) => BlazorInvoke.method(callbackGeolocation, "Error", geolocationPositionError.code, geolocationPositionError.message),
             {
                 maximumAge: maximumAge >= 0 ? maximumAge : Infinity,
@@ -24,10 +24,10 @@ export class GeolocationAPI {
         );
     }
 
-    static getCurrentPositionAsync(maximumAge: number, timeout: number, enableHighAccuracy: boolean): Promise<GeolocationCoordinateObject> {
+    public static getCurrentPositionAsync(maximumAge: number, timeout: number, enableHighAccuracy: boolean): Promise<GeolocationCoordinateObject> {
         return new Promise((resolve, reject) => {
             navigator.geolocation.getCurrentPosition(
-                (geolocationPosition) => resolve(GeolocationAPI.#toGeoCoordsObject(geolocationPosition.coords, geolocationPosition.timestamp)),
+                (geolocationPosition) => resolve(GeolocationAPI.toGeoCoordsObject(geolocationPosition.coords, geolocationPosition.timestamp)),
                 (geolocationPositionError) => reject({ code: geolocationPositionError.code, message: geolocationPositionError.message }),
                 {
                     maximumAge: maximumAge >= 0 ? maximumAge : Infinity,
@@ -39,9 +39,9 @@ export class GeolocationAPI {
     }
 
     /** @returns watchId */
-    static watchPosition(callbackGeolocation: DotNet.DotNetObject, maximumAge: number, timeout: number, enableHighAccuracy: boolean): number {
+    public static watchPosition(callbackGeolocation: DotNet.DotNetObject, maximumAge: number, timeout: number, enableHighAccuracy: boolean): number {
         return navigator.geolocation.watchPosition(
-            (geolocationPosition) => BlazorInvoke.method(callbackGeolocation, "Success", GeolocationAPI.#toGeoCoordsObject(geolocationPosition.coords, geolocationPosition.timestamp)),
+            (geolocationPosition) => BlazorInvoke.method(callbackGeolocation, "Success", GeolocationAPI.toGeoCoordsObject(geolocationPosition.coords, geolocationPosition.timestamp)),
             (geolocationPositionError) => BlazorInvoke.method(callbackGeolocation, "Error", geolocationPositionError.code, geolocationPositionError.message),
             {
                 maximumAge: maximumAge >= 0 ? maximumAge : Infinity,
@@ -51,13 +51,13 @@ export class GeolocationAPI {
         );
     }
 
-    static clearWatch(watchId: number): void {
+    public static clearWatch(watchId: number): void {
         navigator.geolocation.clearWatch(watchId)
     }
 
 
 
-    static #toGeoCoordsObject(geolocationCoordinates: GeolocationCoordinates, timestamp: number): GeolocationCoordinateObject {
+    private static toGeoCoordsObject(geolocationCoordinates: GeolocationCoordinates, timestamp: number): GeolocationCoordinateObject {
         return {
             latitude: geolocationCoordinates.latitude,
             longitude: geolocationCoordinates.longitude,

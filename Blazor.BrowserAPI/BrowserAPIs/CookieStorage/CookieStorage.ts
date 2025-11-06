@@ -1,9 +1,9 @@
-export class CookieStorageAPI {
-    static getAllCookies(): string {
+﻿export class CookieStorageAPI {
+    public static getAllCookies(): string {
         return document.cookie;
     }
 
-    static count(): number {
+    public static count(): number {
         if (document.cookie === "")
             return 0;
 
@@ -11,7 +11,7 @@ export class CookieStorageAPI {
         return cookies.length;
     }
 
-    static key(index: number): string | null {
+    public static key(index: number): string | null {
         if (index < 0)
             return null;
 
@@ -24,7 +24,7 @@ export class CookieStorageAPI {
         return key.trim();
     }
 
-    static getCookie(key: string): string | null {
+    public static getCookie(key: string): string | null {
         let cookies = document.cookie.split(';');
         for (let i = 0; i < cookies.length; i++) {
             let keyValuePair = cookies[i].split('=');
@@ -37,7 +37,7 @@ export class CookieStorageAPI {
         return null;
     }
 
-    static setCookie(key: string, value: string, expires: number | null, path: string, sameSite: string, secure: boolean): void {
+    public static setCookie(key: string, value: string, expires: number | null, path: string, sameSite: string, secure: boolean): void {
         let cookie = `${key}=${value}`;
 
         if (expires !== null)
@@ -50,11 +50,11 @@ export class CookieStorageAPI {
         document.cookie = cookie;
     }
 
-    static removeCookie(key: string): void {
+    public static removeCookie(key: string): void {
         document.cookie = `${key}=;expires=Thu, 01 Jan 1970 00:00:00 GMT`;
     }
 
-    static clear(): void {
+    public static clear(): void {
         let cookies = document.cookie.split(';');
         for (let i = 0; i < cookies.length; i++) {
             let key = cookies[i].split('=')[0];

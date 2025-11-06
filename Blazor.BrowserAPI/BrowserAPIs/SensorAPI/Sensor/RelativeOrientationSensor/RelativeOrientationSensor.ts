@@ -1,13 +1,13 @@
-import { SensorAPI } from "../Sensor";
+﻿import { SensorAPI } from "../Sensor";
 
 export class RelativeOrientationSensorAPI extends SensorAPI {
-    declare sensor: RelativeOrientationSensor;
+    declare protected sensor: RelativeOrientationSensor;
 
-    constructor(relativeOrientationSensor: RelativeOrientationSensor) {
+    private constructor(relativeOrientationSensor: RelativeOrientationSensor) {
         super(relativeOrientationSensor);
     }
 
-    static create(frequency: number, referenceFrame: "device" | "screen"): [RelativeOrientationSensorAPI] | [null] {
+    public static create(frequency: number, referenceFrame: "device" | "screen"): [RelativeOrientationSensorAPI] | [null] {
         if (!("RelativeOrientationSensor" in window))
             return [null];
 
@@ -21,12 +21,12 @@ export class RelativeOrientationSensorAPI extends SensorAPI {
     }
 
 
-    getQuaternion(): number[] {
+    public getQuaternion(): number[] {
         return this.sensor.quaternion ?? [0, 0, 0, 0];
     }
 
 
-    populateMatrix(): number[] {
+    public populateMatrix(): number[] {
         if (this.sensor.quaternion === null)
             return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 

@@ -1,4 +1,4 @@
-import { MediaStreamAPI } from "./MediaStream/MediaStream";
+﻿import { MediaStreamAPI } from "./MediaStream/MediaStream";
 
 namespace MediaDevicesTypes {
     export type ConstrainPreference = 0 | 1 | 2; // 0 = none, 1 = exact, 2 = ideal
@@ -47,27 +47,27 @@ namespace MediaDevicesTypes {
 }
 
 export class MediaDevicesAPI {
-    static enumerateDevices(): Promise<MediaDeviceInfo[]> {
+    public static enumerateDevices(): Promise<MediaDeviceInfo[]> {
         return navigator.mediaDevices.enumerateDevices();
     }
 
-    static getSupportedConstraints(): MediaTrackSupportedConstraints {
+    public static getSupportedConstraints(): MediaTrackSupportedConstraints {
         return navigator.mediaDevices.getSupportedConstraints();
     }
 
-    static async getUserMedia(audio: boolean | MediaDevicesTypes.ConstrainMediaTrack, video: boolean | MediaDevicesTypes.ConstrainMediaTrack): Promise<MediaStreamAPI> {
-        const mediaStream = await navigator.mediaDevices.getUserMedia({ audio: this.#convertToMediaTrackConstraintSet(audio), video: this.#convertToMediaTrackConstraintSet(video) });
+    public static async getUserMedia(audio: boolean | MediaDevicesTypes.ConstrainMediaTrack, video: boolean | MediaDevicesTypes.ConstrainMediaTrack): Promise<MediaStreamAPI> {
+        const mediaStream = await navigator.mediaDevices.getUserMedia({ audio: this.convertToMediaTrackConstraintSet(audio), video: this.convertToMediaTrackConstraintSet(video) });
         return new MediaStreamAPI(mediaStream);
     }
 
-    static async getDisplayMedia(audio: boolean | MediaDevicesTypes.ConstrainMediaTrack, video: boolean | MediaDevicesTypes.ConstrainMediaTrack): Promise<MediaStreamAPI> {
-        const mediaStream = await navigator.mediaDevices.getDisplayMedia({ audio: this.#convertToMediaTrackConstraintSet(audio), video: this.#convertToMediaTrackConstraintSet(video) });
+    public static async getDisplayMedia(audio: boolean | MediaDevicesTypes.ConstrainMediaTrack, video: boolean | MediaDevicesTypes.ConstrainMediaTrack): Promise<MediaStreamAPI> {
+        const mediaStream = await navigator.mediaDevices.getDisplayMedia({ audio: this.convertToMediaTrackConstraintSet(audio), video: this.convertToMediaTrackConstraintSet(video) });
         return new MediaStreamAPI(mediaStream);
     }
 
 
 
-    static #convertToMediaTrackConstraintSet(constrainMediaTrack: boolean | MediaDevicesTypes.ConstrainMediaTrack): boolean | MediaTrackConstraintSet {
+    private static convertToMediaTrackConstraintSet(constrainMediaTrack: boolean | MediaDevicesTypes.ConstrainMediaTrack): boolean | MediaTrackConstraintSet {
         if (typeof constrainMediaTrack === "boolean")
             return constrainMediaTrack;
         else

@@ -1,31 +1,31 @@
-import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
+﻿import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
 
 export abstract class SensorAPI {
     protected sensor: Sensor;
 
-    constructor(sensor: Sensor) {
+    public constructor(sensor: Sensor) {
         this.sensor = sensor;
     }
 
 
-    getActivated(): boolean {
+    public getActivated(): boolean {
         return this.sensor.activated;
     }
 
-    getHasReading(): boolean {
+    public getHasReading(): boolean {
         return this.sensor.hasReading;
     }
 
-    getTimestamp(): number {
+    public getTimestamp(): number {
         return this.sensor.timestamp ?? 0;
     }
 
 
-    start(): void {
+    public start(): void {
         this.sensor.start();
     }
 
-    stop(): void {
+    public stop(): void {
         this.sensor.stop();
     }
 
@@ -34,49 +34,49 @@ export abstract class SensorAPI {
     // events
 
 
-    #eventTrigger: DotNet.DotNetObject;
+    private eventTrigger: DotNet.DotNetObject;
 
-    initEvents(eventTrigger: DotNet.DotNetObject): void {
-        this.#eventTrigger = eventTrigger;
+    public initEvents(eventTrigger: DotNet.DotNetObject): void {
+        this.eventTrigger = eventTrigger;
     }
 
 
     // error event
 
-    #onerror = (event: Event) => BlazorInvoke.method(this.#eventTrigger, "InvokeError", event);
+    private onerror = (event: Event) => BlazorInvoke.method(this.eventTrigger, "InvokeError", event);
 
-    activateOnerror(): void {
-        this.sensor.addEventListener("error", this.#onerror);
+    public activateOnerror(): void {
+        this.sensor.addEventListener("error", this.onerror);
     }
 
-    deactivateOnerror(): void {
-        this.sensor.removeEventListener("error", this.#onerror);
+    public deactivateOnerror(): void {
+        this.sensor.removeEventListener("error", this.onerror);
     }
 
 
     // activate event
 
-    #onactivate = () => BlazorInvoke.method(this.#eventTrigger, "InvokeActivate");
+    private onactivate = () => BlazorInvoke.method(this.eventTrigger, "InvokeActivate");
 
-    activateOnactivate(): void {
-        this.sensor.addEventListener("activate", this.#onactivate);
+    public activateOnactivate(): void {
+        this.sensor.addEventListener("activate", this.onactivate);
     }
 
-    deactivateOnactivate(): void {
-        this.sensor.removeEventListener("activate", this.#onactivate);
+    public deactivateOnactivate(): void {
+        this.sensor.removeEventListener("activate", this.onactivate);
     }
 
 
     // reading event
 
-    #onreading = () => BlazorInvoke.method(this.#eventTrigger, "InvokeReading");
+    private onreading = () => BlazorInvoke.method(this.eventTrigger, "InvokeReading");
 
-    activateOnreading(): void {
-        this.sensor.addEventListener("reading", this.#onreading);
+    public activateOnreading(): void {
+        this.sensor.addEventListener("reading", this.onreading);
     }
 
-    deactivateOnreading(): void {
-        this.sensor.removeEventListener("reading", this.#onreading);
+    public deactivateOnreading(): void {
+        this.sensor.removeEventListener("reading", this.onreading);
     }
 
 
@@ -84,17 +84,17 @@ export abstract class SensorAPI {
     // window events
 
 
-    static #eventTriggerWindow: DotNet.DotNetObject;
+    private static eventTriggerWindow: DotNet.DotNetObject;
 
-    static initEventsWindow(eventTrigger: DotNet.DotNetObject): void {
-        SensorAPI.#eventTriggerWindow = eventTrigger;
+    public static initEventsWindow(eventTrigger: DotNet.DotNetObject): void {
+        SensorAPI.eventTriggerWindow = eventTrigger;
     }
 
 
     // devicemotion event
 
-    static #ondevicemotion(event: DeviceMotionEvent): void {
-        BlazorInvoke.method(SensorAPI.#eventTriggerWindow, "InvokeDeviceMotion", {
+    private static ondevicemotion(event: DeviceMotionEvent): void {
+        BlazorInvoke.method(SensorAPI.eventTriggerWindow, "InvokeDeviceMotion", {
             accelerationX: event.acceleration?.x ?? null,
             accelerationY: event.acceleration?.y ?? null,
             accelerationZ: event.acceleration?.z ?? null,
@@ -108,19 +108,19 @@ export abstract class SensorAPI {
         });
     }
 
-    static activateOndevicemotion(): void {
-        window.addEventListener("devicemotion", SensorAPI.#ondevicemotion);
+    public static activateOndevicemotion(): void {
+        window.addEventListener("devicemotion", SensorAPI.ondevicemotion);
     }
 
-    static deactivateOndevicemotion(): void {
-        window.removeEventListener("devicemotion", SensorAPI.#ondevicemotion);
+    public static deactivateOndevicemotion(): void {
+        window.removeEventListener("devicemotion", SensorAPI.ondevicemotion);
     }
 
 
     // deviceorientation event
 
-    static #ondeviceorientation(event: DeviceOrientationEvent): void {
-        BlazorInvoke.method(SensorAPI.#eventTriggerWindow, "InvokeDeviceOrientation", {
+    private static ondeviceorientation(event: DeviceOrientationEvent): void {
+        BlazorInvoke.method(SensorAPI.eventTriggerWindow, "InvokeDeviceOrientation", {
             absolute: event.absolute,
             alpha: event.alpha,
             beta: event.beta,
@@ -128,19 +128,19 @@ export abstract class SensorAPI {
         });
     }
 
-    static activateOndeviceorientation(): void {
-        window.addEventListener("deviceorientation", SensorAPI.#ondeviceorientation);
+    public static activateOndeviceorientation(): void {
+        window.addEventListener("deviceorientation", SensorAPI.ondeviceorientation);
     }
 
-    static deactivateOndeviceorientation(): void {
-        window.removeEventListener("deviceorientation", SensorAPI.#ondeviceorientation);
+    public static deactivateOndeviceorientation(): void {
+        window.removeEventListener("deviceorientation", SensorAPI.ondeviceorientation);
     }
 
 
     // deviceorientationabsolute event
 
-    static #ondeviceorientationabsolute(event: DeviceOrientationEvent): void {
-        BlazorInvoke.method(SensorAPI.#eventTriggerWindow, "InvokeDeviceOrientationAbsolute", {
+    private static ondeviceorientationabsolute(event: DeviceOrientationEvent): void {
+        BlazorInvoke.method(SensorAPI.eventTriggerWindow, "InvokeDeviceOrientationAbsolute", {
             absolute: event.absolute,
             alpha: event.alpha,
             beta: event.beta,
@@ -148,11 +148,11 @@ export abstract class SensorAPI {
         });
     }
 
-    static activateOndeviceorientationabsolute(): void {
-        window.addEventListener("deviceorientationabsolute", SensorAPI.#ondeviceorientationabsolute);
+    public static activateOndeviceorientationabsolute(): void {
+        window.addEventListener("deviceorientationabsolute", SensorAPI.ondeviceorientationabsolute);
     }
 
-    static deactivateOndeviceorientationabsolute(): void {
-        window.removeEventListener("deviceorientationabsolute", SensorAPI.#ondeviceorientationabsolute);
+    public static deactivateOndeviceorientationabsolute(): void {
+        window.removeEventListener("deviceorientationabsolute", SensorAPI.ondeviceorientationabsolute);
     }
 }

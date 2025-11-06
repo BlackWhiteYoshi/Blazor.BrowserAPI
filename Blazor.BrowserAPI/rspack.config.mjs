@@ -1,4 +1,4 @@
-import path from "path";
+﻿import path from "path";
 
 export default {
     mode: "production",
@@ -34,4 +34,4 @@ export default {
     watch: true
 };
 
-// npx rspack build
+// rspack build

@@ -1,13 +1,13 @@
-import { SensorAPI } from "../Sensor";
+﻿import { SensorAPI } from "../Sensor";
 
 export class AbsoluteOrientationSensorAPI extends SensorAPI {
-    declare sensor: AbsoluteOrientationSensor;
+    declare protected sensor: AbsoluteOrientationSensor;
 
-    constructor(absoluteOrientationSensor: AbsoluteOrientationSensor) {
+    private constructor(absoluteOrientationSensor: AbsoluteOrientationSensor) {
         super(absoluteOrientationSensor);
     }
 
-    static create(frequency: number, referenceFrame: "device" | "screen"): [AbsoluteOrientationSensorAPI] | [null] {
+    public static create(frequency: number, referenceFrame: "device" | "screen"): [AbsoluteOrientationSensorAPI] | [null] {
         if (!("AbsoluteOrientationSensor" in window))
             return [null];
 
@@ -21,12 +21,12 @@ export class AbsoluteOrientationSensorAPI extends SensorAPI {
     }
 
 
-    getQuaternion(): number[] {
+    public getQuaternion(): number[] {
         return this.sensor.quaternion ?? [0, 0, 0, 0];
     }
 
 
-    populateMatrix(): number[] {
+    public populateMatrix(): number[] {
         if (this.sensor.quaternion === null)
             return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
