@@ -9,10 +9,15 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Name = "IWindowInProcess")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 #pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class WindowBase(IModuleManager moduleManager) {
+public abstract class WindowBase(IModuleManager moduleManager) : IDisposable {
 #pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
     private protected IModuleManager moduleManager = moduleManager;
     private protected IJSObjectReference? windowJS;
+
+    /// <summary>
+    /// Releases the <see cref="EventTrigger"/> object used to trigger the events.
+    /// </summary>
+    public void Dispose() => _objectReferenceEventTrigger?.Dispose();
 
 
     /// <summary>

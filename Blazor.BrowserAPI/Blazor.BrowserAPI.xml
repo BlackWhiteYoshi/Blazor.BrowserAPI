@@ -1502,6 +1502,11 @@
             <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
             </summary>
         </member>
+        <member name="M:BrowserAPI.Implementation.DocumentBase.Dispose">
+            <summary>
+            Releases the <see cref="T:BrowserAPI.Implementation.DocumentBase.EventTrigger"/> object used to trigger the events.
+            </summary>
+        </member>
         <member name="P:BrowserAPI.Implementation.DocumentBase.NodeName">
             <summary>
             <para>The name of the current node as a string.</para>
@@ -14316,6 +14321,11 @@
             <param name="cancellationToken"></param>
             <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
         </member>
+        <member name="M:BrowserAPI.Implementation.SensorAPIBase.Dispose">
+            <summary>
+            Releases the <see cref="T:BrowserAPI.Implementation.SensorAPIBase.EventTrigger"/> object used to trigger the events.
+            </summary>
+        </member>
         <member name="E:BrowserAPI.Implementation.SensorAPIBase.OnDeviceMotion">
             <summary>
             <para>
@@ -17450,6 +17460,11 @@
             This event is cancelable and may bubble up to the Document and Window objects.
             </para>
             <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.WindowBase.Dispose">
+            <summary>
+            Releases the <see cref="T:BrowserAPI.Implementation.WindowBase.EventTrigger"/> object used to trigger the events.
             </summary>
         </member>
         <member name="T:BrowserAPI.Implementation.WindowBase.VoidCallback">
@@ -24240,6 +24255,11 @@
             <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
             </summary>
         </member>
+        <member name="M:BrowserAPI.IDocument.Dispose">
+            <summary>
+            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            </summary>
+        </member>
         <member name="P:BrowserAPI.IDocument.NodeName">
             <summary>
             <para>The name of the current node as a string.</para>
@@ -25414,6 +25434,11 @@
             HTML documents, served with the "text/html" content type, also implement the HTMLDocument interface,
             whereas XML and SVG documents implement the XMLDocument interface.
             </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IDocumentInProcess.Dispose">
+            <summary>
+            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
             </summary>
         </member>
         <member name="P:BrowserAPI.IDocumentInProcess.NodeName">
@@ -38999,6 +39024,11 @@
             <param name="cancellationToken"></param>
             <returns>If not available (not supported by the browser or any other error), it returns null.</returns>
         </member>
+        <member name="M:BrowserAPI.ISensorAPI.Dispose">
+            <summary>
+            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            </summary>
+        </member>
         <member name="E:BrowserAPI.ISensorAPI.OnDeviceMotion">
             <summary>
             <para>
@@ -39027,6 +39057,11 @@
         <member name="T:BrowserAPI.ISensorAPIInProcess">
             <summary>
             The Sensor APIs are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.ISensorAPIInProcess.Dispose">
+            <summary>
+            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
             </summary>
         </member>
         <member name="E:BrowserAPI.ISensorAPIInProcess.OnDeviceMotion">
@@ -41942,6 +41977,11 @@
             <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
             </summary>
         </member>
+        <member name="M:BrowserAPI.IWindow.Dispose">
+            <summary>
+            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            </summary>
+        </member>
         <member name="E:BrowserAPI.IWindow.OnError">
             <summary>
             <para>Is fired on a Window object when a resource failed to load or couldn't be used — for example if a script has an execution error.</para>
@@ -43006,6 +43046,11 @@
             That said, even in a tabbed browser, some properties and methods still apply to the overall window that contains the tab, such as <see cref="M:BrowserAPI.IWindowInProcess.ResizeTo(System.Int32,System.Int32)"/> and <see cref="P:BrowserAPI.IWindowInProcess.InnerHeight"/>.
             Generally, anything that can't reasonably pertain to a tab pertains to the window instead.
             </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IWindowInProcess.Dispose">
+            <summary>
+            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
             </summary>
         </member>
         <member name="E:BrowserAPI.IWindowInProcess.OnError">

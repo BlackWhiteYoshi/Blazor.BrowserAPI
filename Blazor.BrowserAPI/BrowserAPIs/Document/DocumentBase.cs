@@ -8,9 +8,14 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Name = "IDocument")]
 [AutoInterface(Namespace = "BrowserAPI", Name = "IDocumentInProcess")]
 #pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class DocumentBase(IModuleManager moduleManager) {
+public abstract class DocumentBase(IModuleManager moduleManager) : IDisposable {
 #pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
     private protected IModuleManager moduleManager = moduleManager;
+
+    /// <summary>
+    /// Releases the <see cref="EventTrigger"/> object used to trigger the events.
+    /// </summary>
+    public void Dispose() => _objectReferenceEventTrigger?.Dispose();
 
 
     /// <summary>
