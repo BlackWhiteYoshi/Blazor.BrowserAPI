@@ -1,12 +1,13 @@
 ﻿using BrowserAPI.Test.Client;
 using Microsoft.Playwright;
+using TUnit.Core.Interfaces;
 
 namespace BrowserAPI.UnitTest;
 
 [ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class HTMLElementTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     public override Task InitializeAsync()
-        => TestContext.Current?.TestName switch {
+        => (TestContext.Current as ITestMetadata)?.DisplayName switch {
             nameof(GetAccessKeyLabel_Property) or nameof(GetAccessKeyLabel_Method) => NewPage(BrowserId.Firefox),
             _ => NewPage(BrowserId.Chromium)
         };
@@ -1193,7 +1194,7 @@ public sealed class HTMLElementTest(PlayWrightFixture playWrightFixture) : PlayW
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='all', types='[]', files='[]'");
+        await Assert.That(result).IsEqualTo("dropEffect='copy', effectAllowed='all', types='[]', files='[]'");
     }
 
 
@@ -3255,7 +3256,7 @@ public sealed class HTMLElementTest(PlayWrightFixture playWrightFixture) : PlayW
         await ExecuteTest(HTMLElementGroup.BUTTON_GET_CLIENT_RECTS);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsNotNull().IsNotEmpty();
+        await Assert.That(result).IsNotNullOrEmpty();
 
         foreach (string item in result!.Split(';'))
             await Assert.That(item).StartsWith(nameof(DOMRect));

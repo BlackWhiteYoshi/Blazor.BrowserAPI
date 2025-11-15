@@ -45,7 +45,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// which also takes into account selection of a best or preferred media resource from a list provided in an HTMLSourceElement (which represents a &lt;source&gt; element).
     /// </para>
     /// </summary>
-    public ValueTask<string> Src => GetSrc(default);
+    public ValueTask<string> Src => GetSrc(CancellationToken.None);
 
     /// <inheritdoc cref="Src" />
     /// <param name="cancellationToken"></param>
@@ -62,7 +62,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <summary>
     /// A MediaStream representing the media to play or that has played in the current HTMLMediaElement, or null if not assigned.
     /// </summary>
-    public ValueTask<IMediaStream?> SrcObject => GetSrcObject(default);
+    public ValueTask<IMediaStream?> SrcObject => GetSrcObject(CancellationToken.None);
 
     /// <inheritdoc cref="SrcObject" />
     /// <param name="cancellationToken"></param>
@@ -86,7 +86,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <summary>
     /// A boolean that reflects the controls HTML attribute, indicating whether user interface items for controlling the resource should be displayed.
     /// </summary>
-    public ValueTask<bool> Controls => GetControls(default);
+    public ValueTask<bool> Controls => GetControls(CancellationToken.None);
 
     /// <inheritdoc cref="Controls" />
     /// <param name="cancellationToken"></param>
@@ -104,7 +104,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <para>A boolean value that reflects the autoplay HTML attribute, indicating whether playback should automatically begin as soon as enough media is available to do so without interruption.</para>
     /// <para>A media element whose source is a MediaStream and whose autoplay property is true will begin playback when it becomes active(that is, when MediaStream.active becomes true).</para>
     /// </summary>
-    public ValueTask<bool> Autoplay => GetAutoplay(default);
+    public ValueTask<bool> Autoplay => GetAutoplay(CancellationToken.None);
 
     /// <inheritdoc cref="Autoplay" />
     /// <param name="cancellationToken"></param>
@@ -121,7 +121,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <summary>
     /// A boolean that reflects the loop HTML attribute, which indicates whether the media element should start over when it reaches the end.
     /// </summary>
-    public ValueTask<bool> Loop => GetLoop(default);
+    public ValueTask<bool> Loop => GetLoop(CancellationToken.None);
 
     /// <inheritdoc cref="Loop" />
     /// <param name="cancellationToken"></param>
@@ -139,7 +139,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <para>A boolean that reflects the muted HTML attribute, which indicates whether the media element's audio output should be muted by default.</para>
     /// <para>This property has no dynamic effect. To mute and unmute the audio output, use the muted property.</para>
     /// </summary>
-    public ValueTask<bool> DefaultMuted => GetDefaultMuted(default);
+    public ValueTask<bool> DefaultMuted => GetDefaultMuted(CancellationToken.None);
 
     /// <inheritdoc cref="DefaultMuted" />
     /// <param name="cancellationToken"></param>
@@ -163,7 +163,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// - "": A synonym of the auto value.
     /// </para>
     /// </summary>
-    public ValueTask<string> Preload => GetPreload(default);
+    public ValueTask<string> Preload => GetPreload(CancellationToken.None);
 
     /// <inheritdoc cref="Preload" />
     /// <param name="cancellationToken"></param>
@@ -185,7 +185,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <para>Returns a string with the absolute URL of the chosen media resource.</para>
     /// <para>This could happen, for example, if the web server selects a media file based on the resolution of the user's display. The value is an empty string if the networkState property is EMPTY.</para>
     /// </summary>
-    public ValueTask<string> CurrentSrc => GetCurrentSrc(default);
+    public ValueTask<string> CurrentSrc => GetCurrentSrc(CancellationToken.None);
 
     /// <inheritdoc cref="CurrentSrc" />
     /// <param name="cancellationToken"></param>
@@ -200,7 +200,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// Setting this value seeks the media to the new time. The time is specified relative to the media's timeline.
     /// </para>
     /// </summary>
-    public ValueTask<double> CurrentTime => GetCurrentTime(default);
+    public ValueTask<double> CurrentTime => GetCurrentTime(CancellationToken.None);
 
     /// <inheritdoc cref="CurrentTime" />
     /// <param name="cancellationToken"></param>
@@ -221,7 +221,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// If the media is of indefinite length (such as streamed live media, a WebRTC call's media, or similar), the value is +Infinity.
     /// </para>
     /// </summary>
-    public ValueTask<double> Duration => GetDuration(default);
+    public ValueTask<double> Duration => GetDuration(CancellationToken.None);
 
     /// <inheritdoc cref="Duration" />
     /// <param name="cancellationToken"></param>
@@ -232,7 +232,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <summary>
     /// Returns a TimeRanges object that contains the time ranges that the user is able to seek to.
     /// </summary>
-    public ValueTask<TimeRange[]> Seekable => GetSeekable(default);
+    public ValueTask<TimeRange[]> Seekable => GetSeekable(CancellationToken.None);
 
     /// <inheritdoc cref="Seekable" />
     /// <param name="cancellationToken"></param>
@@ -244,7 +244,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <para>A boolean that determines whether audio is muted. true if the audio is muted and false otherwise.</para>
     /// <para>true means muted and false means not muted.</para>
     /// </summary>
-    public ValueTask<bool> Muted => GetMuted(default);
+    public ValueTask<bool> Muted => GetMuted(CancellationToken.None);
 
     /// <inheritdoc cref="Muted" />
     /// <param name="cancellationToken"></param>
@@ -261,7 +261,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <summary>
     /// A double indicating the audio volume, from 0.0 (silent) to 1.0 (loudest).
     /// </summary>
-    public ValueTask<double> Volume => GetVolume(default);
+    public ValueTask<double> Volume => GetVolume(CancellationToken.None);
 
     /// <inheritdoc cref="Volume" />
     /// <param name="cancellationToken"></param>
@@ -279,7 +279,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <para>Returns a boolean that indicates whether the media element is paused.</para>
     /// <para>true is paused and false is not paused.</para>
     /// </summary>
-    public ValueTask<bool> Paused => GetPaused(default);
+    public ValueTask<bool> Paused => GetPaused(CancellationToken.None);
 
     /// <inheritdoc cref="Paused" />
     /// <param name="cancellationToken"></param>
@@ -292,7 +292,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <para>true if the media contained in the element has finished playing.</para>
     /// <para>If the source of the media is a MediaStream, this value is true if the value of the stream's active property is false.</para>
     /// </summary>
-    public ValueTask<bool> Ended => GetEnded(default);
+    public ValueTask<bool> Ended => GetEnded(CancellationToken.None);
 
     /// <inheritdoc cref="Ended" />
     /// <param name="cancellationToken"></param>
@@ -303,7 +303,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <summary>
     /// Returns a boolean that indicates whether the media is in the process of seeking to a new position.
     /// </summary>
-    public ValueTask<bool> Seeking => GetSeeking(default);
+    public ValueTask<bool> Seeking => GetSeeking(CancellationToken.None);
 
     /// <inheritdoc cref="Seeking" />
     /// <param name="cancellationToken"></param>
@@ -322,7 +322,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// 4 = HAVE_ENOUGH_DATA: Enough data is available—and the download rate is high enough—that the media can be played through to the end without interruption.
     /// </para>
     /// </summary>
-    public ValueTask<int> ReadyState => GetReadyState(default);
+    public ValueTask<int> ReadyState => GetReadyState(CancellationToken.None);
 
     /// <inheritdoc cref="ReadyState" />
     /// <param name="cancellationToken"></param>
@@ -340,7 +340,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// 3 = NETWORK_NO_SOURCE: No HTMLMediaElement src found.
     /// </para>
     /// </summary>
-    public ValueTask<int> NetworkState => GetNetworkState(default);
+    public ValueTask<int> NetworkState => GetNetworkState(CancellationToken.None);
 
     /// <inheritdoc cref="NetworkState" />
     /// <param name="cancellationToken"></param>
@@ -351,7 +351,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <summary>
     /// Returns a TimeRanges object that indicates the ranges of the media source that the browser has buffered (if any) at the moment the buffered property is accessed.
     /// </summary>
-    public ValueTask<TimeRange[]> Buffered => GetBuffered(default);
+    public ValueTask<TimeRange[]> Buffered => GetBuffered(CancellationToken.None);
 
     /// <inheritdoc cref="Buffered" />
     /// <param name="cancellationToken"></param>
@@ -362,7 +362,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <summary>
     /// Returns a TimeRanges object that contains the ranges of the media source that the browser has played, if any.
     /// </summary>
-    public ValueTask<TimeRange[]> Played => GetPlayed(default);
+    public ValueTask<TimeRange[]> Played => GetPlayed(CancellationToken.None);
 
     /// <inheritdoc cref="Played" />
     /// <param name="cancellationToken"></param>
@@ -384,7 +384,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <para>The audio is muted when the fast forward or slow motion is outside a useful range(for example, Gecko mutes the sound outside the range 0.25 to 4.0).</para>
     /// <para>The pitch of the audio is corrected by default. You can disable pitch correction using the HTMLMediaElement.preservesPitch property.</para>
     /// </summary>
-    public ValueTask<double> PlaybackRate => GetPlaybackRate(default);
+    public ValueTask<double> PlaybackRate => GetPlaybackRate(CancellationToken.None);
 
     /// <inheritdoc cref="PlaybackRate" />
     /// <param name="cancellationToken"></param>
@@ -402,7 +402,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <para>A double indicating the default playback rate for the media.</para>
     /// <para>A double. 1.0 is "normal speed," values lower than 1.0 make the media play slower than normal, higher values make it play faster.</para>
     /// </summary>
-    public ValueTask<double> DefaultPlaybackRate => GetDefaultPlaybackRate(default);
+    public ValueTask<double> DefaultPlaybackRate => GetDefaultPlaybackRate(CancellationToken.None);
 
     /// <inheritdoc cref="DefaultPlaybackRate" />
     /// <param name="cancellationToken"></param>
@@ -431,7 +431,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// </para>
     /// <para>If the <i>crossOrigin</i> property is not specified, the resource is fetched without CORS (the <i>no-cors</i> mode and the <i>same-origin</i> credentials mode).</para>
     /// </summary>
-    public ValueTask<string> CrossOrigin => GetCrossOrigin(default);
+    public ValueTask<string> CrossOrigin => GetCrossOrigin(CancellationToken.None);
 
     /// <inheritdoc cref="CrossOrigin" />
     /// <param name="cancellationToken"></param>
@@ -451,7 +451,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// If set to false, the pitch will adjust to the speed of the audio.</para>
     /// <para>Default is true.</para>
     /// </summary>
-    public ValueTask<bool> PreservesPitch => GetPreservesPitch(default);
+    public ValueTask<bool> PreservesPitch => GetPreservesPitch(CancellationToken.None);
 
     /// <inheritdoc cref="PreservesPitch" />
     /// <param name="cancellationToken"></param>
@@ -469,7 +469,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <para>A boolean that sets or returns the remote playback state, indicating whether the media element is allowed to have a remote playback UI.</para>
     /// <para>false means "not disabled", which means "enabled"</para>
     /// </summary>
-    public ValueTask<bool> DisableRemotePlayback => GetDisableRemotePlayback(default);
+    public ValueTask<bool> DisableRemotePlayback => GetDisableRemotePlayback(CancellationToken.None);
 
     /// <inheritdoc cref="DisableRemotePlayback" />
     /// <param name="cancellationToken"></param>
@@ -491,7 +491,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <para>&lt;video&gt; elements only</para>
     /// <para>Reflects the width attribute of the &lt;video&gt; element, specifying the displayed width of the resource in CSS pixels.</para>
     /// </summary>
-    public ValueTask<int> Width => GetWidth(default);
+    public ValueTask<int> Width => GetWidth(CancellationToken.None);
 
     /// <inheritdoc cref="Width" />
     /// <param name="cancellationToken"></param>
@@ -509,7 +509,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <para>&lt;video&gt; elements only</para>
     /// <para>Reflects the height attribute of the &lt;video&gt; element, specifying the displayed height of the resource in CSS pixels.</para>
     /// </summary>
-    public ValueTask<int> Height => GetHeight(default);
+    public ValueTask<int> Height => GetHeight(CancellationToken.None);
 
     /// <inheritdoc cref="Height" />
     /// <param name="cancellationToken"></param>
@@ -529,7 +529,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <para>If the element's <see cref="ReadyState"/> is HTMLMediaElement.HAVE_NOTHING, then the value of this property is 0, because neither video nor poster frame size information is yet available.</para>
     /// <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/videoHeight#about_intrinsic_width_and_height">HTMLVideoElement.videoHeight > About intrinsic width and height</see> for more details.</para>
     /// </summary>
-    public ValueTask<int> VideoWidth => GetVideoWidth(default);
+    public ValueTask<int> VideoWidth => GetVideoWidth(CancellationToken.None);
 
     /// <inheritdoc cref="VideoWidth" />
     /// <param name="cancellationToken"></param>
@@ -543,7 +543,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <para>If the element's <see cref="ReadyState"/> is HTMLMediaElement.HAVE_NOTHING, then the value of this property is 0, because neither video nor poster frame size information is yet available.</para>
     /// <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/videoHeight#about_intrinsic_width_and_height">HTMLVideoElement.videoHeight > About intrinsic width and height</see> for more details.</para>
     /// </summary>
-    public ValueTask<int> VideoHeight => GetVideoHeight(default);
+    public ValueTask<int> VideoHeight => GetVideoHeight(CancellationToken.None);
 
     /// <inheritdoc cref="VideoHeight" />
     /// <param name="cancellationToken"></param>
@@ -556,7 +556,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <para>Reflects the URL for an image to be shown while no video data is available. If the property does not represent a valid URL, no poster frame will be shown.</para>
     /// <para>It reflects the poster attribute of the &lt;video&gt; element.</para>
     /// </summary>
-    public ValueTask<string> Poster => GetPoster(default);
+    public ValueTask<string> Poster => GetPoster(CancellationToken.None);
 
     /// <inheritdoc cref="Poster" />
     /// <param name="cancellationToken"></param>
@@ -578,7 +578,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// User configuration may change the eventual behavior—for example, Firefox users can change the media.videocontrols.picture-in-picture.respect-disablePictureInPicture setting to ignore the request to disable PiP.
     /// </para>
     /// </summary>
-    public ValueTask<bool> DisablePictureInPicture => GetDisablePictureInPicture(default);
+    public ValueTask<bool> DisablePictureInPicture => GetDisablePictureInPicture(CancellationToken.None);
 
     /// <inheritdoc cref="DisablePictureInPicture" />
     /// <param name="cancellationToken"></param>

@@ -72,7 +72,7 @@ public sealed partial class ServiceWorkerInProcessGroup : ComponentBase, IAsyncD
 
     public const string BUTTON_GET_READY_METHOD = "service-worker-container-inprocess-get-ready-method";
     private async Task GetReady_Method() {
-        using IServiceWorkerRegistrationInProcess? serviceWorkerRegistration = await ServiceWorkerContainer.GetReady(default);
+        using IServiceWorkerRegistrationInProcess? serviceWorkerRegistration = await ServiceWorkerContainer.GetReady(CancellationToken.None);
         labelOutput = (serviceWorkerRegistration is not null).ToString();
     }
 

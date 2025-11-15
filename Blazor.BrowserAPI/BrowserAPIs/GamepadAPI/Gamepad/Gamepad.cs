@@ -26,7 +26,7 @@ public sealed class Gamepad(IJSObjectReference gamepadJS) : GamepadBase(gamepadJ
     /// <para>An array representing the controls with axes present on the device (e.g., analog thumb sticks).</para>
     /// <para>Each entry in the array is a floating point value in the range -1.0 – 1.0, representing the axis position from the lowest value (-1.0) to the highest value (1.0).</para>
     /// </summary>
-    public ValueTask<double[]> Axes => GetAxes(default);
+    public ValueTask<double[]> Axes => GetAxes(CancellationToken.None);
 
     /// <inheritdoc cref="Axes" />
     /// <param name="cancellationToken"></param>
@@ -38,7 +38,7 @@ public sealed class Gamepad(IJSObjectReference gamepadJS) : GamepadBase(gamepadJ
     /// <para>An array of <see cref="GamepadButton"/> objects representing the buttons present on the device.</para>
     /// <para>Each entry in the array is 0 if the button is not pressed, and non-zero (typically 1.0) if the button is pressed.</para>
     /// </summary>
-    public ValueTask<GamepadButton[]> Buttons => GetButtons(default);
+    public ValueTask<GamepadButton[]> Buttons => GetButtons(CancellationToken.None);
 
     /// <inheritdoc cref="Buttons" />
     /// <param name="cancellationToken"></param>
@@ -51,7 +51,7 @@ public sealed class Gamepad(IJSObjectReference gamepadJS) : GamepadBase(gamepadJ
     /// <para>A boolean indicating whether the gamepad is still connected to the system.</para>
     /// <para>If the gamepad is connected, the value is true; if not, it is false.</para>
     /// </summary>
-    public ValueTask<bool> Connected => GetConnected(default);
+    public ValueTask<bool> Connected => GetConnected(CancellationToken.None);
 
     /// <inheritdoc cref="Connected" />
     /// <param name="cancellationToken"></param>
@@ -69,7 +69,7 @@ public sealed class Gamepad(IJSObjectReference gamepadJS) : GamepadBase(gamepadJ
     /// </para>
     /// <para>This information is intended to allow you to find a mapping for the controls on the device as well as display useful feedback to the user.</para>
     /// </summary>
-    public ValueTask<string> Id => GetId(default);
+    public ValueTask<string> Id => GetId(CancellationToken.None);
 
     /// <inheritdoc cref="Id" />
     /// <param name="cancellationToken"></param>
@@ -81,7 +81,7 @@ public sealed class Gamepad(IJSObjectReference gamepadJS) : GamepadBase(gamepadJ
     /// <para>An integer that is auto-incremented to be unique for each device currently connected to the system.</para>
     /// <para>This can be used to distinguish multiple controllers; a gamepad that is disconnected and reconnected will retain the same index.</para>
     /// </summary>
-    public ValueTask<int> Index => GetIndex(default);
+    public ValueTask<int> Index => GetIndex(CancellationToken.None);
 
     /// <inheritdoc cref="Index" />
     /// <param name="cancellationToken"></param>
@@ -97,7 +97,7 @@ public sealed class Gamepad(IJSObjectReference gamepadJS) : GamepadBase(gamepadJ
     /// - "xr-standard for the <see href="https://immersive-web.github.io/webxr-gamepads-module/#xr-standard-heading">standard XR gamepad</see>. See also <see href="https://developer.mozilla.org/en-US/docs/Web/API/XRInputSource/gamepad">XRInputSource.gamepad</see>.
     /// </para>
     /// </summary>
-    public ValueTask<string> Mapping => GetMapping(default);
+    public ValueTask<string> Mapping => GetMapping(CancellationToken.None);
 
     /// <inheritdoc cref="Mapping" />
     /// <param name="cancellationToken"></param>
@@ -113,7 +113,7 @@ public sealed class Gamepad(IJSObjectReference gamepadJS) : GamepadBase(gamepadJ
     /// meaning that they can be compared to determine the ordering of updates, as newer values will always be greater than or equal to older values.</para>
     /// <para>Note: This property is not currently supported anywhere.</para>
     /// </summary>
-    public ValueTask<double> Timestamp => GetTimestamp(default);
+    public ValueTask<double> Timestamp => GetTimestamp(CancellationToken.None);
 
     /// <inheritdoc cref="Timestamp" />
     /// <param name="cancellationToken"></param>
@@ -134,7 +134,7 @@ public sealed class Gamepad(IJSObjectReference gamepadJS) : GamepadBase(gamepadJ
     /// <remarks>Browser support: If the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Gamepad/vibrationActuator">vibrationActuator</see> property is not supported, an empty array is returned.
     /// If <see href="https://developer.mozilla.org/en-US/docs/Web/API/GamepadHapticActuator/effects">effects</see> property is not supported, the <see href="https://developer.mozilla.org/en-US/docs/Web/API/GamepadHapticActuator/type">type</see> property is used instead.</remarks>
     /// </summary>
-    public ValueTask<string[]> VibrationActuatorEffects => GetVibrationActuatorEffects(default);
+    public ValueTask<string[]> VibrationActuatorEffects => GetVibrationActuatorEffects(CancellationToken.None);
 
     /// <inheritdoc cref="VibrationActuatorEffects" />
     /// <param name="cancellationToken"></param>

@@ -124,7 +124,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_EMBEDS_METHOD = "document-get-embeds-method";
     private async Task GetEmbeds_Method() {
-        IHTMLElement[] embedElements = await Document.GetEmbeds(default);
+        IHTMLElement[] embedElements = await Document.GetEmbeds(CancellationToken.None);
         labelOutput = embedElements.Length.ToString();
 
         await embedElements.DisposeAsync();
@@ -141,7 +141,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_FORMS_METHOD = "document-get-forms-method";
     private async Task GetForms_Method() {
-        IHTMLElement[] formElements = await Document.GetForms(default);
+        IHTMLElement[] formElements = await Document.GetForms(CancellationToken.None);
         labelOutput = formElements.Length.ToString();
 
         await formElements.DisposeAsync();
@@ -158,7 +158,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_IMAGES_METHOD = "document-get-images-method";
     private async Task GetImages_Method() {
-        IHTMLElement[] imageElements = await Document.GetImages(default);
+        IHTMLElement[] imageElements = await Document.GetImages(CancellationToken.None);
         labelOutput = imageElements.Length.ToString();
 
         await imageElements.DisposeAsync();
@@ -175,7 +175,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_LINKS_METHOD = "document-get-links-method";
     private async Task GetLinks_Method() {
-        IHTMLElement[] linkElements = await Document.GetLinks(default);
+        IHTMLElement[] linkElements = await Document.GetLinks(CancellationToken.None);
         labelOutput = linkElements.Length.ToString();
 
         await linkElements.DisposeAsync();
@@ -192,7 +192,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_PLUGINS_METHOD = "document-get-plugins-method";
     private async Task GetPlugins_Method() {
-        IHTMLElement[] pluginElements = await Document.GetPlugins(default);
+        IHTMLElement[] pluginElements = await Document.GetPlugins(CancellationToken.None);
         labelOutput = pluginElements.Length.ToString();
 
         await pluginElements.DisposeAsync();
@@ -209,7 +209,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_SCRIPTS_METHOD = "document-get-scripts-method";
     private async Task GetScripts_Method() {
-        IHTMLElement[] scriptElements = await Document.GetScripts(default);
+        IHTMLElement[] scriptElements = await Document.GetScripts(CancellationToken.None);
         labelOutput = scriptElements.Length.ToString();
 
         await scriptElements.DisposeAsync();
@@ -226,7 +226,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_ACTIVE_ELEMENT_METHOD = "document-get-active-element-method";
     private async Task GetActiveElement_Method() {
-        await using IHTMLElement? activeElement = await Document.GetActiveElement(default);
+        await using IHTMLElement? activeElement = await Document.GetActiveElement(CancellationToken.None);
         labelOutput = (activeElement is not null).ToString();
     }
 
@@ -239,7 +239,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_CURRENT_SCRIPT_METHOD = "document-get-current-script-method";
     private async Task GetCurrentScript_Method() {
-        await using IHTMLElement? currentScript = await Document.GetCurrentScript(default);
+        await using IHTMLElement? currentScript = await Document.GetCurrentScript(CancellationToken.None);
         labelOutput = (currentScript is not null).ToString();
     }
 
@@ -252,7 +252,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_FULLSCREEN_ELEMENT_METHOD = "document-get-fullscreen-element-method";
     private async Task GetFullscreenElement_Method() {
-        await using IHTMLElement? fullscreenElement = await Document.GetFullscreenElement(default);
+        await using IHTMLElement? fullscreenElement = await Document.GetFullscreenElement(CancellationToken.None);
         labelOutput = (fullscreenElement is not null).ToString();
     }
 
@@ -265,7 +265,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_PICTURE_IN_PICTURE_ELEMENT_METHOD = "document-get-picture-in-picture-element-method";
     private async Task GetPictureInPictureElement_Method() {
-        await using IHTMLElement? pictureInPicture = await Document.GetPictureInPictureElement(default);
+        await using IHTMLElement? pictureInPicture = await Document.GetPictureInPictureElement(CancellationToken.None);
         labelOutput = (pictureInPicture is not null).ToString();
     }
 
@@ -278,7 +278,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_POINTER_LOCK_ELEMENT_METHOD = "document-get-pointer-lock-element-method";
     private async Task GetPointerLockElement_Method() {
-        await using IHTMLElement? pointerLockElement = await Document.GetPointerLockElement(default);
+        await using IHTMLElement? pointerLockElement = await Document.GetPointerLockElement(CancellationToken.None);
         labelOutput = (pointerLockElement is not null).ToString();
     }
 
@@ -293,7 +293,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_CHARACTER_SET_METHOD = "document-get-character-set-method";
     private async Task GetCharacterSet_Method() {
-        string characterSet = await Document.GetCharacterSet(default);
+        string characterSet = await Document.GetCharacterSet(CancellationToken.None);
         labelOutput = characterSet;
     }
 
@@ -306,7 +306,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_COMPAT_MODE_METHOD = "document-get-compat-mode-method";
     private async Task GetCompatMode_Method() {
-        string compatMode = await Document.GetCompatMode(default);
+        string compatMode = await Document.GetCompatMode(CancellationToken.None);
         labelOutput = compatMode;
     }
 
@@ -319,7 +319,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_CONTENT_TYPE_METHOD = "document-get-content-type-method";
     private async Task GetContentType_Method() {
-        string contentType = await Document.GetContentType(default);
+        string contentType = await Document.GetContentType(CancellationToken.None);
         labelOutput = contentType;
     }
 
@@ -332,7 +332,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_DESIGN_MODE_METHOD = "document-get-design-mode-method";
     private async Task GetDesignMode_Method() {
-        string designMode = await Document.GetDesignMode(default);
+        string designMode = await Document.GetDesignMode(CancellationToken.None);
         labelOutput = designMode;
     }
 
@@ -350,7 +350,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_DIR_METHOD = "document-get-dir-method";
     private async Task GetDir_Method() {
-        string dir = await Document.GetDir(default);
+        string dir = await Document.GetDir(CancellationToken.None);
         labelOutput = dir;
     }
 
@@ -368,7 +368,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_DOCUMENT_URI_METHOD = "document-get-document-uri-method";
     private async Task GetDocumentURI_Method() {
-        string documentURI = await Document.GetDocumentURI(default);
+        string documentURI = await Document.GetDocumentURI(CancellationToken.None);
         labelOutput = documentURI;
     }
 
@@ -381,7 +381,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_FULLSCREEN_ENABLED_METHOD = "document-get-fullscreen-enabled-method";
     private async Task GetFullscreenEnabled_Method() {
-        bool fullscreenEnabled = await Document.GetFullscreenEnabled(default);
+        bool fullscreenEnabled = await Document.GetFullscreenEnabled(CancellationToken.None);
         labelOutput = fullscreenEnabled.ToString();
     }
 
@@ -394,7 +394,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_HIDDEN_METHOD = "document-get-hidden-method";
     private async Task GetHidden_Method() {
-        bool hidden = await Document.GetHidden(default);
+        bool hidden = await Document.GetHidden(CancellationToken.None);
         labelOutput = hidden.ToString();
     }
 
@@ -407,7 +407,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_LAST_MODIFIED_METHOD = "document-get-last-modified-method";
     private async Task GetLastModified_Method() {
-        string lastModified = await Document.GetLastModified(default);
+        string lastModified = await Document.GetLastModified(CancellationToken.None);
         labelOutput = lastModified;
     }
 
@@ -420,7 +420,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_PICTURE_IN_PICTURE_ENABLED_METHOD = "document-get-picture-in-picture-enabled-method";
     private async Task GetPictureInPictureEnabled_Method() {
-        bool pictureInPictureEnabled = await Document.GetPictureInPictureEnabled(default);
+        bool pictureInPictureEnabled = await Document.GetPictureInPictureEnabled(CancellationToken.None);
         labelOutput = pictureInPictureEnabled.ToString();
     }
 
@@ -433,7 +433,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_READY_STATE_METHOD = "document-get-ready-state-method";
     private async Task GetReadyState_Method() {
-        string readyState = await Document.GetReadyState(default);
+        string readyState = await Document.GetReadyState(CancellationToken.None);
         labelOutput = readyState;
     }
 
@@ -446,7 +446,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_REFERRER_METHOD = "document-get-referrer-method";
     private async Task GetReferrer_Method() {
-        string referrer = await Document.GetReferrer(default);
+        string referrer = await Document.GetReferrer(CancellationToken.None);
         labelOutput = referrer is not "" ? referrer : TEST_NO_REFFERER;
     }
 
@@ -459,7 +459,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_TITLE_METHOD = "document-get-title-method";
     private async Task GetTitle_Method() {
-        string title = await Document.GetTitle(default);
+        string title = await Document.GetTitle(CancellationToken.None);
         labelOutput = title;
     }
 
@@ -477,7 +477,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_URL_METHOD = "document-get-url-method";
     private async Task GetURL_Method() {
-        string url = await Document.GetURL(default);
+        string url = await Document.GetURL(CancellationToken.None);
         labelOutput = url;
     }
 
@@ -490,7 +490,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_VISIBILITY_STATE_METHOD = "document-get-visibility-state-method";
     private async Task GetVisibilityState_Method() {
-        string visibilityState = await Document.GetVisibilityState(default);
+        string visibilityState = await Document.GetVisibilityState(CancellationToken.None);
         labelOutput = visibilityState;
     }
 
@@ -505,7 +505,7 @@ public sealed partial class DocumentGroup : ComponentBase {
 
     public const string BUTTON_GET_BASE_URI_METHOD = "document-get-base-uri-method";
     private async Task GetBaseURI_Method() {
-        string baseURI = await Document.GetBaseURI(default);
+        string baseURI = await Document.GetBaseURI(CancellationToken.None);
         labelOutput = baseURI;
     }
 

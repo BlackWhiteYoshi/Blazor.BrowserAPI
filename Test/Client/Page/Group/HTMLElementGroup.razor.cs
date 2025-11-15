@@ -175,7 +175,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_ACCESS_KEY_METHOD = "htmlelement-get-access-key-method";
     private async Task GetAccessKey_Method() {
-        string accessKey = await HTMLElement.GetAccessKey(default);
+        string accessKey = await HTMLElement.GetAccessKey(CancellationToken.None);
         labelOutput = accessKey;
     }
 
@@ -193,7 +193,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_ACCESS_KEY_LABEL_METHOD = "htmlelement-get-access-key-label-method";
     private async Task GetAccessKeyLabel_Method() {
-        string accessKeyLabel = await HTMLElement.GetAccessKeyLabel(default);
+        string accessKeyLabel = await HTMLElement.GetAccessKeyLabel(CancellationToken.None);
         labelOutput = accessKeyLabel;
     }
 
@@ -206,7 +206,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_ATTRIBUTE_STYLE_MAP_METHOD = "htmlelement-get-attribute-style-map-method";
     private async Task GetAttributeStyleMap_Method() {
-        Dictionary<string, string> attributeStyleMap = await HTMLElement.GetAttributeStyleMap(default);
+        Dictionary<string, string> attributeStyleMap = await HTMLElement.GetAttributeStyleMap(CancellationToken.None);
         labelOutput = string.Join(", ", attributeStyleMap.Select(pair => $"{pair.Key} = {pair.Value}"));
     }
 
@@ -229,7 +229,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_AUTOCAPITALIZE_METHOD = "htmlelement-get-autocapitalize-method";
     private async Task GetAutocapitalize_Method() {
-        string autocapitalize = await HTMLElement.GetAutocapitalize(default);
+        string autocapitalize = await HTMLElement.GetAutocapitalize(CancellationToken.None);
         labelOutput = autocapitalize;
     }
 
@@ -247,7 +247,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_AUTOFOCUS_METHOD = "htmlelement-get-autofocus-method";
     private async Task GetAutofocus_Method() {
-        bool autofocus = await HTMLElement.GetAutofocus(default);
+        bool autofocus = await HTMLElement.GetAutofocus(CancellationToken.None);
         labelOutput = autofocus.ToString();
     }
 
@@ -265,7 +265,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_CONTENT_EDITABLE_METHOD = "htmlelement-get-content-editable-method";
     private async Task GetContentEditable_Method() {
-        string contentEditable = await HTMLElement.GetContentEditable(default);
+        string contentEditable = await HTMLElement.GetContentEditable(CancellationToken.None);
         labelOutput = contentEditable;
     }
 
@@ -283,7 +283,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_DATASET_METHOD = "htmlelement-get-dataset-method";
     private async Task GetDataset_Method() {
-        Dictionary<string, string> dataset = await HTMLElement.GetDataset(default);
+        Dictionary<string, string> dataset = await HTMLElement.GetDataset(CancellationToken.None);
         labelOutput = string.Join(", ", dataset.Select(pair => $"{pair.Key} = {pair.Value}"));
     }
 
@@ -306,7 +306,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_DIR_METHOD = "htmlelement-get-dir-method";
     private async Task GetDir_Method() {
-        string dir = await HTMLElement.GetDir(default);
+        string dir = await HTMLElement.GetDir(CancellationToken.None);
         labelOutput = dir;
     }
 
@@ -324,7 +324,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_DRAGGABLE_METHOD = "htmlelement-get-draggable-method";
     private async Task GetDraggable_Method() {
-        bool draggable = await HTMLElement.GetDraggable(default);
+        bool draggable = await HTMLElement.GetDraggable(CancellationToken.None);
         labelOutput = draggable.ToString();
     }
 
@@ -342,7 +342,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_ENTER_KEY_HINT_METHOD = "htmlelement-get-enter-key-hint-method";
     private async Task GetEnterKeyHint_Method() {
-        string enterKeyHint = await HTMLElement.GetEnterKeyHint(default);
+        string enterKeyHint = await HTMLElement.GetEnterKeyHint(CancellationToken.None);
         labelOutput = enterKeyHint;
     }
 
@@ -360,7 +360,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_HIDDEN_METHOD = "htmlelement-get-hidden-method";
     private async Task GetHidden_Method() {
-        bool hidden = await HTMLElement.GetHidden(default);
+        bool hidden = await HTMLElement.GetHidden(CancellationToken.None);
         labelOutput = hidden.ToString();
     }
 
@@ -378,7 +378,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_INERT_METHOD = "htmlelement-get-inert-method";
     private async Task GetInert_Method() {
-        bool inert = await HTMLElement.GetInert(default);
+        bool inert = await HTMLElement.GetInert(CancellationToken.None);
         labelOutput = inert.ToString();
     }
 
@@ -396,7 +396,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_INNERTEXT_METHOD = "htmlelement-get-innertext-method";
     private async Task GetInnerText_Method() {
-        string innerText = await HTMLElement.GetInnerText(default);
+        string innerText = await HTMLElement.GetInnerText(CancellationToken.None);
         labelOutput = innerText;
     }
 
@@ -414,7 +414,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_INPUT_MODE_METHOD = "htmlelement-get-input-mode-method";
     private async Task GetInputMode_Method() {
-        string inputMode = await HTMLElement.GetInputMode(default);
+        string inputMode = await HTMLElement.GetInputMode(CancellationToken.None);
         labelOutput = inputMode;
     }
 
@@ -432,7 +432,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_IS_CONTENT_EDITABLE_METHOD = "htmlelement-get-is-content-editable-method";
     private async Task GetIsContentEditable_Method() {
-        bool isContentEditable = await HTMLElement.GetIsContentEditable(default);
+        bool isContentEditable = await HTMLElement.GetIsContentEditable(CancellationToken.None);
         labelOutput = isContentEditable.ToString();
     }
 
@@ -445,7 +445,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_LANG_METHOD = "htmlelement-get-lang-method";
     private async Task GetLang_Method() {
-        string lang = await HTMLElement.GetLang(default);
+        string lang = await HTMLElement.GetLang(CancellationToken.None);
         labelOutput = lang;
     }
 
@@ -463,7 +463,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_NONCE_METHOD = "htmlelement-get-nonce-method";
     private async Task GetNonce_Method() {
-        string nonce = await HTMLElement.GetNonce(default);
+        string nonce = await HTMLElement.GetNonce(CancellationToken.None);
         labelOutput = nonce;
     }
 
@@ -481,7 +481,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_OFFSETWIDTH_METHOD = "htmlelement-get-offsetwidth-method";
     private async Task GetOffsetWidth_Method() {
-        int offsetWidth = await HTMLElement.GetOffsetWidth(default);
+        int offsetWidth = await HTMLElement.GetOffsetWidth(CancellationToken.None);
         labelOutput = offsetWidth.ToString();
     }
 
@@ -493,7 +493,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_OFFSETHEIGHT_METHOD = "htmlelement-get-offsetheight-method";
     private async Task GetOffsetHeight_Method() {
-        int offsetHeight = await HTMLElement.GetOffsetHeight(default);
+        int offsetHeight = await HTMLElement.GetOffsetHeight(CancellationToken.None);
         labelOutput = offsetHeight.ToString();
     }
 
@@ -505,7 +505,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_OFFSETLEFT_METHOD = "htmlelement-get-offsetleft-method";
     private async Task GetOffsetLeft_Method() {
-        int offsetLeft = await HTMLElement.GetOffsetLeft(default);
+        int offsetLeft = await HTMLElement.GetOffsetLeft(CancellationToken.None);
         labelOutput = offsetLeft.ToString();
     }
 
@@ -517,7 +517,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_OFFSETTOP_METHOD = "htmlelement-get-offsettop-method";
     private async Task GetOffsetTop_Method() {
-        int offsetTop = await HTMLElement.GetOffsetTop(default);
+        int offsetTop = await HTMLElement.GetOffsetTop(CancellationToken.None);
         labelOutput = offsetTop.ToString();
     }
 
@@ -529,7 +529,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_OFFSETPARENT_METHOD = "htmlelement-get-offsetparent-method";
     private async Task GetOffsetParent_Method() {
-        await using IHTMLElement? offsetParent = await HTMLElement.GetOffsetParent(default);
+        await using IHTMLElement? offsetParent = await HTMLElement.GetOffsetParent(CancellationToken.None);
         labelOutput = (offsetParent is not null).ToString();
     }
 
@@ -542,7 +542,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_OUTERTEXT_METHOD = "htmlelement-get-outertext-method";
     private async Task GetOuterText_Method() {
-        string outerText = await HTMLElement.GetOuterText(default);
+        string outerText = await HTMLElement.GetOuterText(CancellationToken.None);
         labelOutput = outerText;
     }
 
@@ -560,7 +560,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_POPOVER_METHOD = "htmlelement-get-popover-method";
     private async Task GetPopover_Method() {
-        string? popover = await HTMLElement.GetPopover(default);
+        string? popover = await HTMLElement.GetPopover(CancellationToken.None);
         labelOutput = popover ?? "(empty)";
     }
 
@@ -578,7 +578,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_SPELLCHECK_METHOD = "htmlelement-get-spellcheck-method";
     private async Task GetSpellcheck_Method() {
-        bool spellcheck = await HTMLElement.GetSpellcheck(default);
+        bool spellcheck = await HTMLElement.GetSpellcheck(CancellationToken.None);
         labelOutput = spellcheck.ToString();
     }
 
@@ -596,7 +596,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_STYLE_METHOD = "htmlelement-get-style-method";
     private async Task GetStyle_Method() {
-        string style = await HTMLElement.GetStyle(default);
+        string style = await HTMLElement.GetStyle(CancellationToken.None);
         labelOutput = style;
     }
 
@@ -614,7 +614,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_TAB_INDEX_METHOD = "htmlelement-get-tab-index-method";
     private async Task GetTabIndex_Method() {
-        long tabIndex = await HTMLElement.GetTabIndex(default);
+        long tabIndex = await HTMLElement.GetTabIndex(CancellationToken.None);
         labelOutput = tabIndex.ToString();
     }
 
@@ -632,7 +632,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_TITLE_METHOD = "htmlelement-get-title-method";
     private async Task GetTitle_Method() {
-        string title = await HTMLElement.GetTitle(default);
+        string title = await HTMLElement.GetTitle(CancellationToken.None);
         labelOutput = title;
     }
 
@@ -650,7 +650,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_TRANSLATE_METHOD = "htmlelement-get-translate-method";
     private async Task GetTranslate_Method() {
-        bool translate = await HTMLElement.GetTranslate(default);
+        bool translate = await HTMLElement.GetTranslate(CancellationToken.None);
         labelOutput = translate.ToString();
     }
 
@@ -670,7 +670,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_HASFOCUS_METHOD = "htmlelement-get-hasfocus-method";
     private async Task GetHasFocus_Method() {
-        bool hasFocus = await HTMLElement.GetHasFocus(default);
+        bool hasFocus = await HTMLElement.GetHasFocus(CancellationToken.None);
         labelOutput = hasFocus.ToString();
     }
 
@@ -953,7 +953,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_ATTRIBUTES_METHOD = "htmlelement-get-attributes-method";
     private async Task GetAttributes_Method() {
-        Dictionary<string, string> attributes = await HTMLElement.GetAttributes(default);
+        Dictionary<string, string> attributes = await HTMLElement.GetAttributes(CancellationToken.None);
         labelOutput = JsonSerializer.Serialize(attributes);
     }
 
@@ -966,7 +966,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_CLASS_LIST_METHOD = "htmlelement-get-class-list-method";
     private async Task GetClassList_Method() {
-        string[] classList = await HTMLElement.GetClassList(default);
+        string[] classList = await HTMLElement.GetClassList(CancellationToken.None);
         labelOutput = string.Join(',', classList);
     }
 
@@ -979,7 +979,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_CLASS_NAME_METHOD = "htmlelement-get-class-name-method";
     private async Task GetClassName_Method() {
-        string className = await HTMLElement.GetClassName(default);
+        string className = await HTMLElement.GetClassName(CancellationToken.None);
         labelOutput = className;
     }
 
@@ -997,7 +997,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_CLIENT_WIDTH_METHOD = "htmlelement-get-client-width-method";
     private async Task GetClientWidth_Method() {
-        int clientWidth = await HTMLElement.GetClientWidth(default);
+        int clientWidth = await HTMLElement.GetClientWidth(CancellationToken.None);
         labelOutput = clientWidth.ToString();
     }
 
@@ -1009,7 +1009,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_CLIENT_HEIGHT_METHOD = "htmlelement-get-client-height-method";
     private async Task GetClientHeight_Method() {
-        int clientHeight = await HTMLElement.GetClientHeight(default);
+        int clientHeight = await HTMLElement.GetClientHeight(CancellationToken.None);
         labelOutput = clientHeight.ToString();
     }
 
@@ -1021,7 +1021,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_CLIENT_LEFT_METHOD = "htmlelement-get-client-left-method";
     private async Task GetClientLeft_Method() {
-        int clientLeft = await HTMLElement.GetClientLeft(default);
+        int clientLeft = await HTMLElement.GetClientLeft(CancellationToken.None);
         labelOutput = clientLeft.ToString();
     }
 
@@ -1033,7 +1033,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_CLIENT_TOP_METHOD = "htmlelement-get-client-top-method";
     private async Task GetClientTop_Method() {
-        int clientTop = await HTMLElement.GetClientTop(default);
+        int clientTop = await HTMLElement.GetClientTop(CancellationToken.None);
         labelOutput = clientTop.ToString();
     }
 
@@ -1046,7 +1046,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_CURRENT_CSS_ZOOM_METHOD = "htmlelement-get-current-css-zoom-method";
     private async Task GetCurrentCSSZoom_Method() {
-        double currentCSSZoom = await HTMLElement.GetCurrentCSSZoom(default);
+        double currentCSSZoom = await HTMLElement.GetCurrentCSSZoom(CancellationToken.None);
         labelOutput = currentCSSZoom.ToString();
     }
 
@@ -1059,7 +1059,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_ID_METHOD = "htmlelement-get-id-method";
     private async Task GetId_Method() {
-        string id = await HTMLElement.GetId(default);
+        string id = await HTMLElement.GetId(CancellationToken.None);
         labelOutput = id;
     }
 
@@ -1077,7 +1077,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_IS_CONNECTED_METHOD = "htmlelement-get-is-connected-method";
     private async Task GetIsConnected_Method() {
-        bool isConnected = await HTMLElement.GetIsConnected(default);
+        bool isConnected = await HTMLElement.GetIsConnected(CancellationToken.None);
         labelOutput = isConnected.ToString();
     }
 
@@ -1090,7 +1090,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_INNER_HTML_METHOD = "htmlelement-get-inner-html-method";
     private async Task GetInnerHTML_Method() {
-        string innerHTML = await HTMLElement.GetInnerHTML(default);
+        string innerHTML = await HTMLElement.GetInnerHTML(CancellationToken.None);
         labelOutput = innerHTML;
     }
 
@@ -1108,7 +1108,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_OUTER_HTML_METHOD = "htmlelement-get-outer-html-method";
     private async Task GetOuterHTML_Method() {
-        string outerHTML = await HTMLElement.GetOuterHTML(default);
+        string outerHTML = await HTMLElement.GetOuterHTML(CancellationToken.None);
         labelOutput = outerHTML;
     }
 
@@ -1126,7 +1126,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_PART_METHOD = "htmlelement-get-part-method";
     private async Task GetPart_Method() {
-        string[] part = await HTMLElement.GetPart(default);
+        string[] part = await HTMLElement.GetPart(CancellationToken.None);
         labelOutput = string.Join(',', part);
     }
 
@@ -1139,7 +1139,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_SCROLL_WIDTH_METHOD = "htmlelement-get-scroll-width-method";
     private async Task GetScrollWidth_Method() {
-        int ScrollWidth = await HTMLElement.GetScrollWidth(default);
+        int ScrollWidth = await HTMLElement.GetScrollWidth(CancellationToken.None);
         labelOutput = ScrollWidth.ToString();
     }
 
@@ -1151,7 +1151,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_SCROLL_HEIGHT_METHOD = "htmlelement-get-scroll-height-method";
     private async Task GetScrollHeight_Method() {
-        int ScrollHeight = await HTMLElement.GetScrollHeight(default);
+        int ScrollHeight = await HTMLElement.GetScrollHeight(CancellationToken.None);
         labelOutput = ScrollHeight.ToString();
     }
 
@@ -1163,7 +1163,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_SCROLL_LEFT_METHOD = "htmlelement-get-scroll-left-method";
     private async Task GetScrollLeft_Method() {
-        int ScrollLeft = await HTMLElement.GetScrollLeft(default);
+        int ScrollLeft = await HTMLElement.GetScrollLeft(CancellationToken.None);
         labelOutput = ScrollLeft.ToString();
     }
 
@@ -1180,7 +1180,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_SCROLL_TOP_METHOD = "htmlelement-get-scroll-top-method";
     private async Task GetScrollTop_Method() {
-        int ScrollTop = await HTMLElement.GetScrollTop(default);
+        int ScrollTop = await HTMLElement.GetScrollTop(CancellationToken.None);
         labelOutput = ScrollTop.ToString();
     }
 
@@ -1198,7 +1198,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_SLOT_METHOD = "htmlelement-get-slot-method";
     private async Task GetSlot_Method() {
-        string slot = await HTMLElement.GetSlot(default);
+        string slot = await HTMLElement.GetSlot(CancellationToken.None);
         labelOutput = slot;
     }
 
@@ -1216,7 +1216,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_TEXT_CONTENT_METHOD = "htmlelement-get-text-content-method";
     private async Task GetTextContent_Method() {
-        string textContent = await HTMLElement.GetTextContent(default);
+        string textContent = await HTMLElement.GetTextContent(CancellationToken.None);
         labelOutput = textContent;
     }
 
@@ -1234,7 +1234,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_LOCAL_NAME_METHOD = "htmlelement-get-local-name-method";
     private async Task GetLocalName_Method() {
-        string localName = await HTMLElement.GetLocalName(default);
+        string localName = await HTMLElement.GetLocalName(CancellationToken.None);
         labelOutput = localName;
     }
 
@@ -1246,7 +1246,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_NAMESPACE_URI_METHOD = "htmlelement-get-namespace-uri-method";
     private async Task GetNamespaceURI_Method() {
-        string? namespaceURI = await HTMLElement.GetNamespaceURI(default);
+        string? namespaceURI = await HTMLElement.GetNamespaceURI(CancellationToken.None);
         labelOutput = namespaceURI ?? "empty namespace";
     }
 
@@ -1258,7 +1258,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_PREFIX_METHOD = "htmlelement-get-prefix-method";
     private async Task GetPrefix_Method() {
-        string? prefix = await HTMLElement.GetPrefix(default);
+        string? prefix = await HTMLElement.GetPrefix(CancellationToken.None);
         labelOutput = prefix ?? "no prefix";
     }
 
@@ -1270,7 +1270,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_BASE_URI_METHOD = "htmlelement-get-base-uri-method";
     private async Task GetBaseURI_Method() {
-        string baseURI = await HTMLElement.GetBaseURI(default);
+        string baseURI = await HTMLElement.GetBaseURI(CancellationToken.None);
         labelOutput = baseURI;
     }
 
@@ -1282,7 +1282,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_TAG_NAME_METHOD = "htmlelement-get-tag-name-method";
     private async Task GetTagName_Method() {
-        string tagName = await HTMLElement.GetTagName(default);
+        string tagName = await HTMLElement.GetTagName(CancellationToken.None);
         labelOutput = tagName;
     }
 
@@ -1294,7 +1294,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_NODE_NAME_METHOD = "htmlelement-get-node-name-method";
     private async Task GetNodeName_Method() {
-        string nodeName = await HTMLElement.GetNodeName(default);
+        string nodeName = await HTMLElement.GetNodeName(CancellationToken.None);
         labelOutput = nodeName;
     }
 
@@ -1306,7 +1306,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_NODE_TYPE_METHOD = "htmlelement-get-node-type-method";
     private async Task GetNodeType_Method() {
-        int nodeType = await HTMLElement.GetNodeType(default);
+        int nodeType = await HTMLElement.GetNodeType(CancellationToken.None);
         labelOutput = nodeType.ToString();
     }
 
@@ -1321,7 +1321,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_CHILD_ELEMENT_COUNT_METHOD = "htmlelement-get-child-element-count-method";
     private async Task GetChildElementCount_Method() {
-        int childElementCount = await HTMLElement.GetChildElementCount(default);
+        int childElementCount = await HTMLElement.GetChildElementCount(CancellationToken.None);
         labelOutput = childElementCount.ToString();
     }
 
@@ -1336,7 +1336,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_CHILDREN_METHOD = "htmlelement-get-children-method";
     private async Task GetChildren_Method() {
-        IHTMLElement[] children = await HTMLElement.GetChildren(default);
+        IHTMLElement[] children = await HTMLElement.GetChildren(CancellationToken.None);
         labelOutput = children.Length.ToString();
 
         await children.DisposeAsync();
@@ -1351,7 +1351,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_FIRST_ELEMENT_CHILD_METHOD = "htmlelement-get-first-element-child-method";
     private async Task GetFirstElementChild_Method() {
-        await using IHTMLElement? child = await HTMLElement.GetFirstElementChild(default);
+        await using IHTMLElement? child = await HTMLElement.GetFirstElementChild(CancellationToken.None);
         labelOutput = (child is not null).ToString();
     }
 
@@ -1364,7 +1364,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_LAST_ELEMENT_CHILD_METHOD = "htmlelement-get-last-element-child-method";
     private async Task GetLastElementChild_Method() {
-        await using IHTMLElement? child = await HTMLElement.GetLastElementChild(default);
+        await using IHTMLElement? child = await HTMLElement.GetLastElementChild(CancellationToken.None);
         labelOutput = (child is not null).ToString();
     }
 
@@ -1377,7 +1377,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_PREVIOUS_ELEMENT_SIBLING_METHOD = "htmlelement-get-previous-element-sibling-method";
     private async Task GetPreviousElementSibling_Method() {
-        await using IHTMLElement? sibling = await HTMLElement.GetPreviousElementSibling(default);
+        await using IHTMLElement? sibling = await HTMLElement.GetPreviousElementSibling(CancellationToken.None);
         labelOutput = (sibling is not null).ToString();
     }
 
@@ -1390,7 +1390,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_NEXT_ELEMENT_SIBLING_METHOD = "htmlelement-get-next-element-sibling-method";
     private async Task GetNextElementSibling_Method() {
-        await using IHTMLElement? sibling = await HTMLElement.GetNextElementSibling(default);
+        await using IHTMLElement? sibling = await HTMLElement.GetNextElementSibling(CancellationToken.None);
         labelOutput = (sibling is not null).ToString();
     }
 
@@ -1403,7 +1403,7 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_PARENT_ELEMENT_METHOD = "htmlelement-get-parent-element-method";
     private async Task GetParentElement_Method() {
-        await using IHTMLElement? parent = await HTMLElement.GetParentElement(default);
+        await using IHTMLElement? parent = await HTMLElement.GetParentElement(CancellationToken.None);
         labelOutput = (parent is not null).ToString();
     }
 

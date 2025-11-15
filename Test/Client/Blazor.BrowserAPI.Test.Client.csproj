@@ -1,25 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
     <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
     <StaticWebAssetProjectMode>Default</StaticWebAssetProjectMode>
     <CompressionEnabled>false</CompressionEnabled>
-    <BlazorCacheBootResources>false</BlazorCacheBootResources>
     <DisableScopedCssBundling>true</DisableScopedCssBundling>
     <!--<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>-->
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.9" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.0" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Blazor.BrowserAPI\Blazor.BrowserAPI.csproj" />
+    <ProjectReference Include="..\..\Blazor.BrowserAPI\Blazor.BrowserAPI.csproj" AdditionalProperties="TargetFramework=net10.0" />
   </ItemGroup>
 
 </Project>

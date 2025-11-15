@@ -35,7 +35,7 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     /// See our <see href="https://developer.mozilla.org/en-US/docs/Web/Media/Formats">media type and format guide</see> for information about container and codec support across browsers.
     /// </para>
     /// </summary>
-    public ValueTask<string> MimeType => GetMimeType(default);
+    public ValueTask<string> MimeType => GetMimeType(CancellationToken.None);
 
     /// <inheritdoc cref="MimeType" />
     /// <param name="cancellationToken"></param>
@@ -51,7 +51,7 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     /// "paused" - Recording has been started, then paused, but not yet stopped or resumed.
     /// </para>
     /// </summary>
-    public ValueTask<string> State => GetState(default);
+    public ValueTask<string> State => GetState(CancellationToken.None);
 
     /// <inheritdoc cref="State" />
     /// <param name="cancellationToken"></param>
@@ -62,7 +62,7 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     /// <summary>
     /// The <i>stream</i> read-only property of the MediaRecorder interface returns the stream that was passed into the <see cref="IMediaStream.CreateRecorder">CreateRecorder() method</see> when the MediaRecorder was created.
     /// </summary>
-    public ValueTask<IMediaStream> Stream => GetStream(default);
+    public ValueTask<IMediaStream> Stream => GetStream(CancellationToken.None);
 
     /// <inheritdoc cref="Stream" />
     /// <param name="cancellationToken"></param>
@@ -74,7 +74,7 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     /// The <i>audioBitsPerSecond</i> read-only property of the MediaRecorder interface returns the audio encoding bit rate in use.<br />
     /// This may differ from the bit rate specified in the constructor (if it was provided).
     /// </summary>
-    public ValueTask<ulong> AudioBitsPerSecond => GetAudioBitsPerSecond(default);
+    public ValueTask<ulong> AudioBitsPerSecond => GetAudioBitsPerSecond(CancellationToken.None);
 
     /// <inheritdoc cref="AudioBitsPerSecond" />
     /// <param name="cancellationToken"></param>
@@ -86,7 +86,7 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     /// The <i>videoBitsPerSecond</i> read-only property of the MediaRecorder interface returns the video encoding bit rate in use.<br />
     /// This may differ from the bit rate specified in the constructor, if it was provided.
     /// </summary>
-    public ValueTask<ulong> VideoBitsPerSecond => GetVideoBitsPerSecond(default);
+    public ValueTask<ulong> VideoBitsPerSecond => GetVideoBitsPerSecond(CancellationToken.None);
 
     /// <inheritdoc cref="VideoBitsPerSecond" />
     /// <param name="cancellationToken"></param>

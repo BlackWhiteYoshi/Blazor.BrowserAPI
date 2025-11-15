@@ -42,7 +42,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        bool activated = await gyroscope.GetActivated(default);
+        bool activated = await gyroscope.GetActivated(CancellationToken.None);
         labelOutput = activated.ToString();
     }
 
@@ -67,7 +67,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        bool hasReading = await gyroscope.GetHasReading(default);
+        bool hasReading = await gyroscope.GetHasReading(CancellationToken.None);
         labelOutput = hasReading.ToString();
     }
 
@@ -92,7 +92,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double timestamp = await gyroscope.GetTimestamp(default);
+        double timestamp = await gyroscope.GetTimestamp(CancellationToken.None);
         labelOutput = timestamp.ToString();
     }
 
@@ -227,7 +227,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double illuminance = await ambientLightSensor.GetIlluminance(default);
+        double illuminance = await ambientLightSensor.GetIlluminance(CancellationToken.None);
         labelOutput = illuminance.ToString();
     }
 
@@ -254,7 +254,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double x = await gyroscope.GetX(default);
+        double x = await gyroscope.GetX(CancellationToken.None);
         labelOutput = x.ToString();
     }
 
@@ -279,7 +279,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double y = await gyroscope.GetY(default);
+        double y = await gyroscope.GetY(CancellationToken.None);
         labelOutput = y.ToString();
     }
 
@@ -304,7 +304,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double z = await gyroscope.GetZ(default);
+        double z = await gyroscope.GetZ(CancellationToken.None);
         labelOutput = z.ToString();
     }
 
@@ -331,7 +331,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double x = await accelerometer.GetX(default);
+        double x = await accelerometer.GetX(CancellationToken.None);
         labelOutput = x.ToString();
     }
 
@@ -356,7 +356,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double y = await accelerometer.GetY(default);
+        double y = await accelerometer.GetY(CancellationToken.None);
         labelOutput = y.ToString();
     }
 
@@ -381,7 +381,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double z = await accelerometer.GetZ(default);
+        double z = await accelerometer.GetZ(CancellationToken.None);
         labelOutput = z.ToString();
     }
 
@@ -408,7 +408,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double x = await linearAccelerationSensor.GetX(default);
+        double x = await linearAccelerationSensor.GetX(CancellationToken.None);
         labelOutput = x.ToString();
     }
 
@@ -433,7 +433,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double y = await linearAccelerationSensor.GetY(default);
+        double y = await linearAccelerationSensor.GetY(CancellationToken.None);
         labelOutput = y.ToString();
     }
 
@@ -458,7 +458,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double z = await linearAccelerationSensor.GetZ(default);
+        double z = await linearAccelerationSensor.GetZ(CancellationToken.None);
         labelOutput = z.ToString();
     }
 
@@ -485,7 +485,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double x = await gravitySensor.GetX(default);
+        double x = await gravitySensor.GetX(CancellationToken.None);
         labelOutput = x.ToString();
     }
 
@@ -510,7 +510,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double y = await gravitySensor.GetY(default);
+        double y = await gravitySensor.GetY(CancellationToken.None);
         labelOutput = y.ToString();
     }
 
@@ -535,7 +535,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double z = await gravitySensor.GetZ(default);
+        double z = await gravitySensor.GetZ(CancellationToken.None);
         labelOutput = z.ToString();
     }
 
@@ -562,7 +562,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        Quaternion quaternion = await absoluteOrientationSensor.GetQuaternion(default);
+        Quaternion quaternion = await absoluteOrientationSensor.GetQuaternion(CancellationToken.None);
         labelOutput = quaternion.ToString();
     }
 
@@ -602,7 +602,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        Quaternion quaternion = await relativeOrientationSensor.GetQuaternion(default);
+        Quaternion quaternion = await relativeOrientationSensor.GetQuaternion(CancellationToken.None);
         labelOutput = quaternion.ToString();
     }
 
@@ -642,7 +642,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double x = await magnetometer.GetX(default);
+        double x = await magnetometer.GetX(CancellationToken.None);
         labelOutput = x.ToString();
     }
 
@@ -667,7 +667,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double y = await magnetometer.GetY(default);
+        double y = await magnetometer.GetY(CancellationToken.None);
         labelOutput = y.ToString();
     }
 
@@ -692,7 +692,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double z = await magnetometer.GetZ(default);
+        double z = await magnetometer.GetZ(CancellationToken.None);
         labelOutput = z.ToString();
     }
 
@@ -719,7 +719,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double x = await uncalibratedMagnetometer.GetX(default);
+        double x = await uncalibratedMagnetometer.GetX(CancellationToken.None);
         labelOutput = x.ToString();
     }
 
@@ -744,7 +744,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double y = await uncalibratedMagnetometer.GetY(default);
+        double y = await uncalibratedMagnetometer.GetY(CancellationToken.None);
         labelOutput = y.ToString();
     }
 
@@ -769,7 +769,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double z = await uncalibratedMagnetometer.GetZ(default);
+        double z = await uncalibratedMagnetometer.GetZ(CancellationToken.None);
         labelOutput = z.ToString();
     }
 
@@ -794,7 +794,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double x = await uncalibratedMagnetometer.GetXBias(default);
+        double x = await uncalibratedMagnetometer.GetXBias(CancellationToken.None);
         labelOutput = x.ToString();
     }
 
@@ -819,7 +819,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double y = await uncalibratedMagnetometer.GetYBias(default);
+        double y = await uncalibratedMagnetometer.GetYBias(CancellationToken.None);
         labelOutput = y.ToString();
     }
 
@@ -844,7 +844,7 @@ public sealed partial class SensorAPIGroup {
             return;
         }
 
-        double z = await uncalibratedMagnetometer.GetZBias(default);
+        double z = await uncalibratedMagnetometer.GetZBias(CancellationToken.None);
         labelOutput = z.ToString();
     }
 }

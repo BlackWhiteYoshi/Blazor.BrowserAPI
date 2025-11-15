@@ -13,7 +13,7 @@ public sealed class Screen(IModuleManager moduleManager) : ScreenBase(moduleMana
     /// <summary>
     /// Returns the width of the screen in CSS pixels.
     /// </summary>
-    public ValueTask<int> Width => GetWidth(default);
+    public ValueTask<int> Width => GetWidth(CancellationToken.None);
 
     /// <inheritdoc cref="Width" />
     /// <param name="cancellationToken"></param>
@@ -24,7 +24,7 @@ public sealed class Screen(IModuleManager moduleManager) : ScreenBase(moduleMana
     /// <summary>
     /// Returns the height of the screen in CSS pixels.
     /// </summary>
-    public ValueTask<int> Height => GetHeight(default);
+    public ValueTask<int> Height => GetHeight(CancellationToken.None);
 
     /// <inheritdoc cref="Height" />
     /// <param name="cancellationToken"></param>
@@ -35,7 +35,7 @@ public sealed class Screen(IModuleManager moduleManager) : ScreenBase(moduleMana
     /// <summary>
     /// Returns the amount of horizontal space (in CSS pixels) available to the window.
     /// </summary>
-    public ValueTask<int> AvailWidth => GetAvailWidth(default);
+    public ValueTask<int> AvailWidth => GetAvailWidth(CancellationToken.None);
 
     /// <inheritdoc cref="AvailWidth" />
     /// <param name="cancellationToken"></param>
@@ -50,7 +50,7 @@ public sealed class Screen(IModuleManager moduleManager) : ScreenBase(moduleMana
     /// </para>
     /// <para>You can similarly use <see cref="AvailWidth">Screen.availWidth</see> to get the number of pixels which are horizontally available to the browser for its use.</para>
     /// </summary>
-    public ValueTask<int> AvailHeight => GetAvailHeight(default);
+    public ValueTask<int> AvailHeight => GetAvailHeight(CancellationToken.None);
 
     /// <inheritdoc cref="AvailHeight" />
     /// <param name="cancellationToken"></param>
@@ -63,7 +63,7 @@ public sealed class Screen(IModuleManager moduleManager) : ScreenBase(moduleMana
     /// Per the CSSOM, some implementations return 24 for compatibility reasons.
     /// See the browser compatibility section for those that don't.
     /// </summary>
-    public ValueTask<int> ColorDepth => GetColorDepth(default);
+    public ValueTask<int> ColorDepth => GetColorDepth(CancellationToken.None);
 
     /// <inheritdoc cref="ColorDepth" />
     /// <param name="cancellationToken"></param>
@@ -76,7 +76,7 @@ public sealed class Screen(IModuleManager moduleManager) : ScreenBase(moduleMana
     /// Per the CSSOM, some implementations return 24 for compatibility reasons.
     /// See the browser compatibility section for those that don't.
     /// </summary>
-    public ValueTask<int> PixelDepth => GetPixelDepth(default);
+    public ValueTask<int> PixelDepth => GetPixelDepth(CancellationToken.None);
 
     /// <inheritdoc cref="PixelDepth" />
     /// <param name="cancellationToken"></param>
@@ -91,7 +91,7 @@ public sealed class Screen(IModuleManager moduleManager) : ScreenBase(moduleMana
     /// and can be used to test whether multiple screens are available before attempting to create a multi-window, multi-screen layout using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window_Management_API">Window Management API</see>.
     /// </para>
     /// </summary>
-    public ValueTask<bool> IsExtended => GetIsExtended(default);
+    public ValueTask<bool> IsExtended => GetIsExtended(CancellationToken.None);
 
     /// <inheritdoc cref="IsExtended" />
     /// <param name="cancellationToken"></param>
@@ -108,7 +108,7 @@ public sealed class Screen(IModuleManager moduleManager) : ScreenBase(moduleMana
     /// - "landscape-primary"<br />
     /// - "landscape-secondary"
     /// </summary>
-    public ValueTask<string> OrientationType => GetOrientationType(default);
+    public ValueTask<string> OrientationType => GetOrientationType(CancellationToken.None);
 
     /// <inheritdoc cref="OrientationType" />
     /// <param name="cancellationToken"></param>
@@ -119,7 +119,7 @@ public sealed class Screen(IModuleManager moduleManager) : ScreenBase(moduleMana
     /// <summary>
     /// Returns the document's current orientation angle.
     /// </summary>
-    public ValueTask<double> OrientationAngle => GetOrientationAngle(default);
+    public ValueTask<double> OrientationAngle => GetOrientationAngle(CancellationToken.None);
 
     /// <inheritdoc cref="OrientationAngle" />
     /// <param name="cancellationToken"></param>

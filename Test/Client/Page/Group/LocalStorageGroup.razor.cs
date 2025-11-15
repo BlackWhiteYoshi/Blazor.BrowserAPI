@@ -26,7 +26,7 @@ public partial class LocalStorageGroup : ComponentBase {
 
     public const string BUTTON_GET_LENGTH_METHOD = "local-storage-get-length-method";
     private async Task GetLength_Method() {
-        int length = await LocalStorage.GetLength(default);
+        int length = await LocalStorage.GetLength(CancellationToken.None);
         labelOutput = length.ToString();
     }
 

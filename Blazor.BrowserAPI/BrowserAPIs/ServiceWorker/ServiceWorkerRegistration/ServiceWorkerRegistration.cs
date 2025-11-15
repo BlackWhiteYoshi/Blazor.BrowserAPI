@@ -26,7 +26,7 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
     /// Returns a service worker whose ServiceWorker.state is activating or activated.
     /// This property is initially set to null.
     /// </summary>
-    public ValueTask<IServiceWorker?> Active => GetActive(default);
+    public ValueTask<IServiceWorker?> Active => GetActive(CancellationToken.None);
 
     /// <inheritdoc cref="Active" />
     /// <param name="cancellationToken"></param>
@@ -44,7 +44,7 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
     /// Returns a service worker whose ServiceWorker.state is installing.
     /// This property is initially set to null.
     /// </summary>
-    public ValueTask<IServiceWorker?> Installing => GetInstalling(default);
+    public ValueTask<IServiceWorker?> Installing => GetInstalling(CancellationToken.None);
 
     /// <inheritdoc cref="Installing" />
     /// <param name="cancellationToken"></param>
@@ -62,7 +62,7 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
     /// Returns a service worker whose ServiceWorker.state is installed.
     /// This property is initially set to null.
     /// </summary>
-    public ValueTask<IServiceWorker?> Waiting => GetWaiting(default);
+    public ValueTask<IServiceWorker?> Waiting => GetWaiting(CancellationToken.None);
 
     /// <inheritdoc cref="Waiting" />
     /// <param name="cancellationToken"></param>
@@ -81,7 +81,7 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
     /// Returns a unique identifier for a service worker registration.
     /// The service worker must be on the same origin as the document that registers the ServiceWorker.
     /// </summary>
-    public ValueTask<string> Scope => GetScope(default);
+    public ValueTask<string> Scope => GetScope(CancellationToken.None);
 
     /// <inheritdoc cref="Scope" />
     /// <param name="cancellationToken"></param>
@@ -101,7 +101,7 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
     /// - <b>none</b>: meaning the HTTP cache is never consulted.
     /// </para>
     /// </summary>
-    public ValueTask<string> UpdateViaCache => GetUpdateViaCache(default);
+    public ValueTask<string> UpdateViaCache => GetUpdateViaCache(CancellationToken.None);
 
     /// <inheritdoc cref="UpdateViaCache" />
     /// <param name="cancellationToken"></param>

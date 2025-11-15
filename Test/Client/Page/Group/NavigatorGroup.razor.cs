@@ -32,7 +32,7 @@ public sealed partial class NavigatorGroup : ComponentBase {
 
     public const string BUTTON_GET_LANGUAGE_METHOD = "navigator-get-language-method";
     private async Task GetLanguage_Method() {
-        string langauge = await Navigator.GetLanguage(default);
+        string langauge = await Navigator.GetLanguage(CancellationToken.None);
         labelOutput = langauge;
     }
 
@@ -44,7 +44,7 @@ public sealed partial class NavigatorGroup : ComponentBase {
 
     public const string BUTTON_GET_LANGUAGES_METHOD = "navigator-get-languages-method";
     private async Task GetLanguages_Method() {
-        string[] langauges = await Navigator.GetLanguages(default);
+        string[] langauges = await Navigator.GetLanguages(CancellationToken.None);
         labelOutput = string.Join(',', langauges);
     }
 
@@ -57,7 +57,7 @@ public sealed partial class NavigatorGroup : ComponentBase {
 
     public const string BUTTON_GET_USER_AGENT_METHOD = "navigator-get-user-agent-method";
     private async Task GetUserAgent_Method() {
-        string langauge = await Navigator.GetUserAgent(default);
+        string langauge = await Navigator.GetUserAgent(CancellationToken.None);
         labelOutput = langauge;
     }
 
@@ -69,7 +69,7 @@ public sealed partial class NavigatorGroup : ComponentBase {
 
     public const string BUTTON_GET_WEBDRIVER_METHOD = "navigator-get-webdriver-method";
     private async Task GetWebdriver_Method() {
-        bool webdriver = await Navigator.GetWebdriver(default);
+        bool webdriver = await Navigator.GetWebdriver(CancellationToken.None);
         labelOutput = webdriver.ToString();
     }
 
@@ -82,7 +82,7 @@ public sealed partial class NavigatorGroup : ComponentBase {
 
     public const string BUTTON_GET_USER_ACTIVATION_IS_ACTIVE_METHOD = "navigator-get-user-activation-is-active-method";
     private async Task GetUserActivationIsActive_Method() {
-        bool userActivationIsActive = await Navigator.GetUserActivationIsActive(default);
+        bool userActivationIsActive = await Navigator.GetUserActivationIsActive(CancellationToken.None);
         labelOutput = userActivationIsActive.ToString();
     }
 
@@ -94,7 +94,7 @@ public sealed partial class NavigatorGroup : ComponentBase {
 
     public const string BUTTON_GET_USER_ACTIVATION_HAS_BEEN_ACTIVE_METHOD = "navigator-get-user-activation-has-been-active-method";
     private async Task GetUserActivationHasBeenActive_Method() {
-        bool userActivationHasBeenActive = await Navigator.GetUserActivationHasBeenActive(default);
+        bool userActivationHasBeenActive = await Navigator.GetUserActivationHasBeenActive(CancellationToken.None);
         labelOutput = userActivationHasBeenActive.ToString();
     }
 
@@ -107,7 +107,7 @@ public sealed partial class NavigatorGroup : ComponentBase {
 
     public const string BUTTON_GET_COOKIE_ENABLED_METHOD = "navigator-get-cookie-enabled-method";
     private async Task GetCookieEnabled_Method() {
-        bool cookieEnabled = await Navigator.GetCookieEnabled(default);
+        bool cookieEnabled = await Navigator.GetCookieEnabled(CancellationToken.None);
         labelOutput = cookieEnabled.ToString();
     }
 
@@ -119,7 +119,7 @@ public sealed partial class NavigatorGroup : ComponentBase {
 
     public const string BUTTON_GET_PDF_VIEWER_ENABLED_METHOD = "navigator-get-pdf-viewer-enabled-method";
     private async Task GetPdfViewerEnabled_Method() {
-        bool pdfViewerEnabled = await Navigator.GetPdfViewerEnabled(default);
+        bool pdfViewerEnabled = await Navigator.GetPdfViewerEnabled(CancellationToken.None);
         labelOutput = pdfViewerEnabled.ToString();
     }
 
@@ -132,7 +132,7 @@ public sealed partial class NavigatorGroup : ComponentBase {
 
     public const string BUTTON_GET_MAX_TOUCH_POINTS_METHOD = "navigator-get-max-touch-points-method";
     private async Task GetMaxTouchPoints_Method() {
-        int maxTouchPoints = await Navigator.GetMaxTouchPoints(default);
+        int maxTouchPoints = await Navigator.GetMaxTouchPoints(CancellationToken.None);
         labelOutput = maxTouchPoints.ToString();
     }
 
@@ -144,7 +144,7 @@ public sealed partial class NavigatorGroup : ComponentBase {
 
     public const string BUTTON_GET_HARDWARE_CONCURRENCY_METHOD = "navigator-get-hardware-concurrency-method";
     private async Task GetHardwareConcurrency_Method() {
-        int hardwareConcurrency = await Navigator.GetHardwareConcurrency(default);
+        int hardwareConcurrency = await Navigator.GetHardwareConcurrency(CancellationToken.None);
         labelOutput = hardwareConcurrency.ToString();
     }
 
@@ -156,7 +156,7 @@ public sealed partial class NavigatorGroup : ComponentBase {
 
     public const string BUTTON_GET_DEVICE_MEMORY_METHOD = "navigator-get-device-memory-method";
     private async Task GetDeviceMemory_Method() {
-        double deviceMemory = await Navigator.GetDeviceMemory(default);
+        double deviceMemory = await Navigator.GetDeviceMemory(CancellationToken.None);
         labelOutput = deviceMemory.ToString();
     }
 

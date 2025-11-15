@@ -25,7 +25,7 @@ public sealed partial class CookieStorageGroup : ComponentBase {
 
     public const string BUTTON_GET_ALL_COOKIES_METHOD = "cookie-storage-get-all-cookies-method";
     private async Task GetAllCookies_Method() {
-        labelOutput = await CookieStorage.GetAllCookies(default);
+        labelOutput = await CookieStorage.GetAllCookies(CancellationToken.None);
     }
 
     public const string BUTTON_GET_LENGTH_PROPERTY = "cookie-storage-get-length-property";
@@ -36,7 +36,7 @@ public sealed partial class CookieStorageGroup : ComponentBase {
 
     public const string BUTTON_GET_LENGTH_METHOD = "cookie-storage-get-length-method";
     private async Task GetLength_Method() {
-        int length = await CookieStorage.GetLength(default);
+        int length = await CookieStorage.GetLength(CancellationToken.None);
         labelOutput = length.ToString();
     }
 

@@ -64,16 +64,16 @@ public abstract class ScreenBase(IModuleManager moduleManager) : IDisposable {
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return moduleManager.InvokeTrySync("ScreenAPI.initEvents", default, [_objectReferenceEventTrigger]);
+        return moduleManager.InvokeTrySync("ScreenAPI.initEvents", CancellationToken.None, [_objectReferenceEventTrigger]);
     }
 
 
     private async ValueTask ActivateJSEvent(string jsMethodName) {
         await InitEventTrigger();
-        await moduleManager.InvokeTrySync(jsMethodName, default);
+        await moduleManager.InvokeTrySync(jsMethodName, CancellationToken.None);
     }
 
-    private ValueTask DeactivateJSEvent(string jsMethodName) => moduleManager.InvokeTrySync(jsMethodName, default);
+    private ValueTask DeactivateJSEvent(string jsMethodName) => moduleManager.InvokeTrySync(jsMethodName, CancellationToken.None);
 
 
     private Action? _onChange;

@@ -25,7 +25,7 @@ public sealed class ScreenDetails(IJSObjectReference screenDetailsJS) : ScreenDe
     /// <summary>
     /// A single ScreenDetailed object representing detailed information about the screen that the current browser window is displayed in.
     /// </summary>
-    public ValueTask<IScreenDetailed> CurrentScreen => GetCurrentScreen(default);
+    public ValueTask<IScreenDetailed> CurrentScreen => GetCurrentScreen(CancellationToken.None);
 
     /// <inheritdoc cref="CurrentScreen" />
     /// <param name="cancellationToken"></param>
@@ -39,7 +39,7 @@ public sealed class ScreenDetails(IJSObjectReference screenDetailsJS) : ScreenDe
     /// <summary>
     /// An array of ScreenDetailed objects, each one representing detailed information about one specific screen available to the user's device.
     /// </summary>
-    public ValueTask<IScreenDetailed[]> Screens => GetScreens(default);
+    public ValueTask<IScreenDetailed[]> Screens => GetScreens(CancellationToken.None);
 
     /// <inheritdoc cref="Screens" />
     /// <param name="cancellationToken"></param>

@@ -24,7 +24,7 @@ public sealed class PermissionStatus(IJSObjectReference permissionStatusJS) : Pe
     /// <summary>
     /// Returns the name of a requested permission, identical to the <i>name</i> passed to <see cref="IPermissions.Query"/>.
     /// </summary>
-    public ValueTask<string> Name => GetName(default);
+    public ValueTask<string> Name => GetName(CancellationToken.None);
 
     /// <inheritdoc cref="Name" />
     /// <param name="cancellationToken"></param>
@@ -38,7 +38,7 @@ public sealed class PermissionStatus(IJSObjectReference permissionStatusJS) : Pe
     /// - "denied": The user, or the user agent on the user's behalf, has denied access to this powerful feature. The caller can't use the feature.<br />
     /// - "prompt": The user has not given express permission to use the feature (i.e., it's the same as denied). It also means that if a caller attempts to use the feature, the user agent will either be prompting the user for permission or access to the feature will be denied.
     /// </summary>
-    public ValueTask<string> State => GetState(default);
+    public ValueTask<string> State => GetState(CancellationToken.None);
 
     /// <inheritdoc cref="State" />
     /// <param name="cancellationToken"></param>

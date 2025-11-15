@@ -1,6 +1,6 @@
-# Clipboard
+ï»¿# Clipboard
 
-The Clipboard interface implements the Clipboard API, providing—if the user grants permission—both read and write access to the contents of the system clipboard.
+The Clipboard interface implements the Clipboard API, providingâ€”if the user grants permissionâ€”both read and write access to the contents of the system clipboard.
 
 
 <br><br />

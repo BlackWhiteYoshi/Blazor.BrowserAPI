@@ -25,7 +25,7 @@ public sealed class WritableFileStream(IJSObjectReference writableFileStreamJS) 
     /// <summary>
     /// A boolean indicating whether the WritableStream is locked to a writer.
     /// </summary>
-    public ValueTask<bool> Locked => GetLocked(default);
+    public ValueTask<bool> Locked => GetLocked(CancellationToken.None);
 
     /// <inheritdoc cref="Locked" />
     /// <param name="cancellationToken"></param>

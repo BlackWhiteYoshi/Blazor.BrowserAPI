@@ -23,10 +23,12 @@ namespace BrowserAPI.Test.PostGenerator;
  */
 
 file static class JsonNodeExtension {
-    internal static JsonNode Get(this JsonNode node, string key) => node[key] ?? throw new ArgumentException($"Cannot find key '{key}' in json config.");
-    internal static string GetString(this JsonNode node, string key) => (string?)node.Get(key) ?? throw new ArgumentException($"key '{key}' must be a string.");
-    internal static bool GetBool(this JsonNode node, string key) => (bool?)node.Get(key) ?? throw new ArgumentException($"key '{key}' must be a boolean.");
-    internal static string[] AsStringArray(this JsonNode node) => node.AsArray().Select((JsonNode? node) => (string?)node ?? throw new ArgumentException($"key '{node}' must be a string.")).ToArray();
+    extension(JsonNode node) {
+        public JsonNode Get(string key) => node[key] ?? throw new ArgumentException($"Cannot find key '{key}' in json config.");
+        public string GetString(string key) => (string?)node.Get(key) ?? throw new ArgumentException($"key '{key}' must be a string.");
+        public bool GetBool(string key) => (bool?)node.Get(key) ?? throw new ArgumentException($"key '{key}' must be a boolean.");
+        public string[] ToStringArray() => node.AsArray().Select((JsonNode? node) => (string?)node ?? throw new ArgumentException($"key '{node}' must be a string.")).ToArray();
+    }
 }
 
 public sealed class Config {
@@ -68,19 +70,19 @@ public sealed class Config {
         SiteUrl = root.GetString("site url");
 
         GenerateHtmlPage = root.Get("generate files").Get("html page").GetBool("enabled");
-        GenerateFiles = root.Get("generate files").Get("other files").AsStringArray();
+        GenerateFiles = root.Get("generate files").Get("other files").ToStringArray();
 
         CreateRobotsTxt = root.GetBool("create robots.txt");
 
         CreateSitemapXml = root.GetBool("create sitemap.xml");
 
         RemoveFiles = root.Get("remove files").GetBool("enabled");
-        RemoveFileList = (root.Get("remove files").Get("folder list").AsStringArray(), root.Get("remove files").Get("file list").AsStringArray());
+        RemoveFileList = (root.Get("remove files").Get("folder list").ToStringArray(), root.Get("remove files").Get("file list").ToStringArray());
 
         MinifyCssJs = root.Get("minify css/js").GetBool("enabled");
-        MinifyExcludeList = (root.Get("minify css/js").Get("exclude list startsWith").AsStringArray(), root.Get("minify css/js").Get("exclude list endsWith").AsStringArray());
+        MinifyExcludeList = (root.Get("minify css/js").Get("exclude list startsWith").ToStringArray(), root.Get("minify css/js").Get("exclude list endsWith").ToStringArray());
 
         ZipFiles = root.Get("zip files").GetBool("enabled");
-        ZipExcludeList = (root.Get("zip files").Get("exclude list startsWith").AsStringArray(), root.Get("zip files").Get("exclude list endsWith").AsStringArray());
+        ZipExcludeList = (root.Get("zip files").Get("exclude list startsWith").ToStringArray(), root.Get("zip files").Get("exclude list endsWith").ToStringArray());
     }
 }

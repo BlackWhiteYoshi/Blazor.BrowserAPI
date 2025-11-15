@@ -296,9 +296,9 @@ public abstract class WindowBase(IModuleManager moduleManager) : IDisposable {
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
         if (windowJS is null)
-            windowJS = await moduleManager.InvokeTrySync<IJSObjectReference>("WindowAPI.createInstanceAndInitEvents", default, [_objectReferenceEventTrigger]);
+            windowJS = await moduleManager.InvokeTrySync<IJSObjectReference>("WindowAPI.createInstanceAndInitEvents", CancellationToken.None, [_objectReferenceEventTrigger]);
         else
-            await windowJS.InvokeVoidTrySync("WindowAPI.initEvents", default, [_objectReferenceEventTrigger]);
+            await windowJS.InvokeVoidTrySync("WindowAPI.initEvents", CancellationToken.None, [_objectReferenceEventTrigger]);
     }
 
 

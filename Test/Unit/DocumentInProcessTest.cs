@@ -979,7 +979,7 @@ public sealed class DocumentInProcessTest(PlayWrightFixture playWrightFixture) :
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='all', types='[]', files='[]'");
+        await Assert.That(result).IsEqualTo("dropEffect='copy', effectAllowed='all', types='[]', files='[]'");
     }
 
 

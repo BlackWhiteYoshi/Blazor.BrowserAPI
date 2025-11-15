@@ -54,16 +54,16 @@ public sealed class GamepadAPI(IModuleManager moduleManager) : IGamepadAPI, IDis
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return moduleManager.InvokeTrySync("GamepadInterfaceAPI.initEvents", default, [_objectReferenceEventTrigger]);
+        return moduleManager.InvokeTrySync("GamepadInterfaceAPI.initEvents", CancellationToken.None, [_objectReferenceEventTrigger]);
     }
 
 
     private async ValueTask ActivateJSEvent(string jsMethodName) {
         await InitEventTrigger();
-        await moduleManager.InvokeTrySync(jsMethodName, default);
+        await moduleManager.InvokeTrySync(jsMethodName, CancellationToken.None);
     }
 
-    private ValueTask DeactivateJSEvent(string jsMethodName) => moduleManager.InvokeTrySync(jsMethodName, default);
+    private ValueTask DeactivateJSEvent(string jsMethodName) => moduleManager.InvokeTrySync(jsMethodName, CancellationToken.None);
 
 
     private Action<IGamepad>? _onGamepadConnected;

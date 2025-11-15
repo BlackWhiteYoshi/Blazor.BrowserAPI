@@ -19,7 +19,7 @@ public sealed class Navigator(IModuleManager moduleManager) : NavigatorBase(modu
     /// </para>
     /// <para>Note that in Safari on iOS prior to 10.2, the country code returned is lowercase: "en-us", "fr-fr" etc.</para>
     /// </summary>
-    public ValueTask<string> Language => GetLanguage(default);
+    public ValueTask<string> Language => GetLanguage(CancellationToken.None);
 
     /// <inheritdoc cref="Language" />
     /// <param name="cancellationToken"></param>
@@ -41,7 +41,7 @@ public sealed class Navigator(IModuleManager moduleManager) : NavigatorBase(modu
     /// such as in Safari (always) and Chrome's incognito mode, where only one language is listed.
     /// </para>
     /// </summary>
-    public ValueTask<string[]> Languages => GetLanguages(default);
+    public ValueTask<string[]> Languages => GetLanguages(CancellationToken.None);
 
     /// <inheritdoc cref="Languages" />
     /// <param name="cancellationToken"></param>
@@ -70,7 +70,7 @@ public sealed class Navigator(IModuleManager moduleManager) : NavigatorBase(modu
     /// Also keep in mind that users of a browser can change the value of this field if they want (UA spoofing).
     /// </para>
     /// </remarks>
-    public ValueTask<string> UserAgent => GetUserAgent(default);
+    public ValueTask<string> UserAgent => GetUserAgent(CancellationToken.None);
 
     /// <inheritdoc cref="UserAgent" />
     /// <param name="cancellationToken"></param>
@@ -86,7 +86,7 @@ public sealed class Navigator(IModuleManager moduleManager) : NavigatorBase(modu
     /// - Firefox: The marionette.enabled preference or --marionette flag is passed.
     /// </para>
     /// </summary>
-    public ValueTask<bool> Webdriver => GetWebdriver(default);
+    public ValueTask<bool> Webdriver => GetWebdriver(CancellationToken.None);
 
     /// <inheritdoc cref="Webdriver" />
     /// <param name="cancellationToken"></param>
@@ -101,7 +101,7 @@ public sealed class Navigator(IModuleManager moduleManager) : NavigatorBase(modu
     /// or has completed an interaction since page load.
     /// </para>
     /// </summary>
-    public ValueTask<bool> UserActivationIsActive => GetUserActivationIsActive(default);
+    public ValueTask<bool> UserActivationIsActive => GetUserActivationIsActive(CancellationToken.None);
 
     /// <inheritdoc cref="UserActivationIsActive" />
     /// <param name="cancellationToken"></param>
@@ -115,7 +115,7 @@ public sealed class Navigator(IModuleManager moduleManager) : NavigatorBase(modu
     /// or has completed an interaction since page load.
     /// </para>
     /// </summary>
-    public ValueTask<bool> UserActivationHasBeenActive => GetUserActivationHasBeenActive(default);
+    public ValueTask<bool> UserActivationHasBeenActive => GetUserActivationHasBeenActive(CancellationToken.None);
 
     /// <inheritdoc cref="UserActivationHasBeenActive" />
     /// <param name="cancellationToken"></param>
@@ -132,7 +132,7 @@ public sealed class Navigator(IModuleManager moduleManager) : NavigatorBase(modu
     /// For example, Chrome-based browsers, as well as some experimental version of Firefox, does not allow creating cookies with SameSite=None attribute,
     /// unless they are created over HTTPS and with Secure attribute.
     /// </remarks>
-    public ValueTask<bool> CookieEnabled => GetCookieEnabled(default);
+    public ValueTask<bool> CookieEnabled => GetCookieEnabled(CancellationToken.None);
 
     /// <inheritdoc cref="CookieEnabled" />
     /// <param name="cancellationToken"></param>
@@ -144,7 +144,7 @@ public sealed class Navigator(IModuleManager moduleManager) : NavigatorBase(modu
     /// <para>If inline viewing is not supported the PDF is downloaded and may then be handled by some external application.</para>
     /// </summary>
     /// <remarks>Note: This method replaces a number of legacy methods of inferring support for inline viewing of PDF files.</remarks>
-    public ValueTask<bool> PdfViewerEnabled => GetPdfViewerEnabled(default);
+    public ValueTask<bool> PdfViewerEnabled => GetPdfViewerEnabled(CancellationToken.None);
 
     /// <inheritdoc cref="PdfViewerEnabled" />
     /// <param name="cancellationToken"></param>
@@ -155,7 +155,7 @@ public sealed class Navigator(IModuleManager moduleManager) : NavigatorBase(modu
     /// <summary>
     /// Returns the maximum number of simultaneous touch contact points that are supported by the current device.
     /// </summary>
-    public ValueTask<int> MaxTouchPoints => GetMaxTouchPoints(default);
+    public ValueTask<int> MaxTouchPoints => GetMaxTouchPoints(CancellationToken.None);
 
     /// <inheritdoc cref="MaxTouchPoints" />
     /// <param name="cancellationToken"></param>
@@ -176,7 +176,7 @@ public sealed class Navigator(IModuleManager moduleManager) : NavigatorBase(modu
     /// so don't treat this as an absolute measurement of the number of cores in the user's system.
     /// </para>
     /// </summary>
-    public ValueTask<int> HardwareConcurrency => GetHardwareConcurrency(default);
+    public ValueTask<int> HardwareConcurrency => GetHardwareConcurrency(CancellationToken.None);
 
     /// <inheritdoc cref="HardwareConcurrency" />
     /// <param name="cancellationToken"></param>
@@ -200,7 +200,7 @@ public sealed class Navigator(IModuleManager moduleManager) : NavigatorBase(modu
     /// - 8.0
     /// </para>
     /// </summary>
-    public ValueTask<double> DeviceMemory => GetDeviceMemory(default);
+    public ValueTask<double> DeviceMemory => GetDeviceMemory(CancellationToken.None);
 
     /// <inheritdoc cref="DeviceMemory" />
     /// <param name="cancellationToken"></param>

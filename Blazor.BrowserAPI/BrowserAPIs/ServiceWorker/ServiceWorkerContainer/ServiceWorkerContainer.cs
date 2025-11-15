@@ -30,7 +30,7 @@ public sealed class ServiceWorkerContainer(IModuleManager moduleManager) : Servi
     /// Returns a <i>ServiceWorker</i> object if its state is activating or activated (the same object returned by ServiceWorkerRegistration.active).
     /// This property returns null during a force-refresh request (Shift + refresh) or if there is no active worker.
     /// </summary>
-    public ValueTask<IServiceWorker?> Controller => GetController(default);
+    public ValueTask<IServiceWorker?> Controller => GetController(CancellationToken.None);
 
     /// <inheritdoc cref="Controller" />
     /// <param name="cancellationToken"></param>
@@ -48,7 +48,7 @@ public sealed class ServiceWorkerContainer(IModuleManager moduleManager) : Servi
     /// It returns a Promise that will never reject, and which waits indefinitely until the ServiceWorkerRegistration associated with the current page has an ServiceWorkerRegistration.active worker.
     /// Once that condition is met, it resolves with the ServiceWorkerRegistration.
     /// </summary>
-    public ValueTask<IServiceWorkerRegistration> Ready => GetReady(default);
+    public ValueTask<IServiceWorkerRegistration> Ready => GetReady(CancellationToken.None);
 
     /// <inheritdoc cref="Ready" />
     /// <param name="cancellationToken"></param>

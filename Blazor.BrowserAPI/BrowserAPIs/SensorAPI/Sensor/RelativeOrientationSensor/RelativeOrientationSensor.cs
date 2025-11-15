@@ -16,7 +16,7 @@ public sealed class RelativeOrientationSensor(IJSObjectReference relativeOrienta
     /// <summary>
     /// Returns a unit quaternion representing the device's orientation.
     /// </summary>
-    public ValueTask<Quaternion> Quaternion => GetQuaternion(default);
+    public ValueTask<Quaternion> Quaternion => GetQuaternion(CancellationToken.None);
 
     /// <inheritdoc cref="Quaternion" />
     /// <param name="cancellationToken"></param>

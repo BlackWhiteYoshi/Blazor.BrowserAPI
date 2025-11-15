@@ -90,7 +90,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_SRC_METHOD = "htmlmediaelement-get-src-method";
     private async Task GetSrc_Method() {
-        string value = await AudioElement.GetSrc(default);
+        string value = await AudioElement.GetSrc(CancellationToken.None);
         labelOutput = value;
     }
 
@@ -110,7 +110,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_SRC_OBJECT_METHOD = "htmlmediaelement-get-src-object-method";
     private async Task GetSrcObject_Method() {
-        IMediaStream? value = await AudioElement.GetSrcObject(default);
+        IMediaStream? value = await AudioElement.GetSrcObject(CancellationToken.None);
         labelOutput = (value is not null).ToString();
         if (value != null)
             await value.DisposeAsync();
@@ -131,7 +131,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_CONTROLS_METHOD = "htmlmediaelement-get-controls-method";
     private async Task GetControls_Method() {
-        bool value = await AudioElement.GetControls(default);
+        bool value = await AudioElement.GetControls(CancellationToken.None);
         labelOutput = value.ToString();
     }
 
@@ -149,7 +149,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_AUTOPLAY_METHOD = "htmlmediaelement-get-autoplay-method";
     private async Task GetAutoplay_Method() {
-        bool value = await AudioElement.GetAutoplay(default);
+        bool value = await AudioElement.GetAutoplay(CancellationToken.None);
         labelOutput = value.ToString();
     }
 
@@ -167,7 +167,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_LOOP_METHOD = "htmlmediaelement-get-loop-method";
     private async Task GetLoop_Method() {
-        bool value = await AudioElement.GetLoop(default);
+        bool value = await AudioElement.GetLoop(CancellationToken.None);
         labelOutput = value.ToString();
     }
 
@@ -185,7 +185,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_DEFAULT_MUTED_METHOD = "htmlmediaelement-get-default-muted-method";
     private async Task GetDefaultMuted_Method() {
-        bool value = await AudioElement.GetDefaultMuted(default);
+        bool value = await AudioElement.GetDefaultMuted(CancellationToken.None);
         labelOutput = value.ToString();
     }
 
@@ -203,7 +203,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_PRELOAD_METHOD = "htmlmediaelement-get-preload-method";
     private async Task GetPreload_Method() {
-        string value = await AudioElement.GetPreload(default);
+        string value = await AudioElement.GetPreload(CancellationToken.None);
         labelOutput = value;
     }
 
@@ -225,7 +225,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_CURRENT_SRC_METHOD = "htmlmediaelement-get-current-src-method";
     private async Task GetCurrentSrc_Method() {
-        string value = await AudioElement.GetCurrentSrc(default);
+        string value = await AudioElement.GetCurrentSrc(CancellationToken.None);
         labelOutput = value;
     }
 
@@ -238,7 +238,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_CURRENT_TIME_METHOD = "htmlmediaelement-get-current-time-method";
     private async Task GetCurrentTime_Method() {
-        double value = await AudioElement.GetCurrentTime(default);
+        double value = await AudioElement.GetCurrentTime(CancellationToken.None);
         labelOutput = value.ToString();
     }
 
@@ -256,7 +256,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_DURATION_METHOD = "htmlmediaelement-get-duration-method";
     private async Task GetDuration_Method() {
-        double value = await AudioElement.GetDuration(default);
+        double value = await AudioElement.GetDuration(CancellationToken.None);
         labelOutput = value.ToString();
     }
 
@@ -269,7 +269,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_SEEKABLE_METHOD = "htmlmediaelement-get-seekable-method";
     private async Task GetSeekable_Method() {
-        TimeRange[] value = await AudioElement.GetSeekable(default);
+        TimeRange[] value = await AudioElement.GetSeekable(CancellationToken.None);
         labelOutput = $"{value.Length}: {string.Join(", ", value.Select((TimeRange timeRange) => $"[{timeRange.Start}, {timeRange.End}]"))}";
     }
 
@@ -282,7 +282,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_MUTED_METHOD = "htmlmediaelement-get-muted-method";
     private async Task GetMuted_Method() {
-        bool value = await AudioElement.GetMuted(default);
+        bool value = await AudioElement.GetMuted(CancellationToken.None);
         labelOutput = value.ToString();
     }
 
@@ -300,7 +300,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_VOLUME_METHOD = "htmlmediaelement-get-volume-method";
     private async Task GetVolume_Method() {
-        double value = await AudioElement.GetVolume(default);
+        double value = await AudioElement.GetVolume(CancellationToken.None);
         labelOutput = value.ToString();
     }
 
@@ -318,7 +318,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_PAUSED_METHOD = "htmlmediaelement-get-paused-method";
     private async Task GetPaused_Method() {
-        bool value = await AudioElement.GetPaused(default);
+        bool value = await AudioElement.GetPaused(CancellationToken.None);
         labelOutput = value.ToString();
     }
 
@@ -331,7 +331,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_ENDED_METHOD = "htmlmediaelement-get-ended-method";
     private async Task GetEnded_Method() {
-        bool value = await AudioElement.GetEnded(default);
+        bool value = await AudioElement.GetEnded(CancellationToken.None);
         labelOutput = value.ToString();
     }
 
@@ -344,7 +344,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_SEEKING_METHOD = "htmlmediaelement-get-seeking-method";
     private async Task GetSeeking_Method() {
-        bool value = await AudioElement.GetSeeking(default);
+        bool value = await AudioElement.GetSeeking(CancellationToken.None);
         labelOutput = value.ToString();
     }
 
@@ -357,7 +357,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_READY_STATE_METHOD = "htmlmediaelement-get-ready-state-method";
     private async Task GetReadyState_Method() {
-        int value = await AudioElement.GetReadyState(default);
+        int value = await AudioElement.GetReadyState(CancellationToken.None);
         labelOutput = value.ToString();
     }
 
@@ -370,7 +370,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_NETWORK_STATE_METHOD = "htmlmediaelement-get-network-state-method";
     private async Task GetNetworkState_Method() {
-        int value = await AudioElement.GetNetworkState(default);
+        int value = await AudioElement.GetNetworkState(CancellationToken.None);
         labelOutput = value.ToString();
     }
 
@@ -383,7 +383,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_BUFFERED_METHOD = "htmlmediaelement-get-buffered-method";
     private async Task GetBuffered_Method() {
-        TimeRange[] value = await AudioElement.GetBuffered(default);
+        TimeRange[] value = await AudioElement.GetBuffered(CancellationToken.None);
         labelOutput = $"{value.Length}: {string.Join(", ", value.Select((TimeRange timeRange) => $"[{timeRange.Start}, {timeRange.End}]"))}";
     }
 
@@ -396,7 +396,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_PLAYED_METHOD = "htmlmediaelement-get-played-method";
     private async Task GetPlayed_Method() {
-        TimeRange[] value = await AudioElement.GetPlayed(default);
+        TimeRange[] value = await AudioElement.GetPlayed(CancellationToken.None);
         labelOutput = $"{value.Length}: {string.Join(", ", value.Select((TimeRange timeRange) => $"[{timeRange.Start}, {timeRange.End}]"))}";
     }
 
@@ -413,7 +413,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_PLAYBACK_RATE_METHOD = "htmlmediaelement-get-playback-rate-method";
     private async Task GetPlaybackRate_Method() {
-        double value = await AudioElement.GetPlaybackRate(default);
+        double value = await AudioElement.GetPlaybackRate(CancellationToken.None);
         labelOutput = value.ToString();
     }
 
@@ -431,7 +431,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_DEFAULT_PLAYBACK_RATE_METHOD = "htmlmediaelement-get-default-playback-rate-method";
     private async Task GetDefaultPlaybackRate_Method() {
-        double value = await AudioElement.GetDefaultPlaybackRate(default);
+        double value = await AudioElement.GetDefaultPlaybackRate(CancellationToken.None);
         labelOutput = value.ToString();
     }
 
@@ -449,7 +449,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_CROSS_ORIGIN_METHOD = "htmlmediaelement-get-cross-origin-method";
     private async Task GetCrossOrigin_Method() {
-        string value = await AudioElement.GetCrossOrigin(default);
+        string value = await AudioElement.GetCrossOrigin(CancellationToken.None);
         labelOutput = value;
     }
 
@@ -467,7 +467,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_PRESERVES_PITCH_METHOD = "htmlmediaelement-get-preserves-pitch-method";
     private async Task GetPreservesPitch_Method() {
-        bool value = await AudioElement.GetPreservesPitch(default);
+        bool value = await AudioElement.GetPreservesPitch(CancellationToken.None);
         labelOutput = value.ToString();
     }
 
@@ -485,7 +485,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_DISABLE_REMOTE_PLAYBACK_METHOD = "htmlmediaelement-get-disable-remote-playback-method";
     private async Task GetDisableRemotePlayback_Method() {
-        bool value = await AudioElement.GetDisableRemotePlayback(default);
+        bool value = await AudioElement.GetDisableRemotePlayback(CancellationToken.None);
         labelOutput = value.ToString();
     }
 
@@ -507,7 +507,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_WIDTH_METHOD = "htmlmediaelement-get-width-method";
     private async Task GetWidth_Method() {
-        int width = await VideoElement.GetWidth(default);
+        int width = await VideoElement.GetWidth(CancellationToken.None);
         labelOutput = width.ToString();
     }
 
@@ -525,7 +525,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_HEIGHT_METHOD = "htmlmediaelement-get-height-method";
     private async Task GetHeight_Method() {
-        int height = await VideoElement.GetHeight(default);
+        int height = await VideoElement.GetHeight(CancellationToken.None);
         labelOutput = height.ToString();
     }
 
@@ -543,7 +543,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_VIDEO_WIDTH_METHOD = "htmlmediaelement-get-video-width-method";
     private async Task GetVideoWidth_Method() {
-        int videoWidth = await VideoElement.GetVideoWidth(default);
+        int videoWidth = await VideoElement.GetVideoWidth(CancellationToken.None);
         labelOutput = videoWidth.ToString();
     }
 
@@ -556,7 +556,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_VIDEO_HEIGHT_METHOD = "htmlmediaelement-get-video-height-method";
     private async Task GetVideoHeight_Method() {
-        int videoHeight = await VideoElement.GetVideoHeight(default);
+        int videoHeight = await VideoElement.GetVideoHeight(CancellationToken.None);
         labelOutput = videoHeight.ToString();
     }
 
@@ -569,7 +569,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_POSTER_METHOD = "htmlmediaelement-get-poster-method";
     private async Task GetPoster_Method() {
-        string poster = await VideoElement.GetPoster(default);
+        string poster = await VideoElement.GetPoster(CancellationToken.None);
         labelOutput = poster;
     }
 
@@ -587,7 +587,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
 
     public const string BUTTON_GET_DISABLE_PICTURE_IN_PICTURE_METHOD = "htmlmediaelement-get-disable-picture-in-picture-method";
     private async Task GetDisablePictureInPicture_Method() {
-        bool disablePictureInPicture = await VideoElement.GetDisablePictureInPicture(default);
+        bool disablePictureInPicture = await VideoElement.GetDisablePictureInPicture(CancellationToken.None);
         labelOutput = disablePictureInPicture.ToString();
     }
 
@@ -611,7 +611,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_GET_PICTURE_IN_PICTURE_WINDOW_WIDTH_METHOD = "htmlmediaelement-get-picture-in-picture-window-width-method";
     private async Task GetPictureInPictureWindowWidth_Method() {
         await using IPictureInPictureWindow pictureInPictureWindow = await VideoElement.RequestPictureInPicture();
-        int width = await pictureInPictureWindow.GetWidth(default);
+        int width = await pictureInPictureWindow.GetWidth(CancellationToken.None);
         labelOutput = width.ToString();
     }
 
@@ -626,7 +626,7 @@ public sealed partial class HTMLMediaElementGroup : ComponentBase, IAsyncDisposa
     public const string BUTTON_GET_PICTURE_IN_PICTURE_WINDOW_HEIGHT_METHOD = "htmlmediaelement-get-picture-in-picture-window-height-method";
     private async Task GetPictureInPictureWindowHeight_Method() {
         await using IPictureInPictureWindow pictureInPictureWindow = await VideoElement.RequestPictureInPicture();
-        int height = await pictureInPictureWindow.GetHeight(default);
+        int height = await pictureInPictureWindow.GetHeight(CancellationToken.None);
         labelOutput = height.ToString();
     }
 

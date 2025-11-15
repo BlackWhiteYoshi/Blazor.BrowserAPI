@@ -45,7 +45,7 @@ public sealed class ServiceWorkerContainerInProcess(IModuleManager moduleManager
     /// It returns a Promise that will never reject, and which waits indefinitely until the ServiceWorkerRegistration associated with the current page has an ServiceWorkerRegistration.active worker.
     /// Once that condition is met, it resolves with the ServiceWorkerRegistration.
     /// </summary>
-    public ValueTask<IServiceWorkerRegistrationInProcess> Ready => GetReady(default);
+    public ValueTask<IServiceWorkerRegistrationInProcess> Ready => GetReady(CancellationToken.None);
 
     /// <inheritdoc cref="Ready" />
     /// <param name="cancellationToken"></param>

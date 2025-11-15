@@ -105,7 +105,7 @@ public sealed partial class FileSystemGroup : ComponentBase {
     public const string BUTTON_FILEHANDLE_GET_NAME_METHOD = "filesystem-filehandle-get-name-method";
     private async Task FileHandle_GetName_Method() {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
-        string name = await tempFile.FileHandle.GetName(default);
+        string name = await tempFile.FileHandle.GetName(CancellationToken.None);
         labelOutput = name;
     }
 
@@ -151,7 +151,7 @@ public sealed partial class FileSystemGroup : ComponentBase {
     public const string BUTTON_DIRECTORYHANDLE_GET_NAME_METHOD = "filesystem-directoryhandle-get-name-method";
     private async Task DirectoryHandle_GetName_Method() {
         await using IDirectoryHandle directoryHandle = await FileSystem.StorageManagerGetDirectory();
-        string name = await directoryHandle.GetName(default);
+        string name = await directoryHandle.GetName(CancellationToken.None);
         labelOutput = name;
     }
 
@@ -236,7 +236,7 @@ public sealed partial class FileSystemGroup : ComponentBase {
     private async Task File_GetName_Method() {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         await using IFile file = await tempFile.FileHandle.GetFile();
-        string name = await file.GetName(default);
+        string name = await file.GetName(CancellationToken.None);
         labelOutput = name;
     }
 
@@ -252,7 +252,7 @@ public sealed partial class FileSystemGroup : ComponentBase {
     private async Task File_GetSize_Method() {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         await using IFile file = await tempFile.FileHandle.GetFile();
-        long size = await file.GetSize(default);
+        long size = await file.GetSize(CancellationToken.None);
         labelOutput = size.ToString();
     }
 
@@ -268,7 +268,7 @@ public sealed partial class FileSystemGroup : ComponentBase {
     private async Task File_GetType_Method() {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         await using IFile file = await tempFile.FileHandle.GetFile();
-        string type = await file.GetType(default);
+        string type = await file.GetType(CancellationToken.None);
         labelOutput = type;
     }
 
@@ -284,7 +284,7 @@ public sealed partial class FileSystemGroup : ComponentBase {
     private async Task File_GetLastModified_Method() {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         await using IFile file = await tempFile.FileHandle.GetFile();
-        long lastModified = await file.GetLastModified(default);
+        long lastModified = await file.GetLastModified(CancellationToken.None);
         labelOutput = lastModified.ToString();
     }
 
@@ -300,7 +300,7 @@ public sealed partial class FileSystemGroup : ComponentBase {
     private async Task File_GetWebkitRelativePath_Method() {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         await using IFile file = await tempFile.FileHandle.GetFile();
-        string webkitRelativePath = await file.GetWebkitRelativePath(default);
+        string webkitRelativePath = await file.GetWebkitRelativePath(CancellationToken.None);
         labelOutput = webkitRelativePath;
     }
 
@@ -328,7 +328,7 @@ public sealed partial class FileSystemGroup : ComponentBase {
     private async Task WritableFileStream_GetLocked_Method() {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         await using IWritableFileStream stream = await tempFile.FileHandle.CreateWritable();
-        bool locked = await stream.GetLocked(default);
+        bool locked = await stream.GetLocked(CancellationToken.None);
         await stream.Close();
         labelOutput = locked.ToString();
     }

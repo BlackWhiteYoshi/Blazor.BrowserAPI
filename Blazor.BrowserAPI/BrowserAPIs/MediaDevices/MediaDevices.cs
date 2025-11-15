@@ -15,7 +15,7 @@ public sealed class MediaDevices(IModuleManager moduleManager) : MediaDevicesBas
     /// Returns an object based on the MediaTrackSupportedConstraints dictionary,
     /// whose member fields each specify one of the constrainable properties the user agent understands.
     /// </summary>
-    public ValueTask<MediaTrackSupportedConstraints> SupportedConstraints => GetSupportedConstraints(default);
+    public ValueTask<MediaTrackSupportedConstraints> SupportedConstraints => GetSupportedConstraints(CancellationToken.None);
 
     /// <inheritdoc cref="SupportedConstraints" />
     /// <param name="cancellationToken"></param>

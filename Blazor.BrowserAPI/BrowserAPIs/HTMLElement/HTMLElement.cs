@@ -53,7 +53,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// Note: The HTMLElement.accessKey property is seldom used because of its multiple conflicts with already present key bindings in browsers.
     /// To work around this, browsers implement accesskey behavior if the keys are pressed with other "qualifying" keys (such as Alt + accesskey).
     /// </remarks>
-    public ValueTask<string> AccessKey => GetAccessKey(default);
+    public ValueTask<string> AccessKey => GetAccessKey(CancellationToken.None);
 
     /// <inheritdoc cref="AccessKey" />
     /// <param name="cancellationToken"></param>
@@ -69,7 +69,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// Returns a string containing the element's browser-assigned access key (if any); otherwise it returns an empty string.
     /// </summary>
-    public ValueTask<string> AccessKeyLabel => GetAccessKeyLabel(default);
+    public ValueTask<string> AccessKeyLabel => GetAccessKeyLabel(CancellationToken.None);
 
     /// <inheritdoc cref="AccessKeyLabel" />
     /// <param name="cancellationToken"></param>
@@ -89,7 +89,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </para>
     /// <para>Though this property itself is not writable, you can write and remove inline styles through <see cref="SetAttributeStyleMap"/> and <see cref="RemoveAttributeStyleMap"/>.</para>
     /// </summary>
-    public ValueTask<Dictionary<string, string>> AttributeStyleMap => GetAttributeStyleMap(default);
+    public ValueTask<Dictionary<string, string>> AttributeStyleMap => GetAttributeStyleMap(CancellationToken.None);
 
     /// <inheritdoc cref="AttributeStyleMap" />
     /// <param name="cancellationToken"></param>
@@ -139,7 +139,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </para>
     /// <para>It reflects the value of the autocapitalize HTML global attribute.</para>
     /// </summary>
-    public ValueTask<string> Autocapitalize => GetAutocapitalize(default);
+    public ValueTask<string> Autocapitalize => GetAutocapitalize(CancellationToken.None);
 
     /// <inheritdoc cref="Autocapitalize" />
     /// <param name="cancellationToken"></param>
@@ -168,7 +168,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// it merely tells the browser to focus to it when the element is inserted in the document.
     /// Setting it after the insertion, that is most of the time after the document load, has no visible effect.
     /// </remarks>
-    public ValueTask<bool> Autofocus => GetAutofocus(default);
+    public ValueTask<bool> Autofocus => GetAutofocus(CancellationToken.None);
 
     /// <inheritdoc cref="Autofocus" />
     /// <param name="cancellationToken"></param>
@@ -192,7 +192,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>You can use the <see cref="IsContentEditable"/> property to test the computed boolean value of this property.</para>
     /// <para>If the attribute is missing or its value is invalid, its value is inherited from its parent element: so the element is editable (or not) based on the parent element.</para>
     /// </summary>
-    public ValueTask<string> ContentEditable => GetContentEditable(default);
+    public ValueTask<string> ContentEditable => GetContentEditable(CancellationToken.None);
 
     /// <inheritdoc cref="ContentEditable" />
     /// <param name="cancellationToken"></param>
@@ -214,7 +214,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </para>
     /// <para>For writing or removing elements use <see cref="SetDataset"/> or <see cref="RemoveDataset"/>.</para>
     /// </summary>
-    public ValueTask<Dictionary<string, string>> Dataset => GetDataset(default);
+    public ValueTask<Dictionary<string, string>> Dataset => GetDataset(CancellationToken.None);
 
     /// <inheritdoc cref="Dataset" />
     /// <param name="cancellationToken"></param>
@@ -261,7 +261,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// Arabic languages and Hebrew are typical languages using the RTL directionality.
     /// </para>
     /// </summary>
-    public ValueTask<string> Dir => GetDir(default);
+    public ValueTask<string> Dir => GetDir(CancellationToken.None);
 
     /// <inheritdoc cref="Dir" />
     /// <param name="cancellationToken"></param>
@@ -278,7 +278,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// A boolean value indicating if the element can be dragged. It reflects the value of the draggable HTML global attribute.
     /// </summary>
-    public ValueTask<bool> Draggable => GetDraggable(default);
+    public ValueTask<bool> Draggable => GetDraggable(CancellationToken.None);
 
     /// <inheritdoc cref="Draggable" />
     /// <param name="cancellationToken"></param>
@@ -306,7 +306,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </para>
     /// <para>If no <i>enterKeyHint</i> value has been specified or if it was set to a different value than the allowed ones, it will return an empty string.</para>
     /// </summary>
-    public ValueTask<string> EnterKeyHint => GetEnterKeyHint(default);
+    public ValueTask<string> EnterKeyHint => GetEnterKeyHint(CancellationToken.None);
 
     /// <inheritdoc cref="EnterKeyHint" />
     /// <param name="cancellationToken"></param>
@@ -325,7 +325,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// true - The element is hidden.<br />
     /// false - The element is not hidden. This is the default value for the attribute.
     /// </summary>
-    public ValueTask<bool> Hidden => GetHidden(default);
+    public ValueTask<bool> Hidden => GetHidden(CancellationToken.None);
 
     /// <inheritdoc cref="Hidden" />
     /// <param name="cancellationToken"></param>
@@ -351,7 +351,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// However, that inherited inertness is not reflected by this property's value.
     /// </para>
     /// </summary>
-    public ValueTask<bool> Inert => GetInert(default);
+    public ValueTask<bool> Inert => GetInert(CancellationToken.None);
 
     /// <inheritdoc cref="Inert" />
     /// <param name="cancellationToken"></param>
@@ -376,7 +376,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// Basically, innerText is aware of the rendered appearance of text, while textContent is not.
     /// </para>
     /// </summary>
-    public ValueTask<string> InnerText => GetInnerText(default);
+    public ValueTask<string> InnerText => GetInnerText(CancellationToken.None);
 
     /// <inheritdoc cref="InnerText" />
     /// <param name="cancellationToken"></param>
@@ -408,7 +408,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "url": A keypad optimized for entering URLs. This may have the / key more prominent, for example.
     /// </para>
     /// </summary>
-    public ValueTask<string> InputMode => GetInputMode(default);
+    public ValueTask<string> InputMode => GetInputMode(CancellationToken.None);
 
     /// <inheritdoc cref="InputMode" />
     /// <param name="cancellationToken"></param>
@@ -425,7 +425,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// It is true if the contents of the element are editable; otherwise it returns false.
     /// </summary>
-    public ValueTask<bool> IsContentEditable => GetIsContentEditable(default);
+    public ValueTask<bool> IsContentEditable => GetIsContentEditable(CancellationToken.None);
 
     /// <inheritdoc cref="IsContentEditable" />
     /// <param name="cancellationToken"></param>
@@ -444,7 +444,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </para>
     /// <para>Common examples include "en" for English, "ja" for Japanese, "es" for Spanish and so on. If unspecified, the value is an empty string.</para>
     /// </summary>
-    public ValueTask<string> Lang => GetLang(default);
+    public ValueTask<string> Lang => GetLang(CancellationToken.None);
 
     /// <inheritdoc cref="Lang" />
     /// <param name="cancellationToken"></param>
@@ -462,7 +462,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Returns the cryptographic number used once that is used by Content Security Policy to determine whether a given fetch will be allowed to proceed.</para>
     /// <para>In later implementations, elements only expose their nonce attribute to scripts (and not to side-channels like CSS attribute selectors).</para>
     /// </summary>
-    public ValueTask<string> Nonce => GetNonce(default);
+    public ValueTask<string> Nonce => GetNonce(CancellationToken.None);
 
     /// <inheritdoc cref="Nonce" />
     /// <param name="cancellationToken"></param>
@@ -485,7 +485,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>If the element is hidden (for example, by setting style.display on the element or one of its ancestors to "none"), then 0 is returned.</para>
     /// <para>Note: This property will round the value to an integer. If you need a fractional value, use element.getBoundingClientRect().</para>
     /// </summary>
-    public ValueTask<int> OffsetWidth => GetOffsetWidth(default);
+    public ValueTask<int> OffsetWidth => GetOffsetWidth(CancellationToken.None);
 
     /// <inheritdoc cref="OffsetWidth" />
     /// <param name="cancellationToken"></param>
@@ -502,7 +502,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>If the element is hidden(for example, by setting style.display on the element or one of its ancestors to "none"), then 0 is returned.</para>
     /// <para>Note: This property will round the value to an integer. If you need a fractional value, use element.getBoundingClientRect().</para>
     /// </summary>
-    public ValueTask<int> OffsetHeight => GetOffsetHeight(default);
+    public ValueTask<int> OffsetHeight => GetOffsetHeight(CancellationToken.None);
 
     /// <inheritdoc cref="OffsetHeight" />
     /// <param name="cancellationToken"></param>
@@ -519,7 +519,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// Therefore, a box with the left, top, width and height of offsetLeft, offsetTop, offsetWidth and offsetHeight will not be a bounding box for a span with wrapped text.
     /// </para>
     /// </summary>
-    public ValueTask<int> OffsetLeft => GetOffsetLeft(default);
+    public ValueTask<int> OffsetLeft => GetOffsetLeft(CancellationToken.None);
 
     /// <inheritdoc cref="OffsetLeft" />
     /// <param name="cancellationToken"></param>
@@ -530,7 +530,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// Returns the distance from the outer border of the current element (including its margin) to the top padding edge of the offsetParent, the closest positioned ancestor element.
     /// </summary>
-    public ValueTask<int> OffsetTop => GetOffsetTop(default);
+    public ValueTask<int> OffsetTop => GetOffsetTop(CancellationToken.None);
 
     /// <inheritdoc cref="OffsetTop" />
     /// <param name="cancellationToken"></param>
@@ -554,7 +554,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </para>
     /// <para><i>offsetParent</i> is useful because offsetTop and offsetLeft are relative to its padding edge.</para>
     /// </summary>
-    public ValueTask<IHTMLElement?> OffsetParent => GetOffsetParent(default);
+    public ValueTask<IHTMLElement?> OffsetParent => GetOffsetParent(CancellationToken.None);
 
     /// <inheritdoc cref="OffsetParent" />
     /// <param name="cancellationToken"></param>
@@ -575,7 +575,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </para>
     /// <para>See <see cref="InnerText">HTMLElement.innerText</see> for more information and examples showing how both properties are used as getters.</para>
     /// </summary>
-    public ValueTask<string> OuterText => GetOuterText(default);
+    public ValueTask<string> OuterText => GetOuterText(CancellationToken.None);
 
     /// <inheritdoc cref="OuterText" />
     /// <param name="cancellationToken"></param>
@@ -606,7 +606,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// Multiple independent manual popovers can be shown simultaneously.
     /// </para>
     /// </summary>
-    public ValueTask<string?> Popover => GetPopover(default);
+    public ValueTask<string?> Popover => GetPopover(CancellationToken.None);
 
     /// <inheritdoc cref="Popover" />
     /// <param name="cancellationToken"></param>
@@ -624,7 +624,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// Represents a boolean value that controls the spell-checking hint. It is available on all HTML elements, though it doesn't affect all of them.
     /// It reflects the value of the spellcheck HTML global attribute.
     /// </summary>
-    public ValueTask<bool> Spellcheck => GetSpellcheck(default);
+    public ValueTask<bool> Spellcheck => GetSpellcheck(CancellationToken.None);
 
     /// <inheritdoc cref="Spellcheck" />
     /// <param name="cancellationToken"></param>
@@ -644,7 +644,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>To be able to set a stylesheet rule dynamically, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Using_dynamic_styling_information">Using dynamic styling information</see>.</para>
     /// <para>Not to be confused with stylesheet style-rule <see href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/cssText">CSSRule.cssText</see>.</para>
     /// </summary>
-    public ValueTask<string> Style => GetStyle(default);
+    public ValueTask<string> Style => GetStyle(CancellationToken.None);
 
     /// <inheritdoc cref="Style" />
     /// <param name="cancellationToken"></param>
@@ -667,7 +667,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </para>
     /// <para>Values don't need to be sequential, nor must they begin with any particular value. They may even be negative, though each browser trims very large values.</para>
     /// </summary>
-    public ValueTask<long> TabIndex => GetTabIndex(default);
+    public ValueTask<long> TabIndex => GetTabIndex(CancellationToken.None);
 
     /// <inheritdoc cref="TabIndex" />
     /// <param name="cancellationToken"></param>
@@ -684,7 +684,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// Represents the title of the element: the text usually displayed in a 'tooltip' popup when the mouse is over the node.
     /// </summary>
-    public ValueTask<string> Title => GetTitle(default);
+    public ValueTask<string> Title => GetTitle(CancellationToken.None);
 
     /// <inheritdoc cref="Title" />
     /// <param name="cancellationToken"></param>
@@ -702,7 +702,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// Indicates whether an element's attribute values and the values of its Text node children are to be translated when the page is localized, or whether to leave them unchanged.
     /// It reflects the value of the translate HTML global attribute.
     /// </summary>
-    public ValueTask<bool> Translate => GetTranslate(default);
+    public ValueTask<bool> Translate => GetTranslate(CancellationToken.None);
 
     /// <inheritdoc cref="Translate" />
     /// <param name="cancellationToken"></param>
@@ -722,7 +722,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>htmlElement === document.activeElement;</para>
     /// <para>If true, the htmlElement has focus, otherwise false.</para>
     /// </summary>
-    public ValueTask<bool> HasFocus => GetHasFocus(default);
+    public ValueTask<bool> HasFocus => GetHasFocus(CancellationToken.None);
 
     /// <inheritdoc cref="HasFocus" />
     /// <param name="cancellationToken"></param>
@@ -1016,7 +1016,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// It is a NamedNodeMap, not an Array, so it has no Array methods and the Attr nodes' indexes may differ among browsers.
     /// To be more specific, attributes is a key/value pair of strings that represents any information regarding that attribute.
     /// </summary>
-    public ValueTask<Dictionary<string, string>> Attributes => GetAttributes(default);
+    public ValueTask<Dictionary<string, string>> Attributes => GetAttributes(CancellationToken.None);
 
     /// <inheritdoc cref="Attributes" />
     /// <param name="cancellationToken"></param>
@@ -1028,7 +1028,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Returns a live DOMTokenList collection of the class attributes of the element. This can then be used to manipulate the class list.</para>
     /// <para>Using classList is a convenient alternative to accessing an element's list of classes as a space-delimited string via <i>element.className</i>.</para>
     /// </summary>
-    public ValueTask<string[]> ClassList => GetClassList(default);
+    public ValueTask<string[]> ClassList => GetClassList(CancellationToken.None);
 
     /// <inheritdoc cref="ClassList" />
     /// <param name="cancellationToken"></param>
@@ -1039,7 +1039,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// Gets/Sets the value of the class attribute of the specified element.
     /// </summary>
-    public ValueTask<string> ClassName => GetClassName(default);
+    public ValueTask<string> ClassName => GetClassName(CancellationToken.None);
 
     /// <inheritdoc cref="ClassName" />
     /// <param name="cancellationToken"></param>
@@ -1064,7 +1064,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </para>
     /// <para>Note: This property will round the value to an integer. If you need a fractional value, use element.getBoundingClientRect().</para>
     /// </summary>
-    public ValueTask<int> ClientWidth => GetClientWidth(default);
+    public ValueTask<int> ClientWidth => GetClientWidth(CancellationToken.None);
 
     /// <inheritdoc cref="ClientWidth" />
     /// <param name="cancellationToken"></param>
@@ -1083,7 +1083,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </para>
     /// <para>Note: This property will round the value to an integer. If you need a fractional value, use element.getBoundingClientRect().</para>
     /// </summary>
-    public ValueTask<int> ClientHeight => GetClientHeight(default);
+    public ValueTask<int> ClientHeight => GetClientHeight(CancellationToken.None);
 
     /// <inheritdoc cref="ClientHeight" />
     /// <param name="cancellationToken"></param>
@@ -1099,7 +1099,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Note: This property will round the value to an integer.If you need a fractional value, use element.getBoundingClientRect().</para>
     /// <para>Note: When an element has display: inline, clientLeft returns 0 regardless of the element's border.</para>
     /// </summary>
-    public ValueTask<int> ClientLeft => GetClientLeft(default);
+    public ValueTask<int> ClientLeft => GetClientLeft(CancellationToken.None);
 
     /// <inheritdoc cref="ClientLeft" />
     /// <param name="cancellationToken"></param>
@@ -1116,7 +1116,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </para>
     /// <para>Note: This property will round the value to an integer.If you need a fractional value, use element.getBoundingClientRect().</para>
     /// </summary>
-    public ValueTask<int> ClientTop => GetClientTop(default);
+    public ValueTask<int> ClientTop => GetClientTop(CancellationToken.None);
 
     /// <inheritdoc cref="ClientTop" />
     /// <param name="cancellationToken"></param>
@@ -1138,7 +1138,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// The currentCSSZoom property can be used to scale these values to adjust for the effects of zooming.
     /// </para>
     /// </summary>
-    public ValueTask<double> CurrentCSSZoom => GetCurrentCSSZoom(default);
+    public ValueTask<double> CurrentCSSZoom => GetCurrentCSSZoom(CancellationToken.None);
 
     /// <inheritdoc cref="CurrentCSSZoom" />
     /// <param name="cancellationToken"></param>
@@ -1151,7 +1151,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>If the id value is not the empty string, it must be unique in a document.</para>
     /// <para>The id is often used with getElementById() to retrieve a particular element. Another common case is to use an element's ID as a selector when styling the document with CSS.</para>
     /// </summary>
-    public ValueTask<string> Id => GetId(default);
+    public ValueTask<string> Id => GetId(CancellationToken.None);
 
     /// <inheritdoc cref="Id" />
     /// <param name="cancellationToken"></param>
@@ -1168,7 +1168,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// A boolean indicating whether the node is connected (directly or indirectly) to a Document object.
     /// </summary>
-    public ValueTask<bool> IsConnected => GetIsConnected(default);
+    public ValueTask<bool> IsConnected => GetIsConnected(CancellationToken.None);
 
     /// <inheritdoc cref="IsConnected" />
     /// <param name="cancellationToken"></param>
@@ -1180,7 +1180,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Gets/Sets the HTML or XML markup contained within the element.</para>
     /// <para>To insert the HTML into the document rather than replace the contents of an element, use the method insertAdjacentHTML().</para>
     /// </summary>
-    public ValueTask<string> InnerHTML => GetInnerHTML(default);
+    public ValueTask<string> InnerHTML => GetInnerHTML(CancellationToken.None);
 
     /// <inheritdoc cref="InnerHTML" />
     /// <param name="cancellationToken"></param>
@@ -1201,7 +1201,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </para>
     /// <para>To only obtain the HTML representation of the contents of an element, or to replace the contents of an element, use the innerHTML property instead.</para>
     /// </summary>
-    public ValueTask<string> OuterHTML => GetOuterHTML(default);
+    public ValueTask<string> OuterHTML => GetOuterHTML(CancellationToken.None);
 
     /// <inheritdoc cref="OuterHTML" />
     /// <param name="cancellationToken"></param>
@@ -1218,7 +1218,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// Represents the part identifier(s) of the element (i.e., set using the part attribute), returned as a DOMTokenList. These can be used to style parts of a shadow DOM, via the ::part pseudo-element.
     /// </summary>
-    public ValueTask<string[]> Part => GetPart(default);
+    public ValueTask<string[]> Part => GetPart(CancellationToken.None);
 
     /// <inheritdoc cref="Part" />
     /// <param name="cancellationToken"></param>
@@ -1236,7 +1236,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </para>
     /// <para>Note: This property will round the value to an integer.If you need a fractional value, use element.getBoundingClientRect().</para>
     /// </summary>
-    public ValueTask<int> ScrollWidth => GetScrollWidth(default);
+    public ValueTask<int> ScrollWidth => GetScrollWidth(CancellationToken.None);
 
     /// <inheritdoc cref="ScrollWidth" />
     /// <param name="cancellationToken"></param>
@@ -1257,7 +1257,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </para>
     /// <para>Note: This property will round the value to an integer.If you need a fractional value, use Element.getBoundingClientRect().</para>
     /// </summary>
-    public ValueTask<int> ScrollHeight => GetScrollHeight(default);
+    public ValueTask<int> ScrollHeight => GetScrollHeight(CancellationToken.None);
 
     /// <inheritdoc cref="ScrollHeight" />
     /// <param name="cancellationToken"></param>
@@ -1278,7 +1278,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </para>
     /// <para>Warning: On systems using display scaling, scrollLeft may give you a decimal value. (It will be rounded down to the next integer.)</para>
     /// </summary>
-    public ValueTask<int> ScrollLeft => GetScrollLeft(default);
+    public ValueTask<int> ScrollLeft => GetScrollLeft(CancellationToken.None);
 
     /// <inheritdoc cref="ScrollLeft" />
     /// <param name="cancellationToken"></param>
@@ -1309,7 +1309,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </para>
     /// <para>Warning: On systems using display scaling, scrollTop may give you a decimal value. (It will be rounded down to the next integer.)</para>
     /// </summary>
-    public ValueTask<int> ScrollTop => GetScrollTop(default);
+    public ValueTask<int> ScrollTop => GetScrollTop(CancellationToken.None);
 
     /// <inheritdoc cref="ScrollTop" />
     /// <param name="cancellationToken"></param>
@@ -1327,7 +1327,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// Returns the name of the shadow DOM slot the element is inserted in.<br />
     /// A slot is a placeholder inside a web component that users can fill with their own markup (see Using templates and slots for more information).
     /// </summary>
-    public ValueTask<string> Slot => GetSlot(default);
+    public ValueTask<string> Slot => GetSlot(CancellationToken.None);
 
     /// <inheritdoc cref="Slot" />
     /// <param name="cancellationToken"></param>
@@ -1354,7 +1354,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// Note: textContent and HTMLElement.innerText are easily confused, but the two properties are different in important ways.<br />
     /// Warning: Setting textContent on a node removes all of the node's children and replaces them with a single text node with the given string value.
     /// </remarks>
-    public ValueTask<string> TextContent => GetTextContent(default);
+    public ValueTask<string> TextContent => GetTextContent(CancellationToken.None);
 
     /// <inheritdoc cref="TextContent" />
     /// <param name="cancellationToken"></param>
@@ -1371,7 +1371,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// The local part of the qualified name of an element.
     /// </summary>
-    public ValueTask<string> LocalName => GetLocalName(default);
+    public ValueTask<string> LocalName => GetLocalName(CancellationToken.None);
 
     /// <inheritdoc cref="LocalName" />
     /// <param name="cancellationToken"></param>
@@ -1381,7 +1381,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// The namespace URI of the element, or null if the element is not in a namespace.
     /// </summary>
-    public ValueTask<string?> NamespaceURI => GetNamespaceURI(default);
+    public ValueTask<string?> NamespaceURI => GetNamespaceURI(CancellationToken.None);
 
     /// <inheritdoc cref="NamespaceURI" />
     /// <param name="cancellationToken"></param>
@@ -1391,7 +1391,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// The namespace prefix of the specified element, or null if no prefix is specified.
     /// </summary>
-    public ValueTask<string?> Prefix => GetPrefix(default);
+    public ValueTask<string?> Prefix => GetPrefix(CancellationToken.None);
 
     /// <inheritdoc cref="Prefix" />
     /// <param name="cancellationToken"></param>
@@ -1411,7 +1411,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// 2. If it is an HTML Document and there is a &lt;Base&gt; element in the document, the href value of the first Base element with such an attribute is used instead.
     /// </para>
     /// </summary>
-    public ValueTask<string> BaseURI => GetBaseURI(default);
+    public ValueTask<string> BaseURI => GetBaseURI(CancellationToken.None);
 
     /// <inheritdoc cref="BaseURI" />
     /// <param name="cancellationToken"></param>
@@ -1425,7 +1425,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// Note: You can use the localName property to access the Element's local name — which for the case in the example is img (lowercase).
     /// </para>
     /// </summary>
-    public ValueTask<string> TagName => GetTagName(default);
+    public ValueTask<string> TagName => GetTagName(CancellationToken.None);
 
     /// <inheritdoc cref="TagName" />
     /// <param name="cancellationToken"></param>
@@ -1447,7 +1447,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - Text: The string "#text"
     /// </para>
     /// </summary>
-    public ValueTask<string> NodeName => GetNodeName(default);
+    public ValueTask<string> NodeName => GetNodeName(CancellationToken.None);
 
     /// <inheritdoc cref="NodeName" />
     /// <param name="cancellationToken"></param>
@@ -1475,7 +1475,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - 12: NOTATION_NODE
     /// </para>
     /// </summary>
-    public ValueTask<int> NodeType => GetNodeType(default);
+    public ValueTask<int> NodeType => GetNodeType(CancellationToken.None);
 
     /// <inheritdoc cref="NodeType" />
     /// <param name="cancellationToken"></param>
@@ -1488,7 +1488,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// Returns the number of child elements of this element.
     /// </summary>
-    public ValueTask<int> ChildElementCount => GetChildElementCount(default);
+    public ValueTask<int> ChildElementCount => GetChildElementCount(CancellationToken.None);
 
     /// <inheritdoc cref="ChildElementCount" />
     /// <param name="cancellationToken"></param>
@@ -1500,7 +1500,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Returns a live HTMLCollection which contains all of the child elements of the element upon which it was called.</para>
     /// <para>Element.children includes only element nodes.To get all child nodes, including non-element nodes like text and comment nodes, use Node.childNodes.</para>
     /// </summary>
-    public ValueTask<IHTMLElement[]> Children => GetChildren(default);
+    public ValueTask<IHTMLElement[]> Children => GetChildren(CancellationToken.None);
 
     /// <inheritdoc cref="Children" />
     /// <param name="cancellationToken"></param>
@@ -1519,7 +1519,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Returns an element's first child Element, or null if there are no child elements.</para>
     /// <para>It includes only element nodes.</para>
     /// </summary>
-    public ValueTask<IHTMLElement?> FirstElementChild => GetFirstElementChild(default);
+    public ValueTask<IHTMLElement?> FirstElementChild => GetFirstElementChild(CancellationToken.None);
 
     /// <inheritdoc cref="FirstElementChild" />
     /// <param name="cancellationToken"></param>
@@ -1537,7 +1537,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Returns an element's last child Element, or null if there are no child elements.</para>
     /// <para>It includes only element nodes.</para>
     /// </summary>
-    public ValueTask<IHTMLElement?> LastElementChild => GetLastElementChild(default);
+    public ValueTask<IHTMLElement?> LastElementChild => GetLastElementChild(CancellationToken.None);
 
     /// <inheritdoc cref="LastElementChild" />
     /// <param name="cancellationToken"></param>
@@ -1554,7 +1554,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// Returns the Element immediately prior to the specified one in its parent's children list, or null if the specified element is the first one in the list.
     /// </summary>
-    public ValueTask<IHTMLElement?> PreviousElementSibling => GetPreviousElementSibling(default);
+    public ValueTask<IHTMLElement?> PreviousElementSibling => GetPreviousElementSibling(CancellationToken.None);
 
     /// <inheritdoc cref="PreviousElementSibling" />
     /// <param name="cancellationToken"></param>
@@ -1571,7 +1571,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// Returns the element immediately following the specified one in its parent's children list, or null if the specified element is the last one in the list.
     /// </summary>
-    public ValueTask<IHTMLElement?> NextElementSibling => GetNextElementSibling(default);
+    public ValueTask<IHTMLElement?> NextElementSibling => GetNextElementSibling(CancellationToken.None);
 
     /// <inheritdoc cref="NextElementSibling" />
     /// <param name="cancellationToken"></param>
@@ -1588,7 +1588,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// Returns the DOM node's parent Element, or null if the node either has no parent,or its parent isn't a DOM Element.
     /// </summary>
-    public ValueTask<IHTMLElement?> ParentElement => GetParentElement(default);
+    public ValueTask<IHTMLElement?> ParentElement => GetParentElement(CancellationToken.None);
 
     /// <inheritdoc cref="ParentElement" />
     /// <param name="cancellationToken"></param>
@@ -1612,7 +1612,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "true": Assistive technologies will present the entire changed region as a whole, including the author-defined label if one exists.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaAtomic => GetAriaAtomic(default);
+    public ValueTask<string?> AriaAtomic => GetAriaAtomic(CancellationToken.None);
 
     /// <inheritdoc cref="AriaAtomic" />
     /// <param name="cancellationToken"></param>
@@ -1636,7 +1636,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "none": When a user is providing input, there is no display of an automatic suggestion that attempts to predict how the user intends to complete the input.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaAutoComplete => GetAriaAutoComplete(default);
+    public ValueTask<string?> AriaAutoComplete => GetAriaAutoComplete(CancellationToken.None);
 
     /// <inheritdoc cref="AriaAutoComplete" />
     /// <param name="cancellationToken"></param>
@@ -1655,7 +1655,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// This element label may be used by assistive technologies that can present content in braille, but should only be set if a braille-specific label would improve the user experience.
     /// The aria-braillelabel contains additional information about when the property should be set.
     /// </summary>
-    public ValueTask<string?> AriaBrailleLabel => GetAriaBrailleLabel(default);
+    public ValueTask<string?> AriaBrailleLabel => GetAriaBrailleLabel(CancellationToken.None);
 
     /// <inheritdoc cref="AriaBrailleLabel" />
     /// <param name="cancellationToken"></param>
@@ -1675,7 +1675,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// It should only be used if aria-roledescription is present and in the rare case where it is too verbose for braille.
     /// The aria-brailleroledescription contains additional information about when the property should be set.
     /// </summary>
-    public ValueTask<string?> AriaBrailleRoleDescription => GetAriaBrailleRoleDescription(default);
+    public ValueTask<string?> AriaBrailleRoleDescription => GetAriaBrailleRoleDescription(CancellationToken.None);
 
     /// <inheritdoc cref="AriaBrailleRoleDescription" />
     /// <param name="cancellationToken"></param>
@@ -1698,7 +1698,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "false": There are no expected updates for the element.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaBusy => GetAriaBusy(default);
+    public ValueTask<string?> AriaBusy => GetAriaBusy(CancellationToken.None);
 
     /// <inheritdoc cref="AriaBusy" />
     /// <param name="cancellationToken"></param>
@@ -1722,7 +1722,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "undefined": The element does not support being checked.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaChecked => GetAriaChecked(default);
+    public ValueTask<string?> AriaChecked => GetAriaChecked(CancellationToken.None);
 
     /// <inheritdoc cref="AriaChecked" />
     /// <param name="cancellationToken"></param>
@@ -1740,7 +1740,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Reflects the value of the aria-colcount attribute, which defines the number of columns in a table, grid, or treegrid.</para>
     /// <para>Value is a string which contains an integer.</para>
     /// </summary>
-    public ValueTask<string?> AriaColCount => GetAriaColCount(default);
+    public ValueTask<string?> AriaColCount => GetAriaColCount(CancellationToken.None);
 
     /// <inheritdoc cref="AriaColCount" />
     /// <param name="cancellationToken"></param>
@@ -1758,7 +1758,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Reflects the value of the aria-colindex attribute, which defines an element's column index or position with respect to the total number of columns within a table, grid, or treegrid.</para>
     /// <para>Value is a string which contains an integer.</para>
     /// </summary>
-    public ValueTask<string?> AriaColIndex => GetAriaColIndex(default);
+    public ValueTask<string?> AriaColIndex => GetAriaColIndex(CancellationToken.None);
 
     /// <inheritdoc cref="AriaColIndex" />
     /// <param name="cancellationToken"></param>
@@ -1775,7 +1775,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// Reflects the value of the aria-colindextext attribute, which defines a human readable text alternative of aria-colindex.
     /// </summary>
-    public ValueTask<string?> AriaColIndexText => GetAriaColIndexText(default);
+    public ValueTask<string?> AriaColIndexText => GetAriaColIndexText(CancellationToken.None);
 
     /// <inheritdoc cref="AriaColIndexText" />
     /// <param name="cancellationToken"></param>
@@ -1793,7 +1793,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Reflects the value of the aria-colspan attribute, which defines the number of columns spanned by a cell or gridcell within a table, grid, or treegrid.</para>
     /// <para>Value is a string which contains an integer.</para>
     /// </summary>
-    public ValueTask<string?> AriaColSpan => GetAriaColSpan(default);
+    public ValueTask<string?> AriaColSpan => GetAriaColSpan(CancellationToken.None);
 
     /// <inheritdoc cref="AriaColSpan" />
     /// <param name="cancellationToken"></param>
@@ -1820,7 +1820,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "false": Does not represent the current item within a set.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaCurrent => GetAriaCurrent(default);
+    public ValueTask<string?> AriaCurrent => GetAriaCurrent(CancellationToken.None);
 
     /// <inheritdoc cref="AriaCurrent" />
     /// <param name="cancellationToken"></param>
@@ -1837,7 +1837,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// Reflects the value of the aria-description attribute, which defines a string value that describes or annotates the current element.
     /// </summary>
-    public ValueTask<string?> AriaDescription => GetAriaDescription(default);
+    public ValueTask<string?> AriaDescription => GetAriaDescription(CancellationToken.None);
 
     /// <inheritdoc cref="AriaDescription" />
     /// <param name="cancellationToken"></param>
@@ -1859,7 +1859,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "false": The element is enabled.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaDisabled => GetAriaDisabled(default);
+    public ValueTask<string?> AriaDisabled => GetAriaDisabled(CancellationToken.None);
 
     /// <inheritdoc cref="AriaDisabled" />
     /// <param name="cancellationToken"></param>
@@ -1882,7 +1882,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "undefined": The element does not own or control a grouping element that is expandable.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaExpanded => GetAriaExpanded(default);
+    public ValueTask<string?> AriaExpanded => GetAriaExpanded(CancellationToken.None);
 
     /// <inheritdoc cref="AriaExpanded" />
     /// <param name="cancellationToken"></param>
@@ -1909,7 +1909,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "dialog": The element has a popup that is a dialog.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaHasPopup => GetAriaHasPopup(default);
+    public ValueTask<string?> AriaHasPopup => GetAriaHasPopup(CancellationToken.None);
 
     /// <inheritdoc cref="AriaHasPopup" />
     /// <param name="cancellationToken"></param>
@@ -1932,7 +1932,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "undefined": The element's hidden state is determined by the user agent based on whether it is rendered.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaHidden => GetAriaHidden(default);
+    public ValueTask<string?> AriaHidden => GetAriaHidden(CancellationToken.None);
 
     /// <inheritdoc cref="Hidden" />
     /// <param name="cancellationToken"></param>
@@ -1965,7 +1965,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "spelling": The element is in an invalid state because spelling error was detected.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaInvalid => GetAriaInvalid(default);
+    public ValueTask<string?> AriaInvalid => GetAriaInvalid(CancellationToken.None);
 
     /// <inheritdoc cref="AriaInvalid" />
     /// <param name="cancellationToken"></param>
@@ -1982,7 +1982,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// Reflects the value of the aria-keyshortcuts attribute, which indicates keyboard shortcuts that an author has implemented to activate or give focus to an element.
     /// </summary>
-    public ValueTask<string?> AriaKeyShortcuts => GetAriaKeyShortcuts(default);
+    public ValueTask<string?> AriaKeyShortcuts => GetAriaKeyShortcuts(CancellationToken.None);
 
     /// <inheritdoc cref="AriaKeyShortcuts" />
     /// <param name="cancellationToken"></param>
@@ -1999,7 +1999,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// Reflects the value of the aria-label attribute, which defines a string value that labels the current element.
     /// </summary>
-    public ValueTask<string?> AriaLabel => GetAriaLabel(default);
+    public ValueTask<string?> AriaLabel => GetAriaLabel(CancellationToken.None);
 
     /// <inheritdoc cref="AriaLabel" />
     /// <param name="cancellationToken"></param>
@@ -2018,7 +2018,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Note: Where possible use an HTML h1 or other correct heading level as these have built in semantics and do not require ARIA attributes.</para>
     /// <para>Value is a string containing an integer.</para>
     /// </summary>
-    public ValueTask<string?> AriaLevel => GetAriaLevel(default);
+    public ValueTask<string?> AriaLevel => GetAriaLevel(CancellationToken.None);
 
     /// <inheritdoc cref="AriaLevel" />
     /// <param name="cancellationToken"></param>
@@ -2044,7 +2044,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "polite": Indicates that updates to the region should be presented at the next graceful opportunity, such as at the end of speaking the current sentence or when the user pauses typing.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaLive => GetAriaLive(default);
+    public ValueTask<string?> AriaLive => GetAriaLive(CancellationToken.None);
 
     /// <inheritdoc cref="AriaLive" />
     /// <param name="cancellationToken"></param>
@@ -2069,7 +2069,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "false": The element is not modal.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaModal => GetAriaModal(default);
+    public ValueTask<string?> AriaModal => GetAriaModal(CancellationToken.None);
 
     /// <inheritdoc cref="AriaModal" />
     /// <param name="cancellationToken"></param>
@@ -2092,7 +2092,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "false": This is a single-line text box.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaMultiline => GetAriaMultiline(default);
+    public ValueTask<string?> AriaMultiline => GetAriaMultiline(CancellationToken.None);
 
     /// <inheritdoc cref="AriaMultiline" />
     /// <param name="cancellationToken"></param>
@@ -2115,7 +2115,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "false": Only one item may be selected.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaMultiSelectable => GetAriaMultiSelectable(default);
+    public ValueTask<string?> AriaMultiSelectable => GetAriaMultiSelectable(CancellationToken.None);
 
     /// <inheritdoc cref="AriaMultiSelectable" />
     /// <param name="cancellationToken"></param>
@@ -2138,7 +2138,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "undefined": The element's orientation is unknown.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaOrientation => GetAriaOrientation(default);
+    public ValueTask<string?> AriaOrientation => GetAriaOrientation(CancellationToken.None);
 
     /// <inheritdoc cref="AriaOrientation" />
     /// <param name="cancellationToken"></param>
@@ -2156,7 +2156,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Reflects the value of the aria-placeholder attribute, which defines a short hint intended to aid the user with data entry when the control has no value.</para>
     /// <para>Note: Where possible use an HTML &lt;input&gt; element with type="text" or a &lt;textarea&gt; as these have built in semantics and do not require ARIA attributes.</para>
     /// </summary>
-    public ValueTask<string?> AriaPlaceholder => GetAriaPlaceholder(default);
+    public ValueTask<string?> AriaPlaceholder => GetAriaPlaceholder(CancellationToken.None);
 
     /// <inheritdoc cref="AriaPlaceholder" />
     /// <param name="cancellationToken"></param>
@@ -2174,7 +2174,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Reflects the value of the aria-posinset attribute, which defines an element's number or position in the current set of listitems or treeitems.</para>
     /// <para>Value is a string containing an integer.</para>
     /// </summary>
-    public ValueTask<string?> AriaPosInSet => GetAriaPosInSet(default);
+    public ValueTask<string?> AriaPosInSet => GetAriaPosInSet(CancellationToken.None);
 
     /// <inheritdoc cref="AriaPosInSet" />
     /// <param name="cancellationToken"></param>
@@ -2199,7 +2199,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "undefined": The element does not support being pressed.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaPressed => GetAriaPressed(default);
+    public ValueTask<string?> AriaPressed => GetAriaPressed(CancellationToken.None);
 
     /// <inheritdoc cref="AriaPressed" />
     /// <param name="cancellationToken"></param>
@@ -2222,7 +2222,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "false": The user can set the value of the element.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaReadOnly => GetAriaReadOnly(default);
+    public ValueTask<string?> AriaReadOnly => GetAriaReadOnly(CancellationToken.None);
 
     /// <inheritdoc cref="AriaReadOnly" />
     /// <param name="cancellationToken"></param>
@@ -2245,7 +2245,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "false": User input is not necessary to submit the form.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaRequired => GetAriaRequired(default);
+    public ValueTask<string?> AriaRequired => GetAriaRequired(CancellationToken.None);
 
     /// <inheritdoc cref="AriaRequired" />
     /// <param name="cancellationToken"></param>
@@ -2262,7 +2262,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// Rreflects the value of the aria-roledescription attribute, which defines a human-readable, author-localized description for the role of an element.
     /// </summary>
-    public ValueTask<string?> AriaRoleDescription => GetAriaRoleDescription(default);
+    public ValueTask<string?> AriaRoleDescription => GetAriaRoleDescription(CancellationToken.None);
 
     /// <inheritdoc cref="AriaRoleDescription" />
     /// <param name="cancellationToken"></param>
@@ -2280,7 +2280,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Reflects the value of the aria-rowcount attribute, which defines the total number of rows in a table, grid, or treegrid.</para>
     /// <para>Value is a string which contains an integer.</para>
     /// </summary>
-    public ValueTask<string?> AriaRowCount => GetAriaRowCount(default);
+    public ValueTask<string?> AriaRowCount => GetAriaRowCount(CancellationToken.None);
 
     /// <inheritdoc cref="AriaRowCount" />
     /// <param name="cancellationToken"></param>
@@ -2298,7 +2298,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Reflects the value of the aria-rowindex attribute, which defines an element's row index or position with respect to the total number of rows within a table, grid, or treegrid.</para>
     /// <para>Value is a string which contains an integer.</para>
     /// </summary>
-    public ValueTask<string?> AriaRowIndex => GetAriaRowIndex(default);
+    public ValueTask<string?> AriaRowIndex => GetAriaRowIndex(CancellationToken.None);
 
     /// <inheritdoc cref="AriaRowIndex" />
     /// <param name="cancellationToken"></param>
@@ -2315,7 +2315,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// Reflects the value of the aria-rowindextext attribute, which defines a human readable text alternative of aria-rowindex.
     /// </summary>
-    public ValueTask<string?> AriaRowIndexText => GetAriaRowIndexText(default);
+    public ValueTask<string?> AriaRowIndexText => GetAriaRowIndexText(CancellationToken.None);
 
     /// <inheritdoc cref="AriaRowIndexText" />
     /// <param name="cancellationToken"></param>
@@ -2333,7 +2333,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Reflects the value of the aria-rowspan attribute, which defines the number of rows spanned by a cell or gridcell within a table, grid, or treegrid.</para>
     /// <para>Value is a string which contains an integer.</para>
     /// </summary>
-    public ValueTask<string?> AriaRowSpan => GetAriaRowSpan(default);
+    public ValueTask<string?> AriaRowSpan => GetAriaRowSpan(CancellationToken.None);
 
     /// <inheritdoc cref="AriaRowSpan" />
     /// <param name="cancellationToken"></param>
@@ -2356,7 +2356,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "undefined": The item is not selectable.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaSelected => GetAriaSelected(default);
+    public ValueTask<string?> AriaSelected => GetAriaSelected(CancellationToken.None);
 
     /// <inheritdoc cref="AriaSelected" />
     /// <param name="cancellationToken"></param>
@@ -2374,7 +2374,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Reflects the value of the aria-setsize attribute, which defines the number of items in the current set of listitems or treeitems.</para>
     /// <para>Value is a string containing an integer.</para>
     /// </summary>
-    public ValueTask<string?> AriaSetSize => GetAriaSetSize(default);
+    public ValueTask<string?> AriaSetSize => GetAriaSetSize(CancellationToken.None);
 
     /// <inheritdoc cref="AriaSetSize" />
     /// <param name="cancellationToken"></param>
@@ -2398,7 +2398,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// - "other": A sort algorithm other than ascending or descending has been applied.
     /// </para>
     /// </summary>
-    public ValueTask<string?> AriaSort => GetAriaSort(default);
+    public ValueTask<string?> AriaSort => GetAriaSort(CancellationToken.None);
 
     /// <inheritdoc cref="AriaSort" />
     /// <param name="cancellationToken"></param>
@@ -2416,7 +2416,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Reflects the value of the aria-valuemax attribute, which defines the maximum allowed value for a range widget.</para>
     /// <para>Value is a string which contains a number.</para>
     /// </summary>
-    public ValueTask<string?> AriaValueMax => GetAriaValueMax(default);
+    public ValueTask<string?> AriaValueMax => GetAriaValueMax(CancellationToken.None);
 
     /// <inheritdoc cref="AriaValueMax" />
     /// <param name="cancellationToken"></param>
@@ -2434,7 +2434,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Reflects the value of the aria-valuemin attribute, which defines the minimum allowed value for a range widget.</para>
     /// <para>Value is a string which contains a number.</para>
     /// </summary>
-    public ValueTask<string?> AriaValueMin => GetAriaValueMin(default);
+    public ValueTask<string?> AriaValueMin => GetAriaValueMin(CancellationToken.None);
 
     /// <inheritdoc cref="AriaValueMin" />
     /// <param name="cancellationToken"></param>
@@ -2452,7 +2452,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <para>Reflects the value of the aria-valuenow attribute, which defines the current value for a range widget.</para>
     /// <para>Value is a string which contains a number.</para>
     /// </summary>
-    public ValueTask<string?> AriaValueNow => GetAriaValueNow(default);
+    public ValueTask<string?> AriaValueNow => GetAriaValueNow(CancellationToken.None);
 
     /// <inheritdoc cref="AriaValueNow" />
     /// <param name="cancellationToken"></param>
@@ -2469,7 +2469,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// <summary>
     /// Reflects the value of the aria-valuetext attribute, which defines the human-readable text alternative of aria-valuenow for a range widget.
     /// </summary>
-    public ValueTask<string?> AriaValueText => GetAriaValueText(default);
+    public ValueTask<string?> AriaValueText => GetAriaValueText(CancellationToken.None);
 
     /// <inheritdoc cref="AriaValueText" />
     /// <param name="cancellationToken"></param>
@@ -2494,7 +2494,7 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// </para>
     /// <para>The full list of defined ARIA roles can be found on the <see href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles">ARIA roles</see> reference page.</para>
     /// </summary>
-    public ValueTask<string?> Role => GetRole(default);
+    public ValueTask<string?> Role => GetRole(CancellationToken.None);
 
     /// <inheritdoc cref="Role" />
     /// <param name="cancellationToken"></param>

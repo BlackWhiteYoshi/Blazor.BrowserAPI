@@ -28,7 +28,7 @@ public sealed class FileHandle(IJSObjectReference fileHandleJS) : FileHandleBase
     /// <summary>
     /// Returns the name of the associated entry.
     /// </summary>
-    public ValueTask<string> Name => GetName(default);
+    public ValueTask<string> Name => GetName(CancellationToken.None);
 
     /// <inheritdoc cref="Name" />
     /// <param name="cancellationToken"></param>

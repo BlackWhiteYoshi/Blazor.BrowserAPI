@@ -66,7 +66,7 @@ public sealed partial class ServiceWorkerGroup : ComponentBase, IAsyncDisposable
 
     public const string BUTTON_GET_CONTROLLER_METHOD = "service-worker-container-get-controller-method";
     private async Task GetController_Method() {
-        await using IServiceWorker? serviceWorker = await ServiceWorkerContainer.GetController(default);
+        await using IServiceWorker? serviceWorker = await ServiceWorkerContainer.GetController(CancellationToken.None);
         labelOutput = (serviceWorker is not null).ToString();
     }
 
@@ -78,7 +78,7 @@ public sealed partial class ServiceWorkerGroup : ComponentBase, IAsyncDisposable
 
     public const string BUTTON_GET_READY_METHOD = "service-worker-container-get-ready-method";
     private async Task GetReady_Method() {
-        await using IServiceWorkerRegistration? serviceWorkerRegistration = await ServiceWorkerContainer.GetReady(default);
+        await using IServiceWorkerRegistration? serviceWorkerRegistration = await ServiceWorkerContainer.GetReady(CancellationToken.None);
         labelOutput = (serviceWorkerRegistration is not null).ToString();
     }
 
@@ -145,7 +145,7 @@ public sealed partial class ServiceWorkerGroup : ComponentBase, IAsyncDisposable
 
     public const string BUTTON_ACTIVE_METHOD = "service-worker-registration-active-method";
     private async Task Active_Method() {
-        await using IServiceWorker? serviceWorker = await (await ServiceWorkerRegistration).GetActive(default);
+        await using IServiceWorker? serviceWorker = await (await ServiceWorkerRegistration).GetActive(CancellationToken.None);
         labelOutput = (serviceWorker is not null).ToString();
     }
 
@@ -157,7 +157,7 @@ public sealed partial class ServiceWorkerGroup : ComponentBase, IAsyncDisposable
 
     public const string BUTTON_INSTALLING_METHOD = "service-worker-registration-installing-method";
     private async Task Installing_Method() {
-        await using IServiceWorker? serviceWorker = await (await ServiceWorkerRegistration).GetInstalling(default);
+        await using IServiceWorker? serviceWorker = await (await ServiceWorkerRegistration).GetInstalling(CancellationToken.None);
         labelOutput = (serviceWorker is not null).ToString();
     }
 
@@ -169,7 +169,7 @@ public sealed partial class ServiceWorkerGroup : ComponentBase, IAsyncDisposable
 
     public const string BUTTON_WAITING_METHOD = "service-worker-registration-waiting-method";
     private async Task Waiting_Method() {
-        await using IServiceWorker? serviceWorker = await (await ServiceWorkerRegistration).GetWaiting(default);
+        await using IServiceWorker? serviceWorker = await (await ServiceWorkerRegistration).GetWaiting(CancellationToken.None);
         labelOutput = (serviceWorker is not null).ToString();
     }
 
@@ -181,7 +181,7 @@ public sealed partial class ServiceWorkerGroup : ComponentBase, IAsyncDisposable
 
     public const string BUTTON_SCOPE_METHOD = "service-worker-registration-scope-method";
     private async Task Scope_Method() {
-        string scope = await (await ServiceWorkerRegistration).GetScope(default);
+        string scope = await (await ServiceWorkerRegistration).GetScope(CancellationToken.None);
         labelOutput = scope;
     }
 
@@ -193,7 +193,7 @@ public sealed partial class ServiceWorkerGroup : ComponentBase, IAsyncDisposable
 
     public const string BUTTON_UPDATE_VIA_CACHE_METHOD = "service-worker-registration-update-via-cache-method";
     private async Task UpdateViaCache_Method() {
-        string cacheMode = await (await ServiceWorkerRegistration).GetUpdateViaCache(default);
+        string cacheMode = await (await ServiceWorkerRegistration).GetUpdateViaCache(CancellationToken.None);
         labelOutput = cacheMode;
     }
 
@@ -224,7 +224,7 @@ public sealed partial class ServiceWorkerGroup : ComponentBase, IAsyncDisposable
 
     public const string BUTTON_SCRIPT_URL_METHOD = "service-worker-script-url-method";
     private async Task ScriptUrl_Method() {
-        string scriptUrl = await (await ServiceWorker).GetScriptUrl(default);
+        string scriptUrl = await (await ServiceWorker).GetScriptUrl(CancellationToken.None);
         labelOutput = scriptUrl;
     }
 
@@ -236,7 +236,7 @@ public sealed partial class ServiceWorkerGroup : ComponentBase, IAsyncDisposable
 
     public const string BUTTON_STATE_METHOD = "service-worker-state-method";
     private async Task State_Method() {
-        string state = await (await ServiceWorker).GetState(default);
+        string state = await (await ServiceWorker).GetState(CancellationToken.None);
         labelOutput = state;
     }
 

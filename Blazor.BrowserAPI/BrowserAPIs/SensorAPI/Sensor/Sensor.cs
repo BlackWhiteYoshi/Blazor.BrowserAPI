@@ -24,7 +24,7 @@ public abstract class Sensor(IJSObjectReference sensorJS) : SensorBase(sensorJS)
     /// <summary>
     /// Returns a boolean value indicating whether the sensor is active.
     /// </summary>
-    public ValueTask<bool> Activated => GetActivated(default);
+    public ValueTask<bool> Activated => GetActivated(CancellationToken.None);
 
     /// <inheritdoc cref="Activated" />
     /// <param name="cancellationToken"></param>
@@ -35,7 +35,7 @@ public abstract class Sensor(IJSObjectReference sensorJS) : SensorBase(sensorJS)
     /// <summary>
     /// Returns a boolean value indicating whether the sensor has a reading.
     /// </summary>
-    public ValueTask<bool> HasReading => GetHasReading(default);
+    public ValueTask<bool> HasReading => GetHasReading(CancellationToken.None);
 
     /// <inheritdoc cref="HasReading" />
     /// <param name="cancellationToken"></param>
@@ -46,7 +46,7 @@ public abstract class Sensor(IJSObjectReference sensorJS) : SensorBase(sensorJS)
     /// <summary>
     /// Returns the timestamp of the latest sensor reading.
     /// </summary>
-    public ValueTask<double> Timestamp => GetTimestamp(default);
+    public ValueTask<double> Timestamp => GetTimestamp(CancellationToken.None);
 
     /// <inheritdoc cref="Timestamp" />
     /// <param name="cancellationToken"></param>

@@ -11,7 +11,7 @@ public sealed class LocalStorage(IModuleManager moduleManager) : ILocalStorage {
     /// <summary>
     /// Returns an integer representing the number of data items stored in localStorage.
     /// </summary>
-    public ValueTask<int> Length => GetLength(default);
+    public ValueTask<int> Length => GetLength(CancellationToken.None);
 
     /// <inheritdoc cref="Length" />
     /// <param name="cancellationToken"></param>

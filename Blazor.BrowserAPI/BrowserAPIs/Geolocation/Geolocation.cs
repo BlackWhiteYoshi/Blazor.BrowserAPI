@@ -1,4 +1,4 @@
-using AutoInterfaceAttributes;
+﻿using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
 
 namespace BrowserAPI.Implementation;

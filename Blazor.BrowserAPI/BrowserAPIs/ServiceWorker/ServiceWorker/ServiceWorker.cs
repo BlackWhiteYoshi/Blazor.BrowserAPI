@@ -25,7 +25,7 @@ public sealed class ServiceWorker(IJSObjectReference serviceWorkerJS) : ServiceW
     /// Returns the <i>ServiceWorker</i> serialized script URL defined as part of ServiceWorkerRegistration.
     /// The URL must be on the same origin as the document that registers the ServiceWorker.
     /// </summary>
-    public ValueTask<string> ScriptUrl => GetScriptUrl(default);
+    public ValueTask<string> ScriptUrl => GetScriptUrl(CancellationToken.None);
 
     /// <inheritdoc cref="ScriptUrl" />
     /// <param name="cancellationToken"></param>
@@ -37,7 +37,7 @@ public sealed class ServiceWorker(IJSObjectReference serviceWorkerJS) : ServiceW
     /// Returns a string representing the current state of the service worker.
     /// It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.
     /// </summary>
-    public ValueTask<string> State => GetState(default);
+    public ValueTask<string> State => GetState(CancellationToken.None);
 
     /// <inheritdoc cref="State" />
     /// <param name="cancellationToken"></param>

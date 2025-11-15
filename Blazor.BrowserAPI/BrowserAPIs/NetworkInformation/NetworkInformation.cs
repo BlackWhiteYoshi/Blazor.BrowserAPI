@@ -25,7 +25,7 @@ public sealed class NetworkInformation(IModuleManager moduleManager) : NetworkIn
     /// Therefore, this property is inherently unreliable, and you should not disable features based on the online status, only provide hints when the user may seem offline.
     /// </para>
     /// </summary>
-    public ValueTask<bool> OnLine => GetOnLine(default);
+    public ValueTask<bool> OnLine => GetOnLine(CancellationToken.None);
 
     /// <inheritdoc cref="OnLine" />
     /// <param name="cancellationToken"></param>
@@ -39,7 +39,7 @@ public sealed class NetworkInformation(IModuleManager moduleManager) : NetworkIn
     /// This value is based on recently observed application layer throughput across recently active connections, excluding connections made to a private address space.
     /// In the absence of recent bandwidth measurement data, the attribute value is determined by the properties of the underlying connection technology.
     /// </summary>
-    public ValueTask<double> Downlink => GetDownlink(default);
+    public ValueTask<double> Downlink => GetDownlink(CancellationToken.None);
 
     /// <inheritdoc cref="Downlink" />
     /// <param name="cancellationToken"></param>
@@ -50,7 +50,7 @@ public sealed class NetworkInformation(IModuleManager moduleManager) : NetworkIn
     /// <summary>
     /// Returns the maximum downlink speed, in megabits per second (Mbps), for the underlying connection technology.
     /// </summary>
-    public ValueTask<double> DownlinkMax => GetDownlinkMax(default);
+    public ValueTask<double> DownlinkMax => GetDownlinkMax(CancellationToken.None);
 
     /// <inheritdoc cref="DownlinkMax" />
     /// <param name="cancellationToken"></param>
@@ -62,7 +62,7 @@ public sealed class NetworkInformation(IModuleManager moduleManager) : NetworkIn
     /// Returns the effective type of the connection meaning one of 'slow-2g', '2g', '3g', or '4g'.
     /// This value is determined using a combination of recently observed round-trip time and downlink values.
     /// </summary>
-    public ValueTask<string> EffectiveType => GetEffectiveType(default);
+    public ValueTask<string> EffectiveType => GetEffectiveType(CancellationToken.None);
 
     /// <inheritdoc cref="EffectiveType" />
     /// <param name="cancellationToken"></param>
@@ -74,7 +74,7 @@ public sealed class NetworkInformation(IModuleManager moduleManager) : NetworkIn
     /// Returns the type of connection a device is using to communicate with the network. It will be one of the following values:<br />
     /// "bluetooth", "cellular", "ethernet", "none", "wifi", "wimax", "other", "unknown"
     /// </summary>
-    public ValueTask<string> Type => GetType(default);
+    public ValueTask<string> Type => GetType(CancellationToken.None);
 
     /// <inheritdoc cref="Type" />
     /// <param name="cancellationToken"></param>
@@ -88,7 +88,7 @@ public sealed class NetworkInformation(IModuleManager moduleManager) : NetworkIn
     /// It excludes connections made to a private address space.
     /// If no recent measurement data is available, the value is based on the properties of the underlying connection technology.
     /// </summary>
-    public ValueTask<int> RTT => GetRTT(default);
+    public ValueTask<int> RTT => GetRTT(CancellationToken.None);
 
     /// <inheritdoc cref="RTT" />
     /// <param name="cancellationToken"></param>
@@ -99,7 +99,7 @@ public sealed class NetworkInformation(IModuleManager moduleManager) : NetworkIn
     /// <summary>
     /// Returns true if the user has set a reduced data usage option on the user agent.
     /// </summary>
-    public ValueTask<bool> SaveData => GetSaveData(default);
+    public ValueTask<bool> SaveData => GetSaveData(CancellationToken.None);
 
     /// <inheritdoc cref="SaveData" />
     /// <param name="cancellationToken"></param>

@@ -25,7 +25,7 @@ public sealed partial class NetworkInformationGroup : ComponentBase {
 
     public const string BUTTON_GET_ON_LINE_METHOD = "network-information-get-on-line-method";
     private async Task GetOnLine_Method() {
-        bool online = await NetworkInformation.GetOnLine(default);
+        bool online = await NetworkInformation.GetOnLine(CancellationToken.None);
         labelOutput = online.ToString();
     }
 
@@ -38,7 +38,7 @@ public sealed partial class NetworkInformationGroup : ComponentBase {
 
     public const string BUTTON_GET_DOWNLINK_METHOD = "network-information-get-downlink-method";
     private async Task GetDownlink_Method() {
-        double downlink = await NetworkInformation.GetDownlink(default);
+        double downlink = await NetworkInformation.GetDownlink(CancellationToken.None);
         labelOutput = downlink.ToString();
     }
 
@@ -50,7 +50,7 @@ public sealed partial class NetworkInformationGroup : ComponentBase {
 
     public const string BUTTON_GET_DOWNLINK_MAX_METHOD = "network-information-get-downlink-max-method";
     private async Task GetDownlinkMax_Method() {
-        double downlinkMax = await NetworkInformation.GetDownlinkMax(default);
+        double downlinkMax = await NetworkInformation.GetDownlinkMax(CancellationToken.None);
         labelOutput = downlinkMax.ToString();
     }
 
@@ -62,7 +62,7 @@ public sealed partial class NetworkInformationGroup : ComponentBase {
 
     public const string BUTTON_GET_EFFECTIVE_TYPE_METHOD = "network-information-get-effective-type-method";
     private async Task GetEffectiveType_Method() {
-        string effectiveType = await NetworkInformation.GetEffectiveType(default);
+        string effectiveType = await NetworkInformation.GetEffectiveType(CancellationToken.None);
         labelOutput = effectiveType;
     }
 
@@ -74,7 +74,7 @@ public sealed partial class NetworkInformationGroup : ComponentBase {
 
     public const string BUTTON_GET_TYPE_METHOD = "network-information-get-type-method";
     private async Task GetType_Method() {
-        string type = await NetworkInformation.GetType(default);
+        string type = await NetworkInformation.GetType(CancellationToken.None);
         labelOutput = type ?? MISSING_BROWSER_SUPPOERT;
     }
 
@@ -86,7 +86,7 @@ public sealed partial class NetworkInformationGroup : ComponentBase {
 
     public const string BUTTON_GET_RTT_METHOD = "network-information-get-rtt-method";
     private async Task GetRTT_Method() {
-        int rtt = await NetworkInformation.GetRTT(default);
+        int rtt = await NetworkInformation.GetRTT(CancellationToken.None);
         labelOutput = rtt.ToString();
     }
 
@@ -98,7 +98,7 @@ public sealed partial class NetworkInformationGroup : ComponentBase {
 
     public const string BUTTON_GET_SAVE_DATA_METHOD = "network-information-get-save-data-method";
     private async Task GetSaveData_Method() {
-        bool saveData = await NetworkInformation.GetSaveData(default);
+        bool saveData = await NetworkInformation.GetSaveData(CancellationToken.None);
         labelOutput = saveData.ToString();
     }
 

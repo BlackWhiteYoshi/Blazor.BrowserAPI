@@ -47,7 +47,7 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
 
     public const string BUTTON_GET_SUPPORTED_CONSTRAINTS_METHOD = "media-devices-get-supported-constraints-method";
     private async Task GetSupportedConstraints_Method() {
-        MediaTrackSupportedConstraints supportedConstraints = await MediaDevices.GetSupportedConstraints(default);
+        MediaTrackSupportedConstraints supportedConstraints = await MediaDevices.GetSupportedConstraints(CancellationToken.None);
         labelOutput = supportedConstraints.ToString();
     }
 
@@ -104,7 +104,7 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
     private async Task GetActive_Method() {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
 
-        bool active = await mediaStream.GetActive(default);
+        bool active = await mediaStream.GetActive(CancellationToken.None);
         labelOutput = active.ToString();
     }
 
@@ -121,7 +121,7 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
     private async Task GetId_Method() {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
 
-        string id = await mediaStream.GetId(default);
+        string id = await mediaStream.GetId(CancellationToken.None);
         labelOutput = id;
     }
 
@@ -142,7 +142,7 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
         await using IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder(mimeType: TEST_MIME_TYPE);
 
-        string mimeType = await mediaRecorder.GetMimeType(default);
+        string mimeType = await mediaRecorder.GetMimeType(CancellationToken.None);
         labelOutput = mimeType;
     }
 
@@ -161,7 +161,7 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
         await using IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 
-        string state = await mediaRecorder.GetState(default);
+        string state = await mediaRecorder.GetState(CancellationToken.None);
         labelOutput = state;
     }
 
@@ -180,7 +180,7 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
         await using IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 
-        await using IMediaStream streamReference2 = await mediaRecorder.GetStream(default);
+        await using IMediaStream streamReference2 = await mediaRecorder.GetStream(CancellationToken.None);
         labelOutput = (await mediaStream.Id == await streamReference2.Id).ToString();
     }
 
@@ -199,7 +199,7 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
         await using IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 
-        ulong audioBitsPerSecond = await mediaRecorder.GetAudioBitsPerSecond(default);
+        ulong audioBitsPerSecond = await mediaRecorder.GetAudioBitsPerSecond(CancellationToken.None);
         labelOutput = audioBitsPerSecond.ToString();
     }
 
@@ -218,7 +218,7 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
         await using IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 
-        ulong videoBitsPerSecond = await mediaRecorder.GetVideoBitsPerSecond(default);
+        ulong videoBitsPerSecond = await mediaRecorder.GetVideoBitsPerSecond(CancellationToken.None);
         labelOutput = videoBitsPerSecond.ToString();
     }
 

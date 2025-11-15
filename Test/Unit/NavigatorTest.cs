@@ -1,11 +1,12 @@
 ﻿using BrowserAPI.Test.Client;
+using TUnit.Core.Interfaces;
 
 namespace BrowserAPI.UnitTest;
 
 [ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class NavigatorTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     public override Task InitializeAsync()
-        => TestContext.Current?.TestName switch {
+        => (TestContext.Current as ITestMetadata)?.DisplayName switch {
             nameof(GetAutoplayPolicy_String)
             or nameof(GetAutoplayPolicy_Element) => NewPage(BrowserId.Firefox),
             _ => NewPage(BrowserId.Chromium)

@@ -25,17 +25,17 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// <summary>
     /// Returns the Element that is the root element of the document (for example, the &lt;html&gt; element for HTML documents).
     /// </summary>
-    public IHTMLElement DocumentElement => new HTMLElement(moduleManager.InvokeTrySync<IJSObjectReference>("DocumentAPI.getDocumentElement", default).AsTask());
+    public IHTMLElement DocumentElement => new HTMLElement(moduleManager.InvokeTrySync<IJSObjectReference>("DocumentAPI.getDocumentElement", CancellationToken.None).AsTask());
 
     /// <summary>
     /// Returns the &lt;head&gt; element of the current document.
     /// </summary>
-    public IHTMLElement Head => new HTMLElement(moduleManager.InvokeTrySync<IJSObjectReference>("DocumentAPI.getHead", default).AsTask());
+    public IHTMLElement Head => new HTMLElement(moduleManager.InvokeTrySync<IJSObjectReference>("DocumentAPI.getHead", CancellationToken.None).AsTask());
 
     /// <summary>
     /// Represents the &lt;body&gt; or &lt;frameset&gt; node of the current document, or null if no such element exists.
     /// </summary>
-    public IHTMLElement Body => new HTMLElement(moduleManager.InvokeTrySync<IJSObjectReference>("DocumentAPI.getBody", default).AsTask());
+    public IHTMLElement Body => new HTMLElement(moduleManager.InvokeTrySync<IJSObjectReference>("DocumentAPI.getBody", CancellationToken.None).AsTask());
 
     /// <summary>
     /// Represents the &lt;body&gt; or &lt;frameset&gt; node of the current document, or null if no such element exists.
@@ -49,7 +49,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// This may look surprising but is true according to both the specification and browsers.
     /// </para>
     /// </summary>
-    public IHTMLElement ScrollingElement => new HTMLElement(moduleManager.InvokeTrySync<IJSObjectReference>("DocumentAPI.getScrollingElement", default).AsTask());
+    public IHTMLElement ScrollingElement => new HTMLElement(moduleManager.InvokeTrySync<IJSObjectReference>("DocumentAPI.getScrollingElement", CancellationToken.None).AsTask());
 
 
     // Properties - HTMLElement Collection
@@ -57,13 +57,13 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// <summary>
     /// Returns a list of the embedded &lt;embed&gt; elements within the current document.
     /// </summary>
-    public ValueTask<IHTMLElement[]> Embeds => GetEmbeds(default);
+    public ValueTask<IHTMLElement[]> Embeds => GetEmbeds(CancellationToken.None);
 
     /// <inheritdoc cref="Embeds" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IHTMLElement[]> GetEmbeds(CancellationToken cancellationToken) {
-        IJSObjectReference[] embedElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getEmbeds", default);
+        IJSObjectReference[] embedElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getEmbeds", CancellationToken.None);
 
         IHTMLElement[] result = new IHTMLElement[embedElements.Length];
         for (int i = 0; i < result.Length; i++)
@@ -75,13 +75,13 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// <summary>
     /// Returns an HTMLCollection listing all the &lt;form&gt; elements contained in the document.
     /// </summary>
-    public ValueTask<IHTMLElement[]> Forms => GetForms(default);
+    public ValueTask<IHTMLElement[]> Forms => GetForms(CancellationToken.None);
 
     /// <inheritdoc cref="Forms" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IHTMLElement[]> GetForms(CancellationToken cancellationToken) {
-        IJSObjectReference[] formElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getForms", default);
+        IJSObjectReference[] formElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getForms", CancellationToken.None);
 
         IHTMLElement[] result = new IHTMLElement[formElements.Length];
         for (int i = 0; i < result.Length; i++)
@@ -94,13 +94,13 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// Returns a collection of the images in the current HTML document.
     /// Each entry in the collection is an HTMLImageElement &lt;img&gt; representing a single image element.
     /// </summary>
-    public ValueTask<IHTMLElement[]> Images => GetImages(default);
+    public ValueTask<IHTMLElement[]> Images => GetImages(CancellationToken.None);
 
     /// <inheritdoc cref="Images" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IHTMLElement[]> GetImages(CancellationToken cancellationToken) {
-        IJSObjectReference[] imageElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getImages", default);
+        IJSObjectReference[] imageElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getImages", CancellationToken.None);
 
         IHTMLElement[] result = new IHTMLElement[imageElements.Length];
         for (int i = 0; i < result.Length; i++)
@@ -112,13 +112,13 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// <summary>
     /// Returns a collection of all &lt;area&gt; elements and &lt;a&gt; elements in a document with a value for the href attribute.
     /// </summary>
-    public ValueTask<IHTMLElement[]> Links => GetLinks(default);
+    public ValueTask<IHTMLElement[]> Links => GetLinks(CancellationToken.None);
 
     /// <inheritdoc cref="Links" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IHTMLElement[]> GetLinks(CancellationToken cancellationToken) {
-        IJSObjectReference[] linkElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getLinks", default);
+        IJSObjectReference[] linkElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getLinks", CancellationToken.None);
 
         IHTMLElement[] result = new IHTMLElement[linkElements.Length];
         for (int i = 0; i < result.Length; i++)
@@ -130,13 +130,13 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// <summary>
     /// Returns an HTMLCollection object containing one or more HTMLEmbedElements representing the &lt;embed&gt; elements in the current document.
     /// </summary>
-    public ValueTask<IHTMLElement[]> Plugins => GetPlugins(default);
+    public ValueTask<IHTMLElement[]> Plugins => GetPlugins(CancellationToken.None);
 
     /// <inheritdoc cref="Plugins" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IHTMLElement[]> GetPlugins(CancellationToken cancellationToken) {
-        IJSObjectReference[] pluginElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getPlugins", default);
+        IJSObjectReference[] pluginElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getPlugins", CancellationToken.None);
 
         IHTMLElement[] result = new IHTMLElement[pluginElements.Length];
         for (int i = 0; i < result.Length; i++)
@@ -148,13 +148,13 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// <summary>
     /// Returns a list of the &lt;script&gt; elements in the document.
     /// </summary>
-    public ValueTask<IHTMLElement[]> Scripts => GetScripts(default);
+    public ValueTask<IHTMLElement[]> Scripts => GetScripts(CancellationToken.None);
 
     /// <inheritdoc cref="Scripts" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IHTMLElement[]> GetScripts(CancellationToken cancellationToken) {
-        IJSObjectReference[] scriptElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getScripts", default);
+        IJSObjectReference[] scriptElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getScripts", CancellationToken.None);
 
         IHTMLElement[] result = new IHTMLElement[scriptElements.Length];
         for (int i = 0; i < result.Length; i++)
@@ -180,7 +180,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// Note: Focus (which element is receiving user input events) is not the same thing as selection (the currently highlighted part of the document).
     /// You can get the current selection using window.getSelection().
     /// </remarks>
-    public ValueTask<IHTMLElement?> ActiveElement => GetActiveElement(default);
+    public ValueTask<IHTMLElement?> ActiveElement => GetActiveElement(CancellationToken.None);
 
     /// <inheritdoc cref="ActiveElement" />
     /// <param name="cancellationToken"></param>
@@ -201,7 +201,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// it will only reference the element while it's initially being processed.
     /// </para>
     /// </summary>
-    public ValueTask<IHTMLElement?> CurrentScript => GetCurrentScript(default);
+    public ValueTask<IHTMLElement?> CurrentScript => GetCurrentScript(CancellationToken.None);
 
     /// <inheritdoc cref="CurrentScript" />
     /// <param name="cancellationToken"></param>
@@ -219,7 +219,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// <para>Returns the Element that is currently being presented in fullscreen mode in this document, or null if fullscreen mode is not currently in use.</para>
     /// <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and it will be ignored.</para>
     /// </summary>
-    public ValueTask<IHTMLElement?> FullscreenElement => GetFullscreenElement(default);
+    public ValueTask<IHTMLElement?> FullscreenElement => GetFullscreenElement(CancellationToken.None);
 
     /// <inheritdoc cref="FullscreenElement" />
     /// <param name="cancellationToken"></param>
@@ -237,7 +237,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// <para>Returns the Element that is currently being presented in picture-in-picture mode in this document, or null if picture-in-picture mode is not currently in use.</para>
     /// <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and will be ignored.</para>
     /// </summary>
-    public ValueTask<IHTMLElement?> PictureInPictureElement => GetPictureInPictureElement(default);
+    public ValueTask<IHTMLElement?> PictureInPictureElement => GetPictureInPictureElement(CancellationToken.None);
 
     /// <inheritdoc cref="PictureInPictureElement" />
     /// <param name="cancellationToken"></param>
@@ -255,7 +255,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// Provides the element set as the target for mouse events while the pointer is locked.
     /// It is null if lock is pending, pointer is unlocked, or the target is in another document.
     /// </summary>
-    public ValueTask<IHTMLElement?> PointerLockElement => GetPointerLockElement(default);
+    public ValueTask<IHTMLElement?> PointerLockElement => GetPointerLockElement(CancellationToken.None);
 
     /// <inheritdoc cref="PointerLockElement" />
     /// <param name="cancellationToken"></param>
@@ -275,7 +275,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// Returns the character encoding of the document that it's currently rendered with.
     /// </summary>
     /// <remarks>Note: A "character set" and a "character encoding" are related, but different. Despite the name of this property, it returns the encoding.</remarks>
-    public ValueTask<string> CharacterSet => GetCharacterSet(default);
+    public ValueTask<string> CharacterSet => GetCharacterSet(CancellationToken.None);
 
     /// <inheritdoc cref="CharacterSet" />
     /// <param name="cancellationToken"></param>
@@ -292,7 +292,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// </para>
     /// </summary>
     /// <remarks>Note: All these modes are now standardized, so the older "standards" and "almost standards" names are nonsensical and no longer used in standards.</remarks>
-    public ValueTask<string> CompatMode => GetCompatMode(default);
+    public ValueTask<string> CompatMode => GetCompatMode(CancellationToken.None);
 
     /// <inheritdoc cref="CompatMode" />
     /// <param name="cancellationToken"></param>
@@ -305,7 +305,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// This may come from HTTP headers or other sources of MIME information, and might be affected by automatic type conversions performed by either the browser or extensions.
     /// </summary>
     /// <remarks>Note: This property is unaffected by &lt;meta&gt; elements.</remarks>
-    public ValueTask<string> ContentType => GetContentType(default);
+    public ValueTask<string> ContentType => GetContentType(CancellationToken.None);
 
     /// <inheritdoc cref="ContentType" />
     /// <param name="cancellationToken"></param>
@@ -322,7 +322,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// Starting in Chrome 43, the default is "off" and "inherit" is no longer supported.
     /// In IE6-10, the value is capitalized.
     /// </summary>
-    public ValueTask<string> DesignMode => GetDesignMode(default);
+    public ValueTask<string> DesignMode => GetDesignMode(CancellationToken.None);
 
     /// <inheritdoc cref="DesignMode" />
     /// <param name="cancellationToken"></param>
@@ -340,7 +340,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// Representing the directionality of the text of the document, whether left to right (default) or right to left.
     /// Possible values are "rtl", right to left, and "ltr", left to right.
     /// </summary>
-    public ValueTask<string> Dir => GetDir(default);
+    public ValueTask<string> Dir => GetDir(CancellationToken.None);
 
     /// <inheritdoc cref="Dir" />
     /// <param name="cancellationToken"></param>
@@ -357,7 +357,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// <summary>
     /// Returns the document location as a string.
     /// </summary>
-    public ValueTask<string> DocumentURI => GetDocumentURI(default);
+    public ValueTask<string> DocumentURI => GetDocumentURI(CancellationToken.None);
 
     /// <inheritdoc cref="DocumentURI" />
     /// <param name="cancellationToken"></param>
@@ -373,7 +373,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// </para>
     /// <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and it will be ignored.</para>
     /// </summary>
-    public ValueTask<bool> FullscreenEnabled => GetFullscreenEnabled(default);
+    public ValueTask<bool> FullscreenEnabled => GetFullscreenEnabled(CancellationToken.None);
 
     /// <inheritdoc cref="FullscreenEnabled" />
     /// <param name="cancellationToken"></param>
@@ -385,7 +385,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// <para>Indicates if the page is considered hidden or not.</para>
     /// <para>The <see cref="VisibilityState"/> property provides an alternative way to determine whether the page is hidden.</para>
     /// </summary>
-    public ValueTask<bool> Hidden => GetHidden(default);
+    public ValueTask<bool> Hidden => GetHidden(CancellationToken.None);
 
     /// <inheritdoc cref="Hidden" />
     /// <param name="cancellationToken"></param>
@@ -396,7 +396,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// <summary>
     /// Contains the date and local time on which the current document was last modified.
     /// </summary>
-    public ValueTask<string> LastModified => GetLastModified(default);
+    public ValueTask<string> LastModified => GetLastModified(CancellationToken.None);
 
     /// <inheritdoc cref="LastModified" />
     /// <param name="cancellationToken"></param>
@@ -409,7 +409,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// <para>Picture-in-Picture mode is available by default unless specified otherwise by a Permissions-Policy.</para>
     /// <para>Although this property is read-only, it will not throw if it is modified (even in strict mode); the setter is a no-operation and will be ignored.</para>
     /// </summary>
-    public ValueTask<bool> PictureInPictureEnabled => GetPictureInPictureEnabled(default);
+    public ValueTask<bool> PictureInPictureEnabled => GetPictureInPictureEnabled(CancellationToken.None);
 
     /// <inheritdoc cref="PictureInPictureEnabled" />
     /// <param name="cancellationToken"></param>
@@ -427,7 +427,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// - "complete": The document and all sub-resources have finished loading. The state indicates that the load event is about to fire.
     /// </para>
     /// </summary>
-    public ValueTask<string> ReadyState => GetReadyState(default);
+    public ValueTask<string> ReadyState => GetReadyState(CancellationToken.None);
 
     /// <inheritdoc cref="ReadyState" />
     /// <param name="cancellationToken"></param>
@@ -447,7 +447,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// For more information, see the <see href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy#strict-origin-when-cross-origin">Referrer-Policy: strict-origin-when-cross-origin</see> documentation.
     /// </para>
     /// </summary>
-    public ValueTask<string> Referrer => GetReferrer(default);
+    public ValueTask<string> Referrer => GetReferrer(CancellationToken.None);
 
     /// <inheritdoc cref="Referrer" />
     /// <param name="cancellationToken"></param>
@@ -458,7 +458,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// <summary>
     /// Gets or sets the current title of the document. When present, it defaults to the value of the &lt;title&gt;.
     /// </summary>
-    public ValueTask<string> Title => GetTitle(default);
+    public ValueTask<string> Title => GetTitle(CancellationToken.None);
 
     /// <inheritdoc cref="Title" />
     /// <param name="cancellationToken"></param>
@@ -475,7 +475,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// <summary>
     /// Returns the document location as a string.
     /// </summary>
-    public ValueTask<string> URL => GetURL(default);
+    public ValueTask<string> URL => GetURL(CancellationToken.None);
 
     /// <inheritdoc cref="URL" />
     /// <param name="cancellationToken"></param>
@@ -493,7 +493,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// - "hidden": The page content is not visible to the user. In practice this means that the document is either a background tab or part of a minimized window, or the OS screen lock is active.
     /// </para>
     /// </summary>
-    public ValueTask<string> VisibilityState => GetVisibilityState(default);
+    public ValueTask<string> VisibilityState => GetVisibilityState(CancellationToken.None);
 
     /// <inheritdoc cref="VisibilityState" />
     /// <param name="cancellationToken"></param>
@@ -516,7 +516,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase(module
     /// 2. If it is an HTML Document and there is a &lt;Base&gt; element in the document, the href value of the first Base element with such an attribute is used instead.
     /// </para>
     /// </summary>
-    public ValueTask<string> BaseURI => GetBaseURI(default);
+    public ValueTask<string> BaseURI => GetBaseURI(CancellationToken.None);
 
     /// <inheritdoc cref="BaseURI" />
     /// <param name="cancellationToken"></param>

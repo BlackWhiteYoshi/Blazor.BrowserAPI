@@ -1,4 +1,4 @@
-# Download
+﻿# Download
 
 Save data as a file download on the filesystem. For file upload use the *InputFile* component.
 

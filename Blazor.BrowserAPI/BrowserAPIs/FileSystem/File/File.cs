@@ -34,7 +34,7 @@ public sealed class File(IJSObjectReference fileJS) : FileBase(fileJS), IFile {
     /// <summary>
     /// Returns the name of the file referenced by the File object.
     /// </summary>
-    public ValueTask<string> Name => GetName(default);
+    public ValueTask<string> Name => GetName(CancellationToken.None);
 
     /// <inheritdoc cref="Name" />
     /// <param name="cancellationToken"></param>
@@ -45,7 +45,7 @@ public sealed class File(IJSObjectReference fileJS) : FileBase(fileJS), IFile {
     /// <summary>
     /// The size, in bytes, of the data contained in the Blob object.
     /// </summary>
-    public ValueTask<long> Size => GetSize(default);
+    public ValueTask<long> Size => GetSize(CancellationToken.None);
 
     /// <inheritdoc cref="Size" />
     /// <param name="cancellationToken"></param>
@@ -56,7 +56,7 @@ public sealed class File(IJSObjectReference fileJS) : FileBase(fileJS), IFile {
     /// <summary>
     /// A string indicating the MIME type of the data contained in the Blob. If the type is unknown, this string is empty.
     /// </summary>
-    public ValueTask<string> Type => GetType(default);
+    public ValueTask<string> Type => GetType(CancellationToken.None);
 
     /// <inheritdoc cref="Type" />
     /// <param name="cancellationToken"></param>
@@ -67,7 +67,7 @@ public sealed class File(IJSObjectReference fileJS) : FileBase(fileJS), IFile {
     /// <summary>
     /// Returns the last modified time of the file, in millisecond since the UNIX epoch (January 1st, 1970 at Midnight).
     /// </summary>
-    public ValueTask<long> LastModified => GetLastModified(default);
+    public ValueTask<long> LastModified => GetLastModified(CancellationToken.None);
 
     /// <inheritdoc cref="LastModified" />
     /// <param name="cancellationToken"></param>
@@ -78,7 +78,7 @@ public sealed class File(IJSObjectReference fileJS) : FileBase(fileJS), IFile {
     /// <summary>
     /// Returns the path the URL of the File is relative to.
     /// </summary>
-    public ValueTask<string> WebkitRelativePath => GetWebkitRelativePath(default);
+    public ValueTask<string> WebkitRelativePath => GetWebkitRelativePath(CancellationToken.None);
 
     /// <inheritdoc cref="WebkitRelativePath" />
     /// <param name="cancellationToken"></param>

@@ -104,7 +104,7 @@ public sealed partial class WindowGroup : ComponentBase {
 
     public const string BUTTON_GET_INNER_WIDTH_METHOD = "window-get-inner-width-method";
     private async Task GetInnerWidth_Method() {
-        int innerWidth = await Window.GetInnerWidth(default);
+        int innerWidth = await Window.GetInnerWidth(CancellationToken.None);
         labelOutput = innerWidth.ToString();
     }
 
@@ -116,7 +116,7 @@ public sealed partial class WindowGroup : ComponentBase {
 
     public const string BUTTON_GET_INNER_HEIGHT_METHOD = "window-get-inner-height-method";
     private async Task GetInnerHeight_Method() {
-        int innerHeight = await Window.GetInnerHeight(default);
+        int innerHeight = await Window.GetInnerHeight(CancellationToken.None);
         labelOutput = innerHeight.ToString();
     }
 
@@ -128,7 +128,7 @@ public sealed partial class WindowGroup : ComponentBase {
 
     public const string BUTTON_GET_OUTER_WIDTH_METHOD = "window-get-outer-width-method";
     private async Task GetOuterWidth_Method() {
-        int outerWidth = await Window.GetOuterWidth(default);
+        int outerWidth = await Window.GetOuterWidth(CancellationToken.None);
         labelOutput = outerWidth.ToString();
     }
 
@@ -140,7 +140,7 @@ public sealed partial class WindowGroup : ComponentBase {
 
     public const string BUTTON_GET_OUTER_HEIGHT_METHOD = "window-get-outer-height-method";
     private async Task GetOuterHeight_Method() {
-        int outerHeight = await Window.GetOuterHeight(default);
+        int outerHeight = await Window.GetOuterHeight(CancellationToken.None);
         labelOutput = outerHeight.ToString();
     }
 
@@ -152,7 +152,7 @@ public sealed partial class WindowGroup : ComponentBase {
 
     public const string BUTTON_GET_DEVICE_PIXEL_RATIO_METHOD = "window-get-device-pixel-ratio-method";
     private async Task GetDevicePixelRatio_Method() {
-        double devicePixelRatio = await Window.GetDevicePixelRatio(default);
+        double devicePixelRatio = await Window.GetDevicePixelRatio(CancellationToken.None);
         labelOutput = devicePixelRatio.ToString();
     }
 
@@ -165,7 +165,7 @@ public sealed partial class WindowGroup : ComponentBase {
 
     public const string BUTTON_GET_SCROLL_X_METHOD = "window-get-scroll-x-method";
     private async Task GetScrollX_Method() {
-        double scrollX = await Window.GetScrollX(default);
+        double scrollX = await Window.GetScrollX(CancellationToken.None);
         labelOutput = scrollX.ToString();
     }
 
@@ -177,7 +177,7 @@ public sealed partial class WindowGroup : ComponentBase {
 
     public const string BUTTON_GET_SCROLL_Y_METHOD = "window-get-scroll-y-method";
     private async Task GetScrollY_Method() {
-        double scrollY = await Window.GetScrollY(default);
+        double scrollY = await Window.GetScrollY(CancellationToken.None);
         labelOutput = scrollY.ToString();
     }
 
@@ -189,7 +189,7 @@ public sealed partial class WindowGroup : ComponentBase {
 
     public const string BUTTON_GET_SCREEN_X_METHOD = "window-get-screen-x-method";
     private async Task GetScreenX_Method() {
-        int screenX = await Window.GetScreenX(default);
+        int screenX = await Window.GetScreenX(CancellationToken.None);
         labelOutput = screenX.ToString();
     }
 
@@ -201,7 +201,7 @@ public sealed partial class WindowGroup : ComponentBase {
 
     public const string BUTTON_GET_SCREEN_Y_METHOD = "window-get-screen-y-method";
     private async Task GetScreenY_Method() {
-        int screenY = await Window.GetScreenY(default);
+        int screenY = await Window.GetScreenY(CancellationToken.None);
         labelOutput = screenY.ToString();
     }
 
@@ -214,7 +214,7 @@ public sealed partial class WindowGroup : ComponentBase {
 
     public const string BUTTON_GET_ORIGIN_METHOD = "window-get-origin-method";
     private async Task GetOrigin_Method() {
-        string origin = await Window.GetOrigin(default);
+        string origin = await Window.GetOrigin(CancellationToken.None);
         labelOutput = origin;
     }
 
@@ -226,7 +226,7 @@ public sealed partial class WindowGroup : ComponentBase {
 
     public const string BUTTON_GET_NAME_METHOD = "window-get-name-method";
     private async Task GetName_Method() {
-        string name = await Window.GetName(default);
+        string name = await Window.GetName(CancellationToken.None);
         labelOutput = name;
     }
 
@@ -244,7 +244,7 @@ public sealed partial class WindowGroup : ComponentBase {
 
     public const string BUTTON_GET_CLOSED_METHOD = "window-get-closed-method";
     private async Task GetClosed_Method() {
-        bool closed = await Window.GetClosed(default);
+        bool closed = await Window.GetClosed(CancellationToken.None);
         labelOutput = closed.ToString();
     }
 
@@ -256,7 +256,7 @@ public sealed partial class WindowGroup : ComponentBase {
 
     public const string BUTTON_GET_CREDENTIALLESS_METHOD = "window-get-credentialless-method";
     private async Task GetCredentialless_Method() {
-        bool credentialless = await Window.GetCredentialless(default);
+        bool credentialless = await Window.GetCredentialless(CancellationToken.None);
         labelOutput = credentialless.ToString();
     }
 
@@ -268,7 +268,7 @@ public sealed partial class WindowGroup : ComponentBase {
 
     public const string BUTTON_GET_CROSS_ORIGIN_ISOLATED_METHOD = "window-get-cross-origin-isolated-method";
     private async Task GetCrossOriginIsolated_Method() {
-        bool crossOriginIsolated = await Window.GetCrossOriginIsolated(default);
+        bool crossOriginIsolated = await Window.GetCrossOriginIsolated(CancellationToken.None);
         labelOutput = crossOriginIsolated.ToString();
     }
 
@@ -280,7 +280,7 @@ public sealed partial class WindowGroup : ComponentBase {
 
     public const string BUTTON_GET_IS_SECURE_CONTEXT_METHOD = "window-get-is-secure-context-method";
     private async Task GetIsSecureContext_Method() {
-        bool isSecureContext = await Window.GetIsSecureContext(default);
+        bool isSecureContext = await Window.GetIsSecureContext(CancellationToken.None);
         labelOutput = isSecureContext.ToString();
     }
 
@@ -292,7 +292,7 @@ public sealed partial class WindowGroup : ComponentBase {
 
     public const string BUTTON_GET_ORIGIN_AGENT_CLUSTER_METHOD = "window-get-origin-agent-cluster-method";
     private async Task GetOriginAgentCluster_Method() {
-        bool originAgentCluster = await Window.GetOriginAgentCluster(default);
+        bool originAgentCluster = await Window.GetOriginAgentCluster(CancellationToken.None);
         labelOutput = originAgentCluster.ToString();
     }
 
@@ -304,7 +304,7 @@ public sealed partial class WindowGroup : ComponentBase {
 
     public const string BUTTON_GET_MENUBAR_METHOD = "window-get-menubar-method";
     private async Task GetMenubar_Method() {
-        bool menubar = await Window.GetMenubar(default);
+        bool menubar = await Window.GetMenubar(CancellationToken.None);
         labelOutput = menubar.ToString();
     }
 
@@ -317,7 +317,7 @@ public sealed partial class WindowGroup : ComponentBase {
 
     public const string BUTTON_GET_FRAME_ELEMENT_METHOD = "window-get-frame-element-method";
     private async Task GetFrameElement_Method() {
-        await using IHTMLElement? frameElement = await Window.GetFrameElement(default);
+        await using IHTMLElement? frameElement = await Window.GetFrameElement(CancellationToken.None);
         labelOutput = (frameElement is not null).ToString();
     }
 

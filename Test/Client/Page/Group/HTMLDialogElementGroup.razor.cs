@@ -43,7 +43,7 @@ public sealed partial class HTMLDialogElementGroup : ComponentBase, IAsyncDispos
 
     public const string BUTTON_GET_CLOSED_BY_METHOD = "htmldialogelement-get-closed-by-method";
     private async Task GetClosedBy_Method() {
-        labelOutput = await Dialog.GetClosedBy(default);
+        labelOutput = await Dialog.GetClosedBy(CancellationToken.None);
     }
 
     public const string BUTTON_SET_CLOSED_BY = "htmldialogelement-set-closed-by";
@@ -60,7 +60,7 @@ public sealed partial class HTMLDialogElementGroup : ComponentBase, IAsyncDispos
 
     public const string BUTTON_GET_OPEN_METHOD = "htmldialogelement-get-open-method";
     private async Task GetOpen_Method() {
-        bool state = await Dialog.GetOpen(default);
+        bool state = await Dialog.GetOpen(CancellationToken.None);
         labelOutput = state.ToString();
     }
 
@@ -77,7 +77,7 @@ public sealed partial class HTMLDialogElementGroup : ComponentBase, IAsyncDispos
 
     public const string BUTTON_GET_RETURN_VALUE_METHOD = "htmldialogelement-get-return-value-method";
     private async Task GetReturnValue_Method() {
-        labelOutput = await Dialog.GetReturnValue(default);
+        labelOutput = await Dialog.GetReturnValue(CancellationToken.None);
     }
 
     public const string BUTTON_SET_RETURN_VALUE = "htmldialogelement-set-return-value";

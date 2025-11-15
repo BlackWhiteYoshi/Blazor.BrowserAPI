@@ -410,16 +410,16 @@ public abstract class DocumentBase(IModuleManager moduleManager) : IDisposable {
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return moduleManager.InvokeTrySync("DocumentAPI.initEvents", default, [_objectReferenceEventTrigger]);
+        return moduleManager.InvokeTrySync("DocumentAPI.initEvents", CancellationToken.None, [_objectReferenceEventTrigger]);
     }
 
 
     private protected async ValueTask ActivateJSEvent(string jsMethodName) {
         await InitEventTrigger();
-        await moduleManager.InvokeTrySync(jsMethodName, default);
+        await moduleManager.InvokeTrySync(jsMethodName, CancellationToken.None);
     }
 
-    private protected ValueTask DeactivateJSEvent(string jsMethodName) => moduleManager.InvokeTrySync(jsMethodName, default);
+    private protected ValueTask DeactivateJSEvent(string jsMethodName) => moduleManager.InvokeTrySync(jsMethodName, CancellationToken.None);
 
 
     // Document - Events

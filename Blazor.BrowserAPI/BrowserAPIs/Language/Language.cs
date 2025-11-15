@@ -26,7 +26,7 @@ public sealed class Language(IModuleManager moduleManager) : ILanguage {
     /// </para>
     /// </summary>
     [Obsolete("Will be removed at Release. Use INavigator.Language instead.")]
-    public ValueTask<string> BrowserLanguage => GetBrowserLanguage(default);
+    public ValueTask<string> BrowserLanguage => GetBrowserLanguage(CancellationToken.None);
 
     /// <inheritdoc cref="BrowserLanguage" />
     /// <param name="cancellationToken"></param>
@@ -48,7 +48,7 @@ public sealed class Language(IModuleManager moduleManager) : ILanguage {
     /// </para>
     /// </summary>
     [Obsolete("Will be removed at Release. Use INavigator.Languages instead.")]
-    public ValueTask<string[]> BrowserLanguages => GetBrowserLanguages(default);
+    public ValueTask<string[]> BrowserLanguages => GetBrowserLanguages(CancellationToken.None);
 
     /// <inheritdoc cref="BrowserLanguages" />
     /// <param name="cancellationToken"></param>
@@ -71,7 +71,7 @@ public sealed class Language(IModuleManager moduleManager) : ILanguage {
     /// </para>
     /// </summary>
     [Obsolete("Will be removed at Release. Use IDocument.DocumentElement.Lang instead.")]
-    public ValueTask<string> HtmlLanguage => GetHtmlLanguage(default);
+    public ValueTask<string> HtmlLanguage => GetHtmlLanguage(CancellationToken.None);
 
     /// <inheritdoc cref="HtmlLanguage" />
     /// <param name="cancellationToken"></param>

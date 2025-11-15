@@ -11,7 +11,7 @@ public sealed class SessionStorage(IModuleManager moduleManager) : ISessionStora
     /// <summary>
     /// Returns an integer representing the number of data items stored in sessionStorage.
     /// </summary>
-    public ValueTask<int> Length => GetLength(default);
+    public ValueTask<int> Length => GetLength(CancellationToken.None);
 
     /// <inheritdoc cref="Length" />
     /// <param name="cancellationToken"></param>

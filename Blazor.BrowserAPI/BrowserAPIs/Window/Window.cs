@@ -35,7 +35,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// That measurement also accounts for the height of the horizontal scroll bar, if it is visible.
     /// </para>
     /// </summary>
-    public ValueTask<int> InnerWidth => GetInnerWidth(default);
+    public ValueTask<int> InnerWidth => GetInnerWidth(CancellationToken.None);
 
     /// <inheritdoc cref="InnerWidth" />
     /// <param name="cancellationToken"></param>
@@ -47,7 +47,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <para>Returns the interior height of the window in pixels, including the height of the horizontal scroll bar, if present.</para>
     /// <para>The value of innerHeight is taken from the height of the window's layout viewport. The width can be obtained using the <see cref="InnerWidth"/> property.</para>
     /// </summary>
-    public ValueTask<int> InnerHeight => GetInnerHeight(default);
+    public ValueTask<int> InnerHeight => GetInnerHeight(CancellationToken.None);
 
     /// <inheritdoc cref="InnerHeight" />
     /// <param name="cancellationToken"></param>
@@ -59,7 +59,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// Returns the width of the outside of the browser window.
     /// It represents the width of the whole browser window including sidebar (if expanded), window chrome and window resizing borders/handles.
     /// </summary>
-    public ValueTask<int> OuterWidth => GetOuterWidth(default);
+    public ValueTask<int> OuterWidth => GetOuterWidth(CancellationToken.None);
 
     /// <inheritdoc cref="OuterWidth" />
     /// <param name="cancellationToken"></param>
@@ -70,7 +70,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <summary>
     /// Returns the height in pixels of the whole browser window, including any sidebar, window chrome, and window-resizing borders/handles.
     /// </summary>
-    public ValueTask<int> OuterHeight => GetOuterHeight(default);
+    public ValueTask<int> OuterHeight => GetOuterHeight(CancellationToken.None);
 
     /// <inheritdoc cref="OuterHeight" />
     /// <param name="cancellationToken"></param>
@@ -94,7 +94,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// which use more screen pixels to draw the same objects, resulting in a sharper image.
     /// </para>
     /// </summary>
-    public ValueTask<double> DevicePixelRatio => GetDevicePixelRatio(default);
+    public ValueTask<double> DevicePixelRatio => GetDevicePixelRatio(CancellationToken.None);
 
     /// <inheritdoc cref="DevicePixelRatio" />
     /// <param name="cancellationToken"></param>
@@ -108,7 +108,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// This value is subpixel precise in modern browsers, meaning that it isn't necessarily a whole number.
     /// You can get the number of pixels the document is scrolled vertically from the <see cref="ScrollY"/> property.
     /// </summary>
-    public ValueTask<double> ScrollX => GetScrollX(default);
+    public ValueTask<double> ScrollX => GetScrollX(CancellationToken.None);
 
     /// <inheritdoc cref="ScrollX" />
     /// <param name="cancellationToken"></param>
@@ -121,7 +121,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// This value is subpixel precise in modern browsers, meaning that it isn't necessarily a whole number.
     /// You can get the number of pixels the document is scrolled horizontally from the <see cref="ScrollX"/> property.
     /// </summary>
-    public ValueTask<double> ScrollY => GetScrollY(default);
+    public ValueTask<double> ScrollY => GetScrollY(CancellationToken.None);
 
     /// <inheritdoc cref="ScrollY" />
     /// <param name="cancellationToken"></param>
@@ -132,7 +132,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <summary>
     /// Returns the horizontal distance, in CSS pixels, of the left border of the user's browser viewport to the left side of the screen.
     /// </summary>
-    public ValueTask<int> ScreenX => GetScreenX(default);
+    public ValueTask<int> ScreenX => GetScreenX(CancellationToken.None);
 
     /// <inheritdoc cref="ScreenX" />
     /// <param name="cancellationToken"></param>
@@ -143,7 +143,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <summary>
     /// Returns the vertical distance, in CSS pixels, of the top border of the user's browser viewport to the top edge of the screen.
     /// </summary>
-    public ValueTask<int> ScreenY => GetScreenY(default);
+    public ValueTask<int> ScreenY => GetScreenY(CancellationToken.None);
 
     /// <inheritdoc cref="ScreenY" />
     /// <param name="cancellationToken"></param>
@@ -155,7 +155,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <summary>
     /// Returns the origin of the global scope, serialized as a string.
     /// </summary>
-    public ValueTask<string> Origin => GetOrigin(default);
+    public ValueTask<string> Origin => GetOrigin(CancellationToken.None);
 
     /// <inheritdoc cref="Origin" />
     /// <param name="cancellationToken"></param>
@@ -173,7 +173,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// (potentially the new page might also modify such data, which might then be read by the original page if it was reloaded).
     /// </para>
     /// </summary>
-    public ValueTask<string> Name => GetName(default);
+    public ValueTask<string> Name => GetName(CancellationToken.None);
 
     /// <inheritdoc cref="Name" />
     /// <param name="cancellationToken"></param>
@@ -191,7 +191,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <summary>
     /// Indicates whether the referenced window is closed or not.
     /// </summary>
-    public ValueTask<bool> Closed => GetClosed(default);
+    public ValueTask<bool> Closed => GetClosed(CancellationToken.None);
 
     /// <inheritdoc cref="Closed" />
     /// <param name="cancellationToken"></param>
@@ -208,7 +208,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// </para>
     /// <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/Security/IFrame_credentialless">IFrame credentialless</see> for a deeper explanation.</para>
     /// </summary>
-    public ValueTask<bool> Credentialless => GetCredentialless(default);
+    public ValueTask<bool> Credentialless => GetCredentialless(CancellationToken.None);
 
     /// <inheritdoc cref="Credentialless" />
     /// <param name="cancellationToken"></param>
@@ -226,7 +226,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// This mitigates the risk of side-channel attacks and cross-origin attacks referred to as XS-Leaks.
     /// </para>
     /// </summary>
-    public ValueTask<bool> CrossOriginIsolated => GetCrossOriginIsolated(default);
+    public ValueTask<bool> CrossOriginIsolated => GetCrossOriginIsolated(CancellationToken.None);
 
     /// <inheritdoc cref="CrossOriginIsolated" />
     /// <param name="cancellationToken"></param>
@@ -237,7 +237,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <summary>
     /// Indicates whether the current context is secure (true) or not (false).
     /// </summary>
-    public ValueTask<bool> IsSecureContext => GetIsSecureContext(default);
+    public ValueTask<bool> IsSecureContext => GetIsSecureContext(CancellationToken.None);
 
     /// <inheritdoc cref="IsSecureContext" />
     /// <param name="cancellationToken"></param>
@@ -252,7 +252,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// </para>
     /// <para>Otherwise this property returns false.</para>
     /// </summary>
-    public ValueTask<bool> OriginAgentCluster => GetOriginAgentCluster(default);
+    public ValueTask<bool> OriginAgentCluster => GetOriginAgentCluster(CancellationToken.None);
 
     /// <inheritdoc cref="OriginAgentCluster" />
     /// <param name="cancellationToken"></param>
@@ -265,7 +265,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <para>This is one of a group of Window properties that contain a boolean visible property, that used to represent whether or not a particular part of a web browser's user interface was visible.</para>
     /// <para>For privacy and interoperability reasons, the value of the visible property is now false if this Window is a popup, and true otherwise.</para>
     /// </summary>
-    public ValueTask<bool> Menubar => GetMenubar(default);
+    public ValueTask<bool> Menubar => GetMenubar(CancellationToken.None);
 
     /// <inheritdoc cref="Menubar" />
     /// <param name="cancellationToken"></param>
@@ -277,7 +277,7 @@ public sealed class Window(IModuleManager moduleManager) : WindowBase(moduleMana
     /// <summary>
     /// Returns the element (such as &lt;iframe&gt; or &lt;object&gt;) in which the window is embedded.
     /// </summary>
-    public ValueTask<IHTMLElement?> FrameElement => GetFrameElement(default);
+    public ValueTask<IHTMLElement?> FrameElement => GetFrameElement(CancellationToken.None);
 
     /// <inheritdoc cref="FrameElement" />
     /// <param name="cancellationToken"></param>

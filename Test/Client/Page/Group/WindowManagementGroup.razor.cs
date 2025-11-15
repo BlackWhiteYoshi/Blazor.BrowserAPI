@@ -36,7 +36,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
 
     public const string BUTTON_SCREEN_GET_WIDTH_METHOD = "window-management-screen-get-width-method";
     private async Task Screen_GetWidth_Method() {
-        int width = await WindowManagement.Screen.GetWidth(default);
+        int width = await WindowManagement.Screen.GetWidth(CancellationToken.None);
         labelOutput = width.ToString();
     }
 
@@ -49,7 +49,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
 
     public const string BUTTON_SCREEN_GET_HEIGHT_METHOD = "window-management-screen-get-height-method";
     private async Task Screen_GetHeight_Method() {
-        int height = await WindowManagement.Screen.GetHeight(default);
+        int height = await WindowManagement.Screen.GetHeight(CancellationToken.None);
         labelOutput = height.ToString();
     }
 
@@ -62,7 +62,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
 
     public const string BUTTON_SCREEN_GET_AVAIL_WIDTH_METHOD = "window-management-screen-get-avail-width-method";
     private async Task Screen_GetAvailWidth_Method() {
-        int availWidth = await WindowManagement.Screen.GetAvailWidth(default);
+        int availWidth = await WindowManagement.Screen.GetAvailWidth(CancellationToken.None);
         labelOutput = availWidth.ToString();
     }
 
@@ -75,7 +75,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
 
     public const string BUTTON_SCREEN_GET_AVAIL_HEIGHT_METHOD = "window-management-screen-get-avail-height-method";
     private async Task Screen_GetAvailHeight_Method() {
-        int availHeight = await WindowManagement.Screen.GetAvailHeight(default);
+        int availHeight = await WindowManagement.Screen.GetAvailHeight(CancellationToken.None);
         labelOutput = availHeight.ToString();
     }
 
@@ -88,7 +88,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
 
     public const string BUTTON_SCREEN_GET_COLOR_DEPTH_METHOD = "window-management-screen-get-color-depth-method";
     private async Task Screen_GetColorDepth_Method() {
-        int colorDepth = await WindowManagement.Screen.GetColorDepth(default);
+        int colorDepth = await WindowManagement.Screen.GetColorDepth(CancellationToken.None);
         labelOutput = colorDepth.ToString();
     }
 
@@ -101,7 +101,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
 
     public const string BUTTON_SCREEN_GET_PIXEL_DEPTH_METHOD = "window-management-screen-get-pixel-depth-method";
     private async Task Screen_GetPixelDepth_Method() {
-        int pixelDepth = await WindowManagement.Screen.GetPixelDepth(default);
+        int pixelDepth = await WindowManagement.Screen.GetPixelDepth(CancellationToken.None);
         labelOutput = pixelDepth.ToString();
     }
 
@@ -114,7 +114,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
 
     public const string BUTTON_SCREEN_GET_IS_EXTENDED_METHOD = "window-management-screen-get-is-extended-method";
     private async Task Screen_GetIsExtended_Method() {
-        bool isExtended = await WindowManagement.Screen.GetIsExtended(default);
+        bool isExtended = await WindowManagement.Screen.GetIsExtended(CancellationToken.None);
         labelOutput = isExtended.ToString();
     }
 
@@ -129,7 +129,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
 
     public const string BUTTON_SCREEN_GET_ORIENTATION_TYPE_METHOD = "window-management-screen-get-orientation-type-method";
     private async Task Screen_GetOrientationType_Method() {
-        string orientationType = await WindowManagement.Screen.GetOrientationType(default);
+        string orientationType = await WindowManagement.Screen.GetOrientationType(CancellationToken.None);
         labelOutput = orientationType;
     }
 
@@ -142,7 +142,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
 
     public const string BUTTON_SCREEN_GET_ORIENTATION_ANGLE_METHOD = "window-management-screen-get-orientation-angle-method";
     private async Task Screen_GetOrientationAngle_Method() {
-        double orientationAngle = await WindowManagement.Screen.GetOrientationAngle(default);
+        double orientationAngle = await WindowManagement.Screen.GetOrientationAngle(CancellationToken.None);
         labelOutput = orientationAngle.ToString();
     }
 
@@ -209,7 +209,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
     public const string BUTTON_GET_CURRENT_SCREEN_METHOD = "window-management-get-current-screen-method";
     private async Task GetCurrentScreen_Method() {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
-        await using IScreenDetailed screenDetailed = await screenDetails.GetCurrentScreen(default);
+        await using IScreenDetailed screenDetailed = await screenDetails.GetCurrentScreen(CancellationToken.None);
 
         labelOutput = (screenDetailed is not null).ToString();
     }
@@ -226,7 +226,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
     public const string BUTTON_GET_SCREENS_METHOD = "window-management-get-screens-method";
     private async Task GetScreens_Method() {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
-        IScreenDetailed[] screens = await screenDetails.GetScreens(default);
+        IScreenDetailed[] screens = await screenDetails.GetScreens(CancellationToken.None);
 
         labelOutput = screens.Length.ToString();
         await screens.DisposeAsync();
@@ -276,7 +276,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
         await using IScreenDetailed screenDetailed = await screenDetails.CurrentScreen;
 
-        int left = await screenDetailed.GetLeft(default);
+        int left = await screenDetailed.GetLeft(CancellationToken.None);
         labelOutput = left.ToString();
     }
 
@@ -295,7 +295,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
         await using IScreenDetailed screenDetailed = await screenDetails.CurrentScreen;
 
-        int top = await screenDetailed.GetTop(default);
+        int top = await screenDetailed.GetTop(CancellationToken.None);
         labelOutput = top.ToString();
     }
 
@@ -314,7 +314,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
         await using IScreenDetailed screenDetailed = await screenDetails.CurrentScreen;
 
-        int availLeft = await screenDetailed.GetAvailLeft(default);
+        int availLeft = await screenDetailed.GetAvailLeft(CancellationToken.None);
         labelOutput = availLeft.ToString();
     }
 
@@ -333,7 +333,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
         await using IScreenDetailed screenDetailed = await screenDetails.CurrentScreen;
 
-        int availTop = await screenDetailed.GetAvailTop(default);
+        int availTop = await screenDetailed.GetAvailTop(CancellationToken.None);
         labelOutput = availTop.ToString();
     }
 
@@ -352,7 +352,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
         await using IScreenDetailed screenDetailed = await screenDetails.CurrentScreen;
 
-        string label = await screenDetailed.GetLabel(default);
+        string label = await screenDetailed.GetLabel(CancellationToken.None);
         labelOutput = label != string.Empty ? label : "(empty)";
     }
 
@@ -371,7 +371,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
         await using IScreenDetailed screenDetailed = await screenDetails.CurrentScreen;
 
-        double devicePixelRatio = await screenDetailed.GetDevicePixelRatio(default);
+        double devicePixelRatio = await screenDetailed.GetDevicePixelRatio(CancellationToken.None);
         labelOutput = devicePixelRatio.ToString();
     }
 
@@ -390,7 +390,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
         await using IScreenDetailed screenDetailed = await screenDetails.CurrentScreen;
 
-        bool isPrimary = await screenDetailed.GetIsPrimary(default);
+        bool isPrimary = await screenDetailed.GetIsPrimary(CancellationToken.None);
         labelOutput = isPrimary.ToString();
     }
 
@@ -409,7 +409,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
         await using IScreenDetailed screenDetailed = await screenDetails.CurrentScreen;
 
-        bool isInternal = await screenDetailed.GetIsInternal(default);
+        bool isInternal = await screenDetailed.GetIsInternal(CancellationToken.None);
         labelOutput = isInternal.ToString();
     }
 
@@ -429,7 +429,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
         await using IScreenDetailed screenDetailed = await screenDetails.CurrentScreen;
 
-        int width = await screenDetailed.GetWidth(default);
+        int width = await screenDetailed.GetWidth(CancellationToken.None);
         labelOutput = width.ToString();
     }
 
@@ -448,7 +448,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
         await using IScreenDetailed screenDetailed = await screenDetails.CurrentScreen;
 
-        int height = await screenDetailed.GetHeight(default);
+        int height = await screenDetailed.GetHeight(CancellationToken.None);
         labelOutput = height.ToString();
     }
 
@@ -467,7 +467,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
         await using IScreenDetailed screenDetailed = await screenDetails.CurrentScreen;
 
-        int availWidth = await screenDetailed.GetAvailWidth(default);
+        int availWidth = await screenDetailed.GetAvailWidth(CancellationToken.None);
         labelOutput = availWidth.ToString();
     }
 
@@ -486,7 +486,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
         await using IScreenDetailed screenDetailed = await screenDetails.CurrentScreen;
 
-        int availHeight = await screenDetailed.GetAvailHeight(default);
+        int availHeight = await screenDetailed.GetAvailHeight(CancellationToken.None);
         labelOutput = availHeight.ToString();
     }
 
@@ -505,7 +505,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
         await using IScreenDetailed screenDetailed = await screenDetails.CurrentScreen;
 
-        int colorDepth = await screenDetailed.GetColorDepth(default);
+        int colorDepth = await screenDetailed.GetColorDepth(CancellationToken.None);
         labelOutput = colorDepth.ToString();
     }
 
@@ -524,7 +524,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
         await using IScreenDetailed screenDetailed = await screenDetails.CurrentScreen;
 
-        int pixelDepth = await screenDetailed.GetPixelDepth(default);
+        int pixelDepth = await screenDetailed.GetPixelDepth(CancellationToken.None);
         labelOutput = pixelDepth.ToString();
     }
 
@@ -543,7 +543,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
         await using IScreenDetailed screenDetailed = await screenDetails.CurrentScreen;
 
-        bool isExtended = await screenDetailed.GetIsExtended(default);
+        bool isExtended = await screenDetailed.GetIsExtended(CancellationToken.None);
         labelOutput = isExtended.ToString();
     }
 
@@ -563,7 +563,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
         await using IScreenDetailed screenDetailed = await screenDetails.CurrentScreen;
 
-        string orientationType = await screenDetailed.GetOrientationType(default);
+        string orientationType = await screenDetailed.GetOrientationType(CancellationToken.None);
         labelOutput = orientationType;
     }
 
@@ -582,7 +582,7 @@ public sealed partial class WindowManagementGroup : ComponentBase {
         await using IScreenDetails screenDetails = await WindowManagement.GetScreenDetails();
         await using IScreenDetailed screenDetailed = await screenDetails.CurrentScreen;
 
-        double angle = await screenDetailed.GetOrientationAngle(default);
+        double angle = await screenDetailed.GetOrientationAngle(CancellationToken.None);
         labelOutput = angle.ToString();
     }
 

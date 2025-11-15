@@ -21,7 +21,7 @@ public sealed class UncalibratedMagnetometer(IJSObjectReference uncalibratedMagn
     /// <summary>
     /// Returns a double containing the uncalibrated magnetic field around the device's x axis.
     /// </summary>
-    public ValueTask<double> X => GetX(default);
+    public ValueTask<double> X => GetX(CancellationToken.None);
 
     /// <inheritdoc cref="X" />
     /// <param name="cancellationToken"></param>
@@ -32,7 +32,7 @@ public sealed class UncalibratedMagnetometer(IJSObjectReference uncalibratedMagn
     /// <summary>
     /// Returns a double containing the uncalibrated magnetic field around the device's y axis.
     /// </summary>
-    public ValueTask<double> Y => GetY(default);
+    public ValueTask<double> Y => GetY(CancellationToken.None);
 
     /// <inheritdoc cref="Y" />
     /// <param name="cancellationToken"></param>
@@ -43,7 +43,7 @@ public sealed class UncalibratedMagnetometer(IJSObjectReference uncalibratedMagn
     /// <summary>
     /// Returns a double containing the uncalibrated magnetic field around the device's z axis.
     /// </summary>
-    public ValueTask<double> Z => GetZ(default);
+    public ValueTask<double> Z => GetZ(CancellationToken.None);
 
     /// <inheritdoc cref="Z" />
     /// <param name="cancellationToken"></param>
@@ -55,7 +55,7 @@ public sealed class UncalibratedMagnetometer(IJSObjectReference uncalibratedMagn
     /// <summary>
     /// Returns a double representing the hard iron distortion correction around x axis.
     /// </summary>
-    public ValueTask<double> XBias => GetXBias(default);
+    public ValueTask<double> XBias => GetXBias(CancellationToken.None);
 
     /// <inheritdoc cref="XBias" />
     /// <param name="cancellationToken"></param>
@@ -66,7 +66,7 @@ public sealed class UncalibratedMagnetometer(IJSObjectReference uncalibratedMagn
     /// <summary>
     /// Returns a double representing the hard iron distortion correction around y axis.
     /// </summary>
-    public ValueTask<double> YBias => GetYBias(default);
+    public ValueTask<double> YBias => GetYBias(CancellationToken.None);
 
     /// <inheritdoc cref="YBias" />
     /// <param name="cancellationToken"></param>
@@ -77,7 +77,7 @@ public sealed class UncalibratedMagnetometer(IJSObjectReference uncalibratedMagn
     /// <summary>
     /// Returns a double representing the hard iron distortion correction around z axis.
     /// </summary>
-    public ValueTask<double> ZBias => GetZBias(default);
+    public ValueTask<double> ZBias => GetZBias(CancellationToken.None);
 
     /// <inheritdoc cref="ZBias" />
     /// <param name="cancellationToken"></param>

@@ -67,7 +67,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
             return;
         IGamepad gamepad = gamepads[0];
 
-        double[] axes = await gamepad.GetAxes(default);
+        double[] axes = await gamepad.GetAxes(CancellationToken.None);
         labelOutput = $"({axes.Length}): [{string.Join(", ", axes)}]";
 
         await gamepads.DisposeAsync();
@@ -95,7 +95,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
             return;
         IGamepad gamepad = gamepads[0];
 
-        GamepadButton[] buttons = await gamepad.GetButtons(default);
+        GamepadButton[] buttons = await gamepad.GetButtons(CancellationToken.None);
         labelOutput = $"({buttons.Length}): [{string.Join(", ", buttons)}]";
 
         await gamepads.DisposeAsync();
@@ -124,7 +124,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
             return;
         IGamepad gamepad = gamepads[0];
 
-        bool connected = await gamepad.GetConnected(default);
+        bool connected = await gamepad.GetConnected(CancellationToken.None);
         labelOutput = connected.ToString();
 
         await gamepads.DisposeAsync();
@@ -152,7 +152,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
             return;
         IGamepad gamepad = gamepads[0];
 
-        string id = await gamepad.GetId(default);
+        string id = await gamepad.GetId(CancellationToken.None);
         labelOutput = id;
 
         await gamepads.DisposeAsync();
@@ -180,7 +180,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
             return;
         IGamepad gamepad = gamepads[0];
 
-        int index = await gamepad.GetIndex(default);
+        int index = await gamepad.GetIndex(CancellationToken.None);
         labelOutput = index.ToString();
 
         await gamepads.DisposeAsync();
@@ -208,7 +208,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
             return;
         IGamepad gamepad = gamepads[0];
 
-        string mapping = await gamepad.GetMapping(default);
+        string mapping = await gamepad.GetMapping(CancellationToken.None);
         labelOutput = mapping;
 
         await gamepads.DisposeAsync();
@@ -236,7 +236,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
             return;
         IGamepad gamepad = gamepads[0];
 
-        double timestamp = await gamepad.GetTimestamp(default);
+        double timestamp = await gamepad.GetTimestamp(CancellationToken.None);
         labelOutput = timestamp.ToString();
 
         await gamepads.DisposeAsync();
@@ -265,7 +265,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
             return;
         IGamepad gamepad = gamepads[0];
 
-        string[] vibrationEffects = await gamepad.GetVibrationActuatorEffects(default);
+        string[] vibrationEffects = await gamepad.GetVibrationActuatorEffects(CancellationToken.None);
         labelOutput = $"({vibrationEffects.Length}): [{string.Join(", ", vibrationEffects)}]";
 
         await gamepads.DisposeAsync();

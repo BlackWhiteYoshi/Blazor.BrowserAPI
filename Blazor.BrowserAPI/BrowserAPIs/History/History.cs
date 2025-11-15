@@ -14,7 +14,7 @@ public sealed class History(IModuleManager moduleManager) : HistoryBase(moduleMa
     /// <summary>
     /// Returns an Integer representing the number of elements in the session history, including the currently loaded page. For example, for a page loaded in a new tab this property returns 1.
     /// </summary>
-    public ValueTask<int> Length => GetLength(default);
+    public ValueTask<int> Length => GetLength(CancellationToken.None);
 
     /// <inheritdoc cref="Length" />
     /// <param name="cancellationToken"></param>
@@ -26,7 +26,7 @@ public sealed class History(IModuleManager moduleManager) : HistoryBase(moduleMa
     /// <para>Allows web applications to explicitly set default scroll restoration behavior on history navigation.</para>
     /// <para>This property can be either "auto" or "manual".</para>
     /// </summary>
-    public ValueTask<string> ScrollRestoration => GetScrollRestoration(default);
+    public ValueTask<string> ScrollRestoration => GetScrollRestoration(CancellationToken.None);
 
     /// <inheritdoc cref="ScrollRestoration" />
     /// <param name="cancellationToken"></param>
@@ -43,7 +43,7 @@ public sealed class History(IModuleManager moduleManager) : HistoryBase(moduleMa
     /// <summary>
     /// Returns an <i>any</i> value representing the state at the top of the history stack. This is a way to look at the state without having to wait for a <i>popstate</i> event.
     /// </summary>
-    public ValueTask<JsonElement?> State => GetState(default);
+    public ValueTask<JsonElement?> State => GetState(CancellationToken.None);
 
     /// <inheritdoc cref="State" />
     /// <param name="cancellationToken"></param>

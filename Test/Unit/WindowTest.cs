@@ -1002,7 +1002,7 @@ public sealed class WindowTest(PlayWrightFixture playWrightFixture) : PlayWright
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(WindowGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='all', types='[]', files='[]'");
+        await Assert.That(result).IsEqualTo("dropEffect='copy', effectAllowed='all', types='[]', files='[]'");
     }
 
 

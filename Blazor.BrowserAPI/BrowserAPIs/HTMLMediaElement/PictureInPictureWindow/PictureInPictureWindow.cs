@@ -25,7 +25,7 @@ public sealed class PictureInPictureWindow(IJSObjectReference pictureInPictureWi
     /// <summary>
     /// Returns the width of the floating video window in pixels if it is open. Otherwise, it returns 0.
     /// </summary>
-    public ValueTask<int> Width => GetWidth(default);
+    public ValueTask<int> Width => GetWidth(CancellationToken.None);
 
     /// <inheritdoc cref="Width" />
     /// <param name="cancellationToken"></param>
@@ -36,7 +36,7 @@ public sealed class PictureInPictureWindow(IJSObjectReference pictureInPictureWi
     /// <summary>
     /// Returns the height of the floating video window in pixels if it is open. Otherwise, it returns 0.
     /// </summary>
-    public ValueTask<int> Height => GetHeight(default);
+    public ValueTask<int> Height => GetHeight(CancellationToken.None);
 
     /// <inheritdoc cref="Height" />
     /// <param name="cancellationToken"></param>

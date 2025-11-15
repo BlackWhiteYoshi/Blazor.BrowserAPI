@@ -1,4 +1,4 @@
-# CookieStorage
+﻿# CookieStorage
 
 The Document property cookie lets you read and write cookies associated with the document.
 

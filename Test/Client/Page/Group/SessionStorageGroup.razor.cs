@@ -26,7 +26,7 @@ public partial class SessionStorageGroup : ComponentBase {
 
     public const string BUTTON_GET_LENGTH_METHOD = "session-storage-get-length-method";
     private async Task GetLength_Method() {
-        int length = await SessionStorage.GetLength(default);
+        int length = await SessionStorage.GetLength(CancellationToken.None);
         labelOutput = length.ToString();
     }
 

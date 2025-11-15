@@ -18,7 +18,7 @@ public sealed class CookieStorage(IModuleManager moduleManager) : ICookieStorage
     /// Note that each key and value may be surrounded by whitespace (space and tab characters).
     /// </para>
     /// </summary>
-    public ValueTask<string> AllCookies => GetAllCookies(default);
+    public ValueTask<string> AllCookies => GetAllCookies(CancellationToken.None);
 
     /// <inheritdoc cref="AllCookies" />
     /// <param name="cancellationToken"></param>
@@ -29,7 +29,7 @@ public sealed class CookieStorage(IModuleManager moduleManager) : ICookieStorage
     /// <summary>
     /// Returns an integer representing the number of cookies stored in cookieStorage.
     /// </summary>
-    public ValueTask<int> Length => GetLength(default);
+    public ValueTask<int> Length => GetLength(CancellationToken.None);
 
     /// <inheritdoc cref="Length" />
     /// <param name="cancellationToken"></param>

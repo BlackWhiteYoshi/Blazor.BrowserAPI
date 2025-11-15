@@ -32,7 +32,7 @@ public sealed partial class PermissionsGroup : ComponentBase {
     public const string BUTTON_GET_NAME_METHOD = "permissions-get-name-method";
     private async Task GetName_Method() {
         await using IPermissionStatus permissionStatus = await Permissions.Query(TEST_PERMISSION_NAME);
-        string name = await permissionStatus.GetName(default);
+        string name = await permissionStatus.GetName(CancellationToken.None);
         labelOutput = name;
     }
 
@@ -46,7 +46,7 @@ public sealed partial class PermissionsGroup : ComponentBase {
     public const string BUTTON_GET_STATE_METHOD = "permissions-get-state-method";
     private async Task GetState_Method() {
         await using IPermissionStatus permissionStatus = await Permissions.Query(TEST_PERMISSION_NAME);
-        string state = await permissionStatus.GetState(default);
+        string state = await permissionStatus.GetState(CancellationToken.None);
         labelOutput = state;
     }
 

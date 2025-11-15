@@ -15,7 +15,7 @@ public sealed class AmbientLightSensor(IJSObjectReference ambientLightSensor) : 
     /// <summary>
     /// Returns the current light level in lux of the ambient light level around the hosting device.
     /// </summary>
-    public ValueTask<double> Illuminance => GetIlluminance(default);
+    public ValueTask<double> Illuminance => GetIlluminance(CancellationToken.None);
 
     /// <inheritdoc cref="Illuminance" />
     /// <param name="cancellationToken"></param>

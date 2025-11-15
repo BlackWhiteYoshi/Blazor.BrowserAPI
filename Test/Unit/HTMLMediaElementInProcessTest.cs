@@ -1,11 +1,12 @@
 ﻿using BrowserAPI.Test.Client;
+using TUnit.Core.Interfaces;
 
 namespace BrowserAPI.UnitTest;
 
 [ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {
     public override Task InitializeAsync()
-        => TestContext.Current?.TestName switch {
+        => (TestContext.Current as ITestMetadata)?.DisplayName switch {
             nameof(GetVideoWidth)
             or nameof(GetVideoHeight)
             or nameof(RegisterOnResize) => NewPage(BrowserId.Firefox),
@@ -260,7 +261,7 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         await ExecuteTest(HTMLMediaElementInProcessGroup.BUTTON_GET_READY_STATE);
 
         string? result = await Page.GetByTestId(HTMLMediaElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsNotNull().IsNotEmpty();
+        await Assert.That(result).IsNotNullOrEmpty();
     }
 
 

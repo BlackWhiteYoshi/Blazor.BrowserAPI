@@ -1,4 +1,4 @@
-<Solution>
+﻿<Solution>
   <Project Path="Blazor.BrowserAPI/Blazor.BrowserAPI.csproj" />
   <Folder Name="/Test/">
     <Project Path="Test/Client/Blazor.BrowserAPI.Test.Client.csproj" />

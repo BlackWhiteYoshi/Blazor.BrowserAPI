@@ -1,7 +1,7 @@
-# FileSystem
+ï»¿# FileSystem
 
 The *File System API*
-— with extensions provided via the [File System Access API](https://wicg.github.io/file-system-access) to access files on the device file system —
+â€” with extensions provided via the [File System Access API](https://wicg.github.io/file-system-access) to access files on the device file system â€”
 allows read, write and file management capabilities.
 
 See [Relationship to other file-related APIs](https://developer.mozilla.org/en-US/docs/Web/API/File_API#relationship_to_other_file-related_apis) for a comparison between this API,
@@ -51,7 +51,7 @@ public sealed partial class ExampleComponent : ComponentBase {
 ### IFileSystem
 
 The *File System API*
-— with extensions provided via the [File System Access API](https://wicg.github.io/file-system-access) to access files on the device file system —
+â€” with extensions provided via the [File System Access API](https://wicg.github.io/file-system-access) to access files on the device file system â€”
 allows read, write and file management capabilities.
 
 See [Relationship to other file-related APIs](https://developer.mozilla.org/en-US/docs/Web/API/File_API#relationship_to_other_file-related_apis) for a comparison between this API,
@@ -194,7 +194,7 @@ The interface is accessed through the FileSystemFileHandle.createWritable() meth
 ### IFileSystemInProcess
 
 The *File System API*
-— with extensions provided via the [File System Access API](https://wicg.github.io/file-system-access) to access files on the device file system —
+â€” with extensions provided via the [File System Access API](https://wicg.github.io/file-system-access) to access files on the device file system â€”
 allows read, write and file management capabilities.
 
 See [Relationship to other file-related APIs](https://developer.mozilla.org/en-US/docs/Web/API/File_API#relationship_to_other_file-related_apis) for a comparison between this API,

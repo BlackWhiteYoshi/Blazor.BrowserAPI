@@ -1,4 +1,4 @@
-export {}
+﻿export {}
 
 declare global {
     export namespace DotNet {

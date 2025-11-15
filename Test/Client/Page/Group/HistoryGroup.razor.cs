@@ -24,7 +24,7 @@ public sealed partial class HistoryGroup : ComponentBase {
 
     public const string BUTTON_GET_LENGTH_METHOD = "history-get-length-method";
     private async Task GetLength_Method() {
-        int length = await History.GetLength(default);
+        int length = await History.GetLength(CancellationToken.None);
         labelOutput = length.ToString();
     }
 
@@ -36,7 +36,7 @@ public sealed partial class HistoryGroup : ComponentBase {
 
     public const string BUTTON_GET_SCROLL_RESTORATION_METHOD = "history-get-scroll-restoration-method";
     private async Task GetScrollRestoration_Method() {
-        labelOutput = await History.GetScrollRestoration(default);
+        labelOutput = await History.GetScrollRestoration(CancellationToken.None);
     }
 
     public const string BUTTON_SET_SCROLL_RESTORATION = "history-set-scroll-restoration";
@@ -55,7 +55,7 @@ public sealed partial class HistoryGroup : ComponentBase {
 
     public const string BUTTON_GET_STATE_METHOD = "history-get-state-method";
     private async Task GetState_Method() {
-        object? state = await History.GetState(default);
+        object? state = await History.GetState(CancellationToken.None);
         labelOutput = state?.ToString() ?? "(null)";
     }
 

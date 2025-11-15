@@ -15,7 +15,7 @@ public sealed class Gyroscope(IJSObjectReference gyroscope) : Sensor(gyroscope),
     /// <summary>
     /// Returns a double, containing the angular velocity of the device along the device's x axis.
     /// </summary>
-    public ValueTask<double> X => GetX(default);
+    public ValueTask<double> X => GetX(CancellationToken.None);
 
     /// <inheritdoc cref="X" />
     /// <param name="cancellationToken"></param>
@@ -26,7 +26,7 @@ public sealed class Gyroscope(IJSObjectReference gyroscope) : Sensor(gyroscope),
     /// <summary>
     /// Returns a double, containing the angular velocity of the device along the device's y axis.
     /// </summary>
-    public ValueTask<double> Y => GetY(default);
+    public ValueTask<double> Y => GetY(CancellationToken.None);
 
     /// <inheritdoc cref="Y" />
     /// <param name="cancellationToken"></param>
@@ -37,7 +37,7 @@ public sealed class Gyroscope(IJSObjectReference gyroscope) : Sensor(gyroscope),
     /// <summary>
     /// Returns a double, containing the angular velocity of the device along the device's z axis.
     /// </summary>
-    public ValueTask<double> Z => GetZ(default);
+    public ValueTask<double> Z => GetZ(CancellationToken.None);
 
     /// <inheritdoc cref="Z" />
     /// <param name="cancellationToken"></param>

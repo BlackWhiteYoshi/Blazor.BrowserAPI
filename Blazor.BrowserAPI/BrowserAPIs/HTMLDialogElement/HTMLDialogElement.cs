@@ -44,7 +44,7 @@ public sealed class HTMLDialogElement(Task<IJSObjectReference> dialogTask) : HTM
     /// - "none": The dialog can only be dismissed with a developer-specified mechanism.
     /// </para>
     /// </summary>
-    public ValueTask<string> ClosedBy => GetClosedBy(default);
+    public ValueTask<string> ClosedBy => GetClosedBy(CancellationToken.None);
 
     /// <inheritdoc cref="ClosedBy" />
     /// <param name="cancellationToken"></param>
@@ -61,7 +61,7 @@ public sealed class HTMLDialogElement(Task<IJSObjectReference> dialogTask) : HTM
     /// <summary>
     /// Reflecting the open HTML attribute, indicating whether the &lt;dialog&gt; is available for interaction.
     /// </summary>
-    public ValueTask<bool> Open => GetOpen(default);
+    public ValueTask<bool> Open => GetOpen(CancellationToken.None);
 
     /// <inheritdoc cref="Open" />
     /// <param name="cancellationToken"></param>
@@ -78,7 +78,7 @@ public sealed class HTMLDialogElement(Task<IJSObjectReference> dialogTask) : HTM
     /// <summary>
     /// Gets/Sets the return value for the &lt;dialog&gt;, usually to indicate which button the user pressed to close it.
     /// </summary>
-    public ValueTask<string> ReturnValue => GetReturnValue(default);
+    public ValueTask<string> ReturnValue => GetReturnValue(CancellationToken.None);
 
     /// <inheritdoc cref="ReturnValue" />
     /// <param name="cancellationToken"></param>

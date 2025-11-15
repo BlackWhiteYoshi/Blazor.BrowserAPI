@@ -29,7 +29,7 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
     /// Windows cannot be placed in those areas; to get the left-hand coordinate of the screen area that windows can be placed in, use <see cref="AvailLeft"/>.
     /// </para>
     /// </summary>
-    public ValueTask<int> Left => GetLeft(default);
+    public ValueTask<int> Left => GetLeft(CancellationToken.None);
 
     /// <summary>
     /// <para>A number representing the x-coordinate (left-hand edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
@@ -50,7 +50,7 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
     /// Windows cannot be placed in those areas; to get the top coordinate of the screen area that windows can be placed in, use <see cref="AvailTop"/>.
     /// </para>
     /// </summary>
-    public ValueTask<int> Top => GetTop(default);
+    public ValueTask<int> Top => GetTop(CancellationToken.None);
 
     /// <summary>
     /// <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
@@ -71,7 +71,7 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
     /// Windows cannot be placed in those areas, so availLeft is useful for giving you the left boundary of the actual area available to open or place windows.
     /// </para>
     /// </summary>
-    public ValueTask<int> AvailLeft => GetAvailLeft(default);
+    public ValueTask<int> AvailLeft => GetAvailLeft(CancellationToken.None);
 
     /// <summary>
     /// <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
@@ -92,7 +92,7 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
     /// Windows cannot be placed in those areas, so availTop is useful for giving you the top boundary of the actual area available to open or place windows.
     /// </para>
     /// </summary>
-    public ValueTask<int> AvailTop => GetAvailTop(default);
+    public ValueTask<int> AvailTop => GetAvailTop(CancellationToken.None);
 
     /// <summary>
     /// <para>A number representing the y-coordinate (top edge) of the available screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
@@ -111,7 +111,7 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
     /// <para>A descriptive label for the screen, for example "Built-in Retina Display".</para>
     /// <para>This is useful for constructing a list of options to display to the user if you want them to choose a screen to display content on.</para>
     /// </summary>
-    public ValueTask<string> Label => GetLabel(default);
+    public ValueTask<string> Label => GetLabel(CancellationToken.None);
 
     /// <summary>
     /// <para>A descriptive label for the screen, for example "Built-in Retina Display".</para>
@@ -130,7 +130,7 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
     /// - also includes scaling of the window itself, i.e., page zoom (at least on some browser implementations).
     /// </para>
     /// </summary>
-    public ValueTask<double> DevicePixelRatio => GetDevicePixelRatio(default);
+    public ValueTask<double> DevicePixelRatio => GetDevicePixelRatio(CancellationToken.None);
 
     /// <summary>
     /// <para>A number representing the screen's device pixel ratio.</para>
@@ -153,7 +153,7 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
     /// The primary screen may change for a number of reasons, such as a screen being unplugged.
     /// </para>
     /// </summary>
-    public ValueTask<bool> IsPrimary => GetIsPrimary(default);
+    public ValueTask<bool> IsPrimary => GetIsPrimary(CancellationToken.None);
 
     /// <summary>
     /// <para>A boolean indicating whether the screen is set as the operating system (OS) primary screen or not.</para>
@@ -173,7 +173,7 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
     /// External devices are generally manufactured separately from the device they are attached to and can be connected and disconnected as needed,
     /// whereas internal screens are part of the device and not intended to be disconnected.
     /// </summary>
-    public ValueTask<bool> IsInternal => GetIsInternal(default);
+    public ValueTask<bool> IsInternal => GetIsInternal(CancellationToken.None);
 
     /// <summary>
     /// A boolean indicating whether the screen is internal to the device or external.
@@ -189,7 +189,7 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
     // Screen
 
     /// <inheritdoc cref="Screen.Width" />
-    public ValueTask<int> Width => GetWidth(default);
+    public ValueTask<int> Width => GetWidth(CancellationToken.None);
 
     /// <inheritdoc cref="Width" />
     /// <param name="cancellationToken"></param>
@@ -198,7 +198,7 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
 
 
     /// <inheritdoc cref="Screen.Height" />
-    public ValueTask<int> Height => GetHeight(default);
+    public ValueTask<int> Height => GetHeight(CancellationToken.None);
 
     /// <inheritdoc cref="Height" />
     /// <param name="cancellationToken"></param>
@@ -207,7 +207,7 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
 
 
     /// <inheritdoc cref="Screen.AvailWidth" />
-    public ValueTask<int> AvailWidth => GetAvailWidth(default);
+    public ValueTask<int> AvailWidth => GetAvailWidth(CancellationToken.None);
 
     /// <inheritdoc cref="AvailWidth" />
     /// <param name="cancellationToken"></param>
@@ -216,7 +216,7 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
 
 
     /// <inheritdoc cref="Screen.AvailHeight" />
-    public ValueTask<int> AvailHeight => GetAvailHeight(default);
+    public ValueTask<int> AvailHeight => GetAvailHeight(CancellationToken.None);
 
     /// <inheritdoc cref="AvailHeight" />
     /// <param name="cancellationToken"></param>
@@ -225,7 +225,7 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
 
 
     /// <inheritdoc cref="Screen.ColorDepth" />
-    public ValueTask<int> ColorDepth => GetColorDepth(default);
+    public ValueTask<int> ColorDepth => GetColorDepth(CancellationToken.None);
 
     /// <inheritdoc cref="ColorDepth" />
     /// <param name="cancellationToken"></param>
@@ -234,7 +234,7 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
 
 
     /// <inheritdoc cref="Screen.PixelDepth" />
-    public ValueTask<int> PixelDepth => GetPixelDepth(default);
+    public ValueTask<int> PixelDepth => GetPixelDepth(CancellationToken.None);
 
     /// <inheritdoc cref="PixelDepth" />
     /// <param name="cancellationToken"></param>
@@ -243,7 +243,7 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
 
 
     /// <inheritdoc cref="Screen.IsExtended" />
-    public ValueTask<bool> IsExtended => GetIsExtended(default);
+    public ValueTask<bool> IsExtended => GetIsExtended(CancellationToken.None);
 
     /// <inheritdoc cref="IsExtended" />
     /// <param name="cancellationToken"></param>
@@ -254,7 +254,7 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
     // Screen orientation
 
     /// <inheritdoc cref="Screen.OrientationType" />
-    public ValueTask<string> OrientationType => GetOrientationType(default);
+    public ValueTask<string> OrientationType => GetOrientationType(CancellationToken.None);
 
     /// <inheritdoc cref="OrientationType" />
     /// <param name="cancellationToken"></param>
@@ -263,7 +263,7 @@ public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : Screen
 
 
     /// <inheritdoc cref="Screen.OrientationAngle" />
-    public ValueTask<double> OrientationAngle => GetOrientationAngle(default);
+    public ValueTask<double> OrientationAngle => GetOrientationAngle(CancellationToken.None);
 
     /// <inheritdoc cref="OrientationAngle" />
     /// <param name="cancellationToken"></param>
