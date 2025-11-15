@@ -173,3 +173,6 @@ There are more interfaces coming.
   - marked WindowManagement.Open() as obsolete
   - added more events to History and SensorAPI
   - small breaking change: Geolocation.WatchPosition()/Geolocation.ClearWatch() returns/takes a handle that contains the id instead of just the id.
+- 0.15.1
+  - added TargetFramework net10.0
+  - added more TrySyncExtension methods: InvokeConstructor, GetValue, SetValue, TimeSpan overloads
