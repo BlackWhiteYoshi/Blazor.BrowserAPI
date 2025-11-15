@@ -1603,15 +1603,23 @@ public sealed class DocumentInProcessTest(PlayWrightFixture playWrightFixture) :
             const tempElement = document.createElement("div");
             tempElement.setAttribute("data-testid", "temp");
             tempElement.classList.add("html-element");
+            tempElement.classList.add("long-transition");
             document.body.appendChild(tempElement);
             """);
         await Task.Delay(SMALL_WAIT_TIME);
-        await Page.GetByTestId("temp").EvaluateAsync("node => node.style.backgroundColor = '#000';");
-        await Task.Delay(SMALL_WAIT_TIME);
-        await Page.GetByTestId("temp").EvaluateAsync("node => node.style.backgroundColor = '#222';");
-        await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        // fluctuating test -> do multiple times with different timings
+        string? result = null;
+        for (int i = 0; i < 60; i++) {
+            char colorNumber = (i % 10).ToString()[0];
+            await Page.GetByTestId("temp").EvaluateAsync($"node => node.style.backgroundColor = '#{colorNumber}{colorNumber}{colorNumber}';");
+            await Task.Delay(i * SMALL_WAIT_TIME);
+
+            result = await Page.GetByTestId(DocumentInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+            if (result is not (null or ""))
+                break;
+        }
+
         await Assert.That(result).StartsWith(DocumentInProcessGroup.TEST_EVENT_TRANSITION_CANCEL);
     }
 

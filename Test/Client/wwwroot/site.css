@@ -175,6 +175,10 @@ img, picture {
   padding: 0.5em;
 }
 
+.long-transition {
+  transition-duration: 30s;
+}
+
 .animation-start {
   animation: change-background-color 300ms;
 }

@@ -4496,12 +4496,25 @@ public sealed class HTMLElementTest(PlayWrightFixture playWrightFixture) : PlayW
     [Test]
     public async Task RegisterOnTransitionCancel() {
         await ExecuteTest(HTMLElementGroup.BUTTON_REGISTER_ON_TRANSITION_CANCEL);
-        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#000';");
-        await Task.Delay(SMALL_WAIT_TIME);
-        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync("node => node.style.backgroundColor = '#222';");
-        await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
+        await Page.EvaluateAsync("""
+            for (const htmlElement of document.getElementsByClassName("html-element"))
+                htmlElement.classList.add("long-transition");
+            """);
+        await Task.Delay(SMALL_WAIT_TIME);
+
+        // fluctuating test -> do multiple times with different timings
+        string? result = null;
+        for (int i = 0; i < 60; i++) {
+            char colorNumber = (i % 10).ToString()[0];
+            await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.style.backgroundColor = '#{colorNumber}{colorNumber}{colorNumber}';");
+            await Task.Delay(i * SMALL_WAIT_TIME);
+
+            result = await Page.GetByTestId(HTMLElementGroup.LABEL_OUTPUT).TextContentAsync();
+            if (result is not (null or ""))
+                break;
+        }
+
         await Assert.That(result).StartsWith(HTMLElementGroup.TEST_EVENT_TRANSITION_CANCEL);
     }
 
