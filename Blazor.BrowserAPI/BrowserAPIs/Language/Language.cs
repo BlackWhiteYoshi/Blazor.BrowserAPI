@@ -31,7 +31,7 @@ public sealed class Language(IModuleManager moduleManager) : ILanguage {
     /// <inheritdoc cref="BrowserLanguage" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    [Obsolete("Will be removed at Release. Use INavigator.Languages instead.")]
+    [Obsolete("Will be removed at Release. Use INavigator.Language instead.")]
     public ValueTask<string> GetBrowserLanguage(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<string>("LanguageAPI.getBrowserLanguage", cancellationToken);
 
 
@@ -76,13 +76,13 @@ public sealed class Language(IModuleManager moduleManager) : ILanguage {
     /// <inheritdoc cref="HtmlLanguage" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    [Obsolete("Will be removed at Release. Use INavigator.Languages instead.")]
+    [Obsolete("Will be removed at Release. Use IDocument.DocumentElement.Lang instead.")]
     public ValueTask<string> GetHtmlLanguage(CancellationToken cancellationToken) => moduleManager.InvokeTrySync<string>("LanguageAPI.getHtmlLanguage", cancellationToken);
 
     /// <inheritdoc cref="HtmlLanguage" />
     /// <param name="language">language abbreviation: e.g. "en", "fr", "es", "de"</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    [Obsolete("Will be removed at Release. Use INavigator.Languages instead.")]
+    [Obsolete("Will be removed at Release. Use IDocument.DocumentElement.Lang instead.")]
     public ValueTask SetHtmlLanguage(string language, CancellationToken cancellationToken = default) => moduleManager.InvokeTrySync("LanguageAPI.setHtmlLanguage", cancellationToken, [language]);
 }
