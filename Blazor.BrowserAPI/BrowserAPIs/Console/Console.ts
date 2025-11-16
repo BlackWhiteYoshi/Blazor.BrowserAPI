@@ -1,4 +1,4 @@
-﻿export class ConsoleAPI {
+export class ConsoleAPI {
     public static assert(condition: boolean, data: any[]): void {
         console.assert(condition, data);
     }

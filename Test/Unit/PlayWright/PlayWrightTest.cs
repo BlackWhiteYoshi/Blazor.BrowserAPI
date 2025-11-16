@@ -1,4 +1,4 @@
-﻿using Microsoft.Playwright;
+using Microsoft.Playwright;
 using System.Diagnostics;
 using TUnit.Core.Interfaces;
 

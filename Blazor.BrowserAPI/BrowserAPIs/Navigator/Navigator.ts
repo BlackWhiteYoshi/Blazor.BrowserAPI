@@ -1,4 +1,4 @@
-﻿import { FileAPI } from "../FileSystem/File/File";
+import { FileAPI } from "../FileSystem/File/File";
 import { HTMLMediaElementAPI } from "../HTMLMediaElement/HTMLMediaElement";
 
 export class NavigatorAPI {

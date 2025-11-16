@@ -1,4 +1,4 @@
-﻿# SessionStorage
+# SessionStorage
 
 The read-only sessionStorage property accesses a session Storage object for the current origin.  
 sessionStorage is similar to localStorage; the difference is that while data in localStorage doesn't expire, data in sessionStorage is cleared when the page session ends.

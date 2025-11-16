@@ -1,4 +1,4 @@
-﻿# History
+# History
 
 The *History* interface of the [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) allows manipulation of the browser session history, that is the pages visited in the tab or frame that the current page is loaded in.
 

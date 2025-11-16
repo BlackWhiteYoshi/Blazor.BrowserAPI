@@ -1,4 +1,4 @@
-﻿import { FileAPI } from "../File/File";
+import { FileAPI } from "../File/File";
 import { WritableFileStreamAPI } from "../WritableFileStream/WritableFileStream";
 
 export class FileHandleAPI {

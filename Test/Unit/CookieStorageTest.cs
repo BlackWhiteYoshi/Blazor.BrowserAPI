@@ -1,4 +1,4 @@
-﻿using BrowserAPI.Test.Client;
+using BrowserAPI.Test.Client;
 using System.Text;
 
 namespace BrowserAPI.UnitTest;

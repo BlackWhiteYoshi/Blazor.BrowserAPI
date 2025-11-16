@@ -1,4 +1,4 @@
-﻿# Blazor.BrowserAPI
+# Blazor.BrowserAPI
 
 A Blazor library that provides easy access to browser APIs without the need to use any JavaScript.
 Since JavaScript functionality for Blazor is primarly used for accessing BrowserAPIs, for most applications there will be no need to write any additional JavaScript.  

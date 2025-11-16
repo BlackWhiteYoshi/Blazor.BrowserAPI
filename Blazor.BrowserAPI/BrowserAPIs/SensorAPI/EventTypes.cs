@@ -1,4 +1,4 @@
-﻿namespace BrowserAPI;
+namespace BrowserAPI;
 
 /// <summary>
 /// Provides web developers with information about the speed of changes for the device's position and orientation.

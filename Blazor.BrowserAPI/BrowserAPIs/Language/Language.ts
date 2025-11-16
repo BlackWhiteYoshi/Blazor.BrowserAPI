@@ -1,4 +1,4 @@
-﻿export class LanguageAPI {
+export class LanguageAPI {
     public static getBrowserLanguage(): string {
         return navigator.language;
     }

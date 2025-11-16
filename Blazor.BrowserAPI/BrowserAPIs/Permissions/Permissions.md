@@ -1,4 +1,4 @@
-﻿# Permissions API
+# Permissions API
 
 The *Permissions API* provides a consistent programmatic way to query the status of API permissions attributed to the current context, such as a web page or worker.
 For example, it can be used to determine if permission to access a particular feature or API has been granted, denied, or requires specific user permission.

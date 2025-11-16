@@ -1,4 +1,4 @@
-﻿export class SessionStorageAPI {
+export class SessionStorageAPI {
     public static count(): number {
         return sessionStorage.length;
     }

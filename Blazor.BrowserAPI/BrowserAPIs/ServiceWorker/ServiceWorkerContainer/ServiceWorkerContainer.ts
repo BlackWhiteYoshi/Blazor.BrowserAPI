@@ -1,4 +1,4 @@
-﻿import { ServiceWorkerRegistrationAPI } from "../ServiceWorkerRegistration/ServiceWorkerRegistration";
+import { ServiceWorkerRegistrationAPI } from "../ServiceWorkerRegistration/ServiceWorkerRegistration";
 import { ServiceWorkerAPI } from "../ServiceWorker/ServiceWorker";
 import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
 

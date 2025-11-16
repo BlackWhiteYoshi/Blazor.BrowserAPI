@@ -1,4 +1,4 @@
-﻿import { PermissionStatusAPI } from "./PermissionStatus/PermissionStatus";
+import { PermissionStatusAPI } from "./PermissionStatus/PermissionStatus";
 
 export class PermissionsAPI {
     public static async query(name: string, userVisibleOnly: boolean, sysex: boolean): Promise<PermissionStatusAPI> {

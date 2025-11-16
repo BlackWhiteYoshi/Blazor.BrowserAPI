@@ -1,4 +1,4 @@
-﻿import { HTMLElementAPI } from "../HTMLElement/HTMLElement";
+import { HTMLElementAPI } from "../HTMLElement/HTMLElement";
 import { BlazorInvoke } from "../../Extensions/blazorExtensions";
 
 export class HTMLDialogElementAPI {

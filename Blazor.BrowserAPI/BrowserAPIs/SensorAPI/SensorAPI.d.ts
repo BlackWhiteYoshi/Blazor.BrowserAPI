@@ -1,4 +1,4 @@
-﻿// taken from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/w3c-generic-sensor/index.d.ts
+// taken from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/w3c-generic-sensor/index.d.ts
 
 declare class Sensor extends EventTarget {
     readonly activated: boolean;

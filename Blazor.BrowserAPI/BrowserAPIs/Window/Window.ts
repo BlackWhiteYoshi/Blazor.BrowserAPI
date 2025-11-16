@@ -1,4 +1,4 @@
-﻿import { HTMLElementAPI } from "../HTMLElement/HTMLElement";
+import { HTMLElementAPI } from "../HTMLElement/HTMLElement";
 import { FileAPI } from "../FileSystem/File/File";
 import { BlazorInvoke } from "../../Extensions/blazorExtensions";
 

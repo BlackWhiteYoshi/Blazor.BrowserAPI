@@ -1,4 +1,4 @@
-﻿import { DirectoryHandleAPI } from "./DirectoryHandle/DirectoryHandle";
+import { DirectoryHandleAPI } from "./DirectoryHandle/DirectoryHandle";
 import { FileHandleAPI } from "./FileHandle/FileHandle";
 
 export class FileSystemAPI {

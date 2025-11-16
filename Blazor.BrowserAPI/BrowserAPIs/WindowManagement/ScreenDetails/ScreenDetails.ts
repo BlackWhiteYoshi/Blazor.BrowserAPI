@@ -1,4 +1,4 @@
-﻿import { ScreenDetailedAPI } from "../ScreenDetailed/ScreenDetailed";
+import { ScreenDetailedAPI } from "../ScreenDetailed/ScreenDetailed";
 import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
 
 export class ScreenDetailsAPI {

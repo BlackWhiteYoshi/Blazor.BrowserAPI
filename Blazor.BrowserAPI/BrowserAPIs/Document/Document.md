@@ -1,4 +1,4 @@
-﻿# Document
+# Document
 
 The *Document* interface represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.
 

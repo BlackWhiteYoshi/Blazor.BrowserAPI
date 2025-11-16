@@ -1,4 +1,4 @@
-﻿namespace BrowserAPI;
+namespace BrowserAPI;
 
 /// <summary>
 /// Represents installed related apps.<br />

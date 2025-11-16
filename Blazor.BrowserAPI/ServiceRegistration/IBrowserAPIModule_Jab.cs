@@ -1,4 +1,4 @@
-﻿namespace Jab;
+namespace Jab;
 
 /// <summary>
 /// <para>

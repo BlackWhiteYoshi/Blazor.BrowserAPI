@@ -1,4 +1,4 @@
-﻿using AutoInterfaceAttributes;
+using AutoInterfaceAttributes;
 using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;

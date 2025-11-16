@@ -1,4 +1,4 @@
-﻿import { HTMLElementAPI } from "../HTMLElement/HTMLElement";
+import { HTMLElementAPI } from "../HTMLElement/HTMLElement";
 import { PictureInPictureWindowAPI } from "./PictureInPictureWindow/PictureInPictureWindow";
 import { MediaStreamAPI } from "../MediaDevices/MediaStream/MediaStream";
 import { BlazorInvoke } from "../../Extensions/blazorExtensions";

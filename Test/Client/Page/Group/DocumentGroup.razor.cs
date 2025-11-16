@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using System.Text.Json;
 
 namespace BrowserAPI.Test.Client;

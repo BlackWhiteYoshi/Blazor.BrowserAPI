@@ -1,4 +1,4 @@
-﻿using BrowserAPI.Implementation;
+using BrowserAPI.Implementation;
 using Microsoft.JSInterop;
 
 namespace BrowserAPI;

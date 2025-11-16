@@ -1,4 +1,4 @@
-﻿namespace BrowserAPI;
+namespace BrowserAPI;
 
 /// <summary>
 /// <para>

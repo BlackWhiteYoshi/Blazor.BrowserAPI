@@ -1,4 +1,4 @@
-﻿namespace BrowserAPI;
+namespace BrowserAPI;
 
 /// <summary>
 /// <para>The <i>GamepadButton</i> interface defines an individual button of a gamepad or other controller, allowing access to the current state of different types of buttons available on the control device.</para>

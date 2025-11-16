@@ -1,4 +1,4 @@
-﻿import { MediaRecorderAPI } from "../MediaRecorder/MediaRecorder";
+import { MediaRecorderAPI } from "../MediaRecorder/MediaRecorder";
 
 export class MediaStreamAPI {
     private mediaStream: MediaStream;

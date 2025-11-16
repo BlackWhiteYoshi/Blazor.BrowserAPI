@@ -1,4 +1,4 @@
-﻿namespace BrowserAPI;
+namespace BrowserAPI;
 
 /// <summary>
 /// <para>A DOMRect describes the size and position of a rectangle.</para>

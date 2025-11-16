@@ -1,4 +1,4 @@
-﻿# Gamepad API
+# Gamepad API
 
 The *Gamepad API* is a way for developers to access and respond to signals from gamepads and other game controllers in a simple, consistent way.
 It contains three interfaces, two events and one specialist function, to respond to gamepads being connected and disconnected,

@@ -1,4 +1,4 @@
-﻿export class FileAPI {
+export class FileAPI {
     private _file: File;
     public get file() {
         return this._file;

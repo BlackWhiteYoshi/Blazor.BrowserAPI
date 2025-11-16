@@ -1,4 +1,4 @@
-﻿using BrowserAPI.UnitTest;
+using BrowserAPI.UnitTest;
 using TUnit.Core.Interfaces;
 
 [assembly: ParallelLimiter<TestParallelLimit>]

@@ -1,4 +1,4 @@
-﻿import { ScreenDetailsAPI } from "./ScreenDetails/ScreenDetails";
+import { ScreenDetailsAPI } from "./ScreenDetails/ScreenDetails";
 
 export class WindowManagementAPI {
     public static async getScreenDetails(): Promise<ScreenDetailsAPI> {

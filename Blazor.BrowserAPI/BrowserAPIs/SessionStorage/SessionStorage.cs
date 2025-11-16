@@ -1,4 +1,4 @@
-﻿using AutoInterfaceAttributes;
+using AutoInterfaceAttributes;
 
 namespace BrowserAPI.Implementation;
 

@@ -1,4 +1,4 @@
-﻿import { FileHandleAPI } from "../FileHandle/FileHandle";
+import { FileHandleAPI } from "../FileHandle/FileHandle";
 
 export class DirectoryHandleAPI {
     private _handle: FileSystemDirectoryHandle;

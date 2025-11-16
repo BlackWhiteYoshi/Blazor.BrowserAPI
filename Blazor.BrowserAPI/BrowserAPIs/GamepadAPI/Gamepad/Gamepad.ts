@@ -1,4 +1,4 @@
-﻿export class GamepadAPI {
+export class GamepadAPI {
     private gamepad: Gamepad;
 
     public constructor(gamepad: Gamepad) {

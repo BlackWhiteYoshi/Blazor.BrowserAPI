@@ -1,4 +1,4 @@
-﻿import { SensorAPI } from "../Sensor";
+import { SensorAPI } from "../Sensor";
 
 export class AbsoluteOrientationSensorAPI extends SensorAPI {
     declare protected sensor: AbsoluteOrientationSensor;

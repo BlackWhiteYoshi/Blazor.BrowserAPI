@@ -1,4 +1,4 @@
-﻿import { BlazorInvoke } from "../../Extensions/blazorExtensions";
+import { BlazorInvoke } from "../../Extensions/blazorExtensions";
 
 export class HistoryAPI {
     public static getLength(): number {

@@ -1,4 +1,4 @@
-﻿// taken from https://www.npmjs.com/package/@types/webscreens-window-placement?activeTab=code
+// taken from https://www.npmjs.com/package/@types/webscreens-window-placement?activeTab=code
 
 interface ScreenDetailsEventHandlersEventMap {
     currentscreenchange: Event;

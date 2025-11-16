@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Server;
+using Microsoft.AspNetCore.Components.Server;
 
 namespace BrowserAPI.Test.ClientHost;
 

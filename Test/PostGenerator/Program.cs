@@ -1,4 +1,4 @@
-﻿namespace BrowserAPI.Test.PostGenerator;
+namespace BrowserAPI.Test.PostGenerator;
 
 public static class Program {
     public static int Main() {

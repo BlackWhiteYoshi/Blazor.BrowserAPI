@@ -1,4 +1,4 @@
-﻿using StringOrIJSObjectReference = object;
+using StringOrIJSObjectReference = object;
 
 namespace BrowserAPI;
 

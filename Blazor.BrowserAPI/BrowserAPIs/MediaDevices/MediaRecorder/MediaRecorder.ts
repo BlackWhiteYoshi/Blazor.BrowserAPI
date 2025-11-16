@@ -1,4 +1,4 @@
-﻿import { MediaStreamAPI } from "../MediaStream/MediaStream";
+import { MediaStreamAPI } from "../MediaStream/MediaStream";
 import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
 
 export class MediaRecorderAPI {

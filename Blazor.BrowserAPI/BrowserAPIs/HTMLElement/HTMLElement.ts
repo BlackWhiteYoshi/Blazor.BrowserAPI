@@ -1,4 +1,4 @@
-﻿import { HTMLDialogElementAPI } from "../HTMLDialogElement/HTMLDialogElement";
+import { HTMLDialogElementAPI } from "../HTMLDialogElement/HTMLDialogElement";
 import { HTMLMediaElementAPI } from "../HTMLMediaElement/HTMLMediaElement";
 import { FileAPI } from "../FileSystem/File/File";
 import { BlazorInvoke } from "../../Extensions/blazorExtensions";

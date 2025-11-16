@@ -1,4 +1,4 @@
-﻿using Microsoft.JSInterop;
+using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;

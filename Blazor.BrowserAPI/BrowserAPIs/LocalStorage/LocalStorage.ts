@@ -1,4 +1,4 @@
-﻿export class LocalStorageAPI {
+export class LocalStorageAPI {
     public static count(): number {
         return localStorage.length;
     }

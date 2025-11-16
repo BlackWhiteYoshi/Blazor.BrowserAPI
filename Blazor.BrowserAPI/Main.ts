@@ -1,4 +1,4 @@
-﻿import { ClipboardAPI } from "./BrowserAPIs/Clipboard/Clipboard.ts";
+import { ClipboardAPI } from "./BrowserAPIs/Clipboard/Clipboard.ts";
 export { ClipboardAPI };
 
 import { ConsoleAPI } from "./BrowserAPIs/Console/Console.ts";

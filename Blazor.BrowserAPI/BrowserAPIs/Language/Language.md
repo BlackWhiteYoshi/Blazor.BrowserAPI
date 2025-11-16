@@ -1,4 +1,4 @@
-﻿# Language
+# Language
 
 This interface is a collection of language related functionalities,
 for example [navigator.language](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/language)

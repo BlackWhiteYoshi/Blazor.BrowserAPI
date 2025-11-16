@@ -1,4 +1,4 @@
-﻿import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
+import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
 
 export abstract class SensorAPI {
     protected sensor: Sensor;

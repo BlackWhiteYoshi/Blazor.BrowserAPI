@@ -1,4 +1,4 @@
-﻿using AutoInterfaceAttributes;
+using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 

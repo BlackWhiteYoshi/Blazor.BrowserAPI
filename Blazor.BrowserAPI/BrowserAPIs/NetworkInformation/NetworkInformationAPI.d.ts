@@ -1,4 +1,4 @@
-﻿// taken from https://www.npmjs.com/package/network-information-types?activeTab=code
+// taken from https://www.npmjs.com/package/network-information-types?activeTab=code
 // @author - Suguru Inatomi: https://github.com/lacolaco
 
 

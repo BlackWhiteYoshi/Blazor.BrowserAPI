@@ -1,4 +1,4 @@
-﻿export class WritableFileStreamAPI {
+export class WritableFileStreamAPI {
     private writableFileStream: FileSystemWritableFileStream;
 
     public constructor(writableFileStream: FileSystemWritableFileStream) {

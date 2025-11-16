@@ -1,4 +1,4 @@
-﻿export class CookieStorageAPI {
+export class CookieStorageAPI {
     public static getAllCookies(): string {
         return document.cookie;
     }

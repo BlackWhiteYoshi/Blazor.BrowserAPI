@@ -1,4 +1,4 @@
-﻿namespace CircleDIAttributes;
+namespace CircleDIAttributes;
 
 /// <summary>
 /// <para>

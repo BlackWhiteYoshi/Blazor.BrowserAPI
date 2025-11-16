@@ -1,4 +1,4 @@
-﻿export class ClipboardAPI {
+export class ClipboardAPI {
     public static writeText(text: string): Promise<void> {
         return navigator.clipboard.writeText(text);
     }

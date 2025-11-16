@@ -1,4 +1,4 @@
-﻿import { SensorAPI } from "../Sensor";
+import { SensorAPI } from "../Sensor";
 
 export class AccelerometerAPI extends SensorAPI {
     declare protected sensor: Accelerometer;

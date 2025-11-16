@@ -1,4 +1,4 @@
-﻿export class BlazorInvoke {
+export class BlazorInvoke {
     private static isSync: boolean;
 
     /**

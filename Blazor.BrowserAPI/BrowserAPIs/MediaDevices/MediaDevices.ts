@@ -1,4 +1,4 @@
-﻿import { MediaStreamAPI } from "./MediaStream/MediaStream";
+import { MediaStreamAPI } from "./MediaStream/MediaStream";
 
 namespace MediaDevicesTypes {
     export type ConstrainPreference = 0 | 1 | 2; // 0 = none, 1 = exact, 2 = ideal

@@ -1,4 +1,4 @@
-﻿import { GamepadAPI } from "./Gamepad/Gamepad";
+import { GamepadAPI } from "./Gamepad/Gamepad";
 import { BlazorInvoke } from "../../Extensions/blazorExtensions";
 
 export class GamepadInterfaceAPI {

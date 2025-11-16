@@ -1,4 +1,4 @@
-﻿namespace BrowserAPI;
+namespace BrowserAPI;
 
 /// <summary>
 /// Extensions for collections of <see cref="IDisposable">Disposable</see> objects, including Arrays, Enumerables or tuple of Enumerables.
