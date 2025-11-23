@@ -22747,6 +22747,96 @@
             <param name="args">JSON-serializable arguments.</param>
             <returns></returns>
         </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSRuntime,System.String,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
+            </summary>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSRuntime,System.String,System.Threading.CancellationToken,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
+            </summary>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSRuntime,System.String,System.TimeSpan,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
+            </summary>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
+            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String)">
+            <summary>
+            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
+            </summary>
+            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
+            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
+            </summary>
+            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,System.TimeSpan)">
+            <summary>
+            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
+            </summary>
+            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
+            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
+            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,``0)">
+            <summary>
+            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
+            </summary>
+            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
+            <param name="value">JSON-serializable value.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,``0,System.Threading.CancellationToken)">
+            <summary>
+            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
+            </summary>
+            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
+            <param name="value">JSON-serializable value.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,``0,System.TimeSpan)">
+            <summary>
+            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
+            </summary>
+            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
+            <param name="value">JSON-serializable value.</param>
+            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
+        </member>
         <member name="M:BrowserAPI.TrySyncExtensions.InvokeVoidTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Object[])">
             <summary>
             <para>Invokes the specified JavaScript function synchronously if possible, otherwise asynchronously.</para>
@@ -22813,6 +22903,96 @@
             <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
             <param name="args">JSON-serializable arguments.</param>
             <returns>An instance of <typeparamref name="TResult"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
+            </summary>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Threading.CancellationToken,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
+            </summary>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.TimeSpan,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
+            </summary>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
+            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String)">
+            <summary>
+            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
+            </summary>
+            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
+            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
+            </summary>
+            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,System.TimeSpan)">
+            <summary>
+            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
+            </summary>
+            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
+            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
+            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,``0)">
+            <summary>
+            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
+            </summary>
+            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
+            <param name="value">JSON-serializable value.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,``0,System.Threading.CancellationToken)">
+            <summary>
+            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
+            </summary>
+            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
+            <param name="value">JSON-serializable value.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,``0,System.TimeSpan)">
+            <summary>
+            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
+            </summary>
+            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
+            <param name="value">JSON-serializable value.</param>
+            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
         </member>
         <member name="M:BrowserAPI.TrySyncExtensions.DisposeTrySync(Microsoft.JSInterop.IJSObjectReference)">
             <summary>
@@ -44605,307 +44785,6 @@
             <param name="handler">
             A reference to a function that should be called in the near future, when the event loop is idle.
             The callback function is passed an IdleDeadline object describing the amount of time available and whether or not the callback has been run because the timeout period expired.
-            </param>
-            <param name="timeout">
-            <para>
-            If the number of milliseconds represented by this parameter has elapsed and the callback has not already been called,
-            then a task to execute the callback is queued in the event loop (even if doing so risks causing a negative performance impact).
-            timeout must be a positive value or it is ignored.
-            </para>
-            <para>Note: A timeout option is strongly recommended for required work, as otherwise it's possible multiple seconds will elapse before the callback is fired.</para>
-            </param>
-            <returns>An ID which can be used to cancel the callback by passing it into the <see cref="M:BrowserAPI.IWindowInProcess.CancelIdleCallback(BrowserAPI.IdleCallbackHandle)"/> method.</returns>
-        </member>
-        <member name="M:BrowserAPI.IWindowInProcess.CancelIdleCallback(BrowserAPI.IdleCallbackHandle)">
-            <summary>
-            Cancels a callback previously scheduled with <see cref="M:BrowserAPI.IWindowInProcess.RequestIdleCallback(System.Action,System.Nullable{System.Int32})"/>.
-            </summary>
-            <param name="idleCallbackHandle">The ID value returned by <see cref="M:BrowserAPI.IWindowInProcess.RequestIdleCallback(System.Action,System.Nullable{System.Int32})"/> when the callback was established.</param>
-            <returns></returns>
-        </member>
-        <member name="M:BrowserAPI.IWindowInProcess.QueueMicrotask(System.Action)">
-            <summary>
-            <para>Queues a microtask to be executed at a safe time prior to control returning to the browser's event loop.</para>
-            <para>
-            The microtask is a short function which will run after the current task has completed its work
-            and when there is no other code waiting to be run before control of the execution context is returned to the browser's event loop.
-            </para>
-            <para>
-            This lets your code run without interfering with any other, potentially higher priority, code that is pending,
-            but before the browser regains control over the execution context, potentially depending on work you need to complete.
-            You can learn more about how to use microtasks and why you might choose to do so in our <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide">microtask guide</see>.
-            </para>
-            <para>
-            The importance of microtasks comes in its ability to perform tasks asynchronously but in a specific order.
-            See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide">Using microtasks in JavaScript with queueMicrotask()</see> for more details.
-            </para>
-            <para>Microtasks are especially useful for libraries and frameworks that need to perform final cleanup or other just-before-rendering tasks.</para>
-            </summary>
-            <param name="handler">
-            A function to be executed when the browser engine determines it is safe to call your code.
-            Enqueued microtasks are executed after all pending tasks have completed but before yielding control to the browser's event loop.
-            </param>
-            <returns></returns>
-        </member>
-        <member name="M:BrowserAPI.IWindowInProcess.Atob(System.String)">
-            <summary>
-            Decodes a string of data which has been encoded using Base64 encoding.
-            You can use the <see cref="M:BrowserAPI.IWindowInProcess.Btoa(System.String)"/> to encode and transmit data which may otherwise cause communication problems, then transmit it and use this method to decode the data again.
-            For example, you can encode, transmit, and decode control characters such as ASCII values 0 through 31.
-            </summary>
-            <param name="base64">A base64-encoded string, using the alphabet produced by <see cref="M:BrowserAPI.IWindowInProcess.Btoa(System.String)"/>.</param>
-            <returns>
-            A binary string containing raw bytes decoded from the input.
-            Strings in JavaScript are encoded as UTF-16, so this means each character must have a code point less than 256, representing one byte of data.
-            </returns>
-        </member>
-        <member name="M:BrowserAPI.IWindowInProcess.Btoa(System.String)">
-            <summary>
-            <para>Creates a Base64-encoded ASCII string from a binary string (i.e., a string in which each character in the string is treated as a byte of binary data).</para>
-            <para>
-            You can use this method to encode data which may otherwise cause communication problems, transmit it, then use the <see cref="M:BrowserAPI.IWindowInProcess.Atob(System.String)"/> method to decode the data again.
-            For example, you can encode control characters such as ASCII values 0 through 31.
-            </para>
-            </summary>
-            <param name="ascii">The binary string to encode. Strings in JavaScript are encoded as UTF-16, so this means each character must have a code point less than 256, representing one byte of data.</param>
-            <returns>An ASCII string containing the Base64 representation of the input.</returns>
-        </member>
-        <member name="M:BrowserAPI.IWindowInProcess.PostMessage(System.Object,System.String)">
-            <summary>
-            <para>
-            Safely enables cross-origin communication between Window objects;
-            e.g., between a page and a pop-up that it spawned, or between a page and an iframe embedded within it.
-            </para>
-            <para>
-            Normally, scripts on different pages are allowed to access each other if and only if the pages they originate from share the same origin (also known as the "same-origin policy").
-            window.postMessage() provides a controlled mechanism to securely circumvent this restriction (if used properly).
-            </para>
-            <para>
-            Furthermore, an accessing script must have obtained the window object of the accessed document beforehand.
-            This can occur through methods such as <see cref="M:BrowserAPI.IWindowInProcess.Open(System.String,System.String,System.String)"/> for popups or <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/contentWindow">iframe.contentWindow</see> for iframes.
-            </para>
-            <para>
-            Broadly, one window may obtain a reference to another (e.g., via targetWindow = window.opener), and then dispatch a MessageEvent on it with targetWindow.postMessage().
-            The receiving window is then free to handle this event as needed.
-            The arguments passed to window.postMessage() (i.e., the "message") are exposed to the receiving window through the <see cref="E:BrowserAPI.IWindowInProcess.OnMessage">event object</see>.
-            </para>
-            </summary>
-            <param name="message">
-            Data to be dispatched to the other window.
-            The data is serialized using the <see cref="M:BrowserAPI.IWindowInProcess.StructuredClone``1(``0)">structured clone algorithm</see>.
-            This means you can pass a broad variety of data objects safely to the destination window without having to serialize them yourself.
-            </param>
-            <param name="targetOrigin">
-            <para>
-            Specifies the origin the recipient window must have in order to receive the event.
-            In order for the event to be dispatched, the origin must match exactly (including scheme, hostname, and port).
-            If omitted, it defaults to "/", which is the origin that is calling the method.
-            This mechanism provides control over where messages are sent;
-            for example, if postMessage() was used to transmit a password,
-            it would be absolutely critical that this argument be a URI whose origin is the same as the intended receiver of the message containing the password,
-            to prevent interception of the password by a malicious third party.
-            </para>
-            <para>"*" may also be provided, which means the message can be dispatched to a listener with any origin.</para>
-            </param>
-            <returns></returns>
-        </member>
-        <member name="M:BrowserAPI.IWindowInProcess.StructuredClone``1(``0)">
-            <summary>
-            Creates a deep clone of a given value using the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm">structured clone algorithm</see>.
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="value">The object to be cloned. This can be any structured-cloneable type.</param>
-            <returns></returns>
-        </member>
-        <member name="E:BrowserAPI.IWindowInProcess.OnDrag">
-            <summary>
-            <para>Bubbled event invoked from child elements.</para>
-            <para>
-            Is fired every few hundred milliseconds as an element or text selection is being dragged by the user.<br />
-            This event is cancelable and may bubble up to the Document and Window objects.
-            </para>
-            <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
-            </summary>
-        </member>
-        <member name="E:BrowserAPI.IWindowInProcess.OnDragStart">
-            <summary>
-            <para>Bubbled event invoked from child elements.</para>
-            <para>
-            Is fired when the user starts dragging an element or text selection.<br />
-            This event is cancelable and may bubble up to the Document and Window objects.
-            </para>
-            <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
-            </summary>
-        </member>
-        <member name="E:BrowserAPI.IWindowInProcess.OnDragEnd">
-            <summary>
-            <para>Bubbled event invoked from child elements.</para>
-            <para>
-            Is fired when a drag operation ends (by releasing a mouse button or hitting the escape key).<br />
-            This event is cancelable and may bubble up to the Document and Window objects.
-            </para>
-            <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
-            </summary>
-        </member>
-        <member name="E:BrowserAPI.IWindowInProcess.OnDragEnter">
-            <summary>
-            <para>Bubbled event invoked from child elements.</para>
-            <para>
-            Is fired when a dragged element or text selection enters a valid drop target.
-            The target object is the immediate user selection (the element directly indicated by the user as the drop target), or the &lt;body&gt; element.<br />
-            This event is cancelable and may bubble up to the Document and Window objects.
-            </para>
-            <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
-            </summary>
-        </member>
-        <member name="E:BrowserAPI.IWindowInProcess.OnDragLeave">
-            <summary>
-            <para>Bubbled event invoked from child elements.</para>
-            <para>
-            Is fired when a dragged element or text selection leaves a valid drop target.<br />
-            This event is not cancelable and may bubble up to the Document and Window objects.
-            </para>
-            <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
-            </summary>
-        </member>
-        <member name="E:BrowserAPI.IWindowInProcess.OnDragOver">
-            <summary>
-            <para>Bubbled event invoked from child elements.</para>
-            <para>
-            Is fired when an element or text selection is being dragged over a valid drop target (every few hundred milliseconds).<br />
-            This event is cancelable and may bubble up to the Document and Window objects.
-            </para>
-            <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
-            </summary>
-        </member>
-        <member name="E:BrowserAPI.IWindowInProcess.OnDrop">
-            <summary>
-            <para>Bubbled event invoked from child elements.</para>
-            <para>
-            Is fired when an element or text selection is dropped on a valid drop target.
-            To ensure that the drop event always fires as expected, you should always include a preventDefault() call in the part of your code which handles the dragover event.<br />
-            This event is cancelable and may bubble up to the Document and Window objects.
-            </para>
-            <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
-            </summary>
-        </member>
-        <member name="T:CircleDIAttributes.IBrowserAPIModule">
-            <summary>
-            <para>
-            CircleDI service providers can import this module to register all services available in this library.<br />
-            All services includes every BrowserAPI service and <see cref="T:BrowserAPI.IModuleManager"/>.
-            </para>
-            <para>All services will be registered as scoped, CreationTiming.Constructor, GetAccess.Property and default Name (name of the implementation class).</para>
-            </summary>
-        </member>
-        <member name="T:CircleDIAttributes.ScopedAttribute`2">
-            <summary>
-            <para>The register attribute from CircleDI to register a scoped service to a CircleDI service provider.</para>
-            <para>This attributes members are omitted, because only the attribute class and the type parameters are used here.</para>
-            </summary>
-            <typeparam name="TService">Type of the service.</typeparam>
-            <typeparam name="TImplementation">Type of the implementation.</typeparam>
-        </member>
-        <member name="T:Jab.IBrowserAPIModule">
-            <summary>
-            <para>
-            Jab service providers can import this module to register all services available in this library.<br />
-            All services includes every BrowserAPI service and <see cref="T:BrowserAPI.IModuleManager"/>.
-            </para>
-            <para>All services will be registered as scoped.</para>
-            </summary>
-        </member>
-        <member name="T:Jab.ServiceProviderModuleAttribute">
-            <summary>
-            The attribute from Jab to mark an interface as module.
-            </summary>
-        </member>
-        <member name="T:Jab.ScopedAttribute`2">
-            <summary>
-            <para>The register attribute from Jab to register a scoped service to a Jab service provider.</para>
-            <para>This attributes members are omitted, because only the attribute class and the type parameters are used here.</para>
-            </summary>
-            <typeparam name="TService">Type of the service.</typeparam>
-            <typeparam name="TImpl">Type of the implementation.</typeparam>
-        </member>
-        <member name="T:AutoInterfaceAttributes.AutoInterfaceAttribute">
-            <summary>
-            Generates an interface for the decorated class/struct.
-            </summary>
-        </member>
-        <member name="P:AutoInterfaceAttributes.AutoInterfaceAttribute.Name">
-            <summary>
-            <para>The name of the generated interface.</para>
-            <para>Default is "I{ClassName}"</para>
-            </summary>
-        </member>
-        <member name="P:AutoInterfaceAttributes.AutoInterfaceAttribute.Modifier">
-            <summary>
-            <para>The modifier(s) for the interface.</para>
-            <para>Deault is "public partial"</para>
-            </summary>
-        </member>
-        <member name="P:AutoInterfaceAttributes.AutoInterfaceAttribute.Namespace">
-            <summary>
-            <para>The namespace declaration for the interface.</para>
-            <para>If empty string, no namespace directive will be used (global namespace).<br />
-            Default (if not present) it will be mapped to the same namespace as the namespace of the class/struct.</para>
-            </summary>
-        </member>
-        <member name="P:AutoInterfaceAttributes.AutoInterfaceAttribute.Inheritance">
-            <summary>
-            <para>interface inheritance: Name(s) of interfaces this interface will inherit.</para>
-            <para>Default is Array.Empty</para>
-            </summary>
-        </member>
-        <member name="P:AutoInterfaceAttributes.AutoInterfaceAttribute.Nested">
-            <summary>
-            <para>
-            The Classes, structs or interfaces containing the generated interface.<br />
-            e.g. ["public sealed partial class Example"] will wrap the interface with that expression.
-            </para>
-            <para>Default is Array.Empty</para>
-            </summary>
-        </member>
-        <member name="P:AutoInterfaceAttributes.AutoInterfaceAttribute.StaticMembers">
-            <summary>
-            <para>If enabled, static members get accepted and are generating "static abstract" members.</para>
-            <para>Default is false</para>
-            </summary>
-        </member>
-        <member name="T:AutoInterfaceAttributes.IgnoreAutoInterfaceAttribute">
-            <summary>
-            The decorated member will be Ignored by the generator.
-            </summary>
-        </member>
-        <member name="T:AutoInterfaceAttributes.AutoInterfaceVisibilityPublic">
-            <summary>
-            Adds a "public" access modifier to the interface member.
-            </summary>
-        </member>
-        <member name="T:AutoInterfaceAttributes.AutoInterfaceVisibilityInternal">
-            <summary>
-            Adds a "internal" access modifier to the interface member.
-            </summary>
-        </member>
-        <member name="T:AutoInterfaceAttributes.AutoInterfaceVisibilityProtected">
-            <summary>
-            Adds a "protected" access modifier to the interface member.
-            </summary>
-        </member>
-        <member name="T:AutoInterfaceAttributes.AutoInterfaceVisibilityProtectedInternal">
-            <summary>
-            Adds a "protected internal" access modifier to the interface member.
-            </summary>
-        </member>
-        <member name="T:AutoInterfaceAttributes.AutoInterfaceVisibilityPrivateProtected">
-            <summary>
-            Adds a "private protected" access modifier to the interface member.
-            </summary>
-        </member>
-    </members>
-</doc>
-her or not the callback has been run because the timeout period expired.
             </param>
             <param name="timeout">
             <para>

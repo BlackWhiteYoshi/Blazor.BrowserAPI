@@ -202,7 +202,7 @@ public static class Generator {
             Console.WriteLine("Done file generating.\n");
         }
         else
-            Console.WriteLine("Skip html pages.\n");
+            Console.WriteLine("Skip file generating.\n");
 
         if (config.CreateRobotsTxt) {
             Console.WriteLine("Creating robots.txt...");
