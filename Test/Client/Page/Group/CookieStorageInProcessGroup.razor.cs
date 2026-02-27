@@ -14,29 +14,29 @@ public sealed partial class CookieStorageInProcessGroup : ComponentBase {
     public required ICookieStorageInProcess CookieStorage { private get; init; }
 
 
-    public const string LABEL_OUTPUT = "cookie-storage-inprocess-output";
-    private string labelOutput = string.Empty;
+    public const string OUTPUT = "cookie-storage-inprocess-output";
+    private string output = string.Empty;
 
 
     public const string BUTTON_GET_ALL_COOKIES = "cookie-storage-inprocess-get-all-cookies";
     private void GetAllCookies() {
-        labelOutput = CookieStorage.AllCookies;
+        output = CookieStorage.AllCookies;
     }
 
     public const string BUTTON_GET_LENGTH = "cookie-storage-inprocess-get-length";
     private void GetLength() {
         int length = CookieStorage.Length;
-        labelOutput = length.ToString();
+        output = length.ToString();
     }
 
     public const string BUTTON_KEY = "cookie-storage-inprocess-key";
     private void Key() {
-        labelOutput = CookieStorage.Key(TEST_KEY_INDEX) ?? $"key ({TEST_KEY_INDEX}) is not present";
+        output = CookieStorage.Key(TEST_KEY_INDEX) ?? $"key ({TEST_KEY_INDEX}) is not present";
     }
 
     public const string BUTTON_GET_COOKIE = "cookie-storage-inprocess-get-cookie";
     private void GetCookie() {
-        labelOutput = CookieStorage.GetCookie(TEST_GET_COOKIE) ?? $"key '{TEST_GET_COOKIE}' is not present";
+        output = CookieStorage.GetCookie(TEST_GET_COOKIE) ?? $"key '{TEST_GET_COOKIE}' is not present";
     }
 
     public const string BUTTON_SET_COOKIE = "cookie-storage-inprocess-set-cookie";

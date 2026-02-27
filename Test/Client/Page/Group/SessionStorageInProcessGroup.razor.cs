@@ -14,24 +14,24 @@ public partial class SessionStorageInProcessGroup : ComponentBase {
     public required ISessionStorageInProcess SessionStorage { private get; init; }
 
 
-    public const string LABEL_OUTPUT = "session-storage-inprocess-output";
-    private string labelOutput = string.Empty;
+    public const string OUTPUT = "session-storage-inprocess-output";
+    private string output = string.Empty;
 
 
     public const string BUTTON_GET_LENGTH = "session-storage-inprocess-get-length";
     private void GetLength() {
         int length = SessionStorage.Length;
-        labelOutput = length.ToString();
+        output = length.ToString();
     }
 
     public const string BUTTON_KEY = "session-storage-inprocess-key";
     private void Key() {
-        labelOutput = SessionStorage.Key(TEST_KEY_INDEX) ?? $"key ({TEST_KEY_INDEX}) is not present";
+        output = SessionStorage.Key(TEST_KEY_INDEX) ?? $"key ({TEST_KEY_INDEX}) is not present";
     }
 
     public const string BUTTON_GET_ITEM = "session-storage-inprocess-get-item";
     private void GetItem() {
-        labelOutput = SessionStorage.GetItem(TEST_GET_ITEM) ?? $"key '{TEST_GET_ITEM}' is not present";
+        output = SessionStorage.GetItem(TEST_GET_ITEM) ?? $"key '{TEST_GET_ITEM}' is not present";
     }
 
     public const string BUTTON_SET_ITEM = "session-storage-inprocess-set-item";

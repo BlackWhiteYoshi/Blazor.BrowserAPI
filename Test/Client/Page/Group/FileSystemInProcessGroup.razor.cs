@@ -38,20 +38,20 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
     public required IFileSystemInProcess FileSystem { private get; init; }
 
 
-    public const string LABEL_OUTPUT = "filesystem-inprocess-output";
-    private string labelOutput = string.Empty;
+    public const string OUTPUT = "filesystem-inprocess-output";
+    private string output = string.Empty;
 
 
     public const string BUTTON_SHOW_OPEN_FILE_PICKER = "filesystem-inprocess-show-open-file-picker";
     private async Task ShowOpenFilePicker() {
         using IFileHandleInProcess fileHandle = await FileSystem.ShowOpenFilePicker(id: "example", PickerDialogStartIn.Desktop, excludeAcceptAllOption: true, [("text", [("text/plain", [".txt"])])]);
-        labelOutput = (fileHandle is not null).ToString();
+        output = (fileHandle is not null).ToString();
     }
 
     public const string BUTTON_SHOW_OPEN_FILE_PICKER_MULTIPLE_FILES = "filesystem-inprocess-show-open-file-picker-multiple-files";
     private async Task ShowOpenFilePickerMultipleFiles() {
         IFileHandleInProcess[] fileHandleList = await FileSystem.ShowOpenFilePickerMultipleFiles(id: "Example", PickerDialogStartIn.Pictures, excludeAcceptAllOption: false, [("images", [("image/*", [".jpg", ".jpeg", ".png", ".gif"])])]);
-        labelOutput = fileHandleList.Length.ToString();
+        output = fileHandleList.Length.ToString();
 
         fileHandleList.Dispose();
     }
@@ -59,38 +59,38 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
     public const string BUTTON_SHOW_SAVE_FILE_PICKER = "filesystem-inprocess-show-save-file-picker";
     private async Task ShowSaveFilePicker() {
         using IFileHandleInProcess fileHandle = await FileSystem.ShowSaveFilePicker(suggestedName: "asdf.txt", id: "y", PickerDialogStartIn.Documents, excludeAcceptAllOption: false, [("text", [("text/*", [".txt"])])]);
-        labelOutput = (fileHandle is not null).ToString();
+        output = (fileHandle is not null).ToString();
     }
 
     public const string BUTTON_SHOW_DIRECTORY_PICKER = "filesystem-inprocess-show-directory-picker";
     private async Task ShowDirectoryPicker() {
         using IDirectoryHandleInProcess directoryHandle = await FileSystem.ShowDirectoryPicker("readwrite", id: "Y", PickerDialogStartIn.Videos);
-        labelOutput = (directoryHandle is not null).ToString();
+        output = (directoryHandle is not null).ToString();
     }
 
 
     public const string BUTTON_STORAGE_MANAGER_ESTIMATE = "filesystem-inprocess-storage-manager-estimate";
     private async Task StorageManagerEstimate() {
         (long? usage, long? quota) = await FileSystem.StorageManagerEstimate();
-        labelOutput = $"(usage: {usage}, quota: {quota})";
+        output = $"(usage: {usage}, quota: {quota})";
     }
 
     public const string BUTTON_STORAGE_MANAGER_PERSIST = "filesystem-inprocess-storage-manager-persist";
     private async Task StorageManagerPersist() {
         bool persist = await FileSystem.StorageManagerPersist();
-        labelOutput = persist.ToString();
+        output = persist.ToString();
     }
 
     public const string BUTTON_STORAGE_MANAGER_PERSISTED = "filesystem-inprocess-storage-manager-persisted";
     private async Task StorageManagerPersisted() {
         bool persist = await FileSystem.StorageManagerPersisted();
-        labelOutput = persist.ToString();
+        output = persist.ToString();
     }
 
     public const string BUTTON_STORAGE_MANAGER_GET_DIRECTORY = "filesystem-inprocess-storage-manager-get-directory";
     private async Task StorageManagerGetDirectory() {
         using IDirectoryHandleInProcess directoryHandle = await FileSystem.StorageManagerGetDirectory();
-        labelOutput = (directoryHandle is not null).ToString();
+        output = (directoryHandle is not null).ToString();
     }
 
 
@@ -99,14 +99,14 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
     private async Task FileHandle_GetName() {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         string name = tempFile.FileHandle.Name;
-        labelOutput = name;
+        output = name;
     }
 
     public const string BUTTON_FILEHANDLE_GET_KIND = "filesystem-inprocess-filehandle-get-kind";
     private async Task FileHandle_GetKind() {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         string kind = tempFile.FileHandle.Kind;
-        labelOutput = kind;
+        output = kind;
     }
 
 
@@ -114,14 +114,14 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
     private async Task FileHandle_IsSameEntry() {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         bool isSame = await tempFile.FileHandle.IsSameEntry(tempFile.FileHandle);
-        labelOutput = isSame.ToString();
+        output = isSame.ToString();
     }
 
     public const string BUTTON_FILEHANDLE_GET_FILE = "filesystem-inprocess-filehandle-get-file";
     private async Task FileHandle_GetFile() {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         using IFileInProcess file = await tempFile.FileHandle.GetFile();
-        labelOutput = (file is not null).ToString();
+        output = (file is not null).ToString();
     }
 
     public const string BUTTON_FILEHANDLE_CREATE_WRITABLE = "filesystem-inprocess-filehandle-create-writable";
@@ -129,7 +129,7 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         using IWritableFileStreamInProcess writableFileStream = await tempFile.FileHandle.CreateWritable();
         await writableFileStream.Close();
-        labelOutput = (writableFileStream is not null).ToString();
+        output = (writableFileStream is not null).ToString();
     }
 
 
@@ -138,14 +138,14 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
     private async Task DirectoryHandle_GetName() {
         using IDirectoryHandleInProcess directoryHandle = await FileSystem.StorageManagerGetDirectory();
         string name = directoryHandle.Name;
-        labelOutput = name;
+        output = name;
     }
 
     public const string BUTTON_DIRECTORYHANDLE_GET_KIND = "filesystem-inprocess-directoryhandle-get-kind";
     private async Task DirectoryHandle_GetKind() {
         using IDirectoryHandleInProcess directoryHandle = await FileSystem.StorageManagerGetDirectory();
         string kind = directoryHandle.Kind;
-        labelOutput = kind;
+        output = kind;
     }
 
 
@@ -153,14 +153,14 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
     private async Task DirectoryHandle_IsSameEntry() {
         using IDirectoryHandleInProcess directoryHandle = await FileSystem.StorageManagerGetDirectory();
         bool isSame = await directoryHandle.IsSameEntry(directoryHandle);
-        labelOutput = isSame.ToString();
+        output = isSame.ToString();
     }
 
     public const string BUTTON_DIRECTORYHANDLE_GET_DIRECTORYHANDLE = "filesystem-inprocess-directoryhandle-get-directoryhandle";
     private async Task DirectoryHandle_GetDirectoryHandle() {
         using IDirectoryHandleInProcess directoryHandle = await FileSystem.StorageManagerGetDirectory();
         using IDirectoryHandleInProcess subDirectoryHandle = await directoryHandle.GetDirectoryHandle("temp", create: true);
-        labelOutput = (subDirectoryHandle is not null).ToString();
+        output = (subDirectoryHandle is not null).ToString();
 
         await directoryHandle.RemoveEntry("temp", recursive: true);
     }
@@ -169,7 +169,7 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
     private async Task DirectoryHandle_GetFileHandle() {
         using IDirectoryHandleInProcess directoryHandle = await FileSystem.StorageManagerGetDirectory();
         using IFileHandleInProcess fileHandle = await directoryHandle.GetFileHandle("temp.txt", create: true);
-        labelOutput = (fileHandle is not null).ToString();
+        output = (fileHandle is not null).ToString();
 
         await directoryHandle.RemoveEntry("temp.txt");
     }
@@ -182,7 +182,7 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
         await directoryHandle.RemoveEntry("subFolder", recursive: true);
 
         (long? usage, _) = await FileSystem.StorageManagerEstimate();
-        labelOutput = $"usage: {usage?.ToString() ?? "unkown"}";
+        output = $"usage: {usage?.ToString() ?? "unkown"}";
     }
 
     public const string BUTTON_DIRECTORYHANDLE_VALUES = "filesystem-inprocess-directoryhandle-values";
@@ -201,7 +201,7 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
         foreach (IFileHandleInProcess file in fileList)
             builder.Append($"file: {file.Name}, ");
         builder.Length -= 2;
-        labelOutput = builder.ToString();
+        output = builder.ToString();
 
         await directoryHandle.RemoveEntry("sub1", recursive: true);
         await directoryHandle.RemoveEntry("sub2");
@@ -216,7 +216,7 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         using IFileInProcess file = await tempFile.FileHandle.GetFile();
         string name = file.Name;
-        labelOutput = name;
+        output = name;
     }
 
     public const string BUTTON_FILE_GET_SIZE = "filesystem-inprocess-file-get-size";
@@ -224,7 +224,7 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         using IFileInProcess file = await tempFile.FileHandle.GetFile();
         long size = file.Size;
-        labelOutput = size.ToString();
+        output = size.ToString();
     }
 
     public const string BUTTON_FILE_GET_TYPE = "filesystem-inprocess-file-get-type";
@@ -232,7 +232,7 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         using IFileInProcess file = await tempFile.FileHandle.GetFile();
         string type = file.Type;
-        labelOutput = type;
+        output = type;
     }
 
     public const string BUTTON_FILE_GET_LAST_MODIFIED = "filesystem-inprocess-file-get-last-modified";
@@ -240,7 +240,7 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         using IFileInProcess file = await tempFile.FileHandle.GetFile();
         long lastModified = file.LastModified;
-        labelOutput = lastModified.ToString();
+        output = lastModified.ToString();
     }
 
     public const string BUTTON_FILE_GET_WEBKIT_RELATIVE_PATH = "filesystem-inprocess-file-get-webkit-relative-path";
@@ -248,7 +248,7 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         using IFileInProcess file = await tempFile.FileHandle.GetFile();
         string webkitRelativePath = file.WebkitRelativePath;
-        labelOutput = webkitRelativePath;
+        output = webkitRelativePath;
     }
 
 
@@ -257,7 +257,7 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
         await using TempFile tempFile = await TempFile.Create(FileSystem);
         using IFileInProcess file = await tempFile.FileHandle.GetFile();
         string fileContent = await file.Text();
-        labelOutput = fileContent != string.Empty ? fileContent : FILE_TEXT_RESULT;
+        output = fileContent != string.Empty ? fileContent : FILE_TEXT_RESULT;
     }
 
 
@@ -268,7 +268,7 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
         using IWritableFileStreamInProcess stream = await tempFile.FileHandle.CreateWritable();
         bool locked = stream.Locked;
         await stream.Close();
-        labelOutput = locked.ToString();
+        output = locked.ToString();
     }
 
 
@@ -281,7 +281,7 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
 
         using IFileInProcess file = await tempFile.FileHandle.GetFile();
         string fileContent = await file.Text();
-        labelOutput = fileContent;
+        output = fileContent;
     }
 
     public const string BUTTON_WRITABLE_FILE_STREAM_WRITE_BYTES = "filesystem-inprocess-writable-file-stream-write-bytes";
@@ -293,7 +293,7 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
 
         using IFileInProcess file = await tempFile.FileHandle.GetFile();
         string fileContent = await file.Text();
-        labelOutput = fileContent;
+        output = fileContent;
     }
 
     public const string BUTTON_WRITABLE_FILE_STREAM_SEEK = "filesystem-inprocess-writable-file-stream-seek";
@@ -302,7 +302,7 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
         using IWritableFileStreamInProcess stream = await tempFile.FileHandle.CreateWritable();
         await stream.Seek(1);
 
-        labelOutput = WRITABLE_FILE_STREAM_SEEK_DONE;
+        output = WRITABLE_FILE_STREAM_SEEK_DONE;
         await stream.Close();
     }
 
@@ -312,7 +312,7 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
         using IWritableFileStreamInProcess stream = await tempFile.FileHandle.CreateWritable();
         await stream.Truncate(1);
 
-        labelOutput = WRITABLE_FILE_STREAM_TRUNCATE_DONE;
+        output = WRITABLE_FILE_STREAM_TRUNCATE_DONE;
         await stream.Close();
     }
 
@@ -322,7 +322,7 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
         using IWritableFileStreamInProcess stream = await tempFile.FileHandle.CreateWritable();
         await stream.Abort("test reason");
 
-        labelOutput = WRITABLE_FILE_STREAM_ABORT_DONE;
+        output = WRITABLE_FILE_STREAM_ABORT_DONE;
     }
 
     public const string BUTTON_WRITABLE_FILE_STREAM_CLOSE = "filesystem-inprocess-writable-file-stream-close";
@@ -331,6 +331,6 @@ public sealed partial class FileSystemInProcessGroup : ComponentBase {
         using IWritableFileStreamInProcess stream = await tempFile.FileHandle.CreateWritable();
         await stream.Close();
 
-        labelOutput = WRITABLE_FILE_STREAM_CLOSE_DONE;
+        output = WRITABLE_FILE_STREAM_CLOSE_DONE;
     }
 }

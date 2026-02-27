@@ -14,30 +14,30 @@ public partial class LocalStorageGroup : ComponentBase {
     public required ILocalStorage LocalStorage { private get; init; }
 
 
-    public const string LABEL_OUTPUT = "local-storage-output";
-    private string labelOutput = string.Empty;
+    public const string OUTPUT = "local-storage-output";
+    private string output = string.Empty;
 
 
     public const string BUTTON_GET_LENGTH_PROPERTY = "local-storage-get-length-property";
     private async Task GetLength_Property() {
         int length = await LocalStorage.Length;
-        labelOutput = length.ToString();
+        output = length.ToString();
     }
 
     public const string BUTTON_GET_LENGTH_METHOD = "local-storage-get-length-method";
     private async Task GetLength_Method() {
         int length = await LocalStorage.GetLength(CancellationToken.None);
-        labelOutput = length.ToString();
+        output = length.ToString();
     }
 
     public const string BUTTON_KEY = "local-storage-key";
     private async Task Key() {
-        labelOutput = await LocalStorage.Key(TEST_KEY_INDEX) ?? $"key {TEST_KEY_INDEX} is not present";
+        output = await LocalStorage.Key(TEST_KEY_INDEX) ?? $"key {TEST_KEY_INDEX} is not present";
     }
 
     public const string BUTTON_GET_ITEM = "local-storage-get-item";
     private async Task GetItem() {
-        labelOutput = await LocalStorage.GetItem(TEST_GET_ITEM) ?? $"key '{TEST_GET_ITEM}' is not present";
+        output = await LocalStorage.GetItem(TEST_GET_ITEM) ?? $"key '{TEST_GET_ITEM}' is not present";
     }
 
     public const string BUTTON_SET_ITEM = "local-storage-set-item";

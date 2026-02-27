@@ -8,7 +8,7 @@ public sealed class NetworkInformationInProcessTest(PlayWrightFixture playWright
     public async Task GetOnLine() {
         await ExecuteTest(NetworkInformationInProcessGroup.BUTTON_GET_ON_LINE);
 
-        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -17,7 +17,7 @@ public sealed class NetworkInformationInProcessTest(PlayWrightFixture playWright
     public async Task GetDownlink() {
         await ExecuteTest(NetworkInformationInProcessGroup.BUTTON_GET_DOWNLINK);
 
-        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.OUTPUT).TextContentAsync();
         bool isNumber = double.TryParse(result, out _);
         await Assert.That(isNumber).IsTrue();
     }
@@ -26,7 +26,7 @@ public sealed class NetworkInformationInProcessTest(PlayWrightFixture playWright
     public async Task GetDownlinkMax() {
         await ExecuteTest(NetworkInformationInProcessGroup.BUTTON_GET_DOWNLINK_MAX);
 
-        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.OUTPUT).TextContentAsync();
         bool isNumber = double.TryParse(result, out _);
         await Assert.That(isNumber).IsTrue();
     }
@@ -35,7 +35,7 @@ public sealed class NetworkInformationInProcessTest(PlayWrightFixture playWright
     public async Task GetEffectiveType() {
         await ExecuteTest(NetworkInformationInProcessGroup.BUTTON_GET_EFFECTIVE_TYPE);
 
-        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsNotEmpty();
     }
 
@@ -43,7 +43,7 @@ public sealed class NetworkInformationInProcessTest(PlayWrightFixture playWright
     public new async Task GetType() {
         await ExecuteTest(NetworkInformationInProcessGroup.BUTTON_GET_TYPE);
 
-        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(NetworkInformationInProcessGroup.MISSING_BROWSER_SUPPOERT);
     }
 
@@ -51,7 +51,7 @@ public sealed class NetworkInformationInProcessTest(PlayWrightFixture playWright
     public async Task GetRTT() {
         await ExecuteTest(NetworkInformationInProcessGroup.BUTTON_GET_RTT);
 
-        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.OUTPUT).TextContentAsync();
         bool isNumber = int.TryParse(result, out _);
         await Assert.That(isNumber).IsTrue();
     }
@@ -60,7 +60,7 @@ public sealed class NetworkInformationInProcessTest(PlayWrightFixture playWright
     public async Task GetSaveData() {
         await ExecuteTest(NetworkInformationInProcessGroup.BUTTON_GET_SAVE_DATA);
 
-        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
     }
 
@@ -73,7 +73,7 @@ public sealed class NetworkInformationInProcessTest(PlayWrightFixture playWright
         await BrowserContext.SetOfflineAsync(false);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(NetworkInformationInProcessGroup.TEST_ONLINE_EVENT);
     }
 
@@ -83,7 +83,7 @@ public sealed class NetworkInformationInProcessTest(PlayWrightFixture playWright
         await BrowserContext.SetOfflineAsync(true);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(NetworkInformationInProcessGroup.TEST_OFFLINE_EVENT);
     }
 
@@ -93,7 +93,7 @@ public sealed class NetworkInformationInProcessTest(PlayWrightFixture playWright
         await BrowserContext.SetOfflineAsync(true);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(NetworkInformationInProcessGroup.TEST_CHANGE_EVENT);
     }
 }

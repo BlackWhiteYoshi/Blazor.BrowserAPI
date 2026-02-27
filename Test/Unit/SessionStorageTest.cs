@@ -15,7 +15,7 @@ public sealed class SessionStorageTest(PlayWrightFixture playWrightFixture) : Pl
 
         await ExecuteTest(SessionStorageGroup.BUTTON_GET_LENGTH_PROPERTY);
 
-        string? result = await Page.GetByTestId(SessionStorageGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SessionStorageGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(number.ToString());
 
     }
@@ -31,7 +31,7 @@ public sealed class SessionStorageTest(PlayWrightFixture playWrightFixture) : Pl
 
         await ExecuteTest(SessionStorageGroup.BUTTON_GET_LENGTH_METHOD);
 
-        string? result = await Page.GetByTestId(SessionStorageGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SessionStorageGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(number.ToString());
     }
 
@@ -42,7 +42,7 @@ public sealed class SessionStorageTest(PlayWrightFixture playWrightFixture) : Pl
 
         await ExecuteTest(SessionStorageGroup.BUTTON_KEY);
 
-        string? result = await Page.GetByTestId(SessionStorageGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SessionStorageGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(KEY);
     }
 
@@ -53,7 +53,7 @@ public sealed class SessionStorageTest(PlayWrightFixture playWrightFixture) : Pl
 
         await ExecuteTest(SessionStorageGroup.BUTTON_GET_ITEM);
 
-        string? result = await Page.GetByTestId(SessionStorageGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SessionStorageGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(VALUE);
     }
 

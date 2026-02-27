@@ -15,7 +15,7 @@ public sealed class LocalStorageTest(PlayWrightFixture playWrightFixture) : Play
 
         await ExecuteTest(LocalStorageGroup.BUTTON_GET_LENGTH_PROPERTY);
 
-        string? result = await Page.GetByTestId(LocalStorageGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(LocalStorageGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(number.ToString());
     }
 
@@ -30,7 +30,7 @@ public sealed class LocalStorageTest(PlayWrightFixture playWrightFixture) : Play
 
         await ExecuteTest(LocalStorageGroup.BUTTON_GET_LENGTH_METHOD);
 
-        string? result = await Page.GetByTestId(LocalStorageGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(LocalStorageGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(number.ToString());
     }
 
@@ -41,7 +41,7 @@ public sealed class LocalStorageTest(PlayWrightFixture playWrightFixture) : Play
 
         await ExecuteTest(LocalStorageGroup.BUTTON_KEY);
 
-        string? result = await Page.GetByTestId(LocalStorageGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(LocalStorageGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(KEY);
     }
 
@@ -52,7 +52,7 @@ public sealed class LocalStorageTest(PlayWrightFixture playWrightFixture) : Play
 
         await ExecuteTest(LocalStorageGroup.BUTTON_GET_ITEM);
 
-        string? result = await Page.GetByTestId(LocalStorageGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(LocalStorageGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(VALUE);
     }
 

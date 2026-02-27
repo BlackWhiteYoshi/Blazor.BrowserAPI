@@ -81,7 +81,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task EnumerateDevices() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_ENUMERATE_DEVICES);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("MediaDeviceInfo");
     }
 
@@ -89,7 +89,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetSupportedConstraints_Property() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_SUPPORTED_CONSTRAINTS_PROPERTY);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("MediaTrackSupportedConstraint");
     }
 
@@ -97,7 +97,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetSupportedConstraints_Method() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_SUPPORTED_CONSTRAINTS_METHOD);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("MediaTrackSupportedConstraint");
     }
 
@@ -106,7 +106,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetUserMedia() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_USER_MEDIA);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -114,7 +114,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetUserMediaWithConstraint() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_USER_MEDIA_WITH_CONSTRAINT);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -122,7 +122,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetDisplayMedia() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_DISPLAY_MEDIA);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -130,7 +130,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetDisplayMediaWithConstraint() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_DISPLAY_MEDIA_WITH_CONSTRAINT);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -141,7 +141,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetActive_Property() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_ACTIVE_PROPERTY);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -149,7 +149,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetActive_Method() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_ACTIVE_METHOD);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -158,7 +158,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetId_Property() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_ID_PROPERTY);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(MEDIA_STREAM_ID);
     }
 
@@ -166,7 +166,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetId_Method() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_ID_METHOD);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(MEDIA_STREAM_ID);
     }
 
@@ -177,7 +177,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetMimeType_Property() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_MIME_TYPE_PROPERTY);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(MEDIA_RECORDER_MIMETYPE);
     }
 
@@ -185,7 +185,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetMimeType_Method() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_MIME_TYPE_METHOD);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(MEDIA_RECORDER_MIMETYPE);
     }
 
@@ -194,7 +194,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetState_Property() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_STATE_PROPERTY);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(MEDIA_RECORDER_STATE);
     }
 
@@ -202,7 +202,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetState_Method() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_STATE_METHOD);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(MEDIA_RECORDER_STATE);
     }
 
@@ -211,7 +211,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetStream_Property() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_STREAM_PROPERTY);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -219,7 +219,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetStream_Method() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_STREAM_METHOD);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -228,7 +228,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetAudioBitsPerSecond_Property() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_AUDIO_BITS_PER_SECOND_PROPERTY);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(MEDIA_RECORDER_AUDIO_BITS_PER_SECOND);
     }
 
@@ -236,7 +236,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetAudioBitsPerSecond_Method() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_AUDIO_BITS_PER_SECOND_METHOD);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(MEDIA_RECORDER_AUDIO_BITS_PER_SECOND);
     }
 
@@ -245,7 +245,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetVideoBitsPerSecond_Property() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_VIDEO_BITS_PER_SECOND_PROPERTY);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(MEDIA_RECORDER_VIDEO_BITS_PER_SECOND);
     }
 
@@ -253,7 +253,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task GetVideoBitsPerSecond_Method() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_GET_VIDEO_BITS_PER_SECOND_METHOD);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(MEDIA_RECORDER_VIDEO_BITS_PER_SECOND);
     }
 
@@ -331,7 +331,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task IsTypeSupported() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_IS_TYPE_SUPPORTED);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -342,7 +342,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task RegisterOnDataAvailable() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_REGISTER_ON_DATA_AVAILABLE);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("4");
     }
 
@@ -350,7 +350,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task RegisterOnError() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_REGISTER_ON_ERROR);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(MEDIA_RECORDER_EVENT_ERROR_MESSAGE);
     }
 
@@ -358,7 +358,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task RegisterOnStart() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_REGISTER_ON_START);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(MediaDevicesGroup.TEST_EVENT_ON_START);
     }
 
@@ -366,7 +366,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task RegisterOnStop() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_REGISTER_ON_STOP);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(MediaDevicesGroup.TEST_EVENT_ON_STOP);
     }
 
@@ -374,7 +374,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task RegisterOnResume() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_REGISTER_ON_RESUME);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(MediaDevicesGroup.TEST_EVENT_ON_RESUME);
     }
 
@@ -382,7 +382,7 @@ public sealed class MediaDevicesTest(PlayWrightFixture playWrightFixture) : Play
     public async Task RegisterOnPause() {
         await ExecuteTest(MediaDevicesGroup.BUTTON_REGISTER_ON_PAUSE);
 
-        string? result = await Page.GetByTestId(MediaDevicesGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(MediaDevicesGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(MediaDevicesGroup.TEST_EVENT_ON_PAUSE);
     }
 }

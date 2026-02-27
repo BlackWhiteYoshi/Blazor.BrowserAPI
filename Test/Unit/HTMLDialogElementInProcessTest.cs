@@ -8,7 +8,7 @@ public sealed class HTMLDialogElementInProcessTest(PlayWrightFixture playWrightF
     public async Task ToHTMLElement() {
         await ExecuteTest(HTMLDialogElementInProcessGroup.BUTTON_TO_HTML_ELEMENT);
 
-        string? result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -19,7 +19,7 @@ public sealed class HTMLDialogElementInProcessTest(PlayWrightFixture playWrightF
 
         await ExecuteTest(HTMLDialogElementInProcessGroup.BUTTON_GET_CLOSED_BY);
 
-        string? result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(HTMLDialogElementInProcessGroup.TEST_CLOSED_BY);
     }
 
@@ -36,7 +36,7 @@ public sealed class HTMLDialogElementInProcessTest(PlayWrightFixture playWrightF
     public async Task GetOpen() {
         await ExecuteTest(HTMLDialogElementInProcessGroup.BUTTON_GET_OPEN);
 
-        string? result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
     }
 
@@ -55,7 +55,7 @@ public sealed class HTMLDialogElementInProcessTest(PlayWrightFixture playWrightF
 
         await ExecuteTest(HTMLDialogElementInProcessGroup.BUTTON_GET_RETURN_VALUE);
 
-        string? result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(HTMLDialogElementInProcessGroup.TEST_RETURN_VALUE);
     }
 
@@ -126,7 +126,7 @@ public sealed class HTMLDialogElementInProcessTest(PlayWrightFixture playWrightF
         await Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT).EvaluateAsync("dialog => dialog.close();");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(HTMLDialogElementInProcessGroup.TEST_EVENT_CLOSE);
     }
 
@@ -139,7 +139,7 @@ public sealed class HTMLDialogElementInProcessTest(PlayWrightFixture playWrightF
         await Page.GetByTestId(HTMLDialogElementInProcessGroup.DIALOG_ELEMENT).PressAsync("Escape");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(HTMLDialogElementInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(HTMLDialogElementInProcessGroup.TEST_EVENT_CANCEL);
     }
 }

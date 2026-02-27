@@ -24,7 +24,7 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
 
         await ExecuteTest(GeolocationInProcessGroup.BUTTON_GET_CURRENT_POSITION);
 
-        string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(GeolocationInProcessGroup.OUTPUT).TextContentAsync();
 
         string expectedStart = $"GeolocationCoordinates {{ Latitude = {LATITUDE}, Longitude = {LONGITUDE}, Altitude = , Accuracy = {ACCURACY}, AltitudeAccuracy = , Heading = , Speed = , Timestamp = ";
         await Assert.That(result).StartsWith(expectedStart);
@@ -46,7 +46,7 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
 
         await ExecuteTest(GeolocationInProcessGroup.BUTTON_GET_CURRENT_POSITION_ASYNC);
 
-        string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(GeolocationInProcessGroup.OUTPUT).TextContentAsync();
 
         string expectedStart = $"GeolocationCoordinates {{ Latitude = {LATITUDE}, Longitude = {LONGITUDE}, Altitude = , Accuracy = {ACCURACY}, AltitudeAccuracy = , Heading = , Speed = , Timestamp = ";
         await Assert.That(result).StartsWith(expectedStart);
@@ -71,7 +71,7 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
             });
             await Task.Delay(STANDARD_WAIT_TIME);
 
-            string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+            string? result = await Page.GetByTestId(GeolocationInProcessGroup.OUTPUT).TextContentAsync();
 
             string expectedStart = $"GeolocationCoordinates {{ Latitude = {LATITUDE * i}, Longitude = {LONGITUDE * i}, Altitude = , Accuracy = {ACCURACY * i}, AltitudeAccuracy = , Heading = , Speed = , Timestamp = ";
             await Assert.That(result).StartsWith(expectedStart);
@@ -101,7 +101,7 @@ public sealed class GeolocationInProcessTest(PlayWrightFixture playWrightFixture
         });
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(GeolocationInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(GeolocationInProcessGroup.OUTPUT).TextContentAsync();
 
         // "watchId: {ínt}, count: 0"
         const string expectedStart = "watchId: ";

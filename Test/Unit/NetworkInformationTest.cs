@@ -8,7 +8,7 @@ public sealed class NetworkInformationTest(PlayWrightFixture playWrightFixture) 
     public async Task GetOnLine_Property() {
         await ExecuteTest(NetworkInformationGroup.BUTTON_GET_ON_LINE_PROPERTY);
 
-        string? result = await Page.GetByTestId(NetworkInformationGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -16,7 +16,7 @@ public sealed class NetworkInformationTest(PlayWrightFixture playWrightFixture) 
     public async Task GetOnLine_Method() {
         await ExecuteTest(NetworkInformationGroup.BUTTON_GET_ON_LINE_METHOD);
 
-        string? result = await Page.GetByTestId(NetworkInformationGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -25,7 +25,7 @@ public sealed class NetworkInformationTest(PlayWrightFixture playWrightFixture) 
     public async Task GetDownlink_Property() {
         await ExecuteTest(NetworkInformationGroup.BUTTON_GET_DOWNLINK_PROPERTY);
 
-        string? result = await Page.GetByTestId(NetworkInformationGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationGroup.OUTPUT).TextContentAsync();
         bool isNumber = double.TryParse(result, out _);
         await Assert.That(isNumber).IsTrue();
     }
@@ -34,7 +34,7 @@ public sealed class NetworkInformationTest(PlayWrightFixture playWrightFixture) 
     public async Task GetDownlink_Method() {
         await ExecuteTest(NetworkInformationGroup.BUTTON_GET_DOWNLINK_METHOD);
 
-        string? result = await Page.GetByTestId(NetworkInformationGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationGroup.OUTPUT).TextContentAsync();
         bool isNumber = double.TryParse(result, out _);
         await Assert.That(isNumber).IsTrue();
     }
@@ -43,7 +43,7 @@ public sealed class NetworkInformationTest(PlayWrightFixture playWrightFixture) 
     public async Task GetDownlinkMax_Property() {
         await ExecuteTest(NetworkInformationGroup.BUTTON_GET_DOWNLINK_MAX_PROPERTY);
 
-        string? result = await Page.GetByTestId(NetworkInformationGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationGroup.OUTPUT).TextContentAsync();
         bool isNumber = double.TryParse(result, out _);
         await Assert.That(isNumber).IsTrue();
     }
@@ -52,7 +52,7 @@ public sealed class NetworkInformationTest(PlayWrightFixture playWrightFixture) 
     public async Task GetDownlinkMax_Method() {
         await ExecuteTest(NetworkInformationGroup.BUTTON_GET_DOWNLINK_MAX_METHOD);
 
-        string? result = await Page.GetByTestId(NetworkInformationGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationGroup.OUTPUT).TextContentAsync();
         bool isNumber = double.TryParse(result, out _);
         await Assert.That(isNumber).IsTrue();
     }
@@ -61,7 +61,7 @@ public sealed class NetworkInformationTest(PlayWrightFixture playWrightFixture) 
     public async Task GetEffectiveType_Property() {
         await ExecuteTest(NetworkInformationGroup.BUTTON_GET_EFFECTIVE_TYPE_PROPERTY);
 
-        string? result = await Page.GetByTestId(NetworkInformationGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsNotEmpty();
     }
 
@@ -69,7 +69,7 @@ public sealed class NetworkInformationTest(PlayWrightFixture playWrightFixture) 
     public async Task GetEffectiveType_Method() {
         await ExecuteTest(NetworkInformationGroup.BUTTON_GET_EFFECTIVE_TYPE_METHOD);
 
-        string? result = await Page.GetByTestId(NetworkInformationGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsNotEmpty();
     }
 
@@ -77,7 +77,7 @@ public sealed class NetworkInformationTest(PlayWrightFixture playWrightFixture) 
     public async Task GetType_Property() {
         await ExecuteTest(NetworkInformationGroup.BUTTON_GET_TYPE_PROPERTY);
 
-        string? result = await Page.GetByTestId(NetworkInformationGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(NetworkInformationGroup.MISSING_BROWSER_SUPPOERT);
     }
 
@@ -85,7 +85,7 @@ public sealed class NetworkInformationTest(PlayWrightFixture playWrightFixture) 
     public async Task GetType_Method() {
         await ExecuteTest(NetworkInformationGroup.BUTTON_GET_TYPE_METHOD);
 
-        string? result = await Page.GetByTestId(NetworkInformationGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(NetworkInformationGroup.MISSING_BROWSER_SUPPOERT);
     }
 
@@ -93,7 +93,7 @@ public sealed class NetworkInformationTest(PlayWrightFixture playWrightFixture) 
     public async Task GetRTT_Property() {
         await ExecuteTest(NetworkInformationGroup.BUTTON_GET_RTT_PROPERTY);
 
-        string? result = await Page.GetByTestId(NetworkInformationGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationGroup.OUTPUT).TextContentAsync();
         bool isNumber = int.TryParse(result, out _);
         await Assert.That(isNumber).IsTrue();
     }
@@ -102,7 +102,7 @@ public sealed class NetworkInformationTest(PlayWrightFixture playWrightFixture) 
     public async Task GetRTT_Method() {
         await ExecuteTest(NetworkInformationGroup.BUTTON_GET_RTT_METHOD);
 
-        string? result = await Page.GetByTestId(NetworkInformationGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationGroup.OUTPUT).TextContentAsync();
         bool isNumber = int.TryParse(result, out _);
         await Assert.That(isNumber).IsTrue();
     }
@@ -111,7 +111,7 @@ public sealed class NetworkInformationTest(PlayWrightFixture playWrightFixture) 
     public async Task GetSaveData_Property() {
         await ExecuteTest(NetworkInformationGroup.BUTTON_GET_SAVE_DATA_PROPERTY);
 
-        string? result = await Page.GetByTestId(NetworkInformationGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
     }
 
@@ -119,7 +119,7 @@ public sealed class NetworkInformationTest(PlayWrightFixture playWrightFixture) 
     public async Task GetSaveData_Method() {
         await ExecuteTest(NetworkInformationGroup.BUTTON_GET_SAVE_DATA_METHOD);
 
-        string? result = await Page.GetByTestId(NetworkInformationGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
     }
 
@@ -132,7 +132,7 @@ public sealed class NetworkInformationTest(PlayWrightFixture playWrightFixture) 
         await BrowserContext.SetOfflineAsync(false);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(NetworkInformationGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(NetworkInformationGroup.TEST_ONLINE_EVENT);
     }
 
@@ -142,7 +142,7 @@ public sealed class NetworkInformationTest(PlayWrightFixture playWrightFixture) 
         await BrowserContext.SetOfflineAsync(true);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(NetworkInformationGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(NetworkInformationGroup.TEST_OFFLINE_EVENT);
     }
 
@@ -152,7 +152,7 @@ public sealed class NetworkInformationTest(PlayWrightFixture playWrightFixture) 
         await BrowserContext.SetOfflineAsync(true);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(NetworkInformationGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(NetworkInformationGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(NetworkInformationGroup.TEST_CHANGE_EVENT);
     }
 }

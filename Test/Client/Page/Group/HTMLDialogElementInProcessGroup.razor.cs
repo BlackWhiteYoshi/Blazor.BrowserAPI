@@ -17,8 +17,8 @@ public sealed partial class HTMLDialogElementInProcessGroup : ComponentBase, IDi
     private IHTMLDialogElementInProcess Dialog => _dialog ??= ElementFactory.CreateHTMLDialogElement(dialogElement);
 
 
-    public const string LABEL_OUTPUT = "htmldialogelement-inprocess-output";
-    private string labelOutput = string.Empty;
+    public const string OUTPUT = "htmldialogelement-inprocess-output";
+    private string output = string.Empty;
 
     public const string DIALOG_ELEMENT = "htmldialogelement-inprocess-dialog-element";
     private ElementReference dialogElement;
@@ -29,13 +29,13 @@ public sealed partial class HTMLDialogElementInProcessGroup : ComponentBase, IDi
     public const string BUTTON_TO_HTML_ELEMENT = "htmldialogelement-inprocess-to-html-element";
     private void ToHTMLElement() {
         using IHTMLElementInProcess htmlElement = Dialog.ToHTMLElement();
-        labelOutput = (htmlElement is not null).ToString();
+        output = (htmlElement is not null).ToString();
     }
 
 
     public const string BUTTON_GET_CLOSED_BY = "htmldialogelement-inprocess-get-closed-by";
     private void GetClosedBy() {
-        labelOutput = Dialog.ClosedBy;
+        output = Dialog.ClosedBy;
     }
 
     public const string BUTTON_SET_CLOSED_BY = "htmldialogelement-inprocess-set-closed-by";
@@ -47,7 +47,7 @@ public sealed partial class HTMLDialogElementInProcessGroup : ComponentBase, IDi
     public const string BUTTON_GET_OPEN = "htmldialogelement-inprocess-get-open";
     private void GetOpen() {
         bool state = Dialog.Open;
-        labelOutput = state.ToString();
+        output = state.ToString();
     }
 
     public const string BUTTON_SET_OPEN = "htmldialogelement-inprocess-set-open";
@@ -58,7 +58,7 @@ public sealed partial class HTMLDialogElementInProcessGroup : ComponentBase, IDi
 
     public const string BUTTON_GET_RETURN_VALUE = "htmldialogelement-inprocess-get-return-value";
     private void GetReturnValue() {
-        labelOutput = Dialog.ReturnValue;
+        output = Dialog.ReturnValue;
     }
 
     public const string BUTTON_SET_RETURN_VALUE = "htmldialogelement-inprocess-set-return-value";
@@ -96,7 +96,7 @@ public sealed partial class HTMLDialogElementInProcessGroup : ComponentBase, IDi
     public const string BUTTON_REGISTER_ON_CLOSE = "htmldialogelement-inprocess-close-event";
     private void RegisterOnClose() {
         Dialog.OnClose += () => {
-            labelOutput = TEST_EVENT_CLOSE;
+            output = TEST_EVENT_CLOSE;
             StateHasChanged();
         };
     }
@@ -104,7 +104,7 @@ public sealed partial class HTMLDialogElementInProcessGroup : ComponentBase, IDi
     public const string BUTTON_REGISTER_ON_CANCEL = "htmldialogelement-inprocess-cancel-event";
     private void RegisterOnCancel() {
         Dialog.OnCancel += () => {
-            labelOutput = TEST_EVENT_CANCEL;
+            output = TEST_EVENT_CANCEL;
             StateHasChanged();
         };
     }

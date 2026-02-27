@@ -14,24 +14,24 @@ public partial class LocalStorageInProcessGroup : ComponentBase {
     public required ILocalStorageInProcess LocalStorage { private get; init; }
 
 
-    public const string LABEL_OUTPUT = "local-storage-inprocess-output";
-    private string labelOutput = string.Empty;
+    public const string OUTPUT = "local-storage-inprocess-output";
+    private string output = string.Empty;
 
 
     public const string BUTTON_GET_LENGTH = "local-storage-inprocess-get-length";
     private void GetLength() {
         int length = LocalStorage.Length;
-        labelOutput = length.ToString();
+        output = length.ToString();
     }
 
     public const string BUTTON_KEY = "local-storage-inprocess-key";
     private void Key() {
-        labelOutput = LocalStorage.Key(TEST_KEY_INDEX) ?? $"key ({TEST_KEY_INDEX}) is not present";
+        output = LocalStorage.Key(TEST_KEY_INDEX) ?? $"key ({TEST_KEY_INDEX}) is not present";
     }
 
     public const string BUTTON_GET_ITEM = "local-storage-inprocess-get-item";
     private void GetItem() {
-        labelOutput = LocalStorage.GetItem(TEST_GET_ITEM) ?? $"key '{TEST_GET_ITEM}' is not present";
+        output = LocalStorage.GetItem(TEST_GET_ITEM) ?? $"key '{TEST_GET_ITEM}' is not present";
     }
 
     public const string BUTTON_SET_ITEM = "local-storage-inprocess-set-item";

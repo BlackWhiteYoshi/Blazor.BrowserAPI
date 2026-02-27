@@ -11,15 +11,15 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
     public required IGamepadAPI GamepadAPI { private get; init; }
 
 
-    public const string LABEL_OUTPUT = "gamepad-output";
-    private string labelOutput = string.Empty;
+    public const string OUTPUT = "gamepad-output";
+    private string output = string.Empty;
 
 
     public const string BUTTON_GET_GAMEPADS = "gamepad-get-gamepads";
     private async Task GetGamepads() {
         IGamepad?[] gamepadSlots = await GamepadAPI.GetGamepads();
         IGamepad[] gamepads = [.. gamepadSlots.OfType<IGamepad>()];
-        labelOutput = $"Slots = {gamepadSlots.Length}, Connected = {gamepads.Length}";
+        output = $"Slots = {gamepadSlots.Length}, Connected = {gamepads.Length}";
 
         await gamepads.DisposeAsync();
     }
@@ -27,7 +27,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_GAMEPAD_CONNECTED = "gamepad-gamepad-connected-event";
     private void RegisterOnGamepadConnected() {
         GamepadAPI.OnGamepadConnected += (IGamepad gamepad) => {
-            labelOutput = TEST_GAMEPAD_CONNECTED_EVENT;
+            output = TEST_GAMEPAD_CONNECTED_EVENT;
             StateHasChanged();
 
             _ = gamepad.DisposeAsync().Preserve();
@@ -37,7 +37,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_GAMEPAD_DISCONNECTED = "gamepad-gamepad-disconnected-event";
     private void RegisterOnGamepadDisconnected() {
         GamepadAPI.OnGamepadDisconnected += (IGamepad gamepad) => {
-            labelOutput = TEST_GAMEPAD_DISCONNECTED_EVENT;
+            output = TEST_GAMEPAD_DISCONNECTED_EVENT;
             StateHasChanged();
 
             _ = gamepad.DisposeAsync().Preserve();
@@ -54,7 +54,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         double[] axes = await gamepad.Axes;
-        labelOutput = $"({axes.Length}): [{string.Join(", ", axes)}]";
+        output = $"({axes.Length}): [{string.Join(", ", axes)}]";
 
         await gamepads.DisposeAsync();
     }
@@ -68,7 +68,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         double[] axes = await gamepad.GetAxes(CancellationToken.None);
-        labelOutput = $"({axes.Length}): [{string.Join(", ", axes)}]";
+        output = $"({axes.Length}): [{string.Join(", ", axes)}]";
 
         await gamepads.DisposeAsync();
     }
@@ -82,7 +82,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         GamepadButton[] buttons = await gamepad.Buttons;
-        labelOutput = $"({buttons.Length}): [{string.Join(", ", buttons)}]";
+        output = $"({buttons.Length}): [{string.Join(", ", buttons)}]";
 
         await gamepads.DisposeAsync();
     }
@@ -96,7 +96,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         GamepadButton[] buttons = await gamepad.GetButtons(CancellationToken.None);
-        labelOutput = $"({buttons.Length}): [{string.Join(", ", buttons)}]";
+        output = $"({buttons.Length}): [{string.Join(", ", buttons)}]";
 
         await gamepads.DisposeAsync();
     }
@@ -111,7 +111,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         bool connected = await gamepad.Connected;
-        labelOutput = connected.ToString();
+        output = connected.ToString();
 
         await gamepads.DisposeAsync();
     }
@@ -125,7 +125,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         bool connected = await gamepad.GetConnected(CancellationToken.None);
-        labelOutput = connected.ToString();
+        output = connected.ToString();
 
         await gamepads.DisposeAsync();
     }
@@ -139,7 +139,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         string id = await gamepad.Id;
-        labelOutput = id;
+        output = id;
 
         await gamepads.DisposeAsync();
     }
@@ -153,7 +153,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         string id = await gamepad.GetId(CancellationToken.None);
-        labelOutput = id;
+        output = id;
 
         await gamepads.DisposeAsync();
     }
@@ -167,7 +167,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         int index = await gamepad.Index;
-        labelOutput = index.ToString();
+        output = index.ToString();
 
         await gamepads.DisposeAsync();
     }
@@ -181,7 +181,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         int index = await gamepad.GetIndex(CancellationToken.None);
-        labelOutput = index.ToString();
+        output = index.ToString();
 
         await gamepads.DisposeAsync();
     }
@@ -195,7 +195,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         string mapping = await gamepad.Mapping;
-        labelOutput = mapping;
+        output = mapping;
 
         await gamepads.DisposeAsync();
     }
@@ -209,7 +209,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         string mapping = await gamepad.GetMapping(CancellationToken.None);
-        labelOutput = mapping;
+        output = mapping;
 
         await gamepads.DisposeAsync();
     }
@@ -223,7 +223,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         double timestamp = await gamepad.Timestamp;
-        labelOutput = timestamp.ToString();
+        output = timestamp.ToString();
 
         await gamepads.DisposeAsync();
     }
@@ -237,7 +237,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         double timestamp = await gamepad.GetTimestamp(CancellationToken.None);
-        labelOutput = timestamp.ToString();
+        output = timestamp.ToString();
 
         await gamepads.DisposeAsync();
     }
@@ -252,7 +252,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         string[] vibrationEffects = await gamepad.VibrationActuatorEffects;
-        labelOutput = $"({vibrationEffects.Length}): [{string.Join(", ", vibrationEffects)}]";
+        output = $"({vibrationEffects.Length}): [{string.Join(", ", vibrationEffects)}]";
 
         await gamepads.DisposeAsync();
     }
@@ -266,7 +266,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         string[] vibrationEffects = await gamepad.GetVibrationActuatorEffects(CancellationToken.None);
-        labelOutput = $"({vibrationEffects.Length}): [{string.Join(", ", vibrationEffects)}]";
+        output = $"({vibrationEffects.Length}): [{string.Join(", ", vibrationEffects)}]";
 
         await gamepads.DisposeAsync();
     }
@@ -280,7 +280,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         string rumbleResult = await gamepad.PlayVibrationActuatorEffect("dual-rumble", duration: 300);
-        labelOutput = rumbleResult;
+        output = rumbleResult;
 
         await gamepads.DisposeAsync();
     }
@@ -294,7 +294,7 @@ public sealed partial class GamepadAPIGroup : ComponentBase {
         IGamepad gamepad = gamepads[0];
 
         string rumbleResetResult = await gamepad.ResetVibrationActuator();
-        labelOutput = rumbleResetResult;
+        output = rumbleResetResult;
 
         await gamepads.DisposeAsync();
     }

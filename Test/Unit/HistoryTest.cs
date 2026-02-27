@@ -8,7 +8,7 @@ public sealed class HistoryTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task GetLength_Property() {
         await ExecuteTest(HistoryGroup.BUTTON_GET_LENGTH_PROPERTY);
 
-        string? result = await Page.GetByTestId(HistoryGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(HistoryGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("2");
     }
 
@@ -16,7 +16,7 @@ public sealed class HistoryTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task GetLength_Method() {
         await ExecuteTest(HistoryGroup.BUTTON_GET_LENGTH_METHOD);
 
-        string? result = await Page.GetByTestId(HistoryGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(HistoryGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("2");
     }
 
@@ -25,7 +25,7 @@ public sealed class HistoryTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task GetScrollRestoration_Property() {
         await ExecuteTest(HistoryGroup.BUTTON_GET_SCROLL_RESTORATION_PROPERTY);
 
-        string? result = await Page.GetByTestId(HistoryGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(HistoryGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("auto");
     }
 
@@ -33,7 +33,7 @@ public sealed class HistoryTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task GetScrollRestoration_Method() {
         await ExecuteTest(HistoryGroup.BUTTON_GET_SCROLL_RESTORATION_METHOD);
 
-        string? result = await Page.GetByTestId(HistoryGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(HistoryGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("auto");
     }
 
@@ -41,7 +41,7 @@ public sealed class HistoryTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task SetScrollRestoration() {
         await ExecuteTest(HistoryGroup.BUTTON_SET_SCROLL_RESTORATION);
 
-        string? result = await Page.GetByTestId(HistoryGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(HistoryGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("manual");
     }
 
@@ -50,7 +50,7 @@ public sealed class HistoryTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task GetState_Property() {
         await ExecuteTest(HistoryGroup.BUTTON_GET_STATE_PROPERTY);
 
-        string? result = await Page.GetByTestId(HistoryGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(HistoryGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("(null)");
     }
 
@@ -58,7 +58,7 @@ public sealed class HistoryTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     public async Task GetState_Method() {
         await ExecuteTest(HistoryGroup.BUTTON_GET_STATE_METHOD);
 
-        string? result = await Page.GetByTestId(HistoryGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(HistoryGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("(null)");
     }
 
@@ -91,9 +91,9 @@ public sealed class HistoryTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     [Test]
     public async Task Go() {
         await Page.EvaluateAsync("""
-            const label = document.createElement('label');
-            label.setAttribute("data-testid", "temp");
-            document.body.appendChild(label);
+            const span = document.createElement('span');
+            span.setAttribute("data-testid", "temp");
+            document.body.appendChild(span);
             """);
         await Task.Delay(SMALL_WAIT_TIME);
 
@@ -132,7 +132,7 @@ public sealed class HistoryTest(PlayWrightFixture playWrightFixture) : PlayWrigh
         await Page.EvaluateAsync("window.dispatchEvent(new Event('pagereveal'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(HistoryGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(HistoryGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(HistoryGroup.TEST_EVENT_PAGE_REVEAL);
     }
 
@@ -142,7 +142,7 @@ public sealed class HistoryTest(PlayWrightFixture playWrightFixture) : PlayWrigh
         await Page.EvaluateAsync("window.dispatchEvent(new Event('pageswap'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(HistoryGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(HistoryGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(HistoryGroup.TEST_EVENT_PAGE_SWAP);
     }
 
@@ -156,7 +156,7 @@ public sealed class HistoryTest(PlayWrightFixture playWrightFixture) : PlayWrigh
             """);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(HistoryGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(HistoryGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -170,7 +170,7 @@ public sealed class HistoryTest(PlayWrightFixture playWrightFixture) : PlayWrigh
             """);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(HistoryGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(HistoryGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -180,7 +180,7 @@ public sealed class HistoryTest(PlayWrightFixture playWrightFixture) : PlayWrigh
         await Page.EvaluateAsync("history.pushState(null, '', '/test'); history.back();");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(HistoryGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(HistoryGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("(null)");
     }
 
@@ -190,7 +190,7 @@ public sealed class HistoryTest(PlayWrightFixture playWrightFixture) : PlayWrigh
         await Page.EvaluateAsync("window.location.href = 'https://localhost:5000/#anchor';");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(HistoryGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(HistoryGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("new = https://localhost:5000/#anchor, old = https://localhost:5000/");
     }
 }

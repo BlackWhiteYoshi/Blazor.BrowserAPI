@@ -75,8 +75,8 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public required IDocumentInProcess Document { private get; init; }
 
 
-    public const string LABEL_OUTPUT = "document-inprocess-output";
-    private string labelOutput = string.Empty;
+    public const string OUTPUT = "document-inprocess-output";
+    private string output = string.Empty;
 
     public const string TEMP_HTML_ELEMENT_ID = "document-inprocess-temp-htmlElement-id";
 
@@ -86,31 +86,31 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_GET_DOCUMENT_ELEMENT = "document-inprocess-get-document-element";
     private void GetDocumentElement() {
         using IHTMLElementInProcess documentElement = Document.DocumentElement;
-        labelOutput = (documentElement is not null).ToString();
+        output = (documentElement is not null).ToString();
     }
 
     public const string BUTTON_GET_HEAD = "document-inprocess-get-head";
     private void GetHead() {
         using IHTMLElementInProcess head = Document.Head;
-        labelOutput = (head is not null).ToString();
+        output = (head is not null).ToString();
     }
 
     public const string BUTTON_GET_BODY = "document-inprocess-get-body";
     private void GetBody() {
         using IHTMLElementInProcess body = Document.Body;
-        labelOutput = (body is not null).ToString();
+        output = (body is not null).ToString();
     }
 
     public const string BUTTON_SET_BODY = "document-inprocess-set-body";
     private void SetBody() {
         Document.Body = Document.Body;
-        labelOutput = TEST_SET_BODY;
+        output = TEST_SET_BODY;
     }
 
     public const string BUTTON_GET_SCROLLING_ELEMENT = "document-inprocess-get-scrolling-element";
     private void GetScrollingElement() {
         using IHTMLElementInProcess scrollingElement = Document.ScrollingElement;
-        labelOutput = (scrollingElement is not null).ToString();
+        output = (scrollingElement is not null).ToString();
     }
 
 
@@ -119,7 +119,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_GET_EMBEDS = "document-inprocess-get-embeds";
     private void GetEmbeds() {
         IHTMLElementInProcess[] embedElements = Document.Embeds;
-        labelOutput = embedElements.Length.ToString();
+        output = embedElements.Length.ToString();
 
         embedElements.Dispose();
     }
@@ -127,7 +127,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_GET_FORMS = "document-inprocess-get-forms";
     private void GetForms() {
         IHTMLElementInProcess[] formElements = Document.Forms;
-        labelOutput = formElements.Length.ToString();
+        output = formElements.Length.ToString();
 
         formElements.Dispose();
     }
@@ -135,7 +135,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_GET_IMAGES = "document-inprocess-get-images";
     private void GetImages() {
         IHTMLElementInProcess[] imageElements = Document.Images;
-        labelOutput = imageElements.Length.ToString();
+        output = imageElements.Length.ToString();
 
         imageElements.Dispose();
     }
@@ -143,7 +143,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_GET_LINKS = "document-inprocess-get-links";
     private void GetLinks() {
         IHTMLElementInProcess[] linkElements = Document.Links;
-        labelOutput = linkElements.Length.ToString();
+        output = linkElements.Length.ToString();
 
         linkElements.Dispose();
     }
@@ -151,7 +151,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_GET_PLUGINS = "document-inprocess-get-plugins";
     private void GetPlugins() {
         IHTMLElementInProcess[] pluginElements = Document.Plugins;
-        labelOutput = pluginElements.Length.ToString();
+        output = pluginElements.Length.ToString();
 
         pluginElements.Dispose();
     }
@@ -159,7 +159,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_GET_SCRIPTS = "document-inprocess-get-scripts";
     private void GetScripts() {
         IHTMLElementInProcess[] scriptElements = Document.Scripts;
-        labelOutput = scriptElements.Length.ToString();
+        output = scriptElements.Length.ToString();
 
         scriptElements.Dispose();
     }
@@ -170,31 +170,31 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_GET_ACTIVE_ELEMENT = "document-inprocess-get-active-element";
     private void GetActiveElement() {
         using IHTMLElementInProcess? activeElement = Document.ActiveElement;
-        labelOutput = (activeElement is not null).ToString();
+        output = (activeElement is not null).ToString();
     }
 
     public const string BUTTON_GET_CURRENT_SCRIPT = "document-inprocess-get-current-script";
     private void GetCurrentScript() {
         using IHTMLElementInProcess? currentScript = Document.CurrentScript;
-        labelOutput = (currentScript is not null).ToString();
+        output = (currentScript is not null).ToString();
     }
 
     public const string BUTTON_GET_FULLSCREEN_ELEMENT = "document-inprocess-get-fullscreen-element";
     private void GetFullscreenElement() {
         using IHTMLElementInProcess? fullscreenElement = Document.FullscreenElement;
-        labelOutput = (fullscreenElement is not null).ToString();
+        output = (fullscreenElement is not null).ToString();
     }
 
     public const string BUTTON_GET_PICTURE_IN_PICTURE_ELEMENT = "document-inprocess-get-picture-in-picture-element";
     private void GetPictureInPictureElement() {
         using IHTMLElementInProcess? pictureInPicture = Document.PictureInPictureElement;
-        labelOutput = (pictureInPicture is not null).ToString();
+        output = (pictureInPicture is not null).ToString();
     }
 
     public const string BUTTON_GET_POINTER_LOCK_ELEMENT = "document-inprocess-get-pointer-lock-element";
     private void GetPointerLockElement() {
         using IHTMLElementInProcess? pointerLockElement = Document.PointerLockElement;
-        labelOutput = (pointerLockElement is not null).ToString();
+        output = (pointerLockElement is not null).ToString();
     }
 
 
@@ -203,25 +203,25 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_GET_CHARACTER_SET = "document-inprocess-get-character-set";
     private void GetCharacterSet() {
         string characterSet = Document.CharacterSet;
-        labelOutput = characterSet;
+        output = characterSet;
     }
 
     public const string BUTTON_GET_COMPAT_MODE = "document-inprocess-get-compat-mode";
     private void GetCompatMode() {
         string compatMode = Document.CompatMode;
-        labelOutput = compatMode;
+        output = compatMode;
     }
 
     public const string BUTTON_GET_CONTENT_TYPE = "document-inprocess-get-content-type";
     private void GetContentType() {
         string contentType = Document.ContentType;
-        labelOutput = contentType;
+        output = contentType;
     }
 
     public const string BUTTON_GET_DESIGN_MODE = "document-inprocess-get-design-mode";
     private void GetDesignMode() {
         string designMode = Document.DesignMode;
-        labelOutput = designMode;
+        output = designMode;
     }
 
     public const string BUTTON_SET_DESIGN_MODE = "document-inprocess-set-design-mode";
@@ -232,7 +232,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_GET_DIR = "document-inprocess-get-dir";
     private void GetDir() {
         string dir = Document.Dir;
-        labelOutput = dir;
+        output = dir;
     }
 
     public const string BUTTON_SET_DIR = "document-inprocess-set-dir";
@@ -243,49 +243,49 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_GET_DOCUMENT_URI = "document-inprocess-get-document-uri";
     private void GetDocumentURI() {
         string documentURI = Document.DocumentURI;
-        labelOutput = documentURI;
+        output = documentURI;
     }
 
     public const string BUTTON_GET_FULLSCREEN_ENABLED = "document-inprocess-get-fullscreen-enabled";
     private void GetFullscreenEnabled() {
         bool fullscreenEnabled = Document.FullscreenEnabled;
-        labelOutput = fullscreenEnabled.ToString();
+        output = fullscreenEnabled.ToString();
     }
 
     public const string BUTTON_GET_HIDDEN = "document-inprocess-get-hidden";
     private void GetHidden() {
         bool hidden = Document.Hidden;
-        labelOutput = hidden.ToString();
+        output = hidden.ToString();
     }
 
     public const string BUTTON_GET_LAST_MODIFIED = "document-inprocess-get-last-modified";
     private void GetLastModified() {
         string lastModified = Document.LastModified;
-        labelOutput = lastModified;
+        output = lastModified;
     }
 
     public const string BUTTON_GET_PICTURE_IN_PICTURE_ENABLED = "document-inprocess-get-picture-in-picture-enabled";
     private void GetPictureInPictureEnabled() {
         bool pictureInPictureEnabled = Document.PictureInPictureEnabled;
-        labelOutput = pictureInPictureEnabled.ToString();
+        output = pictureInPictureEnabled.ToString();
     }
 
     public const string BUTTON_GET_READY_STATE = "document-inprocess-get-ready-state";
     private void GetReadyState() {
         string readyState = Document.ReadyState;
-        labelOutput = readyState;
+        output = readyState;
     }
 
     public const string BUTTON_GET_REFERRER = "document-inprocess-get-referrer";
     private void GetReferrer() {
         string referrer = Document.Referrer;
-        labelOutput = referrer is not "" ? referrer : TEST_NO_REFFERER;
+        output = referrer is not "" ? referrer : TEST_NO_REFFERER;
     }
 
     public const string BUTTON_GET_TITLE = "document-inprocess-get-title";
     private void GetTitle() {
         string title = Document.Title;
-        labelOutput = title;
+        output = title;
     }
 
     public const string BUTTON_SET_TITLE = "document-inprocess-set-title";
@@ -296,13 +296,13 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_GET_URL = "document-inprocess-get-url";
     private void GetURL() {
         string url = Document.URL;
-        labelOutput = url;
+        output = url;
     }
 
     public const string BUTTON_GET_VISIBILITY_STATE = "document-inprocess-get-visibility-state";
     private void GetVisibilityState() {
         string visibilityState = Document.VisibilityState;
-        labelOutput = visibilityState;
+        output = visibilityState;
     }
 
 
@@ -311,19 +311,19 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_GET_BASE_URI = "document-inprocess-get-base-uri";
     private void GetBaseURI() {
         string baseURI = Document.BaseURI;
-        labelOutput = baseURI;
+        output = baseURI;
     }
 
     public const string BUTTON_GET_NODE_NAME = "document-inprocess-get-node-name";
     private void GetNodeName() {
         string nodeName = Document.NodeName;
-        labelOutput = nodeName;
+        output = nodeName;
     }
 
     public const string BUTTON_GET_NODE_TYPE = "document-inprocess-get-node-type";
     private void GetNodeType() {
         int nodeType = Document.NodeType;
-        labelOutput = nodeType.ToString();
+        output = nodeType.ToString();
     }
 
 
@@ -332,26 +332,26 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
 
     public const string BUTTON_CREATE_ELEMENT = "document-inprocess-create-element";
     private void CreateElement() {
-        using IHTMLElementInProcess htmlElement = Document.CreateElement("label");
-        labelOutput = (htmlElement is not null).ToString();
+        using IHTMLElementInProcess htmlElement = Document.CreateElement("span");
+        output = (htmlElement is not null).ToString();
     }
 
     public const string BUTTON_CREATE_ELEMENT_NS = "document-inprocess-create-element-ns";
     private void CreateElementNS() {
-        using IHTMLElementInProcess htmlElement = Document.CreateElementNS("http://www.w3.org/1999/xhtml", "label");
-        labelOutput = (htmlElement is not null).ToString();
+        using IHTMLElementInProcess htmlElement = Document.CreateElementNS("http://www.w3.org/1999/xhtml", "span");
+        output = (htmlElement is not null).ToString();
     }
 
     public const string BUTTON_GET_ELEMENT_BY_ID = "document-inprocess-get-element-by-id";
     private void GetElementById() {
         using IHTMLElementInProcess? htmlElement = Document.GetElementById("test-page");
-        labelOutput = (htmlElement is not null).ToString();
+        output = (htmlElement is not null).ToString();
     }
 
     public const string BUTTON_GET_ELEMENTS_BY_CLASS_NAME = "document-inprocess-get-elements-by-class-name";
     private void GetElementsByClassName() {
         IHTMLElementInProcess[] htmlElements = Document.GetElementsByClassName("group");
-        labelOutput = htmlElements.Length.ToString();
+        output = htmlElements.Length.ToString();
 
         htmlElements.Dispose();
     }
@@ -359,7 +359,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_GET_ELEMENTS_BY_TAG_NAME = "document-inprocess-get-elements-by-tag-name";
     private void GetElementsByTagName() {
         IHTMLElementInProcess[] htmlElements = Document.GetElementsByTagName("h1");
-        labelOutput = htmlElements.Length.ToString();
+        output = htmlElements.Length.ToString();
 
         htmlElements.Dispose();
     }
@@ -367,7 +367,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_GET_ELEMENTS_BY_TAG_NAME_NS = "document-inprocess-get-elements-by-tag-name-ns";
     private void GetElementsByTagNameNS() {
         IHTMLElementInProcess[] htmlElements = Document.GetElementsByTagNameNS("http://www.w3.org/1999/xhtml", "h1");
-        labelOutput = htmlElements.Length.ToString();
+        output = htmlElements.Length.ToString();
 
         htmlElements.Dispose();
     }
@@ -375,7 +375,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_GET_ELEMENTS_BY_NAME = "document-inprocess-get-elements-by-name";
     private void GetElementsByName() {
         IHTMLElementInProcess[] htmlElements = Document.GetElementsByName(TEST_ELEMENT_NAME);
-        labelOutput = htmlElements.Length.ToString();
+        output = htmlElements.Length.ToString();
 
         htmlElements.Dispose();
     }
@@ -383,13 +383,13 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_QUERY_SELECTOR = "document-inprocess-query-selector";
     private void QuerySelector() {
         using IHTMLElementInProcess? htmlElement = Document.QuerySelector(".group");
-        labelOutput = (htmlElement is not null).ToString();
+        output = (htmlElement is not null).ToString();
     }
 
     public const string BUTTON_QUERY_SELECTOR_ALL = "document-inprocess-query-selector-all";
     private void QuerySelectorAll() {
         IHTMLElementInProcess[] htmlElements = Document.QuerySelectorAll(".group");
-        labelOutput = htmlElements.Length.ToString();
+        output = htmlElements.Length.ToString();
 
         htmlElements.Dispose();
     }
@@ -397,13 +397,13 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_ELEMENT_FROM_POINT = "document-inprocess-element-from-point";
     private void ElementFromPoint() {
         using IHTMLElementInProcess? htmlElement = Document.ElementFromPoint(1, 1);
-        labelOutput = (htmlElement is not null).ToString();
+        output = (htmlElement is not null).ToString();
     }
 
     public const string BUTTON_ELEMENTS_FROM_POINT = "document-inprocess-elements-from-point";
     private void ElementsFromPoint() {
         IHTMLElementInProcess[] htmlElements = Document.ElementsFromPoint(1, 1);
-        labelOutput = htmlElements.Length.ToString();
+        output = htmlElements.Length.ToString();
 
         htmlElements.Dispose();
     }
@@ -414,7 +414,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
         Document.ReplaceChildren([]);
         await Task.Delay(100);
         Document.ReplaceChildren([rootElement]);
-        labelOutput = (rootElement is not null).ToString();
+        output = (rootElement is not null).ToString();
     }
 
 
@@ -423,19 +423,19 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REQUEST_STORAGE_ACCESS = "document-inprocess-request-storage-access";
     private async Task RequestStorageAccess() {
         await Document.RequestStorageAccess(all: true);
-        labelOutput = TEST_REQUEST_STORAGE_ACCESS;
+        output = TEST_REQUEST_STORAGE_ACCESS;
     }
 
     public const string BUTTON_REQUEST_STORAGE_ACCESS_FOR = "document-inprocess-request-storage-access-for";
     private async Task RequestStorageAccessFor() {
         await Document.RequestStorageAccessFor("https://localhost");
-        labelOutput = TEST_REQUEST_STORAGE_ACCESS_FOR;
+        output = TEST_REQUEST_STORAGE_ACCESS_FOR;
     }
 
     public const string BUTTON_HAS_STORAGE_ACCESS = "document-inprocess-has-storage-access";
     private async Task HasStorageAccess() {
         bool storageAccess = await Document.HasStorageAccess();
-        labelOutput = storageAccess.ToString();
+        output = storageAccess.ToString();
     }
 
 
@@ -450,10 +450,10 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     private async Task ExitPictureInPicture() {
         try {
             await Document.ExitPictureInPicture();
-            labelOutput = "picture in picture exit";
+            output = "picture in picture exit";
         }
         catch (Microsoft.JSInterop.JSException exception) {
-            labelOutput = exception.Message.Substring(0, exception.Message.IndexOf('\n'));
+            output = exception.Message.Substring(0, exception.Message.IndexOf('\n'));
         }
     }
 
@@ -468,7 +468,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_HAS_FOCUS = "document-inprocess-has-focus";
     private void HasFocus() {
         bool focus = Document.HasFocus();
-        labelOutput = focus.ToString();
+        output = focus.ToString();
     }
 
 
@@ -477,31 +477,31 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_COMPARE_DOCUMENT_POSITION = "document-inprocess-compare-document-position";
     private void CompareDocumentPosition() {
         int comparison = Document.CompareDocumentPosition(Document.Body);
-        labelOutput = comparison.ToString();
+        output = comparison.ToString();
     }
 
     public const string BUTTON_CONTAINS = "document-inprocess-contains";
     private void Contains() {
         bool contains = Document.Contains(Document.Body);
-        labelOutput = contains.ToString();
+        output = contains.ToString();
     }
 
     public const string BUTTON_IS_DEFAULT_NAMESPACE = "document-inprocess-is-default-namespace";
     private void IsDefaultNamespace() {
         bool isDefaultNamespace = Document.IsDefaultNamespace("http://www.w3.org/1999/xhtml");
-        labelOutput = isDefaultNamespace.ToString();
+        output = isDefaultNamespace.ToString();
     }
 
     public const string BUTTON_LOOKUP_PREFIX = "document-inprocess-lookup-prefix";
     private void LookupPrefix() {
         string? prefix = Document.LookupPrefix("http://www.w3.org/1999/xhtml");
-        labelOutput = prefix ?? "(no prefix)";
+        output = prefix ?? "(no prefix)";
     }
 
     public const string BUTTON_LOOKUP_NAMESPACE_URI = "document-inprocess-lookup-namespace-uri";
     private void LookupNamespaceURI() {
         string? namespaceURI = Document.LookupNamespaceURI(null);
-        labelOutput = namespaceURI ?? "(no namespace uri)";
+        output = namespaceURI ?? "(no namespace uri)";
     }
 
     public const string BUTTON_NORMALIZE = "document-inprocess-normalize";
@@ -516,7 +516,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_SECURITY_POLICY_VIOLATION = "document-inprocess-security-policy-violation-event";
     private void RegisterOnSecurityPolicyViolation() {
         Document.OnSecurityPolicyViolation += (SecurityPolicyViolationEvent securityPolicyViolationEvent) => {
-            labelOutput = securityPolicyViolationEvent.ToString();
+            output = securityPolicyViolationEvent.ToString();
             StateHasChanged();
         };
     }
@@ -524,7 +524,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_VISIBILITY_CHANGE = "document-inprocess-visibility-change-event";
     private void RegisterOnVisibilityChange() {
         Document.OnVisibilityChange += () => {
-            labelOutput = TEST_EVENT_VISIBILITY_CHANGE;
+            output = TEST_EVENT_VISIBILITY_CHANGE;
             StateHasChanged();
         };
     }
@@ -533,7 +533,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_FULLSCREEN_CHANGE = "document-inprocess-fullscreen-change-event";
     private void RegisterOnFullscreenChange() {
         Document.OnFullscreenChange += () => {
-            labelOutput = TEST_EVENT_FULLSCREEN_CHANGE;
+            output = TEST_EVENT_FULLSCREEN_CHANGE;
             StateHasChanged();
         };
     }
@@ -541,7 +541,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_FULLSCREEN_ERROR = "document-inprocess-fullscreen-error-event";
     private void RegisterOnFullscreenError() {
         Document.OnFullscreenError += () => {
-            labelOutput = TEST_EVENT_FULLSCREEN_ERROR;
+            output = TEST_EVENT_FULLSCREEN_ERROR;
             StateHasChanged();
         };
     }
@@ -550,7 +550,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_DOM_CONTENT_LOADED = "document-inprocess-dom-content-loaded-event";
     private void RegisterOnDOMContentLoaded() {
         Document.OnDOMContentLoaded += () => {
-            labelOutput = TEST_EVENT_DOM_CONTENT_LOADED;
+            output = TEST_EVENT_DOM_CONTENT_LOADED;
             StateHasChanged();
         };
     }
@@ -558,7 +558,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_READY_STATE_CHANGE = "document-inprocess-ready-state-change-event";
     private void RegisterOnReadyStateChange() {
         Document.OnReadyStateChange += () => {
-            labelOutput = TEST_EVENT_READY_STATE_CHANGE;
+            output = TEST_EVENT_READY_STATE_CHANGE;
             StateHasChanged();
         };
     }
@@ -567,7 +567,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_POINTER_LOCK_CHANGE = "document-inprocess-pointer-lock-change-event";
     private void RegisterOnPointerLockChange() {
         Document.OnPointerLockChange += () => {
-            labelOutput = TEST_EVENT_POINTER_LOCK_CHANGE;
+            output = TEST_EVENT_POINTER_LOCK_CHANGE;
             StateHasChanged();
         };
     }
@@ -575,7 +575,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_POINTER_LOCK_ERROR = "document-inprocess-pointer-lock-error-event";
     private void RegisterOnPointerLockError() {
         Document.OnPointerLockError += () => {
-            labelOutput = TEST_EVENT_POINTER_LOCK_ERROR;
+            output = TEST_EVENT_POINTER_LOCK_ERROR;
             StateHasChanged();
         };
     }
@@ -584,7 +584,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_SCROLL = "document-inprocess-scroll-event";
     private void RegisterOnScroll() {
         Document.OnScroll += () => {
-            labelOutput = TEST_EVENT_SCROLL;
+            output = TEST_EVENT_SCROLL;
             StateHasChanged();
         };
     }
@@ -592,7 +592,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_SCROLL_END = "document-inprocess-scroll-end-event";
     private void RegisterOnScrollEnd() {
         Document.OnScrollEnd += () => {
-            labelOutput = TEST_EVENT_SCROLL_END;
+            output = TEST_EVENT_SCROLL_END;
             StateHasChanged();
         };
     }
@@ -601,7 +601,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_SELECTION_CHANGE = "document-inprocess-selection-change-event";
     private void RegisterOnSelectionChange() {
         Document.OnSelectionChange += () => {
-            labelOutput = TEST_EVENT_SELECTION_CHANGE;
+            output = TEST_EVENT_SELECTION_CHANGE;
             StateHasChanged();
         };
     }
@@ -609,7 +609,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_SELECT_START = "document-inprocess-select-start-event";
     private void RegisterOnSelectStart() {
         Document.OnSelectStart += () => {
-            labelOutput = TEST_EVENT_SELECT_START;
+            output = TEST_EVENT_SELECT_START;
             StateHasChanged();
         };
     }
@@ -620,7 +620,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_CHANGE = "document-inprocess-change-event";
     private void RegisterOnChange() {
         Document.OnChange += () => {
-            labelOutput = TEST_EVENT_CHANGE;
+            output = TEST_EVENT_CHANGE;
             StateHasChanged();
         };
     }
@@ -628,7 +628,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_LOAD = "document-inprocess-load-event";
     private void RegisterOnLoad() {
         Document.OnLoad += () => {
-            labelOutput = TEST_EVENT_LOAD;
+            output = TEST_EVENT_LOAD;
             StateHasChanged();
         };
     }
@@ -636,7 +636,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_ERROR = "document-inprocess-error-event";
     private void RegisterOnError() {
         Document.OnError += (JsonElement error) => {
-            labelOutput = error.ToString();
+            output = error.ToString();
             StateHasChanged();
         };
     }
@@ -651,7 +651,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
                 for (int i = 0; i < content.Length; i++)
                     content[i] = await dragEvent.Files[i].Text();
 
-                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
+                output = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
                 StateHasChanged();
                 dragEvent.Files.Dispose();
             }
@@ -667,7 +667,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
                 for (int i = 0; i < content.Length; i++)
                     content[i] = await dragEvent.Files[i].Text();
 
-                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
+                output = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
                 StateHasChanged();
                 dragEvent.Files.Dispose();
             }
@@ -683,7 +683,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
                 for (int i = 0; i < content.Length; i++)
                     content[i] = await dragEvent.Files[i].Text();
 
-                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
+                output = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
                 StateHasChanged();
                 dragEvent.Files.Dispose();
             }
@@ -699,7 +699,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
                 for (int i = 0; i < content.Length; i++)
                     content[i] = await dragEvent.Files[i].Text();
 
-                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
+                output = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
                 StateHasChanged();
                 dragEvent.Files.Dispose();
             }
@@ -715,7 +715,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
                 for (int i = 0; i < content.Length; i++)
                     content[i] = await dragEvent.Files[i].Text();
 
-                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
+                output = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
                 StateHasChanged();
                 dragEvent.Files.Dispose();
             }
@@ -731,7 +731,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
                 for (int i = 0; i < content.Length; i++)
                     content[i] = await dragEvent.Files[i].Text();
 
-                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
+                output = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
                 StateHasChanged();
                 dragEvent.Files.Dispose();
             }
@@ -747,7 +747,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
                 for (int i = 0; i < content.Length; i++)
                     content[i] = await dragEvent.Files[i].Text();
 
-                labelOutput = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
+                output = $"dropEffect='{dragEvent.DropEffect}', effectAllowed='{dragEvent.EffectAllowed}', types='[{string.Join(';', dragEvent.Types)}]', files='[{string.Join(';', content)}]'";
                 StateHasChanged();
                 dragEvent.Files.Dispose();
             }
@@ -758,7 +758,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_TOGGLE = "document-inprocess-toggle-event";
     private void RegisterOnToggle() {
         Document.OnToggle += (string oldState, string newState) => {
-            labelOutput = $"oldState='{oldState}', newState='{newState}'";
+            output = $"oldState='{oldState}', newState='{newState}'";
             StateHasChanged();
         };
     }
@@ -766,7 +766,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_BEFORE_TOGGLE = "document-inprocess-before-toggle-event";
     private void RegisterOnBeforeToggle() {
         Document.OnBeforeToggle += (string oldState, string newState) => {
-            labelOutput = $"oldState='{oldState}', newState='{newState}'";
+            output = $"oldState='{oldState}', newState='{newState}'";
             StateHasChanged();
         };
     }
@@ -777,7 +777,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_INPUT = "document-inprocess-input-event";
     private void RegisterOnInput() {
         Document.OnInput += (string? data, string? inputType, bool isComposing) => {
-            labelOutput = $"data={data ?? "(null)"}, inputType={inputType ?? "(null)"}, isComposing={isComposing}";
+            output = $"data={data ?? "(null)"}, inputType={inputType ?? "(null)"}, isComposing={isComposing}";
             StateHasChanged();
         };
     }
@@ -785,7 +785,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_BEFORE_INPUT = "document-inprocess-before-input-event";
     private void RegisterOnBeforeInput() {
         Document.OnBeforeInput += (string? data, string? inputType, bool isComposing) => {
-            labelOutput = $"data={data ?? "(null)"}, inputType={inputType ?? "(null)"}, isComposing={isComposing}";
+            output = $"data={data ?? "(null)"}, inputType={inputType ?? "(null)"}, isComposing={isComposing}";
             StateHasChanged();
         };
     }
@@ -793,7 +793,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_BEFORE_MATCH = "document-inprocess-before-match-event";
     private void RegisterOnBeforeMatch() {
         Document.OnBeforeMatch += () => {
-            labelOutput = TEST_EVENT_BEFORE_MATCH;
+            output = TEST_EVENT_BEFORE_MATCH;
             StateHasChanged();
         };
     }
@@ -802,7 +802,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_KEY_DOWN = "document-inprocess-key-down-event";
     private void RegisterOnKeyDown() {
         Document.OnKeyDown += (KeyboardEvent keyboardEvent) => {
-            labelOutput = keyboardEvent.ToString();
+            output = keyboardEvent.ToString();
             StateHasChanged();
         };
     }
@@ -810,7 +810,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_KEY_UP = "document-inprocess-key-up-event";
     private void RegisterOnKeyUp() {
         Document.OnKeyUp += (KeyboardEvent keyboardEvent) => {
-            labelOutput = keyboardEvent.ToString();
+            output = keyboardEvent.ToString();
             StateHasChanged();
         };
     }
@@ -819,7 +819,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_CLICK = "document-inprocess-click-event";
     private void RegisterOnClick() {
         Document.OnClick += (MouseEvent mouseEvent) => {
-            labelOutput = mouseEvent.ToString();
+            output = mouseEvent.ToString();
             StateHasChanged();
         };
     }
@@ -827,7 +827,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_DBL_CLICK = "document-inprocess-dbl-click-event";
     private void RegisterOnDblClick() {
         Document.OnDblClick += (MouseEvent mouseEvent) => {
-            labelOutput = mouseEvent.ToString();
+            output = mouseEvent.ToString();
             StateHasChanged();
         };
     }
@@ -835,7 +835,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_AUX_CLICK = "document-inprocess-aux-click-event";
     private void RegisterOnAuxClick() {
         Document.OnAuxClick += (MouseEvent mouseEvent) => {
-            labelOutput = mouseEvent.ToString();
+            output = mouseEvent.ToString();
             StateHasChanged();
         };
     }
@@ -843,7 +843,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_CONTEXT_MENU = "document-inprocess-context-menu-event";
     private void RegisterOnContextMenu() {
         Document.OnContextMenu += (MouseEvent mouseEvent) => {
-            labelOutput = mouseEvent.ToString();
+            output = mouseEvent.ToString();
             StateHasChanged();
         };
     }
@@ -851,7 +851,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_MOUSE_DOWN = "document-inprocess-mouse-down-event";
     private void RegisterOnMouseDown() {
         Document.OnMouseDown += (MouseEvent mouseEvent) => {
-            labelOutput = mouseEvent.ToString();
+            output = mouseEvent.ToString();
             StateHasChanged();
         };
     }
@@ -859,7 +859,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_MOUSE_UP = "document-inprocess-mouse-up-event";
     private void RegisterOnMouseUp() {
         Document.OnMouseUp += (MouseEvent mouseEvent) => {
-            labelOutput = mouseEvent.ToString();
+            output = mouseEvent.ToString();
             StateHasChanged();
         };
     }
@@ -867,7 +867,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_WHEEL = "document-inprocess-wheel-event";
     private void RegisterOnWheel() {
         Document.OnWheel += (WheelEvent wheelEvent) => {
-            labelOutput = wheelEvent.ToString();
+            output = wheelEvent.ToString();
             StateHasChanged();
         };
     }
@@ -875,7 +875,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_MOUSE_MOVE = "document-inprocess-mouse-move-event";
     private void RegisterOnMouseMove() {
         Document.OnMouseMove += (MouseEvent mouseEvent) => {
-            labelOutput = mouseEvent.ToString();
+            output = mouseEvent.ToString();
             StateHasChanged();
         };
     }
@@ -883,7 +883,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_MOUSE_OVER = "document-inprocess-mouse-over-event";
     private void RegisterOnMouseOver() {
         Document.OnMouseOver += (MouseEvent mouseEvent) => {
-            labelOutput = mouseEvent.ToString();
+            output = mouseEvent.ToString();
             StateHasChanged();
         };
     }
@@ -891,7 +891,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_MOUSE_OUT = "document-inprocess-mouse-out-event";
     private void RegisterOnMouseOut() {
         Document.OnMouseOut += (MouseEvent mouseEvent) => {
-            labelOutput = mouseEvent.ToString();
+            output = mouseEvent.ToString();
             StateHasChanged();
         };
     }
@@ -899,7 +899,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_MOUSE_ENTER = "document-inprocess-mouse-enter-event";
     private void RegisterOnMouseEnter() {
         Document.OnMouseEnter += (MouseEvent mouseEvent) => {
-            labelOutput = mouseEvent.ToString();
+            output = mouseEvent.ToString();
             StateHasChanged();
         };
     }
@@ -907,7 +907,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_MOUSE_LEAVE = "document-inprocess-mouse-leave-event";
     private void RegisterOnMouseLeave() {
         Document.OnMouseLeave += (MouseEvent mouseEvent) => {
-            labelOutput = mouseEvent.ToString();
+            output = mouseEvent.ToString();
             StateHasChanged();
         };
     }
@@ -916,7 +916,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_TOUCH_START = "document-inprocess-touch-start-event";
     private void RegisterOnTouchStart() {
         Document.OnTouchStart += (TouchEvent touchEvent) => {
-            labelOutput = touchEvent.ToString();
+            output = touchEvent.ToString();
             StateHasChanged();
         };
     }
@@ -924,7 +924,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_TOUCH_END = "document-inprocess-touch-end-event";
     private void RegisterOnTouchEnd() {
         Document.OnTouchEnd += (TouchEvent touchEvent) => {
-            labelOutput = touchEvent.ToString();
+            output = touchEvent.ToString();
             StateHasChanged();
         };
     }
@@ -932,7 +932,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_TOUCH_MOVE = "document-inprocess-touch-move-event";
     private void RegisterOnTouchMove() {
         Document.OnTouchMove += (TouchEvent touchEvent) => {
-            labelOutput = touchEvent.ToString();
+            output = touchEvent.ToString();
             StateHasChanged();
         };
     }
@@ -940,7 +940,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_TOUCH_CANCEL = "document-inprocess-touch-cancel-event";
     private void RegisterOnTouchCancel() {
         Document.OnTouchCancel += (TouchEvent touchEvent) => {
-            labelOutput = touchEvent.ToString();
+            output = touchEvent.ToString();
             StateHasChanged();
         };
     }
@@ -949,7 +949,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_POINTER_DOWN = "document-inprocess-pointer-down-event";
     private void RegisterOnPointerDown() {
         Document.OnPointerDown += (PointerEvent pointerEvent) => {
-            labelOutput = pointerEvent.ToString();
+            output = pointerEvent.ToString();
             StateHasChanged();
         };
     }
@@ -957,7 +957,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_POINTER_UP = "document-inprocess-pointer-up-event";
     private void RegisterOnPointerUp() {
         Document.OnPointerUp += (PointerEvent pointerEvent) => {
-            labelOutput = pointerEvent.ToString();
+            output = pointerEvent.ToString();
             StateHasChanged();
         };
     }
@@ -965,7 +965,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_POINTER_MOVE = "document-inprocess-pointer-move-event";
     private void RegisterOnPointerMove() {
         Document.OnPointerMove += (PointerEvent pointerEvent) => {
-            labelOutput = pointerEvent.ToString();
+            output = pointerEvent.ToString();
             StateHasChanged();
         };
     }
@@ -973,7 +973,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_POINTER_OVER = "document-inprocess-pointer-over-event";
     private void RegisterOnPointerOver() {
         Document.OnPointerOver += (PointerEvent pointerEvent) => {
-            labelOutput = pointerEvent.ToString();
+            output = pointerEvent.ToString();
             StateHasChanged();
         };
     }
@@ -981,7 +981,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_POINTER_OUT = "document-inprocess-pointer-out-event";
     private void RegisterOnPointerOut() {
         Document.OnPointerOut += (PointerEvent pointerEvent) => {
-            labelOutput = pointerEvent.ToString();
+            output = pointerEvent.ToString();
             StateHasChanged();
         };
     }
@@ -989,7 +989,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_POINTER_ENTER = "document-inprocess-pointer-enter-event";
     private void RegisterOnPointerEnter() {
         Document.OnPointerEnter += (PointerEvent pointerEvent) => {
-            labelOutput = pointerEvent.ToString();
+            output = pointerEvent.ToString();
             StateHasChanged();
         };
     }
@@ -997,7 +997,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_POINTER_LEAVE = "document-inprocess-pointer-leave-event";
     private void RegisterOnPointerLeave() {
         Document.OnPointerLeave += (PointerEvent pointerEvent) => {
-            labelOutput = pointerEvent.ToString();
+            output = pointerEvent.ToString();
             StateHasChanged();
         };
     }
@@ -1005,7 +1005,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_POINTER_CANCEL = "document-inprocess-pointer-cancel-event";
     private void RegisterOnPointerCancel() {
         Document.OnPointerCancel += (PointerEvent pointerEvent) => {
-            labelOutput = pointerEvent.ToString();
+            output = pointerEvent.ToString();
             StateHasChanged();
         };
     }
@@ -1013,7 +1013,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_POINTER_RAW_UPDATE = "document-inprocess-pointer-raw-update-event";
     private void RegisterOnPointerRawUpdate() {
         Document.OnPointerRawUpdate += (PointerEvent pointerEvent) => {
-            labelOutput = pointerEvent.ToString();
+            output = pointerEvent.ToString();
             StateHasChanged();
         };
     }
@@ -1021,7 +1021,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_GOT_POINTER_CAPTURE = "document-inprocess-got-pointer-capture-event";
     private void RegisterOnGotPointerCapture() {
         Document.OnGotPointerCapture += (PointerEvent pointerEvent) => {
-            labelOutput = pointerEvent.ToString();
+            output = pointerEvent.ToString();
             StateHasChanged();
         };
     }
@@ -1029,7 +1029,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_LOST_POINTER_CAPTURE = "document-inprocess-lost-pointer-capture-event";
     private void RegisterOnLostPointerCapture() {
         Document.OnLostPointerCapture += (PointerEvent pointerEvent) => {
-            labelOutput = pointerEvent.ToString();
+            output = pointerEvent.ToString();
             StateHasChanged();
         };
     }
@@ -1038,7 +1038,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_FOCUS = "document-inprocess-focus-event";
     private void RegisterOnFocus() {
         Document.OnFocus += () => {
-            labelOutput = TEST_EVENT_FOCUS;
+            output = TEST_EVENT_FOCUS;
             StateHasChanged();
         };
     }
@@ -1046,7 +1046,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_FOCUS_IN = "document-inprocess-focus-in-event";
     private void RegisterOnFocusIn() {
         Document.OnFocusIn += () => {
-            labelOutput = TEST_EVENT_FOCUS_IN;
+            output = TEST_EVENT_FOCUS_IN;
             StateHasChanged();
         };
     }
@@ -1054,7 +1054,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_BLUR = "document-inprocess-blur-event";
     private void RegisterOnBlur() {
         Document.OnBlur += () => {
-            labelOutput = TEST_EVENT_BLUR;
+            output = TEST_EVENT_BLUR;
             StateHasChanged();
         };
     }
@@ -1062,7 +1062,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_FOCUS_OUT = "document-inprocess-focus-out-event";
     private void RegisterOnFocusOut() {
         Document.OnFocusOut += () => {
-            labelOutput = TEST_EVENT_FOCUS_OUT;
+            output = TEST_EVENT_FOCUS_OUT;
             StateHasChanged();
         };
     }
@@ -1071,7 +1071,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_COPY = "document-inprocess-copy-event";
     private void RegisterOnCopy() {
         Document.OnCopy += () => {
-            labelOutput = TEST_EVENT_COPY;
+            output = TEST_EVENT_COPY;
             StateHasChanged();
         };
     }
@@ -1079,7 +1079,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_PASTE = "document-inprocess-paste-event";
     private void RegisterOnPaste() {
         Document.OnPaste += () => {
-            labelOutput = TEST_EVENT_PASTE;
+            output = TEST_EVENT_PASTE;
             StateHasChanged();
         };
     }
@@ -1087,7 +1087,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_CUT = "document-inprocess-cut-event";
     private void RegisterOnCut() {
         Document.OnCut += () => {
-            labelOutput = TEST_EVENT_CUT;
+            output = TEST_EVENT_CUT;
             StateHasChanged();
         };
     }
@@ -1096,7 +1096,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_TRANSITION_START = "document-inprocess-transition-start-event";
     private void RegisterOnTransitionStart() {
         Document.OnTransitionStart += (string propertyName, double elapsedTime, string pseudoElement) => {
-            labelOutput = $"{TEST_EVENT_TRANSITION_START}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            output = $"{TEST_EVENT_TRANSITION_START}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
             StateHasChanged();
         };
     }
@@ -1104,7 +1104,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_TRANSITION_END = "document-inprocess-transition-end-event";
     private void RegisterOnTransitionEnd() {
         Document.OnTransitionEnd += (string propertyName, double elapsedTime, string pseudoElement) => {
-            labelOutput = $"{TEST_EVENT_TRANSITION_END}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            output = $"{TEST_EVENT_TRANSITION_END}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
             StateHasChanged();
         };
     }
@@ -1112,7 +1112,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_TRANSITION_RUN = "document-inprocess-transition-run-event";
     private void RegisterOnTransitionRun() {
         Document.OnTransitionRun += (string propertyName, double elapsedTime, string pseudoElement) => {
-            labelOutput = $"{TEST_EVENT_TRANSITION_RUN}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            output = $"{TEST_EVENT_TRANSITION_RUN}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
             StateHasChanged();
         };
     }
@@ -1120,7 +1120,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_TRANSITION_CANCEL = "document-inprocess-transition-cancel-event";
     private void RegisterOnTransitionCancel() {
         Document.OnTransitionCancel += (string propertyName, double elapsedTime, string pseudoElement) => {
-            labelOutput = $"{TEST_EVENT_TRANSITION_CANCEL}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            output = $"{TEST_EVENT_TRANSITION_CANCEL}; propertyName={propertyName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
             StateHasChanged();
         };
     }
@@ -1129,7 +1129,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_ANIMATION_START = "document-inprocess-animation-start-event";
     private void RegisterOnAnimationStart() {
         Document.OnAnimationStart += (string animationName, double elapsedTime, string pseudoElement) => {
-            labelOutput = $"{TEST_EVENT_ANIMATION_START}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            output = $"{TEST_EVENT_ANIMATION_START}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
             StateHasChanged();
         };
     }
@@ -1137,7 +1137,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_ANIMATION_END = "document-inprocess-animation-end-event";
     private void RegisterOnAnimationEnd() {
         Document.OnAnimationEnd += (string animationName, double elapsedTime, string pseudoElement) => {
-            labelOutput = $"{TEST_EVENT_ANIMATION_END}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            output = $"{TEST_EVENT_ANIMATION_END}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
             StateHasChanged();
         };
     }
@@ -1145,7 +1145,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_ANIMATION_ITERATION = "document-inprocess-animation-iteration-event";
     private void RegisterOnAnimationIteration() {
         Document.OnAnimationIteration += (string animationName, double elapsedTime, string pseudoElement) => {
-            labelOutput = $"{TEST_EVENT_ANIMATION_ITERATION}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            output = $"{TEST_EVENT_ANIMATION_ITERATION}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
             StateHasChanged();
         };
     }
@@ -1153,7 +1153,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_ANIMATION_CANCEL = "document-inprocess-animation-cancel-event";
     private void RegisterOnAnimationCancel() {
         Document.OnAnimationCancel += (string animationName, double elapsedTime, string pseudoElement) => {
-            labelOutput = $"{TEST_EVENT_ANIMATION_CANCEL}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
+            output = $"{TEST_EVENT_ANIMATION_CANCEL}; animationName={animationName}, elapsedTime={elapsedTime}, pseudoElement={pseudoElement}";
             StateHasChanged();
         };
     }
@@ -1164,7 +1164,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_CAN_PLAY = "document-inprocess-can-play-event";
     private void RegisterOnCanPlay() {
         Document.OnCanPlay += () => {
-            labelOutput = TEST_EVENT_CAN_PLAY;
+            output = TEST_EVENT_CAN_PLAY;
             StateHasChanged();
         };
     }
@@ -1172,7 +1172,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_CAN_PLAY_THROUGH = "document-inprocess-can-play-through-event";
     private void RegisterOnCanPlayThrough() {
         Document.OnCanPlayThrough += () => {
-            labelOutput = TEST_EVENT_CAN_PLAY_THROUGH;
+            output = TEST_EVENT_CAN_PLAY_THROUGH;
             StateHasChanged();
         };
     }
@@ -1180,7 +1180,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_PLAYING = "document-inprocess-playing-event";
     private void RegisterOnPlaying() {
         Document.OnPlaying += () => {
-            labelOutput = TEST_EVENT_PLAYING;
+            output = TEST_EVENT_PLAYING;
             StateHasChanged();
         };
     }
@@ -1190,7 +1190,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_LOAD_START = "document-inprocess-load-start-event";
     private void RegisterOnLoadStart() {
         Document.OnLoadStart += () => {
-            labelOutput = TEST_EVENT_LOAD_START;
+            output = TEST_EVENT_LOAD_START;
             StateHasChanged();
         };
     }
@@ -1198,7 +1198,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_PROGRESS = "document-inprocess-progress-event";
     private void RegisterOnProgress() {
         Document.OnProgress += () => {
-            labelOutput = TEST_EVENT_PROGRESS;
+            output = TEST_EVENT_PROGRESS;
             StateHasChanged();
         };
     }
@@ -1206,7 +1206,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_LOADED_DATA = "document-inprocess-loaded-data-event";
     private void RegisterOnLoadedData() {
         Document.OnLoadedData += () => {
-            labelOutput = TEST_EVENT_LOADED_DATA;
+            output = TEST_EVENT_LOADED_DATA;
             StateHasChanged();
         };
     }
@@ -1214,7 +1214,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_LOADED_METADATA = "document-inprocess-loaded-metadata-event";
     private void RegisterOnLoadedMetadata() {
         Document.OnLoadedMetadata += () => {
-            labelOutput = TEST_EVENT_LOADED_METADATA;
+            output = TEST_EVENT_LOADED_METADATA;
             StateHasChanged();
         };
     }
@@ -1222,7 +1222,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_STALLED = "document-inprocess-stalled-event";
     private void RegisterOnStalled() {
         Document.OnStalled += () => {
-            labelOutput = TEST_EVENT_STALLED;
+            output = TEST_EVENT_STALLED;
             StateHasChanged();
         };
     }
@@ -1230,7 +1230,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_SUSPEND = "document-inprocess-suspend-event";
     private void RegisterOnSuspend() {
         Document.OnSuspend += () => {
-            labelOutput = TEST_EVENT_SUSPEND;
+            output = TEST_EVENT_SUSPEND;
             StateHasChanged();
         };
     }
@@ -1238,7 +1238,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_WAITING = "document-inprocess-waiting-event";
     private void RegisterOnWaiting() {
         Document.OnWaiting += () => {
-            labelOutput = TEST_EVENT_WAITING;
+            output = TEST_EVENT_WAITING;
             StateHasChanged();
         };
     }
@@ -1246,7 +1246,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_ABORT = "document-inprocess-abort-event";
     private void RegisterOnAbort() {
         Document.OnAbort += () => {
-            labelOutput = TEST_EVENT_ABORT;
+            output = TEST_EVENT_ABORT;
             StateHasChanged();
         };
     }
@@ -1254,7 +1254,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_EMPTIED = "document-inprocess-emptied-event";
     private void RegisterOnEmptied() {
         Document.OnEmptied += () => {
-            labelOutput = TEST_EVENT_EMPTIED;
+            output = TEST_EVENT_EMPTIED;
             StateHasChanged();
         };
     }
@@ -1264,7 +1264,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_PLAY = "document-inprocess-play-event";
     private void RegisterOnPlay() {
         Document.OnPlay += () => {
-            labelOutput = TEST_EVENT_PLAY;
+            output = TEST_EVENT_PLAY;
             StateHasChanged();
         };
     }
@@ -1272,7 +1272,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_PAUSE = "document-inprocess-pause-event";
     private void RegisterOnPause() {
         Document.OnPause += () => {
-            labelOutput = TEST_EVENT_PAUSE;
+            output = TEST_EVENT_PAUSE;
             StateHasChanged();
         };
     }
@@ -1280,7 +1280,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_ENDED = "document-inprocess-ended-event";
     private void RegisterOnEnded() {
         Document.OnEnded += () => {
-            labelOutput = TEST_EVENT_ENDED;
+            output = TEST_EVENT_ENDED;
             StateHasChanged();
         };
     }
@@ -1288,7 +1288,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_SEEKING = "document-inprocess-seeking-event";
     private void RegisterOnSeeking() {
         Document.OnSeeking += () => {
-            labelOutput = TEST_EVENT_SEEKING;
+            output = TEST_EVENT_SEEKING;
             StateHasChanged();
         };
     }
@@ -1296,7 +1296,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_SEEKED = "document-inprocess-seeked-event";
     private void RegisterOnSeeked() {
         Document.OnSeeked += () => {
-            labelOutput = TEST_EVENT_SEEKED;
+            output = TEST_EVENT_SEEKED;
             StateHasChanged();
         };
     }
@@ -1304,7 +1304,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_TIME_UPDATE = "document-inprocess-time-update-event";
     private void RegisterOnTimeUpdate() {
         Document.OnTimeUpdate += () => {
-            labelOutput = TEST_EVENT_TIME_UPDATE;
+            output = TEST_EVENT_TIME_UPDATE;
             StateHasChanged();
         };
     }
@@ -1314,7 +1314,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_VOLUME_CHANGE = "document-inprocess-volume-change-event";
     private void RegisterOnVolumeChange() {
         Document.OnVolumeChange += () => {
-            labelOutput = TEST_EVENT_VOLUME_CHANGE;
+            output = TEST_EVENT_VOLUME_CHANGE;
             StateHasChanged();
         };
     }
@@ -1322,7 +1322,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_RATE_CHANGE = "document-inprocess-rate-change-event";
     private void RegisterOnRateChange() {
         Document.OnRateChange += () => {
-            labelOutput = TEST_EVENT_RATE_CHANGE;
+            output = TEST_EVENT_RATE_CHANGE;
             StateHasChanged();
         };
     }
@@ -1330,7 +1330,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_DURATION_CHANGE = "document-inprocess-duration-change-event";
     private void RegisterOnDurationChange() {
         Document.OnDurationChange += () => {
-            labelOutput = TEST_EVENT_DURATION_CHANGE;
+            output = TEST_EVENT_DURATION_CHANGE;
             StateHasChanged();
         };
     }
@@ -1340,7 +1340,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_RESIZE = "document-inprocess-resize-event";
     private void RegisterOnResize() {
         Document.OnResize += () => {
-            labelOutput = TEST_EVENT_RESIZE;
+            output = TEST_EVENT_RESIZE;
             StateHasChanged();
         };
     }
@@ -1351,7 +1351,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_CLOSE = "document-inprocess-close-event";
     private void RegisterOnClose() {
         Document.OnClose += () => {
-            labelOutput = TEST_EVENT_CLOSE;
+            output = TEST_EVENT_CLOSE;
             StateHasChanged();
         };
     }
@@ -1359,7 +1359,7 @@ public sealed partial class DocumentInProcessGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_CANCEL = "document-inprocess-cancel-event";
     private void RegisterOnCancel() {
         Document.OnCancel += () => {
-            labelOutput = TEST_EVENT_CANCEL;
+            output = TEST_EVENT_CANCEL;
             StateHasChanged();
         };
     }

@@ -12,37 +12,37 @@ public sealed partial class HistoryGroup : ComponentBase {
     public required IHistory History { private get; init; }
 
 
-    public const string LABEL_OUTPUT = "history-output";
-    private string labelOutput = string.Empty;
+    public const string OUTPUT = "history-output";
+    private string output = string.Empty;
 
 
     public const string BUTTON_GET_LENGTH_PROPERTY = "history-get-length-property";
     private async Task GetLength_Property() {
         int length = await History.Length;
-        labelOutput = length.ToString();
+        output = length.ToString();
     }
 
     public const string BUTTON_GET_LENGTH_METHOD = "history-get-length-method";
     private async Task GetLength_Method() {
         int length = await History.GetLength(CancellationToken.None);
-        labelOutput = length.ToString();
+        output = length.ToString();
     }
 
 
     public const string BUTTON_GET_SCROLL_RESTORATION_PROPERTY = "history-get-scroll-restoration-property";
     private async Task GetScrollRestoration_Property() {
-        labelOutput = await History.ScrollRestoration;
+        output = await History.ScrollRestoration;
     }
 
     public const string BUTTON_GET_SCROLL_RESTORATION_METHOD = "history-get-scroll-restoration-method";
     private async Task GetScrollRestoration_Method() {
-        labelOutput = await History.GetScrollRestoration(CancellationToken.None);
+        output = await History.GetScrollRestoration(CancellationToken.None);
     }
 
     public const string BUTTON_SET_SCROLL_RESTORATION = "history-set-scroll-restoration";
     private async Task SetScrollRestoration() {
         await History.SetScrollRestoration("manual");
-        labelOutput = await History.ScrollRestoration;
+        output = await History.ScrollRestoration;
         await History.SetScrollRestoration("auto");
     }
 
@@ -50,13 +50,13 @@ public sealed partial class HistoryGroup : ComponentBase {
     public const string BUTTON_GET_STATE_PROPERTY = "history-get-state-property";
     private async Task GetState_Property() {
         object? state = await History.State;
-        labelOutput = state?.ToString() ?? "(null)";
+        output = state?.ToString() ?? "(null)";
     }
 
     public const string BUTTON_GET_STATE_METHOD = "history-get-state-method";
     private async Task GetState_Method() {
         object? state = await History.GetState(CancellationToken.None);
-        labelOutput = state?.ToString() ?? "(null)";
+        output = state?.ToString() ?? "(null)";
     }
 
 
@@ -81,7 +81,7 @@ public sealed partial class HistoryGroup : ComponentBase {
         await History.PushState(null, "", "/test");
 
         int length = await History.Length;
-        labelOutput = length.ToString();
+        output = length.ToString();
     }
 
     public const string BUTTON_REPLACE_STATE = "history-replace-state";
@@ -89,7 +89,7 @@ public sealed partial class HistoryGroup : ComponentBase {
         await History.ReplaceState(null, "", "/test");
 
         int length = await History.Length;
-        labelOutput = length.ToString();
+        output = length.ToString();
     }
 
 
@@ -97,7 +97,7 @@ public sealed partial class HistoryGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_PAGE_REVEAL = "history-page-reveal-event";
     private void RegisterOnPageReveal() {
         History.OnPageReveal += () => {
-            labelOutput = TEST_EVENT_PAGE_REVEAL;
+            output = TEST_EVENT_PAGE_REVEAL;
             StateHasChanged();
         };
     }
@@ -105,7 +105,7 @@ public sealed partial class HistoryGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_PAGE_SWAP = "history-page-swap-event";
     private void RegisterOnPageSwap() {
         History.OnPageSwap += () => {
-            labelOutput = TEST_EVENT_PAGE_SWAP;
+            output = TEST_EVENT_PAGE_SWAP;
             StateHasChanged();
         };
     }
@@ -113,7 +113,7 @@ public sealed partial class HistoryGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_PAGE_SHOW = "history-page-show-event";
     private void RegisterOnPageShow() {
         History.OnPageShow += (bool persisted) => {
-            labelOutput = persisted.ToString();
+            output = persisted.ToString();
             StateHasChanged();
         };
     }
@@ -121,7 +121,7 @@ public sealed partial class HistoryGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_PAGE_HIDE = "history-page-hide-event";
     private void RegisterOnPageHide() {
         History.OnPageHide += (bool persisted) => {
-            labelOutput = persisted.ToString();
+            output = persisted.ToString();
             StateHasChanged();
         };
     }
@@ -129,7 +129,7 @@ public sealed partial class HistoryGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_POP_STATE = "history-pop-state-event";
     private void RegisterOnPopState() {
         History.OnPopState += (JsonElement? data) => {
-            labelOutput = data?.ToString() ?? "(null)";
+            output = data?.ToString() ?? "(null)";
             StateHasChanged();
         };
     }
@@ -137,7 +137,7 @@ public sealed partial class HistoryGroup : ComponentBase {
     public const string BUTTON_REGISTER_ON_HASH_CHANGE = "history-hash-change-event";
     private void RegisterOnHashChange() {
         History.OnHashChange += (string newURL, string oldURL) => {
-            labelOutput = $"new = {newURL}, old = {oldURL}";
+            output = $"new = {newURL}, old = {oldURL}";
             StateHasChanged();
         };
     }

@@ -556,12 +556,12 @@
         <button data-testid="@BUTTON_REGISTER_ON_FULLSCREEN_CHANGE" @onclick="RegisterOnFullscreenChange">RegisterOnFullscreenChange</button>
         <button data-testid="@BUTTON_REGISTER_ON_FULLSCREEN_ERROR" @onclick="RegisterOnFullscreenError">RegisterOnFullscreenError</button>
     </div>
-    <label data-testid="@LABEL_OUTPUT">@labelOutput</label>
+    <span data-testid="@OUTPUT">@output</span>
     <div data-testid="@HTML_ELEMENT_CONTAINER" class="html-element-container">
         <div data-testid="@HTML_ELEMENT" class="html-element" @ref="htmlElement" @onpointerdown="SetPointerCapture" @onpointermove="HasPointerCapture" @onpointerup="ReleasePointerCapture">
             test <b>bold</b> <i>italic</i> <u>underlined</u>
         </div>
     </div>
     <p data-testid="@POPOVER_ELEMENT" @ref="popoverElement" class="html-element-popover" popover>Popover</p>
-    <label data-testid="@HIDDEN_ELEMENT" hidden @ref="hiddenElement">hidden</label>
+    <span data-testid="@HIDDEN_ELEMENT" hidden @ref="hiddenElement">hidden</span>
 </div>

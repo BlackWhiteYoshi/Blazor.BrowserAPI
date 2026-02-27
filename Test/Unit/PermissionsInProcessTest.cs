@@ -8,7 +8,7 @@ public sealed class PermissionsInProcessTest(PlayWrightFixture playWrightFixture
     public async Task Query() {
         await ExecuteTest(PermissionsInProcessGroup.BUTTON_QUERY);
 
-        string? result = await Page.GetByTestId(PermissionsInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(PermissionsInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -17,7 +17,7 @@ public sealed class PermissionsInProcessTest(PlayWrightFixture playWrightFixture
     public async Task GetName() {
         await ExecuteTest(PermissionsInProcessGroup.BUTTON_GET_NAME);
 
-        string? result = await Page.GetByTestId(PermissionsInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(PermissionsInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(PermissionsInProcessGroup.TEST_PERMISSION_NAME);
     }
 
@@ -25,7 +25,7 @@ public sealed class PermissionsInProcessTest(PlayWrightFixture playWrightFixture
     public async Task GetState() {
         await ExecuteTest(PermissionsInProcessGroup.BUTTON_GET_STATE);
 
-        string? result = await Page.GetByTestId(PermissionsInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(PermissionsInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("prompt");
     }
 
@@ -36,7 +36,7 @@ public sealed class PermissionsInProcessTest(PlayWrightFixture playWrightFixture
         await BrowserContext.GrantPermissionsAsync([PermissionsInProcessGroup.TEST_PERMISSION_NAME]);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(PermissionsInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(PermissionsInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(PermissionsInProcessGroup.TEST_ON_CHANGE_EVENT);
     }
 }

@@ -7,8 +7,8 @@ public sealed partial class GeolocationInProcessGroup : ComponentBase {
     public required IGeolocationInProcess Geolocation { private get; init; }
 
 
-    public const string LABEL_OUTPUT = "geolocation-inprocess-output";
-    private string labelOutput = string.Empty;
+    public const string OUTPUT = "geolocation-inprocess-output";
+    private string output = string.Empty;
 
 
     private readonly List<GeolocationWatchHandle> watchRegistrations = [];
@@ -16,7 +16,7 @@ public sealed partial class GeolocationInProcessGroup : ComponentBase {
     public const string BUTTON_GET_CURRENT_POSITION = "geolocation-inprocess-get-current-position";
     private void GetCurrentPosition() {
         Geolocation.GetCurrentPosition((GeolocationCoordinates geolocationCoordinates) => {
-            labelOutput = geolocationCoordinates.ToString();
+            output = geolocationCoordinates.ToString();
             StateHasChanged();
         });
     }
@@ -24,17 +24,17 @@ public sealed partial class GeolocationInProcessGroup : ComponentBase {
     public const string BUTTON_GET_CURRENT_POSITION_ASYNC = "geolocation-inprocess-get-current-position-async";
     private async Task GetCurrentPositionAsync() {
         GeolocationCoordinates geolocationCoordinates = await Geolocation.GetCurrentPositionAsync();
-        labelOutput = geolocationCoordinates.ToString();
+        output = geolocationCoordinates.ToString();
     }
 
     public const string BUTTON_WATCH_POSITION = "geolocation-inprocess-watch-position";
     private void WatchPosition() {
         GeolocationWatchHandle watchId = Geolocation.WatchPosition((GeolocationCoordinates geolocationCoordinates) => {
-            labelOutput = geolocationCoordinates.ToString();
+            output = geolocationCoordinates.ToString();
             StateHasChanged();
         });
         watchRegistrations.Add(watchId);
-        labelOutput = $"{watchId.Id}, {watchRegistrations.Count}";
+        output = $"{watchId.Id}, {watchRegistrations.Count}";
     }
 
     public const string BUTTON_CLEAR_WATCH = "geolocation-inprocess-clear-watch";
@@ -42,6 +42,6 @@ public sealed partial class GeolocationInProcessGroup : ComponentBase {
         GeolocationWatchHandle watchId = watchRegistrations[^1];
         Geolocation.ClearWatch(watchId);
         watchRegistrations.RemoveAt(watchRegistrations.Count - 1);
-        labelOutput = $"watchId: {watchId.Id}, count: {watchRegistrations.Count}";
+        output = $"watchId: {watchId.Id}, count: {watchRegistrations.Count}";
     }
 }

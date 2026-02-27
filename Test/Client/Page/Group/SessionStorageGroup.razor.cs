@@ -14,30 +14,30 @@ public partial class SessionStorageGroup : ComponentBase {
     public required ISessionStorage SessionStorage { private get; init; }
 
 
-    public const string LABEL_OUTPUT = "session-storage-output";
-    private string labelOutput = string.Empty;
+    public const string OUTPUT = "session-storage-output";
+    private string output = string.Empty;
 
 
     public const string BUTTON_GET_LENGTH_PROPERTY = "session-storage-get-length-property";
     private async Task GetLength_Property() {
         int length = await SessionStorage.Length;
-        labelOutput = length.ToString();
+        output = length.ToString();
     }
 
     public const string BUTTON_GET_LENGTH_METHOD = "session-storage-get-length-method";
     private async Task GetLength_Method() {
         int length = await SessionStorage.GetLength(CancellationToken.None);
-        labelOutput = length.ToString();
+        output = length.ToString();
     }
 
     public const string BUTTON_KEY = "session-storage-key";
     private async Task Key() {
-        labelOutput = await SessionStorage.Key(TEST_KEY_INDEX) ?? $"key {TEST_KEY_INDEX} is not present";
+        output = await SessionStorage.Key(TEST_KEY_INDEX) ?? $"key {TEST_KEY_INDEX} is not present";
     }
 
     public const string BUTTON_GET_ITEM = "session-storage-get-item";
     private async Task GetItem() {
-        labelOutput = await SessionStorage.GetItem(TEST_GET_ITEM) ?? $"key '{TEST_GET_ITEM}' is not present";
+        output = await SessionStorage.GetItem(TEST_GET_ITEM) ?? $"key '{TEST_GET_ITEM}' is not present";
     }
 
     public const string BUTTON_SET_ITEM = "session-storage-set-item";

@@ -11,14 +11,14 @@ public sealed partial class PermissionsGroup : ComponentBase {
     public required IPermissions Permissions { private get; init; }
 
 
-    public const string LABEL_OUTPUT = "permissions-output";
-    private string labelOutput = string.Empty;
+    public const string OUTPUT = "permissions-output";
+    private string output = string.Empty;
 
 
     public const string BUTTON_QUERY = "permissions-query";
     private async Task Query() {
         await using IPermissionStatus permissionStatus = await Permissions.Query(TEST_PERMISSION_NAME);
-        labelOutput = (permissionStatus is not null).ToString();
+        output = (permissionStatus is not null).ToString();
     }
 
 
@@ -26,28 +26,28 @@ public sealed partial class PermissionsGroup : ComponentBase {
     private async Task GetName_Property() {
         await using IPermissionStatus permissionStatus = await Permissions.Query(TEST_PERMISSION_NAME);
         string name = await permissionStatus.Name;
-        labelOutput = name;
+        output = name;
     }
 
     public const string BUTTON_GET_NAME_METHOD = "permissions-get-name-method";
     private async Task GetName_Method() {
         await using IPermissionStatus permissionStatus = await Permissions.Query(TEST_PERMISSION_NAME);
         string name = await permissionStatus.GetName(CancellationToken.None);
-        labelOutput = name;
+        output = name;
     }
 
     public const string BUTTON_GET_STATE_PROPERTY = "permissions-get-state-property";
     private async Task GetState_Property() {
         await using IPermissionStatus permissionStatus = await Permissions.Query(TEST_PERMISSION_NAME);
         string state = await permissionStatus.State;
-        labelOutput = state;
+        output = state;
     }
 
     public const string BUTTON_GET_STATE_METHOD = "permissions-get-state-method";
     private async Task GetState_Method() {
         await using IPermissionStatus permissionStatus = await Permissions.Query(TEST_PERMISSION_NAME);
         string state = await permissionStatus.GetState(CancellationToken.None);
-        labelOutput = state;
+        output = state;
     }
 
 
@@ -57,7 +57,7 @@ public sealed partial class PermissionsGroup : ComponentBase {
         permissionStatus.OnChange += OnChange;
 
         void OnChange() {
-            labelOutput = TEST_ON_CHANGE_EVENT;
+            output = TEST_ON_CHANGE_EVENT;
             StateHasChanged();
             permissionStatus.OnChange -= OnChange;
             _ = permissionStatus.DisposeAsync().Preserve();

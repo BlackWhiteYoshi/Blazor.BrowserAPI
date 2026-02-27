@@ -18,7 +18,7 @@ public sealed class ClipboardTest(PlayWrightFixture playWrightFixture) : PlayWri
 
         await ExecuteTest(ClipboardGroup.BUTTON_READ);
 
-        string? result = await Page.GetByTestId(ClipboardGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ClipboardGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(TEST_STR);
     }
 

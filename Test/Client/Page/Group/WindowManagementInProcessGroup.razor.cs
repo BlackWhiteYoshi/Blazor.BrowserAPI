@@ -22,8 +22,8 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
     public required IWindowManagementInProcess WindowManagement { private get; init; }
 
 
-    public const string LABEL_OUTPUT = "window-management-inprocess-output";
-    private string labelOutput = string.Empty;
+    public const string OUTPUT = "window-management-inprocess-output";
+    private string output = string.Empty;
 
 
     #region Screen
@@ -31,49 +31,49 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
     public const string BUTTON_SCREEN_GET_WIDTH = "window-management-screen-inprocess-get-width";
     private void Screen_GetWidth() {
         int width = WindowManagement.Screen.Width;
-        labelOutput = width.ToString();
+        output = width.ToString();
     }
 
 
     public const string BUTTON_SCREEN_GET_HEIGHT = "window-management-screen-inprocess-get-height";
     private void Screen_GetHeight() {
         int height = WindowManagement.Screen.Height;
-        labelOutput = height.ToString();
+        output = height.ToString();
     }
 
 
     public const string BUTTON_SCREEN_GET_AVAIL_WIDTH = "window-management-screen-inprocess-get-avail-width";
     private void Screen_GetAvailWidth() {
         int availWidth = WindowManagement.Screen.AvailWidth;
-        labelOutput = availWidth.ToString();
+        output = availWidth.ToString();
     }
 
 
     public const string BUTTON_SCREEN_GET_AVAIL_HEIGHT = "window-management-screen-inprocess-get-avail-height";
     private void Screen_GetAvailHeight() {
         int availHeight = WindowManagement.Screen.AvailHeight;
-        labelOutput = availHeight.ToString();
+        output = availHeight.ToString();
     }
 
 
     public const string BUTTON_SCREEN_GET_COLOR_DEPTH = "window-management-screen-inprocess-get-color-depth";
     private void Screen_GetColorDepth() {
         int colorDepth = WindowManagement.Screen.ColorDepth;
-        labelOutput = colorDepth.ToString();
+        output = colorDepth.ToString();
     }
 
 
     public const string BUTTON_SCREEN_GET_PIXEL_DEPTH = "window-management-screen-inprocess-get-pixel-depth";
     private void Screen_GetPixelDepth() {
         int pixelDepth = WindowManagement.Screen.PixelDepth;
-        labelOutput = pixelDepth.ToString();
+        output = pixelDepth.ToString();
     }
 
 
     public const string BUTTON_SCREEN_GET_IS_EXTENDED = "window-management-screen-inprocess-get-is-extended";
     private void Screen_GetIsExtended() {
         bool isExtended = WindowManagement.Screen.IsExtended;
-        labelOutput = isExtended.ToString();
+        output = isExtended.ToString();
     }
 
 
@@ -82,14 +82,14 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
     public const string BUTTON_SCREEN_GET_ORIENTATION_TYPE = "window-management-screen-inprocess-get-orientation-type";
     private void Screen_GetOrientationType() {
         string orientationType = WindowManagement.Screen.OrientationType;
-        labelOutput = orientationType;
+        output = orientationType;
     }
 
 
     public const string BUTTON_SCREEN_GET_ORIENTATION_ANGLE = "window-management-screen-inprocess-get-orientation-angle";
     private void Screen_GetOrientationAngle() {
         double orientationAngle = WindowManagement.Screen.OrientationAngle;
-        labelOutput = orientationAngle.ToString();
+        output = orientationAngle.ToString();
     }
 
 
@@ -97,11 +97,11 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
     private async Task Screen_LockOrientation() {
         try {
             await WindowManagement.Screen.LockOrientation("any");
-            labelOutput = TEST_SCREEN_LOCK_ORIENTATION_RESULT;
+            output = TEST_SCREEN_LOCK_ORIENTATION_RESULT;
         }
         catch (Microsoft.JSInterop.JSException exception) {
             if (exception.Message.StartsWith("screen.orientation.lock() is not available on this device"))
-                labelOutput = TEST_SCREEN_LOCK_ORIENTATION_NOT_SUPPOERTED;
+                output = TEST_SCREEN_LOCK_ORIENTATION_NOT_SUPPOERTED;
             else
                 throw;
         }
@@ -110,7 +110,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
     public const string BUTTON_SCREEN_UNLOCK_ORIENTATION = "window-management-screen-inprocess-unlock-orientation";
     private void Screen_UnlockOrientation() {
         WindowManagement.Screen.UnlockOrientation();
-        labelOutput = TEST_SCREEN_UNLOCK_ORIENTATION_RESULT;
+        output = TEST_SCREEN_UNLOCK_ORIENTATION_RESULT;
     }
 
 
@@ -119,7 +119,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
     public const string BUTTON_SCREEN_REGISTER_ON_CHANGE = "window-management-screen-inprocess-change-event";
     private void Screen_RegisterOnChange() {
         WindowManagement.Screen.OnChange += () => {
-            labelOutput = TEST_SCREEN_CHANGE_EVENT;
+            output = TEST_SCREEN_CHANGE_EVENT;
             StateHasChanged();
         };
     }
@@ -127,7 +127,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
     public const string BUTTON_SCREEN_REGISTER_ON_ORIENTATION_CHANGE = "window-management-screen-inprocess-orientation-change-event";
     private void Screen_RegisterOnOrientationChange() {
         WindowManagement.Screen.OnOrientationChange += () => {
-            labelOutput = TEST_SCREEN_ORIENTATION_CHANGE_EVENT;
+            output = TEST_SCREEN_ORIENTATION_CHANGE_EVENT;
             StateHasChanged();
         };
     }
@@ -140,7 +140,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
     public const string BUTTON_GET_SCREEN_DETAILS = "window-management-inprocess-get-screen-details";
     private async Task GetScreenDetails() {
         using IScreenDetailsInProcess screenDetails = await WindowManagement.GetScreenDetails();
-        labelOutput = (screenDetails is not null).ToString();
+        output = (screenDetails is not null).ToString();
     }
 
 
@@ -149,7 +149,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailsInProcess screenDetails = await WindowManagement.GetScreenDetails();
         using IScreenDetailedInProcess screenDetailed = screenDetails.CurrentScreen;
 
-        labelOutput = (screenDetailed is not null).ToString();
+        output = (screenDetailed is not null).ToString();
     }
 
     public const string BUTTON_GET_SCREENS = "window-management-inprocess-get-screens";
@@ -157,7 +157,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailsInProcess screenDetails = await WindowManagement.GetScreenDetails();
         IScreenDetailedInProcess[] screens = screenDetails.Screens;
 
-        labelOutput = screens.Length.ToString();
+        output = screens.Length.ToString();
         screens.Dispose();
     }
 
@@ -168,7 +168,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         screenDetails.OnCurrentScreenChange += OnCurrentScreenChange;
 
         void OnCurrentScreenChange() {
-            labelOutput = TEST_EVENT_ON_CURRENT_SCREEN_CHANGE;
+            output = TEST_EVENT_ON_CURRENT_SCREEN_CHANGE;
             StateHasChanged();
             screenDetails.OnCurrentScreenChange -= OnCurrentScreenChange;
             screenDetails.Dispose();
@@ -181,7 +181,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         screenDetails.OnScreensChange += OnScreensChange;
 
         void OnScreensChange() {
-            labelOutput = TEST_EVENT_ON_SCREENS_CHANGE;
+            output = TEST_EVENT_ON_SCREENS_CHANGE;
             StateHasChanged();
             screenDetails.OnCurrentScreenChange -= OnScreensChange;
             screenDetails.Dispose();
@@ -197,7 +197,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailedInProcess screenDetailed = screenDetails.CurrentScreen;
 
         int left = screenDetailed.Left;
-        labelOutput = left.ToString();
+        output = left.ToString();
     }
 
     public const string BUTTON_REGISTER_GET_TOP = "window-management-inprocess-get-top";
@@ -206,7 +206,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailedInProcess screenDetailed = screenDetails.CurrentScreen;
 
         int top = screenDetailed.Top;
-        labelOutput = top.ToString();
+        output = top.ToString();
     }
 
     public const string BUTTON_REGISTER_GET_AVAIL_LEFT = "window-management-inprocess-get-avail-left";
@@ -215,7 +215,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailedInProcess screenDetailed = screenDetails.CurrentScreen;
 
         int availLeft = screenDetailed.AvailLeft;
-        labelOutput = availLeft.ToString();
+        output = availLeft.ToString();
     }
 
     public const string BUTTON_REGISTER_GET_AVAIL_TOP = "window-management-inprocess-get-avail-top";
@@ -224,7 +224,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailedInProcess screenDetailed = screenDetails.CurrentScreen;
 
         int availTop = screenDetailed.AvailTop;
-        labelOutput = availTop.ToString();
+        output = availTop.ToString();
     }
 
     public const string BUTTON_REGISTER_GET_LABEL = "window-management-inprocess-get-label";
@@ -233,7 +233,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailedInProcess screenDetailed = screenDetails.CurrentScreen;
 
         string label = screenDetailed.Label;
-        labelOutput = label != string.Empty ? label : "(empty)";
+        output = label != string.Empty ? label : "(empty)";
     }
 
     public const string BUTTON_REGISTER_GET_DEVICE_PIXEL_RATIO = "window-management-inprocess-get-device-pixel-ratio";
@@ -242,7 +242,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailedInProcess screenDetailed = screenDetails.CurrentScreen;
 
         double devicePixelRatio = screenDetailed.DevicePixelRatio;
-        labelOutput = devicePixelRatio.ToString();
+        output = devicePixelRatio.ToString();
     }
 
     public const string BUTTON_REGISTER_GET_IS_PRIMARY = "window-management-inprocess-get-is-primary";
@@ -251,7 +251,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailedInProcess screenDetailed = screenDetails.CurrentScreen;
 
         bool isPrimary = screenDetailed.IsPrimary;
-        labelOutput = isPrimary.ToString();
+        output = isPrimary.ToString();
     }
 
     public const string BUTTON_REGISTER_GET_IS_INTERNAL = "window-management-inprocess-get-is-internal";
@@ -260,7 +260,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailedInProcess screenDetailed = screenDetails.CurrentScreen;
 
         bool isInternal = screenDetailed.IsInternal;
-        labelOutput = isInternal.ToString();
+        output = isInternal.ToString();
     }
 
 
@@ -270,7 +270,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailedInProcess screenDetailed = screenDetails.CurrentScreen;
 
         int width = screenDetailed.Width;
-        labelOutput = width.ToString();
+        output = width.ToString();
     }
 
     public const string BUTTON_GET_HEIGHT = "window-management-inprocess-get-height";
@@ -279,7 +279,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailedInProcess screenDetailed = screenDetails.CurrentScreen;
 
         int height = screenDetailed.Height;
-        labelOutput = height.ToString();
+        output = height.ToString();
     }
 
     public const string BUTTON_GET_AVAIL_WIDTH = "window-management-inprocess-get-avail-width";
@@ -288,7 +288,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailedInProcess screenDetailed = screenDetails.CurrentScreen;
 
         int availWidth = screenDetailed.AvailWidth;
-        labelOutput = availWidth.ToString();
+        output = availWidth.ToString();
     }
 
     public const string BUTTON_GET_AVAIL_HEIGHT = "window-management-inprocess-get-avail-height";
@@ -297,7 +297,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailedInProcess screenDetailed = screenDetails.CurrentScreen;
 
         int availHeight = screenDetailed.AvailHeight;
-        labelOutput = availHeight.ToString();
+        output = availHeight.ToString();
     }
 
     public const string BUTTON_GET_COLOR_DEPTH = "window-management-inprocess-get-color-depth";
@@ -306,7 +306,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailedInProcess screenDetailed = screenDetails.CurrentScreen;
 
         int colorDepth = screenDetailed.ColorDepth;
-        labelOutput = colorDepth.ToString();
+        output = colorDepth.ToString();
     }
 
     public const string BUTTON_GET_PIXEL_DEPTH = "window-management-inprocess-get-pixel-depth";
@@ -315,7 +315,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailedInProcess screenDetailed = screenDetails.CurrentScreen;
 
         int pixelDepth = screenDetailed.PixelDepth;
-        labelOutput = pixelDepth.ToString();
+        output = pixelDepth.ToString();
     }
 
     public const string BUTTON_GET_IS_EXTENDED = "window-management-inprocess-get-is-extended";
@@ -324,7 +324,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailedInProcess screenDetailed = screenDetails.CurrentScreen;
 
         bool isExtended = screenDetailed.IsExtended;
-        labelOutput = isExtended.ToString();
+        output = isExtended.ToString();
     }
 
 
@@ -334,7 +334,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailedInProcess screenDetailed = screenDetails.CurrentScreen;
 
         string orientationType = screenDetailed.OrientationType;
-        labelOutput = orientationType;
+        output = orientationType;
     }
 
     public const string BUTTON_GET_ORIENTATION_ANGLE = "window-management-inprocess-get-orientation-angle";
@@ -343,7 +343,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailedInProcess screenDetailed = screenDetails.CurrentScreen;
 
         double angle = screenDetailed.OrientationAngle;
-        labelOutput = angle.ToString();
+        output = angle.ToString();
     }
 
 
@@ -354,11 +354,11 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
 
         try {
             await screenDetailed.LockOrientation("any");
-            labelOutput = TEST_LOCK_ORIENTATION_RESULT;
+            output = TEST_LOCK_ORIENTATION_RESULT;
         }
         catch (Microsoft.JSInterop.JSException exception) {
             if (exception.Message.Contains("lock() is not available on this device"))
-                labelOutput = TEST_LOCK_ORIENTATION_NOT_SUPPOERTED;
+                output = TEST_LOCK_ORIENTATION_NOT_SUPPOERTED;
             else
                 throw;
         }
@@ -370,7 +370,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         using IScreenDetailedInProcess screenDetailed = screenDetails.CurrentScreen;
 
         screenDetailed.UnlockOrientation();
-        labelOutput = TEST_UNLOCK_ORIENTATION_RESULT;
+        output = TEST_UNLOCK_ORIENTATION_RESULT;
     }
 
 
@@ -381,7 +381,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         screenDetailed.OnChange += OnChange;
 
         void OnChange() {
-            labelOutput = TEST_CHANGE_EVENT;
+            output = TEST_CHANGE_EVENT;
             StateHasChanged();
             screenDetailed.OnChange -= OnChange;
             screenDetails.Dispose();
@@ -396,7 +396,7 @@ public sealed partial class WindowManagementInProcessGroup : ComponentBase {
         screenDetailed.OnOrientationChange += OnOrientationChange;
 
         void OnOrientationChange() {
-            labelOutput = TEST_ORIENTATION_CHANGE_EVENT;
+            output = TEST_ORIENTATION_CHANGE_EVENT;
             StateHasChanged();
             screenDetailed.OnOrientationChange -= OnOrientationChange;
             screenDetails.Dispose();

@@ -16,7 +16,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task GetActivated() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_GET_ACTIVATED);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -24,7 +24,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task GetHasReading() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_GET_HAS_READING);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -32,7 +32,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task GetTimestamp() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_GET_TIMESTAMP);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -43,7 +43,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task Start() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_START);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(SensorAPIInProcessGroup.TEST_SENSOR_START);
     }
 
@@ -51,7 +51,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task Stop() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_STOP);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(SensorAPIInProcessGroup.TEST_SENSOR_STOP);
     }
 
@@ -77,7 +77,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
         await Page.EvaluateAsync("sensor.dispatchEvent(new Event('error'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(SensorAPIGroup.TEST_SENSOR_ERROR_EVENT);
     }
 
@@ -100,7 +100,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
         await Page.EvaluateAsync("sensor.dispatchEvent(new Event('activate'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(SensorAPIGroup.TEST_SENSOR_ACTIVATE_EVENT);
     }
 
@@ -123,7 +123,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
         await Page.EvaluateAsync("sensor.dispatchEvent(new Event('reading'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(SensorAPIGroup.TEST_SENSOR_READING_EVENT);
     }
 
@@ -143,7 +143,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
             """);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(nameof(DeviceMotionEvent));
     }
 
@@ -160,7 +160,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
             """);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(nameof(DeviceOrientationEvent));
     }
 
@@ -177,7 +177,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
             """);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(nameof(DeviceOrientationEvent));
     }
 
@@ -188,7 +188,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task AmbientLightSensorGetIlluminance() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_AMBIENT_LIGHT_SENSOR_GET_ILLUMINANCE);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -199,7 +199,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task GyroscopeGetX() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_GYROSCOPE_GET_X);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -207,7 +207,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task GyroscopeGetY() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_GYROSCOPE_GET_Y);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -215,7 +215,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task GyroscopeGetZ() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_GYROSCOPE_GET_Z);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -226,7 +226,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task AccelerometerGetX() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_ACCELEROMETER_GET_X);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -234,7 +234,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task AccelerometerGetY() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_ACCELEROMETER_GET_Y);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -242,7 +242,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task AccelerometerGetZ() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_ACCELEROMETER_GET_Z);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -253,7 +253,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task LinearAccelerationSensorGetX() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_LINEAR_ACCELERATION_SENSOR_GET_X);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -261,7 +261,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task LinearAccelerationSensorGetY() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_LINEAR_ACCELERATION_SENSOR_GET_Y);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -269,7 +269,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task LinearAccelerationSensorGetZ() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_LINEAR_ACCELERATION_SENSOR_GET_Z);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -280,7 +280,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task GravitySensorGetX() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_GRAVITY_SENSOR_GET_X);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -288,7 +288,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task GravitySensorGetY() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_GRAVITY_SENSOR_GET_Y);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -296,7 +296,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task GravitySensorGetZ() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_GRAVITY_SENSOR_GET_Z);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -307,7 +307,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task AbsoluteOrientationSensorGetQuaternion() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_ABSOLUTE_ORIENTATION_SENSOR_GET_QUATERNION);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -315,7 +315,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task AbsoluteOrientationSensorPopulateMatrix() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_ABSOLUTE_ORIENTATION_SENSOR_POPULATE_MATRIX);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -326,7 +326,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task RelativeOrientationSensorGetQuaternion() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_RELATIVE_ORIENTATION_SENSOR_GET_QUATERNION);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -334,7 +334,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task RelativeOrientationSensorPopulateMatrix() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_RELATIVE_ORIENTATION_SENSOR_POPULATE_MATRIX);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -345,7 +345,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task MagnetometerGetX() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_MAGNETOMETER_GET_X);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -353,7 +353,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task MagnetometerGetY() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_MAGNETOMETER_GET_Y);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -361,7 +361,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task MagnetometerGetZ() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_MAGNETOMETER_GET_Z);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -372,7 +372,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task UncalibratedMagnetometerGetX() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_UNCALIBRATED_MAGNETOMETER_GET_X);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -380,7 +380,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task UncalibratedMagnetometerGetY() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_UNCALIBRATED_MAGNETOMETER_GET_Y);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -388,7 +388,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task UncalibratedMagnetometerGetZ() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_UNCALIBRATED_MAGNETOMETER_GET_Z);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -396,7 +396,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task UncalibratedMagnetometerGetXBias() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_UNCALIBRATED_MAGNETOMETER_GET_X_BIAS);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -404,7 +404,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task UncalibratedMagnetometerGetYBias() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_UNCALIBRATED_MAGNETOMETER_GET_Y_BIAS);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 
@@ -412,7 +412,7 @@ public sealed class SensorAPIInProcessTest(PlayWrightFixture playWrightFixture) 
     public async Task UncalibratedMagnetometerGetZBias() {
         await ExecuteTest(SensorAPIInProcessGroup.BUTTON_UNCALIBRATED_MAGNETOMETER_GET_Z_BIAS);
 
-        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(SensorAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result!).IsNotEmpty();
     }
 }

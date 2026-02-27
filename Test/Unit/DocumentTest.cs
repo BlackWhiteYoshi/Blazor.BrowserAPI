@@ -11,7 +11,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetDocumentElement() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_DOCUMENT_ELEMENT);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -19,7 +19,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetHead() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_HEAD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -27,7 +27,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetBody() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_BODY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -35,7 +35,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task SetBody() {
         await ExecuteTest(DocumentGroup.BUTTON_SET_BODY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_SET_BODY);
     }
 
@@ -43,7 +43,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetScrollingElement() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_SCROLLING_ELEMENT);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -61,7 +61,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
 
         await ExecuteTest(DocumentGroup.BUTTON_GET_EMBEDS_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("1");
     }
 
@@ -76,7 +76,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
 
         await ExecuteTest(DocumentGroup.BUTTON_GET_EMBEDS_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("1");
     }
 
@@ -92,7 +92,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
 
         await ExecuteTest(DocumentGroup.BUTTON_GET_FORMS_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("1");
     }
 
@@ -107,7 +107,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
 
         await ExecuteTest(DocumentGroup.BUTTON_GET_FORMS_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("1");
     }
 
@@ -123,7 +123,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
 
         await ExecuteTest(DocumentGroup.BUTTON_GET_IMAGES_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("1");
     }
 
@@ -138,7 +138,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
 
         await ExecuteTest(DocumentGroup.BUTTON_GET_IMAGES_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("1");
     }
 
@@ -147,7 +147,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetLinks_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_LINKS_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("1");
     }
 
@@ -155,7 +155,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetLinks_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_LINKS_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("1");
     }
 
@@ -171,7 +171,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
 
         await ExecuteTest(DocumentGroup.BUTTON_GET_PLUGINS_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("1");
     }
 
@@ -186,7 +186,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
 
         await ExecuteTest(DocumentGroup.BUTTON_GET_PLUGINS_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("1");
     }
 
@@ -195,7 +195,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetScripts_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_SCRIPTS_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         int.TryParse(result, out int resultNumber);
         await Assert.That(resultNumber).IsGreaterThanOrEqualTo(1);
     }
@@ -204,7 +204,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetScripts_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_SCRIPTS_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         int.TryParse(result, out int resultNumber);
         await Assert.That(resultNumber).IsGreaterThanOrEqualTo(1);
     }
@@ -216,7 +216,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetActiveElement_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_ACTIVE_ELEMENT_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -224,7 +224,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetActiveElement_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_ACTIVE_ELEMENT_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -233,7 +233,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetCurrentScript_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_CURRENT_SCRIPT_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
     }
 
@@ -241,7 +241,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetCurrentScript_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_CURRENT_SCRIPT_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
     }
 
@@ -253,7 +253,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
 
         await ExecuteTest(DocumentGroup.BUTTON_GET_FULLSCREEN_ELEMENT_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -264,7 +264,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
 
         await ExecuteTest(DocumentGroup.BUTTON_GET_FULLSCREEN_ELEMENT_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -273,7 +273,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetPictureInPictureElement_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_PICTURE_IN_PICTURE_ELEMENT_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
     }
 
@@ -281,7 +281,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetPictureInPictureElement_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_PICTURE_IN_PICTURE_ELEMENT_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
     }
 
@@ -296,7 +296,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.UpAsync();
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -310,7 +310,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.UpAsync();
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -321,7 +321,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetCharacterSet_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_CHARACTER_SET_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("UTF-8");
     }
 
@@ -329,7 +329,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetCharacterSet_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_CHARACTER_SET_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("UTF-8");
     }
 
@@ -338,7 +338,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetCompatMode_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_COMPAT_MODE_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("CSS1Compat");
     }
 
@@ -346,7 +346,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetCompatMode_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_COMPAT_MODE_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("CSS1Compat");
     }
 
@@ -355,7 +355,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetContentType_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_CONTENT_TYPE_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("text/html");
     }
 
@@ -363,7 +363,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetContentType_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_CONTENT_TYPE_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("text/html");
     }
 
@@ -372,7 +372,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetDesignMode_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_DESIGN_MODE_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("off");
     }
 
@@ -380,7 +380,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetDesignMode_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_DESIGN_MODE_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("off");
     }
 
@@ -400,7 +400,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
 
         await ExecuteTest(DocumentGroup.BUTTON_GET_DIR_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("ltr");
     }
 
@@ -411,7 +411,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
 
         await ExecuteTest(DocumentGroup.BUTTON_GET_DIR_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("ltr");
     }
 
@@ -428,7 +428,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetDocumentURI_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_DOCUMENT_URI_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("https://localhost");
     }
 
@@ -436,7 +436,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetDocumentURI_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_DOCUMENT_URI_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("https://localhost");
     }
 
@@ -445,7 +445,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetFullscreenEnabled_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_FULLSCREEN_ENABLED_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -453,7 +453,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetFullscreenEnabled_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_FULLSCREEN_ENABLED_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -462,7 +462,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetHidden_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_HIDDEN_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
     }
 
@@ -470,7 +470,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetHidden_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_HIDDEN_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
     }
 
@@ -479,7 +479,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetLastModified_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_LAST_MODIFIED_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         bool isDateTime = DateTime.TryParseExact(result, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _);
         await Assert.That(isDateTime).IsTrue();
     }
@@ -488,7 +488,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetLastModified_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_LAST_MODIFIED_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         bool isDateTime = DateTime.TryParseExact(result, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _);
         await Assert.That(isDateTime).IsTrue();
     }
@@ -498,7 +498,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetPictureInPictureEnabled_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_PICTURE_IN_PICTURE_ENABLED_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -506,7 +506,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetPictureInPictureEnabled_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_PICTURE_IN_PICTURE_ENABLED_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -515,7 +515,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetReadyState_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_READY_STATE_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("complete");
     }
 
@@ -523,7 +523,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetReadyState_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_READY_STATE_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("complete");
     }
 
@@ -532,7 +532,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetReferrer_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_REFERRER_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_NO_REFFERER);
     }
 
@@ -540,7 +540,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetReferrer_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_REFERRER_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_NO_REFFERER);
     }
 
@@ -549,7 +549,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetTitle_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_TITLE_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("BrowserAPI Test");
     }
 
@@ -557,7 +557,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetTitle_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_TITLE_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("BrowserAPI Test");
     }
 
@@ -574,7 +574,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetURL_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_URL_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("https://localhost");
     }
 
@@ -582,7 +582,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetURL_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_URL_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("https://localhost");
     }
 
@@ -591,7 +591,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetVisibilityState_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_VISIBILITY_STATE_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("visible");
     }
 
@@ -599,7 +599,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetVisibilityState_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_VISIBILITY_STATE_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("visible");
     }
 
@@ -610,7 +610,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetBaseURI_Property() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_BASE_URI_PROPERTY);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("https://localhost");
     }
 
@@ -618,7 +618,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetBaseURI_Method() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_BASE_URI_METHOD);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("https://localhost");
     }
 
@@ -626,7 +626,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetNodeName() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_NODE_NAME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("#document");
     }
 
@@ -634,7 +634,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetNodeType() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_NODE_TYPE);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("9");
     }
 
@@ -646,7 +646,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task CreateElement() {
         await ExecuteTest(DocumentGroup.BUTTON_CREATE_ELEMENT);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -654,7 +654,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task CreateElementNS() {
         await ExecuteTest(DocumentGroup.BUTTON_CREATE_ELEMENT_NS);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -662,7 +662,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetElementById() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_ELEMENT_BY_ID);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -670,7 +670,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetElementsByClassName() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_ELEMENTS_BY_CLASS_NAME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         int.TryParse(result, out int resultNumber);
         await Assert.That(resultNumber).IsGreaterThanOrEqualTo(1);
     }
@@ -679,7 +679,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetElementsByTagName() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_ELEMENTS_BY_TAG_NAME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         int.TryParse(result, out int resultNumber);
         await Assert.That(resultNumber).IsGreaterThanOrEqualTo(1);
     }
@@ -688,7 +688,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task GetElementsByTagNameNS() {
         await ExecuteTest(DocumentGroup.BUTTON_GET_ELEMENTS_BY_TAG_NAME_NS);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         int.TryParse(result, out int resultNumber);
         await Assert.That(resultNumber).IsGreaterThanOrEqualTo(1);
     }
@@ -705,7 +705,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
 
         await ExecuteTest(DocumentGroup.BUTTON_GET_ELEMENTS_BY_NAME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         int.TryParse(result, out int resultNumber);
         await Assert.That(resultNumber).IsGreaterThanOrEqualTo(1);
     }
@@ -714,7 +714,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task QuerySelector() {
         await ExecuteTest(DocumentGroup.BUTTON_QUERY_SELECTOR);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -722,7 +722,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task QuerySelectorAll() {
         await ExecuteTest(DocumentGroup.BUTTON_QUERY_SELECTOR_ALL);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         int.TryParse(result, out int resultNumber);
         await Assert.That(resultNumber).IsGreaterThanOrEqualTo(1);
     }
@@ -731,7 +731,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task ElementFromPoint() {
         await ExecuteTest(DocumentGroup.BUTTON_ELEMENT_FROM_POINT);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -739,7 +739,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task ElementsFromPoint() {
         await ExecuteTest(DocumentGroup.BUTTON_ELEMENTS_FROM_POINT);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         int.TryParse(result, out int resultNumber);
         await Assert.That(resultNumber).IsGreaterThanOrEqualTo(1);
     }
@@ -748,7 +748,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task ReplaceChildren() {
         await ExecuteTest(DocumentGroup.BUTTON_REPLACE_CHILDREN);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -759,7 +759,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task RequestStorageAccess() {
         await ExecuteTest(DocumentGroup.BUTTON_REQUEST_STORAGE_ACCESS);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_REQUEST_STORAGE_ACCESS);
     }
 
@@ -767,7 +767,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task RequestStorageAccessFor() {
         await ExecuteTest(DocumentGroup.BUTTON_REQUEST_STORAGE_ACCESS_FOR);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_REQUEST_STORAGE_ACCESS_FOR);
     }
 
@@ -775,7 +775,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task HasStorageAccess() {
         await ExecuteTest(DocumentGroup.BUTTON_HAS_STORAGE_ACCESS);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -803,7 +803,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task ExitPictureInPicture() {
         await ExecuteTest(DocumentGroup.BUTTON_EXIT_PICTURE_IN_PICTURE);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Failed to execute 'exitPictureInPicture' on 'Document': There is no Picture-in-Picture element in this document.");
     }
 
@@ -817,7 +817,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.UpAsync();
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).ClickAsync();
+        await Page.GetByTestId(DocumentGroup.OUTPUT).ClickAsync();
     }
 
 
@@ -827,7 +827,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task HasFocus() {
         await ExecuteTest(DocumentGroup.BUTTON_HAS_FOCUS);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -838,7 +838,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task CompareDocumentPosition() {
         await ExecuteTest(DocumentGroup.BUTTON_COMPARE_DOCUMENT_POSITION);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         bool isInteger = int.TryParse(result, out _);
         await Assert.That(isInteger).IsTrue();
     }
@@ -847,7 +847,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task Contains() {
         await ExecuteTest(DocumentGroup.BUTTON_CONTAINS);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -855,7 +855,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task IsDefaultNamespace() {
         await ExecuteTest(DocumentGroup.BUTTON_IS_DEFAULT_NAMESPACE);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -863,7 +863,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task LookupPrefix() {
         await ExecuteTest(DocumentGroup.BUTTON_LOOKUP_PREFIX);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("(no prefix)");
     }
 
@@ -871,18 +871,18 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task LookupNamespaceURI() {
         await ExecuteTest(DocumentGroup.BUTTON_LOOKUP_NAMESPACE_URI);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("http://www.w3.org/1999/xhtml");
     }
 
     [Test]
     public async Task Normalize() {
-        await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).EvaluateAsync("node => node.append('-textNode1-', '-textNode2-');");
+        await Page.GetByTestId(DocumentGroup.OUTPUT).EvaluateAsync("node => node.append('-textNode1-', '-textNode2-');");
         await Task.Delay(SMALL_WAIT_TIME);
 
         await ExecuteTest(DocumentGroup.BUTTON_NORMALIZE);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).EvaluateAsync<string?>("node => node.lastChild.textContent;");
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).EvaluateAsync<string?>("node => node.lastChild.textContent;");
         await Assert.That(result).IsEqualTo("-textNode1--textNode2-");
     }
 
@@ -915,7 +915,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
             """);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("SecurityPolicyViolationEvent { BlockedURI = s1, EffectiveDirective = s2, DocumentURI = s3, LineNumber = 4, ColumnNumber = 5, OriginalPolicy = s6, Referrer = s7, SourceFile = s8, Sample = s9, StatusCode = 10, Disposition = s11 }");
     }
 
@@ -926,7 +926,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('visibilitychange'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_VISIBILITY_CHANGE);
     }
 
@@ -935,10 +935,10 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task RegisterOnFullscreenChange() {
         await ExecuteTest(DocumentGroup.BUTTON_REGISTER_ON_FULLSCREEN_CHANGE);
 
-        await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).EvaluateAsync("node => node.requestFullscreen();");
+        await Page.GetByTestId(DocumentGroup.OUTPUT).EvaluateAsync("node => node.requestFullscreen();");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(DocumentGroup.TEST_EVENT_FULLSCREEN_CHANGE);
     }
 
@@ -949,7 +949,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('fullscreenerror'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(DocumentGroup.TEST_EVENT_FULLSCREEN_ERROR);
     }
 
@@ -961,7 +961,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('DOMContentLoaded'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(DocumentGroup.TEST_EVENT_DOM_CONTENT_LOADED);
     }
 
@@ -972,7 +972,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('readystatechange'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(DocumentGroup.TEST_EVENT_READY_STATE_CHANGE);
     }
 
@@ -981,10 +981,10 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task RegisterOnPointerLockChange() {
         await ExecuteTest(DocumentGroup.BUTTON_REGISTER_ON_POINTER_LOCK_CHANGE);
 
-        await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).EvaluateAsync("node => node.requestPointerLock();");
+        await Page.GetByTestId(DocumentGroup.OUTPUT).EvaluateAsync("node => node.requestPointerLock();");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(DocumentGroup.TEST_EVENT_POINTER_LOCK_CHANGE);
     }
 
@@ -995,7 +995,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('pointerlockerror'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(DocumentGroup.TEST_EVENT_POINTER_LOCK_ERROR);
     }
 
@@ -1007,7 +1007,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.WheelAsync(0, 1);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(DocumentGroup.TEST_EVENT_SCROLL);
     }
 
@@ -1018,7 +1018,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.WheelAsync(0, 1);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(DocumentGroup.TEST_EVENT_SCROLL_END);
     }
 
@@ -1027,10 +1027,10 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task RegisterOnSelectionChange() {
         await ExecuteTest(DocumentGroup.BUTTON_REGISTER_ON_SELECTION_CHANGE);
 
-        await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).ClickAsync();
+        await Page.GetByTestId(DocumentGroup.OUTPUT).ClickAsync();
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(DocumentGroup.TEST_EVENT_SELECTION_CHANGE);
     }
 
@@ -1038,10 +1038,10 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task RegisterOnSelectStart() {
         await ExecuteTest(DocumentGroup.BUTTON_REGISTER_ON_SELECT_START);
 
-        await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).ClickAsync();
+        await Page.GetByTestId(DocumentGroup.OUTPUT).ClickAsync();
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(DocumentGroup.TEST_EVENT_SELECT_START);
     }
 
@@ -1063,7 +1063,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.GetByTestId("temp").BlurAsync();
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_CHANGE);
     }
 
@@ -1074,7 +1074,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('load'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_LOAD);
     }
 
@@ -1089,7 +1089,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
             """);
         await Task.Delay(SMALL_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsNotEmpty();
     }
 
@@ -1114,7 +1114,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.GetByTestId("temp").DragToAsync(Page.GetByTestId("dragTarget"));
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='uninitialized', types='[]', files='[]'");
     }
 
@@ -1138,7 +1138,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.GetByTestId("temp").DragToAsync(Page.GetByTestId("dragTarget"));
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='uninitialized', types='[]', files='[]'");
     }
 
@@ -1162,7 +1162,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.GetByTestId("temp").DragToAsync(Page.GetByTestId("dragTarget"));
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='uninitialized', types='[]', files='[]'");
     }
 
@@ -1186,7 +1186,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.GetByTestId("temp").DragToAsync(Page.GetByTestId("dragTarget"));
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='all', types='[]', files='[]'");
     }
 
@@ -1210,7 +1210,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.GetByTestId("temp").DragToAsync(Page.GetByTestId("dragTarget"));
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='all', types='[]', files='[]'");
     }
 
@@ -1234,7 +1234,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.GetByTestId("temp").DragToAsync(Page.GetByTestId("dragTarget"));
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='all', types='[]', files='[]'");
     }
 
@@ -1259,8 +1259,8 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.GetByTestId("temp").DragToAsync(Page.GetByTestId("dragTarget"));
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("dropEffect='copy', effectAllowed='all', types='[]', files='[]'");
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='all', types='[]', files='[]'");
     }
 
 
@@ -1276,7 +1276,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
             """);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("oldState='closed', newState='open'");
     }
 
@@ -1292,7 +1292,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
             """);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("oldState='closed', newState='open'");
     }
 
@@ -1312,7 +1312,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.GetByTestId("temp").FillAsync("something");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("data=something, inputType=insertText, isComposing=False");
     }
 
@@ -1329,7 +1329,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.GetByTestId("temp").FillAsync("something");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("data=something, inputType=insertText, isComposing=False");
     }
 
@@ -1350,7 +1350,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
             """);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_BEFORE_MATCH);
     }
 
@@ -1362,7 +1362,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Keyboard.PressAsync("a");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("KeyboardEvent { Key = a, Code = KeyA, Location = 0, CtrlKey = False, ShiftKey = False, AltKey = False, MetaKey = False, Repeat = False, IsComposing = False }");
     }
 
@@ -1373,7 +1373,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Keyboard.PressAsync("a");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("KeyboardEvent { Key = a, Code = KeyA, Location = 0, CtrlKey = False, ShiftKey = False, AltKey = False, MetaKey = False, Repeat = False, IsComposing = False }");
     }
 
@@ -1385,7 +1385,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.ClickAsync(1.0f, 1.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("MouseEvent");
     }
 
@@ -1396,7 +1396,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.DblClickAsync(1.0f, 1.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("MouseEvent");
     }
 
@@ -1407,7 +1407,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.ClickAsync(1.0f, 1.0f, new MouseClickOptions() { Button = MouseButton.Right });
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("MouseEvent");
     }
 
@@ -1418,7 +1418,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.ClickAsync(1.0f, 1.0f, new MouseClickOptions() { Button = MouseButton.Right });
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("MouseEvent");
     }
 
@@ -1429,7 +1429,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.ClickAsync(1.0f, 1.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("MouseEvent");
     }
 
@@ -1440,7 +1440,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.ClickAsync(1.0f, 1.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("MouseEvent");
     }
 
@@ -1451,7 +1451,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.WheelAsync(0.0f, 1.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("WheelEvent { DeltaX = 0, DeltaY = 1, DeltaZ = 0, DeltaMode = 0 }");
     }
 
@@ -1462,7 +1462,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.MoveAsync(1.0f, 1.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("MouseEvent");
     }
 
@@ -1473,7 +1473,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.MoveAsync(1.0f, 1.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("MouseEvent");
     }
 
@@ -1484,7 +1484,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.MoveAsync(1.0f, 1.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("MouseEvent");
     }
 
@@ -1497,7 +1497,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.MoveAsync(2.0f, 2.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("MouseEvent");
     }
 
@@ -1508,7 +1508,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.MoveAsync(-1.0f, -1.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("MouseEvent");
     }
 
@@ -1520,7 +1520,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Touchscreen.TapAsync(1.0f, 1.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("TouchEvent");
     }
 
@@ -1531,7 +1531,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Touchscreen.TapAsync(1.0f, 1.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("TouchEvent");
     }
 
@@ -1552,7 +1552,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
             """);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("TouchEvent");
     }
 
@@ -1573,7 +1573,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
             """);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("TouchEvent");
     }
 
@@ -1585,7 +1585,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.ClickAsync(1.0f, 1.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("PointerEvent");
     }
 
@@ -1596,7 +1596,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.ClickAsync(1.0f, 1.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("PointerEvent");
     }
 
@@ -1607,7 +1607,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.MoveAsync(1.0f, 1.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("PointerEvent");
     }
 
@@ -1618,7 +1618,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.MoveAsync(1.0f, 1.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("PointerEvent");
     }
 
@@ -1629,7 +1629,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.MoveAsync(1.0f, 1.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("PointerEvent");
     }
 
@@ -1642,7 +1642,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.MoveAsync(2.0f, 2.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("PointerEvent");
     }
 
@@ -1653,7 +1653,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.MoveAsync(-1.0f, -1.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("PointerEvent");
     }
 
@@ -1696,7 +1696,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
             """);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("PointerEvent");
     }
 
@@ -1707,7 +1707,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Mouse.MoveAsync(1.0f, 1.0f);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("PointerEvent");
     }
 
@@ -1715,12 +1715,12 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task RegisterOnGotPointerCapture() {
         await ExecuteTest(DocumentGroup.BUTTON_REGISTER_ON_GOT_POINTER_CAPTURE);
 
-        await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).EvaluateAsync("node => node.addEventListener('pointerdown', event => node.setPointerCapture(event.pointerId));");
+        await Page.GetByTestId(DocumentGroup.OUTPUT).EvaluateAsync("node => node.addEventListener('pointerdown', event => node.setPointerCapture(event.pointerId));");
         await Task.Delay(SMALL_WAIT_TIME);
-        await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).ClickAsync();
+        await Page.GetByTestId(DocumentGroup.OUTPUT).ClickAsync();
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("PointerEvent");
     }
 
@@ -1728,17 +1728,17 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     public async Task RegisterOnLostPointerCapture() {
         await ExecuteTest(DocumentGroup.BUTTON_REGISTER_ON_LOST_POINTER_CAPTURE);
 
-        await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).EvaluateAsync("""
+        await Page.GetByTestId(DocumentGroup.OUTPUT).EvaluateAsync("""
             node => {
                 node.addEventListener("pointerdown", event => node.setPointerCapture(event.pointerId));
                 node.addEventListener("pointerup", event => node.releasePointerCapture(event.pointerId));
             }
             """);
         await Task.Delay(SMALL_WAIT_TIME);
-        await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).ClickAsync();
+        await Page.GetByTestId(DocumentGroup.OUTPUT).ClickAsync();
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith("PointerEvent");
     }
 
@@ -1750,7 +1750,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('focus'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_FOCUS);
     }
 
@@ -1761,7 +1761,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('focusin'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_FOCUS_IN);
     }
 
@@ -1772,7 +1772,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('blur'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_BLUR);
     }
 
@@ -1783,7 +1783,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('focusout'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_FOCUS_OUT);
     }
 
@@ -1795,7 +1795,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Keyboard.PressAsync("Control+c");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_COPY);
     }
 
@@ -1806,7 +1806,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Keyboard.PressAsync("Control+v");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_PASTE);
     }
 
@@ -1817,7 +1817,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.Keyboard.PressAsync("Control+x");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_CUT);
     }
 
@@ -1836,7 +1836,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.GetByTestId("temp").EvaluateAsync("node => node.style.backgroundColor = '#000';");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(DocumentGroup.TEST_EVENT_TRANSITION_START);
     }
 
@@ -1854,7 +1854,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.GetByTestId("temp").EvaluateAsync("node => node.style.backgroundColor = '#000';");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(DocumentGroup.TEST_EVENT_TRANSITION_END);
     }
 
@@ -1872,7 +1872,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.GetByTestId("temp").EvaluateAsync("node => node.style.backgroundColor = '#000';");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(DocumentGroup.TEST_EVENT_TRANSITION_RUN);
     }
 
@@ -1896,7 +1896,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
             await Page.GetByTestId("temp").EvaluateAsync($"node => node.style.backgroundColor = '#{colorNumber}{colorNumber}{colorNumber}';");
             await Task.Delay(i * SMALL_WAIT_TIME);
 
-            result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+            result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
             if (result is not (null or ""))
                 break;
         }
@@ -1919,7 +1919,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.GetByTestId("temp").EvaluateAsync("node => node.classList.add('animation-start');");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(DocumentGroup.TEST_EVENT_ANIMATION_START);
     }
 
@@ -1937,7 +1937,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.GetByTestId("temp").EvaluateAsync("node => node.classList.add('animation-start');");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(DocumentGroup.TEST_EVENT_ANIMATION_END);
     }
 
@@ -1955,7 +1955,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.GetByTestId("temp").EvaluateAsync("node => node.classList.add('animation-start-infinite');");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(DocumentGroup.TEST_EVENT_ANIMATION_ITERATION);
     }
 
@@ -1975,7 +1975,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.GetByTestId("temp").EvaluateAsync("node => node.classList.remove('animation-start-infinite');");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).StartsWith(DocumentGroup.TEST_EVENT_ANIMATION_CANCEL);
     }
 
@@ -1989,7 +1989,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('canplay'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_CAN_PLAY);
     }
 
@@ -2000,7 +2000,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('canplaythrough'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_CAN_PLAY_THROUGH);
     }
 
@@ -2011,7 +2011,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('playing'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_PLAYING);
     }
 
@@ -2024,7 +2024,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('loadstart'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_LOAD_START);
     }
 
@@ -2035,7 +2035,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('progress'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_PROGRESS);
     }
 
@@ -2046,7 +2046,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('loadeddata'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_LOADED_DATA);
     }
 
@@ -2057,7 +2057,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('loadedmetadata'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_LOADED_METADATA);
     }
 
@@ -2068,7 +2068,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('stalled'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_STALLED);
     }
 
@@ -2079,7 +2079,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('suspend'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_SUSPEND);
     }
 
@@ -2090,7 +2090,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('waiting'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_WAITING);
     }
 
@@ -2101,7 +2101,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('abort'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_ABORT);
     }
 
@@ -2112,7 +2112,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('emptied'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_EMPTIED);
     }
 
@@ -2125,7 +2125,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('play'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_PLAY);
     }
 
@@ -2136,7 +2136,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('pause'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_PAUSE);
     }
 
@@ -2147,7 +2147,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('ended'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_ENDED);
     }
 
@@ -2158,7 +2158,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('seeking'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_SEEKING);
     }
 
@@ -2169,7 +2169,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('seeked'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_SEEKED);
     }
 
@@ -2180,7 +2180,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('timeupdate'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_TIME_UPDATE);
     }
 
@@ -2193,7 +2193,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('volumechange'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_VOLUME_CHANGE);
     }
 
@@ -2204,7 +2204,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('ratechange'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_RATE_CHANGE);
     }
 
@@ -2215,7 +2215,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('durationchange'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_DURATION_CHANGE);
     }
 
@@ -2228,7 +2228,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('resize'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_RESIZE);
     }
 
@@ -2242,7 +2242,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('close'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_CLOSE);
     }
 
@@ -2253,7 +2253,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await Page.EvaluateAsync("document.dispatchEvent(new Event('cancel'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(DocumentGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(DocumentGroup.TEST_EVENT_CANCEL);
     }
 }

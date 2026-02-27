@@ -17,8 +17,8 @@ public sealed partial class HTMLDialogElementGroup : ComponentBase, IAsyncDispos
     private IHTMLDialogElement Dialog => _dialog ??= ElementFactory.CreateHTMLDialogElement(dialogElement);
 
 
-    public const string LABEL_OUTPUT = "htmldialogelement-output";
-    private string labelOutput = string.Empty;
+    public const string OUTPUT = "htmldialogelement-output";
+    private string output = string.Empty;
 
     public const string DIALOG_ELEMENT = "htmldialogelement-dialog-element";
     private ElementReference dialogElement;
@@ -32,18 +32,18 @@ public sealed partial class HTMLDialogElementGroup : ComponentBase, IAsyncDispos
     public const string BUTTON_TO_HTML_ELEMENT = "htmldialogelement-to-html-element";
     private async Task ToHTMLElement() {
         await using IHTMLElement htmlElement = await Dialog.ToHTMLElement();
-        labelOutput = (htmlElement is not null).ToString();
+        output = (htmlElement is not null).ToString();
     }
 
 
     public const string BUTTON_GET_CLOSED_BY_PROPERTY = "htmldialogelement-get-closed-by-property";
     private async Task GetClosedBy_Property() {
-        labelOutput = await Dialog.ClosedBy;
+        output = await Dialog.ClosedBy;
     }
 
     public const string BUTTON_GET_CLOSED_BY_METHOD = "htmldialogelement-get-closed-by-method";
     private async Task GetClosedBy_Method() {
-        labelOutput = await Dialog.GetClosedBy(CancellationToken.None);
+        output = await Dialog.GetClosedBy(CancellationToken.None);
     }
 
     public const string BUTTON_SET_CLOSED_BY = "htmldialogelement-set-closed-by";
@@ -55,13 +55,13 @@ public sealed partial class HTMLDialogElementGroup : ComponentBase, IAsyncDispos
     public const string BUTTON_GET_OPEN_PROPERTY = "htmldialogelement-get-open-property";
     private async Task GetOpen_Property() {
         bool state = await Dialog.Open;
-        labelOutput = state.ToString();
+        output = state.ToString();
     }
 
     public const string BUTTON_GET_OPEN_METHOD = "htmldialogelement-get-open-method";
     private async Task GetOpen_Method() {
         bool state = await Dialog.GetOpen(CancellationToken.None);
-        labelOutput = state.ToString();
+        output = state.ToString();
     }
 
     public const string BUTTON_SET_OPEN = "htmldialogelement-set-open";
@@ -72,12 +72,12 @@ public sealed partial class HTMLDialogElementGroup : ComponentBase, IAsyncDispos
 
     public const string BUTTON_GET_RETURN_VALUE_PROPERTY = "htmldialogelement-get-return-value-property";
     private async Task GetReturnValue_Property() {
-        labelOutput = await Dialog.ReturnValue;
+        output = await Dialog.ReturnValue;
     }
 
     public const string BUTTON_GET_RETURN_VALUE_METHOD = "htmldialogelement-get-return-value-method";
     private async Task GetReturnValue_Method() {
-        labelOutput = await Dialog.GetReturnValue(CancellationToken.None);
+        output = await Dialog.GetReturnValue(CancellationToken.None);
     }
 
     public const string BUTTON_SET_RETURN_VALUE = "htmldialogelement-set-return-value";
@@ -115,7 +115,7 @@ public sealed partial class HTMLDialogElementGroup : ComponentBase, IAsyncDispos
     public const string BUTTON_REGISTER_ON_CLOSE = "htmldialogelement-close-event";
     private void RegisterOnClose() {
         Dialog.OnClose += () => {
-            labelOutput = TEST_EVENT_CLOSE;
+            output = TEST_EVENT_CLOSE;
             StateHasChanged();
         };
     }
@@ -123,7 +123,7 @@ public sealed partial class HTMLDialogElementGroup : ComponentBase, IAsyncDispos
     public const string BUTTON_REGISTER_ON_CANCEL = "htmldialogelement-cancel-event";
     private void RegisterOnCancel() {
         Dialog.OnCancel += () => {
-            labelOutput = TEST_EVENT_CANCEL;
+            output = TEST_EVENT_CANCEL;
             StateHasChanged();
         };
     }

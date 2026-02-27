@@ -25,7 +25,7 @@ public sealed class CookieStorageTest(PlayWrightFixture playWrightFixture) : Pla
 
         await ExecuteTest(CookieStorageGroup.BUTTON_GET_ALL_COOKIES_PROPERTY);
 
-        string? result = await Page.GetByTestId(CookieStorageGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(CookieStorageGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(expected);
 
     }
@@ -50,7 +50,7 @@ public sealed class CookieStorageTest(PlayWrightFixture playWrightFixture) : Pla
 
         await ExecuteTest(CookieStorageGroup.BUTTON_GET_ALL_COOKIES_METHOD);
 
-        string? result = await Page.GetByTestId(CookieStorageGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(CookieStorageGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(expected);
     }
 
@@ -65,7 +65,7 @@ public sealed class CookieStorageTest(PlayWrightFixture playWrightFixture) : Pla
 
         await ExecuteTest(CookieStorageGroup.BUTTON_GET_LENGTH_PROPERTY);
 
-        string? result = await Page.GetByTestId(CookieStorageGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(CookieStorageGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(number.ToString());
 
     }
@@ -81,7 +81,7 @@ public sealed class CookieStorageTest(PlayWrightFixture playWrightFixture) : Pla
 
         await ExecuteTest(CookieStorageGroup.BUTTON_GET_LENGTH_METHOD);
 
-        string? result = await Page.GetByTestId(CookieStorageGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(CookieStorageGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(number.ToString());
     }
 
@@ -92,7 +92,7 @@ public sealed class CookieStorageTest(PlayWrightFixture playWrightFixture) : Pla
 
         await ExecuteTest(CookieStorageGroup.BUTTON_KEY);
 
-        string? result = await Page.GetByTestId(CookieStorageGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(CookieStorageGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(KEY);
     }
 
@@ -103,7 +103,7 @@ public sealed class CookieStorageTest(PlayWrightFixture playWrightFixture) : Pla
 
         await ExecuteTest(CookieStorageGroup.BUTTON_GET_COOKIE);
 
-        string? result = await Page.GetByTestId(CookieStorageGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(CookieStorageGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(VALUE);
     }
 

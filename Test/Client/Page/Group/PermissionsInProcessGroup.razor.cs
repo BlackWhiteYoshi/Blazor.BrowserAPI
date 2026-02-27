@@ -11,14 +11,14 @@ public sealed partial class PermissionsInProcessGroup : ComponentBase {
     public required IPermissionsInProcess Permissions { private get; init; }
 
 
-    public const string LABEL_OUTPUT = "permissions-inprocess-output";
-    private string labelOutput = string.Empty;
+    public const string OUTPUT = "permissions-inprocess-output";
+    private string output = string.Empty;
 
 
     public const string BUTTON_QUERY = "permissions-inprocess-query";
     private async Task Query() {
         using IPermissionStatusInProcess permissionStatus = await Permissions.Query(TEST_PERMISSION_NAME);
-        labelOutput = (permissionStatus is not null).ToString();
+        output = (permissionStatus is not null).ToString();
     }
 
 
@@ -26,14 +26,14 @@ public sealed partial class PermissionsInProcessGroup : ComponentBase {
     private async Task GetName() {
         using IPermissionStatusInProcess permissionStatus = await Permissions.Query(TEST_PERMISSION_NAME);
         string name = permissionStatus.Name;
-        labelOutput = name;
+        output = name;
     }
 
     public const string BUTTON_GET_STATE = "permissions-inprocess-get-state";
     private async Task GetState() {
         using IPermissionStatusInProcess permissionStatus = await Permissions.Query(TEST_PERMISSION_NAME);
         string state = permissionStatus.State;
-        labelOutput = state;
+        output = state;
     }
 
 
@@ -43,7 +43,7 @@ public sealed partial class PermissionsInProcessGroup : ComponentBase {
         permissionStatus.OnChange += OnChange;
 
         void OnChange() {
-            labelOutput = TEST_ON_CHANGE_EVENT;
+            output = TEST_ON_CHANGE_EVENT;
             StateHasChanged();
             permissionStatus.OnChange -= OnChange;
             permissionStatus.Dispose();

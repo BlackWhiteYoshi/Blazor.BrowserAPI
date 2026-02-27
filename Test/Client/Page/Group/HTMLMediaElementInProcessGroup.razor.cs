@@ -61,8 +61,8 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     private ElementReference videoElement;
 
 
-    public const string LABEL_OUTPUT = "htmlmediaelement-inprocess-output";
-    private string labelOutput = string.Empty;
+    public const string OUTPUT = "htmlmediaelement-inprocess-output";
+    private string output = string.Empty;
 
 
     public void Dispose() {
@@ -74,7 +74,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_TO_HTML_ELEMENT = "htmlmediaelement-inprocess-to-html-element";
     private void ToHTMLElement() {
         using IHTMLElementInProcess htmlElement = AudioElement.ToHTMLElement();
-        labelOutput = (htmlElement is not null).ToString();
+        output = (htmlElement is not null).ToString();
     }
 
 
@@ -83,7 +83,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_SRC = "htmlmediaelement-inprocess-get-src";
     private void GetSrc() {
         string value = AudioElement.Src;
-        labelOutput = value;
+        output = value;
     }
 
     public const string BUTTON_SET_SRC = "htmlmediaelement-inprocess-set-src";
@@ -95,21 +95,21 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_SRC_OBJECT = "htmlmediaelement-inprocess-get-src-object";
     private void GetSrcObject() {
         IMediaStreamInProcess? value = AudioElement.SrcObject;
-        labelOutput = (value is not null).ToString();
+        output = (value is not null).ToString();
         value?.Dispose();
     }
 
     public const string BUTTON_SET_SRC_OBJECT = "htmlmediaelement-inprocess-set-src-object";
     private void SetSrcObject() {
         AudioElement.SrcObject = null;
-        labelOutput = TEST_SET_SRC_OBJECT;
+        output = TEST_SET_SRC_OBJECT;
     }
 
 
     public const string BUTTON_GET_CONTROLS = "htmlmediaelement-inprocess-get-controls";
     private void GetControls() {
         bool value = AudioElement.Controls;
-        labelOutput = value.ToString();
+        output = value.ToString();
     }
 
     public const string BUTTON_SET_CONTROLS = "htmlmediaelement-inprocess-set-controls";
@@ -121,7 +121,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_AUTOPLAY = "htmlmediaelement-inprocess-get-autoplay";
     private void GetAutoplay() {
         bool value = AudioElement.Autoplay;
-        labelOutput = value.ToString();
+        output = value.ToString();
     }
 
     public const string BUTTON_SET_AUTOPLAY = "htmlmediaelement-inprocess-set-autoplay";
@@ -133,7 +133,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_LOOP = "htmlmediaelement-inprocess-get-loop";
     private void GetLoop() {
         bool value = AudioElement.Loop;
-        labelOutput = value.ToString();
+        output = value.ToString();
     }
 
     public const string BUTTON_SET_LOOP = "htmlmediaelement-inprocess-set-loop";
@@ -145,7 +145,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_DEFAULT_MUTED = "htmlmediaelement-inprocess-get-default-muted";
     private void GetDefaultMuted() {
         bool value = AudioElement.DefaultMuted;
-        labelOutput = value.ToString();
+        output = value.ToString();
     }
 
     public const string BUTTON_SET_DEFAULT_MUTED = "htmlmediaelement-inprocess-set-default-muted";
@@ -157,7 +157,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_PRELOAD = "htmlmediaelement-inprocess-get-preload";
     private void GetPreload() {
         string value = AudioElement.Preload;
-        labelOutput = value;
+        output = value;
     }
 
     public const string BUTTON_SET_PRELOAD = "htmlmediaelement-inprocess-set-preload";
@@ -173,14 +173,14 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_CURRENT_SRC = "htmlmediaelement-inprocess-get-current-src";
     private void GetCurrentSrc() {
         string value = AudioElement.CurrentSrc;
-        labelOutput = value;
+        output = value;
     }
 
 
     public const string BUTTON_GET_CURRENT_TIME = "htmlmediaelement-inprocess-get-current-time";
     private void GetCurrentTime() {
         double value = AudioElement.CurrentTime;
-        labelOutput = value.ToString();
+        output = value.ToString();
     }
 
     public const string BUTTON_SET_CURRENT_TIME = "htmlmediaelement-inprocess-set-current-time";
@@ -192,21 +192,21 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_DURATION = "htmlmediaelement-inprocess-get-duration";
     private void GetDuration() {
         double value = AudioElement.Duration;
-        labelOutput = value.ToString();
+        output = value.ToString();
     }
 
 
     public const string BUTTON_GET_SEEKABLE = "htmlmediaelement-inprocess-get-seekable";
     private void GetSeekable() {
         TimeRange[] value = AudioElement.Seekable;
-        labelOutput = $"{value.Length}: {string.Join(", ", value.Select((TimeRange timeRange) => $"[{timeRange.Start}, {timeRange.End}]"))}";
+        output = $"{value.Length}: {string.Join(", ", value.Select((TimeRange timeRange) => $"[{timeRange.Start}, {timeRange.End}]"))}";
     }
 
 
     public const string BUTTON_GET_MUTED = "htmlmediaelement-inprocess-get-muted";
     private void GetMuted() {
         bool value = AudioElement.Muted;
-        labelOutput = value.ToString();
+        output = value.ToString();
     }
 
     public const string BUTTON_SET_MUTED = "htmlmediaelement-inprocess-set-muted";
@@ -218,7 +218,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_VOLUME = "htmlmediaelement-inprocess-get-volume";
     private void GetVolume() {
         double value = AudioElement.Volume;
-        labelOutput = value.ToString();
+        output = value.ToString();
     }
 
     public const string BUTTON_SET_VOLUME = "htmlmediaelement-inprocess-set-volume";
@@ -230,49 +230,49 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_PAUSED = "htmlmediaelement-inprocess-get-paused";
     private void GetPaused() {
         bool value = AudioElement.Paused;
-        labelOutput = value.ToString();
+        output = value.ToString();
     }
 
 
     public const string BUTTON_GET_ENDED = "htmlmediaelement-inprocess-get-ended";
     private void GetEnded() {
         bool value = AudioElement.Ended;
-        labelOutput = value.ToString();
+        output = value.ToString();
     }
 
 
     public const string BUTTON_GET_SEEKING = "htmlmediaelement-inprocess-get-seeking";
     private void GetSeeking() {
         bool value = AudioElement.Seeking;
-        labelOutput = value.ToString();
+        output = value.ToString();
     }
 
 
     public const string BUTTON_GET_READY_STATE = "htmlmediaelement-inprocess-get-ready-state";
     private void GetReadyState() {
         int value = AudioElement.ReadyState;
-        labelOutput = value.ToString();
+        output = value.ToString();
     }
 
 
     public const string BUTTON_GET_NETWORK_STATE = "htmlmediaelement-inprocess-get-network-state";
     private void GetNetworkState() {
         int value = AudioElement.NetworkState;
-        labelOutput = value.ToString();
+        output = value.ToString();
     }
 
 
     public const string BUTTON_GET_BUFFERED = "htmlmediaelement-inprocess-get-buffered";
     private void GetBuffered() {
         TimeRange[] value = AudioElement.Buffered;
-        labelOutput = $"{value.Length}: {string.Join(", ", value.Select((TimeRange timeRange) => $"[{timeRange.Start}, {timeRange.End}]"))}";
+        output = $"{value.Length}: {string.Join(", ", value.Select((TimeRange timeRange) => $"[{timeRange.Start}, {timeRange.End}]"))}";
     }
 
 
     public const string BUTTON_GET_PLAYED = "htmlmediaelement-inprocess-get-played";
     private void GetPlayed() {
         TimeRange[] value = AudioElement.Played;
-        labelOutput = $"{value.Length}: {string.Join(", ", value.Select((TimeRange timeRange) => $"[{timeRange.Start}, {timeRange.End}]"))}";
+        output = $"{value.Length}: {string.Join(", ", value.Select((TimeRange timeRange) => $"[{timeRange.Start}, {timeRange.End}]"))}";
     }
 
     #endregion
@@ -283,7 +283,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_PLAYBACK_RATE = "htmlmediaelement-inprocess-get-playback-rate";
     private void GetPlaybackRate() {
         double value = AudioElement.PlaybackRate;
-        labelOutput = value.ToString();
+        output = value.ToString();
     }
 
     public const string BUTTON_SET_PLAYBACK_RATE = "htmlmediaelement-inprocess-set-playback-rate";
@@ -295,7 +295,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_DEFAULT_PLAYBACK_RATE = "htmlmediaelement-inprocess-get-default_playback-rate";
     private void GetDefaultPlaybackRate() {
         double value = AudioElement.DefaultPlaybackRate;
-        labelOutput = value.ToString();
+        output = value.ToString();
     }
 
     public const string BUTTON_SET_DEFAULT_PLAYBACK_RATE = "htmlmediaelement-inprocess-set-default-playback-rate";
@@ -307,7 +307,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_CROSS_ORIGIN = "htmlmediaelement-inprocess-get-cross-origin";
     private void GetCrossOrigin() {
         string value = AudioElement.CrossOrigin;
-        labelOutput = value;
+        output = value;
     }
 
     public const string BUTTON_SET_CROSS_ORIGIN = "htmlmediaelement-inprocess-set-cross-origin";
@@ -319,7 +319,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_PRESERVES_PITCH = "htmlmediaelement-inprocess-get-preserves-pitch";
     private void GetPreservesPitch() {
         bool value = AudioElement.PreservesPitch;
-        labelOutput = value.ToString();
+        output = value.ToString();
     }
 
     public const string BUTTON_SET_PRESERVES_PITCH = "htmlmediaelement-inprocess-set-preserves-pitch";
@@ -331,7 +331,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_DISABLE_REMOTE_PLAYBACK = "htmlmediaelement-inprocess-get-disable-remote-playback";
     private void GetDisableRemotePlayback() {
         bool value = AudioElement.DisableRemotePlayback;
-        labelOutput = value.ToString();
+        output = value.ToString();
     }
 
     public const string BUTTON_SET_DISABLE_REMOTE_PLAYBACK = "htmlmediaelement-inprocess-set-disable-remote-playback";
@@ -347,7 +347,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_WIDTH = "htmlmediaelement-inprocess-get-width";
     private void GetWidth() {
         int width = VideoElement.Width;
-        labelOutput = width.ToString();
+        output = width.ToString();
     }
 
     public const string BUTTON_SET_WIDTH = "htmlmediaelement-inprocess-set-width";
@@ -359,7 +359,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_HEIGHT = "htmlmediaelement-inprocess-get-height";
     private void GetHeight() {
         int height = VideoElement.Height;
-        labelOutput = height.ToString();
+        output = height.ToString();
     }
 
     public const string BUTTON_SET_HEIGHT = "htmlmediaelement-inprocess-set-height";
@@ -371,20 +371,20 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_VIDEO_WIDTH = "htmlmediaelement-inprocess-get-video-width";
     private void GetVideoWidth() {
         int videoWidth = VideoElement.VideoWidth;
-        labelOutput = videoWidth.ToString();
+        output = videoWidth.ToString();
     }
 
     public const string BUTTON_GET_VIDEO_HEIGHT = "htmlmediaelement-inprocess-get-video-height";
     private void GetVideoHeight() {
         int videoHeight = VideoElement.VideoHeight;
-        labelOutput = videoHeight.ToString();
+        output = videoHeight.ToString();
     }
 
 
     public const string BUTTON_GET_POSTER = "htmlmediaelement-inprocess-get-poster";
     private void GetPoster() {
         string poster = VideoElement.Poster;
-        labelOutput = poster;
+        output = poster;
     }
 
     public const string BUTTON_SET_POSTER = "htmlmediaelement-inprocess-set-poster";
@@ -396,7 +396,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_GET_DISABLE_PICTURE_IN_PICTURE = "htmlmediaelement-inprocess-get-disable-picture-in-picture";
     private void GetDisablePictureInPicture() {
         bool disablePictureInPicture = VideoElement.DisablePictureInPicture;
-        labelOutput = disablePictureInPicture.ToString();
+        output = disablePictureInPicture.ToString();
     }
 
     public const string BUTTON_SET_DISABLE_PICTURE_IN_PICTURE = "htmlmediaelement-inprocess-set-disable-picture-in-picture";
@@ -413,14 +413,14 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     private async Task GetPictureInPictureWindowWidth() {
         using IPictureInPictureWindowInProcess pictureInPictureWindow = await VideoElement.RequestPictureInPicture();
         int width = pictureInPictureWindow.Width;
-        labelOutput = width.ToString();
+        output = width.ToString();
     }
 
     public const string BUTTON_GET_PICTURE_IN_PICTURE_WINDOW_HEIGHT = "htmlmediaelement-inprocess-get-picture-in-picture-window-height";
     private async Task GetPictureInPictureWindowHeight() {
         using IPictureInPictureWindowInProcess pictureInPictureWindow = await VideoElement.RequestPictureInPicture();
         int height = pictureInPictureWindow.Height;
-        labelOutput = height.ToString();
+        output = height.ToString();
     }
 
 
@@ -430,7 +430,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
         pictureInPictureWindow.OnResize += OnResize;
 
         void OnResize() {
-            labelOutput = TEST_EVENT_PICTURE_IN_PICTURE_WINDOW_RESIZE;
+            output = TEST_EVENT_PICTURE_IN_PICTURE_WINDOW_RESIZE;
             StateHasChanged();
             pictureInPictureWindow.OnResize -= OnResize;
             pictureInPictureWindow.Dispose();
@@ -465,14 +465,14 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_CAN_PLAY_TYPE = "htmlmediaelement-inprocess-can-play-type";
     private void CanPlayType() {
         string value = AudioElement.CanPlayType("audio/mpeg");
-        labelOutput = value;
+        output = value;
     }
 
 
     public const string BUTTON_REQUEST_PICTURE_IN_PICTURE = "htmlmediaelement-inprocess-request-picture-in-picture";
     private async Task RequestPictureInPicture() {
         using IPictureInPictureWindowInProcess pictureInPictureWindow = await VideoElement.RequestPictureInPicture();
-        labelOutput = (pictureInPictureWindow is not null).ToString();
+        output = (pictureInPictureWindow is not null).ToString();
     }
 
     #endregion
@@ -485,7 +485,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_ERROR = "htmlmediaelement-inprocess-error-event";
     private void RegisterOnError() {
         AudioElement.OnError += (int code, string message) => {
-            labelOutput = $"{TEST_EVENT_ERROR}: errorCode = {code}, {message}";
+            output = $"{TEST_EVENT_ERROR}: errorCode = {code}, {message}";
             StateHasChanged();
         };
     }
@@ -493,7 +493,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_CAN_PLAY = "htmlmediaelement-inprocess-can-play-event";
     private void RegisterOnCanPlay() {
         AudioElement.OnCanPlay += () => {
-            labelOutput = TEST_EVENT_CAN_PLAY;
+            output = TEST_EVENT_CAN_PLAY;
             StateHasChanged();
         };
     }
@@ -501,7 +501,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_CAN_PLAY_THROUGH = "htmlmediaelement-inprocess-can-play-through-event";
     private void RegisterOnCanPlayThrough() {
         AudioElement.OnCanPlayThrough += () => {
-            labelOutput = TEST_EVENT_CAN_PLAY_THROUGH;
+            output = TEST_EVENT_CAN_PLAY_THROUGH;
             StateHasChanged();
         };
     }
@@ -509,7 +509,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_PLAYING = "htmlmediaelement-inprocess-playing-event";
     private void RegisterOnPlaying() {
         AudioElement.OnPlaying += () => {
-            labelOutput = TEST_EVENT_PLAYING;
+            output = TEST_EVENT_PLAYING;
             StateHasChanged();
         };
     }
@@ -520,7 +520,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_LOAD_START = "htmlmediaelement-inprocess-load-start-event";
     private void RegisterOnLoadStart() {
         AudioElement.OnLoadStart += () => {
-            labelOutput = TEST_EVENT_LOAD_START;
+            output = TEST_EVENT_LOAD_START;
             StateHasChanged();
         };
     }
@@ -528,7 +528,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_PROGRESS = "htmlmediaelement-inprocess-progress-event";
     private void RegisterOnProgress() {
         AudioElement.OnProgress += () => {
-            labelOutput = TEST_EVENT_PROGRESS;
+            output = TEST_EVENT_PROGRESS;
             StateHasChanged();
         };
     }
@@ -536,7 +536,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_LOADED_DATA = "htmlmediaelement-inprocess-loaded-data-event";
     private void RegisterOnLoadedData() {
         AudioElement.OnLoadedData += () => {
-            labelOutput = TEST_EVENT_LOADED_DATA;
+            output = TEST_EVENT_LOADED_DATA;
             StateHasChanged();
         };
     }
@@ -544,7 +544,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_LOADED_METADATA = "htmlmediaelement-inprocess-loaded-metadata-event";
     private void RegisterOnLoadedMetadata() {
         AudioElement.OnLoadedMetadata += () => {
-            labelOutput = TEST_EVENT_LOADED_METADATA;
+            output = TEST_EVENT_LOADED_METADATA;
             StateHasChanged();
         };
     }
@@ -552,7 +552,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_STALLED = "htmlmediaelement-inprocess-stalled-event";
     private void RegisterOnStalled() {
         AudioElement.OnStalled += () => {
-            labelOutput = TEST_EVENT_STALLED;
+            output = TEST_EVENT_STALLED;
             StateHasChanged();
         };
     }
@@ -560,7 +560,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_SUSPEND = "htmlmediaelement-inprocess-suspend-event";
     private void RegisterOnSuspend() {
         AudioElement.OnSuspend += () => {
-            labelOutput = TEST_EVENT_SUSPEND;
+            output = TEST_EVENT_SUSPEND;
             StateHasChanged();
         };
     }
@@ -568,7 +568,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_WAITING = "htmlmediaelement-inprocess-waiting-event";
     private void RegisterOnWaiting() {
         AudioElement.OnWaiting += () => {
-            labelOutput = TEST_EVENT_WAITING;
+            output = TEST_EVENT_WAITING;
             StateHasChanged();
         };
     }
@@ -576,7 +576,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_ABORT = "htmlmediaelement-inprocess-abort-event";
     private void RegisterOnAbort() {
         AudioElement.OnAbort += () => {
-            labelOutput = TEST_EVENT_ABORT;
+            output = TEST_EVENT_ABORT;
             StateHasChanged();
         };
     }
@@ -584,7 +584,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_EMPTIED = "htmlmediaelement-inprocess-emptied-event";
     private void RegisterOnEmptied() {
         AudioElement.OnEmptied += () => {
-            labelOutput = TEST_EVENT_EMPTIED;
+            output = TEST_EVENT_EMPTIED;
             StateHasChanged();
         };
     }
@@ -595,7 +595,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_PLAY = "htmlmediaelement-inprocess-play-event";
     private void RegisterOnPlay() {
         AudioElement.OnPlay += () => {
-            labelOutput = TEST_EVENT_PLAY;
+            output = TEST_EVENT_PLAY;
             StateHasChanged();
         };
     }
@@ -603,7 +603,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_PAUSE = "htmlmediaelement-inprocess-pause-event";
     private void RegisterOnPause() {
         AudioElement.OnPause += () => {
-            labelOutput = TEST_EVENT_PAUSE;
+            output = TEST_EVENT_PAUSE;
             StateHasChanged();
         };
     }
@@ -611,7 +611,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_ENDED = "htmlmediaelement-inprocess-ended-event";
     private void RegisterOnEnded() {
         AudioElement.OnEnded += () => {
-            labelOutput = TEST_EVENT_ENDED;
+            output = TEST_EVENT_ENDED;
             StateHasChanged();
         };
     }
@@ -619,7 +619,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_SEEKING = "htmlmediaelement-inprocess-seeking-event";
     private void RegisterOnSeeking() {
         AudioElement.OnSeeking += () => {
-            labelOutput = TEST_EVENT_SEEKING;
+            output = TEST_EVENT_SEEKING;
             StateHasChanged();
         };
     }
@@ -627,7 +627,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_SEEKED = "htmlmediaelement-inprocess-seeked-event";
     private void RegisterOnSeeked() {
         AudioElement.OnSeeked += () => {
-            labelOutput = TEST_EVENT_SEEKED;
+            output = TEST_EVENT_SEEKED;
             StateHasChanged();
         };
     }
@@ -635,7 +635,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_TIME_UPDATE = "htmlmediaelement-inprocess-time-update-event";
     private void RegisterOnTimeUpdate() {
         AudioElement.OnTimeUpdate += () => {
-            labelOutput = TEST_EVENT_TIME_UPDATE;
+            output = TEST_EVENT_TIME_UPDATE;
             StateHasChanged();
         };
     }
@@ -646,7 +646,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_VOLUME_CHANGE = "htmlmediaelement-inprocess-volume-change-event";
     private void RegisterOnVolumeChange() {
         AudioElement.OnVolumeChange += () => {
-            labelOutput = TEST_EVENT_VOLUME_CHANGE;
+            output = TEST_EVENT_VOLUME_CHANGE;
             StateHasChanged();
         };
     }
@@ -654,7 +654,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_RATE_CHANGE = "htmlmediaelement-inprocess-rate-change-event";
     private void RegisterOnRateChange() {
         AudioElement.OnRateChange += () => {
-            labelOutput = TEST_EVENT_RATE_CHANGE;
+            output = TEST_EVENT_RATE_CHANGE;
             StateHasChanged();
         };
     }
@@ -662,7 +662,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_DURATION_CHANGE = "htmlmediaelement-inprocess-duration-change-event";
     private void RegisterOnDurationChange() {
         AudioElement.OnDurationChange += () => {
-            labelOutput = TEST_EVENT_DURATION_CHANGE;
+            output = TEST_EVENT_DURATION_CHANGE;
             StateHasChanged();
         };
     }
@@ -673,7 +673,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_RESIZE = "htmlmediaelement-inprocess-resize-event";
     private void RegisterOnResize() {
         VideoElement.OnResize += () => {
-            labelOutput = TEST_EVENT_RESIZE;
+            output = TEST_EVENT_RESIZE;
             StateHasChanged();
         };
     }
@@ -681,7 +681,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_ENTER_PICTURE_IN_PICTURE = "htmlmediaelement-inprocess-enter-picture-in-picture-event";
     private void RegisterOnEnterPictureInPicture() {
         VideoElement.OnEnterPictureInPicture += (IPictureInPictureWindowInProcess pictureInPictureWindow) => {
-            labelOutput = TEST_EVENT_ENTER_PICTURE_IN_PICTURE;
+            output = TEST_EVENT_ENTER_PICTURE_IN_PICTURE;
             StateHasChanged();
             pictureInPictureWindow.Dispose();
         };
@@ -690,7 +690,7 @@ public sealed partial class HTMLMediaElementInProcessGroup : ComponentBase, IDis
     public const string BUTTON_REGISTER_ON_LEAVE_PICTURE_IN_PICTURE = "htmlmediaelement-inprocess-leave-picture-in-picture-event";
     private void RegisterOnLeavePictureInPicture() {
         VideoElement.OnLeavePictureInPicture += (IPictureInPictureWindowInProcess pictureInPictureWindow) => {
-            labelOutput = TEST_EVENT_LEAVE_PICTURE_IN_PICTURE;
+            output = TEST_EVENT_LEAVE_PICTURE_IN_PICTURE;
             StateHasChanged();
             pictureInPictureWindow.Dispose();
         };

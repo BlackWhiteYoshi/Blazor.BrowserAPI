@@ -43,7 +43,7 @@ public sealed class GamepadAPIInProcessTest(PlayWrightFixture playWrightFixture)
     public async Task GetGamepads() {
         await ExecuteTest(GamepadAPIInProcessGroup.BUTTON_GET_GAMEPADS);
 
-        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("Slots = 1, Connected = 1");
     }
 
@@ -57,7 +57,7 @@ public sealed class GamepadAPIInProcessTest(PlayWrightFixture playWrightFixture)
             """);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(GamepadAPIInProcessGroup.TEST_GAMEPAD_CONNECTED_EVENT);
     }
 
@@ -71,7 +71,7 @@ public sealed class GamepadAPIInProcessTest(PlayWrightFixture playWrightFixture)
             """);
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(GamepadAPIInProcessGroup.TEST_GAMEPAD_DISCONNECTED_EVENT);
     }
 
@@ -80,7 +80,7 @@ public sealed class GamepadAPIInProcessTest(PlayWrightFixture playWrightFixture)
     public async Task GetAxes() {
         await ExecuteTest(GamepadAPIInProcessGroup.BUTTON_GET_AXES);
 
-        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("(2): [0, 1]");
     }
 
@@ -88,7 +88,7 @@ public sealed class GamepadAPIInProcessTest(PlayWrightFixture playWrightFixture)
     public async Task GetButtons() {
         await ExecuteTest(GamepadAPIInProcessGroup.BUTTON_GET_BUTTONS);
 
-        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("(3): [GamepadButton { Pressed = True, Touched = True, Value = 1 }, GamepadButton { Pressed = False, Touched = False, Value = 0 }, GamepadButton { Pressed = False, Touched = False, Value = 0 }]");
     }
 
@@ -97,7 +97,7 @@ public sealed class GamepadAPIInProcessTest(PlayWrightFixture playWrightFixture)
     public async Task GetConnected() {
         await ExecuteTest(GamepadAPIInProcessGroup.BUTTON_GET_CONNECTED);
 
-        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -105,7 +105,7 @@ public sealed class GamepadAPIInProcessTest(PlayWrightFixture playWrightFixture)
     public async Task GetId() {
         await ExecuteTest(GamepadAPIInProcessGroup.BUTTON_GET_ID);
 
-        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(GAMEPAD_ID);
     }
 
@@ -113,7 +113,7 @@ public sealed class GamepadAPIInProcessTest(PlayWrightFixture playWrightFixture)
     public async Task GetIndex() {
         await ExecuteTest(GamepadAPIInProcessGroup.BUTTON_GET_INDEX);
 
-        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(GAMEPAD_INDEX);
     }
 
@@ -121,7 +121,7 @@ public sealed class GamepadAPIInProcessTest(PlayWrightFixture playWrightFixture)
     public async Task GetMapping() {
         await ExecuteTest(GamepadAPIInProcessGroup.BUTTON_GET_MAPPING);
 
-        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(GAMEPAD_MAPPING);
     }
 
@@ -129,7 +129,7 @@ public sealed class GamepadAPIInProcessTest(PlayWrightFixture playWrightFixture)
     public async Task GetTimestamp() {
         await ExecuteTest(GamepadAPIInProcessGroup.BUTTON_GET_TIMESTAMP);
 
-        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(GAMEPAD_TIMESTAMP);
     }
 
@@ -138,7 +138,7 @@ public sealed class GamepadAPIInProcessTest(PlayWrightFixture playWrightFixture)
     public async Task GetVibrationActuatorEffects() {
         await ExecuteTest(GamepadAPIInProcessGroup.BUTTON_GET_VIBRATION_ACTUATOR_EFFECTS);
 
-        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo($"(1): [{GAMEPAD_VIBRATION_ACTUATOR_EFFECT}]");
     }
 
@@ -146,7 +146,7 @@ public sealed class GamepadAPIInProcessTest(PlayWrightFixture playWrightFixture)
     public async Task PlayVibrationActuatorEffect() {
         await ExecuteTest(GamepadAPIInProcessGroup.BUTTON_PLAY_VIBRATION_ACTUATOR_EFFECT);
 
-        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(GAMEPAD_VIBRATION_ACTUATOR_RESULT);
     }
 
@@ -154,7 +154,7 @@ public sealed class GamepadAPIInProcessTest(PlayWrightFixture playWrightFixture)
     public async Task ResetVibrationActuator() {
         await ExecuteTest(GamepadAPIInProcessGroup.BUTTON_RESET_VIBRATION_ACTUATOR);
 
-        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(GamepadAPIInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(GAMEPAD_VIBRATION_ACTUATOR_RESULT);
     }
 }

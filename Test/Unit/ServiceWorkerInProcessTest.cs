@@ -75,7 +75,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task Register() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_REGISTER);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(ServiceWorkerInProcessGroup.TEST_REGISTER);
     }
 
@@ -83,7 +83,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task RegisterWithWorkerRegistration() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_REGISTER_WITH_WORKER_REGISTRATION);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -92,7 +92,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task GetController() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_GET_CONTROLLER);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
     }
 
@@ -100,7 +100,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task GetReady_Property() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_GET_READY_PROPERTY);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -108,7 +108,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task GetReady_Method() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_GET_READY_METHOD);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -117,7 +117,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task GetRegistration() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_GET_REGISTRATION);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
     }
 
@@ -125,7 +125,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task GetRegistrations() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_GET_REGISTRATIONS);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("0");
     }
 
@@ -133,7 +133,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task StartMessages() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_START_MESSAGES);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(ServiceWorkerInProcessGroup.TEST_START_MESSAGES);
     }
 
@@ -144,7 +144,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
         await Page.EvaluateAsync("navigator.serviceWorker.dispatchEvent(new Event('controllerchange'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(ServiceWorkerInProcessGroup.TEST_EVENT_CONTROLLER_CHANGED);
     }
 
@@ -154,7 +154,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
         await Page.EvaluateAsync("navigator.serviceWorker.dispatchEvent(new MessageEvent('message', { data: 'fake-message' }));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("fake-message");
     }
 
@@ -165,7 +165,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task Unregister() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_UNREGISTER);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -174,7 +174,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task Active() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_ACTIVE);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -182,7 +182,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task Installing() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_INSTALLING);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
     }
 
@@ -190,7 +190,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task Waiting() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_WAITING);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("False");
     }
 
@@ -198,7 +198,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task Scope() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_SCOPE);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(SERVICE_WORKER_REGISTRATION_SCOPE);
     }
 
@@ -206,7 +206,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task UpdateViaCache() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_UPDATE_VIA_CACHE);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(SERVICE_WORKER_REGISTRATION_UPDATE_VIA_CACHE);
     }
 
@@ -215,7 +215,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task Update() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_UPDATE);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
     }
 
@@ -224,7 +224,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task RegisterOnUpdateFound() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_REGISTER_ON_UPDATE_FOUND);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(ServiceWorkerInProcessGroup.TEST_EVENT_UPDATE_FOUND);
     }
 
@@ -235,7 +235,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task ScriptUrl() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_SCRIPT_URL);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(SERVICE_WORKER_SCRIPT_URL);
     }
 
@@ -243,7 +243,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task State() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_STATE);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(SERVICE_WORKER_STATE);
     }
 
@@ -252,7 +252,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task PostMessage() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_POST_MESSAGE);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(ServiceWorkerInProcessGroup.TEST_POST_MESSAGE);
     }
 
@@ -261,7 +261,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task RegisterOnStateChange() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_REGISTER_ON_STATE_CHANGE);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(SERVICE_WORKER_EVENT_STATE_CHANGE);
     }
 
@@ -269,7 +269,7 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
     public async Task RegisterOnError() {
         await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_REGISTER_ON_ERROR);
 
-        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(SERVICE_WORKER_EVENT_ERROR_MESSAGE);
     }
 }

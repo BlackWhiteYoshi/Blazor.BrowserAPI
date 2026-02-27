@@ -31,7 +31,7 @@ public sealed class WindowManagementInProcessTest(PlayWrightFixture playWrightFi
     public async Task Screen_GetWidth() {
         await ExecuteTest(WindowManagementInProcessGroup.BUTTON_SCREEN_GET_WIDTH);
 
-        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.OUTPUT).TextContentAsync();
         bool isNumber = int.TryParse(result, out _);
         await Assert.That(isNumber).IsTrue();
     }
@@ -40,7 +40,7 @@ public sealed class WindowManagementInProcessTest(PlayWrightFixture playWrightFi
     public async Task Screen_GetHeight() {
         await ExecuteTest(WindowManagementInProcessGroup.BUTTON_SCREEN_GET_HEIGHT);
 
-        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.OUTPUT).TextContentAsync();
         bool isNumber = int.TryParse(result, out _);
         await Assert.That(isNumber).IsTrue();
     }
@@ -49,7 +49,7 @@ public sealed class WindowManagementInProcessTest(PlayWrightFixture playWrightFi
     public async Task Screen_GetAvailWidth() {
         await ExecuteTest(WindowManagementInProcessGroup.BUTTON_SCREEN_GET_AVAIL_WIDTH);
 
-        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.OUTPUT).TextContentAsync();
         bool isNumber = int.TryParse(result, out _);
         await Assert.That(isNumber).IsTrue();
     }
@@ -58,7 +58,7 @@ public sealed class WindowManagementInProcessTest(PlayWrightFixture playWrightFi
     public async Task Screen_GetAvailHeight() {
         await ExecuteTest(WindowManagementInProcessGroup.BUTTON_SCREEN_GET_AVAIL_HEIGHT);
 
-        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.OUTPUT).TextContentAsync();
         bool isNumber = int.TryParse(result, out _);
         await Assert.That(isNumber).IsTrue();
     }
@@ -67,7 +67,7 @@ public sealed class WindowManagementInProcessTest(PlayWrightFixture playWrightFi
     public async Task Screen_GetColorDepth() {
         await ExecuteTest(WindowManagementInProcessGroup.BUTTON_SCREEN_GET_COLOR_DEPTH);
 
-        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.OUTPUT).TextContentAsync();
         bool isNumber = int.TryParse(result, out _);
         await Assert.That(isNumber).IsTrue();
     }
@@ -76,7 +76,7 @@ public sealed class WindowManagementInProcessTest(PlayWrightFixture playWrightFi
     public async Task Screen_GetPixelDepth() {
         await ExecuteTest(WindowManagementInProcessGroup.BUTTON_SCREEN_GET_PIXEL_DEPTH);
 
-        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.OUTPUT).TextContentAsync();
         bool isNumber = int.TryParse(result, out _);
         await Assert.That(isNumber).IsTrue();
     }
@@ -85,7 +85,7 @@ public sealed class WindowManagementInProcessTest(PlayWrightFixture playWrightFi
     public async Task Screen_GetIsExtended() {
         await ExecuteTest(WindowManagementInProcessGroup.BUTTON_SCREEN_GET_IS_EXTENDED);
 
-        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result is "True" or "False").IsTrue();
     }
 
@@ -96,7 +96,7 @@ public sealed class WindowManagementInProcessTest(PlayWrightFixture playWrightFi
     public async Task Screen_GetOrientationType() {
         await ExecuteTest(WindowManagementInProcessGroup.BUTTON_SCREEN_GET_ORIENTATION_TYPE);
 
-        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsNotEmpty();
     }
 
@@ -104,7 +104,7 @@ public sealed class WindowManagementInProcessTest(PlayWrightFixture playWrightFi
     public async Task Screen_GetOrientationAngle() {
         await ExecuteTest(WindowManagementInProcessGroup.BUTTON_SCREEN_GET_ORIENTATION_ANGLE);
 
-        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.OUTPUT).TextContentAsync();
         bool isNumber = double.TryParse(result, out _);
         await Assert.That(isNumber).IsTrue();
     }
@@ -113,7 +113,7 @@ public sealed class WindowManagementInProcessTest(PlayWrightFixture playWrightFi
     public async Task Screen_LockOrientation() {
         await ExecuteTest(WindowManagementInProcessGroup.BUTTON_SCREEN_LOCK_ORIENTATION);
 
-        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result is WindowManagementInProcessGroup.TEST_SCREEN_LOCK_ORIENTATION_RESULT or WindowManagementInProcessGroup.TEST_SCREEN_LOCK_ORIENTATION_NOT_SUPPOERTED).IsTrue();
     }
 
@@ -121,7 +121,7 @@ public sealed class WindowManagementInProcessTest(PlayWrightFixture playWrightFi
     public async Task Screen_UnlockOrientation() {
         await ExecuteTest(WindowManagementInProcessGroup.BUTTON_SCREEN_UNLOCK_ORIENTATION);
 
-        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(WindowManagementInProcessGroup.TEST_SCREEN_UNLOCK_ORIENTATION_RESULT);
     }
 
@@ -134,7 +134,7 @@ public sealed class WindowManagementInProcessTest(PlayWrightFixture playWrightFi
         await Page.EvaluateAsync("window.screen.dispatchEvent(new Event('change'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(WindowManagementInProcessGroup.TEST_SCREEN_CHANGE_EVENT);
     }
 
@@ -144,7 +144,7 @@ public sealed class WindowManagementInProcessTest(PlayWrightFixture playWrightFi
         await Page.EvaluateAsync("window.screen.orientation.dispatchEvent(new Event('change'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
-        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.LABEL_OUTPUT).TextContentAsync();
+        string? result = await Page.GetByTestId(WindowManagementInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(WindowManagementInProcessGroup.TEST_SCREEN_ORIENTATION_CHANGE_EVENT);
     }
 

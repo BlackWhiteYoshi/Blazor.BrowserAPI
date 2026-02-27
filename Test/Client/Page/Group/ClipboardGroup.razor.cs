@@ -10,13 +10,13 @@ public sealed partial class ClipboardGroup : ComponentBase {
     public required IClipboard Clipboard { private get; init; }
 
 
-    public const string LABEL_OUTPUT = "clipboard-output";
-    private string labelOutput = string.Empty;
+    public const string OUTPUT = "clipboard-output";
+    private string output = string.Empty;
 
 
     public const string BUTTON_READ = "clipboard-read";
     private async Task Read() {
-        labelOutput = await Clipboard.Read();
+        output = await Clipboard.Read();
     }
 
     public const string BUTTON_WRITE = "clipboard-write";
