@@ -186,6 +186,17 @@ public static class Generator {
                         using BrotliStream brotliStream = new(fileStream, CompressionLevel.SmallestSize);
                         await originalStream.CopyToAsync(brotliStream);
                     }
+
+                    originalStream.Seek(0, SeekOrigin.Begin);
+
+                    // compress zstandard
+                    {
+                        using FileStream fileStream = File.Create($"{filePath}.zst");
+                        // .NET11 has ZstandardStream
+                        //   using ZstandardStream zstandardStream = new(fileStream, CompressionLevel.SmallestSize);
+                        using ZstdSharp.CompressionStream zstandardStream = new(fileStream, ZstdSharp.Compressor.DefaultCompressionLevel);
+                        await originalStream.CopyToAsync(zstandardStream);
+                    }
                 }
             }
             Task.WhenAll(tasklist).GetAwaiter().GetResult();
