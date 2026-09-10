@@ -1132,7 +1132,7 @@ public sealed class HTMLElementTest(PlayWrightFixture playWrightFixture) : PlayW
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='all', types='[]', files='[]'");
+        await Assert.That(result).IsEqualTo("dropEffect='copy', effectAllowed='all', types='[]', files='[]'");
     }
 
     [Test]
@@ -1170,7 +1170,7 @@ public sealed class HTMLElementTest(PlayWrightFixture playWrightFixture) : PlayW
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='all', types='[]', files='[]'");
+        await Assert.That(result).IsEqualTo("dropEffect='copy', effectAllowed='all', types='[]', files='[]'");
     }
 
     [Test]
@@ -1194,7 +1194,7 @@ public sealed class HTMLElementTest(PlayWrightFixture playWrightFixture) : PlayW
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HTMLElementGroup.OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("dropEffect='none', effectAllowed='all', types='[]', files='[]'");
+        await Assert.That(result).IsEqualTo("dropEffect='copy', effectAllowed='all', types='[]', files='[]'");
     }
 
 

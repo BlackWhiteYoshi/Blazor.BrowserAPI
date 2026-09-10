@@ -12,6 +12,7 @@ namespace BrowserAPI.Implementation;
 /// or by grabbing any position in the array returned by the <see cref="IGamepadAPI.GetGamepads">Navigator.getGamepads()</see> method.
 /// </para>
 /// </summary>
+/// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="DisposeAsync"/> when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class Gamepad(IJSObjectReference gamepadJS) : GamepadBase(gamepadJS), IGamepad {

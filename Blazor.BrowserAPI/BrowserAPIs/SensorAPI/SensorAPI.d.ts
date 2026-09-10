@@ -9,12 +9,11 @@ declare class Sensor extends EventTarget {
     stop(): void;
 
     onreading: (this: this, ev: Event) => any;
-    onactivate: (this: this, ev: Event) => any;
-    onerror: (this: this, ev: SensorErrorEvent) => any;
-
-    addEventListener(type: "error", listener: (this: this, ev: SensorErrorEvent) => any, useCapture?: boolean): void;
-    addEventListener(type: "activate", listener: (this: this, ev: Event) => any, useCapture?: boolean): void;
     addEventListener(type: "reading", listener: (this: this, ev: Event) => any, useCapture?: boolean): void;
+    onactivate: (this: this, ev: Event) => any;
+    addEventListener(type: "activate", listener: (this: this, ev: Event) => any, useCapture?: boolean): void;
+    onerror: (this: this, ev: SensorErrorEvent) => any;
+    addEventListener(type: "error", listener: (this: this, ev: SensorErrorEvent) => any, useCapture?: boolean): void;
 }
 
 declare class SensorErrorEvent extends Event {

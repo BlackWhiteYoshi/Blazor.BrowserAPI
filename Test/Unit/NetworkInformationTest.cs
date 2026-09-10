@@ -149,7 +149,7 @@ public sealed class NetworkInformationTest(PlayWrightFixture playWrightFixture) 
     [Test]
     public async Task RegisterOnChange() {
         await ExecuteTest(NetworkInformationGroup.BUTTON_REGISTER_ON_CHANGE);
-        await BrowserContext.SetOfflineAsync(true);
+        await Page.EvaluateAsync("navigator.connection.dispatchEvent(new Event('change'));");
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(NetworkInformationGroup.OUTPUT).TextContentAsync();

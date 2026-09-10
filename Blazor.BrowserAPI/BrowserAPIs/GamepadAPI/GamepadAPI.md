@@ -92,6 +92,11 @@ and to access other information about the gamepads themselves, and what buttons 
 <br></br>
 ### IGamepad
 
+The *Gamepad* interface of the Gamepad API defines an individual gamepad or other controller, allowing access to information such as button presses, axis positions, and id.  
+A Gamepad object can be returned in one of two ways:
+via the gamepad property of the IGamepadAPI.OnGamepadConnected and IGamepadAPI.OnGamepadDisconnected events,
+or by grabbing any position in the array returned by the IGamepadAPI.GetGamepads method.
+
 #### Properties
 
 | **Name**                 | **Type**                         | get/set | **Description**                                                                                                                                                                                                                                                                                                                                                          |
@@ -145,6 +150,11 @@ and to access other information about the gamepads themselves, and what buttons 
 
 <br></br>
 ### IGamepadInProcess
+
+The *Gamepad* interface of the Gamepad API defines an individual gamepad or other controller, allowing access to information such as button presses, axis positions, and id.  
+A Gamepad object can be returned in one of two ways:
+via the gamepad property of the IGamepadAPIInProcess.OnGamepadConnected and IGamepadAPIInProcess.OnGamepadDisconnected events,
+or by grabbing any position in the array returned by the IGamepadAPIInProcess.GetGamepads method.
 
 #### Properties
 
