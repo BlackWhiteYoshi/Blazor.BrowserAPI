@@ -11,6 +11,7 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 
 ## Available Browser APIs
 
+- BatteryStatus
 - Clipboard
 - Console
 - CookieStorage

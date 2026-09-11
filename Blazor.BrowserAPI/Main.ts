@@ -1,3 +1,6 @@
+import { BatteryStatusAPI } from "./BrowserAPIs/BatteryStatus/BatteryStatus.ts";
+export { BatteryStatusAPI };
+
 import { ClipboardAPI } from "./BrowserAPIs/Clipboard/Clipboard.ts";
 export { ClipboardAPI };
 
@@ -8,7 +11,7 @@ import { CookieStorageAPI } from "./BrowserAPIs/CookieStorage/CookieStorage.ts";
 export { CookieStorageAPI };
 
 import { DocumentAPI } from "./BrowserAPIs/Document/Document.ts";
-export { DocumentAPI }
+export { DocumentAPI };
 
 import { DownloadAPI } from "./BrowserAPIs/Download/Download.ts";
 export { DownloadAPI };

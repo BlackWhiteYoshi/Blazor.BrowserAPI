@@ -9,6 +9,8 @@ namespace Jab;
 /// </summary>
 [ServiceProviderModule]
 [Scoped<BrowserAPI.IModuleManager, BrowserAPI.Implementation.ModuleManager>]
+[Scoped<BrowserAPI.IBatteryStatus, BrowserAPI.Implementation.BatteryStatus>]
+[Scoped<BrowserAPI.IBatteryStatusInProcess, BrowserAPI.Implementation.BatteryStatusInProcess>]
 [Scoped<BrowserAPI.IClipboard, BrowserAPI.Implementation.Clipboard>]
 [Scoped<BrowserAPI.IConsole, BrowserAPI.Implementation.Console>]
 [Scoped<BrowserAPI.IConsoleInProcess, BrowserAPI.Implementation.ConsoleInProcess>]

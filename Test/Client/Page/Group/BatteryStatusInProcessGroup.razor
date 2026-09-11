@@ -1,0 +1,19 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Battery Status InProcess</h2>
+    <div>
+        <button data-testid="@BUTTON_GET_BATTERY" @onclick="GetBattery">GetBattery</button>
+
+        <button data-testid="@BUTTON_GET_CHARGING" @onclick="GetCharging">GetCharging</button>
+        <button data-testid="@BUTTON_GET_CHARGING_TIME" @onclick="GetChargingTime">GetChargingTime</button>
+        <button data-testid="@BUTTON_GET_DISCHARGING_TIME" @onclick="GetDischargingTime">GetDischargingTime</button>
+        <button data-testid="@BUTTON_GET_LEVEL" @onclick="GetLevel">GetLevel</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_CHARGING_CHANGE" @onclick="RegisterOnChargingChange">RegisterOnChargingChange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_CHARGING_TIME_CHANGE" @onclick="RegisterOnChargingTimeChange">RegisterOnChargingTimeChange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_DISCHARGING_TIME_CHANGE" @onclick="RegisterOnDisChargingTimeChange">RegisterOnDisChargingTimeChange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_LEVEL_CHANGE" @onclick="RegisterOnLevelChange">RegisterOnLevelChange</button>
+    </div>
+    <span data-testid="@OUTPUT">@output</span>
+</div>

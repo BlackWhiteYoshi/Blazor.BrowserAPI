@@ -15,6 +15,9 @@ else {
     <div id="test-page">
         <h1>Testing Page @RendererInfo.Name</h1>
 
+        <BatteryStatusGroup />
+        @if (isInProcess) { <BatteryStatusInProcessGroup /> }
+
         <ClipboardGroup />
 
         <ConsoleGroup />

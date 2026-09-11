@@ -9,6 +9,7 @@ You can find the test page at [blazor-browserapi.blackwhiteyoshi.com](https://bl
 
 ## Available Browser APIs
 
+- [BatteryStatus](Blazor.BrowserAPI/BrowserAPIs/BatteryStatus/BatteryStatus.md)
 - [Clipboard](Blazor.BrowserAPI/BrowserAPIs/Clipboard/Clipboard.md)
 - [Console](Blazor.BrowserAPI/BrowserAPIs/Console/Console.md)
 - [CookieStorage](Blazor.BrowserAPI/BrowserAPIs/CookieStorage/CookieStorage.md)

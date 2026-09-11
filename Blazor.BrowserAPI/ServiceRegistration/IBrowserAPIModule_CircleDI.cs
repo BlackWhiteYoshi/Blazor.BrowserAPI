@@ -8,6 +8,8 @@ namespace CircleDIAttributes;
 /// <para>All services will be registered as scoped, CreationTiming.Constructor, GetAccess.Property and default Name (name of the implementation class).</para>
 /// </summary>
 [Scoped<BrowserAPI.IModuleManager, BrowserAPI.Implementation.ModuleManager>]
+[Scoped<BrowserAPI.IBatteryStatus, BrowserAPI.Implementation.BatteryStatus>]
+[Scoped<BrowserAPI.IBatteryStatusInProcess, BrowserAPI.Implementation.BatteryStatusInProcess>]
 [Scoped<BrowserAPI.IClipboard, BrowserAPI.Implementation.Clipboard>]
 [Scoped<BrowserAPI.IConsole, BrowserAPI.Implementation.Console>]
 [Scoped<BrowserAPI.IConsoleInProcess, BrowserAPI.Implementation.ConsoleInProcess>]

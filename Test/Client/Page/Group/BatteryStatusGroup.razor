@@ -1,0 +1,23 @@
+﻿@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Battery Status</h2>
+    <div>
+        <button data-testid="@BUTTON_GET_BATTERY" @onclick="GetBattery">GetBattery</button>
+
+        <button data-testid="@BUTTON_GET_CHARGING_PROPERTY" @onclick="GetCharging_Property">GetCharging_Property</button>
+        <button data-testid="@BUTTON_GET_CHARGING_METHOD" @onclick="GetCharging_Method">GetCharging_Method</button>
+        <button data-testid="@BUTTON_GET_CHARGING_TIME_PROPERTY" @onclick="GetChargingTime_Property">GetChargingTime_Property</button>
+        <button data-testid="@BUTTON_GET_CHARGING_TIME_METHOD" @onclick="GetChargingTime_Method">GetChargingTime_Method</button>
+        <button data-testid="@BUTTON_GET_DISCHARGING_TIME_PROPERTY" @onclick="GetDischargingTime_Property">GetDischargingTime_Property</button>
+        <button data-testid="@BUTTON_GET_DISCHARGING_TIME_METHOD" @onclick="GetDischargingTime_Method">GetDischargingTime_Method</button>
+        <button data-testid="@BUTTON_GET_LEVEL_PROPERTY" @onclick="GetLevel_Property">GetLevel_Property</button>
+        <button data-testid="@BUTTON_GET_LEVEL_METHOD" @onclick="GetLevel_Method">GetLevel_Method</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_CHARGING_CHANGE" @onclick="RegisterOnChargingChange">RegisterOnChargingChange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_CHARGING_TIME_CHANGE" @onclick="RegisterOnChargingTimeChange">RegisterOnChargingTimeChange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_DISCHARGING_TIME_CHANGE" @onclick="RegisterOnDisChargingTimeChange">RegisterOnDisChargingTimeChange</button>
+        <button data-testid="@BUTTON_REGISTER_ON_LEVEL_CHANGE" @onclick="RegisterOnLevelChange">RegisterOnLevelChange</button>
+    </div>
+    <span data-testid="@OUTPUT">@output</span>
+</div>

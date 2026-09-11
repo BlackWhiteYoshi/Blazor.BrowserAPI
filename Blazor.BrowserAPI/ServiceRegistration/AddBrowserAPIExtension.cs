@@ -19,6 +19,8 @@ public static class AddBrowserAPIExtension {
     [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
     public static IServiceCollection AddBrowserAPI(this IServiceCollection services) {
         services.AddScoped<IModuleManager, Implementation.ModuleManager>()
+            .AddScoped<IBatteryStatus, Implementation.BatteryStatus>()
+            .AddScoped<IBatteryStatusInProcess, Implementation.BatteryStatusInProcess>()
             .AddScoped<IClipboard, Implementation.Clipboard>()
             .AddScoped<IConsole, Implementation.Console>()
             .AddScoped<IConsoleInProcess, Implementation.ConsoleInProcess>()
