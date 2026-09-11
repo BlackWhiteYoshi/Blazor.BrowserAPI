@@ -177,3 +177,5 @@ There are more interfaces coming.
 - 0.15.1
   - added TargetFramework net10.0
   - added more TrySyncExtension methods: InvokeConstructor, GetValue, SetValue, TimeSpan overloads
+- 0.16.0
+  - added BatteryStatus (23 BrowserAPIs)
