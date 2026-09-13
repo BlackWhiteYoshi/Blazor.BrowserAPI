@@ -1,7 +1,5 @@
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
-using System.Threading;
 
 namespace BrowserAPI;
 

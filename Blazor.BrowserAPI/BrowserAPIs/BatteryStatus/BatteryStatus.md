@@ -43,8 +43,8 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
 
 #### Methods
 
-| **Name**   | **Parameters**                                  | **ReturnType**                   | **Description**                                                                                                                                                                                                             |
-| ---------- | ----------------------------------------------- | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Name**   | **Parameters**                                  | **ReturnType**                   | **Description**                                                                                                                                                                                                                                                                                                                                |
+| ---------- | ----------------------------------------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | GetBattery | [CancellationToken cancellationToken = default] | ValueTask&lt;IBatteryManager&gt; | Provides information about the system's battery. It returns a battery promise, which resolves with a BatteryManager object providing some properties to get the battery status also some events you can handle to monitor the battery status.<br />Each method call produces a new instance that should be disposed when you are done with it. |
 
 
@@ -58,7 +58,7 @@ Since Chrome 103, the BatteryManager interface of Battery Status API only expose
 
 #### Properties
 
-| **Name**        | **Type**                | get/set | **Description**                                                                                                                                                                                                                                                                                                                                                          |
+| **Name**        | **Type**                | get/set | **Description**                                                                                                              |
 | --------------- | ----------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | Charging        | ValueTask&lt;bool&gt;   | get     | Indicating whether the battery is currently being charged.                                                                   |
 | ChargingTime    | ValueTask&lt;double&gt; | get     | Representing the remaining time in seconds until the battery is fully charged, or 0 if the battery is already fully charged. |
@@ -67,7 +67,7 @@ Since Chrome 103, the BatteryManager interface of Battery Status API only expose
 
 #### Events
 
-| **Name**                | **Type** | **Description**                                                                                                                                                                                                                                                                                                                                                              |
+| **Name**                | **Type** | **Description**                                                                                |
 | ----------------------- | -------- | ---------------------------------------------------------------------------------------------- |
 | OnChargingChange        | Action   | Fired when the battery charging state (IBatteryManager.Charging property) is updated.          |
 | OnChargingTimeChange    | Action   | Fired when the battery charging time (IBatteryManager.ChargingTime property) is updated.       |
@@ -81,8 +81,8 @@ Since Chrome 103, the BatteryManager interface of Battery Status API only expose
 
 #### Methods
 
-| **Name**   | **Parameters**                                  | **ReturnType**                            | **Description**                                                                                                                                                                                                             |
-| ---------- | ----------------------------------------------- | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Name**   | **Parameters**                                  | **ReturnType**                            | **Description**                                                                                                                                                                                                                                                                                                                                |
+| ---------- | ----------------------------------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | GetBattery | [CancellationToken cancellationToken = default] | ValueTask&lt;IBatteryManagerInProcess&gt; | Provides information about the system's battery. It returns a battery promise, which resolves with a BatteryManager object providing some properties to get the battery status also some events you can handle to monitor the battery status.<br />Each method call produces a new instance that should be disposed when you are done with it. |
 
 
@@ -96,7 +96,7 @@ Since Chrome 103, the BatteryManager interface of Battery Status API only expose
 
 #### Properties
 
-| **Name**        | **Type** | get/set | **Description**                                                                                                                                                                                                                                                                                                                                                          |
+| **Name**        | **Type** | get/set | **Description**                                                                                                              |
 | --------------- | -------- | ------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | Charging        | bool     | get     | Indicating whether the battery is currently being charged.                                                                   |
 | ChargingTime    | double   | get     | Representing the remaining time in seconds until the battery is fully charged, or 0 if the battery is already fully charged. |
@@ -105,7 +105,7 @@ Since Chrome 103, the BatteryManager interface of Battery Status API only expose
 
 #### Events
 
-| **Name**                | **Type** | **Description**                                                                                                                                                                                                                                                                                                                                                              |
+| **Name**                | **Type** | **Description**                                                                                |
 | ----------------------- | -------- | ---------------------------------------------------------------------------------------------- |
 | OnChargingChange        | Action   | Fired when the battery charging state (IBatteryManager.Charging property) is updated.          |
 | OnChargingTimeChange    | Action   | Fired when the battery charging time (IBatteryManager.ChargingTime property) is updated.       |

@@ -1,4 +1,4 @@
-﻿using AutoInterfaceAttributes;
+using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 
@@ -28,12 +28,12 @@ public abstract class BatteryManagerBase(IJSObjectReference batteryManagerJS) {
 
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
 
-    private ValueTask InitEventTrigger(IJSObjectReference htmlElement) {
+    private ValueTask InitEventTrigger() {
         if (_objectReferenceEventTrigger is not null)
             return ValueTask.CompletedTask;
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return htmlElement.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger]);
+        return batteryManagerJS.InvokeVoidTrySync("initEvents", [_objectReferenceEventTrigger]);
     }
 
     /// <summary>
@@ -43,7 +43,7 @@ public abstract class BatteryManagerBase(IJSObjectReference batteryManagerJS) {
 
 
     private protected async ValueTask ActivateJSEvent(string jsMethodName) {
-        await InitEventTrigger(batteryManagerJS);
+        await InitEventTrigger();
         await batteryManagerJS.InvokeVoidTrySync(jsMethodName);
     }
 
