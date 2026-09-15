@@ -15,6 +15,7 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - Clipboard
 - Console
 - CookieStorage
+- DevicePosture
 - Document
 - Download
 - FileSystem

@@ -15,6 +15,8 @@ namespace CircleDIAttributes;
 [Scoped<BrowserAPI.IConsoleInProcess, BrowserAPI.Implementation.ConsoleInProcess>]
 [Scoped<BrowserAPI.ICookieStorage, BrowserAPI.Implementation.CookieStorage>]
 [Scoped<BrowserAPI.ICookieStorageInProcess, BrowserAPI.Implementation.CookieStorageInProcess>]
+[Scoped<BrowserAPI.IDevicePosture, BrowserAPI.Implementation.DevicePosture>]
+[Scoped<BrowserAPI.IDevicePostureInProcess, BrowserAPI.Implementation.DevicePostureInProcess>]
 [Scoped<BrowserAPI.IDocument, BrowserAPI.Implementation.Document>]
 [Scoped<BrowserAPI.IDocumentInProcess, BrowserAPI.Implementation.DocumentInProcess>]
 [Scoped<BrowserAPI.IDownload, BrowserAPI.Implementation.Download>]

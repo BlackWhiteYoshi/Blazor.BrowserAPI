@@ -10,6 +10,9 @@ export { ConsoleAPI };
 import { CookieStorageAPI } from "./BrowserAPIs/CookieStorage/CookieStorage.ts";
 export { CookieStorageAPI };
 
+import { DevicePostureAPI } from "./BrowserAPIs/DevicePosture/DevicePosture.ts";
+export { DevicePostureAPI };
+
 import { DocumentAPI } from "./BrowserAPIs/Document/Document.ts";
 export { DocumentAPI };
 

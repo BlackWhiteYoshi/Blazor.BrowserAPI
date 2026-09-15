@@ -13,6 +13,7 @@ You can find the test page at [blazor-browserapi.blackwhiteyoshi.com](https://bl
 - [Clipboard](Blazor.BrowserAPI/BrowserAPIs/Clipboard/Clipboard.md)
 - [Console](Blazor.BrowserAPI/BrowserAPIs/Console/Console.md)
 - [CookieStorage](Blazor.BrowserAPI/BrowserAPIs/CookieStorage/CookieStorage.md)
+- [DevicePosture](Blazor.BrowserAPI/BrowserAPIs/DevicePosture/DevicePosture.md)
 - [Document](Blazor.BrowserAPI/BrowserAPIs/Document/Document.md)
 - [Download](Blazor.BrowserAPI/BrowserAPIs/Download/Download.md)
 - [FileSystem](Blazor.BrowserAPI/BrowserAPIs/FileSystem/FileSystem.md)

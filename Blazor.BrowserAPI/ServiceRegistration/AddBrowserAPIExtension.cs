@@ -26,6 +26,8 @@ public static class AddBrowserAPIExtension {
             .AddScoped<IConsoleInProcess, Implementation.ConsoleInProcess>()
             .AddScoped<ICookieStorage, Implementation.CookieStorage>()
             .AddScoped<ICookieStorageInProcess, Implementation.CookieStorageInProcess>()
+            .AddScoped<IDevicePosture, Implementation.DevicePosture>()
+            .AddScoped<IDevicePostureInProcess, Implementation.DevicePostureInProcess>()
             .AddScoped<IDocument, Implementation.Document>()
             .AddScoped<IDocumentInProcess, Implementation.DocumentInProcess>()
             .AddScoped<IDownload, Implementation.Download>()
