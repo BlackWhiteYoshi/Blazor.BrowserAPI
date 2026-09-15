@@ -180,3 +180,5 @@ There are more interfaces coming.
   - added more TrySyncExtension methods: InvokeConstructor, GetValue, SetValue, TimeSpan overloads
 - 0.16.0
   - added BatteryStatus (23 BrowserAPIs)
+- 0.17.0
+  - added DevicePosture (24 BrowserAPIs)
