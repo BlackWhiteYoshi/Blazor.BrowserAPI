@@ -289,8 +289,8 @@ public sealed partial class HTMLElementInProcessGroup : ComponentBase, IDisposab
 
     public const string BUTTON_GET_HIDDEN = "htmlelement-inprocess-get-hidden";
     private void GetHidden() {
-        bool hidden = HTMLElement.Hidden;
-        output = hidden.ToString();
+        bool? hidden = HTMLElement.Hidden;
+        output = hidden?.ToString() ?? "null";
     }
 
     public const string BUTTON_SET_HIDDEN = "htmlelement-inprocess-set-hidden";

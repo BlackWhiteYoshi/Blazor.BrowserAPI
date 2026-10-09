@@ -240,10 +240,26 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// Reflects the value of the element's hidden attribute.<br />
     /// true - The element is hidden.<br />
     /// false - The element is not hidden. This is the default value for the attribute.
+    /// null - The attribute contains "until-found". The element is hidden until found, meaning that it is hidden but will be revealed if found through in page search or reached through fragment navigation.
     /// </summary>
-    public bool Hidden {
-        get => htmlElementJS.Invoke<bool>("getHidden");
-        set => htmlElementJS.InvokeVoid("setHidden", [value]);
+    public bool? Hidden {
+        get {
+            int hidden = htmlElementJS.Invoke<int>("getHidden");
+            return hidden switch {
+                0 => false,
+                1 => true,
+                2 => null,
+                _ => throw new JSException($"Invalid result from JS function getHidden(): {hidden}. Only 0 (false), 1 (true), 2 (\"until-found\") are allowed.")
+            };
+        }
+        set {
+            int hidden = value switch {
+                false => 0,
+                true => 1,
+                null => 2
+            };
+            htmlElementJS.InvokeVoid("setHidden", [hidden]);
+        }
     }
 
     /// <summary>

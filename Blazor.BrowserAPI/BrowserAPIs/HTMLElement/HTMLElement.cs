@@ -324,19 +324,35 @@ public sealed class HTMLElement(Task<IJSObjectReference> htmlElementTask) : HTML
     /// Reflects the value of the element's hidden attribute.<br />
     /// true - The element is hidden.<br />
     /// false - The element is not hidden. This is the default value for the attribute.
+    /// null - The attribute contains "until-found". The element is hidden until found, meaning that it is hidden but will be revealed if found through in page search or reached through fragment navigation.
     /// </summary>
-    public ValueTask<bool> Hidden => GetHidden(CancellationToken.None);
+    public ValueTask<bool?> Hidden => GetHidden(CancellationToken.None);
 
     /// <inheritdoc cref="Hidden" />
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask<bool> GetHidden(CancellationToken cancellationToken) => await (await htmlElementTask).InvokeTrySync<bool>("getHidden", cancellationToken);
+    public async ValueTask<bool?> GetHidden(CancellationToken cancellationToken) {
+        int hidden = await (await htmlElementTask).InvokeTrySync<int>("getHidden", cancellationToken);
+        return hidden switch {
+            0 => false,
+            1 => true,
+            2 => null,
+            _ => throw new JSException($"Invalid result from JS function getHidden(): {hidden}. Only 0 (false), 1 (true), 2 (\"until-found\") are allowed.")
+        };
+    }
 
     /// <inheritdoc cref="Hidden" />
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async ValueTask SetHidden(bool value, CancellationToken cancellationToken = default) => await (await htmlElementTask).InvokeVoidTrySync("setHidden", cancellationToken, [value]);
+    public async ValueTask SetHidden(bool? value, CancellationToken cancellationToken = default) {
+        int hidden = value switch {
+            false => 0,
+            true => 1,
+            null => 2
+        };
+        await (await htmlElementTask).InvokeVoidTrySync("setHidden", cancellationToken, [hidden]);
+    }
 
 
     /// <summary>

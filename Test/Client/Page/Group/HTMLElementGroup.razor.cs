@@ -354,14 +354,14 @@ public sealed partial class HTMLElementGroup : ComponentBase, IAsyncDisposable {
 
     public const string BUTTON_GET_HIDDEN_PROPERTY = "htmlelement-get-hidden-property";
     private async Task GetHidden_Property() {
-        bool hidden = await HTMLElement.Hidden;
-        output = hidden.ToString();
+        bool? hidden = await HTMLElement.Hidden;
+        output = hidden?.ToString() ?? "null";
     }
 
     public const string BUTTON_GET_HIDDEN_METHOD = "htmlelement-get-hidden-method";
     private async Task GetHidden_Method() {
-        bool hidden = await HTMLElement.GetHidden(CancellationToken.None);
-        output = hidden.ToString();
+        bool? hidden = await HTMLElement.GetHidden(CancellationToken.None);
+        output = hidden?.ToString() ?? "null";
     }
 
     public const string BUTTON_SET_HIDDEN = "htmlelement-set-hidden";

@@ -248,13 +248,25 @@ public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture
 
     [Test]
     public async Task GetHidden() {
-        await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('hidden', '');");
-        await Task.Delay(SMALL_WAIT_TIME);
+        {
+            await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('hidden', '');");
+            await Task.Delay(SMALL_WAIT_TIME);
 
-        await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_HIDDEN);
+            await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_HIDDEN);
 
-        string? result = await Page.GetByTestId(HTMLElementInProcessGroup.OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("True");
+            string? result = await Page.GetByTestId(HTMLElementInProcessGroup.OUTPUT).TextContentAsync();
+            await Assert.That(result).IsEqualTo("True");
+        }
+
+        {
+            await Page.GetByTestId(HTMLElementInProcessGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('hidden', 'until-found');");
+            await Task.Delay(SMALL_WAIT_TIME);
+
+            await ExecuteTest(HTMLElementInProcessGroup.BUTTON_GET_HIDDEN);
+
+            string? result = await Page.GetByTestId(HTMLElementInProcessGroup.OUTPUT).TextContentAsync();
+            await Assert.That(result).IsEqualTo("null");
+        }
     }
 
     [Test]

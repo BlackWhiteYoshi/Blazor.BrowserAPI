@@ -359,24 +359,48 @@ public sealed class HTMLElementTest(PlayWrightFixture playWrightFixture) : PlayW
 
     [Test]
     public async Task GetHidden_Property() {
-        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('hidden', '');");
-        await Task.Delay(SMALL_WAIT_TIME);
+        {
+            await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('hidden', '');");
+            await Task.Delay(SMALL_WAIT_TIME);
 
-        await ExecuteTest(HTMLElementGroup.BUTTON_GET_HIDDEN_PROPERTY);
+            await ExecuteTest(HTMLElementGroup.BUTTON_GET_HIDDEN_PROPERTY);
 
-        string? result = await Page.GetByTestId(HTMLElementGroup.OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("True");
+            string? result = await Page.GetByTestId(HTMLElementGroup.OUTPUT).TextContentAsync();
+            await Assert.That(result).IsEqualTo("True");
+        }
+
+        {
+            await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('hidden', 'until-found');");
+            await Task.Delay(SMALL_WAIT_TIME);
+
+            await ExecuteTest(HTMLElementGroup.BUTTON_GET_HIDDEN_PROPERTY);
+
+            string? result = await Page.GetByTestId(HTMLElementGroup.OUTPUT).TextContentAsync();
+            await Assert.That(result).IsEqualTo("null");
+        }
     }
 
     [Test]
     public async Task GetHidden_Method() {
-        await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('hidden', '');");
-        await Task.Delay(SMALL_WAIT_TIME);
+        {
+            await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('hidden', '');");
+            await Task.Delay(SMALL_WAIT_TIME);
 
-        await ExecuteTest(HTMLElementGroup.BUTTON_GET_HIDDEN_METHOD);
+            await ExecuteTest(HTMLElementGroup.BUTTON_GET_HIDDEN_METHOD);
 
-        string? result = await Page.GetByTestId(HTMLElementGroup.OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("True");
+            string? result = await Page.GetByTestId(HTMLElementGroup.OUTPUT).TextContentAsync();
+            await Assert.That(result).IsEqualTo("True");
+        }
+
+        {
+            await Page.GetByTestId(HTMLElementGroup.HTML_ELEMENT).EvaluateAsync($"node => node.setAttribute('hidden', 'until-found');");
+            await Task.Delay(SMALL_WAIT_TIME);
+
+            await ExecuteTest(HTMLElementGroup.BUTTON_GET_HIDDEN_METHOD);
+
+            string? result = await Page.GetByTestId(HTMLElementGroup.OUTPUT).TextContentAsync();
+            await Assert.That(result).IsEqualTo("null");
+        }
     }
 
     [Test]

@@ -127,12 +127,20 @@ export class HTMLElementAPI {
     }
 
 
-    public getHidden(): boolean | "until-found" {
-        return this.htmlElement.hidden;
+    public getHidden(): 0 | 1 | 2 { // 0 = false, 1 = true, 2 = "until-found"
+        switch (this.htmlElement.hidden) {
+            case false: return 0;
+            case true: return 1;
+            case "until-found": return 2;
+        }
     }
 
-    public setHidden(value: boolean | "until-found"): void {
-        this.htmlElement.hidden = value;
+    public setHidden(value: 0 | 1 | 2): void { // 0 = false, 1 = true, 2 = "until-found"
+        this.htmlElement.hidden = {
+            0: false,
+            1: true,
+            2: <"until-found">"until-found",
+        }[value];
     }
 
 
