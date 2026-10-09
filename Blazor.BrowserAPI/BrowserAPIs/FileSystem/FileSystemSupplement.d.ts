@@ -134,7 +134,7 @@ declare global {
         keys(): AsyncIterableIterator<string>;
         values(): AsyncIterableIterator<FileSystemDirectoryHandle | FileSystemFileHandle>;
         entries(): AsyncIterableIterator<[string, FileSystemDirectoryHandle | FileSystemFileHandle]>;
-        [Symbol.asyncIterator]: FileSystemDirectoryHandle["entries"];
+        [Symbol.asyncIterator]: () => FileSystemDirectoryHandleAsyncIterator<[string, FileSystemFileHandle | FileSystemDirectoryHandle]>;
         /**
          * @deprecated Old property just for Chromium <=85. Use `kind` property in the new API.
          */

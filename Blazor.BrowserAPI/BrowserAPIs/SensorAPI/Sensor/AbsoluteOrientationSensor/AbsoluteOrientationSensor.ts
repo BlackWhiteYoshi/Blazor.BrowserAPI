@@ -1,8 +1,6 @@
 import { SensorAPI } from "../Sensor";
 
-export class AbsoluteOrientationSensorAPI extends SensorAPI {
-    declare protected sensor: AbsoluteOrientationSensor;
-
+export class AbsoluteOrientationSensorAPI extends SensorAPI<AbsoluteOrientationSensor> {
     private constructor(absoluteOrientationSensor: AbsoluteOrientationSensor) {
         super(absoluteOrientationSensor);
     }

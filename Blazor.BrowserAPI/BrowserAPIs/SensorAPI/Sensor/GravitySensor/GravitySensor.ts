@@ -1,8 +1,6 @@
 import { SensorAPI } from "../Sensor";
 
-export class GravitySensorAPI extends SensorAPI {
-    declare protected sensor: GravitySensor;
-
+export class GravitySensorAPI extends SensorAPI<GravitySensor> {
     private constructor(gravitySensor: GravitySensor) {
         super(gravitySensor);
     }

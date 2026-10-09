@@ -1,8 +1,6 @@
 import { SensorAPI } from "../Sensor";
 
-export class LinearAccelerationSensorAPI extends SensorAPI {
-    declare protected sensor: LinearAccelerationSensor;
-
+export class LinearAccelerationSensorAPI extends SensorAPI<LinearAccelerationSensor> {
     private constructor(linearAccelerationSensor: LinearAccelerationSensor) {
         super(linearAccelerationSensor);
     }

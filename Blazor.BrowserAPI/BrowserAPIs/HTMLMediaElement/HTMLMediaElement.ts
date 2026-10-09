@@ -224,43 +224,43 @@ export class HTMLMediaElementAPI {
     // Video (HTMLVideoElement only)
 
     public getWidth(): number {
-        return (<HTMLVideoElement>this.htmlMediaElement).width;
+        return (<HTMLVideoElement><unknown>this.htmlMediaElement).width;
     }
 
     public setWidth(value: number): void {
-        (<HTMLVideoElement>this.htmlMediaElement).width = value;
+        (<HTMLVideoElement><unknown>this.htmlMediaElement).width = value;
     }
 
     public getHeight(): number {
-        return (<HTMLVideoElement>this.htmlMediaElement).height;
+        return (<HTMLVideoElement><unknown>this.htmlMediaElement).height;
     }
 
     public setHeight(value: number): void {
-        (<HTMLVideoElement>this.htmlMediaElement).height = value;
+        (<HTMLVideoElement><unknown>this.htmlMediaElement).height = value;
     }
 
     public getVideoWidth(): number {
-        return (<HTMLVideoElement>this.htmlMediaElement).videoWidth;
+        return (<HTMLVideoElement><unknown>this.htmlMediaElement).videoWidth;
     }
 
     public getVideoHeight(): number {
-        return (<HTMLVideoElement>this.htmlMediaElement).videoHeight;
+        return (<HTMLVideoElement><unknown>this.htmlMediaElement).videoHeight;
     }
 
     public getPoster(): string {
-        return (<HTMLVideoElement>this.htmlMediaElement).poster;
+        return (<HTMLVideoElement><unknown>this.htmlMediaElement).poster;
     }
 
     public setPoster(value: string): void {
-        (<HTMLVideoElement>this.htmlMediaElement).poster = value;
+        (<HTMLVideoElement><unknown>this.htmlMediaElement).poster = value;
     }
 
     public getDisablePictureInPicture(): boolean {
-        return (<HTMLVideoElement>this.htmlMediaElement).disablePictureInPicture;
+        return (<HTMLVideoElement><unknown>this.htmlMediaElement).disablePictureInPicture;
     }
 
     public setDisablePictureInPicture(value: boolean): void {
-        (<HTMLVideoElement>this.htmlMediaElement).disablePictureInPicture = value;
+        (<HTMLVideoElement><unknown>this.htmlMediaElement).disablePictureInPicture = value;
     }
 
 
@@ -288,7 +288,7 @@ export class HTMLMediaElementAPI {
 
     // HTMLVideoElement only
     public async requestPictureInPicture(): Promise<PictureInPictureWindowAPI> {
-        const pictureInPictureWindow = await (<HTMLVideoElement>this.htmlMediaElement).requestPictureInPicture();
+        const pictureInPictureWindow = await (<HTMLVideoElement><unknown>this.htmlMediaElement).requestPictureInPicture();
         return new PictureInPictureWindowAPI(pictureInPictureWindow);
     }
 
@@ -296,7 +296,7 @@ export class HTMLMediaElementAPI {
     // events
 
 
-    private eventTrigger: DotNet.DotNetObject;
+    private eventTrigger!: DotNet.DotNetObject;
 
     public initEvents(eventTrigger: DotNet.DotNetObject): void {
         this.eventTrigger = eventTrigger;

@@ -1,9 +1,9 @@
 import { BlazorInvoke } from "../../../Extensions/blazorExtensions";
 
-export abstract class SensorAPI {
-    protected sensor: Sensor;
+export abstract class SensorAPI<TSensor extends Sensor> {
+    protected sensor: TSensor;
 
-    public constructor(sensor: Sensor) {
+    public constructor(sensor: TSensor) {
         this.sensor = sensor;
     }
 
@@ -34,7 +34,7 @@ export abstract class SensorAPI {
     // events
 
 
-    private eventTrigger: DotNet.DotNetObject;
+    private eventTrigger!: DotNet.DotNetObject;
 
     public initEvents(eventTrigger: DotNet.DotNetObject): void {
         this.eventTrigger = eventTrigger;

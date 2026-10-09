@@ -1,8 +1,6 @@
 import { SensorAPI } from "../Sensor";
 
-export class MagnetometerAPI extends SensorAPI {
-    declare protected sensor: Magnetometer;
-
+export class MagnetometerAPI extends SensorAPI<Magnetometer> {
     private constructor(magnetometer: Magnetometer) {
         super(magnetometer);
     }

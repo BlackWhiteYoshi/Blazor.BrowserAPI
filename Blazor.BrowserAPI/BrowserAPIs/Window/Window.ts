@@ -232,7 +232,7 @@ export class WindowAPI {
     // events
 
 
-    private eventTrigger: DotNet.DotNetObject;
+    private eventTrigger!: DotNet.DotNetObject;
 
     public static createInstanceAndInitEvents(eventTrigger: DotNet.DotNetObject): WindowAPI {
         const instance = new WindowAPI(window);
@@ -1556,11 +1556,11 @@ export class WindowAPI {
     });
 
     public activateOnpointerrawupdate(): void {
-        window.addEventListener("pointerrawupdate", this.onpointerrawupdate);
+        window.addEventListener("pointerrawupdate", <(event: Event) => unknown>this.onpointerrawupdate);
     }
 
     public deactivateOnpointerrawupdate(): void {
-        window.removeEventListener("pointerrawupdate", this.onpointerrawupdate);
+        window.removeEventListener("pointerrawupdate", <(event: Event) => unknown>this.onpointerrawupdate);
     }
 
 

@@ -40,7 +40,7 @@ export class GamepadAPI {
     // vibrationActuator
 
     public getVibrationActuatorEffects(): ("vibration" | "dual-rumble" | "trigger-rumble")[] {
-        const vibration = <GamepadHapticActuator & { effects: ("dual-rumble" | "trigger-rumble")[]; }>this.gamepad.vibrationActuator;
+        const vibration = <GamepadHapticActuator & { effects: ("dual-rumble" | "trigger-rumble")[], type: "vibration" | "dual-rumble" }>this.gamepad.vibrationActuator;
         if (!vibration)
             return [];
 

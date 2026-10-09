@@ -1,8 +1,6 @@
 import { SensorAPI } from "../Sensor";
 
-export class UncalibratedMagnetometerAPI extends SensorAPI {
-    declare protected sensor: UncalibratedMagnetometer;
-
+export class UncalibratedMagnetometerAPI extends SensorAPI<UncalibratedMagnetometer> {
     private constructor(uncalibratedMagnetometer: UncalibratedMagnetometer) {
         super(uncalibratedMagnetometer);
     }

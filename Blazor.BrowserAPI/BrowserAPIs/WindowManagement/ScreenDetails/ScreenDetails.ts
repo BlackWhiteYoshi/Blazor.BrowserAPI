@@ -23,7 +23,7 @@ export class ScreenDetailsAPI {
     // events
 
 
-    private eventTrigger: DotNet.DotNetObject;
+    private eventTrigger!: DotNet.DotNetObject;
 
     public initEvents(eventTrigger: DotNet.DotNetObject): void {
         this.eventTrigger = eventTrigger;

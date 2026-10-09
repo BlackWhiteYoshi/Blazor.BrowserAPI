@@ -1,8 +1,6 @@
 import { SensorAPI } from "../Sensor";
 
-export class GyroscopeAPI extends SensorAPI {
-    declare protected sensor: Gyroscope;
-
+export class GyroscopeAPI extends SensorAPI<Gyroscope> {
     private constructor(gyroscope: Gyroscope) {
         super(gyroscope);
     }

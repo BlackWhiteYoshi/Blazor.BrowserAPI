@@ -1685,11 +1685,11 @@ export class DocumentAPI {
     }
 
     public static activateOnpointerrawupdate(): void {
-        document.addEventListener("pointerrawupdate", DocumentAPI.onpointerrawupdate);
+        document.addEventListener("pointerrawupdate", <(event: Event) => unknown>DocumentAPI.onpointerrawupdate);
     }
 
     public static deactivateOnpointerrawupdate(): void {
-        document.removeEventListener("pointerrawupdate", DocumentAPI.onpointerrawupdate);
+        document.removeEventListener("pointerrawupdate", <(event: Event) => unknown>DocumentAPI.onpointerrawupdate);
     }
 
 

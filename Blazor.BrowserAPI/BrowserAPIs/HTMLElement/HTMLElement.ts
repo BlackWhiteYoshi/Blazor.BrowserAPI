@@ -127,11 +127,11 @@ export class HTMLElementAPI {
     }
 
 
-    public getHidden(): boolean {
+    public getHidden(): boolean | "until-found" {
         return this.htmlElement.hidden;
     }
 
-    public setHidden(value: boolean): void {
+    public setHidden(value: boolean | "until-found"): void {
         this.htmlElement.hidden = value;
     }
 
@@ -474,7 +474,7 @@ export class HTMLElementAPI {
     }
 
     public getChildren(): HTMLElementAPI[] {
-        return [... this.htmlElement.children].map((child: HTMLElement) => DotNet.createJSObjectReference(new HTMLElementAPI(child)));
+        return [... this.htmlElement.children].map((child: Element) => DotNet.createJSObjectReference(new HTMLElementAPI(<HTMLElement>child)));
     }
 
     public getFirstElementChild(): [HTMLElementAPI] | [null] {
@@ -1193,7 +1193,7 @@ export class HTMLElementAPI {
     // events
 
 
-    private eventTrigger: DotNet.DotNetObject;
+    private eventTrigger!: DotNet.DotNetObject;
 
     public initEvents(eventTrigger: DotNet.DotNetObject): void {
         this.eventTrigger = eventTrigger;
@@ -2359,11 +2359,11 @@ export class HTMLElementAPI {
     });
 
     public activateOnpointerrawupdate(): void {
-        this.htmlElement.addEventListener("pointerrawupdate", this.onpointerrawupdate);
+        this.htmlElement.addEventListener("pointerrawupdate", <(event: Event) => unknown>this.onpointerrawupdate);
     }
 
     public deactivateOnpointerrawupdate(): void {
-        this.htmlElement.removeEventListener("pointerrawupdate", this.onpointerrawupdate);
+        this.htmlElement.removeEventListener("pointerrawupdate", <(event: Event) => unknown>this.onpointerrawupdate);
     }
 
 

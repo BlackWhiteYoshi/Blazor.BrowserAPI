@@ -12,7 +12,7 @@ export class WritableFileStreamAPI {
 
 
     public write(data: string | Uint8Array): Promise<void> {
-        return this.writableFileStream.write(data);
+        return this.writableFileStream.write(data as string | ArrayBuffer);
     }
 
     public seek(position: number): Promise<void> {

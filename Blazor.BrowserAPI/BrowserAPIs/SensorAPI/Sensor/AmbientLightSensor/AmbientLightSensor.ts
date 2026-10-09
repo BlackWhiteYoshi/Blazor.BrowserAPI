@@ -1,8 +1,6 @@
 import { SensorAPI } from "../Sensor";
 
-export class AmbientLightSensorAPI extends SensorAPI {
-    declare protected sensor: AmbientLightSensor;
-
+export class AmbientLightSensorAPI extends SensorAPI<AmbientLightSensor> {
     private constructor(ambientLightSensor: AmbientLightSensor) {
         super(ambientLightSensor);
     }

@@ -84,7 +84,7 @@ export class NavigatorAPI {
     }
 
     public static sendBeacon_Bytes(url: string, data: Uint8Array): boolean {
-        return navigator.sendBeacon(url, data.buffer);
+        return navigator.sendBeacon(url, <ArrayBuffer>data.buffer);
     }
 
     public static vibrate(pattern: number[]): boolean {
