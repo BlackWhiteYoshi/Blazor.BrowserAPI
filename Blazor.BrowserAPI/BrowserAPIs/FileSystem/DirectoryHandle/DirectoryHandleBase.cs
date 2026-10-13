@@ -90,7 +90,7 @@ public abstract class DirectoryHandleBase<TJSObjectReference, TDirectoryHandle, 
     /// This method uses the <see href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryHandle/values">values()</see> Asynchronous iterator method to create these lists.
     /// Since returning each entry one by one would be unnecessary slow, all entries are iterated and returned at once.
     /// </para>
-    /// <para>Do not forget to call <i>DispseAsync()</i> on each single item in fileList and directoryList when you done with it.</para>
+    /// <para>Do not forget to call <i>DispseAsync()</i> on all items in fileList and directoryList when you done with it.</para>
     /// </remarks>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>

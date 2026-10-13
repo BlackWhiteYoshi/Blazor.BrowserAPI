@@ -30,7 +30,7 @@ public interface IDragEvent;
 
 /// <inheritdoc cref="IDragEvent" />
 /// <remarks>
-/// Note: Do not forget to <i>Dispse</i> each single file in <see cref="Files"/> when you done with it.
+/// Note: Do not forget to <i>Dispse</i> all files in <see cref="Files"/> when you done with it.
 /// </remarks>
 /// <param name="DropEffect">Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".</param>
 /// <param name="EffectAllowed">Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".</param>
@@ -40,7 +40,7 @@ public readonly record struct DragEvent(string DropEffect, string EffectAllowed,
 
 /// <inheritdoc cref="IDragEvent" />
 /// <remarks>
-/// Note: Do not forget to <i>Dispse</i> each single file in <see cref="Files"/> when you done with it.
+/// Note: Do not forget to <i>Dispse</i> all files in <see cref="Files"/> when you done with it.
 /// </remarks>
 /// <param name="DropEffect">Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".</param>
 /// <param name="EffectAllowed">Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".</param>

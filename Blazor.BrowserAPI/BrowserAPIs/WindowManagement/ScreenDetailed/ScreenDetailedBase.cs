@@ -53,6 +53,8 @@ public abstract class ScreenDetailedBase<TJSObjectReference>(TJSObjectReference 
     private ValueTask DeactivateJSEvent(string jsMethodName) => screenDetailedJS.InvokeVoidTrySync(jsMethodName);
 
 
+    // Events
+
     private Action? _onChange;
     /// <inheritdoc cref="ScreenBase.OnChange" />
     public event Action OnChange {

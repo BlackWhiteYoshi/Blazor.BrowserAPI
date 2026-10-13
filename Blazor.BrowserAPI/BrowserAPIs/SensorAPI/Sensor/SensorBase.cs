@@ -49,6 +49,8 @@ public abstract class SensorBase<TJSObjectReference>(TJSObjectReference sensorJS
     private ValueTask DeactivateJSEvent(string jsMethodName) => sensorJS.InvokeVoidTrySync(jsMethodName);
 
 
+    // Events
+
     private Action<JsonElement>? _onError;
     /// <summary>
     /// <para>

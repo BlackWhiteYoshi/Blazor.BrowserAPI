@@ -47,6 +47,8 @@ public abstract class ServiceWorkerBase<TJSObjectReference>(TJSObjectReference s
     private ValueTask DeactivateJSEvent(string jsMethodName) => serviceWorkerJS.InvokeVoidTrySync(jsMethodName);
 
 
+    // Events
+
     private Action<string>? _onStateChange;
     /// <summary>
     /// <para>Fires anytime the ServiceWorker.state changes.</para>

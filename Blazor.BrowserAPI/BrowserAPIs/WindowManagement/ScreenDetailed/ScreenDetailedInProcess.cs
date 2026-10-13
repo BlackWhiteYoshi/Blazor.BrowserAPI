@@ -13,7 +13,7 @@ namespace BrowserAPI.Implementation;
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class ScreenDetailedInProcess(IJSInProcessObjectReference screenDetailedJS) : ScreenDetailedBase<IJSInProcessObjectReference>(screenDetailedJS), IScreenDetailedInProcess {
     /// <summary>
-    /// Releases the JS instance for this ScreenDetails.
+    /// Releases the JS instance for this ScreenDetailed.
     /// </summary>
     public void Dispose() {
         DisposeEventTrigger();

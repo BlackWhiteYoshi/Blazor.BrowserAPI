@@ -46,6 +46,8 @@ public abstract class ScreenDetailsBase<TJSObjectReference>(TJSObjectReference s
     private ValueTask DeactivateJSEvent(string jsMethodName) => screenDetailsJS.InvokeVoidTrySync(jsMethodName);
 
 
+    // Events
+
     private Action? _onCurrentScreenChange;
     /// <summary>
     /// Is fired when the ScreenDetails.currentScreen changes in one of the following ways:<br />

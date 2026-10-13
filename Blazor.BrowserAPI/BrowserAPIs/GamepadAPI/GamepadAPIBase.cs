@@ -9,11 +9,13 @@ namespace BrowserAPI.Implementation;
 /// It is not intended to use this interface directly.
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class GamepadAPIBase<TJSObjectReference, TGamepad>(IModuleManager moduleManager) : IDisposable where TJSObjectReference : IJSObjectReference where TGamepad : IGamepadBase<TJSObjectReference> {
+public abstract class GamepadAPIBase<TJSObjectReference, TGamepad>(IModuleManager moduleManager) : IDisposable
+    where TJSObjectReference : IJSObjectReference
+    where TGamepad : IGamepadBase<TJSObjectReference> {
     private protected IModuleManager moduleManager = moduleManager;
 
     /// <summary>
-    /// Releases the <see cref="EventTrigger"/> object used to trigger the events.
+    /// Releases the EventTrigger object used to trigger the events.
     /// </summary>
     public void Dispose() => _objectReferenceEventTrigger?.Dispose();
 
@@ -59,6 +61,8 @@ public abstract class GamepadAPIBase<TJSObjectReference, TGamepad>(IModuleManage
 
     private ValueTask DeactivateJSEvent(string jsMethodName) => moduleManager.InvokeTrySync(jsMethodName, CancellationToken.None);
 
+
+    // Events
 
     private Action<TGamepad>? _onGamepadConnected;
     /// <summary>

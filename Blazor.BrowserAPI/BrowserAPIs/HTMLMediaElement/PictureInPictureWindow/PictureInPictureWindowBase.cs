@@ -46,6 +46,8 @@ public abstract class PictureInPictureWindowBase<TJSObjectReference>(TJSObjectRe
     }
 
 
+    // Events
+
     private Action? _onResize;
     /// <summary>
     /// <para>Fires when the floating video window has been resized.</para>

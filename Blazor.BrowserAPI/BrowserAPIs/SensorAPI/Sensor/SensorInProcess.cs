@@ -13,7 +13,7 @@ namespace BrowserAPI.Implementation;
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class SensorInProcess(IJSInProcessObjectReference sensorJS) : SensorBase<IJSInProcessObjectReference>(sensorJS), ISensorInProcess {
     /// <summary>
-    /// Releases the JS instance for this service worker.
+    /// Releases the JS instance for this sensor.
     /// </summary>
     public void Dispose() {
         DisposeEventTrigger();

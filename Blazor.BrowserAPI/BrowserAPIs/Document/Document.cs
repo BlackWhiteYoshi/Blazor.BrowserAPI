@@ -63,7 +63,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase<IJSObj
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IHTMLElement[]> GetEmbeds(CancellationToken cancellationToken) {
-        IJSObjectReference[] embedElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getEmbeds", CancellationToken.None);
+        IJSObjectReference[] embedElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getEmbeds", cancellationToken);
 
         IHTMLElement[] result = new IHTMLElement[embedElements.Length];
         for (int i = 0; i < result.Length; i++)
@@ -81,7 +81,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase<IJSObj
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IHTMLElement[]> GetForms(CancellationToken cancellationToken) {
-        IJSObjectReference[] formElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getForms", CancellationToken.None);
+        IJSObjectReference[] formElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getForms", cancellationToken);
 
         IHTMLElement[] result = new IHTMLElement[formElements.Length];
         for (int i = 0; i < result.Length; i++)
@@ -100,7 +100,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase<IJSObj
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IHTMLElement[]> GetImages(CancellationToken cancellationToken) {
-        IJSObjectReference[] imageElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getImages", CancellationToken.None);
+        IJSObjectReference[] imageElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getImages", cancellationToken);
 
         IHTMLElement[] result = new IHTMLElement[imageElements.Length];
         for (int i = 0; i < result.Length; i++)
@@ -118,7 +118,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase<IJSObj
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IHTMLElement[]> GetLinks(CancellationToken cancellationToken) {
-        IJSObjectReference[] linkElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getLinks", CancellationToken.None);
+        IJSObjectReference[] linkElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getLinks", cancellationToken);
 
         IHTMLElement[] result = new IHTMLElement[linkElements.Length];
         for (int i = 0; i < result.Length; i++)
@@ -136,7 +136,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase<IJSObj
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IHTMLElement[]> GetPlugins(CancellationToken cancellationToken) {
-        IJSObjectReference[] pluginElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getPlugins", CancellationToken.None);
+        IJSObjectReference[] pluginElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getPlugins", cancellationToken);
 
         IHTMLElement[] result = new IHTMLElement[pluginElements.Length];
         for (int i = 0; i < result.Length; i++)
@@ -154,7 +154,7 @@ public sealed class Document(IModuleManager moduleManager) : DocumentBase<IJSObj
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask<IHTMLElement[]> GetScripts(CancellationToken cancellationToken) {
-        IJSObjectReference[] scriptElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getScripts", CancellationToken.None);
+        IJSObjectReference[] scriptElements = await moduleManager.InvokeTrySync<IJSObjectReference[]>("DocumentAPI.getScripts", cancellationToken);
 
         IHTMLElement[] result = new IHTMLElement[scriptElements.Length];
         for (int i = 0; i < result.Length; i++)

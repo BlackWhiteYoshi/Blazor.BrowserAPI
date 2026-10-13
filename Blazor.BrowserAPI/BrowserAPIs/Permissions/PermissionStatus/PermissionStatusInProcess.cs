@@ -12,7 +12,7 @@ namespace BrowserAPI.Implementation;
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class PermissionStatusInProcess(IJSInProcessObjectReference permissionStatusJS) : PermissionStatusBase<IJSInProcessObjectReference>(permissionStatusJS), IPermissionStatusInProcess {
     /// <summary>
-    /// Releases the JS instance for this media recorder.
+    /// Releases the JS instance for this permission object.
     /// </summary>
     public void Dispose() {
         DisposeEventTrigger();

@@ -13,7 +13,7 @@ namespace BrowserAPI.Implementation;
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : ScreenDetailedBase<IJSObjectReference>(screenDetailedJS), IScreenDetailed {
     /// <summary>
-    /// Releases the JS instance for this ScreenDetails.
+    /// Releases the JS instance for this ScreenDetailed.
     /// </summary>
     /// <returns></returns>
     public ValueTask DisposeAsync() {

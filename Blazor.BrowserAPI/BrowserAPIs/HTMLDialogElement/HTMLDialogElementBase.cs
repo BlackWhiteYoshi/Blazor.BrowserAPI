@@ -50,6 +50,8 @@ public abstract class HTMLDialogElementBase<TJSObjectReference>(Task<TJSObjectRe
     }
 
 
+    // Events
+
     private Action? _onClose;
     /// <summary>
     /// Is fired on an HTMLDialogElement object when the &lt;dialog&gt; it represents has been closed.

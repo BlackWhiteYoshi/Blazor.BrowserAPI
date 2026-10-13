@@ -94,8 +94,8 @@ However, the class names itself will be stable, so using them for service provid
 ## How to contribute
 
 Adding a member to an existing BrowserAPI normally includes 5 steps:
-1. Adding a function to the corresponding *.ts* file (in case of a event -> 3 functions)
-2. Adding methods to the corresponding *.cs* and *Inprocess.cs* files (in case of a event -> *Base.cs* file)
+1. Adding a function to the corresponding *.ts* file (in case of an event -> 3 functions)
+2. Adding methods to the corresponding *.cs* and *Inprocess.cs* files (in case of async or event -> *Base.cs* file)
 3. Adding a button to the test page
 4. Adding a unit test
 5. Adding an entry to .md file

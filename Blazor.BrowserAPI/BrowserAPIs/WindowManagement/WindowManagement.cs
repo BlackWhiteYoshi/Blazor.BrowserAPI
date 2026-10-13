@@ -1,6 +1,5 @@
 using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
-using Microsoft.JSInterop.Implementation;
 using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;

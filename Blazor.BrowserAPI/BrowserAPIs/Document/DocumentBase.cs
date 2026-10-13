@@ -21,7 +21,7 @@ public abstract class DocumentBase<TJSObjectReference, TDragEvent>(IModuleManage
     private protected IModuleManager moduleManager = moduleManager;
 
     /// <summary>
-    /// Releases the <see cref="EventTrigger"/> object used to trigger the events.
+    /// Releases the EventTrigger object used to trigger the events.
     /// </summary>
     public void Dispose() => _objectReferenceEventTrigger?.Dispose();
 

@@ -17,7 +17,7 @@ public abstract class WindowBase<TJSObjectReference, TDragEvent>(IModuleManager 
     private protected TJSObjectReference? windowJS;
 
     /// <summary>
-    /// Releases the <see cref="EventTrigger"/> object used to trigger the events.
+    /// Releases the EventTrigger object used to trigger the events.
     /// </summary>
     public void Dispose() => _objectReferenceEventTrigger?.Dispose();
 

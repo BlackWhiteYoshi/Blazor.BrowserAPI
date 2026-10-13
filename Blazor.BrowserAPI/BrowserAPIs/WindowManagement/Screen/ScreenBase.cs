@@ -13,7 +13,7 @@ public abstract class ScreenBase(IModuleManager moduleManager) : IDisposable {
     private protected IModuleManager moduleManager = moduleManager;
 
     /// <summary>
-    /// Releases the <see cref="EventTrigger"/> object used to trigger the events.
+    /// Releases the EventTrigger object used to trigger the events.
     /// </summary>
     public void Dispose() => _objectReferenceEventTrigger?.Dispose();
 
@@ -75,6 +75,8 @@ public abstract class ScreenBase(IModuleManager moduleManager) : IDisposable {
 
     private ValueTask DeactivateJSEvent(string jsMethodName) => moduleManager.InvokeTrySync(jsMethodName, CancellationToken.None);
 
+
+    // Events
 
     private Action? _onChange;
     /// <summary>

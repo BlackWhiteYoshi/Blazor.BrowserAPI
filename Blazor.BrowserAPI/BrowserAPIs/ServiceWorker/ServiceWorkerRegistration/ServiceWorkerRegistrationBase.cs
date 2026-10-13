@@ -72,6 +72,8 @@ public abstract class ServiceWorkerRegistrationBase<TJSObjectReference, TService
     private ValueTask DeactivateJSEvent(string jsMethodName) => serviceWorkerRegistrationJS.InvokeVoidTrySync(jsMethodName);
 
 
+    // Events
+
     private Action? _onUpdateFound;
     /// <summary>
     /// Is fired any time the <i>ServiceWorkerRegistration.installing</i> property acquires a new service worker.

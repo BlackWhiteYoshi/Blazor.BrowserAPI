@@ -55,6 +55,8 @@ public abstract class MediaRecorderBase<TJSObjectReference>(TJSObjectReference m
     private ValueTask DeactivateJSEvent(string jsMethodName) => mediaRecorderJS.InvokeVoidTrySync(jsMethodName);
 
 
+    // Events
+
     private Action<byte[]>? _onDataAvailable;
     /// <summary>
     /// <para>

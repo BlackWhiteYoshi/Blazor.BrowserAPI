@@ -12,7 +12,7 @@ namespace BrowserAPI.Implementation;
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class PermissionStatus(IJSObjectReference permissionStatusJS) : PermissionStatusBase<IJSObjectReference>(permissionStatusJS), IPermissionStatus {
     /// <summary>
-    /// Releases the JS instance for this media recorder.
+    /// Releases the JS instance for this permission object.
     /// </summary>
     /// <returns></returns>
     public ValueTask DisposeAsync() {

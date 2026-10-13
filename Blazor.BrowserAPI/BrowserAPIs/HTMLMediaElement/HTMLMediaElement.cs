@@ -25,7 +25,7 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <summary>
     /// Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">HTMLElement</see>.
     /// </summary>
-    /// <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+    /// <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose both when you are done with them.</remarks>
     /// <returns></returns>
     public async ValueTask<IHTMLElement> ToHTMLElement(CancellationToken cancellationToken = default) {
         Task<IJSObjectReference> htmlElementTask = (await htmlMediaElementTask).InvokeTrySync<IJSObjectReference>("toHTMLElement", cancellationToken).AsTask();

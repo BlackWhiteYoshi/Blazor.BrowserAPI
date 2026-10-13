@@ -44,6 +44,8 @@ public abstract class PermissionStatusBase<TJSObjectReference>(TJSObjectReferenc
     private ValueTask DeactivateJSEvent(string jsMethodName) => permissionStatusJS.InvokeVoidTrySync(jsMethodName);
 
 
+    // Events
+
     private Action? _onChange;
     /// <summary>
     /// Fires whenever the <i>State</i> property changes.

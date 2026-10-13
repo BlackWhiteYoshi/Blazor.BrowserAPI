@@ -13,7 +13,7 @@ namespace BrowserAPI.Implementation;
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class Sensor(IJSObjectReference sensorJS) : SensorBase<IJSObjectReference>(sensorJS), ISensor {
     /// <summary>
-    /// Releases the JS instance for this service worker.
+    /// Releases the JS instance for this sensor.
     /// </summary>
     public ValueTask DisposeAsync() {
         DisposeEventTrigger();
