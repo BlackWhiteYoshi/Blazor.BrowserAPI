@@ -6,12 +6,12 @@ namespace BrowserAPI.Implementation;
 
 /// <summary>
 /// <para>Represents an object able to programmatically obtain the width and height and resize event of the floating video window.</para>
-/// <para>An object with this interface is obtained using the <see cref="IHTMLMediaElement.RequestPictureInPicture"/> return value.</para>
+/// <para>An object with this interface is obtained using the <see cref="IHTMLMediaElementBase{IJSObjectReference, IPictureInPictureWindow}.RequestPictureInPicture"/> return value.</para>
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="DisposeAsync"/> when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IPictureInPictureWindowBase<IJSObjectReference>), typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class PictureInPictureWindow(IJSObjectReference pictureInPictureWindowJS) : PictureInPictureWindowBase(pictureInPictureWindowJS), IPictureInPictureWindow {
+public sealed class PictureInPictureWindow(IJSObjectReference pictureInPictureWindowJS) : PictureInPictureWindowBase<IJSObjectReference>(pictureInPictureWindowJS), IPictureInPictureWindow {
     /// <summary>
     /// Releases the JS instance for this pictureInPictureWindow.
     /// </summary>

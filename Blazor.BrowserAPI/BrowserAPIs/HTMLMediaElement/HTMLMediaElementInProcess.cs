@@ -9,18 +9,18 @@ namespace BrowserAPI.Implementation;
 /// <para>The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see> and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see> elements both inherit this interface.</para>
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="Dispose"/> when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IHTMLMediaElementBase<IJSInProcessObjectReference, IPictureInPictureWindowInProcess>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMediaElementJS) : HTMLMediaElementBase(Task.FromResult<IJSObjectReference>(htmlMediaElementJS)), IHTMLMediaElementInProcess {
+public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMediaElementJS) : HTMLMediaElementBase<IJSInProcessObjectReference, IPictureInPictureWindowInProcess>(Task.FromResult(htmlMediaElementJS)), IHTMLMediaElementInProcess {
     [AutoInterfaceVisibilityInternal]
-    IJSInProcessObjectReference IHTMLMediaElementInProcess.HTMLMediaElementJS => htmlMediaElementJS;
+    IJSInProcessObjectReference IHTMLMediaElementInProcess.HTMLMediaElementJS => htmlMediaElementTask.Result;
 
     /// <summary>
     /// Releases the JS instance for this htmlMediaElement.
     /// </summary>
     public void Dispose() {
         DisposeEventTrigger();
-        htmlMediaElementJS.Dispose();
+        htmlMediaElementTask.Result.Dispose();
     }
 
 
@@ -30,7 +30,7 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
     /// <returns></returns>
     public IHTMLElementInProcess ToHTMLElement() {
-        IJSInProcessObjectReference htmlElementJS = htmlMediaElementJS.Invoke<IJSInProcessObjectReference>("toHTMLElement");
+        IJSInProcessObjectReference htmlElementJS = htmlMediaElementTask.Result.Invoke<IJSInProcessObjectReference>("toHTMLElement");
         return new HTMLElementInProcess(htmlElementJS);
     }
 
@@ -45,8 +45,8 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// </para>
     /// </summary>
     public string Src {
-        get => htmlMediaElementJS.Invoke<string>("getSrc");
-        set => htmlMediaElementJS.InvokeVoid("setSrc", [value]);
+        get => htmlMediaElementTask.Result.Invoke<string>("getSrc");
+        set => htmlMediaElementTask.Result.InvokeVoid("setSrc", [value]);
     }
 
     /// <summary>
@@ -54,21 +54,21 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// </summary>
     public IMediaStreamInProcess? SrcObject {
         get {
-            IJSInProcessObjectReference?[] singleReference = htmlMediaElementJS.Invoke<IJSInProcessObjectReference?[]>("getSrcObject");
+            IJSInProcessObjectReference?[] singleReference = htmlMediaElementTask.Result.Invoke<IJSInProcessObjectReference?[]>("getSrcObject");
             if (singleReference[0] is IJSInProcessObjectReference mediaStream)
                 return new MediaStreamInProcess(mediaStream);
             else
                 return null;
         }
-        set => htmlMediaElementJS.InvokeVoid("setSrcObject", [value?.MediaStreamJS]);
+        set => htmlMediaElementTask.Result.InvokeVoid("setSrcObject", [value?.MediaStreamJS]);
     }
 
     /// <summary>
     /// A boolean that reflects the controls HTML attribute, indicating whether user interface items for controlling the resource should be displayed.
     /// </summary>
     public bool Controls {
-        get => htmlMediaElementJS.Invoke<bool>("getControls");
-        set => htmlMediaElementJS.InvokeVoid("setControls", [value]);
+        get => htmlMediaElementTask.Result.Invoke<bool>("getControls");
+        set => htmlMediaElementTask.Result.InvokeVoid("setControls", [value]);
     }
 
     /// <summary>
@@ -76,16 +76,16 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// <para>A media element whose source is a MediaStream and whose autoplay property is true will begin playback when it becomes active(that is, when MediaStream.active becomes true).</para>
     /// </summary>
     public bool Autoplay {
-        get => htmlMediaElementJS.Invoke<bool>("getAutoplay");
-        set => htmlMediaElementJS.InvokeVoid("setAutoplay", [value]);
+        get => htmlMediaElementTask.Result.Invoke<bool>("getAutoplay");
+        set => htmlMediaElementTask.Result.InvokeVoid("setAutoplay", [value]);
     }
 
     /// <summary>
     /// A boolean that reflects the loop HTML attribute, which indicates whether the media element should start over when it reaches the end.
     /// </summary>
     public bool Loop {
-        get => htmlMediaElementJS.Invoke<bool>("getLoop");
-        set => htmlMediaElementJS.InvokeVoid("setLoop", [value]);
+        get => htmlMediaElementTask.Result.Invoke<bool>("getLoop");
+        set => htmlMediaElementTask.Result.InvokeVoid("setLoop", [value]);
     }
 
     /// <summary>
@@ -93,8 +93,8 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// <para>This property has no dynamic effect. To mute and unmute the audio output, use the muted property.</para>
     /// </summary>
     public bool DefaultMuted {
-        get => htmlMediaElementJS.Invoke<bool>("getDefaultMuted");
-        set => htmlMediaElementJS.InvokeVoid("setDefaultMuted", [value]);
+        get => htmlMediaElementTask.Result.Invoke<bool>("getDefaultMuted");
+        set => htmlMediaElementTask.Result.InvokeVoid("setDefaultMuted", [value]);
     }
 
     /// <summary>
@@ -108,8 +108,8 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// </para>
     /// </summary>
     public string Preload {
-        get => htmlMediaElementJS.Invoke<string>("getPreload");
-        set => htmlMediaElementJS.InvokeVoid("setPreload", [value]);
+        get => htmlMediaElementTask.Result.Invoke<string>("getPreload");
+        set => htmlMediaElementTask.Result.InvokeVoid("setPreload", [value]);
     }
 
     #endregion
@@ -121,7 +121,7 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// <para>Returns a string with the absolute URL of the chosen media resource.</para>
     /// <para>This could happen, for example, if the web server selects a media file based on the resolution of the user's display. The value is an empty string if the networkState property is EMPTY.</para>
     /// </summary>
-    public string CurrentSrc => htmlMediaElementJS.Invoke<string>("getCurrentSrc");
+    public string CurrentSrc => htmlMediaElementTask.Result.Invoke<string>("getCurrentSrc");
 
     /// <summary>
     /// <para>A double-precision floating-point value indicating the current playback time in seconds.</para>
@@ -131,8 +131,8 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// </para>
     /// </summary>
     public double CurrentTime {
-        get => htmlMediaElementJS.Invoke<double>("getCurrentTime");
-        set => htmlMediaElementJS.InvokeVoid("setCurrentTime", [value]);
+        get => htmlMediaElementTask.Result.Invoke<double>("getCurrentTime");
+        set => htmlMediaElementTask.Result.InvokeVoid("setCurrentTime", [value]);
     }
 
     /// <summary>
@@ -142,47 +142,47 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// If the media is of indefinite length (such as streamed live media, a WebRTC call's media, or similar), the value is +Infinity.
     /// </para>
     /// </summary>
-    public double Duration => htmlMediaElementJS.Invoke<double>("getDuration");
+    public double Duration => htmlMediaElementTask.Result.Invoke<double>("getDuration");
 
     /// <summary>
     /// Returns a TimeRanges object that contains the time ranges that the user is able to seek to.
     /// </summary>
-    public TimeRange[] Seekable => htmlMediaElementJS.Invoke<TimeRange[]>("getSeekable");
+    public TimeRange[] Seekable => htmlMediaElementTask.Result.Invoke<TimeRange[]>("getSeekable");
 
     /// <summary>
     /// <para>A boolean that determines whether audio is muted. true if the audio is muted and false otherwise.</para>
     /// <para>true means muted and false means not muted.</para>
     /// </summary>
     public bool Muted {
-        get => htmlMediaElementJS.Invoke<bool>("getMuted");
-        set => htmlMediaElementJS.InvokeVoid("setMuted", [value]);
+        get => htmlMediaElementTask.Result.Invoke<bool>("getMuted");
+        set => htmlMediaElementTask.Result.InvokeVoid("setMuted", [value]);
     }
 
     /// <summary>
     /// A double indicating the audio volume, from 0.0 (silent) to 1.0 (loudest).
     /// </summary>
     public double Volume {
-        get => htmlMediaElementJS.Invoke<double>("getVolume");
-        set => htmlMediaElementJS.InvokeVoid("setVolume", [value]);
+        get => htmlMediaElementTask.Result.Invoke<double>("getVolume");
+        set => htmlMediaElementTask.Result.InvokeVoid("setVolume", [value]);
     }
 
     /// <summary>
     /// <para>Returns a boolean that indicates whether the media element is paused.</para>
     /// <para>true is paused and false is not paused.</para>
     /// </summary>
-    public bool Paused => htmlMediaElementJS.Invoke<bool>("getPaused");
+    public bool Paused => htmlMediaElementTask.Result.Invoke<bool>("getPaused");
 
     /// <summary>
     /// <para>Returns a boolean that indicates whether the media element has finished playing.</para>
     /// <para>true if the media contained in the element has finished playing.</para>
     /// <para>If the source of the media is a MediaStream, this value is true if the value of the stream's active property is false.</para>
     /// </summary>
-    public bool Ended => htmlMediaElementJS.Invoke<bool>("getEnded");
+    public bool Ended => htmlMediaElementTask.Result.Invoke<bool>("getEnded");
 
     /// <summary>
     /// Returns a boolean that indicates whether the media is in the process of seeking to a new position.
     /// </summary>
-    public bool Seeking => htmlMediaElementJS.Invoke<bool>("getSeeking");
+    public bool Seeking => htmlMediaElementTask.Result.Invoke<bool>("getSeeking");
 
     /// <summary>
     /// <para>Returns a unsigned short (enumeration) indicating the readiness state of the media.</para>
@@ -195,7 +195,7 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// 4 = HAVE_ENOUGH_DATA: Enough data is available—and the download rate is high enough—that the media can be played through to the end without interruption.
     /// </para>
     /// </summary>
-    public int ReadyState => htmlMediaElementJS.Invoke<int>("getReadyState");
+    public int ReadyState => htmlMediaElementTask.Result.Invoke<int>("getReadyState");
 
     /// <summary>
     /// <para>Returns a unsigned short (enumeration) indicating the current state of fetching the media over the network.</para>
@@ -207,17 +207,17 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// 3 = NETWORK_NO_SOURCE: No HTMLMediaElement src found.
     /// </para>
     /// </summary>
-    public int NetworkState => htmlMediaElementJS.Invoke<int>("getNetworkState");
+    public int NetworkState => htmlMediaElementTask.Result.Invoke<int>("getNetworkState");
 
     /// <summary>
     /// Returns a TimeRanges object that indicates the ranges of the media source that the browser has buffered (if any) at the moment the buffered property is accessed.
     /// </summary>
-    public TimeRange[] Buffered => htmlMediaElementJS.Invoke<TimeRange[]>("getBuffered");
+    public TimeRange[] Buffered => htmlMediaElementTask.Result.Invoke<TimeRange[]>("getBuffered");
 
     /// <summary>
     /// Returns a TimeRanges object that contains the ranges of the media source that the browser has played, if any.
     /// </summary>
-    public TimeRange[] Played => htmlMediaElementJS.Invoke<TimeRange[]>("getPlayed");
+    public TimeRange[] Played => htmlMediaElementTask.Result.Invoke<TimeRange[]>("getPlayed");
 
     #endregion
 
@@ -235,8 +235,8 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// <para>The pitch of the audio is corrected by default. You can disable pitch correction using the HTMLMediaElement.preservesPitch property.</para>
     /// </summary>
     public double PlaybackRate {
-        get => htmlMediaElementJS.Invoke<double>("getPlaybackRate");
-        set => htmlMediaElementJS.InvokeVoid("setPlaybackRate", [value]);
+        get => htmlMediaElementTask.Result.Invoke<double>("getPlaybackRate");
+        set => htmlMediaElementTask.Result.InvokeVoid("setPlaybackRate", [value]);
     }
 
     /// <summary>
@@ -244,8 +244,8 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// <para>A double. 1.0 is "normal speed," values lower than 1.0 make the media play slower than normal, higher values make it play faster.</para>
     /// </summary>
     public double DefaultPlaybackRate {
-        get => htmlMediaElementJS.Invoke<double>("getDefaultPlaybackRate");
-        set => htmlMediaElementJS.InvokeVoid("setDefaultPlaybackRate", [value]);
+        get => htmlMediaElementTask.Result.Invoke<double>("getDefaultPlaybackRate");
+        set => htmlMediaElementTask.Result.InvokeVoid("setDefaultPlaybackRate", [value]);
     }
 
     /// <summary>
@@ -264,8 +264,8 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// <para>If the <i>crossOrigin</i> property is not specified, the resource is fetched without CORS (the <i>no-cors</i> mode and the <i>same-origin</i> credentials mode).</para>
     /// </summary>
     public string CrossOrigin {
-        get => htmlMediaElementJS.Invoke<string>("getCrossOrigin");
-        set => htmlMediaElementJS.InvokeVoid("setCrossOrigin", [value]);
+        get => htmlMediaElementTask.Result.Invoke<string>("getCrossOrigin");
+        set => htmlMediaElementTask.Result.InvokeVoid("setCrossOrigin", [value]);
     }
 
     /// <summary>
@@ -275,8 +275,8 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// <para>Default is true.</para>
     /// </summary>
     public bool PreservesPitch {
-        get => htmlMediaElementJS.Invoke<bool>("getPreservesPitch");
-        set => htmlMediaElementJS.InvokeVoid("setPreservesPitch", [value]);
+        get => htmlMediaElementTask.Result.Invoke<bool>("getPreservesPitch");
+        set => htmlMediaElementTask.Result.InvokeVoid("setPreservesPitch", [value]);
     }
 
     /// <summary>
@@ -284,8 +284,8 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// <para>false means "not disabled", which means "enabled"</para>
     /// </summary>
     public bool DisableRemotePlayback {
-        get => htmlMediaElementJS.Invoke<bool>("getDisableRemotePlayback");
-        set => htmlMediaElementJS.InvokeVoid("setDisableRemotePlayback", [value]);
+        get => htmlMediaElementTask.Result.Invoke<bool>("getDisableRemotePlayback");
+        set => htmlMediaElementTask.Result.InvokeVoid("setDisableRemotePlayback", [value]);
     }
 
     #endregion
@@ -298,8 +298,8 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// <para>Reflects the width attribute of the &lt;video&gt; element, specifying the displayed width of the resource in CSS pixels.</para>
     /// </summary>
     public int Width {
-        get => htmlMediaElementJS.Invoke<int>("getWidth");
-        set => htmlMediaElementJS.InvokeVoid("setWidth", [value]);
+        get => htmlMediaElementTask.Result.Invoke<int>("getWidth");
+        set => htmlMediaElementTask.Result.InvokeVoid("setWidth", [value]);
     }
 
     /// <summary>
@@ -307,8 +307,8 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// <para>Reflects the height attribute of the &lt;video&gt; element, specifying the displayed height of the resource in CSS pixels.</para>
     /// </summary>
     public int Height {
-        get => htmlMediaElementJS.Invoke<int>("getHeight");
-        set => htmlMediaElementJS.InvokeVoid("setHeight", [value]);
+        get => htmlMediaElementTask.Result.Invoke<int>("getHeight");
+        set => htmlMediaElementTask.Result.InvokeVoid("setHeight", [value]);
     }
 
     /// <summary>
@@ -317,7 +317,7 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// <para>If the element's <see cref="ReadyState"/> is HTMLMediaElement.HAVE_NOTHING, then the value of this property is 0, because neither video nor poster frame size information is yet available.</para>
     /// <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/videoHeight#about_intrinsic_width_and_height">HTMLVideoElement.videoHeight > About intrinsic width and height</see> for more details.</para>
     /// </summary>
-    public int VideoWidth => htmlMediaElementJS.Invoke<int>("getVideoWidth");
+    public int VideoWidth => htmlMediaElementTask.Result.Invoke<int>("getVideoWidth");
 
     /// <summary>
     /// <para>&lt;video&gt; elements only</para>
@@ -325,7 +325,7 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// <para>If the element's <see cref="ReadyState"/> is HTMLMediaElement.HAVE_NOTHING, then the value of this property is 0, because neither video nor poster frame size information is yet available.</para>
     /// <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/videoHeight#about_intrinsic_width_and_height">HTMLVideoElement.videoHeight > About intrinsic width and height</see> for more details.</para>
     /// </summary>
-    public int VideoHeight => htmlMediaElementJS.Invoke<int>("getVideoHeight");
+    public int VideoHeight => htmlMediaElementTask.Result.Invoke<int>("getVideoHeight");
 
     /// <summary>
     /// <para>&lt;video&gt; elements only</para>
@@ -333,8 +333,8 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// <para>It reflects the poster attribute of the &lt;video&gt; element.</para>
     /// </summary>
     public string Poster {
-        get => htmlMediaElementJS.Invoke<string>("getPoster");
-        set => htmlMediaElementJS.InvokeVoid("setPoster", [value]);
+        get => htmlMediaElementTask.Result.Invoke<string>("getPoster");
+        set => htmlMediaElementTask.Result.InvokeVoid("setPoster", [value]);
     }
 
     /// <summary>
@@ -346,8 +346,8 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// </para>
     /// </summary>
     public bool DisablePictureInPicture {
-        get => htmlMediaElementJS.Invoke<bool>("getDisablePictureInPicture");
-        set => htmlMediaElementJS.InvokeVoid("setDisablePictureInPicture", [value]);
+        get => htmlMediaElementTask.Result.Invoke<bool>("getDisablePictureInPicture");
+        set => htmlMediaElementTask.Result.InvokeVoid("setDisablePictureInPicture", [value]);
     }
 
     #endregion
@@ -361,19 +361,19 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// <para>Pauses the media playback.</para>
     /// <para>If the media is already in a paused state this method will have no effect.</para>
     /// </summary>
-    public void Pause() => htmlMediaElementJS.InvokeVoid("pause");
+    public void Pause() => htmlMediaElementTask.Result.InvokeVoid("pause");
 
     /// <summary>
     /// Resets the media to the beginning and selects the best available source from the sources provided using the <i>src</i> attribute or the <i>&lt;source&gt;</i> element.
     /// </summary>
-    public void Load() => htmlMediaElementJS.InvokeVoid("load");
+    public void Load() => htmlMediaElementTask.Result.InvokeVoid("load");
 
     /// <summary>
     /// <para>Quickly seeks to the given time with low precision.</para>
     /// <para>Note: If you need to seek with precision, you should set HTMLMediaElement.currentTime instead.</para>
     /// </summary>
     /// <param name="time"></param>
-    public void FastSeek(double time) => htmlMediaElementJS.InvokeVoid("fastSeek", [time]);
+    public void FastSeek(double time) => htmlMediaElementTask.Result.InvokeVoid("fastSeek", [time]);
 
     /// <summary>
     /// Given a string specifying a MIME media type (potentially with the codecs parameter included), canPlayType() returns the string<br />
@@ -383,74 +383,7 @@ public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMe
     /// </summary>
     /// <param name="type">A string specifying the MIME type of the media and (optionally) a codecs parameter containing a comma-separated list of the supported codecs.</param>
     /// <returns>"probably", "maybe" or ""</returns>
-    public string CanPlayType(string type) => htmlMediaElementJS.Invoke<string>("canPlayType", [type]);
-
-
-    /// <summary>
-    /// <para>&lt;video&gt; elements only</para>
-    /// <para>Issues an asynchronous request to display the video in picture-in-picture mode.</para>
-    /// <para>
-    /// It's not guaranteed that the video will be put into picture-in-picture.
-    /// If permission to enter that mode is granted, the returned Promise will resolve and the video will receive a enterpictureinpicture event to let it know that it's now in picture-in-picture.
-    /// </para>
-    /// </summary>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public async ValueTask<IPictureInPictureWindowInProcess> RequestPictureInPicture(CancellationToken cancellationToken = default) {
-        IJSInProcessObjectReference pictureInPictureWindowJS = await (await htmlMediaElementTask).InvokeAsync<IJSInProcessObjectReference>("requestPictureInPicture", cancellationToken);
-        return new PictureInPictureWindowInProcess(pictureInPictureWindowJS);
-    }
-
-    #endregion
-
-
-    #region Events
-
-    private protected override void InvokeEnterPictureInPicture(IJSObjectReference pictureInPictureWindow) => _onEnterPictureInPicture?.Invoke(new PictureInPictureWindowInProcess((IJSInProcessObjectReference)pictureInPictureWindow));
-    private Action<IPictureInPictureWindowInProcess>? _onEnterPictureInPicture;
-    /// <summary>
-    /// <para>Is fired when the HTMLVideoElement enters picture-in-picture mode successfully.</para>
-    /// <para>This event is not cancelable and does not bubble.</para>
-    /// <para>
-    /// Parameter returns the PictureInPictureWindow the event relates to.<br />
-    /// Note: Dispose the given PictureInPictureWindow object when you are done with it.
-    /// </para>
-    /// </summary>
-    public event Action<IPictureInPictureWindowInProcess> OnEnterPictureInPicture {
-        add {
-            if (_onEnterPictureInPicture == null)
-                _ = ActivateJSEvent("activateOnenterpictureinpicture").Preserve();
-            _onEnterPictureInPicture += value;
-        }
-        remove {
-            _onEnterPictureInPicture -= value;
-            if (_onEnterPictureInPicture == null)
-                _ = DeactivateJSEvent("deactivateOnenterpictureinpicture").Preserve();
-        }
-    }
-
-    private protected override void InvokeLeavePictureInPicture(IJSObjectReference pictureInPictureWindow) => _onLeavePictureInPicture?.Invoke(new PictureInPictureWindowInProcess((IJSInProcessObjectReference)pictureInPictureWindow));
-    private Action<IPictureInPictureWindowInProcess>? _onLeavePictureInPicture;
-    /// <summary>
-    /// <para>Is fired when the HTMLVideoElement leaves picture-in-picture mode successfully.</para>
-    /// <para>This event is not cancelable and does not bubble.</para>
-    /// <para>
-    /// Parameter returns the PictureInPictureWindow the event relates to.<br />
-    /// Note: Dispose the given PictureInPictureWindow object when you are done with it.
-    /// </para>
-    /// </summary>
-    public event Action<IPictureInPictureWindowInProcess> OnLeavePictureInPicture {
-        add {
-            if (_onLeavePictureInPicture == null)
-                _ = ActivateJSEvent("activateOnleavepictureinpicture").Preserve();
-            _onLeavePictureInPicture += value;
-        }
-        remove {
-            _onLeavePictureInPicture -= value;
-            if (_onLeavePictureInPicture == null)
-                _ = DeactivateJSEvent("deactivateOnleavepictureinpicture").Preserve();
-        }
-    }
+    public string CanPlayType(string type) => htmlMediaElementTask.Result.Invoke<string>("canPlayType", [type]);
 
     #endregion
 }

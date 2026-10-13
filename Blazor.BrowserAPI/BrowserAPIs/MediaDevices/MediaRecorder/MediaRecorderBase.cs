@@ -5,13 +5,13 @@ using System.Text.Json;
 
 namespace BrowserAPI.Implementation;
 
-[AutoInterface(Namespace = "BrowserAPI", Name = "IMediaRecorder")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IMediaRecorderInProcess")]
+/// Base interface of <see cref="IMediaRecorder"/> and <see cref="IMediaRecorderInProcess"/>.<br/>
+/// It contains common functionality for both interfaces.<br/>
+/// It is not intended to use this interface directly.
+[AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class MediaRecorderBase(IJSObjectReference mediaRecorderJS) {
-#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected IJSObjectReference mediaRecorderJS = mediaRecorderJS;
+public abstract class MediaRecorderBase<TJSObjectReference>(TJSObjectReference mediaRecorderJS) where TJSObjectReference : IJSObjectReference {
+    private protected TJSObjectReference mediaRecorderJS = mediaRecorderJS;
 
 
     #region Events
@@ -22,7 +22,7 @@ public abstract class MediaRecorderBase(IJSObjectReference mediaRecorderJS) {
     [method: DynamicDependency(nameof(InvokeStop))]
     [method: DynamicDependency(nameof(InvokeResume))]
     [method: DynamicDependency(nameof(InvokePause))]
-    private sealed class EventTrigger(MediaRecorderBase mediaRecorder) {
+    private sealed class EventTrigger(MediaRecorderBase<TJSObjectReference> mediaRecorder) {
         [JSInvokable] public void InvokeDataAvailable(byte[] data) => mediaRecorder._onDataAvailable?.Invoke(data);
         [JSInvokable] public void InvokeError(JsonElement errorEvent) => mediaRecorder._onError?.Invoke(errorEvent);
         [JSInvokable] public void InvokeStart() => mediaRecorder._onStart?.Invoke();

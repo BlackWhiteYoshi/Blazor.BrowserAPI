@@ -9,9 +9,9 @@ namespace BrowserAPI.Implementation;
 /// <para>It is created using the <see cref="IMediaStream.CreateRecorder">CreateRecorder() method</see>.</para>
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IMediaRecorderBase<IJSObjectReference>), typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecorderBase(mediaRecorder), IMediaRecorder {
+public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecorderBase<IJSObjectReference>(mediaRecorder), IMediaRecorder {
     /// <summary>
     /// Stops recording and releases the JS instance for this media recorder.
     /// </summary>

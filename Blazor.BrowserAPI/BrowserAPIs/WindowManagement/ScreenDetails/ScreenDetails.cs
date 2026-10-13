@@ -6,12 +6,12 @@ namespace BrowserAPI.Implementation;
 
 /// <summary>
 /// <para>The <i>ScreenDetails</i> interface of the Window Management API represents the details of all the screens available to the user's device.</para>
-/// <para>This information is accessed via the <see cref="IWindowManagement.GetScreenDetails">Window.getScreenDetails()</see> method.</para>
+/// <para>This information is accessed via the <see cref="IWindowManagementBase{IJSObjectReference, IScreenDetails}.GetScreenDetails">Window.getScreenDetails()</see> method.</para>
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IScreenDetailsBase<IJSObjectReference>), typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class ScreenDetails(IJSObjectReference screenDetailsJS) : ScreenDetailsBase(screenDetailsJS), IScreenDetails {
+public sealed class ScreenDetails(IJSObjectReference screenDetailsJS) : ScreenDetailsBase<IJSObjectReference>(screenDetailsJS), IScreenDetails {
     /// <summary>
     /// Releases the JS instance for this ScreenDetails.
     /// </summary>

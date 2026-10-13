@@ -21,31 +21,31 @@ public sealed class UncalibratedMagnetometerInProcess(IJSInProcessObjectReferenc
     /// <summary>
     /// Returns a double containing the uncalibrated magnetic field around the device's x axis.
     /// </summary>
-    public double X => SensorJS.Invoke<double>("getX");
+    public double X => sensorJS.Invoke<double>("getX");
 
     /// <summary>
     /// Returns a double containing the uncalibrated magnetic field around the device's y axis.
     /// </summary>
-    public double Y => SensorJS.Invoke<double>("getY");
+    public double Y => sensorJS.Invoke<double>("getY");
 
     /// <summary>
     /// Returns a double containing the uncalibrated magnetic field around the device's z axis.
     /// </summary>
-    public double Z => SensorJS.Invoke<double>("getZ");
+    public double Z => sensorJS.Invoke<double>("getZ");
 
 
     /// <summary>
     /// Returns a double representing the hard iron distortion correction around x axis.
     /// </summary>
-    public double XBias => SensorJS.Invoke<double>("getXBias");
+    public double XBias => sensorJS.Invoke<double>("getXBias");
 
     /// <summary>
     /// Returns a double representing the hard iron distortion correction around y axis.
     /// </summary>
-    public double YBias => SensorJS.Invoke<double>("getYBias");
+    public double YBias => sensorJS.Invoke<double>("getYBias");
 
     /// <summary>
     /// Returns a double representing the hard iron distortion correction around z axis.
     /// </summary>
-    public double ZBias => SensorJS.Invoke<double>("getZBias");
+    public double ZBias => sensorJS.Invoke<double>("getZBias");
 }

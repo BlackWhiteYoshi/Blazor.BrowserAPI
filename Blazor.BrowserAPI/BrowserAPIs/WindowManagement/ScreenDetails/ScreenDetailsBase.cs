@@ -4,20 +4,20 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
-[AutoInterface(Namespace = "BrowserAPI", Name = "IScreenDetails")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IScreenDetailsInProcess")]
+/// Base interface of <see cref="IScreenDetails"/> and <see cref="IScreenDetailsInProcess"/>.<br/>
+/// It contains common functionality for both interfaces.<br/>
+/// It is not intended to use this interface directly.
+[AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class ScreenDetailsBase(IJSObjectReference screenDetailsJS) {
-#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected IJSObjectReference screenDetailsJS = screenDetailsJS;
+public abstract class ScreenDetailsBase<TJSObjectReference>(TJSObjectReference screenDetailsJS) where TJSObjectReference : IJSObjectReference {
+    private protected TJSObjectReference screenDetailsJS = screenDetailsJS;
 
 
     #region Events
 
     [method: DynamicDependency(nameof(InvokeCurrentScreenChange))]
     [method: DynamicDependency(nameof(InvokeScreensChange))]
-    private sealed class EventTrigger(ScreenDetailsBase screenDetails) {
+    private sealed class EventTrigger(ScreenDetailsBase<TJSObjectReference> screenDetails) {
         [JSInvokable] public void InvokeCurrentScreenChange() => screenDetails._onCurrentScreenChange?.Invoke();
         [JSInvokable] public void InvokeScreensChange() => screenDetails._onScreensChange?.Invoke();
     }

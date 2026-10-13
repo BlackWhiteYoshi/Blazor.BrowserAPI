@@ -9,18 +9,16 @@ namespace BrowserAPI.Implementation;
 /// <para>It is created using the <see cref="IMediaStreamInProcess.CreateRecorder">CreateRecorder() method</see>.</para>
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IMediaRecorderBase<IJSInProcessObjectReference>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class MediaRecorderInProcess(IJSInProcessObjectReference mediaRecorderJS) : MediaRecorderBase(mediaRecorderJS), IMediaRecorderInProcess {
-    private IJSInProcessObjectReference MediaRecorderJS => (IJSInProcessObjectReference)base.mediaRecorderJS;
-
+public sealed class MediaRecorderInProcess(IJSInProcessObjectReference mediaRecorderJS) : MediaRecorderBase<IJSInProcessObjectReference>(mediaRecorderJS), IMediaRecorderInProcess {
     /// <summary>
     /// Stops recording and releases the JS instance for this media recorder.
     /// </summary>
     public void Dispose() {
         Stop();
         DisposeEventTrigger();
-        MediaRecorderJS.Dispose();
+        mediaRecorderJS.Dispose();
     }
 
 
@@ -36,7 +34,7 @@ public sealed class MediaRecorderInProcess(IJSInProcessObjectReference mediaReco
     /// See our <see href="https://developer.mozilla.org/en-US/docs/Web/Media/Formats">media type and format guide</see> for information about container and codec support across browsers.
     /// </para>
     /// </summary>
-    public string MimeType => MediaRecorderJS.Invoke<string>("getMimeType");
+    public string MimeType => mediaRecorderJS.Invoke<string>("getMimeType");
 
     /// <summary>
     /// <para>The <i>state</i> read-only property of the MediaRecorder interface returns the current state of the current MediaRecorder object:</para>
@@ -46,24 +44,24 @@ public sealed class MediaRecorderInProcess(IJSInProcessObjectReference mediaReco
     /// "paused" - Recording has been started, then paused, but not yet stopped or resumed.
     /// </para>
     /// </summary>
-    public string State => MediaRecorderJS.Invoke<string>("getState");
+    public string State => mediaRecorderJS.Invoke<string>("getState");
 
     /// <summary>
     /// The <i>stream</i> read-only property of the MediaRecorder interface returns the stream that was passed into the <see cref="IMediaStreamInProcess.CreateRecorder">CreateRecorder() method</see> when the MediaRecorder was created.
     /// </summary>
-    public IMediaStreamInProcess Stream => new MediaStreamInProcess(MediaRecorderJS.Invoke<IJSInProcessObjectReference>("getStream"));
+    public IMediaStreamInProcess Stream => new MediaStreamInProcess(mediaRecorderJS.Invoke<IJSInProcessObjectReference>("getStream"));
 
     /// <summary>
     /// The <i>videoBitsPerSecond</i> read-only property of the MediaRecorder interface returns the video encoding bit rate in use.<br />
     /// This may differ from the bit rate specified in the constructor, if it was provided.
     /// </summary>
-    public ulong AudioBitsPerSecond => MediaRecorderJS.Invoke<ulong>("getAudioBitsPerSecond");
+    public ulong AudioBitsPerSecond => mediaRecorderJS.Invoke<ulong>("getAudioBitsPerSecond");
 
     /// <summary>
     /// The <i>videoBitsPerSecond</i> read-only property of the MediaRecorder interface returns the video encoding bit rate in use.<br />
     /// This may differ from the bit rate specified in the constructor, if it was provided.
     /// </summary>
-    public ulong VideoBitsPerSecond => MediaRecorderJS.Invoke<ulong>("getVideoBitsPerSecond");
+    public ulong VideoBitsPerSecond => mediaRecorderJS.Invoke<ulong>("getVideoBitsPerSecond");
 
 
     /// <summary>
@@ -79,32 +77,32 @@ public sealed class MediaRecorderInProcess(IJSInProcessObjectReference mediaReco
     /// <para>Note: Like other time values in web APIs, timeslice is not exact and the real intervals may be slightly longer due to other pending tasks before the creation of the next blob.</para>
     /// </param>
     /// <returns></returns>
-    public void Start(int timeslice = 0) => MediaRecorderJS.InvokeVoid("start", [timeslice]);
+    public void Start(int timeslice = 0) => mediaRecorderJS.InvokeVoid("start", [timeslice]);
 
     /// <summary>
     /// Stops recording, at which point a dataavailable event containing the final Blob of saved data is fired. No more recording occurs.
     /// </summary>
     /// <returns></returns>
-    public void Stop() => MediaRecorderJS.InvokeVoid("stop");
+    public void Stop() => mediaRecorderJS.InvokeVoid("stop");
 
     /// <summary>
     /// Resumes recording of media after having been paused.
     /// </summary>
     /// <returns></returns>
-    public void Resume() => MediaRecorderJS.InvokeVoid("resume");
+    public void Resume() => mediaRecorderJS.InvokeVoid("resume");
 
     /// <summary>
     /// Pauses the recording of media.
     /// </summary>
     /// <returns></returns>
-    public void Pause() => MediaRecorderJS.InvokeVoid("pause");
+    public void Pause() => mediaRecorderJS.InvokeVoid("pause");
 
     /// <summary>
     /// Requests a Blob containing the saved data received thus far (or since the last time requestData() was called.
     /// After calling this method, recording continues, but in a new Blob.
     /// </summary>
     /// <returns></returns>
-    public void RequestData() => MediaRecorderJS.InvokeVoid("requestData");
+    public void RequestData() => mediaRecorderJS.InvokeVoid("requestData");
 
 
     /// <summary>
@@ -113,5 +111,5 @@ public sealed class MediaRecorderInProcess(IJSInProcessObjectReference mediaReco
     /// <remarks>In C# this method is not static because it needs an reference to the JS-module.</remarks>
     /// <param name="mimeType"></param>
     /// <returns></returns>
-    public bool IsTypeSupported(string mimeType) => MediaRecorderJS.Invoke<bool>("isTypeSupported");
+    public bool IsTypeSupported(string mimeType) => mediaRecorderJS.Invoke<bool>("isTypeSupported");
 }

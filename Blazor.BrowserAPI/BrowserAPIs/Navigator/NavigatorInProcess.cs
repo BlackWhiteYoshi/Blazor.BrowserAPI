@@ -8,9 +8,9 @@ namespace BrowserAPI.Implementation;
 /// The Navigator interface represents the state and the identity of the user agent.
 /// It allows scripts to query it and to register themselves to carry on some activities.
 /// </summary>
-[AutoInterface(Namespace = "BrowserAPI")]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(INavigatorBase<IJSInProcessObjectReference, IFileInProcess>)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class NavigatorInProcess(IModuleManager moduleManager) : NavigatorBase(moduleManager), INavigatorInProcess {
+public sealed class NavigatorInProcess(IModuleManager moduleManager) : NavigatorBase<IJSInProcessObjectReference, IFileInProcess>(moduleManager), INavigatorInProcess {
     /// <summary>
     /// <para>Represents the preferred language of the user, usually the language of the browser UI.</para>
     /// <para>
@@ -28,7 +28,7 @@ public sealed class NavigatorInProcess(IModuleManager moduleManager) : Navigator
     /// In the returned array they are ordered by preference with the most preferred language first.
     /// </para>
     /// <para>The value of <see cref="Language"/> is the first element of the returned array.</para>
-    /// <para>When its value changes, as the user's preferred languages are changed a <see cref="IWindowInProcess.OnLanguageChange"/> event is fired on the <see cref="IWindowInProcess"/> object.</para>
+    /// <para>When its value changes, as the user's preferred languages are changed a <see cref="IWindowBase{IJSInProcessObjectReference, DragEventInProcess}.OnLanguageChange"/> event is fired on the <see cref="IWindowInProcess"/> object.</para>
     /// <para>
     /// The Accept-Language HTTP header in every HTTP request from the user's browser generally lists the same locales as the navigator.languages property, with decreasing q values (quality values).
     /// Some browsers (Chrome and Safari) add language-only fallback tags in Accept-Language—for example, en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7 when navigator.languages is ["en-US", "zh-CN"].
@@ -155,7 +155,7 @@ public sealed class NavigatorInProcess(IModuleManager moduleManager) : Navigator
 
 
     /// <summary>
-    /// <para>Returns true if the equivalent call to <see cref="Share"/> would succeed.</para>
+    /// <para>Returns true if the equivalent call to <see cref="INavigatorBase{IJSInProcessObjectReference, IFileInProcess}.Share"/> would succeed.</para>
     /// <para>
     /// The method returns false if the data cannot be validated. Reasons the data might be invalid include:<br />
     /// - The data parameter has been omitted or only contains properties with unknown values. Note that any properties that are not recognized by the user agent are ignored.<br/>
@@ -179,34 +179,6 @@ public sealed class NavigatorInProcess(IModuleManager moduleManager) : Navigator
         }
 
         return moduleManager.InvokeSync<bool>("NavigatorAPI.canShare", [url, text, title, filesJS]);
-    }
-
-    /// <summary>
-    /// <para>
-    /// Invokes the native sharing mechanism of the device to share data such as text, URLs, or files.
-    /// The available share targets depend on the device, but might include the clipboard, contacts and email applications, websites, Bluetooth, etc.
-    /// </para>
-    /// <para>
-    /// The method resolves a Promise with undefined.
-    /// On Windows this happens when the share popup is launched, while on Android the promise resolves once the data has successfully been passed to the share target.
-    /// </para>
-    /// <para>The Web Share API is gated by the web-share permission policy. The share() method will throw exceptions if the permission is supported but has not been granted.</para>
-    /// </summary>
-    /// <param name="url">Representing a URL to be shared.</param>
-    /// <param name="text">Representing text to be shared.</param>
-    /// <param name="title">Representing a title to be shared. May be ignored by the target.</param>
-    /// <param name="files">Representing files to be shared. See <see href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share#shareable_file_types">below for shareable file types</see>.</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public ValueTask Share(string? url = null, string? text = null, string? title = null, IFileInProcess[]? files = null, CancellationToken cancellationToken = default) {
-        IJSInProcessObjectReference[]? filesJS = null;
-        if (files is not null) {
-            filesJS = new IJSInProcessObjectReference[files.Length];
-            for (int i = 0; i < filesJS.Length; i++)
-                filesJS[i] = files[i].FileJS;
-        }
-
-        return moduleManager.InvokeAsync("NavigatorAPI.share", cancellationToken, [url, text, title, filesJS]);
     }
 
 

@@ -1,5 +1,6 @@
 using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
+using Microsoft.JSInterop.Implementation;
 using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
@@ -8,25 +9,15 @@ namespace BrowserAPI.Implementation;
 /// The <i>Window Management API</i> allows you to get detailed information on the displays connected to your device and more easily place windows on specific screens,
 /// paving the way towards more effective multi-screen applications.
 /// </summary>
-[AutoInterface(Namespace = "BrowserAPI")]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IWindowManagementBase<IJSObjectReference, IScreenDetails>)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class WindowManagement(IModuleManager moduleManager) : IWindowManagement {
+public sealed class WindowManagement(IModuleManager moduleManager) : WindowManagementBase<IJSObjectReference, IScreenDetails>(moduleManager), IWindowManagement {
     /// <summary>
     /// The Window property <i>screen</i> returns a reference to the screen object associated with the window.
     /// The screen object, implementing the Screen interface, is a special object for inspecting properties of the screen on which the current window is being rendered.
     /// </summary>
     public IScreen Screen { get; } = new Screen(moduleManager);
 
-
-    /// <summary>
-    /// The <i>getScreenDetails()</i> method of the Window interface returns a Promise that fulfills with a ScreenDetails object instance representing the details of all the screens available to the user's device.
-    /// </summary>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public async ValueTask<IScreenDetails> GetScreenDetails(CancellationToken cancellationToken = default) {
-        IJSObjectReference screenDetailsJS = await moduleManager.InvokeAsync<IJSObjectReference>("WindowManagementAPI.getScreenDetails", cancellationToken);
-        return new ScreenDetails(screenDetailsJS);
-    }
 
     /// <summary>
     /// The <i>open()</i> method of the Window interface loads a specified resource into a new or existing browsing context (that is, a tab, a window, or an iframe) under a specified name.

@@ -4,19 +4,19 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
-[AutoInterface(Namespace = "BrowserAPI", Name = "IPictureInPictureWindow")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IPictureInPictureWindowInProcess")]
+/// Base interface of <see cref="IPictureInPictureWindow"/> and <see cref="IPictureInPictureWindowInProcess"/>.<br/>
+/// It contains common functionality for both interfaces.<br/>
+/// It is not intended to use this interface directly.
+[AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class PictureInPictureWindowBase(IJSObjectReference pictureInPictureWindowJS) {
-#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected IJSObjectReference pictureInPictureWindowJS = pictureInPictureWindowJS;
+public abstract class PictureInPictureWindowBase<TJSObjectReference>(TJSObjectReference pictureInPictureWindowJS) where TJSObjectReference : IJSObjectReference {
+    private protected TJSObjectReference pictureInPictureWindowJS = pictureInPictureWindowJS;
 
 
     #region Events
 
     [method: DynamicDependency(nameof(InvokeResize))]
-    private sealed class EventTrigger(PictureInPictureWindowBase pictureInPictureWindow) {
+    private sealed class EventTrigger(PictureInPictureWindowBase<TJSObjectReference> pictureInPictureWindow) {
         [JSInvokable] public void InvokeResize() => pictureInPictureWindow._onResize?.Invoke();
     }
 

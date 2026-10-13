@@ -9,17 +9,15 @@ namespace BrowserAPI.Implementation;
 /// <para><i>ScreenDetailed</i> objects can be accessed via the <see cref="IScreenDetailsInProcess.Screens">ScreenDetails.screens</see> and <see cref="IScreenDetailsInProcess.CurrentScreen">ScreenDetails.currentScreen</see> properties.</para>
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IScreenDetailedBase<IJSInProcessObjectReference>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class ScreenDetailedInProcess(IJSInProcessObjectReference screenDetailedJS) : ScreenDetailedBase(screenDetailedJS), IScreenDetailedInProcess {
-    private IJSInProcessObjectReference ScreenDetailedJS => (IJSInProcessObjectReference)base.screenDetailedJS;
-
+public sealed class ScreenDetailedInProcess(IJSInProcessObjectReference screenDetailedJS) : ScreenDetailedBase<IJSInProcessObjectReference>(screenDetailedJS), IScreenDetailedInProcess {
     /// <summary>
     /// Releases the JS instance for this ScreenDetails.
     /// </summary>
     public void Dispose() {
         DisposeEventTrigger();
-        ScreenDetailedJS.Dispose();
+        screenDetailedJS.Dispose();
     }
 
 
@@ -30,7 +28,7 @@ public sealed class ScreenDetailedInProcess(IJSInProcessObjectReference screenDe
     /// Windows cannot be placed in those areas; to get the left-hand coordinate of the screen area that windows can be placed in, use <see cref="AvailLeft"/>.
     /// </para>
     /// </summary>
-    public int Left => ScreenDetailedJS.Invoke<int>("getLeft");
+    public int Left => screenDetailedJS.Invoke<int>("getLeft");
 
     /// <summary>
     /// <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
@@ -39,7 +37,7 @@ public sealed class ScreenDetailedInProcess(IJSInProcessObjectReference screenDe
     /// Windows cannot be placed in those areas; to get the top coordinate of the screen area that windows can be placed in, use <see cref="AvailTop"/>.
     /// </para>
     /// </summary>
-    public int Top => ScreenDetailedJS.Invoke<int>("getTop");
+    public int Top => screenDetailedJS.Invoke<int>("getTop");
 
     /// <summary>
     /// <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
@@ -48,7 +46,7 @@ public sealed class ScreenDetailedInProcess(IJSInProcessObjectReference screenDe
     /// Windows cannot be placed in those areas, so availLeft is useful for giving you the left boundary of the actual area available to open or place windows.
     /// </para>
     /// </summary>
-    public int AvailLeft => ScreenDetailedJS.Invoke<int>("getAvailLeft");
+    public int AvailLeft => screenDetailedJS.Invoke<int>("getAvailLeft");
 
     /// <summary>
     /// <para>A number representing the y-coordinate (top edge) of the available screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
@@ -57,14 +55,14 @@ public sealed class ScreenDetailedInProcess(IJSInProcessObjectReference screenDe
     /// Windows cannot be placed in those areas, so availTop is useful for giving you the top boundary of the actual area available to open or place windows.
     /// </para>
     /// </summary>
-    public int AvailTop => ScreenDetailedJS.Invoke<int>("getAvailTop");
+    public int AvailTop => screenDetailedJS.Invoke<int>("getAvailTop");
 
 
     /// <summary>
     /// <para>A descriptive label for the screen, for example "Built-in Retina Display".</para>
     /// <para>This is useful for constructing a list of options to display to the user if you want them to choose a screen to display content on.</para>
     /// </summary>
-    public string Label => ScreenDetailedJS.Invoke<string>("getLabel");
+    public string Label => screenDetailedJS.Invoke<string>("getLabel");
 
     /// <summary>
     /// <para>A number representing the screen's device pixel ratio.</para>
@@ -74,7 +72,7 @@ public sealed class ScreenDetailedInProcess(IJSInProcessObjectReference screenDe
     /// - also includes scaling of the window itself, i.e., page zoom (at least on some browser implementations).
     /// </para>
     /// </summary>
-    public double DevicePixelRatio => ScreenDetailedJS.Invoke<double>("getDevicePixelRatio");
+    public double DevicePixelRatio => screenDetailedJS.Invoke<double>("getDevicePixelRatio");
 
     /// <summary>
     /// <para>A boolean indicating whether the screen is set as the operating system (OS) primary screen or not.</para>
@@ -84,52 +82,52 @@ public sealed class ScreenDetailedInProcess(IJSInProcessObjectReference screenDe
     /// The primary screen may change for a number of reasons, such as a screen being unplugged.
     /// </para>
     /// </summary>
-    public bool IsPrimary => ScreenDetailedJS.Invoke<bool>("getIsPrimary");
+    public bool IsPrimary => screenDetailedJS.Invoke<bool>("getIsPrimary");
 
     /// <summary>
     /// A boolean indicating whether the screen is internal to the device or external.
     /// External devices are generally manufactured separately from the device they are attached to and can be connected and disconnected as needed,
     /// whereas internal screens are part of the device and not intended to be disconnected.
     /// </summary>
-    public bool IsInternal => ScreenDetailedJS.Invoke<bool>("getIsInternal");
+    public bool IsInternal => screenDetailedJS.Invoke<bool>("getIsInternal");
 
 
 
     // Screen
 
     /// <inheritdoc cref="ScreenInProcess.Width" />
-    public int Width => ScreenDetailedJS.Invoke<int>("getWidth");
+    public int Width => screenDetailedJS.Invoke<int>("getWidth");
 
     /// <inheritdoc cref="ScreenInProcess.Height" />
-    public int Height => ScreenDetailedJS.Invoke<int>("getHeight");
+    public int Height => screenDetailedJS.Invoke<int>("getHeight");
 
     /// <inheritdoc cref="ScreenInProcess.AvailWidth" />
-    public int AvailWidth => ScreenDetailedJS.Invoke<int>("getAvailWidth");
+    public int AvailWidth => screenDetailedJS.Invoke<int>("getAvailWidth");
 
     /// <inheritdoc cref="ScreenInProcess.AvailHeight" />
-    public int AvailHeight => ScreenDetailedJS.Invoke<int>("getAvailHeight");
+    public int AvailHeight => screenDetailedJS.Invoke<int>("getAvailHeight");
 
     /// <inheritdoc cref="ScreenInProcess.ColorDepth" />
-    public int ColorDepth => ScreenDetailedJS.Invoke<int>("getColorDepth");
+    public int ColorDepth => screenDetailedJS.Invoke<int>("getColorDepth");
 
     /// <inheritdoc cref="ScreenInProcess.PixelDepth" />
-    public int PixelDepth => ScreenDetailedJS.Invoke<int>("getPixelDepth");
+    public int PixelDepth => screenDetailedJS.Invoke<int>("getPixelDepth");
 
     /// <inheritdoc cref="ScreenInProcess.IsExtended" />
-    public bool IsExtended => ScreenDetailedJS.Invoke<bool>("getIsExtended");
+    public bool IsExtended => screenDetailedJS.Invoke<bool>("getIsExtended");
 
 
     // orientation
 
     /// <inheritdoc cref="ScreenInProcess.OrientationType" />
-    public string OrientationType => ScreenDetailedJS.Invoke<string>("getOrientationType");
+    public string OrientationType => screenDetailedJS.Invoke<string>("getOrientationType");
 
     /// <inheritdoc cref="ScreenInProcess.OrientationAngle" />
-    public double OrientationAngle => ScreenDetailedJS.Invoke<double>("getOrientationAngle");
+    public double OrientationAngle => screenDetailedJS.Invoke<double>("getOrientationAngle");
 
 
     // public ValueTask LockOrientation(...) is in ScreenDetailedBase
 
     /// <inheritdoc cref="ScreenInProcess.UnlockOrientation" />
-    public void UnlockOrientation() => ScreenDetailedJS.InvokeVoid("unlockOrientation");
+    public void UnlockOrientation() => screenDetailedJS.InvokeVoid("unlockOrientation");
 }

@@ -4,13 +4,18 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
-[AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLMediaElement")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLMediaElementInProcess")]
+/// Base interface of <see cref="IHTMLMediaElement"/> and <see cref="IHTMLMediaElementInProcess"/>.<br/>
+/// It contains common functionality for both interfaces.<br/>
+/// It is not intended to use this interface directly.
+[AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaElementTask) {
-#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected Task<IJSObjectReference> htmlMediaElementTask = htmlMediaElementTask;
+public abstract class HTMLMediaElementBase<TJSObjectReference, TPictureInPictureWindow>(Task<TJSObjectReference> htmlMediaElementTask) : IHTMLMediaElementBase<TJSObjectReference, TPictureInPictureWindow>
+    where TJSObjectReference : IJSObjectReference
+    where TPictureInPictureWindow : IPictureInPictureWindowBase<TJSObjectReference> {
+    private protected Task<TJSObjectReference> htmlMediaElementTask = htmlMediaElementTask;
+
+    [AutoInterfaceVisibilityInternal]
+    Task<TJSObjectReference> IHTMLMediaElementBase<TJSObjectReference, TPictureInPictureWindow>.HTMLMediaElementTask => htmlMediaElementTask;
 
 
     /// <summary>
@@ -20,6 +25,24 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async ValueTask Play(CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeVoidAsync("play", cancellationToken);
+
+    /// <summary>
+    /// <para>&lt;video&gt; elements only</para>
+    /// <para>Issues an asynchronous request to display the video in picture-in-picture mode.</para>
+    /// <para>
+    /// It's not guaranteed that the video will be put into picture-in-picture.
+    /// If permission to enter that mode is granted, the returned Promise will resolve and the video will receive a enterpictureinpicture event to let it know that it's now in picture-in-picture.
+    /// </para>
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<TPictureInPictureWindow> RequestPictureInPicture(CancellationToken cancellationToken = default) {
+        TJSObjectReference pictureInPictureWindowJS = await (await htmlMediaElementTask).InvokeAsync<TJSObjectReference>("requestPictureInPicture", cancellationToken);
+        if (typeof(TJSObjectReference) == typeof(IJSObjectReference))
+            return (TPictureInPictureWindow)(IPictureInPictureWindow)new PictureInPictureWindow(pictureInPictureWindowJS);
+        else
+            return (TPictureInPictureWindow)(IPictureInPictureWindowInProcess)new PictureInPictureWindowInProcess((IJSInProcessObjectReference)pictureInPictureWindowJS);
+    }
 
 
     #region Events
@@ -58,7 +81,9 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
     [method: DynamicDependency(nameof(InvokeResize))]
     [method: DynamicDependency(nameof(InvokeEnterPictureInPicture))]
     [method: DynamicDependency(nameof(InvokeLeavePictureInPicture))]
-    private sealed class EventTrigger(HTMLMediaElementBase htmlMediaElement) {
+
+    [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
+    private sealed class EventTrigger(HTMLMediaElementBase<TJSObjectReference, TPictureInPictureWindow> htmlMediaElement) {
         // Ready
         [JSInvokable] public void InvokeError(int code, string message) => htmlMediaElement._onError?.Invoke(code, message);
         [JSInvokable] public void InvokeCanPlay() => htmlMediaElement._onCanPlay?.Invoke();
@@ -91,13 +116,24 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
 
         // Video
         [JSInvokable] public void InvokeResize() => htmlMediaElement._onResize?.Invoke();
-        [JSInvokable] public void InvokeEnterPictureInPicture(IJSObjectReference pictureInPictureWindow) => htmlMediaElement.InvokeEnterPictureInPicture(pictureInPictureWindow);
-        [JSInvokable] public void InvokeLeavePictureInPicture(IJSObjectReference pictureInPictureWindow) => htmlMediaElement.InvokeLeavePictureInPicture(pictureInPictureWindow);
+        [JSInvokable]
+        public void InvokeEnterPictureInPicture(TJSObjectReference pictureInPictureWindowJs) {
+            TPictureInPictureWindow pictureInPictureWindow = typeof(TJSObjectReference) == typeof(IJSObjectReference)
+                ? (TPictureInPictureWindow)(IPictureInPictureWindow)new PictureInPictureWindow(pictureInPictureWindowJs)
+                : (TPictureInPictureWindow)(IPictureInPictureWindowInProcess)new PictureInPictureWindowInProcess((IJSInProcessObjectReference)pictureInPictureWindowJs);
+            htmlMediaElement._onEnterPictureInPicture?.Invoke(pictureInPictureWindow);
+        }
+        [JSInvokable] public void InvokeLeavePictureInPicture(TJSObjectReference pictureInPictureWindowJs) {
+            TPictureInPictureWindow pictureInPictureWindow = typeof(TJSObjectReference) == typeof(IJSObjectReference)
+                ? (TPictureInPictureWindow)(IPictureInPictureWindow)new PictureInPictureWindow(pictureInPictureWindowJs)
+                : (TPictureInPictureWindow)(IPictureInPictureWindowInProcess)new PictureInPictureWindowInProcess((IJSInProcessObjectReference)pictureInPictureWindowJs);
+            htmlMediaElement._onLeavePictureInPicture?.Invoke(pictureInPictureWindow);
+        }
     }
 
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
 
-    private ValueTask InitEventTrigger(IJSObjectReference htmlMediaElement) {
+    private ValueTask InitEventTrigger(TJSObjectReference htmlMediaElement) {
         if (_objectReferenceEventTrigger is not null)
             return ValueTask.CompletedTask;
 
@@ -112,13 +148,13 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
 
 
     private protected async ValueTask ActivateJSEvent(string jsMethodName) {
-        IJSObjectReference htmlMediaElement = await htmlMediaElementTask;
+        TJSObjectReference htmlMediaElement = await htmlMediaElementTask;
         await InitEventTrigger(htmlMediaElement);
         await htmlMediaElement.InvokeVoidTrySync(jsMethodName);
     }
 
     private protected async ValueTask DeactivateJSEvent(string jsMethodName) {
-        IJSObjectReference htmlMediaElement = await htmlMediaElementTask;
+        TJSObjectReference htmlMediaElement = await htmlMediaElementTask;
         await htmlMediaElement.InvokeVoidTrySync(jsMethodName);
     }
 
@@ -573,11 +609,49 @@ public abstract class HTMLMediaElementBase(Task<IJSObjectReference> htmlMediaEle
         }
     }
 
-    // (IPictureInPictureWindow | IPictureInPictureWindowInProcess) pictureInPictureWindow
-    private protected abstract void InvokeEnterPictureInPicture(IJSObjectReference pictureInPictureWindow);
+    private Action<TPictureInPictureWindow>? _onEnterPictureInPicture;
+    /// <summary>
+    /// <para>Is fired when the HTMLVideoElement enters picture-in-picture mode successfully.</para>
+    /// <para>This event is not cancelable and does not bubble.</para>
+    /// <para>
+    /// Parameter returns the PictureInPictureWindow the event relates to.<br />
+    /// Note: Dispose the given PictureInPictureWindow object when you are done with it.
+    /// </para>
+    /// </summary>
+    public event Action<TPictureInPictureWindow> OnEnterPictureInPicture {
+        add {
+            if (_onEnterPictureInPicture == null)
+                _ = ActivateJSEvent("activateOnenterpictureinpicture").Preserve();
+            _onEnterPictureInPicture += value;
+        }
+        remove {
+            _onEnterPictureInPicture -= value;
+            if (_onEnterPictureInPicture == null)
+                _ = DeactivateJSEvent("deactivateOnenterpictureinpicture").Preserve();
+        }
+    }
 
-    // (IPictureInPictureWindow | IPictureInPictureWindowInProcess) pictureInPictureWindow
-    private protected abstract void InvokeLeavePictureInPicture(IJSObjectReference pictureInPictureWindow);
+    private Action<TPictureInPictureWindow>? _onLeavePictureInPicture;
+    /// <summary>
+    /// <para>Is fired when the HTMLVideoElement leaves picture-in-picture mode successfully.</para>
+    /// <para>This event is not cancelable and does not bubble.</para>
+    /// <para>
+    /// Parameter returns the PictureInPictureWindow the event relates to.<br />
+    /// Note: Dispose the given PictureInPictureWindow object when you are done with it.
+    /// </para>
+    /// </summary>
+    public event Action<TPictureInPictureWindow> OnLeavePictureInPicture {
+        add {
+            if (_onLeavePictureInPicture == null)
+                _ = ActivateJSEvent("activateOnleavepictureinpicture").Preserve();
+            _onLeavePictureInPicture += value;
+        }
+        remove {
+            _onLeavePictureInPicture -= value;
+            if (_onLeavePictureInPicture == null)
+                _ = DeactivateJSEvent("deactivateOnleavepictureinpicture").Preserve();
+        }
+    }
 
     #endregion
 }

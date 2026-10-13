@@ -9,9 +9,9 @@ namespace BrowserAPI.Implementation;
 /// Multiple browsing contexts (e.g. pages, workers, etc.) can be associated with the same service worker, each through a unique ServiceWorker object.
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="DisposeAsync"/> when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IServiceWorkerBase<IJSObjectReference>), typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class ServiceWorker(IJSObjectReference serviceWorkerJS) : ServiceWorkerBase(serviceWorkerJS), IServiceWorker {
+public sealed class ServiceWorker(IJSObjectReference serviceWorkerJS) : ServiceWorkerBase<IJSObjectReference>(serviceWorkerJS), IServiceWorker {
     /// <summary>
     /// Releases the JS instance for this service worker.
     /// </summary>

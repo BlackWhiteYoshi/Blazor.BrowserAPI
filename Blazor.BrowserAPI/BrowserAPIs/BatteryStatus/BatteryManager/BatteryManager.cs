@@ -7,14 +7,14 @@ namespace BrowserAPI.Implementation;
 /// <summary>
 /// <para>
 /// Provides information about the system's battery charge level.
-/// The <see cref="IBatteryStatus.GetBattery"/> method returns a promise that resolves with a BatteryManager interface.
+/// The <see cref="IBatteryStatusBase{IJSObjectReference, IBatteryManager}.GetBattery"/> method returns a promise that resolves with a BatteryManager interface.
 /// </para>
 /// <para>Since Chrome 103, the BatteryManager interface of Battery Status API only expose to secure context.</para>
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="DisposeAsync"/> when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IBatteryManagerBase<IJSObjectReference>), typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class BatteryManager(IJSObjectReference batteryManagerJS) : BatteryManagerBase(batteryManagerJS), IBatteryManager {
+public sealed class BatteryManager(IJSObjectReference batteryManagerJS) : BatteryManagerBase<IJSObjectReference>(batteryManagerJS), IBatteryManager {
     /// <summary>
     /// Releases the JS instance for this Manager.
     /// </summary>

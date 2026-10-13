@@ -4,13 +4,17 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
-[AutoInterface(Namespace = "BrowserAPI", Name = "IBatteryManager")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IBatteryManagerInProcess")]
+/// <summary>
+/// Base interface of <see cref="IBatteryManager"/> and <see cref="IBatteryManagerInProcess"/>.<br/>
+/// It contains common functionality for both interfaces.<br/>
+/// It is not intended to use this interface directly.
+/// </summary>
+/// <typeparam name="TJSObjectReference"></typeparam>
+/// <param name="batteryManagerJS"></param>
+[AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class BatteryManagerBase(IJSObjectReference batteryManagerJS) {
-#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected IJSObjectReference batteryManagerJS = batteryManagerJS;
+public abstract class BatteryManagerBase<TJSObjectReference>(TJSObjectReference batteryManagerJS) where TJSObjectReference : IJSObjectReference {
+    private protected TJSObjectReference batteryManagerJS = batteryManagerJS;
 
 
     #region Events
@@ -19,7 +23,7 @@ public abstract class BatteryManagerBase(IJSObjectReference batteryManagerJS) {
     [method: DynamicDependency(nameof(InvokeChargingTimeChange))]
     [method: DynamicDependency(nameof(InvokeDischargingTimeChange))]
     [method: DynamicDependency(nameof(InvokeLevelChange))]
-    private sealed class EventTrigger(BatteryManagerBase batteryManager) {
+    private sealed class EventTrigger(BatteryManagerBase<TJSObjectReference> batteryManager) {
         [JSInvokable] public void InvokeChargingChange() => batteryManager._onChargingChange?.Invoke();
         [JSInvokable] public void InvokeChargingTimeChange() => batteryManager._onChargingTimeChange?.Invoke();
         [JSInvokable] public void InvokeDischargingTimeChange() => batteryManager._onDischargingTimeChange?.Invoke();

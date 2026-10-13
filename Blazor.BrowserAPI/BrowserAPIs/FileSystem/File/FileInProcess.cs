@@ -18,43 +18,38 @@ namespace BrowserAPI.Implementation;
 /// <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications">Using files from web applications</see> for more information and examples.</para>
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="Dispose"/> when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IFileBase<IJSInProcessObjectReference>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class FileInProcess(IJSObjectReference fileJS) : FileBase(fileJS), IFileInProcess {
-    private IJSInProcessObjectReference FileJS => (IJSInProcessObjectReference)base.fileJS;
-
-    [AutoInterfaceVisibilityInternal]
-    IJSInProcessObjectReference IFileInProcess.FileJS => FileJS;
-
+public sealed class FileInProcess(IJSInProcessObjectReference fileJS) : FileBase<IJSInProcessObjectReference>(fileJS), IFileInProcess {
     /// <summary>
     /// Releases the JS instance for this file.
     /// </summary>
     /// <returns></returns>
-    public void Dispose() => FileJS.Dispose();
+    public void Dispose() => fileJS.Dispose();
 
 
     /// <summary>
     /// Returns the name of the file referenced by the File object.
     /// </summary>
-    public string Name => FileJS.Invoke<string>("getName");
+    public string Name => fileJS.Invoke<string>("getName");
 
     /// <summary>
     /// The size, in bytes, of the data contained in the Blob object.
     /// </summary>
-    public long Size => FileJS.Invoke<long>("getSize");
+    public long Size => fileJS.Invoke<long>("getSize");
 
     /// <summary>
     /// A string indicating the MIME type of the data contained in the Blob. If the type is unknown, this string is empty.
     /// </summary>
-    public string Type => FileJS.Invoke<string>("getType");
+    public string Type => fileJS.Invoke<string>("getType");
 
     /// <summary>
     /// Returns the last modified time of the file, in millisecond since the UNIX epoch (January 1st, 1970 at Midnight).
     /// </summary>
-    public long LastModified => FileJS.Invoke<long>("getLastModified");
+    public long LastModified => fileJS.Invoke<long>("getLastModified");
 
     /// <summary>
     /// Returns the path the URL of the File is relative to.
     /// </summary>
-    public string WebkitRelativePath => FileJS.Invoke<string>("getWebkitRelativePath");
+    public string WebkitRelativePath => fileJS.Invoke<string>("getWebkitRelativePath");
 }

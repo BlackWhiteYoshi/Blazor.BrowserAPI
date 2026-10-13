@@ -4,13 +4,13 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
-[AutoInterface(Namespace = "BrowserAPI", Name = "IGamepad")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IGamepadInProcess")]
+/// Base interface of <see cref="IGamepad"/> and <see cref="IGamepadInProcess"/>.<br/>
+/// It contains common functionality for both interfaces.<br/>
+/// It is not intended to use this interface directly.
+[AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class GamepadBase(IJSObjectReference gamepadJS) {
-#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected IJSObjectReference gamepadJS = gamepadJS;
+public abstract class GamepadBase<TJSObjectReference>(TJSObjectReference gamepadJS) where TJSObjectReference : IJSObjectReference {
+    private protected TJSObjectReference gamepadJS = gamepadJS;
 
 
     /// <summary>

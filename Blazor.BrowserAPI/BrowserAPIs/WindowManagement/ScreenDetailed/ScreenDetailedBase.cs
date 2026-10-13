@@ -4,13 +4,13 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
-[AutoInterface(Namespace = "BrowserAPI", Name = "IScreenDetailed")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IScreenDetailedInProcess")]
+/// Base interface of <see cref="IScreenDetailed"/> and <see cref="IScreenDetailedInProcess"/>.<br/>
+/// It contains common functionality for both interfaces.<br/>
+/// It is not intended to use this interface directly.
+[AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class ScreenDetailedBase(IJSObjectReference screenDetailedJS) {
-#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected IJSObjectReference screenDetailedJS = screenDetailedJS;
+public abstract class ScreenDetailedBase<TJSObjectReference>(TJSObjectReference screenDetailedJS) where TJSObjectReference : IJSObjectReference {
+    private protected TJSObjectReference screenDetailedJS = screenDetailedJS;
 
 
     /// <inheritdoc cref="ScreenBase.LockOrientation" />
@@ -24,7 +24,7 @@ public abstract class ScreenDetailedBase(IJSObjectReference screenDetailedJS) {
 
     [method: DynamicDependency(nameof(InvokeChange))]
     [method: DynamicDependency(nameof(InvokeOrientationChange))]
-    private sealed class EventTrigger(ScreenDetailedBase screenDetailed) {
+    private sealed class EventTrigger(ScreenDetailedBase<TJSObjectReference> screenDetailed) {
         [JSInvokable] public void InvokeChange() => screenDetailed._onChange?.Invoke();
         [JSInvokable] public void InvokeOrientationChange() => screenDetailed._onOrientationChange?.Invoke();
     }

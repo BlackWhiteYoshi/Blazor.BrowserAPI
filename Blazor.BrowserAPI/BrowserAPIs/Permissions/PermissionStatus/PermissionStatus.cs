@@ -8,9 +8,9 @@ namespace BrowserAPI.Implementation;
 /// The <i>PermissionStatus</i> interface of the Permissions API provides the state of an object and an event handler for monitoring changes to said state.
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IPermissionStatusBase<IJSObjectReference>), typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class PermissionStatus(IJSObjectReference permissionStatusJS) : PermissionStatusBase(permissionStatusJS), IPermissionStatus {
+public sealed class PermissionStatus(IJSObjectReference permissionStatusJS) : PermissionStatusBase<IJSObjectReference>(permissionStatusJS), IPermissionStatus {
     /// <summary>
     /// Releases the JS instance for this media recorder.
     /// </summary>
@@ -22,7 +22,7 @@ public sealed class PermissionStatus(IJSObjectReference permissionStatusJS) : Pe
 
 
     /// <summary>
-    /// Returns the name of a requested permission, identical to the <i>name</i> passed to <see cref="IPermissions.Query"/>.
+    /// Returns the name of a requested permission, identical to the <i>name</i> passed to <see cref="IPermissionsBase{IJSObjectReference, IPermissionStatus}.Query"/>.
     /// </summary>
     public ValueTask<string> Name => GetName(CancellationToken.None);
 

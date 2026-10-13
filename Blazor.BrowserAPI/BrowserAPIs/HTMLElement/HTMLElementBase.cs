@@ -5,13 +5,19 @@ using System.Text.Json;
 
 namespace BrowserAPI.Implementation;
 
-[AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLElement")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLElementInProcess")]
+/// Base interface of <see cref="IHTMLElement"/> and <see cref="IHTMLElementInProcess"/>.<br/>
+/// It contains common functionality for both interfaces.<br/>
+/// It is not intended to use this interface directly.
+[AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) {
-#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected Task<IJSObjectReference> htmlElementTask = htmlElementTask;
+public abstract class HTMLElementBase<TJSObjectReference, THTMLElement, TDragEvent>(Task<TJSObjectReference> htmlElementTask) : IHTMLElementBase<TJSObjectReference, THTMLElement, TDragEvent>
+    where TJSObjectReference : IJSObjectReference
+    where THTMLElement : IHTMLElementBase<TJSObjectReference, THTMLElement, TDragEvent>
+    where TDragEvent : IDragEvent {
+    private protected Task<TJSObjectReference> htmlElementTask = htmlElementTask;
+
+    [AutoInterfaceVisibilityInternal]
+    Task<TJSObjectReference> IHTMLElementBase<TJSObjectReference, THTMLElement, TDragEvent>.HTMLElementTask => htmlElementTask;
 
 
     /// <summary>
@@ -130,19 +136,26 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
 
     [method: DynamicDependency(nameof(InvokeFullscreenChange))]
     [method: DynamicDependency(nameof(InvokeFullscreenError))]
-    private sealed class EventTrigger(HTMLElementBase htmlElement) {
+
+    [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
+    private sealed class EventTrigger(HTMLElementBase<TJSObjectReference, THTMLElement, TDragEvent> htmlElement) {
         [JSInvokable] public void InvokeChange() => htmlElement._onChange?.Invoke();
-        [JSInvokable] public void InvokeCommand(IJSObjectReference source, string command) => htmlElement.InvokeCommand(source, command);
+        [JSInvokable] public void InvokeCommand(/* HTMLElement */TJSObjectReference source, string command) {
+            THTMLElement otherHtmlElement = typeof(TJSObjectReference) == typeof(IJSObjectReference)
+                ? (THTMLElement)(IHTMLElement)new HTMLElement(Task.FromResult((IJSObjectReference)source))
+                : (THTMLElement)(IHTMLElementInProcess)new HTMLElementInProcess((IJSInProcessObjectReference)source);
+            htmlElement._onCommand?.Invoke(otherHtmlElement, command);
+        }
         [JSInvokable] public void InvokeLoad() => htmlElement._onLoad?.Invoke();
         [JSInvokable] public void InvokeError(JsonElement errorEvent) => htmlElement._onError?.Invoke(errorEvent);
 
-        [JSInvokable] public void InvokeDrag(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => htmlElement.InvokeDrag(dropEffect, effectAllowed, types, files);
-        [JSInvokable] public void InvokeDragStart(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => htmlElement.InvokeDragStart(dropEffect, effectAllowed, types, files);
-        [JSInvokable] public void InvokeDragEnd(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => htmlElement.InvokeDragEnd(dropEffect, effectAllowed, types, files);
-        [JSInvokable] public void InvokeDragEnter(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => htmlElement.InvokeDragEnter(dropEffect, effectAllowed, types, files);
-        [JSInvokable] public void InvokeDragLeave(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => htmlElement.InvokeDragLeave(dropEffect, effectAllowed, types, files);
-        [JSInvokable] public void InvokeDragOver(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => htmlElement.InvokeDragOver(dropEffect, effectAllowed, types, files);
-        [JSInvokable] public void InvokeDrop(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => htmlElement.InvokeDrop(dropEffect, effectAllowed, types, files);
+        [JSInvokable] public void InvokeDrag(string dropEffect, string effectAllowed, string[] types, TJSObjectReference[] files) => htmlElement._onDrag?.Invoke(CreateDragEvent(dropEffect, effectAllowed, types, files));
+        [JSInvokable] public void InvokeDragStart(string dropEffect, string effectAllowed, string[] types, TJSObjectReference[] files) => htmlElement._onDragStart?.Invoke(CreateDragEvent(dropEffect, effectAllowed, types, files));
+        [JSInvokable] public void InvokeDragEnd(string dropEffect, string effectAllowed, string[] types, TJSObjectReference[] files) => htmlElement._onDragEnd?.Invoke(CreateDragEvent(dropEffect, effectAllowed, types, files));
+        [JSInvokable] public void InvokeDragEnter(string dropEffect, string effectAllowed, string[] types, TJSObjectReference[] files) => htmlElement._onDragEnter?.Invoke(CreateDragEvent(dropEffect, effectAllowed, types, files));
+        [JSInvokable] public void InvokeDragLeave(string dropEffect, string effectAllowed, string[] types, TJSObjectReference[] files) => htmlElement._onDragLeave?.Invoke(CreateDragEvent(dropEffect, effectAllowed, types, files));
+        [JSInvokable] public void InvokeDragOver(string dropEffect, string effectAllowed, string[] types, TJSObjectReference[] files) => htmlElement._onDragOver?.Invoke(CreateDragEvent(dropEffect, effectAllowed, types, files));
+        [JSInvokable] public void InvokeDrop(string dropEffect, string effectAllowed, string[] types, TJSObjectReference[] files) => htmlElement._onDrop?.Invoke(CreateDragEvent(dropEffect, effectAllowed, types, files));
 
         [JSInvokable] public void InvokeToggle(string oldState, string newState) => htmlElement._onToggle?.Invoke(oldState, newState);
         [JSInvokable] public void InvokeBeforeToggle(string oldState, string newState) => htmlElement._onBeforeToggle?.Invoke(oldState, newState);
@@ -212,11 +225,27 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
 
         [JSInvokable] public void InvokeFullscreenChange() => htmlElement._onFullscreenChange?.Invoke();
         [JSInvokable] public void InvokeFullscreenError() => htmlElement._onFullscreenError?.Invoke();
+
+
+        private static TDragEvent CreateDragEvent(string dropEffect, string effectAllowed, string[] types, TJSObjectReference[] files) {
+            if (typeof(TJSObjectReference) == typeof(IJSObjectReference)) {
+                IFile[] wrappedFiles = new IFile[files.Length];
+                for (int i = 0; i < wrappedFiles.Length; i++)
+                    wrappedFiles[i] = new File(files[i]);
+                return (TDragEvent)(IDragEvent)new DragEvent(dropEffect, effectAllowed, types, wrappedFiles);
+            }
+            else {
+                IFileInProcess[] wrappedFiles = new IFileInProcess[files.Length];
+                for (int i = 0; i < wrappedFiles.Length; i++)
+                    wrappedFiles[i] = new FileInProcess((IJSInProcessObjectReference)files[i]);
+                return (TDragEvent)(IDragEvent)new DragEventInProcess(dropEffect, effectAllowed, types, wrappedFiles);
+            }
+        }
     }
 
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
 
-    private ValueTask InitEventTrigger(IJSObjectReference htmlElement) {
+    private ValueTask InitEventTrigger(TJSObjectReference htmlElement) {
         if (_objectReferenceEventTrigger is not null)
             return ValueTask.CompletedTask;
 
@@ -231,13 +260,13 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
 
 
     private protected async ValueTask ActivateJSEvent(string jsMethodName) {
-        IJSObjectReference htmlElement = await htmlElementTask;
+        TJSObjectReference htmlElement = await htmlElementTask;
         await InitEventTrigger(htmlElement);
         await htmlElement.InvokeVoidTrySync(jsMethodName);
     }
 
     private protected async ValueTask DeactivateJSEvent(string jsMethodName) {
-        IJSObjectReference htmlElement = await htmlElementTask;
+        TJSObjectReference htmlElement = await htmlElementTask;
         await htmlElement.InvokeVoidTrySync(jsMethodName);
     }
 
@@ -271,8 +300,32 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
         }
     }
 
-    // (IHTMLElement | IHTMLElementInProcess) source
-    private protected abstract void InvokeCommand(IJSObjectReference source, string command);
+    private Action<THTMLElement, string>? _onCommand;
+    /// <summary>
+    /// <para>
+    /// Fires on an element that is controlled via a button with valid commandForElement and command values, whenever the button is interacted with (e.g., it is clicked).
+    /// </para>
+    /// <para>
+    /// <b>Parameters</b><br />
+    /// - IHTMLElement <i>source</i>: An HTMLButtonElement representing the button that caused this invocation.<br />
+    /// - string <i>command</i>: Representing the command value of the source button.
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// Note: Dispose the given IHTMLElement object when you are done with it.
+    /// </remarks>
+    public event Action<THTMLElement, string> OnCommand {
+        add {
+            if (_onCommand == null)
+                _ = ActivateJSEvent("activateOncommand").Preserve();
+            _onCommand += value;
+        }
+        remove {
+            _onCommand -= value;
+            if (_onCommand == null)
+                _ = DeactivateJSEvent("deactivateOncommand").Preserve();
+        }
+    }
 
     private Action? _onLoad;
     /// <summary>
@@ -320,26 +373,154 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     }
 
 
-    // (IFile | IFileInProcess)[] files
-    private protected abstract void InvokeDrag(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+    private Action<TDragEvent>? _onDrag;
+    /// <summary>
+    /// <para>
+    /// Is fired every few hundred milliseconds as an element or text selection is being dragged by the user.<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<TDragEvent> OnDrag {
+        add {
+            if (_onDrag == null)
+                _ = ActivateJSEvent("activateOndrag").Preserve();
+            _onDrag += value;
+        }
+        remove {
+            _onDrag -= value;
+            if (_onDrag == null)
+                _ = DeactivateJSEvent("deactivateOndrag").Preserve();
+        }
+    }
 
-    // (IFile | IFileInProcess)[] files
-    private protected abstract void InvokeDragStart(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+    private Action<TDragEvent>? _onDragStart;
+    /// <summary>
+    /// <para>
+    /// Is fired when the user starts dragging an element or text selection.<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<TDragEvent> OnDragStart {
+        add {
+            if (_onDragStart == null)
+                _ = ActivateJSEvent("activateOndragstart").Preserve();
+            _onDragStart += value;
+        }
+        remove {
+            _onDragStart -= value;
+            if (_onDragStart == null)
+                _ = DeactivateJSEvent("deactivateOndragstart").Preserve();
+        }
+    }
 
-    // (IFile | IFileInProcess)[] files
-    private protected abstract void InvokeDragEnd(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+    private Action<TDragEvent>? _onDragEnd;
+    /// <summary>
+    /// <para>
+    /// Is fired when a drag operation ends (by releasing a mouse button or hitting the escape key).<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<TDragEvent> OnDragEnd {
+        add {
+            if (_onDragEnd == null)
+                _ = ActivateJSEvent("activateOndragend").Preserve();
+            _onDragEnd += value;
+        }
+        remove {
+            _onDragEnd -= value;
+            if (_onDragEnd == null)
+                _ = DeactivateJSEvent("deactivateOndragend").Preserve();
+        }
+    }
 
-    // (IFile | IFileInProcess)[] files
-    private protected abstract void InvokeDragEnter(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+    private Action<TDragEvent>? _onDragEnter;
+    /// <summary>
+    /// <para>
+    /// Is fired when a dragged element or text selection enters a valid drop target.
+    /// The target object is the immediate user selection (the element directly indicated by the user as the drop target), or the &lt;body&gt; element.<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<TDragEvent> OnDragEnter {
+        add {
+            if (_onDragEnter == null)
+                _ = ActivateJSEvent("activateOndragenter").Preserve();
+            _onDragEnter += value;
+        }
+        remove {
+            _onDragEnter -= value;
+            if (_onDragEnter == null)
+                _ = DeactivateJSEvent("deactivateOndragenter").Preserve();
+        }
+    }
 
-    // (IFile | IFileInProcess)[] files
-    private protected abstract void InvokeDragLeave(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+    private Action<TDragEvent>? _onDragLeave;
+    /// <summary>
+    /// <para>
+    /// Is fired when a dragged element or text selection leaves a valid drop target.<br />
+    /// This event is not cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<TDragEvent> OnDragLeave {
+        add {
+            if (_onDragLeave == null)
+                _ = ActivateJSEvent("activateOndragleave").Preserve();
+            _onDragLeave += value;
+        }
+        remove {
+            _onDragLeave -= value;
+            if (_onDragLeave == null)
+                _ = DeactivateJSEvent("deactivateOndragleave").Preserve();
+        }
+    }
 
-    // (IFile | IFileInProcess)[] files
-    private protected abstract void InvokeDragOver(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+    private Action<TDragEvent>? _onDragOver;
+    /// <summary>
+    /// <para>
+    /// Is fired when an element or text selection is being dragged over a valid drop target (every few hundred milliseconds).<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<TDragEvent> OnDragOver {
+        add {
+            if (_onDragOver == null)
+                _ = ActivateJSEvent("activateOndragover").Preserve();
+            _onDragOver += value;
+        }
+        remove {
+            _onDragOver -= value;
+            if (_onDragOver == null)
+                _ = DeactivateJSEvent("deactivateOndragover").Preserve();
+        }
+    }
 
-    // (IFile | IFileInProcess)[] files
-    private protected abstract void InvokeDrop(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+    private Action<TDragEvent>? _onDrop;
+    /// <summary>
+    /// <para>
+    /// Is fired when an element or text selection is dropped on a valid drop target.
+    /// To ensure that the drop event always fires as expected, you should always include a preventDefault() call in the part of your code which handles the dragover event.<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<TDragEvent> OnDrop {
+        add {
+            if (_onDrop == null)
+                _ = ActivateJSEvent("activateOndrop").Preserve();
+            _onDrop += value;
+        }
+        remove {
+            _onDrop -= value;
+            if (_onDrop == null)
+                _ = DeactivateJSEvent("deactivateOndrop").Preserve();
+        }
+    }
 
 
     private Action<string, string>? _onToggle;
@@ -1326,7 +1507,7 @@ public abstract class HTMLElementBase(Task<IJSObjectReference> htmlElementTask) 
     /// User gestures like touch panning or trackpad scrolling aren't complete until pointers or keys have released.
     /// If the scroll position did not change, then no scrollend event fires.
     /// </para>
-    /// <para>For detecting when scrolling inside a Document is complete, see <see cref="IDocument.OnScrollEnd">the scrollend event of Document</see>.</para>
+    /// <para>For detecting when scrolling inside a Document is complete, see <see cref="IDocumentBase{TJSObjectReference, TDragEvent}.OnScrollEnd">the scrollend event of Document</see>.</para>
     /// </summary>
     public event Action OnScrollEnd {
         add {

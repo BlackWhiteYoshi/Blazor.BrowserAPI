@@ -5,20 +5,20 @@ using System.Text.Json;
 
 namespace BrowserAPI.Implementation;
 
-[AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorker")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerInProcess")]
+/// Base interface of <see cref="IServiceWorker"/> and <see cref="IServiceWorkerInProcess"/>.<br/>
+/// It contains common functionality for both interfaces.<br/>
+/// It is not intended to use this interface directly.
+[AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class ServiceWorkerBase(IJSObjectReference serviceWorkerJS) {
-#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected IJSObjectReference serviceWorkerJS = serviceWorkerJS;
+public abstract class ServiceWorkerBase<TJSObjectReference>(TJSObjectReference serviceWorkerJS) where TJSObjectReference : IJSObjectReference {
+    private protected TJSObjectReference serviceWorkerJS = serviceWorkerJS;
 
 
     #region Events
 
     [method: DynamicDependency(nameof(InvokeStateChange))]
     [method: DynamicDependency(nameof(InvokeError))]
-    private sealed class EventTrigger(ServiceWorkerBase serviceWorker) {
+    private sealed class EventTrigger(ServiceWorkerBase<TJSObjectReference> serviceWorker) {
         [JSInvokable] public void InvokeStateChange(string state) => serviceWorker._onStateChange?.Invoke(state);
         [JSInvokable] public void InvokeError(JsonElement errorEvent) => serviceWorker._onError?.Invoke(errorEvent);
     }

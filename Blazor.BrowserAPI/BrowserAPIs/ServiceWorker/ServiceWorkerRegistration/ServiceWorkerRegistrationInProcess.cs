@@ -9,17 +9,15 @@ namespace BrowserAPI.Implementation;
 /// You register a service worker to control one or more pages that share the same origin.
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="Dispose"/> when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IServiceWorkerRegistrationBase<IJSInProcessObjectReference, IServiceWorkerRegistrationInProcess>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReference serviceWorkerRegistrationJS) : ServiceWorkerRegistrationBase(serviceWorkerRegistrationJS), IServiceWorkerRegistrationInProcess {
-    private IJSInProcessObjectReference ServiceWorkerRegistrationJS => (IJSInProcessObjectReference)base.serviceWorkerRegistrationJS;
-
+public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReference serviceWorkerRegistrationJS) : ServiceWorkerRegistrationBase<IJSInProcessObjectReference, IServiceWorkerRegistrationInProcess>(serviceWorkerRegistrationJS), IServiceWorkerRegistrationInProcess {
     /// <summary>
     /// Releases the JS instance for this service worker registration.
     /// </summary>
     public void Dispose() {
         DisposeEventTrigger();
-        ServiceWorkerRegistrationJS.Dispose();
+        serviceWorkerRegistrationJS.Dispose();
     }
 
 
@@ -29,7 +27,7 @@ public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReferen
     /// </summary>
     public IServiceWorkerInProcess? Active {
         get {
-            IJSInProcessObjectReference?[] singleReference = ServiceWorkerRegistrationJS.Invoke<IJSInProcessObjectReference?[]>("getActive");
+            IJSInProcessObjectReference?[] singleReference = serviceWorkerRegistrationJS.Invoke<IJSInProcessObjectReference?[]>("getActive");
             if (singleReference[0] is IJSInProcessObjectReference serviceWorker)
                 return new ServiceWorkerInProcess(serviceWorker);
             else
@@ -43,7 +41,7 @@ public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReferen
     /// </summary>
     public IServiceWorkerInProcess? Installing {
         get {
-            IJSInProcessObjectReference?[] singleReference = ServiceWorkerRegistrationJS.Invoke<IJSInProcessObjectReference?[]>("getInstalling");
+            IJSInProcessObjectReference?[] singleReference = serviceWorkerRegistrationJS.Invoke<IJSInProcessObjectReference?[]>("getInstalling");
             if (singleReference[0] is IJSInProcessObjectReference serviceWorker)
                 return new ServiceWorkerInProcess(serviceWorker);
             else
@@ -57,7 +55,7 @@ public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReferen
     /// </summary>
     public IServiceWorkerInProcess? Waiting {
         get {
-            IJSInProcessObjectReference?[] singleReference = ServiceWorkerRegistrationJS.Invoke<IJSInProcessObjectReference?[]>("getWaiting");
+            IJSInProcessObjectReference?[] singleReference = serviceWorkerRegistrationJS.Invoke<IJSInProcessObjectReference?[]>("getWaiting");
             if (singleReference[0] is IJSInProcessObjectReference serviceWorker)
                 return new ServiceWorkerInProcess(serviceWorker);
             else
@@ -70,7 +68,7 @@ public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReferen
     /// Returns a unique identifier for a service worker registration.
     /// The service worker must be on the same origin as the document that registers the ServiceWorker.
     /// </summary>
-    public string Scope => ServiceWorkerRegistrationJS.Invoke<string>("getScope");
+    public string Scope => serviceWorkerRegistrationJS.Invoke<string>("getScope");
 
     /// <summary>
     /// <para>
@@ -84,18 +82,5 @@ public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReferen
     /// - <b>none</b>: meaning the HTTP cache is never consulted.
     /// </para>
     /// </summary>
-    public string UpdateViaCache => ServiceWorkerRegistrationJS.Invoke<string>("getUpdateViaCache");
-
-
-    /// <summary>
-    /// Attempts to update the service worker.
-    /// It fetches the worker's script URL, and if the new worker is not byte-by-byte identical to the current worker, it installs the new worker.
-    /// The fetch of the worker bypasses any browser caches if the previous fetch occurred over 24 hours ago.
-    /// </summary>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public async ValueTask<IServiceWorkerRegistrationInProcess> Update(CancellationToken cancellationToken = default) {
-        IJSInProcessObjectReference serviceWorkerRegistration = await ServiceWorkerRegistrationJS.InvokeAsync<IJSInProcessObjectReference>("update", cancellationToken);
-        return new ServiceWorkerRegistrationInProcess(serviceWorkerRegistration);
-    }
+    public string UpdateViaCache => serviceWorkerRegistrationJS.Invoke<string>("getUpdateViaCache");
 }

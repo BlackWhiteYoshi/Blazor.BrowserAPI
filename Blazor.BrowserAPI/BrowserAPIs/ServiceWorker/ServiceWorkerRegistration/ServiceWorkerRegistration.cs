@@ -9,9 +9,9 @@ namespace BrowserAPI.Implementation;
 /// You register a service worker to control one or more pages that share the same origin.
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="DisposeAsync"/> when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IServiceWorkerRegistrationBase<IJSObjectReference, IServiceWorkerRegistration>), typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRegistrationJS) : ServiceWorkerRegistrationBase(serviceWorkerRegistrationJS), IServiceWorkerRegistration {
+public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRegistrationJS) : ServiceWorkerRegistrationBase<IJSObjectReference, IServiceWorkerRegistration>(serviceWorkerRegistrationJS), IServiceWorkerRegistration {
     /// <summary>
     /// Releases the JS instance for this service worker registration.
     /// </summary>
@@ -107,18 +107,4 @@ public sealed class ServiceWorkerRegistration(IJSObjectReference serviceWorkerRe
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public ValueTask<string> GetUpdateViaCache(CancellationToken cancellationToken) => serviceWorkerRegistrationJS.InvokeTrySync<string>("getUpdateViaCache", cancellationToken);
-
-
-
-    /// <summary>
-    /// Attempts to update the service worker.
-    /// It fetches the worker's script URL, and if the new worker is not byte-by-byte identical to the current worker, it installs the new worker.
-    /// The fetch of the worker bypasses any browser caches if the previous fetch occurred over 24 hours ago.
-    /// </summary>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public async ValueTask<IServiceWorkerRegistration> Update(CancellationToken cancellationToken = default) {
-        IJSObjectReference serviceWorkerRegistration = await serviceWorkerRegistrationJS.InvokeAsync<IJSObjectReference>("update", cancellationToken);
-        return new ServiceWorkerRegistration(serviceWorkerRegistration);
-    }
 }

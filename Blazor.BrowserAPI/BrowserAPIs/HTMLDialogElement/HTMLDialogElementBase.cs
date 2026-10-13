@@ -4,27 +4,27 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
-[AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLDialogElement")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IHTMLDialogElementInProcess")]
+/// Base interface of <see cref="IHTMLDialogElement"/> and <see cref="IHTMLDialogElementInProcess"/>.<br/>
+/// It contains common functionality for both interfaces.<br/>
+/// It is not intended to use this interface directly.
+[AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class HTMLDialogElementBase(Task<IJSObjectReference> dialogTask) {
-#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected Task<IJSObjectReference> dialogTask = dialogTask;
+public abstract class HTMLDialogElementBase<TJSObjectReference>(Task<TJSObjectReference> dialogTask) where TJSObjectReference : IJSObjectReference {
+    private protected Task<TJSObjectReference> dialogTask = dialogTask;
 
 
     #region Events
 
     [method: DynamicDependency(nameof(InvokeClose))]
     [method: DynamicDependency(nameof(InvokeCancel))]
-    private sealed class EventTrigger(HTMLDialogElementBase dialog) {
+    private sealed class EventTrigger(HTMLDialogElementBase<TJSObjectReference> dialog) {
         [JSInvokable] public void InvokeClose() => dialog._onClose?.Invoke();
         [JSInvokable] public void InvokeCancel() => dialog._onCancel?.Invoke();
     }
 
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
 
-    private ValueTask InitEventTrigger(IJSObjectReference dialog) {
+    private ValueTask InitEventTrigger(TJSObjectReference dialog) {
         if (_objectReferenceEventTrigger is not null)
             return ValueTask.CompletedTask;
 
@@ -39,13 +39,13 @@ public abstract class HTMLDialogElementBase(Task<IJSObjectReference> dialogTask)
 
 
     private async ValueTask ActivateJSEvent(string jsMethodName) {
-        IJSObjectReference dialog = await dialogTask;
+        TJSObjectReference dialog = await dialogTask;
         await InitEventTrigger(dialog);
         await dialog.InvokeVoidTrySync(jsMethodName);
     }
 
     private async ValueTask DeactivateJSEvent(string jsMethodName) {
-        IJSObjectReference dialog = await dialogTask;
+        TJSObjectReference dialog = await dialogTask;
         await dialog.InvokeVoidTrySync(jsMethodName);
     }
 

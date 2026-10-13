@@ -26,31 +26,27 @@ public readonly record struct DOMRect(double X, double Y, double Width, double H
 /// Applications are free to interpret a drag and drop interaction in an application-specific way.
 /// </para>
 /// </summary>
-/// <remarks>
-/// Note: Do not forget to call <i>DispseAsync()</i> on each single file in <see cref="Files"/> when you done with it.
-/// </remarks>
-/// <param name="DropEffect">Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".</param>
-/// <param name="EffectAllowed">Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".</param>
-/// <param name="Types">Giving the formats that were set in the dragstart event.</param>
-/// <param name="Files">Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.</param>
-public readonly record struct DragEvent(string DropEffect, string EffectAllowed, string[] Types, IFile[] Files);
+public interface IDragEvent;
 
-/// <summary>
-/// <para>Holds the drag operation's data (as a DataTransfer object).</para>
-/// <para>
-/// Represents a drag and drop interaction.
-/// The user initiates a drag by placing a pointer device (such as a mouse) on the touch surface and then dragging the pointer to a new location (such as another DOM element).
-/// Applications are free to interpret a drag and drop interaction in an application-specific way.
-/// </para>
-/// </summary>
+/// <inheritdoc cref="IDragEvent" />
 /// <remarks>
-/// Note: Do not forget to call <i>Dispse()</i> on each single file in <see cref="Files"/> when you done with it.
+/// Note: Do not forget to <i>Dispse</i> each single file in <see cref="Files"/> when you done with it.
 /// </remarks>
 /// <param name="DropEffect">Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".</param>
 /// <param name="EffectAllowed">Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".</param>
 /// <param name="Types">Giving the formats that were set in the dragstart event.</param>
 /// <param name="Files">Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.</param>
-public readonly record struct DragEventInProcess(string DropEffect, string EffectAllowed, string[] Types, IFileInProcess[] Files);
+public readonly record struct DragEvent(string DropEffect, string EffectAllowed, string[] Types, IFile[] Files) : IDragEvent;
+
+/// <inheritdoc cref="IDragEvent" />
+/// <remarks>
+/// Note: Do not forget to <i>Dispse</i> each single file in <see cref="Files"/> when you done with it.
+/// </remarks>
+/// <param name="DropEffect">Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".</param>
+/// <param name="EffectAllowed">Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".</param>
+/// <param name="Types">Giving the formats that were set in the dragstart event.</param>
+/// <param name="Files">Contains a list of all the local files available on the data transfer. If the drag operation doesn't involve dragging files, this property is an empty list.</param>
+public readonly record struct DragEventInProcess(string DropEffect, string EffectAllowed, string[] Types, IFileInProcess[] Files) : IDragEvent;
 
 
 /// <summary>

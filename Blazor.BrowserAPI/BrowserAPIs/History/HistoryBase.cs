@@ -108,7 +108,7 @@ public abstract class HistoryBase(IModuleManager moduleManager) : IDisposable {
     /// </para>
     /// <para>Parameter is the <i>persisted</i> property that indicates if a webpage is loading from a cache.</para>
     /// </summary>
-    /// <remarks>Note: During the initial page load, the pageshow event fires after the <see cref="IWindow.OnLoad"/> event.</remarks>
+    /// <remarks>Note: During the initial page load, the pageshow event fires after the <see cref="IWindowBase{IJSObjectReference, DragEvent}.OnLoad"/> event.</remarks>
     public event Action<bool> OnPageShow {
         add {
             if (_onPageShow == null)

@@ -8,21 +8,19 @@ namespace BrowserAPI.Implementation;
 /// <para>The <i>Gamepad</i> interface of the Gamepad API defines an individual gamepad or other controller, allowing access to information such as button presses, axis positions, and id.</para>
 /// <para>
 /// A Gamepad object can be returned in one of two ways:
-/// via the gamepad property of the <see cref="IGamepadAPIInProcess.OnGamepadConnected">gamepadconnected</see> and <see cref="IGamepadAPIInProcess.OnGamepadDisconnected">gamepaddisconnected</see> events,
+/// via the gamepad property of the <see cref="IGamepadAPIBase{IJSInProcessObjectReference, IGamepadInProcess}.OnGamepadConnected">gamepadconnected</see> and <see cref="IGamepadAPIBase{IJSInProcessObjectReference, IGamepadInProcess}.OnGamepadDisconnected">gamepaddisconnected</see> events,
 /// or by grabbing any position in the array returned by the <see cref="IGamepadAPIInProcess.GetGamepads">Navigator.getGamepads()</see> method.
 /// </para>
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="Dispose"/> when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IGamepadBase<IJSInProcessObjectReference>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class GamepadInProcess(IJSInProcessObjectReference gamepadJS) : GamepadBase(gamepadJS), IGamepadInProcess {
-    private IJSInProcessObjectReference GamepadJS => (IJSInProcessObjectReference)base.gamepadJS;
-
+public sealed class GamepadInProcess(IJSInProcessObjectReference gamepadJS) : GamepadBase<IJSInProcessObjectReference>(gamepadJS), IGamepadInProcess {
     /// <summary>
     /// Releases the JS instance for this gamepad.
     /// </summary>
     /// <returns></returns>
-    public void Dispose() => GamepadJS.Dispose();
+    public void Dispose() => gamepadJS.Dispose();
 
 
     /// <summary>
@@ -30,20 +28,20 @@ public sealed class GamepadInProcess(IJSInProcessObjectReference gamepadJS) : Ga
     /// <para>Each entry in the array is a floating point value in the range -1.0 – 1.0, representing the axis position from the lowest value (-1.0) to the highest value (1.0).</para>
     /// </summary>
     /// <returns></returns>
-    public double[] Axes => GamepadJS.Invoke<double[]>("getAxes");
+    public double[] Axes => gamepadJS.Invoke<double[]>("getAxes");
 
     /// <summary>
     /// <para>An array of <see cref="GamepadButton"/> objects representing the buttons present on the device.</para>
     /// <para>Each entry in the array is 0 if the button is not pressed, and non-zero (typically 1.0) if the button is pressed.</para>
     /// </summary>
-    public GamepadButton[] Buttons => GamepadJS.Invoke<GamepadButton[]>("getButtons");
+    public GamepadButton[] Buttons => gamepadJS.Invoke<GamepadButton[]>("getButtons");
 
 
     /// <summary>
     /// <para>A boolean indicating whether the gamepad is still connected to the system.</para>
     /// <para>If the gamepad is connected, the value is true; if not, it is false.</para>
     /// </summary>
-    public bool Connected => GamepadJS.Invoke<bool>("getConnected");
+    public bool Connected => gamepadJS.Invoke<bool>("getConnected");
 
     /// <summary>
     /// <para>A string containing identifying information about the controller.</para>
@@ -55,13 +53,13 @@ public sealed class GamepadInProcess(IJSInProcessObjectReference gamepadJS) : Ga
     /// </para>
     /// <para>This information is intended to allow you to find a mapping for the controls on the device as well as display useful feedback to the user.</para>
     /// </summary>
-    public string Id => GamepadJS.Invoke<string>("getId");
+    public string Id => gamepadJS.Invoke<string>("getId");
 
     /// <summary>
     /// <para>An integer that is auto-incremented to be unique for each device currently connected to the system.</para>
     /// <para>This can be used to distinguish multiple controllers; a gamepad that is disconnected and reconnected will retain the same index.</para>
     /// </summary>
-    public int Index => GamepadJS.Invoke<int>("getIndex");
+    public int Index => gamepadJS.Invoke<int>("getIndex");
 
     /// <summary>
     /// <para>A string indicating whether the browser has remapped the controls on the device to a known layout.</para>
@@ -71,7 +69,7 @@ public sealed class GamepadInProcess(IJSInProcessObjectReference gamepadJS) : Ga
     /// - "xr-standard for the <see href="https://immersive-web.github.io/webxr-gamepads-module/#xr-standard-heading">standard XR gamepad</see>. See also <see href="https://developer.mozilla.org/en-US/docs/Web/API/XRInputSource/gamepad">XRInputSource.gamepad</see>.
     /// </para>
     /// </summary>
-    public string Mapping => GamepadJS.Invoke<string>("getMapping");
+    public string Mapping => gamepadJS.Invoke<string>("getMapping");
 
     /// <summary>
     /// <para>A <see href="https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp">DOMHighResTimeStamp</see> representing the last time the data for this gamepad was updated.</para>
@@ -81,7 +79,7 @@ public sealed class GamepadInProcess(IJSInProcessObjectReference gamepadJS) : Ga
     /// meaning that they can be compared to determine the ordering of updates, as newer values will always be greater than or equal to older values.</para>
     /// <para>Note: This property is not currently supported anywhere.</para>
     /// </summary>
-    public double Timestamp => GamepadJS.Invoke<double>("getTimestamp");
+    public double Timestamp => gamepadJS.Invoke<double>("getTimestamp");
 
 
     /// <summary>
@@ -96,5 +94,5 @@ public sealed class GamepadInProcess(IJSInProcessObjectReference gamepadJS) : Ga
     /// <remarks>Browser support: If the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Gamepad/vibrationActuator">vibrationActuator</see> property is not supported, an empty array is returned.
     /// If <see href="https://developer.mozilla.org/en-US/docs/Web/API/GamepadHapticActuator/effects">effects</see> property is not supported, the <see href="https://developer.mozilla.org/en-US/docs/Web/API/GamepadHapticActuator/type">type</see> property is used instead.</remarks>
     /// </summary>
-    public string[] VibrationActuatorEffects => GamepadJS.Invoke<string[]>("getVibrationActuatorEffects");
+    public string[] VibrationActuatorEffects => gamepadJS.Invoke<string[]>("getVibrationActuatorEffects");
 }

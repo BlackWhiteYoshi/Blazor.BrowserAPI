@@ -1,13 +1,45 @@
 using AutoInterfaceAttributes;
+using Microsoft.JSInterop;
 
 namespace BrowserAPI.Implementation;
 
-[AutoInterface(Namespace = "BrowserAPI", Name = "INavigator")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "INavigatorInProcess")]
-#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class NavigatorBase(IModuleManager moduleManager) {
-#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
+/// Base interface of <see cref="INavigator"/> and <see cref="INavigatorInProcess"/>.<br/>
+/// It contains common functionality for both interfaces.<br/>
+/// It is not intended to use this interface directly.
+[AutoInterface(Namespace = "BrowserAPI")]
+public abstract class NavigatorBase<TJSObjectReference, TFile>(IModuleManager moduleManager)
+    where TJSObjectReference : IJSObjectReference
+    where TFile : IFileBase<TJSObjectReference> {
     private protected IModuleManager moduleManager = moduleManager;
+
+
+    /// <summary>
+    /// <para>
+    /// Invokes the native sharing mechanism of the device to share data such as text, URLs, or files.
+    /// The available share targets depend on the device, but might include the clipboard, contacts and email applications, websites, Bluetooth, etc.
+    /// </para>
+    /// <para>
+    /// The method resolves a Promise with undefined.
+    /// On Windows this happens when the share popup is launched, while on Android the promise resolves once the data has successfully been passed to the share target.
+    /// </para>
+    /// <para>The Web Share API is gated by the web-share permission policy. The share() method will throw exceptions if the permission is supported but has not been granted.</para>
+    /// </summary>
+    /// <param name="url">Representing a URL to be shared.</param>
+    /// <param name="text">Representing text to be shared.</param>
+    /// <param name="title">Representing a title to be shared. May be ignored by the target.</param>
+    /// <param name="files">Representing files to be shared. See <see href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share#shareable_file_types">below for shareable file types</see>.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask Share(string? url = null, string? text = null, string? title = null, TFile[]? files = null, CancellationToken cancellationToken = default) {
+        TJSObjectReference[]? filesJS = null;
+        if (files is not null) {
+            filesJS = new TJSObjectReference[files.Length];
+            for (int i = 0; i < filesJS.Length; i++)
+                filesJS[i] = files[i].FileJS;
+        }
+
+        return moduleManager.InvokeAsync("NavigatorAPI.share", cancellationToken, [url, text, title, filesJS]);
+    }
 
 
     /// <summary>

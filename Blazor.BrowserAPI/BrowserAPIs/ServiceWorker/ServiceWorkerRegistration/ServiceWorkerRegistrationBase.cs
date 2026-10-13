@@ -4,13 +4,15 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
-[AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerRegistration")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IServiceWorkerRegistrationInProcess")]
+/// Base interface of <see cref="IServiceWorkerRegistration"/> and <see cref="IServiceWorkerRegistrationInProcess"/>.<br/>
+/// It contains common functionality for both interfaces.<br/>
+/// It is not intended to use this interface directly.
+[AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class ServiceWorkerRegistrationBase(IJSObjectReference serviceWorkerRegistrationJS) {
-#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected IJSObjectReference serviceWorkerRegistrationJS = serviceWorkerRegistrationJS;
+public abstract class ServiceWorkerRegistrationBase<TJSObjectReference, TServiceWorkerRegistration>(TJSObjectReference serviceWorkerRegistrationJS)
+    where TJSObjectReference : IJSObjectReference
+    where TServiceWorkerRegistration : IServiceWorkerRegistrationBase<TJSObjectReference, TServiceWorkerRegistration> {
+    private protected TJSObjectReference serviceWorkerRegistrationJS = serviceWorkerRegistrationJS;
 
 
     /// <summary>
@@ -22,11 +24,26 @@ public abstract class ServiceWorkerRegistrationBase(IJSObjectReference serviceWo
     /// <returns>false if no registration was found, otherwise true (irrespective of whether unregistration happened or not)</returns>
     public ValueTask<bool> Unregister(CancellationToken cancellationToken = default) => serviceWorkerRegistrationJS.InvokeAsync<bool>("unregister", cancellationToken);
 
+    /// <summary>
+    /// Attempts to update the service worker.
+    /// It fetches the worker's script URL, and if the new worker is not byte-by-byte identical to the current worker, it installs the new worker.
+    /// The fetch of the worker bypasses any browser caches if the previous fetch occurred over 24 hours ago.
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<TServiceWorkerRegistration> Update(CancellationToken cancellationToken = default) {
+        TJSObjectReference serviceWorkerRegistration = await serviceWorkerRegistrationJS.InvokeAsync<TJSObjectReference>("update", cancellationToken);
+        if (typeof(TJSObjectReference) == typeof(IJSObjectReference))
+            return (TServiceWorkerRegistration)(IServiceWorkerRegistration)new ServiceWorkerRegistration(serviceWorkerRegistration);
+        else
+            return (TServiceWorkerRegistration)(IServiceWorkerRegistrationInProcess)new ServiceWorkerRegistrationInProcess((IJSInProcessObjectReference)serviceWorkerRegistration);
+    }
+
 
     #region Events
 
     [method: DynamicDependency(nameof(InvokeUpdateFound))]
-    private sealed class EventTrigger(ServiceWorkerRegistrationBase serviceWorkerRegistration) {
+    private sealed class EventTrigger(ServiceWorkerRegistrationBase<TJSObjectReference, TServiceWorkerRegistration> serviceWorkerRegistration) {
         [JSInvokable]
         public void InvokeUpdateFound() => serviceWorkerRegistration._onUpdateFound?.Invoke();
     }

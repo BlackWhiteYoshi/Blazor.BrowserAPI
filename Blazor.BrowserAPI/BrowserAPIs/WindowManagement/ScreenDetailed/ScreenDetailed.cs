@@ -9,9 +9,9 @@ namespace BrowserAPI.Implementation;
 /// <para><i>ScreenDetailed</i> objects can be accessed via the <see cref="IScreenDetails.Screens">ScreenDetails.screens</see> and <see cref="IScreenDetails.CurrentScreen">ScreenDetails.currentScreen</see> properties.</para>
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IScreenDetailedBase<IJSObjectReference>), typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : ScreenDetailedBase(screenDetailedJS), IScreenDetailed {
+public sealed class ScreenDetailed(IJSObjectReference screenDetailedJS) : ScreenDetailedBase<IJSObjectReference>(screenDetailedJS), IScreenDetailed {
     /// <summary>
     /// Releases the JS instance for this ScreenDetails.
     /// </summary>

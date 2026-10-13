@@ -9,12 +9,9 @@ namespace BrowserAPI.Implementation;
 /// <para>The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see> and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see> elements both inherit this interface.</para>
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="DisposeAsync"/> when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IHTMLMediaElementBase<IJSObjectReference, IPictureInPictureWindow>), typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTask) : HTMLMediaElementBase(htmlMediaElementTask), IHTMLMediaElement {
-    [AutoInterfaceVisibilityInternal]
-    Task<IJSObjectReference> IHTMLMediaElement.HTMLMediaElementTask => htmlMediaElementTask;
-
+public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTask) : HTMLMediaElementBase<IJSObjectReference, IPictureInPictureWindow>(htmlMediaElementTask), IHTMLMediaElement {
     /// <summary>
     /// Releases the JS instance for this htmlMediaElement.
     /// </summary>
@@ -632,73 +629,6 @@ public sealed class HTMLMediaElement(Task<IJSObjectReference> htmlMediaElementTa
     /// <param name="cancellationToken"></param>
     /// <returns>"probably", "maybe" or ""</returns>
     public async ValueTask<string> CanPlayType(string type, CancellationToken cancellationToken = default) => await (await htmlMediaElementTask).InvokeTrySync<string>("canPlayType", cancellationToken, [type]);
-
-
-    /// <summary>
-    /// <para>&lt;video&gt; elements only</para>
-    /// <para>Issues an asynchronous request to display the video in picture-in-picture mode.</para>
-    /// <para>
-    /// It's not guaranteed that the video will be put into picture-in-picture.
-    /// If permission to enter that mode is granted, the returned Promise will resolve and the video will receive a enterpictureinpicture event to let it know that it's now in picture-in-picture.
-    /// </para>
-    /// </summary>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public async ValueTask<IPictureInPictureWindow> RequestPictureInPicture(CancellationToken cancellationToken = default) {
-        IJSObjectReference pictureInPictureWindowJS = await (await htmlMediaElementTask).InvokeAsync<IJSObjectReference>("requestPictureInPicture", cancellationToken);
-        return new PictureInPictureWindow(pictureInPictureWindowJS);
-    }
-
-    #endregion
-
-
-    #region Events
-
-    private protected override void InvokeEnterPictureInPicture(IJSObjectReference pictureInPictureWindow) => _onEnterPictureInPicture?.Invoke(new PictureInPictureWindow(pictureInPictureWindow));
-    private Action<IPictureInPictureWindow>? _onEnterPictureInPicture;
-    /// <summary>
-    /// <para>Is fired when the HTMLVideoElement enters picture-in-picture mode successfully.</para>
-    /// <para>This event is not cancelable and does not bubble.</para>
-    /// <para>
-    /// Parameter returns the PictureInPictureWindow the event relates to.<br />
-    /// Note: Dispose the given PictureInPictureWindow object when you are done with it.
-    /// </para>
-    /// </summary>
-    public event Action<IPictureInPictureWindow> OnEnterPictureInPicture {
-        add {
-            if (_onEnterPictureInPicture == null)
-                _ = ActivateJSEvent("activateOnenterpictureinpicture").Preserve();
-            _onEnterPictureInPicture += value;
-        }
-        remove {
-            _onEnterPictureInPicture -= value;
-            if (_onEnterPictureInPicture == null)
-                _ = DeactivateJSEvent("deactivateOnenterpictureinpicture").Preserve();
-        }
-    }
-
-    private protected override void InvokeLeavePictureInPicture(IJSObjectReference pictureInPictureWindow) => _onLeavePictureInPicture?.Invoke(new PictureInPictureWindow(pictureInPictureWindow));
-    private Action<IPictureInPictureWindow>? _onLeavePictureInPicture;
-    /// <summary>
-    /// <para>Is fired when the HTMLVideoElement leaves picture-in-picture mode successfully.</para>
-    /// <para>This event is not cancelable and does not bubble.</para>
-    /// <para>
-    /// Parameter returns the PictureInPictureWindow the event relates to.<br />
-    /// Note: Dispose the given PictureInPictureWindow object when you are done with it.
-    /// </para>
-    /// </summary>
-    public event Action<IPictureInPictureWindow> OnLeavePictureInPicture {
-        add {
-            if (_onLeavePictureInPicture == null)
-                _ = ActivateJSEvent("activateOnleavepictureinpicture").Preserve();
-            _onLeavePictureInPicture += value;
-        }
-        remove {
-            _onLeavePictureInPicture -= value;
-            if (_onLeavePictureInPicture == null)
-                _ = DeactivateJSEvent("deactivateOnleavepictureinpicture").Preserve();
-        }
-    }
 
     #endregion
 }

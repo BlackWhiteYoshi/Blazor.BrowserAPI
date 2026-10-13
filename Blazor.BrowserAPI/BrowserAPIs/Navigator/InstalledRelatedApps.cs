@@ -2,7 +2,7 @@ namespace BrowserAPI;
 
 /// <summary>
 /// Represents installed related apps.<br />
-/// It is the ReturnType of <see cref="INavigator.GetInstalledRelatedApps"/>/<see cref="INavigatorInProcess.GetInstalledRelatedApps"/>
+/// It is the ReturnType of <see cref="INavigatorBase{IJSObjectReference, IFile}.GetInstalledRelatedApps"/>.
 /// </summary>
 /// <param name="Id">Represents the ID used to represent the application on the specified platform. The exact form of the string will vary by platform.</param>
 /// <param name="Platform">

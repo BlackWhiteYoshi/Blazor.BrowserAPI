@@ -4,13 +4,17 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
-[AutoInterface(Namespace = "BrowserAPI", Name = "IFile")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IFileInProcess")]
+/// Base interface of <see cref="IFile"/> and <see cref="IFileInProcess"/>.<br/>
+/// It contains common functionality for both interfaces.<br/>
+/// It is not intended to use this interface directly.
+[AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class FileBase(IJSObjectReference fileJS) {
-#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected IJSObjectReference fileJS = fileJS;
+public abstract class FileBase<TJSObjectReference>(TJSObjectReference fileJS) : IFileBase<TJSObjectReference>
+    where TJSObjectReference : IJSObjectReference {
+    private protected TJSObjectReference fileJS = fileJS;
+
+    [AutoInterfaceVisibilityInternal]
+    TJSObjectReference IFileBase<TJSObjectReference>.FileJS => fileJS;
 
 
     /// <summary>

@@ -3,12 +3,12 @@ using Microsoft.JSInterop;
 
 namespace BrowserAPI.Implementation;
 
-[AutoInterface(Namespace = "BrowserAPI", Name = "IWritableFileStream")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IWritableFileStreamInProcess")]
-#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class WritableFileStreamBase(IJSObjectReference writableFileStreamJS) {
-#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected IJSObjectReference writableFileStreamJS = writableFileStreamJS;
+/// Base interface of <see cref="IWritableFileStream"/> and <see cref="IWritableFileStreamInProcess"/>.<br/>
+/// It contains common functionality for both interfaces.<br/>
+/// It is not intended to use this interface directly.
+[AutoInterface(Namespace = "BrowserAPI")]
+public abstract class WritableFileStreamBase<TJSObjectReference>(TJSObjectReference writableFileStreamJS) where TJSObjectReference : IJSObjectReference {
+    private protected TJSObjectReference writableFileStreamJS = writableFileStreamJS;
 
 
     /// <summary>

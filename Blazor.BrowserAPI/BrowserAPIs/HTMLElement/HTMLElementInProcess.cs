@@ -8,11 +8,11 @@ namespace BrowserAPI.Implementation;
 /// The <i>HTMLElement</i> interface represents any HTML element. Some elements directly implement this interface, while others implement it via an interface that inherits it.
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="Dispose"/> when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IHTMLElementBase<IJSInProcessObjectReference, IHTMLElementInProcess, DragEventInProcess>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElementJS) : HTMLElementBase(Task.FromResult<IJSObjectReference>(htmlElementJS)), IHTMLElementInProcess {
+public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElementJS) : HTMLElementBase<IJSInProcessObjectReference, IHTMLElementInProcess, DragEventInProcess>(Task.FromResult(htmlElementJS)), IHTMLElementInProcess {
     [AutoInterfaceVisibilityInternal]
-    IJSInProcessObjectReference IHTMLElementInProcess.HTMLElement => htmlElementJS;
+    IJSInProcessObjectReference IHTMLElementInProcess.HTMLElement => htmlElementTask.Result;
 
     /// <summary>
     /// Releases the JS instance for this HTML element.
@@ -61,7 +61,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <summary>
     /// Returns a string containing the element's browser-assigned access key (if any); otherwise it returns an empty string.
     /// </summary>
-    public string AccessKeyLabel => htmlElementJS.Invoke<string>("getAccessKeyLabel");
+    public string AccessKeyLabel => htmlElementTask.Result.Invoke<string>("getAccessKeyLabel");
 
 
     /// <summary>
@@ -76,7 +76,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// <para>Though this property itself is not writable, you can write and remove inline styles through <see cref="SetAttributeStyleMap"/> and <see cref="RemoveAttributeStyleMap"/>.</para>
     /// </summary>
-    public Dictionary<string, string> AttributeStyleMap => htmlElementJS.Invoke<Dictionary<string, string>>("getAttributeStyleMap");
+    public Dictionary<string, string> AttributeStyleMap => htmlElementTask.Result.Invoke<Dictionary<string, string>>("getAttributeStyleMap");
 
     /// <summary>
     /// <para>Sets the given css property name to the given value.</para>
@@ -88,13 +88,13 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     /// <param name="name">name of the css property</param>
     /// <param name="value">value for the given css property</param>
-    public void SetAttributeStyleMap(string name, string value) => htmlElementJS.InvokeVoid("setAttributeStyleMap", [name, value]);
+    public void SetAttributeStyleMap(string name, string value) => htmlElementTask.Result.InvokeVoid("setAttributeStyleMap", [name, value]);
 
     /// <summary>
     /// Removes the given css property.
     /// </summary>
     /// <param name="name">css property name</param>
-    public void RemoveAttributeStyleMap(string name) => htmlElementJS.InvokeVoid("removeAttributeStyleMap", [name]);
+    public void RemoveAttributeStyleMap(string name) => htmlElementTask.Result.InvokeVoid("removeAttributeStyleMap", [name]);
 
 
     /// <summary>
@@ -118,8 +118,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>It reflects the value of the autocapitalize HTML global attribute.</para>
     /// </summary>
     public string Autocapitalize {
-        get => htmlElementJS.Invoke<string>("getAutocapitalize");
-        set => htmlElementJS.InvokeVoid("setAutocapitalize", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAutocapitalize");
+        set => htmlElementTask.Result.InvokeVoid("setAutocapitalize", [value]);
     }
 
     /// <summary>
@@ -138,8 +138,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// Setting it after the insertion, that is most of the time after the document load, has no visible effect.
     /// </remarks>
     public bool Autofocus {
-        get => htmlElementJS.Invoke<bool>("getAutofocus");
-        set => htmlElementJS.InvokeVoid("setAutofocus", [value]);
+        get => htmlElementTask.Result.Invoke<bool>("getAutofocus");
+        set => htmlElementTask.Result.InvokeVoid("setAutofocus", [value]);
     }
 
     /// <summary>
@@ -153,8 +153,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>If the attribute is missing or its value is invalid, its value is inherited from its parent element: so the element is editable (or not) based on the parent element.</para>
     /// </summary>
     public string ContentEditable {
-        get => htmlElementJS.Invoke<string>("getContentEditable");
-        set => htmlElementJS.InvokeVoid("setContentEditable", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getContentEditable");
+        set => htmlElementTask.Result.InvokeVoid("setContentEditable", [value]);
     }
 
 
@@ -166,7 +166,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// <para>For writing or removing elements use <see cref="SetDataset"/> or <see cref="RemoveDataset"/>.</para>
     /// </summary>
-    public Dictionary<string, string> Dataset => htmlElementJS.Invoke<Dictionary<string, string>>("getDataset");
+    public Dictionary<string, string> Dataset => htmlElementTask.Result.Invoke<Dictionary<string, string>>("getDataset");
 
     /// <summary>
     /// <para>Sets the given data-attribute to the given value.</para>
@@ -178,13 +178,13 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     /// <param name="name">name of the data-attribute without data- prefix</param>
     /// <param name="value">value for the given data-attribute</param>
-    public void SetDataset(string name, string value) => htmlElementJS.InvokeVoid("setDataset", [name, value]);
+    public void SetDataset(string name, string value) => htmlElementTask.Result.InvokeVoid("setDataset", [name, value]);
 
     /// <summary>
     /// Removes the given data-attribute.
     /// </summary>
     /// <param name="name">data-attribute name</param>
-    public void RemoveDataset(string name) => htmlElementJS.InvokeVoid("removeDataset", [name]);
+    public void RemoveDataset(string name) => htmlElementTask.Result.InvokeVoid("removeDataset", [name]);
 
 
     /// <summary>
@@ -205,16 +205,16 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string Dir {
-        get => htmlElementJS.Invoke<string>("getDir");
-        set => htmlElementJS.InvokeVoid("setDir", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getDir");
+        set => htmlElementTask.Result.InvokeVoid("setDir", [value]);
     }
 
     /// <summary>
     /// A boolean value indicating if the element can be dragged. It reflects the value of the draggable HTML global attribute.
     /// </summary>
     public bool Draggable {
-        get => htmlElementJS.Invoke<bool>("getDraggable");
-        set => htmlElementJS.InvokeVoid("setDraggable", [value]);
+        get => htmlElementTask.Result.Invoke<bool>("getDraggable");
+        set => htmlElementTask.Result.InvokeVoid("setDraggable", [value]);
     }
 
     /// <summary>
@@ -232,8 +232,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>If no <i>enterKeyHint</i> value has been specified or if it was set to a different value than the allowed ones, it will return an empty string.</para>
     /// </summary>
     public string EnterKeyHint {
-        get => htmlElementJS.Invoke<string>("getEnterKeyHint");
-        set => htmlElementJS.InvokeVoid("setEnterKeyHint", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getEnterKeyHint");
+        set => htmlElementTask.Result.InvokeVoid("setEnterKeyHint", [value]);
     }
 
     /// <summary>
@@ -244,7 +244,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     public bool? Hidden {
         get {
-            int hidden = htmlElementJS.Invoke<int>("getHidden");
+            int hidden = htmlElementTask.Result.Invoke<int>("getHidden");
             return hidden switch {
                 0 => false,
                 1 => true,
@@ -258,7 +258,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
                 true => 1,
                 null => 2
             };
-            htmlElementJS.InvokeVoid("setHidden", [hidden]);
+            htmlElementTask.Result.InvokeVoid("setHidden", [hidden]);
         }
     }
 
@@ -275,8 +275,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public bool Inert {
-        get => htmlElementJS.Invoke<bool>("getInert");
-        set => htmlElementJS.InvokeVoid("setInert", [value]);
+        get => htmlElementTask.Result.Invoke<bool>("getInert");
+        set => htmlElementTask.Result.InvokeVoid("setInert", [value]);
     }
 
     /// <summary>
@@ -291,8 +291,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string InnerText {
-        get => htmlElementJS.Invoke<string>("getInnerText");
-        set => htmlElementJS.InvokeVoid("setInnerText", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getInnerText");
+        set => htmlElementTask.Result.InvokeVoid("setInnerText", [value]);
     }
 
     /// <summary>
@@ -314,14 +314,14 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string InputMode {
-        get => htmlElementJS.Invoke<string>("getInputMode");
-        set => htmlElementJS.InvokeVoid("setInputMode", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getInputMode");
+        set => htmlElementTask.Result.InvokeVoid("setInputMode", [value]);
     }
 
     /// <summary>
     /// It is true if the contents of the element are editable; otherwise it returns false.
     /// </summary>
-    public bool IsContentEditable => htmlElementJS.Invoke<bool>("getIsContentEditable");
+    public bool IsContentEditable => htmlElementTask.Result.Invoke<bool>("getIsContentEditable");
 
     /// <summary>
     /// <para>
@@ -335,8 +335,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Common examples include "en" for English, "ja" for Japanese, "es" for Spanish and so on. If unspecified, the value is an empty string.</para>
     /// </summary>
     public string Lang {
-        get => htmlElementJS.Invoke<string>("getLang");
-        set => htmlElementJS.InvokeVoid("setLang", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getLang");
+        set => htmlElementTask.Result.InvokeVoid("setLang", [value]);
     }
 
     /// <summary>
@@ -344,8 +344,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>In later implementations, elements only expose their nonce attribute to scripts (and not to side-channels like CSS attribute selectors).</para>
     /// </summary>
     public string Nonce {
-        get => htmlElementJS.Invoke<string>("getNonce");
-        set => htmlElementJS.InvokeVoid("setNonce", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getNonce");
+        set => htmlElementTask.Result.InvokeVoid("setNonce", [value]);
     }
 
 
@@ -358,7 +358,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>If the element is hidden (for example, by setting style.display on the element or one of its ancestors to "none"), then 0 is returned.</para>
     /// <para>Note: This property will round the value to an integer. If you need a fractional value, use element.getBoundingClientRect().</para>
     /// </summary>
-    public int OffsetWidth => htmlElementJS.Invoke<int>("getOffsetWidth");
+    public int OffsetWidth => htmlElementTask.Result.Invoke<int>("getOffsetWidth");
 
     /// <summary>
     /// <para>Returns the height of an element, including vertical padding and borders, as an integer.</para>
@@ -369,7 +369,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>If the element is hidden(for example, by setting style.display on the element or one of its ancestors to "none"), then 0 is returned.</para>
     /// <para>Note: This property will round the value to an integer. If you need a fractional value, use element.getBoundingClientRect().</para>
     /// </summary>
-    public int OffsetHeight => htmlElementJS.Invoke<int>("getOffsetHeight");
+    public int OffsetHeight => htmlElementTask.Result.Invoke<int>("getOffsetHeight");
 
     /// <summary>
     /// <para>Returns the number of pixels that the upper left corner of the current element is offset to the left within the HTMLElement.offsetParent node.</para>
@@ -380,13 +380,13 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// Therefore, a box with the left, top, width and height of offsetLeft, offsetTop, offsetWidth and offsetHeight will not be a bounding box for a span with wrapped text.
     /// </para>
     /// </summary>
-    public int OffsetLeft => htmlElementJS.Invoke<int>("getOffsetLeft");
+    public int OffsetLeft => htmlElementTask.Result.Invoke<int>("getOffsetLeft");
 
     /// <summary>
     /// Returns the distance from the outer border of the current element (including its margin) to the top padding edge of the offsetParent,
     /// the closest positioned ancestor element.
     /// </summary>
-    public int OffsetTop => htmlElementJS.Invoke<int>("getOffsetTop");
+    public int OffsetTop => htmlElementTask.Result.Invoke<int>("getOffsetTop");
 
     /// <summary>
     /// <para>Returns a reference to the element which is the closest (nearest in the containment hierarchy) positioned ancestor element.</para>
@@ -406,7 +406,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     public IHTMLElementInProcess? OffsetParent {
         get {
-            IJSInProcessObjectReference?[] singleReference = htmlElementJS.Invoke<IJSInProcessObjectReference?[]>("getOffsetParent");
+            IJSInProcessObjectReference?[] singleReference = htmlElementTask.Result.Invoke<IJSInProcessObjectReference?[]>("getOffsetParent");
             if (singleReference[0] is IJSInProcessObjectReference htmlElement)
                 return new HTMLElementInProcess(htmlElement);
             else
@@ -423,8 +423,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>See <see cref="InnerText">HTMLElement.innerText</see> for more information and examples showing how both properties are used as getters.</para>
     /// </summary>
     public string OuterText {
-        get => htmlElementJS.Invoke<string>("getOuterText");
-        set => htmlElementJS.InvokeVoid("setOuterText", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getOuterText");
+        set => htmlElementTask.Result.InvokeVoid("setOuterText", [value]);
     }
 
     /// <summary>
@@ -445,8 +445,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? Popover {
-        get => htmlElementJS.Invoke<string?>("getPopover");
-        set => htmlElementJS.InvokeVoid("setPopover", [value]);
+        get => htmlElementTask.Result.Invoke<string?>("getPopover");
+        set => htmlElementTask.Result.InvokeVoid("setPopover", [value]);
     }
 
     /// <summary>
@@ -454,8 +454,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// It reflects the value of the spellcheck HTML global attribute.
     /// </summary>
     public bool Spellcheck {
-        get => htmlElementJS.Invoke<bool>("getSpellcheck");
-        set => htmlElementJS.InvokeVoid("setSpellcheck", [value]);
+        get => htmlElementTask.Result.Invoke<bool>("getSpellcheck");
+        set => htmlElementTask.Result.InvokeVoid("setSpellcheck", [value]);
     }
 
     /// <summary>
@@ -465,8 +465,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Not to be confused with stylesheet style-rule <see href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/cssText">CSSRule.cssText</see>.</para>
     /// </summary>
     public string Style {
-        get => htmlElementJS.Invoke<string>("getStyle");
-        set => htmlElementJS.InvokeVoid("setStyle", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getStyle");
+        set => htmlElementTask.Result.InvokeVoid("setStyle", [value]);
     }
 
     /// <summary>
@@ -479,16 +479,16 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Values don't need to be sequential, nor must they begin with any particular value. They may even be negative, though each browser trims very large values.</para>
     /// </summary>
     public long TabIndex {
-        get => htmlElementJS.Invoke<long>("getTabIndex");
-        set => htmlElementJS.InvokeVoid("setTabIndex", [value]);
+        get => htmlElementTask.Result.Invoke<long>("getTabIndex");
+        set => htmlElementTask.Result.InvokeVoid("setTabIndex", [value]);
     }
 
     /// <summary>
     /// Represents the title of the element: the text usually displayed in a 'tooltip' popup when the mouse is over the node.
     /// </summary>
     public string Title {
-        get => htmlElementJS.Invoke<string>("getTitle");
-        set => htmlElementJS.InvokeVoid("setTitle", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getTitle");
+        set => htmlElementTask.Result.InvokeVoid("setTitle", [value]);
     }
 
     /// <summary>
@@ -496,8 +496,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// It reflects the value of the translate HTML global attribute.
     /// </summary>
     public bool Translate {
-        get => htmlElementJS.Invoke<bool>("getTranslate");
-        set => htmlElementJS.InvokeVoid("setTranslate", [value]);
+        get => htmlElementTask.Result.Invoke<bool>("getTranslate");
+        set => htmlElementTask.Result.InvokeVoid("setTranslate", [value]);
     }
 
 
@@ -507,7 +507,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>htmlElement === document.activeElement;</para>
     /// <para>If true, the htmlElement has focus, otherwise false.</para>
     /// </summary>
-    public bool HasFocus => htmlElementJS.Invoke<bool>("hasFocus");
+    public bool HasFocus => htmlElementTask.Result.Invoke<bool>("hasFocus");
 
 
     // methods
@@ -519,7 +519,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// This event then bubbles up to elements higher in the document tree (or event chain) and fires their click events.
     /// </para>
     /// </summary>
-    public void Click() => htmlElementJS.InvokeVoid("click");
+    public void Click() => htmlElementTask.Result.InvokeVoid("click");
 
     /// <summary>
     /// <para>Sets focus on the specified element, if it can be focused. The focused element is the element that will receive keyboard and similar events by default.</para>
@@ -533,12 +533,12 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// A value of false for preventScroll (the default) means that the browser will scroll the element into view after focusing it.
     /// If preventScroll is set to true, no scrolling will occur.
     /// </param>
-    public void Focus(bool preventScroll = false) => htmlElementJS.InvokeVoid("focus", [preventScroll]);
+    public void Focus(bool preventScroll = false) => htmlElementTask.Result.InvokeVoid("focus", [preventScroll]);
 
     /// <summary>
     /// Removes keyboard focus from the current element.
     /// </summary>
-    public void Blur() => htmlElementJS.InvokeVoid("blur");
+    public void Blur() => htmlElementTask.Result.InvokeVoid("blur");
 
     /// <summary>
     /// <para>Shows a popover element (i.e. one that has a valid popover attribute) by adding it to the top layer.</para>
@@ -547,7 +547,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// If the element is already showing, an error will be thrown.
     /// </para>
     /// </summary>
-    public void ShowPopover() => htmlElementJS.InvokeVoid("showPopover");
+    public void ShowPopover() => htmlElementTask.Result.InvokeVoid("showPopover");
 
     /// <summary>
     /// <para>Hides a popover element (i.e. one that has a valid popover attribute) by removing it from the top layer and styling it with display: none.</para>
@@ -556,7 +556,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// If the element is already hidden, an error is thrown.
     /// </para>
     /// </summary>
-    public void HidePopover() => htmlElementJS.InvokeVoid("hidePopover");
+    public void HidePopover() => htmlElementTask.Result.InvokeVoid("hidePopover");
 
     /// <summary>
     /// <para>Toggles a popover element (i.e. one that has a valid popover attribute) between the hidden and showing states.</para>
@@ -578,202 +578,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>true if the popup is open after the call, and false otherwise.</para>
     /// <para>None(undefined) may be returned in older browser versions(see browser compatibility).</para>
     /// </returns>
-    public bool TogglePopover(bool? force = null) => htmlElementJS.Invoke<bool>("togglePopover", [force]);
-
-
-    // events
-
-    private protected override void InvokeCommand(IJSObjectReference source, string command) => _onCommand?.Invoke(new HTMLElementInProcess((IJSInProcessObjectReference)source), command);
-    private Action<IHTMLElementInProcess, string>? _onCommand;
-    /// <summary>
-    /// <para>
-    /// Fires on an element that is controlled via a button with valid commandForElement and command values, whenever the button is interacted with (e.g., it is clicked).
-    /// </para>
-    /// <para>
-    /// <b>Parameters</b><br />
-    /// - IHTMLElementInProcess <i>source</i>: An HTMLButtonElement representing the button that caused this invocation.<br />
-    /// - string <i>command</i>: Representing the command value of the source button.
-    /// </para>
-    /// </summary>
-    /// <remarks>
-    /// Note: Dispose the given IHTMLElementInProcess object when you are done with it.
-    /// </remarks>
-    public event Action<IHTMLElementInProcess, string> OnCommand {
-        add {
-            if (_onCommand == null)
-                _ = ActivateJSEvent("activateOncommand").Preserve();
-            _onCommand += value;
-        }
-        remove {
-            _onCommand -= value;
-            if (_onCommand == null)
-                _ = DeactivateJSEvent("deactivateOncommand").Preserve();
-        }
-    }
-
-
-    private protected override void InvokeDrag(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDrag?.Invoke(new DragEventInProcess(dropEffect, effectAllowed, types, WrapFiles(files)));
-    private Action<DragEventInProcess>? _onDrag;
-    /// <summary>
-    /// <para>
-    /// Is fired every few hundred milliseconds as an element or text selection is being dragged by the user.<br />
-    /// This event is cancelable and may bubble up to the Document and Window objects.
-    /// </para>
-    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
-    /// </summary>
-    public event Action<DragEventInProcess> OnDrag {
-        add {
-            if (_onDrag == null)
-                _ = ActivateJSEvent("activateOndrag").Preserve();
-            _onDrag += value;
-        }
-        remove {
-            _onDrag -= value;
-            if (_onDrag == null)
-                _ = DeactivateJSEvent("deactivateOndrag").Preserve();
-        }
-    }
-
-    private protected override void InvokeDragStart(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDragStart?.Invoke(new DragEventInProcess(dropEffect, effectAllowed, types, WrapFiles(files)));
-    private Action<DragEventInProcess>? _onDragStart;
-    /// <summary>
-    /// <para>
-    /// Is fired when the user starts dragging an element or text selection.<br />
-    /// This event is cancelable and may bubble up to the Document and Window objects.
-    /// </para>
-    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
-    /// </summary>
-    public event Action<DragEventInProcess> OnDragStart {
-        add {
-            if (_onDragStart == null)
-                _ = ActivateJSEvent("activateOndragstart").Preserve();
-            _onDragStart += value;
-        }
-        remove {
-            _onDragStart -= value;
-            if (_onDragStart == null)
-                _ = DeactivateJSEvent("deactivateOndragstart").Preserve();
-        }
-    }
-
-    private protected override void InvokeDragEnd(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDragEnd?.Invoke(new DragEventInProcess(dropEffect, effectAllowed, types, WrapFiles(files)));
-    private Action<DragEventInProcess>? _onDragEnd;
-    /// <summary>
-    /// <para>
-    /// Is fired when a drag operation ends (by releasing a mouse button or hitting the escape key).<br />
-    /// This event is cancelable and may bubble up to the Document and Window objects.
-    /// </para>
-    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
-    /// </summary>
-    public event Action<DragEventInProcess> OnDragEnd {
-        add {
-            if (_onDragEnd == null)
-                _ = ActivateJSEvent("activateOndragend").Preserve();
-            _onDragEnd += value;
-        }
-        remove {
-            _onDragEnd -= value;
-            if (_onDragEnd == null)
-                _ = DeactivateJSEvent("deactivateOndragend").Preserve();
-        }
-    }
-
-    private protected override void InvokeDragEnter(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDragEnter?.Invoke(new DragEventInProcess(dropEffect, effectAllowed, types, WrapFiles(files)));
-    private Action<DragEventInProcess>? _onDragEnter;
-    /// <summary>
-    /// <para>
-    /// Is fired when a dragged element or text selection enters a valid drop target.
-    /// The target object is the immediate user selection (the element directly indicated by the user as the drop target), or the &lt;body&gt; element.<br />
-    /// This event is cancelable and may bubble up to the Document and Window objects.
-    /// </para>
-    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
-    /// </summary>
-    public event Action<DragEventInProcess> OnDragEnter {
-        add {
-            if (_onDragEnter == null)
-                _ = ActivateJSEvent("activateOndragenter").Preserve();
-            _onDragEnter += value;
-        }
-        remove {
-            _onDragEnter -= value;
-            if (_onDragEnter == null)
-                _ = DeactivateJSEvent("deactivateOndragenter").Preserve();
-        }
-    }
-
-    private protected override void InvokeDragLeave(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDragLeave?.Invoke(new DragEventInProcess(dropEffect, effectAllowed, types, WrapFiles(files)));
-    private Action<DragEventInProcess>? _onDragLeave;
-    /// <summary>
-    /// <para>
-    /// Is fired when a dragged element or text selection leaves a valid drop target.<br />
-    /// This event is not cancelable and may bubble up to the Document and Window objects.
-    /// </para>
-    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
-    /// </summary>
-    public event Action<DragEventInProcess> OnDragLeave {
-        add {
-            if (_onDragLeave == null)
-                _ = ActivateJSEvent("activateOndragleave").Preserve();
-            _onDragLeave += value;
-        }
-        remove {
-            _onDragLeave -= value;
-            if (_onDragLeave == null)
-                _ = DeactivateJSEvent("deactivateOndragleave").Preserve();
-        }
-    }
-
-    private protected override void InvokeDragOver(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDragOver?.Invoke(new DragEventInProcess(dropEffect, effectAllowed, types, WrapFiles(files)));
-    private Action<DragEventInProcess>? _onDragOver;
-    /// <summary>
-    /// <para>
-    /// Is fired when an element or text selection is being dragged over a valid drop target (every few hundred milliseconds).<br />
-    /// This event is cancelable and may bubble up to the Document and Window objects.
-    /// </para>
-    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
-    /// </summary>
-    public event Action<DragEventInProcess> OnDragOver {
-        add {
-            if (_onDragOver == null)
-                _ = ActivateJSEvent("activateOndragover").Preserve();
-            _onDragOver += value;
-        }
-        remove {
-            _onDragOver -= value;
-            if (_onDragOver == null)
-                _ = DeactivateJSEvent("deactivateOndragover").Preserve();
-        }
-    }
-
-    private protected override void InvokeDrop(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => _onDrop?.Invoke(new DragEventInProcess(dropEffect, effectAllowed, types, WrapFiles(files)));
-    private Action<DragEventInProcess>? _onDrop;
-    /// <summary>
-    /// <para>
-    /// Is fired when an element or text selection is dropped on a valid drop target.
-    /// To ensure that the drop event always fires as expected, you should always include a preventDefault() call in the part of your code which handles the dragover event.<br />
-    /// This event is cancelable and may bubble up to the Document and Window objects.
-    /// </para>
-    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
-    /// </summary>
-    public event Action<DragEventInProcess> OnDrop {
-        add {
-            if (_onDrop == null)
-                _ = ActivateJSEvent("activateOndrop").Preserve();
-            _onDrop += value;
-        }
-        remove {
-            _onDrop -= value;
-            if (_onDrop == null)
-                _ = DeactivateJSEvent("deactivateOndrop").Preserve();
-        }
-    }
-
-    private static IFileInProcess[] WrapFiles(IJSObjectReference[] files) {
-        FileInProcess[] result = new FileInProcess[files.Length];
-        for (int i = 0; i < result.Length; i++)
-            result[i] = new FileInProcess(files[i]);
-        return result;
-    }
+    public bool TogglePopover(bool? force = null) => htmlElementTask.Result.Invoke<bool>("togglePopover", [force]);
 
     #endregion
 
@@ -785,20 +590,20 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// It is a NamedNodeMap, not an Array, so it has no Array methods and the Attr nodes' indexes may differ among browsers.
     /// To be more specific, attributes is a key/value pair of strings that represents any information regarding that attribute.
     /// </summary>
-    public Dictionary<string, string> Attributes => htmlElementJS.Invoke<Dictionary<string, string>>("getAttributes");
+    public Dictionary<string, string> Attributes => htmlElementTask.Result.Invoke<Dictionary<string, string>>("getAttributes");
 
     /// <summary>
     /// <para>Returns a live DOMTokenList collection of the class attributes of the element. This can then be used to manipulate the class list.</para>
     /// <para>Using classList is a convenient alternative to accessing an element's list of classes as a space-delimited string via <i>element.className</i>.</para>
     /// </summary>
-    public string[] ClassList => htmlElementJS.Invoke<string[]>("getClassList");
+    public string[] ClassList => htmlElementTask.Result.Invoke<string[]>("getClassList");
 
     /// <summary>
     /// Gets/Sets the value of the class attribute of the specified element.
     /// </summary>
     public string ClassName {
-        get => htmlElementJS.Invoke<string>("getClassName");
-        set => htmlElementJS.InvokeVoid("setClassName", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getClassName");
+        set => htmlElementTask.Result.InvokeVoid("setClassName", [value]);
     }
 
 
@@ -813,7 +618,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// <para>Note: This property will round the value to an integer. If you need a fractional value, use element.getBoundingClientRect().</para>
     /// </summary>
-    public int ClientWidth => htmlElementJS.Invoke<int>("getClientWidth");
+    public int ClientWidth => htmlElementTask.Result.Invoke<int>("getClientWidth");
 
     /// <summary>
     /// <para>
@@ -827,7 +632,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// <para>Note: This property will round the value to an integer. If you need a fractional value, use element.getBoundingClientRect().</para>
     /// </summary>
-    public int ClientHeight => htmlElementJS.Invoke<int>("getClientHeight");
+    public int ClientHeight => htmlElementTask.Result.Invoke<int>("getClientHeight");
 
     /// <summary>
     /// <para>
@@ -838,7 +643,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Note: This property will round the value to an integer.If you need a fractional value, use element.getBoundingClientRect().</para>
     /// <para>Note: When an element has display: inline, clientLeft returns 0 regardless of the element's border.</para>
     /// </summary>
-    public int ClientLeft => htmlElementJS.Invoke<int>("getClientLeft");
+    public int ClientLeft => htmlElementTask.Result.Invoke<int>("getClientLeft");
 
     /// <summary>
     /// <para>The width of the top border of an element in pixels. It is a read-only, integer property of element.</para>
@@ -850,7 +655,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// <para>Note: This property will round the value to an integer.If you need a fractional value, use element.getBoundingClientRect().</para>
     /// </summary>
-    public int ClientTop => htmlElementJS.Invoke<int>("getClientTop");
+    public int ClientTop => htmlElementTask.Result.Invoke<int>("getClientTop");
 
 
     /// <summary>
@@ -867,7 +672,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// The currentCSSZoom property can be used to scale these values to adjust for the effects of zooming.
     /// </para>
     /// </summary>
-    public double CurrentCSSZoom => htmlElementJS.Invoke<double>("getCurrentCSSZoom");
+    public double CurrentCSSZoom => htmlElementTask.Result.Invoke<double>("getCurrentCSSZoom");
 
     /// <summary>
     /// <para>Represents the element's identifier, reflecting the id global attribute.</para>
@@ -875,14 +680,14 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>The id is often used with getElementById() to retrieve a particular element. Another common case is to use an element's ID as a selector when styling the document with CSS.</para>
     /// </summary>
     public string Id {
-        get => htmlElementJS.Invoke<string>("getId");
-        set => htmlElementJS.InvokeVoid("setId", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getId");
+        set => htmlElementTask.Result.InvokeVoid("setId", [value]);
     }
 
     /// <summary>
     /// A boolean indicating whether the node is connected (directly or indirectly) to a Document object.
     /// </summary>
-    public bool IsConnected => htmlElementJS.Invoke<bool>("getIsConnected");
+    public bool IsConnected => htmlElementTask.Result.Invoke<bool>("getIsConnected");
 
 
     /// <summary>
@@ -890,8 +695,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>To insert the HTML into the document rather than replace the contents of an element, use the method insertAdjacentHTML().</para>
     /// </summary>
     public string InnerHTML {
-        get => htmlElementJS.Invoke<string>("getInnerHTML");
-        set => htmlElementJS.InvokeVoid("setInnerHTML", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getInnerHTML");
+        set => htmlElementTask.Result.InvokeVoid("setInnerHTML", [value]);
     }
 
     /// <summary>
@@ -902,15 +707,15 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>To only obtain the HTML representation of the contents of an element, or to replace the contents of an element, use the innerHTML property instead.</para>
     /// </summary>
     public string OuterHTML {
-        get => htmlElementJS.Invoke<string>("getOuterHTML");
-        set => htmlElementJS.InvokeVoid("setOuterHTML", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getOuterHTML");
+        set => htmlElementTask.Result.InvokeVoid("setOuterHTML", [value]);
     }
 
 
     /// <summary>
     /// Represents the part identifier(s) of the element (i.e., set using the part attribute), returned as a DOMTokenList. These can be used to style parts of a shadow DOM, via the ::part pseudo-element.
     /// </summary>
-    public string[] Part => htmlElementJS.Invoke<string[]>("getPart");
+    public string[] Part => htmlElementTask.Result.Invoke<string[]>("getPart");
 
 
     /// <summary>
@@ -923,7 +728,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// <para>Note: This property will round the value to an integer.If you need a fractional value, use element.getBoundingClientRect().</para>
     /// </summary>
-    public int ScrollWidth => htmlElementJS.Invoke<int>("getScrollWidth");
+    public int ScrollWidth => htmlElementTask.Result.Invoke<int>("getScrollWidth");
 
     /// <summary>
     /// <para>Is a measurement of the height of an element's content, including content not visible on the screen due to overflow.</para>
@@ -939,7 +744,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// <para>Note: This property will round the value to an integer.If you need a fractional value, use Element.getBoundingClientRect().</para>
     /// </summary>
-    public int ScrollHeight => htmlElementJS.Invoke<int>("getScrollHeight");
+    public int ScrollHeight => htmlElementTask.Result.Invoke<int>("getScrollHeight");
 
     /// <summary>
     /// <para>Gets/Sets the number of pixels that an element's content is scrolled from its left edge.</para>
@@ -956,8 +761,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Warning: On systems using display scaling, scrollLeft may give you a decimal value. (It will be rounded down to the next integer.)</para>
     /// </summary>
     public int ScrollLeft {
-        get => (int)htmlElementJS.Invoke<double>("getScrollLeft");
-        set => htmlElementJS.InvokeVoid("setScrollLeft", [value]);
+        get => (int)htmlElementTask.Result.Invoke<double>("getScrollLeft");
+        set => htmlElementTask.Result.InvokeVoid("setScrollLeft", [value]);
     }
 
     /// <summary>
@@ -979,8 +784,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Warning: On systems using display scaling, scrollTop may give you a decimal value. (It will be rounded down to the next integer.)</para>
     /// </summary>
     public int ScrollTop {
-        get => (int)htmlElementJS.Invoke<double>("getScrollTop");
-        set => htmlElementJS.InvokeVoid("setScrollTop", [value]);
+        get => (int)htmlElementTask.Result.Invoke<double>("getScrollTop");
+        set => htmlElementTask.Result.InvokeVoid("setScrollTop", [value]);
     }
 
 
@@ -989,8 +794,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// A slot is a placeholder inside a web component that users can fill with their own markup (see Using templates and slots for more information).
     /// </summary>
     public string Slot {
-        get => htmlElementJS.Invoke<string>("getSlot");
-        set => htmlElementJS.InvokeVoid("setSlot", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getSlot");
+        set => htmlElementTask.Result.InvokeVoid("setSlot", [value]);
     }
 
 
@@ -1008,25 +813,25 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// Warning: Setting textContent on a node removes all of the node's children and replaces them with a single text node with the given string value.
     /// </remarks>
     public string TextContent {
-        get => htmlElementJS.Invoke<string>("getTextContent");
-        set => htmlElementJS.InvokeVoid("setTextContent", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getTextContent");
+        set => htmlElementTask.Result.InvokeVoid("setTextContent", [value]);
     }
 
 
     /// <summary>
     /// The local part of the qualified name of an element.
     /// </summary>
-    public string LocalName => htmlElementJS.Invoke<string>("getLocalName");
+    public string LocalName => htmlElementTask.Result.Invoke<string>("getLocalName");
 
     /// <summary>
     /// The namespace URI of the element, or null if the element is not in a namespace.
     /// </summary>
-    public string? NamespaceURI => htmlElementJS.Invoke<string?>("getNamespaceURI");
+    public string? NamespaceURI => htmlElementTask.Result.Invoke<string?>("getNamespaceURI");
 
     /// <summary>
     /// The namespace prefix of the specified element, or null if no prefix is specified.
     /// </summary>
-    public string? Prefix => htmlElementJS.Invoke<string?>("getPrefix");
+    public string? Prefix => htmlElementTask.Result.Invoke<string?>("getPrefix");
 
     /// <summary>
     /// <para>The absolute base URL of the document containing the node.</para>
@@ -1041,7 +846,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// 2. If it is an HTML Document and there is a &lt;Base&gt; element in the document, the href value of the first Base element with such an attribute is used instead.
     /// </para>
     /// </summary>
-    public string BaseURI => htmlElementJS.Invoke<string>("getBaseURI");
+    public string BaseURI => htmlElementTask.Result.Invoke<string>("getBaseURI");
 
     /// <summary>
     /// <para>The tag name of the element on which it's called.</para>
@@ -1050,7 +855,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// Note: You can use the localName property to access the Element's local name — which for the case in the example is img (lowercase).
     /// </para>
     /// </summary>
-    public string TagName => htmlElementJS.Invoke<string>("getTagName");
+    public string TagName => htmlElementTask.Result.Invoke<string>("getTagName");
 
     /// <summary>
     /// <para>The name of the current node as a string.</para>
@@ -1067,7 +872,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// - Text: The string "#text"
     /// </para>
     /// </summary>
-    public string NodeName => htmlElementJS.Invoke<string>("getNodeName");
+    public string NodeName => htmlElementTask.Result.Invoke<string>("getNodeName");
 
     /// <summary>
     /// <para>An integer that identifies what the node is. It distinguishes different kind of nodes from each other, such as elements, text and comments.</para>
@@ -1090,7 +895,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// - 12: NOTATION_NODE
     /// </para>
     /// </summary>
-    public int NodeType => htmlElementJS.Invoke<int>("getNodeType");
+    public int NodeType => htmlElementTask.Result.Invoke<int>("getNodeType");
 
 
     // properties - Tree-nodes
@@ -1098,7 +903,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <summary>
     /// Returns the number of child elements of this element.
     /// </summary>
-    public int ChildElementCount => htmlElementJS.Invoke<int>("getChildElementCount");
+    public int ChildElementCount => htmlElementTask.Result.Invoke<int>("getChildElementCount");
 
     /// <summary>
     /// <para>Returns a live HTMLCollection which contains all of the child elements of the element upon which it was called.</para>
@@ -1106,7 +911,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     public IHTMLElementInProcess[] Children {
         get {
-            IJSInProcessObjectReference[] children = htmlElementJS.Invoke<IJSInProcessObjectReference[]>("getChildren");
+            IJSInProcessObjectReference[] children = htmlElementTask.Result.Invoke<IJSInProcessObjectReference[]>("getChildren");
 
             HTMLElementInProcess[] result = new HTMLElementInProcess[children.Length];
             for (int i = 0; i < result.Length; i++)
@@ -1121,7 +926,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     public IHTMLElementInProcess? FirstElementChild {
         get {
-            IJSInProcessObjectReference?[] singleReference = htmlElementJS.Invoke<IJSInProcessObjectReference?[]>("getFirstElementChild");
+            IJSInProcessObjectReference?[] singleReference = htmlElementTask.Result.Invoke<IJSInProcessObjectReference?[]>("getFirstElementChild");
             if (singleReference[0] is IJSInProcessObjectReference child)
                 return new HTMLElementInProcess(child);
             else
@@ -1135,7 +940,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     public IHTMLElementInProcess? LastElementChild {
         get {
-            IJSInProcessObjectReference?[] singleReference = htmlElementJS.Invoke<IJSInProcessObjectReference?[]>("getLastElementChild");
+            IJSInProcessObjectReference?[] singleReference = htmlElementTask.Result.Invoke<IJSInProcessObjectReference?[]>("getLastElementChild");
             if (singleReference[0] is IJSInProcessObjectReference child)
                 return new HTMLElementInProcess(child);
             else
@@ -1148,7 +953,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     public IHTMLElementInProcess? PreviousElementSibling {
         get {
-            IJSInProcessObjectReference?[] singleReference = htmlElementJS.Invoke<IJSInProcessObjectReference?[]>("getPreviousElementSibling");
+            IJSInProcessObjectReference?[] singleReference = htmlElementTask.Result.Invoke<IJSInProcessObjectReference?[]>("getPreviousElementSibling");
             if (singleReference[0] is IJSInProcessObjectReference sibling)
                 return new HTMLElementInProcess(sibling);
             else
@@ -1161,7 +966,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     public IHTMLElementInProcess? NextElementSibling {
         get {
-            IJSInProcessObjectReference?[] singleReference = htmlElementJS.Invoke<IJSInProcessObjectReference?[]>("getNextElementSibling");
+            IJSInProcessObjectReference?[] singleReference = htmlElementTask.Result.Invoke<IJSInProcessObjectReference?[]>("getNextElementSibling");
             if (singleReference[0] is IJSInProcessObjectReference sibling)
                 return new HTMLElementInProcess(sibling);
             else
@@ -1174,7 +979,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     public IHTMLElementInProcess? ParentElement {
         get {
-            IJSInProcessObjectReference?[] singleReference = htmlElementJS.Invoke<IJSInProcessObjectReference?[]>("getParentElement");
+            IJSInProcessObjectReference?[] singleReference = htmlElementTask.Result.Invoke<IJSInProcessObjectReference?[]>("getParentElement");
             if (singleReference[0] is IJSInProcessObjectReference parent)
                 return new HTMLElementInProcess(parent);
             else
@@ -1194,8 +999,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaAtomic {
-        get => htmlElementJS.Invoke<string>("getAriaAtomic");
-        set => htmlElementJS.InvokeVoid("setAriaAtomic", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaAtomic");
+        set => htmlElementTask.Result.InvokeVoid("setAriaAtomic", [value]);
     }
 
     /// <summary>
@@ -1209,8 +1014,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaAutoComplete {
-        get => htmlElementJS.Invoke<string>("getAriaAutoComplete");
-        set => htmlElementJS.InvokeVoid("setAriaAutoComplete", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaAutoComplete");
+        set => htmlElementTask.Result.InvokeVoid("setAriaAutoComplete", [value]);
     }
 
     /// <summary>
@@ -1219,8 +1024,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// The aria-braillelabel contains additional information about when the property should be set.
     /// </summary>
     public string? AriaBrailleLabel {
-        get => htmlElementJS.Invoke<string>("getAriaBrailleLabel");
-        set => htmlElementJS.InvokeVoid("setAriaBrailleLabel", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaBrailleLabel");
+        set => htmlElementTask.Result.InvokeVoid("setAriaBrailleLabel", [value]);
     }
 
     /// <summary>
@@ -1230,8 +1035,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// The aria-brailleroledescription contains additional information about when the property should be set.
     /// </summary>
     public string? AriaBrailleRoleDescription {
-        get => htmlElementJS.Invoke<string>("getAriaBrailleRoleDescription");
-        set => htmlElementJS.InvokeVoid("setAriaBrailleRoleDescription", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaBrailleRoleDescription");
+        set => htmlElementTask.Result.InvokeVoid("setAriaBrailleRoleDescription", [value]);
     }
 
     /// <summary>
@@ -1243,8 +1048,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaBusy {
-        get => htmlElementJS.Invoke<string>("getAriaBusy");
-        set => htmlElementJS.InvokeVoid("setAriaBusy", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaBusy");
+        set => htmlElementTask.Result.InvokeVoid("setAriaBusy", [value]);
     }
 
     /// <summary>
@@ -1258,8 +1063,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaChecked {
-        get => htmlElementJS.Invoke<string>("getAriaChecked");
-        set => htmlElementJS.InvokeVoid("setAriaChecked", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaChecked");
+        set => htmlElementTask.Result.InvokeVoid("setAriaChecked", [value]);
     }
 
     /// <summary>
@@ -1267,8 +1072,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Value is a string which contains an integer.</para>
     /// </summary>
     public string? AriaColCount {
-        get => htmlElementJS.Invoke<string>("getAriaColCount");
-        set => htmlElementJS.InvokeVoid("setAriaColCount", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaColCount");
+        set => htmlElementTask.Result.InvokeVoid("setAriaColCount", [value]);
     }
 
     /// <summary>
@@ -1276,16 +1081,16 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Value is a string which contains an integer.</para>
     /// </summary>
     public string? AriaColIndex {
-        get => htmlElementJS.Invoke<string>("getAriaColIndex");
-        set => htmlElementJS.InvokeVoid("setAriaColIndex", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaColIndex");
+        set => htmlElementTask.Result.InvokeVoid("setAriaColIndex", [value]);
     }
 
     /// <summary>
     /// Reflects the value of the aria-colindextext attribute, which defines a human readable text alternative of aria-colindex.
     /// </summary>
     public string? AriaColIndexText {
-        get => htmlElementJS.Invoke<string>("getAriaColIndexText");
-        set => htmlElementJS.InvokeVoid("setAriaColIndexText", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaColIndexText");
+        set => htmlElementTask.Result.InvokeVoid("setAriaColIndexText", [value]);
     }
 
     /// <summary>
@@ -1293,8 +1098,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Value is a string which contains an integer.</para>
     /// </summary>
     public string? AriaColSpan {
-        get => htmlElementJS.Invoke<string>("getAriaColSpan");
-        set => htmlElementJS.InvokeVoid("setAriaColSpan", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaColSpan");
+        set => htmlElementTask.Result.InvokeVoid("setAriaColSpan", [value]);
     }
 
     /// <summary>
@@ -1311,16 +1116,16 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaCurrent {
-        get => htmlElementJS.Invoke<string>("getAriaCurrent");
-        set => htmlElementJS.InvokeVoid("setAriaCurrent", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaCurrent");
+        set => htmlElementTask.Result.InvokeVoid("setAriaCurrent", [value]);
     }
 
     /// <summary>
     /// Reflects the value of the aria-description attribute, which defines a string value that describes or annotates the current element.
     /// </summary>
     public string? AriaDescription {
-        get => htmlElementJS.Invoke<string>("getAriaDescription");
-        set => htmlElementJS.InvokeVoid("setAriaDescription", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaDescription");
+        set => htmlElementTask.Result.InvokeVoid("setAriaDescription", [value]);
     }
 
     /// <summary>
@@ -1332,8 +1137,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaDisabled {
-        get => htmlElementJS.Invoke<string>("getAriaDisabled");
-        set => htmlElementJS.InvokeVoid("setAriaDisabled", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaDisabled");
+        set => htmlElementTask.Result.InvokeVoid("setAriaDisabled", [value]);
     }
 
     /// <summary>
@@ -1346,8 +1151,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaExpanded {
-        get => htmlElementJS.Invoke<string>("getAriaExpanded");
-        set => htmlElementJS.InvokeVoid("setAriaExpanded", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaExpanded");
+        set => htmlElementTask.Result.InvokeVoid("setAriaExpanded", [value]);
     }
 
     /// <summary>
@@ -1364,8 +1169,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaHasPopup {
-        get => htmlElementJS.Invoke<string>("getAriaHasPopup");
-        set => htmlElementJS.InvokeVoid("setAriaHasPopup", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaHasPopup");
+        set => htmlElementTask.Result.InvokeVoid("setAriaHasPopup", [value]);
     }
 
     /// <summary>
@@ -1378,8 +1183,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaHidden {
-        get => htmlElementJS.Invoke<string>("getAriaHidden");
-        set => htmlElementJS.InvokeVoid("setAriaHidden", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaHidden");
+        set => htmlElementTask.Result.InvokeVoid("setAriaHidden", [value]);
     }
 
     /// <summary>
@@ -1402,24 +1207,24 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaInvalid {
-        get => htmlElementJS.Invoke<string>("getAriaInvalid");
-        set => htmlElementJS.InvokeVoid("setAriaInvalid", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaInvalid");
+        set => htmlElementTask.Result.InvokeVoid("setAriaInvalid", [value]);
     }
 
     /// <summary>
     /// Reflects the value of the aria-keyshortcuts attribute, which indicates keyboard shortcuts that an author has implemented to activate or give focus to an element.
     /// </summary>
     public string? AriaKeyShortcuts {
-        get => htmlElementJS.Invoke<string>("getAriaKeyShortcuts");
-        set => htmlElementJS.InvokeVoid("setAriaKeyShortcuts", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaKeyShortcuts");
+        set => htmlElementTask.Result.InvokeVoid("setAriaKeyShortcuts", [value]);
     }
 
     /// <summary>
     /// Reflects the value of the aria-label attribute, which defines a string value that labels the current element.
     /// </summary>
     public string? AriaLabel {
-        get => htmlElementJS.Invoke<string>("getAriaLabel");
-        set => htmlElementJS.InvokeVoid("setAriaLabel", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaLabel");
+        set => htmlElementTask.Result.InvokeVoid("setAriaLabel", [value]);
     }
 
     /// <summary>
@@ -1428,8 +1233,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Value is a string containing an integer.</para>
     /// </summary>
     public string? AriaLevel {
-        get => htmlElementJS.Invoke<string>("getAriaLevel");
-        set => htmlElementJS.InvokeVoid("setAriaLevel", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaLevel");
+        set => htmlElementTask.Result.InvokeVoid("setAriaLevel", [value]);
     }
 
     /// <summary>
@@ -1445,8 +1250,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaLive {
-        get => htmlElementJS.Invoke<string>("getAriaLive");
-        set => htmlElementJS.InvokeVoid("setAriaLive", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaLive");
+        set => htmlElementTask.Result.InvokeVoid("setAriaLive", [value]);
     }
 
     /// <summary>
@@ -1461,8 +1266,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaModal {
-        get => htmlElementJS.Invoke<string>("getAriaModal");
-        set => htmlElementJS.InvokeVoid("setAriaModal", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaModal");
+        set => htmlElementTask.Result.InvokeVoid("setAriaModal", [value]);
     }
 
     /// <summary>
@@ -1475,8 +1280,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaMultiline {
-        get => htmlElementJS.Invoke<string>("getAriaMultiline");
-        set => htmlElementJS.InvokeVoid("setAriaMultiline", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaMultiline");
+        set => htmlElementTask.Result.InvokeVoid("setAriaMultiline", [value]);
     }
 
     /// <summary>
@@ -1489,8 +1294,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaMultiSelectable {
-        get => htmlElementJS.Invoke<string>("getAriaMultiSelectable");
-        set => htmlElementJS.InvokeVoid("setAriaMultiSelectable", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaMultiSelectable");
+        set => htmlElementTask.Result.InvokeVoid("setAriaMultiSelectable", [value]);
     }
 
     /// <summary>
@@ -1503,8 +1308,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaOrientation {
-        get => htmlElementJS.Invoke<string>("getAriaOrientation");
-        set => htmlElementJS.InvokeVoid("setAriaOrientation", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaOrientation");
+        set => htmlElementTask.Result.InvokeVoid("setAriaOrientation", [value]);
     }
 
     /// <summary>
@@ -1512,8 +1317,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Note: Where possible use an HTML &lt;input&gt; element with type="text" or a &lt;textarea&gt; as these have built in semantics and do not require ARIA attributes.</para>
     /// </summary>
     public string? AriaPlaceholder {
-        get => htmlElementJS.Invoke<string>("getAriaPlaceholder");
-        set => htmlElementJS.InvokeVoid("setAriaPlaceholder", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaPlaceholder");
+        set => htmlElementTask.Result.InvokeVoid("setAriaPlaceholder", [value]);
     }
 
     /// <summary>
@@ -1521,8 +1326,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Value is a string containing an integer.</para>
     /// </summary>
     public string? AriaPosInSet {
-        get => htmlElementJS.Invoke<string>("getAriaPosInSet");
-        set => htmlElementJS.InvokeVoid("setAriaPosInSet", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaPosInSet");
+        set => htmlElementTask.Result.InvokeVoid("setAriaPosInSet", [value]);
     }
 
     /// <summary>
@@ -1537,8 +1342,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaPressed {
-        get => htmlElementJS.Invoke<string>("getAriaPressed");
-        set => htmlElementJS.InvokeVoid("setAriaPressed", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaPressed");
+        set => htmlElementTask.Result.InvokeVoid("setAriaPressed", [value]);
     }
 
     /// <summary>
@@ -1551,8 +1356,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaReadOnly {
-        get => htmlElementJS.Invoke<string>("getAriaReadOnly");
-        set => htmlElementJS.InvokeVoid("setAriaReadOnly", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaReadOnly");
+        set => htmlElementTask.Result.InvokeVoid("setAriaReadOnly", [value]);
     }
 
     /// <summary>
@@ -1565,16 +1370,16 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaRequired {
-        get => htmlElementJS.Invoke<string>("getAriaRequired");
-        set => htmlElementJS.InvokeVoid("setAriaRequired", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaRequired");
+        set => htmlElementTask.Result.InvokeVoid("setAriaRequired", [value]);
     }
 
     /// <summary>
     /// Rreflects the value of the aria-roledescription attribute, which defines a human-readable, author-localized description for the role of an element.
     /// </summary>
     public string? AriaRoleDescription {
-        get => htmlElementJS.Invoke<string>("getAriaRoleDescription");
-        set => htmlElementJS.InvokeVoid("setAriaRoleDescription", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaRoleDescription");
+        set => htmlElementTask.Result.InvokeVoid("setAriaRoleDescription", [value]);
     }
 
     /// <summary>
@@ -1582,8 +1387,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Value is a string which contains an integer.</para>
     /// </summary>
     public string? AriaRowCount {
-        get => htmlElementJS.Invoke<string>("getAriaRowCount");
-        set => htmlElementJS.InvokeVoid("setAriaRowCount", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaRowCount");
+        set => htmlElementTask.Result.InvokeVoid("setAriaRowCount", [value]);
     }
 
     /// <summary>
@@ -1591,16 +1396,16 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Value is a string which contains an integer.</para>
     /// </summary>
     public string? AriaRowIndex {
-        get => htmlElementJS.Invoke<string>("getAriaRowIndex");
-        set => htmlElementJS.InvokeVoid("setAriaRowIndex", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaRowIndex");
+        set => htmlElementTask.Result.InvokeVoid("setAriaRowIndex", [value]);
     }
 
     /// <summary>
     /// Reflects the value of the aria-rowindextext attribute, which defines a human readable text alternative of aria-rowindex.
     /// </summary>
     public string? AriaRowIndexText {
-        get => htmlElementJS.Invoke<string>("getAriaRowIndexText");
-        set => htmlElementJS.InvokeVoid("setAriaRowIndexText", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaRowIndexText");
+        set => htmlElementTask.Result.InvokeVoid("setAriaRowIndexText", [value]);
     }
 
     /// <summary>
@@ -1608,8 +1413,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Value is a string which contains an integer.</para>
     /// </summary>
     public string? AriaRowSpan {
-        get => htmlElementJS.Invoke<string>("getAriaRowSpan");
-        set => htmlElementJS.InvokeVoid("setAriaRowSpan", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaRowSpan");
+        set => htmlElementTask.Result.InvokeVoid("setAriaRowSpan", [value]);
     }
 
     /// <summary>
@@ -1622,8 +1427,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaSelected {
-        get => htmlElementJS.Invoke<string>("getAriaSelected");
-        set => htmlElementJS.InvokeVoid("setAriaSelected", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaSelected");
+        set => htmlElementTask.Result.InvokeVoid("setAriaSelected", [value]);
     }
 
     /// <summary>
@@ -1631,8 +1436,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Value is a string containing an integer.</para>
     /// </summary>
     public string? AriaSetSize {
-        get => htmlElementJS.Invoke<string>("getAriaSetSize");
-        set => htmlElementJS.InvokeVoid("setAriaSetSize", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaSetSize");
+        set => htmlElementTask.Result.InvokeVoid("setAriaSetSize", [value]);
     }
 
     /// <summary>
@@ -1646,8 +1451,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     public string? AriaSort {
-        get => htmlElementJS.Invoke<string>("getAriaSort");
-        set => htmlElementJS.InvokeVoid("setAriaSort", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaSort");
+        set => htmlElementTask.Result.InvokeVoid("setAriaSort", [value]);
     }
 
     /// <summary>
@@ -1655,8 +1460,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Value is a string which contains a number.</para>
     /// </summary>
     public string? AriaValueMax {
-        get => htmlElementJS.Invoke<string>("getAriaValueMax");
-        set => htmlElementJS.InvokeVoid("setAriaValueMax", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaValueMax");
+        set => htmlElementTask.Result.InvokeVoid("setAriaValueMax", [value]);
     }
 
     /// <summary>
@@ -1664,8 +1469,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Value is a string which contains a number.</para>
     /// </summary>
     public string? AriaValueMin {
-        get => htmlElementJS.Invoke<string>("getAriaValueMin");
-        set => htmlElementJS.InvokeVoid("setAriaValueMin", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaValueMin");
+        set => htmlElementTask.Result.InvokeVoid("setAriaValueMin", [value]);
     }
 
     /// <summary>
@@ -1673,16 +1478,16 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Value is a string which contains a number.</para>
     /// </summary>
     public string? AriaValueNow {
-        get => htmlElementJS.Invoke<string>("getAriaValueNow");
-        set => htmlElementJS.InvokeVoid("setAriaValueNow", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaValueNow");
+        set => htmlElementTask.Result.InvokeVoid("setAriaValueNow", [value]);
     }
 
     /// <summary>
     /// Reflects the value of the aria-valuetext attribute, which defines the human-readable text alternative of aria-valuenow for a range widget.
     /// </summary>
     public string? AriaValueText {
-        get => htmlElementJS.Invoke<string>("getAriaValueText");
-        set => htmlElementJS.InvokeVoid("setAriaValueText", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getAriaValueText");
+        set => htmlElementTask.Result.InvokeVoid("setAriaValueText", [value]);
     }
 
     /// <summary>
@@ -1697,8 +1502,8 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>The full list of defined ARIA roles can be found on the <see href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles">ARIA roles</see> reference page.</para>
     /// </summary>
     public string? Role {
-        get => htmlElementJS.Invoke<string>("getRole");
-        set => htmlElementJS.InvokeVoid("setRole", [value]);
+        get => htmlElementTask.Result.Invoke<string>("getRole");
+        set => htmlElementTask.Result.InvokeVoid("setRole", [value]);
     }
 
 
@@ -1721,13 +1526,13 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <param name="visibilityProperty">true to check if the element is invisible due to the value of its visibility property. false by default.</param>
     /// <returns></returns>
     public bool CheckVisibility(bool contentVisibilityAuto = false, bool opacityProperty = false, bool visibilityProperty = false)
-        => htmlElementJS.Invoke<bool>("checkVisibility", [contentVisibilityAuto, opacityProperty, visibilityProperty]);
+        => htmlElementTask.Result.Invoke<bool>("checkVisibility", [contentVisibilityAuto, opacityProperty, visibilityProperty]);
 
     /// <summary>
     /// Returns a StylePropertyMapReadOnly interface which provides a read-only representation of a CSS declaration block that is an alternative to CSSStyleDeclaration.
     /// </summary>
     /// <returns></returns>
-    public Dictionary<string, string> ComputedStyleMap() => htmlElementJS.Invoke<Dictionary<string, string>>("computedStyleMap");
+    public Dictionary<string, string> ComputedStyleMap() => htmlElementTask.Result.Invoke<Dictionary<string, string>>("computedStyleMap");
 
     /// <summary>
     /// Returns a DOMRect object providing information about the size of an element and its position relative to the viewport.
@@ -1758,7 +1563,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// (these can be obtained using window.scrollY and window.scrollX) to get a bounding rectangle which is independent from the current scrolling position.
     /// </para>
     /// </returns>
-    public DOMRect GetBoundingClientRect() => htmlElementJS.Invoke<DOMRect>("getBoundingClientRect");
+    public DOMRect GetBoundingClientRect() => htmlElementTask.Result.Invoke<DOMRect>("getBoundingClientRect");
 
     /// <summary>
     /// <para>Returns a collection of DOMRect objects that indicate the bounding rectangles for each CSS border box in a client.</para>
@@ -1778,14 +1583,14 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <para>Rectangles are returned even for CSS boxes that have empty border-boxes.The left, top, right, and bottom coordinates can still be meaningful.</para>
     /// <para>Fractional pixel offsets are possible.</para>
     /// </returns>
-    public DOMRect[] GetClientRects() => htmlElementJS.Invoke<DOMRect[]>("getClientRects");
+    public DOMRect[] GetClientRects() => htmlElementTask.Result.Invoke<DOMRect[]>("getClientRects");
 
     /// <summary>
     /// Tests whether the element would be selected by the specified CSS selector.
     /// </summary>
     /// <param name="selectors">A string containing valid CSS selectors to test the Element against.</param>
     /// <returns></returns>
-    public bool Matches(string selectors) => htmlElementJS.Invoke<bool>("matches", [selectors]);
+    public bool Matches(string selectors) => htmlElementTask.Result.Invoke<bool>("matches", [selectors]);
 
     // public async ValueTask RequestFullscreen(...)  is in HTMLElementBase
 
@@ -1796,7 +1601,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     /// <param name="namespaceURI">A string representing the namespace against which the element will be checked.</param>
     /// <returns></returns>
-    public bool IsDefaultNamespace(string? namespaceURI) => htmlElementJS.Invoke<bool>("isDefaultNamespace", [namespaceURI]);
+    public bool IsDefaultNamespace(string? namespaceURI) => htmlElementTask.Result.Invoke<bool>("isDefaultNamespace", [namespaceURI]);
 
     /// <summary>
     /// <para>Returns a string containing the prefix for a given namespace URI, if present, and null if not. When multiple prefixes are possible, the first prefix is returned.</para>
@@ -1804,7 +1609,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     /// <param name="namespace">A string containing the namespace to look the prefix up.</param>
     /// <returns></returns>
-    public string? LookupPrefix(string? @namespace) => htmlElementJS.Invoke<string?>("lookupPrefix", [@namespace]);
+    public string? LookupPrefix(string? @namespace) => htmlElementTask.Result.Invoke<string?>("lookupPrefix", [@namespace]);
 
     /// <summary>
     /// <para>
@@ -1822,13 +1627,13 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     /// <param name="prefix">The prefix to look for.</param>
     /// <returns></returns>
-    public string? LookupNamespaceURI(string? prefix) => htmlElementJS.Invoke<string?>("lookupNamespaceURI", [prefix]);
+    public string? LookupNamespaceURI(string? prefix) => htmlElementTask.Result.Invoke<string?>("lookupNamespaceURI", [prefix]);
 
     /// <summary>
     /// Puts the specified node and all of its sub-tree into a normalized form. In a normalized sub-tree, no text nodes in the sub-tree are empty and there are no adjacent text nodes.
     /// </summary>
     /// <returns></returns>
-    public void Normalize() => htmlElementJS.InvokeVoid("normalize");
+    public void Normalize() => htmlElementTask.Result.InvokeVoid("normalize");
 
 
     // methods - Pointer Capture
@@ -1850,21 +1655,21 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     /// <param name="pointerId">The pointerId of a PointerEvent object.</param>
-    public void SetPointerCapture(long pointerId) => htmlElementJS.InvokeVoid("setPointerCapture", [pointerId]);
+    public void SetPointerCapture(long pointerId) => htmlElementTask.Result.InvokeVoid("setPointerCapture", [pointerId]);
 
     /// <summary>
     /// <para>Releases (stops) pointer capture that was previously set for a specific (PointerEvent) pointer.</para>
     /// <para>See the <see cref="SetPointerCapture(long)"/> method for a description of pointer capture and how to set it for a particular element.</para>
     /// </summary>
     /// <param name="pointerId">The pointerId of a PointerEvent object.</param>
-    public void ReleasePointerCapture(long pointerId) => htmlElementJS.InvokeVoid("releasePointerCapture", [pointerId]);
+    public void ReleasePointerCapture(long pointerId) => htmlElementTask.Result.InvokeVoid("releasePointerCapture", [pointerId]);
 
     /// <summary>
     /// Checks whether the element on which it is invoked has pointer capture for the pointer identified by the given pointer ID.
     /// </summary>
     /// <param name="pointerId">The pointerId of a PointerEvent object.</param>
     /// <returns></returns>
-    public bool HasPointerCapture(long pointerId) => htmlElementJS.Invoke<bool>("hasPointerCapture", [pointerId]);
+    public bool HasPointerCapture(long pointerId) => htmlElementTask.Result.Invoke<bool>("hasPointerCapture", [pointerId]);
 
 
     // methods - Scroll
@@ -1880,7 +1685,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// - "instant": scrolling should happen instantly in a single jump<br />
     /// - "auto": scroll behavior is determined by the computed value of scroll-behavior
     /// </param>
-    public void Scroll(int left, int top, string? behavior = null) => htmlElementJS.InvokeVoid("scroll", [left, top, behavior]);
+    public void Scroll(int left, int top, string? behavior = null) => htmlElementTask.Result.InvokeVoid("scroll", [left, top, behavior]);
 
     /// <summary>
     /// Scrolls to a particular set of coordinates inside a given element.
@@ -1893,7 +1698,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// - "instant": scrolling should happen instantly in a single jump<br />
     /// - "auto": scroll behavior is determined by the computed value of scroll-behavior
     /// </param>
-    public void ScrollTo(int left, int top, string? behavior = null) => htmlElementJS.InvokeVoid("scrollTo", [left, top, behavior]);
+    public void ScrollTo(int left, int top, string? behavior = null) => htmlElementTask.Result.InvokeVoid("scrollTo", [left, top, behavior]);
 
     /// <summary>
     /// Scrolls an element by the given amount.
@@ -1906,7 +1711,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// - "instant": scrolling should happen instantly in a single jump<br />
     /// - "auto": scroll behavior is determined by the computed value of scroll-behavior
     /// </param>
-    public void ScrollBy(int deltaX, int deltaY, string? behavior = null) => htmlElementJS.InvokeVoid("scrollBy", [deltaX, deltaY, behavior]);
+    public void ScrollBy(int deltaX, int deltaY, string? behavior = null) => htmlElementTask.Result.InvokeVoid("scrollBy", [deltaX, deltaY, behavior]);
 
     /// <summary>
     /// Scrolls the element's ancestor containers such that the element on which <i>scrollIntoView()</i> is called is visible to the user.
@@ -1920,7 +1725,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// - "auto": scroll behavior is determined by the computed value of scroll-behavior<br />
     /// Defaults to "auto".
     /// </param>
-    public void ScrollIntoView(string block = "start", string inline = "nearest", string behavior = "auto") => htmlElementJS.InvokeVoid("scrollIntoView", [block, inline, behavior]);
+    public void ScrollIntoView(string block = "start", string inline = "nearest", string behavior = "auto") => htmlElementTask.Result.InvokeVoid("scrollIntoView", [block, inline, behavior]);
 
 
     // methods - Attribute
@@ -1930,7 +1735,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     /// <param name="qualifiedName">The name of the attribute whose value you want to get.</param>
     /// <returns></returns>
-    public string? GetAttribute(string qualifiedName) => htmlElementJS.Invoke<string?>("getAttribute", [qualifiedName]);
+    public string? GetAttribute(string qualifiedName) => htmlElementTask.Result.Invoke<string?>("getAttribute", [qualifiedName]);
 
     /// <summary>
     /// <para>
@@ -1946,7 +1751,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <param name="namespace">The namespace in which to look for the specified attribute.</param>
     /// <param name="qualifiedName">The name of the attribute to look for.</param>
     /// <returns></returns>
-    public string? GetAttributeNS(string @namespace, string qualifiedName) => htmlElementJS.Invoke<string?>("getAttributeNS", [@namespace, qualifiedName]);
+    public string? GetAttributeNS(string @namespace, string qualifiedName) => htmlElementTask.Result.Invoke<string?>("getAttributeNS", [@namespace, qualifiedName]);
 
     /// <summary>
     /// <para>Returns the attribute names of the element as an Array of strings. If the element has no attributes it returns an empty array.</para>
@@ -1958,7 +1763,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </para>
     /// </summary>
     /// <returns></returns>
-    public string[] GetAttributeNames() => htmlElementJS.Invoke<string[]>("getAttributeNames");
+    public string[] GetAttributeNames() => htmlElementTask.Result.Invoke<string[]>("getAttributeNames");
 
     /// <summary>
     /// <para>Sets the value of an attribute on the specified element. If the attribute already exists, the value is updated; otherwise a new attribute is added with the specified name and value.</para>
@@ -1976,7 +1781,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </param>
     /// <param name="value">A string containing the value to assign to the attribute. Any non-string value specified is converted automatically into a string.</param>
     /// <returns></returns>
-    public void SetAttribute(string qualifiedName, string value) => htmlElementJS.InvokeVoid("setAttribute", [qualifiedName, value]);
+    public void SetAttribute(string qualifiedName, string value) => htmlElementTask.Result.InvokeVoid("setAttribute", [qualifiedName, value]);
 
     /// <summary>
     /// <para>Adds a new attribute or changes the value of an attribute with the given namespace and name.</para>
@@ -1986,7 +1791,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <param name="qualifiedName">A string identifying the attribute by its qualified name; that is, a namespace prefix followed by a colon followed by a local name.</param>
     /// <param name="value">The desired string value of the new attribute.</param>
     /// <returns></returns>
-    public void SetAttributeNS(string @namespace, string qualifiedName, string value) => htmlElementJS.InvokeVoid("setAttributeNS", [@namespace, qualifiedName, value]);
+    public void SetAttributeNS(string @namespace, string qualifiedName, string value) => htmlElementTask.Result.InvokeVoid("setAttributeNS", [@namespace, qualifiedName, value]);
 
     /// <summary>
     /// Toggles a Boolean attribute (removing it if it is present and adding it if it is not present) on the given element.
@@ -2002,14 +1807,14 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// - if false, the toggleAttribute method removes the attribute named name
     /// </param>
     /// <returns></returns>
-    public bool ToggleAttribute(string qualifiedName, bool? force = null) => htmlElementJS.Invoke<bool>("toggleAttribute", [qualifiedName, force]);
+    public bool ToggleAttribute(string qualifiedName, bool? force = null) => htmlElementTask.Result.Invoke<bool>("toggleAttribute", [qualifiedName, force]);
 
     /// <summary>
     /// Removes the attribute with the specified name from the element.
     /// </summary>
     /// <param name="qualifiedName">A string specifying the name of the attribute to remove from the element. If the specified attribute does not exist, removeAttribute() returns without generating an error.</param>
     /// <returns></returns>
-    public void RemoveAttribute(string qualifiedName) => htmlElementJS.InvokeVoid("removeAttribute", [qualifiedName]);
+    public void RemoveAttribute(string qualifiedName) => htmlElementTask.Result.InvokeVoid("removeAttribute", [qualifiedName]);
 
     /// <summary>
     /// <para>Removes the specified attribute with the specified namespace from an element.</para>
@@ -2018,14 +1823,14 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <param name="namespace">A string that contains the namespace of the attribute.</param>
     /// <param name="qualifiedName">A string that names the attribute to be removed from the current node.</param>
     /// <returns></returns>
-    public void RemoveAttributeNS(string @namespace, string qualifiedName) => htmlElementJS.InvokeVoid("removeAttributeNS", [@namespace, qualifiedName]);
+    public void RemoveAttributeNS(string @namespace, string qualifiedName) => htmlElementTask.Result.InvokeVoid("removeAttributeNS", [@namespace, qualifiedName]);
 
     /// <summary>
     /// Returns a Boolean value indicating whether the specified element has the specified attribute or not.
     /// </summary>
     /// <param name="name">A string representing the name of the attribute.</param>
     /// <returns></returns>
-    public bool HasAttribute(string name) => htmlElementJS.Invoke<bool>("hasAttribute", [name]);
+    public bool HasAttribute(string name) => htmlElementTask.Result.Invoke<bool>("hasAttribute", [name]);
 
     /// <summary>
     /// <para>Returns a boolean value indicating whether the current element has the specified attribute with the specified namespace.</para>
@@ -2034,13 +1839,13 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <param name="namespace">A string specifying the namespace of the attribute.</param>
     /// <param name="qualifiedName">The name of the attribute.</param>
     /// <returns></returns>
-    public bool HasAttributeNS(string @namespace, string qualifiedName) => htmlElementJS.Invoke<bool>("hasAttributeNS", [@namespace, qualifiedName]);
+    public bool HasAttributeNS(string @namespace, string qualifiedName) => htmlElementTask.Result.Invoke<bool>("hasAttributeNS", [@namespace, qualifiedName]);
 
     /// <summary>
     /// Returns a boolean value indicating whether the current element has any attributes or not.
     /// </summary>
     /// <returns></returns>
-    public bool HasAttributes() => htmlElementJS.Invoke<bool>("hasAttributes");
+    public bool HasAttributes() => htmlElementTask.Result.Invoke<bool>("hasAttributes");
 
 
     // methods - Tree-nodes
@@ -2052,7 +1857,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <param name="className">A string containing one or more class names to match on, separated by whitespace.</param>
     /// <returns></returns>
     public IHTMLElementInProcess[] GetElementsByClassName(string className) {
-        IJSInProcessObjectReference[] htmlElements = htmlElementJS.Invoke<IJSInProcessObjectReference[]>("getElementsByClassName", [className]);
+        IJSInProcessObjectReference[] htmlElements = htmlElementTask.Result.Invoke<IJSInProcessObjectReference[]>("getElementsByClassName", [className]);
 
         HTMLElementInProcess[] result = new HTMLElementInProcess[htmlElements.Length];
         for (int i = 0; i < result.Length; i++)
@@ -2072,7 +1877,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <param name="qualifiedName">The qualified name to look for. The special string "*" represents all elements. For compatibility with XHTML, lower-case should be used.</param>
     /// <returns></returns>
     public IHTMLElementInProcess[] GetElementsByTagName(string qualifiedName) {
-        IJSInProcessObjectReference[] htmlElements = htmlElementJS.Invoke<IJSInProcessObjectReference[]>("getElementsByTagName", [qualifiedName]);
+        IJSInProcessObjectReference[] htmlElements = htmlElementTask.Result.Invoke<IJSInProcessObjectReference[]>("getElementsByTagName", [qualifiedName]);
 
         HTMLElementInProcess[] result = new HTMLElementInProcess[htmlElements.Length];
         for (int i = 0; i < result.Length; i++)
@@ -2091,7 +1896,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <param name="qualifiedName">Either the local name of elements to look for or the special value "*", which matches all elements (see Element.localName and Attr.localName).</param>
     /// <returns></returns>
     public IHTMLElementInProcess[] GetElementsByTagNameNS(string @namespace, string qualifiedName) {
-        IJSInProcessObjectReference[] htmlElements = htmlElementJS.Invoke<IJSInProcessObjectReference[]>("getElementsByTagNameNS", [@namespace, qualifiedName]);
+        IJSInProcessObjectReference[] htmlElements = htmlElementTask.Result.Invoke<IJSInProcessObjectReference[]>("getElementsByTagNameNS", [@namespace, qualifiedName]);
 
         HTMLElementInProcess[] result = new HTMLElementInProcess[htmlElements.Length];
         for (int i = 0; i < result.Length; i++)
@@ -2112,7 +1917,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </param>
     /// <returns></returns>
     public IHTMLElementInProcess? QuerySelector(string selectors) {
-        IJSInProcessObjectReference?[] singleReference = htmlElementJS.Invoke<IJSInProcessObjectReference[]>("querySelector", [selectors]);
+        IJSInProcessObjectReference?[] singleReference = htmlElementTask.Result.Invoke<IJSInProcessObjectReference[]>("querySelector", [selectors]);
         if (singleReference[0] is IJSInProcessObjectReference htmlElement)
             return new HTMLElementInProcess(htmlElement);
         else
@@ -2138,7 +1943,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </param>
     /// <returns></returns>
     public IHTMLElementInProcess[] QuerySelectorAll(string selectors) {
-        IJSInProcessObjectReference[] htmlElements = htmlElementJS.Invoke<IJSInProcessObjectReference[]>("querySelectorAll", [selectors]);
+        IJSInProcessObjectReference[] htmlElements = htmlElementTask.Result.Invoke<IJSInProcessObjectReference[]>("querySelectorAll", [selectors]);
 
         HTMLElementInProcess[] result = new HTMLElementInProcess[htmlElements.Length];
         for (int i = 0; i < result.Length; i++)
@@ -2152,7 +1957,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <param name="selectors">A string of valid CSS selectors to match the Element and its ancestors against.</param>
     /// <returns></returns>
     public IHTMLElementInProcess? Closest(string selectors) {
-        IJSInProcessObjectReference?[] singleReference = htmlElementJS.Invoke<IJSInProcessObjectReference?[]>("closest", [selectors]);
+        IJSInProcessObjectReference?[] singleReference = htmlElementTask.Result.Invoke<IJSInProcessObjectReference?[]>("closest", [selectors]);
         if (singleReference[0] is IJSInProcessObjectReference closest)
             return new HTMLElementInProcess(closest);
         else
@@ -2165,7 +1970,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     /// <param name="nodes">A set of strings to insert.</param>
     /// <returns></returns>
-    public void Before(string[] nodes) => htmlElementJS.InvokeVoid("before_string", [nodes]);
+    public void Before(string[] nodes) => htmlElementTask.Result.InvokeVoid("before_string", [nodes]);
 
     /// <summary>
     /// Inserts a set of Node objects in the children list of this Element's parent, just before this Element.
@@ -2177,7 +1982,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
         for (int i = 0; i < nodesJS.Length; i++)
             nodesJS[i] = nodes[i].HTMLElement;
 
-        htmlElementJS.InvokeVoid("before_htmlElement", [nodesJS]);
+        htmlElementTask.Result.InvokeVoid("before_htmlElement", [nodesJS]);
     }
 
     /// <summary>
@@ -2185,7 +1990,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     /// <param name="nodes">A set of strings to insert.</param>
     /// <returns></returns>
-    public void After(string[] nodes) => htmlElementJS.InvokeVoid("after_string", [nodes]);
+    public void After(string[] nodes) => htmlElementTask.Result.InvokeVoid("after_string", [nodes]);
 
     /// <summary>
     /// Inserts a set of Node objects in the children list of the Element's parent, just after the Element.
@@ -2197,7 +2002,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
         for (int i = 0; i < nodesJS.Length; i++)
             nodesJS[i] = nodes[i].HTMLElement;
 
-        htmlElementJS.InvokeVoid("after_htmlElement", [nodesJS]);
+        htmlElementTask.Result.InvokeVoid("after_htmlElement", [nodesJS]);
     }
 
 
@@ -2206,7 +2011,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     /// <param name="nodes">A set of strings to insert.</param>
     /// <returns></returns>
-    public void Prepend(string[] nodes) => htmlElementJS.InvokeVoid("prepend_string", [nodes]);
+    public void Prepend(string[] nodes) => htmlElementTask.Result.InvokeVoid("prepend_string", [nodes]);
 
     /// <summary>
     /// Inserts a set of Node objects before the first child of the Element.
@@ -2218,7 +2023,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
         for (int i = 0; i < nodesJS.Length; i++)
             nodesJS[i] = nodes[i].HTMLElement;
 
-        htmlElementJS.InvokeVoid("prepend_htmlElement", [nodesJS]);
+        htmlElementTask.Result.InvokeVoid("prepend_htmlElement", [nodesJS]);
     }
 
     /// <summary>
@@ -2230,14 +2035,14 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     /// <param name="node">The node to append to the given parent node</param>
     /// <returns></returns>
-    public void AppendChild(IHTMLElementInProcess node) => htmlElementJS.InvokeVoid("appendChild", [node.HTMLElement]);
+    public void AppendChild(IHTMLElementInProcess node) => htmlElementTask.Result.InvokeVoid("appendChild", [node.HTMLElement]);
 
     /// <summary>
     /// Inserts a set of strings after the last child of the Element. Strings are inserted as equivalent Text nodes.
     /// </summary>
     /// <param name="nodes">A set of strings to insert.</param>
     /// <returns></returns>
-    public void Append(string[] nodes) => htmlElementJS.InvokeVoid("append_string", [nodes]);
+    public void Append(string[] nodes) => htmlElementTask.Result.InvokeVoid("append_string", [nodes]);
 
     /// <summary>
     /// Inserts a set of Node objects after the last child of the Element.
@@ -2249,7 +2054,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
         for (int i = 0; i < nodesJS.Length; i++)
             nodesJS[i] = nodes[i].HTMLElement;
 
-        htmlElementJS.InvokeVoid("append_htmlElement", [nodesJS]);
+        htmlElementTask.Result.InvokeVoid("append_htmlElement", [nodesJS]);
     }
 
     /// <summary>
@@ -2264,7 +2069,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </param>
     /// <param name="htmlElement">The element to be inserted into the tree.</param>
     /// <returns>true if element was inserted, false if the insertion failed.</returns>
-    public bool InsertAdjacentElement(string position, IHTMLElementInProcess htmlElement) => htmlElementJS.Invoke<bool>("insertAdjacentElement", [position, htmlElement.HTMLElement]);
+    public bool InsertAdjacentElement(string position, IHTMLElementInProcess htmlElement) => htmlElementTask.Result.Invoke<bool>("insertAdjacentElement", [position, htmlElement.HTMLElement]);
 
     /// <summary>
     /// Parses the specified input as HTML or XML and inserts the resulting nodes into the DOM tree at a specified position.
@@ -2282,7 +2087,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </param>
     /// <param name="html">A TrustedHTML instance or string defining the HTML or XML to be parsed.</param>
     /// <returns></returns>
-    public void InsertAdjacentHTML(string position, string html) => htmlElementJS.InvokeVoid("insertAdjacentHTML", [position, html]);
+    public void InsertAdjacentHTML(string position, string html) => htmlElementTask.Result.InvokeVoid("insertAdjacentHTML", [position, html]);
 
     /// <summary>
     /// Given a relative position and a string, inserts a new text node at the given position relative to the element it is called from.
@@ -2296,7 +2101,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </param>
     /// <param name="data">A string from which to create a new text node to insert at the given position where relative to the element the method is called from.</param>
     /// <returns></returns>
-    public void InsertAdjacentText(string position, string data) => htmlElementJS.InvokeVoid("insertAdjacentText", [position, data]);
+    public void InsertAdjacentText(string position, string data) => htmlElementTask.Result.InvokeVoid("insertAdjacentText", [position, data]);
 
 
     /// <summary>
@@ -2308,14 +2113,14 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </remarks>
     /// <param name="node">A Node that is the child node to be removed from the DOM.</param>
     /// <returns></returns>
-    public void RemoveChild(IHTMLElementInProcess node) => htmlElementJS.InvokeVoid("removeChild", [node.HTMLElement]);
+    public void RemoveChild(IHTMLElementInProcess node) => htmlElementTask.Result.InvokeVoid("removeChild", [node.HTMLElement]);
 
     /// <summary>
     /// Removes the element from its parent node.
     /// If it has no parent node, calling remove() does nothing.
     /// </summary>
     /// <returns></returns>
-    public void Remove() => htmlElementJS.InvokeVoid("remove");
+    public void Remove() => htmlElementTask.Result.InvokeVoid("remove");
 
     /// <summary>
     /// Replaces a child node within the given (parent) node.
@@ -2329,7 +2134,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </param>
     /// <param name="oldChild">The child to be replaced.</param>
     /// <returns></returns>
-    public void ReplaceChild(IHTMLElementInProcess newChild, IHTMLElementInProcess oldChild) => htmlElementJS.InvokeVoid("replaceChild", [newChild.HTMLElement, oldChild.HTMLElement]);
+    public void ReplaceChild(IHTMLElementInProcess newChild, IHTMLElementInProcess oldChild) => htmlElementTask.Result.InvokeVoid("replaceChild", [newChild.HTMLElement, oldChild.HTMLElement]);
 
     /// <summary>
     /// Replaces a child node within the given (parent) node.
@@ -2340,14 +2145,14 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </param>
     /// <param name="oldChildIndex">The zero based index of the child to be replaced.</param>
     /// <returns></returns>
-    public void ReplaceChild(IHTMLElementInProcess newChild, int oldChildIndex) => htmlElementJS.InvokeVoid("replaceChildIndex", [newChild.HTMLElement, oldChildIndex]);
+    public void ReplaceChild(IHTMLElementInProcess newChild, int oldChildIndex) => htmlElementTask.Result.InvokeVoid("replaceChildIndex", [newChild.HTMLElement, oldChildIndex]);
 
     /// <summary>
     /// Replaces this Element in the children list of its parent with a set of strings. Strings are inserted as equivalent Text nodes.
     /// </summary>
     /// <param name="nodes">A set of strings to replace.</param>
     /// <returns></returns>
-    public void ReplaceWith(string[] nodes) => htmlElementJS.InvokeVoid("replaceWith_string", [nodes]);
+    public void ReplaceWith(string[] nodes) => htmlElementTask.Result.InvokeVoid("replaceWith_string", [nodes]);
 
     /// <summary>
     /// Replaces this Element in the children list of its parent with a set of Node objects.
@@ -2359,7 +2164,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
         for (int i = 0; i < nodesJS.Length; i++)
             nodesJS[i] = nodes[i].HTMLElement;
 
-        htmlElementJS.InvokeVoid("replaceWith_htmlElement", [nodesJS]);
+        htmlElementTask.Result.InvokeVoid("replaceWith_htmlElement", [nodesJS]);
     }
 
     /// <summary>
@@ -2368,7 +2173,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <remarks>It also provides a very convenient mechanism for emptying a node of all its children. You call it on the parent node with an empty array.</remarks>
     /// <param name="nodes">A set of strings to replace the Element's existing children with.</param>
     /// <returns></returns>
-    public void ReplaceChildren(string[] nodes) => htmlElementJS.InvokeVoid("replaceChildren_string", [nodes]);
+    public void ReplaceChildren(string[] nodes) => htmlElementTask.Result.InvokeVoid("replaceChildren_string", [nodes]);
 
     /// <summary>
     /// Replaces the existing children of a Node with a specified new set of children.
@@ -2381,7 +2186,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
         for (int i = 0; i < nodesJS.Length; i++)
             nodesJS[i] = nodes[i].HTMLElement;
 
-        htmlElementJS.InvokeVoid("replaceChildren_htmlElement", [nodesJS]);
+        htmlElementTask.Result.InvokeVoid("replaceChildren_htmlElement", [nodesJS]);
     }
 
 
@@ -2404,7 +2209,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </param>
     /// <returns></returns>
     public IHTMLElementInProcess CloneNode(bool deep = false) {
-        IJSInProcessObjectReference clonedElement = htmlElementJS.Invoke<IJSInProcessObjectReference>("cloneNode", [deep]);
+        IJSInProcessObjectReference clonedElement = htmlElementTask.Result.Invoke<IJSInProcessObjectReference>("cloneNode", [deep]);
         return new HTMLElementInProcess(clonedElement);
     }
 
@@ -2413,7 +2218,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     /// <param name="other">The Node to test against.</param>
     /// <returns></returns>
-    public bool IsSameNode(IHTMLElementInProcess other) => htmlElementJS.Invoke<bool>("isSameNode", [other.HTMLElement]);
+    public bool IsSameNode(IHTMLElementInProcess other) => htmlElementTask.Result.Invoke<bool>("isSameNode", [other.HTMLElement]);
 
     /// <summary>
     /// Tests whether two nodes are equal.
@@ -2422,7 +2227,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     /// <param name="other">The Node to compare equality with.</param>
     /// <returns></returns>
-    public bool IsEqualNode(IHTMLElementInProcess other) => htmlElementJS.Invoke<bool>("isEqualNode", [other.HTMLElement]);
+    public bool IsEqualNode(IHTMLElementInProcess other) => htmlElementTask.Result.Invoke<bool>("isEqualNode", [other.HTMLElement]);
 
     /// <summary>
     /// Returns a boolean value indicating whether a node is a descendant of a given node, that is the node itself, one of its direct children (childNodes), one of the children's direct children, and so on.
@@ -2430,7 +2235,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// <remarks>Note: A node is contained inside itself.</remarks>
     /// <param name="other">The Node to test with.</param>
     /// <returns></returns>
-    public bool Contains(IHTMLElementInProcess other) => htmlElementJS.Invoke<bool>("contains", [other.HTMLElement]);
+    public bool Contains(IHTMLElementInProcess other) => htmlElementTask.Result.Invoke<bool>("contains", [other.HTMLElement]);
 
     /// <summary>
     /// <para>Reports the position of its argument node relative to the node on which it is called.</para>
@@ -2451,7 +2256,7 @@ public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElement
     /// </summary>
     /// <param name="other">The Node for which position should be reported, relative to the node.</param>
     /// <returns></returns>
-    public int CompareDocumentPosition(IHTMLElementInProcess other) => htmlElementJS.Invoke<int>("compareDocumentPosition", [other.HTMLElement]);
+    public int CompareDocumentPosition(IHTMLElementInProcess other) => htmlElementTask.Result.Invoke<int>("compareDocumentPosition", [other.HTMLElement]);
 
     #endregion
 }

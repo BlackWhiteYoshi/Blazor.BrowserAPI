@@ -8,9 +8,9 @@ namespace BrowserAPI.Implementation;
 /// The <i>HTMLDialogElement</i> interface provides methods to manipulate &lt;dialog&gt; elements. It inherits properties and methods from the HTMLElement interface.
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="DisposeAsync"/> when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IHTMLDialogElementBase<IJSObjectReference>), typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class HTMLDialogElement(Task<IJSObjectReference> dialogTask) : HTMLDialogElementBase(dialogTask), IHTMLDialogElement {
+public sealed class HTMLDialogElement(Task<IJSObjectReference> dialogTask) : HTMLDialogElementBase<IJSObjectReference>(dialogTask), IHTMLDialogElement {
     /// <summary>
     /// Releases the JS instance for this dialog.
     /// </summary>

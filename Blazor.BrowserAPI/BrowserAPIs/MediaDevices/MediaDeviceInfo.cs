@@ -6,7 +6,7 @@ namespace BrowserAPI;
 /// contains information that describes a single media input or output device.
 /// </para>
 /// <para>
-/// The list of devices obtained by calling <see cref="IMediaDevices.EnumerateDevices">navigator.mediaDevices.enumerateDevices()</see>
+/// The list of devices obtained by calling <see cref="IMediaDevicesBase{IJSObjectReference, IMediaStream}.EnumerateDevices">navigator.mediaDevices.enumerateDevices()</see>
 /// is an array of MediaDeviceInfo objects, one per media device.
 /// </para>
 /// </summary>

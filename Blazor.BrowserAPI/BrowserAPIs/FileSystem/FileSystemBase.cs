@@ -1,13 +1,20 @@
 using AutoInterfaceAttributes;
 using Microsoft.JSInterop;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
-[AutoInterface(Namespace = "BrowserAPI", Name = "IFileSystem")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IFileSystemInProcess")]
-#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class FileSystemBase(IModuleManager moduleManager) {
-#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
+/// Base interface of <see cref="IFileSystem"/> and <see cref="IFileSystemInProcess"/>.<br/>
+/// It contains common functionality for both interfaces.<br/>
+/// It is not intended to use this interface directly.
+[AutoInterface(Namespace = "BrowserAPI")]
+[RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
+public abstract class FileSystemBase<TJSObjectReference, TDirectoryHandle, TFileHandle, TFile, TWritableFileStream>(IModuleManager moduleManager)
+    where TJSObjectReference : IJSObjectReference
+    where TDirectoryHandle : IDirectoryHandleBase<TJSObjectReference, TDirectoryHandle, TFileHandle, TFile, TWritableFileStream>
+    where TFileHandle : IFileHandleBase<TJSObjectReference, TFileHandle, TFile, TWritableFileStream>
+    where TFile : IFileBase<TJSObjectReference>
+    where TWritableFileStream : IWritableFileStreamBase<TJSObjectReference> {
     private protected IModuleManager moduleManager = moduleManager;
 
 
@@ -32,17 +39,132 @@ public abstract class FileSystemBase(IModuleManager moduleManager) {
         return result;
     }
 
-    private protected ValueTask<IJSObjectReference> ShowOpenFilePickerBase(string? id, PickerDialogStartIn startIn, bool excludeAcceptAllOption, (string description, (string MIMEtype, string[] fileExtensions)[] accept)[]? types, CancellationToken cancellationToken)
-        => moduleManager.InvokeAsync<IJSObjectReference>("FileSystemAPI.showOpenFilePicker", cancellationToken, [id, startIn.WellKnownDirectoryOrFileHandle, excludeAcceptAllOption, MapTypes(types)]);
+    /// <summary>
+    /// Shows a file picker that allows a user to select a file and returns a handle for the file.
+    /// </summary>
+    /// <remarks>
+    /// <para>When the user clicks on the cancel button or just closes the dialog picker, an Exception is thrown.</para>
+    /// <para>
+    /// This method sets the parameter <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/showOpenFilePicker#multiple">multiple</see> to false, so a single fileHandle is returned.
+    /// When multiple files should be selectable use the method <see cref="IFileSystemBase{TJSObjectReference, TDirectoryHandle, TFileHandle, TFile, TWritableFileStream}.ShowOpenFilePickerMultipleFiles"/>.
+    /// </para>
+    /// </remarks>
+    /// <exception cref="JSException"></exception>
+    /// <param name="id">By specifying an ID, the browser can remember different directories for different IDs. If the same ID is used for another picker, the picker opens in the same directory.</param>
+    /// <param name="startIn">A FileSystemHandle(<see cref="IFileHandle" />/<see cref="IFileHandleInProcess" />) or a well known directory ("desktop", "documents", "downloads", "music", "pictures", or "videos") to open the dialog in.</param>
+    /// <param name="excludeAcceptAllOption">A boolean value that defaults to false. By default the picker should include an option to not apply any file type filters (instigated with the type option below). Setting this option to true means that option is not available.</param>
+    /// <param name="types">
+    /// An Array of allowed file types to pick. Each item is an object with the following options:<br />
+    /// - description: An optional description of the category of files types allowed. Defaults to an empty string.<br />
+    /// - accept: An Object with the keys set to the MIME type and the values an Array of file extensions.<br />
+    /// e.g.
+    /// <code>
+    /// var types = [
+    ///     ("Images", [
+    ///         ("image/*", [".png", ".gif", ".jpeg", ".jpg"])
+    ///     ])
+    /// ];
+    /// </code>
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<TFileHandle> ShowOpenFilePicker(string? id = null, PickerDialogStartIn startIn = default, bool excludeAcceptAllOption = false, (string description, (string MIMEtype, string[] fileExtensions)[] accept)[]? types = null, CancellationToken cancellationToken = default) {
+        TJSObjectReference fileHandleJS = await moduleManager.InvokeAsync<TJSObjectReference>("FileSystemAPI.showOpenFilePicker", cancellationToken, [id, startIn.WellKnownDirectoryOrFileHandle, excludeAcceptAllOption, MapTypes(types)]);
+        if (typeof(TJSObjectReference) == typeof(IJSObjectReference))
+            return (TFileHandle)(IFileHandle)new FileHandle(fileHandleJS);
+        else
+            return (TFileHandle)(IFileHandleInProcess)new FileHandleInProcess((IJSInProcessObjectReference)fileHandleJS);
+    }
 
-    private protected ValueTask<IJSObjectReference[]> ShowOpenFilePickerMultipleFilesBase(string? id, PickerDialogStartIn startIn, bool excludeAcceptAllOption, (string description, (string MIMEtype, string[] fileExtensions)[] accept)[]? types, CancellationToken cancellationToken)
-        => moduleManager.InvokeAsync<IJSObjectReference[]>("FileSystemAPI.showOpenFilePickerMultipleFiles", cancellationToken, [id, startIn.WellKnownDirectoryOrFileHandle, excludeAcceptAllOption, MapTypes(types)]);
+    /// <summary>
+    /// Shows a file picker that allows a user to select a file or multiple files and returns a handle for the file(s).
+    /// </summary>
+    /// <remarks>
+    /// <para>When the user clicks on the cancel button or just closes the dialog picker, an Exception is thrown.</para>
+    /// <para>
+    /// This method sets the parameter <see href="https://developer.mozilla.org/en-US/docs/Web/API/Window/showOpenFilePicker#multiple">multiple</see> to true, so a multiple fileHandles can be returned.
+    /// When only a single file should be selectable use the method <see cref="IFileSystemBase{TJSObjectReference, TDirectoryHandle, TFileHandle, TFile, TWritableFileStream}.ShowOpenFilePicker"/>.
+    /// </para>
+    /// </remarks>
+    /// <exception cref="JSException"></exception>
+    /// <param name="id">By specifying an ID, the browser can remember different directories for different IDs. If the same ID is used for another picker, the picker opens in the same directory.</param>
+    /// <param name="startIn">A FileSystemHandle(<see cref="IFileHandle" />/<see cref="IFileHandleInProcess" />) or a well known directory ("desktop", "documents", "downloads", "music", "pictures", or "videos") to open the dialog in.</param>
+    /// <param name="excludeAcceptAllOption">A boolean value that defaults to false. By default the picker should include an option to not apply any file type filters (instigated with the type option below). Setting this option to true means that option is not available.</param>
+    /// <param name="types">
+    /// An Array of allowed file types to pick. Each item is an object with the following options:<br />
+    /// - description: An optional description of the category of files types allowed. Defaults to an empty string.<br />
+    /// - accept: An Object with the keys set to the MIME type and the values an Array of file extensions.<br />
+    /// e.g.
+    /// <code>
+    /// var types = [
+    ///     ("Images", [
+    ///         ("image/*", [".png", ".gif", ".jpeg", ".jpg"])
+    ///     ])
+    /// ];
+    /// </code>
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<TFileHandle[]> ShowOpenFilePickerMultipleFiles(string? id = null, PickerDialogStartIn startIn = default, bool excludeAcceptAllOption = false, (string description, (string MIMEtype, string[] fileExtensions)[] accept)[]? types = null, CancellationToken cancellationToken = default) {
+        TJSObjectReference[] fileHandleJSList = await moduleManager.InvokeAsync<TJSObjectReference[]>("FileSystemAPI.showOpenFilePickerMultipleFiles", cancellationToken, [id, startIn.WellKnownDirectoryOrFileHandle, excludeAcceptAllOption, MapTypes(types)]);
 
-    private protected ValueTask<IJSObjectReference> ShowSaveFilePickerBase(string? suggestedName, string? id, PickerDialogStartIn startIn, bool excludeAcceptAllOption, (string description, (string MIMEtype, string[] fileExtensions)[] accept)[]? types, CancellationToken cancellationToken)
-        => moduleManager.InvokeAsync<IJSObjectReference>("FileSystemAPI.showSaveFilePicker", cancellationToken, [suggestedName, id, startIn.WellKnownDirectoryOrFileHandle, excludeAcceptAllOption, MapTypes(types)]);
+        TFileHandle[] result = new TFileHandle[fileHandleJSList.Length];
+        for (int i = 0; i < result.Length; i++)
+            result[i] = typeof(TJSObjectReference) == typeof(IJSObjectReference)
+                ? (TFileHandle)(IFileHandle)new FileHandle(fileHandleJSList[i])
+                : (TFileHandle)(IFileHandleInProcess)new FileHandleInProcess((IJSInProcessObjectReference)fileHandleJSList[i]);
+        return result;
+    }
 
-    private protected ValueTask<IJSObjectReference> ShowDirectoryPickerBase(string mode, string? id, PickerDialogStartIn startIn, CancellationToken cancellationToken)
-        => moduleManager.InvokeAsync<IJSObjectReference>("FileSystemAPI.showDirectoryPicker", cancellationToken, [mode, id, startIn.WellKnownDirectoryOrFileHandle]);
+    /// <summary>
+    /// Shows a file picker that allows a user to save a file. Either by selecting an existing file, or entering a name for a new file.
+    /// </summary>
+    /// <remarks>When the user clicks on the cancel button or just closes the dialog picker, an Exception is thrown.</remarks>
+    /// <exception cref="JSException"></exception>
+    /// <param name="suggestedName">A String. The suggested file name.</param>
+    /// <param name="id">By specifying an ID, the browser can remember different directories for different IDs. If the same ID is used for another picker, the picker opens in the same directory.</param>
+    /// <param name="startIn">A FileSystemHandle(<see cref="IFileHandle" />/<see cref="IFileHandleInProcess" />) or a well known directory ("desktop", "documents", "downloads", "music", "pictures", or "videos") to open the dialog in.</param>
+    /// <param name="excludeAcceptAllOption">A boolean value that defaults to false. By default the picker should include an option to not apply any file type filters (instigated with the type option below). Setting this option to true means that option is not available.</param>
+    /// <param name="types">
+    /// An Array of allowed file types to pick. Each item is an object with the following options:<br />
+    /// - description: An optional description of the category of files types allowed. Defaults to an empty string.<br />
+    /// - accept: An Object with the keys set to the MIME type and the values an Array of file extensions.<br />
+    /// e.g.
+    /// <code>
+    /// var types = [
+    ///     ("Images", [
+    ///         ("image/*", [".png", ".gif", ".jpeg", ".jpg"])
+    ///     ])
+    /// ];
+    /// </code>
+    /// </param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<TFileHandle> ShowSaveFilePicker(string? suggestedName = null, string? id = null, PickerDialogStartIn startIn = default, bool excludeAcceptAllOption = false, (string description, (string MIMEtype, string[] fileExtensions)[] accept)[]? types = null, CancellationToken cancellationToken = default) {
+        TJSObjectReference fileHandleJS = await moduleManager.InvokeAsync<TJSObjectReference>("FileSystemAPI.showSaveFilePicker", cancellationToken, [suggestedName, id, startIn.WellKnownDirectoryOrFileHandle, excludeAcceptAllOption, MapTypes(types)]);
+        if (typeof(TJSObjectReference) == typeof(IJSObjectReference))
+            return (TFileHandle)(IFileHandle)new FileHandle(fileHandleJS);
+        else
+            return (TFileHandle)(IFileHandleInProcess)new FileHandleInProcess((IJSInProcessObjectReference)fileHandleJS);
+    }
+
+    /// <summary>
+    /// Displays a directory picker which allows the user to select a directory.
+    /// </summary>
+    /// <remarks>When the user clicks on the cancel button or just closes the dialog picker, an Exception is thrown.</remarks>
+    /// <exception cref="JSException"></exception>
+    /// <param name="mode">A string that defaults to "read" for read-only access or "readwrite" for read and write access to the directory.</param>
+    /// <param name="id">By specifying an ID, the browser can remember different directories for different IDs. If the same ID is used for another picker, the picker opens in the same directory.</param>
+    /// <param name="startIn">A FileSystemHandle(<see cref="IFileHandle" />/<see cref="IFileHandleInProcess" />) or a well known directory ("desktop", "documents", "downloads", "music", "pictures", or "videos") to open the dialog in.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<TDirectoryHandle> ShowDirectoryPicker(string mode = "read", string? id = null, PickerDialogStartIn startIn = default, CancellationToken cancellationToken = default) {
+        TJSObjectReference directoryHandleJS = await moduleManager.InvokeAsync<TJSObjectReference>("FileSystemAPI.showDirectoryPicker", cancellationToken, [mode, id, startIn.WellKnownDirectoryOrFileHandle]);
+        if (typeof(TJSObjectReference) == typeof(IJSObjectReference))
+            return (TDirectoryHandle)(IDirectoryHandle)new DirectoryHandle(directoryHandleJS);
+        else
+            return (TDirectoryHandle)(IDirectoryHandleInProcess)new DirectoryHandleInProcess((IJSInProcessObjectReference)directoryHandleJS);
+    }
 
 
     private readonly record struct Estimate(long? Usage, long? Quota);
@@ -74,6 +196,16 @@ public abstract class FileSystemBase(IModuleManager moduleManager) {
     /// <returns></returns>
     public ValueTask<bool> StorageManagerPersisted(CancellationToken cancellationToken = default) => moduleManager.InvokeAsync<bool>("FileSystemAPI.storageManagerPersisted", cancellationToken);
 
-    private protected ValueTask<IJSObjectReference> StorageManagerGetDirectoryBase(CancellationToken cancellationToken)
-        => moduleManager.InvokeAsync<IJSObjectReference>("FileSystemAPI.storageManagerGetDirectory", cancellationToken);
+    /// <summary>
+    /// Is used to obtain a reference to a FileSystemDirectoryHandle object allowing access to a directory and its contents, stored in the origin private file system (OPFS).
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async ValueTask<TDirectoryHandle> StorageManagerGetDirectory(CancellationToken cancellationToken = default) {
+        TJSObjectReference directoryHandleJS = await moduleManager.InvokeAsync<TJSObjectReference>("FileSystemAPI.storageManagerGetDirectory", cancellationToken);
+        if (typeof(TJSObjectReference) == typeof(IJSObjectReference))
+            return (TDirectoryHandle)(IDirectoryHandle)new DirectoryHandle(directoryHandleJS);
+        else
+            return (TDirectoryHandle)(IDirectoryHandleInProcess)new DirectoryHandleInProcess((IJSInProcessObjectReference)directoryHandleJS);
+    }
 }

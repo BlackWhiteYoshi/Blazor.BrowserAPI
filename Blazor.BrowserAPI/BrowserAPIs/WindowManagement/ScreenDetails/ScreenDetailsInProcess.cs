@@ -6,20 +6,18 @@ namespace BrowserAPI.Implementation;
 
 /// <summary>
 /// <para>The <i>ScreenDetails</i> interface of the Window Management API represents the details of all the screens available to the user's device.</para>
-/// <para>This information is accessed via the <see cref="IWindowManagementInProcess.GetScreenDetails">Window.getScreenDetails()</see> method.</para>
+/// <para>This information is accessed via the <see cref="IWindowManagementBase{IJSInProcessObjectReference, IScreenDetailsInProcess}.GetScreenDetails">Window.getScreenDetails()</see> method.</para>
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IScreenDetailsBase<IJSInProcessObjectReference>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class ScreenDetailsInProcess(IJSInProcessObjectReference screenDetailsJS) : ScreenDetailsBase(screenDetailsJS), IScreenDetailsInProcess {
-    private IJSInProcessObjectReference ScreenDetailsJS => (IJSInProcessObjectReference)base.screenDetailsJS;
-
+public sealed class ScreenDetailsInProcess(IJSInProcessObjectReference screenDetailsJS) : ScreenDetailsBase<IJSInProcessObjectReference>(screenDetailsJS), IScreenDetailsInProcess {
     /// <summary>
     /// Releases the JS instance for this ScreenDetails.
     /// </summary>
     public void Dispose() {
         DisposeEventTrigger();
-        ScreenDetailsJS.Dispose();
+        screenDetailsJS.Dispose();
     }
 
 
@@ -28,7 +26,7 @@ public sealed class ScreenDetailsInProcess(IJSInProcessObjectReference screenDet
     /// </summary>
     public IScreenDetailedInProcess CurrentScreen {
         get {
-            IJSInProcessObjectReference screenDetailedJS = ScreenDetailsJS.Invoke<IJSInProcessObjectReference>("getCurrentScreen");
+            IJSInProcessObjectReference screenDetailedJS = screenDetailsJS.Invoke<IJSInProcessObjectReference>("getCurrentScreen");
             return new ScreenDetailedInProcess(screenDetailedJS);
         }
     }
@@ -39,7 +37,7 @@ public sealed class ScreenDetailsInProcess(IJSInProcessObjectReference screenDet
     /// </summary>
     public IScreenDetailedInProcess[] Screens {
         get {
-            IJSInProcessObjectReference[] screenDetailedJSArray = ScreenDetailsJS.Invoke<IJSInProcessObjectReference[]>("getScreens");
+            IJSInProcessObjectReference[] screenDetailedJSArray = screenDetailsJS.Invoke<IJSInProcessObjectReference[]>("getScreens");
 
             ScreenDetailedInProcess[] result = new ScreenDetailedInProcess[screenDetailedJSArray.Length];
             for (int i = 0; i < result.Length; i++)

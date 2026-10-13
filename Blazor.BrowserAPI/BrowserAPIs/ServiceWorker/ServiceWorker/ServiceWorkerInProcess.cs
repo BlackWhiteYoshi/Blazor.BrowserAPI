@@ -9,17 +9,15 @@ namespace BrowserAPI.Implementation;
 /// Multiple browsing contexts (e.g. pages, workers, etc.) can be associated with the same service worker, each through a unique ServiceWorker object.
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="Dispose"/> when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IServiceWorkerBase<IJSInProcessObjectReference>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class ServiceWorkerInProcess(IJSInProcessObjectReference serviceWorkerJS) : ServiceWorkerBase(serviceWorkerJS), IServiceWorkerInProcess {
-    private IJSInProcessObjectReference ServiceWorkerJS => (IJSInProcessObjectReference)base.serviceWorkerJS;
-
+public sealed class ServiceWorkerInProcess(IJSInProcessObjectReference serviceWorkerJS) : ServiceWorkerBase<IJSInProcessObjectReference>(serviceWorkerJS), IServiceWorkerInProcess {
     /// <summary>
     /// Releases the JS instance for this service worker.
     /// </summary>
     public void Dispose() {
         DisposeEventTrigger();
-        ServiceWorkerJS.Dispose();
+        serviceWorkerJS.Dispose();
     }
 
 
@@ -27,13 +25,13 @@ public sealed class ServiceWorkerInProcess(IJSInProcessObjectReference serviceWo
     /// Returns the <i>ServiceWorker</i> serialized script URL defined as part of ServiceWorkerRegistration.
     /// The URL must be on the same origin as the document that registers the ServiceWorker.
     /// </summary>
-    public string ScriptUrl => ServiceWorkerJS.Invoke<string>("getScriptURL");
+    public string ScriptUrl => serviceWorkerJS.Invoke<string>("getScriptURL");
 
     /// <summary>
     /// Returns a string representing the current state of the service worker.
     /// It can be one of the following values: parsed, installing, installed, activating, activated, or redundant.
     /// </summary>
-    public string State => ServiceWorkerJS.Invoke<string>("getState");
+    public string State => serviceWorkerJS.Invoke<string>("getState");
 
     /// <summary>
     /// <para>
@@ -50,5 +48,5 @@ public sealed class ServiceWorkerInProcess(IJSInProcessObjectReference serviceWo
     /// <para>The object to deliver to the worker; this will be in the data field in the event delivered to the message event. This may be any JavaScript object handled by the structured clone algorithm.</para>
     /// <para>The message parameter is mandatory.If the data to be passed to the worker is unimportant, null or undefined must be passed explicitly.</para>
     /// </param>
-    public void PostMessage(object message) => ServiceWorkerJS.InvokeVoid("postMessage", [message]);
+    public void PostMessage(object message) => serviceWorkerJS.InvokeVoid("postMessage", [message]);
 }

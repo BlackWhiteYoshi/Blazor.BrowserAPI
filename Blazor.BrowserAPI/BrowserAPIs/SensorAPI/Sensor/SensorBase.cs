@@ -5,13 +5,13 @@ using System.Text.Json;
 
 namespace BrowserAPI.Implementation;
 
-[AutoInterface(Namespace = "BrowserAPI", Name = "ISensor")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "ISensorInProcess")]
+/// Base interface of <see cref="ISensor"/> and <see cref="ISensorInProcess"/>.<br/>
+/// It contains common functionality for both interfaces.<br/>
+/// It is not intended to use this interface directly.
+[AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class SensorBase(IJSObjectReference sensorJS) {
-#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected IJSObjectReference sensorJS = sensorJS;
+public abstract class SensorBase<TJSObjectReference>(TJSObjectReference sensorJS) where TJSObjectReference : IJSObjectReference {
+    private protected TJSObjectReference sensorJS = sensorJS;
 
 
     #region Events
@@ -19,7 +19,7 @@ public abstract class SensorBase(IJSObjectReference sensorJS) {
     [method: DynamicDependency(nameof(InvokeError))]
     [method: DynamicDependency(nameof(InvokeActivate))]
     [method: DynamicDependency(nameof(InvokeReading))]
-    private sealed class EventTrigger(SensorBase sensor) {
+    private sealed class EventTrigger(SensorBase<TJSObjectReference> sensor) {
         [JSInvokable] public void InvokeError(JsonElement errorEvent) => sensor._onError?.Invoke(errorEvent);
         [JSInvokable] public void InvokeActivate() => sensor._onActivate?.Invoke();
         [JSInvokable] public void InvokeReading() => sensor._onReading?.Invoke();

@@ -15,15 +15,15 @@ public sealed class MagnetometerInProcess(IJSInProcessObjectReference magnetomet
     /// <summary>
     /// Returns a double containing the magnetic field around the device's x axis.
     /// </summary>
-    public double X => SensorJS.Invoke<double>("getX");
+    public double X => sensorJS.Invoke<double>("getX");
 
     /// <summary>
     /// Returns a double containing the magnetic field around the device's y axis.
     /// </summary>
-    public double Y => SensorJS.Invoke<double>("getY");
+    public double Y => sensorJS.Invoke<double>("getY");
 
     /// <summary>
     /// Returns a double containing the magnetic field around the device's z axis.
     /// </summary>
-    public double Z => SensorJS.Invoke<double>("getZ");
+    public double Z => sensorJS.Invoke<double>("getZ");
 }

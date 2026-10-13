@@ -4,19 +4,19 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
-[AutoInterface(Namespace = "BrowserAPI", Name = "IPermissionStatus")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IPermissionStatusInProcess")]
+/// Base interface of <see cref="IPermissionStatus"/> and <see cref="IPermissionStatusInProcess"/>.<br/>
+/// It contains common functionality for both interfaces.<br/>
+/// It is not intended to use this interface directly.
+[AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class PermissionStatusBase(IJSObjectReference permissionStatusJS) {
-#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-    private protected IJSObjectReference permissionStatusJS = permissionStatusJS;
+public abstract class PermissionStatusBase<TJSObjectReference>(TJSObjectReference permissionStatusJS) where TJSObjectReference : IJSObjectReference {
+    private protected TJSObjectReference permissionStatusJS = permissionStatusJS;
 
 
     #region Events
 
     [method: DynamicDependency(nameof(InvokeChange))]
-    private sealed class EventTrigger(PermissionStatusBase permissionStatus) {
+    private sealed class EventTrigger(PermissionStatusBase<TJSObjectReference> permissionStatus) {
         [JSInvokable] public void InvokeChange() => permissionStatus._onChange?.Invoke();
     }
 

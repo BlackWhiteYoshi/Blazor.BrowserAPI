@@ -8,14 +8,14 @@ namespace BrowserAPI.Implementation;
 /// <para>The <i>Gamepad</i> interface of the Gamepad API defines an individual gamepad or other controller, allowing access to information such as button presses, axis positions, and id.</para>
 /// <para>
 /// A Gamepad object can be returned in one of two ways:
-/// via the gamepad property of the <see cref="IGamepadAPI.OnGamepadConnected">gamepadconnected</see> and <see cref="IGamepadAPI.OnGamepadDisconnected">gamepaddisconnected</see> events,
+/// via the gamepad property of the <see cref="IGamepadAPIBase{IJSObjectReference, IGamepad}.OnGamepadConnected">gamepadconnected</see> and <see cref="IGamepadAPIBase{IJSObjectReference, IGamepad}.OnGamepadDisconnected">gamepaddisconnected</see> events,
 /// or by grabbing any position in the array returned by the <see cref="IGamepadAPI.GetGamepads">Navigator.getGamepads()</see> method.
 /// </para>
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="DisposeAsync"/> when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IAsyncDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IGamepadBase<IJSObjectReference>), typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class Gamepad(IJSObjectReference gamepadJS) : GamepadBase(gamepadJS), IGamepad {
+public sealed class Gamepad(IJSObjectReference gamepadJS) : GamepadBase<IJSObjectReference>(gamepadJS), IGamepad {
     /// <summary>
     /// Releases the JS instance for this gamepad.
     /// </summary>

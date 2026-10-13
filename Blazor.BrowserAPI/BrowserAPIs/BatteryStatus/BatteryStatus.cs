@@ -9,18 +9,6 @@ namespace BrowserAPI.Implementation;
 /// and lets you be notified by events that are sent when the battery level or charging status change.
 /// This can be used to adjust your app's resource usage to reduce battery drain when the battery is low, or to save changes before the battery runs out in order to prevent data loss.
 /// </summary>
-[AutoInterface(Namespace = "BrowserAPI")]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IBatteryStatusBase<IJSObjectReference, IBatteryManager>)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class BatteryStatus(IModuleManager moduleManager) : IBatteryStatus {
-    /// <summary>
-    /// Provides information about the system's battery.
-    /// It returns a battery promise, which resolves with a BatteryManager object providing some properties to get the battery status also some events you can handle to monitor the battery status.
-    /// </summary>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    /// <remarks>Each method call produces a new instance that should be disposed when you are done with it.</remarks>
-    public async ValueTask<IBatteryManager> GetBattery(CancellationToken cancellationToken = default) {
-        IJSObjectReference batteryManagerJS = await moduleManager.InvokeAsync<IJSObjectReference>("BatteryStatusAPI.getBattery", cancellationToken);
-        return new BatteryManager(batteryManagerJS);
-    }
-}
+public sealed class BatteryStatus(IModuleManager moduleManager) : BatteryStatusBase<IJSObjectReference, IBatteryManager>(moduleManager), IBatteryStatus;

@@ -15,5 +15,5 @@ public sealed class AmbientLightSensorInProcess(IJSInProcessObjectReference ambi
     /// <summary>
     /// Returns the current light level in lux of the ambient light level around the hosting device.
     /// </summary>
-    public double Illuminance => SensorJS.Invoke<double>("getIlluminance");
+    public double Illuminance => sensorJS.Invoke<double>("getIlluminance");
 }

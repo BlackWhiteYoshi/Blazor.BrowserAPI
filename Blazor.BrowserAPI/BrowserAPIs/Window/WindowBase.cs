@@ -5,46 +5,21 @@ using System.Text.Json;
 
 namespace BrowserAPI.Implementation;
 
-[AutoInterface(Namespace = "BrowserAPI", Name = "IWindow")]
-[AutoInterface(Namespace = "BrowserAPI", Name = "IWindowInProcess")]
+/// Base interface of <see cref="IWindow"/> and <see cref="IWindowInProcess"/>.<br/>
+/// It contains common functionality for both interfaces.<br/>
+/// It is not intended to use this interface directly.
+[AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-#pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class WindowBase(IModuleManager moduleManager) : IDisposable {
-#pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
+public abstract class WindowBase<TJSObjectReference, TDragEvent>(IModuleManager moduleManager) : IDisposable
+    where TJSObjectReference : IJSObjectReference
+    where TDragEvent : IDragEvent {
     private protected IModuleManager moduleManager = moduleManager;
-    private protected IJSObjectReference? windowJS;
+    private protected TJSObjectReference? windowJS;
 
     /// <summary>
     /// Releases the <see cref="EventTrigger"/> object used to trigger the events.
     /// </summary>
     public void Dispose() => _objectReferenceEventTrigger?.Dispose();
-
-
-    /// <summary>
-    /// <para>Contains a callback with no parameter and no return value.</para>
-    /// <para>Used for <see cref="Window.SetTimeout"/>, <see cref="Window.SetInterval"/>, <see cref="Window.RequestIdleCallback"/> and <see cref="Window.QueueMicrotask"/>.</para>
-    /// </summary>
-    /// <param name="handler">callback function given as argument.</param>
-    [method: DynamicDependency(nameof(Handler))]
-    internal sealed class VoidCallback(Action handler) {
-        public Action HandlerValue { get; set; } = handler;
-
-        [JSInvokable]
-        public void Handler() => HandlerValue();
-    }
-
-    /// <summary>
-    /// <para>Contains a callback with a timestamp parameter and no return value.</para>
-    /// <para>Used for <see cref="Window.RequestAnimationFrame"/>.</para>
-    /// </summary>
-    /// <param name="handler">callback function given as argument. The parameter is the timeStamp.</param>
-    [method: DynamicDependency(nameof(Handler))]
-    internal sealed class AnimationFrameCallback(Action<double> handler) {
-        public Action<double> HandlerValue { get; set; } = handler;
-
-        [JSInvokable]
-        public void Handler(double timeStamp) => HandlerValue(timeStamp);
-    }
 
 
     #region Events
@@ -167,7 +142,9 @@ public abstract class WindowBase(IModuleManager moduleManager) : IDisposable {
     // HTMLDialogElement
     [method: DynamicDependency(nameof(InvokeClose))]
     [method: DynamicDependency(nameof(InvokeCancel))]
-    private sealed class EventTrigger(WindowBase window) {
+
+    [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
+    private sealed class EventTrigger(WindowBase<TJSObjectReference, TDragEvent> window) {
         [JSInvokable] public void InvokeError(JsonElement error) => window._onError?.Invoke(error);
         [JSInvokable] public void InvokeLanguageChange() => window._onLanguageChange?.Invoke();
         [JSInvokable] public void InvokeResize() => window._onResize?.Invoke();
@@ -191,13 +168,13 @@ public abstract class WindowBase(IModuleManager moduleManager) : IDisposable {
         [JSInvokable] public void InvokeScrollEnd() => window._onScrollEnd?.Invoke();
         [JSInvokable] public void InvokeChange() => window._onChange?.Invoke();
 
-        [JSInvokable] public void InvokeDrag(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => window.InvokeDrag(dropEffect, effectAllowed, types, files);
-        [JSInvokable] public void InvokeDragStart(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => window.InvokeDragStart(dropEffect, effectAllowed, types, files);
-        [JSInvokable] public void InvokeDragEnd(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => window.InvokeDragEnd(dropEffect, effectAllowed, types, files);
-        [JSInvokable] public void InvokeDragEnter(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => window.InvokeDragEnter(dropEffect, effectAllowed, types, files);
-        [JSInvokable] public void InvokeDragLeave(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => window.InvokeDragLeave(dropEffect, effectAllowed, types, files);
-        [JSInvokable] public void InvokeDragOver(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => window.InvokeDragOver(dropEffect, effectAllowed, types, files);
-        [JSInvokable] public void InvokeDrop(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files) => window.InvokeDrop(dropEffect, effectAllowed, types, files);
+        [JSInvokable] public void InvokeDrag(string dropEffect, string effectAllowed, string[] types, TJSObjectReference[] files) => window._onDrag?.Invoke(CreateDragEvent(dropEffect, effectAllowed, types, files));
+        [JSInvokable] public void InvokeDragStart(string dropEffect, string effectAllowed, string[] types, TJSObjectReference[] files) => window._onDragStart?.Invoke(CreateDragEvent(dropEffect, effectAllowed, types, files));
+        [JSInvokable] public void InvokeDragEnd(string dropEffect, string effectAllowed, string[] types, TJSObjectReference[] files) => window._onDragEnd?.Invoke(CreateDragEvent(dropEffect, effectAllowed, types, files));
+        [JSInvokable] public void InvokeDragEnter(string dropEffect, string effectAllowed, string[] types, TJSObjectReference[] files) => window._onDragEnter?.Invoke(CreateDragEvent(dropEffect, effectAllowed, types, files));
+        [JSInvokable] public void InvokeDragLeave(string dropEffect, string effectAllowed, string[] types, TJSObjectReference[] files) => window._onDragLeave?.Invoke(CreateDragEvent(dropEffect, effectAllowed, types, files));
+        [JSInvokable] public void InvokeDragOver(string dropEffect, string effectAllowed, string[] types, TJSObjectReference[] files) => window._onDragOver?.Invoke(CreateDragEvent(dropEffect, effectAllowed, types, files));
+        [JSInvokable] public void InvokeDrop(string dropEffect, string effectAllowed, string[] types, TJSObjectReference[] files) => window._onDrop?.Invoke(CreateDragEvent(dropEffect, effectAllowed, types, files));
 
         [JSInvokable] public void InvokeToggle(string oldState, string newState) => window._onToggle?.Invoke(oldState, newState);
         [JSInvokable] public void InvokeBeforeToggle(string oldState, string newState) => window._onBeforeToggle?.Invoke(oldState, newState);
@@ -286,6 +263,22 @@ public abstract class WindowBase(IModuleManager moduleManager) : IDisposable {
         // HTMLDialogElement
         [JSInvokable] public void InvokeClose() => window._onClose?.Invoke();
         [JSInvokable] public void InvokeCancel() => window._onCancel?.Invoke();
+
+
+        private static TDragEvent CreateDragEvent(string dropEffect, string effectAllowed, string[] types, TJSObjectReference[] files) {
+            if (typeof(TJSObjectReference) == typeof(IJSObjectReference)) {
+                IFile[] wrappedFiles = new IFile[files.Length];
+                for (int i = 0; i < wrappedFiles.Length; i++)
+                    wrappedFiles[i] = new File(files[i]);
+                return (TDragEvent)(IDragEvent)new DragEvent(dropEffect, effectAllowed, types, wrappedFiles);
+            }
+            else {
+                IFileInProcess[] wrappedFiles = new IFileInProcess[files.Length];
+                for (int i = 0; i < wrappedFiles.Length; i++)
+                    wrappedFiles[i] = new FileInProcess((IJSInProcessObjectReference)files[i]);
+                return (TDragEvent)(IDragEvent)new DragEventInProcess(dropEffect, effectAllowed, types, wrappedFiles);
+            }
+        }
     }
 
     private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
@@ -296,7 +289,7 @@ public abstract class WindowBase(IModuleManager moduleManager) : IDisposable {
 
         _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
         if (windowJS is null)
-            windowJS = await moduleManager.InvokeTrySync<IJSObjectReference>("WindowAPI.createInstanceAndInitEvents", CancellationToken.None, [_objectReferenceEventTrigger]);
+            windowJS = await moduleManager.InvokeTrySync<TJSObjectReference>("WindowAPI.createInstanceAndInitEvents", CancellationToken.None, [_objectReferenceEventTrigger]);
         else
             await windowJS.InvokeVoidTrySync("WindowAPI.initEvents", CancellationToken.None, [_objectReferenceEventTrigger]);
     }
@@ -696,7 +689,7 @@ public abstract class WindowBase(IModuleManager moduleManager) : IDisposable {
     /// User gestures like touch panning or trackpad scrolling aren't complete until pointers or keys have released.
     /// If the scroll position did not change, then no scrollend event fires.
     /// </para>
-    /// <para>For detecting when scrolling inside a Document is complete, see <see cref="IDocument.OnScrollEnd">the scrollend event of Document</see>.</para>
+    /// <para>For detecting when scrolling inside a Document is complete, see <see cref="IDocumentBase{TJSObjectReference, TDragEvent}.OnScrollEnd">the scrollend event of Document</see>.</para>
     /// </summary>
     public event Action OnScrollEnd {
         add {
@@ -740,26 +733,161 @@ public abstract class WindowBase(IModuleManager moduleManager) : IDisposable {
     }
 
 
-    // (IFile | IFileInProcess)[] files
-    private protected abstract void InvokeDrag(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+    private Action<TDragEvent>? _onDrag;
+    /// <summary>
+    /// <para>Bubbled event invoked from child elements.</para>
+    /// <para>
+    /// Is fired every few hundred milliseconds as an element or text selection is being dragged by the user.<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<TDragEvent> OnDrag {
+        add {
+            if (_onDrag == null)
+                _ = ActivateJSEvent("activateOndrag").Preserve();
+            _onDrag += value;
+        }
+        remove {
+            _onDrag -= value;
+            if (_onDrag == null)
+                _ = DeactivateJSEvent("deactivateOndrag").Preserve();
+        }
+    }
 
-    // (IFile | IFileInProcess)[] files
-    private protected abstract void InvokeDragStart(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+    private Action<TDragEvent>? _onDragStart;
+    /// <summary>
+    /// <para>Bubbled event invoked from child elements.</para>
+    /// <para>
+    /// Is fired when the user starts dragging an element or text selection.<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<TDragEvent> OnDragStart {
+        add {
+            if (_onDragStart == null)
+                _ = ActivateJSEvent("activateOndragstart").Preserve();
+            _onDragStart += value;
+        }
+        remove {
+            _onDragStart -= value;
+            if (_onDragStart == null)
+                _ = DeactivateJSEvent("deactivateOndragstart").Preserve();
+        }
+    }
 
-    // (IFile | IFileInProcess)[] files
-    private protected abstract void InvokeDragEnd(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+    private Action<TDragEvent>? _onDragEnd;
+    /// <summary>
+    /// <para>Bubbled event invoked from child elements.</para>
+    /// <para>
+    /// Is fired when a drag operation ends (by releasing a mouse button or hitting the escape key).<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<TDragEvent> OnDragEnd {
+        add {
+            if (_onDragEnd == null)
+                _ = ActivateJSEvent("activateOndragend").Preserve();
+            _onDragEnd += value;
+        }
+        remove {
+            _onDragEnd -= value;
+            if (_onDragEnd == null)
+                _ = DeactivateJSEvent("deactivateOndragend").Preserve();
+        }
+    }
 
-    // (IFile | IFileInProcess)[] files
-    private protected abstract void InvokeDragEnter(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+    private Action<TDragEvent>? _onDragEnter;
+    /// <summary>
+    /// <para>Bubbled event invoked from child elements.</para>
+    /// <para>
+    /// Is fired when a dragged element or text selection enters a valid drop target.
+    /// The target object is the immediate user selection (the element directly indicated by the user as the drop target), or the &lt;body&gt; element.<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<TDragEvent> OnDragEnter {
+        add {
+            if (_onDragEnter == null)
+                _ = ActivateJSEvent("activateOndragenter").Preserve();
+            _onDragEnter += value;
+        }
+        remove {
+            _onDragEnter -= value;
+            if (_onDragEnter == null)
+                _ = DeactivateJSEvent("deactivateOndragenter").Preserve();
+        }
+    }
 
-    // (IFile | IFileInProcess)[] files
-    private protected abstract void InvokeDragLeave(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+    private Action<TDragEvent>? _onDragLeave;
+    /// <summary>
+    /// <para>Bubbled event invoked from child elements.</para>
+    /// <para>
+    /// Is fired when a dragged element or text selection leaves a valid drop target.<br />
+    /// This event is not cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<TDragEvent> OnDragLeave {
+        add {
+            if (_onDragLeave == null)
+                _ = ActivateJSEvent("activateOndragleave").Preserve();
+            _onDragLeave += value;
+        }
+        remove {
+            _onDragLeave -= value;
+            if (_onDragLeave == null)
+                _ = DeactivateJSEvent("deactivateOndragleave").Preserve();
+        }
+    }
 
-    // (IFile | IFileInProcess)[] files
-    private protected abstract void InvokeDragOver(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+    private Action<TDragEvent>? _onDragOver;
+    /// <summary>
+    /// <para>Bubbled event invoked from child elements.</para>
+    /// <para>
+    /// Is fired when an element or text selection is being dragged over a valid drop target (every few hundred milliseconds).<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<TDragEvent> OnDragOver {
+        add {
+            if (_onDragOver == null)
+                _ = ActivateJSEvent("activateOndragover").Preserve();
+            _onDragOver += value;
+        }
+        remove {
+            _onDragOver -= value;
+            if (_onDragOver == null)
+                _ = DeactivateJSEvent("deactivateOndragover").Preserve();
+        }
+    }
 
-    // (IFile | IFileInProcess)[] files
-    private protected abstract void InvokeDrop(string dropEffect, string effectAllowed, string[] types, IJSObjectReference[] files);
+    private Action<TDragEvent>? _onDrop;
+    /// <summary>
+    /// <para>Bubbled event invoked from child elements.</para>
+    /// <para>
+    /// Is fired when an element or text selection is dropped on a valid drop target.
+    /// To ensure that the drop event always fires as expected, you should always include a preventDefault() call in the part of your code which handles the dragover event.<br />
+    /// This event is cancelable and may bubble up to the Document and Window objects.
+    /// </para>
+    /// <para>The parameter holds the content of the <see href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer">DragEvent.dataTransfer</see> property,</para>
+    /// </summary>
+    public event Action<TDragEvent> OnDrop {
+        add {
+            if (_onDrop == null)
+                _ = ActivateJSEvent("activateOndrop").Preserve();
+            _onDrop += value;
+        }
+        remove {
+            _onDrop -= value;
+            if (_onDrop == null)
+                _ = DeactivateJSEvent("deactivateOndrop").Preserve();
+        }
+    }
 
 
     private Action<string, string>? _onToggle;
@@ -2263,7 +2391,7 @@ public abstract class WindowBase(IModuleManager moduleManager) : IDisposable {
     private Action? _onPlay;
     /// <summary>
     /// <para>Bubbled event invoked from child elements.</para>
-    /// <para>Fired when the paused property is changed from true to false, as a result of the <see cref="IHTMLMediaElement.Play">Play()</see> method, or the autoplay attribute.</para>
+    /// <para>Fired when the paused property is changed from true to false, as a result of the <see cref="IHTMLMediaElementBase{IJSObjectReference, IPictureInPictureWindow}.Play">Play()</see> method, or the autoplay attribute.</para>
     /// <para>This event is not cancelable and does not bubble.</para>
     /// </summary>
     public event Action OnPlay {

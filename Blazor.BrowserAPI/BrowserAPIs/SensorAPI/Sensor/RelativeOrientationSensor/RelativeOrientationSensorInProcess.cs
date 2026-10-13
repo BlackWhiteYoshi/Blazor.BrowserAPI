@@ -19,7 +19,7 @@ public sealed class RelativeOrientationSensorInProcess(IJSInProcessObjectReferen
     /// </summary>
     public Quaternion Quaternion {
         get {
-            float[] quaternion = SensorJS.Invoke<float[]>("getQuaternion");
+            float[] quaternion = sensorJS.Invoke<float[]>("getQuaternion");
             return new Quaternion(quaternion[0], quaternion[1], quaternion[2], quaternion[3]);
         }
     }
@@ -30,7 +30,7 @@ public sealed class RelativeOrientationSensorInProcess(IJSInProcessObjectReferen
     /// </summary>
     /// <returns></returns>
     public Matrix4x4 PopulateMatrix() {
-        float[] matrix4x4 = SensorJS.Invoke<float[]>("populateMatrix");
+        float[] matrix4x4 = sensorJS.Invoke<float[]>("populateMatrix");
         return new Matrix4x4(
             matrix4x4[0],
             matrix4x4[1],

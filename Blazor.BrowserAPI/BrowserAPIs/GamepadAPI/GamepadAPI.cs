@@ -9,15 +9,9 @@ namespace BrowserAPI.Implementation;
 /// It contains three interfaces, two events and one specialist function, to respond to gamepads being connected and disconnected,
 /// and to access other information about the gamepads themselves, and what buttons and other controls are currently being pressed.
 /// </summary>
-[AutoInterface(Namespace = "BrowserAPI")]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IGamepadAPIBase<IJSObjectReference, IGamepad>)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class GamepadAPI(IModuleManager moduleManager) : IGamepadAPI, IDisposable {
-    /// <summary>
-    /// Releases the <see cref="EventTrigger"/> object used to trigger the events.
-    /// </summary>
-    public void Dispose() => _objectReferenceEventTrigger?.Dispose();
-
-
+public sealed class GamepadAPI(IModuleManager moduleManager) : GamepadAPIBase<IJSObjectReference, IGamepad>(moduleManager), IGamepadAPI {
     /// <summary>
     /// <para>Returns an array of <see cref="IGamepad"/> objects, one for each connected gamepad.</para>
     /// <para>Elements in the array may be <i>null</i> if a gamepad disconnects during a session, so that the remaining gamepads retain the same index.</para>
@@ -35,86 +29,4 @@ public sealed class GamepadAPI(IModuleManager moduleManager) : IGamepadAPI, IDis
                 result[i] = null;
         return result;
     }
-
-
-    #region Events
-
-    [method: DynamicDependency(nameof(InvokeGamepadConnected))]
-    [method: DynamicDependency(nameof(InvokeGamepadDisconnected))]
-    [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-    private sealed class EventTrigger(GamepadAPI gamepadAPI) {
-        [JSInvokable] public void InvokeGamepadConnected(IJSObjectReference gamepad) => gamepadAPI._onGamepadConnected?.Invoke(new Gamepad(gamepad));
-        [JSInvokable] public void InvokeGamepadDisconnected(IJSObjectReference gamepad) => gamepadAPI._onGamepadDisconnected?.Invoke(new Gamepad(gamepad));
-    }
-
-    private DotNetObjectReference<EventTrigger>? _objectReferenceEventTrigger;
-
-    private ValueTask InitEventTrigger() {
-        if (_objectReferenceEventTrigger is not null)
-            return ValueTask.CompletedTask;
-
-        _objectReferenceEventTrigger = DotNetObjectReference.Create(new EventTrigger(this));
-        return moduleManager.InvokeTrySync("GamepadInterfaceAPI.initEvents", CancellationToken.None, [_objectReferenceEventTrigger]);
-    }
-
-
-    private async ValueTask ActivateJSEvent(string jsMethodName) {
-        await InitEventTrigger();
-        await moduleManager.InvokeTrySync(jsMethodName, CancellationToken.None);
-    }
-
-    private ValueTask DeactivateJSEvent(string jsMethodName) => moduleManager.InvokeTrySync(jsMethodName, CancellationToken.None);
-
-
-    private Action<IGamepad>? _onGamepadConnected;
-    /// <summary>
-    /// <para>
-    /// Is fired when the browser detects that a gamepad has been connected or the first time a button/axis of the gamepad is used.<br />
-    /// The event will not fire if disallowed by the document's gamepad Permissions Policy.<br />
-    /// This event is not cancelable and does not bubble.
-    /// </para>
-    /// <para>
-    /// Parameter is the connected Gamepad.<br />
-    /// Note: Dispose the given Gamepad object when you are done with it.
-    /// </para>
-    /// </summary>
-    public event Action<IGamepad> OnGamepadConnected {
-        add {
-            if (_onGamepadConnected == null)
-                _ = ActivateJSEvent("GamepadInterfaceAPI.activateOngamepadconnected").Preserve();
-            _onGamepadConnected += value;
-        }
-        remove {
-            _onGamepadConnected -= value;
-            if (_onGamepadConnected == null)
-                _ = DeactivateJSEvent("GamepadInterfaceAPI.deactivateOngamepadconnected").Preserve();
-        }
-    }
-
-    private Action<IGamepad>? _onGamepadDisconnected;
-    /// <summary>
-    /// <para>
-    /// Is fired when the browser detects that a gamepad has been disconnected.<br />
-    /// The event will not fire if disallowed by the document's gamepad Permissions Policy.<br />
-    /// This event is not cancelable and does not bubble.
-    /// </para>
-    /// <para>
-    /// Parameter is the disconnected Gamepad.<br />
-    /// Note: Dispose the given Gamepad object when you are done with it.
-    /// </para>
-    /// </summary>
-    public event Action<IGamepad> OnGamepadDisconnected {
-        add {
-            if (_onGamepadDisconnected == null)
-                _ = ActivateJSEvent("GamepadInterfaceAPI.activateOngamepaddisconnected").Preserve();
-            _onGamepadDisconnected += value;
-        }
-        remove {
-            _onGamepadDisconnected -= value;
-            if (_onGamepadDisconnected == null)
-                _ = DeactivateJSEvent("GamepadInterfaceAPI.deactivateOngamepaddisconnected").Preserve();
-        }
-    }
-
-    #endregion
 }

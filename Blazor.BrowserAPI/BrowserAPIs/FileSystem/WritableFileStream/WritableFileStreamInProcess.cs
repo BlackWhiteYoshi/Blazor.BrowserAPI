@@ -10,22 +10,20 @@ namespace BrowserAPI.Implementation;
 /// </summary>
 /// <remarks>
 /// <para>Objects of this class must disposed manually, so do not forget to call <see cref="Dispose"/> when you are done with it.</para>
-/// <para>Disposing does <b>not</b> call <see cref="IWritableFileStreamInProcess.Close"/>. Before disposing this stream should be closed.</para>
+/// <para>Disposing does <b>not</b> call <see cref="IWritableFileStreamBase{IJSInProcessObjectReference}.Close"/>. Before disposing this stream should be closed.</para>
 /// </remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IWritableFileStreamBase<IJSInProcessObjectReference>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class WritableFileStreamInProcess(IJSObjectReference writableFileStreamJS) : WritableFileStreamBase(writableFileStreamJS), IWritableFileStreamInProcess {
-    private IJSInProcessObjectReference WritableFileStreamJS => (IJSInProcessObjectReference)base.writableFileStreamJS;
-
+public sealed class WritableFileStreamInProcess(IJSInProcessObjectReference writableFileStreamJS) : WritableFileStreamBase<IJSInProcessObjectReference>(writableFileStreamJS), IWritableFileStreamInProcess {
     /// <summary>
     /// Releases the JS instance for this writableFileStream.
     /// </summary>
     /// <returns></returns>
-    public void Dispose() => WritableFileStreamJS.Dispose();
+    public void Dispose() => writableFileStreamJS.Dispose();
 
 
     /// <summary>
     /// A boolean indicating whether the WritableStream is locked to a writer.
     /// </summary>
-    public bool Locked => WritableFileStreamJS.Invoke<bool>("getLocked");
+    public bool Locked => writableFileStreamJS.Invoke<bool>("getLocked");
 }

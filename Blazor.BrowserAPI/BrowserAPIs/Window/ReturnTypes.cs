@@ -1,5 +1,6 @@
 using BrowserAPI.Implementation;
 using Microsoft.JSInterop;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI;
 
@@ -12,8 +13,8 @@ namespace BrowserAPI;
 /// </summary>
 public readonly struct TimeoutHandle {
     internal readonly int id;
-    internal readonly DotNetObjectReference<WindowBase.VoidCallback> callback;
-    internal TimeoutHandle(int id, DotNetObjectReference<WindowBase.VoidCallback> callback) => (this.id, this.callback) = (id, callback);
+    internal readonly DotNetObjectReference<VoidCallback> callback;
+    internal TimeoutHandle(int id, DotNetObjectReference<VoidCallback> callback) => (this.id, this.callback) = (id, callback);
 
     /// <summary>
     /// <para>
@@ -42,8 +43,8 @@ public readonly struct TimeoutHandle {
 /// </summary>
 public readonly struct IntervalHandle {
     internal readonly int id;
-    internal readonly DotNetObjectReference<WindowBase.VoidCallback> callback;
-    internal IntervalHandle(int id, DotNetObjectReference<WindowBase.VoidCallback> callback) => (this.id, this.callback) = (id, callback);
+    internal readonly DotNetObjectReference<VoidCallback> callback;
+    internal IntervalHandle(int id, DotNetObjectReference<VoidCallback> callback) => (this.id, this.callback) = (id, callback);
 
     /// <summary>
     /// <para>
@@ -72,8 +73,8 @@ public readonly struct IntervalHandle {
 /// </summary>
 public readonly struct AnimationFrameHandle {
     internal readonly ulong id;
-    internal readonly DotNetObjectReference<WindowBase.AnimationFrameCallback> callback;
-    internal AnimationFrameHandle(ulong id, DotNetObjectReference<WindowBase.AnimationFrameCallback> callback) => (this.id, this.callback) = (id, callback);
+    internal readonly DotNetObjectReference<AnimationFrameCallback> callback;
+    internal AnimationFrameHandle(ulong id, DotNetObjectReference<AnimationFrameCallback> callback) => (this.id, this.callback) = (id, callback);
 
     /// <summary>
     /// The request ID that uniquely identifies the entry in the callback list.
@@ -97,8 +98,8 @@ public readonly struct AnimationFrameHandle {
 /// </summary>
 public readonly struct IdleCallbackHandle {
     internal readonly ulong id;
-    internal readonly DotNetObjectReference<WindowBase.VoidCallback> callback;
-    internal IdleCallbackHandle(ulong id, DotNetObjectReference<WindowBase.VoidCallback> callback) => (this.id, this.callback) = (id, callback);
+    internal readonly DotNetObjectReference<VoidCallback> callback;
+    internal IdleCallbackHandle(ulong id, DotNetObjectReference<VoidCallback> callback) => (this.id, this.callback) = (id, callback);
 
     /// <summary>
     /// An ID which can be used to cancel the callback by passing it into the cancelIdleCallback() method.
@@ -126,3 +127,30 @@ public readonly struct IdleCallbackHandle {
 /// This value is null when the storage item has been newly added and therefore doesn't have any previous value.
 /// </param>
 public readonly record struct StorageEvent(string Url, string Key, string? NewValue, string? OldValue);
+
+
+/// <summary>
+/// <para>Contains a callback with no parameter and no return value.</para>
+/// <para>Used for <see cref="Window.SetTimeout"/>, <see cref="Window.SetInterval"/>, <see cref="Window.RequestIdleCallback"/> and <see cref="Window.QueueMicrotask"/>.</para>
+/// </summary>
+/// <param name="handler">callback function given as argument.</param>
+[method: DynamicDependency(nameof(Handler))]
+internal sealed class VoidCallback(Action handler) {
+    public Action HandlerValue { get; set; } = handler;
+
+    [JSInvokable]
+    public void Handler() => HandlerValue();
+}
+
+/// <summary>
+/// <para>Contains a callback with a timestamp parameter and no return value.</para>
+/// <para>Used for <see cref="Window.RequestAnimationFrame"/>.</para>
+/// </summary>
+/// <param name="handler">callback function given as argument. The parameter is the timeStamp.</param>
+[method: DynamicDependency(nameof(Handler))]
+internal sealed class AnimationFrameCallback(Action<double> handler) {
+    public Action<double> HandlerValue { get; set; } = handler;
+
+    [JSInvokable]
+    public void Handler(double timeStamp) => HandlerValue(timeStamp);
+}
