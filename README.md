@@ -183,3 +183,6 @@ There are more interfaces coming.
   - added BatteryStatus (23 BrowserAPIs)
 - 0.17.0
   - added DevicePosture (24 BrowserAPIs)
+- 0.18.0
+  - added NotificationsAPI (25 BrowserAPIs)
+  - small breaking change: changed HTMLElement.Hidden from bool to bool? (null represents "until-found")
