@@ -992,7 +992,7 @@
         </member>
         <member name="M:BrowserAPI.Implementation.DevicePostureBase.Dispose">
             <summary>
-            Releases the <see cref="T:BrowserAPI.Implementation.DevicePostureBase.EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="E:BrowserAPI.Implementation.DevicePostureBase.OnChange">
@@ -1717,7 +1717,7 @@
         </member>
         <member name="M:BrowserAPI.Implementation.DocumentBase`2.Dispose">
             <summary>
-            Releases the <see cref="T:BrowserAPI.Implementation.DocumentBase`2.EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="P:BrowserAPI.Implementation.DocumentBase`2.NodeName">
@@ -3589,7 +3589,7 @@
             This method uses the <see href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryHandle/values">values()</see> Asynchronous iterator method to create these lists.
             Since returning each entry one by one would be unnecessary slow, all entries are iterated and returned at once.
             </para>
-            <para>Do not forget to call <i>DispseAsync()</i> on each single item in fileList and directoryList when you done with it.</para>
+            <para>Do not forget to call <i>DispseAsync()</i> on all items in fileList and directoryList when you done with it.</para>
             </remarks>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -4569,7 +4569,7 @@
         </member>
         <member name="M:BrowserAPI.Implementation.GamepadAPIBase`2.Dispose">
             <summary>
-            Releases the <see cref="T:BrowserAPI.Implementation.GamepadAPIBase`2.EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="E:BrowserAPI.Implementation.GamepadAPIBase`2.OnGamepadConnected">
@@ -5040,7 +5040,7 @@
         </member>
         <member name="M:BrowserAPI.Implementation.HistoryBase.Dispose">
             <summary>
-            Releases the <see cref="T:BrowserAPI.Implementation.HistoryBase.EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="E:BrowserAPI.Implementation.HistoryBase.OnPageReveal">
@@ -5217,7 +5217,7 @@
             <summary>
             Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">HTMLElement</see>.
             </summary>
-            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose both when you are done with them.</remarks>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.Implementation.HTMLDialogElement.ClosedBy">
@@ -5363,7 +5363,7 @@
             <summary>
             Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">HTMLElement</see>.
             </summary>
-            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose both when you are done with them.</remarks>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.Implementation.HTMLDialogElementInProcess.ClosedBy">
@@ -5522,14 +5522,14 @@
             <summary>
             Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement">HTMLDialogElement</see>.
             </summary>
-            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose both when you are done with them.</remarks>
             <returns></returns>
         </member>
         <member name="M:BrowserAPI.Implementation.HTMLElement.ToHTMLMediaElement(System.Threading.CancellationToken)">
             <summary>
             Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement">HTMLMediaElement</see>.
             </summary>
-            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose both when you are done with them.</remarks>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.Implementation.HTMLElement.AccessKey">
@@ -9282,14 +9282,14 @@
             <summary>
             Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement">HTMLDialogElement</see>.
             </summary>
-            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose both when you are done with them.</remarks>
             <returns></returns>
         </member>
         <member name="M:BrowserAPI.Implementation.HTMLElementInProcess.ToHTMLMediaElement">
             <summary>
             Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement">HTMLMediaElement</see>.
             </summary>
-            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose both when you are done with them.</remarks>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.Implementation.HTMLElementInProcess.AccessKey">
@@ -11109,7 +11109,7 @@
             <summary>
             Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">HTMLElement</see>.
             </summary>
-            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose both when you are done with them.</remarks>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.Implementation.HTMLMediaElement.Src">
@@ -11890,7 +11890,7 @@
             <summary>
             Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">HTMLElement</see>.
             </summary>
-            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose both when you are done with them.</remarks>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.Implementation.HTMLMediaElementInProcess.Src">
@@ -13858,7 +13858,7 @@
         </member>
         <member name="M:BrowserAPI.Implementation.NetworkInformationBase.Dispose">
             <summary>
-            Releases the <see cref="T:BrowserAPI.Implementation.NetworkInformationBase.EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="E:BrowserAPI.Implementation.NetworkInformationBase.OnOnline">
@@ -13941,6 +13941,545 @@
         <member name="P:BrowserAPI.Implementation.NetworkInformationInProcess.SaveData">
             <summary>
             Returns true if the user has set a reduced data usage option on the user agent.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.Notification">
+            <summary>
+            <para>The Notification interface of the Notifications API is used to configure and display desktop notifications to the user.</para>
+            <para>These notifications' appearance and specific functionality vary across platforms but generally they provide a way to asynchronously provide information to the user.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="M:BrowserAPI.Implementation.Notification.DisposeAsync"/> when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Notification.#ctor(Microsoft.JSInterop.IJSObjectReference)">
+            <summary>
+            <para>The Notification interface of the Notifications API is used to configure and display desktop notifications to the user.</para>
+            <para>These notifications' appearance and specific functionality vary across platforms but generally they provide a way to asynchronously provide information to the user.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="M:BrowserAPI.Implementation.Notification.DisposeAsync"/> when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Notification.DisposeAsync">
+            <summary>
+            Releases the JS instance for this notification.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Notification.Actions">
+            <summary>
+            Provides the actions available for users to select when interacting with the notification.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Notification.GetActions(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Notification.Actions" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Notification.Badge">
+            <summary>
+            <para>
+            Contains the URL of a small icon representing the web application itself.
+            The badge is used by the platform when there is not enough space to display the full notification — for example, in a status bar.
+            On Android, the badge should accommodate up to 4x display resolution (about 96×96px), and the image will be automatically masked to a monochrome silhouette.
+            </para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#notifications_with_different_images">Notifications with different images</see> for a comparison of the three image options.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Notification.GetBadge(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Notification.Badge" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Notification.Body">
+            <summary>
+            Indicates the body string of the notification, as specified in the body option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Notification.GetBody(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Notification.Body" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Notification.Data">
+            <summary>
+            <para>Returns a structured clone of the notification's data, as specified in the data option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.</para>
+            <para>The notification's data can be any arbitrary data that you want associated with the notification.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Notification.GetData(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Notification.Data" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Notification.Dir">
+            <summary>
+            <para>Indicates the text direction of the notification, as specified in the dir option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.</para>
+            <para>
+            Possible values are:<br/>
+            - "auto": adopts the browser's language setting behavior (the default).<br/>
+            - "ltr": left to right.<br/>
+            - "rtl": right to left.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Notification.GetDir(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Notification.Dir" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Notification.Icon">
+            <summary>
+            <para>Contains the URL of a small image that reinforces the notification — for example, an app logo or a photo of the message sender. It is displayed alongside the notification title and body.</para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#notifications_with_different_images">Notifications with different images</see> for a comparison of the three image options.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Notification.GetIcon(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Notification.Icon" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Notification.Image">
+            <summary>
+            <para>Contains the URL of a large image displayed as part of the notification's content body — for example, a news photo or product thumbnail. It has the highest visual priority of the three image options (image, icon, badge).</para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#notifications_with_different_images">Notifications with different images</see> for a comparison of the three image options.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Notification.GetImage(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Notification.Image" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Notification.Lang">
+            <summary>
+            <para>Indicates the language used in the notification, as specified in the lang option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.</para>
+            <para>The language itself is specified using a string representing a <see href="https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag">BCP 47 language tag</see>.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Notification.GetLang(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Notification.Lang" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Notification.Navigate">
+            <summary>
+            <para>Contains the URL the user agent will navigate to when the user activates the notification.</para>
+            <para>This is the resolved value of the URL, if any, that was specified in the navigate option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see> or <see cref="M:BrowserAPI.IServiceWorkerRegistrationBase`3.ShowNotification(System.String,BrowserAPI.NotificationAction[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)"/>.</para>
+            <para>
+            Normally, activating a non-persistent notification fires the <see cref="E:BrowserAPI.INotificationBase`1.OnClick">click event</see> on its <see cref="T:BrowserAPI.INotification">Notification</see> object,
+            and activating a persistent notification fires the <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/notificationclick_event">notificationclick event</see> on the <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope">ServiceWorkerGlobalScope</see>.
+            </para>
+            <para>
+            When a notification with a navigation URL is activated by the user, the user agent navigates to the specified URL instead of firing either of these events.
+            This allows notifications to direct users to a specific page without requiring an event handler.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Notification.GetNavigate(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Notification.Navigate" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Notification.Renotify">
+            <summary>
+            <para>Specifies whether the user should be notified after a new notification replaces an old one, as specified in the renotify option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.</para>
+            <para>false is the default; true makes the notification renotify the user.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Notification.GetRenotify(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Notification.Renotify" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Notification.RequireInteraction">
+            <summary>
+            Returns a boolean value indicating that a notification should remain active until the user clicks or dismisses it, rather than closing automatically.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Notification.GetRequireInteraction(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Notification.RequireInteraction" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Notification.Silent">
+            <summary>
+            <para>
+            Specifies whether the notification should be silent, i.e., no sounds or vibrations should be issued regardless of the device settings.
+            This is controlled via the silent option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.
+            </para>
+            <para>If set to true, the notification is silent; if set to null (the default value), the device's default settings are respected.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Notification.GetSilent(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Notification.Silent" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Notification.Tag">
+            <summary>
+            <para>Signifies an identifying tag for the notification, as specified in the tag option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.</para>
+            <para>
+            The idea of notification tags is that more than one notification can share the same tag, linking them together.
+            One notification can then be programmatically replaced with another to avoid the users' screen being filled up with a huge number of similar notifications.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Notification.GetTag(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Notification.Tag" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Notification.Timestamp">
+            <summary>
+            <para>Returns a number, as specified in the timestamp option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.</para>
+            <para>
+            The notification's timestamp can represent the time, in milliseconds since 00:00:00 UTC on 1 January 1970, of the event for which the notification was created,
+            or it can be an arbitrary timestamp that you want associated with the notification.
+            For example, a timestamp for an upcoming meeting could be set in the future, whereas a timestamp for a missed message could be set in the past.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Notification.GetTimestamp(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Notification.Timestamp" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Notification.Title">
+            <summary>
+            Indicates the title of the notification, as specified in the title parameter of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Notification.GetTitle(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Notification.Title" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.Notification.Vibrate">
+            <summary>
+            Specifies a vibration pattern for the device's vibration hardware to emit when the notification fires.
+            This is specified in the vibrate option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Notification.GetVibrate(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.Notification.Vibrate" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.Notification.Close(System.Threading.CancellationToken)">
+            <summary>
+            Closes/Removes a previously displayed notification.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.NotificationBase`1">
+            Base interface of <see cref="T:BrowserAPI.INotification"/> and <see cref="T:BrowserAPI.INotificationInProcess"/>.<br/>
+            It contains common functionality for both interfaces.<br/>
+            It is not intended to use this interface directly.
+        </member>
+        <member name="M:BrowserAPI.Implementation.NotificationBase`1.#ctor(`0)">
+            Base interface of <see cref="T:BrowserAPI.INotification"/> and <see cref="T:BrowserAPI.INotificationInProcess"/>.<br/>
+            It contains common functionality for both interfaces.<br/>
+            It is not intended to use this interface directly.
+        </member>
+        <member name="M:BrowserAPI.Implementation.NotificationBase`1.DisposeEventTrigger">
+            <summary>
+            Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call this method.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.NotificationBase`1.OnClick">
+            <summary>
+            <para>Fires when the user clicks on displayed Notification.</para>
+            <para>The default behavior is to move the focus to the viewport of the notification's related browsing context. If you don't want that behavior, call preventDefault() on the event object.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.NotificationBase`1.OnClose">
+            <summary>
+            Fires when a Notification is closed.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.NotificationBase`1.OnError">
+            <summary>
+            Fires when something goes wrong with a Notification (in many cases an error preventing the notification from being displayed.)
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.Implementation.NotificationBase`1.OnShow">
+            <summary>
+            Fires when a Notification is displayed.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.NotificationInProcess">
+            <summary>
+            <para>The Notification interface of the Notifications API is used to configure and display desktop notifications to the user.</para>
+            <para>These notifications' appearance and specific functionality vary across platforms but generally they provide a way to asynchronously provide information to the user.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="M:BrowserAPI.Implementation.NotificationInProcess.Dispose"/> when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NotificationInProcess.#ctor(Microsoft.JSInterop.IJSInProcessObjectReference)">
+            <summary>
+            <para>The Notification interface of the Notifications API is used to configure and display desktop notifications to the user.</para>
+            <para>These notifications' appearance and specific functionality vary across platforms but generally they provide a way to asynchronously provide information to the user.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="M:BrowserAPI.Implementation.NotificationInProcess.Dispose"/> when you are done with it.</remarks>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NotificationInProcess.Dispose">
+            <summary>
+            Releases the JS instance for this notification.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationInProcess.Actions">
+            <summary>
+            Provides the actions available for users to select when interacting with the notification.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationInProcess.Badge">
+            <summary>
+            <para>
+            Contains the URL of a small icon representing the web application itself.
+            The badge is used by the platform when there is not enough space to display the full notification — for example, in a status bar.
+            On Android, the badge should accommodate up to 4x display resolution (about 96×96px), and the image will be automatically masked to a monochrome silhouette.
+            </para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#notifications_with_different_images">Notifications with different images</see> for a comparison of the three image options.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationInProcess.Body">
+            <summary>
+            Indicates the body string of the notification, as specified in the body option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationInProcess.Data">
+            <summary>
+            <para>Returns a structured clone of the notification's data, as specified in the data option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.</para>
+            <para>The notification's data can be any arbitrary data that you want associated with the notification.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationInProcess.Dir">
+            <summary>
+            <para>Indicates the text direction of the notification, as specified in the dir option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.</para>
+            <para>
+            Possible values are:<br/>
+            - "auto": adopts the browser's language setting behavior (the default).<br/>
+            - "ltr": left to right.<br/>
+            - "rtl": right to left.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationInProcess.Icon">
+            <summary>
+            <para>Contains the URL of a small image that reinforces the notification — for example, an app logo or a photo of the message sender. It is displayed alongside the notification title and body.</para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#notifications_with_different_images">Notifications with different images</see> for a comparison of the three image options.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationInProcess.Image">
+            <summary>
+            <para>Contains the URL of a large image displayed as part of the notification's content body — for example, a news photo or product thumbnail. It has the highest visual priority of the three image options (image, icon, badge).</para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#notifications_with_different_images">Notifications with different images</see> for a comparison of the three image options.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationInProcess.Lang">
+            <summary>
+            <para>Indicates the language used in the notification, as specified in the lang option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.</para>
+            <para>The language itself is specified using a string representing a <see href="https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag">BCP 47 language tag</see>.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationInProcess.Navigate">
+            <summary>
+            <para>Contains the URL the user agent will navigate to when the user activates the notification.</para>
+            <para>This is the resolved value of the URL, if any, that was specified in the navigate option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see> or <see cref="M:BrowserAPI.IServiceWorkerRegistrationBase`3.ShowNotification(System.String,BrowserAPI.NotificationAction[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)"/>.</para>
+            <para>
+            Normally, activating a non-persistent notification fires the <see cref="E:BrowserAPI.INotificationBase`1.OnClick">click event</see> on its <see cref="T:BrowserAPI.INotificationInProcess">Notification</see> object,
+            and activating a persistent notification fires the <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/notificationclick_event">notificationclick event</see> on the <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope">ServiceWorkerGlobalScope</see>.
+            </para>
+            <para>
+            When a notification with a navigation URL is activated by the user, the user agent navigates to the specified URL instead of firing either of these events.
+            This allows notifications to direct users to a specific page without requiring an event handler.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationInProcess.Renotify">
+            <summary>
+            <para>Specifies whether the user should be notified after a new notification replaces an old one, as specified in the renotify option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.</para>
+            <para>false is the default; true makes the notification renotify the user.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationInProcess.RequireInteraction">
+            <summary>
+            Returns a boolean value indicating that a notification should remain active until the user clicks or dismisses it, rather than closing automatically.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationInProcess.Silent">
+            <summary>
+            <para>
+            Specifies whether the notification should be silent, i.e., no sounds or vibrations should be issued regardless of the device settings.
+            This is controlled via the silent option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.
+            </para>
+            <para>If set to true, the notification is silent; if set to null (the default value), the device's default settings are respected.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationInProcess.Tag">
+            <summary>
+            <para>Signifies an identifying tag for the notification, as specified in the tag option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.</para>
+            <para>
+            The idea of notification tags is that more than one notification can share the same tag, linking them together.
+            One notification can then be programmatically replaced with another to avoid the users' screen being filled up with a huge number of similar notifications.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationInProcess.Timestamp">
+            <summary>
+            <para>Returns a number, as specified in the timestamp option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.</para>
+            <para>
+            The notification's timestamp can represent the time, in milliseconds since 00:00:00 UTC on 1 January 1970, of the event for which the notification was created,
+            or it can be an arbitrary timestamp that you want associated with the notification.
+            For example, a timestamp for an upcoming meeting could be set in the future, whereas a timestamp for a missed message could be set in the past.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationInProcess.Title">
+            <summary>
+            Indicates the title of the notification, as specified in the title parameter of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationInProcess.Vibrate">
+            <summary>
+            Specifies a vibration pattern for the device's vibration hardware to emit when the notification fires.
+            This is specified in the vibrate option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NotificationInProcess.Close">
+            <summary>
+            Closes/Removes a previously displayed notification.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.Implementation.NotificationsAPI">
+            <summary>
+            The Notifications API allows web pages to control the display of system notifications to the end user.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NotificationsAPI.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            The Notifications API allows web pages to control the display of system notifications to the end user.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">
+            <summary>Creates a new instance of the Notification object.</summary>
+            <remarks>
+            Warning<br/>
+            This creates a <i>Non-persistent notification</i>:<br/>
+            Their lifetime is tied to the lifetime of the page — if the page is closed, the notification can no longer be interacted with.
+            Also, it throws a TypeError when called in nearly all mobile browsers.<br/>
+            Consider creating a <i>Persistent notification</i>: Instead, you need to register a service worker and use <see cref="M:BrowserAPI.IServiceWorkerRegistrationBase`3.ShowNotification(System.String,BrowserAPI.NotificationAction[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)"/>.<br/>
+            For more information, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API#persistent_and_non-persistent_notifications">Persistent and non-persistent notifications</see>.
+            </remarks>
+            <param name="title">Defines a title for the notification, which is shown at the top of the notification window.</param>
+            <param name="badge">Containing the URL of a small icon representing the web application itself. The badge is used by the platform when there is not enough space to display the full notification — for example, in a status bar. It should have less visual priority than the icon and image options. On Android, the badge should accommodate up to 4x display resolution (about 96×96px), and the image will be automatically masked to a monochrome silhouette.</param>
+            <param name="body">Representing the body text of the notification, which is displayed below the title. The default is the empty string.</param>
+            <param name="data">Arbitrary data that you want associated with the notification. This can be of any structured-clonable data type. The default is null.</param>
+            <param name="dir">The direction in which to display the notification. It defaults to <b>"auto"</b>, which just adopts the browser's language setting behavior, but you can override that behavior by setting values of <b>"ltr"</b> and <b>"rtl"</b> (although most browsers seem to ignore these settings.)</param>
+            <param name="icon">Containing the URL of a small image that reinforces the notification — for example, an app logo or a photo of the message sender. It is displayed alongside the notification title and body.</param>
+            <param name="image">Containing the URL of a large image displayed as part of the notification's content body — for example, a news photo or product thumbnail. It has the highest visual priority of the three image options (image, icon, badge). See <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#notifications_with_different_images">Notifications with different images</see> for a comparison of these three image options.</param>
+            <param name="lang">The notification's language, as specified using a string representing a BCP 47 language tag. The default is the empty string.</param>
+            <param name="navigate">Containing a URL to navigate to when the user activates the notification. When set, the user agent navigates to this URL instead of firing the <see cref="E:BrowserAPI.INotificationBase`1.OnClick">click event</see>. The value is parsed relative to the base URL of the page. See <see cref="P:BrowserAPI.INotification.Navigate"/> for more information.</param>
+            <param name="renotify">Specifies whether the user should be notified after a new notification replaces an old one. The default is false, which means they won't be notified. If true, tag must also be set.</param>
+            <param name="requireInteraction">Indicates that a notification should remain active until the user clicks or dismisses it, rather than closing automatically. The default value is false.</param>
+            <param name="silent">Specifies whether the notification should be silent, i.e., no sounds or vibrations should be issued regardless of the device settings. If set to true, the notification is silent; if set to null (the default value), the device's default settings are respected.</param>
+            <param name="tag">Representing an identifying tag for the notification. The default is the empty string.</param>
+            <param name="timestamp">A timestamp, given as Unix time in milliseconds, representing the time associated with the notification. This could be in the past when a notification is used for a message that couldn't immediately be delivered because the device was offline, or in the future for a meeting that is about to start.</param>
+            <param name="vibrate">A vibration pattern for the device's vibration hardware to emit with the notification. If specified, silent must not be true.</param>
+            <param name="cancellationToken"></param>
+            <returns>An instance of the Notification object.</returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationsAPI.Permission">
+            <summary>
+            <para>Representing the current permission to display notifications.</para>
+            <para>
+            Possible values are:<br/>
+            - "denied": The user refuses to have notifications displayed.<br/>
+            - "granted": The user accepts having notifications displayed.<br/>
+            - "default": The user choice is unknown and therefore the browser will act as if the value were denied.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NotificationsAPI.GetPermission(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.NotificationsAPI.Permission" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationsAPI.MaxActions">
+            <summary>
+            <para>The maximum number of actions that can be displayed in a notification.</para>
+            <para>Notification actions are buttons or controls that appear within persistent notifications. Actions are set using the actions option of the second argument of the <see cref="M:BrowserAPI.IServiceWorkerRegistrationBase`3.ShowNotification(System.String,BrowserAPI.NotificationAction[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)"/> method.</para>
+            <para>Browsers typically limit the maximum number of actions they will display for a particular notification. The maxActions property returns that limit, which is the maximum number of elements in the Notification.actions array that will be respected by the user agent.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NotificationsAPI.GetMaxActions(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.NotificationsAPI.MaxActions" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NotificationsAPIBase.RequestPermission(System.Threading.CancellationToken)">
+            <summary>
+            <para>Requests permission from the user to display notifications.</para>
+            <para>
+            Possible values for this string are:<br/>
+            - "granted": The user has explicitly granted permission for the current origin to display system notifications.<br/>
+            - "denied": The user has explicitly denied permission for the current origin to display system notifications.<br/>
+            - "default": The user decision is unknown; in this case the application will act as if permission was denied.
+            </para>
+            </summary>
+            <returns>"granted" | "denied" | "default"</returns>
+        </member>
+        <member name="T:BrowserAPI.Implementation.NotificationsAPIInProcess">
+            <summary>
+            The Notifications API allows web pages to control the display of system notifications to the end user.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NotificationsAPIInProcess.#ctor(BrowserAPI.IModuleManager)">
+            <summary>
+            The Notifications API allows web pages to control the display of system notifications to the end user.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.NotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">
+            <summary>Creates a new instance of the Notification object.</summary>
+            <remarks>
+            Warning<br/>
+            This creates a <i>Non-persistent notification</i>:<br/>
+            Their lifetime is tied to the lifetime of the page — if the page is closed, the notification can no longer be interacted with.
+            Also, it throws a TypeError when called in nearly all mobile browsers.<br/>
+            Consider creating a <i>Persistent notification</i>: Instead, you need to register a service worker and use <see cref="M:BrowserAPI.IServiceWorkerRegistrationBase`3.ShowNotification(System.String,BrowserAPI.NotificationAction[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)"/>.<br/>
+            For more information, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API#persistent_and_non-persistent_notifications">Persistent and non-persistent notifications</see>.
+            </remarks>
+            <param name="title">Defines a title for the notification, which is shown at the top of the notification window.</param>
+            <param name="badge">Containing the URL of a small icon representing the web application itself. The badge is used by the platform when there is not enough space to display the full notification — for example, in a status bar. It should have less visual priority than the icon and image options. On Android, the badge should accommodate up to 4x display resolution (about 96×96px), and the image will be automatically masked to a monochrome silhouette.</param>
+            <param name="body">Representing the body text of the notification, which is displayed below the title. The default is the empty string.</param>
+            <param name="data">Arbitrary data that you want associated with the notification. This can be of any structured-clonable data type. The default is null.</param>
+            <param name="dir">The direction in which to display the notification. It defaults to <b>"auto"</b>, which just adopts the browser's language setting behavior, but you can override that behavior by setting values of <b>"ltr"</b> and <b>"rtl"</b> (although most browsers seem to ignore these settings.)</param>
+            <param name="icon">Containing the URL of a small image that reinforces the notification — for example, an app logo or a photo of the message sender. It is displayed alongside the notification title and body.</param>
+            <param name="image">Containing the URL of a large image displayed as part of the notification's content body — for example, a news photo or product thumbnail. It has the highest visual priority of the three image options (image, icon, badge). See <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#notifications_with_different_images">Notifications with different images</see> for a comparison of these three image options.</param>
+            <param name="lang">The notification's language, as specified using a string representing a BCP 47 language tag. The default is the empty string.</param>
+            <param name="navigate">Containing a URL to navigate to when the user activates the notification. When set, the user agent navigates to this URL instead of firing the <see cref="E:BrowserAPI.INotificationBase`1.OnClick">click event</see>. The value is parsed relative to the base URL of the page. See <see cref="P:BrowserAPI.INotificationInProcess.Navigate"/> for more information.</param>
+            <param name="renotify">Specifies whether the user should be notified after a new notification replaces an old one. The default is false, which means they won't be notified. If true, tag must also be set.</param>
+            <param name="requireInteraction">Indicates that a notification should remain active until the user clicks or dismisses it, rather than closing automatically. The default value is false.</param>
+            <param name="silent">Specifies whether the notification should be silent, i.e., no sounds or vibrations should be issued regardless of the device settings. If set to true, the notification is silent; if set to null (the default value), the device's default settings are respected.</param>
+            <param name="tag">Representing an identifying tag for the notification. The default is the empty string.</param>
+            <param name="timestamp">A timestamp, given as Unix time in milliseconds, representing the time associated with the notification. This could be in the past when a notification is used for a message that couldn't immediately be delivered because the device was offline, or in the future for a meeting that is about to start.</param>
+            <param name="vibrate">A vibration pattern for the device's vibration hardware to emit with the notification. If specified, silent must not be true.</param>
+            <returns>An instance of the Notification object.</returns>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationsAPIInProcess.Permission">
+            <summary>
+            <para>Representing the current permission to display notifications.</para>
+            <para>
+            Possible values are:<br/>
+            - "denied": The user refuses to have notifications displayed.<br/>
+            - "granted": The user accepts having notifications displayed.<br/>
+            - "default": The user choice is unknown and therefore the browser will act as if the value were denied.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.Implementation.NotificationsAPIInProcess.MaxActions">
+            <summary>
+            <para>The maximum number of actions that can be displayed in a notification.</para>
+            <para>Notification actions are buttons or controls that appear within persistent notifications. Actions are set using the actions option of the second argument of the <see cref="M:BrowserAPI.IServiceWorkerRegistrationBase`3.ShowNotification(System.String,BrowserAPI.NotificationAction[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)"/> method.</para>
+            <para>Browsers typically limit the maximum number of actions they will display for a particular notification. The maxActions property returns that limit, which is the maximum number of elements in the Notification.actions array that will be respected by the user agent.</para>
             </summary>
         </member>
         <member name="T:BrowserAPI.Implementation.Permissions">
@@ -14059,7 +14598,7 @@
         </member>
         <member name="M:BrowserAPI.Implementation.PermissionStatus.DisposeAsync">
             <summary>
-            Releases the JS instance for this media recorder.
+            Releases the JS instance for this permission object.
             </summary>
             <returns></returns>
         </member>
@@ -14120,7 +14659,7 @@
         </member>
         <member name="M:BrowserAPI.Implementation.PermissionStatusInProcess.Dispose">
             <summary>
-            Releases the JS instance for this media recorder.
+            Releases the JS instance for this permission object.
             </summary>
         </member>
         <member name="P:BrowserAPI.Implementation.PermissionStatusInProcess.Name">
@@ -14672,7 +15211,7 @@
         </member>
         <member name="M:BrowserAPI.Implementation.Sensor.DisposeAsync">
             <summary>
-            Releases the JS instance for this service worker.
+            Releases the JS instance for this sensor.
             </summary>
         </member>
         <member name="P:BrowserAPI.Implementation.Sensor.Activated">
@@ -14767,7 +15306,7 @@
         </member>
         <member name="M:BrowserAPI.Implementation.SensorInProcess.Dispose">
             <summary>
-            Releases the JS instance for this service worker.
+            Releases the JS instance for this sensor.
             </summary>
         </member>
         <member name="P:BrowserAPI.Implementation.SensorInProcess.Activated">
@@ -15035,7 +15574,7 @@
         </member>
         <member name="M:BrowserAPI.Implementation.SensorAPIBase.Dispose">
             <summary>
-            Releases the <see cref="T:BrowserAPI.Implementation.SensorAPIBase.EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="E:BrowserAPI.Implementation.SensorAPIBase.OnDeviceMotion">
@@ -15322,22 +15861,22 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:BrowserAPI.Implementation.ServiceWorkerContainerBase`3">
+        <member name="T:BrowserAPI.Implementation.ServiceWorkerContainerBase`4">
             Base interface of <see cref="T:BrowserAPI.IServiceWorkerContainer"/> and <see cref="T:BrowserAPI.IServiceWorkerContainerInProcess"/>.<br/>
             It contains common functionality for both interfaces.<br/>
             It is not intended to use this interface directly.
         </member>
-        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerBase`3.#ctor(BrowserAPI.IModuleManager)">
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerBase`4.#ctor(BrowserAPI.IModuleManager)">
             Base interface of <see cref="T:BrowserAPI.IServiceWorkerContainer"/> and <see cref="T:BrowserAPI.IServiceWorkerContainerInProcess"/>.<br/>
             It contains common functionality for both interfaces.<br/>
             It is not intended to use this interface directly.
         </member>
-        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerBase`3.Dispose">
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerBase`4.Dispose">
             <summary>
-            Releases the <see cref="T:BrowserAPI.Implementation.ServiceWorkerContainerBase`3.EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
-        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerBase`3.Register(System.String,System.Threading.CancellationToken)">
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerBase`4.Register(System.String,System.Threading.CancellationToken)">
             <summary>
             Registers a service worker.
             </summary>
@@ -15345,7 +15884,7 @@
             <param name="cancellationToken"></param>
             <returns>true, if service worker is supported, otherwise false</returns>
         </member>
-        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerBase`3.RegisterWithWorkerRegistration(System.String,System.Threading.CancellationToken)">
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerBase`4.RegisterWithWorkerRegistration(System.String,System.Threading.CancellationToken)">
             <summary>
             Registers a service worker and returns a <i>ServiceWorkerRegistration</i> object, which can be used to track the registration.
             </summary>
@@ -15353,19 +15892,19 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="P:BrowserAPI.Implementation.ServiceWorkerContainerBase`3.Ready">
+        <member name="P:BrowserAPI.Implementation.ServiceWorkerContainerBase`4.Ready">
             <summary>
             Provides a way of delaying code execution until a service worker is active.
             It returns a Promise that will never reject, and which waits indefinitely until the ServiceWorkerRegistration associated with the current page has an ServiceWorkerRegistration.active worker.
             Once that condition is met, it resolves with the ServiceWorkerRegistration.
             </summary>
         </member>
-        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerBase`3.GetReady(System.Threading.CancellationToken)">
-            <inheritdoc cref="P:BrowserAPI.Implementation.ServiceWorkerContainerBase`3.Ready" />
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerBase`4.GetReady(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.Implementation.ServiceWorkerContainerBase`4.Ready" />
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerBase`3.GetRegistration(System.String,System.Threading.CancellationToken)">
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerBase`4.GetRegistration(System.String,System.Threading.CancellationToken)">
             <summary>
             Gets a ServiceWorkerRegistration object whose scope URL matches the provided client URL.
             The method returns a Promise that resolves to a ServiceWorkerRegistration or undefined.
@@ -15374,7 +15913,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerBase`3.GetRegistrations(System.Threading.CancellationToken)">
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerContainerBase`4.GetRegistrations(System.Threading.CancellationToken)">
             <summary>
             Gets all ServiceWorkerRegistrations associated with a ServiceWorkerContainer, in an array.
             The method returns a Promise that resolves to an array of ServiceWorkerRegistration.
@@ -15382,12 +15921,12 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="E:BrowserAPI.Implementation.ServiceWorkerContainerBase`3.OnControllerChange">
+        <member name="E:BrowserAPI.Implementation.ServiceWorkerContainerBase`4.OnControllerChange">
             <summary>
             Occurs when the document's associated <i>ServiceWorkerRegistration</i> acquires a new active worker.
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.ServiceWorkerContainerBase`3.OnMessage">
+        <member name="E:BrowserAPI.Implementation.ServiceWorkerContainerBase`4.OnMessage">
             <summary>
             <para>Is used in a page controlled by a service worker to receive messages from the service worker.</para>
             <para>Parameter is <see href="https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent/data">MessageEvent.data</see> as json.</para>
@@ -15506,26 +16045,17 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:BrowserAPI.Implementation.ServiceWorkerRegistrationBase`2">
+        <member name="T:BrowserAPI.Implementation.ServiceWorkerRegistrationBase`3">
             Base interface of <see cref="T:BrowserAPI.IServiceWorkerRegistration"/> and <see cref="T:BrowserAPI.IServiceWorkerRegistrationInProcess"/>.<br/>
             It contains common functionality for both interfaces.<br/>
             It is not intended to use this interface directly.
         </member>
-        <member name="M:BrowserAPI.Implementation.ServiceWorkerRegistrationBase`2.#ctor(`0)">
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerRegistrationBase`3.#ctor(`0)">
             Base interface of <see cref="T:BrowserAPI.IServiceWorkerRegistration"/> and <see cref="T:BrowserAPI.IServiceWorkerRegistrationInProcess"/>.<br/>
             It contains common functionality for both interfaces.<br/>
             It is not intended to use this interface directly.
         </member>
-        <member name="M:BrowserAPI.Implementation.ServiceWorkerRegistrationBase`2.Unregister(System.Threading.CancellationToken)">
-            <summary>
-            Unregisters the service worker registration and returns a Promise.
-            The promise will resolve to false if no registration was found, otherwise it resolves to true irrespective of whether unregistration happened or not (it may not unregister if someone else just called ServiceWorkerContainer.register() with the same scope.)
-            The service worker will finish any ongoing operations before it is unregistered.
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns>false if no registration was found, otherwise true (irrespective of whether unregistration happened or not)</returns>
-        </member>
-        <member name="M:BrowserAPI.Implementation.ServiceWorkerRegistrationBase`2.Update(System.Threading.CancellationToken)">
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerRegistrationBase`3.Update(System.Threading.CancellationToken)">
             <summary>
             Attempts to update the service worker.
             It fetches the worker's script URL, and if the new worker is not byte-by-byte identical to the current worker, it installs the new worker.
@@ -15534,12 +16064,56 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:BrowserAPI.Implementation.ServiceWorkerRegistrationBase`2.DisposeEventTrigger">
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerRegistrationBase`3.Unregister(System.Threading.CancellationToken)">
+            <summary>
+            Unregisters the service worker registration and returns a Promise.
+            The promise will resolve to false if no registration was found, otherwise it resolves to true irrespective of whether unregistration happened or not (it may not unregister if someone else just called ServiceWorkerContainer.register() with the same scope.)
+            The service worker will finish any ongoing operations before it is unregistered.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns>false if no registration was found, otherwise true (irrespective of whether unregistration happened or not)</returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerRegistrationBase`3.ShowNotification(System.String,BrowserAPI.NotificationAction[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">
+            <summary>
+            <para>Creates a notification on an active service worker.</para>
+            <para>This is a persistent notification, it remains interactive beyond the lifetime of an individual page.</para>
+            </summary>
+            <param name="title">Defines a title for the notification, which is shown at the top of the notification window.</param>
+            <param name="actions">An array of actions to display in the notification, for which the default is an empty array.</param>
+            <param name="badge">Containing the URL of a small icon representing the web application itself. The badge is used by the platform when there is not enough space to display the full notification — for example, in a status bar. It should have less visual priority than the icon and image options. On Android, the badge should accommodate up to 4x display resolution (about 96×96px), and the image will be automatically masked to a monochrome silhouette.</param>
+            <param name="body">Representing the body text of the notification, which is displayed below the title. The default is the empty string.</param>
+            <param name="data">Arbitrary data that you want associated with the notification. This can be of any structured-clonable data type. The default is null.</param>
+            <param name="dir">The direction in which to display the notification. It defaults to <b>"auto"</b>, which just adopts the browser's language setting behavior, but you can override that behavior by setting values of <b>"ltr"</b> and <b>"rtl"</b> (although most browsers seem to ignore these settings.)</param>
+            <param name="icon">Containing the URL of a small image that reinforces the notification — for example, an app logo or a photo of the message sender. It is displayed alongside the notification title and body.</param>
+            <param name="image">Containing the URL of a large image displayed as part of the notification's content body — for example, a news photo or product thumbnail. It has the highest visual priority of the three image options (image, icon, badge). See <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#notifications_with_different_images">Notifications with different images</see> for a comparison of these three image options.</param>
+            <param name="lang">The notification's language, as specified using a string representing a BCP 47 language tag. The default is the empty string.</param>
+            <param name="navigate">Containing a URL to navigate to when the user activates the notification. When set, the user agent navigates to this URL instead of firing the notificationclick event. The value is parsed relative to the base URL of the service worker. See <see cref="P:BrowserAPI.INotificationInProcess.Navigate"/> for more information.</param>
+            <param name="renotify">Specifies whether the user should be notified after a new notification replaces an old one. The default is false, which means they won't be notified. If true, tag must also be set.</param>
+            <param name="requireInteraction">Indicates that a notification should remain active until the user clicks or dismisses it, rather than closing automatically. The default value is false.</param>
+            <param name="silent">Specifies whether the notification is silent (no sounds or vibrations issued), regardless of the device settings. The default, null, means to respect device defaults. If true, then vibrate must not be present.</param>
+            <param name="tag">Representing an identifying tag for the notification. The default is the empty string.</param>
+            <param name="timestamp">A timestamp, given as Unix time in milliseconds, representing the time associated with the notification. This could be in the past when a notification is used for a message that couldn't immediately be delivered because the device was offline, or in the future for a meeting that is about to start.</param>
+            <param name="vibrate">A vibration pattern for the device's vibration hardware to emit with the notification. If specified, silent must not be true.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerRegistrationBase`3.GetNotifications(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Returns a list of the notifications in the order that they were created from the current origin via the current service worker registration.
+            Origins can have many active but differently-scoped service worker registrations.
+            Notifications created by one service worker on the same origin will not be available to other active service workers on that same origin.
+            </summary>
+            <remarks>Do not forget to <i>Dispse</i> all notification object when you done with it.</remarks>
+            <param name="tag">Represents a notification tag. If specified, only notifications that have this tag will be returned.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.Implementation.ServiceWorkerRegistrationBase`3.DisposeEventTrigger">
             <summary>
             Derived class should implement <see cref="T:System.IDisposable"/> or <see cref="T:System.IAsyncDisposable"/> and call this method.
             </summary>
         </member>
-        <member name="E:BrowserAPI.Implementation.ServiceWorkerRegistrationBase`2.OnUpdateFound">
+        <member name="E:BrowserAPI.Implementation.ServiceWorkerRegistrationBase`3.OnUpdateFound">
             <summary>
             Is fired any time the <i>ServiceWorkerRegistration.installing</i> property acquires a new service worker.
             </summary>
@@ -16455,7 +17029,7 @@
         </member>
         <member name="M:BrowserAPI.Implementation.WindowBase`2.Dispose">
             <summary>
-            Releases the <see cref="T:BrowserAPI.Implementation.WindowBase`2.EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="E:BrowserAPI.Implementation.WindowBase`2.OnError">
@@ -18311,7 +18885,7 @@
         </member>
         <member name="M:BrowserAPI.Implementation.ScreenBase.Dispose">
             <summary>
-            Releases the <see cref="T:BrowserAPI.Implementation.ScreenBase.EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.ScreenBase.LockOrientation(System.String,System.Threading.CancellationToken)">
@@ -18454,7 +19028,7 @@
         </member>
         <member name="M:BrowserAPI.Implementation.ScreenDetailed.DisposeAsync">
             <summary>
-            Releases the JS instance for this ScreenDetails.
+            Releases the JS instance for this ScreenDetailed.
             </summary>
             <returns></returns>
         </member>
@@ -18732,7 +19306,7 @@
         </member>
         <member name="M:BrowserAPI.Implementation.ScreenDetailedInProcess.Dispose">
             <summary>
-            Releases the JS instance for this ScreenDetails.
+            Releases the JS instance for this ScreenDetailed.
             </summary>
         </member>
         <member name="P:BrowserAPI.Implementation.ScreenDetailedInProcess.Left">
@@ -19406,7 +19980,7 @@
         <member name="T:BrowserAPI.DragEvent">
             <inheritdoc cref="T:BrowserAPI.IDragEvent" />
             <remarks>
-            Note: Do not forget to <i>Dispse</i> each single file in <see cref="P:BrowserAPI.DragEvent.Files"/> when you done with it.
+            Note: Do not forget to <i>Dispse</i> all files in <see cref="P:BrowserAPI.DragEvent.Files"/> when you done with it.
             </remarks>
             <param name="DropEffect">Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".</param>
             <param name="EffectAllowed">Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".</param>
@@ -19416,7 +19990,7 @@
         <member name="M:BrowserAPI.DragEvent.#ctor(System.String,System.String,System.String[],BrowserAPI.IFile[])">
             <inheritdoc cref="T:BrowserAPI.IDragEvent" />
             <remarks>
-            Note: Do not forget to <i>Dispse</i> each single file in <see cref="P:BrowserAPI.DragEvent.Files"/> when you done with it.
+            Note: Do not forget to <i>Dispse</i> all files in <see cref="P:BrowserAPI.DragEvent.Files"/> when you done with it.
             </remarks>
             <param name="DropEffect">Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".</param>
             <param name="EffectAllowed">Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".</param>
@@ -19438,7 +20012,7 @@
         <member name="T:BrowserAPI.DragEventInProcess">
             <inheritdoc cref="T:BrowserAPI.IDragEvent" />
             <remarks>
-            Note: Do not forget to <i>Dispse</i> each single file in <see cref="P:BrowserAPI.DragEventInProcess.Files"/> when you done with it.
+            Note: Do not forget to <i>Dispse</i> all files in <see cref="P:BrowserAPI.DragEventInProcess.Files"/> when you done with it.
             </remarks>
             <param name="DropEffect">Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".</param>
             <param name="EffectAllowed">Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".</param>
@@ -19448,7 +20022,7 @@
         <member name="M:BrowserAPI.DragEventInProcess.#ctor(System.String,System.String,System.String[],BrowserAPI.IFileInProcess[])">
             <inheritdoc cref="T:BrowserAPI.IDragEvent" />
             <remarks>
-            Note: Do not forget to <i>Dispse</i> each single file in <see cref="P:BrowserAPI.DragEventInProcess.Files"/> when you done with it.
+            Note: Do not forget to <i>Dispse</i> all files in <see cref="P:BrowserAPI.DragEventInProcess.Files"/> when you done with it.
             </remarks>
             <param name="DropEffect">Gets the type of drag-and-drop operation currently selected or sets the operation to a new type. The value must be "none", "copy", "link" or "move".</param>
             <param name="EffectAllowed">Provides all of the types of operations that are possible. Must be one of "none", "copy", "copyLink", "copyMove", "link", "linkMove", "move", "all" or "uninitialized".</param>
@@ -22078,6 +22652,56 @@
         <member name="P:BrowserAPI.InstalledRelatedApps.Version">
             <summary>Represents the related app's version.</summary>
         </member>
+        <member name="T:BrowserAPI.NotificationAction">
+            <summary>
+            <para>
+            Notification actions are buttons or controls that appear within persistent notifications.
+            They are set using the actions option of the second argument of the <see cref="M:BrowserAPI.IServiceWorkerRegistrationBase`3.ShowNotification(System.String,BrowserAPI.NotificationAction[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)"/> method.
+            Note that actions are not available for non-persistent notifications.
+            If you pass an options object with an actions property that is anything other than null to the Notification() constructor, a TypeError is thrown.
+            </para>
+            <para>
+            Clicking the button associated with an action navigates to the URL set in the navigate option if one is specified.
+            Otherwise, it fires a notificationclick event on the service worker that includes the action that was selected (and the associated Notification instance),
+            so the worker can handle it without the user ever switching to your page.
+            </para>
+            </summary>
+            <param name="Action">Identifies a user action to be displayed on the notification.</param>
+            <param name="Title">Contains action text to be shown to the user.</param>
+            <param name="Icon">Contains the URL of an icon to display with the action.</param>
+            <param name="Navigate">Contains a URL to navigate to when the user activates this action. When set, the user agent navigates to this URL instead of firing the notificationclick event. See <see cref="P:BrowserAPI.INotification.Navigate"/> for more information.</param>
+        </member>
+        <member name="M:BrowserAPI.NotificationAction.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            <para>
+            Notification actions are buttons or controls that appear within persistent notifications.
+            They are set using the actions option of the second argument of the <see cref="M:BrowserAPI.IServiceWorkerRegistrationBase`3.ShowNotification(System.String,BrowserAPI.NotificationAction[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)"/> method.
+            Note that actions are not available for non-persistent notifications.
+            If you pass an options object with an actions property that is anything other than null to the Notification() constructor, a TypeError is thrown.
+            </para>
+            <para>
+            Clicking the button associated with an action navigates to the URL set in the navigate option if one is specified.
+            Otherwise, it fires a notificationclick event on the service worker that includes the action that was selected (and the associated Notification instance),
+            so the worker can handle it without the user ever switching to your page.
+            </para>
+            </summary>
+            <param name="Action">Identifies a user action to be displayed on the notification.</param>
+            <param name="Title">Contains action text to be shown to the user.</param>
+            <param name="Icon">Contains the URL of an icon to display with the action.</param>
+            <param name="Navigate">Contains a URL to navigate to when the user activates this action. When set, the user agent navigates to this URL instead of firing the notificationclick event. See <see cref="P:BrowserAPI.INotification.Navigate"/> for more information.</param>
+        </member>
+        <member name="P:BrowserAPI.NotificationAction.Action">
+            <summary>Identifies a user action to be displayed on the notification.</summary>
+        </member>
+        <member name="P:BrowserAPI.NotificationAction.Title">
+            <summary>Contains action text to be shown to the user.</summary>
+        </member>
+        <member name="P:BrowserAPI.NotificationAction.Icon">
+            <summary>Contains the URL of an icon to display with the action.</summary>
+        </member>
+        <member name="P:BrowserAPI.NotificationAction.Navigate">
+            <summary>Contains a URL to navigate to when the user activates this action. When set, the user agent navigates to this URL instead of firing the notificationclick event. See <see cref="P:BrowserAPI.INotification.Navigate"/> for more information.</summary>
+        </member>
         <member name="T:BrowserAPI.DeviceMotionEvent">
             <summary>
             Provides web developers with information about the speed of changes for the device's position and orientation.
@@ -23758,7 +24382,7 @@
         </member>
         <member name="M:BrowserAPI.IDevicePosture.Dispose">
             <summary>
-            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="E:BrowserAPI.IDevicePosture.OnChange">
@@ -23774,7 +24398,7 @@
         </member>
         <member name="M:BrowserAPI.IDevicePostureInProcess.Dispose">
             <summary>
-            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="E:BrowserAPI.IDevicePostureInProcess.OnChange">
@@ -24462,7 +25086,7 @@
         </member>
         <member name="M:BrowserAPI.IDocumentBase`2.Dispose">
             <summary>
-            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="P:BrowserAPI.IDocumentBase`2.NodeName">
@@ -26289,7 +26913,7 @@
             This method uses the <see href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryHandle/values">values()</see> Asynchronous iterator method to create these lists.
             Since returning each entry one by one would be unnecessary slow, all entries are iterated and returned at once.
             </para>
-            <para>Do not forget to call <i>DispseAsync()</i> on each single item in fileList and directoryList when you done with it.</para>
+            <para>Do not forget to call <i>DispseAsync()</i> on all items in fileList and directoryList when you done with it.</para>
             </remarks>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -27043,7 +27667,7 @@
         </member>
         <member name="M:BrowserAPI.IGamepadAPIBase`2.Dispose">
             <summary>
-            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="E:BrowserAPI.IGamepadAPIBase`2.OnGamepadConnected">
@@ -27524,7 +28148,7 @@
         </member>
         <member name="M:BrowserAPI.IHistory.Dispose">
             <summary>
-            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="E:BrowserAPI.IHistory.OnPageReveal">
@@ -27596,7 +28220,7 @@
         </member>
         <member name="M:BrowserAPI.IHistoryInProcess.Dispose">
             <summary>
-            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="E:BrowserAPI.IHistoryInProcess.OnPageReveal">
@@ -27749,7 +28373,7 @@
             <summary>
             Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">HTMLElement</see>.
             </summary>
-            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose both when you are done with them.</remarks>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.IHTMLDialogElement.ClosedBy">
@@ -27874,7 +28498,7 @@
             <summary>
             Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">HTMLElement</see>.
             </summary>
-            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose both when you are done with them.</remarks>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.IHTMLDialogElementInProcess.ClosedBy">
@@ -28003,14 +28627,14 @@
             <summary>
             Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement">HTMLDialogElement</see>.
             </summary>
-            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose both when you are done with them.</remarks>
             <returns></returns>
         </member>
         <member name="M:BrowserAPI.IHTMLElement.ToHTMLMediaElement(System.Threading.CancellationToken)">
             <summary>
             Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement">HTMLMediaElement</see>.
             </summary>
-            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose both when you are done with them.</remarks>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.IHTMLElement.AccessKey">
@@ -31742,14 +32366,14 @@
             <summary>
             Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement">HTMLDialogElement</see>.
             </summary>
-            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose both when you are done with them.</remarks>
             <returns></returns>
         </member>
         <member name="M:BrowserAPI.IHTMLElementInProcess.ToHTMLMediaElement">
             <summary>
             Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement">HTMLMediaElement</see>.
             </summary>
-            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose both when you are done with them.</remarks>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.IHTMLElementInProcess.AccessKey">
@@ -33556,7 +34180,7 @@
             <summary>
             Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">HTMLElement</see>.
             </summary>
-            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose both when you are done with them.</remarks>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.IHTMLMediaElement.Src">
@@ -34309,7 +34933,7 @@
             <summary>
             Creates a new JS object and a new C# object to represent the underlying html element as <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">HTMLElement</see>.
             </summary>
-            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose each object when you are done with it.</remarks>
+            <remarks>Note: The original object as well as the returned result must be disposed manually. Do not forget to Dispose both when you are done with them.</remarks>
             <returns></returns>
         </member>
         <member name="P:BrowserAPI.IHTMLMediaElementInProcess.Src">
@@ -36102,7 +36726,7 @@
         </member>
         <member name="M:BrowserAPI.INetworkInformation.Dispose">
             <summary>
-            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="E:BrowserAPI.INetworkInformation.OnOnline">
@@ -36129,7 +36753,7 @@
         </member>
         <member name="M:BrowserAPI.INetworkInformationInProcess.Dispose">
             <summary>
-            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="E:BrowserAPI.INetworkInformationInProcess.OnOnline">
@@ -36200,6 +36824,511 @@
         <member name="P:BrowserAPI.INetworkInformationInProcess.SaveData">
             <summary>
             Returns true if the user has set a reduced data usage option on the user agent.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.INotification">
+            <summary>
+            <para>The Notification interface of the Notifications API is used to configure and display desktop notifications to the user.</para>
+            <para>These notifications' appearance and specific functionality vary across platforms but generally they provide a way to asynchronously provide information to the user.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="!:DisposeAsync"/> when you are done with it.</remarks>
+        </member>
+        <member name="P:BrowserAPI.INotification.Actions">
+            <summary>
+            Provides the actions available for users to select when interacting with the notification.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotification.GetActions(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.INotification.Actions" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INotification.Badge">
+            <summary>
+            <para>
+            Contains the URL of a small icon representing the web application itself.
+            The badge is used by the platform when there is not enough space to display the full notification — for example, in a status bar.
+            On Android, the badge should accommodate up to 4x display resolution (about 96×96px), and the image will be automatically masked to a monochrome silhouette.
+            </para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#notifications_with_different_images">Notifications with different images</see> for a comparison of the three image options.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotification.GetBadge(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.INotification.Badge" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INotification.Body">
+            <summary>
+            Indicates the body string of the notification, as specified in the body option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotification.GetBody(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.INotification.Body" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INotification.Data">
+            <summary>
+            <para>Returns a structured clone of the notification's data, as specified in the data option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.</para>
+            <para>The notification's data can be any arbitrary data that you want associated with the notification.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotification.GetData(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.INotification.Data" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INotification.Dir">
+            <summary>
+            <para>Indicates the text direction of the notification, as specified in the dir option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.</para>
+            <para>
+            Possible values are:<br/>
+            - "auto": adopts the browser's language setting behavior (the default).<br/>
+            - "ltr": left to right.<br/>
+            - "rtl": right to left.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotification.GetDir(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.INotification.Dir" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INotification.Icon">
+            <summary>
+            <para>Contains the URL of a small image that reinforces the notification — for example, an app logo or a photo of the message sender. It is displayed alongside the notification title and body.</para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#notifications_with_different_images">Notifications with different images</see> for a comparison of the three image options.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotification.GetIcon(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.INotification.Icon" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INotification.Image">
+            <summary>
+            <para>Contains the URL of a large image displayed as part of the notification's content body — for example, a news photo or product thumbnail. It has the highest visual priority of the three image options (image, icon, badge).</para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#notifications_with_different_images">Notifications with different images</see> for a comparison of the three image options.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotification.GetImage(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.INotification.Image" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INotification.Lang">
+            <summary>
+            <para>Indicates the language used in the notification, as specified in the lang option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.</para>
+            <para>The language itself is specified using a string representing a <see href="https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag">BCP 47 language tag</see>.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotification.GetLang(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.INotification.Lang" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INotification.Navigate">
+            <summary>
+            <para>Contains the URL the user agent will navigate to when the user activates the notification.</para>
+            <para>This is the resolved value of the URL, if any, that was specified in the navigate option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see> or <see cref="M:BrowserAPI.IServiceWorkerRegistrationBase`3.ShowNotification(System.String,BrowserAPI.NotificationAction[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)"/>.</para>
+            <para>
+            Normally, activating a non-persistent notification fires the <see cref="E:BrowserAPI.INotificationBase`1.OnClick">click event</see> on its <see cref="T:BrowserAPI.INotification">Notification</see> object,
+            and activating a persistent notification fires the <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/notificationclick_event">notificationclick event</see> on the <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope">ServiceWorkerGlobalScope</see>.
+            </para>
+            <para>
+            When a notification with a navigation URL is activated by the user, the user agent navigates to the specified URL instead of firing either of these events.
+            This allows notifications to direct users to a specific page without requiring an event handler.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotification.GetNavigate(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.INotification.Navigate" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INotification.Renotify">
+            <summary>
+            <para>Specifies whether the user should be notified after a new notification replaces an old one, as specified in the renotify option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.</para>
+            <para>false is the default; true makes the notification renotify the user.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotification.GetRenotify(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.INotification.Renotify" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INotification.RequireInteraction">
+            <summary>
+            Returns a boolean value indicating that a notification should remain active until the user clicks or dismisses it, rather than closing automatically.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotification.GetRequireInteraction(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.INotification.RequireInteraction" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INotification.Silent">
+            <summary>
+            <para>
+            Specifies whether the notification should be silent, i.e., no sounds or vibrations should be issued regardless of the device settings.
+            This is controlled via the silent option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.
+            </para>
+            <para>If set to true, the notification is silent; if set to null (the default value), the device's default settings are respected.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotification.GetSilent(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.INotification.Silent" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INotification.Tag">
+            <summary>
+            <para>Signifies an identifying tag for the notification, as specified in the tag option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.</para>
+            <para>
+            The idea of notification tags is that more than one notification can share the same tag, linking them together.
+            One notification can then be programmatically replaced with another to avoid the users' screen being filled up with a huge number of similar notifications.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotification.GetTag(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.INotification.Tag" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INotification.Timestamp">
+            <summary>
+            <para>Returns a number, as specified in the timestamp option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.</para>
+            <para>
+            The notification's timestamp can represent the time, in milliseconds since 00:00:00 UTC on 1 January 1970, of the event for which the notification was created,
+            or it can be an arbitrary timestamp that you want associated with the notification.
+            For example, a timestamp for an upcoming meeting could be set in the future, whereas a timestamp for a missed message could be set in the past.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotification.GetTimestamp(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.INotification.Timestamp" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INotification.Title">
+            <summary>
+            Indicates the title of the notification, as specified in the title parameter of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotification.GetTitle(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.INotification.Title" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INotification.Vibrate">
+            <summary>
+            Specifies a vibration pattern for the device's vibration hardware to emit when the notification fires.
+            This is specified in the vibrate option of the <see cref="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">Notification constructor</see>.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotification.GetVibrate(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.INotification.Vibrate" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.INotification.Close(System.Threading.CancellationToken)">
+            <summary>
+            Closes/Removes a previously displayed notification.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.INotificationBase`1">
+            Base interface of <see cref="T:BrowserAPI.INotification"/> and <see cref="T:BrowserAPI.INotificationInProcess"/>.<br/>
+            It contains common functionality for both interfaces.<br/>
+            It is not intended to use this interface directly.
+        </member>
+        <member name="E:BrowserAPI.INotificationBase`1.OnClick">
+            <summary>
+            <para>Fires when the user clicks on displayed Notification.</para>
+            <para>The default behavior is to move the focus to the viewport of the notification's related browsing context. If you don't want that behavior, call preventDefault() on the event object.</para>
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.INotificationBase`1.OnClose">
+            <summary>
+            Fires when a Notification is closed.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.INotificationBase`1.OnError">
+            <summary>
+            Fires when something goes wrong with a Notification (in many cases an error preventing the notification from being displayed.)
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.INotificationBase`1.OnShow">
+            <summary>
+            Fires when a Notification is displayed.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.INotificationInProcess">
+            <summary>
+            <para>The Notification interface of the Notifications API is used to configure and display desktop notifications to the user.</para>
+            <para>These notifications' appearance and specific functionality vary across platforms but generally they provide a way to asynchronously provide information to the user.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="!:Dispose"/> when you are done with it.</remarks>
+        </member>
+        <member name="P:BrowserAPI.INotificationInProcess.Actions">
+            <summary>
+            Provides the actions available for users to select when interacting with the notification.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INotificationInProcess.Badge">
+            <summary>
+            <para>
+            Contains the URL of a small icon representing the web application itself.
+            The badge is used by the platform when there is not enough space to display the full notification — for example, in a status bar.
+            On Android, the badge should accommodate up to 4x display resolution (about 96×96px), and the image will be automatically masked to a monochrome silhouette.
+            </para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#notifications_with_different_images">Notifications with different images</see> for a comparison of the three image options.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INotificationInProcess.Body">
+            <summary>
+            Indicates the body string of the notification, as specified in the body option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INotificationInProcess.Data">
+            <summary>
+            <para>Returns a structured clone of the notification's data, as specified in the data option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.</para>
+            <para>The notification's data can be any arbitrary data that you want associated with the notification.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INotificationInProcess.Dir">
+            <summary>
+            <para>Indicates the text direction of the notification, as specified in the dir option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.</para>
+            <para>
+            Possible values are:<br/>
+            - "auto": adopts the browser's language setting behavior (the default).<br/>
+            - "ltr": left to right.<br/>
+            - "rtl": right to left.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INotificationInProcess.Icon">
+            <summary>
+            <para>Contains the URL of a small image that reinforces the notification — for example, an app logo or a photo of the message sender. It is displayed alongside the notification title and body.</para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#notifications_with_different_images">Notifications with different images</see> for a comparison of the three image options.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INotificationInProcess.Image">
+            <summary>
+            <para>Contains the URL of a large image displayed as part of the notification's content body — for example, a news photo or product thumbnail. It has the highest visual priority of the three image options (image, icon, badge).</para>
+            <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#notifications_with_different_images">Notifications with different images</see> for a comparison of the three image options.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INotificationInProcess.Lang">
+            <summary>
+            <para>Indicates the language used in the notification, as specified in the lang option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.</para>
+            <para>The language itself is specified using a string representing a <see href="https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag">BCP 47 language tag</see>.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INotificationInProcess.Navigate">
+            <summary>
+            <para>Contains the URL the user agent will navigate to when the user activates the notification.</para>
+            <para>This is the resolved value of the URL, if any, that was specified in the navigate option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see> or <see cref="M:BrowserAPI.IServiceWorkerRegistrationBase`3.ShowNotification(System.String,BrowserAPI.NotificationAction[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)"/>.</para>
+            <para>
+            Normally, activating a non-persistent notification fires the <see cref="E:BrowserAPI.INotificationBase`1.OnClick">click event</see> on its <see cref="T:BrowserAPI.INotificationInProcess">Notification</see> object,
+            and activating a persistent notification fires the <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/notificationclick_event">notificationclick event</see> on the <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope">ServiceWorkerGlobalScope</see>.
+            </para>
+            <para>
+            When a notification with a navigation URL is activated by the user, the user agent navigates to the specified URL instead of firing either of these events.
+            This allows notifications to direct users to a specific page without requiring an event handler.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INotificationInProcess.Renotify">
+            <summary>
+            <para>Specifies whether the user should be notified after a new notification replaces an old one, as specified in the renotify option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.</para>
+            <para>false is the default; true makes the notification renotify the user.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INotificationInProcess.RequireInteraction">
+            <summary>
+            Returns a boolean value indicating that a notification should remain active until the user clicks or dismisses it, rather than closing automatically.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INotificationInProcess.Silent">
+            <summary>
+            <para>
+            Specifies whether the notification should be silent, i.e., no sounds or vibrations should be issued regardless of the device settings.
+            This is controlled via the silent option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.
+            </para>
+            <para>If set to true, the notification is silent; if set to null (the default value), the device's default settings are respected.</para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INotificationInProcess.Tag">
+            <summary>
+            <para>Signifies an identifying tag for the notification, as specified in the tag option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.</para>
+            <para>
+            The idea of notification tags is that more than one notification can share the same tag, linking them together.
+            One notification can then be programmatically replaced with another to avoid the users' screen being filled up with a huge number of similar notifications.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INotificationInProcess.Timestamp">
+            <summary>
+            <para>Returns a number, as specified in the timestamp option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.</para>
+            <para>
+            The notification's timestamp can represent the time, in milliseconds since 00:00:00 UTC on 1 January 1970, of the event for which the notification was created,
+            or it can be an arbitrary timestamp that you want associated with the notification.
+            For example, a timestamp for an upcoming meeting could be set in the future, whereas a timestamp for a missed message could be set in the past.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INotificationInProcess.Title">
+            <summary>
+            Indicates the title of the notification, as specified in the title parameter of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INotificationInProcess.Vibrate">
+            <summary>
+            Specifies a vibration pattern for the device's vibration hardware to emit when the notification fires.
+            This is specified in the vibrate option of the <see cref="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">Notification constructor</see>.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotificationInProcess.Close">
+            <summary>
+            Closes/Removes a previously displayed notification.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.INotificationsAPI">
+            <summary>
+            The Notifications API allows web pages to control the display of system notifications to the end user.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">
+            <summary>Creates a new instance of the Notification object.</summary>
+            <remarks>
+            Warning<br/>
+            This creates a <i>Non-persistent notification</i>:<br/>
+            Their lifetime is tied to the lifetime of the page — if the page is closed, the notification can no longer be interacted with.
+            Also, it throws a TypeError when called in nearly all mobile browsers.<br/>
+            Consider creating a <i>Persistent notification</i>: Instead, you need to register a service worker and use <see cref="M:BrowserAPI.IServiceWorkerRegistrationBase`3.ShowNotification(System.String,BrowserAPI.NotificationAction[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)"/>.<br/>
+            For more information, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API#persistent_and_non-persistent_notifications">Persistent and non-persistent notifications</see>.
+            </remarks>
+            <param name="title">Defines a title for the notification, which is shown at the top of the notification window.</param>
+            <param name="badge">Containing the URL of a small icon representing the web application itself. The badge is used by the platform when there is not enough space to display the full notification — for example, in a status bar. It should have less visual priority than the icon and image options. On Android, the badge should accommodate up to 4x display resolution (about 96×96px), and the image will be automatically masked to a monochrome silhouette.</param>
+            <param name="body">Representing the body text of the notification, which is displayed below the title. The default is the empty string.</param>
+            <param name="data">Arbitrary data that you want associated with the notification. This can be of any structured-clonable data type. The default is null.</param>
+            <param name="dir">The direction in which to display the notification. It defaults to <b>"auto"</b>, which just adopts the browser's language setting behavior, but you can override that behavior by setting values of <b>"ltr"</b> and <b>"rtl"</b> (although most browsers seem to ignore these settings.)</param>
+            <param name="icon">Containing the URL of a small image that reinforces the notification — for example, an app logo or a photo of the message sender. It is displayed alongside the notification title and body.</param>
+            <param name="image">Containing the URL of a large image displayed as part of the notification's content body — for example, a news photo or product thumbnail. It has the highest visual priority of the three image options (image, icon, badge). See <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#notifications_with_different_images">Notifications with different images</see> for a comparison of these three image options.</param>
+            <param name="lang">The notification's language, as specified using a string representing a BCP 47 language tag. The default is the empty string.</param>
+            <param name="navigate">Containing a URL to navigate to when the user activates the notification. When set, the user agent navigates to this URL instead of firing the <see cref="E:BrowserAPI.INotificationBase`1.OnClick">click event</see>. The value is parsed relative to the base URL of the page. See <see cref="P:BrowserAPI.INotification.Navigate"/> for more information.</param>
+            <param name="renotify">Specifies whether the user should be notified after a new notification replaces an old one. The default is false, which means they won't be notified. If true, tag must also be set.</param>
+            <param name="requireInteraction">Indicates that a notification should remain active until the user clicks or dismisses it, rather than closing automatically. The default value is false.</param>
+            <param name="silent">Specifies whether the notification should be silent, i.e., no sounds or vibrations should be issued regardless of the device settings. If set to true, the notification is silent; if set to null (the default value), the device's default settings are respected.</param>
+            <param name="tag">Representing an identifying tag for the notification. The default is the empty string.</param>
+            <param name="timestamp">A timestamp, given as Unix time in milliseconds, representing the time associated with the notification. This could be in the past when a notification is used for a message that couldn't immediately be delivered because the device was offline, or in the future for a meeting that is about to start.</param>
+            <param name="vibrate">A vibration pattern for the device's vibration hardware to emit with the notification. If specified, silent must not be true.</param>
+            <param name="cancellationToken"></param>
+            <returns>An instance of the Notification object.</returns>
+        </member>
+        <member name="P:BrowserAPI.INotificationsAPI.Permission">
+            <summary>
+            <para>Representing the current permission to display notifications.</para>
+            <para>
+            Possible values are:<br/>
+            - "denied": The user refuses to have notifications displayed.<br/>
+            - "granted": The user accepts having notifications displayed.<br/>
+            - "default": The user choice is unknown and therefore the browser will act as if the value were denied.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotificationsAPI.GetPermission(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.INotificationsAPI.Permission" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.INotificationsAPI.MaxActions">
+            <summary>
+            <para>The maximum number of actions that can be displayed in a notification.</para>
+            <para>Notification actions are buttons or controls that appear within persistent notifications. Actions are set using the actions option of the second argument of the <see cref="M:BrowserAPI.IServiceWorkerRegistrationBase`3.ShowNotification(System.String,BrowserAPI.NotificationAction[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)"/> method.</para>
+            <para>Browsers typically limit the maximum number of actions they will display for a particular notification. The maxActions property returns that limit, which is the maximum number of elements in the Notification.actions array that will be respected by the user agent.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotificationsAPI.GetMaxActions(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.INotificationsAPI.MaxActions" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.INotificationsAPI.RequestPermission(System.Threading.CancellationToken)">
+            <summary>
+            <para>Requests permission from the user to display notifications.</para>
+            <para>
+            Possible values for this string are:<br/>
+            - "granted": The user has explicitly granted permission for the current origin to display system notifications.<br/>
+            - "denied": The user has explicitly denied permission for the current origin to display system notifications.<br/>
+            - "default": The user decision is unknown; in this case the application will act as if permission was denied.
+            </para>
+            </summary>
+            <returns>"granted" | "denied" | "default"</returns>
+        </member>
+        <member name="T:BrowserAPI.INotificationsAPIInProcess">
+            <summary>
+            The Notifications API allows web pages to control the display of system notifications to the end user.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.INotificationsAPIInProcess.RequestPermission(System.Threading.CancellationToken)">
+            <summary>
+            <para>Requests permission from the user to display notifications.</para>
+            <para>
+            Possible values for this string are:<br/>
+            - "granted": The user has explicitly granted permission for the current origin to display system notifications.<br/>
+            - "denied": The user has explicitly denied permission for the current origin to display system notifications.<br/>
+            - "default": The user decision is unknown; in this case the application will act as if permission was denied.
+            </para>
+            </summary>
+            <returns>"granted" | "denied" | "default"</returns>
+        </member>
+        <member name="M:BrowserAPI.INotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">
+            <summary>Creates a new instance of the Notification object.</summary>
+            <remarks>
+            Warning<br/>
+            This creates a <i>Non-persistent notification</i>:<br/>
+            Their lifetime is tied to the lifetime of the page — if the page is closed, the notification can no longer be interacted with.
+            Also, it throws a TypeError when called in nearly all mobile browsers.<br/>
+            Consider creating a <i>Persistent notification</i>: Instead, you need to register a service worker and use <see cref="M:BrowserAPI.IServiceWorkerRegistrationBase`3.ShowNotification(System.String,BrowserAPI.NotificationAction[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)"/>.<br/>
+            For more information, see <see href="https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API#persistent_and_non-persistent_notifications">Persistent and non-persistent notifications</see>.
+            </remarks>
+            <param name="title">Defines a title for the notification, which is shown at the top of the notification window.</param>
+            <param name="badge">Containing the URL of a small icon representing the web application itself. The badge is used by the platform when there is not enough space to display the full notification — for example, in a status bar. It should have less visual priority than the icon and image options. On Android, the badge should accommodate up to 4x display resolution (about 96×96px), and the image will be automatically masked to a monochrome silhouette.</param>
+            <param name="body">Representing the body text of the notification, which is displayed below the title. The default is the empty string.</param>
+            <param name="data">Arbitrary data that you want associated with the notification. This can be of any structured-clonable data type. The default is null.</param>
+            <param name="dir">The direction in which to display the notification. It defaults to <b>"auto"</b>, which just adopts the browser's language setting behavior, but you can override that behavior by setting values of <b>"ltr"</b> and <b>"rtl"</b> (although most browsers seem to ignore these settings.)</param>
+            <param name="icon">Containing the URL of a small image that reinforces the notification — for example, an app logo or a photo of the message sender. It is displayed alongside the notification title and body.</param>
+            <param name="image">Containing the URL of a large image displayed as part of the notification's content body — for example, a news photo or product thumbnail. It has the highest visual priority of the three image options (image, icon, badge). See <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#notifications_with_different_images">Notifications with different images</see> for a comparison of these three image options.</param>
+            <param name="lang">The notification's language, as specified using a string representing a BCP 47 language tag. The default is the empty string.</param>
+            <param name="navigate">Containing a URL to navigate to when the user activates the notification. When set, the user agent navigates to this URL instead of firing the <see cref="E:BrowserAPI.INotificationBase`1.OnClick">click event</see>. The value is parsed relative to the base URL of the page. See <see cref="P:BrowserAPI.INotificationInProcess.Navigate"/> for more information.</param>
+            <param name="renotify">Specifies whether the user should be notified after a new notification replaces an old one. The default is false, which means they won't be notified. If true, tag must also be set.</param>
+            <param name="requireInteraction">Indicates that a notification should remain active until the user clicks or dismisses it, rather than closing automatically. The default value is false.</param>
+            <param name="silent">Specifies whether the notification should be silent, i.e., no sounds or vibrations should be issued regardless of the device settings. If set to true, the notification is silent; if set to null (the default value), the device's default settings are respected.</param>
+            <param name="tag">Representing an identifying tag for the notification. The default is the empty string.</param>
+            <param name="timestamp">A timestamp, given as Unix time in milliseconds, representing the time associated with the notification. This could be in the past when a notification is used for a message that couldn't immediately be delivered because the device was offline, or in the future for a meeting that is about to start.</param>
+            <param name="vibrate">A vibration pattern for the device's vibration hardware to emit with the notification. If specified, silent must not be true.</param>
+            <returns>An instance of the Notification object.</returns>
+        </member>
+        <member name="P:BrowserAPI.INotificationsAPIInProcess.Permission">
+            <summary>
+            <para>Representing the current permission to display notifications.</para>
+            <para>
+            Possible values are:<br/>
+            - "denied": The user refuses to have notifications displayed.<br/>
+            - "granted": The user accepts having notifications displayed.<br/>
+            - "default": The user choice is unknown and therefore the browser will act as if the value were denied.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.INotificationsAPIInProcess.MaxActions">
+            <summary>
+            <para>The maximum number of actions that can be displayed in a notification.</para>
+            <para>Notification actions are buttons or controls that appear within persistent notifications. Actions are set using the actions option of the second argument of the <see cref="M:BrowserAPI.IServiceWorkerRegistrationBase`3.ShowNotification(System.String,BrowserAPI.NotificationAction[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)"/> method.</para>
+            <para>Browsers typically limit the maximum number of actions they will display for a particular notification. The maxActions property returns that limit, which is the maximum number of elements in the Notification.actions array that will be respected by the user agent.</para>
             </summary>
         </member>
         <member name="T:BrowserAPI.IPermissions">
@@ -37061,7 +38190,7 @@
         </member>
         <member name="M:BrowserAPI.ISensorAPI.Dispose">
             <summary>
-            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="E:BrowserAPI.ISensorAPI.OnDeviceMotion">
@@ -37096,7 +38225,7 @@
         </member>
         <member name="M:BrowserAPI.ISensorAPIInProcess.Dispose">
             <summary>
-            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="E:BrowserAPI.ISensorAPIInProcess.OnDeviceMotion">
@@ -37330,17 +38459,17 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:BrowserAPI.IServiceWorkerContainerBase`3">
+        <member name="T:BrowserAPI.IServiceWorkerContainerBase`4">
             Base interface of <see cref="T:BrowserAPI.IServiceWorkerContainer"/> and <see cref="T:BrowserAPI.IServiceWorkerContainerInProcess"/>.<br/>
             It contains common functionality for both interfaces.<br/>
             It is not intended to use this interface directly.
         </member>
-        <member name="M:BrowserAPI.IServiceWorkerContainerBase`3.Dispose">
+        <member name="M:BrowserAPI.IServiceWorkerContainerBase`4.Dispose">
             <summary>
-            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
-        <member name="M:BrowserAPI.IServiceWorkerContainerBase`3.Register(System.String,System.Threading.CancellationToken)">
+        <member name="M:BrowserAPI.IServiceWorkerContainerBase`4.Register(System.String,System.Threading.CancellationToken)">
             <summary>
             Registers a service worker.
             </summary>
@@ -37348,7 +38477,7 @@
             <param name="cancellationToken"></param>
             <returns>true, if service worker is supported, otherwise false</returns>
         </member>
-        <member name="M:BrowserAPI.IServiceWorkerContainerBase`3.RegisterWithWorkerRegistration(System.String,System.Threading.CancellationToken)">
+        <member name="M:BrowserAPI.IServiceWorkerContainerBase`4.RegisterWithWorkerRegistration(System.String,System.Threading.CancellationToken)">
             <summary>
             Registers a service worker and returns a <i>ServiceWorkerRegistration</i> object, which can be used to track the registration.
             </summary>
@@ -37356,19 +38485,19 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="P:BrowserAPI.IServiceWorkerContainerBase`3.Ready">
+        <member name="P:BrowserAPI.IServiceWorkerContainerBase`4.Ready">
             <summary>
             Provides a way of delaying code execution until a service worker is active.
             It returns a Promise that will never reject, and which waits indefinitely until the ServiceWorkerRegistration associated with the current page has an ServiceWorkerRegistration.active worker.
             Once that condition is met, it resolves with the ServiceWorkerRegistration.
             </summary>
         </member>
-        <member name="M:BrowserAPI.IServiceWorkerContainerBase`3.GetReady(System.Threading.CancellationToken)">
-            <inheritdoc cref="P:BrowserAPI.IServiceWorkerContainerBase`3.Ready" />
+        <member name="M:BrowserAPI.IServiceWorkerContainerBase`4.GetReady(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IServiceWorkerContainerBase`4.Ready" />
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:BrowserAPI.IServiceWorkerContainerBase`3.GetRegistration(System.String,System.Threading.CancellationToken)">
+        <member name="M:BrowserAPI.IServiceWorkerContainerBase`4.GetRegistration(System.String,System.Threading.CancellationToken)">
             <summary>
             Gets a ServiceWorkerRegistration object whose scope URL matches the provided client URL.
             The method returns a Promise that resolves to a ServiceWorkerRegistration or undefined.
@@ -37377,7 +38506,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:BrowserAPI.IServiceWorkerContainerBase`3.GetRegistrations(System.Threading.CancellationToken)">
+        <member name="M:BrowserAPI.IServiceWorkerContainerBase`4.GetRegistrations(System.Threading.CancellationToken)">
             <summary>
             Gets all ServiceWorkerRegistrations associated with a ServiceWorkerContainer, in an array.
             The method returns a Promise that resolves to an array of ServiceWorkerRegistration.
@@ -37385,12 +38514,12 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="E:BrowserAPI.IServiceWorkerContainerBase`3.OnControllerChange">
+        <member name="E:BrowserAPI.IServiceWorkerContainerBase`4.OnControllerChange">
             <summary>
             Occurs when the document's associated <i>ServiceWorkerRegistration</i> acquires a new active worker.
             </summary>
         </member>
-        <member name="E:BrowserAPI.IServiceWorkerContainerBase`3.OnMessage">
+        <member name="E:BrowserAPI.IServiceWorkerContainerBase`4.OnMessage">
             <summary>
             <para>Is used in a page controlled by a service worker to receive messages from the service worker.</para>
             <para>Parameter is <see href="https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent/data">MessageEvent.data</see> as json.</para>
@@ -37487,21 +38616,12 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:BrowserAPI.IServiceWorkerRegistrationBase`2">
+        <member name="T:BrowserAPI.IServiceWorkerRegistrationBase`3">
             Base interface of <see cref="T:BrowserAPI.IServiceWorkerRegistration"/> and <see cref="T:BrowserAPI.IServiceWorkerRegistrationInProcess"/>.<br/>
             It contains common functionality for both interfaces.<br/>
             It is not intended to use this interface directly.
         </member>
-        <member name="M:BrowserAPI.IServiceWorkerRegistrationBase`2.Unregister(System.Threading.CancellationToken)">
-            <summary>
-            Unregisters the service worker registration and returns a Promise.
-            The promise will resolve to false if no registration was found, otherwise it resolves to true irrespective of whether unregistration happened or not (it may not unregister if someone else just called ServiceWorkerContainer.register() with the same scope.)
-            The service worker will finish any ongoing operations before it is unregistered.
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns>false if no registration was found, otherwise true (irrespective of whether unregistration happened or not)</returns>
-        </member>
-        <member name="M:BrowserAPI.IServiceWorkerRegistrationBase`2.Update(System.Threading.CancellationToken)">
+        <member name="M:BrowserAPI.IServiceWorkerRegistrationBase`3.Update(System.Threading.CancellationToken)">
             <summary>
             Attempts to update the service worker.
             It fetches the worker's script URL, and if the new worker is not byte-by-byte identical to the current worker, it installs the new worker.
@@ -37510,7 +38630,51 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="E:BrowserAPI.IServiceWorkerRegistrationBase`2.OnUpdateFound">
+        <member name="M:BrowserAPI.IServiceWorkerRegistrationBase`3.Unregister(System.Threading.CancellationToken)">
+            <summary>
+            Unregisters the service worker registration and returns a Promise.
+            The promise will resolve to false if no registration was found, otherwise it resolves to true irrespective of whether unregistration happened or not (it may not unregister if someone else just called ServiceWorkerContainer.register() with the same scope.)
+            The service worker will finish any ongoing operations before it is unregistered.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns>false if no registration was found, otherwise true (irrespective of whether unregistration happened or not)</returns>
+        </member>
+        <member name="M:BrowserAPI.IServiceWorkerRegistrationBase`3.ShowNotification(System.String,BrowserAPI.NotificationAction[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">
+            <summary>
+            <para>Creates a notification on an active service worker.</para>
+            <para>This is a persistent notification, it remains interactive beyond the lifetime of an individual page.</para>
+            </summary>
+            <param name="title">Defines a title for the notification, which is shown at the top of the notification window.</param>
+            <param name="actions">An array of actions to display in the notification, for which the default is an empty array.</param>
+            <param name="badge">Containing the URL of a small icon representing the web application itself. The badge is used by the platform when there is not enough space to display the full notification — for example, in a status bar. It should have less visual priority than the icon and image options. On Android, the badge should accommodate up to 4x display resolution (about 96×96px), and the image will be automatically masked to a monochrome silhouette.</param>
+            <param name="body">Representing the body text of the notification, which is displayed below the title. The default is the empty string.</param>
+            <param name="data">Arbitrary data that you want associated with the notification. This can be of any structured-clonable data type. The default is null.</param>
+            <param name="dir">The direction in which to display the notification. It defaults to <b>"auto"</b>, which just adopts the browser's language setting behavior, but you can override that behavior by setting values of <b>"ltr"</b> and <b>"rtl"</b> (although most browsers seem to ignore these settings.)</param>
+            <param name="icon">Containing the URL of a small image that reinforces the notification — for example, an app logo or a photo of the message sender. It is displayed alongside the notification title and body.</param>
+            <param name="image">Containing the URL of a large image displayed as part of the notification's content body — for example, a news photo or product thumbnail. It has the highest visual priority of the three image options (image, icon, badge). See <see href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#notifications_with_different_images">Notifications with different images</see> for a comparison of these three image options.</param>
+            <param name="lang">The notification's language, as specified using a string representing a BCP 47 language tag. The default is the empty string.</param>
+            <param name="navigate">Containing a URL to navigate to when the user activates the notification. When set, the user agent navigates to this URL instead of firing the notificationclick event. The value is parsed relative to the base URL of the service worker. See <see cref="P:BrowserAPI.INotificationInProcess.Navigate"/> for more information.</param>
+            <param name="renotify">Specifies whether the user should be notified after a new notification replaces an old one. The default is false, which means they won't be notified. If true, tag must also be set.</param>
+            <param name="requireInteraction">Indicates that a notification should remain active until the user clicks or dismisses it, rather than closing automatically. The default value is false.</param>
+            <param name="silent">Specifies whether the notification is silent (no sounds or vibrations issued), regardless of the device settings. The default, null, means to respect device defaults. If true, then vibrate must not be present.</param>
+            <param name="tag">Representing an identifying tag for the notification. The default is the empty string.</param>
+            <param name="timestamp">A timestamp, given as Unix time in milliseconds, representing the time associated with the notification. This could be in the past when a notification is used for a message that couldn't immediately be delivered because the device was offline, or in the future for a meeting that is about to start.</param>
+            <param name="vibrate">A vibration pattern for the device's vibration hardware to emit with the notification. If specified, silent must not be true.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IServiceWorkerRegistrationBase`3.GetNotifications(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Returns a list of the notifications in the order that they were created from the current origin via the current service worker registration.
+            Origins can have many active but differently-scoped service worker registrations.
+            Notifications created by one service worker on the same origin will not be available to other active service workers on that same origin.
+            </summary>
+            <remarks>Do not forget to <i>Dispse</i> all notification object when you done with it.</remarks>
+            <param name="tag">Represents a notification tag. If specified, only notifications that have this tag will be returned.</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="E:BrowserAPI.IServiceWorkerRegistrationBase`3.OnUpdateFound">
             <summary>
             Is fired any time the <i>ServiceWorkerRegistration.installing</i> property acquires a new service worker.
             </summary>
@@ -38379,7 +39543,7 @@
         </member>
         <member name="M:BrowserAPI.IWindowBase`2.Dispose">
             <summary>
-            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="E:BrowserAPI.IWindowBase`2.OnError">
@@ -40211,7 +41375,7 @@
         </member>
         <member name="M:BrowserAPI.IScreen.Dispose">
             <summary>
-            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="M:BrowserAPI.IScreen.LockOrientation(System.String,System.Threading.CancellationToken)">
@@ -40267,7 +41431,7 @@
         </member>
         <member name="M:BrowserAPI.IScreenInProcess.Dispose">
             <summary>
-            Releases the <see cref="!:EventTrigger"/> object used to trigger the events.
+            Releases the EventTrigger object used to trigger the events.
             </summary>
         </member>
         <member name="M:BrowserAPI.IScreenInProcess.LockOrientation(System.String,System.Threading.CancellationToken)">

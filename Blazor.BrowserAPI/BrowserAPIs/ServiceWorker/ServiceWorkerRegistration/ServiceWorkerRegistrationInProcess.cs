@@ -9,9 +9,9 @@ namespace BrowserAPI.Implementation;
 /// You register a service worker to control one or more pages that share the same origin.
 /// </summary>
 /// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="Dispose"/> when you are done with it.</remarks>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IServiceWorkerRegistrationBase<IJSInProcessObjectReference, IServiceWorkerRegistrationInProcess>), typeof(IDisposable)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IServiceWorkerRegistrationBase<IJSInProcessObjectReference, IServiceWorkerRegistrationInProcess, INotificationInProcess>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReference serviceWorkerRegistrationJS) : ServiceWorkerRegistrationBase<IJSInProcessObjectReference, IServiceWorkerRegistrationInProcess>(serviceWorkerRegistrationJS), IServiceWorkerRegistrationInProcess {
+public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReference serviceWorkerRegistrationJS) : ServiceWorkerRegistrationBase<IJSInProcessObjectReference, IServiceWorkerRegistrationInProcess, INotificationInProcess>(serviceWorkerRegistrationJS), IServiceWorkerRegistrationInProcess {
     /// <summary>
     /// Releases the JS instance for this service worker registration.
     /// </summary>

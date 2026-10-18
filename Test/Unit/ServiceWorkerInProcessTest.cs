@@ -30,8 +30,11 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
             scope: "{{SERVICE_WORKER_REGISTRATION_SCOPE}}",
             updateViaCache: "{{SERVICE_WORKER_REGISTRATION_UPDATE_VIA_CACHE}}",
 
-            unregister: () => Promise.resolve(true),
             update: () => Promise.resolve(null),
+            unregister: () => Promise.resolve(true),
+
+            showNotification: (title, options) => new Promise(resolve => resolve()),
+            getNotifications: (options) => new Promise(resolve => resolve([])),
 
             addEventListener: (type, listener) => window.setTimeout(listener, 300),
             removeEventListener: (type, listener) => { }
@@ -217,6 +220,23 @@ public sealed class ServiceWorkerInProcessTest(PlayWrightFixture playWrightFixtu
 
         string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");
+    }
+
+
+    [Test]
+    public async Task ShowNotification() {
+        await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_SHOW_NOTIFICATION);
+
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo(ServiceWorkerInProcessGroup.TEST_NOTIFICATION_TITLE);
+    }
+
+    [Test]
+    public async Task GetNotifications() {
+        await ExecuteTest(ServiceWorkerInProcessGroup.BUTTON_GET_NOTIFICATIONS);
+
+        string? result = await Page.GetByTestId(ServiceWorkerInProcessGroup.OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("0");
     }
 
 

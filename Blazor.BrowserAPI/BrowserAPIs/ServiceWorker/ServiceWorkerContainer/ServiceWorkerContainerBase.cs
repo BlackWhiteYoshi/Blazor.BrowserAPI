@@ -10,10 +10,11 @@ namespace BrowserAPI.Implementation;
 /// It is not intended to use this interface directly.
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class ServiceWorkerContainerBase<TJSObjectReference, TServiceWorkerRegistration, TServiceWorker>(IModuleManager moduleManager) : IDisposable
+public abstract class ServiceWorkerContainerBase<TJSObjectReference, TServiceWorkerRegistration, TServiceWorker, TNotification>(IModuleManager moduleManager) : IDisposable
     where TJSObjectReference : IJSObjectReference
-    where TServiceWorkerRegistration : class, IServiceWorkerRegistrationBase<TJSObjectReference, TServiceWorkerRegistration>
-    where TServiceWorker : IServiceWorkerBase<TJSObjectReference> {
+    where TServiceWorkerRegistration : class, IServiceWorkerRegistrationBase<TJSObjectReference, TServiceWorkerRegistration, TNotification>
+    where TServiceWorker : IServiceWorkerBase<TJSObjectReference>
+    where TNotification : INotificationBase<TJSObjectReference> {
     private protected IModuleManager moduleManager = moduleManager;
 
     /// <summary>
@@ -104,7 +105,7 @@ public abstract class ServiceWorkerContainerBase<TJSObjectReference, TServiceWor
 
     [method: DynamicDependency(nameof(InvokeControllerChange))]
     [method: DynamicDependency(nameof(InvokeMessage))]
-    private sealed class EventTrigger(ServiceWorkerContainerBase<TJSObjectReference, TServiceWorkerRegistration, TServiceWorker> serviceWorkerContainer) {
+    private sealed class EventTrigger(ServiceWorkerContainerBase<TJSObjectReference, TServiceWorkerRegistration, TServiceWorker, TNotification> serviceWorkerContainer) {
         [JSInvokable] public void InvokeControllerChange() => serviceWorkerContainer._onControllerChange?.Invoke();
         [JSInvokable] public void InvokeMessage(JsonElement message) => serviceWorkerContainer._onMessage?.Invoke(message);
     }

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -11,6 +12,7 @@ public sealed partial class ServiceWorkerGroup : ComponentBase, IAsyncDisposable
     public const string TEST_EVENT_CONTROLLER_CHANGED = "service-worker-container controller changed";
     public const string TEST_EVENT_UPDATE_FOUND = "service-worker-registration update found";
     public const string TEST_POST_MESSAGE = "service-worker post message";
+    public const string TEST_NOTIFICATION_TITLE = "test Notification";
 
 
     [Inject]
@@ -204,6 +206,18 @@ public sealed partial class ServiceWorkerGroup : ComponentBase, IAsyncDisposable
         output = (serviceWorkerRegistration is not null).ToString();
     }
 
+    public const string BUTTON_SHOW_NOTIFICATION = "service-worker-registration-show-notification";
+    private async Task ShowNotification() {
+        await (await ServiceWorkerRegistration).ShowNotification(TEST_NOTIFICATION_TITLE);
+        output = TEST_NOTIFICATION_TITLE;
+    }
+
+    public const string BUTTON_GET_NOTIFICATIONS = "service-worker-registration-get-notifications";
+    private async Task GetNotifications() {
+        INotification[] notifications = await (await ServiceWorkerRegistration).GetNotifications();
+        output = notifications.Length.ToString();
+        await notifications.DisposeAsync();
+    }
 
     public const string BUTTON_REGISTER_ON_UPDATE_FOUND = "service-worker-registration-event-update-found";
     private async Task RegisterOnUpdateFound() {

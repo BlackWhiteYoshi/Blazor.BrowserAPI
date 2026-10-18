@@ -29,6 +29,7 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - MediaDevices (microphone/camera)
 - Navigator
 - NetworkInformation
+- NotificationsAPI
 - Permissions
 - SensorAPI
 - ServiceWorker

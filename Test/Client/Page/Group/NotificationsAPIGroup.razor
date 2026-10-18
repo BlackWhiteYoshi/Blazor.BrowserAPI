@@ -1,0 +1,59 @@
+@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Notifications API</h2>
+    <div>
+        @* NotificationsAPI *@
+
+        <button data-testid="@BUTTON_PERMISSION_PROPERTY" @onclick="Permission_Property">Permission_Property</button>
+        <button data-testid="@BUTTON_PERMISSION_METHOD" @onclick="Permission_Method">Permission_Method</button>
+        <button data-testid="@BUTTON_MAX_ACTIONS_PROPERTY" @onclick="MaxActions_Property">MaxActions_Property</button>
+        <button data-testid="@BUTTON_MAX_ACTIONS_METHOD" @onclick="MaxActions_Method">MaxActions_Method</button>
+
+        <button data-testid="@BUTTON_REQUEST_PERMISSION" @onclick="RequestPermission">RequestPermission</button>
+        <button data-testid="@BUTTON_CREATE_NOTIFICATION" @onclick="CreateNotification">CreateNotification</button>
+
+        @* Notification *@
+
+        <button data-testid="@BUTTON_ACTIONS_PROPERTY" @onclick="Actions_Property">Actions_Property</button>
+        <button data-testid="@BUTTON_ACTIONS_METHOD" @onclick="Actions_Method">Actions_Method</button>
+        <button data-testid="@BUTTON_BADGE_PROPERTY" @onclick="Badge_Property">Badge_Property</button>
+        <button data-testid="@BUTTON_BADGE_METHOD" @onclick="Badge_Method">Badge_Method</button>
+        <button data-testid="@BUTTON_BODY_PROPERTY" @onclick="Body_Property">Body_Property</button>
+        <button data-testid="@BUTTON_BODY_METHOD" @onclick="Body_Method">Body_Method</button>
+        <button data-testid="@BUTTON_DATA_PROPERTY" @onclick="Data_Property">Data_Property</button>
+        <button data-testid="@BUTTON_DATA_METHOD" @onclick="Data_Method">Data_Method</button>
+        <button data-testid="@BUTTON_DIR_PROPERTY" @onclick="Dir_Property">Dir_Property</button>
+        <button data-testid="@BUTTON_DIR_METHOD" @onclick="Dir_Method">Dir_Method</button>
+        <button data-testid="@BUTTON_ICON_PROPERTY" @onclick="Icon_Property">Icon_Property</button>
+        <button data-testid="@BUTTON_ICON_METHOD" @onclick="Icon_Method">Icon_Method</button>
+        <button data-testid="@BUTTON_IMAGE_PROPERTY" @onclick="Image_Property">Image_Property</button>
+        <button data-testid="@BUTTON_IMAGE_METHOD" @onclick="Image_Method">Image_Method</button>
+        <button data-testid="@BUTTON_LANG_PROPERTY" @onclick="Lang_Property">Lang_Property</button>
+        <button data-testid="@BUTTON_LANG_METHOD" @onclick="Lang_Method">Lang_Method</button>
+        <button data-testid="@BUTTON_NAVIGATE_PROPERTY" @onclick="Navigate_Property">Navigate_Property</button>
+        <button data-testid="@BUTTON_NAVIGATE_METHOD" @onclick="Navigate_Method">Navigate_Method</button>
+        <button data-testid="@BUTTON_RENOTIFY_PROPERTY" @onclick="Renotify_Property">Renotify_Property</button>
+        <button data-testid="@BUTTON_RENOTIFY_METHOD" @onclick="Renotify_Method">Renotify_Method</button>
+        <button data-testid="@BUTTON_REQUIRE_INTERACTION_PROPERTY" @onclick="RequireInteraction_Property">RequireInteraction_Property</button>
+        <button data-testid="@BUTTON_REQUIRE_INTERACTION_METHOD" @onclick="RequireInteraction_Method">RequireInteraction_Method</button>
+        <button data-testid="@BUTTON_SILENT_PROPERTY" @onclick="Silent_Property">Silent_Property</button>
+        <button data-testid="@BUTTON_SILENT_METHOD" @onclick="Silent_Method">Silent_Method</button>
+        <button data-testid="@BUTTON_TAG_PROPERTY" @onclick="Tag_Property">Tag_Property</button>
+        <button data-testid="@BUTTON_TAG_METHOD" @onclick="Tag_Method">Tag_Method</button>
+        <button data-testid="@BUTTON_TIMESTAMP_PROPERTY" @onclick="Timestamp_Property">Timestamp_Property</button>
+        <button data-testid="@BUTTON_TIMESTAMP_METHOD" @onclick="Timestamp_Method">Timestamp_Method</button>
+        <button data-testid="@BUTTON_TITLE_PROPERTY" @onclick="Title_Property">Title_Property</button>
+        <button data-testid="@BUTTON_TITLE_METHOD" @onclick="Title_Method">Title_Method</button>
+        <button data-testid="@BUTTON_VIBRATE_PROPERTY" @onclick="Vibrate_Property">Vibrate_Property</button>
+        <button data-testid="@BUTTON_VIBRATE_METHOD" @onclick="Vibrate_Method">Vibrate_Method</button>
+
+        <button data-testid="@BUTTON_CLOSE" @onclick="Close">Close</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_CLICK" @onclick="RegisterOnClick">RegisterOnClick</button>
+        <button data-testid="@BUTTON_REGISTER_ON_CLOSE" @onclick="RegisterOnClose">RegisterOnClose</button>
+        <button data-testid="@BUTTON_REGISTER_ON_ERROR" @onclick="RegisterOnError">RegisterOnError</button>
+        <button data-testid="@BUTTON_REGISTER_ON_SHOW" @onclick="RegisterOnShow">RegisterOnShow</button>
+    </div>
+    <span data-testid="@OUTPUT">@output</span>
+</div>

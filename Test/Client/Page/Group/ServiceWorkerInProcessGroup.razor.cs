@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -11,6 +12,7 @@ public sealed partial class ServiceWorkerInProcessGroup : ComponentBase, IAsyncD
     public const string TEST_EVENT_CONTROLLER_CHANGED = "service-worker-container-inprocess controller changed";
     public const string TEST_EVENT_UPDATE_FOUND = "service-worker-registration-inprocess update found";
     public const string TEST_POST_MESSAGE = "service-worker-inprocess post message";
+    public const string TEST_NOTIFICATION_TITLE = "test Notification";
 
 
     [Inject]
@@ -175,6 +177,19 @@ public sealed partial class ServiceWorkerInProcessGroup : ComponentBase, IAsyncD
             output = TEST_EVENT_UPDATE_FOUND;
             StateHasChanged();
         };
+    }
+
+    public const string BUTTON_SHOW_NOTIFICATION = "service-worker-registration-inprocess-show-notification";
+    private async Task ShowNotification() {
+        await (await ServiceWorkerRegistration).ShowNotification(TEST_NOTIFICATION_TITLE);
+        output = TEST_NOTIFICATION_TITLE;
+    }
+
+    public const string BUTTON_GET_NOTIFICATIONS = "service-worker-registration-inprocess-get-notifications";
+    private async Task GetNotifications() {
+        INotificationInProcess[] notifications = await (await ServiceWorkerRegistration).GetNotifications();
+        output = notifications.Length.ToString();
+        notifications.Dispose();
     }
 
 

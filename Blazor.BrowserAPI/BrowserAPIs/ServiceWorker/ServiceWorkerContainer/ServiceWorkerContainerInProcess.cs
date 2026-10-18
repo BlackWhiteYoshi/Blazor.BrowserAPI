@@ -11,9 +11,9 @@ namespace BrowserAPI.Implementation;
 /// Most importantly, it exposes the <i>ServiceWorkerContainer.register()</i> method used to register service workers, and the <i>ServiceWorkerContainer.controller</i> property used to determine whether or not the current page is actively controlled.
 /// </para>
 /// </summary>
-[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IServiceWorkerContainerBase<IJSInProcessObjectReference, IServiceWorkerRegistrationInProcess, IServiceWorkerInProcess>)])]
+[AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IServiceWorkerContainerBase<IJSInProcessObjectReference, IServiceWorkerRegistrationInProcess, IServiceWorkerInProcess, INotificationInProcess>)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public sealed class ServiceWorkerContainerInProcess(IModuleManager moduleManager) : ServiceWorkerContainerBase<IJSInProcessObjectReference, IServiceWorkerRegistrationInProcess, IServiceWorkerInProcess>(moduleManager), IServiceWorkerContainerInProcess {
+public sealed class ServiceWorkerContainerInProcess(IModuleManager moduleManager) : ServiceWorkerContainerBase<IJSInProcessObjectReference, IServiceWorkerRegistrationInProcess, IServiceWorkerInProcess, INotificationInProcess>(moduleManager), IServiceWorkerContainerInProcess {
     /// <summary>
     /// Returns a <i>ServiceWorker</i> object if its state is activating or activated (the same object returned by ServiceWorkerRegistration.active).
     /// This property returns null during a force-refresh request (Shift + refresh) or if there is no active worker.

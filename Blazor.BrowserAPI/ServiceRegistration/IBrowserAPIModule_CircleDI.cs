@@ -40,6 +40,8 @@ namespace CircleDIAttributes;
 [Scoped<BrowserAPI.INavigatorInProcess, BrowserAPI.Implementation.NavigatorInProcess>]
 [Scoped<BrowserAPI.INetworkInformation, BrowserAPI.Implementation.NetworkInformation>]
 [Scoped<BrowserAPI.INetworkInformationInProcess, BrowserAPI.Implementation.NetworkInformationInProcess>]
+[Scoped<BrowserAPI.INotificationsAPI, BrowserAPI.Implementation.NotificationsAPI>]
+[Scoped<BrowserAPI.INotificationsAPIInProcess, BrowserAPI.Implementation.NotificationsAPIInProcess>]
 [Scoped<BrowserAPI.IPermissions, BrowserAPI.Implementation.Permissions>]
 [Scoped<BrowserAPI.IPermissionsInProcess, BrowserAPI.Implementation.PermissionsInProcess>]
 [Scoped<BrowserAPI.ISensorAPI, BrowserAPI.Implementation.SensorAPI>]

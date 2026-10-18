@@ -55,6 +55,9 @@ export { NavigatorAPI };
 import { NetworkInformationAPI } from "./BrowserAPIs/NetworkInformation/NetworkInformation.ts";
 export { NetworkInformationAPI };
 
+import { NotificationsAPI } from "./BrowserAPIs/NotificationsAPI/NotificationsAPI.ts";
+export { NotificationsAPI };
+
 import { PermissionsAPI } from "./BrowserAPIs/Permissions/Permissions.ts";
 export { PermissionsAPI };
 

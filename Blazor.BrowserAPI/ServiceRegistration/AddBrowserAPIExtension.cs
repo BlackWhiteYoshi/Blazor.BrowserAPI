@@ -51,6 +51,8 @@ public static class AddBrowserAPIExtension {
             .AddScoped<INavigatorInProcess, Implementation.NavigatorInProcess>()
             .AddScoped<INetworkInformation, Implementation.NetworkInformation>()
             .AddScoped<INetworkInformationInProcess, Implementation.NetworkInformationInProcess>()
+            .AddScoped<INotificationsAPI, Implementation.NotificationsAPI>()
+            .AddScoped<INotificationsAPIInProcess, Implementation.NotificationsAPIInProcess>()
             .AddScoped<IPermissions, Implementation.Permissions>()
             .AddScoped<IPermissionsInProcess, Implementation.PermissionsInProcess>()
             .AddScoped<ISensorAPI, Implementation.SensorAPI>()

@@ -27,6 +27,7 @@ You can find the test page at [blazor-browserapi.blackwhiteyoshi.com](https://bl
 - [MediaDevices (microphone/camera)](Blazor.BrowserAPI/BrowserAPIs/MediaDevices/MediaDevices.md)
 - [Navigator](Blazor.BrowserAPI/BrowserAPIs/Navigator/Navigator.md)
 - [NetworkInformation](Blazor.BrowserAPI/BrowserAPIs/NetworkInformation/NetworkInformation.md)
+- [NotificationsAPI](Blazor.BrowserAPI/BrowserAPIs/NotificationsAPI/NotificationsAPI.md)
 - [Permissions](Blazor.BrowserAPI/BrowserAPIs/Permissions/Permissions.md)
 - [SensorAPI](Blazor.BrowserAPI/BrowserAPIs/SensorAPI/SensorAPI.md)
 - [ServiceWorker](Blazor.BrowserAPI/BrowserAPIs/ServiceWorker/ServiceWorker.md)
