@@ -11,7 +11,7 @@ namespace BrowserAPI.Implementation;
 /// </para>
 /// <para>Since Chrome 103, the BatteryManager interface of Battery Status API only expose to secure context.</para>
 /// </summary>
-/// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="Dispose"/> when you are done with it.</remarks>
+/// <remarks>Objects of this class must disposed manually, so do not forget to dispose this object when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IBatteryManagerBase<IJSInProcessObjectReference>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class BatteryManagerInProcess(IJSInProcessObjectReference batteryManagerJS) : BatteryManagerBase<IJSInProcessObjectReference>(batteryManagerJS), IBatteryManagerInProcess {

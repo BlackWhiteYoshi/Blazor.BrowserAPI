@@ -5,9 +5,13 @@ using System.Text.Json;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
 /// Base interface of <see cref="IMediaRecorder"/> and <see cref="IMediaRecorderInProcess"/>.<br/>
 /// It contains common functionality for both interfaces.<br/>
 /// It is not intended to use this interface directly.
+/// </summary>
+/// <typeparam name="TJSObjectReference"></typeparam>
+/// <param name="mediaRecorderJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class MediaRecorderBase<TJSObjectReference>(TJSObjectReference mediaRecorderJS) where TJSObjectReference : IJSObjectReference {

@@ -8,7 +8,7 @@ namespace BrowserAPI.Implementation;
 /// <para>The Notification interface of the Notifications API is used to configure and display desktop notifications to the user.</para>
 /// <para>These notifications' appearance and specific functionality vary across platforms but generally they provide a way to asynchronously provide information to the user.</para>
 /// </summary>
-/// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="Dispose"/> when you are done with it.</remarks>
+/// <remarks>Objects of this class must disposed manually, so do not forget to dispose this object when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(INotificationBase<IJSInProcessObjectReference>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class NotificationInProcess(IJSInProcessObjectReference notificationJS) : NotificationBase<IJSInProcessObjectReference>(notificationJS), INotificationInProcess {

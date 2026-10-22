@@ -10,7 +10,7 @@ namespace BrowserAPI.Implementation;
 /// <para>The <i>RelativeOrientationSensor</i> interface of the Sensor APIs describes the device's physical orientation without regard to the Earth's reference coordinate system.</para>
 /// <para>To use this sensor, the user must grant permission to the 'accelerometer', and 'gyroscope' device sensors through the Permissions API.</para>
 /// </summary>
-/// <remarks>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</remarks>
+/// <remarks>Objects of this class must disposed manually, so do not forget to dispose this object when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensorInProcess)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class RelativeOrientationSensorInProcess(IJSInProcessObjectReference relativeOrientationSensor) : SensorInProcess(relativeOrientationSensor), IRelativeOrientationSensorInProcess {

@@ -4,9 +4,13 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
 /// Base interface of <see cref="IScreenDetails"/> and <see cref="IScreenDetailsInProcess"/>.<br/>
 /// It contains common functionality for both interfaces.<br/>
 /// It is not intended to use this interface directly.
+/// </summary>
+/// <typeparam name="TJSObjectReference"></typeparam>
+/// <param name="screenDetailsJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class ScreenDetailsBase<TJSObjectReference>(TJSObjectReference screenDetailsJS) where TJSObjectReference : IJSObjectReference {

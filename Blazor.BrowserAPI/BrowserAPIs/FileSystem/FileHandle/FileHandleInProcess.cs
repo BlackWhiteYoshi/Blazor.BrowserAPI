@@ -11,7 +11,7 @@ namespace BrowserAPI.Implementation;
 /// The queryPermission method of the FileSystemHandle interface can be used to verify permission state before accessing a file.
 /// </para>
 /// </summary>
-/// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="Dispose"/> when you are done with it.</remarks>
+/// <remarks>Objects of this class must disposed manually, so do not forget to dispose this object when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IFileHandleBase<IJSInProcessObjectReference, IFileHandleInProcess, IFileInProcess, IWritableFileStreamInProcess>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class FileHandleInProcess(IJSInProcessObjectReference fileHandleJS) : FileHandleBase<IJSInProcessObjectReference, IFileHandleInProcess, IFileInProcess, IWritableFileStreamInProcess>(fileHandleJS), IFileHandleInProcess {

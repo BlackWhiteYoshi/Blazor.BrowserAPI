@@ -5,9 +5,15 @@ using System.Text.Json;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
 /// Base interface of <see cref="IHTMLElement"/> and <see cref="IHTMLElementInProcess"/>.<br/>
 /// It contains common functionality for both interfaces.<br/>
 /// It is not intended to use this interface directly.
+/// </summary>
+/// <typeparam name="TJSObjectReference"></typeparam>
+/// <typeparam name="THTMLElement"></typeparam>
+/// <typeparam name="TDragEvent"></typeparam>
+/// <param name="htmlElementTask"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class HTMLElementBase<TJSObjectReference, THTMLElement, TDragEvent>(Task<TJSObjectReference> htmlElementTask) : IHTMLElementBase<TJSObjectReference, THTMLElement, TDragEvent>

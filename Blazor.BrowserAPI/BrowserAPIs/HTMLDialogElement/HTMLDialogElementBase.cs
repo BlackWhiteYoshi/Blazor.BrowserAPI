@@ -4,9 +4,13 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
 /// Base interface of <see cref="IHTMLDialogElement"/> and <see cref="IHTMLDialogElementInProcess"/>.<br/>
 /// It contains common functionality for both interfaces.<br/>
 /// It is not intended to use this interface directly.
+/// </summary>
+/// <typeparam name="TJSObjectReference"></typeparam>
+/// <param name="dialogTask"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class HTMLDialogElementBase<TJSObjectReference>(Task<TJSObjectReference> dialogTask) where TJSObjectReference : IJSObjectReference {

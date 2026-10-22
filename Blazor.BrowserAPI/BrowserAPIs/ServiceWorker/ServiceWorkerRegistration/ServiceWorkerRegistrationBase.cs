@@ -4,9 +4,15 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
 /// Base interface of <see cref="IServiceWorkerRegistration"/> and <see cref="IServiceWorkerRegistrationInProcess"/>.<br/>
 /// It contains common functionality for both interfaces.<br/>
 /// It is not intended to use this interface directly.
+/// </summary>
+/// <typeparam name="TJSObjectReference"></typeparam>
+/// <typeparam name="TServiceWorkerRegistration"></typeparam>
+/// <typeparam name="TNotification"></typeparam>
+/// <param name="serviceWorkerRegistrationJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class ServiceWorkerRegistrationBase<TJSObjectReference, TServiceWorkerRegistration, TNotification>(TJSObjectReference serviceWorkerRegistrationJS)

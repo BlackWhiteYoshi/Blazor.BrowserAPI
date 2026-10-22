@@ -8,7 +8,7 @@ namespace BrowserAPI.Implementation;
 /// <para>The <i>HTMLMediaElement</i> interface adds to HTMLElement the properties and methods needed to support basic media-related capabilities that are common to audio and video.</para>
 /// <para>The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see> and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see> elements both inherit this interface.</para>
 /// </summary>
-/// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="Dispose"/> when you are done with it.</remarks>
+/// <remarks>Objects of this class must disposed manually, so do not forget to dispose this object when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IHTMLMediaElementBase<IJSInProcessObjectReference, IPictureInPictureWindowInProcess>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class HTMLMediaElementInProcess(IJSInProcessObjectReference htmlMediaElementJS) : HTMLMediaElementBase<IJSInProcessObjectReference, IPictureInPictureWindowInProcess>(Task.FromResult(htmlMediaElementJS)), IHTMLMediaElementInProcess {

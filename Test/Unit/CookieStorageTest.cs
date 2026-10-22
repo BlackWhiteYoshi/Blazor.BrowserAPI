@@ -66,7 +66,6 @@ public sealed class CookieStorageTest(PlayWrightFixture playWrightFixture) : Pla
 
         string? result = await Page.GetByTestId(CookieStorageGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(number.ToString());
-
     }
 
     [Test]

@@ -4,9 +4,14 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
 /// Base interface of <see cref="IGamepadAPI"/> and <see cref="IGamepadAPIInProcess"/>.<br/>
 /// It contains common functionality for both interfaces.<br/>
 /// It is not intended to use this interface directly.
+/// </summary>
+/// <typeparam name="TJSObjectReference"></typeparam>
+/// <typeparam name="TGamepad"></typeparam>
+/// <param name="moduleManager"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class GamepadAPIBase<TJSObjectReference, TGamepad>(IModuleManager moduleManager) : IDisposable

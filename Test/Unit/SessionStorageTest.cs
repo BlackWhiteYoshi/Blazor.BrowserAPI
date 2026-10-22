@@ -17,7 +17,6 @@ public sealed class SessionStorageTest(PlayWrightFixture playWrightFixture) : Pl
 
         string? result = await Page.GetByTestId(SessionStorageGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo(number.ToString());
-
     }
 
     [Test]

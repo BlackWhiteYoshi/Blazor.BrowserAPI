@@ -17,13 +17,17 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
 
 
     protected override async Task OnInitializedAsync() {
-        IGamepad[] gamepads = await GamepadAPI.GetGamepads();
-        if (gamepads.Length > 0) {
-            // this example only uses one gamepad
-            gamepad = gamepads[0];
-            // dispose all other gamepads, if any
-            for (int i = 1; i < gamepads.Length; i++)
-                await gamepads[i].DisposeAsync();
+        IGamepad?[] gamepads = await GamepadAPI.GetGamepads();
+        foreach (IGamepad? gamepad in gamepads) {
+            if (gamepad is null)
+                continue;
+
+            // this example only uses one gamepad, get the first one available
+            if (this.gamepad is null)
+                this.gamepad = gamepad;
+            else
+                // dispose all other gamepads, if any
+                await gamepad.DisposeAsync();
         }
 
         GamepadAPI.OnGamepadConnected += OnGamepadConnected;

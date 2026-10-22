@@ -8,7 +8,7 @@ namespace BrowserAPI.Implementation;
 /// The <i>ServiceWorkerRegistration</i> interface of the Service Worker API represents the service worker registration.
 /// You register a service worker to control one or more pages that share the same origin.
 /// </summary>
-/// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="Dispose"/> when you are done with it.</remarks>
+/// <remarks>Objects of this class must disposed manually, so do not forget to dispose this object when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IServiceWorkerRegistrationBase<IJSInProcessObjectReference, IServiceWorkerRegistrationInProcess, INotificationInProcess>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class ServiceWorkerRegistrationInProcess(IJSInProcessObjectReference serviceWorkerRegistrationJS) : ServiceWorkerRegistrationBase<IJSInProcessObjectReference, IServiceWorkerRegistrationInProcess, INotificationInProcess>(serviceWorkerRegistrationJS), IServiceWorkerRegistrationInProcess {

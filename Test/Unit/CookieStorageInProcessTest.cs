@@ -82,8 +82,6 @@ public sealed class CookieStorageInProcessTest(PlayWrightFixture playWrightFixtu
 
         string result = await Page.EvaluateAsync<string>("document.cookie;");
         await Assert.That(result).IsEmpty();
-
-
     }
 
     [Test]

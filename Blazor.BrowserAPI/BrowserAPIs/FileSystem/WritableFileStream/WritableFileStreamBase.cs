@@ -3,9 +3,13 @@ using Microsoft.JSInterop;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
 /// Base interface of <see cref="IWritableFileStream"/> and <see cref="IWritableFileStreamInProcess"/>.<br/>
 /// It contains common functionality for both interfaces.<br/>
 /// It is not intended to use this interface directly.
+/// </summary>
+/// <typeparam name="TJSObjectReference"></typeparam>
+/// <param name="writableFileStreamJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 public abstract class WritableFileStreamBase<TJSObjectReference>(TJSObjectReference writableFileStreamJS) where TJSObjectReference : IJSObjectReference {
     private protected TJSObjectReference writableFileStreamJS = writableFileStreamJS;

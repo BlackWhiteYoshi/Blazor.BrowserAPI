@@ -8,7 +8,7 @@ namespace BrowserAPI.Implementation;
 /// <para>The <i>LinearAccelerationSensor</i> interface of the Sensor APIs provides on each reading the acceleration applied to the device along all three axes, but without the contribution of gravity.</para>
 /// <para>To use this sensor, the user must grant permission to the 'accelerometer' device sensor through the Permissions API.</para>
 /// </summary>
-/// <remarks>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</remarks>
+/// <remarks>Objects of this class must disposed manually, so do not forget to dispose this object when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensorInProcess)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class LinearAccelerationSensorInProcess(IJSInProcessObjectReference linearAccelerationSensor) : SensorInProcess(linearAccelerationSensor), ILinearAccelerationSensorInProcess {

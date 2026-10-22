@@ -25,7 +25,7 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
 
     public async ValueTask DisposeAsync() {
         if (mediaRecorder is not null) {
-            mediaRecorder.OnDataavailable -= SaveChunk;
+            mediaRecorder.OnDataAvailable -= SaveChunk;
             await mediaRecorder.DisposeAsync();
         }
         if (mediaStream is not null)
@@ -51,7 +51,7 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
         videoData.Clear();
         mediaRecorder = await mediaStream.CreateRecorder(mimeType: "video/mp4");
         mediaRecorder.OnError += OutputToConsole;
-        mediaRecorder.OnDataavailable += SaveChunk;
+        mediaRecorder.OnDataAvailable += SaveChunk;
 
         await mediaRecorder.Start(100);
 
@@ -78,7 +78,7 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
             await video.SetSrcObject(null);
 
         await Task.Delay(5000); // delay cleanup to make sure that the last chunk is saved
-        mediaRecorder.OnDataavailable -= SaveChunk;
+        mediaRecorder.OnDataAvailable -= SaveChunk;
         mediaRecorder.OnError -= OutputToConsole;
         await mediaRecorder.DisposeAsync();
         await mediaStream.DisposeAsync();

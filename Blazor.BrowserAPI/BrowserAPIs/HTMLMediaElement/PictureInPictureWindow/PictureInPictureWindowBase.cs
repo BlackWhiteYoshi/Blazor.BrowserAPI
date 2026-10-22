@@ -4,9 +4,13 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
 /// Base interface of <see cref="IPictureInPictureWindow"/> and <see cref="IPictureInPictureWindowInProcess"/>.<br/>
 /// It contains common functionality for both interfaces.<br/>
 /// It is not intended to use this interface directly.
+/// </summary>
+/// <typeparam name="TJSObjectReference"></typeparam>
+/// <param name="pictureInPictureWindowJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class PictureInPictureWindowBase<TJSObjectReference>(TJSObjectReference pictureInPictureWindowJS) where TJSObjectReference : IJSObjectReference {

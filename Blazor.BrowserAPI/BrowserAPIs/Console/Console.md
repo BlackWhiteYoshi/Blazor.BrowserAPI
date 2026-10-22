@@ -14,6 +14,8 @@ public sealed partial class ExampleComponent : ComponentBase {
 
     private async Task Example() {
         await Console.Log("output to browser console");
+        await Console.Warn("warning to browser console");
+        await Console.Error("error to browser console");
     }
 }
 ```

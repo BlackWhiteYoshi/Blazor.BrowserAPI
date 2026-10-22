@@ -4,9 +4,14 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
 /// Base interface of <see cref="IHTMLMediaElement"/> and <see cref="IHTMLMediaElementInProcess"/>.<br/>
 /// It contains common functionality for both interfaces.<br/>
 /// It is not intended to use this interface directly.
+/// </summary>
+/// <typeparam name="TJSObjectReference"></typeparam>
+/// <typeparam name="TPictureInPictureWindow"></typeparam>
+/// <param name="htmlMediaElementTask"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class HTMLMediaElementBase<TJSObjectReference, TPictureInPictureWindow>(Task<TJSObjectReference> htmlMediaElementTask) : IHTMLMediaElementBase<TJSObjectReference, TPictureInPictureWindow>

@@ -8,7 +8,7 @@ namespace BrowserAPI.Implementation;
 /// <para>Represents an object able to programmatically obtain the width and height and resize event of the floating video window.</para>
 /// <para>An object with this interface is obtained using the <see cref="IHTMLMediaElementBase{IJSInProcessObjectReference, IPictureInPictureWindowInProcess}.RequestPictureInPicture"/> return value.</para>
 /// </summary>
-/// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="Dispose"/> when you are done with it.</remarks>
+/// <remarks>Objects of this class must disposed manually, so do not forget to dispose this object when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IPictureInPictureWindowBase<IJSInProcessObjectReference>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class PictureInPictureWindowInProcess(IJSInProcessObjectReference pictureInPictureWindowJS) : PictureInPictureWindowBase<IJSInProcessObjectReference>(pictureInPictureWindowJS), IPictureInPictureWindowInProcess {

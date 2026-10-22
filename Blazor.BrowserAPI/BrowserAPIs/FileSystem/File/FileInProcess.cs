@@ -17,7 +17,7 @@ namespace BrowserAPI.Implementation;
 /// </para>
 /// <para>See <see href="https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications">Using files from web applications</see> for more information and examples.</para>
 /// </summary>
-/// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="Dispose"/> when you are done with it.</remarks>
+/// <remarks>Objects of this class must disposed manually, so do not forget to dispose this object when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IFileBase<IJSInProcessObjectReference>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class FileInProcess(IJSInProcessObjectReference fileJS) : FileBase<IJSInProcessObjectReference>(fileJS), IFileInProcess {

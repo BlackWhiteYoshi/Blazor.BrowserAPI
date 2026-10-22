@@ -5,9 +5,13 @@ using System.Text.Json;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
 /// Base interface of <see cref="ISensor"/> and <see cref="ISensorInProcess"/>.<br/>
 /// It contains common functionality for both interfaces.<br/>
 /// It is not intended to use this interface directly.
+/// </summary>
+/// <typeparam name="TJSObjectReference"></typeparam>
+/// <param name="sensorJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class SensorBase<TJSObjectReference>(TJSObjectReference sensorJS) where TJSObjectReference : IJSObjectReference {

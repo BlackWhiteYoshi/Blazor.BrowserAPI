@@ -21,8 +21,8 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
             return;
         }
 
-        gyroscope.OnError += Console.WriteLine;
-        gyroscope.OnReading += ReadSensor;
+        gyroscope.OnError += OnSensorError;
+        gyroscope.OnReading += OnSensorRead;
         await gyroscope.Start();
     }
 
@@ -31,22 +31,27 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
             return;
 
         await gyroscope.Stop();
-        gyroscope.OnReading -= ReadSensor;
-        gyroscope.OnError -= Console.WriteLine;
+        gyroscope.OnReading -= OnSensorRead;
+        gyroscope.OnError -= OnSensorError;
 
         await gyroscope.DisposeAsync();
     }
 
 
-    private void ReadSensor() {
+    private void OnSensorRead() {
+        if (gyroscope is null)
+            return;
+
         _ = RunAsync();
         async Task RunAsync() {
-            double x = await gyroscope!.X;
+            double x = await gyroscope.X;
             double y = await gyroscope.Y;
             double z = await gyroscope.Z;
             Console.WriteLine($"Angular velocity: ({x}, {y}, {z})");
-        };
+        }
     }
+
+    private void OnSensorError(JsonElement error) => Console.WriteLine($"Error on sensor:\n{error}");
 }
 ```
 

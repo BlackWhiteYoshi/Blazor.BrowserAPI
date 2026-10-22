@@ -241,7 +241,6 @@ public sealed class HTMLElementTest(PlayWrightFixture playWrightFixture) : PlayW
 
         string? result = await Page.GetByTestId(HTMLElementGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo($"testid = htmlelement-html-element, {HTMLElementGroup.TEST_DATASET_NAME} = {HTMLElementGroup.TEST_DATASET_VALUE}");
-
     }
 
     [Test]

@@ -57,8 +57,6 @@ public sealed class SessionStorageInProcessTest(PlayWrightFixture playWrightFixt
 
         string? result = await Page.EvaluateAsync<string?>($"sessionStorage.getItem('{SessionStorageInProcessGroup.TEST_REMOVE_ITEM}');");
         await Assert.That(result).IsNull();
-
-
     }
 
     [Test]

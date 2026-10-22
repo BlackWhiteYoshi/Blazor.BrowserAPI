@@ -7,7 +7,7 @@ namespace BrowserAPI.Implementation;
 /// <summary>
 /// The <i>HTMLElement</i> interface represents any HTML element. Some elements directly implement this interface, while others implement it via an interface that inherits it.
 /// </summary>
-/// <remarks>Objects of this class must disposed manually, so do not forget to call <see cref="Dispose"/> when you are done with it.</remarks>
+/// <remarks>Objects of this class must disposed manually, so do not forget to dispose this object when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IHTMLElementBase<IJSInProcessObjectReference, IHTMLElementInProcess, DragEventInProcess>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class HTMLElementInProcess(IJSInProcessObjectReference htmlElementJS) : HTMLElementBase<IJSInProcessObjectReference, IHTMLElementInProcess, DragEventInProcess>(Task.FromResult(htmlElementJS)), IHTMLElementInProcess {

@@ -5,9 +5,13 @@ using System.Text.Json;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
 /// Base interface of <see cref="IServiceWorker"/> and <see cref="IServiceWorkerInProcess"/>.<br/>
 /// It contains common functionality for both interfaces.<br/>
 /// It is not intended to use this interface directly.
+/// </summary>
+/// <typeparam name="TJSObjectReference"></typeparam>
+/// <param name="serviceWorkerJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class ServiceWorkerBase<TJSObjectReference>(TJSObjectReference serviceWorkerJS) where TJSObjectReference : IJSObjectReference {

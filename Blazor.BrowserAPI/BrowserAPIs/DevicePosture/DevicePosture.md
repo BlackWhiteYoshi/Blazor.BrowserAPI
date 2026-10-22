@@ -23,7 +23,7 @@ public sealed partial class ExampleComponent : ComponentBase, IDisposable {
 
 
     private void DisplayDevicePosture() {
-        DoAsync().Preserve();
+        _ = DoAsync().Preserve();
         async ValueTask DoAsync() {
             Console.WriteLine($"Current posture: {await DevicePosture.Type}");
         }

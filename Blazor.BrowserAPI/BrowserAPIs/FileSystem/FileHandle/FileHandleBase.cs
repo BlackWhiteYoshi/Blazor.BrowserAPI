@@ -4,9 +4,16 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
 /// Base interface of <see cref="IFileHandle"/> and <see cref="IFileHandleInProcess"/>.<br/>
 /// It contains common functionality for both interfaces.<br/>
 /// It is not intended to use this interface directly.
+/// </summary>
+/// <typeparam name="TJSObjectReference"></typeparam>
+/// <typeparam name="TFileHandle"></typeparam>
+/// <typeparam name="TFile"></typeparam>
+/// <typeparam name="TWritableFileStream"></typeparam>
+/// <param name="fileHandleJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class FileHandleBase<TJSObjectReference, TFileHandle, TFile, TWritableFileStream>(TJSObjectReference fileHandleJS) : IFileHandleBase<TJSObjectReference, TFileHandle, TFile, TWritableFileStream>

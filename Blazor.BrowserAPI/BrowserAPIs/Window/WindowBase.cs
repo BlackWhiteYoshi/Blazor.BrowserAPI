@@ -5,9 +5,14 @@ using System.Text.Json;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
 /// Base interface of <see cref="IWindow"/> and <see cref="IWindowInProcess"/>.<br/>
 /// It contains common functionality for both interfaces.<br/>
 /// It is not intended to use this interface directly.
+/// </summary>
+/// <typeparam name="TJSObjectReference"></typeparam>
+/// <typeparam name="TDragEvent"></typeparam>
+/// <param name="moduleManager"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class WindowBase<TJSObjectReference, TDragEvent>(IModuleManager moduleManager) : IDisposable

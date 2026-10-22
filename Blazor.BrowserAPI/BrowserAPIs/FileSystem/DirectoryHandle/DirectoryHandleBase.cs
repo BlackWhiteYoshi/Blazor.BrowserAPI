@@ -4,9 +4,17 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
 /// Base interface of <see cref="IDirectoryHandle"/> and <see cref="IDirectoryHandleInProcess"/>.<br/>
 /// It contains common functionality for both interfaces.<br/>
 /// It is not intended to use this interface directly.
+/// </summary>
+/// <typeparam name="TJSObjectReference"></typeparam>
+/// <typeparam name="TDirectoryHandle"></typeparam>
+/// <typeparam name="TFileHandle"></typeparam>
+/// <typeparam name="TFile"></typeparam>
+/// <typeparam name="TWritableFileStream"></typeparam>
+/// <param name="directoryHandleJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public abstract class DirectoryHandleBase<TJSObjectReference, TDirectoryHandle, TFileHandle, TFile, TWritableFileStream>(TJSObjectReference directoryHandleJS) : IDirectoryHandleBase<TJSObjectReference, TDirectoryHandle, TFileHandle, TFile, TWritableFileStream>

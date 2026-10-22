@@ -3,9 +3,14 @@ using Microsoft.JSInterop;
 
 namespace BrowserAPI.Implementation;
 
+/// <summary>
 /// Base interface of <see cref="INavigator"/> and <see cref="INavigatorInProcess"/>.<br/>
 /// It contains common functionality for both interfaces.<br/>
 /// It is not intended to use this interface directly.
+/// </summary>
+/// <typeparam name="TJSObjectReference"></typeparam>
+/// <typeparam name="TFile"></typeparam>
+/// <param name="moduleManager"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 public abstract class NavigatorBase<TJSObjectReference, TFile>(IModuleManager moduleManager)
     where TJSObjectReference : IJSObjectReference

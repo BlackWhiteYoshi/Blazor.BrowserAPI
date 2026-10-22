@@ -8,7 +8,7 @@ namespace BrowserAPI.Implementation;
 /// <para>The <i>Gyroscope</i> interface of the Sensor APIs provides on each reading the angular velocity of the device along all three axes.</para>
 /// <para>To use this sensor, the user must grant permission to the 'gyroscope' device sensor through the Permissions API.</para>
 /// </summary>
-/// <remarks>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</remarks>
+/// <remarks>Objects of this class must disposed manually, so do not forget to dispose this object when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensor)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
 public sealed class Gyroscope(IJSObjectReference gyroscope) : Sensor(gyroscope), IGyroscope {

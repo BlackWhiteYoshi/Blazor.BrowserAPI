@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace BrowserAPI.Test.Client;
 
-public partial class SessionStorageGroup : ComponentBase {
+public sealed partial class SessionStorageGroup : ComponentBase {
     private const int TEST_KEY_INDEX = 0;
     public const string TEST_GET_ITEM = "get-item-test";
     public const string TEST_SET_ITEM_KEY = "set-item-key-test";
