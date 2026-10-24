@@ -1,0 +1,38 @@
+@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Web MIDI InProcess</h2>
+    <div>
+        @* WebMIDI *@
+        <button data-testid="@BUTTON_REQUEST_MIDI_ACCESS" @onclick="RequestMIDIAccess">RequestMIDIAccess</button>
+
+        @* MIDIAccess *@
+        <button data-testid="@BUTTON_GET_INPUTS" @onclick="GetInputs">GetInputs</button>
+        <button data-testid="@BUTTON_GET_OUTPUTS" @onclick="GetOutputs">GetOutput</button>
+        <button data-testid="@BUTTON_GET_SYSEX_ENABLED" @onclick="GetSysexEnabled">GetSysexEnabled</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_STATE_CHANGE" @onclick="RegisterOnStateChange">RegisterOnStateChange</button>
+
+        @* MIDIPort *@
+        <button data-testid="@BUTTON_GET_ID" @onclick="GetId">GetId</button>
+        <button data-testid="@BUTTON_GET_MANUFACTURER" @onclick="GetManufacturer">GetManufacturer</button>
+        <button data-testid="@BUTTON_GET_NAME" @onclick="GetName">GetName</button>
+        <button data-testid="@BUTTON_GET_TYPE" @onclick="GetType">GetType</button>
+        <button data-testid="@BUTTON_GET_VERSION" @onclick="GetVersion">GetVersion</button>
+        <button data-testid="@BUTTON_GET_STATE" @onclick="GetState">GetState</button>
+        <button data-testid="@BUTTON_GET_CONNECTION" @onclick="GetConnection">GetConnection</button>
+
+        <button data-testid="@BUTTON_OPEN" @onclick="Open">Open</button>
+        <button data-testid="@BUTTON_CLOSE" @onclick="Close">Close</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_STATE_CHANGE_PORT" @onclick="RegisterOnStateChangePort">RegisterOnStateChangePort</button>
+
+        @* MIDIInput *@
+        <button data-testid="@BUTTON_REGISTER_ON_MIDI_MESSAGE" @onclick="RegisterOnMIDIMessage">RegisterOnMIDIMessage</button>
+
+        @* MIDIOutput *@
+        <button data-testid="@BUTTON_SEND" @onclick="Send">Send</button>
+        <button data-testid="@BUTTON_CLEAR" @onclick="Clear">Clear</button>
+    </div>
+    <span data-testid="@OUTPUT">@output</span>
+</div>

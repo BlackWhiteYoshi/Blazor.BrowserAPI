@@ -80,6 +80,9 @@ export { ServiceWorkerContainerAPI };
 import { SessionStorageAPI } from "./BrowserAPIs/SessionStorage/SessionStorage.ts";
 export { SessionStorageAPI };
 
+import { WebMIDIAPI } from "./BrowserAPIs/WebMIDI/WebMIDI.ts";
+export { WebMIDIAPI };
+
 import { WindowAPI } from "./BrowserAPIs/Window/Window.ts";
 export { WindowAPI };
 

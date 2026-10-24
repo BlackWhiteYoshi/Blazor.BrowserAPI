@@ -82,6 +82,9 @@ else {
         <SessionStorageGroup />
         @if (isInProcess) { <SessionStorageInProcessGroup /> }
 
+        <WebMIDIGroup />
+        @if (isInProcess) { <WebMIDIInProcessGroup /> }
+
         <WindowGroup />
         @if (isInProcess) { <WindowInProcessGroup /> }
 

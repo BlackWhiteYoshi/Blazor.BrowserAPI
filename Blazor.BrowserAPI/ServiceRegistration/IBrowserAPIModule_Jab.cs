@@ -51,6 +51,8 @@ namespace Jab;
 [Scoped<BrowserAPI.IServiceWorkerContainerInProcess, BrowserAPI.Implementation.ServiceWorkerContainerInProcess>]
 [Scoped<BrowserAPI.ISessionStorage, BrowserAPI.Implementation.SessionStorage>]
 [Scoped<BrowserAPI.ISessionStorageInProcess, BrowserAPI.Implementation.SessionStorageInProcess>]
+[Scoped<BrowserAPI.IWebMIDI, BrowserAPI.Implementation.WebMIDI>]
+[Scoped<BrowserAPI.IWebMIDIInProcess, BrowserAPI.Implementation.WebMIDIInProcess>]
 [Scoped<BrowserAPI.IWindow, BrowserAPI.Implementation.Window>]
 [Scoped<BrowserAPI.IWindowInProcess, BrowserAPI.Implementation.WindowInProcess>]
 [Scoped<BrowserAPI.IWindowManagement, BrowserAPI.Implementation.WindowManagement>]

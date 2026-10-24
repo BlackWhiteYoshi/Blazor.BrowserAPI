@@ -34,6 +34,7 @@ You can find the test page at [blazor-browserapi.firerocket.de](https://blazor-b
 - SensorAPI
 - ServiceWorker
 - SessionStorage
+- WebMIDI
 - Window
 - WindowManagement (screen)
 

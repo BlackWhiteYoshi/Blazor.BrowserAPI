@@ -1,0 +1,48 @@
+@namespace BrowserAPI.Test.Client
+
+<div class="group">
+    <h2>Web MIDI</h2>
+    <div>
+        @* WebMIDI *@
+        <button data-testid="@BUTTON_REQUEST_MIDI_ACCESS" @onclick="RequestMIDIAccess">RequestMIDIAccess</button>
+
+        @* MIDIAccess *@
+        <button data-testid="@BUTTON_GET_INPUTS_PROPERTY" @onclick="GetInputs_Property">GetInputs_Property</button>
+        <button data-testid="@BUTTON_GET_INPUTS_METHOD" @onclick="GetInputs_Method">GetInputs_Method</button>
+        <button data-testid="@BUTTON_GET_OUTPUTS_PROPERTY" @onclick="GetOutputs_Property">GetOutput_Property</button>
+        <button data-testid="@BUTTON_GET_OUTPUTS_METHOD" @onclick="GetOutputs_Method">GetOutput_Method</button>
+        <button data-testid="@BUTTON_GET_SYSEX_ENABLED_PROPERTY" @onclick="GetSysexEnabled_Property">GetSysexEnabled_Property</button>
+        <button data-testid="@BUTTON_GET_SYSEX_ENABLED_METHOD" @onclick="GetSysexEnabled_Method">GetSysexEnabled_Method</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_STATE_CHANGE" @onclick="RegisterOnStateChange">RegisterOnStateChange</button>
+
+        @* MIDIPort *@
+        <button data-testid="@BUTTON_GET_ID_PROPERTY" @onclick="GetId_Property">GetId_Property</button>
+        <button data-testid="@BUTTON_GET_ID_METHOD" @onclick="GetId_Method">GetId_Method</button>
+        <button data-testid="@BUTTON_GET_MANUFACTURER_PROPERTY" @onclick="GetManufacturer_Property">GetManufacturer_Property</button>
+        <button data-testid="@BUTTON_GET_MANUFACTURER_METHOD" @onclick="GetManufacturer_Method">GetManufacturer_Method</button>
+        <button data-testid="@BUTTON_GET_NAME_PROPERTY" @onclick="GetName_Property">GetName_Property</button>
+        <button data-testid="@BUTTON_GET_NAME_METHOD" @onclick="GetName_Method">GetName_Method</button>
+        <button data-testid="@BUTTON_GET_TYPE_PROPERTY" @onclick="GetType_Property">GetType_Property</button>
+        <button data-testid="@BUTTON_GET_TYPE_METHOD" @onclick="GetType_Method">GetType_Method</button>
+        <button data-testid="@BUTTON_GET_VERSION_PROPERTY" @onclick="GetVersion_Property">GetVersion_Property</button>
+        <button data-testid="@BUTTON_GET_VERSION_METHOD" @onclick="GetVersion_Method">GetVersion_Method</button>
+        <button data-testid="@BUTTON_GET_STATE_PROPERTY" @onclick="GetState_Property">GetState_Property</button>
+        <button data-testid="@BUTTON_GET_STATE_METHOD" @onclick="GetState_Method">GetState_Method</button>
+        <button data-testid="@BUTTON_GET_CONNECTION_PROPERTY" @onclick="GetConnection_Property">GetConnection_Property</button>
+        <button data-testid="@BUTTON_GET_CONNECTION_METHOD" @onclick="GetConnection_Method">GetConnection_Method</button>
+
+        <button data-testid="@BUTTON_OPEN" @onclick="Open">Open</button>
+        <button data-testid="@BUTTON_CLOSE" @onclick="Close">Close</button>
+
+        <button data-testid="@BUTTON_REGISTER_ON_STATE_CHANGE_PORT" @onclick="RegisterOnStateChangePort">RegisterOnStateChangePort</button>
+
+        @* MIDIInput *@
+        <button data-testid="@BUTTON_REGISTER_ON_MIDI_MESSAGE" @onclick="RegisterOnMIDIMessage">RegisterOnMIDIMessage</button>
+
+        @* MIDIOutput *@
+        <button data-testid="@BUTTON_SEND" @onclick="Send">Send</button>
+        <button data-testid="@BUTTON_CLEAR" @onclick="Clear">Clear</button>
+    </div>
+    <span data-testid="@OUTPUT">@output</span>
+</div>

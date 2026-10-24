@@ -61,6 +61,8 @@ public static class AddBrowserAPIExtension {
             .AddScoped<IServiceWorkerContainerInProcess, Implementation.ServiceWorkerContainerInProcess>()
             .AddScoped<ISessionStorage, Implementation.SessionStorage>()
             .AddScoped<ISessionStorageInProcess, Implementation.SessionStorageInProcess>()
+            .AddScoped<IWebMIDI, Implementation.WebMIDI>()
+            .AddScoped<IWebMIDIInProcess, Implementation.WebMIDIInProcess>()
             .AddScoped<IWindow, Implementation.Window>()
             .AddScoped<IWindowInProcess, Implementation.WindowInProcess>()
             .AddScoped<IWindowManagement, Implementation.WindowManagement>()

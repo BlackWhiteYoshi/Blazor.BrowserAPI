@@ -32,6 +32,7 @@ You can find the test page at [blazor-browserapi.blackwhiteyoshi.com](https://bl
 - [SensorAPI](Blazor.BrowserAPI/BrowserAPIs/SensorAPI/SensorAPI.md)
 - [ServiceWorker](Blazor.BrowserAPI/BrowserAPIs/ServiceWorker/ServiceWorker.md)
 - [SessionStorage](Blazor.BrowserAPI/BrowserAPIs/SessionStorage/SessionStorage.md)
+- [WebMIDI](Blazor.BrowserAPI/BrowserAPIs/WebMIDI/WebMIDI.md)
 - [Window](Blazor.BrowserAPI/BrowserAPIs/Window/Window.md)
 - [WindowManagement (screen)](Blazor.BrowserAPI/BrowserAPIs/WindowManagement/WindowManagement.md)
 
