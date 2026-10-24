@@ -116,8 +116,8 @@ and the following files contain a list of all BrowserAPIs and the new BrowserAPI
 <br></br>
 ## Preview
 
-This package is in preview and breaking changes may occur (breaking changes are always mentioned in the [Release Notes](#release-notes)).  
-There are more interfaces coming.
+This package is currently in preview, but it will change to release after updating to .NET11.  
+There are no more features planned.
 
 
 <br></br>
@@ -187,3 +187,5 @@ There are more interfaces coming.
 - 0.18.0
   - added NotificationsAPI (25 BrowserAPIs)
   - small breaking change: changed HTMLElement.Hidden from bool to bool? (null represents "until-found")
+- 0.19.0
+  - added WebMIDI (26 BrowserAPIs)
