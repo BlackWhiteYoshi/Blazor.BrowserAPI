@@ -18,18 +18,22 @@ public sealed partial class ExampleComponent : ComponentBase, IDisposable {
     private string onlineIndicator = string.Empty;
 
     protected override async Task OnInitializedAsync() {
-        NetworkInformation.OnOnline += SetGreen;
-        NetworkInformation.OnOffline += SetRed;
+        if (RendererInfo.IsInteractive) {
+            NetworkInformation.OnOnline += SetGreen;
+            NetworkInformation.OnOffline += SetRed;
 
-        if (await NetworkInformation.OnLine)
-            onlineIndicator = "green";
-        else
-            onlineIndicator = "red";
+            if (await NetworkInformation.OnLine)
+                onlineIndicator = "green";
+            else
+                onlineIndicator = "red";
+        }
     }
 
     public void Dispose() {
-        NetworkInformation.OnOnline -= SetGreen;
-        NetworkInformation.OnOffline -= SetRed;
+        if (RendererInfo.IsInteractive) {
+            NetworkInformation.OnOnline -= SetGreen;
+            NetworkInformation.OnOffline -= SetRed;
+        }
     }
 
 

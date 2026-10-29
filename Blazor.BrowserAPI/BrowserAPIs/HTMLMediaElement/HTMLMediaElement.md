@@ -26,12 +26,18 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
             audio = ElementFactory.CreateHTMLMediaElement(audioElement);
     }
 
-    public ValueTask DisposeAsync() => audio?.DisposeAsync() ?? ValueTask.CompletedTask;
-
-
-    private async Task Play() {
-        await audio!.Play();
+    public async ValueTask DisposeAsync() {
+        if (audio is not null)
+            try {
+                await audio.DisposeAsync();
+            }
+            catch (JSDisconnectedException) { }
     }
+
+
+    private async Task Play() => await audio!.Play();
+
+    private async Task Pause() => await audio!.Pause();
 }
 ```
 

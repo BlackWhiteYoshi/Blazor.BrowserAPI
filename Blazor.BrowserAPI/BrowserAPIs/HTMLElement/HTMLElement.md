@@ -36,7 +36,13 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
         }
     }
 
-    public ValueTask DisposeAsync() => div?.DisposeAsync() ?? ValueTask.CompletedTask;
+    public async ValueTask DisposeAsync() {
+        if (div is not null)
+            try {
+                await div.DisposeAsync();
+            }
+            catch (JSDisconnectedException) { }
+    }
 }
 ```
 

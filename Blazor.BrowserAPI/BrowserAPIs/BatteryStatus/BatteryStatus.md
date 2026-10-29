@@ -12,20 +12,22 @@ This can be used to adjust your app's resource usage to reduce battery drain whe
 public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
     [Inject]
     public required IBatteryStatus BatteryStatus { private get; init; }
-    private Task<IBatteryManager> batteryManagerTask = null!;
-
-    protected override void OnInitialized() {
-        batteryManagerTask = BatteryStatus.GetBattery().AsTask();
-    }
+    
+    private Task<IBatteryManager>? _batteryManagerTask;
+    private Task<IBatteryManager> BatteryManagerTask => _batteryManagerTask ??= BatteryStatus.GetBattery().AsTask();
 
     public async ValueTask DisposeAsync() {
-        IBatteryManager batteryManager = await batteryManagerTask;
-        await batteryManager.DisposeAsync();
+        if (_batteryManagerTask is not null)
+            try {
+                IBatteryManager batteryManager = await _batteryManagerTask;
+                await batteryManager.DisposeAsync();
+            }
+            catch (JSDisconnectedException) { }
     }
 
 
     private async Task DisplayBatteryInfo() {
-        IBatteryManager batteryManager = await batteryManagerTask;
+        IBatteryManager batteryManager = await BatteryManagerTask;
 
         Console.WriteLine($"Charging: {await batteryManager.Charging}");
         Console.WriteLine($"Time until full: {await batteryManager.ChargingTime} secs");

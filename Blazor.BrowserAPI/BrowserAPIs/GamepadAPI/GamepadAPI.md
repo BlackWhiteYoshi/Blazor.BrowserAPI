@@ -17,23 +17,34 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
 
 
     protected override async Task OnInitializedAsync() {
-        IGamepad?[] gamepads = await GamepadAPI.GetGamepads();
-        foreach (IGamepad? gamepad in gamepads) {
-            if (gamepad is null)
-                continue;
+        if (RendererInfo.IsInteractive) {
+            IGamepad?[] gamepads = await GamepadAPI.GetGamepads();
+            foreach (IGamepad? gamepad in gamepads) {
+                if (gamepad is null)
+                    continue;
 
-            // this example only uses one gamepad, get the first one available
-            if (this.gamepad is null)
-                this.gamepad = gamepad;
-            else
-                // dispose all other gamepads, if any
-                await gamepad.DisposeAsync();
+                // this example only uses one gamepad, get the first one available
+                if (this.gamepad is null)
+                    this.gamepad = gamepad;
+                else
+                    // dispose all other gamepads, if any
+                    await gamepad.DisposeAsync();
+            }
+
+            GamepadAPI.OnGamepadConnected += OnGamepadConnected;
+            GamepadAPI.OnGamepadDisconnected += OnGamepadDisconnected;
         }
-
-        GamepadAPI.OnGamepadConnected += OnGamepadConnected;
-        GamepadAPI.OnGamepadDisconnected += OnGamepadDisconnected;
     }
 
+    public async ValueTask DisposeAsync() {
+        if (gamepad is not null)
+            try {
+                await gamepad.DisposeAsync();
+            }
+            catch (JSDisconnectedException) { }
+    }
+
+    
     public void OnGamepadConnected(IGamepad gamepad) {
         if (this.gamepad is null)
             this.gamepad = gamepad;
@@ -52,8 +63,6 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
             }
         }
     }
-
-    public ValueTask DisposeAsync() => gamepad?.DisposeAsync() ?? ValueTask.CompletedTask;
 
 
     private async Task ReadGamepadInput() {

@@ -13,12 +13,15 @@ public sealed partial class ExampleComponent : ComponentBase, IDisposable {
     public required IDevicePosture DevicePosture { private get; init; }
 
     protected override void OnInitialized() {
-        DisplayDevicePosture();
-        DevicePosture.OnChange += DisplayDevicePosture;
+        if (RendererInfo.IsInteractive) {
+            DisplayDevicePosture();
+            DevicePosture.OnChange += DisplayDevicePosture;
+        }
     }
 
     public void Dispose() {
-        DevicePosture.OnChange -= DisplayDevicePosture;
+        if (RendererInfo.IsInteractive)
+            DevicePosture.OnChange -= DisplayDevicePosture;
     }
 
 

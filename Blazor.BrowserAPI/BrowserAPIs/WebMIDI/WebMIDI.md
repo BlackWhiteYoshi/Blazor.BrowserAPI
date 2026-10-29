@@ -19,14 +19,19 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
 
 
     protected override async Task OnInitializedAsync() {
-        await using IMIDIAccess midiAccess = await WebMIDI.RequestMIDIAccess();
-        inputPorts = await midiAccess.Inputs;
-        outputPorts = await midiAccess.Outputs;
+        if (RendererInfo.IsInteractive) {
+            await using IMIDIAccess midiAccess = await WebMIDI.RequestMIDIAccess();
+            inputPorts = await midiAccess.Inputs;
+            outputPorts = await midiAccess.Outputs;
+        }
     }
 
     public async ValueTask DisposeAsync() {
-        await inputPorts.DisposeAsync();
-        await outputPorts.DisposeAsync();
+        try {
+            await inputPorts.DisposeAsync();
+            await outputPorts.DisposeAsync();
+        }
+        catch (JSDisconnectedException) { }
     }
 
 

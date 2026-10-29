@@ -24,15 +24,18 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
     public required IMediaDevices MediaDevices { private get; init; }
 
     public async ValueTask DisposeAsync() {
-        if (mediaRecorder is not null) {
-            mediaRecorder.OnDataAvailable -= SaveChunk;
-            await mediaRecorder.DisposeAsync();
-        }
-        if (mediaStream is not null)
-            await mediaStream.DisposeAsync();
+        try {
+            if (mediaRecorder is not null) {
+                mediaRecorder.OnDataAvailable -= SaveChunk;
+                await mediaRecorder.DisposeAsync();
+            }
+            if (mediaStream is not null)
+                await mediaStream.DisposeAsync();
 
-        if (video is not null)
-            await video.DisposeAsync();
+            if (video is not null)
+                await video.DisposeAsync();
+        }
+        catch (JSDisconnectedException) { }
     }
 
 

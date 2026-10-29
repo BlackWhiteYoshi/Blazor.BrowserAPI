@@ -26,12 +26,18 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
             dialog = ElementFactory.CreateHTMLDialogElement(dialogElement);
     }
 
-    public ValueTask DisposeAsync() => dialog?.DisposeAsync() ?? ValueTask.CompletedTask;
-
-
-    private async Task Example() {
-        await dialog!.Show();
+    public async ValueTask DisposeAsync() {
+        if (dialog is not null)
+            try {
+                await dialog.DisposeAsync();
+            }
+            catch (JSDisconnectedException) { }
     }
+
+
+    private async Task Open() => await dialog!.Show();
+
+    private async Task Close() => await dialog!.Close();
 }
 ```
 

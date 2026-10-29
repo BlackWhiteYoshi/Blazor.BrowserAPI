@@ -15,26 +15,30 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
 
 
     protected override async Task OnInitializedAsync() {
-        gyroscope = await SensorAPI.CreateGyroscope(frequency: 20);
-        if (gyroscope is null) {
-            Console.WriteLine("gyroscope is not supported");
-            return;
-        }
+        if (RendererInfo.IsInteractive) {
+            gyroscope = await SensorAPI.CreateGyroscope(frequency: 20);
+            if (gyroscope is null) {
+                Console.WriteLine("gyroscope is not supported");
+                return;
+            }
 
-        gyroscope.OnError += OnSensorError;
-        gyroscope.OnReading += OnSensorRead;
-        await gyroscope.Start();
+            gyroscope.OnError += OnSensorError;
+            gyroscope.OnReading += OnSensorRead;
+            await gyroscope.Start();
+        }
     }
 
     public async ValueTask DisposeAsync() {
-        if (gyroscope is null)
-            return;
+        if (gyroscope is not null) {
+            try {
+                await gyroscope.Stop();
+                gyroscope.OnReading -= OnSensorRead;
+                gyroscope.OnError -= OnSensorError;
 
-        await gyroscope.Stop();
-        gyroscope.OnReading -= OnSensorRead;
-        gyroscope.OnError -= OnSensorError;
-
-        await gyroscope.DisposeAsync();
+                await gyroscope.DisposeAsync();
+            }
+            catch (JSDisconnectedException) { }
+        }
     }
 
 

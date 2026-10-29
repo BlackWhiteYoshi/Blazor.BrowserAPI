@@ -19,7 +19,7 @@ public sealed partial class ExampleComponent : ComponentBase {
     [Inject]
     public required IDocument Document { private get; init; }
 
-    protected override async Task OnInitializedAsync() {
+    private async Task AppendSpanElement() {
         await using IHTMLElement spanElement = Document.CreateElement("span");
         await spanElement.SetInnerText("appended to body");
         await Document.Body.AppendChild(spanElement);
