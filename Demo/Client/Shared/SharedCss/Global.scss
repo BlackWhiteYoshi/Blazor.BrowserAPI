@@ -1,0 +1,71 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0 0 1em 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+}
+
+p {
+    text-wrap: pretty;
+}
+
+button, select, input, textarea {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+button:not(:disabled) {
+    cursor: pointer;
+}
+
+img, picture {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+tr {
+    &:nth-child(odd) {
+        background-color: #C8C8C8CC;
+    }
+
+    &:nth-child(even) {
+        background-color: #D8D8D8CC;
+    }
+}
+
+td, math {
+    font-variant-numeric: tabular-nums;
+}
+
+:target {
+    scroll-margin-block: 5rlh;
+}
+
+ul {
+    list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" width="12" height="12"><polygon points="0 0 3 5 0 10 10 5"/></svg>');
+    margin: 1rem 0;
+}
+
+a {
+    transition: color 0.1s, text-shadow 0.1s;
+
+    &:link {
+        text-decoration: none;
+    }
+
+    &:hover {
+        color: #FFF !important;
+        text-shadow: 0 0 5px #000;
+        transition: color 0.3s, text-shadow 0.3s;
+    }
+}

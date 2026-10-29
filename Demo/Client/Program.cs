@@ -1,0 +1,19 @@
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+
+namespace BrowserAPI.Demo.Client;
+
+public static class Program {
+    public static async Task Main(string[] args) {
+        WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
+
+        builder.Services.AddBrowserAPI();
+        builder.Services.AddClientServices();
+        builder.RootComponents.Add<App>("#app");
+        await using WebAssemblyHost host = builder.Build();
+
+        IModuleManager moduleManager = host.Services.GetRequiredService<IModuleManager>();
+        await moduleManager.LoadModule();
+
+        await host.RunAsync();
+    }
+}

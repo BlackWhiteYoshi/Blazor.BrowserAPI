@@ -110,7 +110,8 @@ and the following files contain a list of all BrowserAPIs and the new BrowserAPI
 - AddBrowserAPIExtansion.cs
 - IBrowserAPIModule_CircleDI.cs
 - IBrowserAPIModule_Jab.cs
-- App.razor
+- App.razor (BrowserAPI.Test.Client)
+- AppNavBar.razor.cs (BrowserAPI.Demo.Client)
 
 
 <br></br>

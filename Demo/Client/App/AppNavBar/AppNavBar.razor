@@ -1,0 +1,13 @@
+@namespace BrowserAPI.Demo.Client
+
+<div id=app-nav-bar>
+    <a href="/">
+        <Logo />
+    </a>
+
+    <ul>
+        @foreach (string browserAPI in BrowserAPIList) {
+            <li><NavLink href="@browserAPI.ToLower()">@browserAPI</NavLink></li>
+        }
+    </ul>
+</div>

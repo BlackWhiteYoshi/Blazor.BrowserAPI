@@ -1,0 +1,10 @@
+@use "Shared/SharedCss/Global.scss";
+@use "Shared/SharedCss/Classes.scss";
+
+@use "App/App.razor.scss";
+@use "App/AppNavBar/AppNavBar.razor.scss";
+
+@use "Pages/Home.razor.scss";
+
+
+// sass Main.scss wwwroot/site.css --no-source-map --style=compressed --watch

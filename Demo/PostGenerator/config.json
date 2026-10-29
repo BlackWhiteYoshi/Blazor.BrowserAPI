@@ -1,0 +1,23 @@
+{
+  "working directory": "../../../../Client/bin/Release/net10.0/publish/wwwroot",
+  "site url": "https://blazor-browserapi.firerocket.de",
+  "generate files": {
+    "html pages": {
+      "enabled": true,
+      "page folder": "__html_pages"
+    },
+    "other files": []
+  },
+  "create robots.txt": true,
+  "create sitemap.xml": true,
+  "remove files": {
+    "enabled": true,
+    "folder list": [],
+    "file list": [ "_framework/Blazor.BrowserAPI.Demo.Client.pdb.gz" ]
+  },
+  "zip files": {
+    "enabled": true,
+    "exclude list startsWith": [],
+    "exclude list endsWith": [ ".gz", ".br", ".jpg", ".png", ".woff2" ]
+  }
+}

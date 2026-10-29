@@ -1,0 +1,39 @@
+@using BrowserAPI.Demo.Client
+
+@namespace BrowserAPI.Demo.ClientHost
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>Blazor BrowserAPI Demo</title>
+        <base href="/">
+
+        <link rel="stylesheet" href="site.css">
+
+        @if (renderMode is not null) {
+            <script src="_framework/blazor.web.js" defer></script>
+        }
+        else {
+            <script src="_framework/blazor.webassembly.js" defer></script>
+        }
+        <link rel="modulepreload" href="_content/Blazor.BrowserAPI/BrowserAPI.js">
+    </head>
+
+    <body>
+        <div id="app">
+            <App @rendermode="renderMode" />
+        </div>
+
+        <div id="blazor-error-ui">
+            <div>
+                <p><span>An unexpected error has occurred.</span><span><a href="/" class="reload">Reload Website</a> if not working as expected.</span></p>
+                <svg class="dismiss" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
+                    <line x1="2" y1="2" x2="8" y2="8" />
+                    <line x1="2" y1="8" x2="8" y2="2" />
+                </svg>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,21 @@
+@namespace BrowserAPI.Demo.Client
+
+@if (!RendererInfo.IsInteractive) {
+    <div id="app-loading-progress">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+            <circle r="46" cx="50" cy="50" stroke-width="4" />
+            <circle r="46" cx="50" cy="50" stroke-width="4" />
+        </svg>
+    </div>
+}
+
+<AppNavBar />
+
+<main>
+    <Router AppAssembly="@typeof(App).Assembly" NotFoundPage="typeof(NotFound)">
+        <Found Context="routeData">
+            <RouteView RouteData="@routeData" />
+            <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+        </Found>
+    </Router>
+</main>

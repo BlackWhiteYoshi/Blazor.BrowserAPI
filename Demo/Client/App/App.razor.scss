@@ -1,0 +1,130 @@
+$breakpoint: 800px;
+
+html {
+    color-scheme: dark;
+    font-family: system-ui, sans-serif;
+    interpolate-size: allow-keywords;
+
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+
+    @media (prefers-reduced-motion: no-preference) {
+        scroll-behavior: smooth;
+    }
+}
+
+body {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+    color: #EEE;
+    background-color: #222;
+    overflow-y: hidden;
+}
+
+
+#app {
+    height: 100svh;
+    display: grid;
+    @media (width >= $breakpoint)  {
+        grid-template-columns: auto 1fr;
+    }
+
+    & > main {
+        padding: 2em;
+        overflow-y: auto;
+        
+        @media (width < $breakpoint)  {
+            padding-inline: 1em;
+        }
+    }
+}
+
+#app-loading-progress {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1.4em;
+    background-color: #333;
+    border: 1px solid #FFF;
+    border-radius: 0.6em;
+
+    & > svg {
+        width: 25vw;
+        height: 25vw;
+
+        & > circle {
+            fill: none;
+            stroke: #e0e0e0;
+            transform-origin: 50% 50%;
+            transform: rotate(-90deg);
+
+            &:last-child {
+                stroke: #1b6ec2;
+                stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
+                transition: stroke-dasharray 0.05s ease-in-out;
+            }
+        }
+    }
+
+    &:after {
+        text-align: center;
+        font-weight: bold;
+        content: var(--blazor-load-percentage-text, "Loading");
+    }
+}
+
+#blazor-error-ui {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 1000;
+    display: none;
+    color: #222;
+    background-image: linear-gradient(90deg, #FF7, #FF4, #FF7);
+
+    & > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.8em;
+        padding: 0.6em 1.2em;
+
+        & > p {
+            margin: 0 0 0 auto;
+
+            & > span {
+                display: inline-block;
+
+                &:first-child {
+                    margin-right: 0.4em;
+                }
+            }
+        }
+
+        & > .dismiss {
+            cursor: pointer;
+            margin-left: auto;
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            transition: stroke 0.1s;
+
+            & > line {
+                stroke: #000;
+                stroke-width: 2;
+                stroke-linecap: round;
+            }
+
+            &:hover > line {
+                stroke: #04b;
+                transition: stroke 0.3s;
+            }
+        }
+    }
+}

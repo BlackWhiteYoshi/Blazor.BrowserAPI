@@ -1,0 +1,27 @@
+#home {
+    & > svg {
+        width: calc(100px + 20%);
+        display: table;
+        margin: 0 auto 1em auto;
+    }
+
+    & > p {
+        display: table;
+        margin: 0 auto 2em auto;
+        max-width: 100ch;
+    }
+
+    & > div {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, min(380px, 100%));
+        gap: 0.6em;
+
+        & > a {
+            margin-left: 130px;
+
+            @media (width < 400px) {
+                margin-left: 10%;
+            }
+        }
+    }
+}

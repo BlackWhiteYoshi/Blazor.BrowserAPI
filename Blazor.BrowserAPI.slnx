@@ -1,5 +1,10 @@
 <Solution>
   <Project Path="Blazor.BrowserAPI/Blazor.BrowserAPI.csproj" />
+  <Folder Name="/Demo/">
+    <Project Path="Demo/Client/Blazor.BrowserAPI.Demo.Client.csproj" />
+    <Project Path="Demo/ClientHost/Blazor.BrowserAPI.Demo.ClientHost.csproj" />
+    <Project Path="Demo/PostGenerator/Blazor.BrowserAPI.Demo.PostGenerator.csproj" />
+  </Folder>
   <Folder Name="/Test/">
     <Project Path="Test/Client/Blazor.BrowserAPI.Test.Client.csproj" />
     <Project Path="Test/ClientHost/Blazor.BrowserAPI.Test.ClientHost.csproj" />
