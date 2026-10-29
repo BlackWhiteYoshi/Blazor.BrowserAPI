@@ -40,9 +40,6 @@ export { HTMLElementAPI };
 import { HTMLMediaElementAPI } from "./BrowserAPIs/HTMLMediaElement/HTMLMediaElement.ts";
 export { HTMLMediaElementAPI };
 
-import { LanguageAPI } from "./BrowserAPIs/Language/Language.ts"; // Obsolete
-export { LanguageAPI }; // Obsolete
-
 import { LocalStorageAPI } from "./BrowserAPIs/LocalStorage/LocalStorage.ts";
 export { LocalStorageAPI };
 

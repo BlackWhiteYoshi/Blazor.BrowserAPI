@@ -12366,157 +12366,6 @@
             Returns the height of the floating video window in pixels if it is open. Otherwise, it returns 0.
             </summary>
         </member>
-        <member name="T:BrowserAPI.Implementation.Language">
-            <summary>
-            <para>This interface is obsolete and will be removed in the future.</para>
-            <para>
-            The following functionalities are available in other interfaces:<br />
-            - <see cref="P:BrowserAPI.ILanguage.BrowserLanguage"/> (navigator.language) -> <see cref="P:BrowserAPI.INavigator.Language"/><br />
-            - <see cref="P:BrowserAPI.ILanguage.BrowserLanguages"/> (navigator.languages) -> <see cref="P:BrowserAPI.INavigator.Languages"/><br />
-            - <see cref="P:BrowserAPI.ILanguage.HtmlLanguage"/> (document.documentElement.lang) -> <see cref="P:BrowserAPI.IDocument.DocumentElement"/>.<see cref="P:BrowserAPI.IHTMLElement.Lang">Lang</see>
-            </para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.Language.#ctor(BrowserAPI.IModuleManager)">
-            <summary>
-            <para>This interface is obsolete and will be removed in the future.</para>
-            <para>
-            The following functionalities are available in other interfaces:<br />
-            - <see cref="P:BrowserAPI.ILanguage.BrowserLanguage"/> (navigator.language) -> <see cref="P:BrowserAPI.INavigator.Language"/><br />
-            - <see cref="P:BrowserAPI.ILanguage.BrowserLanguages"/> (navigator.languages) -> <see cref="P:BrowserAPI.INavigator.Languages"/><br />
-            - <see cref="P:BrowserAPI.ILanguage.HtmlLanguage"/> (document.documentElement.lang) -> <see cref="P:BrowserAPI.IDocument.DocumentElement"/>.<see cref="P:BrowserAPI.IHTMLElement.Lang">Lang</see>
-            </para>
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.Implementation.Language.BrowserLanguage">
-            <summary>
-            <para>navigator.language</para>
-            <para>
-            Deprecated, use <see cref="P:BrowserAPI.INavigator.Language"/> instead:
-            <code>
-            [Inject]
-            public required INavigator Navigator { private get; init; }
-            ...
-            string value = await Navigator.Language;
-            </code>
-            </para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.Language.GetBrowserLanguage(System.Threading.CancellationToken)">
-            <inheritdoc cref="P:BrowserAPI.Implementation.Language.BrowserLanguage" />
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.Implementation.Language.BrowserLanguages">
-            <summary>
-            <para>navigator.languages</para>
-            <para>
-            Deprecated, use <see cref="P:BrowserAPI.INavigator.Languages"/> instead:
-            <code>
-            [Inject]
-            public required INavigator Navigator { private get; init; }
-            ...
-            string[] value = await Navigator.Languages;
-            </code>
-            </para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.Language.GetBrowserLanguages(System.Threading.CancellationToken)">
-            <inheritdoc cref="P:BrowserAPI.Implementation.Language.BrowserLanguages" />
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.Implementation.Language.HtmlLanguage">
-            <summary>
-            <para>document.documentElement.lang</para>
-            <para>
-            Deprecated, use <see cref="P:BrowserAPI.IDocument.DocumentElement"/>.<see cref="P:BrowserAPI.IHTMLElement.Lang">Lang</see> instead:
-            <code>
-            [Inject]
-            public required IDocument Document { private get; init; }
-            ...
-            string value = await Document.DocumentElement.Lang;
-            await Document.DocumentElement.SetLang(newValue);
-            </code>
-            </para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.Language.GetHtmlLanguage(System.Threading.CancellationToken)">
-            <inheritdoc cref="P:BrowserAPI.Implementation.Language.HtmlLanguage" />
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:BrowserAPI.Implementation.Language.SetHtmlLanguage(System.String,System.Threading.CancellationToken)">
-            <inheritdoc cref="P:BrowserAPI.Implementation.Language.HtmlLanguage" />
-            <param name="language">language abbreviation: e.g. "en", "fr", "es", "de"</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="T:BrowserAPI.Implementation.LanguageInProcess">
-            <summary>
-            <para>This interface is obsolete and will be removed in the future.</para>
-            <para>
-            The following functionalities are available in other interfaces:<br />
-            - <see cref="P:BrowserAPI.ILanguageInProcess.BrowserLanguage"/> (navigator.language) -> <see cref="P:BrowserAPI.INavigatorInProcess.Language"/><br />
-            - <see cref="P:BrowserAPI.ILanguageInProcess.BrowserLanguages"/> (navigator.languages) -> <see cref="P:BrowserAPI.INavigatorInProcess.Languages"/><br />
-            - <see cref="P:BrowserAPI.ILanguageInProcess.HtmlLanguage"/> (document.documentElement.lang) -> <see cref="P:BrowserAPI.IDocumentInProcess.DocumentElement"/>.<see cref="P:BrowserAPI.IHTMLElementInProcess.Lang">Lang</see>
-            </para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.LanguageInProcess.#ctor(BrowserAPI.IModuleManager)">
-            <summary>
-            <para>This interface is obsolete and will be removed in the future.</para>
-            <para>
-            The following functionalities are available in other interfaces:<br />
-            - <see cref="P:BrowserAPI.ILanguageInProcess.BrowserLanguage"/> (navigator.language) -> <see cref="P:BrowserAPI.INavigatorInProcess.Language"/><br />
-            - <see cref="P:BrowserAPI.ILanguageInProcess.BrowserLanguages"/> (navigator.languages) -> <see cref="P:BrowserAPI.INavigatorInProcess.Languages"/><br />
-            - <see cref="P:BrowserAPI.ILanguageInProcess.HtmlLanguage"/> (document.documentElement.lang) -> <see cref="P:BrowserAPI.IDocumentInProcess.DocumentElement"/>.<see cref="P:BrowserAPI.IHTMLElementInProcess.Lang">Lang</see>
-            </para>
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.Implementation.LanguageInProcess.BrowserLanguage">
-            <summary>
-            <para>navigator.language</para>
-            <para>
-            Deprecated, use <see cref="P:BrowserAPI.INavigatorInProcess.Language"/> instead:
-            <code>
-            [Inject]
-            public required INavigatorInProcess Navigator { private get; init; }
-            ...
-            string value = Navigator.Language;
-            </code>
-            </para>
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.Implementation.LanguageInProcess.BrowserLanguages">
-            <summary>
-            <para>navigator.languages</para>
-            <para>
-            Deprecated, use <see cref="P:BrowserAPI.INavigatorInProcess.Languages"/> instead:
-            <code>
-            [Inject]
-            public required INavigatorInProcess Navigator { private get; init; }
-            ...
-            string[] value = Navigator.Languages;
-            </code>
-            </para>
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.Implementation.LanguageInProcess.HtmlLanguage">
-            <summary>
-            <para>document.documentElement.lang</para>
-            <para>
-            Deprecated, use <see cref="P:BrowserAPI.IDocumentInProcess.DocumentElement"/>.<see cref="P:BrowserAPI.IHTMLElementInProcess.Lang">Lang</see> instead:
-            <code>
-            [Inject]
-            public required IDocumentInProcess Document { private get; init; }
-            ...
-            string value = Document.DocumentElement.Lang;
-            Document.DocumentElement.Lang = newValue;
-            </code>
-            </para>
-            </summary>
-        </member>
         <member name="T:BrowserAPI.Implementation.LocalStorage">
             <summary>
             The localStorage read-only property of the window interface allows you to access a Storage object for the Document's origin;<br />
@@ -20274,44 +20123,6 @@
             The screen object, implementing the Screen interface, is a special object for inspecting properties of the screen on which the current window is being rendered.
             </summary>
         </member>
-        <member name="M:BrowserAPI.Implementation.WindowManagement.Open(System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-            The <i>open()</i> method of the Window interface loads a specified resource into a new or existing browsing context (that is, a tab, a window, or an iframe) under a specified name.
-            </summary>
-            <param name="url">
-            A string indicating the URL or path of the resource to be loaded.
-            If an empty string ("") is specified or this parameter is omitted, a blank page is opened into the targeted browsing context.
-            </param>
-            <param name="target">
-            <para>
-            A string, without whitespace, specifying the name of the browsing context the resource is being loaded into.<br />
-            If the name doesn't identify an existing context, a new context is created and given the specified name.<br />
-            The special target keywords, "<i>_self</i>", "<i>_blank</i>" (default), "<i>_parent</i>", "<i>_top</i>", and "<i>_unfencedTop</i>" can also be used.<br />
-            "<i>_unfencedTop</i>" is only relevant to fenced frames.
-            </para>
-            <para>This name can be used as the target attribute of &lt;a&gt; or &lt;form&gt; elements.</para>
-            </param>
-            <param name="features">
-            <para>
-            A string containing a comma-separated list of window features in the form <i>name=value</i>.
-            Boolean values can be set to true using one of: <i>name</i>, <i>name=yes</i>, <i>name=true</i>, or <i>name=n</i> where n is any non-zero integer.
-            These features include options such as the window's default size and position, whether or not to open a minimal popup window, and so forth.
-            The following options are supported:</para>
-            <para>
-            - "attributionsrc": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
-            - "popup": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
-            - "width" or "innerWidth": Specifies the width of the content area, including scrollbars. The minimum required value is 100.<br />
-            - "height" or "innerHeight": Specifies the height of the content area, including scrollbars. The minimum required value is 100.<br />
-            - "left" or "screenX": Specifies the distance in pixels from the left side of the work area as defined by the user's operating system where the new window will be generated.<br />
-            - "top" or "screenY": Specifies the distance in pixels from the top side of the work area as defined by the user's operating system where the new window will be generated.<br />
-            - "noopener": If this feature is set, the new window will not have access to the originating window via Window.opener and returns null. When noopener is used, non-empty target names, other than <i>_top</i>, <i>_self</i>, and <i>_parent</i>, are treated like <i>_blank</i> in terms of deciding whether to open a new browsing context.<br />
-            - "noreferrer": If this feature is set, the browser will omit the Referer header, as well as set noopener to true. See rel="noreferrer" for more information.
-            </para>
-            <para>A null value is treated the same as the empty string ("").</para>
-            </param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
         <member name="T:BrowserAPI.Implementation.WindowManagementBase`2">
             <summary>
             Base interface of <see cref="T:BrowserAPI.IWindowManagement"/> and <see cref="T:BrowserAPI.IWindowManagementInProcess"/>.<br/>
@@ -20356,42 +20167,6 @@
             The Window property <i>screen</i> returns a reference to the screen object associated with the window.
             The screen object, implementing the Screen interface, is a special object for inspecting properties of the screen on which the current window is being rendered.
             </summary>
-        </member>
-        <member name="M:BrowserAPI.Implementation.WindowManagementInProcess.Open(System.String,System.String,System.String)">
-            <summary>
-            The <i>open()</i> method of the Window interface loads a specified resource into a new or existing browsing context (that is, a tab, a window, or an iframe) under a specified name.
-            </summary>
-            <param name="url">
-            A string indicating the URL or path of the resource to be loaded.
-            If an empty string ("") is specified or this parameter is omitted, a blank page is opened into the targeted browsing context.
-            </param>
-            <param name="target">
-            <para>
-            A string, without whitespace, specifying the name of the browsing context the resource is being loaded into.<br />
-            If the name doesn't identify an existing context, a new context is created and given the specified name.<br />
-            The special target keywords, "<i>_self</i>", "<i>_blank</i>" (default), "<i>_parent</i>", "<i>_top</i>", and "<i>_unfencedTop</i>" can also be used.<br />
-            "<i>_unfencedTop</i>" is only relevant to fenced frames.
-            </para>
-            <para>This name can be used as the target attribute of &lt;a&gt; or &lt;form&gt; elements.</para>
-            </param>
-            <param name="features">
-            <para>
-            A string containing a comma-separated list of window features in the form <i>name=value</i>.
-            Boolean values can be set to true using one of: <i>name</i>, <i>name=yes</i>, <i>name=true</i>, or <i>name=n</i> where n is any non-zero integer.
-            These features include options such as the window's default size and position, whether or not to open a minimal popup window, and so forth.
-            The following options are supported:</para>
-            <para>
-            - "attributionsrc": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
-            - "popup": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
-            - "width" or "innerWidth": Specifies the width of the content area, including scrollbars. The minimum required value is 100.<br />
-            - "height" or "innerHeight": Specifies the height of the content area, including scrollbars. The minimum required value is 100.<br />
-            - "left" or "screenX": Specifies the distance in pixels from the left side of the work area as defined by the user's operating system where the new window will be generated.<br />
-            - "top" or "screenY": Specifies the distance in pixels from the top side of the work area as defined by the user's operating system where the new window will be generated.<br />
-            - "noopener": If this feature is set, the new window will not have access to the originating window via Window.opener and returns null. When noopener is used, non-empty target names, other than <i>_top</i>, <i>_self</i>, and <i>_parent</i>, are treated like <i>_blank</i> in terms of deciding whether to open a new browsing context.<br />
-            - "noreferrer": If this feature is set, the browser will omit the Referer header, as well as set noopener to true. See rel="noreferrer" for more information.
-            </para>
-            <para>A null value is treated the same as the empty string ("").</para>
-            </param>
         </member>
         <member name="T:BrowserAPI.Implementation.ModuleManager">
             <summary>
@@ -24038,6 +23813,96 @@
             <param name="args">JSON-serializable arguments.</param>
             <returns></returns>
         </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSRuntime,System.String,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
+            </summary>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSRuntime,System.String,System.Threading.CancellationToken,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
+            </summary>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSRuntime,System.String,System.TimeSpan,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
+            </summary>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
+            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String)">
+            <summary>
+            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
+            </summary>
+            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
+            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
+            </summary>
+            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,System.TimeSpan)">
+            <summary>
+            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
+            </summary>
+            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
+            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
+            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,``0)">
+            <summary>
+            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
+            </summary>
+            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
+            <param name="value">JSON-serializable value.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,``0,System.Threading.CancellationToken)">
+            <summary>
+            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
+            </summary>
+            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
+            <param name="value">JSON-serializable value.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,``0,System.TimeSpan)">
+            <summary>
+            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
+            </summary>
+            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
+            <param name="value">JSON-serializable value.</param>
+            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
+        </member>
         <member name="M:BrowserAPI.TrySyncExtensions.InvokeVoidTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Object[])">
             <summary>
             <para>Invokes the specified JavaScript function synchronously if possible, otherwise asynchronously.</para>
@@ -24104,6 +23969,96 @@
             <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
             <param name="args">JSON-serializable arguments.</param>
             <returns>An instance of <typeparamref name="TResult"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
+            </summary>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Threading.CancellationToken,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
+            </summary>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.TimeSpan,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
+            </summary>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
+            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String)">
+            <summary>
+            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
+            </summary>
+            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
+            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
+            </summary>
+            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,System.TimeSpan)">
+            <summary>
+            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
+            </summary>
+            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
+            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
+            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,``0)">
+            <summary>
+            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
+            </summary>
+            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
+            <param name="value">JSON-serializable value.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,``0,System.Threading.CancellationToken)">
+            <summary>
+            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
+            </summary>
+            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
+            <param name="value">JSON-serializable value.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,``0,System.TimeSpan)">
+            <summary>
+            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
+            </summary>
+            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
+            <param name="value">JSON-serializable value.</param>
+            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
         </member>
         <member name="M:BrowserAPI.TrySyncExtensions.DisposeTrySync(Microsoft.JSInterop.IJSObjectReference)">
             <summary>
@@ -35933,135 +35888,6 @@
             Returns the height of the floating video window in pixels if it is open. Otherwise, it returns 0.
             </summary>
         </member>
-        <member name="T:BrowserAPI.ILanguage">
-            <summary>
-            <para>This interface is obsolete and will be removed in the future.</para>
-            <para>
-            The following functionalities are available in other interfaces:<br />
-            - <see cref="P:BrowserAPI.ILanguage.BrowserLanguage"/> (navigator.language) -> <see cref="P:BrowserAPI.INavigator.Language"/><br />
-            - <see cref="P:BrowserAPI.ILanguage.BrowserLanguages"/> (navigator.languages) -> <see cref="P:BrowserAPI.INavigator.Languages"/><br />
-            - <see cref="P:BrowserAPI.ILanguage.HtmlLanguage"/> (document.documentElement.lang) -> <see cref="P:BrowserAPI.IDocument.DocumentElement"/>.<see cref="P:BrowserAPI.IHTMLElement.Lang">Lang</see>
-            </para>
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.ILanguage.BrowserLanguage">
-            <summary>
-            <para>navigator.language</para>
-            <para>
-            Deprecated, use <see cref="P:BrowserAPI.INavigator.Language"/> instead:
-            <code>
-            [Inject]
-            public required INavigator Navigator { private get; init; }
-            ...
-            string value = await Navigator.Language;
-            </code>
-            </para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.ILanguage.GetBrowserLanguage(System.Threading.CancellationToken)">
-            <inheritdoc cref="P:BrowserAPI.ILanguage.BrowserLanguage" />
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.ILanguage.BrowserLanguages">
-            <summary>
-            <para>navigator.languages</para>
-            <para>
-            Deprecated, use <see cref="P:BrowserAPI.INavigator.Languages"/> instead:
-            <code>
-            [Inject]
-            public required INavigator Navigator { private get; init; }
-            ...
-            string[] value = await Navigator.Languages;
-            </code>
-            </para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.ILanguage.GetBrowserLanguages(System.Threading.CancellationToken)">
-            <inheritdoc cref="P:BrowserAPI.ILanguage.BrowserLanguages" />
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="P:BrowserAPI.ILanguage.HtmlLanguage">
-            <summary>
-            <para>document.documentElement.lang</para>
-            <para>
-            Deprecated, use <see cref="P:BrowserAPI.IDocument.DocumentElement"/>.<see cref="P:BrowserAPI.IHTMLElement.Lang">Lang</see> instead:
-            <code>
-            [Inject]
-            public required IDocument Document { private get; init; }
-            ...
-            string value = await Document.DocumentElement.Lang;
-            await Document.DocumentElement.SetLang(newValue);
-            </code>
-            </para>
-            </summary>
-        </member>
-        <member name="M:BrowserAPI.ILanguage.GetHtmlLanguage(System.Threading.CancellationToken)">
-            <inheritdoc cref="P:BrowserAPI.ILanguage.HtmlLanguage" />
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:BrowserAPI.ILanguage.SetHtmlLanguage(System.String,System.Threading.CancellationToken)">
-            <inheritdoc cref="P:BrowserAPI.ILanguage.HtmlLanguage" />
-            <param name="language">language abbreviation: e.g. "en", "fr", "es", "de"</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="T:BrowserAPI.ILanguageInProcess">
-            <summary>
-            <para>This interface is obsolete and will be removed in the future.</para>
-            <para>
-            The following functionalities are available in other interfaces:<br />
-            - <see cref="P:BrowserAPI.ILanguageInProcess.BrowserLanguage"/> (navigator.language) -> <see cref="P:BrowserAPI.INavigatorInProcess.Language"/><br />
-            - <see cref="P:BrowserAPI.ILanguageInProcess.BrowserLanguages"/> (navigator.languages) -> <see cref="P:BrowserAPI.INavigatorInProcess.Languages"/><br />
-            - <see cref="P:BrowserAPI.ILanguageInProcess.HtmlLanguage"/> (document.documentElement.lang) -> <see cref="P:BrowserAPI.IDocumentInProcess.DocumentElement"/>.<see cref="P:BrowserAPI.IHTMLElementInProcess.Lang">Lang</see>
-            </para>
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.ILanguageInProcess.BrowserLanguage">
-            <summary>
-            <para>navigator.language</para>
-            <para>
-            Deprecated, use <see cref="P:BrowserAPI.INavigatorInProcess.Language"/> instead:
-            <code>
-            [Inject]
-            public required INavigatorInProcess Navigator { private get; init; }
-            ...
-            string value = Navigator.Language;
-            </code>
-            </para>
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.ILanguageInProcess.BrowserLanguages">
-            <summary>
-            <para>navigator.languages</para>
-            <para>
-            Deprecated, use <see cref="P:BrowserAPI.INavigatorInProcess.Languages"/> instead:
-            <code>
-            [Inject]
-            public required INavigatorInProcess Navigator { private get; init; }
-            ...
-            string[] value = Navigator.Languages;
-            </code>
-            </para>
-            </summary>
-        </member>
-        <member name="P:BrowserAPI.ILanguageInProcess.HtmlLanguage">
-            <summary>
-            <para>document.documentElement.lang</para>
-            <para>
-            Deprecated, use <see cref="P:BrowserAPI.IDocumentInProcess.DocumentElement"/>.<see cref="P:BrowserAPI.IHTMLElementInProcess.Lang">Lang</see> instead:
-            <code>
-            [Inject]
-            public required IDocumentInProcess Document { private get; init; }
-            ...
-            string value = Document.DocumentElement.Lang;
-            Document.DocumentElement.Lang = newValue;
-            </code>
-            </para>
-            </summary>
-        </member>
         <member name="T:BrowserAPI.ILocalStorage">
             <summary>
             The localStorage read-only property of the window interface allows you to access a Storage object for the Document's origin;<br />
@@ -43086,44 +42912,6 @@
             The screen object, implementing the Screen interface, is a special object for inspecting properties of the screen on which the current window is being rendered.
             </summary>
         </member>
-        <member name="M:BrowserAPI.IWindowManagement.Open(System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-            The <i>open()</i> method of the Window interface loads a specified resource into a new or existing browsing context (that is, a tab, a window, or an iframe) under a specified name.
-            </summary>
-            <param name="url">
-            A string indicating the URL or path of the resource to be loaded.
-            If an empty string ("") is specified or this parameter is omitted, a blank page is opened into the targeted browsing context.
-            </param>
-            <param name="target">
-            <para>
-            A string, without whitespace, specifying the name of the browsing context the resource is being loaded into.<br />
-            If the name doesn't identify an existing context, a new context is created and given the specified name.<br />
-            The special target keywords, "<i>_self</i>", "<i>_blank</i>" (default), "<i>_parent</i>", "<i>_top</i>", and "<i>_unfencedTop</i>" can also be used.<br />
-            "<i>_unfencedTop</i>" is only relevant to fenced frames.
-            </para>
-            <para>This name can be used as the target attribute of &lt;a&gt; or &lt;form&gt; elements.</para>
-            </param>
-            <param name="features">
-            <para>
-            A string containing a comma-separated list of window features in the form <i>name=value</i>.
-            Boolean values can be set to true using one of: <i>name</i>, <i>name=yes</i>, <i>name=true</i>, or <i>name=n</i> where n is any non-zero integer.
-            These features include options such as the window's default size and position, whether or not to open a minimal popup window, and so forth.
-            The following options are supported:</para>
-            <para>
-            - "attributionsrc": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
-            - "popup": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
-            - "width" or "innerWidth": Specifies the width of the content area, including scrollbars. The minimum required value is 100.<br />
-            - "height" or "innerHeight": Specifies the height of the content area, including scrollbars. The minimum required value is 100.<br />
-            - "left" or "screenX": Specifies the distance in pixels from the left side of the work area as defined by the user's operating system where the new window will be generated.<br />
-            - "top" or "screenY": Specifies the distance in pixels from the top side of the work area as defined by the user's operating system where the new window will be generated.<br />
-            - "noopener": If this feature is set, the new window will not have access to the originating window via Window.opener and returns null. When noopener is used, non-empty target names, other than <i>_top</i>, <i>_self</i>, and <i>_parent</i>, are treated like <i>_blank</i> in terms of deciding whether to open a new browsing context.<br />
-            - "noreferrer": If this feature is set, the browser will omit the Referer header, as well as set noopener to true. See rel="noreferrer" for more information.
-            </para>
-            <para>A null value is treated the same as the empty string ("").</para>
-            </param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
         <member name="T:BrowserAPI.IWindowManagementBase`2">
             <summary>
             Base interface of <see cref="T:BrowserAPI.IWindowManagement"/> and <see cref="T:BrowserAPI.IWindowManagementInProcess"/>.<br/>
@@ -43152,42 +42940,6 @@
             The Window property <i>screen</i> returns a reference to the screen object associated with the window.
             The screen object, implementing the Screen interface, is a special object for inspecting properties of the screen on which the current window is being rendered.
             </summary>
-        </member>
-        <member name="M:BrowserAPI.IWindowManagementInProcess.Open(System.String,System.String,System.String)">
-            <summary>
-            The <i>open()</i> method of the Window interface loads a specified resource into a new or existing browsing context (that is, a tab, a window, or an iframe) under a specified name.
-            </summary>
-            <param name="url">
-            A string indicating the URL or path of the resource to be loaded.
-            If an empty string ("") is specified or this parameter is omitted, a blank page is opened into the targeted browsing context.
-            </param>
-            <param name="target">
-            <para>
-            A string, without whitespace, specifying the name of the browsing context the resource is being loaded into.<br />
-            If the name doesn't identify an existing context, a new context is created and given the specified name.<br />
-            The special target keywords, "<i>_self</i>", "<i>_blank</i>" (default), "<i>_parent</i>", "<i>_top</i>", and "<i>_unfencedTop</i>" can also be used.<br />
-            "<i>_unfencedTop</i>" is only relevant to fenced frames.
-            </para>
-            <para>This name can be used as the target attribute of &lt;a&gt; or &lt;form&gt; elements.</para>
-            </param>
-            <param name="features">
-            <para>
-            A string containing a comma-separated list of window features in the form <i>name=value</i>.
-            Boolean values can be set to true using one of: <i>name</i>, <i>name=yes</i>, <i>name=true</i>, or <i>name=n</i> where n is any non-zero integer.
-            These features include options such as the window's default size and position, whether or not to open a minimal popup window, and so forth.
-            The following options are supported:</para>
-            <para>
-            - "attributionsrc": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
-            - "popup": By default, window.open opens the page in a new tab. If popup is set to true, it requests that a minimal popup window be used. The UI features included in the popup window will be automatically decided by the browser, generally including an address bar only. If popup is present and set to false, a new tab is still opened.<br />
-            - "width" or "innerWidth": Specifies the width of the content area, including scrollbars. The minimum required value is 100.<br />
-            - "height" or "innerHeight": Specifies the height of the content area, including scrollbars. The minimum required value is 100.<br />
-            - "left" or "screenX": Specifies the distance in pixels from the left side of the work area as defined by the user's operating system where the new window will be generated.<br />
-            - "top" or "screenY": Specifies the distance in pixels from the top side of the work area as defined by the user's operating system where the new window will be generated.<br />
-            - "noopener": If this feature is set, the new window will not have access to the originating window via Window.opener and returns null. When noopener is used, non-empty target names, other than <i>_top</i>, <i>_self</i>, and <i>_parent</i>, are treated like <i>_blank</i> in terms of deciding whether to open a new browsing context.<br />
-            - "noreferrer": If this feature is set, the browser will omit the Referer header, as well as set noopener to true. See rel="noreferrer" for more information.
-            </para>
-            <para>A null value is treated the same as the empty string ("").</para>
-            </param>
         </member>
         <member name="T:BrowserAPI.IModuleManager">
             <summary>

@@ -31,8 +31,6 @@ namespace Jab;
 [Scoped<BrowserAPI.IGeolocationInProcess, BrowserAPI.Implementation.GeolocationInProcess>]
 [Scoped<BrowserAPI.IHistory, BrowserAPI.Implementation.History>]
 [Scoped<BrowserAPI.IHistoryInProcess, BrowserAPI.Implementation.HistoryInProcess>]
-[Scoped<BrowserAPI.ILanguage, BrowserAPI.Implementation.Language>] // Obsolete
-[Scoped<BrowserAPI.ILanguageInProcess, BrowserAPI.Implementation.LanguageInProcess>] // Obsolete
 [Scoped<BrowserAPI.ILocalStorage, BrowserAPI.Implementation.LocalStorage>]
 [Scoped<BrowserAPI.ILocalStorageInProcess, BrowserAPI.Implementation.LocalStorageInProcess>]
 [Scoped<BrowserAPI.IMediaDevices, BrowserAPI.Implementation.MediaDevices>]

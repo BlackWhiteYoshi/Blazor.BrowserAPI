@@ -41,8 +41,6 @@ public static class AddBrowserAPIExtension {
             .AddScoped<IGeolocationInProcess, Implementation.GeolocationInProcess>()
             .AddScoped<IHistory, Implementation.History>()
             .AddScoped<IHistoryInProcess, Implementation.HistoryInProcess>()
-            .AddScoped<ILanguage, Implementation.Language>() // Obsolete
-            .AddScoped<ILanguageInProcess, Implementation.LanguageInProcess>() // Obsolete
             .AddScoped<ILocalStorage, Implementation.LocalStorage>()
             .AddScoped<ILocalStorageInProcess, Implementation.LocalStorageInProcess>()
             .AddScoped<IMediaDevices, Implementation.MediaDevices>()
