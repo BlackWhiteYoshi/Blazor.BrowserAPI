@@ -7,7 +7,7 @@
     <InvariantGlobalization>true</InvariantGlobalization>
     <CompressionEnabled>false</CompressionEnabled>
     <ServerGarbageCollection>true</ServerGarbageCollection>
-    <!--<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>-->
+    <EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
   </PropertyGroup>
 
   <ItemGroup>

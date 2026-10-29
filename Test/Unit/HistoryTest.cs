@@ -187,10 +187,10 @@ public sealed class HistoryTest(PlayWrightFixture playWrightFixture) : PlayWrigh
     [Test]
     public async Task RegisterOnHashChange() {
         await ExecuteTest(HistoryGroup.BUTTON_REGISTER_ON_HASH_CHANGE);
-        await Page.EvaluateAsync("window.location.href = 'https://localhost:5000/#anchor';");
+        await Page.EvaluateAsync("window.location.href = 'https://localhost:5000/#app';");
         await Task.Delay(STANDARD_WAIT_TIME);
 
         string? result = await Page.GetByTestId(HistoryGroup.OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("new = https://localhost:5000/#anchor, old = https://localhost:5000/");
+        await Assert.That(result).IsEqualTo("new = https://localhost:5000/#app, old = https://localhost:5000/");
     }
 }

@@ -7,7 +7,7 @@ public static class Program {
         WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
 
         builder.Services.AddBrowserAPI();
-        builder.RootComponents.Add<App>("#anchor");
+        builder.RootComponents.Add<App>("#app");
         await using WebAssemblyHost host = builder.Build();
 
         IModuleManager moduleManager = host.Services.GetRequiredService<IModuleManager>();
