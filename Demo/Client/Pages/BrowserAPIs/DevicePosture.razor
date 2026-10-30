@@ -5,6 +5,12 @@
     <h1 class="headline">DevicePosture</h1>
 
     <div>
-        @* TODO *@ Not Implemented yet...
+        <div>
+            <span style="color: @(isContinuous switch { true => "#0F0", false or null => "#444" })">viewport is flat/continuous</span>
+            <span style="color: @(isContinuous switch { false => "#0F0", true or null => "#444" })">viewport is folded</span>
+        </div>
+        <button class="btn-main" @onclick="ReadDevicePosture">Read Device Posture</button>
+        <button class="btn-deny" @onclick="ListenOnChange" disabled="@isListeningOnChange">Listen on change</button>
+        <button class="btn-cancel" @onclick="RemoveOnChange" disabled="@(!isListeningOnChange)">Stop listening</button>
     </div>
 </div>
