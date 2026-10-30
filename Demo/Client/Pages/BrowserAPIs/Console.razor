@@ -1,20 +1,20 @@
-    @namespace BrowserAPI.Demo.Client
-    @page "/console"
+@namespace BrowserAPI.Demo.Client
+@page "/console"
 
-    <div id="console">
-        <h1 class="headline">Console</h1>
+<div id="console">
+    <h1 class="headline">Console</h1>
 
+    <div>
+        <p>Open <span>DevTools -> Console</span> to see the effects of these buttons.</p>
+        
         <div>
-            <p>Open <span>DevTools -> Console</span> to see the effects of these buttons.</p>
-            
-            <div>
-                <button class="btn-main" @onclick="ConsoleLog">Log to console</button>
-                <button class="btn-info" @onclick="ConsoleInfo">Info message to console</button>
-                <button class="btn-second" @onclick="ConsoleDebug">Debug log level output</button>
-                <button class="btn-deny" @onclick="ConsoleWarning">create Warning</button>
-                <button class="btn-danger" @onclick="ConsoleError">Error out</button>
-                <button class="btn-danger" @onclick="ConsoleAssert">Assert (1 = 2)</button>
-                <button class="btn-cancel" @onclick="ConsoleClear">Clear the console</button>
-            </div>
+            <button class="btn-main" @onclick="ConsoleLog">Log to console</button>
+            <button class="btn-info" @onclick="ConsoleInfo">Info message to console</button>
+            <button class="btn-second" @onclick="ConsoleDebug">Debug log level output</button>
+            <button class="btn-deny" @onclick="ConsoleWarning">create Warning</button>
+            <button class="btn-danger" @onclick="ConsoleError">Error out</button>
+            <button class="btn-danger" @onclick="ConsoleAssert">Assert (1 = 2)</button>
+            <button class="btn-cancel" @onclick="ConsoleClear">Clear the console</button>
         </div>
     </div>
+</div>

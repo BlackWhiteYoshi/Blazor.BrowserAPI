@@ -1,17 +1,17 @@
-    @namespace BrowserAPI.Demo.Client
-    @page "/clipboard"
+@namespace BrowserAPI.Demo.Client
+@page "/clipboard"
 
-    <div id="clipboard">
-        <h1 class="headline">Clipboard</h1>
+<div id="clipboard">
+    <h1 class="headline">Clipboard</h1>
 
+    <div>
         <div>
-            <div>
-                <textarea name="cipboard-area" @bind="textAreaContent"></textarea>
-                <button class="btn-main" @onclick="CopyTextToClipboard">Copy text to Clipboard</button>
-            </div>
-            <div>
-                <button class="btn-main" @onclick="GetTextFromClipboard">Read in Clipboard content</button>
-                <span class="center">@(savedValue is null ? "No value" : $"Current value: \"{savedValue}\"")</span>
-            </div>
+            <textarea @bind="textAreaContent"></textarea>
+            <button class="btn-main" @onclick="CopyTextToClipboard">Copy text to Clipboard</button>
+        </div>
+        <div>
+            <button class="btn-main" @onclick="GetTextFromClipboard">Read in Clipboard content</button>
+            <span class="center">@(savedValue is null ? "No value" : $"Current value: \"{savedValue}\"")</span>
         </div>
     </div>
+</div>
