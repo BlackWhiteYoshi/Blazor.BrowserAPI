@@ -5,6 +5,26 @@
         <h1 class="headline">BatteryStatus</h1>
 
         <div>
-            @* TODO *@ Not Implemented yet...
+            <button class="btn-main" @onclick="ReadBatteryInfo">Read Battery Info</button>
+            
+            <span data-description data-row-1>Charging:</span>
+            <span data-value data-row-1>@(isCharging?.ToString() ?? "---")</span>
+            <button class="btn-deny" data-listen data-row-1 @onclick="ListenOnChargingChange" disabled="@isListeningOnChargingChange">Listen on charging change</button>
+            <button class="btn-cancel" data-remove data-row-1 @onclick="RemoveOnChargingChange" disabled="@(!isListeningOnChargingChange)">Stop listening</button>
+
+            <span data-description data-row-2>Time until full:</span>
+            <span data-value data-row-2>@(chargingTime?.ToString() ?? "---")</span>
+            <button class="btn-deny" data-listen data-row-2 @onclick="ListenOnChargingTimeChange" disabled="@isListeningOnChargingTimeChange">Listen on charging time change</button>
+            <button class="btn-cancel" data-remove data-row-2 @onclick="RemoveOnChargingTimeChange" disabled="@(!isListeningOnChargingTimeChange)">Stop listening</button>
+
+            <span data-description data-row-3>Time until empty:</span>
+            <span data-value data-row-3>@(dischargingTime?.ToString() ??  "---")</span>
+            <button class="btn-deny" data-listen data-row-3 @onclick="ListenOnDischargingTimeChange" disabled="@isListeningOnDischargingTimeChange">Listen on discharging time change</button>
+            <button class="btn-cancel" data-remove data-row-3 @onclick="RemoveOnDischargingTimeChange" disabled="@(!isListeningOnDischargingTimeChange)">Stop listening</button>
+            
+            <span data-description data-row-4>Charge level:</span>
+            <span data-value data-row-4>@(chargeLevel?.ToString() ??  "---")</span>
+            <button class="btn-deny" data-listen data-row-4 @onclick="ListenOnLevelChange" disabled="@isListeningOnLevelChange">Listen on charge level change</button>
+            <button class="btn-cancel" data-remove data-row-4 @onclick="RemoveOnLevelChange" disabled="@(!isListeningOnLevelChange)">Stop listening</button>
         </div>
     </div>

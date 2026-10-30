@@ -5,6 +5,7 @@
 @use "App/AppNavBar/AppNavBar.razor.scss";
 
 @use "Pages/Home.razor.scss";
+@use "Pages/BrowserAPIs/BatteryStatus.razor.scss"
 
 
 // sass Main.scss wwwroot/site.css --no-source-map --style=compressed --watch

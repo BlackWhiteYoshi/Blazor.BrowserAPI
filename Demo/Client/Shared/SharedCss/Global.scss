@@ -19,6 +19,10 @@ button, select, input, textarea {
     font-size: inherit;
 }
 
+input, textarea {
+    padding: 0.4em;
+}
+
 button:not(:disabled) {
     cursor: pointer;
 }
