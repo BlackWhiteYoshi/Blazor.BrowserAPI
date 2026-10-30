@@ -1,0 +1,23 @@
+#console {
+    & > div {
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+
+        & > p {
+            display: table;
+            margin-inline: auto;
+
+            & > span {
+                color: #6F6;
+            }
+        }
+
+        & > div {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            margin-inline: auto;
+        }
+    }
+}
