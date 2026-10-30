@@ -1,10 +1,28 @@
-    @namespace BrowserAPI.Demo.Client
-    @page "/cookiestorage"
+@namespace BrowserAPI.Demo.Client
+@page "/cookiestorage"
 
-    <div id="cookie-storage">
-        <h1 class="headline">CookieStorage</h1>
+<div id="cookie-storage">
+    <h1 class="headline">CookieStorage</h1>
 
+    <button class="btn-main center" @onclick="LoadCookies" disabled="@CookiesLoaded">Load Cookies</button>
+
+    @if (CookiesLoaded) {
         <div>
-            @* TODO *@ Not Implemented yet...
+            <div>
+                <button class="btn-second" @onclick="OnCreateCookie">Create Cookie</button>
+                <button class="btn-danger" @onclick="OnDeleteAllCookies">Remove all Cookies</button>
+            </div>
+            <span>Cookies Count: @cookies!.Length</span>
+            <ul>
+                @for (int i = 0; i < cookies.Length; i++) {
+                    int index = i;
+                    <li>
+                        <input value="@cookies[i].key" @onchange="(ChangeEventArgs e) => OnKeyUpdate(e, index)">
+                        <input value="@cookies[i].value" @onchange="(ChangeEventArgs e) => OnValueUpdate(e, index)">
+                        <button class="btn-danger" @onclick="() => OnDeleteCookie(index)">Remove Cookie</button>
+                    </li>
+                }
+            </ul>
         </div>
-    </div>
+    }
+</div>
