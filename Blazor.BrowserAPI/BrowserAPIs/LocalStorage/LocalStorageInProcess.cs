@@ -3,7 +3,7 @@ using AutoInterfaceAttributes;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// The localStorage read-only property of the window interface allows you to access a Storage object for the Document's origin;<br />
+/// The <i>localStorage</i> read-only property of the window interface allows you to access a Storage object for the Document's origin;<br />
 /// the stored data is saved across browser sessions.
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI")]

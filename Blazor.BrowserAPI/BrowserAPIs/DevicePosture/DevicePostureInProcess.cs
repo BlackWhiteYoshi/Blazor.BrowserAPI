@@ -3,7 +3,7 @@ using AutoInterfaceAttributes;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// The DevicePosture interface of the Device Posture API represents the device's posture, that is, whether the viewport is in a flat or folded state.<br />
+/// The <i>DevicePosture</i> interface of the Device Posture API represents the device's posture, that is, whether the viewport is in a flat or folded state.<br />
 /// It allows developers to create user interfaces that adapt to a foldable device's posture and respond to posture changes.
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI")]

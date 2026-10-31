@@ -4,7 +4,11 @@
 <div id="clipboard">
     <h1 class="headline">Clipboard</h1>
 
-    <div>
+    <div class="description">
+        <p>The <i>Clipboard</i> interface implements the <i>Clipboard API</i>, providing — if the user grants permission — both read and write access to the contents of the system clipboard.</p>
+    </div>
+
+    <div class="demo">
         <div>
             <textarea @bind="textAreaContent"></textarea>
             <button class="btn-main" @onclick="CopyTextToClipboard">Copy text to Clipboard</button>

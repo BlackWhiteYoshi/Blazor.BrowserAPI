@@ -4,8 +4,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// The NetworkInformation interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
-/// The NetworkInformation interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
+/// The <i>NetworkInformation</i> interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
+/// The <i>NetworkInformation</i> interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]

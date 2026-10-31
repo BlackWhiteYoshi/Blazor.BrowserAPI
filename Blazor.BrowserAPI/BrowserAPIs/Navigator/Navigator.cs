@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// The Navigator interface represents the state and the identity of the user agent.
+/// The <i>Navigator</i> interface represents the state and the identity of the user agent.
 /// It allows scripts to query it and to register themselves to carry on some activities.
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(INavigatorBase<IJSObjectReference, IFile>)])]

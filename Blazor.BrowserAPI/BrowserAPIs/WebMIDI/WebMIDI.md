@@ -1,6 +1,6 @@
 # Web MIDI
 
-The Web MIDI API connects to and interacts with Musical Instrument Digital Interface (MIDI) Devices.
+The *Web MIDI API* connects to and interacts with Musical Instrument Digital Interface (MIDI) Devices.
 
 The interfaces deal with the practical aspects of sending and receiving MIDI messages.
 Therefore, the API can be used for musical and non-musical uses, with any MIDI device connected to your computer.

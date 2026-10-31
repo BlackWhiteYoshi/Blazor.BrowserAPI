@@ -1,6 +1,6 @@
 # NotificationsAPI
 
-The Notifications API allows web pages to control the display of system notifications to the end user.
+The *Notifications API* allows web pages to control the display of system notifications to the end user.
 
 
 <br><br />
@@ -178,4 +178,3 @@ Objects of this class must disposed manually, so do not forget to call *Dispose*
 | OnClose  | Action   | Fires when a Notification is closed.                                                                                                                                                                                                                |
 | OnError  | Action   | Fires when something goes wrong with a Notification (in many cases an error preventing the notification from being displayed.)                                                                                                                      |
 | OnShow   | Action   | Fires when a Notification is displayed.                                                                                                                                                                                                             |
-

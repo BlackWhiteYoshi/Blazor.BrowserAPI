@@ -38,6 +38,12 @@ body {
         @media (width < $breakpoint)  {
             padding-inline: 1em;
         }
+
+        & > div[id] {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
     }
 }
 

@@ -4,7 +4,14 @@
 <div id="device-posture">
     <h1 class="headline">DevicePosture</h1>
 
-    <div>
+    <div class="description">
+        <p>
+            The <i>DevicePosture</i> interface of the Device Posture API represents the device's posture, that is, whether the viewport is in a flat or folded state.  
+            It allows developers to create user interfaces that adapt to a foldable device's posture and respond to posture changes.
+        </p>
+    </div>
+
+    <div class="demo">
         <div>
             <span style="color: @(isContinuous switch { true => "#0F0", false or null => "#444" })">viewport is flat/continuous</span>
             <span style="color: @(isContinuous switch { false => "#0F0", true or null => "#444" })">viewport is folded</span>

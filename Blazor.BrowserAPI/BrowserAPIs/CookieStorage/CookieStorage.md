@@ -1,8 +1,8 @@
 # CookieStorage
 
-The Document property cookie lets you read and write cookies associated with the document.
+The Document property *cookie* lets you read and write cookies associated with the document.
 
-Note: The CookieStorage interface is more sophisticated than the actual browser cookie interface.  
+Note: The CookieStorage interface is more sophisticated than the actual browser *cookie* interface.  
 It is structured similar to the [LocalStorage](../LocalStorage/LocalStorage.md)/[SessionStorage](../SessionStorage/SessionStorage.md) interface.
 
 

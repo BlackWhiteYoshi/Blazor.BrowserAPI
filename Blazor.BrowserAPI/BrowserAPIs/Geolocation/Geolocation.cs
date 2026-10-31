@@ -4,7 +4,7 @@ using Microsoft.JSInterop;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// The Geolocation API allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
+/// The <i>Geolocation API</i> allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI")]
 public sealed class Geolocation(IModuleManager moduleManager) : GeolocationBase(moduleManager), IGeolocation {

@@ -15,6 +15,8 @@
         display: grid;
         grid-template-columns: repeat(auto-fill, min(380px, 100%));
         gap: 0.6em;
+        align-self: stretch;
+        justify-content: center;
 
         & > a {
             margin-left: 130px;

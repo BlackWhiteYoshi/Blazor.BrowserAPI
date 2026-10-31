@@ -1,5 +1,5 @@
 #clipboard {
-    & > div {
+    & > .demo {
         display: flex;
         flex-direction: column;
         gap: 4em;
@@ -13,6 +13,7 @@
             margin-inline: auto;
 
             & > textarea {
+                min-width: 40ch;
                 min-height: 12ch;
             }
         }

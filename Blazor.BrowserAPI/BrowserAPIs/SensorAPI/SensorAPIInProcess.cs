@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// The Sensor APIs are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
+/// The <i>Sensor APIs</i> are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]

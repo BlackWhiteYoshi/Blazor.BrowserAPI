@@ -1,6 +1,8 @@
 # Download
 
-Save data as a file download on the filesystem. For file upload use the *InputFile* component.
+Save data as a file download on the filesystem.
+
+For file upload use the [InputFile component](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.forms.inputfile).
 
 
 <br><br />

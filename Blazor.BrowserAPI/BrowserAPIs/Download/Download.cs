@@ -5,7 +5,7 @@ using System.Text;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// Save data as a file download on the filesystem.
+/// <para>Save data as a file download on the filesystem.</para>
 /// <para>For file upload use the <see cref="Microsoft.AspNetCore.Components.Forms.InputFile">InputFile</see> component.</para>
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI")]

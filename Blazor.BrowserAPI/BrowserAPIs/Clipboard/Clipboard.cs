@@ -3,7 +3,7 @@ using AutoInterfaceAttributes;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// The Clipboard interface implements the Clipboard API, providing—if the user grants permission—both read and write access to the contents of the system clipboard.
+/// The <i>Clipboard</i> interface implements the <i>Clipboard API</i>, providing—if the user grants permission—both read and write access to the contents of the system clipboard.
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI")]
 public sealed class Clipboard(IModuleManager moduleManager) : IClipboard {

@@ -4,7 +4,7 @@ The *Network Information API* provides information about the system's connection
 This can be used to select high definition content or low definition content based on the user's connection.
 
 The interface consists of a single *NetworkInformation* object,
-an instance of which is returned by the Navigator.connection property or the WorkerNavigator.connection property.
+an instance of which is returned by the *Navigator.connection* property or the *WorkerNavigator.connection* property.
 
 
 <br><br />

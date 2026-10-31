@@ -1,13 +1,13 @@
 # Window
 
-The Window interface represents a window containing a DOM document; the document property points to the DOM document loaded in that window.
+The *Window* interface represents a window containing a DOM document; the document property points to the DOM document loaded in that window.
 
 A window for a given document can be obtained using the document.defaultView property.
 
 A global variable, window, representing the window in which the script is running, is exposed to JavaScript code.
 
-The Window interface is home to a variety of functions, namespaces, objects, and constructors which are not necessarily directly associated with the concept of a user interface window.
-However, the Window interface is a suitable place to include these items that need to be globally available.
+The *Window* interface is home to a variety of functions, namespaces, objects, and constructors which are not necessarily directly associated with the concept of a user interface window.
+However, the *Window* interface is a suitable place to include these items that need to be globally available.
 Many of these are documented in the [JavaScript Reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference)
 and the [DOM Reference](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model).
 

@@ -1,6 +1,6 @@
 # DevicePosture
 
-The DevicePosture interface of the Device Posture API represents the device's posture, that is, whether the viewport is in a flat or folded state.  
+The *DevicePosture* interface of the Device Posture API represents the device's posture, that is, whether the viewport is in a flat or folded state.  
 It allows developers to create user interfaces that adapt to a foldable device's posture and respond to posture changes.
 
 

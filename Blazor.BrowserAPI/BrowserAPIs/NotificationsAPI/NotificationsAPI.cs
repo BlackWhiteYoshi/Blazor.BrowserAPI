@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// The Notifications API allows web pages to control the display of system notifications to the end user.
+/// The <i>Notifications API</i> allows web pages to control the display of system notifications to the end user.
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]

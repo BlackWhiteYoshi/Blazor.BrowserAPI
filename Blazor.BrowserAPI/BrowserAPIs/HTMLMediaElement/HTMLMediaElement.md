@@ -2,7 +2,9 @@
 
 The *HTMLMediaElement* interface adds to HTMLElement the properties and methods needed to support basic media-related capabilities that are common to audio and video.
 
-The [HTMLVideoElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement) and [HTMLAudioElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement) elements both inherit this interface.</para>
+The [HTMLVideoElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement)
+and [HTMLAudioElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement)
+elements both inherit this interface.
 
 
 <br><br />

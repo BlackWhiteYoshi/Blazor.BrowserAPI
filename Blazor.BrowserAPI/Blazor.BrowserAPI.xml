@@ -218,12 +218,12 @@
         </member>
         <member name="T:BrowserAPI.Implementation.Clipboard">
             <summary>
-            The Clipboard interface implements the Clipboard API, providing—if the user grants permission—both read and write access to the contents of the system clipboard.
+            The <i>Clipboard</i> interface implements the <i>Clipboard API</i>, providing—if the user grants permission—both read and write access to the contents of the system clipboard.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.Clipboard.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            The Clipboard interface implements the Clipboard API, providing—if the user grants permission—both read and write access to the contents of the system clipboard.
+            The <i>Clipboard</i> interface implements the <i>Clipboard API</i>, providing—if the user grants permission—both read and write access to the contents of the system clipboard.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.Clipboard.Write(System.String,System.Threading.CancellationToken)">
@@ -814,19 +814,19 @@
         </member>
         <member name="T:BrowserAPI.Implementation.CookieStorage">
             <summary>
-            <para>The Document property cookie lets you read and write cookies associated with the document.</para>
+            <para>The Document property <i>cookie</i> lets you read and write cookies associated with the document.</para>
             </summary>
             <remarks>
-            Note: The CookieStorage interface is more sophisticated than the actual browser cookie interface.<br />
+            Note: The CookieStorage interface is more sophisticated than the actual browser <i>cookie</i> interface.<br />
             It is structured similar to the <see cref="T:BrowserAPI.ILocalStorage">LocalStorage</see>/<see cref="T:BrowserAPI.ISessionStorage">SessionStorage</see> interface.
             </remarks>
         </member>
         <member name="M:BrowserAPI.Implementation.CookieStorage.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            <para>The Document property cookie lets you read and write cookies associated with the document.</para>
+            <para>The Document property <i>cookie</i> lets you read and write cookies associated with the document.</para>
             </summary>
             <remarks>
-            Note: The CookieStorage interface is more sophisticated than the actual browser cookie interface.<br />
+            Note: The CookieStorage interface is more sophisticated than the actual browser <i>cookie</i> interface.<br />
             It is structured similar to the <see cref="T:BrowserAPI.ILocalStorage">LocalStorage</see>/<see cref="T:BrowserAPI.ISessionStorage">SessionStorage</see> interface.
             </remarks>
         </member>
@@ -900,19 +900,19 @@
         </member>
         <member name="T:BrowserAPI.Implementation.CookieStorageInProcess">
             <summary>
-            The Document property cookie lets you read and write cookies associated with the document.
+            The Document property <i>cookie</i> lets you read and write cookies associated with the document.
             </summary>
             <remarks>
-            Note: The CookieStorage interface is more sophisticated than the actual browser cookie interface.<br />
+            Note: The CookieStorage interface is more sophisticated than the actual browser <i>cookie</i> interface.<br />
             It is structured similar to the <see cref="T:BrowserAPI.ILocalStorageInProcess">LocalStorage</see>/<see cref="T:BrowserAPI.ISessionStorageInProcess">SessionStorage</see> interface.
             </remarks>
         </member>
         <member name="M:BrowserAPI.Implementation.CookieStorageInProcess.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            The Document property cookie lets you read and write cookies associated with the document.
+            The Document property <i>cookie</i> lets you read and write cookies associated with the document.
             </summary>
             <remarks>
-            Note: The CookieStorage interface is more sophisticated than the actual browser cookie interface.<br />
+            Note: The CookieStorage interface is more sophisticated than the actual browser <i>cookie</i> interface.<br />
             It is structured similar to the <see cref="T:BrowserAPI.ILocalStorageInProcess">LocalStorage</see>/<see cref="T:BrowserAPI.ISessionStorageInProcess">SessionStorage</see> interface.
             </remarks>
         </member>
@@ -968,13 +968,13 @@
         </member>
         <member name="T:BrowserAPI.Implementation.DevicePosture">
             <summary>
-            The DevicePosture interface of the Device Posture API represents the device's posture, that is, whether the viewport is in a flat or folded state.<br />
+            The <i>DevicePosture</i> interface of the Device Posture API represents the device's posture, that is, whether the viewport is in a flat or folded state.<br />
             It allows developers to create user interfaces that adapt to a foldable device's posture and respond to posture changes.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.DevicePosture.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            The DevicePosture interface of the Device Posture API represents the device's posture, that is, whether the viewport is in a flat or folded state.<br />
+            The <i>DevicePosture</i> interface of the Device Posture API represents the device's posture, that is, whether the viewport is in a flat or folded state.<br />
             It allows developers to create user interfaces that adapt to a foldable device's posture and respond to posture changes.
             </summary>
         </member>
@@ -1002,13 +1002,13 @@
         </member>
         <member name="T:BrowserAPI.Implementation.DevicePostureInProcess">
             <summary>
-            The DevicePosture interface of the Device Posture API represents the device's posture, that is, whether the viewport is in a flat or folded state.<br />
+            The <i>DevicePosture</i> interface of the Device Posture API represents the device's posture, that is, whether the viewport is in a flat or folded state.<br />
             It allows developers to create user interfaces that adapt to a foldable device's posture and respond to posture changes.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.DevicePostureInProcess.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            The DevicePosture interface of the Device Posture API represents the device's posture, that is, whether the viewport is in a flat or folded state.<br />
+            The <i>DevicePosture</i> interface of the Device Posture API represents the device's posture, that is, whether the viewport is in a flat or folded state.<br />
             It allows developers to create user interfaces that adapt to a foldable device's posture and respond to posture changes.
             </summary>
         </member>
@@ -1021,13 +1021,13 @@
         </member>
         <member name="T:BrowserAPI.Implementation.Document">
             <summary>
-            <para>Represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
+            <para>The <i>Document</i> interface represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
             <para>
             The DOM tree includes elements such as &lt;body&gt; and &lt;table&gt;, among many others.
             It provides functionality globally to the document, like how to obtain the page's URL and create new elements in the document.
             </para>
             <para>
-            The Document interface describes the common properties and methods for any kind of document.
+            The <i>Document</i> interface describes the common properties and methods for any kind of document.
             Depending on the document's type (e.g., HTML, XML, SVG, …), a larger API is available:
             HTML documents, served with the "text/html" content type, also implement the HTMLDocument interface,
             whereas XML and SVG documents implement the XMLDocument interface.
@@ -1036,13 +1036,13 @@
         </member>
         <member name="M:BrowserAPI.Implementation.Document.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            <para>Represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
+            <para>The <i>Document</i> interface represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
             <para>
             The DOM tree includes elements such as &lt;body&gt; and &lt;table&gt;, among many others.
             It provides functionality globally to the document, like how to obtain the page's URL and create new elements in the document.
             </para>
             <para>
-            The Document interface describes the common properties and methods for any kind of document.
+            The <i>Document</i> interface describes the common properties and methods for any kind of document.
             Depending on the document's type (e.g., HTML, XML, SVG, …), a larger API is available:
             HTML documents, served with the "text/html" content type, also implement the HTMLDocument interface,
             whereas XML and SVG documents implement the XMLDocument interface.
@@ -2955,13 +2955,13 @@
         </member>
         <member name="T:BrowserAPI.Implementation.DocumentInProcess">
             <summary>
-            <para>Represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
+            <para>The <i>Document</i> interface represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
             <para>
             The DOM tree includes elements such as &lt;body&gt; and &lt;table&gt;, among many others.
             It provides functionality globally to the document, like how to obtain the page's URL and create new elements in the document.
             </para>
             <para>
-            The Document interface describes the common properties and methods for any kind of document.
+            The <i>Document</i> interface describes the common properties and methods for any kind of document.
             Depending on the document's type (e.g., HTML, XML, SVG, …), a larger API is available:
             HTML documents, served with the "text/html" content type, also implement the HTMLDocument interface,
             whereas XML and SVG documents implement the XMLDocument interface.
@@ -2970,13 +2970,13 @@
         </member>
         <member name="M:BrowserAPI.Implementation.DocumentInProcess.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            <para>Represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
+            <para>The <i>Document</i> interface represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
             <para>
             The DOM tree includes elements such as &lt;body&gt; and &lt;table&gt;, among many others.
             It provides functionality globally to the document, like how to obtain the page's URL and create new elements in the document.
             </para>
             <para>
-            The Document interface describes the common properties and methods for any kind of document.
+            The <i>Document</i> interface describes the common properties and methods for any kind of document.
             Depending on the document's type (e.g., HTML, XML, SVG, …), a larger API is available:
             HTML documents, served with the "text/html" content type, also implement the HTMLDocument interface,
             whereas XML and SVG documents implement the XMLDocument interface.
@@ -3450,13 +3450,13 @@
         </member>
         <member name="T:BrowserAPI.Implementation.Download">
             <summary>
-            Save data as a file download on the filesystem.
+            <para>Save data as a file download on the filesystem.</para>
             <para>For file upload use the <see cref="T:Microsoft.AspNetCore.Components.Forms.InputFile">InputFile</see> component.</para>
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.Download.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            Save data as a file download on the filesystem.
+            <para>Save data as a file download on the filesystem.</para>
             <para>For file upload use the <see cref="T:Microsoft.AspNetCore.Components.Forms.InputFile">InputFile</see> component.</para>
             </summary>
         </member>
@@ -4701,12 +4701,12 @@
         </member>
         <member name="T:BrowserAPI.Implementation.Geolocation">
             <summary>
-            The Geolocation API allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
+            The <i>Geolocation API</i> allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.Geolocation.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            The Geolocation API allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
+            The <i>Geolocation API</i> allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.Geolocation.GetCurrentPosition(System.Action{BrowserAPI.GeolocationCoordinates},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)">
@@ -4886,12 +4886,12 @@
         </member>
         <member name="T:BrowserAPI.Implementation.GeolocationInProcess">
             <summary>
-            The Geolocation API allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
+            The <i>Geolocation API</i> allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.GeolocationInProcess.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            The Geolocation API allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
+            The <i>Geolocation API</i> allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.GeolocationInProcess.GetCurrentPosition(System.Action{BrowserAPI.GeolocationCoordinates},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean)">
@@ -11188,14 +11188,22 @@
         <member name="T:BrowserAPI.Implementation.HTMLMediaElement">
             <summary>
             <para>The <i>HTMLMediaElement</i> interface adds to HTMLElement the properties and methods needed to support basic media-related capabilities that are common to audio and video.</para>
-            <para>The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see> and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see> elements both inherit this interface.</para>
+            <para>
+            The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see>
+            and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see>
+            elements both inherit this interface.
+            </para>
             </summary>
             <remarks>Objects of this class must disposed manually, so do not forget to dispose this object when you are done with it.</remarks>
         </member>
         <member name="M:BrowserAPI.Implementation.HTMLMediaElement.#ctor(System.Threading.Tasks.Task{Microsoft.JSInterop.IJSObjectReference})">
             <summary>
             <para>The <i>HTMLMediaElement</i> interface adds to HTMLElement the properties and methods needed to support basic media-related capabilities that are common to audio and video.</para>
-            <para>The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see> and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see> elements both inherit this interface.</para>
+            <para>
+            The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see>
+            and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see>
+            elements both inherit this interface.
+            </para>
             </summary>
             <remarks>Objects of this class must disposed manually, so do not forget to dispose this object when you are done with it.</remarks>
         </member>
@@ -11980,14 +11988,22 @@
         <member name="T:BrowserAPI.Implementation.HTMLMediaElementInProcess">
             <summary>
             <para>The <i>HTMLMediaElement</i> interface adds to HTMLElement the properties and methods needed to support basic media-related capabilities that are common to audio and video.</para>
-            <para>The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see> and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see> elements both inherit this interface.</para>
+            <para>
+            The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see>
+            and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see>
+            elements both inherit this interface.
+            </para>
             </summary>
             <remarks>Objects of this class must disposed manually, so do not forget to dispose this object when you are done with it.</remarks>
         </member>
         <member name="M:BrowserAPI.Implementation.HTMLMediaElementInProcess.#ctor(Microsoft.JSInterop.IJSInProcessObjectReference)">
             <summary>
             <para>The <i>HTMLMediaElement</i> interface adds to HTMLElement the properties and methods needed to support basic media-related capabilities that are common to audio and video.</para>
-            <para>The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see> and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see> elements both inherit this interface.</para>
+            <para>
+            The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see>
+            and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see>
+            elements both inherit this interface.
+            </para>
             </summary>
             <remarks>Objects of this class must disposed manually, so do not forget to dispose this object when you are done with it.</remarks>
         </member>
@@ -12368,13 +12384,13 @@
         </member>
         <member name="T:BrowserAPI.Implementation.LocalStorage">
             <summary>
-            The localStorage read-only property of the window interface allows you to access a Storage object for the Document's origin;<br />
+            The <i>localStorage</i> read-only property of the window interface allows you to access a Storage object for the Document's origin;<br />
             the stored data is saved across browser sessions.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.LocalStorage.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            The localStorage read-only property of the window interface allows you to access a Storage object for the Document's origin;<br />
+            The <i>localStorage</i> read-only property of the window interface allows you to access a Storage object for the Document's origin;<br />
             the stored data is saved across browser sessions.
             </summary>
         </member>
@@ -12430,13 +12446,13 @@
         </member>
         <member name="T:BrowserAPI.Implementation.LocalStorageInProcess">
             <summary>
-            The localStorage read-only property of the window interface allows you to access a Storage object for the Document's origin;<br />
+            The <i>localStorage</i> read-only property of the window interface allows you to access a Storage object for the Document's origin;<br />
             the stored data is saved across browser sessions.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.LocalStorageInProcess.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            The localStorage read-only property of the window interface allows you to access a Storage object for the Document's origin;<br />
+            The <i>localStorage</i> read-only property of the window interface allows you to access a Storage object for the Document's origin;<br />
             the stored data is saved across browser sessions.
             </summary>
         </member>
@@ -13043,13 +13059,13 @@
         </member>
         <member name="T:BrowserAPI.Implementation.Navigator">
             <summary>
-            The Navigator interface represents the state and the identity of the user agent.
+            The <i>Navigator</i> interface represents the state and the identity of the user agent.
             It allows scripts to query it and to register themselves to carry on some activities.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.Navigator.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            The Navigator interface represents the state and the identity of the user agent.
+            The <i>Navigator</i> interface represents the state and the identity of the user agent.
             It allows scripts to query it and to register themselves to carry on some activities.
             </summary>
         </member>
@@ -13471,13 +13487,13 @@
         </member>
         <member name="T:BrowserAPI.Implementation.NavigatorInProcess">
             <summary>
-            The Navigator interface represents the state and the identity of the user agent.
+            The <i>Navigator</i> interface represents the state and the identity of the user agent.
             It allows scripts to query it and to register themselves to carry on some activities.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.NavigatorInProcess.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            The Navigator interface represents the state and the identity of the user agent.
+            The <i>Navigator</i> interface represents the state and the identity of the user agent.
             It allows scripts to query it and to register themselves to carry on some activities.
             </summary>
         </member>
@@ -13752,14 +13768,14 @@
         </member>
         <member name="T:BrowserAPI.Implementation.NetworkInformation">
             <summary>
-            The NetworkInformation interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
-            The NetworkInformation interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
+            The <i>NetworkInformation</i> interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
+            The <i>NetworkInformation</i> interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.NetworkInformation.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            The NetworkInformation interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
-            The NetworkInformation interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
+            The <i>NetworkInformation</i> interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
+            The <i>NetworkInformation</i> interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
             </summary>
         </member>
         <member name="P:BrowserAPI.Implementation.NetworkInformation.OnLine">
@@ -13874,14 +13890,14 @@
         </member>
         <member name="T:BrowserAPI.Implementation.NetworkInformationInProcess">
             <summary>
-            The NetworkInformation interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
-            The NetworkInformation interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
+            The <i>NetworkInformation</i> interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
+            The <i>NetworkInformation</i> interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.NetworkInformationInProcess.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            The NetworkInformation interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
-            The NetworkInformation interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
+            The <i>NetworkInformation</i> interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
+            The <i>NetworkInformation</i> interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
             </summary>
         </member>
         <member name="P:BrowserAPI.Implementation.NetworkInformationInProcess.OnLine">
@@ -14354,12 +14370,12 @@
         </member>
         <member name="T:BrowserAPI.Implementation.NotificationsAPI">
             <summary>
-            The Notifications API allows web pages to control the display of system notifications to the end user.
+            The <i>Notifications API</i> allows web pages to control the display of system notifications to the end user.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.NotificationsAPI.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            The Notifications API allows web pages to control the display of system notifications to the end user.
+            The <i>Notifications API</i> allows web pages to control the display of system notifications to the end user.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.NotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">
@@ -14432,12 +14448,12 @@
         </member>
         <member name="T:BrowserAPI.Implementation.NotificationsAPIInProcess">
             <summary>
-            The Notifications API allows web pages to control the display of system notifications to the end user.
+            The <i>Notifications API</i> allows web pages to control the display of system notifications to the end user.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.NotificationsAPIInProcess.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            The Notifications API allows web pages to control the display of system notifications to the end user.
+            The <i>Notifications API</i> allows web pages to control the display of system notifications to the end user.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.NotificationsAPIInProcess.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[])">
@@ -14488,7 +14504,7 @@
         <member name="T:BrowserAPI.Implementation.Permissions">
             <summary>
             <para>
-            The Permissions API provides a consistent programmatic way to query the status of API permissions attributed to the current context, such as a web page or worker.
+            The <i>Permissions API</i> provides a consistent programmatic way to query the status of API permissions attributed to the current context, such as a web page or worker.
             For example, it can be used to determine if permission to access a particular feature or API has been granted, denied, or requires specific user permission.
             </para>
             <para>The <i>Permissions</i> interface of the Permissions API provides the core Permission API functionality, such as methods for querying and revoking permissions.</para>
@@ -14497,7 +14513,7 @@
         <member name="M:BrowserAPI.Implementation.Permissions.#ctor(BrowserAPI.IModuleManager)">
             <summary>
             <para>
-            The Permissions API provides a consistent programmatic way to query the status of API permissions attributed to the current context, such as a web page or worker.
+            The <i>Permissions API</i> provides a consistent programmatic way to query the status of API permissions attributed to the current context, such as a web page or worker.
             For example, it can be used to determine if permission to access a particular feature or API has been granted, denied, or requires specific user permission.
             </para>
             <para>The <i>Permissions</i> interface of the Permissions API provides the core Permission API functionality, such as methods for querying and revoking permissions.</para>
@@ -14582,7 +14598,7 @@
         <member name="T:BrowserAPI.Implementation.PermissionsInProcess">
             <summary>
             <para>
-            The Permissions API provides a consistent programmatic way to query the status of API permissions attributed to the current context, such as a web page or worker.
+            The <i>Permissions API</i> provides a consistent programmatic way to query the status of API permissions attributed to the current context, such as a web page or worker.
             For example, it can be used to determine if permission to access a particular feature or API has been granted, denied, or requires specific user permission.
             </para>
             <para>The <i>Permissions</i> interface of the Permissions API provides the core Permission API functionality, such as methods for querying and revoking permissions.</para>
@@ -14591,7 +14607,7 @@
         <member name="M:BrowserAPI.Implementation.PermissionsInProcess.#ctor(BrowserAPI.IModuleManager)">
             <summary>
             <para>
-            The Permissions API provides a consistent programmatic way to query the status of API permissions attributed to the current context, such as a web page or worker.
+            The <i>Permissions API</i> provides a consistent programmatic way to query the status of API permissions attributed to the current context, such as a web page or worker.
             For example, it can be used to determine if permission to access a particular feature or API has been granted, denied, or requires specific user permission.
             </para>
             <para>The <i>Permissions</i> interface of the Permissions API provides the core Permission API functionality, such as methods for querying and revoking permissions.</para>
@@ -15511,12 +15527,12 @@
         </member>
         <member name="T:BrowserAPI.Implementation.SensorAPI">
             <summary>
-            The Sensor APIs are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
+            The <i>Sensor APIs</i> are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.SensorAPI.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            The Sensor APIs are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
+            The <i>Sensor APIs</i> are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.SensorAPI.CreateAmbientLightSensor(System.Double,System.Threading.CancellationToken)">
@@ -15637,12 +15653,12 @@
         </member>
         <member name="T:BrowserAPI.Implementation.SensorAPIInProcess">
             <summary>
-            The Sensor APIs are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
+            The <i>Sensor APIs</i> are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.SensorAPIInProcess.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            The Sensor APIs are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
+            The <i>Sensor APIs</i> are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.SensorAPIInProcess.CreateAmbientLightSensor(System.Double)">
@@ -16244,14 +16260,14 @@
         </member>
         <member name="T:BrowserAPI.Implementation.SessionStorage">
             <summary>
-            The read-only sessionStorage property accesses a session Storage object for the current origin.<br />
-            sessionStorage is similar to localStorage; the difference is that while data in localStorage doesn't expire, data in sessionStorage is cleared when the page session ends.
+            The read-only <i>sessionStorage</i> property accesses a session Storage object for the current origin.<br />
+            <i>sessionStorage</i> is similar to <i>localStorage</i>; the difference is that while data in <i>localStorage</i> doesn't expire, data in <i>sessionStorage</i> is cleared when the page session ends.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.SessionStorage.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            The read-only sessionStorage property accesses a session Storage object for the current origin.<br />
-            sessionStorage is similar to localStorage; the difference is that while data in localStorage doesn't expire, data in sessionStorage is cleared when the page session ends.
+            The read-only <i>sessionStorage</i> property accesses a session Storage object for the current origin.<br />
+            <i>sessionStorage</i> is similar to <i>localStorage</i>; the difference is that while data in <i>localStorage</i> doesn't expire, data in <i>sessionStorage</i> is cleared when the page session ends.
             </summary>
         </member>
         <member name="P:BrowserAPI.Implementation.SessionStorage.Length">
@@ -16306,14 +16322,14 @@
         </member>
         <member name="T:BrowserAPI.Implementation.SessionStorageInProcess">
             <summary>
-            The read-only sessionStorage property accesses a session Storage object for the current origin.<br />
-            sessionStorage is similar to localStorage; the difference is that while data in localStorage doesn't expire, data in sessionStorage is cleared when the page session ends.
+            The read-only <i>sessionStorage</i> property accesses a session Storage object for the current origin.<br />
+            <i>sessionStorage</i> is similar to <i>localStorage</i>; the difference is that while data in <i>localStorage</i> doesn't expire, data in <i>sessionStorage</i> is cleared when the page session ends.
             </summary>
         </member>
         <member name="M:BrowserAPI.Implementation.SessionStorageInProcess.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            The read-only sessionStorage property accesses a session Storage object for the current origin.<br />
-            sessionStorage is similar to localStorage; the difference is that while data in localStorage doesn't expire, data in sessionStorage is cleared when the page session ends.
+            The read-only <i>sessionStorage</i> property accesses a session Storage object for the current origin.<br />
+            <i>sessionStorage</i> is similar to <i>localStorage</i>; the difference is that while data in <i>localStorage</i> doesn't expire, data in <i>sessionStorage</i> is cleared when the page session ends.
             </summary>
         </member>
         <member name="P:BrowserAPI.Implementation.SessionStorageInProcess.Length">
@@ -16783,7 +16799,7 @@
         </member>
         <member name="T:BrowserAPI.Implementation.WebMIDI">
             <summary>
-            <para>The Web MIDI API connects to and interacts with Musical Instrument Digital Interface (MIDI) Devices.</para>
+            <para>The <i>Web MIDI API</i> connects to and interacts with Musical Instrument Digital Interface (MIDI) Devices.</para>
             <para>
             The interfaces deal with the practical aspects of sending and receiving MIDI messages.
             Therefore, the API can be used for musical and non-musical uses, with any MIDI device connected to your computer.
@@ -16793,7 +16809,7 @@
         </member>
         <member name="M:BrowserAPI.Implementation.WebMIDI.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            <para>The Web MIDI API connects to and interacts with Musical Instrument Digital Interface (MIDI) Devices.</para>
+            <para>The <i>Web MIDI API</i> connects to and interacts with Musical Instrument Digital Interface (MIDI) Devices.</para>
             <para>
             The interfaces deal with the practical aspects of sending and receiving MIDI messages.
             Therefore, the API can be used for musical and non-musical uses, with any MIDI device connected to your computer.
@@ -16841,7 +16857,7 @@
         </member>
         <member name="T:BrowserAPI.Implementation.WebMIDIInProcess">
             <summary>
-            <para>The Web MIDI API connects to and interacts with Musical Instrument Digital Interface (MIDI) Devices.</para>
+            <para>The <i>Web MIDI API</i> connects to and interacts with Musical Instrument Digital Interface (MIDI) Devices.</para>
             <para>
             The interfaces deal with the practical aspects of sending and receiving MIDI messages.
             Therefore, the API can be used for musical and non-musical uses, with any MIDI device connected to your computer.
@@ -16851,7 +16867,7 @@
         </member>
         <member name="M:BrowserAPI.Implementation.WebMIDIInProcess.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            <para>The Web MIDI API connects to and interacts with Musical Instrument Digital Interface (MIDI) Devices.</para>
+            <para>The <i>Web MIDI API</i> connects to and interacts with Musical Instrument Digital Interface (MIDI) Devices.</para>
             <para>
             The interfaces deal with the practical aspects of sending and receiving MIDI messages.
             Therefore, the API can be used for musical and non-musical uses, with any MIDI device connected to your computer.
@@ -16861,12 +16877,12 @@
         </member>
         <member name="T:BrowserAPI.Implementation.Window">
             <summary>
-            <para>The Window interface represents a window containing a DOM document; the document property points to the DOM document loaded in that window.</para>
+            <para>The <i>Window</i> interface represents a window containing a DOM document; the document property points to the DOM document loaded in that window.</para>
             <para>A window for a given document can be obtained using the document.defaultView property.</para>
             <para>A global variable, window, representing the window in which the script is running, is exposed to JavaScript code.</para>
             ^<para>
-            The Window interface is home to a variety of functions, namespaces, objects, and constructors which are not necessarily directly associated with the concept of a user interface window.
-            However, the Window interface is a suitable place to include these items that need to be globally available.
+            The <i>Window</i> interface is home to a variety of functions, namespaces, objects, and constructors which are not necessarily directly associated with the concept of a user interface window.
+            However, the <i>Window</i> interface is a suitable place to include these items that need to be globally available.
             Many of these are documented in the <see href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference">JavaScript Reference</see>
             and the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">DOM Reference</see>.
             </para>
@@ -16879,12 +16895,12 @@
         </member>
         <member name="M:BrowserAPI.Implementation.Window.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            <para>The Window interface represents a window containing a DOM document; the document property points to the DOM document loaded in that window.</para>
+            <para>The <i>Window</i> interface represents a window containing a DOM document; the document property points to the DOM document loaded in that window.</para>
             <para>A window for a given document can be obtained using the document.defaultView property.</para>
             <para>A global variable, window, representing the window in which the script is running, is exposed to JavaScript code.</para>
             ^<para>
-            The Window interface is home to a variety of functions, namespaces, objects, and constructors which are not necessarily directly associated with the concept of a user interface window.
-            However, the Window interface is a suitable place to include these items that need to be globally available.
+            The <i>Window</i> interface is home to a variety of functions, namespaces, objects, and constructors which are not necessarily directly associated with the concept of a user interface window.
+            However, the <i>Window</i> interface is a suitable place to include these items that need to be globally available.
             Many of these are documented in the <see href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference">JavaScript Reference</see>
             and the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">DOM Reference</see>.
             </para>
@@ -18737,12 +18753,12 @@
         </member>
         <member name="T:BrowserAPI.Implementation.WindowInProcess">
             <summary>
-            <para>The Window interface represents a window containing a DOM document; the document property points to the DOM document loaded in that window.</para>
+            <para>The <i>Window</i> interface represents a window containing a DOM document; the document property points to the DOM document loaded in that window.</para>
             <para>A window for a given document can be obtained using the document.defaultView property.</para>
             <para>A global variable, window, representing the window in which the script is running, is exposed to JavaScript code.</para>
             ^<para>
-            The Window interface is home to a variety of functions, namespaces, objects, and constructors which are not necessarily directly associated with the concept of a user interface window.
-            However, the Window interface is a suitable place to include these items that need to be globally available.
+            The <i>Window</i> interface is home to a variety of functions, namespaces, objects, and constructors which are not necessarily directly associated with the concept of a user interface window.
+            However, the <i>Window</i> interface is a suitable place to include these items that need to be globally available.
             Many of these are documented in the <see href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference">JavaScript Reference</see>
             and the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">DOM Reference</see>.
             </para>
@@ -18755,12 +18771,12 @@
         </member>
         <member name="M:BrowserAPI.Implementation.WindowInProcess.#ctor(BrowserAPI.IModuleManager)">
             <summary>
-            <para>The Window interface represents a window containing a DOM document; the document property points to the DOM document loaded in that window.</para>
+            <para>The <i>Window</i> interface represents a window containing a DOM document; the document property points to the DOM document loaded in that window.</para>
             <para>A window for a given document can be obtained using the document.defaultView property.</para>
             <para>A global variable, window, representing the window in which the script is running, is exposed to JavaScript code.</para>
             ^<para>
-            The Window interface is home to a variety of functions, namespaces, objects, and constructors which are not necessarily directly associated with the concept of a user interface window.
-            However, the Window interface is a suitable place to include these items that need to be globally available.
+            The <i>Window</i> interface is home to a variety of functions, namespaces, objects, and constructors which are not necessarily directly associated with the concept of a user interface window.
+            However, the <i>Window</i> interface is a suitable place to include these items that need to be globally available.
             Many of these are documented in the <see href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference">JavaScript Reference</see>
             and the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">DOM Reference</see>.
             </para>
@@ -23813,96 +23829,6 @@
             <param name="args">JSON-serializable arguments.</param>
             <returns></returns>
         </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSRuntime,System.String,System.Object[])">
-            <summary>
-            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
-            </summary>
-            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
-            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
-            <param name="args">JSON-serializable arguments.</param>
-            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSRuntime,System.String,System.Threading.CancellationToken,System.Object[])">
-            <summary>
-            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
-            </summary>
-            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
-            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
-            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
-            <param name="args">JSON-serializable arguments.</param>
-            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSRuntime,System.String,System.TimeSpan,System.Object[])">
-            <summary>
-            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
-            </summary>
-            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
-            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
-            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
-            <param name="args">JSON-serializable arguments.</param>
-            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String)">
-            <summary>
-            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
-            </summary>
-            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
-            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
-            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
-            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,System.Threading.CancellationToken)">
-            <summary>
-            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
-            </summary>
-            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
-            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
-            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
-            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
-            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,System.TimeSpan)">
-            <summary>
-            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
-            </summary>
-            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
-            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
-            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
-            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
-            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,``0)">
-            <summary>
-            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
-            </summary>
-            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
-            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
-            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
-            <param name="value">JSON-serializable value.</param>
-            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,``0,System.Threading.CancellationToken)">
-            <summary>
-            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
-            </summary>
-            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
-            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
-            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
-            <param name="value">JSON-serializable value.</param>
-            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
-            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,``0,System.TimeSpan)">
-            <summary>
-            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
-            </summary>
-            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
-            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
-            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
-            <param name="value">JSON-serializable value.</param>
-            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
-            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
-        </member>
         <member name="M:BrowserAPI.TrySyncExtensions.InvokeVoidTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Object[])">
             <summary>
             <para>Invokes the specified JavaScript function synchronously if possible, otherwise asynchronously.</para>
@@ -23969,96 +23895,6 @@
             <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
             <param name="args">JSON-serializable arguments.</param>
             <returns>An instance of <typeparamref name="TResult"/> obtained by JSON-deserializing the return value.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Object[])">
-            <summary>
-            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
-            </summary>
-            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
-            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
-            <param name="args">JSON-serializable arguments.</param>
-            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Threading.CancellationToken,System.Object[])">
-            <summary>
-            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
-            </summary>
-            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
-            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
-            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
-            <param name="args">JSON-serializable arguments.</param>
-            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.TimeSpan,System.Object[])">
-            <summary>
-            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
-            </summary>
-            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
-            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
-            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
-            <param name="args">JSON-serializable arguments.</param>
-            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String)">
-            <summary>
-            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
-            </summary>
-            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
-            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
-            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
-            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,System.Threading.CancellationToken)">
-            <summary>
-            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
-            </summary>
-            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
-            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
-            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
-            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
-            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,System.TimeSpan)">
-            <summary>
-            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
-            </summary>
-            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
-            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
-            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
-            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
-            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,``0)">
-            <summary>
-            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
-            </summary>
-            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
-            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
-            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
-            <param name="value">JSON-serializable value.</param>
-            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,``0,System.Threading.CancellationToken)">
-            <summary>
-            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
-            </summary>
-            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
-            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
-            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
-            <param name="value">JSON-serializable value.</param>
-            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
-            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,``0,System.TimeSpan)">
-            <summary>
-            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
-            </summary>
-            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
-            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
-            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
-            <param name="value">JSON-serializable value.</param>
-            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
-            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
         </member>
         <member name="M:BrowserAPI.TrySyncExtensions.DisposeTrySync(Microsoft.JSInterop.IJSObjectReference)">
             <summary>
@@ -24227,7 +24063,7 @@
         </member>
         <member name="T:BrowserAPI.IClipboard">
             <summary>
-            The Clipboard interface implements the Clipboard API, providing—if the user grants permission—both read and write access to the contents of the system clipboard.
+            The <i>Clipboard</i> interface implements the <i>Clipboard API</i>, providing—if the user grants permission—both read and write access to the contents of the system clipboard.
             </summary>
         </member>
         <member name="M:BrowserAPI.IClipboard.Write(System.String,System.Threading.CancellationToken)">
@@ -24806,10 +24642,10 @@
         </member>
         <member name="T:BrowserAPI.ICookieStorage">
             <summary>
-            <para>The Document property cookie lets you read and write cookies associated with the document.</para>
+            <para>The Document property <i>cookie</i> lets you read and write cookies associated with the document.</para>
             </summary>
             <remarks>
-            Note: The CookieStorage interface is more sophisticated than the actual browser cookie interface.<br />
+            Note: The CookieStorage interface is more sophisticated than the actual browser <i>cookie</i> interface.<br />
             It is structured similar to the <see cref="T:BrowserAPI.ILocalStorage">LocalStorage</see>/<see cref="T:BrowserAPI.ISessionStorage">SessionStorage</see> interface.
             </remarks>
         </member>
@@ -24883,10 +24719,10 @@
         </member>
         <member name="T:BrowserAPI.ICookieStorageInProcess">
             <summary>
-            The Document property cookie lets you read and write cookies associated with the document.
+            The Document property <i>cookie</i> lets you read and write cookies associated with the document.
             </summary>
             <remarks>
-            Note: The CookieStorage interface is more sophisticated than the actual browser cookie interface.<br />
+            Note: The CookieStorage interface is more sophisticated than the actual browser <i>cookie</i> interface.<br />
             It is structured similar to the <see cref="T:BrowserAPI.ILocalStorageInProcess">LocalStorage</see>/<see cref="T:BrowserAPI.ISessionStorageInProcess">SessionStorage</see> interface.
             </remarks>
         </member>
@@ -24942,7 +24778,7 @@
         </member>
         <member name="T:BrowserAPI.IDevicePosture">
             <summary>
-            The DevicePosture interface of the Device Posture API represents the device's posture, that is, whether the viewport is in a flat or folded state.<br />
+            The <i>DevicePosture</i> interface of the Device Posture API represents the device's posture, that is, whether the viewport is in a flat or folded state.<br />
             It allows developers to create user interfaces that adapt to a foldable device's posture and respond to posture changes.
             </summary>
         </member>
@@ -24970,7 +24806,7 @@
         </member>
         <member name="T:BrowserAPI.IDevicePostureInProcess">
             <summary>
-            The DevicePosture interface of the Device Posture API represents the device's posture, that is, whether the viewport is in a flat or folded state.<br />
+            The <i>DevicePosture</i> interface of the Device Posture API represents the device's posture, that is, whether the viewport is in a flat or folded state.<br />
             It allows developers to create user interfaces that adapt to a foldable device's posture and respond to posture changes.
             </summary>
         </member>
@@ -24993,13 +24829,13 @@
         </member>
         <member name="T:BrowserAPI.IDocument">
             <summary>
-            <para>Represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
+            <para>The <i>Document</i> interface represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
             <para>
             The DOM tree includes elements such as &lt;body&gt; and &lt;table&gt;, among many others.
             It provides functionality globally to the document, like how to obtain the page's URL and create new elements in the document.
             </para>
             <para>
-            The Document interface describes the common properties and methods for any kind of document.
+            The <i>Document</i> interface describes the common properties and methods for any kind of document.
             Depending on the document's type (e.g., HTML, XML, SVG, …), a larger API is available:
             HTML documents, served with the "text/html" content type, also implement the HTMLDocument interface,
             whereas XML and SVG documents implement the XMLDocument interface.
@@ -26902,13 +26738,13 @@
         </member>
         <member name="T:BrowserAPI.IDocumentInProcess">
             <summary>
-            <para>Represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
+            <para>The <i>Document</i> interface represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
             <para>
             The DOM tree includes elements such as &lt;body&gt; and &lt;table&gt;, among many others.
             It provides functionality globally to the document, like how to obtain the page's URL and create new elements in the document.
             </para>
             <para>
-            The Document interface describes the common properties and methods for any kind of document.
+            The <i>Document</i> interface describes the common properties and methods for any kind of document.
             Depending on the document's type (e.g., HTML, XML, SVG, …), a larger API is available:
             HTML documents, served with the "text/html" content type, also implement the HTMLDocument interface,
             whereas XML and SVG documents implement the XMLDocument interface.
@@ -27382,7 +27218,7 @@
         </member>
         <member name="T:BrowserAPI.IDownload">
             <summary>
-            Save data as a file download on the filesystem.
+            <para>Save data as a file download on the filesystem.</para>
             <para>For file upload use the <see cref="T:Microsoft.AspNetCore.Components.Forms.InputFile">InputFile</see> component.</para>
             </summary>
         </member>
@@ -28330,7 +28166,7 @@
         </member>
         <member name="T:BrowserAPI.IGeolocation">
             <summary>
-            The Geolocation API allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
+            The <i>Geolocation API</i> allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
             </summary>
         </member>
         <member name="M:BrowserAPI.IGeolocation.GetCurrentPosition(System.Action{BrowserAPI.GeolocationCoordinates},System.Action{System.Int32,System.String},System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)">
@@ -28494,7 +28330,7 @@
         </member>
         <member name="T:BrowserAPI.IGeolocationInProcess">
             <summary>
-            The Geolocation API allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
+            The <i>Geolocation API</i> allows the user to provide their location to web applications if they so desire. For privacy reasons, the user is asked for permission to report location information.
             </summary>
         </member>
         <member name="M:BrowserAPI.IGeolocationInProcess.GetCurrentPositionAsync(System.Int64,System.Int64,System.Boolean,System.Threading.CancellationToken)">
@@ -34800,7 +34636,11 @@
         <member name="T:BrowserAPI.IHTMLMediaElement">
             <summary>
             <para>The <i>HTMLMediaElement</i> interface adds to HTMLElement the properties and methods needed to support basic media-related capabilities that are common to audio and video.</para>
-            <para>The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see> and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see> elements both inherit this interface.</para>
+            <para>
+            The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see>
+            and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see>
+            elements both inherit this interface.
+            </para>
             </summary>
             <remarks>Objects of this class must disposed manually, so do not forget to dispose this object when you are done with it.</remarks>
         </member>
@@ -35558,7 +35398,11 @@
         <member name="T:BrowserAPI.IHTMLMediaElementInProcess">
             <summary>
             <para>The <i>HTMLMediaElement</i> interface adds to HTMLElement the properties and methods needed to support basic media-related capabilities that are common to audio and video.</para>
-            <para>The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see> and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see> elements both inherit this interface.</para>
+            <para>
+            The <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement">HTMLVideoElement</see>
+            and <see href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement">HTMLAudioElement</see>
+            elements both inherit this interface.
+            </para>
             </summary>
             <remarks>Objects of this class must disposed manually, so do not forget to dispose this object when you are done with it.</remarks>
         </member>
@@ -35890,7 +35734,7 @@
         </member>
         <member name="T:BrowserAPI.ILocalStorage">
             <summary>
-            The localStorage read-only property of the window interface allows you to access a Storage object for the Document's origin;<br />
+            The <i>localStorage</i> read-only property of the window interface allows you to access a Storage object for the Document's origin;<br />
             the stored data is saved across browser sessions.
             </summary>
         </member>
@@ -35946,7 +35790,7 @@
         </member>
         <member name="T:BrowserAPI.ILocalStorageInProcess">
             <summary>
-            The localStorage read-only property of the window interface allows you to access a Storage object for the Document's origin;<br />
+            The <i>localStorage</i> read-only property of the window interface allows you to access a Storage object for the Document's origin;<br />
             the stored data is saved across browser sessions.
             </summary>
         </member>
@@ -36466,7 +36310,7 @@
         </member>
         <member name="T:BrowserAPI.INavigator">
             <summary>
-            The Navigator interface represents the state and the identity of the user agent.
+            The <i>Navigator</i> interface represents the state and the identity of the user agent.
             It allows scripts to query it and to register themselves to carry on some activities.
             </summary>
         </member>
@@ -36878,7 +36722,7 @@
         </member>
         <member name="T:BrowserAPI.INavigatorInProcess">
             <summary>
-            The Navigator interface represents the state and the identity of the user agent.
+            The <i>Navigator</i> interface represents the state and the identity of the user agent.
             It allows scripts to query it and to register themselves to carry on some activities.
             </summary>
         </member>
@@ -37153,8 +36997,8 @@
         </member>
         <member name="T:BrowserAPI.INetworkInformation">
             <summary>
-            The NetworkInformation interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
-            The NetworkInformation interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
+            The <i>NetworkInformation</i> interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
+            The <i>NetworkInformation</i> interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
             </summary>
         </member>
         <member name="P:BrowserAPI.INetworkInformation.OnLine">
@@ -37269,8 +37113,8 @@
         </member>
         <member name="T:BrowserAPI.INetworkInformationInProcess">
             <summary>
-            The NetworkInformation interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
-            The NetworkInformation interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
+            The <i>NetworkInformation</i> interface of the Network Information API provides information about the connection a device is using to communicate with the network and provides a means for scripts to be notified if the connection type changes.
+            The <i>NetworkInformation</i> interface cannot be instantiated. It is instead accessed through the connection property of the Navigator interface or the WorkerNavigator interface.
             </summary>
         </member>
         <member name="M:BrowserAPI.INetworkInformationInProcess.Dispose">
@@ -37724,7 +37568,7 @@
         </member>
         <member name="T:BrowserAPI.INotificationsAPI">
             <summary>
-            The Notifications API allows web pages to control the display of system notifications to the end user.
+            The <i>Notifications API</i> allows web pages to control the display of system notifications to the end user.
             </summary>
         </member>
         <member name="M:BrowserAPI.INotificationsAPI.CreateNotification(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int64},System.Int32[],System.Threading.CancellationToken)">
@@ -37797,7 +37641,7 @@
         </member>
         <member name="T:BrowserAPI.INotificationsAPIInProcess">
             <summary>
-            The Notifications API allows web pages to control the display of system notifications to the end user.
+            The <i>Notifications API</i> allows web pages to control the display of system notifications to the end user.
             </summary>
         </member>
         <member name="M:BrowserAPI.INotificationsAPIInProcess.RequestPermission(System.Threading.CancellationToken)">
@@ -37860,7 +37704,7 @@
         <member name="T:BrowserAPI.IPermissions">
             <summary>
             <para>
-            The Permissions API provides a consistent programmatic way to query the status of API permissions attributed to the current context, such as a web page or worker.
+            The <i>Permissions API</i> provides a consistent programmatic way to query the status of API permissions attributed to the current context, such as a web page or worker.
             For example, it can be used to determine if permission to access a particular feature or API has been granted, denied, or requires specific user permission.
             </para>
             <para>The <i>Permissions</i> interface of the Permissions API provides the core Permission API functionality, such as methods for querying and revoking permissions.</para>
@@ -37935,7 +37779,7 @@
         <member name="T:BrowserAPI.IPermissionsInProcess">
             <summary>
             <para>
-            The Permissions API provides a consistent programmatic way to query the status of API permissions attributed to the current context, such as a web page or worker.
+            The <i>Permissions API</i> provides a consistent programmatic way to query the status of API permissions attributed to the current context, such as a web page or worker.
             For example, it can be used to determine if permission to access a particular feature or API has been granted, denied, or requires specific user permission.
             </para>
             <para>The <i>Permissions</i> interface of the Permissions API provides the core Permission API functionality, such as methods for querying and revoking permissions.</para>
@@ -38640,7 +38484,7 @@
         </member>
         <member name="T:BrowserAPI.ISensorAPI">
             <summary>
-            The Sensor APIs are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
+            The <i>Sensor APIs</i> are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
             </summary>
         </member>
         <member name="M:BrowserAPI.ISensorAPI.CreateAmbientLightSensor(System.Double,System.Threading.CancellationToken)">
@@ -38761,7 +38605,7 @@
         </member>
         <member name="T:BrowserAPI.ISensorAPIInProcess">
             <summary>
-            The Sensor APIs are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
+            The <i>Sensor APIs</i> are a set of interfaces built to a common design that expose device sensors in a consistent way to the web platform.
             </summary>
         </member>
         <member name="M:BrowserAPI.ISensorAPIInProcess.Dispose">
@@ -39284,8 +39128,8 @@
         </member>
         <member name="T:BrowserAPI.ISessionStorage">
             <summary>
-            The read-only sessionStorage property accesses a session Storage object for the current origin.<br />
-            sessionStorage is similar to localStorage; the difference is that while data in localStorage doesn't expire, data in sessionStorage is cleared when the page session ends.
+            The read-only <i>sessionStorage</i> property accesses a session Storage object for the current origin.<br />
+            <i>sessionStorage</i> is similar to <i>localStorage</i>; the difference is that while data in <i>localStorage</i> doesn't expire, data in <i>sessionStorage</i> is cleared when the page session ends.
             </summary>
         </member>
         <member name="P:BrowserAPI.ISessionStorage.Length">
@@ -39340,8 +39184,8 @@
         </member>
         <member name="T:BrowserAPI.ISessionStorageInProcess">
             <summary>
-            The read-only sessionStorage property accesses a session Storage object for the current origin.<br />
-            sessionStorage is similar to localStorage; the difference is that while data in localStorage doesn't expire, data in sessionStorage is cleared when the page session ends.
+            The read-only <i>sessionStorage</i> property accesses a session Storage object for the current origin.<br />
+            <i>sessionStorage</i> is similar to <i>localStorage</i>; the difference is that while data in <i>localStorage</i> doesn't expire, data in <i>sessionStorage</i> is cleared when the page session ends.
             </summary>
         </member>
         <member name="P:BrowserAPI.ISessionStorageInProcess.Length">
@@ -39695,7 +39539,7 @@
         </member>
         <member name="T:BrowserAPI.IWebMIDI">
             <summary>
-            <para>The Web MIDI API connects to and interacts with Musical Instrument Digital Interface (MIDI) Devices.</para>
+            <para>The <i>Web MIDI API</i> connects to and interacts with Musical Instrument Digital Interface (MIDI) Devices.</para>
             <para>
             The interfaces deal with the practical aspects of sending and receiving MIDI messages.
             Therefore, the API can be used for musical and non-musical uses, with any MIDI device connected to your computer.
@@ -39732,7 +39576,7 @@
         </member>
         <member name="T:BrowserAPI.IWebMIDIInProcess">
             <summary>
-            <para>The Web MIDI API connects to and interacts with Musical Instrument Digital Interface (MIDI) Devices.</para>
+            <para>The <i>Web MIDI API</i> connects to and interacts with Musical Instrument Digital Interface (MIDI) Devices.</para>
             <para>
             The interfaces deal with the practical aspects of sending and receiving MIDI messages.
             Therefore, the API can be used for musical and non-musical uses, with any MIDI device connected to your computer.
@@ -39742,12 +39586,12 @@
         </member>
         <member name="T:BrowserAPI.IWindow">
             <summary>
-            <para>The Window interface represents a window containing a DOM document; the document property points to the DOM document loaded in that window.</para>
+            <para>The <i>Window</i> interface represents a window containing a DOM document; the document property points to the DOM document loaded in that window.</para>
             <para>A window for a given document can be obtained using the document.defaultView property.</para>
             <para>A global variable, window, representing the window in which the script is running, is exposed to JavaScript code.</para>
             ^<para>
-            The Window interface is home to a variety of functions, namespaces, objects, and constructors which are not necessarily directly associated with the concept of a user interface window.
-            However, the Window interface is a suitable place to include these items that need to be globally available.
+            The <i>Window</i> interface is home to a variety of functions, namespaces, objects, and constructors which are not necessarily directly associated with the concept of a user interface window.
+            However, the <i>Window</i> interface is a suitable place to include these items that need to be globally available.
             Many of these are documented in the <see href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference">JavaScript Reference</see>
             and the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">DOM Reference</see>.
             </para>
@@ -41590,12 +41434,12 @@
         </member>
         <member name="T:BrowserAPI.IWindowInProcess">
             <summary>
-            <para>The Window interface represents a window containing a DOM document; the document property points to the DOM document loaded in that window.</para>
+            <para>The <i>Window</i> interface represents a window containing a DOM document; the document property points to the DOM document loaded in that window.</para>
             <para>A window for a given document can be obtained using the document.defaultView property.</para>
             <para>A global variable, window, representing the window in which the script is running, is exposed to JavaScript code.</para>
             ^<para>
-            The Window interface is home to a variety of functions, namespaces, objects, and constructors which are not necessarily directly associated with the concept of a user interface window.
-            However, the Window interface is a suitable place to include these items that need to be globally available.
+            The <i>Window</i> interface is home to a variety of functions, namespaces, objects, and constructors which are not necessarily directly associated with the concept of a user interface window.
+            However, the <i>Window</i> interface is a suitable place to include these items that need to be globally available.
             Many of these are documented in the <see href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference">JavaScript Reference</see>
             and the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">DOM Reference</see>.
             </para>
@@ -42831,6 +42675,306 @@
             <inheritdoc cref="!:ScreenInProcess.OrientationAngle" />
         </member>
         <member name="M:BrowserAPI.IScreenDetailedInProcess.UnlockOrientation">
+            <inheritdoc cref="!:ScreenInProcess.UnlockOrientation" />
+        </member>
+        <member name="T:BrowserAPI.IScreenDetails">
+            <summary>
+            <para>The <i>ScreenDetails</i> interface of the Window Management API represents the details of all the screens available to the user's device.</para>
+            <para>This information is accessed via the <see cref="M:BrowserAPI.IWindowManagementBase`2.GetScreenDetails(System.Threading.CancellationToken)">Window.getScreenDetails()</see> method.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call DisposeAsync() when you are done with it.</remarks>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetails.CurrentScreen">
+            <summary>
+            A single ScreenDetailed object representing detailed information about the screen that the current browser window is displayed in.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetails.GetCurrentScreen(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IScreenDetails.CurrentScreen" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetails.Screens">
+            <summary>
+            An array of ScreenDetailed objects, each one representing detailed information about one specific screen available to the user's device.
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IScreenDetails.GetScreens(System.Threading.CancellationToken)">
+            <inheritdoc cref="P:BrowserAPI.IScreenDetails.Screens" />
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IScreenDetailsBase`1">
+            <summary>
+            Base interface of <see cref="T:BrowserAPI.IScreenDetails"/> and <see cref="T:BrowserAPI.IScreenDetailsInProcess"/>.<br/>
+            It contains common functionality for both interfaces.<br/>
+            It is not intended to use this interface directly.
+            </summary>
+            <typeparam name="TJSObjectReference"></typeparam>
+            <param name="screenDetailsJS"></param>
+        </member>
+        <member name="E:BrowserAPI.IScreenDetailsBase`1.OnCurrentScreenChange">
+            <summary>
+            Is fired when the ScreenDetails.currentScreen changes in one of the following ways:<br />
+            - The current screen changes to a different screen, i.e., the current browser window is moved to a different screen.<br />
+            - One or more of the following properties change on the current screen: width, height, availWidth, availHeight, colorDepth, orientation<br />
+            - One or more properties of <see href="https://developer.mozilla.org/en-US/docs/Web/API/ScreenDetailed">ScreenDetailed</see> changes.
+            </summary>
+        </member>
+        <member name="E:BrowserAPI.IScreenDetailsBase`1.OnScreensChange">
+            <summary>
+            Is fired when the set of screens available to the system has changed: that is, a new screen has become available or an existing screen has become unavailable.
+            This will be reflected in a change in the screens array.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IScreenDetailsInProcess">
+            <summary>
+            <para>The <i>ScreenDetails</i> interface of the Window Management API represents the details of all the screens available to the user's device.</para>
+            <para>This information is accessed via the <see cref="M:BrowserAPI.IWindowManagementBase`2.GetScreenDetails(System.Threading.CancellationToken)">Window.getScreenDetails()</see> method.</para>
+            </summary>
+            <remarks>Objects of this class must disposed manually, so do not forget to call Dispose() when you are done with it.</remarks>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailsInProcess.CurrentScreen">
+            <summary>
+            A single ScreenDetailed object representing detailed information about the screen that the current browser window is displayed in.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IScreenDetailsInProcess.Screens">
+            <summary>
+            An array of ScreenDetailed objects, each one representing detailed information about one specific screen available to the user's device.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IWindowManagement">
+            <summary>
+            The <i>Window Management API</i> allows you to get detailed information on the displays connected to your device and more easily place windows on specific screens,
+            paving the way towards more effective multi-screen applications.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IWindowManagement.Screen">
+            <summary>
+            The Window property <i>screen</i> returns a reference to the screen object associated with the window.
+            The screen object, implementing the Screen interface, is a special object for inspecting properties of the screen on which the current window is being rendered.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IWindowManagementBase`2">
+            <summary>
+            Base interface of <see cref="T:BrowserAPI.IWindowManagement"/> and <see cref="T:BrowserAPI.IWindowManagementInProcess"/>.<br/>
+            It contains common functionality for both interfaces.<br/>
+            It is not intended to use this interface directly.
+            </summary>
+            <typeparam name="TJSObjectReference"></typeparam>
+            <typeparam name="TScreenDetails"></typeparam>
+            <param name="moduleManager"></param>
+        </member>
+        <member name="M:BrowserAPI.IWindowManagementBase`2.GetScreenDetails(System.Threading.CancellationToken)">
+            <summary>
+            The <i>getScreenDetails()</i> method of the Window interface returns a Promise that fulfills with a ScreenDetails object instance representing the details of all the screens available to the user's device.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrowserAPI.IWindowManagementInProcess">
+            <summary>
+            The <i>Window Management API</i> allows you to get detailed information on the displays connected to your device and more easily place windows on specific screens,
+            paving the way towards more effective multi-screen applications.
+            </summary>
+        </member>
+        <member name="P:BrowserAPI.IWindowManagementInProcess.Screen">
+            <summary>
+            The Window property <i>screen</i> returns a reference to the screen object associated with the window.
+            The screen object, implementing the Screen interface, is a special object for inspecting properties of the screen on which the current window is being rendered.
+            </summary>
+        </member>
+        <member name="T:BrowserAPI.IModuleManager">
+            <summary>
+            <para>
+            The ModuleManager is responsible for the access of the JS-module at "_content/Blazor.BrowserAPI/BrowserAPI.js".<br/>
+            The necessary module is lazy loaded the first time when it is needed,
+            but it also contains a method to start the module download manually.
+            </para>
+            <para>However, when *InProcess*-classes are used, the module must be loaded beforehand, otherwise an Exception is thrown.</para>
+            </summary>
+        </member>
+        <member name="M:BrowserAPI.IModuleManager.LoadModule">
+            <summary>
+            Starts the download of the JS module. Returns a Task that represents the download of the module. If this Task finishes, the download finishes.<br/>
+            The JS module is only downloaded once. When called several times, the same ongoing/finished task is returned.
+            </summary>
+            <returns>A Task that represents the download of the module. If this tasks finishes, the download finishes.</returns>
+        </member>
+        <member name="M:BrowserAPI.IModuleManager.InvokeSync(System.String,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript function located inside the JS-module synchronously.
+            </summary>
+            <param name="identifier">An identifier for the function to invoke. For example, the value <c>"someScope.someFunction"</c> will invoke the function <c>window.someScope.someFunction</c>.</param>
+            <param name="args">JSON-serializable arguments.</param>
+        </member>
+        <member name="M:BrowserAPI.IModuleManager.InvokeSync``1(System.String,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript function located inside the JS-module synchronously.
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="identifier">An identifier for the function to invoke. For example, the value <c>"someScope.someFunction"</c> will invoke the function <c>window.someScope.someFunction</c>.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IModuleManager.InvokeTrySync(System.String,System.Threading.CancellationToken,System.Object[])">
+            <summary>
+            <para>Invokes the specified JavaScript function located inside the JS-module synchronously if possible, otherwise asynchronously.</para>
+            <para>When the specified JavaScript function returns a promise, you should use <see cref="M:BrowserAPI.IModuleManager.InvokeAsync(System.String,System.Threading.CancellationToken,System.Object[])"/> instead.</para>
+            </summary>
+            <param name="identifier">An identifier for the function to invoke. For example, the value <c>"someScope.someFunction"</c> will invoke the function <c>window.someScope.someFunction</c>.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IModuleManager.InvokeTrySync``1(System.String,System.Threading.CancellationToken,System.Object[])">
+            <summary>
+            <para>Invokes the specified JavaScript function located inside the JS-module synchronously if possible, otherwise asynchronously.</para>
+            <para>When the specified JavaScript function returns a promise, you should use <see cref="M:BrowserAPI.IModuleManager.InvokeAsync``1(System.String,System.Threading.CancellationToken,System.Object[])"/> instead.</para>
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="identifier">An identifier for the function to invoke. For example, the value <c>"someScope.someFunction"</c> will invoke the function <c>window.someScope.someFunction</c>.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IModuleManager.InvokeAsync(System.String,System.Threading.CancellationToken,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript function located inside the JS-module asynchronously.
+            </summary>
+            <param name="identifier">An identifier for the function to invoke. For example, the value <c>"someScope.someFunction"</c> will invoke the function <c>window.someScope.someFunction</c>.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrowserAPI.IModuleManager.InvokeAsync``1(System.String,System.Threading.CancellationToken,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript function located inside the JS-module asynchronously.
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="identifier">An identifier for the function to invoke. For example, the value <c>"someScope.someFunction"</c> will invoke the function <c>window.someScope.someFunction</c>.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns></returns>
+        </member>
+        <member name="T:CircleDIAttributes.IBrowserAPIModule">
+            <summary>
+            <para>
+            CircleDI service providers can import this module to register all services available in this library.<br />
+            All services includes every BrowserAPI service and <see cref="T:BrowserAPI.IModuleManager"/>.
+            </para>
+            <para>All services will be registered as scoped, CreationTiming.Constructor, GetAccess.Property and default Name (name of the implementation class).</para>
+            </summary>
+        </member>
+        <member name="T:CircleDIAttributes.ScopedAttribute`2">
+            <summary>
+            <para>The register attribute from CircleDI to register a scoped service to a CircleDI service provider.</para>
+            <para>This attributes members are omitted, because only the attribute class and the type parameters are used here.</para>
+            </summary>
+            <typeparam name="TService">Type of the service.</typeparam>
+            <typeparam name="TImplementation">Type of the implementation.</typeparam>
+        </member>
+        <member name="T:Jab.IBrowserAPIModule">
+            <summary>
+            <para>
+            Jab service providers can import this module to register all services available in this library.<br />
+            All services includes every BrowserAPI service and <see cref="T:BrowserAPI.IModuleManager"/>.
+            </para>
+            <para>All services will be registered as scoped.</para>
+            </summary>
+        </member>
+        <member name="T:Jab.ServiceProviderModuleAttribute">
+            <summary>
+            The attribute from Jab to mark an interface as module.
+            </summary>
+        </member>
+        <member name="T:Jab.ScopedAttribute`2">
+            <summary>
+            <para>The register attribute from Jab to register a scoped service to a Jab service provider.</para>
+            <para>This attributes members are omitted, because only the attribute class and the type parameters are used here.</para>
+            </summary>
+            <typeparam name="TService">Type of the service.</typeparam>
+            <typeparam name="TImpl">Type of the implementation.</typeparam>
+        </member>
+        <member name="T:AutoInterfaceAttributes.AutoInterfaceAttribute">
+            <summary>
+            Generates an interface for the decorated class/struct.
+            </summary>
+        </member>
+        <member name="P:AutoInterfaceAttributes.AutoInterfaceAttribute.Name">
+            <summary>
+            <para>The name of the generated interface.</para>
+            <para>Default is "I{ClassName}"</para>
+            </summary>
+        </member>
+        <member name="P:AutoInterfaceAttributes.AutoInterfaceAttribute.Modifier">
+            <summary>
+            <para>The modifier(s) for the interface.</para>
+            <para>Deault is "public partial"</para>
+            </summary>
+        </member>
+        <member name="P:AutoInterfaceAttributes.AutoInterfaceAttribute.Namespace">
+            <summary>
+            <para>The namespace declaration for the interface.</para>
+            <para>If empty string, no namespace directive will be used (global namespace).<br />
+            Default (if not present) it will be mapped to the same namespace as the namespace of the class/struct.</para>
+            </summary>
+        </member>
+        <member name="P:AutoInterfaceAttributes.AutoInterfaceAttribute.Inheritance">
+            <summary>
+            <para>interface inheritance: Name(s) of interfaces this interface will inherit.</para>
+            <para>Default is Array.Empty</para>
+            </summary>
+        </member>
+        <member name="P:AutoInterfaceAttributes.AutoInterfaceAttribute.Nested">
+            <summary>
+            <para>
+            The Classes, structs or interfaces containing the generated interface.<br />
+            e.g. ["public sealed partial class Example"] will wrap the interface with that expression.
+            </para>
+            <para>Default is Array.Empty</para>
+            </summary>
+        </member>
+        <member name="P:AutoInterfaceAttributes.AutoInterfaceAttribute.StaticMembers">
+            <summary>
+            <para>If enabled, static members get accepted and are generating "static abstract" members.</para>
+            <para>Default is false</para>
+            </summary>
+        </member>
+        <member name="T:AutoInterfaceAttributes.IgnoreAutoInterfaceAttribute">
+            <summary>
+            The decorated member will be Ignored by the generator.
+            </summary>
+        </member>
+        <member name="T:AutoInterfaceAttributes.AutoInterfaceVisibilityPublic">
+            <summary>
+            Adds a "public" access modifier to the interface member.
+            </summary>
+        </member>
+        <member name="T:AutoInterfaceAttributes.AutoInterfaceVisibilityInternal">
+            <summary>
+            Adds a "internal" access modifier to the interface member.
+            </summary>
+        </member>
+        <member name="T:AutoInterfaceAttributes.AutoInterfaceVisibilityProtected">
+            <summary>
+            Adds a "protected" access modifier to the interface member.
+            </summary>
+        </member>
+        <member name="T:AutoInterfaceAttributes.AutoInterfaceVisibilityProtectedInternal">
+            <summary>
+            Adds a "protected internal" access modifier to the interface member.
+            </summary>
+        </member>
+        <member name="T:AutoInterfaceAttributes.AutoInterfaceVisibilityPrivateProtected">
+            <summary>
+            Adds a "private protected" access modifier to the interface member.
+            </summary>
+        </member>
+    </members>
+</doc>
+rAPI.IScreenDetailedInProcess.UnlockOrientation">
             <inheritdoc cref="!:ScreenInProcess.UnlockOrientation" />
         </member>
         <member name="T:BrowserAPI.IScreenDetails">

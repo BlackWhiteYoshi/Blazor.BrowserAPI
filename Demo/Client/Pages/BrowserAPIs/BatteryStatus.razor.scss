@@ -1,9 +1,5 @@
 #battery-status {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    & > div {
+    & > .demo {
         display: grid;
         grid-template-rows: repeat(5, auto);
         grid-template-columns: repeat(4, auto);

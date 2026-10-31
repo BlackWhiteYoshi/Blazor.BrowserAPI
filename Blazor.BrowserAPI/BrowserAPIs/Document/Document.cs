@@ -5,13 +5,13 @@ using System.Diagnostics.CodeAnalysis;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// <para>Represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
+/// <para>The <i>Document</i> interface represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the DOM tree.</para>
 /// <para>
 /// The DOM tree includes elements such as &lt;body&gt; and &lt;table&gt;, among many others.
 /// It provides functionality globally to the document, like how to obtain the page's URL and create new elements in the document.
 /// </para>
 /// <para>
-/// The Document interface describes the common properties and methods for any kind of document.
+/// The <i>Document</i> interface describes the common properties and methods for any kind of document.
 /// Depending on the document's type (e.g., HTML, XML, SVG, …), a larger API is available:
 /// HTML documents, served with the "text/html" content type, also implement the HTMLDocument interface,
 /// whereas XML and SVG documents implement the XMLDocument interface.

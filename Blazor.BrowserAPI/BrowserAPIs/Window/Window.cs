@@ -5,12 +5,12 @@ using System.Diagnostics.CodeAnalysis;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// <para>The Window interface represents a window containing a DOM document; the document property points to the DOM document loaded in that window.</para>
+/// <para>The <i>Window</i> interface represents a window containing a DOM document; the document property points to the DOM document loaded in that window.</para>
 /// <para>A window for a given document can be obtained using the document.defaultView property.</para>
 /// <para>A global variable, window, representing the window in which the script is running, is exposed to JavaScript code.</para>
 /// ^<para>
-/// The Window interface is home to a variety of functions, namespaces, objects, and constructors which are not necessarily directly associated with the concept of a user interface window.
-/// However, the Window interface is a suitable place to include these items that need to be globally available.
+/// The <i>Window</i> interface is home to a variety of functions, namespaces, objects, and constructors which are not necessarily directly associated with the concept of a user interface window.
+/// However, the <i>Window</i> interface is a suitable place to include these items that need to be globally available.
 /// Many of these are documented in the <see href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference">JavaScript Reference</see>
 /// and the <see href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">DOM Reference</see>.
 /// </para>

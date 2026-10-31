@@ -3,8 +3,8 @@ using AutoInterfaceAttributes;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// The read-only sessionStorage property accesses a session Storage object for the current origin.<br />
-/// sessionStorage is similar to localStorage; the difference is that while data in localStorage doesn't expire, data in sessionStorage is cleared when the page session ends.
+/// The read-only <i>sessionStorage</i> property accesses a session Storage object for the current origin.<br />
+/// <i>sessionStorage</i> is similar to <i>localStorage</i>; the difference is that while data in <i>localStorage</i> doesn't expire, data in <i>sessionStorage</i> is cleared when the page session ends.
 /// </summary>
 [AutoInterface(Namespace = "BrowserAPI")]
 public sealed class SessionStorageInProcess(IModuleManager moduleManager) : ISessionStorageInProcess {

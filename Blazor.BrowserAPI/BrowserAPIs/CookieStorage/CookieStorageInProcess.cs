@@ -3,10 +3,10 @@ using AutoInterfaceAttributes;
 namespace BrowserAPI.Implementation;
 
 /// <summary>
-/// The Document property cookie lets you read and write cookies associated with the document.
+/// The Document property <i>cookie</i> lets you read and write cookies associated with the document.
 /// </summary>
 /// <remarks>
-/// Note: The CookieStorage interface is more sophisticated than the actual browser cookie interface.<br />
+/// Note: The CookieStorage interface is more sophisticated than the actual browser <i>cookie</i> interface.<br />
 /// It is structured similar to the <see cref="ILocalStorageInProcess">LocalStorage</see>/<see cref="ISessionStorageInProcess">SessionStorage</see> interface.
 /// </remarks>
 [AutoInterface(Namespace = "BrowserAPI")]
