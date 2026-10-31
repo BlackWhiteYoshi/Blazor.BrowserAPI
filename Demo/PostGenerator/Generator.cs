@@ -39,7 +39,7 @@ public static class Generator {
                             ErrorList.Add(error.Message);
                     }
 
-                    string fileName = $"{config.PageFolderPath}/index.html";
+                    string fileName = $"{config.PageFolderPath}/{page}_g.html";
                     Directory.CreateDirectory(Path.GetDirectoryName(fileName)!);
                     File.WriteAllText(fileName, minifyResult.Code);
                 }
