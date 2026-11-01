@@ -18,6 +18,9 @@
     </div>
 
     <div class="demo">
-        @* TODO *@ Demo not Implemented yet...
+        <textarea @bind="textAreaContent"></textarea>
+        <button class="btn-second" @onclick="WriteTextAreaToFile">Write textarea to file</button>
+        <button class="btn-main" @onclick="ReadFromFileToTextArea">Read from file and write to textarea</button>
+        <button class="btn-danger" @onclick="RemoveContentOfDirectory">Remove content of directory</button>
     </div>
 </div>

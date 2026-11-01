@@ -1,0 +1,16 @@
+#file-system {
+    .demo {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+
+        & > textarea {
+            min-width: 40ch;
+            min-height: 12ch;
+        }
+
+        & > button:last-child {
+            margin-top: 1em;
+        }
+    }
+}
