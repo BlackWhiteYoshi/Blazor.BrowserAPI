@@ -9,13 +9,22 @@
     </div>
 }
 
+<dialog id="js-error-dialog" @ref="dialogElement">
+    <h2 class="headline">Not Working BrowserAPI</h2>
+    <p>The requested BrowserAPI is not enabled because of missing permissions or configs or is just not supported by your Browser.</p>
+    <p>Ensure giving permissions, look at your configs, try another Browser or just go on with another BrowserAPI example.</p>
+    <button class="btn-main" @onclick="CloseDialog">Close</button>
+</dialog>
+
 <AppNavBar />
 
-<main>
-    <Router AppAssembly="@typeof(App).Assembly" NotFoundPage="typeof(NotFound)">
-        <Found Context="routeData">
-            <RouteView RouteData="@routeData" />
-            <FocusOnNavigate RouteData="@routeData" Selector="h1" />
-        </Found>
-    </Router>
-</main>
+<JSExceptionBoundary @ref="jsExceptionBoundary">
+    <main>
+        <Router AppAssembly="@typeof(App).Assembly" NotFoundPage="typeof(NotFound)">
+            <Found Context="routeData">
+                <RouteView RouteData="@routeData" />
+                <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+            </Found>
+        </Router>
+    </main>
+</JSExceptionBoundary>
