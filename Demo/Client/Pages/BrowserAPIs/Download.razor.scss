@@ -1,0 +1,12 @@
+#download {
+    .demo {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+
+        & > textarea {
+            min-width: 40ch;
+            min-height: 12ch;
+        }
+    }
+}

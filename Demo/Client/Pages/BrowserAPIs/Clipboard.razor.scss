@@ -9,9 +9,6 @@
             flex-direction: column;
             gap: 0.6em;
 
-            min-width: min(50ch, 100%);
-            margin-inline: auto;
-
             & > textarea {
                 min-width: 40ch;
                 min-height: 12ch;
