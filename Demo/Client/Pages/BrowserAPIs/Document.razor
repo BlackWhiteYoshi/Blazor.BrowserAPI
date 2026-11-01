@@ -19,6 +19,45 @@
     </div>
 
     <div class="demo">
-        @* TODO *@ Demo not Implemented yet...
+        <div>
+            <button class="btn-main" @onclick="ChangeTitle" disabled=@(originalTitle is not null)>Set Title</button>
+            @if (originalTitle is not null) {
+                <input @bind-value="Title" @bind-value:event="oninput">
+            }
+        </div>
+        <button class="btn-deny" @onclick="ColorAllHyperLinks" disabled=@linksAltered>Color all links</button>
+        <div>
+            <button class="btn-danger" @onclick="RemoveActiveElement">Remove active element</button>
+        </div>
+        <button class="btn-info" @onclick="ListEntireDOM" disabled=@(domTree is not null)>List entire DOM</button>
+        @if (domTree is not null) {
+            RenderDomNOde(__builder, domTree.Value);
+        }
     </div>
 </div>
+
+@code {
+    private void RenderDomNOde(RenderTreeBuilder __builder, DomElement domElement) {
+        <ul>
+            <li>tag: "@domElement.TagName"</li>
+            @if (domElement.Attributes.Count > 0) {
+                <li>
+                    attributes:
+                    <ul>
+                        @foreach((string key, string value) in domElement.Attributes) {
+                            <li>@key = @value</li>
+                        }
+                    </ul>
+                </li>
+            }
+            @if (domElement.Children.Length > 0) {
+                <li>
+                    children:
+                    @foreach(DomElement child in domElement.Children) {
+                        RenderDomNOde(__builder, child);
+                    }
+                </li>
+            }
+        </ul>
+    }
+}

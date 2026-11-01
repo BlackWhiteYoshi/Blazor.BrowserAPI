@@ -1,0 +1,32 @@
+#document {
+    .demo {
+        display: flex;
+        flex-direction: column;
+        gap: 1.4em;
+
+        & > div {
+            min-height: 42px;
+            width: 400px;
+
+            display: flex;
+            flex-direction: row;
+            gap: 0.4em;
+
+            & > button {
+                width: 100%;
+            }
+        }
+
+        ul {
+            margin: 0;
+            padding-inline: 20px;
+        }
+        
+        & > ul {
+            width: 400px;
+            max-height: 80vh;
+            padding-inline: 2em;
+            overflow: auto;
+        }
+    }
+}
