@@ -13,7 +13,7 @@ public sealed partial class JSExceptionBoundary : ErrorBoundaryBase {
         Recover();
         
         if (exception is JSException && Dialog is not null)
-            await Dialog.Show();
+            await Dialog.ShowModal();
         else
             await DispatchExceptionAsync(exception);
     }

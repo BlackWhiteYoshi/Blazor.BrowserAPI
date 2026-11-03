@@ -86,26 +86,6 @@ body {
     }
 }
 
-#js-error-dialog {
-    inset: 0;
-    max-width: 720px;
-    padding: 2em;
-    background-color: #111;
-    border: 1px solid #FFF;
-    border-radius: 0.25rem;
-
-    & > h2 {
-        font-size: 2rem;
-    }
-
-    & > button {
-        display: table;
-        margin-inline: auto;
-        margin-top: 2em;
-        padding-inline: 3em;
-    }
-}
-
 #blazor-error-ui {
     position: fixed;
     inset: auto 0 0 0;

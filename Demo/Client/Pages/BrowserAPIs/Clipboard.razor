@@ -14,7 +14,7 @@
             <button class="btn-main" @onclick="CopyTextToClipboard">Copy text to Clipboard</button>
         </div>
         <div>
-            <button class="btn-main" @onclick="GetTextFromClipboard">Read in Clipboard content</button>
+            <button class="btn-second" @onclick="GetTextFromClipboard">Read in Clipboard content</button>
             <span>@(savedValue is null ? "No value" : $"Current value: \"{savedValue}\"")</span>
         </div>
     </div>

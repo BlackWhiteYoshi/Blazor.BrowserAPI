@@ -13,6 +13,30 @@
     margin-inline: auto;
 }
 
+.info-dialog {
+    inset: 0;
+    max-width: 720px;
+    padding: 2em;
+    background-color: #111;
+    border: 1px solid #FFF;
+    border-radius: 0.25rem;
+
+    & > h1, h2, h3, h4, h5, h6 {
+        font-size: 2rem;
+    }
+
+    & > button {
+        display: table;
+        margin-inline: auto;
+        margin-top: 2em;
+        padding-inline: 3em;
+    }
+
+    &::backdrop {
+        background-color: #FFF6;
+    }
+}
+
 
 button:not(:disabled) { cursor: pointer; }
 
