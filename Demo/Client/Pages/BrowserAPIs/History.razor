@@ -13,6 +13,13 @@
     </div>
 
     <div class="demo">
-        @* TODO *@ Demo not Implemented yet...
+        <button class="btn-main" @onclick="GetLength">History length</button>
+        <span>Length: @(length is not null ? length : "---")</span>
+
+        <button class="btn-second" @onclick="GetScrollRestoration">History scroll restoration</button>
+        <span>ScrollRestoration: @(scrollRestoration is not null ? scrollRestoration : "---")</span>
+
+        <button class="btn-deny" @onclick="Back">Go Back</button>
+        <button class="btn-deny" @onclick="Forward">Go Forward</button>
     </div>
 </div>

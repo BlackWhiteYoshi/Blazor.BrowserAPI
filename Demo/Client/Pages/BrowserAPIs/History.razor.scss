@@ -1,0 +1,12 @@
+#history {
+    & > .demo {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.6em;
+        align-items: center;
+
+        .btn-deny {
+            margin-top: 2.4em;
+        }
+    }
+}

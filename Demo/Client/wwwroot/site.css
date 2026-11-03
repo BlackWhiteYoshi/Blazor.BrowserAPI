@@ -701,3 +701,13 @@ body {
   line-height: 1.8;
   margin-top: 1em;
 }
+
+#history .demo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.6em;
+  align-items: center;
+}
+#history .demo .btn-deny {
+  margin-top: 2.4em;
+}
