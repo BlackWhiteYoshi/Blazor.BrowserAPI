@@ -15,7 +15,7 @@ public sealed partial class ExampleComponent : ComponentBase {
     public required IServiceWorkerContainer ServiceWorkerContainer { private get; init; }
 
 
-    public async Task InitNotifications() {
+    private async Task InitNotifications() {
         string permission = await NotificationsAPI.RequestPermission();
         if (permission != "granted")
             return;

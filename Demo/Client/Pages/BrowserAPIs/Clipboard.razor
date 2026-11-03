@@ -15,7 +15,7 @@
         </div>
         <div>
             <button class="btn-main" @onclick="GetTextFromClipboard">Read in Clipboard content</button>
-            <span class="center">@(savedValue is null ? "No value" : $"Current value: \"{savedValue}\"")</span>
+            <span>@(savedValue is null ? "No value" : $"Current value: \"{savedValue}\"")</span>
         </div>
     </div>
 </div>

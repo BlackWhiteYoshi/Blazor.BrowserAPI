@@ -1,5 +1,5 @@
 #document {
-    .demo {
+    & > .demo {
         display: flex;
         flex-direction: column;
         gap: 1.4em;

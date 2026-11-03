@@ -31,5 +31,11 @@ public sealed partial class DevicePosture : ComponentBase, IDisposable {
         PDevicePosture.OnChange -= OnChange;
     }
 
-    private void OnChange() => _ = ReadDevicePosture();
+    private void OnChange() {
+        _ = DoAsync().Preserve();
+        async ValueTask DoAsync() {
+            await ReadDevicePosture();
+            await InvokeAsync(StateHasChanged);
+        }
+    }
 }

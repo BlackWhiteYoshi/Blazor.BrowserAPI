@@ -8,10 +8,15 @@
             display: flex;
             flex-direction: column;
             gap: 0.6em;
+            align-items: center;
 
             & > textarea {
                 min-width: 40ch;
                 min-height: 12ch;
+            }
+
+            & > button {
+                width: 100%;
             }
         }
     }

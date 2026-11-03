@@ -66,6 +66,7 @@ public sealed partial class BatteryStatus : ComponentBase, IAsyncDisposable {
         async ValueTask DoAsync() {
             IBatteryManager batteryManager = await BatteryManagerTask;
             isCharging = await batteryManager.Charging;
+            await InvokeAsync(StateHasChanged);
         }
     }
 
@@ -89,6 +90,7 @@ public sealed partial class BatteryStatus : ComponentBase, IAsyncDisposable {
         async ValueTask DoAsync() {
             IBatteryManager batteryManager = await BatteryManagerTask;
             chargingTime = await batteryManager.ChargingTime;
+            await InvokeAsync(StateHasChanged);
         }
     }
 
@@ -112,6 +114,7 @@ public sealed partial class BatteryStatus : ComponentBase, IAsyncDisposable {
         async ValueTask DoAsync() {
             IBatteryManager batteryManager = await BatteryManagerTask;
             dischargingTime = await batteryManager.DischargingTime;
+            await InvokeAsync(StateHasChanged);
         }
     }
 
@@ -135,6 +138,7 @@ public sealed partial class BatteryStatus : ComponentBase, IAsyncDisposable {
         async ValueTask DoAsync() {
             IBatteryManager batteryManager = await BatteryManagerTask;
             chargeLevel = await batteryManager.Level;
+            await InvokeAsync(StateHasChanged);
         }
     }
 }
