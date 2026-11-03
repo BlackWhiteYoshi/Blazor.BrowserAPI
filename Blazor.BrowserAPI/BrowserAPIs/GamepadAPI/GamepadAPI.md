@@ -9,71 +9,38 @@ and to access other information about the gamepads themselves, and what buttons 
 ## Example
 
 ```csharp
-public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
+public sealed partial class ExampleComponent : ComponentBase {
     [Inject]
     public required IGamepadAPI GamepadAPI { private get; init; }
 
-    private IGamepad? gamepad = null;
-
-
-    protected override async Task OnInitializedAsync() {
-        if (RendererInfo.IsInteractive) {
-            IGamepad?[] gamepads = await GamepadAPI.GetGamepads();
-            foreach (IGamepad? gamepad in gamepads) {
-                if (gamepad is null)
-                    continue;
-
-                // this example only uses one gamepad, get the first one available
-                if (this.gamepad is null)
-                    this.gamepad = gamepad;
-                else
-                    // dispose all other gamepads, if any
-                    await gamepad.DisposeAsync();
-            }
-
-            GamepadAPI.OnGamepadConnected += OnGamepadConnected;
-            GamepadAPI.OnGamepadDisconnected += OnGamepadDisconnected;
-        }
-    }
-
-    public async ValueTask DisposeAsync() {
-        if (gamepad is not null)
-            try {
+    
+    // polling input, should be used at the start of your gameloop
+    private async Task<List<(double[] axes, GamepadButton[] buttons)>> ReadGamepadInputs() {
+        IGamepad?[] gamepads = await GamepadAPI.GetGamepads();
+        List<(double[] axes, GamepadButton[] buttons)> result = new(gamepads.Length);
+        foreach (IGamepad? gamepad in gamepads)
+            if (gamepad is not null) {
+                result.Add((await gamepad.Axes, await gamepad.Buttons));
                 await gamepad.DisposeAsync();
             }
-            catch (JSDisconnectedException) { }
+        
+        return result;
     }
 
-    
-    public void OnGamepadConnected(IGamepad gamepad) {
-        if (this.gamepad is null)
-            this.gamepad = gamepad;
-        else
-            _ = gamepad.DisposeAsync().Preserve();
-    }
+    private async Task RumbleGamepads() {
+        List<Task> rumbleTasks = [];
 
-    public void OnGamepadDisconnected(IGamepad gamepad) {
-        _ = RunAsync().Preserve();
-        async ValueTask RunAsync() {
-            await gamepad.DisposeAsync();
+        IGamepad?[] gamepads = await GamepadAPI.GetGamepads();
+        foreach (IGamepad? gamepad in gamepads)
+            if (gamepad is not null) {
+                string[] effects = await gamepad.VibrationActuatorEffects;
+                if (effects.Length >= 1)
+                    rumbleTasks.Add(gamepad.PlayVibrationActuatorEffect(type: effects[0], duration: 1000).AsTask());
 
-            if (this.gamepad is not null && await this.gamepad.Connected is false) {
-                await this.gamepad.DisposeAsync();
-                this.gamepad = null;
+                await gamepad.DisposeAsync();
             }
-        }
-    }
-
-
-    private async Task ReadGamepadInput() {
-        if (gamepad is null)
-            return;
-
-        double[] axes = await gamepad.Axes;
-        GamepadButton[] buttons = await gamepad.Buttons;
-
-        Console.WriteLine($"axes: {string.Join(", ", axes)}");
-        Console.WriteLine($"buttons: {string.Join(", ", buttons)}");
+        
+        await Task.WhenAll(rumbleTasks);
     }
 }
 ```

@@ -13,6 +13,35 @@
     </div>
 
     <div class="demo">
-        @* TODO *@ Demo not Implemented yet...
+        <div>
+            <button class="btn-main" @onclick="GetGamePads">Read gamepads</button>
+            <div>
+                <button class="btn-deny" @onclick="StartReadGamepadLoop" disabled="@isLoopActive">Start read gamepads loop</button>
+                <button class="btn-cancel" @onclick="StopReadGamepadLoop" disabled="@(!isLoopActive)">Stop reading</button>
+            </div>
+            <button class="btn-main" @onclick="RumbleGamepads" disabled=@isRumbling>Rumble gamepads</button>
+        </div>
+
+        <span>@(gamepadInfoList.Count == 0 ? "Connect a gamepad and press a gamepad button, then read gamepads." : $"Gamepad Count: {gamepadInfoList.Count}")</span>
+        <ul class="gamepad-list">
+            @foreach (GamepadInfo gamepad in gamepadInfoList) {
+                <li class="gamepad">
+                    <span>Id: @gamepad.Id</span>
+                    <span>Index: @gamepad.Index</span>
+                    <span>Mapping: @gamepad.Mapping</span>
+                    <span>Rumble: @string.Join(" ,", gamepad.VibrationActuatorEffects)</span>
+                    <ul>
+                        @foreach ((int i, double axes) in gamepad.Axes.Index()) {
+                            <li>Axes @i: <span style="--amount: @(Math.Abs(@axes) * 100)%">@axes.ToString("F3")</span></li>
+                        }
+                    </ul>
+                    <ul>
+                        @foreach ((int i, GamepadButton button) in gamepad.Buttons.Index()) {
+                            <li>Button @i: <span pressed=@button.Pressed>@button.Value.ToString(button.Value is > 0 and < 1 ? "F3" : "")</span></li>
+                        }
+                    </ul>
+                </li>
+            }
+        </ul>
     </div>
 </div>

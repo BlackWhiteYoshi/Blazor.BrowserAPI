@@ -1,0 +1,61 @@
+#gamepad-api {
+    & > .demo {
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+        align-items: center;
+        
+        & > div {
+            display: flex;
+            flex-direction: row;
+            gap: 1.2em;
+            flex-wrap: wrap;
+
+            & > div {
+                display: flex;
+                flex-direction: row;
+                gap: 0.4em;
+            }
+        }
+
+        & > .gamepad-list {
+            display: flex;
+            flex-direction: row;
+            gap: 4em;
+            align-items: start;
+            flex-wrap: wrap;
+            padding: 0;
+            margin: 0 0 3em 0;
+            list-style: none;
+
+            & > .gamepad {
+                display: flex;
+                flex-direction: column;
+                gap: 0.2em;
+                overflow-x: auto;
+
+                & > span {
+                    max-width: 340px;
+                    white-space: nowrap;
+                }
+
+                & > ul {
+                    padding: 0 0 0 20px;
+                    margin: 0.4em 0 0 0;
+
+                    &:last-child {
+                        margin-bottom: 0.8em;;
+                    }
+
+                    & > li > span {
+                        color: hsl(120deg, var(--amount), calc(93.33% - 43.33 * var(--amount) / 100));
+
+                        &[pressed] {
+                            color: #0F0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
