@@ -16,8 +16,8 @@
         <div>
             <button class="btn-main" @onclick="GetGamePads">Read gamepads</button>
             <div>
-                <button class="btn-deny" @onclick="StartReadGamepadLoop" disabled="@isLoopActive">Start read gamepads loop</button>
-                <button class="btn-cancel" @onclick="StopReadGamepadLoop" disabled="@(!isLoopActive)">Stop reading</button>
+                <button class="btn-deny" @onclick="StartReadGamepadLoop" disabled=@isLoopActive>Start read gamepads loop</button>
+                <button class="btn-cancel" @onclick="StopReadGamepadLoop" disabled=@(!isLoopActive)>Stop reading</button>
             </div>
             <button class="btn-main" @onclick="RumbleGamepads" disabled=@isRumbling>Rumble gamepads</button>
         </div>

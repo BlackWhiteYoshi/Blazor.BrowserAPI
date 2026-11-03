@@ -17,7 +17,7 @@
             <span style="color: @(isContinuous switch { false => "#0F0", true or null => "#444" })">viewport is folded</span>
         </div>
         <button class="btn-main" @onclick="ReadDevicePosture">Read Device Posture</button>
-        <button class="btn-deny" @onclick="ListenOnChange" disabled="@isListeningOnChange">Listen on change</button>
-        <button class="btn-cancel" @onclick="RemoveOnChange" disabled="@(!isListeningOnChange)">Stop listening</button>
+        <button class="btn-deny" @onclick="ListenOnChange" disabled=@isListeningOnChange>Listen on change</button>
+        <button class="btn-cancel" @onclick="RemoveOnChange" disabled=@(!isListeningOnChange)>Stop listening</button>
     </div>
 </div>

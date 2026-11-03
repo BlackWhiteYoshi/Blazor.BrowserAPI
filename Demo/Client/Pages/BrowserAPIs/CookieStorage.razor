@@ -13,15 +13,15 @@
     </div>
 
     <div class="demo">
-        <button class="btn-main" @onclick="LoadCookies" disabled="@CookiesLoaded">Load Cookies</button>
+        <button class="btn-main" @onclick="LoadCookies" disabled=@CookiesLoaded>Load Cookies</button>
 
         @if (CookiesLoaded) {
             <div>
                 <div>
                     <button class="btn-second" @onclick="OnCreateCookie">Create Cookie</button>
-                    <button class="btn-danger" @onclick="OnDeleteAllCookies">Remove all Cookies</button>
+                    <button class="btn-danger" @onclick="OnDeleteAllCookies" disabled=@(cookies!.Length is 0)>Remove all Cookies</button>
                 </div>
-                <span>Cookies Count: @cookies!.Length</span>
+                <span>Cookies Count: @cookies.Length</span>
                 <ul>
                     @for (int i = 0; i < cookies.Length; i++) {
                         int index = i;

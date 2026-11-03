@@ -14,8 +14,8 @@
     <div class="demo">
         <button class="btn-main" @onclick="GetCurrentPosition">Get current position</button>
         <div>
-            <button class="btn-deny" @onclick="WatchPosition" disabled="@isWatching">Start watch position</button>
-            <button class="btn-cancel" @onclick="ClearPosition" disabled="@(!isWatching)">Stop watching</button>
+            <button class="btn-deny" @onclick="WatchPosition" disabled=@isWatching>Start watch position</button>
+            <button class="btn-cancel" @onclick="ClearPosition" disabled=@(!isWatching)>Stop watching</button>
         </div>
         @if (HasCoordinates) {
             <span>
