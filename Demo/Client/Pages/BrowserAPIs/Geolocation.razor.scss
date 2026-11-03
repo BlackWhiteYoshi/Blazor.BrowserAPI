@@ -1,0 +1,12 @@
+#geolocation {
+    & > .demo {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+
+        & > span {
+            line-height: 1.8;
+            margin-top: 1em;
+        }
+    }
+}

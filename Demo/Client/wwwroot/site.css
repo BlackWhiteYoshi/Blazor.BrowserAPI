@@ -591,10 +591,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-#device-posture > .demo > span {
-  min-width: min(25ch, 100%);
-  text-align: center;
-}
 
 #document > .demo {
   display: flex;
@@ -694,4 +690,14 @@ body {
 }
 #gamepad-api > .demo > .gamepad-list > .gamepad > ul > li > span[pressed] {
   color: #0F0;
+}
+
+#geolocation > .demo {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+#geolocation > .demo > span {
+  line-height: 1.8;
+  margin-top: 1em;
 }

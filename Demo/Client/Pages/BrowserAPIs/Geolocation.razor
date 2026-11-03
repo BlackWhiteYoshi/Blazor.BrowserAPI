@@ -12,6 +12,22 @@
     </div>
 
     <div class="demo">
-        @* TODO *@ Demo not Implemented yet...
+        <button class="btn-main" @onclick="GetCurrentPosition">Get current position</button>
+        <div>
+            <button class="btn-deny" @onclick="WatchPosition" disabled="@isWatching">Start watch position</button>
+            <button class="btn-cancel" @onclick="ClearPosition" disabled="@(!isWatching)">Stop watching</button>
+        </div>
+        @if (HasCoordinates) {
+            <span>
+                Latitude: @coordinates.Latitude<br>
+                Longitude: @coordinates.Longitude<br>
+                Altitude: @(coordinates.Altitude?.ToString() ?? "null")<br>
+                Accuracy: @coordinates.Accuracy<br>
+                AltitudeAccuracy: @(coordinates.AltitudeAccuracy?.ToString() ?? "null")<br>
+                Heading: @(coordinates.Heading?.ToString() ?? "null")<br>
+                Speed: @(coordinates.Speed?.ToString() ?? "null")<br>
+                Timestamp: @coordinates.Timestamp
+            </span>
+        }
     </div>
 </div>

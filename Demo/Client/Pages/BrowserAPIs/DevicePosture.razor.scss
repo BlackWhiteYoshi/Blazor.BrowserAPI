@@ -9,10 +9,5 @@
             display: flex;
             flex-direction: column;
         }
-
-        & > span {
-            min-width: min(25ch, 100%);
-            text-align: center;
-        }
     }
 }
