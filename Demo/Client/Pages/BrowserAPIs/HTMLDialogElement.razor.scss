@@ -1,0 +1,7 @@
+#html-dialog-element {
+    & > .demo {
+        display: flex;
+        flex-direction: column;
+        gap: 3em;
+    }
+}

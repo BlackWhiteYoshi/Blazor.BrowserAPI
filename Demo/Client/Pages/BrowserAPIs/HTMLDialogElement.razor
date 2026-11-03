@@ -12,6 +12,12 @@
     </div>
 
     <div class="demo">
-        @* TODO *@ Demo not Implemented yet...
+        <button class="btn-main" @onclick="Open" disabled=@isOpen>Open dialog</button>
+        <button class="btn-second" @onclick="OpenModal" disabled=@isOpen>Open dialog as modal</button>
+        <dialog class="info-dialog" @ref="dialogElement">
+            <h2 class="headline">Dialog</h2>
+            <p>The dialog showcase</p>
+            <button class="btn-main" @onclick="Close">Close</button>
+        </dialog>
     </div>
 </div>

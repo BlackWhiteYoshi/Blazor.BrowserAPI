@@ -84,6 +84,27 @@ a:hover {
   margin-inline: auto;
 }
 
+.info-dialog {
+  inset: 0;
+  max-width: 720px;
+  padding: 2em;
+  background-color: #111;
+  border: 1px solid #FFF;
+  border-radius: 0.25rem;
+}
+.info-dialog > h1, .info-dialog h2, .info-dialog h3, .info-dialog h4, .info-dialog h5, .info-dialog h6 {
+  font-size: 2rem;
+}
+.info-dialog > button {
+  display: table;
+  margin-inline: auto;
+  margin-top: 2em;
+  padding-inline: 3em;
+}
+.info-dialog::backdrop {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
 button:not(:disabled) {
   cursor: pointer;
 }
@@ -305,24 +326,6 @@ body {
   text-align: center;
   font-weight: bold;
   content: var(--blazor-load-percentage-text, "Loading");
-}
-
-#js-error-dialog {
-  inset: 0;
-  max-width: 720px;
-  padding: 2em;
-  background-color: #111;
-  border: 1px solid #FFF;
-  border-radius: 0.25rem;
-}
-#js-error-dialog > h2 {
-  font-size: 2rem;
-}
-#js-error-dialog > button {
-  display: table;
-  margin-inline: auto;
-  margin-top: 2em;
-  padding-inline: 3em;
 }
 
 #blazor-error-ui {
@@ -702,12 +705,18 @@ body {
   margin-top: 1em;
 }
 
-#history .demo {
+#history > .demo {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.6em;
   align-items: center;
 }
-#history .demo .btn-deny {
+#history > .demo .btn-deny {
   margin-top: 2.4em;
+}
+
+#html-dialog-element > .demo {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
 }
