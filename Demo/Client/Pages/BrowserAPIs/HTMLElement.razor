@@ -12,6 +12,18 @@
     </div>
 
     <div class="demo">
-        @* TODO *@ Demo not Implemented yet...
+        <div class="button-div">
+            <button class="btn-deny" @onclick="AddCircle">Add circle</button>
+            <button class="btn-danger" @onclick="RemoveCircle" disabled=@(circleCount is 0)>Remove circle</button>
+        </div>
+        <div class="circle-div" @ref="divElement">
+            @for (int i = 0; i < circleCount; i++) {
+                <div class="circle"></div>
+            }
+        </div>
+        <div class="output-div">
+            <span>Gray box width: @width</span>
+            <span>Gray box height: @height</span>
+        </div>
     </div>
 </div>

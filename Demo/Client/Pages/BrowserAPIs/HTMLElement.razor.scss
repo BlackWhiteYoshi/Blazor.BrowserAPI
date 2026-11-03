@@ -1,0 +1,38 @@
+#html-element {
+    & > .demo {
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+        align-items: center;
+
+        & > .button-div {
+            display: flex;
+            flex-direction: row;
+            gap: 1em;
+            justify-content: center;
+        }
+
+        & > .circle-div {
+            display: flex;
+            flex-direction: row;
+            gap: 2em;
+            flex-wrap: wrap;
+
+            padding: 1em;
+            background-color: #666;
+
+            & > .circle {
+                width: 1em;
+                aspect-ratio: 1;
+                background-color: #FFF;
+                border-radius: 50%;
+            }
+        }
+
+        & > .output-div {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4em;
+        }
+    }
+}
