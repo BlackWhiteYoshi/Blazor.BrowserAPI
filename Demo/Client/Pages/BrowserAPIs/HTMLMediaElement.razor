@@ -14,6 +14,25 @@
     </div>
 
     <div class="demo">
-        @* TODO *@ Demo not Implemented yet...
+        <div>
+            <button class="btn-main" @onclick="PlayAudio">Play</button>
+            <button class="btn-second" @onclick="PauseAudio">Pause</button>
+            <button class="btn-info" @onclick="ResetAudio">Reset to beginning</button>
+            <button class="@(!isDoubleSpeedAudio ? "btn-cancel" : "btn-deny")" @onclick="ToggleSpeedAudio">Toggle 2x speed</button>
+            <button class="@(!isMutedAudio ? "btn-cancel" : "btn-deny")" @onclick="ToggleMutedAudio">Toggle muted</button>
+            <button class="@(!isHalfVolumeAudio ? "btn-cancel" : "btn-deny")" @onclick="ToggleVolumeAudio">Toggle half volume</button>
+        </div>
+        <audio src="sample.mp3" controls loading="lazy" preload="none" @ref="audioElement"></audio>
+
+        <div>
+            <button class="btn-main" @onclick="PlayVideo">Play</button>
+            <button class="btn-second" @onclick="PauseVideo">Pause</button>
+            <button class="btn-info" @onclick="ResetVideo">Reset to beginning</button>
+            <button class="@(!isDoubleSpeedVideo ? "btn-cancel" : "btn-deny")" @onclick="ToggleSpeedVideo">Toggle 2x speed</button>
+            <button class="@(!isMutedVideo ? "btn-cancel" : "btn-deny")" @onclick="ToggleMutedVideo">Toggle muted</button>
+            <button class="@(!isHalfVolumeVideo ? "btn-cancel" : "btn-deny")" @onclick="ToggleVolumeVideo">Toggle half volume</button>
+            <button class="btn-danger" @onclick="OpenPictureInPicture">Open picture in picture</button>
+        </div>
+        <video src="sample.mp4" width="480" height="270" controls loading="lazy" preload="none" @ref="videoElement"></video>
     </div>
 </div>

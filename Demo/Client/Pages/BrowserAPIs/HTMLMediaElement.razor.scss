@@ -1,0 +1,17 @@
+#html-media-element {
+    & > .demo {
+        display: grid;
+        grid-template-columns: auto auto;
+        row-gap: 5em;
+        column-gap: 3em;
+        justify-items: start;
+        align-items: center;
+
+        & > div {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            width: 100%;
+        }
+    }
+}
