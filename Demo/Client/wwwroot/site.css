@@ -767,3 +767,44 @@ body {
   gap: 1em;
   width: 100%;
 }
+
+#local-storage > .demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#local-storage > .demo > button {
+  margin: 0 auto 5em auto;
+}
+#local-storage > .demo > div {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+}
+#local-storage > .demo > div > div {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  justify-content: center;
+}
+#local-storage > .demo > div > div > button {
+  min-width: min(200px, 100%);
+  margin-inline: auto;
+}
+#local-storage > .demo > div > span {
+  margin-top: 1em;
+}
+#local-storage > .demo > div > ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#local-storage > .demo > div > ul > li {
+  display: flex;
+  flex-direction: row;
+  gap: 0.8em;
+}

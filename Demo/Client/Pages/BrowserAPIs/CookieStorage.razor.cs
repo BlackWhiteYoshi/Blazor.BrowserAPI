@@ -60,6 +60,4 @@ public sealed partial class CookieStorage : ComponentBase {
         cookies = [];
         await PCookieStorage.Clear();
     }
-
-    private Task Test() => default!;
 }
