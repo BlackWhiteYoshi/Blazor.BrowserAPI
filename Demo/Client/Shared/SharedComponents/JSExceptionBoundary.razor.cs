@@ -11,7 +11,7 @@ public sealed partial class JSExceptionBoundary : ErrorBoundaryBase {
 
     protected override async Task OnErrorAsync(Exception exception) {
         Recover();
-        
+
         if (exception is JSException && Dialog is not null)
             await Dialog.ShowModal();
         else

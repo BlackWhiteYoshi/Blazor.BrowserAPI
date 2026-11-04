@@ -52,7 +52,7 @@ public sealed class ModuleManager(IJSRuntime jsRuntime) : IModuleManager {
     /// <param name="args">JSON-serializable arguments.</param>
     [AutoInterfaceVisibilityInternal]
     void IModuleManager.InvokeSync(string identifier, object?[]? args = null) => InvokeSync<IJSVoidResult>(identifier, args);
-    
+
     /// <summary>
     /// Invokes the specified JavaScript function located inside the JS-module synchronously.
     /// </summary>
@@ -75,7 +75,7 @@ public sealed class ModuleManager(IJSRuntime jsRuntime) : IModuleManager {
         return module.Invoke<TResult>(identifier, args);
     }
 
-    
+
     /// <summary>
     /// <para>Invokes the specified JavaScript function located inside the JS-module synchronously if possible, otherwise asynchronously.</para>
     /// <para>When the specified JavaScript function returns a promise, you should use <see cref="IModuleManager.InvokeAsync(string, CancellationToken, object?[])"/> instead.</para>
@@ -86,7 +86,7 @@ public sealed class ModuleManager(IJSRuntime jsRuntime) : IModuleManager {
     /// <returns></returns>
     [AutoInterfaceVisibilityInternal]
     async ValueTask IModuleManager.InvokeTrySync(string identifier, CancellationToken cancellationToken, object?[]? args = null) => await InvokeTrySync<IJSVoidResult>(identifier, cancellationToken, args);
-    
+
     /// <summary>
     /// <para>Invokes the specified JavaScript function located inside the JS-module synchronously if possible, otherwise asynchronously.</para>
     /// <para>When the specified JavaScript function returns a promise, you should use <see cref="IModuleManager.InvokeAsync{TResult}(string, CancellationToken, object?[])"/> instead.</para>

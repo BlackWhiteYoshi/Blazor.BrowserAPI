@@ -11,8 +11,8 @@ public sealed partial class GamepadAPI : ComponentBase, IDisposable {
 
     private readonly record struct GamepadInfo(string Id, int Index, string Mapping, string[] VibrationActuatorEffects, double[] Axes, GamepadButton[] Buttons);
     private readonly List<GamepadInfo> gamepadInfoList = [];
-    
-    
+
+
     private async Task GetGamePads() {
         gamepadInfoList.Clear();
         IGamepad?[] gamepads = await PGamepadAPI.GetGamepads();
@@ -68,7 +68,7 @@ public sealed partial class GamepadAPI : ComponentBase, IDisposable {
 
                 await gamepad.DisposeAsync();
             }
-        
+
         await Task.WhenAll(rumbleTasks);
         isRumbling = false;
     }

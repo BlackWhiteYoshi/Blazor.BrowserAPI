@@ -141,7 +141,7 @@ There are no more features planned.
 - 0.6.0
   - added MediaDevices (13 BrowserAPIs)
 - 0.7.0
-  - added SensorAPI (14 BrowserAPIs)  
+  - added SensorAPI (14 BrowserAPIs)
   - changed events to use sync interop if possible
 - 0.7.1
   - added .NET 9 and removed obsolete versions .NET 6 and .NET 7

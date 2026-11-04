@@ -12,7 +12,7 @@ This can be used to adjust your app's resource usage to reduce battery drain whe
 public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
     [Inject]
     public required IBatteryStatus BatteryStatus { private get; init; }
-    
+
     private Task<IBatteryManager>? _batteryManagerTask;
     private Task<IBatteryManager> BatteryManagerTask => _batteryManagerTask ??= BatteryStatus.GetBattery().AsTask();
 

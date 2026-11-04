@@ -11,16 +11,16 @@ public sealed partial class DevicePosture : ComponentBase, IDisposable {
             PDevicePosture.OnChange -= OnChange;
     }
 
-    
+
     private bool? isContinuous;
 
     private async Task ReadDevicePosture() => isContinuous = await PDevicePosture.Type is "continuous";
-    
+
 
     // OnChange
-    
+
     private bool isListeningOnChange = false;
-    
+
     private void ListenOnChange() {
         isListeningOnChange = true;
         PDevicePosture.OnChange += OnChange;

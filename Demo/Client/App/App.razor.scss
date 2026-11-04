@@ -34,7 +34,7 @@ body {
     & > main {
         padding: 2em;
         overflow-y: auto;
-        
+
         @media (width < $breakpoint)  {
             padding-inline: 1em;
         }

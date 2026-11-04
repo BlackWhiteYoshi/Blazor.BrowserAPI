@@ -9,7 +9,7 @@ public sealed partial class FileSystem : ComponentBase {
 
     private string textAreaContent = "BlackWhiteYoshi";
 
-    
+
     private async Task WriteTextAreaToFile() {
         try {
             await using IFileHandle fileHandle = await PFileSystem.ShowSaveFilePicker(suggestedName: "file.txt", startIn: PickerDialogStartIn.Documents, types: [("TXT", [("text/plain", [".txt"])])]);

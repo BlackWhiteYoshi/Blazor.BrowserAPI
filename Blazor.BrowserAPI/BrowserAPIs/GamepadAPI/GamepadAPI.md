@@ -13,7 +13,7 @@ public sealed partial class ExampleComponent : ComponentBase {
     [Inject]
     public required IGamepadAPI GamepadAPI { private get; init; }
 
-    
+
     // polling input, should be used at the start of your gameloop
     private async Task<List<(double[] axes, GamepadButton[] buttons)>> ReadGamepadInputs() {
         IGamepad?[] gamepads = await GamepadAPI.GetGamepads();
@@ -23,7 +23,7 @@ public sealed partial class ExampleComponent : ComponentBase {
                 result.Add((await gamepad.Axes, await gamepad.Buttons));
                 await gamepad.DisposeAsync();
             }
-        
+
         return result;
     }
 
@@ -39,7 +39,7 @@ public sealed partial class ExampleComponent : ComponentBase {
 
                 await gamepad.DisposeAsync();
             }
-        
+
         await Task.WhenAll(rumbleTasks);
     }
 }

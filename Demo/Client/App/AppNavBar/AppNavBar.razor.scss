@@ -10,7 +10,7 @@ $breakpoint: 800px;
 
     & > a {
         padding-block: 0.4em;
-        
+
         & > svg {
             width: 100px;
             aspect-ratio: 1;
@@ -51,8 +51,8 @@ $breakpoint: 800px;
     @media (width < $breakpoint)  {
         display: none;
     }
-    
-    
+
+
     // anchor hovering
 
     &:not(:has(:is(.active, a:hover))) > a > svg {

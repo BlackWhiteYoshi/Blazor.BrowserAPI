@@ -50,7 +50,7 @@ public sealed partial class BatteryStatus : ComponentBase, IAsyncDisposable {
     // OnChargingChange
 
     private bool isListeningOnChargingChange = false;
-    
+
     private async Task ListenOnChargingChange() {
         isListeningOnChargingChange = true;
         (await BatteryManagerTask).OnChargingChange += OnChargingChange;
@@ -74,7 +74,7 @@ public sealed partial class BatteryStatus : ComponentBase, IAsyncDisposable {
     // OnChargingTimeChange
 
     private bool isListeningOnChargingTimeChange = false;
-    
+
     private async Task ListenOnChargingTimeChange() {
         isListeningOnChargingTimeChange = true;
         (await BatteryManagerTask).OnChargingTimeChange += OnChargingTimeChange;
@@ -98,7 +98,7 @@ public sealed partial class BatteryStatus : ComponentBase, IAsyncDisposable {
     // OnDischargingTimeChange
 
     private bool isListeningOnDischargingTimeChange = false;
-    
+
     private async Task ListenOnDischargingTimeChange() {
         isListeningOnDischargingTimeChange = true;
         (await BatteryManagerTask).OnDischargingTimeChange += OnDischargingTimeChange;
@@ -122,7 +122,7 @@ public sealed partial class BatteryStatus : ComponentBase, IAsyncDisposable {
     // OnLevelChange
 
     private bool isListeningOnLevelChange = false;
-    
+
     private async Task ListenOnLevelChange() {
         isListeningOnLevelChange = true;
         (await BatteryManagerTask).OnLevelChange += OnLevelChange;

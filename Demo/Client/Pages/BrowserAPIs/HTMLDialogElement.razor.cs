@@ -10,7 +10,7 @@ public sealed partial class HTMLDialogElement : ComponentBase {
     private ElementReference dialogElement;
     private IHTMLDialogElement? _dialog;
     private IHTMLDialogElement Dialog => _dialog ??= ElementFactory.CreateHTMLDialogElement(dialogElement);
-    
+
     private bool isOpen = false;
 
     public async ValueTask DisposeAsync() {

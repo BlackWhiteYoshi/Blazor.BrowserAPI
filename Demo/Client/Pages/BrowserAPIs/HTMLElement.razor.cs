@@ -12,7 +12,7 @@ public sealed partial class HTMLElement : ComponentBase {
 
 
     private int circleCount = 0;
-    
+
     private int width = 35;
     private int height = 35;
 
@@ -27,7 +27,7 @@ public sealed partial class HTMLElement : ComponentBase {
             StateHasChanged();
         }
     }
-    
+
     private async Task AddCircle() {
         circleCount++;
         updateOutput = true;
