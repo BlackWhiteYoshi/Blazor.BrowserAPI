@@ -3,7 +3,7 @@ using Microsoft.JSInterop;
 
 namespace BrowserAPI.Demo.Client;
 
-public sealed partial class HTMLDialogElement : ComponentBase {
+public sealed partial class HTMLDialogElement : ComponentBase, IAsyncDisposable {
     [Inject]
     public required IElementFactory ElementFactory { private get; init; }
 
