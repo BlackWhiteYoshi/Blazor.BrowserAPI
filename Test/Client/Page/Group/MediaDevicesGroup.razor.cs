@@ -90,6 +90,13 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
     }
 
 
+    public const string BUTTON_IS_TYPE_SUPPORTED_DEVICES = "media-devices-is-type-supported";
+    private async Task IsTypeSupported_Devices() {
+        bool isTypeSupported = await MediaDevices.IsTypeSupported(TEST_MIME_TYPE);
+        output = isTypeSupported.ToString();
+    }
+
+
     // Media Stream
 
     public const string BUTTON_GET_ACTIVE_PROPERTY = "media-stream-get-active-property";
@@ -284,8 +291,8 @@ public sealed partial class MediaDevicesGroup : ComponentBase {
         }
     }
 
-    public const string BUTTON_IS_TYPE_SUPPORTED = "media-recorder-is-type-supported";
-    private async Task IsTypeSupported() {
+    public const string BUTTON_IS_TYPE_SUPPORTED_RECORDER = "media-recorder-is-type-supported";
+    private async Task IsTypeSupported_Recorder() {
         await using IMediaStream mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
         await using IMediaRecorder mediaRecorder = await mediaStream.CreateRecorder();
 

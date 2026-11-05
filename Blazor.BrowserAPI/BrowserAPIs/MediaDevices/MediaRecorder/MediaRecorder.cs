@@ -143,9 +143,9 @@ public sealed class MediaRecorder(IJSObjectReference mediaRecorder) : MediaRecor
     /// <summary>
     /// The <i>isTypeSupported()</i> static method of the MediaRecorder interface returns a Boolean which is true if the MIME media type specified is one the user agent should be able to successfully record.
     /// </summary>
-    /// <remarks>In C# this method is not static because it needs an reference to the JS-module.</remarks>
+    /// <remarks>In C# this method is not static because it needs an reference to the JS-module. To use it as like a static method, consider <see cref="IMediaDevices.IsTypeSupported"/>.</remarks>
     /// <param name="mimeType"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public ValueTask<bool> IsTypeSupported(string mimeType, CancellationToken cancellationToken = default) => mediaRecorderJS.InvokeTrySync<bool>("isTypeSupported", cancellationToken);
+    public ValueTask<bool> IsTypeSupported(string mimeType, CancellationToken cancellationToken = default) => mediaRecorderJS.InvokeTrySync<bool>("isTypeSupported", cancellationToken, [mimeType]);
 }

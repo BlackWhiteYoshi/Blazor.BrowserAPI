@@ -126,6 +126,14 @@ public sealed class MediaDevicesInProcessTest(PlayWrightFixture playWrightFixtur
         await Assert.That(result).IsEqualTo("True");
     }
 
+    [Test]
+    public async Task IsTypeSupported_Devices() {
+        await ExecuteTest(MediaDevicesInProcessGroup.BUTTON_IS_TYPE_SUPPORTED_DEVICES);
+
+        string? result = await Page.GetByTestId(MediaDevicesInProcessGroup.OUTPUT).TextContentAsync();
+        await Assert.That(result).IsEqualTo("True");
+    }
+
 
     // Media Stream
 
@@ -264,8 +272,8 @@ public sealed class MediaDevicesInProcessTest(PlayWrightFixture playWrightFixtur
     }
 
     [Test]
-    public async Task IsTypeSupported() {
-        await ExecuteTest(MediaDevicesInProcessGroup.BUTTON_IS_TYPE_SUPPORTED);
+    public async Task IsTypeSupported_Recorder() {
+        await ExecuteTest(MediaDevicesInProcessGroup.BUTTON_IS_TYPE_SUPPORTED_RECORDER);
 
         string? result = await Page.GetByTestId(MediaDevicesInProcessGroup.OUTPUT).TextContentAsync();
         await Assert.That(result).IsEqualTo("True");

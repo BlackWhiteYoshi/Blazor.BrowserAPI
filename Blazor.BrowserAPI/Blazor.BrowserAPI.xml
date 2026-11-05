@@ -12519,6 +12519,15 @@
             Because only constraints supported by the user agent are included in the list, each of these Boolean properties has the value true.
             </returns>
         </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevices.IsTypeSupported(System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>isTypeSupported()</i> static method of the MediaRecorder interface returns a Boolean which is true if the MIME media type specified is one the user agent should be able to successfully record.
+            </summary>
+            <remarks>Even this static method is a member of MediaRecorder, it is also available here to use it in a static context.</remarks>
+            <param name="mimeType"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="T:BrowserAPI.Implementation.MediaDevicesBase`2">
             <summary>
             Base interface of <see cref="T:BrowserAPI.IMediaDevices"/> and <see cref="T:BrowserAPI.IMediaDevicesInProcess"/>.<br/>
@@ -12646,6 +12655,14 @@
             Returns an object based on the MediaTrackSupportedConstraints dictionary,
             whose member fields each specify one of the constrainable properties the user agent understands.
             </summary>
+        </member>
+        <member name="M:BrowserAPI.Implementation.MediaDevicesInProcess.IsTypeSupported(System.String)">
+            <summary>
+            The <i>isTypeSupported()</i> static method of the MediaRecorder interface returns a Boolean which is true if the MIME media type specified is one the user agent should be able to successfully record.
+            </summary>
+            <remarks>Even this static method is a member of MediaRecorder, it is also available here to use it in a static context.</remarks>
+            <param name="mimeType"></param>
+            <returns></returns>
         </member>
         <member name="T:BrowserAPI.Implementation.MediaRecorder">
             <summary>
@@ -12782,7 +12799,7 @@
             <summary>
             The <i>isTypeSupported()</i> static method of the MediaRecorder interface returns a Boolean which is true if the MIME media type specified is one the user agent should be able to successfully record.
             </summary>
-            <remarks>In C# this method is not static because it needs an reference to the JS-module.</remarks>
+            <remarks>In C# this method is not static because it needs an reference to the JS-module. To use it as like a static method, consider <see cref="M:BrowserAPI.IMediaDevices.IsTypeSupported(System.String,System.Threading.CancellationToken)"/>.</remarks>
             <param name="mimeType"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -12952,7 +12969,7 @@
             <summary>
             The <i>isTypeSupported()</i> static method of the MediaRecorder interface returns a Boolean which is true if the MIME media type specified is one the user agent should be able to successfully record.
             </summary>
-            <remarks>In C# this method is not static because it needs an reference to the JS-module.</remarks>
+            <remarks>In C# this method is not static because it needs an reference to the JS-module. To use it as like a static method, consider <see cref="M:BrowserAPI.IMediaDevicesInProcess.IsTypeSupported(System.String)"/>.</remarks>
             <param name="mimeType"></param>
             <returns></returns>
         </member>
@@ -23829,6 +23846,96 @@
             <param name="args">JSON-serializable arguments.</param>
             <returns></returns>
         </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSRuntime,System.String,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
+            </summary>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSRuntime,System.String,System.Threading.CancellationToken,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
+            </summary>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSRuntime,System.String,System.TimeSpan,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
+            </summary>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
+            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String)">
+            <summary>
+            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
+            </summary>
+            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
+            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
+            </summary>
+            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,System.TimeSpan)">
+            <summary>
+            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
+            </summary>
+            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
+            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
+            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,``0)">
+            <summary>
+            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
+            </summary>
+            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
+            <param name="value">JSON-serializable value.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,``0,System.Threading.CancellationToken)">
+            <summary>
+            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
+            </summary>
+            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
+            <param name="value">JSON-serializable value.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,``0,System.TimeSpan)">
+            <summary>
+            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
+            </summary>
+            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
+            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
+            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
+            <param name="value">JSON-serializable value.</param>
+            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
+        </member>
         <member name="M:BrowserAPI.TrySyncExtensions.InvokeVoidTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Object[])">
             <summary>
             <para>Invokes the specified JavaScript function synchronously if possible, otherwise asynchronously.</para>
@@ -23895,6 +24002,96 @@
             <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
             <param name="args">JSON-serializable arguments.</param>
             <returns>An instance of <typeparamref name="TResult"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
+            </summary>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Threading.CancellationToken,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
+            </summary>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.TimeSpan,System.Object[])">
+            <summary>
+            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
+            </summary>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
+            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
+            <param name="args">JSON-serializable arguments.</param>
+            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String)">
+            <summary>
+            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
+            </summary>
+            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
+            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
+            </summary>
+            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,System.TimeSpan)">
+            <summary>
+            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
+            </summary>
+            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
+            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
+            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,``0)">
+            <summary>
+            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
+            </summary>
+            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
+            <param name="value">JSON-serializable value.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,``0,System.Threading.CancellationToken)">
+            <summary>
+            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
+            </summary>
+            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
+            <param name="value">JSON-serializable value.</param>
+            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
+        </member>
+        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,``0,System.TimeSpan)">
+            <summary>
+            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
+            </summary>
+            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
+            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
+            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
+            <param name="value">JSON-serializable value.</param>
+            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
         </member>
         <member name="M:BrowserAPI.TrySyncExtensions.DisposeTrySync(Microsoft.JSInterop.IJSObjectReference)">
             <summary>
@@ -35851,6 +36048,15 @@
             Because only constraints supported by the user agent are included in the list, each of these Boolean properties has the value true.
             </returns>
         </member>
+        <member name="M:BrowserAPI.IMediaDevices.IsTypeSupported(System.String,System.Threading.CancellationToken)">
+            <summary>
+            The <i>isTypeSupported()</i> static method of the MediaRecorder interface returns a Boolean which is true if the MIME media type specified is one the user agent should be able to successfully record.
+            </summary>
+            <remarks>Even this static method is a member of MediaRecorder, it is also available here to use it in a static context.</remarks>
+            <param name="mimeType"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="T:BrowserAPI.IMediaDevicesBase`2">
             <summary>
             Base interface of <see cref="T:BrowserAPI.IMediaDevices"/> and <see cref="T:BrowserAPI.IMediaDevicesInProcess"/>.<br/>
@@ -35962,6 +36168,14 @@
             Returns an object based on the MediaTrackSupportedConstraints dictionary,
             whose member fields each specify one of the constrainable properties the user agent understands.
             </summary>
+        </member>
+        <member name="M:BrowserAPI.IMediaDevicesInProcess.IsTypeSupported(System.String)">
+            <summary>
+            The <i>isTypeSupported()</i> static method of the MediaRecorder interface returns a Boolean which is true if the MIME media type specified is one the user agent should be able to successfully record.
+            </summary>
+            <remarks>Even this static method is a member of MediaRecorder, it is also available here to use it in a static context.</remarks>
+            <param name="mimeType"></param>
+            <returns></returns>
         </member>
         <member name="T:BrowserAPI.IMediaRecorder">
             <summary>
@@ -36085,7 +36299,7 @@
             <summary>
             The <i>isTypeSupported()</i> static method of the MediaRecorder interface returns a Boolean which is true if the MIME media type specified is one the user agent should be able to successfully record.
             </summary>
-            <remarks>In C# this method is not static because it needs an reference to the JS-module.</remarks>
+            <remarks>In C# this method is not static because it needs an reference to the JS-module. To use it as like a static method, consider <see cref="M:BrowserAPI.IMediaDevices.IsTypeSupported(System.String,System.Threading.CancellationToken)"/>.</remarks>
             <param name="mimeType"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -36229,7 +36443,7 @@
             <summary>
             The <i>isTypeSupported()</i> static method of the MediaRecorder interface returns a Boolean which is true if the MIME media type specified is one the user agent should be able to successfully record.
             </summary>
-            <remarks>In C# this method is not static because it needs an reference to the JS-module.</remarks>
+            <remarks>In C# this method is not static because it needs an reference to the JS-module. To use it as like a static method, consider <see cref="M:BrowserAPI.IMediaDevicesInProcess.IsTypeSupported(System.String)"/>.</remarks>
             <param name="mimeType"></param>
             <returns></returns>
         </member>

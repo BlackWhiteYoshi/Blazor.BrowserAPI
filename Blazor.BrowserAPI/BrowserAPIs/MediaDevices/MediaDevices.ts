@@ -47,6 +47,12 @@ namespace MediaDevicesTypes {
 }
 
 export class MediaDevicesAPI {
+    // static method of MediaRecorder
+    public static isTypeSupported(mimeType: string): boolean {
+        return MediaRecorder.isTypeSupported(mimeType);
+    }
+
+
     public static enumerateDevices(): Promise<MediaDeviceInfo[]> {
         return navigator.mediaDevices.enumerateDevices();
     }

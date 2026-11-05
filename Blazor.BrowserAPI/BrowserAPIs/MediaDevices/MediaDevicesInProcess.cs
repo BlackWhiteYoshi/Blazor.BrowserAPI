@@ -16,4 +16,13 @@ public sealed class MediaDevicesInProcess(IModuleManager moduleManager) : MediaD
     /// whose member fields each specify one of the constrainable properties the user agent understands.
     /// </summary>
     public MediaTrackSupportedConstraints SupportedConstraints => moduleManager.InvokeSync<MediaTrackSupportedConstraints>("MediaDevicesAPI.getSupportedConstraints");
+
+
+    /// <summary>
+    /// The <i>isTypeSupported()</i> static method of the MediaRecorder interface returns a Boolean which is true if the MIME media type specified is one the user agent should be able to successfully record.
+    /// </summary>
+    /// <remarks>Even this static method is a member of MediaRecorder, it is also available here to use it in a static context.</remarks>
+    /// <param name="mimeType"></param>
+    /// <returns></returns>
+    public bool IsTypeSupported(string mimeType) => moduleManager.InvokeSync<bool>("MediaDevicesAPI.isTypeSupported", [mimeType]);
 }
