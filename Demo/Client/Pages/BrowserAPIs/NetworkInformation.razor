@@ -16,6 +16,29 @@
     </div>
 
     <div class="demo">
-        @* TODO *@ Demo not Implemented yet...
+        <div>
+            <button class="btn-main" @onclick="GetOnLine">Internet connection</button>
+            <span>@isConnected</span>
+
+            <button class="btn-second" @onclick="GetType">Connection type</button>
+            <span>@connectionType</span>
+
+            <button class="btn-info" @onclick="GetEffectiveType">Connection kind</button>
+            <span>@connectionKind</span>
+        </div>
+        <div>
+            <button class="btn-main" @onclick="GetDownlink">Effective download bandwidth</button>
+            <span>@(downloadBandwidth.HasValue ? $"{downloadBandwidth} Mbits" : "")</span>
+
+            <button class="btn-second" @onclick="GetDownlinkMax">Maximum download bandwidth</button>
+            <span>@(maxDownloadBandwidth.HasValue ? $"{maxDownloadBandwidth} Mbits" : "")</span>
+
+            <button class="btn-info" @onclick="GetRTT">Connection latency</button>
+            <span>@(connectionLatency.HasValue ? $"{connectionLatency} ms" : "")</span>
+        </div>
+        <div>
+            <button class="btn-main" @onclick="GetSaveData">Reduced data usage</button>
+            <span>@reducedDataUsage</span>
+        </div>
     </div>
 </div>

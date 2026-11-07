@@ -27,7 +27,7 @@
             <span>@hardwareConcurrency</span>
 
             <button class="btn-info" @onclick="GetDeviceMemory">Available Memory</button>
-            <span>@(deviceMemory != null ? $"{deviceMemory}GB" : "")</span>
+            <span>@(deviceMemory.HasValue ? $"{deviceMemory} GB" : "")</span>
         </div>
         <div>
             <button class="btn-main" @onclick="GetWebdriver">Automated Browser</button>

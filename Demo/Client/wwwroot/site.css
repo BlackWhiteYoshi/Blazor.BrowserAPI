@@ -856,3 +856,19 @@ body {
 #navigator > .demo > div > span {
   line-height: 1.1;
 }
+
+#network-information > .demo {
+  width: min(640px, 100%);
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+#network-information > .demo > div {
+  display: grid;
+  grid-column: span 2;
+  grid-template-columns: subgrid;
+  row-gap: 1em;
+  column-gap: 2em;
+  justify-items: stretch;
+  align-items: center;
+  margin-block: 1.1em;
+}
