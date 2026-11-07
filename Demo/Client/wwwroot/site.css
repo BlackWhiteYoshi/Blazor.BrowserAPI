@@ -299,6 +299,7 @@ body {
   top: 50%;
   left: 50%;
   translate: -50% -50%;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -807,4 +808,30 @@ body {
   display: flex;
   flex-direction: row;
   gap: 0.8em;
+}
+
+#media-devices > .demo {
+  display: grid;
+  grid-template-columns: auto auto;
+  row-gap: 5em;
+  column-gap: 3em;
+  justify-items: start;
+  align-items: center;
+}
+#media-devices > .demo > div {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 100%;
+}
+#media-devices > .demo > div > button:has(+ span) {
+  margin-top: 1em;
+}
+#media-devices > .demo > div > span {
+  font-size: 1rem;
+  text-align: center;
+  margin-top: -0.2em;
+}
+#media-devices > .demo > div > span[error] {
+  color: #F00;
 }

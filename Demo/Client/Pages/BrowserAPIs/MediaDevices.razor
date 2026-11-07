@@ -12,6 +12,30 @@
     </div>
 
     <div class="demo">
-        @* TODO *@ Demo not Implemented yet...
+        <div>
+            <button class="btn-main" @onclick="StartRecordingAudio" disabled=@isRecording">Start recording audio</button>
+            <button class="btn-deny" @onclick="StopRecording" disabled=@(!isRecording || hasVideoData)>Stop recording audio</button>
+
+            @* download audio as file *@
+            <button class="btn-info" @onclick="SaveAsFile" disabled=@(isRecording || mediaData.Count == 0 || hasVideoData)>Download audio as file</button>
+            <span error=@(mimeTypeError && !hasVideoData)>@(!hasVideoData && mimeType != string.Empty ? $"Encoding: {mimeType}" : "no recorded data")</span>
+        </div>
+
+        @* live playback of stream *@
+        <audio controls @ref="audioElement"></audio>
+
+
+        <div>
+            <button class="btn-main" @onclick="StartRecordingVideo" disabled=@isRecording>Start recording video only</button>
+            <button class="btn-second" @onclick="StartRecordingVideoAudio" disabled=@isRecording>Start recording video with audio</button>
+            <button class="btn-deny" @onclick="StopRecording" disabled=@(!isRecording || !hasVideoData)>Stop recording video</button>
+
+            @* download video as file *@
+            <button class="btn-info" @onclick="SaveAsFile" disabled=@(isRecording || mediaData.Count == 0 || !hasVideoData)>Download video as file</button>
+            <span error=@(mimeTypeError && hasVideoData)>@(hasVideoData && mimeType != string.Empty ? $"Encoding: {mimeType}" : "no recorded data")</span>
+        </div>
+
+        @* live playback of stream *@
+        <video width="640" height="480" controls @ref="videoElement"></video>
     </div>
 </div>

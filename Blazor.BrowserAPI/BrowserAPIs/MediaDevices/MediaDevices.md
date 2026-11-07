@@ -8,14 +8,15 @@ In essence, it lets you obtain access to any hardware source of media data.
 ## Example
 
 ```razor
-<button @onclick="StartRecording" disabled="@(mediaRecorder is not null)">Start Recording audio/video</button>
-<button @onclick="StopRecording" disabled="@(mediaRecorder is null)">Stop Recording audio/video</button>
+<button @onclick="StartRecording" disabled="@isRecording">Start Recording audio/video</button>
+<button @onclick="StopRecording" disabled="@(!isRecording)">Stop Recording audio/video</button>
+<span>@mimeType</span>
 
 @* live playback of stream *@
 <video @ref="videoElement" controls></video>
 
 @* download video as file *@
-<button @onclick="SaveVideoAsFile" disabled="@(videoData.Count == 0)">Download audio/video as file</button>
+<button @onclick="SaveVideoAsFile" disabled="@(isRecording || videoData.Count == 0)">Download audio/video as file</button>
 ```
 
 ```csharp
@@ -42,45 +43,66 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
     private IMediaStream? mediaStream = null;
     private IMediaRecorder? mediaRecorder = null;
 
+    private bool isRecording = false;
+    private string mimeType = string.Empty;
+
     private readonly List<byte> videoData = [];
     private void SaveChunk(byte[] data) => videoData.AddRange(data);
 
-    private static void OutputToConsole(JsonElement error) => Console.WriteLine(error);
+    private static void OutputToConsole(JsonElement error) => System.Console.WriteLine(error);
 
 
     private async Task StartRecording() {
+        isRecording = true;
+        string[] encodingList = [
+            "video/mp4;codecs=avc1.42E01E,mp4a.40.2",
+            "video/mp4;codecs=avc1,mp4a.40.2",
+            "video/mp4",
+            "video/webm;codecs=vp9,opus",
+            "video/webm;codecs=vp8,opus",
+            "video/webm;codecs=h264,opus",
+            "video/webm",
+            "video/ogg;codecs=theora,opus"];
+        foreach (string encoding in encodingList)
+            if (await MediaDevices.IsTypeSupported(encoding)) {
+                mimeType = encoding;
+                goto _validMimeTypeFound;
+            }
+        /* foreach-else */ {
+            mimeType = "no encoding supported";
+            isRecording = false;
+            return;
+        }
+        _validMimeTypeFound:
+
         mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
 
         videoData.Clear();
-        mediaRecorder = await mediaStream.CreateRecorder(mimeType: "video/mp4");
+        mediaRecorder = await mediaStream.CreateRecorder(mimeType);
         mediaRecorder.OnError += OutputToConsole;
         mediaRecorder.OnDataAvailable += SaveChunk;
 
         await mediaRecorder.Start(100);
 
         // playback the stream
-        if (video is not null) {
-            await video.SetSrcObject(mediaStream);
-            await video.Play();
-        }
+        await video!.SetSrcObject(mediaStream);
+        await video.Play();
     }
 
     private async Task StopRecording() {
-        if (this.mediaRecorder is null || this.mediaStream is null)
-            return;
+        isRecording = false;
 
-        IMediaStream mediaStream = this.mediaStream;
-        IMediaRecorder mediaRecorder = this.mediaRecorder;
+        IMediaStream mediaStream = this.mediaStream!;
+        IMediaRecorder mediaRecorder = this.mediaRecorder!;
         this.mediaStream = null;
         this.mediaRecorder = null;
 
         await mediaRecorder.Stop();
 
         // stop playback the stream
-        if (video is not null)
-            await video.SetSrcObject(null);
+        await video!.SetSrcObject(null);
 
-        await Task.Delay(5000); // delay cleanup to make sure that the last chunk is saved
+        await Task.Delay(1000); // delay cleanup to make sure that the last chunk is saved
         mediaRecorder.OnDataAvailable -= SaveChunk;
         mediaRecorder.OnError -= OutputToConsole;
         await mediaRecorder.DisposeAsync();
@@ -110,8 +132,17 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
     public required IDownload Download { private get; init; }
 
     private async Task SaveVideoAsFile() {
-        if (videoData.Count > 0)
-            await Download.DownloadAsFile("example.mp4", [.. videoData]);
+        int mimeTypeLength = mimeType.IndexOf(';');
+        if (mimeTypeLength == -1)
+            mimeTypeLength = mimeType.Length;
+
+        string fileName = mimeType.AsSpan(0, mimeTypeLength) switch {
+            "video/mp4"  => "example.mp4",
+            "video/webm" => "example.webm",
+            "video/ogg"  => "example.ogv",
+            _ => throw new System.Diagnostics.UnreachableException($"mimeType = {mimeType}")
+        };
+        await Download.DownloadAsFile(fileName, [.. videoData]);
     }
 }
 ```

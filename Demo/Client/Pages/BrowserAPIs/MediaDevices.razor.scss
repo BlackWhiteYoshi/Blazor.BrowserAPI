@@ -1,0 +1,31 @@
+#media-devices {
+    & > .demo {
+        display: grid;
+        grid-template-columns: auto auto;
+        row-gap: 5em;
+        column-gap: 3em;
+        justify-items: start;
+        align-items: center;
+
+        & > div {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            width: 100%;
+
+            & > button:has(+span) {
+                margin-top: 1em;
+            }
+
+            & > span {
+                font-size: 1rem;
+                text-align: center;
+                margin-top: -0.2em;
+
+                &[error] {
+                    color: #F00;
+                }
+            }
+        }
+    }
+}
