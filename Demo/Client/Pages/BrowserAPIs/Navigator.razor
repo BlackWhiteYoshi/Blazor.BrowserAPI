@@ -12,6 +12,36 @@
     </div>
 
     <div class="demo">
-        @* TODO *@ Demo not Implemented yet...
+        <div>
+            <button class="btn-main" @onclick="GetLanguages">Browser Languages</button>
+            <span>@string.Join(", ", languages)</span>
+
+            <button class="btn-second" @onclick="GetUserAgent">User Agent</button>
+            <span>@userAgent</span>
+        </div>
+        <div>
+            <button class="btn-main" @onclick="GetMaxTouchPoints">Max Touch Points</button>
+            <span>@maxTouchPoints</span>
+
+            <button class="btn-second" @onclick="GetHardwareConcurrency">CPU Processors</button>
+            <span>@hardwareConcurrency</span>
+
+            <button class="btn-info" @onclick="GetDeviceMemory">Available Memory</button>
+            <span>@(deviceMemory != null ? $"{deviceMemory}GB" : "")</span>
+        </div>
+        <div>
+            <button class="btn-main" @onclick="GetWebdriver">Automated Browser</button>
+            <span>@isWebdriver</span>
+
+            <button class="btn-second" @onclick="GetCookieEnabled">Cookies enabled</button>
+            <span>@isCookieEnabled</span>
+
+            <button class="btn-info" @onclick="GetPdfViewerEnabled">Inline PDF viewer</button>
+            <span>@isPdfViewerEnabled</span>
+        </div>
+        <div>
+            <button class="btn-deny" @onclick="Vibrate">Vibrate</button>
+            <span>@(isVibrating switch { null => string.Empty, true => "Vibrating for 1 sec...", false => "Vibration not supported" })</span>
+        </div>
     </div>
 </div>

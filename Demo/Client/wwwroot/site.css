@@ -835,3 +835,24 @@ body {
 #media-devices > .demo > div > span[error] {
   color: #F00;
 }
+
+#navigator > .demo {
+  width: min(640px, 100%);
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+#navigator > .demo > div {
+  display: grid;
+  grid-column: span 2;
+  grid-template-columns: subgrid;
+  column-gap: 2em;
+  justify-items: stretch;
+  align-items: center;
+  margin-block: 0.4em;
+}
+#navigator > .demo > div > button {
+  margin-block: 0.6em;
+}
+#navigator > .demo > div > span {
+  line-height: 1.1;
+}
