@@ -623,12 +623,6 @@ public sealed partial class DocumentGroup : ComponentBase {
         output = TEST_REQUEST_STORAGE_ACCESS;
     }
 
-    public const string BUTTON_REQUEST_STORAGE_ACCESS_FOR = "document-request-storage-access-for";
-    private async Task RequestStorageAccessFor() {
-        await Document.RequestStorageAccessFor("https://localhost");
-        output = TEST_REQUEST_STORAGE_ACCESS_FOR;
-    }
-
     public const string BUTTON_HAS_STORAGE_ACCESS = "document-has-storage-access";
     private async Task HasStorageAccess() {
         bool storageAccess = await Document.HasStorageAccess();

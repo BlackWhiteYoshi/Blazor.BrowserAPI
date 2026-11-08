@@ -483,14 +483,6 @@ public sealed class DocumentInProcessTest(PlayWrightFixture playWrightFixture) :
     }
 
     [Test]
-    public async Task RequestStorageAccessFor() {
-        await ExecuteTest(DocumentInProcessGroup.BUTTON_REQUEST_STORAGE_ACCESS_FOR);
-
-        string? result = await Page.GetByTestId(DocumentInProcessGroup.OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo(DocumentInProcessGroup.TEST_REQUEST_STORAGE_ACCESS_FOR);
-    }
-
-    [Test]
     public async Task HasStorageAccess() {
         await ExecuteTest(DocumentInProcessGroup.BUTTON_HAS_STORAGE_ACCESS);
 

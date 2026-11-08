@@ -247,10 +247,6 @@ export class DocumentAPI {
             .requestStorageAccess({ all, cookies, sessionStorage, localStorage, indexedDB, locks, caches, getDirectory, estimate, createObjectURL, revokeObjectURL, BroadcastChannel, SharedWorker });
     }
 
-    public static requestStorageAccessFor(requestedOrigin: string): Promise<void> {
-        return (<Document & { requestStorageAccessFor(requestedOrigin: string): Promise<void>; }>document).requestStorageAccessFor(requestedOrigin);
-    }
-
     public static hasStorageAccess(): Promise<boolean> {
         return document.hasStorageAccess();
     }

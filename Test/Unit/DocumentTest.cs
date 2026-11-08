@@ -764,14 +764,6 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
     }
 
     [Test]
-    public async Task RequestStorageAccessFor() {
-        await ExecuteTest(DocumentGroup.BUTTON_REQUEST_STORAGE_ACCESS_FOR);
-
-        string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo(DocumentGroup.TEST_REQUEST_STORAGE_ACCESS_FOR);
-    }
-
-    [Test]
     public async Task HasStorageAccess() {
         await ExecuteTest(DocumentGroup.BUTTON_HAS_STORAGE_ACCESS);
 

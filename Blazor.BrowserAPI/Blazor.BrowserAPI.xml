@@ -1805,24 +1805,6 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:BrowserAPI.Implementation.DocumentBase`2.RequestStorageAccessFor(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Allows top-level sites to request third-party cookie access on behalf of embedded content originating from another site in the same related website set.
-            It returns a Promise that resolves if the access was granted, and rejects if access was denied.
-            </summary>
-            <remarks>
-            RequestStorageAccessFor() requests are automatically denied unless the top-level content is currently processing a user gesture such as a tap or click (transient activation),
-            or unless permission was already granted previously.
-            If permission was not previously granted, they must run inside a user gesture-based event handler.
-            The user gesture behavior depends on the state of the promise:<br />
-            - If the promise resolves (i.e., permission was granted), then the user gesture has not been consumed, so the script can subsequently call APIs requiring a user gesture.<br />
-            - If the promise is rejected (i.e., permission was not granted), then the user gesture has been consumed, so the script can't do anything that requires a gesture.
-            This prevents scripts from calling RequestStorageAccessFor() again if permission is denied.
-            </remarks>
-            <param name="requestedOrigin">A string representing the URL of the origin you are requesting third-party cookie access for.</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
         <member name="M:BrowserAPI.Implementation.DocumentBase`2.HasStorageAccess(System.Threading.CancellationToken)">
             <summary>
             <para>Resolves with a boolean value indicating whether the document has access to third-party, unpartitioned cookies.</para>
@@ -23846,96 +23828,6 @@
             <param name="args">JSON-serializable arguments.</param>
             <returns></returns>
         </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSRuntime,System.String,System.Object[])">
-            <summary>
-            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
-            </summary>
-            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
-            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
-            <param name="args">JSON-serializable arguments.</param>
-            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSRuntime,System.String,System.Threading.CancellationToken,System.Object[])">
-            <summary>
-            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
-            </summary>
-            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
-            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
-            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
-            <param name="args">JSON-serializable arguments.</param>
-            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSRuntime,System.String,System.TimeSpan,System.Object[])">
-            <summary>
-            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
-            </summary>
-            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
-            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
-            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
-            <param name="args">JSON-serializable arguments.</param>
-            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String)">
-            <summary>
-            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
-            </summary>
-            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
-            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
-            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
-            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,System.Threading.CancellationToken)">
-            <summary>
-            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
-            </summary>
-            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
-            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
-            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
-            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
-            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,System.TimeSpan)">
-            <summary>
-            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
-            </summary>
-            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
-            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
-            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
-            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
-            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,``0)">
-            <summary>
-            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
-            </summary>
-            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
-            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
-            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
-            <param name="value">JSON-serializable value.</param>
-            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,``0,System.Threading.CancellationToken)">
-            <summary>
-            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
-            </summary>
-            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
-            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
-            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
-            <param name="value">JSON-serializable value.</param>
-            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
-            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSRuntime,System.String,``0,System.TimeSpan)">
-            <summary>
-            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
-            </summary>
-            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
-            <param name="jsRuntime">The <see cref="T:Microsoft.JSInterop.IJSRuntime"/>.</param>
-            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
-            <param name="value">JSON-serializable value.</param>
-            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
-            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
-        </member>
         <member name="M:BrowserAPI.TrySyncExtensions.InvokeVoidTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Object[])">
             <summary>
             <para>Invokes the specified JavaScript function synchronously if possible, otherwise asynchronously.</para>
@@ -24002,96 +23894,6 @@
             <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
             <param name="args">JSON-serializable arguments.</param>
             <returns>An instance of <typeparamref name="TResult"/> obtained by JSON-deserializing the return value.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Object[])">
-            <summary>
-            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
-            </summary>
-            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
-            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
-            <param name="args">JSON-serializable arguments.</param>
-            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Threading.CancellationToken,System.Object[])">
-            <summary>
-            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
-            </summary>
-            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
-            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
-            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
-            <param name="args">JSON-serializable arguments.</param>
-            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.InvokeConstructorTrySync(Microsoft.JSInterop.IJSObjectReference,System.String,System.TimeSpan,System.Object[])">
-            <summary>
-            Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
-            </summary>
-            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
-            <param name="identifier">An identifier for the constructor function to invoke. For example, the value <c>"someScope.SomeClass"</c> will invoke the constructor <c>window.someScope.SomeClass</c>.</param>
-            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
-            <param name="args">JSON-serializable arguments.</param>
-            <returns>An <see cref="T:Microsoft.JSInterop.IJSObjectReference"/> instance that represents the created JS object.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String)">
-            <summary>
-            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
-            </summary>
-            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
-            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
-            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
-            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,System.Threading.CancellationToken)">
-            <summary>
-            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
-            </summary>
-            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
-            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
-            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
-            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
-            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.GetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,System.TimeSpan)">
-            <summary>
-            Reads the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.
-            </summary>
-            <typeparam name="TValue">The JSON-serializable return type.</typeparam>
-            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
-            <param name="identifier">An identifier for the property to read. For example, the value <c>"someScope.someProp"</c> will read the value of the property <c>window.someScope.someProp</c>.</param>
-            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
-            <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,``0)">
-            <summary>
-            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
-            </summary>
-            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
-            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
-            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
-            <param name="value">JSON-serializable value.</param>
-            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,``0,System.Threading.CancellationToken)">
-            <summary>
-            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
-            </summary>
-            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
-            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
-            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
-            <param name="value">JSON-serializable value.</param>
-            <param name="cancellationToken">A cancellation token to signal the cancellation of the operation. Specifying this parameter will override any default cancellations such as due to timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>) from being applied.</param>
-            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
-        </member>
-        <member name="M:BrowserAPI.TrySyncExtensions.SetValueTrySync``1(Microsoft.JSInterop.IJSObjectReference,System.String,``0,System.TimeSpan)">
-            <summary>
-            Updates the value of the specified JavaScript property synchronously if possible, otherwise asynchronously.. If the property is not defined on the target object, it will be created.
-            </summary>
-            <typeparam name="TValue">JSON-serializable argument type.</typeparam>
-            <param name="module">Represents an instance of a JavaScript module to which calls may be dispatched.</param>
-            <param name="identifier">An identifier for the property to set. For example, the value <c>"someScope.someProp"</c> will update the property <c>window.someScope.someProp</c>.</param>
-            <param name="value">JSON-serializable value.</param>
-            <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout"/>).</param>
-            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> that represents the asynchronous invocation operation.</returns>
         </member>
         <member name="M:BrowserAPI.TrySyncExtensions.DisposeTrySync(Microsoft.JSInterop.IJSObjectReference)">
             <summary>
@@ -25782,24 +25584,6 @@
             <param name="revokeObjectURL">Specifies StorageAccessHandle.revokeObjectURL() should be made accessible.</param>
             <param name="BroadcastChannel">Specifies StorageAccessHandle.BroadcastChannel() should be made accessible.</param>
             <param name="SharedWorker">Specifies StorageAccessHandle.SharedWorker() should be made accessible.</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:BrowserAPI.IDocumentBase`2.RequestStorageAccessFor(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Allows top-level sites to request third-party cookie access on behalf of embedded content originating from another site in the same related website set.
-            It returns a Promise that resolves if the access was granted, and rejects if access was denied.
-            </summary>
-            <remarks>
-            RequestStorageAccessFor() requests are automatically denied unless the top-level content is currently processing a user gesture such as a tap or click (transient activation),
-            or unless permission was already granted previously.
-            If permission was not previously granted, they must run inside a user gesture-based event handler.
-            The user gesture behavior depends on the state of the promise:<br />
-            - If the promise resolves (i.e., permission was granted), then the user gesture has not been consumed, so the script can subsequently call APIs requiring a user gesture.<br />
-            - If the promise is rejected (i.e., permission was not granted), then the user gesture has been consumed, so the script can't do anything that requires a gesture.
-            This prevents scripts from calling RequestStorageAccessFor() again if permission is denied.
-            </remarks>
-            <param name="requestedOrigin">A string representing the URL of the origin you are requesting third-party cookie access for.</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
