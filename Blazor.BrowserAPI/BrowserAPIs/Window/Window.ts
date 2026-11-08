@@ -128,15 +128,27 @@ export class WindowAPI {
     }
 
     public static prompt(instance: WindowAPI | null, message: string | null, defaultValue: string | null): string | null {
-        return (instance ? instance.window : window).prompt(message ?? undefined, defaultValue ?? undefined);
+        if (message === null)
+            message = "";
+
+        if (defaultValue === null)
+            return (instance ? instance.window : window).prompt(message);
+        else
+            return (instance ? instance.window : window).prompt(message, defaultValue);
     }
 
     public static confirm(instance: WindowAPI | null, message: string | null): boolean {
-        return (instance ? instance.window : window).confirm(message ?? undefined);
+        if (message === null)
+            return (instance ? instance.window : window).confirm();
+        else
+            return (instance ? instance.window : window).confirm(message);
     }
 
     public static alert(instance: WindowAPI | null, message: string | null): void {
-        (instance ? instance.window : window).alert(message ?? undefined);
+        if (message === null)
+            (instance ? instance.window : window).alert();
+        else
+            (instance ? instance.window : window).alert(message);
     }
 
 
@@ -200,7 +212,10 @@ export class WindowAPI {
     }
 
     public static requestIdleCallback(instance: WindowAPI | null, callback: DotNet.DotNetObject, timeout: number | null): number {
-        return (instance ? instance.window : window).requestIdleCallback(() => BlazorInvoke.method(callback, "Handler"), { timeout: timeout ?? undefined });
+        if (timeout === null)
+            return (instance ? instance.window : window).requestIdleCallback(() => BlazorInvoke.method(callback, "Handler"));
+        else
+            return (instance ? instance.window : window).requestIdleCallback(() => BlazorInvoke.method(callback, "Handler"), { timeout });
     }
 
     public static cancelIdleCallback(instance: WindowAPI | null, handle: number): void {

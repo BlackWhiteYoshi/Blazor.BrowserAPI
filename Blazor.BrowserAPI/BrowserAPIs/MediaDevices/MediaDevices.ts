@@ -122,9 +122,9 @@ export class MediaDevicesAPI {
                     return { exact: numberConstrain.value };
                 case 2: // ideal
                     return {
-                        ideal: numberConstrain.value ?? undefined,
-                        min: numberConstrain.min ?? undefined,
-                        max: numberConstrain.max ?? undefined,
+                        ...(numberConstrain.value != null && { ideal: numberConstrain.value }),
+                        ...(numberConstrain.min != null && { min: numberConstrain.min }),
+                        ...(numberConstrain.max != null && { max: numberConstrain.max })
                     };
                 default:
                     throw new Error(`unreachable code: invalid enum -> type must be 0, 1 or 2, but it is ${numberConstrain?.preference}`);

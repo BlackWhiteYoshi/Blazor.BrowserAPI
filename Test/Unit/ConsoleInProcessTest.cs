@@ -310,7 +310,7 @@ public sealed class ConsoleInProcessTest(PlayWrightFixture playWrightFixture) : 
         await Page.EvaluateAsync($"console.time('{ConsoleInProcessGroup.TEST_TIME_LABEL}');");
         await ExecuteTest(ConsoleInProcessGroup.BUTTON_TIME_LOG_LABEL_DATA);
 
-        await Assert.That(consoleMessageCapture.Text).Matches($"^{ConsoleInProcessGroup.TEST_TIME_LABEL}: .* ms \\[{ConsoleInProcessGroup.TEST_TIME_LOG_DATA}, {ConsoleInProcessGroup.TEST_TIME_LOG_DATA}\\]$");
+        await Assert.That(consoleMessageCapture.Text).Matches($"^{ConsoleInProcessGroup.TEST_TIME_LABEL}: .* ms {ConsoleInProcessGroup.TEST_TIME_LOG_DATA} {ConsoleInProcessGroup.TEST_TIME_LOG_DATA}$");
     }
 
 

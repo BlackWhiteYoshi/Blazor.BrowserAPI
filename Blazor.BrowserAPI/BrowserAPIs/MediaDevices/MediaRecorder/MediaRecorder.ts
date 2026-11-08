@@ -31,7 +31,10 @@ export class MediaRecorderAPI {
 
 
     public start(timeslice: number): void {
-        this.mediaRecorder.start(timeslice > 0 ? timeslice : undefined);
+        if (timeslice <= 0)
+            this.mediaRecorder.start();
+        else
+            this.mediaRecorder.start(timeslice);
     }
 
     public stop(): void {

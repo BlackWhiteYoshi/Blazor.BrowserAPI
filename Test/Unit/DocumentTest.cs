@@ -550,7 +550,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await ExecuteTest(DocumentGroup.BUTTON_GET_TITLE_PROPERTY);
 
         string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("BrowserAPI Test");
+        await Assert.That(result).IsEqualTo("Blazor BrowserAPI Test");
     }
 
     [Test]
@@ -558,7 +558,7 @@ public sealed class DocumentTest(PlayWrightFixture playWrightFixture) : PlayWrig
         await ExecuteTest(DocumentGroup.BUTTON_GET_TITLE_METHOD);
 
         string? result = await Page.GetByTestId(DocumentGroup.OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("BrowserAPI Test");
+        await Assert.That(result).IsEqualTo("Blazor BrowserAPI Test");
     }
 
     [Test]

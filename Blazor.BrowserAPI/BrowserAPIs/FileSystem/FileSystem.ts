@@ -4,36 +4,36 @@ import { FileHandleAPI } from "./FileHandle/FileHandle";
 export class FileSystemAPI {
     public static async showOpenFilePicker(id: string | null, startIn: FileHandleAPI | DirectoryHandleAPI | WellKnownDirectory | null, excludeAcceptAllOption: boolean, types: { key: string, value: { key: string, value: string[] }[] }[] | null): Promise<FileHandleAPI> {
         const options: OpenFilePickerOptions = {
-            id: id ?? undefined,
+            ...(id !== null && { id }),
             startIn: this.mapStartIn(startIn),
             excludeAcceptAllOption: excludeAcceptAllOption,
             types: FileSystemAPI.mapTypes(types),
             multiple: false
-        }
+        };
         const [fileHandle] = await showOpenFilePicker(options);
         return new FileHandleAPI(fileHandle);
     }
 
     public static async showOpenFilePickerMultipleFiles(id: string | null, startIn: FileHandleAPI | DirectoryHandleAPI | WellKnownDirectory | null, excludeAcceptAllOption: boolean, types: { key: string, value: { key: string, value: string[]; }[]; }[] | null): Promise<FileHandleAPI[]> {
         const options: OpenFilePickerOptions = {
-            id: id ?? undefined,
+            ...(id !== null && { id }),
             startIn: this.mapStartIn(startIn),
             excludeAcceptAllOption: excludeAcceptAllOption,
             types: FileSystemAPI.mapTypes(types),
             multiple: true
-        }
+        };
         const fileHandleList = await showOpenFilePicker(options);
         return fileHandleList.map((fileHandle: FileSystemFileHandle) => DotNet.createJSObjectReference(new FileHandleAPI(fileHandle)));
     }
 
     public static async showSaveFilePicker(suggestedName: string | null, id: string | null, startIn: FileHandleAPI | DirectoryHandleAPI | WellKnownDirectory | null, excludeAcceptAllOption: boolean, types: { key: string, value: { key: string, value: string[]; }[]; }[] | null): Promise<FileHandleAPI> {
         const options: SaveFilePickerOptions = {
-            suggestedName: suggestedName ?? undefined,
-            id: id ?? undefined,
+            ...(suggestedName !== null && { suggestedName }),
+            ...(id !== null && { id }),
             startIn: this.mapStartIn(startIn),
             excludeAcceptAllOption: excludeAcceptAllOption,
             types: FileSystemAPI.mapTypes(types)
-        }
+        };
         const fileHandle = await showSaveFilePicker(options);
         return new FileHandleAPI(fileHandle);
     }
@@ -41,7 +41,7 @@ export class FileSystemAPI {
     public static async showDirectoryPicker(mode: FileSystemPermissionMode, id: string | null, startIn: FileHandleAPI | DirectoryHandleAPI | WellKnownDirectory | null): Promise<DirectoryHandleAPI> {
         const options: DirectoryPickerOptions = {
             mode: mode,
-            id: id ?? undefined,
+            ...(id !== null && { id }),
             startIn: this.mapStartIn(startIn)
         };
         const directoryHandle = await showDirectoryPicker(options);
@@ -62,7 +62,7 @@ export class FileSystemAPI {
     }
 
     public static async storageManagerGetDirectory(): Promise<DirectoryHandleAPI> {
-        const directoryHandle = await navigator.storage.getDirectory()
+        const directoryHandle = await navigator.storage.getDirectory();
         return new DirectoryHandleAPI(directoryHandle);
     }
 

@@ -18,7 +18,7 @@ export class GeolocationAPI {
             (geolocationPositionError) => BlazorInvoke.method(callbackGeolocation, "Error", geolocationPositionError.code, geolocationPositionError.message),
             {
                 maximumAge: maximumAge >= 0 ? maximumAge : Infinity,
-                timeout: timeout >= 0 ? timeout : undefined,
+                ...(timeout >= 0 && { timeout }),
                 enableHighAccuracy
             }
         );
@@ -31,7 +31,7 @@ export class GeolocationAPI {
                 (geolocationPositionError) => reject({ code: geolocationPositionError.code, message: geolocationPositionError.message }),
                 {
                     maximumAge: maximumAge >= 0 ? maximumAge : Infinity,
-                    timeout: timeout >= 0 ? timeout : undefined,
+                    ...(timeout >= 0 && { timeout }),
                     enableHighAccuracy
                 }
             );
@@ -45,7 +45,7 @@ export class GeolocationAPI {
             (geolocationPositionError) => BlazorInvoke.method(callbackGeolocation, "Error", geolocationPositionError.code, geolocationPositionError.message),
             {
                 maximumAge: maximumAge >= 0 ? maximumAge : Infinity,
-                timeout: timeout >= 0 ? timeout : undefined,
+                ...(timeout >= 0 && { timeout }),
                 enableHighAccuracy
             }
         );

@@ -31,10 +31,10 @@ export class MediaStreamAPI {
 
     public createMediaRecorder(mimeType: string, audioBitsPerSecond: number, videoBitsPerSecond: number, bitsPerSecond: number): MediaRecorderAPI {
         const options: MediaRecorderOptions = {
-            mimeType: mimeType !== "" ? mimeType : undefined,
-            audioBitsPerSecond: audioBitsPerSecond > 0 ? audioBitsPerSecond : undefined,
-            videoBitsPerSecond: videoBitsPerSecond > 0 ? videoBitsPerSecond : undefined,
-            bitsPerSecond: bitsPerSecond > 0 ? bitsPerSecond : undefined
+            ...(mimeType.length > 0 && { mimeType }),
+            ...(audioBitsPerSecond > 0 && { audioBitsPerSecond }),
+            ...(videoBitsPerSecond > 0 && { videoBitsPerSecond }),
+            ...(bitsPerSecond > 0 && { bitsPerSecond })
         };
         return new MediaRecorderAPI(this.mediaStream, options);
     }

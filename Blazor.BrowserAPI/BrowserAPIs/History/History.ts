@@ -30,12 +30,18 @@ export class HistoryAPI {
         history.go(delta);
     }
 
-    public static pushState(data: any, title: string, url: string): void {
-        history.pushState(data, title, url ?? undefined);
+    public static pushState(data: any, title: string, url: string | null): void {
+        if (url === null)
+            history.pushState(data, title);
+        else
+            history.pushState(data, title, url);
     }
 
-    public static replaceState(data: any, title: string, url: string): void {
-        history.replaceState(data, title, url ?? undefined);
+    public static replaceState(data: any, title: string, url: string | null): void {
+        if (url === null)
+            history.replaceState(data, title);
+        else
+            history.replaceState(data, title, url);
     }
 
 

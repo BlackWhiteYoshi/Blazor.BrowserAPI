@@ -311,7 +311,10 @@ export class HTMLElementAPI {
     }
 
     public togglePopover(force: boolean | null): boolean {
-        return <boolean><unknown>this.htmlElement.togglePopover(force ?? undefined);
+        if (force === null)
+            return <boolean><unknown>this.htmlElement.togglePopover();
+        else
+            return <boolean><unknown>this.htmlElement.togglePopover(force);
     }
 
 
@@ -1030,7 +1033,10 @@ export class HTMLElementAPI {
     }
 
     public toggleAttribute(qualifiedName: string, force: boolean | null): boolean {
-        return this.htmlElement.toggleAttribute(qualifiedName, force ?? undefined);
+        if (force === null)
+            return this.htmlElement.toggleAttribute(qualifiedName);
+        else
+            return this.htmlElement.toggleAttribute(qualifiedName, force);
     }
 
     public removeAttribute(qualifiedName: string): void {

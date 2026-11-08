@@ -303,7 +303,7 @@ public sealed class DocumentInProcessTest(PlayWrightFixture playWrightFixture) :
         await ExecuteTest(DocumentInProcessGroup.BUTTON_GET_TITLE);
 
         string? result = await Page.GetByTestId(DocumentInProcessGroup.OUTPUT).TextContentAsync();
-        await Assert.That(result).IsEqualTo("BrowserAPI Test");
+        await Assert.That(result).IsEqualTo("Blazor BrowserAPI Test");
     }
 
     [Test]

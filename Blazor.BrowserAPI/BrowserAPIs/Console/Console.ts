@@ -74,7 +74,7 @@ export class ConsoleAPI {
         if (data === undefined)
             console.timeLog(label);
         else
-            console.timeLog(label, data);
+            console.timeLog(label, ...data);
     }
 
 

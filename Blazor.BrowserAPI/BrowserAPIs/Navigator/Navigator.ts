@@ -53,16 +53,37 @@ export class NavigatorAPI {
 
 
     public static canShare(url: string | null, text: string | null, title: string | null, fileAPIs: FileAPI[] | null): boolean {
-        return navigator.canShare({ url: url ?? undefined, text: text ?? undefined, title: title ?? undefined, files: fileAPIs ? fileAPIs.map(fileAPI => fileAPI.file) : undefined });
+        const shareData: ShareData = {
+            ...(url !== null && { url }),
+            ...(text !== null && { text }),
+            ...(title !== null && { title }),
+            ...(fileAPIs !== null && { files: fileAPIs.map(fileAPI => fileAPI.file) }),
+        };
+        if (Object.keys(shareData).length === 0)
+            return navigator.canShare();
+        else
+            return navigator.canShare(shareData);
     }
 
     public static share(url: string | null, text: string | null, title: string | null, fileAPIs: FileAPI[] | null): Promise<void> {
-        return navigator.share({ url: url ?? undefined, text: text ?? undefined, title: title ?? undefined, files: fileAPIs ? fileAPIs.map(fileAPI => fileAPI.file) : undefined });
+        const shareData: ShareData = {
+            ...(url !== null && { url }),
+            ...(text !== null && { text }),
+            ...(title !== null && { title }),
+            ...(fileAPIs !== null && { files: fileAPIs.map(fileAPI => fileAPI.file) }),
+        };
+        if (Object.keys(shareData).length === 0)
+            return navigator.share();
+        else
+            return navigator.share(shareData);
     }
 
 
     public static setAppBadge(contents: number | null): Promise<void> {
-        return navigator.setAppBadge(contents ?? undefined);
+        if (contents === null)
+            return navigator.setAppBadge();
+        else
+            return navigator.setAppBadge(contents);
     }
 
     public static clearAppBadge(): Promise<void> {
@@ -80,7 +101,10 @@ export class NavigatorAPI {
 
 
     public static sendBeacon_String(url: string, data: string | null): boolean {
-        return navigator.sendBeacon(url, data ?? undefined);
+        if (data === null)
+            return navigator.sendBeacon(url);
+        else
+            return navigator.sendBeacon(url, data);
     }
 
     public static sendBeacon_Bytes(url: string, data: Uint8Array): boolean {

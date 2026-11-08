@@ -46,11 +46,17 @@ export class HTMLDialogElementAPI {
 
 
     public close(returnValue: string | null): void {
-        this.dialog.close(returnValue ?? undefined);
+        if (returnValue === null)
+            this.dialog.close();
+        else
+            this.dialog.close(returnValue);
     }
 
     public requestClose(returnValue: string | null): void {
-        (<HTMLDialogElement & { requestClose(returnValue?: string): void }>this.dialog).requestClose(returnValue ?? undefined);
+        if (returnValue === null)
+            (<HTMLDialogElement & { requestClose(returnValue?: string): void }>this.dialog).requestClose();
+        else
+            (<HTMLDialogElement & { requestClose(returnValue?: string): void }>this.dialog).requestClose(returnValue);
     }
 
 
