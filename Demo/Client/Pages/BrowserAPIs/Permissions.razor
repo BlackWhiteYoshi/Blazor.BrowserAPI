@@ -12,6 +12,70 @@
     </div>
 
     <div class="demo">
-        @* TODO *@ Demo not Implemented yet...
+        <button class="btn-main" @onclick="GetBackgroundSyncPermission">Show background-sync permission</button>
+        <span>@backgroundSyncPermission</span>
+
+        <button class="btn-second" @onclick="GetClipboardReadPermission">Show clipboard-read permission</button>
+        <span>@clipboardReadPermission</span>
+
+        <button class="btn-main" @onclick="GetClipboardWritePermission">Show clipboard-write permission</button>
+        <span>@clipboardWritePermission</span>
+
+        <button class="btn-second" @onclick="GetComputePressurePermission">Show compute-pressure permission</button>
+        <span>@computePressurePermission</span>
+
+        <button class="btn-main" @onclick="GetGeolocationPermission">Show geolocation permission</button>
+        <span>@geolocationPermission</span>
+
+        <button class="btn-second" @onclick="GetLocalFontsPermission">Show local-fonts permission</button>
+        <span>@localFontsPermission</span>
+
+        <button class="btn-main" @onclick="GetCameraPermission">Show camera permission</button>
+        <span>@cameraPermission</span>
+
+        <button class="btn-second" @onclick="GetMicrophonePermission">Show microphone permission</button>
+        <span>@microphonePermission</span>
+
+        <button class="btn-main" @onclick="GetNotificationsPermission">Show notifications permission</button>
+        <span>@notificationsPermission</span>
+
+        <button class="btn-second" @onclick="GetPaymentHandlerPermission">Show payment-handler permission</button>
+        <span>@paymentHandlerPermission</span>
+
+        <button class="btn-main" @onclick="GetPushPermission">Show push permission</button>
+        <span>@pushPermission</span>
+
+        <button class="btn-second" @onclick="GetScreenWakeLockPermission">Show screen-wake-lock permission</button>
+        <span>@screenWakeLockPermission</span>
+
+        <button class="btn-main" @onclick="GetAccelerometerPermission">Show accelerometer permission</button>
+        <span>@accelerometerPermission</span>
+
+        <button class="btn-second" @onclick="GetGyroscopePermission">Show gyroscope permission</button>
+        <span>@gyroscopePermission</span>
+
+        <button class="btn-main" @onclick="GetMagnetometerPermission">Show magnetometer permission</button>
+        <span>@magnetometerPermission</span>
+
+        <button class="btn-second" @onclick="GetAmbientLightSensorPermission">Show ambient-light-sensor permission</button>
+        <span>@ambientLightSensorPermission</span>
+
+        <button class="btn-main" @onclick="GetStorageAccessPermission">Show storage-access permission</button>
+        <span>@storageAccessPermission</span>
+
+        <button class="btn-second" @onclick="GetTopLevelStorageAccessPermission">Show top-level-storage-access permission</button>
+        <span>@topLevelStorageAccessPermission</span>
+
+        <button class="btn-main" @onclick="GetPersistentStoragePermission">Show persistent-storage permission</button>
+        <span>@persistentStoragePermission</span>
+
+        <button class="btn-second" @onclick="GetBluetoothPermission">Show bluetooth permission</button>
+        <span>@bluetoothPermission</span>
+
+        <button class="btn-main" @onclick="GetMidiPermission">Show midi permission</button>
+        <span>@midiPermission</span>
+
+        <button class="btn-second" @onclick="GetWindowManagementPermission">Show window-management permission</button>
+        <span>@windowManagementPermission</span>
     </div>
 </div>

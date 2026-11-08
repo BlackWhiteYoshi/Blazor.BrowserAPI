@@ -872,3 +872,13 @@ body {
   align-items: center;
   margin-block: 1.1em;
 }
+
+#permissions > .demo {
+  width: min(640px, 100%);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  row-gap: 0.6em;
+  column-gap: 2em;
+  justify-items: stretch;
+  align-items: center;
+}
