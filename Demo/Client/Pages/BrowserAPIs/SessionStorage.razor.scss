@@ -1,0 +1,50 @@
+#session-storage {
+    & > .demo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        & > button {
+            margin: 0 auto 5em auto;
+        }
+
+        & > div {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            align-items: center;
+
+            & > div {
+                display: flex;
+                flex-direction: row;
+                gap: 1em;
+                justify-content: center;
+
+                & > button {
+                    min-width: min(200px, 100%);
+                    margin-inline: auto;
+                }
+            }
+
+            & > span {
+                margin-top: 1em;
+            }
+
+            & > ul {
+                display: flex;
+                flex-direction: column;
+                gap: 0.6em;
+
+                list-style: none;
+                margin: 0;
+                padding: 0;
+
+                & > li {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 0.8em;
+                }
+            }
+        }
+    }
+}

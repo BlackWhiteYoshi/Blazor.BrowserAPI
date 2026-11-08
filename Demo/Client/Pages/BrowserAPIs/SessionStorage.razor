@@ -12,6 +12,26 @@
     </div>
 
     <div class="demo">
-        @* TODO *@ Demo not Implemented yet...
+        <button class="btn-main" @onclick="LoadSessionStorage" disabled=@StorageLoaded>Load session storage</button>
+
+        @if (StorageLoaded) {
+            <div>
+                <div>
+                    <button class="btn-second" @onclick="OnCreateItem">Create item</button>
+                    <button class="btn-danger" @onclick="OnDeleteAllItems" disabled=@(items!.Length is 0)>Remove all items</button>
+                </div>
+                <span>Items Count: @items.Length</span>
+                <ul>
+                    @for (int i = 0; i < items.Length; i++) {
+                        int index = i;
+                        <li>
+                            <input value="@items[i].key" @onchange="(ChangeEventArgs e) => OnKeyUpdate(e, index)">
+                            <input value="@items[i].value" @onchange="(ChangeEventArgs e) => OnValueUpdate(e, index)">
+                            <button class="btn-danger" @onclick="() => OnDeleteItem(index)">Remove item</button>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
     </div>
 </div>
