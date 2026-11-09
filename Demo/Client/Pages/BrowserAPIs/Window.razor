@@ -22,6 +22,26 @@
     </div>
 
     <div class="demo">
-        @* TODO *@ Demo not Implemented yet...
+        <div>
+            <button class="btn-main" @onclick="GetOuterWidth">Window width</button>
+            <span>@outerWidth</span>
+
+            <button class="btn-second" @onclick="GetOuterHeight">Window height</button>
+            <span>@outerHeight</span>
+
+            <button class="btn-info" @onclick="GetIsSecureContext">Is secure context</button>
+            <span>@isSecureContext</span>
+        </div>
+        <div>
+            <button class="btn-main" @onclick="BrowserPrompt">Browser prompt</button>
+            <span>@promptAnswer</span>
+
+            <button class="btn-second" @onclick="BrowserConfirm">Browser confirm</button>
+            <span>@conformAnswer</span>
+
+            <button class="btn-danger" @onclick="BrowserAlert">Browser alert</button>
+
+            <button class="btn-deny" @onclick="BrowserPrint">Browser print</button>
+        </div>
     </div>
 </div>
