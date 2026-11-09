@@ -9,6 +9,49 @@
     </div>
 
     <div class="demo">
-        @* TODO *@ Demo not Implemented yet...
+        @* Light *@
+        <div>
+            <button class="btn-main" @onclick="CreateAmbientLightSensor" disabled=@(ambientLightSensor is not null || noAmbientLightSensor)>@(!noAmbientLightSensor ? "Start ambient light sensor" : "Not supported")</button>
+            <button class="btn-cancel" @onclick="DestroyAmbientLightSensor" disabled=@(ambientLightSensor is null)>Stop ambient light sensor</button>
+            <span>illuminance: @illuminance.ToString("F3")</span>
+        </div>
+        @* Movement *@
+        <div>
+            <button class="btn-main" @onclick="CreateGyroscope" disabled=@(gyroscope is not null || noGyroscope)>@(!noGyroscope ? "Start gyroscope" : "Not supported")</button>
+            <button class="btn-cancel" @onclick="DestroyGyroscope" disabled=@(gyroscope is null)>Stop gyroscope</button>
+            <span>X: @gyroscopeX.ToString("F3"), Y: @gyroscopeY.ToString("F3"), Z: @gyroscopeZ.ToString("F3")</span>
+
+            <button class="btn-second" @onclick="CreateAccelerometer" disabled=@(accelerometer is not null || noAccelerometer)>@(!noAccelerometer ? "Start accelerometer" : "Not supported")</button>
+            <button class="btn-cancel" @onclick="DestroyAccelerometer" disabled=@(accelerometer is null)>Stop accelerometer</button>
+            <span>X: @accelerometerX.ToString("F3"), Y: @accelerometerY.ToString("F3"), Z: @accelerometerZ.ToString("F3")</span>
+
+            <button class="btn-main" @onclick="CreateLinearAccelerationSensor" disabled=@(linearAccelerationSensor is not null || noLinearAccelerationSensor)>@(!noLinearAccelerationSensor ? "Start linear acceleration sensor" : "Not supported")</button>
+            <button class="btn-cancel" @onclick="DestroyLinearAccelerationSensor" disabled=@(linearAccelerationSensor is null)>Stop linear accelerometer sensor</button>
+            <span>X: @linearAccelerationSensorX.ToString("F3"), Y: @linearAccelerationSensorY.ToString("F3"), Z: @linearAccelerationSensorZ.ToString("F3")</span>
+
+            <button class="btn-second" @onclick="CreateGravitySensor" disabled=@(gravitySensor is not null || noGravitySensor)>@(!noGravitySensor ? "Start gravity sensor" : "Not supported")</button>
+            <button class="btn-cancel" @onclick="DestroyGravitySensor" disabled=@(gravitySensor is null)>Stop gravity sensor</button>
+            <span>X: @gravitySensorX.ToString("F3"), Y: @gravitySensorY.ToString("F3"), Z: @gravitySensorZ.ToString("F3")</span>
+        </div>
+        @* Orientation *@
+        <div>
+            <button class="btn-main" @onclick="CreateAbsoluteOrientationSensor" disabled=@(absoluteOrientationSensor is not null || noAbsoluteOrientationSensor)>@(!noAbsoluteOrientationSensor ? "Start absolute orientation sensor" : "Not supported")</button>
+            <button class="btn-cancel" @onclick="DestroyAbsoluteOrientationSensor" disabled=@(absoluteOrientationSensor is null)>Stop absolute orientation sensor</button>
+            <span>X: @absoluteQuaternion.X.ToString("F3"), Y: @absoluteQuaternion.Y.ToString("F3"), Z: @absoluteQuaternion.Z.ToString("F3"), W: @absoluteQuaternion.W.ToString("F3")</span>
+
+            <button class="btn-second" @onclick="CreateRelativeOrientationSensor" disabled=@(relativeOrientationSensor is not null || noRelativeOrientationSensor)>@(!noRelativeOrientationSensor ? "Start relative orientation sensor" : "Not supported")</button>
+            <button class="btn-cancel" @onclick="DestroyRelativeOrientationSensor" disabled=@(relativeOrientationSensor is null)>Stop relative orientation sensor</button>
+            <span>X: @relativeQuaternion.X.ToString("F3"), Y: @relativeQuaternion.Y.ToString("F3"), Z: @relativeQuaternion.Z.ToString("F3"), W: @relativeQuaternion.W.ToString("F3")</span>
+        </div>
+        @* Magnetometer *@
+        <div>
+            <button class="btn-main" @onclick="CreateMagnetometer" disabled=@(magnetometer is not null || noMagnetometer)>@(!noMagnetometer ? "Start magnetometer" : "Not supported")</button>
+            <button class="btn-cancel" @onclick="DestroyMagnetometer" disabled=@(magnetometer is null)>Stop magnetometer</button>
+            <span>X: @magnetometerX.ToString("F3"), Y: @magnetometerY.ToString("F3"), Z: @magnetometerZ.ToString("F3")</span>
+
+            <button class="btn-second" @onclick="CreateUncalibratedMagnetometer" disabled=@(uncalibratedMagnetometer is not null || noUncalibratedMagnetometer)>@(!noUncalibratedMagnetometer ? "Start uncalibrated magnetometer" : "Not supported")</button>
+            <button class="btn-cancel" @onclick="DestroyUncalibratedMagnetometer" disabled=@(uncalibratedMagnetometer is null)>Stop uncalibrated magnetometer</button>
+            <span>X: @uncalibratedMagnetometerX.ToString("F3"), Y: @uncalibratedMagnetometerY.ToString("F3"), Z: @uncalibratedMagnetometerZ.ToString("F3"), XBias: @uncalibratedMagnetometerXBias.ToString("F3"), YBias: @uncalibratedMagnetometerYBias.ToString("F3"), ZBias: @uncalibratedMagnetometerZBias.ToString("F3")</span>
+        </div>
     </div>
 </div>

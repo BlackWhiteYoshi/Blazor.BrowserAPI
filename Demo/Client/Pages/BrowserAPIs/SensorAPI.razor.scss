@@ -1,0 +1,17 @@
+#sensor-api {
+    & > .demo {
+        display: grid;
+        grid-template-columns: auto auto auto;
+
+        & > div {
+            display: grid;
+            grid-column: span 3;
+            grid-template-columns: subgrid;
+            row-gap: 1em;
+            column-gap: 2em;
+            justify-items: stretch;
+            align-items: center;
+            margin-block: 1em;
+        }
+    }
+}
