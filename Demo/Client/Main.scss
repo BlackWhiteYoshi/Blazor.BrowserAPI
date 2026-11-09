@@ -30,7 +30,7 @@
 @use "Pages/BrowserAPIs/SessionStorage.razor.scss";
 // WebMIDI
 @use "Pages/BrowserAPIs/Window.razor.scss";
-// WindowManagement
+@use "Pages/BrowserAPIs/WindowManagement.razor.scss";
 
 
 // sass Main.scss wwwroot/site.css --no-source-map --style=compressed --watch

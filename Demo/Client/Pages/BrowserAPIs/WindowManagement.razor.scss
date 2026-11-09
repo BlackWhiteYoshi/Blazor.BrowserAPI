@@ -1,0 +1,22 @@
+#window-management {
+    & > .demo {
+        width: min(640px, 100%);
+        display: grid;
+        grid-template-columns: auto 1fr;
+
+        & > div {
+            display: grid;
+            grid-column: span 2;
+            grid-template-columns: subgrid;
+            row-gap: 1em;
+            column-gap: 2em;
+            justify-items: stretch;
+            align-items: center;
+            margin-block: 1em;
+
+            & > button:last-child {
+                margin-right: auto;
+            }
+        }
+    }
+}

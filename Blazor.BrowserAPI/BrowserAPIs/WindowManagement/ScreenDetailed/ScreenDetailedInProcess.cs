@@ -40,7 +40,7 @@ public sealed class ScreenDetailedInProcess(IJSInProcessObjectReference screenDe
     public int Top => screenDetailedJS.Invoke<int>("getTop");
 
     /// <summary>
-    /// <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+    /// <para>A number representing the x-coordinate (left-hand edge) of the available screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
     /// <para>
     /// This is equal to the <see cref="Left"/> property, plus the width of any OS UI element drawn on the left of the screen.
     /// Windows cannot be placed in those areas, so availLeft is useful for giving you the left boundary of the actual area available to open or place windows.

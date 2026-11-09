@@ -12,6 +12,50 @@
     </div>
 
     <div class="demo">
-        @* TODO *@ Demo not Implemented yet...
+        <div>
+            <button class="btn-main" @onclick="GetWidth">Window width</button>
+            <span>@width</span>
+
+            <button class="btn-second" @onclick="GetHeight">Window height</button>
+            <span>@height</span>
+
+            <button class="btn-main" @onclick="GetColorDepth">Color depth</button>
+            <span>@colorDepth</span>
+
+            <button class="btn-second" @onclick="GetPixelDepth">Pixel depth</button>
+            <span>@pixelDepth</span>
+
+            <button class="btn-main" @onclick="GetOrientation">Screen orientation</button>
+            <span>@orientation</span>
+
+            <button class="btn-second" @onclick="GetOrientationAngle">Orientation angle</button>
+            <span>@orientationAngle</span>
+
+            <button class="btn-main" @onclick="GetHasMultipleScreens">Has multiple Screens</button>
+            <span>@hasMultipleScreens</span>
+        </div>
+        <div>
+            <button class="btn-main" @onclick="GetLeft">Left</button>
+            <span>@left</span>
+
+            <button class="btn-second" @onclick="GetTop">Top</button>
+            <span>@top</span>
+
+            <button class="btn-main" @onclick="GetLabel">Screen Label</button>
+            <span>@label</span>
+
+            <button class="btn-second" @onclick="GetDevicePixelRatio">Screen device pixel ratio</button>
+            <span>@devicePixelRatio</span>
+
+            <button class="btn-main" @onclick="GetIsPrimary">Is primary screen</button>
+            <span>@isPrimary</span>
+
+            <button class="btn-second" @onclick="GetIsInternal">Is external monitor</button>
+            <span>@isInternal</span>
+        </div>
+        <div>
+            <button class="btn-deny" @onclick="LockOrientation" disabled=@isLocked>Lock orientation</button>
+            <button class="btn-cancel" @onclick="UnlockOrientation" disabled=@(!isLocked)>Unlock orientation</button>
+        </div>
     </div>
 </div>
