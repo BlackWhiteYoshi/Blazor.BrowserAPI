@@ -13,6 +13,32 @@
     </div>
 
     <div class="demo">
-        @* TODO *@ Demo not Implemented yet...
+        <div>
+            <button class="btn-deny" @onclick="Register" disabled=@(serviceWorkerRegistration is not null)>Register service worker</button>
+            <button class="btn-cancel" @onclick="Unregister" disabled=@(serviceWorkerRegistration is null)>Unregister service worker</button>
+        </div>
+        <div>
+            <button class="btn-main" @onclick="IsActive" disabled=@(serviceWorkerRegistration is null)>is Active</button>
+            <span>@active</span>
+
+            <button class="btn-second" @onclick="IsInstalling" disabled=@(serviceWorkerRegistration is null)>is Installing</button>
+            <span>@installing</span>
+
+            <button class="btn-info" @onclick="IsWaiting" disabled=@(serviceWorkerRegistration is null)>is Waiting</button>
+            <span>@waiting</span>
+
+            <button class="btn-main" @onclick="GetScope" disabled=@(serviceWorkerRegistration is null)>Scope</button>
+            <span>@scope</span>
+
+            <button class="btn-second" @onclick="GetUpdateViaCache" disabled=@(serviceWorkerRegistration is null)>Update via cache</button>
+            <span>@updateViaCache</span>
+        </div>
+        <div>
+            <button class="btn-main" @onclick="GetScriptUrl" disabled=@(serviceWorkerRegistration is null)>Script URL</button>
+            <span>@scriptUrl</span>
+
+            <button class="btn-second" @onclick="GetState" disabled=@(serviceWorkerRegistration is null)>State</button>
+            <span>@state</span>
+        </div>
     </div>
 </div>

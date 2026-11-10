@@ -26,7 +26,7 @@
 // NotificationsAPI
 @use "Pages/BrowserAPIs/Permissions.razor.scss";
 @use "Pages/BrowserAPIs/SensorAPI.razor.scss";
-// ServiceWorker
+@use "Pages/BrowserAPIs/ServiceWorker.razor.scss";
 @use "Pages/BrowserAPIs/SessionStorage.razor.scss";
 // WebMIDI
 @use "Pages/BrowserAPIs/Window.razor.scss";
