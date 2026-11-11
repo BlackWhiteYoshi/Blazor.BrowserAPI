@@ -9,6 +9,19 @@
     </div>
 
     <div class="demo">
-        @* TODO *@ Demo not Implemented yet...
+        <div>
+            <button class="btn-main" @onclick="GetMaxActions">Max buttons on notification</button>
+            <span>@maxActions</span>
+        </div>
+        <div>
+            <button class="btn-second" @onclick="GetPermission">Permission state</button>
+            <span class="middle">@permission</span>
+            <button class="btn-info" @onclick="RequestPermission">Request permission</button>
+        </div>
+        <div>
+            <button class="btn-deny" @onclick="CreateNotification">Create notification</button>
+            <span class="middle">@notificationState</span>
+            <button class="btn-cancel" @onclick="CloseNotifications">Close all notifications</button>
+        </div>
     </div>
 </div>

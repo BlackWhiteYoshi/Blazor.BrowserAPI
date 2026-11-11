@@ -23,7 +23,7 @@
 @use "Pages/BrowserAPIs/MediaDevices.razor.scss";
 @use "Pages/BrowserAPIs/Navigator.razor.scss";
 @use "Pages/BrowserAPIs/NetworkInformation.razor.scss";
-// NotificationsAPI
+@use "Pages/BrowserAPIs/NotificationsAPI.razor.scss";
 @use "Pages/BrowserAPIs/Permissions.razor.scss";
 @use "Pages/BrowserAPIs/SensorAPI.razor.scss";
 @use "Pages/BrowserAPIs/ServiceWorker.razor.scss";

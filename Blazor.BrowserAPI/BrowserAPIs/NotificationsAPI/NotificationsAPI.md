@@ -20,8 +20,8 @@ public sealed partial class ExampleComponent : ComponentBase {
         if (permission != "granted")
             return;
 
-        await ServiceWorkerContainer.Register("ServiceWorker.js");
-        IServiceWorkerRegistration serviceWorkerRegistration = await ServiceWorkerContainer.Ready; // waiting until service worker is in state "ready"
+        await ServiceWorkerContainer.Register("service-worker.js");
+        await using IServiceWorkerRegistration serviceWorkerRegistration = await ServiceWorkerContainer.Ready; // waiting until service worker is in state "ready"
 
         await serviceWorkerRegistration.ShowNotification("Success", body: "Persistent notification received");
     }
