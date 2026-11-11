@@ -19672,7 +19672,7 @@
         </member>
         <member name="P:BrowserAPI.Implementation.ScreenDetailed.AvailLeft">
             <summary>
-            <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>A number representing the x-coordinate (left-hand edge) of the available screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
             <para>
             This is equal to the <see cref="P:BrowserAPI.Implementation.ScreenDetailed.Left"/> property, plus the width of any OS UI element drawn on the left of the screen.
             Windows cannot be placed in those areas, so availLeft is useful for giving you the left boundary of the actual area available to open or place windows.
@@ -19935,7 +19935,7 @@
         </member>
         <member name="P:BrowserAPI.Implementation.ScreenDetailedInProcess.AvailLeft">
             <summary>
-            <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>A number representing the x-coordinate (left-hand edge) of the available screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
             <para>
             This is equal to the <see cref="P:BrowserAPI.Implementation.ScreenDetailedInProcess.Left"/> property, plus the width of any OS UI element drawn on the left of the screen.
             Windows cannot be placed in those areas, so availLeft is useful for giving you the left boundary of the actual area available to open or place windows.
@@ -42359,7 +42359,7 @@
         </member>
         <member name="P:BrowserAPI.IScreenDetailed.AvailLeft">
             <summary>
-            <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>A number representing the x-coordinate (left-hand edge) of the available screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
             <para>
             This is equal to the <see cref="P:BrowserAPI.IScreenDetailed.Left"/> property, plus the width of any OS UI element drawn on the left of the screen.
             Windows cannot be placed in those areas, so availLeft is useful for giving you the left boundary of the actual area available to open or place windows.
@@ -42596,7 +42596,7 @@
         </member>
         <member name="P:BrowserAPI.IScreenDetailedInProcess.AvailLeft">
             <summary>
-            <para>A number representing the y-coordinate (top edge) of the total screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
+            <para>A number representing the x-coordinate (left-hand edge) of the available screen area inside the OS virtual screen arrangement, relative to the multi-screen origin.</para>
             <para>
             This is equal to the <see cref="P:BrowserAPI.IScreenDetailedInProcess.Left"/> property, plus the width of any OS UI element drawn on the left of the screen.
             Windows cannot be placed in those areas, so availLeft is useful for giving you the left boundary of the actual area available to open or place windows.

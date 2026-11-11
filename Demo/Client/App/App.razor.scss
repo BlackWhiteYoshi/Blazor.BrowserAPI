@@ -1,4 +1,4 @@
-$breakpoint: 800px;
+$breakpoint: 950px;
 
 html {
     color-scheme: dark;
@@ -33,6 +33,7 @@ body {
 
     & > main {
         padding: 2em;
+        overflow-x: clip;
         overflow-y: auto;
 
         @media (width < $breakpoint)  {
