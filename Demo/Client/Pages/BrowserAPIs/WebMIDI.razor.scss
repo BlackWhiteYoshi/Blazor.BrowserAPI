@@ -1,0 +1,49 @@
+#web-midi {
+    & > .demo {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        align-items: center;
+
+        & > button {
+            margin-bottom: 3em;
+        }
+
+        & > div {
+            width: min(640px, 100%);
+            display: grid;
+            grid-template-columns: 1fr 200px;
+
+            & > div {
+                display: grid;
+                grid-column: span 2;
+                grid-template-columns: subgrid;
+                row-gap: 1.8em;
+                column-gap: 2em;
+                justify-items: stretch;
+                margin-block: 2.4em;
+
+                & > div {
+                    display: flex;
+                    flex-direction: column;
+
+                    & > span {
+                        overflow-wrap: anywhere;
+                    }
+
+                    & > div {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.4em;
+                        margin-block: 0.8em;
+
+                        & > span {
+                            text-align: center;
+                            margin-top: 0.4em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

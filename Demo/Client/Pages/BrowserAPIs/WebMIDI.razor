@@ -1,5 +1,6 @@
 @namespace BrowserAPI.Demo.Client
 @page "/webmidi"
+@using BrowserAPI.Implementation
 
 <div id="web-midi">
     <h1 class="headline">WebMIDI</h1>
@@ -13,6 +14,61 @@
     </div>
 
     <div class="demo">
-        @* TODO *@ Demo not Implemented yet...
+        <button class="btn-main" @onclick="FindPorts" disabled=@(foundPorts is null)>Find MIDI Ports</button>
+        @if (foundPorts != true) {
+            <span>@(foundPorts == false ? "no ports" : "searching for ports...")</span>
+        }
+        else {
+            <div>
+                <div>
+                    @foreach (InputPort inputPort in inputPorts) {
+                        RenderPortUI(__builder, inputPort, PortInputUI);
+                    }
+                </div>
+                <div>
+                    @foreach (OutputPort outputPort in outputPorts) {
+                        RenderPortUI(__builder, outputPort, PortOutputUI);
+                    }
+                </div>
+            </div>
+        }
     </div>
 </div>
+
+@code {
+    private void RenderPortUI<TPort>(RenderTreeBuilder __builder, Port<TPort> port, Action<RenderTreeBuilder, Port<TPort>> specificPortUI) where TPort : IMIDIPort {
+        <div>
+            <span>Type: @port.Type</span>
+            <span>Name: @port.Name</span>
+            <span>Id: @port.Id</span>
+            <span>Manufacturer: @port.Manufacturer</span>
+            <span>Version: @port.Version</span>
+            <span>State: @port.State</span>
+            <span>Connection: @port.Connection</span>
+        </div>
+        <div>
+            <div>
+                <button class="btn-second" @onclick="port.Open" disabled=@(port.IsConnected)>Open port</button>
+                <button class="btn-cancel" @onclick="port.Close" disabled=@(!port.IsConnected)>Close port</button>
+            </div>
+            <div>
+                @{ specificPortUI(__builder, port); }
+            </div>
+        </div>
+    }
+
+    private void PortInputUI(RenderTreeBuilder __builder, Port<IMIDIInput> midiInput) {
+        InputPort inputPort = (InputPort)midiInput;
+
+        <button class="btn-deny" @onclick="inputPort.ListenOnMIDIMessage" disabled=@(!inputPort.IsConnected || inputPort.IsListening)>Start listening</button>
+        <button class="btn-cancel" @onclick="inputPort.RemoveOnMIDIMessage" disabled=@(!inputPort.IsConnected || !inputPort.IsListening)>Stop listening</button>
+        <span>@inputPort.Message</span>
+    }
+
+    private void PortOutputUI(RenderTreeBuilder __builder, Port<IMIDIOutput> midiOutput) {
+        OutputPort outputPort = (OutputPort)midiOutput;
+
+        <button class="btn-info" @onclick="outputPort.Send" disabled=@(!outputPort.IsConnected)>Send Note</button>
+        <span>@outputPort.Output</span>
+    }
+}
