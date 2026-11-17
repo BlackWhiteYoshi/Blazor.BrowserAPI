@@ -115,13 +115,6 @@ and the following files contain a list of all BrowserAPIs and the new BrowserAPI
 
 
 <br></br>
-## Preview
-
-This package is currently in preview, but it will change to release after updating to .NET11.  
-There are no more features planned.
-
-
-<br></br>
 ## Release Notes
 
 - 0.1
@@ -190,3 +183,7 @@ There are no more features planned.
   - small breaking change: changed HTMLElement.Hidden from bool to bool? (null represents "until-found")
 - 0.19.0
   - added WebMIDI (26 BrowserAPIs)
+- 1.0.0
+  - added MediaRecorder.isTypeSupported() to MediaDevices
+  - removed members that were previously marked as obsolete
+  - removed obsolete BrowserAPI method Document.requestStorageAccessFor()
