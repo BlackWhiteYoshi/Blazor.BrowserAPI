@@ -9,8 +9,8 @@ public sealed class HTMLMediaElementInProcessTest(PlayWrightFixture playWrightFi
         => (TestContext.Current as ITestMetadata)?.DisplayName switch {
             nameof(GetVideoWidth)
             or nameof(GetVideoHeight)
-            or nameof(RegisterOnResize) => NewPage(BrowserId.Firefox),
-            nameof(FastSeek) => NewPage(BrowserId.Firefox),
+            or nameof(RegisterOnResize)
+            or nameof(FastSeek) => NewPage(BrowserId.Firefox),
             _ => NewPage(BrowserId.Chromium)
         };
 

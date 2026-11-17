@@ -11,8 +11,8 @@ public sealed class HTMLMediaElementTest(PlayWrightFixture playWrightFixture) : 
             or nameof(GetVideoWidth_Method)
             or nameof(GetVideoHeight_Property)
             or nameof(GetVideoHeight_Method)
-            or nameof(RegisterOnResize) => NewPage(BrowserId.Firefox),
-            nameof(FastSeek) => NewPage(BrowserId.Firefox),
+            or nameof(RegisterOnResize)
+            or nameof(FastSeek) => NewPage(BrowserId.Firefox),
             _ => NewPage(BrowserId.Chromium)
         };
 

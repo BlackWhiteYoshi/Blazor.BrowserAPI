@@ -18,6 +18,6 @@
   "zip files": {
     "enabled": true,
     "exclude list startsWith": [],
-    "exclude list endsWith": [ ".gz", ".br", ".jpg", ".png", ".woff2" ]
+    "exclude list endsWith": [ ".gz", ".br", ".zst", ".jpg", ".png", ".mp3", ".mp4" ]
   }
 }
