@@ -1,7 +1,7 @@
 using BrowserAPI.Test.Client;
 using System.Text;
 
-namespace BrowserAPI.UnitTest;
+namespace BrowserAPI.Test.Unit;
 
 [ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class CookieStorageTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {

@@ -2,7 +2,7 @@ using Microsoft.Playwright;
 using System.Diagnostics;
 using TUnit.Core.Interfaces;
 
-namespace BrowserAPI.UnitTest;
+namespace BrowserAPI.Test.Unit;
 
 public closed class PlayWrightTest(PlayWrightFixture playWrightFixture) : IAsyncInitializer, IAsyncDisposable {
     /// <summary>

@@ -1,6 +1,6 @@
 using BrowserAPI.Test.Client;
 
-namespace BrowserAPI.UnitTest;
+namespace BrowserAPI.Test.Unit;
 
 [ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class ClipboardTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {

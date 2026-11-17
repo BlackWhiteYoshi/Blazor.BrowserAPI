@@ -1,9 +1,9 @@
-using BrowserAPI.UnitTest;
+using BrowserAPI.Test.Unit;
 using TUnit.Core.Interfaces;
 
 [assembly: ParallelLimiter<TestParallelLimit>]
 
-namespace BrowserAPI.UnitTest;
+namespace BrowserAPI.Test.Unit;
 
 public readonly struct TestParallelLimit : IParallelLimit {
     /// <summary>

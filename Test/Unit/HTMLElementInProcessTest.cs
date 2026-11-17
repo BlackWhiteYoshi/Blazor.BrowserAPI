@@ -2,7 +2,7 @@ using BrowserAPI.Test.Client;
 using Microsoft.Playwright;
 using TUnit.Core.Interfaces;
 
-namespace BrowserAPI.UnitTest;
+namespace BrowserAPI.Test.Unit;
 
 [ClassDataSource<PlayWrightFixture>(Shared = SharedType.PerAssembly)]
 public sealed class HTMLElementInProcessTest(PlayWrightFixture playWrightFixture) : PlayWrightTest(playWrightFixture) {

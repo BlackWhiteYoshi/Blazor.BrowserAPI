@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Playwright;
 using TUnit.Core.Interfaces;
 
-namespace BrowserAPI.UnitTest;
+namespace BrowserAPI.Test.Unit;
 
 public sealed class PlayWrightFixture : IAsyncInitializer, IAsyncDisposable {
     private sealed class WebApplicationFactoryWithRenderMode(string renderMode) : WebApplicationFactory<Test.ClientHost.Program.IAssemblyMarker> {
