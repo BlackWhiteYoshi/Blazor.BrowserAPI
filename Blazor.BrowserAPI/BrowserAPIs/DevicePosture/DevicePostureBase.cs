@@ -7,7 +7,7 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Name = "IDevicePosture")]
 [AutoInterface(Namespace = "BrowserAPI", Name = "IDevicePostureInProcess")]
 #pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class DevicePostureBase(IModuleManager moduleManager) : IDisposable {
+public closed class DevicePostureBase(IModuleManager moduleManager) : IDisposable {
 #pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
     private protected IModuleManager moduleManager = moduleManager;
 

@@ -13,7 +13,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="gamepadJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class GamepadBase<TJSObjectReference>(TJSObjectReference gamepadJS) where TJSObjectReference : IJSObjectReference {
+public closed class GamepadBase<TJSObjectReference>(TJSObjectReference gamepadJS) where TJSObjectReference : IJSObjectReference {
     private protected TJSObjectReference gamepadJS = gamepadJS;
 
 

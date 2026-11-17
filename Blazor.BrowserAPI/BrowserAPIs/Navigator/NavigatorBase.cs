@@ -12,7 +12,7 @@ namespace BrowserAPI.Implementation;
 /// <typeparam name="TFile"></typeparam>
 /// <param name="moduleManager"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
-public abstract class NavigatorBase<TJSObjectReference, TFile>(IModuleManager moduleManager)
+public closed class NavigatorBase<TJSObjectReference, TFile>(IModuleManager moduleManager)
     where TJSObjectReference : IJSObjectReference
     where TFile : IFileBase<TJSObjectReference> {
     private protected IModuleManager moduleManager = moduleManager;

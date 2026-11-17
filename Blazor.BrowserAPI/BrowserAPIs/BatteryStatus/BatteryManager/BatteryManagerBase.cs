@@ -13,7 +13,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="batteryManagerJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class BatteryManagerBase<TJSObjectReference>(TJSObjectReference batteryManagerJS) where TJSObjectReference : IJSObjectReference {
+public closed class BatteryManagerBase<TJSObjectReference>(TJSObjectReference batteryManagerJS) where TJSObjectReference : IJSObjectReference {
     private protected TJSObjectReference batteryManagerJS = batteryManagerJS;
 
 

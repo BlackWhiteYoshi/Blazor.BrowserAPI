@@ -5,7 +5,7 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Name = "INotificationsAPI")]
 [AutoInterface(Namespace = "BrowserAPI", Name = "INotificationsAPIInProcess")]
 #pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class NotificationsAPIBase(IModuleManager moduleManager) {
+public closed class NotificationsAPIBase(IModuleManager moduleManager) {
 #pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
     private protected IModuleManager moduleManager = moduleManager;
 

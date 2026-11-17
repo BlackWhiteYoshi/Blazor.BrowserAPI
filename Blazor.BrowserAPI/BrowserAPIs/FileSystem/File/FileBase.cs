@@ -13,7 +13,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="fileJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class FileBase<TJSObjectReference>(TJSObjectReference fileJS) : IFileBase<TJSObjectReference>
+public closed class FileBase<TJSObjectReference>(TJSObjectReference fileJS) : IFileBase<TJSObjectReference>
     where TJSObjectReference : IJSObjectReference {
     private protected TJSObjectReference fileJS = fileJS;
 

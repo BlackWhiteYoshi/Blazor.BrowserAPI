@@ -14,7 +14,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="sensorJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class SensorBase<TJSObjectReference>(TJSObjectReference sensorJS) where TJSObjectReference : IJSObjectReference {
+public closed class SensorBase<TJSObjectReference>(TJSObjectReference sensorJS) where TJSObjectReference : IJSObjectReference {
     private protected TJSObjectReference sensorJS = sensorJS;
 
 

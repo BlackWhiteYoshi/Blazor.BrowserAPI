@@ -13,7 +13,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="screenDetailsJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class ScreenDetailsBase<TJSObjectReference>(TJSObjectReference screenDetailsJS) where TJSObjectReference : IJSObjectReference {
+public closed class ScreenDetailsBase<TJSObjectReference>(TJSObjectReference screenDetailsJS) where TJSObjectReference : IJSObjectReference {
     private protected TJSObjectReference screenDetailsJS = screenDetailsJS;
 
 

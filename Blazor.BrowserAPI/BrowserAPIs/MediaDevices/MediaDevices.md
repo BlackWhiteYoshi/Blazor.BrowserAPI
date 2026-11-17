@@ -63,17 +63,17 @@ public sealed partial class ExampleComponent : ComponentBase, IAsyncDisposable {
             "video/webm;codecs=h264,opus",
             "video/webm",
             "video/ogg;codecs=theora,opus"];
-        foreach (string encoding in encodingList)
-            if (await MediaDevices.IsTypeSupported(encoding)) {
-                mimeType = encoding;
-                goto _validMimeTypeFound;
-            }
-        /* foreach-else */ {
+        valid_mime_type_search: do {
+            foreach (string encoding in encodingList)
+                if (await MediaDevices.IsTypeSupported(encoding)) {
+                    mimeType = encoding;
+                    break valid_mime_type_search;
+                }
+
             mimeType = "no encoding supported";
             isRecording = false;
             return;
-        }
-        _validMimeTypeFound:
+        } while (false);
 
         mediaStream = await MediaDevices.GetUserMedia(audio: true, video: true);
 

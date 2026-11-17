@@ -90,8 +90,6 @@ public static class TrySyncExtensions {
     }
 
 
-#if NET10_0_OR_GREATER
-
     /// <summary>
     /// Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
     /// </summary>
@@ -217,7 +215,6 @@ public static class TrySyncExtensions {
         else
             return jsRuntime.SetValueAsync(identifier, value, timeout);
     }
-#endif
 
 
     /// <summary>
@@ -300,8 +297,6 @@ public static class TrySyncExtensions {
             return module.InvokeAsync<TResult>(identifier, timeout, args);
     }
 
-
-#if NET10_0_OR_GREATER
 
     /// <summary>
     /// Invokes the specified JavaScript constructor function synchronously if possible, otherwise asynchronously. The function is invoked with the <c>new</c> operator.
@@ -428,7 +423,6 @@ public static class TrySyncExtensions {
         else
             return module.SetValueAsync(identifier, value, timeout);
     }
-#endif
 
 
     /// <summary>

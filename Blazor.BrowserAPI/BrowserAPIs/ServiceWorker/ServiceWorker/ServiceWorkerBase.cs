@@ -14,7 +14,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="serviceWorkerJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class ServiceWorkerBase<TJSObjectReference>(TJSObjectReference serviceWorkerJS) where TJSObjectReference : IJSObjectReference {
+public closed class ServiceWorkerBase<TJSObjectReference>(TJSObjectReference serviceWorkerJS) where TJSObjectReference : IJSObjectReference {
     private protected TJSObjectReference serviceWorkerJS = serviceWorkerJS;
 
 

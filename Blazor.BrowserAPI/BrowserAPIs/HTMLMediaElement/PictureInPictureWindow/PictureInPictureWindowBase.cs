@@ -13,7 +13,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="pictureInPictureWindowJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class PictureInPictureWindowBase<TJSObjectReference>(TJSObjectReference pictureInPictureWindowJS) where TJSObjectReference : IJSObjectReference {
+public closed class PictureInPictureWindowBase<TJSObjectReference>(TJSObjectReference pictureInPictureWindowJS) where TJSObjectReference : IJSObjectReference {
     private protected TJSObjectReference pictureInPictureWindowJS = pictureInPictureWindowJS;
 
 

@@ -4,7 +4,7 @@ using TUnit.Core.Interfaces;
 
 namespace BrowserAPI.UnitTest;
 
-public abstract class PlayWrightTest(PlayWrightFixture playWrightFixture) : IAsyncInitializer, IAsyncDisposable {
+public closed class PlayWrightTest(PlayWrightFixture playWrightFixture) : IAsyncInitializer, IAsyncDisposable {
     /// <summary>
     /// BrowserContext of this test
     /// </summary>

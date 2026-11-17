@@ -15,7 +15,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="moduleManager"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class WebMIDIBase<TJSObjectReference, TMIDIAccess, TMIDIPort>(IModuleManager moduleManager)
+public closed class WebMIDIBase<TJSObjectReference, TMIDIAccess, TMIDIPort>(IModuleManager moduleManager)
     where TJSObjectReference : IJSObjectReference
     where TMIDIAccess : IMIDIAccessBase<TJSObjectReference, TMIDIPort>
     where TMIDIPort : IMIDIPortBase<TJSObjectReference> {

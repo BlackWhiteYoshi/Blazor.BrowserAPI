@@ -13,7 +13,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="notificationJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class NotificationBase<TJSObjectReference>(TJSObjectReference notificationJS) where TJSObjectReference : IJSObjectReference {
+public closed class NotificationBase<TJSObjectReference>(TJSObjectReference notificationJS) where TJSObjectReference : IJSObjectReference {
     private protected TJSObjectReference notificationJS = notificationJS;
 
 

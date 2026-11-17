@@ -1,4 +1,4 @@
-using StringOrIJSObjectReference = object;
+using Microsoft.JSInterop;
 
 namespace BrowserAPI;
 
@@ -18,6 +18,8 @@ namespace BrowserAPI;
 /// </para>
 /// </summary>
 public readonly record struct PickerDialogStartIn {
+    internal readonly union StringOrIJSObjectReference(string, IJSObjectReference);
+
     /// <summary>
     /// string | FileHandleAPI | DirectoryHandleAPI
     /// </summary>

@@ -33,35 +33,28 @@ public static class Program {
 
         // check for valid startup configuration
         if (renderMode == RenderMode.Static && !preRender)
-            throw new ArgumentException($"invalid combination of 'RenderMode' and 'Prerender': static without prerendering basically means doing nothing");
+            throw new ArgumentException($"invalid combination of 'RenderMode' and 'Prerender': static without prerendering is not supported");
 
 
         // configure Services
         {
             IServiceCollection services = builder.Services;
 
-            IRazorComponentsBuilder razorComponentsBuilder = builder.Services.AddRazorComponents();
+            services.AddBrowserAPI();
+
+            IRazorComponentsBuilder razorComponentsBuilder = services.AddRazorComponents();
             if (renderMode.HasFlag(RenderMode.Server))
                 razorComponentsBuilder.AddInteractiveServerComponents().AddCircuitOptions((CircuitOptions options) => options.DetailedErrors = builder.Environment.IsDevelopment());
             if (renderMode.HasFlag(RenderMode.Webassembly))
                 razorComponentsBuilder.AddInteractiveWebAssemblyComponents();
-
-            builder.Services.AddBrowserAPI();
         }
 
         await using WebApplication app = builder.Build();
 
         // configure Pipeline
         {
-            if (isDevelopmentEnvironment) {
-                app.UseDeveloperExceptionPage();
-                app.UseWebAssemblyDebugging();
-            }
-
-            app.UseBlazorFrameworkFiles();
-            app.UseStaticFiles();
-            //app.MapStaticAssets(); // does not serve audio file correctly
-            app.UseAntiforgery();
+            app.UseDeveloperExceptionPage();
+            app.MapStaticAssets();
 
             // CSP (Content Security Policy)
             app.Use(async (context, next) => {

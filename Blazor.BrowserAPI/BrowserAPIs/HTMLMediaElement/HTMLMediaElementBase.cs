@@ -14,7 +14,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="htmlMediaElementTask"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class HTMLMediaElementBase<TJSObjectReference, TPictureInPictureWindow>(Task<TJSObjectReference> htmlMediaElementTask) : IHTMLMediaElementBase<TJSObjectReference, TPictureInPictureWindow>
+public closed class HTMLMediaElementBase<TJSObjectReference, TPictureInPictureWindow>(Task<TJSObjectReference> htmlMediaElementTask) : IHTMLMediaElementBase<TJSObjectReference, TPictureInPictureWindow>
     where TJSObjectReference : IJSObjectReference
     where TPictureInPictureWindow : IPictureInPictureWindowBase<TJSObjectReference> {
     private protected Task<TJSObjectReference> htmlMediaElementTask = htmlMediaElementTask;

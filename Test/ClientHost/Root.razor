@@ -13,12 +13,7 @@
 
         <link rel="stylesheet" href="site.css">
 
-        @if (renderMode is not null) {
-            <script src="_framework/blazor.web.js" defer></script>
-        }
-        else {
-            <script src="_framework/blazor.webassembly.js" defer></script>
-        }
+        <script src="@(renderMode is not null ? "_framework/blazor.web.js" : "_framework/blazor.webassembly.js")" defer></script>
         <link rel="modulepreload" href="_content/Blazor.BrowserAPI/BrowserAPI.js">
     </head>
 

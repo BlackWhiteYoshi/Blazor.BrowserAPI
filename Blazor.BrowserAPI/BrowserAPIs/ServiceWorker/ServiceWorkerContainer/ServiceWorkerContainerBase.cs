@@ -17,7 +17,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="moduleManager"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class ServiceWorkerContainerBase<TJSObjectReference, TServiceWorkerRegistration, TServiceWorker, TNotification>(IModuleManager moduleManager) : IDisposable
+public closed class ServiceWorkerContainerBase<TJSObjectReference, TServiceWorkerRegistration, TServiceWorker, TNotification>(IModuleManager moduleManager) : IDisposable
     where TJSObjectReference : IJSObjectReference
     where TServiceWorkerRegistration : class, IServiceWorkerRegistrationBase<TJSObjectReference, TServiceWorkerRegistration, TNotification>
     where TServiceWorker : IServiceWorkerBase<TJSObjectReference>

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 namespace BrowserAPI.Demo.Client;
 
 public sealed partial class WebMIDI : ComponentBase, IAsyncDisposable {
-    private abstract class Port<TPort>(TPort port) : IAsyncDisposable where TPort : IMIDIPort {
+    private closed class Port<TPort>(TPort port) : IAsyncDisposable where TPort : IMIDIPort {
         protected readonly TPort port = port;
 
         public string Type { get; private set; } = null!;

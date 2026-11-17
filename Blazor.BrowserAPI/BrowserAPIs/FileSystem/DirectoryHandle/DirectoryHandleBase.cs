@@ -17,7 +17,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="directoryHandleJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class DirectoryHandleBase<TJSObjectReference, TDirectoryHandle, TFileHandle, TFile, TWritableFileStream>(TJSObjectReference directoryHandleJS) : IDirectoryHandleBase<TJSObjectReference, TDirectoryHandle, TFileHandle, TFile, TWritableFileStream>
+public closed class DirectoryHandleBase<TJSObjectReference, TDirectoryHandle, TFileHandle, TFile, TWritableFileStream>(TJSObjectReference directoryHandleJS) : IDirectoryHandleBase<TJSObjectReference, TDirectoryHandle, TFileHandle, TFile, TWritableFileStream>
     where TJSObjectReference : IJSObjectReference
     where TDirectoryHandle : IDirectoryHandleBase<TJSObjectReference, TDirectoryHandle, TFileHandle, TFile, TWritableFileStream>
     where TFileHandle : IFileHandleBase<TJSObjectReference, TFileHandle, TFile, TWritableFileStream>

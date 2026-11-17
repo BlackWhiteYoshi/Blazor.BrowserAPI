@@ -12,7 +12,7 @@ namespace BrowserAPI.Implementation;
 /// <remarks>Objects of this class must disposed manually, so do not forget to dispose this object when you are done with it.</remarks>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(ISensorBase<IJSInProcessObjectReference>), typeof(IDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class SensorInProcess(IJSInProcessObjectReference sensorJS) : SensorBase<IJSInProcessObjectReference>(sensorJS), ISensorInProcess {
+public closed class SensorInProcess(IJSInProcessObjectReference sensorJS) : SensorBase<IJSInProcessObjectReference>(sensorJS), ISensorInProcess {
     /// <summary>
     /// Releases the JS instance for this sensor.
     /// </summary>

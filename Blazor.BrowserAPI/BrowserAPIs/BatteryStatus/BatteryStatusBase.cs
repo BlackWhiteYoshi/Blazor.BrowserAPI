@@ -14,7 +14,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="moduleManager"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class BatteryStatusBase<TJSObjectReference, TBatteryManager>(IModuleManager moduleManager)
+public closed class BatteryStatusBase<TJSObjectReference, TBatteryManager>(IModuleManager moduleManager)
     where TJSObjectReference : IJSObjectReference
     where TBatteryManager : IBatteryManagerBase<TJSObjectReference> {
     private protected IModuleManager moduleManager = moduleManager;

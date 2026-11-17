@@ -14,7 +14,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="moduleManager"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class GamepadAPIBase<TJSObjectReference, TGamepad>(IModuleManager moduleManager) : IDisposable
+public closed class GamepadAPIBase<TJSObjectReference, TGamepad>(IModuleManager moduleManager) : IDisposable
     where TJSObjectReference : IJSObjectReference
     where TGamepad : IGamepadBase<TJSObjectReference> {
     private protected IModuleManager moduleManager = moduleManager;

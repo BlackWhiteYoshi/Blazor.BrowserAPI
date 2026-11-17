@@ -7,7 +7,7 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Name = "ISensorAPI")]
 [AutoInterface(Namespace = "BrowserAPI", Name = "ISensorAPIInProcess")]
 #pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class SensorAPIBase(IModuleManager moduleManager) : IDisposable {
+public closed class SensorAPIBase(IModuleManager moduleManager) : IDisposable {
 #pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
     private protected IModuleManager moduleManager = moduleManager;
 

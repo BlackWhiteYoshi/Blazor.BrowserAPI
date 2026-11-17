@@ -13,7 +13,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="dialogTask"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class HTMLDialogElementBase<TJSObjectReference>(Task<TJSObjectReference> dialogTask) where TJSObjectReference : IJSObjectReference {
+public closed class HTMLDialogElementBase<TJSObjectReference>(Task<TJSObjectReference> dialogTask) where TJSObjectReference : IJSObjectReference {
     private protected Task<TJSObjectReference> dialogTask = dialogTask;
 
 

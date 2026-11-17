@@ -14,7 +14,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="moduleManager"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class WindowManagementBase<TJSObjectReference, TScreenDetails>(IModuleManager moduleManager)
+public closed class WindowManagementBase<TJSObjectReference, TScreenDetails>(IModuleManager moduleManager)
     where TJSObjectReference : IJSObjectReference
     where TScreenDetails : IScreenDetailsBase<TJSObjectReference> {
     private protected IModuleManager moduleManager = moduleManager;

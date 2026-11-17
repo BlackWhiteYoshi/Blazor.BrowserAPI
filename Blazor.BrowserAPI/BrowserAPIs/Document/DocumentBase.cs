@@ -15,7 +15,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="moduleManager"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class DocumentBase<TJSObjectReference, TDragEvent>(IModuleManager moduleManager) : IDisposable
+public closed class DocumentBase<TJSObjectReference, TDragEvent>(IModuleManager moduleManager) : IDisposable
     where TJSObjectReference : IJSObjectReference
     where TDragEvent : IDragEvent {
     private protected IModuleManager moduleManager = moduleManager;

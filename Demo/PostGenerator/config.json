@@ -1,5 +1,5 @@
 {
-  "working directory": "../../../../Client/bin/Release/net10.0/publish/wwwroot",
+  "working directory": "../../../../Client/bin/Release/net11.0/publish/wwwroot",
   "site url": "https://blazor-browserapi.blackwhiteyoshi.com",
   "generate files": {
     "html pages": {

@@ -13,7 +13,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="permissionStatusJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class PermissionStatusBase<TJSObjectReference>(TJSObjectReference permissionStatusJS) where TJSObjectReference : IJSObjectReference {
+public closed class PermissionStatusBase<TJSObjectReference>(TJSObjectReference permissionStatusJS) where TJSObjectReference : IJSObjectReference {
     private protected TJSObjectReference permissionStatusJS = permissionStatusJS;
 
 

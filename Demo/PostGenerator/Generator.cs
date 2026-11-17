@@ -144,9 +144,7 @@ public static class Generator {
                     // compress zstandard
                     {
                         using FileStream fileStream = File.Create($"{filePath}.zst");
-                        // .NET11 has ZstandardStream
-                        //   using ZstandardStream zstandardStream = new(fileStream, CompressionLevel.SmallestSize);
-                        using ZstdSharp.CompressionStream zstandardStream = new(fileStream, ZstdSharp.Compressor.DefaultCompressionLevel);
+                        using ZstandardStream zstandardStream = new(fileStream, new ZstandardCompressionOptions { Quality = ZstandardCompressionOptions.MaxQuality, WindowLog2 = 23, EnableLongDistanceMatching = true });
                         await originalStream.CopyToAsync(zstandardStream);
                     }
                 }

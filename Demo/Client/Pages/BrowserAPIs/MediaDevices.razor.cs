@@ -62,19 +62,19 @@ public sealed partial class MediaDevices : ComponentBase {
             playbackElement = Audio;
         }
 
-        foreach (string encoding in encodingList)
-            if (await PMediaDevices.IsTypeSupported(encoding)) {
-                mimeType = encoding;
-                mimeTypeError = false;
-                goto _validMimeTypeFound;
-            }
-        /* foreach-else */ {
+        valid_mime_type_search: do {
+            foreach (string encoding in encodingList)
+                if (await PMediaDevices.IsTypeSupported(encoding)) {
+                    mimeType = encoding;
+                    mimeTypeError = false;
+                    break valid_mime_type_search;
+                }
+
             mimeType = "no encoding supported";
             mimeTypeError = true;
             isRecording = false;
             return;
-        }
-        _validMimeTypeFound:
+        } while (false);
 
         mediaStream = await PMediaDevices.GetUserMedia(audio: isAudio, video: isVideo);
 

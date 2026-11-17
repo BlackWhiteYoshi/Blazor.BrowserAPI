@@ -13,7 +13,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="midiPortJs"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class MIDIPortBase<TJSObjectReference>(TJSObjectReference midiPortJs) where TJSObjectReference : IJSObjectReference {
+public closed class MIDIPortBase<TJSObjectReference>(TJSObjectReference midiPortJs) where TJSObjectReference : IJSObjectReference {
     private protected TJSObjectReference midiPortJs = midiPortJs;
 
 

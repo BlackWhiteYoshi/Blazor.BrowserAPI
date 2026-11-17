@@ -14,7 +14,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="mediaRecorderJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class MediaRecorderBase<TJSObjectReference>(TJSObjectReference mediaRecorderJS) where TJSObjectReference : IJSObjectReference {
+public closed class MediaRecorderBase<TJSObjectReference>(TJSObjectReference mediaRecorderJS) where TJSObjectReference : IJSObjectReference {
     private protected TJSObjectReference mediaRecorderJS = mediaRecorderJS;
 
 

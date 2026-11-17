@@ -7,7 +7,7 @@ namespace BrowserAPI.Implementation;
 [AutoInterface(Namespace = "BrowserAPI", Name = "IGeolocation")]
 [AutoInterface(Namespace = "BrowserAPI", Name = "IGeolocationInProcess")]
 #pragma warning disable CS1591 // Missing XML comment because AutoInterface must not generate XML comment
-public abstract class GeolocationBase(IModuleManager moduleManager) {
+public closed class GeolocationBase(IModuleManager moduleManager) {
 #pragma warning restore CS1591 // Missing XML comment because AutoInterface must not generate XML comment
     private protected IModuleManager moduleManager = moduleManager;
 

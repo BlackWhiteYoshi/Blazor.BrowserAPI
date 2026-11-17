@@ -14,7 +14,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="moduleManager"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class MediaDevicesBase<TJSObjectReference, TMediaStream>(IModuleManager moduleManager) where TJSObjectReference : IJSObjectReference {
+public closed class MediaDevicesBase<TJSObjectReference, TMediaStream>(IModuleManager moduleManager) where TJSObjectReference : IJSObjectReference {
     private protected IModuleManager moduleManager = moduleManager;
 
 

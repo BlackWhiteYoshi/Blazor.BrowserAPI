@@ -16,7 +16,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="htmlElementTask"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class HTMLElementBase<TJSObjectReference, THTMLElement, TDragEvent>(Task<TJSObjectReference> htmlElementTask) : IHTMLElementBase<TJSObjectReference, THTMLElement, TDragEvent>
+public closed class HTMLElementBase<TJSObjectReference, THTMLElement, TDragEvent>(Task<TJSObjectReference> htmlElementTask) : IHTMLElementBase<TJSObjectReference, THTMLElement, TDragEvent>
     where TJSObjectReference : IJSObjectReference
     where THTMLElement : IHTMLElementBase<TJSObjectReference, THTMLElement, TDragEvent>
     where TDragEvent : IDragEvent {

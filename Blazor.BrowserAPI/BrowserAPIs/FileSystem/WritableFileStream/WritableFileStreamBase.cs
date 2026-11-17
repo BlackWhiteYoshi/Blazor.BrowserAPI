@@ -11,7 +11,7 @@ namespace BrowserAPI.Implementation;
 /// <typeparam name="TJSObjectReference"></typeparam>
 /// <param name="writableFileStreamJS"></param>
 [AutoInterface(Namespace = "BrowserAPI")]
-public abstract class WritableFileStreamBase<TJSObjectReference>(TJSObjectReference writableFileStreamJS) where TJSObjectReference : IJSObjectReference {
+public closed class WritableFileStreamBase<TJSObjectReference>(TJSObjectReference writableFileStreamJS) where TJSObjectReference : IJSObjectReference {
     private protected TJSObjectReference writableFileStreamJS = writableFileStreamJS;
 
 

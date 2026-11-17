@@ -12,7 +12,7 @@ namespace BrowserAPI.Implementation;
 /// <param name="midiPortJs"></param>
 [AutoInterface(Namespace = "BrowserAPI", Inheritance = [typeof(IMIDIPortBase<IJSObjectReference>), typeof(IAsyncDisposable)])]
 [RequiresUnreferencedCode("Uses Microsoft.JSInterop functionalities")]
-public abstract class MIDIPort(IJSObjectReference midiPortJs) : MIDIPortBase<IJSObjectReference>(midiPortJs), IMIDIPort {
+public closed class MIDIPort(IJSObjectReference midiPortJs) : MIDIPortBase<IJSObjectReference>(midiPortJs), IMIDIPort {
     /// <summary>
     /// Releases the JS instance for this notification.
     /// </summary>
